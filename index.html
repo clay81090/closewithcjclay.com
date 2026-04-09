@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a1628">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>HTSA God Script — Offline</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="offline-banner">Offline reference only — not connected to Co-Pilot. Edit notes below; nothing is saved when you close the tab.</div>
+
+<div class="toolbar">
+  <div class="toolbar-block">
+    <label>Call timer</label>
+    <div class="timer-row">
+      <span class="timer-display" id="timerDisplay">00:00</span>
+      <button type="button" class="btn-tb green" onclick="startTimer()">Start</button>
+      <button type="button" class="btn-tb" onclick="pauseTimer()">Pause</button>
+      <button type="button" class="btn-tb" onclick="resetTimer()">Reset</button>
+    </div>
+  </div>
+  <div class="toolbar-block">
+    <label>Prospect name</label>
+    <input type="text" id="noteName" placeholder="First name" autocomplete="off">
+  </div>
+  <div class="toolbar-block">
+    <label>Income goal / win</label>
+    <input type="text" id="noteGoal" placeholder="e.g. 15k/mo remote" autocomplete="off">
+  </div>
+  <div class="toolbar-block">
+    <label>Main pain (their words)</label>
+    <textarea id="notePain" placeholder="Paste how they said it"></textarea>
+  </div>
+  <div class="toolbar-block">
+    <label>Why now / urgency</label>
+    <textarea id="noteUrgency" placeholder="What shifted recently"></textarea>
+  </div>
+  <div class="toolbar-block">
+    <label>Exact words to mirror at close</label>
+    <textarea id="noteWords" placeholder="Freedom + money phrasing"></textarea>
+  </div>
+  <div class="toolbar-block">
+    <label>&nbsp;</label>
+    <button type="button" class="btn-tb green" onclick="copyCloseSnippet()">Copy close snippet</button>
+  </div>
+</div>
+
+<div class="header">
+  <div class="logo">
+    <div class="logo-dot"></div>
+    <div>
+      <div>HTSA</div>
+      <div class="logo-sub">God Script · Offline</div>
+    </div>
+  </div>
+  <nav class="nav" aria-label="Sections">
+    <button type="button" class="nav-btn active" onclick="show('s0',this)">0 · Mindset</button>
+    <button type="button" class="nav-btn" onclick="show('s1',this)">1 · Rapport <span class="timer-badge">0–5m</span></button>
+    <button type="button" class="nav-btn" onclick="show('s2',this)">2 · Frame <span class="timer-badge">5–7m</span></button>
+    <button type="button" class="nav-btn" onclick="show('s3',this)">3 · Discovery <span class="timer-badge">7–27m</span></button>
+    <button type="button" class="nav-btn" onclick="show('s4',this)">4 · Story Bridge <span class="timer-badge">27–30m</span></button>
+    <button type="button" class="nav-btn" onclick="show('s5',this)">5 · Demo <span class="timer-badge">30–40m</span></button>
+    <button type="button" class="nav-btn" onclick="show('s6',this)">6 · Pre-Close</button>
+    <button type="button" class="nav-btn" onclick="show('s7',this)">7 · Price + Close</button>
+    <button type="button" class="nav-btn" onclick="show('s8',this)">8 · Objections</button>
+    <button type="button" class="nav-btn" onclick="show('s9',this)">9 · Stories</button>
+    <button type="button" class="nav-btn" onclick="show('s10',this)">10 · Analogies</button>
+    <button type="button" class="nav-btn" onclick="show('s11',this)">11 · Dark Psych</button>
+  </nav>
+</div>
+
+<!-- 0 MINDSET -->
+<div id="s0" class="section active">
+  <div class="sec-head">
+    <div class="sec-num">Section 0</div>
+    <div class="sec-title">Before Every Call</div>
+    <div class="sec-sub">Read this. Then go be you — inside the clock.</div>
+  </div>
+  <div class="timeline">
+    <div class="tl-seg" onclick="show('s1',document.querySelectorAll('.nav-btn')[1])"><div class="tl-time">0–5m</div><div class="tl-label">Rapport</div></div>
+    <div class="tl-seg" onclick="show('s2',document.querySelectorAll('.nav-btn')[2])"><div class="tl-time">5–7m</div><div class="tl-label">Frame</div></div>
+    <div class="tl-seg" onclick="show('s3',document.querySelectorAll('.nav-btn')[3])"><div class="tl-time">7–27m</div><div class="tl-label">Discovery</div></div>
+    <div class="tl-seg" onclick="show('s4',document.querySelectorAll('.nav-btn')[4])"><div class="tl-time">27–30m</div><div class="tl-label">Story →</div></div>
+    <div class="tl-seg" onclick="show('s5',document.querySelectorAll('.nav-btn')[5])"><div class="tl-time">30–40m</div><div class="tl-label">Demo</div></div>
+    <div class="tl-seg" onclick="show('s6',document.querySelectorAll('.nav-btn')[6])"><div class="tl-time">40–43m</div><div class="tl-label">Pre-close</div></div>
+    <div class="tl-seg" onclick="show('s7',document.querySelectorAll('.nav-btn')[7])"><div class="tl-time">43–50m</div><div class="tl-label">Price</div></div>
+  </div>
+  <div class="box box-red"><div class="box-label">Reality check</div><div class="box-text">They already want change — they need you to lead through fear with clarity. Your job is structure + confidence, not convincing.</div></div>
+  <div class="box box-green"><div class="box-label">Your edge</div><div class="box-text">Authentic, #1 rep energy — add a tighter clock. Warmth lives in tone all call, not 20 minutes of small talk.</div></div>
+  <div class="box box-warn"><div class="box-label">Overtalk leak</div><div class="box-text">Ask one question → <strong>stop</strong>. Silence lets them sell themselves. Every word you add after the question is a word they didn’t say.</div></div>
+  <div class="box box-navy"><div class="box-label">3-ask rule</div><div class="box-text">Close up to 3 times — read the room. IRA / real logistics vs 26yo fear are different games.</div></div>
+</div>
+
+<!-- 1 RAPPORT -->
+<div id="s1" class="section">
+  <div class="sec-head">
+    <div class="sec-num">Section 1 · 0–5 min</div>
+    <div class="sec-title">Rapport — Brief</div>
+    <div class="sec-sub">Name → place → one human beat → time check → frame.</div>
+  </div>
+  <div class="script-box">"Hey, is that [Name]? Hey [Name], it's CJ. Can you hear me okay?"<br><br>"Awesome. And you're still in [city/state], right?"<br><br>"Nice." <em>— one genuine local/sports line, ~15–20 sec max.</em></div>
+  <div class="script-label">Time check</div>
+  <div class="script-box">"Before we dive in — are you still good on time for about 45–60 minutes, or are we working with something tighter today?"</div>
+  <div class="branch-wrap">
+    <div class="branch"><div class="branch-if" onclick="tog(this.parentElement)"><span class="branch-tag">if</span><span class="branch-cond">Less time (e.g. 30 min)</span><span class="branch-arrow">▶</span></div><div class="branch-body"><div class="branch-then">Say</div><div class="branch-say">"Totally fine — I'll keep us tight and hit what matters most. Let's make these 30 minutes count." <em>→ Go straight to Frame.</em></div></div></div>
+    <div class="branch"><div class="branch-if" onclick="tog(this.parentElement)"><span class="branch-tag">if</span><span class="branch-cond">Chatty / won’t stop small talk</span><span class="branch-arrow">▶</span></div><div class="branch-body"><div class="branch-then">Say</div><div class="branch-say">"Man, I love that — I could talk about this all day. I don’t want to burn your time on small talk when there’s something real to figure out. Let me jump into what this call is actually about."</div></div></div>
+    <div class="branch"><div class="branch-if" onclick="tog(this.parentElement)"><span class="branch-tag">if</span><span class="branch-cond">They mention kids, burnout, life stress</span><span class="branch-arrow">▶</span></div><div class="branch-body"><div class="branch-then">Say</div><div class="branch-say">"Yeah — [one real sentence back]. That’s a big part of why I want today to really count for you. Let me ask you…" <em>→ Bridge to Frame.</em></div></div></div>
+  </div>
+</div>
+
+<!-- 2 FRAME — primary wording matches CJ_FULL_SCRIPT_2026 (good fit / resources / team) -->
+<div id="s2" class="section">
+  <div class="sec-head">
+    <div class="sec-num">Section 2 · 5–7 min</div>
+    <div class="sec-title">Decision frame — speak it like a story</div>
+    <div class="sec-sub">This is the main frame. Slow down on the parenthetical; let them feel the two paths (fit vs not fit).</div>
+  </div>
+  <div class="box box-why"><div class="box-label">Why</div><div class="box-text">Without this they think it’s an info call. You’re not trapping them — you’re naming that you might not be for everyone, and that you’ll still help either way.</div></div>
+  <div class="script-box">"[Name], just so you know what this call is about <em>(pause)</em>: we're going to see if High Ticket Sales makes sense for you and if you're a good fit to work with our team."<br><br>"The same way you're looking for a company that will do what they say they're going to do… we're looking for the same thing — members who are coachable and who will actually show up and put in the work."<br><br>"I'm not here to hype you up. I'm going to ask a few questions to understand your background, your current situation, and your future goals."<br><br>"If I don't think we're a good fit… I'll shoot you straight and will still do my best to help and point you in the right direction."<br><br>"If we <em>are</em> a good fit… I'll walk you through exactly how we train you, certify you, and place you into an offer — and we'll get you started by the end of the call."</div>
+  <div class="script-box"><strong>"Sound fair?"</strong> <em>Stop talking. Let them answer.</em></div>
+  <div class="branch-wrap">
+    <div class="branch"><div class="branch-if" onclick="tog(this.parentElement)"><span class="branch-tag">if</span><span class="branch-cond">"Just tell me the price" / "How does it work?" early</span><span class="branch-arrow">▶</span></div><div class="branch-body"><div class="branch-say">"I'll walk you through everything — the investment makes way more sense once I understand you first. Literally a few minutes. Can I ask you a couple quick things?"</div></div></div>
+    <div class="branch"><div class="branch-if" onclick="tog(this.parentElement)"><span class="branch-tag">alt</span><span class="branch-cond">Optional shorter frame (only if you need a tight version)</span><span class="branch-arrow">▶</span></div><div class="branch-body"><div class="branch-say">Same bones: fit check, coachable + show up, no hype, straight if not a fit, full walkthrough + start today if yes — then <strong>"Sound fair?"</strong></div></div></div>
+  </div>
+</div>
+
+<!-- 3 DISCOVERY -->
+<div id="s3" class="section">
+  <div class="sec-head">
+    <div class="sec-num">Section 3 · 7–27 min</div>
+    <div class="sec-title">Discovery</div>
+    <div class="sec-sub">They talk ~80%. After the main open question, open <strong>your branch</strong> below — the analogies and stories are <strong>written out here</strong> so you never have to hunt Section 10 mid-call. Section 10 stays as a backup library.</div>
+  </div>
+  <div class="box box-red"><div class="box-label">Rule</div><div class="box-text">One question → full silence until they finish. Vague answers → same question, different angle until specific. When you use an analogy, tell it like a story, then <strong>stop</strong> — let them react.</div></div>
+
+  <div class="step-label">3.1 Hell — current reality</div>
+  <div class="q-card"><div class="box-label">Open (say this first)</div><div class="q-text">"[Name], what are you doing for work right now — and what does a normal week actually look like? Walk me through it starting with Monday."</div><div class="q-note">If vague: "Where does most of your time go — meetings, customers, paperwork, travel, or putting out fires?" Then mirror: "So most of your week is [their words] — that's been the pattern for about [timeframe], right?"</div></div>
+
+  <div class="branch-wrap">
+    <div class="branch">
+      <div class="branch-if" onclick="tog(this.parentElement)"><span class="branch-tag">if</span><span class="branch-cond">Corporate / W2 / capped raises</span><span class="branch-arrow">▶</span></div>
+      <div class="branch-body">
+        <div class="branch-say">Start with the paradox — slow, casual:<br><br>"Can I ask you something that might sound weird? If you worked twice as hard next month… how much more money would you actually make?" <em>(Silence.)</em><br><br>"So your effort goes up, but the reward barely moves — is that fair?"<br><br>If they dodge or say "it depends," pivot to ceiling:<br><br>"Okay, different angle. If you keep doing exactly what you're doing and everything goes right — where does this path realistically lead you in three to five years? Does that excite you, or does it feel capped?"<br><br>If they've been there a long time:<br><br>"You've been there [X] years — how much has your income actually moved compared to cost of living?"</div>
+        <div class="inline-say-intro">Pick one analogy — full script (read it out loud)</div>
+        <div class="inline-tabs" data-god-tab-group="disc-corp">
+          <div class="god-tab-row">
+            <button type="button" class="god-tab-btn god-tab-active" onclick="godTab(this,0)">Doctor &amp; one skill</button>
+            <button type="button" class="god-tab-btn" onclick="godTab(this,1)">Hamster wheel</button>
+            <button type="button" class="god-tab-btn" onclick="godTab(this,2)">Construction vs Sarah</button>
+          </div>
+          <div class="god-tab-panel god-tab-active">"Here's why I'm even saying that. People will go to school for years — take on serious debt — to become a doctor or a lawyer, and they're basically locked into one lane for a long time. We're talking maybe ninety days of real focus to build a skill that <em>every</em> industry needs. There is no Fortune 500 company arguing about whether they need closers. So when someone later says seven thousand is a lot — I want you to hear what I'm hearing: a decade of capped raises and 'great job' emails… versus one training that opens a skill that pays five figures a month if you run it right. I'm not saying it's guaranteed. I'm asking which scoreboard you actually want to play on."</div>
+          <div class="god-tab-panel">"Another way I've said this to people in your shoes — you know how it feels when the raise is three percent and maybe there's a pizza party? That's the scoreboard they gave you. Versus two real closes on the right offer — that's ten thousand dollars or more inside a couple weeks. Same you. Different game. I'm not saying it's easy. I'm saying 'just work harder here' doesn't actually reward you the way we were taught it would."</div>
+          <div class="god-tab-panel">"Think about two people. One's on a job site or in a truck, trading hours for twenty-two bucks, body wears down, schedule owns them. The other's on Zoom in pajamas with a qualified person who raised their hand — and they earn a three thousand dollar commission in forty-five minutes because they ran a conversation well. I'm not mocking hard work — I'm asking: which system is actually built to reward the effort you're already putting in?"</div>
+        </div>
+        <div class="branch-wrap" style="margin-top:.75rem">
+          <div class="branch"><div class="branch-if" onclick="tog(this.parentElement)"><span class="branch-tag">if</span><span class="branch-cond">"I'm okay / decent money" but they still booked the call</span><span class="branch-arrow">▶</span></div><div class="branch-body"><div class="branch-say">"Totally hear you — so help me understand. If things are okay, what had you carve out time and actually show up to this call today?" <em>(Let them land on the real reason.)</em><br><br>"So it's less about survival — it's that you know you're capable of more, and this path probably won't get you there. Is that fair?"<br><br>Then use the <strong>Doctor &amp; one skill</strong> or <strong>Hamster wheel</strong> tab above — same scripts, now it lands emotionally.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch">
+      <div class="branch-if" onclick="tog(this.parentElement)"><span class="branch-tag">if</span><span class="branch-cond">Already in sales (insurance, cars, D2D, phone)</span><span class="branch-arrow">▶</span></div>
+      <div class="branch-body">
+        <div class="branch-say">Lead with the image — don't rush:<br><br>"Can I paint a quick picture for you? Imagine Usain Bolt — fastest man on the planet — but he's on a treadmill that won't let him hit full speed. He's not the problem. The machine is capping him. That's what I think about when someone already has real sales ability but they're stuck in the wrong model."<br><br>"So here's my honest question — not a trick question. If you stay on this path another six to twelve months, does that actually get you to [their goal], or are we kind of kidding ourselves?" <em>(Silence.)</em></div>
+        <div class="inline-say-intro">If they’re in a specific lane — add this flavor (tabs)</div>
+        <div class="inline-tabs" data-god-tab-group="disc-sales">
+          <div class="god-tab-row">
+            <button type="button" class="god-tab-btn god-tab-active" onclick="godTab(this,0)">Insurance / volume</button>
+            <button type="button" class="god-tab-btn" onclick="godTab(this,1)">Cars / lot</button>
+            <button type="button" class="god-tab-btn" onclick="godTab(this,2)">D2D / phones</button>
+          </div>
+          <div class="god-tab-panel god-tab-active">"You already know the game — volume, grind, resets. High ticket is different math: one conversation, one decision, one person who's already interested. A ten thousand dollar offer at ten percent — you feel how that changes your week compared to chasing tiny tickets all month?"</div>
+          <div class="god-tab-panel">"You can make money on the lot — I respect the hustle. Usually the trade is your nights, your weekends, your body on the floor. Remote high ticket is the same persuasion muscle, but you're not living at the dealership. Does that difference matter to you, or no?"</div>
+          <div class="god-tab-panel">"You already do the hard part — you talk to strangers, you handle rejection, you stay in character. This is that same skill in a chair, warm lead, qualified — no door getting slammed in your face. If the skill transfers, the only question is whether you want a vehicle that pays you like a closer instead of a grinder."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch">
+      <div class="branch-if" onclick="tog(this.parentElement)"><span class="branch-tag">if</span><span class="branch-cond">Business owner / wearing every hat</span><span class="branch-arrow">▶</span></div>
+      <div class="branch-body">
+        <div class="branch-say">"Walk me through your week honestly — what percent is actually selling versus marketing, ops, admin, putting out fires?" <em>(Let them answer.)</em><br><br>"And after everything — ads, software, contractors, taxes — what do you actually net in an average month? Not the best month. The real average."<br><br>"So you're basically running the whole machine just to get to the one part you're great at — the conversations. What if the only job on your calendar was selling… and the leads were warm, and you could do it from home?"</div>
+        <div class="inline-say-intro">Story you can tell here (Mike — same arc as Sec 4 / full script KB)</div>
+        <div class="god-tab-panel god-tab-active" style="display:block;margin-top:.5rem">"I had a guy, Mike — running his own online fitness business, eighty-hour weeks, doing marketing, sales, fulfillment himself. After expenses he was clearing about five thousand a month. He didn't need a personality transplant — he needed a different vehicle. He came through, focused on setter first, third month he did nineteen thousand in commissions. Later promoted to closer, now he's consistently eighteen to twenty-two thousand. He told me straight up: he didn't want to run the whole machine anymore — he wanted to sell and earn. Does any part of that hit home for you, or is your situation different?"</div>
+      </div>
+    </div>
+
+    <div class="branch">
+      <div class="branch-if" onclick="tog(this.parentElement)"><span class="branch-tag">if</span><span class="branch-cond">Young / college / early 20s</span><span class="branch-arrow">▶</span></div>
+      <div class="branch-body">
+        <div class="branch-say">"What made you look at this now — versus just finishing the 'normal' path everyone says you're supposed to take?"<br><br>"And real talk — who do you know <em>personally</em> who got truly wealthy doing only the traditional path? Not Instagram wealthy. Actually." <em>(Hold silence. Let it land.)</em><br><br>"So if that's rare… what does that tell you about the path you're on?"<br><br>"When you picture success for your life — not your parents' version, yours — what does that actually look like?"</div>
+        <div class="inline-say-intro">Optional proof story — Josh (Hormozi path)</div>
+        <div class="god-tab-panel god-tab-active" style="display:block;margin-top:.5rem">"I'll tell you a quick one because it matches the hunger I hear from you. Josh was in college, doing B2B sales, and on his first call with us he said his dream was Acquisition.com — Hormozi. You don't walk in there with zero proof. So we placed him on another closer offer first — he got real reps, started closing, built a real track record. About three months later the door opened at Acquisition.com. We helped him position, prep interviews, use the network. He's one of the top performers there now. He didn't skip steps — he moved fast on purpose. I'm not saying that's your exact path — I'm saying intentionality like yours is the pattern I see on the people who actually get the big rooms."</div>
+      </div>
+    </div>
+
+    <div class="branch">
+      <div class="branch-if" onclick="tog(this.parentElement)"><span class="branch-tag">if</span><span class="branch-cond">Non-sales / "I'm not a salesperson"</span><span class="branch-arrow">▶</span></div>
+      <div class="branch-body">
+        <div class="branch-say">"When you picture a salesperson — like, the stereotype — what do you actually see?" <em>(Let them talk.)</em><br><br>"Yeah — and that's not what this is. This is a conversation with someone who already raised their hand and wants a solution. You're not chasing strangers in a parking lot."<br><br>"You've already persuaded people — recommended a restaurant, talked a friend into trying something, calmed a family member down. That's influence. We're just putting structure and a paycheck behind it."<br><br>"Does that land at all, or does it still feel foreign?"</div>
+        <div class="inline-say-intro">Story — Cassi (confidence / out of workforce)</div>
+        <div class="god-tab-panel god-tab-active" style="display:block;margin-top:.5rem">"Cassi was home with her kids for five years. She wanted back in the workforce but didn't feel like she 'had skills' anymore — impostor stuff, totally normal. She needed remote. She went through setter first, proved herself fast, got promoted to closer. First full month closing she made nine thousand dollars — from home. She didn't come in special. She showed up, practiced, stayed coachable, trusted the process. I'm not telling you it's effortless — I'm saying the 'I'm not a salesperson' story is usually wrong. The question is whether you're willing to let yourself be new for a little bit."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-label">3.2 Pain dig</div>
+  <div class="q-card"><div class="box-label">Pain</div><div class="q-text">"On the flip side — what do you not like about it that has you open to talking about something different?"</div><div class="q-note">Then: "Give me a real example from the last thirty to sixty days where you felt that the most. What happened?" → "In that moment, what were you feeling?" → "What was the worst part for you?" → "How long has it felt like that — better, same, or worse?"</div></div>
+  <div class="inline-say-intro">If they minimize pain — pick one (slow delivery)</div>
+  <div class="inline-tabs" data-god-tab-group="disc-pain">
+    <div class="god-tab-row">
+      <button type="button" class="god-tab-btn god-tab-active" onclick="godTab(this,0)">Expand in time (#23)</button>
+      <button type="button" class="god-tab-btn" onclick="godTab(this,1)">Don't brush teeth</button>
+    </div>
+    <div class="god-tab-panel god-tab-active">"Let me ask it a different way — and I want you to actually think out loud with me. If nothing changes, what does this look like in two days… two weeks… two months… two years? Not for me — for you." <em>(Say it slow. Let them answer each beat if you can.)</em><br><br>"Where does [their pain] go if we don't address it — does it shrink, or does it usually get heavier?"</div>
+    <div class="god-tab-panel">"It's like brushing your teeth — skip one day, whatever. Skip a year, and the problem isn't 'I missed a day,' it's a whole different conversation. So I'm not being dramatic for fun — I want to know where this goes for you in six to twelve months if the pattern stays the same."</div>
+  </div>
+  <div class="script-box" style="margin-top:.75rem">Tony line when it fits: "Tony Robbins says change happens when the pain of staying the same becomes greater than the pain of change — so what's the real cost if nothing changes in the next six months, for you personally, not just the money?" <em>Then silence.</em></div>
+
+  <div class="step-label">3.3 Money reality</div>
+  <div class="script-box">"And right now, what are you actually bringing in from that — on average per month? Not your best month. The real average."<br><br>"If nothing changed and you stayed on this track — where do you realistically see that income in the next twelve months? Same ballpark, a little more, or pretty capped?"</div>
+  <div class="inline-say-intro">If they have a income goal — direction vs effort</div>
+  <div class="god-tab-panel god-tab-active" style="display:block">"Do the math with me for a second. If you want [their goal] and you're at [current] right now — how many more hours would you need at your current rate to even get close? Is that even possible without inventing new physics?" <em>(Pause.)</em><br><br>"So if the math doesn't work there — the real question isn't whether you're willing to grind. It's whether the direction is broken. Fair?"</div>
+
+  <div class="step-label">3.4 Heaven + 3.5 Future pace + 3.6 Gap</div>
+  <div class="q-card"><div class="box-label">Attraction</div><div class="q-text">"Switching gears — what's attracting you to high-ticket remote sales? Is it more freedom, more earning potential, or both?"</div><div class="q-note">Freedom → "When you say freedom, what does that actually mean — family, travel, not being tied to one spot?" Money → "What does that income actually fix or unlock for you?" Both → "So you want income and control — that's the real target, right?" <strong>Write their exact words in the toolbar.</strong></div></div>
+  <div class="script-box">"Let's fast-forward twelve months. You're dialed in, remote, income is closer to [target]. Walk me through a normal Tuesday — where you wake up, what you're doing, who you're around, what's different from today." <em>Silence.</em><br><br>"What else changes in your life when that's real?"</div>
+  <div class="script-box">"Let me reflect this back. Right now you're in [situation], making about [income], dealing with [pain]. What you want is [their vision]. Tony Robbins says change happens when the pain of staying the same exceeds the pain of change — so what's the real cost if nothing changes in six months?" <em>Silence.</em><br><br>Optional follow: "And how would you feel looking back at that version of you?"</div>
+  <div class="q-card"><div class="box-label">Why now</div><div class="q-text">"What shifted recently that made you need to do something about this now?"</div></div>
+  <div class="script-box">"Where do you feel you're going to need the most help — learning the skill, or getting into the right role fast?"<br><br>"How many hours a week could you realistically put in — would ten to twelve be doable?"<br><br>"If we build a plan around [their number] hours, is that something you'll actually follow through on?"</div>
+
+  <div class="flow-banner">When discovery is full → next phase is <strong>Story Bridge</strong>: click <strong>4 · Story Bridge</strong> in the nav (one story, pen &amp; paper, <em>then</em> Demo). You’re not missing content — analogies for Hell were above.</div>
+  <div class="box box-purple"><div class="box-label">Discovery anchor</div><div class="box-text">"So if I'm hearing you right — you want [their words]. What's between you and that is a decision and the right support. Fair?" <em>→ open Section 4 and match your story to their arc.</em></div></div>
+</div>
+
+<!-- 4 STORY BRIDGE -->
+<div id="s4" class="section">
+  <div class="sec-head">
+    <div class="sec-num">Section 4 · 27–30 min</div>
+    <div class="sec-title">Story Bridge</div>
+    <div class="sec-sub">After future pace &amp; gap — proof before process. One story, 60–90 sec.</div>
+  </div>
+  <div class="box box-green"><div class="box-label">Why here</div><div class="box-text">Emotion is highest after they painted pain + future. Story validates before you explain HTSA mechanics.</div></div>
+  <div class="script-box">"Based on everything you told me, you remind me of [Name]."<br><br><em>→ Story. Then:</em> "Does that resonate, or is your situation different?"</div>
+
+  <div class="step-label">Pick one story</div>
+  <div class="story-grid">
+    <div class="story-card" onclick="this.classList.toggle('open')"><div class="story-head"><span class="story-emoji">💼</span><div><div class="story-name">Matt Seitz</div><div class="story-tag">Corporate / ceiling / ~$70k / travel</div></div></div><div class="story-body"><p>Consultant, nonprofits, ~$70k, felt capped. Trained, fastest start in company, top 3, 6 figures, house on coast FL.</p><p class="story-punchline">Doing fine — capable of more. Same guy, different vehicle.</p></div></div>
+    <div class="story-card" onclick="this.classList.toggle('open')"><div class="story-head"><span class="story-emoji">👩‍👦</span><div><div class="story-name">Cassi Lara</div><div class="story-tag">Mom / out of workforce / confidence</div></div></div><div class="story-body"><p>SAHM 5 yrs, remote for kids. Setter → closer. First closing month $9k from home.</p><p class="story-punchline">Showed up, coachable, trusted process.</p></div></div>
+    <div class="story-card" onclick="this.classList.toggle('open')"><div class="story-head"><span class="story-emoji">🔄</span><div><div class="story-name">CJ</div><div class="story-tag">Starting over / skeptical / embezzlement</div></div></div><div class="story-body"><p>$200k+ roofing → partner embezzled $700k+ → -$36k. Borrowed $6k, trained, right vehicle. #1 rep, debt cleared, remote.</p><p class="story-punchline">Sometimes you don't need a new ability — you need the right vehicle.</p></div></div>
+    <div class="story-card" onclick="this.classList.toggle('open')"><div class="story-head"><span class="story-emoji">🎓</span><div><div class="story-name">Josh Sosa</div><div class="story-tag">Young / Hormozi dream</div></div></div><div class="story-body"><p>Closer offer first → proof → Acquisition.com in ~3 mo, top performer.</p><p class="story-punchline">Didn't skip steps — fast and intentional.</p></div></div>
+    <div class="story-card" onclick="this.classList.toggle('open')"><div class="story-head"><span class="story-emoji">🎯</span><div><div class="story-name">Brianna Carroll</div><div class="story-tag">Dream company / Tony Robbins</div></div></div><div class="story-body"><p>Strategic placement first → toughest interview process → dream role in 2 mo.</p><p class="story-punchline">Clear vision, positioning, execution.</p></div></div>
+    <div class="story-card" onclick="this.classList.toggle('open')"><div class="story-head"><span class="story-emoji">🏆</span><div><div class="story-name">Nate Hamrick</div><div class="story-tag">$100k+ / burned out / 70hr</div></div></div><div class="story-body"><p>Insurance $100k+, 70hr weeks. HTS → $170k yr1, travel months, $300k+ later.</p><p class="story-punchline">Same skills, better model, more freedom.</p></div></div>
+    <div class="story-card" onclick="this.classList.toggle('open')"><div class="story-head"><span class="story-emoji">🚀</span><div><div class="story-name">Jay (Jeroen)</div><div class="story-tag">Phone sales / income jump</div></div></div><div class="story-body"><p>Denmark energy sales $7–8k. Landed $24k offer — $4.8k first week.</p><p class="story-punchline">Low-ticket volume vs high-ticket leverage.</p></div></div>
+    <div class="story-card" onclick="this.classList.toggle('open')"><div class="story-head"><span class="story-emoji">🏋️</span><div><div class="story-name">Mike Kaz</div><div class="story-tag">Owner / 80hr / ~$5k net</div></div></div><div class="story-body"><p>Fitness biz grind → setter $19k mo3 → closer $18–22k.</p><p class="story-punchline">Wanted to sell and earn, not run the whole machine.</p></div></div>
+  </div>
+
+  <div class="script-label">Strong fit + pen &amp; paper</div>
+  <div class="script-box">"So based on everything — you said [pain], you want [goal]. That intentionality is what every successful member here has."<br><br>"We'd love to have you on the team — I know you'd do amazing." <em>Pause.</em><br><br>"Before I show you exactly how we make [goal] real — do you have pen and paper, or need to grab one?" <em>Wait.</em><br><br>"Perfect. Here's how we get you from where you are to where you want to be…" <em>→ Sec 5 Demo.</em></div>
+</div>
+
+<!-- 5 DEMO -->
+<div id="s5" class="section">
+  <div class="sec-head"><div class="sec-num">Section 5</div><div class="sec-title">Demo — Keep It Tight</div><div class="sec-sub">~10 min. Tie-down after each block. Don’t lecture AI platform for 15 min.</div></div>
+  <div class="script-box"><strong>Promise:</strong> Do the work + certified → we get you hired. 100% who finish + work with Nate land. <strong>Two objectives:</strong> (1) train you as a strong remote closer (2) get you in front of right companies. <strong>Make sense?</strong></div>
+  <div class="script-box"><strong>Cert + reps:</strong> ~50 lessons, 12–20 hrs, lifetime access. Real skill = reps. <strong>Messi</strong> — thousands of reps; AI roleplay, real scripts, graded feedback. <strong>How do you feel about reps vs only slides?</strong></div>
+  <div class="script-box"><strong>Live coaching + community:</strong> Chad on live calls, recordings, mastermind 24/7. Part-time $4–6k vs athletes at $30–40k+; avg ~$10–12k. <strong>Which do you see yourself if you took this seriously?</strong> Culture: help the person behind you. <strong>How important is high-performer support?</strong></div>
+  <div class="script-box"><strong>Mock + placement:</strong> Live mock, Chad signs off. Then <strong>Nate</strong> 1:1 — roadmap, resume, matched ops, apps pulled (not job-board roulette). Often &lt;3 weeks. <strong>Lifetime</strong> access — course, coaching, community, placement help if you switch offers later. <strong>What stands out most — Chad, community, or Nate placement?</strong> → <strong>Sec 6–7.</strong></div>
+</div>
+
+<!-- 6 PRE-CLOSE -->
+<div id="s6" class="section">
+  <div class="sec-head"><div class="sec-num">Section 6</div><div class="sec-title">Pre-Close</div></div>
+  <div class="script-box">Tie-down from demo → "Besides investment, does this path get you from where you are to where you want?" <em>If hesitant — dig now.</em> → "Cool — probably the only other question is what it costs, right?"</div>
+  <div class="box box-warn"><div class="box-label">Don't rush</div><div class="box-text">If voice is unsure, ask what's still fuzzy before price.</div></div>
+</div>
+
+<!-- 7 PRICE -->
+<div id="s7" class="section">
+  <div class="sec-head"><div class="sec-num">Section 7</div><div class="sec-title">Price + Close</div></div>
+  <div class="script-box">Context: RCA / Cole — group interviews vs Nate 1:1; compare value; <strong>we charge less</strong> than many. $7k as 4×$1,750 or <strong>$6k PIF</strong>. <strong>Which works better — payments or save $1k upfront?</strong> <em>Then silence.</em></div>
+  <div class="price-grid">
+    <div class="price-card"><div class="price-num">$1,750</div><div class="price-val">×4 monthly</div></div>
+    <div class="price-card lead"><div class="price-badge">Save $1k</div><div class="price-num">$6,000</div><div class="price-val">PIF</div></div>
+    <div class="price-card"><div class="price-num">Deposit</div><div class="price-val">Last resort</div></div>
+  </div>
+  <div class="script-box">Mirror their words → <strong>"Card on you or need a second to grab it?"</strong> <em>Silence. First to talk loses.</em></div>
+</div>
+
+<!-- 8 OBJECTIONS -->
+<div id="s8" class="section">
+  <div class="sec-head"><div class="sec-num">Section 8</div><div class="sec-title">Objections</div><div class="sec-sub">Isolate → one layer at a time → reclose.</div></div>
+
+  <div class="obj-root"><div class="obj-header" onclick="togObj(this.parentElement)"><div class="obj-title">"I need to think about it"</div><div class="obj-toggle">▶</div></div><div class="obj-content">
+    <div class="obj-step universal"><div class="obj-step-label">1 · Isolate</div><div class="obj-say">"Money aside — if this were free, would this be your best shot at doing high ticket the right way?"</div>
+      <div class="tie-analogy"><div class="tie-label">Island / beach → mountain (uncertainty)</div><div class="tie-body">After isolate if still fuzzy: beach only sees water; climb → see other islands. "Willing to climb?" Full version in your long script / Sec 11 #17 funnel.</div></div>
+    </div>
+    <div class="obj-step probe"><div class="obj-step-label">2 · Scale</div><div class="obj-say">"1–10, how much do you want this — 10 being all in today?"</div>
+      <div class="obj-branch"><div class="obj-branch-head" onclick="togBranch(this.parentElement)"><span class="obj-branch-tag">9–10</span><span class="obj-branch-cond">"I'm a 10, it's the money"</span><span class="obj-branch-arr">▶</span></div><div class="obj-branch-body"><div class="obj-say">→ Money track below.</div></div></div>
+      <div class="obj-branch"><div class="obj-branch-head" onclick="togBranch(this.parentElement)"><span class="obj-branch-tag">7–8</span><span class="obj-branch-cond">Gap — why not 10?</span><span class="obj-branch-arr">▶</span></div><div class="obj-branch-body">
+        <div class="obj-say">"Why a 7 instead of a 10 — what's the gap?"</div>
+        <div class="obj-branch"><div class="obj-branch-head" onclick="togBranch(this.parentElement)"><span class="obj-branch-tag">if</span><span class="obj-branch-cond">Compare programs</span><span class="obj-branch-arr">▶</span></div><div class="obj-branch-body"><div class="obj-say">Framework: compare placement rate, time-to-role, live access to founder — not just price. "What are you hoping another program has that you didn't see here?"</div></div></div>
+        <div class="obj-branch"><div class="obj-branch-head" onclick="togBranch(this.parentElement)"><span class="obj-branch-tag">if</span><span class="obj-branch-cond">"Don't know if I can do it"</span><span class="obj-branch-arr">▶</span></div><div class="obj-branch-body"><div class="obj-say">Common among top performers. "Others learned this — willing to give yourself the shot?"</div></div></div>
+        <div class="obj-branch"><div class="obj-branch-head" onclick="togBranch(this.parentElement)"><span class="obj-branch-tag">if</span><span class="obj-branch-cond">Spouse</span><span class="obj-branch-arr">▶</span></div><div class="obj-branch-body"><div class="obj-say">"If they were 100% on board, how would YOU feel?" → "If they heard this call — go for it or stay?"</div></div></div>
+      </div></div>
+      <div class="obj-branch"><div class="obj-branch-head" onclick="togBranch(this.parentElement)"><span class="obj-branch-tag">5–6</span><span class="obj-branch-cond">Mixed</span><span class="obj-branch-arr">▶</span></div><div class="obj-branch-body"><div class="obj-say">"What one thing would make this a 9 or 10?" <em>Handle only that.</em></div></div></div>
+    </div>
+    <div class="obj-step close-step"><div class="obj-step-label">3 · Cost of waiting</div><div class="obj-say">"What new info will you have next week that you don't have now?" → tie to [their goal] → <strong>"Ready to do this?"</strong></div></div>
+  </div></div>
+
+  <div class="obj-root"><div class="obj-header" onclick="togObj(this.parentElement)"><div class="obj-title">Money — "can't afford" / "don't have it"</div><div class="obj-toggle">▶</div></div><div class="obj-content">
+    <div class="obj-step universal"><div class="obj-step-label">1 · Isolate</div><div class="obj-say">"Money aside — is this the program you need?" <em>Fast yes = logistics. Hesitate = not money.</em></div></div>
+    <div class="obj-step probe"><div class="obj-step-label">2 · Severity</div><div class="obj-say">"Can't pay bills tomorrow, or tight a couple months?"</div>
+      <div class="obj-branch"><div class="obj-branch-head" onclick="togBranch(this.parentElement)"><span class="obj-branch-tag">Tight</span><span class="obj-branch-cond">Can muscle through</span><span class="obj-branch-arr">▶</span></div><div class="obj-branch-body"><div class="obj-say">Borrowed $6k at -$36k story. "1–2 tight months for $10k+ months after?" → "If you had the money, in today?" → savings / card / temporary pull.</div></div></div>
+      <div class="obj-branch"><div class="obj-branch-head" onclick="togBranch(this.parentElement)"><span class="obj-branch-tag">Hard</span><span class="obj-branch-cond">Real hardship</span><span class="obj-branch-arr">▶</span></div><div class="obj-branch-body"><div class="obj-say">Warm exit + specific follow-up date. Don't bulldoze.</div></div></div>
+    </div>
+    <div class="obj-step handle"><div class="obj-step-label">Reframe</div><div class="obj-say">Expense vs investment; payback math on one close. <strong>Depreciating car</strong> analogy Sec 10.</div></div>
+  </div></div>
+
+  <div class="obj-root"><div class="obj-header" onclick="togObj(this.parentElement)"><div class="obj-title">Time / spouse / pay-to-train</div><div class="obj-toggle">▶</div></div><div class="obj-content">
+    <div class="obj-step"><div class="obj-say"><strong>Time:</strong> "If time weren't an issue — want this?" → 10–15 hr/wk designed for full-time workers → busy people execute.</div></div>
+    <div class="obj-step"><div class="obj-say"><strong>Spouse:</strong> 100% on board test → Hormozi frame if on call.</div></div>
+    <div class="obj-step"><div class="obj-say"><strong>Pay to train:</strong> Low-skill employee training vs doctor/pilot/closer — who owns your future if they pay you to train?</div></div>
+  </div></div>
+</div>
+
+<!-- 9 STORIES LIBRARY -->
+<div id="s9" class="section">
+  <div class="sec-head"><div class="sec-num">Section 9</div><div class="sec-title">Full story library</div><div class="sec-sub">One per call — same cards as Sec 4, expanded when you need the full text on screen.</div></div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:1rem">Use Sec 4 during the call; use this tab to re-read full beats. Add more cards by editing this HTML.</p>
+  <div class="story-grid">
+    <div class="story-card" onclick="this.classList.toggle('open')"><div class="story-head"><span class="story-emoji">💼</span><div><div class="story-name">Matt Seitz</div></div></div><div class="story-body"><p>Corporate nonprofit consultant, travel, ~$70k, ceiling. Training → fastest start, top 3, doubled income, FL coast home.</p></div></div>
+    <div class="story-card" onclick="this.classList.toggle('open')"><div class="story-head"><span class="story-emoji">🔄</span><div><div class="story-name">CJ full arc</div></div></div><div class="story-body"><p>Roofing $200k+ → embezzlement → -$36k → borrowed $6k → certified fast → #1 rep, debt free, Ecuador remote.</p></div></div>
+    <div class="story-card" onclick="this.classList.toggle('open')"><div class="story-head"><span class="story-emoji">👩‍👦</span><div><div class="story-name">Cassi</div></div></div><div class="story-body"><p>5 yrs home → setter → closer → $9k first closing month remote.</p></div></div>
+    <div class="story-card" onclick="this.classList.toggle('open')"><div class="story-head"><span class="story-emoji">🎓</span><div><div class="story-name">Josh Sosa</div></div></div><div class="story-body"><p>Acquisition.com path via proof on another offer first.</p></div></div>
+  </div>
+</div>
+
+<!-- 10 ANALOGIES -->
+<div id="s10" class="section">
+  <div class="sec-head"><div class="sec-num">Section 10</div><div class="sec-title">Analogies</div><div class="sec-sub">Quick library. On calls, the <strong>full speakable versions</strong> now live inside <strong>Section 3</strong> under each branch — use this tab as a short reminder, not your primary flow.</div></div>
+  <div class="analogy-card" onclick="this.classList.toggle('open')"><div class="analogy-head"><div class="analogy-title">Usain Bolt / treadmill</div><div class="analogy-when">Sales, wrong vehicle</div></div><div class="analogy-body"><p>Fastest man on a treadmill that won't go full speed — doesn't improve the runner. Same for you in [insurance/cars/etc.] — potential vs ceiling.</p></div></div>
+  <div class="analogy-card" onclick="this.classList.toggle('open')"><div class="analogy-head"><div class="analogy-title">Construction vs Sarah on Zoom</div><div class="analogy-when">Time-for-money / broken scoreboard</div></div><div class="analogy-body"><p>$22/hr, body breaks down vs $3k commission in pajamas in 45 min. Who's rewarded for effort?</p></div></div>
+  <div class="analogy-card" onclick="this.classList.toggle('open')"><div class="analogy-head"><div class="analogy-title">Corporate hamster wheel</div><div class="analogy-when">3% raises, pizza party</div></div><div class="analogy-body"><p>$60k → $61.8k for a year of grind vs two closes = $10k+ in two weeks. Which scoreboard?</p></div></div>
+  <div class="analogy-card" onclick="this.classList.toggle('open')"><div class="analogy-head"><div class="analogy-title">Doctor / lawyer vs one skill</div><div class="analogy-when">Investment reframes</div></div><div class="analogy-body"><p>Years + debt for one industry lock-in vs 90 days to a skill every vertical pays for.</p></div></div>
+  <div class="analogy-card" onclick="this.classList.toggle('open')"><div class="analogy-head"><div class="analogy-title">Don't brush teeth / pain expands</div><div class="analogy-when">Minimizing urgency</div></div><div class="analogy-body"><p>One day vs one year — pain compounds. Where does [their pain] go in 6–12 months if nothing changes?</p></div></div>
+  <div class="analogy-card" onclick="this.classList.toggle('open')"><div class="analogy-head"><div class="analogy-title">Depreciating car vs skill</div><div class="analogy-when">"$7k is a lot"</div></div><div class="analogy-body"><p>$30k car finance easy; $7k skill that pays 6 figures — notice the pattern.</p></div></div>
+  <div class="analogy-card" onclick="this.classList.toggle('open')"><div class="analogy-head"><div class="analogy-title">Messi / reps</div><div class="analogy-when">AI platform / practice</div></div><div class="analogy-body"><p>Not from film — from reps. Same for closing.</p></div></div>
+  <div class="analogy-card" onclick="this.classList.toggle('open')"><div class="analogy-head"><div class="analogy-title">Two paths — 10 years</div><div class="analogy-when">Close / future self</div></div><div class="analogy-body"><p>Same 10 years passes — stayed vs went all in. Which movie are you the main character in?</p></div></div>
+</div>
+
+<!-- 11 DARK PSYCH -->
+<div id="s11" class="section">
+  <div class="sec-head"><div class="sec-num">Section 11</div><div class="sec-title">Andres-style · use cold, casual delivery</div></div>
+  <div class="psych-grid">
+    <div class="psych-card" onclick="this.classList.toggle('open')"><div class="psych-num">#1</div><div class="psych-name">Two kinds of people</div><div class="psych-when">Stuck in safe vs shot</div><div class="psych-expand"><p>Safe 9–5 vs 0.1% who take a shot — which ends up more successful?</p></div></div>
+    <div class="psych-card" onclick="this.classList.toggle('open')"><div class="psych-num">#4</div><div class="psych-name">Last time risk worked</div><div class="psych-when">Fear at close</div><div class="psych-expand"><p>Positive memory → decide from hope.</p></div></div>
+    <div class="psych-card" onclick="this.classList.toggle('open')"><div class="psych-num">#5</div><div class="psych-name">Future self decides</div><div class="psych-when">Fear state</div><div class="psych-expand"><p>Already-at-[goal] you — what do they choose right now?</p></div></div>
+    <div class="psych-card" onclick="this.classList.toggle('open')"><div class="psych-num">#15</div><div class="psych-name">Funnel objection</div><div class="psych-when">"Too risky"</div><div class="psych-expand"><p>→ "You're really seeking certainty." Now you're in your reframe world.</p></div></div>
+    <div class="psych-card" onclick="this.classList.toggle('open')"><div class="psych-num">#17</div><div class="psych-name">Perspective funnel</div><div class="psych-when">"Think about it"</div><div class="psych-expand"><p>"So help me understand — when you say you want to think about it, what specifically are you trying to figure out? Because usually it's not new information — it's the same perspective making the decision." <em>(Pause.)</em></p><p>"Here's what I mean. Your perspective creates your decisions. Your decisions create your results. And your results are why you're on this call unhappy with where things are. So the real question is: are you willing to let that same exact thinking run the next chapter of your life — yes or no?" <em>If no → you lead.</em></p></div></div>
+    <div class="psych-card" onclick="this.classList.toggle('open')"><div class="psych-num">#23</div><div class="psych-name">Expand pain in time</div><div class="psych-when">Soft on consequence</div><div class="psych-expand"><p>"I want to walk through something with you — not to be dramatic, for real. If nothing changes, what does this look like in two days?" <em>(Let them answer.)</em> "Two weeks?" "Two months?" "Two years?"</p><p>"The point isn't to scare you — it's that pain usually doesn't stay the same size when you ignore it. So where does this actually go if we don't address it?"</p><p><em>Same full script is under Section 3 · Pain dig · tab 'Expand in time.'</em></p></div></div>
+    <div class="psych-card" onclick="this.classList.toggle('open')"><div class="psych-num">#25</div><div class="psych-name">Resourcefulness</div><div class="psych-when">Money</div><div class="psych-expand"><p>Not resources — resourcefulness. Then your borrowed $6k story.</p></div></div>
+    <div class="psych-card" onclick="this.classList.toggle('open')"><div class="psych-num">#8</div><div class="psych-name">Expensive compared to what</div><div class="psych-when">Price shock</div><div class="psych-expand"><p>Dinner vs Ferrari frame — decision from fear of number vs path to goal.</p></div></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
