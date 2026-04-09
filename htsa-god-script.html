@@ -58,19 +58,21 @@ body {
   padding: 6px 12px;
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
+/* Notes/timer live in Section 12 — not sticky over the whole app */
 .toolbar {
   background: var(--white);
-  border-bottom: 2px solid var(--green);
+  border: 1px solid var(--mid);
+  border-radius: 8px;
   padding: 10px 16px;
-  padding-top: max(10px, env(safe-area-inset-top, 10px));
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   align-items: flex-start;
-  position: sticky;
-  top: 0;
-  z-index: 150;
   box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.toolbar-in-notes {
+  border: 2px solid var(--green);
+  margin-bottom: 1rem;
 }
 .toolbar-block { display: flex; flex-direction: column; gap: 4px; flex: 1 1 auto; min-width: 0; }
 .toolbar-block label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
@@ -142,6 +144,42 @@ body {
 }
 .nav-btn:hover { background: var(--navy3); color: var(--white); }
 .nav-btn.active { background: var(--green); color: var(--navy); border-color: var(--green); font-weight: 700; }
+.nav-btn-notes { border-color: rgba(0, 201, 122, 0.45); }
+.nav-btn-notes.nav-btn.active { box-shadow: 0 0 0 2px rgba(0, 201, 122, 0.35); }
+
+/* Phone: timer + jump to Notes without covering the script */
+.mobile-notes-bar {
+  display: none;
+}
+.mnb-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 860px;
+  justify-content: space-between;
+}
+.mnb-notes-btn {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 16px;
+  min-height: 44px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  background: var(--green);
+  color: var(--navy);
+  touch-action: manipulation;
+  flex: 1;
+  max-width: 200px;
+}
+.mnb-notes-btn:active { opacity: 0.92; }
+.mobile-notes-bar .timer-display {
+  color: var(--green);
+  font-size: 22px;
+  min-width: 64px;
+}
 .timer-badge {
   font-size: 8px;
   font-weight: 700;
@@ -370,6 +408,26 @@ body {
     padding-right: max(12px, env(safe-area-inset-right, 12px));
     gap: 14px;
   }
+  .mobile-notes-bar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    background: var(--navy);
+    border-top: 2px solid var(--green);
+    padding: 8px max(12px, env(safe-area-inset-left, 12px)) max(8px, env(safe-area-inset-bottom, 8px)) max(12px, env(safe-area-inset-right, 12px));
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -4px 20px rgba(0,0,0,.2);
+  }
+  body.on-notes-page .mobile-notes-bar {
+    display: none;
+  }
+  body:not(.on-notes-page) {
+    padding-bottom: calc(54px + env(safe-area-inset-bottom, 0px));
+  }
   .toolbar-block {
     flex: 1 1 100%;
     width: 100%;
@@ -461,43 +519,7 @@ body {
 </head>
 <body>
 
-<div class="offline-banner">Offline reference only — not connected to Co-Pilot. Edit notes below; nothing is saved when you close the tab.</div>
-
-<div class="toolbar">
-  <div class="toolbar-block">
-    <label>Call timer</label>
-    <div class="timer-row">
-      <span class="timer-display" id="timerDisplay">00:00</span>
-      <button type="button" class="btn-tb green" onclick="startTimer()">Start</button>
-      <button type="button" class="btn-tb" onclick="pauseTimer()">Pause</button>
-      <button type="button" class="btn-tb" onclick="resetTimer()">Reset</button>
-    </div>
-  </div>
-  <div class="toolbar-block">
-    <label>Prospect name</label>
-    <input type="text" id="noteName" placeholder="First name" autocomplete="off">
-  </div>
-  <div class="toolbar-block">
-    <label>Income goal / win</label>
-    <input type="text" id="noteGoal" placeholder="e.g. 15k/mo remote" autocomplete="off">
-  </div>
-  <div class="toolbar-block">
-    <label>Main pain (their words)</label>
-    <textarea id="notePain" placeholder="Paste how they said it"></textarea>
-  </div>
-  <div class="toolbar-block">
-    <label>Why now / urgency</label>
-    <textarea id="noteUrgency" placeholder="What shifted recently"></textarea>
-  </div>
-  <div class="toolbar-block">
-    <label>Exact words to mirror at close</label>
-    <textarea id="noteWords" placeholder="Freedom + money phrasing"></textarea>
-  </div>
-  <div class="toolbar-block">
-    <label>&nbsp;</label>
-    <button type="button" class="btn-tb green" onclick="copyCloseSnippet()">Copy close snippet</button>
-  </div>
-</div>
+<div class="offline-banner">Offline reference — not connected to Co-Pilot. Timer &amp; scratch pad live under <strong>12 · Notes</strong> (nothing is saved when you close the tab).</div>
 
 <div class="header">
   <div class="logo">
@@ -520,6 +542,7 @@ body {
     <button type="button" class="nav-btn" onclick="show('s9',this)">9 · Stories</button>
     <button type="button" class="nav-btn" onclick="show('s10',this)">10 · Analogies</button>
     <button type="button" class="nav-btn" onclick="show('s11',this)">11 · Dark Psych</button>
+    <button type="button" class="nav-btn nav-btn-notes" id="navNotesBtn" onclick="show('s12',this)">12 · Notes</button>
   </nav>
 </div>
 
@@ -818,6 +841,58 @@ body {
   </div>
 </div>
 
+<!-- 12 NOTES & TIMER — own screen so script sections stay full-height on phone -->
+<div id="s12" class="section">
+  <div class="sec-head">
+    <div class="sec-num">Section 12</div>
+    <div class="sec-title">Call notes &amp; timer</div>
+    <div class="sec-sub">Fill this during the call. Use <strong>Copy close snippet</strong> before you jump back to Price/Close. Swipe the nav to return to any section.</div>
+  </div>
+  <div class="toolbar toolbar-in-notes">
+    <div class="toolbar-block">
+      <label>Call timer</label>
+      <div class="timer-row">
+        <span class="timer-display timer-display-notes" id="timerDisplay">00:00</span>
+        <button type="button" class="btn-tb green" onclick="startTimer()">Start</button>
+        <button type="button" class="btn-tb" onclick="pauseTimer()">Pause</button>
+        <button type="button" class="btn-tb" onclick="resetTimer()">Reset</button>
+      </div>
+    </div>
+    <div class="toolbar-block">
+      <label>Prospect name</label>
+      <input type="text" id="noteName" placeholder="First name" autocomplete="off">
+    </div>
+    <div class="toolbar-block">
+      <label>Income goal / win</label>
+      <input type="text" id="noteGoal" placeholder="e.g. 15k/mo remote" autocomplete="off">
+    </div>
+    <div class="toolbar-block">
+      <label>Main pain (their words)</label>
+      <textarea id="notePain" placeholder="Paste how they said it"></textarea>
+    </div>
+    <div class="toolbar-block">
+      <label>Why now / urgency</label>
+      <textarea id="noteUrgency" placeholder="What shifted recently"></textarea>
+    </div>
+    <div class="toolbar-block">
+      <label>Exact words to mirror at close</label>
+      <textarea id="noteWords" placeholder="Freedom + money phrasing"></textarea>
+    </div>
+    <div class="toolbar-block">
+      <label>&nbsp;</label>
+      <button type="button" class="btn-tb green" onclick="copyCloseSnippet()">Copy close snippet</button>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile: slim strip so timer stays visible without the full notes form -->
+<div class="mobile-notes-bar" id="mobileNotesBar" aria-label="Call timer quick access">
+  <div class="mnb-inner">
+    <span class="timer-display" id="timerDisplaySticky">00:00</span>
+    <button type="button" class="mnb-notes-btn" onclick="show('s12', document.getElementById('navNotesBtn'))">Notes &amp; timer</button>
+  </div>
+</div>
+
 <script>
 /* HTSA God Script — offline only */
 let timerMs = 0;
@@ -830,6 +905,8 @@ function show(id, btn) {
   var el = document.getElementById(id);
   if (el) el.classList.add('active');
   if (btn) btn.classList.add('active');
+  // Hide slim mobile bar on Notes page — full controls are on screen
+  document.body.classList.toggle('on-notes-page', id === 's12');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -859,8 +936,11 @@ function formatTime(ms) {
 function tickTimer() {
   if (!timerRunning) return;
   timerMs += 1000;
+  var t = formatTime(timerMs);
   var d = document.getElementById('timerDisplay');
-  if (d) d.textContent = formatTime(timerMs);
+  if (d) d.textContent = t;
+  var sticky = document.getElementById('timerDisplaySticky');
+  if (sticky) sticky.textContent = t;
 }
 
 function startTimer() {
@@ -879,6 +959,8 @@ function resetTimer() {
   timerMs = 0;
   var d = document.getElementById('timerDisplay');
   if (d) d.textContent = '00:00';
+  var sticky = document.getElementById('timerDisplaySticky');
+  if (sticky) sticky.textContent = '00:00';
 }
 
 function copyCloseSnippet() {
