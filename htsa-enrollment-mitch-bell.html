@@ -1,3 +1,6 @@
+Source URL: https://raw.githubusercontent.com/clay81090/closewithcjclay.com/main/htsa-enrollment-mitch-bell.html
+Title: htsa-enrollment-mitch-bell.html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1050,6 +1053,46 @@
     margin-right: auto;
   }
 
+  /* Trustpilot strip — top of page (5-star display, 4.8/5 rating) */
+  .trustpilot-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px 18px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 55%, #ecfdf5 100%);
+    border-bottom: 3px solid var(--green);
+    text-decoration: none;
+    color: var(--navy);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .trustpilot-top:hover {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 50%, #d1fae5 100%);
+  }
+  .trustpilot-stars {
+    color: #00b67a;
+    font-size: 20px;
+    letter-spacing: 3px;
+    line-height: 1;
+  }
+  .trustpilot-top-text {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .trustpilot-top-text strong {
+    color: #00b67a;
+    font-size: 15px;
+  }
+  .trustpilot-top-cta {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green-dark);
+    text-decoration: underline;
+  }
+
   @media print {
     @page { margin: 0.5in; size: letter; }
     body { background: white; }
@@ -1068,6 +1111,12 @@
 </head>
 <body>
 <div class="page">
+
+  <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="trustpilot-top" target="_blank" rel="noopener noreferrer" aria-label="HTSA Trustpilot reviews 4.8 out of 5">
+    <span class="trustpilot-stars" aria-hidden="true">★★★★★</span>
+    <span class="trustpilot-top-text"><strong>4.8 / 5</strong> on Trustpilot · High Ticket Sales Academy</span>
+    <span class="trustpilot-top-cta">Read verified reviews →</span>
+  </a>
 
   <!-- HEADER -->
   <div class="header">
@@ -1223,41 +1272,41 @@
       <div class="invest-program-label">Certified High Ticket Setter Program</div>
       <div class="invest-program-desc">All services described in the Setter curriculum — training platform, AI roleplay, certification, placement support, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
 
-      <div class="invest-section-kicker">HTSA In-House Payment Options</div>
-      <p class="invest-access-hint"><strong style="color:rgba(255,255,255,0.85);">Cash / card only</strong> — no financing on this page. Each pay-in-full or payment-plan option below includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
+      <div class="invest-section-kicker">Your payment schedule (card daily limit)</div>
+      <p class="invest-access-hint"><strong style="color:rgba(255,255,255,0.85);">Mitch — split for your bank’s daily limit:</strong> <strong style="color:var(--green);">$800 today</strong> (secure Stripe checkout below) and <strong style="color:var(--green);">$250 tomorrow</strong>. That’s <strong style="color:rgba(255,255,255,0.9);">$1,050</strong> toward your enrollment. CJ will send your <strong>$250</strong> checkout link tomorrow (or text him if you don’t see it).</p>
       <div class="invest-grid">
 
         <div class="invest-option-block">
-          <div class="invest-badge invest-badge--option">Option 1</div>
+          <div class="invest-badge invest-badge--option">Pay today</div>
           <div class="invest-option-head invest-option-head--pay">
             <div>
-              <div class="invest-option-title">Paid in Full</div>
-              <div class="invest-option-sub">One payment — best value (save $150 vs. the 3-pay plan).</div>
+              <div class="invest-option-title">$800 — Pay now (Stripe)</div>
+              <div class="invest-option-sub">Use this link today. After it clears, text CJ so access can be coordinated.</div>
             </div>
             <div class="invest-price-stack">
-              <div class="invest-price-big">$3,000</div>
-              <div class="invest-price-mini">One payment</div>
+              <div class="invest-price-big">$800</div>
+              <div class="invest-price-mini">Due today</div>
             </div>
           </div>
           <div class="invest-option-actions invest-option-actions--pay">
-            <a href="https://whop.com/checkout/plan_qzvfCCb1rIO0L?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $3,000 →</a>
+            <a href="https://buy.stripe.com/bJe3cu9dTgXf32l4N3cwg0M" class="invest-btn" target="_blank" rel="noopener noreferrer">Pay $800 securely (Stripe) →</a>
           </div>
         </div>
 
         <div class="invest-option-block">
-          <div class="invest-badge invest-badge--option">Option 2</div>
+          <div class="invest-badge invest-badge--option">Tomorrow</div>
           <div class="invest-option-head invest-option-head--pay">
             <div>
-              <div class="invest-option-title">3 Monthly Payments</div>
-              <div class="invest-option-sub">3 payments of $1,050 — First Payment Due Today.</div>
+              <div class="invest-option-title">$250 — Second charge</div>
+              <div class="invest-option-sub">Same card / daily limit split. CJ sends the secure link — complete it tomorrow to stay on track.</div>
             </div>
             <div class="invest-price-stack">
-              <div class="invest-price-big">$1,050</div>
-              <div class="invest-price-mini">$3,150 total · 3 installments</div>
+              <div class="invest-price-big">$250</div>
+              <div class="invest-price-mini">Due next business day</div>
             </div>
           </div>
           <div class="invest-option-actions invest-option-actions--pay">
-            <a href="https://whop.com/checkout/plan_oK3AajTKp0mXK?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose 3-Pay — Pay $1,050 Today →</a>
+            <span class="invest-btn" style="opacity:0.85;cursor:default;background:rgba(255,255,255,0.12);pointer-events:none;">Link from CJ tomorrow — text (616) 612-1735</span>
           </div>
         </div>
 
@@ -1278,8 +1327,8 @@
     <div class="step-item">
       <div class="step-num">1</div>
       <div class="step-content">
-        <h4>Step 1 — Choose Your Payment Option</h4>
-        <p>Mitch, choose <strong>$3,000 pay in full</strong> or the <strong>3 × $1,050</strong> plan in Program Investment above, complete checkout, then move to Step 2 below.</p>
+        <h4>Step 1 — Pay $800 today, then $250 tomorrow</h4>
+        <p>Mitch, use the <strong>Stripe</strong> button above to pay <strong>$800 today</strong>. Tomorrow, complete the <strong>$250</strong> checkout link CJ sends you (daily card limit split). Then move to Step 2.</p>
       </div>
     </div>
 
