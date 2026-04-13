@@ -286,10 +286,102 @@
     line-height: 1.6;
   }
 
+  /* Horizontal scroll for wide tables on small screens */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 8px 0 12px;
+    border-radius: 6px;
+  }
+  .table-wrap .data-table {
+    margin-top: 0;
+    min-width: 520px;
+  }
+
+  /* MOBILE — readable layout without horizontal page scroll */
+  @media (max-width: 768px) {
+    body {
+      font-size: 15px;
+      overflow-x: hidden;
+    }
+    .cover {
+      padding: 36px 20px 32px;
+    }
+    .cover h1 {
+      font-size: clamp(28px, 8vw, 40px);
+    }
+    .cover-sub {
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .cover-meta {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px 20px;
+      padding-top: 24px;
+    }
+    .cover-meta-item .value {
+      font-size: 17px;
+    }
+    .main {
+      padding: 0 18px 48px;
+    }
+    .section {
+      margin-top: 40px;
+      padding-bottom: 32px;
+    }
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .section h2 {
+      font-size: 22px;
+      line-height: 1.2;
+    }
+    .metric-grid,
+    .metric-grid.two,
+    .metric-grid.four {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .metric-card .mc-value {
+      font-size: 22px;
+    }
+    .timeline .tl-item {
+      flex-direction: column;
+      gap: 8px;
+      padding-left: 0;
+    }
+    .tl-date {
+      min-width: unset;
+    }
+    .report-footer {
+      padding: 20px 18px;
+      font-size: 11px;
+    }
+    .data-table {
+      font-size: 12.5px;
+    }
+    .data-table th,
+    .data-table td {
+      padding: 8px 10px;
+    }
+    .callout {
+      padding: 12px 14px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .cover-meta {
+      grid-template-columns: 1fr;
+    }
+  }
+
   /* PRINT */
   @media print {
     .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .section { page-break-inside: avoid; }
+    .table-wrap { overflow: visible; }
   }
 </style>
 </head>
@@ -378,7 +470,7 @@
 
   <!-- W-2 -->
   <h3 style="font-size:14px; font-weight:600; margin-bottom:8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">W-2 Income</h3>
-  <table class="data-table">
+  <div class="table-wrap"><table class="data-table">
     <thead>
       <tr><th>Source</th><th>EIN / Notes</th><th>Form</th><th class="right">Amount</th></tr>
     </thead>
@@ -394,11 +486,11 @@
         <td class="right">$19,231</td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 
   <!-- 1099 / S-Corp Revenue -->
   <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">S-Corp Business Revenue (flows through 1120-S → K-1)</h3>
-  <table class="data-table">
+  <div class="table-wrap"><table class="data-table">
     <thead>
       <tr><th>Source</th><th>Documentation</th><th>Form</th><th class="right">Amount</th></tr>
     </thead>
@@ -440,11 +532,11 @@
         <td class="right">$81,312</td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 
   <!-- NOT INCOME -->
   <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">Excluded — Not Income</h3>
-  <table class="data-table">
+  <div class="table-wrap"><table class="data-table">
     <thead>
       <tr><th>Description</th><th>Reason Excluded</th><th class="right">Amount</th></tr>
     </thead>
@@ -486,7 +578,7 @@
         <td class="right">$10</td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 
   <!-- TOTAL INCOME SUMMARY -->
   <div class="metric-grid" style="margin-top:20px;">
@@ -525,7 +617,7 @@
     <div class="callout-title">Standard Mileage vs. Actual Expenses</div>
     <p>Total documented vehicle repairs in 2025: $7,095 (Los Chinos lifters $3,200 + water pump $450 + catalytic converter $200 + Discount Auto $987 + Action Tire $756 + Chevrolet service $929 + Buick service $254 + Valvoline $153 + AutoZone $75). Under standard mileage, these cannot be deducted separately. Standard mileage at 12,000 miles = $8,400. Actual expenses method (75% biz) = $7,946. Standard mileage wins by $454 and is far simpler to document.</p>
   </div>
-  <table class="data-table">
+  <div class="table-wrap"><table class="data-table">
     <thead>
       <tr><th>Component</th><th>Calculation</th><th>Source</th><th class="right">Deduction</th></tr>
     </thead>
@@ -542,11 +634,11 @@
         </td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 
   <!-- COACHING -->
   <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">Professional Education &amp; Coaching</h3>
-  <table class="data-table">
+  <div class="table-wrap"><table class="data-table">
     <thead>
       <tr><th>Item</th><th>Notes</th><th class="right">Deductible</th></tr>
     </thead>
@@ -557,11 +649,11 @@
         <td class="right"><strong>$3,000</strong></td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 
   <!-- FULL EXPENSE TABLE -->
   <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">All Business Expenses</h3>
-  <table class="data-table">
+  <div class="table-wrap"><table class="data-table">
     <thead>
       <tr><th>Category</th><th>Items &amp; Source</th><th>Deductibility</th><th class="right">Amount</th></tr>
     </thead>
@@ -718,7 +810,7 @@
         <td class="right">$54 deductible</td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 </div>
 
 <!-- ─────────────────────────────────────────── -->
@@ -735,7 +827,7 @@
     <p>In 2024 (confirmed by IRS transcript), CJ's SE taxable income was $0 despite $114,744 AGI — because K-1 distributions from an S-Corp are NOT subject to the 15.3% self-employment tax. Only the W-2 salary is subject to payroll taxes, which are already withheld by Frank Crum. This is confirmed working correctly and applies equally to 2025.</p>
   </div>
 
-  <table class="data-table" style="margin-top:20px;">
+  <div class="table-wrap" style="margin-top:20px;"><table class="data-table">
     <thead>
       <tr><th>Line Item</th><th>Notes</th><th class="right">Amount</th></tr>
     </thead>
@@ -806,7 +898,7 @@
         <td class="right green"><strong>~$3,793</strong></td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 
   <div class="metric-grid four" style="margin-top:20px;">
     <div class="metric-card">
@@ -851,7 +943,7 @@
     <p>The prior CPA correctly applied S-Corp treatment ($0 SE taxable income). The $8k owed came from income tax on $75,532 of taxable income. The IRS account transcript shows this was filed on 06-02-2025 (late), triggering failure-to-pay penalties. It was not a calculation error — it was a payment/filing timing issue compounded by financial hardship from the 1845 Roofing situation.</p>
   </div>
 
-  <table class="data-table">
+  <div class="table-wrap"><table class="data-table">
     <thead>
       <tr><th>Item</th><th>Amount</th><th>Status</th></tr>
     </thead>
@@ -896,7 +988,7 @@
         <td colspan="2"><strong>Pay off in full using dad's gift/loan. Stops all interest and penalty accrual.</strong></td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 </div>
 
 <!-- ─────────────────────────────────────────── -->
@@ -966,7 +1058,7 @@
     <p>With 2025 estimated at only ~$4,083 (far less than previously estimated due to S-Corp structure), paying off 2024 completely with available funds is the smarter move. It eliminates interest accruing at ~$30/month and removes one IRS obligation entirely. The 2025 balance is manageable by October 15 given current income trajectory.</p>
   </div>
 
-  <table class="data-table">
+  <div class="table-wrap"><table class="data-table">
     <thead>
       <tr><th>Step</th><th>Action</th><th>Amount</th><th>Where</th></tr>
     </thead>
@@ -1008,7 +1100,7 @@
         <td>aicpa.org/forthepublic/findacpa</td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 
   <div class="metric-grid two" style="margin-top:20px;">
     <div class="metric-card">
@@ -1107,7 +1199,7 @@
     <p>Go to <strong>sunbiz.org</strong> (Florida Division of Corporations — the actual state website). Log in or search for your business. File the annual report directly. The actual state fee is <strong>$138.75</strong> per entity. The May 1, 2026 deadline IS real — a $400 late fee applies if you miss it. But pay the state directly, not a third party. You'll save ~$520 total across both entities.</p>
   </div>
 
-  <table class="data-table">
+  <div class="table-wrap"><table class="data-table">
     <thead>
       <tr><th>Entity</th><th>Status</th><th>Annual Report Due</th><th>File At</th><th class="right">Actual Fee</th></tr>
     </thead>
@@ -1139,7 +1231,7 @@
         <td class="right" style="color:#2d6a4f;"><strong>$522.28</strong></td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 
   <div class="callout amber">
     <div class="callout-title">Important: You need to keep C Clay Contracting active through tax season</div>
@@ -1167,7 +1259,7 @@
   </div>
 
   <h3 style="font-size:14px; font-weight:600; margin-bottom:8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">2026 Income — YTD through April 9, 2026</h3>
-  <table class="data-table">
+  <div class="table-wrap"><table class="data-table">
     <thead>
       <tr><th>Date</th><th>Source</th><th>Period</th><th class="right">Amount</th></tr>
     </thead>
@@ -1185,14 +1277,14 @@
       <tr class="subtotal"><td colspan="3"><strong>YTD S-Corp Revenue (through Apr 9)</strong></td><td class="right"><strong>$18,628</strong></td></tr>
       <tr><td colspan="3" class="note-cell">Weekly average: $1,331 · Annualized projection at current pace</td><td class="right">~$69,200</td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">2026 Estimated Tax — Projections</h3>
   <div class="callout blue">
     <div class="callout-title">S-Corp structure still applies — no SE tax on distributions</div>
     <p>Assuming you continue operating through C Clay Contracting LLC (or transition to Millennial One Home Solutions LLC, same structure), your K-1 distributions remain free of self-employment tax. Only your W-2 salary (if you reinstate payroll through Gusto or equivalent) carries payroll taxes. The numbers below assume the same S-Corp treatment as 2025.</p>
   </div>
-  <table class="data-table">
+  <div class="table-wrap"><table class="data-table">
     <thead>
       <tr><th>Item</th><th>Assumption</th><th class="right">Amount</th></tr>
     </thead>
@@ -1209,10 +1301,10 @@
       <tr class="subtotal"><td colspan="2"><strong>Estimated 2026 federal tax</strong></td><td class="right"><strong>~$1,840–$3,500</strong></td></tr>
       <tr><td colspan="3" class="note-cell">Note: Will increase significantly if revenue accelerates above projection. Pay quarterly estimates to avoid underpayment penalty.</td></tr>
     </tbody>
-  </table>
+  </table></div>
 
   <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">2026 Quarterly Estimated Tax Payment Schedule</h3>
-  <table class="data-table">
+  <div class="table-wrap"><table class="data-table">
     <thead>
       <tr><th>Quarter</th><th>Due Date</th><th>Status</th><th>Recommended Payment</th><th class="right">Notes</th></tr>
     </thead>
@@ -1246,7 +1338,7 @@
         <td class="right">Final payment for 2026</td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
   <p style="font-size:12px; color:var(--ink-3); margin-top:8px;">Tip: S-Corp owners can also avoid quarterly estimates by increasing W-2 withholding. If you reinstate a salary through Gusto, ask your CPA about having extra withholding taken from each paycheck to cover your K-1 tax — this eliminates the need to track quarterly deadlines.</p>
 
   <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">Business Structure — C Clay vs. Millennial One</h3>
