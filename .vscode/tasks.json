@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Save & upload to GitHub (commit + push)",
+      "type": "shell",
+      "command": "chmod +x \"${workspaceFolder}/commit-and-push.sh\" && \"${workspaceFolder}/commit-and-push.sh\"",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
