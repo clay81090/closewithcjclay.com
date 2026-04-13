@@ -10,10 +10,6 @@
         "reveal": "always",
         "panel": "shared",
         "focus": true
-      },
-      "group": {
-        "kind": "build",
-        "isDefault": true
       }
     }
   ]
