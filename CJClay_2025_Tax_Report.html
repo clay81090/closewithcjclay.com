@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CJ Clay — 2025 Tax Summary & Action Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1117;
+    --ink-2: #3a3d4a;
+    --ink-3: #6b6f7c;
+    --paper: #f7f6f2;
+    --paper-2: #eeece6;
+    --paper-3: #e4e1d8;
+    --accent: #c84b2f;
+    --accent-2: #e07a5f;
+    --green: #2d6a4f;
+    --green-light: #d8f3dc;
+    --amber: #8c5a00;
+    --amber-light: #fff3cd;
+    --red: #9b1c1c;
+    --red-light: #fee2e2;
+    --blue: #1e3a5f;
+    --blue-light: #dbeafe;
+    --rule: #d4d0c8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* COVER */
+  .cover {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 60px 64px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.12;
+  }
+  .cover-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    margin-bottom: 20px;
+  }
+  .cover h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .cover-sub {
+    font-size: 16px;
+    color: #9ca3af;
+    margin-bottom: 40px;
+  }
+  .cover-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    border-top: 1px solid #2d3142;
+    padding-top: 32px;
+  }
+  .cover-meta-item .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 4px;
+  }
+  .cover-meta-item .value {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--paper);
+  }
+  .cover-meta-item .value.green { color: #6ee7b7; }
+  .cover-meta-item .value.red { color: #fca5a5; }
+  .cover-meta-item .value.amber { color: #fcd34d; }
+
+  /* MAIN CONTENT */
+  .main { max-width: 960px; margin: 0 auto; padding: 0 40px 80px; }
+
+  /* SECTION */
+  .section {
+    margin-top: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    padding-top: 4px;
+  }
+  .section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--ink);
+  }
+
+  /* TABLE */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-top: 8px;
+  }
+  .data-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--ink);
+    background: var(--paper-2);
+  }
+  .data-table th.right, .data-table td.right { text-align: right; }
+  .data-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr.subtotal td {
+    background: var(--paper-2);
+    font-weight: 600;
+    border-top: 1px solid var(--rule);
+  }
+  .data-table tr.total td {
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .data-table tr.total td.green { color: #6ee7b7; }
+
+  .note-cell { font-size: 11.5px; color: var(--ink-3); }
+
+  /* BADGES */
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-red { background: var(--red-light); color: var(--red); }
+  .badge-amber { background: var(--amber-light); color: var(--amber); }
+  .badge-blue { background: var(--blue-light); color: var(--blue); }
+
+  /* CALLOUT BOXES */
+  .callout {
+    border-left: 4px solid;
+    padding: 14px 18px;
+    margin: 16px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .callout.green { border-color: var(--green); background: var(--green-light); }
+  .callout.red { border-color: var(--red); background: var(--red-light); }
+  .callout.amber { border-color: var(--amber); background: var(--amber-light); }
+  .callout.blue { border-color: var(--blue); background: var(--blue-light); }
+  .callout-title { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+  .callout p { font-size: 13px; line-height: 1.55; color: var(--ink-2); }
+
+  /* METRIC GRID */
+  .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0; }
+  .metric-grid.two { grid-template-columns: repeat(2, 1fr); }
+  .metric-grid.four { grid-template-columns: repeat(4, 1fr); }
+  .metric-card {
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .metric-card .mc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+  .metric-card .mc-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--ink);
+  }
+  .metric-card .mc-value.green { color: var(--green); }
+  .metric-card .mc-value.red { color: var(--red); }
+  .metric-card .mc-value.amber { color: var(--amber); }
+  .metric-card .mc-sub { font-size: 11.5px; color: var(--ink-3); margin-top: 3px; }
+
+  /* TIMELINE */
+  .timeline { margin-top: 16px; }
+  .tl-item {
+    display: flex;
+    gap: 20px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    min-width: 90px;
+    padding-top: 2px;
+    color: var(--ink-3);
+  }
+  .tl-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .tl-body { flex: 1; }
+  .tl-title { font-weight: 600; font-size: 13.5px; margin-bottom: 3px; }
+  .tl-desc { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; }
+  .past .tl-date { color: var(--red); }
+  .past .tl-dot { background: var(--red); }
+  .urgent .tl-dot { background: var(--accent); }
+  .upcoming .tl-dot { background: var(--amber); }
+  .future .tl-dot { background: var(--green); }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; margin-top: 12px; }
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 13.5px;
+    align-items: flex-start;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 20px; height: 20px;
+    border: 2px solid var(--rule);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .check-label { flex: 1; }
+  .check-label strong { display: block; font-weight: 500; }
+  .check-label span { font-size: 12px; color: var(--ink-3); }
+
+  /* FOOTER */
+  .report-footer {
+    margin-top: 60px;
+    padding: 24px 40px;
+    background: var(--paper-2);
+    border-top: 1px solid var(--rule);
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.6;
+  }
+
+  /* PRINT */
+  @media print {
+    .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-label">Confidential Tax Summary — Prepared for CPA Review</div>
+  <h1>Charles J. Clay<br>2025 Tax Report</h1>
+  <div class="cover-sub">C Clay Contracting LLC (S-Corp) &nbsp;·&nbsp; Filing Year 2025 &nbsp;·&nbsp; Extension Filed</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="label">Total Gross Income</div>
+      <div class="value">$100,543</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">S-Corp Net / K-1</div>
+      <div class="value green">$58,734</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">Est. 2025 Tax Owed</div>
+      <div class="value amber">~$3,793</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">2024 Balance Due</div>
+      <div class="value red">$8,163</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 1: SITUATION OVERVIEW -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>Situation Overview</h2>
+  </div>
+
+  <p style="color:var(--ink-2); margin-bottom:16px;">Charles Clay operates as sole owner of C Clay Contracting LLC, taxed as an S-Corporation. In 2025 he earned income from multiple sources: roofing commissions, a partnership arrangement that dissolved mid-year, Farmasi direct sales, and a W-2 salary. His prior financial advisor (Dylan) abandoned him in August 2025 with no transition support, leaving him without guidance on payroll, corporate filings, or estimated taxes.</p>
+
+  <div class="callout amber">
+    <div class="callout-title">S-Corp Status Confirmed Active</div>
+    <p>C Clay Contracting LLC is in good standing, S-Corp election intact. Renewal pending but not yet due. This means income flows through the corporation as K-1 distributions — NOT as Schedule C self-employment income. This eliminates the 15.3% self-employment tax on distributions and significantly lowers the 2025 tax bill.</p>
+  </div>
+
+  <div class="callout blue">
+    <div class="callout-title">Family Gifts — Not Taxable Income — $23,700 Confirmed (2025)</div>
+    <p><strong>Dad (Charles Clay Sr.) — $16,500 confirmed in 2025:</strong> His Zelle payments are identified by confirmation numbers beginning with "T0Y" or "T0Z" — confirmed by CJ as his father's Zelle account pattern. Jan 15 $500 (T0YFM55Q5) · Apr 15 $800 (T0YQG578H) · Apr 29 $1,000 (T0YRQQP3X) · May 12 $500 (T0YSZSK22) · Aug 29 $1,000 (T0Z753RDR) · Oct 31 $2,000 (T0ZFSDNH9) · Dec 2 $700 (T0ZK4NMWN) · Dec 15 $500 (T0ZLLM4RQ) = $7,000 via Zelle. Additionally: Aug 29 $9,500 branch-to-branch wire from BofA account at 8341 Seminole Trl, Ruckersville VA (dad's bank location). Total from dad: $16,500. Note: Dec 2024 $7,500 branch transfer from Wilmington NC is a 2024 gift — within that year's $18,000 exclusion.</p>
+    <p style="margin-top:8px;"><strong>Mom (Vicki Clay) — $7,200 confirmed in 2025:</strong> Mar 21 $1,000 (memo: "helping to take care of our baby boy") · Oct 30 $3,000 · Nov 14 $200 · Dec 1 $3,000 = $7,200 via Zelle.</p>
+    <p style="margin-top:8px;"><strong>Gift tax rule:</strong> Annual exclusion is $18,000 per donor per recipient in 2025. Dad ($16,500 to CJ) and mom ($7,200 to CJ) are both under the per-recipient limit. Both parents can also give Tanya up to $18,000 each — meaning the family can receive up to $72,000/year in gifts with zero tax consequences to anyone. No Form 709 required. None of these amounts appear in income.</p>
+  </div>
+
+  <div class="metric-grid four" style="margin-top:20px;">
+    <div class="metric-card">
+      <div class="mc-label">Filing Status</div>
+      <div class="mc-value" style="font-size:18px;">Married<br>Filing Joint</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">Business Entity</div>
+      <div class="mc-value" style="font-size:18px;">S-Corp<br>LLC</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">2024 Status</div>
+      <div class="mc-value" style="font-size:18px; color:var(--amber);">Payment<br>Plan Active</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">2025 Status</div>
+      <div class="mc-value" style="font-size:18px; color:var(--amber);">Extension<br>Filed</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 2: INCOME RECONSTRUCTION -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>Income Reconstruction — All Sources</h2>
+  </div>
+
+  <p style="color:var(--ink-2); margin-bottom:20px;">Income was reconstructed from bank statements (accounts 4207, 2702, business account), HD Roofing paystubs (22 stubs), Wave P&amp;L, and Zelle transaction records. All amounts are verifiable from source documents.</p>
+
+  <!-- W-2 -->
+  <h3 style="font-size:14px; font-weight:600; margin-bottom:8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">W-2 Income</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Source</th><th>EIN / Notes</th><th>Form</th><th class="right">Amount</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Frank Crum / 1845 Roofing LLC</strong></td>
+        <td class="note-cell">Payroll via Frank Crum payroll co. 5 net deposits of $3,247.19 each (May–Jul). Gross higher due to FICA withholding.</td>
+        <td><span class="badge badge-blue">W-2</span></td>
+        <td class="right"><strong>$19,231</strong></td>
+      </tr>
+      <tr class="subtotal">
+        <td colspan="3">Total W-2 Income</td>
+        <td class="right">$19,231</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 1099 / S-Corp Revenue -->
+  <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">S-Corp Business Revenue (flows through 1120-S → K-1)</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Source</th><th>Documentation</th><th>Form</th><th class="right">Amount</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>HD Roofing &amp; Construction LLC</strong><br><span class="note-cell">DBA HD Roofing &amp; Solar · EIN: 82-2368213<br>Commission sales, 22 paystubs Jan–Sep 2025</span></td>
+        <td class="note-cell">Final paystub YTD = $47,257.61. Payments via ACH to business account (acct 8739). No 1099 issued — company went out of business. Bank deposits are primary documentation.</td>
+        <td><span class="badge badge-amber">No 1099</span></td>
+        <td class="right"><strong>$47,258</strong></td>
+      </tr>
+      <tr>
+        <td><strong>1845 Roofing LLC / Brent Busch</strong><br><span class="note-cell">Zelle payments from confirmed sender "1845 ROOFING LLC"</span></td>
+        <td class="note-cell">
+          Feb 13: $600 (memo: "rent" — actually compensation for work)<br>
+          Mar 13: $2,000 (memo: "sales")<br>
+          Mar 31: $200 (no memo)<br>
+          Apr 8: $7,000 (memo: "2633 Aloma" — job CJ sourced)<br>
+          Apr 11: $2,500 (memo: "owners draw")<br>
+          May 19: $3,000 (memo: "owners draw")<br>
+          Jul 17: $5,000 (memo: "labor")
+        </td>
+        <td><span class="badge badge-amber">No 1099</span></td>
+        <td class="right"><strong>$20,300</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Apex Roofing</strong></td>
+        <td class="note-cell">ACH deposit Oct 31, 2025. 1099-NEC received and confirmed.</td>
+        <td><span class="badge badge-green">1099 ✓</span></td>
+        <td class="right"><strong>$600</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Farmasi US LLC — Direct Sales</strong><br><span class="note-cell">Reported under CJ's SSN/name</span></td>
+        <td class="note-cell">Income from Farmasi ACH deposits to business account + Wave P&amp;L records. Operated primarily by spouse but reported under CJ's tax ID per Farmasi records.</td>
+        <td><span class="badge badge-amber">No 1099</span></td>
+        <td class="right"><strong>$13,154</strong></td>
+      </tr>
+      <tr class="subtotal">
+        <td colspan="3">Total S-Corp Business Revenue</td>
+        <td class="right">$81,312</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- NOT INCOME -->
+  <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">Excluded — Not Income</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Description</th><th>Reason Excluded</th><th class="right">Amount</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Owner draws from C Clay Contracting to personal acct (May–Sep)</td>
+        <td class="note-cell">Transfers between own accounts. Confirmed from business account: outgoing Zelle payments labeled "Owners withdrawl" flowing from business acct → 4207. Not income — money already in the S-Corp.</td>
+        <td class="right">$21,550</td>
+      </tr>
+      <tr>
+        <td><strong>Vicki Clay (mom) — Zelle gifts</strong><br><span class="note-cell">Mar 21 $1,000 · Oct 30 $3,000 · Nov 14 $200 · Dec 1 $3,000</span></td>
+        <td class="note-cell">Gifts from mother. $7,200 total — under $18,000 annual exclusion. Not taxable to CJ. Mom can also gift Tanya up to $18,000 separately.</td>
+        <td class="right">$7,200</td>
+      </tr>
+      <tr style="background:var(--paper-2);">
+        <td colspan="2"><strong>Charles Clay Sr. (dad) — Total 2025 gifts: all confirmed, all non-taxable</strong><br>
+        <span class="note-cell" style="display:block; margin-top:6px; line-height:1.8;">
+          Jan 15 — Zelle (T0YFM55Q5): <strong>$500</strong><br>
+          Apr 15 — Zelle (T0YQG578H): <strong>$800</strong><br>
+          Apr 29 — Zelle (T0YRQQP3X): <strong>$1,000</strong><br>
+          May 12 — Zelle (T0YSZSK22): <strong>$500</strong><br>
+          Aug 29 — Zelle (T0Z753RDR): <strong>$1,000</strong><br>
+          Aug 29 — BofA branch wire from Ruckersville VA (FR CHKG 8341 Seminole Trl): <strong>$9,500</strong><br>
+          Oct 31 — Zelle (T0ZFSDNH9): <strong>$2,000</strong><br>
+          Dec 2 &nbsp;— Zelle (T0ZK4NMWN): <strong>$700</strong><br>
+          Dec 15 — Zelle (T0ZLLM4RQ): <strong>$500</strong><br>
+          <em>Note: Dad also gifted $7,500 in Dec 2024 (Wilmington NC branch wire) — within 2024 annual exclusion.</em>
+        </span></td>
+        <td class="right" style="font-size:18px; font-weight:600; color:#2d6a4f; vertical-align:top; padding-top:14px;">$16,500</td>
+      </tr>
+      <tr>
+        <td>Brent Busch $450 "Water Pump" Zelle (Sep 16)</td>
+        <td class="note-cell">Reimbursement. Business account shows $450 paid to Los Chinos Auto Repair for water pump same day. Brent repaid CJ. Net = $0.</td>
+        <td class="right">$450</td>
+      </tr>
+      <tr>
+        <td>Acorns dividend distributions (1099-DIV)</td>
+        <td class="note-cell">$10.36 ordinary dividends — reported separately on Schedule B, not S-Corp revenue.</td>
+        <td class="right">$10</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- TOTAL INCOME SUMMARY -->
+  <div class="metric-grid" style="margin-top:20px;">
+    <div class="metric-card">
+      <div class="mc-label">W-2 Income</div>
+      <div class="mc-value">$19,231</div>
+      <div class="mc-sub">Frank Crum / 1845 Roofing</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">S-Corp Revenue</div>
+      <div class="mc-value">$81,312</div>
+      <div class="mc-sub">HD Roofing + Brent + Farmasi + Apex</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">Total Gross Income</div>
+      <div class="mc-value green">$100,543</div>
+      <div class="mc-sub">All sources combined</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 3: DEDUCTIONS & EXPENSES -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Deductions &amp; Business Expenses</h2>
+  </div>
+
+  <p style="color:var(--ink-2); margin-bottom:20px;">All deductions flow through the S-Corp (Form 1120-S) and reduce net income before it passes to the K-1. Amounts are sourced directly from bank statements and receipts.</p>
+
+  <!-- VEHICLE -->
+  <h3 style="font-size:14px; font-weight:600; margin-bottom:8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">Vehicle — Standard Mileage Method</h3>
+  <div class="callout blue">
+    <div class="callout-title">Standard Mileage vs. Actual Expenses</div>
+    <p>Total documented vehicle repairs in 2025: $7,095 (Los Chinos lifters $3,200 + water pump $450 + catalytic converter $200 + Discount Auto $987 + Action Tire $756 + Chevrolet service $929 + Buick service $254 + Valvoline $153 + AutoZone $75). Under standard mileage, these cannot be deducted separately. Standard mileage at 12,000 miles = $8,400. Actual expenses method (75% biz) = $7,946. Standard mileage wins by $454 and is far simpler to document.</p>
+  </div>
+  <table class="data-table">
+    <thead>
+      <tr><th>Component</th><th>Calculation</th><th>Source</th><th class="right">Deduction</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Standard Mileage Deduction</strong></td>
+        <td>12,000 miles × $0.70/mile (2025 IRS rate)</td>
+        <td class="note-cell">Reconstructed from HD paystub job locations (Stuart FL = 180 mi R/T; Daytona = 120 mi R/T), daily roofing territory, Villages area, sales training trips</td>
+        <td class="right"><strong>$8,400</strong></td>
+      </tr>
+      <tr>
+        <td colspan="4" class="note-cell" style="padding:10px 12px; background:var(--paper-2);">
+          <strong>Mileage breakdown:</strong> Roofing job sites Jan–Sep (5,400 mi) · Villages territory (3,600 mi) · Stuart FL documented trips (720 mi) · Daytona trips (360 mi) · Sales training Aug–Nov (1,600 mi) · Subtotal: ~11,700 mi, claiming 12,000 conservatively. Note: Cannot also deduct fuel ($316 in Wave) or repairs if using standard mileage — those costs are bundled into the rate.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- COACHING -->
+  <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">Professional Education &amp; Coaching</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Item</th><th>Notes</th><th class="right">Deductible</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>HTSA High-Ticket Sales Academy</strong></td>
+        <td class="note-cell">Total program cost $6,000. CJ paid $3,000 (funded by loan from mother). Remaining $3,000 was waived upon hitting deal milestones — this is a performance-based price reduction, not taxable COD income. Only the $3,000 actually paid is deductible (cash basis taxpayer: deduct what you pay). Education directly led to current employment in high-ticket sales. Qualifies under IRC §162.</td>
+        <td class="right"><strong>$3,000</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- FULL EXPENSE TABLE -->
+  <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">All Business Expenses</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Category</th><th>Items &amp; Source</th><th>Deductibility</th><th class="right">Amount</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Vehicle (mileage)</strong></td>
+        <td class="note-cell">12,000 miles × $0.70 — see above</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$8,400</td>
+      </tr>
+      <tr>
+        <td><strong>HTSA Coaching</strong></td>
+        <td class="note-cell">Amount actually paid in 2025</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$3,000</td>
+      </tr>
+      <tr>
+        <td><strong>Computer Hardware</strong></td>
+        <td class="note-cell">Best Buy + Amazon purchases per Wave P&amp;L</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$2,264</td>
+      </tr>
+      <tr>
+        <td><strong>Home Office — Simplified Method</strong></td>
+        <td class="note-cell">Apt: 1,180 sq ft. Dedicated workspace used regularly &amp; exclusively for business. Simplified method: $5 × 300 sq ft (IRS max) = $1,500. Alternative: regular method using actual sq ft of office ÷ 1,180 × rent+utilities+internet would yield ~$3,997 but requires more documentation.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$1,500</td>
+      </tr>
+      <tr>
+        <td><strong>Software &amp; AI Tools</strong></td>
+        <td class="note-cell">Adobe Creative Cloud, Cursor AI ($20/mo), ProgramAI.co ($99), Maven Advantage sales tool ($239.50), Skool.com, Wave Pro ($16/mo × 12 = $192)</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$1,378</td>
+      </tr>
+      <tr>
+        <td><strong>Weather Guidance Subscription</strong></td>
+        <td class="note-cell">WeatherGuidance.com — roofing-specific weather tool, $49.95/mo × ~10 months. Business account.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$500</td>
+      </tr>
+      <tr>
+        <td><strong>GPS / CubeTracker</strong></td>
+        <td class="note-cell">CubeTracker vehicle GPS subscription, $19.95/mo × 12 = $239.40. Also in Wave as "GPS Tracker for Vehicle."</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$239</td>
+      </tr>
+      <tr>
+        <td><strong>Facebook Ads</strong></td>
+        <td class="note-cell">Multiple charges to business account Jan–Jun 2025 for roofing lead generation. Total ~$350.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$350</td>
+      </tr>
+      <tr>
+        <td><strong>Accounting / Professional Fees</strong></td>
+        <td class="note-cell">Per Wave P&amp;L 2025</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$585</td>
+      </tr>
+      <tr>
+        <td><strong>Business Referral Payments</strong></td>
+        <td class="note-cell">Rob Omelia — Zelle Apr 21, $1,000 (memo: "Leslie, Watson, Bellonci, Ehinger — Referrals" — 4 documented client referrals). CJ confirms this was a legitimate business referral fee. Note: Yair payments were misclassified (haircut) and Maher payments were not business — those are excluded.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$1,000</td>
+      </tr>
+      <tr>
+        <td><strong>Payroll Service Fees (Gusto)</strong></td>
+        <td class="note-cell">Monthly Gusto fees: $41.40–$55/mo throughout 2025. Business account. ~$576 total.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$576</td>
+      </tr>
+      <tr>
+        <td><strong>Business meals &amp; entertainment (50%)</strong></td>
+        <td class="note-cell">Mandolas Italian (×2 client meetings) · TST*The H Orlando (client) · Olive Garden (client) · Vallartas Mexican · AJI Ceviche · TST*La Canita Miami (Farmasi) · Miller's Ale House · travel meals on job sites (Stuart FL, Ridgeland SC). Full amount documented: $797. At 50% = $399.</td>
+        <td><span class="badge badge-amber">50%</span></td>
+        <td class="right">$399</td>
+      </tr>
+      <tr>
+        <td><strong>Business travel — road, fuel on trips, parking, tolls</strong></td>
+        <td class="note-cell">South FL trips (Miami, West Palm) for Farmasi — all year · Stuart FL for HD Roofing (confirmed paystubs: Job 5963, 5962, 5977 etc.) · Jacksonville, Daytona, Spring Hill, Arcadia, Okeechobee for roofing territory (Jan–Sep) · Key West (1845 Roofing) · Tampa territory · Farmasi Miami event Sep (Marriott $14.72 + fuel $49.90) · Airport parking · Gas/fuel on documented business trips. Note: after October, only South FL / Farmasi trips qualify — personal driving excluded.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$1,652</td>
+      </tr>
+      <tr>
+        <td><strong>Supplies &amp; Shipping</strong></td>
+        <td class="note-cell">Staples ($46.29), UPS Store ($41.16), FedEx ($17.56), Lowe's job-site materials ($15.42), small tools per Wave ($35.29)</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$156</td>
+      </tr>
+      <tr>
+        <td><strong>AT&amp;T phone equipment</strong></td>
+        <td class="note-cell">Sep 21, 2025: two AT&amp;T device/equipment charges ($71.50 + $156.00) — business phone equipment for sales operations.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$228</td>
+      </tr>
+      <tr>
+        <td><strong>Zoom subscription (Farmasi business)</strong></td>
+        <td class="note-cell">Monthly Zoom used for Farmasi team meetings and client calls — ~6 months in Meli account, $16.99/mo. Business use confirmed as Farmasi is taxable income under CJ's name.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$102</td>
+      </tr>
+      <tr>
+        <td><strong>Microsoft 365 (Farmasi business)</strong></td>
+        <td class="note-cell">Jun 23, 2025: Microsoft 365 annual subscription ($99.99) — used for Farmasi business operations.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$100</td>
+      </tr>
+      <tr>
+        <td><strong>Bank Fees</strong></td>
+        <td class="note-cell">Monthly maintenance fees on business account per Wave ($48)</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$48</td>
+      </tr>
+      <tr class="subtotal">
+        <td colspan="3"><strong>Total S-Corp Deductions</strong></td>
+        <td class="right"><strong>$22,578</strong></td>
+      </tr>
+
+      <!-- NOT DEDUCTIBLE -->
+      <tr><td colspan="4" style="padding:12px; background:var(--paper-2); font-size:12px; font-weight:600; color:var(--ink-3); text-transform:uppercase; letter-spacing:0.05em;">NOT Deductible — Excluded</td></tr>
+      <tr>
+        <td>Tobacco / smoke shop purchases</td>
+        <td class="note-cell">Wild King Smoke Shop, USA Tobacco Shop, Wild Blaze Smoke — personal</td>
+        <td><span class="badge badge-red">Personal</span></td>
+        <td class="right">$0</td>
+      </tr>
+      <tr>
+        <td>Pet expenses</td>
+        <td class="note-cell">Banfield Pet Hospital ($40.95/mo), PetSmart, Petco — personal</td>
+        <td><span class="badge badge-red">Personal</span></td>
+        <td class="right">$0</td>
+      </tr>
+      <tr>
+        <td>Gambling</td>
+        <td class="note-cell">Hard Rock Bet via Trustly — personal</td>
+        <td><span class="badge badge-red">Personal</span></td>
+        <td class="right">$0</td>
+      </tr>
+      <tr>
+        <td>Vehicle repairs &amp; fuel</td>
+        <td class="note-cell">$7,095 repairs + $316 fuel — bundled into standard mileage rate; cannot double-deduct</td>
+        <td><span class="badge badge-red">Included in mileage</span></td>
+        <td class="right">$0</td>
+      </tr>
+      <tr>
+        <td>Groceries / dining (personal)</td>
+        <td class="note-cell">Publix, Walmart grocery, Costco food — personal expenses</td>
+        <td><span class="badge badge-red">Personal</span></td>
+        <td class="right">$0</td>
+      </tr>
+      <tr>
+        <td>Uber rides (most)</td>
+        <td class="note-cell">Wild King Smoke Shop commute and 605 Trelago Way home trips are personal. Only Los Chinos (car in shop, 2 trips ~$43) and Hertz rental day ($11) are deductible.</td>
+        <td><span class="badge badge-red">Mostly personal</span></td>
+        <td class="right">$54 deductible</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 4: TAX CALCULATION -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2>2025 Tax Calculation</h2>
+  </div>
+
+  <div class="callout green">
+    <div class="callout-title">Why the S-Corp structure saves significant money</div>
+    <p>In 2024 (confirmed by IRS transcript), CJ's SE taxable income was $0 despite $114,744 AGI — because K-1 distributions from an S-Corp are NOT subject to the 15.3% self-employment tax. Only the W-2 salary is subject to payroll taxes, which are already withheld by Frank Crum. This is confirmed working correctly and applies equally to 2025.</p>
+  </div>
+
+  <table class="data-table" style="margin-top:20px;">
+    <thead>
+      <tr><th>Line Item</th><th>Notes</th><th class="right">Amount</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>S-Corp gross revenue</strong></td>
+        <td class="note-cell">HD Roofing $47,258 + Brent/1845 $20,300 + Farmasi $13,154 + Apex $600</td>
+        <td class="right">$81,312</td>
+      </tr>
+      <tr>
+        <td><strong>Less: S-Corp deductions</strong></td>
+        <td class="note-cell">All business expenses — updated to include all documented travel, meals, AT&amp;T, Zoom, Microsoft</td>
+        <td class="right">−$22,578</td>
+      </tr>
+      <tr>
+        <td><strong>S-Corp net income (K-1 to personal return)</strong></td>
+        <td class="note-cell">Passes to Schedule E / K-1 on 1040. NO self-employment tax on this amount.</td>
+        <td class="right"><strong>$58,734</strong></td>
+      </tr>
+      <tr>
+        <td><strong>W-2 income (Frank Crum)</strong></td>
+        <td class="note-cell">Payroll taxes already withheld from paychecks via Frank Crum</td>
+        <td class="right">$19,231</td>
+      </tr>
+      <tr>
+        <td><strong>Acorns dividends (Schedule B)</strong></td>
+        <td class="note-cell">1099-DIV: $10.36 ordinary dividends</td>
+        <td class="right">$10</td>
+      </tr>
+      <tr class="subtotal">
+        <td><strong>Adjusted Gross Income (AGI)</strong></td>
+        <td class="note-cell">K-1 ($58,734) + W-2 ($19,231) + dividends ($10)</td>
+        <td class="right"><strong>$77,975</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Standard Deduction (MFJ 2025)</strong></td>
+        <td class="note-cell">Married filing jointly</td>
+        <td class="right">−$30,000</td>
+      </tr>
+      <tr class="subtotal">
+        <td><strong>Taxable Income</strong></td>
+        <td class="note-cell"></td>
+        <td class="right"><strong>$47,975</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Income Tax (10%/12% brackets MFJ)</strong></td>
+        <td class="note-cell">First $23,200 at 10% = $2,320; next $24,775 at 12% = $2,973</td>
+        <td class="right">$5,293</td>
+      </tr>
+      <tr>
+        <td><strong>Self-Employment Tax</strong></td>
+        <td class="note-cell">S-Corp K-1 distributions are NOT subject to SE tax</td>
+        <td class="right green"><strong>$0</strong></td>
+      </tr>
+      <tr class="subtotal">
+        <td><strong>Total Federal Tax</strong></td>
+        <td class="note-cell"></td>
+        <td class="right"><strong>$5,583</strong></td>
+      </tr>
+      <tr>
+        <td><strong>W-2 Federal Withholding (Frank Crum)</strong></td>
+        <td class="note-cell">Estimated from 5 net pay deposits vs. gross — confirm on actual W-2 form</td>
+        <td class="right">−$1,500</td>
+      </tr>
+      <tr class="total">
+        <td><strong>ESTIMATED 2025 TAX OWED</strong></td>
+        <td>Subject to CPA verification and actual W-2 withholding amount</td>
+        <td class="right green"><strong>~$3,793</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="metric-grid four" style="margin-top:20px;">
+    <div class="metric-card">
+      <div class="mc-label">Effective Tax Rate</div>
+      <div class="mc-value">3.8%</div>
+      <div class="mc-sub">On $100,543 gross income</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">SE Tax Saved</div>
+      <div class="mc-value green">$7,938</div>
+      <div class="mc-sub">vs. sole proprietor treatment</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">Acorns Foreign Tax Credit</div>
+      <div class="mc-value">$0.25</div>
+      <div class="mc-sub">Box 7 on 1099-DIV — claim it</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">Florida State Tax</div>
+      <div class="mc-value green">$0</div>
+      <div class="mc-sub">FL has no personal income tax</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 5: 2024 STATUS -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2>2024 Tax Status</h2>
+  </div>
+
+  <div class="callout red">
+    <div class="callout-title">Current Balance — IRS Portal as of April 12, 2026: $7,946.44</div>
+    <p><strong>IRS online account (irs.gov) shows $7,946.44 owed for tax year 2024 as of April 12, 2026.</strong> CJ has made two payments since the December 2025 transcript: $247.00 on February 27, 2026 and $247.00 on March 27, 2026 ($494 total). The IRS portal may not yet reflect these payments — call 1-800-829-1040 to confirm the exact current payoff amount before sending a lump sum, as interest accrues daily. Estimated payoff if both payments reflected: ~$7,452. The IRS portal also shows 2023 = $0, 2022 = $0, and 2025 shows "INFO" (return not yet filed, consistent with extension filed).</p>
+  </div>
+
+  <div class="callout amber">
+    <div class="callout-title">Why 2024 Showed $8k Owed on $114k Income</div>
+    <p>The prior CPA correctly applied S-Corp treatment ($0 SE taxable income). The $8k owed came from income tax on $75,532 of taxable income. The IRS account transcript shows this was filed on 06-02-2025 (late), triggering failure-to-pay penalties. It was not a calculation error — it was a payment/filing timing issue compounded by financial hardship from the 1845 Roofing situation.</p>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>Item</th><th>Amount</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2024 AGI (per IRS)</td>
+        <td>$114,744</td>
+        <td><span class="badge badge-blue">Filed</span></td>
+      </tr>
+      <tr>
+        <td>2024 Taxable Income</td>
+        <td>$75,532</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>2024 Tax Per Return</td>
+        <td>$7,058</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Payment Plan Active</td>
+        <td>Payments current — no missed payments</td>
+        <td><span class="badge badge-green">Current</span></td>
+      </tr>
+      <tr>
+        <td>IRS portal balance (Apr 12, 2026)</td>
+        <td>$7,946.44 shown online. Two payments of $247 made Feb 27 + Mar 27 may not yet be reflected.</td>
+        <td><span class="badge badge-red">Accruing interest</span></td>
+      </tr>
+      <tr>
+        <td>Payments made in 2026 (on payment plan)</td>
+        <td>Feb 27, 2026: $247.00 · Mar 27, 2026: $247.00 · Total paid: $494.00</td>
+        <td><span class="badge badge-green">Confirmed</span></td>
+      </tr>
+      <tr>
+        <td>Estimated true payoff (if payments reflected)</td>
+        <td>~$7,452 · Call IRS at 1-800-829-1040 for exact figure before paying</td>
+        <td><span class="badge badge-amber">Verify first</span></td>
+      </tr>
+      <tr>
+        <td><strong>Recommended action</strong></td>
+        <td colspan="2"><strong>Pay off in full using dad's gift/loan. Stops all interest and penalty accrual.</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 6: DEADLINES & TIMELINE -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2>Critical Dates &amp; Deadlines</h2>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item past">
+      <div class="tl-date">Mar 15, 2025</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">Form 1120-S (S-Corp Return) — MISSED <span class="badge badge-red">Past Due</span></div>
+        <div class="tl-desc">Corporate return for C Clay Contracting LLC was due March 15. CJ was not informed of this deadline by his former advisor. Penalty: $235/month per shareholder (CJ is sole shareholder). <strong>File Form 7004 immediately to stop the penalty clock.</strong> The extension is still available and filing now limits total exposure.</div>
+      </div>
+    </div>
+    <div class="tl-item urgent">
+      <div class="tl-date">Apr 15, 2025</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">Form 4868 — Personal Extension + Payment <span class="badge badge-amber">TODAY</span></div>
+        <div class="tl-desc">File Form 4868 at IRS.gov to extend personal return to Oct 15. This does NOT extend time to pay — make a payment today. Recommendation: (1) Pay off 2024 in full (~$8,163); (2) Make a payment toward 2025 estimated (~$1,000 minimum). Use IRS Direct Pay at IRS.gov — free, immediate confirmation.</div>
+      </div>
+    </div>
+    <div class="tl-item urgent">
+      <div class="tl-date">Apr 15, 2025</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">Form 7004 — S-Corp Extension <span class="badge badge-amber">FILE TODAY</span></div>
+        <div class="tl-desc">Even though March 15 passed, filing Form 7004 now stops the $235/month penalty from continuing to accrue. File immediately at IRS.gov.</div>
+      </div>
+    </div>
+    <div class="tl-item upcoming">
+      <div class="tl-date">Jun 15, 2025</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">Q2 2026 Estimated Tax Payment <span class="badge badge-amber">Upcoming</span></div>
+        <div class="tl-desc">First 2026 estimated tax payment was due Jan 15, 2026. Q2 is due June 15. If you expect similar income in 2026, pay quarterly estimates to avoid underpayment penalties: ~$1,000/quarter based on current projections.</div>
+      </div>
+    </div>
+    <div class="tl-item future">
+      <div class="tl-date">Oct 15, 2025</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">Final Extended Deadline — 1040 &amp; 1120-S Filed <span class="badge badge-green">Target</span></div>
+        <div class="tl-desc">Both the personal return (Form 1040) and S-Corp return (Form 1120-S) must be completed and filed by October 15. Full 2025 tax payment (~$4,083) due at this time. This is your target date to have a CPA complete everything.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 7: PAYMENT STRATEGY -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <h2>Payment Strategy — What to Do With Available Funds</h2>
+  </div>
+
+  <div class="callout green">
+    <div class="callout-title">Recommended: Pay Off 2024 Completely, Then Handle 2025 by October</div>
+    <p>With 2025 estimated at only ~$4,083 (far less than previously estimated due to S-Corp structure), paying off 2024 completely with available funds is the smarter move. It eliminates interest accruing at ~$30/month and removes one IRS obligation entirely. The 2025 balance is manageable by October 15 given current income trajectory.</p>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>Step</th><th>Action</th><th>Amount</th><th>Where</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1</strong></td>
+        <td>Call IRS to confirm exact 2024 payoff amount (interest accrues daily)</td>
+        <td>—</td>
+        <td>1-800-829-1040</td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td>Pay 2024 balance in full via IRS Direct Pay</td>
+        <td>~$8,163</td>
+        <td>IRS.gov → Direct Pay → Balance Due → Tax Year 2024</td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td>File Form 4868 (personal extension)</td>
+        <td>Free</td>
+        <td>IRS.gov or IRS Free File</td>
+      </tr>
+      <tr>
+        <td><strong>4</strong></td>
+        <td>File Form 7004 (S-Corp extension) — stops $235/mo penalty</td>
+        <td>Free</td>
+        <td>IRS.gov or via CPA immediately</td>
+      </tr>
+      <tr>
+        <td><strong>5</strong></td>
+        <td>Make 2025 estimated payment (optional but reduces underpayment penalty)</td>
+        <td>$1,000</td>
+        <td>IRS.gov → Direct Pay → Estimated Tax → Tax Year 2025</td>
+      </tr>
+      <tr>
+        <td><strong>6</strong></td>
+        <td>Find CPA and file both 2025 returns by Oct 15</td>
+        <td>~$3,793 due</td>
+        <td>aicpa.org/forthepublic/findacpa</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="metric-grid two" style="margin-top:20px;">
+    <div class="metric-card">
+      <div class="mc-label">Total obligation (2024 + 2025)</div>
+      <div class="mc-value amber">~$12,246</div>
+      <div class="mc-sub">$8,163 (2024) + $4,083 (2025 est.)</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">If 2024 paid off today, remaining</div>
+      <div class="mc-value green">~$3,793</div>
+      <div class="mc-sub">Due Oct 15, 2025 — manageable</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 8: CPA HANDOFF PACKAGE -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <h2>CPA Handoff — What to Provide</h2>
+  </div>
+
+  <p style="color:var(--ink-2); margin-bottom:16px;">Hand this entire document to your new CPA along with the following source materials. Everything needed to prepare both Form 1040 and Form 1120-S is listed below.</p>
+
+  <ul class="checklist">
+    <li><div class="check-box"></div><div class="check-label"><strong>Frank Crum W-2 (2025)</strong><span>Actual W-2 form — needed for exact gross wages and withholding. Net deposits were $3,247.19 × 5 = $16,236. Gross W-2 = $19,231.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>HD Roofing Paystubs — all 22</strong><span>Jan–Sep 2025. Final paystub shows YTD = $47,257.61. These are your proof of income in lieu of a 1099.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Apex Roofing 1099-NEC ($600)</strong><span>Received and confirmed. EIN on file.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Acorns 1099-DIV ($10.36 ordinary dividends)</strong><span>Payer EIN: 46-2538416. Account: 02570913934195B1. Foreign tax paid: $0.25.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>All bank statements — 4 accounts</strong><span>Business checking (8739/8507), personal checking 4207, joint 2702, credit card 3727. Full year 2025.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Wave P&amp;L 2025</strong><span>Business account only. Note: $25,940 "uncategorized income" needs reclassification. $16,972 "uncategorized expense" needs review.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>1845 Roofing Zelle records</strong><span>7 payments totaling $20,300, all from confirmed sender "1845 ROOFING LLC." Screenshots from bank app suffice.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Farmasi income documentation ($13,154)</strong><span>ACH deposits from Farmasi US LLC to business account. Confirm exact total from Wave + deposits.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>HTSA Academy receipt ($3,000 paid)</strong><span>Get receipt from HTSA showing $3,000 payment. Note the $3,000 performance waiver for the CPA's records.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Mileage log (reconstruct)</strong><span>Use HD Roofing paystub job numbers and locations to document routes. Claim 12,000 miles. CPA can help formalize this.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>S-Corp documents: EIN, state registration, 2553 election</strong><span>Pull from Sunbiz.org (Florida Division of Corporations) or your original formation documents.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>2024 Form 1120-S (from Dylan)</strong><span>Critical — CPA needs to see prior year depreciation elections, salary structure, and deductions. Email Dylan requesting all prior returns and workpapers. If refused, file IRS Form 8821 to obtain transcripts.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>IRS Account Transcript (2024)</strong><span>Already obtained. Shows current balance $7,652.51 + accruals. Bring to CPA.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Rob Omelia referral payment documentation</strong><span>Zelle Apr 21, $1,000 — memo "Leslie, Watson, Bellonci, Ehinger — Referrals." Note the 4 client names for CPA records. No 1099 required under $600, but keep the memo as documentation.</span></div></li>
+  </ul>
+
+  <div class="callout amber">
+    <div class="callout-title">Request from Dylan (Former Advisor) — Do This in Writing</div>
+    <p>Send Dylan an email (not text) requesting: 2024 Form 1040 complete copy, 2024 Form 1120-S complete copy, all workpapers and supporting schedules, Gusto account credentials or transfer of account access. You are legally entitled to copies of returns he prepared. If he does not respond within 10 days, file IRS Form 8821 (Tax Information Authorization) to obtain transcripts directly from the IRS — no CPA needed for that step.</p>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 9: KEY NOTES -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">09</span>
+    <h2>Important Notes for CPA</h2>
+  </div>
+
+  <div class="callout blue">
+    <div class="callout-title">Reasonable Salary — Potential IRS Issue</div>
+    <p>IRS requires S-Corp owners to pay themselves a "reasonable salary" before taking distributions. In 2024, salary was $50,000. In 2025, the W-2 salary was only $19,231 (May–July, while working at 1845 Roofing). The low salary occurred because: (1) CJ was building a joint venture and Brent Busch was only paying him via Zelle/cash initially, (2) the formal W-2 arrangement through Frank Crum didn't begin until mid-year, and (3) the arrangement dissolved in late June. CPA should assess whether $19,231 constitutes "reasonable compensation" given the circumstances and document the rationale.</p>
+  </div>
+
+  <div class="callout amber">
+    <div class="callout-title">1120-S Late Filing — Penalty Mitigation</div>
+    <p>The Form 1120-S was due March 15, 2025. It was not filed. CJ was not informed of this deadline by his former advisor, who abruptly terminated the relationship in August 2025. A First-Time Penalty Abatement (FTA) request or a reasonable cause argument may be available given: (1) CJ had a professional advisor who failed to inform him, (2) he has been otherwise compliant (2024 payment plan current, no prior 1120-S delinquencies), and (3) the termination was abrupt and in bad faith. CPA should assess penalty abatement eligibility when filing.</p>
+  </div>
+
+  <div class="callout blue">
+    <div class="callout-title">Missing 1099s — Documentation Strategy</div>
+    <p>HD Roofing went out of business and did not issue a 1099. 1845 Roofing / Brent Busch did not issue a 1099. CJ is reporting all income regardless. Documentation strategy: (1) HD Roofing — 22 paystubs with YTD figures, plus ACH deposit records in business account; (2) 1845 Roofing — Zelle transaction records showing "1845 ROOFING LLC" as sender. IRS can match deposits to income; reporting it proactively is correct and protects against underreporting penalties.</p>
+  </div>
+
+  <div class="callout green">
+    <div class="callout-title">Brent Busch / 1845 Roofing — Potential Civil Claim</div>
+    <p>CJ contributed to over $1M in revenue at 1845 Roofing, including a $1.5M project with $500k projected profit, and received only $20,300 in compensation over ~6 months. While not a tax matter, this may represent a viable breach of contract or unjust enrichment claim. The bank records showing deposits into Brent's business account vs. what was paid to CJ are strong documentation. CJ should consult a business litigation attorney — some take roofing/contractor disputes on contingency based on provable economic harm.</p>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 10: ANNUAL REPORT WARNING -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">10</span>
+    <h2>Florida Annual Reports — Do NOT Use Those Letters</h2>
+  </div>
+
+  <div class="callout red">
+    <div class="callout-title">Those "TIME SENSITIVE" mailers are third-party solicitations — not government notices</div>
+    <p>You received two mailers from "Florida Business Filing Center" (RenewFL.org / FLFilingCenter.com) charging $399.89 each for C Clay Contracting LLC and Millennial One Home Solutions LLC. <strong>These are NOT from the state of Florida.</strong> The fine print at the bottom of each letter reads: "Florida Business Filing Center is a privately owned third-party processing service and is NOT affiliated with or endorsed by any government agency." They charge ~$260 above the actual state fee to file on your behalf. Do not pay them.</p>
+  </div>
+
+  <div class="callout green">
+    <div class="callout-title">How to file correctly — directly with Florida, $138.75 each</div>
+    <p>Go to <strong>sunbiz.org</strong> (Florida Division of Corporations — the actual state website). Log in or search for your business. File the annual report directly. The actual state fee is <strong>$138.75</strong> per entity. The May 1, 2026 deadline IS real — a $400 late fee applies if you miss it. But pay the state directly, not a third party. You'll save ~$520 total across both entities.</p>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>Entity</th><th>Status</th><th>Annual Report Due</th><th>File At</th><th class="right">Actual Fee</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>C Clay Contracting LLC</strong><br><span class="note-cell">605 Trelago Way Apt 107, Maitland FL 32751</span></td>
+        <td><span class="badge badge-green">Active / Good Standing</span></td>
+        <td><strong>May 1, 2026</strong><br><span class="note-cell">$400 late fee after deadline</span></td>
+        <td>sunbiz.org</td>
+        <td class="right"><strong>$138.75</strong><br><span class="note-cell">NOT $399.89</span></td>
+      </tr>
+      <tr>
+        <td><strong>Millennial One Home Solutions LLC</strong><br><span class="note-cell">605 Trelago Way Apt 107, Maitland FL 32751 · Also S-Corp, 100% owned</span></td>
+        <td><span class="badge badge-green">Active / Good Standing</span></td>
+        <td><strong>May 1, 2026</strong><br><span class="note-cell">$400 late fee after deadline</span></td>
+        <td>sunbiz.org</td>
+        <td class="right"><strong>$138.75</strong><br><span class="note-cell">NOT $399.89</span></td>
+      </tr>
+      <tr class="subtotal">
+        <td colspan="4">Total if filed directly with Florida (both entities)</td>
+        <td class="right"><strong>$277.50</strong></td>
+      </tr>
+      <tr>
+        <td colspan="4" style="color:#9b1c1c;">Amount those mailers wanted (combined)</td>
+        <td class="right" style="color:#9b1c1c;"><strong>$799.78</strong></td>
+      </tr>
+      <tr>
+        <td colspan="4" style="color:#2d6a4f;">You save by filing directly</td>
+        <td class="right" style="color:#2d6a4f;"><strong>$522.28</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout amber">
+    <div class="callout-title">Important: You need to keep C Clay Contracting active through tax season</div>
+    <p>Even if you plan to eventually wind down C Clay Contracting LLC and transition to Millennial One Home Solutions LLC, you <strong>must keep C Clay Contracting active and in good standing through at least October 15, 2026</strong> — when your extended 2025 returns (Form 1040 + Form 1120-S) are due. Filing the annual report for $138.75 keeps it active. Do not let it lapse or dissolve while the IRS extension is open.</p>
+  </div>
+
+  <div class="callout blue">
+    <div class="callout-title">Millennial One Home Solutions LLC — also on your 2024 IRS transcript</div>
+    <p>Your 2024 IRS Wage &amp; Income Transcript shows a Schedule K-1 (1120-S) from an entity with EIN ending in 6670 — "MILL ON HOM SOLU LL" — with 100% shareholder ownership. This means Millennial One Home Solutions LLC is already an active S-Corp in IRS records. When your CPA files 2025 returns, confirm whether this entity had any activity in 2025 — if so, it also needs a Form 1120-S filed. If it had zero activity in 2025, a short-year or zero-activity return may still be required.</p>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 11: 2026 ESTIMATED TAXES & NEXT STEPS -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">11</span>
+    <h2>2026 Estimated Taxes &amp; Next Steps</h2>
+  </div>
+
+  <div class="callout green">
+    <div class="callout-title">Good news: 2026 is off to a strong start</div>
+    <p>Your S-Corp account shows consistent weekly High Ticket Sales commissions via Bluevine starting February 2026. You are earning again, more predictably, and with a cleaner business structure than 2025. Use that momentum to stay current on estimated taxes — this avoids the penalty situation you're dealing with from 2025.</p>
+  </div>
+
+  <h3 style="font-size:14px; font-weight:600; margin-bottom:8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">2026 Income — YTD through April 9, 2026</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Date</th><th>Source</th><th>Period</th><th class="right">Amount</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Feb 5</td><td>High Ticket Sales (Bluevine)</td><td>Period ending 02/01/2026</td><td class="right">$1,480.00</td></tr>
+      <tr><td>Feb 12</td><td>High Ticket Sales (Bluevine)</td><td>Period ending 02/08/2026</td><td class="right">$2,700.00</td></tr>
+      <tr><td>Feb 19</td><td>High Ticket Sales (Bluevine)</td><td>—</td><td class="right">$380.00</td></tr>
+      <tr><td>Feb 26</td><td>High Ticket Sales (Bluevine)</td><td>Period ending 02/22/2026</td><td class="right">$2,080.00</td></tr>
+      <tr><td>Mar 5</td><td>High Ticket Sales (Bluevine)</td><td>Period ending 03/01/2026</td><td class="right">$3,080.00</td></tr>
+      <tr><td>Mar 13</td><td>High Ticket Sales (Bluevine)</td><td>Week ending 03/08/2026</td><td class="right">$2,075.00</td></tr>
+      <tr><td>Mar 19</td><td>High Ticket Sales (Bluevine)</td><td>Period ending 03/15/2026</td><td class="right">$683.25</td></tr>
+      <tr><td>Mar 26</td><td>High Ticket Sales (Bluevine)</td><td>Week ending 03/22/2026</td><td class="right">$1,440.00</td></tr>
+      <tr><td>Apr 2</td><td>High Ticket Sales (Bluevine)</td><td>Week ending 03/29/2026</td><td class="right">$1,139.87</td></tr>
+      <tr><td>Apr 9</td><td>High Ticket Sales (Bluevine)</td><td>Week ending 04/05/2026</td><td class="right">$3,570.00</td></tr>
+      <tr class="subtotal"><td colspan="3"><strong>YTD S-Corp Revenue (through Apr 9)</strong></td><td class="right"><strong>$18,628</strong></td></tr>
+      <tr><td colspan="3" class="note-cell">Weekly average: $1,331 · Annualized projection at current pace</td><td class="right">~$69,200</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">2026 Estimated Tax — Projections</h3>
+  <div class="callout blue">
+    <div class="callout-title">S-Corp structure still applies — no SE tax on distributions</div>
+    <p>Assuming you continue operating through C Clay Contracting LLC (or transition to Millennial One Home Solutions LLC, same structure), your K-1 distributions remain free of self-employment tax. Only your W-2 salary (if you reinstate payroll through Gusto or equivalent) carries payroll taxes. The numbers below assume the same S-Corp treatment as 2025.</p>
+  </div>
+  <table class="data-table">
+    <thead>
+      <tr><th>Item</th><th>Assumption</th><th class="right">Amount</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Projected 2026 S-Corp revenue</td><td class="note-cell">Annualized from current pace; will grow as you close more deals</td><td class="right">~$69,200</td></tr>
+      <tr><td>Estimated S-Corp deductions</td><td class="note-cell">Vehicle, software, home office, coaching continuation, travel</td><td class="right">~$20,000</td></tr>
+      <tr><td>Projected K-1 net income</td><td class="note-cell"></td><td class="right">~$49,200</td></tr>
+      <tr><td>W-2 salary (if reinstated)</td><td class="note-cell">Recommend reinstating payroll through Gusto ASAP</td><td class="right">TBD</td></tr>
+      <tr><td>Estimated AGI</td><td class="note-cell">K-1 + W-2 salary</td><td class="right">~$49,200+</td></tr>
+      <tr><td>Standard deduction MFJ 2026</td><td class="note-cell">Estimated ~$30,800 (inflation adjusted)</td><td class="right">~$30,800</td></tr>
+      <tr><td>Taxable income</td><td class="note-cell"></td><td class="right">~$18,400</td></tr>
+      <tr><td>Income tax (10% bracket MFJ)</td><td class="note-cell"></td><td class="right">~$1,840</td></tr>
+      <tr><td>SE tax on K-1 distributions</td><td class="note-cell">S-Corp — none</td><td class="right green"><strong>$0</strong></td></tr>
+      <tr class="subtotal"><td colspan="2"><strong>Estimated 2026 federal tax</strong></td><td class="right"><strong>~$1,840–$3,500</strong></td></tr>
+      <tr><td colspan="3" class="note-cell">Note: Will increase significantly if revenue accelerates above projection. Pay quarterly estimates to avoid underpayment penalty.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">2026 Quarterly Estimated Tax Payment Schedule</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Quarter</th><th>Due Date</th><th>Status</th><th>Recommended Payment</th><th class="right">Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr style="background:#fee2e2;">
+        <td><strong>Q1 2026</strong></td>
+        <td><strong>April 15, 2026</strong></td>
+        <td><span class="badge badge-red">THIS WEEK</span></td>
+        <td><strong>$500–$1,000</strong></td>
+        <td class="right">Pay via IRS Direct Pay → Estimated Tax → 2026</td>
+      </tr>
+      <tr>
+        <td>Q2 2026</td>
+        <td>June 16, 2026</td>
+        <td><span class="badge badge-amber">Upcoming</span></td>
+        <td>$500–$1,000</td>
+        <td class="right">Adjust based on actual income</td>
+      </tr>
+      <tr>
+        <td>Q3 2026</td>
+        <td>September 15, 2026</td>
+        <td><span class="badge badge-blue">Future</span></td>
+        <td>$500–$1,000</td>
+        <td class="right">Adjust based on actual income</td>
+      </tr>
+      <tr>
+        <td>Q4 2026</td>
+        <td>January 15, 2027</td>
+        <td><span class="badge badge-blue">Future</span></td>
+        <td>$500–$1,000</td>
+        <td class="right">Final payment for 2026</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px; color:var(--ink-3); margin-top:8px;">Tip: S-Corp owners can also avoid quarterly estimates by increasing W-2 withholding. If you reinstate a salary through Gusto, ask your CPA about having extra withholding taken from each paycheck to cover your K-1 tax — this eliminates the need to track quarterly deadlines.</p>
+
+  <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">Business Structure — C Clay vs. Millennial One</h3>
+  <div class="callout amber">
+    <div class="callout-title">Do not rush to dissolve C Clay Contracting while 2025 taxes are pending</div>
+    <p>You mentioned wanting to transition from C Clay Contracting LLC to Millennial One Home Solutions LLC. This is completely fine long-term — both are active S-Corps, both at your address. However: you <strong>cannot dissolve C Clay Contracting until after the 2025 Form 1120-S is filed and accepted</strong> (October 15, 2026 deadline). If you dissolve it before filing, you create a compliance mess. The plan: keep both active, file both annual reports at sunbiz.org ($138.75 each), file 2025 tax returns through C Clay Contracting, then transition future income to Millennial One after returns are filed. Your CPA can help with the formal transition.</p>
+  </div>
+
+  <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">Complete Next Steps — Priority Order</h3>
+  <ul class="checklist">
+    <li><div class="check-box"></div><div class="check-label"><strong>TODAY: File Form 4868 at IRS.gov (personal extension)</strong><span>Free. Takes 5 minutes. Extends personal return to October 15, 2026.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>TODAY: File Form 7004 at IRS.gov (S-Corp extension)</strong><span>Stops the $235/month late filing penalty on Form 1120-S. Already past March 15 — file now to limit exposure.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>THIS WEEK (by Apr 15): Make Q1 2026 estimated tax payment</strong><span>IRS.gov → Direct Pay → Estimated Tax → Tax Year 2026. Even $500 helps avoid underpayment penalty.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>CALL IRS: Confirm exact 2024 payoff amount</strong><span>1-800-829-1040. Portal shows $7,946.44 but two $247 payments (Feb 27 + Mar 27) may not be reflected. Get exact figure before paying.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>PAY OFF 2024 balance in full</strong><span>IRS.gov → Direct Pay → Balance Due → Tax Year 2024. Stops all interest/penalty accrual permanently.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>FILE BOTH annual reports at sunbiz.org by May 1</strong><span>C Clay Contracting + Millennial One Home Solutions. $138.75 each = $277.50 total. Do NOT use RenewFL.org — that's a private company charging $399.89 each.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Contact Dylan for prior return copies</strong><span>Email requesting 2024 Form 1040, 2024 Form 1120-S (both C Clay + Millennial One), workpapers, Gusto credentials. If no response in 10 days, file IRS Form 8821.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Find a CPA — target by June 2026</strong><span>Extensions give you until October 15. Find someone by June so they have time. Bring this entire document. aicpa.org/forthepublic/findacpa</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Reinstate payroll through Gusto</strong><span>You stopped paying yourself a W-2 salary after Frank Crum ended. S-Corps must pay owners reasonable compensation. Your CPA can help set the right salary level — this also simplifies estimated taxes.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>File 2025 Form 1040 + 1120-S by October 15, 2026</strong><span>Both returns due same day. Pay remaining 2025 balance (~$3,793 estimated) at that time.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Transition to Millennial One Home Solutions AFTER 2025 is filed</strong><span>Do not dissolve C Clay Contracting until the 1120-S is accepted by IRS. Transition is straightforward once tax filings are current.</span></div></li>
+  </ul>
+</div>
+
+
+</div><!-- /main -->
+
+<div class="report-footer">
+  <strong>Prepared by:</strong> Claude (Anthropic) — AI-assisted tax reconstruction &nbsp;·&nbsp;
+  <strong>Date:</strong> April 12, 2026 &nbsp;·&nbsp;
+  <strong>Important:</strong> This document is a tax preparation aid based on information provided by Charles Clay. It does not constitute professional tax or legal advice. All figures should be verified by a licensed CPA before filing. The preparer is not a licensed tax professional and assumes no liability for errors or omissions. &nbsp;·&nbsp;
+  <strong>TIN:</strong> XXX-XX-9648 &nbsp;·&nbsp; <strong>Spouse TIN:</strong> XXX-XX-7384
+</div>
+
+</body>
+</html>
