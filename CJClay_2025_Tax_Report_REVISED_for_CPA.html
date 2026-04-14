@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CJ Clay — 2025 Tax Summary (CPA revised)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1117;
+    --ink-2: #3a3d4a;
+    --ink-3: #6b6f7c;
+    --paper: #f7f6f2;
+    --paper-2: #eeece6;
+    --paper-3: #e4e1d8;
+    --accent: #c84b2f;
+    --accent-2: #e07a5f;
+    --green: #2d6a4f;
+    --green-light: #d8f3dc;
+    --amber: #8c5a00;
+    --amber-light: #fff3cd;
+    --red: #9b1c1c;
+    --red-light: #fee2e2;
+    --blue: #1e3a5f;
+    --blue-light: #dbeafe;
+    --rule: #d4d0c8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* COVER */
+  .cover {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 60px 64px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.12;
+  }
+  .cover-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    margin-bottom: 20px;
+  }
+  .cover h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .cover-sub {
+    font-size: 16px;
+    color: #9ca3af;
+    margin-bottom: 40px;
+  }
+  .cover-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    border-top: 1px solid #2d3142;
+    padding-top: 32px;
+  }
+  .cover-meta-item .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 4px;
+  }
+  .cover-meta-item .value {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--paper);
+  }
+  .cover-meta-item .value.green { color: #6ee7b7; }
+  .cover-meta-item .value.red { color: #fca5a5; }
+  .cover-meta-item .value.amber { color: #fcd34d; }
+
+  /* MAIN CONTENT */
+  .main { max-width: 960px; margin: 0 auto; padding: 0 40px 80px; }
+
+  /* SECTION */
+  .section {
+    margin-top: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    padding-top: 4px;
+  }
+  .section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--ink);
+  }
+
+  /* TABLE */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-top: 8px;
+  }
+  .data-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--ink);
+    background: var(--paper-2);
+  }
+  .data-table th.right, .data-table td.right { text-align: right; }
+  .data-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr.subtotal td {
+    background: var(--paper-2);
+    font-weight: 600;
+    border-top: 1px solid var(--rule);
+  }
+  .data-table tr.total td {
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .data-table tr.total td.green { color: #6ee7b7; }
+
+  .note-cell { font-size: 11.5px; color: var(--ink-3); }
+
+  /* BADGES */
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-red { background: var(--red-light); color: var(--red); }
+  .badge-amber { background: var(--amber-light); color: var(--amber); }
+  .badge-blue { background: var(--blue-light); color: var(--blue); }
+
+  /* CALLOUT BOXES */
+  .callout {
+    border-left: 4px solid;
+    padding: 14px 18px;
+    margin: 16px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .callout.green { border-color: var(--green); background: var(--green-light); }
+  .callout.red { border-color: var(--red); background: var(--red-light); }
+  .callout.amber { border-color: var(--amber); background: var(--amber-light); }
+  .callout.blue { border-color: var(--blue); background: var(--blue-light); }
+  .callout-title { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+  .callout p { font-size: 13px; line-height: 1.55; color: var(--ink-2); }
+
+  /* METRIC GRID */
+  .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0; }
+  .metric-grid.two { grid-template-columns: repeat(2, 1fr); }
+  .metric-grid.four { grid-template-columns: repeat(4, 1fr); }
+  .metric-card {
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .metric-card .mc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+  .metric-card .mc-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--ink);
+  }
+  .metric-card .mc-value.green { color: var(--green); }
+  .metric-card .mc-value.red { color: var(--red); }
+  .metric-card .mc-value.amber { color: var(--amber); }
+  .metric-card .mc-sub { font-size: 11.5px; color: var(--ink-3); margin-top: 3px; }
+
+  /* TIMELINE */
+  .timeline { margin-top: 16px; }
+  .tl-item {
+    display: flex;
+    gap: 20px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    min-width: 90px;
+    padding-top: 2px;
+    color: var(--ink-3);
+  }
+  .tl-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .tl-body { flex: 1; }
+  .tl-title { font-weight: 600; font-size: 13.5px; margin-bottom: 3px; }
+  .tl-desc { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; }
+  .past .tl-date { color: var(--red); }
+  .past .tl-dot { background: var(--red); }
+  .urgent .tl-dot { background: var(--accent); }
+  .upcoming .tl-dot { background: var(--amber); }
+  .future .tl-dot { background: var(--green); }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; margin-top: 12px; }
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 13.5px;
+    align-items: flex-start;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 20px; height: 20px;
+    border: 2px solid var(--rule);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .check-label { flex: 1; }
+  .check-label strong { display: block; font-weight: 500; }
+  .check-label span { font-size: 12px; color: var(--ink-3); }
+
+  /* FOOTER */
+  .report-footer {
+    margin-top: 60px;
+    padding: 24px 40px;
+    background: var(--paper-2);
+    border-top: 1px solid var(--rule);
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.6;
+  }
+
+  /* Horizontal scroll for wide tables on small screens */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 8px 0 12px;
+    border-radius: 6px;
+  }
+  .table-wrap .data-table {
+    margin-top: 0;
+    min-width: 520px;
+  }
+
+  /* MOBILE — readable layout without horizontal page scroll */
+  @media (max-width: 768px) {
+    body {
+      font-size: 15px;
+      overflow-x: hidden;
+    }
+    .cover {
+      padding: 36px 20px 32px;
+    }
+    .cover h1 {
+      font-size: clamp(28px, 8vw, 40px);
+    }
+    .cover-sub {
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .cover-meta {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px 20px;
+      padding-top: 24px;
+    }
+    .cover-meta-item .value {
+      font-size: 17px;
+    }
+    .main {
+      padding: 0 18px 48px;
+    }
+    .section {
+      margin-top: 40px;
+      padding-bottom: 32px;
+    }
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .section h2 {
+      font-size: 22px;
+      line-height: 1.2;
+    }
+    .metric-grid,
+    .metric-grid.two,
+    .metric-grid.four {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .metric-card .mc-value {
+      font-size: 22px;
+    }
+    .timeline .tl-item {
+      flex-direction: column;
+      gap: 8px;
+      padding-left: 0;
+    }
+    .tl-date {
+      min-width: unset;
+    }
+    .report-footer {
+      padding: 20px 18px;
+      font-size: 11px;
+    }
+    .data-table {
+      font-size: 12.5px;
+    }
+    .data-table th,
+    .data-table td {
+      padding: 8px 10px;
+    }
+    .callout {
+      padding: 12px 14px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .cover-meta {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* PRINT */
+  @media print {
+    .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section { page-break-inside: avoid; }
+    .table-wrap { overflow: visible; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-label">Confidential Tax Summary — Prepared for CPA Review</div>
+  <h1>Charles J. Clay<br>2025 Tax Report</h1>
+  <div class="cover-sub">2025 Income Reconstruction &nbsp;·&nbsp; Personal vs. S-Corp Split for CPA Review &nbsp;·&nbsp; Updated April 13, 2026</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="label">Total Gross Income</div>
+      <div class="value">$100,543</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">S-Corp Gross Receipts</div>
+      <div class="value green">$47,858</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">Personal 1099 / SE Income Under Review</div>
+      <div class="value amber">$33,454</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">2024 IRS Balance Due</div>
+      <div class="value red">~$7,900+</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 1: SITUATION OVERVIEW -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>Situation Overview</h2>
+  </div>
+
+  <p style="color:var(--ink-2); margin-bottom:16px;">Charles Clay operates C Clay Contracting LLC, taxed as an S-Corporation, but his 2025 income was received across both business and personal accounts. The key correction in this revision is that the Farmasi income and the Brent / 1845 Roofing payments were not received by the S-Corp bank account and should be reviewed by the new CPA as personal non-W-2 income rather than automatically treated as S-Corp receipts. His prior tax professional dropped out during the 2025 filing cycle, leaving payroll, entity filing, and classification issues unresolved.</p>
+
+  <div class="callout amber">
+    <div class="callout-title">Main classification correction in this revision</div>
+    <p>The prior version pushed Brent / 1845 Roofing payments and Farmasi income into the S-Corp bucket. Based on the documents now in hand, that treatment is too aggressive. The Brent payments went to personal account ending 4207, and the Farmasi 1099-NEC is issued under CJ&#39;s personal name / SSN. This revised report separates those amounts out for CPA review instead of treating them as settled S-Corp revenue.</p>
+  </div>
+
+  <div class="callout blue">
+    <div class="callout-title">Family Gifts — Not Taxable Income — $23,700 Confirmed (2025)</div>
+    <p><strong>Dad (Charles Clay Sr.) — $16,500 confirmed in 2025:</strong> His Zelle payments are identified by confirmation numbers beginning with "T0Y" or "T0Z" — confirmed by CJ as his father's Zelle account pattern. Jan 15 $500 (T0YFM55Q5) · Apr 15 $800 (T0YQG578H) · Apr 29 $1,000 (T0YRQQP3X) · May 12 $500 (T0YSZSK22) · Aug 29 $1,000 (T0Z753RDR) · Oct 31 $2,000 (T0ZFSDNH9) · Dec 2 $700 (T0ZK4NMWN) · Dec 15 $500 (T0ZLLM4RQ) = $7,000 via Zelle. Additionally: Aug 29 $9,500 branch-to-branch wire from BofA account at 8341 Seminole Trl, Ruckersville VA (dad's bank location). Total from dad: $16,500. Note: Dec 2024 $7,500 branch transfer from Wilmington NC is a 2024 gift — within that year's $18,000 exclusion.</p>
+    <p style="margin-top:8px;"><strong>Mom (Vicki Clay) — $7,200 confirmed in 2025:</strong> Mar 21 $1,000 (memo: "helping to take care of our baby boy") · Oct 30 $3,000 · Nov 14 $200 · Dec 1 $3,000 = $7,200 via Zelle.</p>
+    <p style="margin-top:8px;"><strong>Gift tax rule:</strong> Annual exclusion is $19,000 per donor per recipient in 2025. Dad ($16,500 to CJ) and mom ($7,200 to CJ) are both under the per-recipient limit. Both parents can also give Tanya up to $19,000 each for 2025 — meaning the family can receive up to $76,000 in 2025 gifts before any gift return issue would normally arise. No Form 709 required. None of these amounts appear in income.</p>
+  </div>
+
+  <div class="metric-grid four" style="margin-top:20px;">
+    <div class="metric-card">
+      <div class="mc-label">Filing Status</div>
+      <div class="mc-value" style="font-size:18px;">Married<br>Filing Joint</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">Business Entity</div>
+      <div class="mc-value" style="font-size:18px;">S-Corp<br>LLC</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">2024 Status</div>
+      <div class="mc-value" style="font-size:18px; color:var(--amber);">Payment<br>Plan Active</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">2025 Status</div>
+      <div class="mc-value" style="font-size:18px; color:var(--amber);">1040 extension due 4/15/26<br>1120-S late</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 2: INCOME RECONSTRUCTION -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>Income Reconstruction — All Sources</h2>
+  </div>
+
+  <p style="color:var(--ink-2); margin-bottom:20px;">Income was reconstructed from bank statements (accounts 4207, 2702, business account), HD Roofing paystubs (22 stubs), Wave P&amp;L, and Zelle transaction records. All amounts are verifiable from source documents.</p>
+
+  <!-- W-2 -->
+  <h3 style="font-size:14px; font-weight:600; margin-bottom:8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">W-2 Income</h3>
+  <div class="table-wrap"><table class="data-table">
+    <thead>
+      <tr><th>Source</th><th>EIN / Notes</th><th>Form</th><th class="right">Amount</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Frank Crum / 1845 Roofing LLC</strong></td>
+        <td class="note-cell">Payroll via Frank Crum payroll co. 5 net deposits of $3,247.19 each (May–Jul). Gross higher due to FICA withholding.</td>
+        <td><span class="badge badge-blue">W-2</span></td>
+        <td class="right"><strong>$19,231</strong></td>
+      </tr>
+      <tr class="subtotal">
+        <td colspan="3">Total W-2 Income</td>
+        <td class="right">$19,231</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  
+<!-- 1099 / S-Corp Revenue -->
+<h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">S-Corp Revenue — amounts that appear to belong in C Clay Contracting LLC</h3>
+<div class="table-wrap"><table class="data-table">
+  <thead>
+    <tr><th>Source</th><th>Documentation</th><th>Form</th><th class="right">Amount</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>HD Roofing &amp; Construction LLC</strong><br><span class="note-cell">DBA HD Roofing &amp; Solar · EIN: 82-2368213<br>Commission sales, 22 paystubs Jan–Sep 2025</span></td>
+      <td class="note-cell">Final paystub YTD = $47,257.61. Payments were treated in the report as business receipts tied to the company books.</td>
+      <td><span class="badge badge-amber">No 1099</span></td>
+      <td class="right"><strong>$47,258</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Apex Roofing</strong></td>
+      <td class="note-cell">1099-NEC shows $600.00. This amount is retained in the S-Corp bucket pending CPA confirmation.</td>
+      <td><span class="badge badge-green">1099 ✓</span></td>
+      <td class="right"><strong>$600</strong></td>
+    </tr>
+    <tr class="subtotal">
+      <td colspan="3">Revised S-Corp Revenue Total</td>
+      <td class="right">$47,858</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">Personal non-W-2 income to review with CPA</h3>
+<div class="callout amber">
+  <div class="callout-title">These amounts were moved out of the S-Corp section in this revision</div>
+  <p>This is not a final legal tax conclusion about which schedule they land on. It is a bookkeeping correction for the CPA handoff based on where the money was received and how the forms were issued.</p>
+</div>
+<div class="table-wrap"><table class="data-table">
+  <thead>
+    <tr><th>Source</th><th>Why moved out of S-Corp section</th><th>Likely tax bucket for CPA review</th><th class="right">Amount</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1845 Roofing LLC / Brent Busch</strong><br><span class="note-cell">All listed payments went to personal account ending 4207</span></td>
+      <td class="note-cell">The combined Brent payment timeline and bank activity show the payments were received personally, not by the S-Corp operating account.</td>
+      <td><span class="badge badge-amber">Personal income review</span></td>
+      <td class="right"><strong>$20,300</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Farmasi US LLC</strong><br><span class="note-cell">1099-NEC issued under CJ&#39;s personal name / SSN</span></td>
+      <td class="note-cell">The Farmasi form shown is a personal 1099-NEC for $13,154.14, so it should not be rolled into the S-Corp without the CPA making that decision knowingly.</td>
+      <td><span class="badge badge-amber">Personal income review</span></td>
+      <td class="right"><strong>$13,154</strong></td>
+    </tr>
+    <tr class="subtotal">
+      <td colspan="3">Revised personal non-W-2 income total</td>
+      <td class="right">$33,454</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<!-- NOT INCOME -->
+
+  <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">Excluded — Not Income</h3>
+  <div class="table-wrap"><table class="data-table">
+    <thead>
+      <tr><th>Description</th><th>Reason Excluded</th><th class="right">Amount</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Owner draws from C Clay Contracting to personal acct (May–Sep)</td>
+        <td class="note-cell">Transfers between own accounts. Confirmed from business account: outgoing Zelle payments labeled "Owners withdrawl" flowing from business acct → 4207. Not income — money already in the S-Corp.</td>
+        <td class="right">$21,550</td>
+      </tr>
+      <tr>
+        <td><strong>Vicki Clay (mom) — Zelle gifts</strong><br><span class="note-cell">Mar 21 $1,000 · Oct 30 $3,000 · Nov 14 $200 · Dec 1 $3,000</span></td>
+        <td class="note-cell">Gifts from mother. $7,200 total — under $19,000 annual exclusion. Not taxable to CJ. Mom can also gift Tanya up to $18,000 separately.</td>
+        <td class="right">$7,200</td>
+      </tr>
+      <tr style="background:var(--paper-2);">
+        <td colspan="2"><strong>Charles Clay Sr. (dad) — Total 2025 gifts: all confirmed, all non-taxable</strong><br>
+        <span class="note-cell" style="display:block; margin-top:6px; line-height:1.8;">
+          Jan 15 — Zelle (T0YFM55Q5): <strong>$500</strong><br>
+          Apr 15 — Zelle (T0YQG578H): <strong>$800</strong><br>
+          Apr 29 — Zelle (T0YRQQP3X): <strong>$1,000</strong><br>
+          May 12 — Zelle (T0YSZSK22): <strong>$500</strong><br>
+          Aug 29 — Zelle (T0Z753RDR): <strong>$1,000</strong><br>
+          Aug 29 — BofA branch wire from Ruckersville VA (FR CHKG 8341 Seminole Trl): <strong>$9,500</strong><br>
+          Oct 31 — Zelle (T0ZFSDNH9): <strong>$2,000</strong><br>
+          Dec 2 &nbsp;— Zelle (T0ZK4NMWN): <strong>$700</strong><br>
+          Dec 15 — Zelle (T0ZLLM4RQ): <strong>$500</strong><br>
+          <em>Note: Dad also gifted $7,500 in Dec 2024 (Wilmington NC branch wire) — within 2024 annual exclusion.</em>
+        </span></td>
+        <td class="right" style="font-size:18px; font-weight:600; color:#2d6a4f; vertical-align:top; padding-top:14px;">$16,500</td>
+      </tr>
+      <tr>
+        <td>Brent Busch $450 "Water Pump" Zelle (Sep 16)</td>
+        <td class="note-cell">Reimbursement. Business account shows $450 paid to Los Chinos Auto Repair for water pump same day. Brent repaid CJ. Net = $0.</td>
+        <td class="right">$450</td>
+      </tr>
+      <tr>
+        <td>Acorns dividend distributions (1099-DIV)</td>
+        <td class="note-cell">$10.36 ordinary dividends — reported separately on Schedule B, not S-Corp revenue.</td>
+        <td class="right">$10</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <!-- TOTAL INCOME SUMMARY -->
+  <div class="metric-grid four" style="margin-top:20px;">
+    <div class="metric-card">
+      <div class="mc-label">W-2 Income</div>
+      <div class="mc-value">$19,231</div>
+      <div class="mc-sub">Frank Crum / 1845 Roofing</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">S-Corp Revenue</div>
+      <div class="mc-value">$47,858</div>
+      <div class="mc-sub">HD Roofing + Apex only in revised split</div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-label">Personal non-W-2 Income</div>
+      <div class="mc-value amber">$33,454</div>
+      <div class="mc-sub">Brent + Farmasi moved out of S-Corp section</div>
+    </div>
+      <div class="metric-card">
+      <div class="mc-label">Total Gross Income</div>
+      <div class="mc-value green">$100,543</div>
+      <div class="mc-sub">All income sources before gifts excluded</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 3: DEDUCTIONS & EXPENSES -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Deductions &amp; Business Expenses</h2>
+  </div>
+
+  <p style="color:var(--ink-2); margin-bottom:20px;">These expenses were collected from the existing report and source records, but after moving Brent and Farmasi out of the S-Corp revenue section, the new CPA should re-allocate expenses between true S-Corp activity and any personal self-employment activity before final filing.</p>
+
+  <!-- VEHICLE -->
+  <h3 style="font-size:14px; font-weight:600; margin-bottom:8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">Vehicle — Standard Mileage Method</h3>
+  <div class="callout blue">
+    <div class="callout-title">Standard Mileage vs. Actual Expenses</div>
+    <p>Total documented vehicle repairs in 2025: $7,095 (Los Chinos lifters $3,200 + water pump $450 + catalytic converter $200 + Discount Auto $987 + Action Tire $756 + Chevrolet service $929 + Buick service $254 + Valvoline $153 + AutoZone $75). Under standard mileage, these cannot be deducted separately. Standard mileage at 12,000 miles = $8,400. Actual expenses method (75% biz) = $7,946. Standard mileage wins by $454 and is far simpler to document.</p>
+  </div>
+  <div class="table-wrap"><table class="data-table">
+    <thead>
+      <tr><th>Component</th><th>Calculation</th><th>Source</th><th class="right">Deduction</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Standard Mileage Deduction</strong></td>
+        <td>12,000 miles × $0.70/mile (2025 IRS rate)</td>
+        <td class="note-cell">Reconstructed from HD paystub job locations (Stuart FL = 180 mi R/T; Daytona = 120 mi R/T), daily roofing territory, Villages area, sales training trips</td>
+        <td class="right"><strong>$8,400</strong></td>
+      </tr>
+      <tr>
+        <td colspan="4" class="note-cell" style="padding:10px 12px; background:var(--paper-2);">
+          <strong>Mileage breakdown:</strong> Roofing job sites Jan–Sep (5,400 mi) · Villages territory (3,600 mi) · Stuart FL documented trips (720 mi) · Daytona trips (360 mi) · Sales training Aug–Nov (1,600 mi) · Subtotal: ~11,700 mi, claiming 12,000 conservatively. Note: Cannot also deduct fuel ($316 in Wave) or repairs if using standard mileage — those costs are bundled into the rate.
+        </td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <!-- COACHING -->
+  <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">Professional Education &amp; Coaching</h3>
+  <div class="table-wrap"><table class="data-table">
+    <thead>
+      <tr><th>Item</th><th>Notes</th><th class="right">Deductible</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>HTSA High-Ticket Sales Academy</strong></td>
+        <td class="note-cell">Total program cost $6,000. CJ paid $3,000 (funded by loan from mother). Remaining $3,000 was waived upon hitting deal milestones — this is a performance-based price reduction, not taxable COD income. Only the $3,000 actually paid is deductible (cash basis taxpayer: deduct what you pay). Education directly led to current employment in high-ticket sales. Qualifies under IRC §162.</td>
+        <td class="right"><strong>$3,000</strong></td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <!-- FULL EXPENSE TABLE -->
+  <h3 style="font-size:14px; font-weight:600; margin: 20px 0 8px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.05em;">All Business Expenses</h3>
+  <div class="table-wrap"><table class="data-table">
+    <thead>
+      <tr><th>Category</th><th>Items &amp; Source</th><th>Deductibility</th><th class="right">Amount</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Vehicle (mileage)</strong></td>
+        <td class="note-cell">12,000 miles × $0.70 — see above</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$8,400</td>
+      </tr>
+      <tr>
+        <td><strong>HTSA Coaching</strong></td>
+        <td class="note-cell">Amount actually paid in 2025</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$3,000</td>
+      </tr>
+      <tr>
+        <td><strong>Computer Hardware</strong></td>
+        <td class="note-cell">Best Buy + Amazon purchases per Wave P&amp;L</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$2,264</td>
+      </tr>
+      <tr>
+        <td><strong>Home Office — Simplified Method</strong></td>
+        <td class="note-cell">Apt: 1,180 sq ft. Dedicated workspace used regularly &amp; exclusively for business. Simplified method: $5 × 300 sq ft (IRS max) = $1,500. Alternative: regular method using actual sq ft of office ÷ 1,180 × rent+utilities+internet would yield ~$3,997 but requires more documentation.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$1,500</td>
+      </tr>
+      <tr>
+        <td><strong>Software &amp; AI Tools</strong></td>
+        <td class="note-cell">Adobe Creative Cloud, Cursor AI ($20/mo), ProgramAI.co ($99), Maven Advantage sales tool ($239.50), Skool.com, Wave Pro ($16/mo × 12 = $192)</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$1,378</td>
+      </tr>
+      <tr>
+        <td><strong>Weather Guidance Subscription</strong></td>
+        <td class="note-cell">WeatherGuidance.com — roofing-specific weather tool, $49.95/mo × ~10 months. Business account.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$500</td>
+      </tr>
+      <tr>
+        <td><strong>GPS / CubeTracker</strong></td>
+        <td class="note-cell">CubeTracker vehicle GPS subscription, $19.95/mo × 12 = $239.40. Also in Wave as "GPS Tracker for Vehicle."</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$239</td>
+      </tr>
+      <tr>
+        <td><strong>Facebook Ads</strong></td>
+        <td class="note-cell">Multiple charges to business account Jan–Jun 2025 for roofing lead generation. Total ~$350.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$350</td>
+      </tr>
+      <tr>
+        <td><strong>Accounting / Professional Fees</strong></td>
+        <td class="note-cell">Per Wave P&amp;L 2025</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$585</td>
+      </tr>
+      <tr>
+        <td><strong>Business Referral Payments</strong></td>
+        <td class="note-cell">Rob Omelia — Zelle Apr 21, $1,000 (memo: "Leslie, Watson, Bellonci, Ehinger — Referrals" — 4 documented client referrals). CJ confirms this was a legitimate business referral fee. Note: Yair payments were misclassified (haircut) and Maher payments were not business — those are excluded.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$1,000</td>
+      </tr>
+      <tr>
+        <td><strong>Payroll Service Fees (Gusto)</strong></td>
+        <td class="note-cell">Monthly Gusto fees: $41.40–$55/mo throughout 2025. Business account. ~$576 total.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$576</td>
+      </tr>
+      <tr>
+        <td><strong>Business meals &amp; entertainment (50%)</strong></td>
+        <td class="note-cell">Mandolas Italian (×2 client meetings) · TST*The H Orlando (client) · Olive Garden (client) · Vallartas Mexican · AJI Ceviche · TST*La Canita Miami (Farmasi) · Miller's Ale House · travel meals on job sites (Stuart FL, Ridgeland SC). Full amount documented: $797. At 50% = $399.</td>
+        <td><span class="badge badge-amber">50%</span></td>
+        <td class="right">$399</td>
+      </tr>
+      <tr>
+        <td><strong>Business travel — road, fuel on trips, parking, tolls</strong></td>
+        <td class="note-cell">South FL trips (Miami, West Palm) for Farmasi — all year · Stuart FL for HD Roofing (confirmed paystubs: Job 5963, 5962, 5977 etc.) · Jacksonville, Daytona, Spring Hill, Arcadia, Okeechobee for roofing territory (Jan–Sep) · Key West (1845 Roofing) · Tampa territory · Farmasi Miami event Sep (Marriott $14.72 + fuel $49.90) · Airport parking · Gas/fuel on documented business trips. Note: after October, only South FL / Farmasi trips qualify — personal driving excluded.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$1,652</td>
+      </tr>
+      <tr>
+        <td><strong>Supplies &amp; Shipping</strong></td>
+        <td class="note-cell">Staples ($46.29), UPS Store ($41.16), FedEx ($17.56), Lowe's job-site materials ($15.42), small tools per Wave ($35.29)</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$156</td>
+      </tr>
+      <tr>
+        <td><strong>AT&amp;T phone equipment</strong></td>
+        <td class="note-cell">Sep 21, 2025: two AT&amp;T device/equipment charges ($71.50 + $156.00) — business phone equipment for sales operations.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$228</td>
+      </tr>
+      <tr>
+        <td><strong>Zoom subscription (Farmasi business)</strong></td>
+        <td class="note-cell">Monthly Zoom used for Farmasi team meetings and client calls — ~6 months in Meli account, $16.99/mo. Business use confirmed as Farmasi is taxable income under CJ's name.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$102</td>
+      </tr>
+      <tr>
+        <td><strong>Microsoft 365 (Farmasi business)</strong></td>
+        <td class="note-cell">Jun 23, 2025: Microsoft 365 annual subscription ($99.99) — used for Farmasi business operations.</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$100</td>
+      </tr>
+      <tr>
+        <td><strong>Bank Fees</strong></td>
+        <td class="note-cell">Monthly maintenance fees on business account per Wave ($48)</td>
+        <td><span class="badge badge-green">100%</span></td>
+        <td class="right">$48</td>
+      </tr>
+      <tr class="subtotal">
+        <td colspan="3"><strong>Total S-Corp Deductions</strong></td>
+        <td class="right"><strong>$22,578</strong></td>
+      </tr>
+
+      <!-- NOT DEDUCTIBLE -->
+      <tr><td colspan="4" style="padding:12px; background:var(--paper-2); font-size:12px; font-weight:600; color:var(--ink-3); text-transform:uppercase; letter-spacing:0.05em;">NOT Deductible — Excluded</td></tr>
+      <tr>
+        <td>Tobacco / smoke shop purchases</td>
+        <td class="note-cell">Wild King Smoke Shop, USA Tobacco Shop, Wild Blaze Smoke — personal</td>
+        <td><span class="badge badge-red">Personal</span></td>
+        <td class="right">$0</td>
+      </tr>
+      <tr>
+        <td>Pet expenses</td>
+        <td class="note-cell">Banfield Pet Hospital ($40.95/mo), PetSmart, Petco — personal</td>
+        <td><span class="badge badge-red">Personal</span></td>
+        <td class="right">$0</td>
+      </tr>
+      <tr>
+        <td>Gambling</td>
+        <td class="note-cell">Hard Rock Bet via Trustly — personal</td>
+        <td><span class="badge badge-red">Personal</span></td>
+        <td class="right">$0</td>
+      </tr>
+      <tr>
+        <td>Vehicle repairs &amp; fuel</td>
+        <td class="note-cell">$7,095 repairs + $316 fuel — bundled into standard mileage rate; cannot double-deduct</td>
+        <td><span class="badge badge-red">Included in mileage</span></td>
+        <td class="right">$0</td>
+      </tr>
+      <tr>
+        <td>Groceries / dining (personal)</td>
+        <td class="note-cell">Publix, Walmart grocery, Costco food — personal expenses</td>
+        <td><span class="badge badge-red">Personal</span></td>
+        <td class="right">$0</td>
+      </tr>
+      <tr>
+        <td>Uber rides (most)</td>
+        <td class="note-cell">Wild King Smoke Shop commute and 605 Trelago Way home trips are personal. Only Los Chinos (car in shop, 2 trips ~$43) and Hertz rental day ($11) are deductible.</td>
+        <td><span class="badge badge-red">Mostly personal</span></td>
+        <td class="right">$54 deductible</td>
+      </tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 4: CLASSIFICATION SUMMARY -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2>Classification Summary for New CPA</h2>
+  </div>
+
+  <div class="callout red">
+    <div class="callout-title">The prior tax estimate is no longer reliable after this correction</div>
+    <p>Because Brent / 1845 payments and Farmasi income were moved out of the S-Corp bucket, the old net K-1 and estimated 2025 tax figures should be treated as obsolete. The CPA should recalculate 2025 from scratch using the revised income split below.</p>
+  </div>
+
+  <div class="table-wrap"><table class="data-table">
+    <thead>
+      <tr><th>Bucket</th><th>Included items</th><th class="right">Amount</th><th>CPA note</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>W-2 wages</strong></td>
+        <td>Frank Crum / 1845 Roofing W-2</td>
+        <td class="right"><strong>$19,230.75</strong></td>
+        <td class="note-cell">Confirm final W-2 withholding from the form itself.</td>
+      </tr>
+      <tr>
+        <td><strong>Revised S-Corp receipts</strong></td>
+        <td>HD Roofing $47,257.61 + Apex 1099-NEC $600.00</td>
+        <td class="right"><strong>$47,857.61</strong></td>
+        <td class="note-cell">Run through 1120-S only after expense allocation is cleaned up.</td>
+      </tr>
+      <tr>
+        <td><strong>Personal non-W-2 income under review</strong></td>
+        <td>Brent / 1845 payments $20,300.00 + Farmasi 1099-NEC $13,154.14</td>
+        <td class="right"><strong>$33,454.14</strong></td>
+        <td class="note-cell">Do not assume this belongs on the 1120-S merely because some related spending touched business records.</td>
+      </tr>
+      <tr>
+        <td><strong>Non-taxable gifts excluded</strong></td>
+        <td>Dad $16,500 + Mom $7,200</td>
+        <td class="right"><strong>$23,700.00</strong></td>
+        <td class="note-cell">Exclude from income. 2025 annual exclusion is $19,000 per donor per recipient.</td>
+      </tr>
+      <tr class="total">
+        <td><strong>Total gross income before gifts exclusion</strong></td>
+        <td>W-2 + revised S-Corp receipts + personal non-W-2 income</td>
+        <td class="right green"><strong>$100,542.50</strong></td>
+        <td>Rounded elsewhere in the report to $100,543.</td>
+      </tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 5: 2024 STATUS -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2>2024 Tax Status</h2>
+  </div>
+
+  <div class="callout red">
+    <div class="callout-title">Current balance still needs confirmation directly with the IRS</div>
+    <p>The report history shows the 2024 balance is still roughly $7,900 plus accruing interest. Before sending a lump sum, the exact payoff should be confirmed through the IRS online account or by phone so the new CPA has the current balance due number.</p>
+  </div>
+
+  <div class="table-wrap"><table class="data-table">
+    <thead>
+      <tr><th>Item</th><th>Amount / status</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2024 return</td>
+        <td>Filed, balance still outstanding on payment plan</td>
+      </tr>
+      <tr>
+        <td>Approximate balance discussed in file</td>
+        <td>~$7,900+</td>
+      </tr>
+      <tr>
+        <td>Main priority</td>
+        <td>Stay current and confirm exact payoff before making any big payment</td>
+      </tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 6: CORRECT DEADLINES AS OF APRIL 13, 2026 -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2>Correct Deadlines as of April 13, 2026</h2>
+  </div>
+
+  <div class="callout amber">
+    <div class="callout-title">Important correction on Form 7004</div>
+    <p>For a calendar year S-Corp, Form 1120-S was due March 16, 2026 because March 15 fell on a Sunday. Form 7004 generally had to be filed by that regular due date to create an automatic extension. Since that date has already passed, the practical move now is to get the 1120-S prepared as fast as possible and have the CPA address any late-filing penalty relief request separately.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item past">
+      <div class="tl-date">Mar 16, 2026</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">1120-S due date passed <span class="badge badge-red">Late now</span></div>
+        <div class="tl-desc">The S-Corp return due date for the 2025 calendar year has already passed. A late-filed Form 7004 does not function like a timely automatic extension.</div>
+      </div>
+    </div>
+    <div class="tl-item urgent">
+      <div class="tl-date">Apr 15, 2026</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">Form 4868 still available for personal return <span class="badge badge-amber">Due now</span></div>
+        <div class="tl-desc">The personal extension for the 2025 Form 1040 can still be filed by April 15, 2026. That extension gives more time to file, not more time to pay.</div>
+      </div>
+    </div>
+    <div class="tl-item urgent">
+      <div class="tl-date">Apr 15, 2026</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">Any 2025 tax payment should be sent by this date <span class="badge badge-amber">Payment deadline</span></div>
+        <div class="tl-desc">Whatever amount can reasonably be paid toward 2025 should be sent by April 15, 2026 to reduce interest and late payment penalties, even if the final return is not ready yet.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SECTION 7: CPA HANDOFF CHECKLIST -->
+<!-- ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <h2>CPA Handoff Checklist</h2>
+  </div>
+
+  <ul class="checklist">
+    <li><div class="check-box"></div><div class="check-label"><strong>Tell CPA the report was corrected to move Brent and Farmasi out of the S-Corp section</strong><span>Those amounts were previously grouped under the S-Corp but were received personally or issued personally.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Ask CPA to recalculate 2025 entirely from the revised split</strong><span>Old K-1 and tax due estimates in the prior version should not be relied on.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>File Form 4868 for the 2025 personal return by April 15, 2026</strong><span>The personal extension is still timely if filed by the April deadline.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Get the 1120-S prepared immediately</strong><span>Because the S-Corp due date already passed, speed matters more now than trying to force a late 7004 theory.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Have CPA evaluate reasonable cause penalty relief for the late 1120-S</strong><span>Your prior preparer dropping out and the unresolved books are facts the CPA can frame carefully.</span></div></li>
+    <li><div class="check-box"></div><div class="check-label"><strong>Keep dad and mom transfers clearly labeled as gifts</strong><span>Do not let those amounts get swept into taxable income during cleanup.</span></div></li>
+  </ul>
+</div>
+
+<div class="report-footer">
+  <strong>Prepared by:</strong> Claude (Anthropic) — AI-assisted tax reconstruction &nbsp;·&nbsp;
+  <strong>Date:</strong> April 12, 2026 &nbsp;·&nbsp;
+  <strong>Important:</strong> This document is a tax preparation aid based on information provided by Charles Clay. It does not constitute professional tax or legal advice. All figures should be verified by a licensed CPA before filing. The preparer is not a licensed tax professional and assumes no liability for errors or omissions. &nbsp;·&nbsp;
+  <strong>TIN:</strong> XXX-XX-9648 &nbsp;·&nbsp; <strong>Spouse TIN:</strong> XXX-XX-7384
+</div>
+
+</body>
+</html>
