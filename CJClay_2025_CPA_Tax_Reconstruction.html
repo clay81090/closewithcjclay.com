@@ -1,0 +1,1051 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CJ Clay — 2025 CPA Tax Reconstruction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f1e8;
+  --card:#fffdf8;
+  --ink:#161616;
+  --muted:#5d635f;
+  --line:#ddd2c2;
+  --line-2:#c9bba6;
+  --accent:#9c4325;
+  --accent-2:#d98d63;
+  --green:#1f6b4f;
+  --green-bg:#dff3e8;
+  --amber:#8a5a00;
+  --amber-bg:#fff3d6;
+  --red:#972b2b;
+  --red-bg:#fde3e3;
+  --blue:#22456e;
+  --blue-bg:#e3eefb;
+  --shadow:0 10px 30px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  line-height:1.55;
+}
+a{color:var(--blue)}
+.wrapper{max-width:1180px;margin:0 auto;padding:0 24px 72px}
+.cover{
+  background:linear-gradient(135deg,#111 0%, #1f1d1b 48%, #2b251f 100%);
+  color:#f8f4ef;
+  padding:64px 24px 48px;
+  position:relative;
+  overflow:hidden;
+}
+.cover:before,.cover:after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  opacity:.12;
+}
+.cover:before{width:420px;height:420px;background:#d98d63;top:-180px;right:-120px}
+.cover:after{width:300px;height:300px;background:#7b2e16;bottom:-120px;left:-80px}
+.cover-inner{max-width:1180px;margin:0 auto;position:relative;z-index:2}
+.kicker{
+  font:600 11px/1 "JetBrains Mono",monospace;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  color:#f0c09f;
+  margin-bottom:22px;
+}
+h1{
+  font-family:"DM Serif Display",Georgia,serif;
+  font-size:54px;
+  line-height:1.02;
+  margin:0 0 12px;
+}
+.subtitle{
+  max-width:900px;
+  font-size:17px;
+  color:#d8d1c9;
+  margin-bottom:34px;
+}
+.meta-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+}
+.meta-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:16px 18px;
+  backdrop-filter: blur(6px);
+}
+.meta-card .label{
+  font:600 10px/1.3 "JetBrains Mono",monospace;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:#c8beb3;
+  margin-bottom:7px;
+}
+.meta-card .value{
+  font-size:27px;
+  font-weight:700;
+  letter-spacing:-.02em;
+}
+.meta-card .value.green{color:#8ee0b2}
+.meta-card .value.amber{color:#ffd57a}
+.meta-card .value.red{color:#ff9b9b}
+.topnav{
+  position:sticky; top:0; z-index:10;
+  background:rgba(246,241,232,.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.topnav .inner{
+  max-width:1180px;margin:0 auto;padding:12px 24px;display:flex;gap:12px;flex-wrap:wrap
+}
+.topnav a{
+  text-decoration:none;color:var(--muted);font-size:13px;font-weight:600;
+  padding:8px 10px;border-radius:999px;border:1px solid transparent
+}
+.topnav a:hover{border-color:var(--line-2);background:#fffaf2}
+.section{
+  padding-top:34px;
+}
+.section-head{
+  display:flex;align-items:flex-end;gap:14px;margin:0 0 18px
+}
+.section-num{
+  font:600 11px/1 "JetBrains Mono",monospace;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--accent)
+}
+.section h2{
+  margin:0;font-family:"DM Serif Display",Georgia,serif;font-size:34px;line-height:1.1
+}
+.lead{
+  font-size:16px;color:var(--muted);margin:0 0 18px;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:22px;
+  margin:16px 0;
+}
+.card h3{
+  margin:0 0 12px;
+  font-size:18px;
+}
+.callout{
+  border-left:5px solid;
+  border-radius:14px;
+  padding:16px 18px;
+  margin:14px 0;
+}
+.callout h4{margin:0 0 6px;font-size:15px}
+.callout p,.callout li{margin:0;color:#28302c}
+.callout ul{margin:8px 0 0 18px;padding:0}
+.callout.blue{background:var(--blue-bg);border-color:var(--blue)}
+.callout.green{background:var(--green-bg);border-color:var(--green)}
+.callout.amber{background:var(--amber-bg);border-color:var(--amber)}
+.callout.red{background:var(--red-bg);border-color:var(--red)}
+.grid-2,.grid-3,.grid-4{display:grid;gap:16px}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.stat{
+  background:#fffdf8;border:1px solid var(--line);border-radius:16px;padding:18px
+}
+.stat .label{
+  font:600 10px/1.3 "JetBrains Mono",monospace;
+  text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px
+}
+.stat .value{
+  font-size:30px;font-weight:700;letter-spacing:-.03em
+}
+.stat .sub{font-size:12px;color:var(--muted);margin-top:6px}
+.entity{
+  border:1px solid var(--line);border-radius:16px;padding:18px;background:#fffdf8
+}
+.entity .name{
+  font-size:19px;font-weight:700;margin-bottom:8px
+}
+.entity .meta{
+  font-size:13px;color:var(--muted)
+}
+.badge{
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:999px;
+  font:600 10px/1 "JetBrains Mono",monospace;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.badge.blue{background:var(--blue-bg);color:var(--blue)}
+.badge.green{background:var(--green-bg);color:var(--green)}
+.badge.amber{background:var(--amber-bg);color:var(--amber)}
+.badge.red{background:var(--red-bg);color:var(--red)}
+.table-wrap{
+  overflow:auto;border:1px solid var(--line);border-radius:16px;background:#fffdf8;box-shadow:var(--shadow)
+}
+table{
+  width:100%;border-collapse:collapse;min-width:720px
+}
+th,td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{
+  background:#f2ece2;
+  text-align:left;
+  color:var(--muted);
+  font:600 10px/1.3 "JetBrains Mono",monospace;
+  text-transform:uppercase;
+  letter-spacing:.11em;
+}
+tbody tr:hover td{background:#fffaf2}
+td.right, th.right{text-align:right}
+tr.subtotal td{
+  background:#f7f1e7;
+  font-weight:700;
+}
+tr.total td{
+  background:#1f1d1b;
+  color:#fff8ee;
+  font-weight:700;
+}
+.small{font-size:12px;color:var(--muted)}
+.timeline{
+  position:relative;margin-left:6px
+}
+.timeline:before{
+  content:"";position:absolute;left:94px;top:6px;bottom:6px;width:2px;background:var(--line-2)
+}
+.tl-item{
+  display:grid;grid-template-columns:80px 28px 1fr;gap:12px;position:relative;padding:10px 0
+}
+.tl-date{
+  font:600 11px/1.3 "JetBrains Mono",monospace;color:var(--muted);padding-top:4px
+}
+.tl-dot{
+  width:12px;height:12px;border-radius:50%;margin-top:6px;position:relative;z-index:2;background:var(--accent)
+}
+.tl-body{
+  background:#fffdf8;border:1px solid var(--line);border-radius:14px;padding:14px 16px
+}
+.tl-title{font-size:15px;font-weight:700;margin-bottom:4px}
+.tl-desc{font-size:13px;color:var(--muted)}
+.checklist{list-style:none;padding:0;margin:0}
+.checklist li{
+  display:grid;grid-template-columns:22px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)
+}
+.checkbox{
+  width:18px;height:18px;border:2px solid var(--line-2);border-radius:5px;margin-top:2px
+}
+.footer{
+  margin-top:42px;
+  padding:20px 0;
+  font-size:12px;color:var(--muted)
+}
+details{
+  border:1px solid var(--line);border-radius:14px;background:#fffdf8;padding:0 16px;margin:12px 0
+}
+summary{
+  list-style:none;cursor:pointer;padding:14px 0;font-weight:700
+}
+summary::-webkit-details-marker{display:none}
+details .detail-body{padding:0 0 16px}
+.anchor-offset{scroll-margin-top:90px}
+@media (max-width: 980px){
+  h1{font-size:42px}
+  .meta-grid,.grid-4,.grid-3,.grid-2{grid-template-columns:1fr}
+}
+@media (max-width: 640px){
+  .wrapper{padding:0 16px 56px}
+  .cover{padding:42px 18px 28px}
+  h1{font-size:36px}
+  .subtitle{font-size:15px}
+  .topnav .inner{padding:10px 16px}
+  .section h2{font-size:28px}
+  .timeline:before{left:74px}
+  .tl-item{grid-template-columns:60px 22px 1fr}
+}
+</style>
+</head>
+<body>
+<header class="cover">
+  <div class="cover-inner">
+    <div class="kicker">Confidential • CPA Handoff File • 2025 Reconstruction</div>
+    <h1>Charles J. Clay<br>2025 Tax Reconstruction</h1>
+    <div class="subtitle">
+      Built to help a CPA quickly understand the full story, the entity split, the income flow, the missed compliance steps, the immediate deadlines, the 2024 baseline, and the records still needed. This version separates what is confirmed, what is likely, and what needs CPA judgment.
+    </div>
+    <div class="meta-grid">
+      <div class="meta-card">
+        <div class="label">Total Gross Income</div>
+        <div class="value">$99,952.86</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Business Income</div>
+        <div class="value green">$47,857.61</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Personal 1099 / non-W2</div>
+        <div class="value amber">$32,854.14</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">W-2 Withholding Credit</div>
+        <div class="value red">$2,994.81</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="topnav">
+  <div class="inner">
+    <a href="#overview">Overview</a>
+    <a href="#story">Narrative</a>
+    <a href="#entities">Entities</a>
+    <a href="#income">Income</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#deductions">Deductions</a>
+    <a href="#profile">Profile</a>
+    <a href="#compliance">Compliance</a>
+    <a href="#baseline2024">2024 Baseline</a>
+    <a href="#deadlines">Deadlines</a>
+    <a href="#documents">Documents</a>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+<section id="overview" class="section anchor-offset">
+  <div class="section-head">
+    <div class="section-num">01</div>
+    <h2>Executive overview</h2>
+  </div>
+  <p class="lead">
+    This file is meant to let a CPA step into a messy 2025 situation fast. The main problems were mixed payment channels, incomplete payroll handling, no 941 work completed for 2025, late S-Corp filing, and an abrupt abandonment by the prior advisor while income and entity treatment were still unresolved.
+  </p>
+
+  <div class="grid-4">
+    <div class="stat">
+      <div class="label">W-2 Gross</div>
+      <div class="value">$19,230.75</div>
+      <div class="sub">FrankCrum 15, Inc.</div>
+    </div>
+    <div class="stat">
+      <div class="label">Business 1099 / LLC</div>
+      <div class="value">$47,857.61</div>
+      <div class="sub">HD Roofing + Apex</div>
+    </div>
+    <div class="stat">
+      <div class="label">Personal non-W2</div>
+      <div class="value">$32,854.14</div>
+      <div class="sub">Brent / 1845 + Farmasi</div>
+    </div>
+    <div class="stat">
+      <div class="label">Investment Income</div>
+      <div class="value">$10.36</div>
+      <div class="sub">Acorns ordinary dividends</div>
+    </div>
+  </div>
+
+  <div class="callout amber">
+    <h4>Main CPA question</h4>
+    <p>
+      Brent / 1845 payments were sent to the personal account even though CJ wanted them sent to the LLC/S-Corp. The CPA should decide whether any of that income can or should be reclassified, reconstructed, or otherwise tied back into the business treatment.
+    </p>
+  </div>
+
+  <div class="callout red">
+    <h4>Immediate urgency</h4>
+    <p>
+      Personal extension still needed by <strong>April 15, 2026</strong>. S-Corp late-filing penalty month two starts <strong>April 18, 2026</strong> under the penalty timing framework CJ is using, so the practical goal is to get the actual 1120-S filed by <strong>April 17, 2026</strong> to keep the penalty from doubling.
+    </p>
+  </div>
+</section>
+
+<section id="story" class="section anchor-offset">
+  <div class="section-head">
+    <div class="section-num">02</div>
+    <h2>Narrative timeline and business context</h2>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">Feb 4</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">Brent asked CJ to become a 50/50 partner</div>
+        <div class="tl-desc">
+          Brent was to hold 51% because he had the license and LLC. CJ was to hold 49%. No operating agreement was ever completed. CJ then dropped everything and began building the company with the expectation that the ownership would be finalized.
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Feb–Jul</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">CJ built sales and revenue side of 1845 Roofing</div>
+        <div class="tl-desc">
+          CJ handled sales, marketing, CRM, lead generation, contractor relationships, and front-end revenue creation. Brent handled production and labor. During this phase Brent lived at CJ’s house and did not pay what CJ requested. Payments to CJ were random and often sent by Zelle to the personal account instead of the LLC.
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Mar 2025</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">Tax adviser told CJ not to put himself in as shareholder yet</div>
+        <div class="tl-desc">
+          The advice was to avoid naming CJ as shareholder because Brent had prior unpaid taxes. CJ followed that advice, expecting Brent would clean it up as revenue increased. That never happened.
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">May 30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">First W-2 payroll starts through FrankCrum</div>
+        <div class="tl-desc">
+          CJ and Brent gave themselves equal reasonable salary treatment through FrankCrum. Payroll began late, and CJ reports that two payments were later withheld illegally. CJ also states no 941 work was completed for 2025.
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Jul 23</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">Falling out after CJ had worked on a $2.5M project</div>
+        <div class="tl-desc">
+          CJ had worked for months on a roughly $2.5M project. In July the relationship with Brent broke down and CJ left. He had no lawyer, no completed partnership protection, and no continued income from HD Roofing.
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Aug 18</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">Prior adviser / POA dropped CJ midstream</div>
+        <div class="tl-desc">
+          CJ received a letter saying the adviser was no longer representing him and was only given a vague list of next steps. That left CJ without payroll support, filing help, or transition support during an already unstable period.
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Sep–Oct</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <div class="tl-title">Short return to roofing, then pivot</div>
+        <div class="tl-desc">
+          CJ went back to HD Roofing briefly, then Apex for about three weeks, then later moved into remote high-ticket sales and got back to $10k+/month after several months.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <h4>What a CPA needs to understand from this story</h4>
+    <ul>
+      <li>Income did not flow cleanly through one entity or one account.</li>
+      <li>Some payments that should have gone to the LLC were paid personally.</li>
+      <li>Payroll started late and was not fully maintained.</li>
+      <li>The prior adviser leaving in August is part of the explanation for the compliance failure.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="entities" class="section anchor-offset">
+  <div class="section-head">
+    <div class="section-num">03</div>
+    <h2>Entity and payer summary</h2>
+  </div>
+
+  <div class="grid-2">
+    <div class="entity">
+      <div class="name">FrankCrum 15, Inc. <span class="badge blue">W-2</span></div>
+      <div class="meta">
+        100 South Missouri Avenue<br>
+        Clearwater, FL 33756<br>
+        Employer EIN #: 90-0873801<br>
+        OMB No. 1545-0029
+      </div>
+    </div>
+
+    <div class="entity">
+      <div class="name">HD Roofing &amp; Construction LLC <span class="badge amber">1099 NEC / LLC-S-Corp</span></div>
+      <div class="meta">
+        477 Commerce Way<br>
+        Longwood, FL 32750<br>
+        Federal EIN #: 822388213<br>
+        Phone: (407) 401-5173<br>
+        Never received 1099. Out of business.
+      </div>
+    </div>
+
+    <div class="entity">
+      <div class="name">APEX Roofing &amp; Restoration LLC <span class="badge amber">1099 NEC / LLC-S-Corp</span></div>
+      <div class="meta">
+        4601 Southlake Parkway<br>
+        Hoover, AL 35244<br>
+        (610) 750-1105<br>
+        Payer TIN #: 27-3035800<br>
+        Account #: U6Y4BVI28H22
+      </div>
+    </div>
+
+    <div class="entity">
+      <div class="name">FARMASI US LLC <span class="badge amber">1099 NEC / Personal</span></div>
+      <div class="meta">
+        10780 NW 27th St.<br>
+        Doral, FL 33172<br>
+        (833) 432-7627<br>
+        Payer TIN #: 352642943<br>
+        Account #: 10839357
+      </div>
+    </div>
+
+    <div class="entity">
+      <div class="name">Brent Bush &amp; 1845 Roofing LLC <span class="badge red">Personal receipts / no 1099</span></div>
+      <div class="meta">
+        224 Birds of Paradise Dr.<br>
+        Palm Coast, FL 32137<br>
+        (239) 276-6690<br>
+        info@1845roofing.com<br>
+        License #: CCC1334841<br>
+        EIN #: 467-75-0110
+      </div>
+    </div>
+
+    <div class="entity">
+      <div class="name">Acorns Securities, LLC <span class="badge green">1099-DIV / Investment</span></div>
+      <div class="meta">
+        5300 California Avenue<br>
+        Irvine, CA 92617<br>
+        855-739-2859<br>
+        Payer Federal ID #: 46-2538416<br>
+        2025 Form 1099-DIV
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="income" class="section anchor-offset">
+  <div class="section-head">
+    <div class="section-num">04</div>
+    <h2>Income summary by bucket</h2>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Bucket</th>
+          <th>What is inside</th>
+          <th class="right">Amount</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>W-2</strong></td>
+          <td>FrankCrum 15, Inc.</td>
+          <td class="right">$19,230.75</td>
+          <td>Gross W-2. Net received tracked separately.</td>
+        </tr>
+        <tr>
+          <td><strong>Business income</strong></td>
+          <td>HD Roofing + Apex</td>
+          <td class="right">$47,857.61</td>
+          <td>Income that clearly belongs in the business bucket as currently tracked.</td>
+        </tr>
+        <tr>
+          <td><strong>Personal non-W2 income</strong></td>
+          <td>Brent / 1845 gross income after rent exclusion + Farmasi</td>
+          <td class="right">$32,854.14</td>
+          <td>Main CPA reclassification question sits here.</td>
+        </tr>
+        <tr>
+          <td><strong>Investment income</strong></td>
+          <td>Acorns ordinary dividends</td>
+          <td class="right">$10.36</td>
+          <td>1099-DIV ordinary dividends.</td>
+        </tr>
+        <tr class="total">
+          <td><strong>Total gross income</strong></td>
+          <td>All categories combined</td>
+          <td class="right">$99,952.86</td>
+          <td>Before any deduction decisions.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <h3>FrankCrum W-2</h3>
+      <div class="small">Gross: <strong>$19,230.75</strong></div>
+      <div class="small">Net: <strong>$12,988.74</strong></div>
+      <div class="small">Federal income tax: <strong>$1,523.65</strong></div>
+      <div class="small">Social Security: <strong>$1,192.31</strong></div>
+      <div class="small">Medicare: <strong>$278.85</strong></div>
+      <div class="small" style="margin-top:8px"><strong>Total withholding credit: $2,994.81</strong></div>
+    </div>
+
+    <div class="card">
+      <h3>Brent / 1845 Roofing</h3>
+      <div class="small">Total received: <strong>$20,300.00</strong></div>
+      <div class="small">Less rent: <strong>$600.00</strong></div>
+      <div class="small">Gross income portion: <strong>$19,700.00</strong></div>
+      <div class="small" style="margin-top:8px">The payments were sent by Zelle to the personal account, but CJ wanted them paid to the LLC/S-Corp.</div>
+    </div>
+
+    <div class="card">
+      <h3>Acorns</h3>
+      <div class="small">Ordinary dividends: <strong>$10.36</strong></div>
+      <div class="small">Qualified dividends: <strong>$5.34</strong></div>
+      <div class="small">Federal tax withheld: <strong>$0.00</strong></div>
+      <div class="small">Foreign tax paid: <strong>$0.25</strong></div>
+    </div>
+  </div>
+</section>
+
+<section id="timeline" class="section anchor-offset">
+  <div class="section-head">
+    <div class="section-num">05</div>
+    <h2>Master payment timeline — chronological and exact</h2>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Exact description / source wording</th>
+          <th>Source</th>
+          <th>Type</th>
+          <th class="right">Amount</th>
+          <th>Classification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>01/03/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:CLAY CHARLES CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$1,917.95</td><td>Business income</td></tr>
+        <tr><td>01/17/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:CLAY CHARLES CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$1,137.85</td><td>Business income</td></tr>
+        <tr><td>01/24/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:CLAY CHARLES CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$1,185.61</td><td>Business income</td></tr>
+        <tr><td>01/31/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:CLAY CHARLES CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$3,290.00</td><td>Business income</td></tr>
+        <tr><td>02/07/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$1,857.50</td><td>Business income</td></tr>
+        <tr><td>02/13/2025</td><td>Zelle payment from 1845 ROOFING LLC for "rent"; Conf# 99ay0jxv1</td><td>1845 / Brent</td><td>Zelle</td><td class="right">$600.00</td><td>Non-income rent reimbursement</td></tr>
+        <tr><td>02/21/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$5,187.71</td><td>Business income</td></tr>
+        <tr><td>02/28/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$2,353.52</td><td>Business income</td></tr>
+        <tr><td>03/07/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$3,607.51</td><td>Business income</td></tr>
+        <tr><td>03/13/2025</td><td>Zelle payment from 1845 ROOFING LLC for "sales"; Conf# 99b17e5mh</td><td>1845 / Brent</td><td>Zelle</td><td class="right">$2,000.00</td><td>Personal income</td></tr>
+        <tr><td>03/21/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$1,900.00</td><td>Business income</td></tr>
+        <tr><td>03/28/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$1,384.02</td><td>Business income</td></tr>
+        <tr><td>03/31/2025</td><td>Zelle payment from 1845 ROOFING LLC Conf# 99b32itvb</td><td>1845 / Brent</td><td>Zelle</td><td class="right">$200.00</td><td>Personal income, unlabeled</td></tr>
+        <tr><td>04/04/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$256.20</td><td>Business income</td></tr>
+        <tr><td>04/08/2025</td><td>Zelle payment from 1845 ROOFING LLC for "2633 aloma"; Conf# 99b45mrwf</td><td>1845 / Brent</td><td>Zelle</td><td class="right">$7,000.00</td><td>Personal income</td></tr>
+        <tr><td>04/11/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$1,496.77</td><td>Business income</td></tr>
+        <tr><td>04/11/2025</td><td>Zelle payment from 1845 ROOFING LLC for "owners draw"; Conf# 99b4gzkew</td><td>1845 / Brent</td><td>Zelle</td><td class="right">$2,500.00</td><td>Personal receipt, memo says owners draw</td></tr>
+        <tr><td>05/05/2025</td><td>FRANKCRUM DES:PAYROLL ID:XXXXX0003 INDN:CLAY CHARLES CO ID:XXXXX26531 PPD</td><td>FrankCrum</td><td>Payroll</td><td class="right">$3,247.19</td><td>W-2 net pay</td></tr>
+        <tr><td>05/16/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$3,281.79</td><td>Business income</td></tr>
+        <tr><td>05/19/2025</td><td>Zelle payment from 1845 ROOFING LLC for "owners draw"; Conf# 99b8u7fdi</td><td>1845 / Brent</td><td>Zelle</td><td class="right">$3,000.00</td><td>Personal receipt, memo says owners draw</td></tr>
+        <tr><td>05/30/2025</td><td>APEX Roofing 1099-NEC total for year</td><td>Apex</td><td>1099-NEC</td><td class="right">$600.00</td><td>Business income</td></tr>
+        <tr><td>06/13/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$808.26</td><td>Business income</td></tr>
+        <tr><td>06/27/2025</td><td>FRANKCRUM DES:PAYROLL ID:XXXXX0003 INDN:CLAY CHARLES CO ID:XXXXX26531 PPD</td><td>FrankCrum</td><td>Payroll</td><td class="right">$3,247.18</td><td>W-2 net pay</td></tr>
+        <tr><td>07/07/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$2,500.00</td><td>Business income</td></tr>
+        <tr><td>07/11/2025</td><td>FRANKCRUM DES:PAYROLL ID:XXXXX0003 INDN:CLAY CHARLES CO ID:XXXXX26531 PPD</td><td>FrankCrum</td><td>Payroll</td><td class="right">$3,247.19</td><td>W-2 net pay</td></tr>
+        <tr><td>07/11/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$5,974.13</td><td>Business income</td></tr>
+        <tr><td>07/17/2025</td><td>Zelle payment from 1845 ROOFING LLC for "labor"; Conf# 99bg09hum</td><td>1845 / Brent</td><td>Zelle</td><td class="right">$5,000.00</td><td>Personal income</td></tr>
+        <tr><td>08/29/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$2,908.20</td><td>Business income</td></tr>
+        <tr><td>09/12/2025</td><td>8739 HD ROOFING DES:DEPOSIT ID:755799 INDN:ING LLC C CLAY CONTRAC CO ID:13584213 PPD</td><td>HD Roofing</td><td>ACH</td><td class="right">$1,500.00</td><td>Business income</td></tr>
+        <tr><td>12/31/2025</td><td>FARMASI US LLC 1099-NEC total for year</td><td>Farmasi</td><td>1099-NEC</td><td class="right">$13,154.14</td><td>Personal income</td></tr>
+        <tr><td>12/31/2025</td><td>ACORNS SECURITIES, LLC 1099-DIV ordinary dividends</td><td>Acorns</td><td>1099-DIV</td><td class="right">$10.36</td><td>Investment income</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <details open>
+    <summary>Totals tied directly to this timeline</summary>
+    <div class="detail-body">
+      <ul class="checklist">
+        <li><div class="checkbox"></div><div><strong>HD Roofing total:</strong> $47,257.61</div></li>
+        <li><div class="checkbox"></div><div><strong>Apex total:</strong> $600.00</div></li>
+        <li><div class="checkbox"></div><div><strong>Brent / 1845 total received:</strong> $20,300.00</div></li>
+        <li><div class="checkbox"></div><div><strong>Brent / 1845 less rent:</strong> $19,700.00 gross income portion</div></li>
+        <li><div class="checkbox"></div><div><strong>Farmasi:</strong> $13,154.14</div></li>
+        <li><div class="checkbox"></div><div><strong>Acorns ordinary dividends:</strong> $10.36</div></li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+<section id="deductions" class="section anchor-offset">
+  <div class="section-head">
+    <div class="section-num">06</div>
+    <h2>Deductions, gifts, mileage, and classification support</h2>
+  </div>
+
+  <p class="lead">
+    These items are carried over from the earlier reconstruction and source records so the CPA can see the full universe of possible deductions, support, exclusions, and reallocation issues in one place. They are listed here for review, not as final filing positions.
+  </p>
+
+  <div class="callout blue">
+    <h4>Important note for allocation</h4>
+    <p>
+      After moving Brent / 1845 receipts and Farmasi out of the clean S-Corp bucket, the prior estimated 2025 K-1 and tax figures should be treated as obsolete. The deduction table below is a full working list. The CPA should decide how each item is allocated between true S-Corp activity, personal non-W-2 income, and any amounts that should be excluded.
+    </p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Confirmed gifts and non-income support</h3>
+      <ul class="checklist">
+        <li><div class="checkbox"></div><div><strong>Father gifts / support</strong><span class="small"><br>Total identified: <strong>$16,500</strong></span></div></li>
+        <li><div class="checkbox"></div><div><strong>Mother gifts / support</strong><span class="small"><br>Total identified: <strong>$7,200</strong></span></div></li>
+        <li><div class="checkbox"></div><div><strong>Total family gifts excluded from income</strong><span class="small"><br><strong>$23,700</strong></span></div></li>
+        <li><div class="checkbox"></div><div><strong>Brent / 1845 rent payment</strong><span class="small"><br><strong>$600</strong> excluded from income</span></div></li>
+        <li><div class="checkbox"></div><div><strong>Brent water pump reimbursement</strong><span class="small"><br><strong>$450</strong> treated as reimbursement / net zero</span></div></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Vehicle and coaching summary</h3>
+      <div class="small" style="margin-bottom:8px"><strong>Vehicle repairs documented in 2025:</strong> $7,095</div>
+      <div class="small">Los Chinos lifters $3,200 • water pump $450 • catalytic converter $200 • Discount Auto $987 • Action Tire $756 • Chevrolet service $929 • Buick service $254 • Valvoline $153 • AutoZone $75</div>
+      <div class="small" style="margin-top:12px"><strong>Standard mileage placeholder:</strong> 12,000 miles × $0.70 = <strong>$8,400</strong></div>
+      <div class="small">Mileage support notes: Roofing job sites Jan–Sep 5,400 mi • Villages territory 3,600 mi • Stuart trips 720 mi • Daytona trips 360 mi • Sales training Aug–Nov 1,600 mi. Subtotal ~11,700 miles, rounded conservatively to 12,000.</div>
+      <div class="small" style="margin-top:12px"><strong>HTSA paid in cash basis:</strong> <strong>$3,000</strong></div>
+      <div class="small">Total program cost was $6,000, but only $3,000 was actually paid. Remaining $3,000 was waived after milestones.</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Detail / source note</th>
+          <th>Deductibility note</th>
+          <th class="right">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Vehicle – standard mileage</strong></td><td>12,000 miles × $0.70</td><td>Working placeholder pending CPA confirmation</td><td class="right">$8,400</td></tr>
+        <tr><td><strong>HTSA coaching</strong></td><td>Amount actually paid in 2025</td><td>Potential 100% business education deduction</td><td class="right">$3,000</td></tr>
+        <tr><td><strong>Computer hardware</strong></td><td>Best Buy + Amazon purchases per prior report / Wave support</td><td>Potential business equipment</td><td class="right">$2,264</td></tr>
+        <tr><td><strong>Home office – simplified method</strong></td><td>$5 × 300 sq ft max</td><td>Potential if exclusivity / regular use is supportable</td><td class="right">$1,500</td></tr>
+        <tr><td><strong>Software &amp; AI tools</strong></td><td>Adobe Creative Cloud, Cursor AI, ProgramAI.co, Maven Advantage, Skool, Wave Pro</td><td>Potential business software</td><td class="right">$1,378</td></tr>
+        <tr><td><strong>Weather Guidance</strong></td><td>Roofing-specific weather tool</td><td>Potential 100% business</td><td class="right">$500</td></tr>
+        <tr><td><strong>GPS / CubeTracker</strong></td><td>Vehicle GPS subscription</td><td>Potential 100% business</td><td class="right">$239</td></tr>
+        <tr><td><strong>Facebook ads</strong></td><td>Lead generation charges Jan–Jun 2025</td><td>Potential 100% business</td><td class="right">$350</td></tr>
+        <tr><td><strong>Accounting / professional fees</strong></td><td>Per Wave / prior report</td><td>Potential 100% business</td><td class="right">$585</td></tr>
+        <tr><td><strong>Referral payment</strong></td><td>Rob Omelia, memo references Leslie, Watson, Bellonci, Ehinger referrals</td><td>Potential 100% business</td><td class="right">$1,000</td></tr>
+        <tr><td><strong>Payroll service fees (Gusto)</strong></td><td>Monthly Gusto fees around $41.40–$55</td><td>Potential 100% business</td><td class="right">$576</td></tr>
+        <tr><td><strong>Meals &amp; entertainment</strong></td><td>Mandolas, The H Orlando, Olive Garden, Vallartas, AJI Ceviche, La Canita Miami, Miller's, travel meals</td><td>50% category in prior report</td><td class="right">$399</td></tr>
+        <tr><td><strong>Business travel</strong></td><td>South FL, Miami, West Palm, Stuart, Jacksonville, Daytona, Spring Hill, Arcadia, Okeechobee, Key West, Tampa, airport parking, tolls, trip fuel</td><td>Potential 100% business depending on tie-out</td><td class="right">$1,652</td></tr>
+        <tr><td><strong>Supplies &amp; shipping</strong></td><td>Staples, UPS Store, FedEx, Lowe's materials, small tools</td><td>Potential 100% business</td><td class="right">$156</td></tr>
+        <tr><td><strong>AT&amp;T phone equipment</strong></td><td>Sep 21 equipment charges $71.50 + $156.00</td><td>Potential 100% business</td><td class="right">$228</td></tr>
+        <tr><td><strong>Zoom subscription</strong></td><td>Farmasi meetings and client calls, about six months</td><td>Potential 100% business</td><td class="right">$102</td></tr>
+        <tr><td><strong>Microsoft 365</strong></td><td>Annual subscription used for Farmasi</td><td>Potential 100% business</td><td class="right">$100</td></tr>
+        <tr><td><strong>Bank fees</strong></td><td>Monthly maintenance fees on business account</td><td>Potential 100% business</td><td class="right">$48</td></tr>
+        <tr class="subtotal"><td colspan="3"><strong>Total prior deduction build</strong></td><td class="right"><strong>$22,578</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <details>
+    <summary>Items previously flagged as not deductible or personal</summary>
+    <div class="detail-body">
+      <ul class="checklist">
+        <li><div class="checkbox"></div><div><strong>Tobacco / smoke shop purchases</strong><span class="small"><br>Wild King Smoke Shop, USA Tobacco Shop, Wild Blaze Smoke</span></div></li>
+        <li><div class="checkbox"></div><div><strong>Pet expenses</strong><span class="small"><br>Banfield, PetSmart, Petco</span></div></li>
+        <li><div class="checkbox"></div><div><strong>Gambling</strong><span class="small"><br>Hard Rock Bet via Trustly</span></div></li>
+        <li><div class="checkbox"></div><div><strong>Vehicle repairs & fuel under mileage method</strong><span class="small"><br>$7,095 repairs + $316 fuel already absorbed if standard mileage is used</span></div></li>
+        <li><div class="checkbox"></div><div><strong>Groceries / personal dining</strong><span class="small"><br>Publix, Walmart grocery, Costco food</span></div></li>
+        <li><div class="checkbox"></div><div><strong>Most Uber rides</strong><span class="small"><br>Only about $54 previously identified as possibly deductible</span></div></li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+<section id="profile" class="section anchor-offset">
+  <div class="section-head">
+    <div class="section-num">07</div>
+    <h2>Personal profile, filing status, and address history</h2>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Taxpayer</h3>
+      <div class="small"><strong>Charles James Clay</strong></div>
+      <div class="small">Phone: (843) 283-3409</div>
+      <div class="small">Email: clay81090@gmail.com</div>
+      <div class="small">Current address: 605 Trelago Way #107, Maitland, FL 32751</div>
+      <div class="small">Previous address: 1106 Crosstown Way #2108, Orlando, FL 32807</div>
+      <div class="small">Prior address: 3227 Landtree Pl., Orlando, FL 32812</div>
+      <div class="small">Address used by prior preparer on 2024 7004: 347 Broadway Ave, Orlando, FL 32803</div>
+    </div>
+
+    <div class="card">
+      <h3>Spouse</h3>
+      <div class="small"><strong>Tanya Melisa Cercado Mera</strong></div>
+      <div class="small">Phone: (689) 251-7810</div>
+      <div class="small">Email: melicercado@gmail.com</div>
+      <div class="small">Address: 605 Trelago Way #107, Maitland, FL 32751</div>
+      <div class="small">Married filing jointly is the intended filing status.</div>
+      <div class="small">Spouse received Social Security number in August 2025.</div>
+      <div class="small">Spouse is from Guayaquil, Ecuador.</div>
+      <div class="small">Spouse had no work income for 2024 or 2025.</div>
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <h4>Other profile facts to keep in record</h4>
+    <p>
+      No Roth IRA, no 401(k), no HSA, no regular health insurance for 2025, no crypto, and no other meaningful investment activity beyond the Acorns 1099-DIV already listed.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Prior tax preparer / power of attorney</h3>
+    <div class="small"><strong>Dylan Quintilone</strong></div>
+    <div class="small">4700 Millenia Blvd. Ste 175, Orlando, FL 32839</div>
+    <div class="small">quintilone@mailfence.com</div>
+    <div class="small">(689) 257-9400</div>
+    <div class="small">2024 Preparer PTIN #: P02055728</div>
+    <div class="small" style="margin-top:10px">
+      Dylan had power of attorney and was handling payroll, S-Corp setup, tax filings, and returns. Representation stopped during 2025 while CJ was in the middle of a business collapse and a separate personal issue related to a roofing dispute involving a previous company. CJ states that he did not even work there at that point and could not do anything about that situation. This file includes that context because the timing overlaps directly with the later compliance breakdown.
+    </div>
+  </div>
+</section>
+
+<section id="compliance" class="section anchor-offset">
+  <div class="section-head">
+    <div class="section-num">08</div>
+    <h2>Entity compliance status and unresolved filing items</h2>
+  </div>
+
+  <div class="grid-2">
+    <div class="entity">
+      <div class="name">C Clay Contracting LLC <span class="badge amber">Active S-Corp</span></div>
+      <div class="meta">EIN: 93-2778268</div>
+    </div>
+    <div class="entity">
+      <div class="name">Millennial One Home Solutions LLC <span class="badge amber">Active S-Corp</span></div>
+      <div class="meta">EIN: 99-3756670<br>No income passed through in 2025 based on current records.</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Entity / scope</th>
+          <th>Status shown in this file</th>
+          <th>Due date</th>
+          <th class="right">Amount / exposure</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Form 7004 / 1120-S extension issue</strong></td><td>C Clay Contracting LLC</td><td>Not filed on time</td><td>Original due date March 17, 2026</td><td class="right">$235 current month exposure</td></tr>
+        <tr><td><strong>Form 7004 / 1120-S extension issue</strong></td><td>Millennial One Home Solutions LLC</td><td>Not filed on time</td><td>Original due date March 17, 2026</td><td class="right">$235 current month exposure</td></tr>
+        <tr class="subtotal"><td colspan="4"><strong>Total current S-Corp late-filing penalty exposure shown in this file</strong></td><td class="right"><strong>$470</strong></td></tr>
+        <tr><td><strong>2026 Annual Report</strong></td><td>C Clay Contracting LLC</td><td>Not yet filed</td><td>May 1, 2026</td><td class="right">$399.89 solicitation received</td></tr>
+        <tr><td><strong>2026 Annual Report</strong></td><td>Millennial One Home Solutions LLC</td><td>Not yet filed</td><td>May 1, 2026</td><td class="right">$399.89 solicitation received</td></tr>
+        <tr><td><strong>2025 payroll run through Gusto</strong></td><td>C Clay Contracting LLC</td><td>Not completed</td><td>2025 year end already passed</td><td class="right">$0 shown in 2025 payroll journal</td></tr>
+        <tr><td><strong>2025 Forms 941</strong></td><td>C Clay Contracting LLC</td><td>Status appears unresolved / not completed based on current evidence</td><td>Quarterly due dates would have applied during 2025</td><td class="right">Needs CPA determination</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout red">
+    <h4>2025 payroll evidence problem</h4>
+    <p>
+      The Gusto screenshots and 2025 payroll journal support the point that 2025 payroll was not actually run through Gusto. The 2025 payroll journal report shows no payrolls with check dates in the selected 2025 range, while Gusto screenshots also show an overdue payroll prompt for a December 22, 2025 payroll and a late payroll screen showing a $60,000 total annual payroll entry being prepared in April 2026.
+    </p>
+  </div>
+</section>
+<section id="deadlines" class="section anchor-offset">
+  <div class="section-head">
+    <div class="section-num">09</div>
+    <h2>Deadlines, due dates, and factual compliance timing</h2>
+  </div>
+
+  <div class="callout red">
+    <h4>S-Corp late-filing month structure being used in this file</h4>
+    <p>
+      The late-filing penalty structure referenced by CJ is: <strong>Month 1 = March 18 through April 17</strong>, with <strong>Month 2 beginning April 18</strong>. On that approach, each active S-Corp currently has a <strong>$235</strong> month-one exposure and reaches <strong>$470</strong> if it rolls into the second month.
+    </p>
+  </div>
+
+  <div class="grid-4">
+    <div class="stat">
+      <div class="label">Form 4868 due</div>
+      <div class="value amber">Apr 15</div>
+      <div class="sub">Personal extension deadline</div>
+    </div>
+    <div class="stat">
+      <div class="label">1120-S month one ends</div>
+      <div class="value red">Apr 17</div>
+      <div class="sub">Practical last day before month two starts</div>
+    </div>
+    <div class="stat">
+      <div class="label">1120-S month two starts</div>
+      <div class="value red">Apr 18</div>
+      <div class="sub">Penalty exposure doubles per entity</div>
+    </div>
+    <div class="stat">
+      <div class="label">Annual reports due</div>
+      <div class="value amber">May 1</div>
+      <div class="sub">Both LLC annual reports</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Status reflected here</th>
+          <th>Due date / timing</th>
+          <th>Supporting note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Personal Form 4868</strong></td><td>Needs to be filed on time</td><td>April 15, 2026</td><td>Personal 1040 deadline.</td></tr>
+        <tr><td><strong>2025 Form 1120-S – C Clay Contracting LLC</strong></td><td>Not yet filed</td><td>Original due date March 17, 2026; month two begins April 18, 2026</td><td>Current month-one penalty exposure shown as $235.</td></tr>
+        <tr><td><strong>2025 Form 1120-S – Millennial One Home Solutions LLC</strong></td><td>Not yet filed</td><td>Original due date March 17, 2026; month two begins April 18, 2026</td><td>Current month-one penalty exposure shown as $235.</td></tr>
+        <tr><td><strong>2026 Annual Report – C Clay Contracting LLC</strong></td><td>Not yet filed</td><td>May 1, 2026</td><td>Solicitation amount received was $399.89.</td></tr>
+        <tr><td><strong>2026 Annual Report – Millennial One Home Solutions LLC</strong></td><td>Not yet filed</td><td>May 1, 2026</td><td>Solicitation amount received was $399.89.</td></tr>
+        <tr><td><strong>2025 payroll through Gusto</strong></td><td>Not run / unresolved</td><td>Would have affected 2025 payroll calendar</td><td>Gusto journal for 2025 shows no payroll activity.</td></tr>
+        <tr><td><strong>2025 Forms 941</strong></td><td>Not shown as completed in the record CJ currently has</td><td>Quarterly due dates during 2025</td><td>CPA should verify directly from payroll / IRS records.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section id="baseline2024" class="section anchor-offset">
+  <div class="section-head">
+    <div class="section-num">10</div>
+    <h2>2024 verified baseline and prior-year context</h2>
+  </div>
+
+  <p class="lead">
+    2024 is useful because it shows the last year the S-Corp, payroll, and return package were substantially completed. It gives the CPA a clean baseline to compare against 2025, where the structure broke down.
+  </p>
+
+  <div class="grid-3">
+    <div class="stat">
+      <div class="label">2024 Gusto payroll</div>
+      <div class="value">$50,000</div>
+      <div class="sub">Total earnings</div>
+    </div>
+    <div class="stat">
+      <div class="label">2024 Net pay</div>
+      <div class="value green">$46,175</div>
+      <div class="sub">Per Gusto year-to-date report</div>
+    </div>
+    <div class="stat">
+      <div class="label">Employer taxes</div>
+      <div class="value amber">$4,056</div>
+      <div class="sub">Per Gusto and 2024 P&amp;L</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>2024 item</th>
+          <th>Amount</th>
+          <th>Why it matters</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>2024 Gusto total earnings</strong></td><td>$50,000.00</td><td>Shows 2024 payroll was actually run.</td></tr>
+        <tr><td><strong>2024 employee taxes</strong></td><td>$3,825.00</td><td>Supports W-2 structure in prior year.</td></tr>
+        <tr><td><strong>2024 employer taxes</strong></td><td>$4,056.00</td><td>Ties to payroll employer taxes on 2024 P&amp;L.</td></tr>
+        <tr><td><strong>2024 net pay</strong></td><td>$46,175.00</td><td>Matches Gusto year-end paystub summary.</td></tr>
+        <tr><td><strong>2024 total income on P&amp;L</strong></td><td>$136,716.76</td><td>Business baseline before 2025 collapse.</td></tr>
+        <tr><td><strong>2024 net profit on P&amp;L</strong></td><td>$48,839.18</td><td>Shows prior-year business profitability.</td></tr>
+        <tr><td><strong>2024 MFJ AGI</strong></td><td>$114,744</td><td>Per signed amended 2024 federal return.</td></tr>
+        <tr><td><strong>2024 taxable income</strong></td><td>$75,532</td><td>Per signed amended 2024 federal return.</td></tr>
+        <tr><td><strong>2024 total federal tax</strong></td><td>$7,652</td><td>Per signed amended 2024 federal return.</td></tr>
+        <tr><td><strong>2024 federal withholding</strong></td><td>$111</td><td>Explains why the balance due remained high.</td></tr>
+        <tr><td><strong>2024 amount owed</strong></td><td>$7,885</td><td>Per signed amended 2024 federal return.</td></tr>
+        <tr><td><strong>2024 NC payment due</strong></td><td>$35</td><td>Per amended North Carolina filing.</td></tr>
+        <tr><td><strong>2024 Schedule E K-1 income</strong></td><td>$50,058</td><td>Shows pass-through S-Corp income was used in prior year.</td></tr>
+        <tr><td><strong>Millennial One on 2024 Schedule E</strong></td><td>$0</td><td>Entity was listed, but no nonpassive income amount was shown for that line.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout blue">
+    <h4>2024 structural takeaway</h4>
+    <p>
+      2024 shows a functioning payroll and S-Corp framework. 2025 does not. That contrast helps explain why 2025 should be treated as a reconstruction year rather than a simple repeat of the prior-year process.
+    </p>
+  </div>
+</section>
+
+<section id="documents" class="section anchor-offset">
+  <div class="section-head">
+    <div class="section-num">11</div>
+    <h2>Document set, evidence placeholders, and source file list</h2>
+  </div>
+
+  <p class="lead">
+    This section should become the clickable exhibit hub. The file set already includes the 2024 signed return package, 2024 P&amp;L, multiple Gusto screenshots, statements, and the working HTML draft.
+  </p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Core 2025 exhibits</h3>
+      <ul class="checklist">
+        <li><div class="checkbox"></div><div><strong>FrankCrum W-2</strong><span class="small"><br>2025 W-2 and net deposit support</span></div></li>
+        <li><div class="checkbox"></div><div><strong>HD Roofing support</strong><span class="small"><br>Statements and any paystub evidence</span></div></li>
+        <li><div class="checkbox"></div><div><strong>Apex 1099-NEC</strong><span class="small"><br>$600</span></div></li>
+        <li><div class="checkbox"></div><div><strong>Farmasi 1099-NEC</strong><span class="small"><br>$13,154.14</span></div></li>
+        <li><div class="checkbox"></div><div><strong>Acorns 1099-DIV</strong><span class="small"><br>Ordinary dividends $10.36</span></div></li>
+        <li><div class="checkbox"></div><div><strong>Personal and business bank statements</strong><span class="small"><br>For Brent Zelles and business receipts</span></div></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>2024 baseline exhibits</h3>
+      <ul class="checklist">
+        <li><div class="checkbox"></div><div><strong>2024 signed amended federal return package</strong></div></li>
+        <li><div class="checkbox"></div><div><strong>2024 P&amp;L</strong></div></li>
+        <li><div class="checkbox"></div><div><strong>2024 Gusto W-2 / paystub summary screens</strong></div></li>
+        <li><div class="checkbox"></div><div><strong>2025 Gusto overdue payroll screenshots</strong></div></li>
+        <li><div class="checkbox"></div><div><strong>2025 payroll journal showing no activity</strong></div></li>
+        <li><div class="checkbox"></div><div><strong>Prior preparer / Encyro signed return evidence</strong></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout amber">
+    <h4>Why the prior preparer abandonment belongs in the file</h4>
+    <p>
+      This file includes the timing of adviser abandonment because it overlaps directly with the period where payroll stopped, entity filing deadlines were missed, and CJ was trying to stabilize income after the 1845 Roofing collapse. The point is not to argue fault in this document, but to preserve factual continuity for the CPA.
+    </p>
+  </div>
+</section>
+<div class="footer">
+  Prepared for CPA review using the facts CJ provided, the uploaded statements, screenshots, signed 2024 return package, 2024 P&L, Gusto images, and the reconstructed payment ledger. This is a working handoff document, not legal or tax advice. The next improvement pass should add clickable exhibits for every major payment source, deduction category, gift, filing gap, and deadline backup.
+</div>
+
+</div>
+</body>
+</html>
