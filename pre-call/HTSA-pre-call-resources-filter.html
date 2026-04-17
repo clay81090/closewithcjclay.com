@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Before Our Call — HTSA | CJ Clay</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #060e1c;
+  --navy-mid: #0a1628;
+  --navy-card: #0f1e35;
+  --navy-light: #142440;
+  --green: #00c97a;
+  --green-dim: #00b06b;
+  --green-dark: #009a5e;
+  --green-glow: rgba(0,201,122,0.18);
+  --green-soft: rgba(0,201,122,0.08);
+  --mid: rgba(255,255,255,0.10);
+  --mid-strong: rgba(255,255,255,0.15);
+  --text: #e8f0ff;
+  --text-soft: rgba(232,240,255,0.72);
+  --muted: #6b7fa0;
+  --gold: #f0c060;
+  --gold-soft: rgba(240,192,96,0.12);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --font-d: 'Syne', system-ui, sans-serif;
+  --font-s: 'Playfair Display', Georgia, serif;
+  --font-b: 'DM Sans', system-ui, sans-serif;
+  --font-m: 'DM Mono', monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-b);background:var(--navy);color:var(--text-soft);line-height:1.65;font-size:15px;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* ── AMBIENT ── */
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 55% at 15% -5%,rgba(0,201,122,0.18),transparent 55%),
+    radial-gradient(ellipse 55% 45% at 92% 18%,rgba(64,100,200,0.10),transparent 50%),
+    radial-gradient(ellipse 60% 50% at 50% 105%,rgba(0,154,94,0.09),transparent 55%),
+    linear-gradient(180deg,var(--navy) 0%,#07111f 100%);}
+.orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);animation:floatOrb 20s var(--ease) infinite;}
+.orb:nth-child(1){width:380px;height:380px;background:rgba(0,201,122,0.14);top:-100px;left:-120px;animation-delay:0s;}
+.orb:nth-child(2){width:300px;height:300px;background:rgba(80,120,255,0.09);bottom:8%;right:-100px;animation-delay:-7s;animation-duration:24s;}
+.orb:nth-child(3){width:220px;height:220px;background:rgba(0,154,94,0.12);top:42%;left:38%;animation-delay:-13s;animation-duration:28s;}
+@keyframes floatOrb{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(28px,-18px) scale(1.04);}66%{transform:translate(-22px,14px) scale(0.97);}}
+.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.048;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* ── SHELL ── */
+.shell{position:relative;z-index:2;max-width:920px;margin:0 auto;padding:0 20px 120px;}
+
+/* ── HERO ── */
+.hero{min-height:82vh;display:flex;flex-direction:column;justify-content:flex-end;padding:100px 0 52px;position:relative;}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;font-size:10.5px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--green);margin-bottom:22px;opacity:0;animation:heroIn 1s var(--ease) 0.1s forwards;}
+.badge-dot{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 18px var(--green);animation:pulseDot 2s ease-in-out infinite;}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.45;transform:scale(0.8);}}
+.hero h1{font-family:var(--font-d);font-weight:800;font-size:clamp(2.2rem,6.5vw,3.6rem);line-height:1.03;letter-spacing:-0.035em;color:var(--text);max-width:17ch;opacity:0;animation:heroIn 1s var(--ease) 0.28s forwards;}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--green) 0%,#4de8b0 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero-lead{margin-top:24px;font-size:clamp(1rem,2vw,1.12rem);max-width:40ch;color:var(--text-soft);opacity:0;animation:heroIn 1s var(--ease) 0.46s forwards;}
+.hero-lead strong{color:var(--text);font-weight:600;}
+.hero-meta{margin-top:30px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;opacity:0;animation:heroIn 1s var(--ease) 0.66s forwards;}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:100px;background:rgba(255,255,255,0.055);backdrop-filter:blur(14px);border:1px solid var(--mid);font-size:12px;font-weight:500;color:var(--text-soft);}
+.pill strong{color:var(--text);}
+.scroll-hint{margin-top:52px;display:flex;align-items:center;gap:12px;font-size:10.5px;letter-spacing:0.17em;text-transform:uppercase;color:var(--muted);opacity:0;animation:heroIn 1s var(--ease) 0.88s forwards;}
+.mouse{width:22px;height:34px;border:2px solid var(--muted);border-radius:12px;position:relative;}
+.mouse::after{content:'';position:absolute;top:8px;left:50%;width:4px;height:8px;background:var(--green);border-radius:2px;transform:translateX(-50%);animation:scrollWheel 1.8s ease-in-out infinite;}
+@keyframes scrollWheel{0%,100%{opacity:1;transform:translate(-50%,0);}50%{opacity:0.3;transform:translate(-50%,8px);}}
+@keyframes heroIn{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+
+/* Show-rate strip */
+.show-strip{margin:0 -4px 28px;padding:14px 18px;border-radius:16px;background:rgba(240,192,96,0.08);border:1px solid rgba(240,192,96,0.22);font-size:13px;color:var(--text-soft);line-height:1.5;}
+.show-strip strong{color:var(--gold);font-weight:600;}
+
+/* About CJ */
+.about-cj{margin-bottom:48px;padding:26px;border-radius:22px;background:var(--navy-card);border:1px solid rgba(0,201,122,0.2);position:relative;overflow:hidden;}
+.about-cj::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);}
+.about-grid{display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:start;}
+@media(max-width:560px){.about-grid{grid-template-columns:1fr;text-align:center;}}
+.about-photo-wrap{width:120px;height:120px;margin:0 auto;}
+.about-photo{width:120px;height:120px;border-radius:20px;object-fit:cover;border:2px solid rgba(0,201,122,0.35);box-shadow:0 12px 40px rgba(0,0,0,0.35);}
+.about-photo-ph{width:120px;height:120px;border-radius:20px;background:linear-gradient(145deg,var(--navy-light),#081422);border:2px solid var(--mid);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:36px;font-weight:800;color:var(--green);}
+.about-kicker{font-family:var(--font-m);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--green-dim);margin-bottom:8px;}
+.about-cj h2{font-family:var(--font-d);font-size:1.35rem;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:-0.02em;}
+.about-cj .about-body p{font-size:14px;color:var(--text-soft);margin-bottom:12px;line-height:1.65;}
+.about-cj .about-body p:last-child{margin-bottom:0;}
+
+/* ── YOUR PATH (future pacing) ── */
+.path-section{padding:28px;border-radius:22px;background:linear-gradient(165deg,rgba(240,192,96,0.07) 0%,var(--navy-card) 45%);border:1px solid rgba(240,192,96,0.2);margin-bottom:56px;position:relative;overflow:hidden;}
+.path-section::before{content:'';position:absolute;top:0;right:0;width:180px;height:180px;background:radial-gradient(circle,rgba(0,201,122,0.12),transparent 70%);pointer-events:none;}
+.path-heart{margin-bottom:20px;position:relative;z-index:1;}
+.path-badge{display:inline-block;font-family:var(--font-m);font-size:9.5px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);background:var(--gold-soft);border:1px solid rgba(240,192,96,0.3);padding:5px 12px;border-radius:100px;margin-bottom:14px;}
+.path-mirror{font-size:14px;color:var(--green-dim);font-weight:600;margin:0 0 22px;padding:14px 16px;border-radius:14px;background:rgba(0,201,122,0.06);border:1px solid rgba(0,201,122,0.15);min-height:3.2em;position:relative;z-index:1;}
+.path-mirror:empty{display:none;}
+.path-mirror strong{color:var(--text);}
+.path-label{font-family:var(--font-m);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin:18px 0 10px;}
+.path-label:first-of-type{margin-top:0;}
+.industry-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+@media(min-width:540px){.industry-grid{grid-template-columns:repeat(4,1fr);}}
+.ind-pill{display:flex;align-items:center;justify-content:center;text-align:center;min-height:52px;padding:10px 12px;border-radius:14px;border:1.5px solid var(--mid);background:rgba(255,255,255,0.03);cursor:pointer;font-size:12.5px;font-weight:600;color:var(--text-soft);transition:border-color 0.2s,background 0.2s,transform 0.15s;position:relative;z-index:1;}
+.ind-pill:hover{border-color:rgba(0,201,122,0.45);background:rgba(0,201,122,0.06);color:var(--text);}
+.ind-pill input{position:absolute;opacity:0;pointer-events:none;}
+.ind-pill.ind-pill--active{border-color:var(--green-dim);background:rgba(0,201,122,0.12);color:var(--text);box-shadow:0 0 0 1px rgba(0,201,122,0.25);}
+.path-other-input{width:100%;margin-top:10px;padding:12px 14px;border-radius:12px;border:1px solid var(--mid);background:rgba(255,255,255,0.04);color:var(--text);font-size:14px;font-family:var(--font-b);}
+.path-other-input:focus{outline:none;border-color:rgba(0,201,122,0.4);}
+.path-other-input::placeholder{color:var(--muted);}
+.income-grid{display:grid;gap:10px;}
+@media(min-width:620px){.income-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:900px){.income-grid{grid-template-columns:repeat(4,1fr);}}
+.income-cell{background:var(--navy-card);border:1px solid var(--mid);border-radius:14px;padding:12px 14px;}
+.income-h{font-family:var(--font-m);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-dim);display:block;margin-bottom:8px;}
+.income-cell select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--mid);background:#0a1528;color:var(--text);font-size:13px;font-family:var(--font-b);cursor:pointer;}
+.income-cell select:focus{outline:none;border-color:rgba(0,201,122,0.4);}
+.path-textarea{width:100%;min-height:88px;padding:14px 16px;border-radius:14px;border:1px solid var(--mid);background:rgba(255,255,255,0.03);color:var(--text);font-size:14px;font-family:var(--font-b);line-height:1.55;resize:vertical;}
+.path-textarea:focus{outline:none;border-color:rgba(0,201,122,0.35);background:rgba(0,201,122,0.04);}
+.path-textarea::placeholder{color:var(--muted);}
+.path-lock{margin-top:18px;padding:12px 0;}
+.path-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center;position:relative;z-index:1;}
+.part2-hint{font-size:11.5px;color:var(--muted);margin-top:14px;line-height:1.5;position:relative;z-index:1;}
+#sendStatus{margin-top:10px;}
+
+/* ── PROGRESS CLUSTER ── */
+.progress-cluster{position:sticky;top:14px;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:14px 20px;margin:0 -4px 28px;border-radius:20px;background:rgba(10,22,40,0.80);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(0,201,122,0.22);box-shadow:0 20px 60px rgba(0,0,0,0.35),0 0 0 1px rgba(0,201,122,0.08);}
+.progress-ring-wrap{display:flex;align-items:center;gap:16px;}
+.ring-svg{width:56px;height:56px;transform:rotate(-90deg);}
+.ring-bg{fill:none;stroke:rgba(255,255,255,0.08);stroke-width:4;}
+.ring-fill{fill:none;stroke:url(#ringGrad);stroke-width:4;stroke-linecap:round;stroke-dasharray:163.36;stroke-dashoffset:163.36;transition:stroke-dashoffset 0.75s var(--ease);filter:drop-shadow(0 0 10px rgba(0,201,122,0.5));}
+.progress-copy h3{font-family:var(--font-d);font-size:13.5px;font-weight:700;color:var(--text);letter-spacing:-0.02em;}
+.progress-copy p{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.progress-copy span#progressText{color:var(--green);font-weight:700;}
+.streak{font-size:11px;font-weight:600;color:var(--muted);padding:8px 14px;border-radius:10px;background:var(--green-soft);border:1px solid rgba(0,201,122,0.18);}
+.streak strong{color:var(--green-dim);}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease);}
+.reveal.is-visible{opacity:1;transform:translateY(0);}
+
+/* ── SECTIONS ── */
+.section{margin-bottom:60px;}
+.section-head{margin-bottom:24px;}
+.section-kicker{font-size:10.5px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--green-dim);margin-bottom:8px;font-family:var(--font-m);}
+.section-title{font-family:var(--font-d);font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:700;color:var(--text);letter-spacing:-0.03em;line-height:1.12;}
+.section-sub{font-size:14px;color:var(--muted);margin-top:8px;max-width:50ch;line-height:1.65;}
+
+/* ── PROSE ── */
+.prose p{margin-bottom:14px;font-size:15px;color:var(--text-soft);max-width:54ch;}
+.prose p:last-child{margin-bottom:0;}
+.prose strong{color:var(--text);font-weight:600;}
+.personal-note{margin-top:16px;padding:16px 18px;border-radius:14px;border-left:3px solid var(--green);background:var(--green-soft);font-style:italic;font-size:14px;color:var(--text-soft);}
+
+/* ── CHIP ROW ── */
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+.chip{display:inline-flex;padding:8px 15px;border-radius:100px;font-size:11.5px;font-weight:600;color:var(--text-soft);text-decoration:none;border:1px solid var(--mid);background:rgba(255,255,255,0.025);transition:transform 0.2s,border-color 0.2s,background 0.2s;}
+.chip:hover{transform:translateY(-2px);border-color:rgba(0,201,122,0.4);background:var(--green-soft);color:var(--text);}
+
+/* ── BENTO ── */
+.bento{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px;}
+.bento-card{padding:22px;border-radius:18px;background:var(--navy-card);border:1px solid var(--mid);transition:transform 0.35s var(--ease),box-shadow 0.35s,border-color 0.3s;position:relative;overflow:hidden;}
+.bento-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:0;transition:opacity 0.35s;}
+.bento-card:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 24px 55px rgba(0,0,0,0.28);}
+.bento-card:hover::before{opacity:1;}
+.bento-card .ico{font-size:22px;margin-bottom:12px;display:block;}
+.bento-card h4{font-family:var(--font-d);font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px;}
+.bento-card p{font-size:12.5px;color:var(--muted);line-height:1.55;}
+
+/* ── STATS BAR ── */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:24px;background:var(--mid);border:1px solid var(--mid);border-radius:18px;overflow:hidden;}
+.stat-box{background:var(--navy-card);padding:22px 18px;text-align:center;}
+.stat-val{font-family:var(--font-d);font-size:2.2rem;font-weight:800;color:var(--green);line-height:1;letter-spacing:-0.03em;}
+.stat-label{font-size:11px;color:var(--muted);margin-top:5px;font-family:var(--font-m);letter-spacing:0.08em;text-transform:uppercase;}
+
+/* ── COMPARISON TABLE ── */
+.compare-wrap{margin-top:24px;border:1px solid var(--mid);border-radius:18px;overflow:hidden;}
+.compare-table{width:100%;border-collapse:collapse;}
+.compare-table thead tr{background:var(--navy-light);border-bottom:1px solid var(--mid-strong);}
+.compare-table th{font-family:var(--font-m);font-size:9.5px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);padding:14px 16px;text-align:left;font-weight:500;}
+.compare-table th.th-htsa{color:var(--green);font-weight:700;}
+.compare-table tbody tr{border-bottom:1px solid rgba(255,255,255,0.05);transition:background 0.15s;}
+.compare-table tbody tr:last-child{border-bottom:none;}
+.compare-table tbody tr:hover{background:rgba(0,201,122,0.04);}
+.compare-table td{padding:15px 16px;font-size:12.5px;vertical-align:top;line-height:1.5;}
+.compare-table td:first-child{color:var(--text);font-weight:500;font-size:12px;}
+.td-htsa{color:#cce8da;}
+.td-them{color:#4a5570;}
+.chk-ico{color:var(--green);margin-right:5px;}
+.x-ico{color:#6b3a3a;margin-right:5px;}
+
+/* ── WATCH LIST ── */
+.journey-intro{font-size:14px;color:var(--text-soft);margin-bottom:28px;max-width:48ch;}
+.watch-list{list-style:none;position:relative;padding-left:0;}
+.watch-list::before{content:'';position:absolute;left:22px;top:40px;bottom:40px;width:2px;background:linear-gradient(180deg,var(--green-dim),transparent);opacity:0.3;border-radius:2px;}
+.watch-item{margin-bottom:14px;perspective:1200px;}
+.watch-card{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:20px;border-radius:18px;background:var(--navy-card);border:1px solid var(--mid);transition:transform 0.45s var(--ease),box-shadow 0.45s,border-color 0.3s;}
+.watch-item:hover .watch-card{transform:rotateX(1.5deg) translateY(-3px);box-shadow:0 28px 60px rgba(0,0,0,0.3);border-color:rgba(0,201,122,0.25);}
+.step-idx{width:44px;height:44px;border-radius:13px;background:linear-gradient(145deg,var(--navy-light),#081422);border:1px solid var(--mid);color:var(--text);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:16px;font-weight:800;flex-shrink:0;transition:background 0.35s,color 0.35s,box-shadow 0.35s;}
+.step-idx.done{background:linear-gradient(145deg,var(--green-dim),var(--green-dark));color:#031010;box-shadow:0 0 22px rgba(0,201,122,0.4);}
+.watch-body h4{font-family:var(--font-s);font-size:16px;font-weight:600;color:var(--text);margin-bottom:5px;line-height:1.25;}
+.watch-body .hint{font-size:12px;color:var(--muted);margin-bottom:13px;line-height:1.5;}
+.watch-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+.amazon-note{margin-top:22px;font-size:13px;color:var(--muted);}
+.amazon-note a{color:var(--green-dim);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(0,176,107,0.35);}
+
+/* ── BUTTONS ── */
+.btn{position:relative;display:inline-flex;align-items:center;gap:8px;overflow:hidden;background:linear-gradient(135deg,var(--green-dim) 0%,var(--green-dark) 100%);color:#031a0e !important;text-decoration:none;font-size:12.5px;font-weight:700;padding:11px 18px;border-radius:11px;border:none;cursor:pointer;transition:transform 0.2s,filter 0.2s;box-shadow:0 8px 28px rgba(0,176,107,0.3);}
+.btn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);transform:translateX(-100%);transition:transform 0.6s;}
+.btn:hover::after{transform:translateX(100%);}
+.btn:hover{filter:brightness(1.09);transform:translateY(-1px);}
+.btn:active{transform:scale(0.98);}
+.btn.ghost{background:transparent;color:var(--text) !important;border:1.5px solid var(--mid);box-shadow:none;}
+.btn.ghost:hover{border-color:var(--green-dim);background:var(--green-soft);}
+.btn.outline{background:transparent;color:var(--text) !important;border:1.5px solid var(--mid-strong);box-shadow:none;}
+.btn.outline:hover{border-color:rgba(0,201,122,0.5);background:var(--green-soft);}
+.btn.btn-dl{font-size:12px;}
+
+/* ── CHECKBOXES ── */
+label.chk{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;color:var(--text-soft);cursor:pointer;user-select:none;}
+label.chk input{width:20px;height:20px;accent-color:var(--green-dim);cursor:pointer;}
+
+/* ── TESTIMONIALS ── */
+.testimonial-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px;}
+.testi-card{padding:22px;border-radius:18px;background:var(--navy-card);border:1px solid var(--mid);position:relative;overflow:hidden;transition:transform 0.35s var(--ease),border-color 0.3s;}
+.testi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),transparent);opacity:0.6;}
+.testi-card:hover{transform:translateY(-3px);border-color:rgba(0,201,122,0.3);}
+.testi-quote{font-family:var(--font-s);font-style:italic;font-size:14px;color:var(--text-soft);line-height:1.7;margin-bottom:14px;}
+.testi-quote::before{content:'\201C';font-size:32px;line-height:0;vertical-align:-14px;color:var(--green);opacity:0.6;margin-right:3px;}
+.testi-meta{display:flex;align-items:center;gap:10px;}
+.testi-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--green-dark),#041a12);border:1.5px solid rgba(0,201,122,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:13px;font-weight:800;color:var(--green);flex-shrink:0;}
+.testi-name{font-size:12.5px;font-weight:700;color:var(--text);}
+.testi-role{font-size:11px;color:var(--muted);margin-top:1px;}
+.testi-stars{color:var(--gold);font-size:11px;margin-top:3px;letter-spacing:1px;}
+.testi-badge{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green-dim);background:var(--green-soft);border:1px solid rgba(0,201,122,0.18);padding:3px 8px;border-radius:6px;margin-top:3px;}
+
+.tp-callout{margin-top:16px;padding:16px 18px;border-radius:14px;background:var(--gold-soft);border:1px solid rgba(240,192,96,0.25);display:flex;align-items:flex-start;gap:12px;}
+.tp-callout .tp-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+.tp-callout p{font-size:13px;color:#bba870;line-height:1.6;}
+.tp-callout p strong{color:var(--gold);}
+.tp-callout a{color:var(--gold);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(240,192,96,0.35);}
+
+/* ── PROOF QUOTES ── */
+.proof-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px;}
+.proof-card{padding:16px;border-radius:14px;background:var(--navy-card);border:1px solid var(--mid);text-align:center;transition:border-color 0.25s,transform 0.25s var(--ease);}
+.proof-card:hover{border-color:rgba(0,201,122,0.3);transform:translateY(-2px);}
+.proof-card .proof-name{font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.proof-card .proof-co{font-size:10.5px;color:var(--green-dim);font-weight:600;font-family:var(--font-m);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;}
+.proof-card a{font-size:11.5px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--mid);}
+.proof-card a:hover{color:var(--green-dim);border-color:rgba(0,201,122,0.35);}
+.proof-play{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--green-dim);text-decoration:none;background:var(--green-soft);border:1px solid rgba(0,201,122,0.2);padding:6px 12px;border-radius:8px;}
+.proof-play:hover{background:rgba(0,201,122,0.14);}
+
+/* ── WHO FIT ── */
+.fit-list{list-style:none;margin:16px 0 0;display:flex;flex-direction:column;gap:8px;}
+.fit-list li{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--text-soft);padding:14px 16px;border-radius:12px;background:var(--navy-card);border:1px solid var(--mid);}
+.fit-list li .fi{font-size:16px;flex-shrink:0;}
+
+/* ── PREP ── */
+.prep-grid{display:grid;gap:10px;margin-top:18px;}
+.prep-item{padding:15px 18px;border-radius:13px;background:var(--green-soft);border:1px solid rgba(0,201,122,0.12);font-size:14px;color:var(--text-soft);transition:background 0.25s,border-color 0.25s;}
+.prep-item:hover{background:rgba(0,201,122,0.12);border-color:rgba(0,201,122,0.22);}
+.prep-item span.label{display:block;font-family:var(--font-d);font-size:9.5px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--green-dim);margin-bottom:5px;}
+.engage-box{margin-top:22px;padding:18px;border-radius:15px;border:1px dashed rgba(0,201,122,0.3);background:var(--green-soft);}
+.engage-box>p{font-size:13px;margin-bottom:12px;color:var(--text-soft);}
+.engage-box .chk{margin-bottom:8px;display:flex;}
+
+/* ── VOICE SUBMISSION ── */
+.voice-box{margin-top:24px;padding:28px;border-radius:18px;background:var(--navy-card);border:1px solid rgba(0,201,122,0.18);position:relative;overflow:hidden;}
+.voice-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),transparent);}
+.voice-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;}
+.voice-icon{width:44px;height:44px;border-radius:12px;background:var(--green-soft);border:1px solid rgba(0,201,122,0.2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.voice-header-text h4{font-family:var(--font-d);font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.voice-header-text p{font-size:12.5px;color:var(--muted);line-height:1.5;}
+.voice-optional{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:var(--gold-soft);border:1px solid rgba(240,192,96,0.25);color:var(--gold);padding:3px 9px;border-radius:6px;margin-bottom:12px;}
+.voice-prompts{margin-bottom:18px;}
+.voice-prompts p{font-size:12.5px;color:var(--muted);margin-bottom:6px;}
+.voice-prompts ul{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.voice-prompts li{font-size:13px;color:var(--text-soft);display:flex;gap:8px;align-items:flex-start;padding:8px 12px;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid rgba(255,255,255,0.05);}
+.voice-prompts li::before{content:'\2192';color:var(--green-dim);flex-shrink:0;font-size:12px;margin-top:1px;}
+.voice-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px;}
+#recBtn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;background:linear-gradient(135deg,var(--green-dim),var(--green-dark));color:#031a0e !important;font-size:13px;font-weight:700;border:none;cursor:pointer;transition:transform 0.2s,filter 0.2s;box-shadow:0 8px 28px rgba(0,176,107,0.3);}
+#recBtn:hover{filter:brightness(1.09);transform:translateY(-1px);}
+#recBtn.recording{background:linear-gradient(135deg,#c0392b,#922b21);color:#fff !important;animation:recPulse 1.5s ease-in-out infinite;box-shadow:0 8px 28px rgba(192,57,43,0.4);}
+@keyframes recPulse{0%,100%{box-shadow:0 8px 28px rgba(192,57,43,0.4);}50%{box-shadow:0 8px 36px rgba(192,57,43,0.7);}}
+#recTimer{font-family:var(--font-m);font-size:13px;color:var(--muted);display:none;}
+#recTimer.active{display:inline-flex;color:var(--text);background:rgba(255,255,255,0.05);padding:8px 14px;border-radius:10px;border:1px solid var(--mid);align-items:center;gap:6px;}
+.rec-dot{width:8px;height:8px;border-radius:50%;background:#e74c3c;animation:pulseDot 1s infinite;}
+#mediaPreviewWrap{margin-top:14px;width:100%;display:none;}
+#mediaPreviewWrap audio,#mediaPreviewWrap video{width:100%;border-radius:10px;}
+.upload-alt{margin-top:12px;font-size:12px;color:var(--muted);}
+.upload-alt label{color:var(--green-dim);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:2px;}
+.upload-alt input{display:none;}
+#voiceStatus{margin-top:12px;font-size:12.5px;color:var(--green-dim);display:none;}
+.voice-send-hint{margin-top:12px;font-size:12px;color:var(--muted);line-height:1.5;padding:12px;border-radius:10px;background:rgba(0,0,0,0.2);border:1px solid var(--mid);}
+.voice-text-alt{margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.06);}
+.voice-text-alt p{font-size:12.5px;color:var(--muted);margin-bottom:10px;}
+.voice-textarea{width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--mid);border-radius:12px;padding:14px 16px;color:var(--text);font-family:var(--font-b);font-size:13.5px;line-height:1.6;resize:vertical;min-height:90px;transition:border-color 0.25s;}
+.voice-textarea:focus{outline:none;border-color:rgba(0,201,122,0.4);background:rgba(0,201,122,0.03);}
+.voice-textarea::placeholder{color:var(--muted);}
+#submitNoteBtn{margin-top:10px;padding:10px 18px;border-radius:10px;background:linear-gradient(135deg,var(--green-dim),var(--green-dark));color:#031a0e;font-size:12.5px;font-weight:700;border:none;cursor:pointer;transition:filter 0.2s,transform 0.2s;}
+#submitNoteBtn:hover{filter:brightness(1.1);transform:translateY(-1px);}
+
+/* ── CTA ── */
+.cta-finale{margin-top:48px;padding:44px 32px;border-radius:24px;text-align:center;background:radial-gradient(ellipse 80% 80% at 50% 0%,rgba(0,201,122,0.13),transparent 60%),linear-gradient(180deg,#0b1a2f 0%,#060d18 100%);border:1px solid rgba(0,201,122,0.18);position:relative;overflow:hidden;}
+.cta-finale::after{content:'';position:absolute;inset:-50%;background:radial-gradient(circle,rgba(0,201,122,0.05) 0%,transparent 45%);animation:ctaGlow 9s ease-in-out infinite;pointer-events:none;}
+@keyframes ctaGlow{0%,100%{transform:translate(0,0);}50%{transform:translate(8%,5%);}}
+.cta-finale h3{position:relative;font-family:var(--font-d);font-size:clamp(1.3rem,3.2vw,1.7rem);font-weight:700;color:var(--text);margin-bottom:12px;z-index:1;}
+.cta-finale>p{position:relative;font-size:14px;color:var(--text-soft);max-width:46ch;margin:0 auto 24px;z-index:1;}
+.cta-row{position:relative;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;z-index:1;}
+.cta-finale .btn{min-width:200px;justify-content:center;}
+.micro{position:relative;margin-top:22px;font-size:11.5px;color:var(--muted);z-index:1;}
+
+/* ── FOOTER ── */
+.footer{text-align:center;padding:32px 0 8px;font-size:11.5px;color:var(--muted);}
+.footer a{color:var(--green-dim);font-weight:600;text-decoration:none;margin:0 6px;}
+.footer a:hover{text-decoration:underline;}
+
+/* ── DOCK ── */
+.dock{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:5px;padding:7px 9px;border-radius:100px;background:rgba(10,22,40,0.88);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(0,201,122,0.2);box-shadow:0 16px 50px rgba(0,0,0,0.4);}
+.dock a{display:flex;align-items:center;justify-content:center;padding:9px 15px;border-radius:100px;font-size:11.5px;font-weight:700;text-decoration:none;color:var(--text-soft);transition:background 0.2s,color 0.2s;white-space:nowrap;}
+.dock a:hover{background:rgba(0,201,122,0.12);color:var(--text);}
+.dock a.primary{background:linear-gradient(135deg,var(--green-dim),var(--green-dark));color:#031a0e;}
+.dock a.primary:hover{filter:brightness(1.06);color:#031a0e;}
+.dock .dot{width:3px;height:3px;border-radius:50%;background:var(--muted);opacity:0.4;}
+
+/* ── CONFETTI ── */
+#celebrate{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden;}
+.confetti-piece{position:absolute;width:9px;height:9px;top:-20px;opacity:0;border-radius:2px;}
+.confetti-piece.spin{animation:confettiFall 2.8s ease-out forwards;}
+@keyframes confettiFall{0%{opacity:1;transform:translateY(0) rotate(0deg);}100%{opacity:0;transform:translateY(100vh) rotate(720deg);}}
+.hidden{display:none !important;}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .bento,.testimonial-grid,.proof-row,.stats-row{grid-template-columns:1fr;}
+  .compare-table{font-size:11.5px;}
+  .compare-table td,.compare-table th{padding:10px 10px;}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true">
+  <defs>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00c97a"/>
+      <stop offset="100%" style="stop-color:#009a5e"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="ambient" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+<div class="noise" aria-hidden="true"></div>
+<div id="celebrate" aria-hidden="true"></div>
+
+<!--
+  PRE_CALL_CONFIG — personalize per lead
+  cjPhotoUrl: full URL or path like ../your-photo.jpg (empty = initials placeholder)
+  aboutParagraphs: HTML string with <p> tags, or plain text (optional)
+-->
+<script>
+window.PRE_CALL_CONFIG = {
+  firstName: 'there',
+  personalNote: '',
+  cjPhotoUrl: '',
+  comebackLine: 'From rock bottom to building a real career in high-ticket — I did not luck into this. I learned the craft, proved it, and now I help people skip the years I lost.',
+  aboutParagraphs: '<p>I am CJ Clay — closer and enrollment advisor with High Ticket Sales Academy. I have been in the weeds of this industry long enough to know what is real versus what is marketing noise.</p><p>This page exists so you walk into our call warmed up, not cold. No price talk here — that is for when we are aligned. This is about fit, clarity, and respect for your time.</p>',
+  bookingUrl: 'https://meetings.hubspot.com/charles660/cj',
+  enrollmentUrl: '',
+  textPhone: '6166121735',
+  // Part 2: get a free endpoint at https://formspree.io — paste the form URL here to enable "Email prep to CJ"
+  formspreeUrl: ''
+};
+</script>
+
+<nav class="dock" aria-label="Quick actions">
+  <a href="#top">Top</a>
+  <span class="dot" aria-hidden="true"></span>
+  <a href="#about-cj">CJ</a>
+  <span class="dot" aria-hidden="true"></span>
+  <a href="#your-path">Your path</a>
+  <span class="dot" aria-hidden="true"></span>
+  <a href="#watch">Videos</a>
+  <span class="dot" aria-hidden="true"></span>
+  <a href="#compare">Compare</a>
+  <span class="dot" aria-hidden="true"></span>
+  <a class="primary" id="dockBook" href="#">Schedule</a>
+  <a id="dockText" href="sms:6166121735">Text CJ</a>
+</nav>
+
+<main class="shell">
+
+  <header class="hero" id="top">
+    <div class="hero-badge"><span class="badge-dot"></span> You're booked — this is your runway</div>
+    <h1>Show up <em>dangerous</em>.<br>Not confused.</h1>
+    <p class="hero-lead">Hey <strong id="cfgFirstName">there</strong> — one link, one sequence. By the time we talk, you'll understand what HTS actually is, exactly why HTSA is different, and whether this energy fits you — so we skip the fluff and go straight to your future.</p>
+    <div class="hero-meta">
+      <div class="pill"><strong>CJ Clay</strong> · HTSA</div>
+      <div class="pill">Pre-call intel — not a generic email dump</div>
+      <div class="pill" style="border-color:rgba(240,192,96,0.35);background:rgba(240,192,96,0.06);">You’re <strong style="color:var(--gold);">wanted here</strong> — I read what you share</div>
+    </div>
+    <div class="scroll-hint"><div class="mouse" aria-hidden="true"></div> Scroll the path</div>
+  </header>
+
+  <div class="progress-cluster reveal" data-reveal>
+    <div class="progress-ring-wrap">
+      <svg class="ring-svg" viewBox="0 0 64 64" aria-hidden="true">
+        <circle class="ring-bg" cx="32" cy="32" r="26"/>
+        <circle class="ring-fill" id="ringFill" cx="32" cy="32" r="26"/>
+      </svg>
+      <div class="progress-copy">
+        <h3>Momentum meter</h3>
+        <p><span id="progressText">0%</span> · lock this in before we talk</p>
+      </div>
+    </div>
+    <div class="streak" id="streakLine">Finish the list — <strong>small wins = big show-up</strong></div>
+  </div>
+
+  <p class="show-strip reveal" data-reveal><strong>Show-rate first.</strong> This page is built to make you <em>more</em> likely to show up — calendar shortcuts, reminders, momentum — not to screen you out. Everything optional stays optional. The goal is investment before the call, not friction that makes you ghost.</p>
+
+  <section class="about-cj reveal" id="about-cj" data-reveal>
+    <p class="about-kicker">Your advisor</p>
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <img id="cjPhoto" class="about-photo hidden" src="" alt="CJ Clay" width="120" height="120" loading="lazy" />
+        <div id="cjPhotoPh" class="about-photo-ph" aria-hidden="true">CJ</div>
+      </div>
+      <div>
+        <h2>CJ Clay</h2>
+        <p id="comebackLine" style="font-size:14px;color:var(--gold);font-style:italic;margin-bottom:14px;line-height:1.5;"></p>
+        <div class="about-body" id="aboutBody"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="welcome" data-reveal>
+    <div class="section-head">
+      <p class="section-kicker">01 · Orientation</p>
+      <h2 class="section-title">This isn't homework. It's loading the conversation.</h2>
+    </div>
+    <div class="prose">
+      <p>Go <strong>in order</strong> — the sequence is intentional: authority, then stories, then proof, then your prep. Your progress saves on this device so you can pause and come back.</p>
+      <p id="cfgPersonal" class="personal-note hidden"></p>
+    </div>
+    <div class="chip-row">
+      <a class="chip" href="#your-path">Your path</a>
+      <a class="chip" href="#what-hts">The craft</a>
+      <a class="chip" href="#why-htsa">Why HTSA</a>
+      <a class="chip" href="#watch">Watch list</a>
+      <a class="chip" href="#compare">Compare programs</a>
+      <a class="chip" href="#testimonials">Real members</a>
+      <a class="chip" href="#who">Fit check</a>
+      <a class="chip" href="#voice">Your intro</a>
+      <a class="chip" href="#prep">Call prep</a>
+    </div>
+  </section>
+
+  <section class="section path-section reveal" id="your-path" data-reveal>
+    <div class="path-heart">
+      <span class="path-badge">This is about you</span>
+      <h2 class="section-title" style="margin-bottom:8px;">Name the future you’re chasing.</h2>
+      <p class="section-sub" style="margin-top:0;">Rough numbers are perfect. This isn’t a test — it’s <strong>future pacing</strong> so I show up to our call already picturing <em>your</em> lane. Take two minutes. It changes how we talk.</p>
+    </div>
+    <div class="path-mirror" id="pathMirror"></div>
+
+    <p class="path-label">Industry I’m most passionate about</p>
+    <div class="industry-grid" role="radiogroup" aria-label="Industry focus">
+      <label class="ind-pill"><input type="radio" name="pathIndustry" value="AI / tech sales" /> AI / Tech</label>
+      <label class="ind-pill"><input type="radio" name="pathIndustry" value="Real estate &amp; related" /> Real estate</label>
+      <label class="ind-pill"><input type="radio" name="pathIndustry" value="Fitness / wellness / health" /> Fitness</label>
+      <label class="ind-pill"><input type="radio" name="pathIndustry" value="Other" /> Other</label>
+    </div>
+    <div id="pathOtherWrap" class="hidden">
+      <label class="path-label" for="pathIndustryOther" style="margin-top:14px;">Describe your lane</label>
+      <input type="text" class="path-other-input" id="pathIndustryOther" placeholder="e.g. solar, med device, coaching…" autocomplete="off" />
+    </div>
+
+    <p class="path-label">Monthly income you’re aiming for (ballpark)</p>
+    <div class="income-grid">
+      <div class="income-cell">
+        <span class="income-h">3 months</span>
+        <select id="inc3" aria-label="Income goal at 3 months">
+          <option value="">Select…</option>
+          <option value="Not sure yet">Not sure yet</option>
+          <option value="Under $3k / mo">Under $3k / mo</option>
+          <option value="$3k–$6k / mo">$3k–$6k / mo</option>
+          <option value="$6k–$10k / mo">$6k–$10k / mo</option>
+          <option value="$10k–$15k / mo">$10k–$15k / mo</option>
+          <option value="$15k–$25k / mo">$15k–$25k / mo</option>
+          <option value="$25k+ / mo">$25k+ / mo</option>
+        </select>
+      </div>
+      <div class="income-cell">
+        <span class="income-h">6 months</span>
+        <select id="inc6" aria-label="Income goal at 6 months">
+          <option value="">Select…</option>
+          <option value="Not sure yet">Not sure yet</option>
+          <option value="Under $3k / mo">Under $3k / mo</option>
+          <option value="$3k–$6k / mo">$3k–$6k / mo</option>
+          <option value="$6k–$10k / mo">$6k–$10k / mo</option>
+          <option value="$10k–$15k / mo">$10k–$15k / mo</option>
+          <option value="$15k–$25k / mo">$15k–$25k / mo</option>
+          <option value="$25k+ / mo">$25k+ / mo</option>
+        </select>
+      </div>
+      <div class="income-cell">
+        <span class="income-h">12 months</span>
+        <select id="inc12" aria-label="Income goal at 12 months">
+          <option value="">Select…</option>
+          <option value="Not sure yet">Not sure yet</option>
+          <option value="Under $3k / mo">Under $3k / mo</option>
+          <option value="$3k–$6k / mo">$3k–$6k / mo</option>
+          <option value="$6k–$10k / mo">$6k–$10k / mo</option>
+          <option value="$10k–$15k / mo">$10k–$15k / mo</option>
+          <option value="$15k–$25k / mo">$15k–$25k / mo</option>
+          <option value="$25k+ / mo">$25k+ / mo</option>
+        </select>
+      </div>
+      <div class="income-cell">
+        <span class="income-h">2 years</span>
+        <select id="inc24" aria-label="Income goal at 2 years">
+          <option value="">Select…</option>
+          <option value="Not sure yet">Not sure yet</option>
+          <option value="Under $3k / mo">Under $3k / mo</option>
+          <option value="$3k–$6k / mo">$3k–$6k / mo</option>
+          <option value="$6k–$10k / mo">$6k–$10k / mo</option>
+          <option value="$10k–$15k / mo">$10k–$15k / mo</option>
+          <option value="$15k–$25k / mo">$15k–$25k / mo</option>
+          <option value="$25k+ / mo">$25k+ / mo</option>
+        </select>
+      </div>
+    </div>
+
+    <p class="path-label">What would make this chapter a win? (optional but powerful)</p>
+    <textarea class="path-textarea" id="pathWin" placeholder="Freedom, stability, proving something, supporting family — whatever’s real for you."></textarea>
+
+    <label class="chk path-lock"><input type="checkbox" data-check="p1" /> I’ve shared my direction — <strong style="color:var(--text);">pin this for my call with CJ</strong></label>
+
+    <div class="path-actions">
+      <button type="button" class="btn" id="copyPrepBtn">Copy full prep for CJ</button>
+      <a class="btn ghost" href="#" id="smsPrepBtn">Open text with prep summary</a>
+    </div>
+    <p class="part2-hint" id="formspreeHint">Tip: tap “Copy” and paste into a text to CJ, or your CRM. Add <code style="font-size:10px;color:var(--green-dim);">formspreeUrl</code> in the config for one-click email (free at formspree.io).</p>
+    <button type="button" class="btn outline hidden" id="sendFormspreeBtn">Email this prep to CJ</button>
+    <p id="sendStatus" class="voice-send-hint" style="display:none;"></p>
+  </section>
+
+  <section class="section reveal" id="what-hts" data-reveal>
+    <div class="section-head">
+      <p class="section-kicker">02 · The craft</p>
+      <h2 class="section-title">High-ticket sales = real conversations, real skill.</h2>
+    </div>
+    <div class="prose">
+      <p>It's helping someone make a meaningful decision — usually on Zoom or phone — when the offer matters and the pay reflects the skill. Not cold spray-and-pray. People raised their hand. HTSA trains that skill from the ground up, certifies you with Chad's name behind yours, and places you directly with companies that need closers.</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-val">430+</div><div class="stat-label">Placed members</div></div>
+      <div class="stat-box"><div class="stat-val">100%</div><div class="stat-label">Placement rate*</div></div>
+      <div class="stat-box"><div class="stat-val">4.8★</div><div class="stat-label">Trustpilot verified</div></div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;">*Every member who completed certification and worked the full placement process with Nate has been placed. The guarantee has never been triggered. Stats per HTSA; verify on our call.</p>
+  </section>
+
+  <section class="section reveal" id="why-htsa" data-reveal>
+    <div class="section-head">
+      <p class="section-kicker">03 · Why this academy</p>
+      <h2 class="section-title">Four pillars — one lane.</h2>
+    </div>
+    <div class="bento">
+      <div class="bento-card">
+        <span class="ico" aria-hidden="true">◎</span>
+        <h4>Train</h4>
+        <p>50 structured modules + Chad live 2x/week — not a random playlist or pre-recorded content dump.</p>
+      </div>
+      <div class="bento-card">
+        <span class="ico" aria-hidden="true">✦</span>
+        <h4>Certify</h4>
+        <p>Chad personally grades your final mock call. His name goes behind yours when we open the door. That's not a certificate — it's an endorsement.</p>
+      </div>
+      <div class="bento-card">
+        <span class="ico" aria-hidden="true">→</span>
+        <h4>Place</h4>
+        <p>Nate — our dedicated placement specialist — personally reaches out to companies on your behalf. You walk in the back door, not a job board.</p>
+      </div>
+      <div class="bento-card">
+        <span class="ico" aria-hidden="true">∞</span>
+        <h4>Stay supported</h4>
+        <p>Lifetime access. Want to switch offers or level up in 6 months? We do it again. No extra cost. No program ends when yours begins.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="watch" data-reveal>
+    <div class="section-head">
+      <p class="section-kicker">04 · The sequence</p>
+      <h2 class="section-title">Watch &amp; read in this order.</h2>
+    </div>
+    <p class="journey-intro">Check each step — it's "good friction." Tiny commitments that prime you to show up sharp. Each checkbox builds your momentum score above.</p>
+
+    <ol class="watch-list">
+      <li class="watch-item" data-step="s1">
+        <div class="watch-card">
+          <div class="step-idx" data-step-idx="s1">1</div>
+          <div class="watch-body">
+            <h4>HTSA on YouTube — Chad &amp; the brand voice</h4>
+            <p class="hint">Skim recent uploads. Get the vibe before the testimonials hit. Notice the content depth vs. what influencer programs put out.</p>
+            <div class="watch-actions">
+              <a class="btn" href="https://www.youtube.com/@highticketsalesacademy" target="_blank" rel="noopener noreferrer">Open channel →</a>
+              <label class="chk"><input type="checkbox" data-check="s1" /> Got the gist</label>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="watch-item" data-step="s2">
+        <div class="watch-card">
+          <div class="step-idx" data-step-idx="s2">2</div>
+          <div class="watch-body">
+            <h4>Taylor Conroy — why he hires our members</h4>
+            <p class="hint">Outside authority. A hiring partner explains on camera why HTSA-trained closers outperform everyone else they've hired.</p>
+            <div class="watch-actions">
+              <a class="btn" href="https://youtu.be/bd65afldLmE" target="_blank" rel="noopener noreferrer">Play video →</a>
+              <label class="chk"><input type="checkbox" data-check="s2" /> Watched</label>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="watch-item" data-step="s3">
+        <div class="watch-card">
+          <div class="step-idx" data-step-idx="s3">3</div>
+          <div class="watch-body">
+            <h4>Josh — Acquisition.com / Hormozi world</h4>
+            <p class="hint">College student placed at Alex Hormozi's company through our network. Not a name-drop — actual video proof with Josh on camera.</p>
+            <div class="watch-actions">
+              <a class="btn" href="https://youtu.be/5pVlD6EKy1k" target="_blank" rel="noopener noreferrer">Play video →</a>
+              <label class="chk"><input type="checkbox" data-check="s3" /> Watched</label>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="watch-item" data-step="s4">
+        <div class="watch-card">
+          <div class="step-idx" data-step-idx="s4">4</div>
+          <div class="watch-body">
+            <h4>Brianna — Tony Robbins team</h4>
+            <p class="hint">Strategic placement — started elsewhere, worked up to a dream role with one of the most recognized names in the world. On camera, verified.</p>
+            <div class="watch-actions">
+              <a class="btn" href="https://youtu.be/TWacdj9x45o" target="_blank" rel="noopener noreferrer">Play video →</a>
+              <label class="chk"><input type="checkbox" data-check="s4" /> Watched</label>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="watch-item" data-step="s5">
+        <div class="watch-card">
+          <div class="step-idx" data-step-idx="s5">5</div>
+          <div class="watch-body">
+            <h4>Cassie — single mom, no prior sales experience</h4>
+            <p class="hint">Placed in under 30 days. Made $10k as a closer. A lot of people see themselves in this one.</p>
+            <div class="watch-actions">
+              <a class="btn" href="https://youtu.be/WOVqPR-ufYM" target="_blank" rel="noopener noreferrer">Play video →</a>
+              <label class="chk"><input type="checkbox" data-check="s5" /> Watched</label>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="watch-item" data-step="s6">
+        <div class="watch-card">
+          <div class="step-idx" data-step-idx="s6">6</div>
+          <div class="watch-body">
+            <h4>Trustpilot — third-party verification</h4>
+            <p class="hint">Independent reviews. Skim the themes. Notice the consistency. This is the only place reviews can't be curated — that matters.</p>
+            <div class="watch-actions">
+              <a class="btn outline" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Read reviews →</a>
+              <label class="chk"><input type="checkbox" data-check="s6" /> Skimmed</label>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="watch-item" data-step="s7">
+        <div class="watch-card">
+          <div class="step-idx" data-step-idx="s7">7</div>
+          <div class="watch-body">
+            <h4>Official site — the full picture</h4>
+            <p class="hint">Don't spiral. Bookmark questions for our call. The goal is calibration, not homework.</p>
+            <div class="watch-actions">
+              <a class="btn outline" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Open site →</a>
+              <label class="chk"><input type="checkbox" data-check="s7" /> Visited</label>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+    <p class="amazon-note reveal" data-reveal>Want depth? <a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><em>The Book on High Ticket Sales</em></a> — Chad Aleo.</p>
+  </section>
+
+  <section class="section reveal" id="compare" data-reveal>
+    <div class="section-head">
+      <p class="section-kicker">05 · Do your research</p>
+      <h2 class="section-title">How programs actually compare.</h2>
+      <p class="section-sub">Before you make any decision — including ours — ask these questions about every program you're considering. The answers tell you everything.</p>
+    </div>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>What to ask every program</th>
+            <th class="th-htsa">HTSA</th>
+            <th>Most others</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Who is the founder — and did they actually build a career as a closer, or go from entry-level straight to selling courses?</td>
+            <td class="td-htsa"><span class="chk-ico">✓</span>10+ yrs, $20M+ in personal HTS sales</td>
+            <td class="td-them"><span class="x-ico">✗</span>Often 2–3 yrs, or influencer background — went from D2D or marketing straight to coaching</td>
+          </tr>
+          <tr>
+            <td>Is there a dedicated placement specialist who personally walks you into interviews — or a job board you apply to yourself?</td>
+            <td class="td-htsa"><span class="chk-ico">✓</span>Nate personally contacts companies on your behalf before you apply</td>
+            <td class="td-them"><span class="x-ico">✗</span>Placement portal — DM companies, apply on LinkedIn, figure it out yourself</td>
+          </tr>
+          <tr>
+            <td>Does the founder personally certify you before placement — or is it just a completion certificate?</td>
+            <td class="td-htsa"><span class="chk-ico">✓</span>Chad grades your final mock call personally. His name goes on your intro</td>
+            <td class="td-them"><span class="x-ico">✗</span>Auto-generated certificate. Nobody picks up the phone for you</td>
+          </tr>
+          <tr>
+            <td>Is there a verified company network, or are you shown a list you could find on Google yourself?</td>
+            <td class="td-htsa"><span class="chk-ico">✓</span>300+ vetted hiring partners who come to HTSA looking for closers</td>
+            <td class="td-them"><span class="x-ico">✗</span>Job board, generic list, or "partnerships" with no verification</td>
+          </tr>
+          <tr>
+            <td>Can they prove placements with video — or just name-drop companies and hope you don't ask for proof?</td>
+            <td class="td-htsa"><span class="chk-ico">✓</span>Video testimonials of members on-camera at specific companies (Hormozi, Robbins)</td>
+            <td class="td-them"><span class="x-ico">✗</span>Claims placements with known brands — no video, no names, no proof</td>
+          </tr>
+          <tr>
+            <td>Is there a money-back placement guarantee — and has it ever actually been triggered?</td>
+            <td class="td-htsa"><span class="chk-ico">✓</span>Full refund if not placed after completing all requirements. Never triggered</td>
+            <td class="td-them"><span class="x-ico">✗</span>Usually none — or a 3-day cancellation window only</td>
+          </tr>
+          <tr>
+            <td>What happens after placement — do they disappear, or stay with you for life?</td>
+            <td class="td-htsa"><span class="chk-ico">✓</span>Lifetime access — coaching, community, re-placement. No extra cost</td>
+            <td class="td-them"><span class="x-ico">✗</span>Course ends, support ends</td>
+          </tr>
+          <tr>
+            <td>Do they have an AI roleplay platform built from real calls — or just scripts and lecture videos?</td>
+            <td class="td-htsa"><span class="chk-ico">✓</span>Proprietary AI platform built from thousands of real calls. Graded feedback every session</td>
+            <td class="td-them"><span class="x-ico">✗</span>None or very limited. Memorize a script and good luck</td>
+          </tr>
+          <tr>
+            <td>Are Trustpilot reviews verified in substantial volume — or light and unverified?</td>
+            <td class="td-htsa"><span class="chk-ico">✓</span>4.8 stars — substantial verified volume. Read them yourself</td>
+            <td class="td-them"><span class="x-ico">✗</span>Mixed, sparse, or only testimonials on their own website</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tp-callout" style="margin-top:16px;">
+      <div class="tp-icon">★</div>
+      <p><strong>Our honest advice:</strong> Don't take our word for it — or anyone else's. Go to <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Trustpilot</a> and read independent reviews for any program you're considering. Ask specifically: did people get placed, or did they land their own job? The answer to that one question separates every program on the market.</p>
+    </div>
+  </section>
+
+  <section class="section reveal" id="testimonials" data-reveal>
+    <div class="section-head">
+      <p class="section-kicker">06 · Real members</p>
+      <h2 class="section-title">Not testimonial page quotes. Actual video proof.</h2>
+      <p class="section-sub">These are people who went through the program and are on camera talking about their results. Watch the full videos in the sequence above.</p>
+    </div>
+
+    <div class="testimonial-grid">
+      <div class="testi-card">
+        <div class="testi-quote">I went from not knowing what high ticket sales was to working for Tony Robbins' team. HTSA placed me — I didn't find that job on LinkedIn.</div>
+        <div class="testi-meta">
+          <div class="testi-avatar">B</div>
+          <div>
+            <div class="testi-name">Brianna</div>
+            <div class="testi-role">Placed with Tony Robbins organization</div>
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-badge">✓ Video verified</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">Single mom, zero sales background. Placed in under 30 days. Made $10k my first month as a closer. The placement process is real — Nate is incredible.</div>
+        <div class="testi-meta">
+          <div class="testi-avatar">C</div>
+          <div>
+            <div class="testi-name">Cassie</div>
+            <div class="testi-role">Setter → Closer, placed in &lt;30 days</div>
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-badge">✓ Video verified</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">I'm a college student. I'm now closing at Acquisition.com — Alex Hormozi's company. Chad's certification meant hiring managers already knew my name when Nate called.</div>
+        <div class="testi-meta">
+          <div class="testi-avatar">J</div>
+          <div>
+            <div class="testi-name">Josh</div>
+            <div class="testi-role">Placed at Acquisition.com (Hormozi)</div>
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-badge">✓ Video verified</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">The AI roleplay is unlike anything I've seen. You're not memorizing a generic script — you're practicing on real objections from real calls until it's second nature.</div>
+        <div class="testi-meta">
+          <div class="testi-avatar">T</div>
+          <div>
+            <div class="testi-name">Taylor (Conroy — hiring partner)</div>
+            <div class="testi-role">Explains on camera why he hires HTSA grads over everyone else</div>
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-badge">✓ Hiring partner video</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="proof-row" style="margin-top:20px;">
+      <div class="proof-card">
+        <div class="proof-name">Josh</div>
+        <div class="proof-co">Acquisition.com</div>
+        <a class="proof-play" href="https://youtu.be/5pVlD6EKy1k" target="_blank" rel="noopener noreferrer">▶ Watch</a>
+      </div>
+      <div class="proof-card">
+        <div class="proof-name">Brianna</div>
+        <div class="proof-co">Tony Robbins</div>
+        <a class="proof-play" href="https://youtu.be/TWacdj9x45o" target="_blank" rel="noopener noreferrer">▶ Watch</a>
+      </div>
+      <div class="proof-card">
+        <div class="proof-name">Cassie</div>
+        <div class="proof-co">Placed in &lt;30 days</div>
+        <a class="proof-play" href="https://youtu.be/WOVqPR-ufYM" target="_blank" rel="noopener noreferrer">▶ Watch</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="who" data-reveal>
+    <div class="section-head">
+      <p class="section-kicker">07 · Fit — not a filter</p>
+      <h2 class="section-title">Who usually crushes it here.</h2>
+    </div>
+    <div class="prose">
+      <p>This isn't to disqualify you — it's so you self-recognize:</p>
+    </div>
+    <ul class="fit-list">
+      <li><span class="fi" aria-hidden="true">🎯</span> Coachable — you'll roleplay, take feedback, and run it again until it's sharp.</li>
+      <li><span class="fi" aria-hidden="true">📱</span> Wants remote / phone income with performance-based pay that reflects your skill.</li>
+      <li><span class="fi" aria-hidden="true">⏱</span> Can commit real hours to training — not looking for a passive income shortcut.</li>
+      <li><span class="fi" aria-hidden="true">🧠</span> Wants to actually learn a skill and own it for life — not rent a script for a month.</li>
+      <li><span class="fi" aria-hidden="true">🚀</span> Ready to move. Not "thinking about it." Not "someday." Right now has a reason.</li>
+    </ul>
+  </section>
+
+  <section class="section reveal" id="voice" data-reveal>
+    <div class="section-head">
+      <p class="section-kicker">08 · Your intro — optional but powerful</p>
+      <h2 class="section-title">We treat this like an interview.</h2>
+      <p class="section-sub">The best candidates treat it that way too. Leave a short voice or video note — or type a quick message — and CJ will review it before your call. It changes the conversation.</p>
+    </div>
+    <div class="voice-box">
+      <div class="voice-header">
+        <div class="voice-icon" aria-hidden="true">🎙</div>
+        <div class="voice-header-text">
+          <h4>Leave a voice or video note (browser)</h4>
+          <p>Record a quick intro, or upload a file. This stays on your device until you send it — use download + text, or paste a Loom link in the note box.</p>
+        </div>
+      </div>
+      <div class="voice-optional">✦ Optional — but those who do it stand out</div>
+      <div class="voice-prompts">
+        <p>Answer whichever resonates:</p>
+        <ul>
+          <li>Where are you now income-wise, and where do you want to be in the next 6 months?</li>
+          <li>What made you book this call — what flipped for you?</li>
+          <li>What's the biggest obstacle you see between where you are and where you want to be?</li>
+        </ul>
+      </div>
+      <div class="voice-controls">
+        <button id="recBtn" type="button">🎙 Start recording</button>
+        <button id="dlBtn" type="button" class="btn btn-dl hidden" style="display:none;">⬇ Download recording</button>
+        <div id="recTimer"><span class="rec-dot"></span> <span id="recTime">0:00</span></div>
+      </div>
+      <div id="mediaPreviewWrap">
+        <audio id="audioPlayback" controls></audio>
+        <video id="videoPlayback" controls playsinline style="display:none;"></video>
+      </div>
+      <div class="upload-alt">Prefer to upload a video or audio file? <label for="fileUpload">Click here to attach</label><input type="file" id="fileUpload" accept="audio/*,video/*"></div>
+      <div class="voice-send-hint"><strong>How CJ gets it:</strong> After recording, tap <strong>Download</strong> and text the file to CJ, <em>or</em> paste a link (Loom, Drive, etc.) in the note box below. This page does not upload to a server by itself.</div>
+      <div id="voiceStatus"></div>
+
+      <div class="voice-text-alt">
+        <p>Prefer to type? Drop a quick note below — CJ reads every one before the call.</p>
+        <textarea class="voice-textarea" id="noteText" placeholder="Hey CJ — here's where I'm at right now and why I booked this call..."></textarea>
+        <button id="submitNoteBtn" type="button">Save note ✓</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="prep" data-reveal>
+    <div class="section-head">
+      <p class="section-kicker">09 · Bring rough numbers</p>
+      <h2 class="section-title">Think about this before we jump on.</h2>
+    </div>
+    <p class="journey-intro">Messy answers are fine — we're calibrating, not judging.</p>
+    <div class="prep-grid">
+      <div class="prep-item"><span class="label">Income now</span> Where you are monthly, and where you want to be in 6–12 months.</div>
+      <div class="prep-item"><span class="label">Why now</span> What flipped that made this call real — not just "I saw an ad."</div>
+      <div class="prep-item"><span class="label">Time</span> Honest hours per week you can commit to training and practice.</div>
+      <div class="prep-item"><span class="label">Questions</span> Write down 2–3 real questions. Not softballs. We respect direct.</div>
+    </div>
+    <div class="engage-box">
+      <p><strong style="color:var(--text);">Lock-in checklist — tick what's true:</strong></p>
+      <label class="chk"><input type="checkbox" data-check="e1" /> Call is on my calendar with a reminder set.</label>
+      <label class="chk"><input type="checkbox" data-check="e2" /> I finished at least the first 3 video steps above.</label>
+      <label class="chk"><input type="checkbox" data-check="e3" /> I'm bringing real questions, not small talk.</label>
+      <label class="chk"><input type="checkbox" data-check="e4" /> I left a voice note, upload, or typed message above.</label>
+    </div>
+  </section>
+
+  <div class="cta-finale reveal" id="cta" data-reveal>
+    <h3>Reschedule, text, or move.</h3>
+    <p>Life happens — use the calendar link anytime. Already know you're in? If CJ sent a personalized enrollment page, it'll show below.</p>
+    <div class="cta-row">
+      <a class="btn" id="btnBook" href="#" target="_blank" rel="noopener noreferrer">Book / reschedule →</a>
+      <a class="btn ghost" href="sms:6166121735" id="btnText">Text CJ directly</a>
+    </div>
+    <div class="cta-row hidden" id="enrollRow" style="margin-top:14px;">
+      <a class="btn" id="btnEnroll" href="#" target="_blank" rel="noopener noreferrer">My enrollment page →</a>
+    </div>
+    <p class="micro">One link beats ten scattered emails. Save this tab. See you on the call.</p>
+  </div>
+
+  <footer class="footer reveal" data-reveal>
+    <p>High Ticket Sales Academy · Pre-call experience · CJ Clay</p>
+    <p style="margin-top:10px;">
+      <a href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Site</a>
+      <a href="https://www.youtube.com/@highticketsalesacademy" target="_blank" rel="noopener noreferrer">YouTube</a>
+      <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
+    </p>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var cfg = window.PRE_CALL_CONFIG || {};
+  var storageKey = 'htsa-precall-filter-v1';
+  var R = 26;
+  var CIRC = 2 * Math.PI * R;
+  var ids = ['p1','s1','s2','s3','s4','s5','s6','s7','e1','e2','e3','e4'];
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(storageKey) || '{}') || {}; } catch (e) {}
+  var pathStoreKey = 'htsa-path-fields-v1';
+
+  var first = document.getElementById('cfgFirstName');
+  if (first) first.textContent = cfg.firstName || 'there';
+  var noteEl = document.getElementById('cfgPersonal');
+  if (noteEl && cfg.personalNote && String(cfg.personalNote).trim()) {
+    noteEl.textContent = cfg.personalNote;
+    noteEl.classList.remove('hidden');
+  }
+
+  var img = document.getElementById('cjPhoto');
+  var ph = document.getElementById('cjPhotoPh');
+  if (cfg.cjPhotoUrl && String(cfg.cjPhotoUrl).trim()) {
+    img.src = cfg.cjPhotoUrl;
+    img.classList.remove('hidden');
+    if (ph) ph.classList.add('hidden');
+    img.onerror = function () { img.classList.add('hidden'); if (ph) ph.classList.remove('hidden'); };
+  }
+  var cl = document.getElementById('comebackLine');
+  if (cl && cfg.comebackLine) cl.textContent = cfg.comebackLine;
+  var ab = document.getElementById('aboutBody');
+  if (ab && cfg.aboutParagraphs) {
+    if (cfg.aboutParagraphs.indexOf('<') !== -1) ab.innerHTML = cfg.aboutParagraphs;
+    else ab.innerHTML = '<p>' + cfg.aboutParagraphs + '</p>';
+  }
+
+  var book = document.getElementById('btnBook'), dockBook = document.getElementById('dockBook');
+  if (cfg.bookingUrl) { if (book) book.href = cfg.bookingUrl; if (dockBook) dockBook.href = cfg.bookingUrl; }
+  var digits = (cfg.textPhone || '6166121735').replace(/\D/g, '');
+  ['btnText', 'dockText'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.href = 'sms:' + digits;
+  });
+  var enrollRow = document.getElementById('enrollRow'), btnEnroll = document.getElementById('btnEnroll');
+  if (cfg.enrollmentUrl && String(cfg.enrollmentUrl).trim()) {
+    if (btnEnroll) btnEnroll.href = cfg.enrollmentUrl;
+    if (enrollRow) enrollRow.classList.remove('hidden');
+  }
+
+  var ringFill = document.getElementById('ringFill');
+  if (ringFill) {
+    ringFill.style.strokeDasharray = String(CIRC);
+    ringFill.style.strokeDashoffset = String(CIRC);
+  }
+
+  function escapeHtml(t) {
+    if (!t) return '';
+    var d = document.createElement('div');
+    d.textContent = t;
+    return d.innerHTML;
+  }
+
+  function getPathIndustry() {
+    var r = document.querySelector('input[name="pathIndustry"]:checked');
+    if (!r) return '';
+    if (r.value === 'Other') {
+      var o = document.getElementById('pathIndustryOther');
+      return (o && o.value.trim()) ? o.value.trim() : 'Other (describe on call)';
+    }
+    return r.value;
+  }
+
+  function savePathFields() {
+    var r = document.querySelector('input[name="pathIndustry"]:checked');
+    var payload = {
+      industryVal: r ? r.value : '',
+      industryOther: (document.getElementById('pathIndustryOther') || {}).value || '',
+      inc3: (document.getElementById('inc3') || {}).value || '',
+      inc6: (document.getElementById('inc6') || {}).value || '',
+      inc12: (document.getElementById('inc12') || {}).value || '',
+      inc24: (document.getElementById('inc24') || {}).value || '',
+      win: (document.getElementById('pathWin') || {}).value || ''
+    };
+    try { localStorage.setItem(pathStoreKey, JSON.stringify(payload)); } catch (e) {}
+    updatePathMirror();
+  }
+
+  function updatePathMirror() {
+    var el = document.getElementById('pathMirror');
+    if (!el) return;
+    var ind = getPathIndustry();
+    if (!ind) {
+      el.innerHTML = '';
+      return;
+    }
+    el.innerHTML = 'You’re leaning toward <strong>' + escapeHtml(ind) + '</strong> — we’ll connect the dots on the call. I’m already rooting for this chapter for you.';
+  }
+
+  function loadPathFields() {
+    var raw;
+    try { raw = JSON.parse(localStorage.getItem(pathStoreKey) || 'null'); } catch (e) { raw = null; }
+    if (!raw || typeof raw !== 'object') return;
+    document.querySelectorAll('.ind-pill').forEach(function (l) { l.classList.remove('ind-pill--active'); });
+    if (raw.industryVal) {
+      document.querySelectorAll('input[name="pathIndustry"]').forEach(function (inp) {
+        inp.checked = inp.value === raw.industryVal;
+        if (inp.checked && inp.closest('.ind-pill')) inp.closest('.ind-pill').classList.add('ind-pill--active');
+      });
+    }
+    var ow = document.getElementById('pathOtherWrap');
+    if (ow) ow.classList.toggle('hidden', raw.industryVal !== 'Other');
+    var ot = document.getElementById('pathIndustryOther');
+    if (ot && raw.industryOther) ot.value = raw.industryOther;
+    ['inc3','inc6','inc12','inc24'].forEach(function (id) {
+      var s = document.getElementById(id);
+      if (s && raw[id]) s.value = raw[id];
+    });
+    var w = document.getElementById('pathWin');
+    if (w && raw.win) w.value = raw.win;
+    updatePathMirror();
+  }
+
+  function buildFullPrepText() {
+    var lines = [];
+    lines.push('— HTSA pre-call prep —');
+    lines.push('Name on page: ' + (cfg.firstName || 'there'));
+    lines.push('');
+    lines.push('INDUSTRY / DIRECTION: ' + (getPathIndustry() || '(not set yet)'));
+    lines.push('Monthly income targets (ballpark):');
+    lines.push('  3 months: ' + ((document.getElementById('inc3') || {}).value || '—'));
+    lines.push('  6 months: ' + ((document.getElementById('inc6') || {}).value || '—'));
+    lines.push('  12 months: ' + ((document.getElementById('inc12') || {}).value || '—'));
+    lines.push('  2 years: ' + ((document.getElementById('inc24') || {}).value || '—'));
+    lines.push('');
+    var win = (document.getElementById('pathWin') || {}).value || '';
+    lines.push('What a win looks like: ' + (win.trim() || '(not filled in)'));
+    lines.push('');
+    var note = '';
+    try { note = localStorage.getItem('htsa-precall-note') || ''; } catch (e) {}
+    lines.push('Note to CJ (from page): ' + (note.trim() || '(none)'));
+    lines.push('');
+    lines.push('— End — Paste or forward this to CJ before your call.');
+    return lines.join('\n');
+  }
+
+  document.querySelectorAll('.ind-pill input[name="pathIndustry"]').forEach(function (inp) {
+    inp.addEventListener('change', function () {
+      document.querySelectorAll('.ind-pill').forEach(function (l) { l.classList.remove('ind-pill--active'); });
+      if (inp.checked && inp.closest('.ind-pill')) inp.closest('.ind-pill').classList.add('ind-pill--active');
+      var wrap = document.getElementById('pathOtherWrap');
+      if (wrap) wrap.classList.toggle('hidden', inp.value !== 'Other');
+      savePathFields();
+    });
+  });
+  var pathOtherEl = document.getElementById('pathIndustryOther');
+  if (pathOtherEl) pathOtherEl.addEventListener('input', savePathFields);
+  ['inc3','inc6','inc12','inc24','pathWin'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('change', savePathFields);
+      el.addEventListener('input', savePathFields);
+    }
+  });
+  loadPathFields();
+
+  var copyPrepBtn = document.getElementById('copyPrepBtn');
+  if (copyPrepBtn) {
+    copyPrepBtn.addEventListener('click', function () {
+      var t = buildFullPrepText();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(t).then(function () {
+          copyPrepBtn.textContent = 'Copied! Paste to CJ';
+          setTimeout(function () { copyPrepBtn.textContent = 'Copy full prep for CJ'; }, 2200);
+        }).catch(function () {
+          window.prompt('Copy this text:', t);
+        });
+      } else {
+        window.prompt('Copy this text:', t);
+      }
+    });
+  }
+
+  var smsPrepBtn = document.getElementById('smsPrepBtn');
+  if (smsPrepBtn) {
+    smsPrepBtn.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      var body = buildFullPrepText();
+      if (body.length > 1500) body = body.slice(0, 1497) + '...';
+      window.location.href = 'sms:' + digits + (body ? '&body=' + encodeURIComponent(body) : '');
+    });
+  }
+
+  var fsBtn = document.getElementById('sendFormspreeBtn');
+  var fsHint = document.getElementById('formspreeHint');
+  var sendStatus = document.getElementById('sendStatus');
+  if (cfg.formspreeUrl && String(cfg.formspreeUrl).trim() && fsBtn) {
+    fsBtn.classList.remove('hidden');
+    if (fsHint) fsHint.innerHTML = 'Email to you is <strong style="color:var(--green-dim);">enabled</strong> — answers submit to the inbox you configured on Formspree.';
+  }
+  if (fsBtn) {
+    fsBtn.addEventListener('click', function () {
+      var url = cfg.formspreeUrl;
+      if (!url || !String(url).trim()) return;
+      fsBtn.disabled = true;
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: 'HTSA pre-call prep: ' + (cfg.firstName || 'lead'),
+          message: buildFullPrepText(),
+          source: 'HTSA-pre-call-resources-filter.html'
+        })
+      }).then(function (res) {
+        if (sendStatus) {
+          sendStatus.style.display = 'block';
+          sendStatus.textContent = res.ok ? 'Sent — check your Formspree inbox.' : 'Something went wrong — use Copy instead.';
+        }
+      }).catch(function () {
+        if (sendStatus) {
+          sendStatus.style.display = 'block';
+          sendStatus.textContent = 'Could not send — use Copy or text.';
+        }
+      }).finally(function () { fsBtn.disabled = false; });
+    });
+  }
+
+  function persist() {
+    try { localStorage.setItem(storageKey, JSON.stringify(saved)); } catch (e) {}
+    updateProgress();
+  }
+
+  function updateProgress() {
+    var done = 0;
+    ids.forEach(function (id) { if (saved[id]) done++; });
+    var pct = Math.round((done / ids.length) * 100);
+    var txt = document.getElementById('progressText');
+    if (txt) txt.textContent = pct + '%';
+    if (ringFill) ringFill.style.strokeDashoffset = String(CIRC * (1 - done / ids.length));
+    var streak = document.getElementById('streakLine');
+    if (streak) {
+      if (pct >= 100) streak.innerHTML = 'Locked in — <strong>see you on the call</strong>';
+      else if (pct >= 70) streak.innerHTML = 'Almost there — <strong>finish the last steps</strong>';
+      else if (pct >= 40) streak.innerHTML = 'Good momentum — <strong>keep going</strong>';
+      else streak.innerHTML = 'Finish the list — <strong>small wins = big show-up</strong>';
+    }
+    ids.forEach(function (id) {
+      var cb = document.querySelector('input[data-check="' + id + '"]');
+      if (cb) cb.checked = !!saved[id];
+      var idx = document.querySelector('[data-step-idx="' + id + '"]');
+      if (idx) idx.classList.toggle('done', !!saved[id]);
+    });
+  }
+
+  function fireConfetti() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var layer = document.getElementById('celebrate');
+    if (!layer) return;
+    var colors = ['#00c97a', '#00e699', '#4de8b0', '#f0c060', '#fff'];
+    for (var i = 0; i < 52; i++) {
+      var p = document.createElement('div');
+      p.className = 'confetti-piece spin';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.background = colors[i % colors.length];
+      p.style.animationDelay = (Math.random() * 0.4) + 's';
+      p.style.animationDuration = (2.2 + Math.random() * 0.8) + 's';
+      layer.appendChild(p);
+    }
+    setTimeout(function () { layer.innerHTML = ''; }, 3500);
+  }
+
+  function markE4() {
+    saved.e4 = true;
+    persist();
+  }
+
+  document.querySelectorAll('input[data-check]').forEach(function (el) {
+    el.addEventListener('change', function () {
+      saved[el.getAttribute('data-check')] = el.checked;
+      persist();
+      var done = 0;
+      ids.forEach(function (i) { if (saved[i]) done++; });
+      if (done === ids.length && !sessionStorage.getItem('htsa-confetti')) {
+        sessionStorage.setItem('htsa-confetti', '1');
+        fireConfetti();
+      }
+    });
+  });
+  updateProgress();
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) en.target.classList.add('is-visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(function (el) { obs.observe(el); });
+  } else {
+    document.querySelectorAll('[data-reveal]').forEach(function (el) { el.classList.add('is-visible'); });
+  }
+
+  // Recorder + download (no server)
+  var recBtn = document.getElementById('recBtn');
+  var dlBtn = document.getElementById('dlBtn');
+  var recTimer = document.getElementById('recTimer');
+  var recTimeEl = document.getElementById('recTime');
+  var audioPlayback = document.getElementById('audioPlayback');
+  var videoPlayback = document.getElementById('videoPlayback');
+  var mediaWrap = document.getElementById('mediaPreviewWrap');
+  var voiceStatus = document.getElementById('voiceStatus');
+  var mediaRecorder, chunks = [], stream, recInterval, recSeconds = 0;
+  var lastBlob = null;
+
+  function formatTime(s) {
+    return Math.floor(s / 60) + ':' + (s % 60 < 10 ? '0' : '') + (s % 60);
+  }
+
+  function stopTimer() {
+    if (recInterval) clearInterval(recInterval);
+    recInterval = null;
+  }
+
+  if (recBtn) {
+    recBtn.addEventListener('click', function () {
+      if (!mediaRecorder || mediaRecorder.state === 'inactive') {
+        chunks = [];
+        recSeconds = 0;
+        navigator.mediaDevices.getUserMedia({ audio: true }).then(function (s) {
+          stream = s;
+          mediaRecorder = new MediaRecorder(stream);
+          mediaRecorder.ondataavailable = function (e) { if (e.data.size > 0) chunks.push(e.data); };
+          mediaRecorder.onstop = function () {
+            stopTimer();
+            lastBlob = new Blob(chunks, { type: 'audio/webm' });
+            var url = URL.createObjectURL(lastBlob);
+            audioPlayback.src = url;
+            videoPlayback.style.display = 'none';
+            audioPlayback.style.display = 'block';
+            mediaWrap.style.display = 'block';
+            recBtn.textContent = '🎙 Record again';
+            recBtn.classList.remove('recording');
+            recTimer.classList.remove('active');
+            if (dlBtn) { dlBtn.style.display = 'inline-flex'; dlBtn.classList.remove('hidden'); }
+            if (voiceStatus) {
+              voiceStatus.textContent = '✓ Recording ready — download and text CJ, or use the note box.';
+              voiceStatus.style.display = 'block';
+            }
+            if (stream) stream.getTracks().forEach(function (t) { t.stop(); });
+            markE4();
+          };
+          mediaRecorder.start();
+          recBtn.textContent = '⏹ Stop recording';
+          recBtn.classList.add('recording');
+          recTimer.classList.add('active');
+          if (recTimeEl) recTimeEl.textContent = '0:00';
+          recInterval = setInterval(function () {
+            recSeconds++;
+            if (recTimeEl) recTimeEl.textContent = formatTime(recSeconds);
+            if (recSeconds >= 120 && mediaRecorder && mediaRecorder.state === 'recording') mediaRecorder.stop();
+          }, 1000);
+        }).catch(function () {
+          if (voiceStatus) {
+            voiceStatus.textContent = 'Microphone blocked — use upload or type your note below.';
+            voiceStatus.style.display = 'block';
+          }
+        });
+      } else if (mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+      }
+    });
+  }
+
+  if (dlBtn) {
+    dlBtn.addEventListener('click', function () {
+      if (!lastBlob) return;
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(lastBlob);
+      a.download = 'cj-intro-' + Date.now() + '.webm';
+      a.click();
+    });
+  }
+
+  var fileUpload = document.getElementById('fileUpload');
+  if (fileUpload) {
+    fileUpload.addEventListener('change', function () {
+      var f = fileUpload.files && fileUpload.files[0];
+      if (!f) return;
+      var url = URL.createObjectURL(f);
+      mediaWrap.style.display = 'block';
+      if (f.type.indexOf('video') === 0) {
+        videoPlayback.src = url;
+        videoPlayback.style.display = 'block';
+        audioPlayback.style.display = 'none';
+      } else {
+        audioPlayback.src = url;
+        audioPlayback.style.display = 'block';
+        videoPlayback.style.display = 'none';
+      }
+      if (voiceStatus) {
+        voiceStatus.textContent = '✓ File loaded — text it to CJ or add a link in the note box.';
+        voiceStatus.style.display = 'block';
+      }
+      markE4();
+    });
+  }
+
+  var submitNoteBtn = document.getElementById('submitNoteBtn');
+  var noteText = document.getElementById('noteText');
+  if (submitNoteBtn && noteText) {
+    var sn = localStorage.getItem('htsa-precall-note');
+    if (sn) noteText.value = sn;
+    submitNoteBtn.addEventListener('click', function () {
+      if (noteText.value.trim().length > 5) {
+        localStorage.setItem('htsa-precall-note', noteText.value);
+        submitNoteBtn.textContent = '✓ Saved locally';
+        markE4();
+        setTimeout(function () { submitNoteBtn.textContent = 'Save note ✓'; }, 2500);
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
