@@ -994,6 +994,48 @@
     }
   }
 
+  /* Enrollment-specific performance guarantee callout (orange) — above Terms */
+  .enrollment-guarantee-banner {
+    margin: 0 36px 22px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border: 2px solid #ea580c;
+    border-left: 6px solid #ea580c;
+    border-radius: 8px;
+    box-shadow: 0 2px 14px rgba(234, 88, 12, 0.18);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .enrollment-guarantee-banner-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #c2410c;
+    margin: 0 0 10px;
+  }
+
+  .enrollment-guarantee-banner p {
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: #9a3412;
+    margin: 0;
+  }
+
+  .enrollment-guarantee-banner p strong {
+    color: #7c2d12;
+    font-weight: 700;
+  }
+
+  .enrollment-guarantee-banner--pre-terms {
+    margin-top: 12px;
+    margin-bottom: 4px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   @media print {
     @page { margin: 0.5in; size: letter; }
     body { background: white; }
@@ -1001,6 +1043,11 @@
     .ref-strip-quote-body {
       max-height: none;
       overflow: visible;
+    }
+    .enrollment-guarantee-banner {
+      border: 2px solid #ea580c !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
   }
 </style>
@@ -1163,8 +1210,8 @@
       <div class="invest-program-label">Certified High Ticket Closer Program</div>
       <div class="invest-program-desc">All services described above — training platform, AI roleplay, live coaching with Chad, certification, job placement, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
 
-      <div class="invest-section-kicker">HTSA In-House Payment Options</div>
-      <p class="invest-access-hint">This option includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
+      <div class="invest-section-kicker">Payment — $6,000 paid in full</div>
+      <p class="invest-access-hint">This enrollment is <strong style="color:rgba(255,255,255,0.75);">$6,000 paid in full only</strong>. You receive <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
       <div class="invest-grid">
 
         <div class="invest-option-block">
@@ -1186,7 +1233,7 @@
 
       </div>
 
-      <div class="invest-note" style="color:#ff9c7a;"><strong>Performance Guarantee.</strong> HTSA stands behind its program. If you complete all modules, attend your kickoff call, engage with the community, and apply for placements without success within the program timeframe, contact our support team — we'll work with you directly to make it right.</div>
+      <div class="invest-note" style="margin-top:18px;color:rgba(255,255,255,0.5);"><strong style="color:#ff9c7a;">Next:</strong> After you pay, jump to <strong style="color:var(--white);">Step 1</strong> below — text CJ so we can grant access right away.</div>
     </div>
   </div>
 
@@ -1270,6 +1317,12 @@
   <div class="welcome-band">
     <h3>Welcome to the <span>HTSA Family,</span> Abraham. 🎉</h3>
     <p>You're not just enrolling in a program — you're joining a community of people who show up, do the work, and build something real. We can't wait to see where this takes you.</p>
+  </div>
+
+  <!-- Performance guarantee — confirmed for this enrollment (before formal terms) -->
+  <div class="enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms">
+    <div class="enrollment-guarantee-banner-title">Performance Guarantee — Confirmed for This Enrollment</div>
+    <p><strong>This performance guarantee applies to you.</strong> HTSA is <strong>confirming the program’s performance guarantee</strong> for your enrollment, provided you complete <strong>all</strong> required steps, milestones, and obligations exactly as described on this page and in your enrollment materials.</p>
   </div>
 
   <!-- TERMS OF SERVICE -->
