@@ -412,47 +412,6 @@
     margin-top: 14px;
   }
 
-  /* Bonus — Chad 1:1 sessions (stands out on invest card) */
-  .invest-bonus-chad {
-    margin: 20px 0 18px;
-    padding: 16px 18px;
-    border-radius: 12px;
-    background: linear-gradient(145deg, rgba(0, 201, 122, 0.16) 0%, rgba(10, 22, 40, 0.55) 100%);
-    border: 2px solid var(--green);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 8px 28px rgba(0, 201, 122, 0.14);
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  .invest-bonus-chad-kicker {
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 2.2px;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 8px;
-  }
-
-  .invest-bonus-chad-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--white);
-    line-height: 1.25;
-    margin-bottom: 10px;
-  }
-
-  .invest-bonus-chad-body {
-    font-size: 12px;
-    line-height: 1.65;
-    color: rgba(255, 255, 255, 0.76);
-    margin: 0;
-  }
-
-  .invest-bonus-chad-body strong {
-    color: rgba(255, 255, 255, 0.95);
-  }
-
   .invest-badge.financing {
     background: rgba(0,201,122,0.18);
     color: var(--green);
@@ -536,19 +495,6 @@
     margin-bottom: 8px;
   }
 
-  .pay-pill-btn {
-    display: inline-block;
-    background: var(--green);
-    color: var(--navy);
-    font-weight: 700;
-    font-size: 12.5px;
-    padding: 10px 18px;
-    border-radius: 6px;
-    text-decoration: none;
-    margin-right: 10px;
-    margin-top: 10px;
-  }
-
   .step-link {
     display: inline-block;
     font-size: 11.5px;
@@ -557,56 +503,6 @@
     text-decoration: none;
     border-bottom: 1px solid rgba(0,154,94,0.4);
     padding-bottom: 1px;
-  }
-
-  .step-pay-pick {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    gap: 10px;
-    margin: 14px 0 4px;
-  }
-
-  .step-pay-tab {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 13px;
-    text-decoration: none;
-    text-align: center;
-    line-height: 1.25;
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
-    border: 2px solid transparent;
-    flex: 1 1 160px;
-    min-width: 140px;
-  }
-
-  .step-pay-tab:hover {
-    transform: translateY(-1px);
-  }
-
-  .step-pay-tab--pif {
-    background: var(--navy);
-    color: var(--white);
-    border-color: rgba(10, 22, 40, 0.5);
-  }
-
-  .step-pay-tab--pif:hover {
-    border-color: var(--green);
-    box-shadow: 0 6px 18px rgba(10, 22, 40, 0.2);
-  }
-
-  .step-pay-tab--4pay {
-    background: var(--green);
-    color: var(--navy);
-    box-shadow: 0 10px 22px rgba(0, 201, 122, 0.2);
-  }
-
-  .step-pay-tab--4pay:hover {
-    box-shadow: 0 12px 26px rgba(0, 201, 122, 0.28);
   }
 
   .phone-option {
@@ -830,9 +726,6 @@
     .invest-option-actions { width: 100%; }
     .invest-btn { display: block; width: 100%; text-align: center; }
     .step-item { padding: 16px 20px; gap: 14px; }
-    .step-pay-pick { flex-direction: column; }
-    .step-pay-tab { flex: 1 1 auto; width: 100%; min-width: 0; }
-    .pay-pill-btn { display: block; text-align: center; margin-right: 0; }
     .phone-option { padding: 14px 20px; }
     .closing-band { padding: 18px 20px; }
     .welcome-band { padding: 22px 20px; }
@@ -1101,48 +994,6 @@
     }
   }
 
-  /* Enrollment-specific performance guarantee callout (orange) — above Terms */
-  .enrollment-guarantee-banner {
-    margin: 0 36px 22px;
-    padding: 16px 20px;
-    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
-    border: 2px solid #ea580c;
-    border-left: 6px solid #ea580c;
-    border-radius: 8px;
-    box-shadow: 0 2px 14px rgba(234, 88, 12, 0.18);
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  .enrollment-guarantee-banner-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
-    color: #c2410c;
-    margin: 0 0 10px;
-  }
-
-  .enrollment-guarantee-banner p {
-    font-size: 12.5px;
-    line-height: 1.65;
-    color: #9a3412;
-    margin: 0;
-  }
-
-  .enrollment-guarantee-banner p strong {
-    color: #7c2d12;
-    font-weight: 700;
-  }
-
-  .enrollment-guarantee-banner--pre-terms {
-    margin-top: 12px;
-    margin-bottom: 4px;
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   @media print {
     @page { margin: 0.5in; size: letter; }
     body { background: white; }
@@ -1150,11 +1001,6 @@
     .ref-strip-quote-body {
       max-height: none;
       overflow: visible;
-    }
-    .enrollment-guarantee-banner {
-      border: 2px solid #ea580c !important;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
     }
   }
 </style>
@@ -1317,21 +1163,16 @@
       <div class="invest-program-label">Certified High Ticket Closer Program</div>
       <div class="invest-program-desc">All services described above — training platform, AI roleplay, live coaching with Chad, certification, job placement, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
 
-      <div class="invest-bonus-chad">
-        <div class="invest-bonus-chad-kicker">Bonus included for you</div>
-        <div class="invest-bonus-chad-title">3 one-on-one sessions with Chad Aleo</div>
-        <p class="invest-bonus-chad-body">Personal time with Chad beyond group coaching — use them strategically. <strong>Recommendation:</strong> save at least <strong>one session for after you land your offer</strong> and you’re in your role, so you can tighten execution where it counts.</p>
-      </div>
-
-      <div class="invest-section-kicker">Payment — $6,000 paid in full</div>
-      <p class="invest-access-hint">This enrollment is <strong style="color:rgba(255,255,255,0.75);">$6,000 paid in full only</strong> — no payment plans and no financing. You receive <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
+      <div class="invest-section-kicker">HTSA In-House Payment Options</div>
+      <p class="invest-access-hint">This option includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
       <div class="invest-grid">
 
         <div class="invest-option-block">
+          <div class="invest-badge invest-badge--option">Option 1</div>
           <div class="invest-option-head invest-option-head--pay">
             <div>
-              <div class="invest-option-title">$6,000 — Paid in Full</div>
-              <div class="invest-option-sub">One payment of <strong>$6,000</strong> through secure checkout below. No other pay options on this invoice.</div>
+              <div class="invest-option-title">Paid in Full</div>
+              <div class="invest-option-sub">Best value — pay the remainder by day 30 and your total is only $6,000.</div>
             </div>
             <div class="invest-price-stack">
               <div class="invest-price-big">$6,000</div>
@@ -1339,13 +1180,13 @@
             </div>
           </div>
           <div class="invest-option-actions invest-option-actions--pay">
-            <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Pay $6,000 in full →</a>
+            <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $6,000 →</a>
           </div>
         </div>
 
       </div>
 
-      <div class="invest-note" style="margin-top:18px;color:rgba(255,255,255,0.5);"><strong style="color:#ff9c7a;">Next:</strong> After you pay, jump to <strong style="color:var(--white);">Step 1</strong> below — text CJ so we can grant access right away.</div>
+      <div class="invest-note" style="color:#ff9c7a;"><strong>Performance Guarantee.</strong> HTSA stands behind its program. If you complete all modules, attend your kickoff call, engage with the community, and apply for placements without success within the program timeframe, contact our support team — we'll work with you directly to make it right.</div>
     </div>
   </div>
 
@@ -1360,9 +1201,8 @@
     <div class="step-item">
       <div class="step-num">1</div>
       <div class="step-content">
-        <h4>Step 1 — Complete your $6,000 payment</h4>
-        <p>Abraham, use the <strong>$6,000 paid in full</strong> button in <strong>Program Investment</strong> above (same link as below). Complete checkout, then continue to Step 2.</p>
-        <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="pay-pill-btn" target="_blank" rel="noopener noreferrer">$6,000 Paid in full →</a>
+        <h4>Step 1 — Complete your payment</h4>
+        <p>Abraham, use the <strong>Choose PIF — Pay $6,000</strong> button in <strong>Program Investment</strong> above. Complete checkout, then continue to Step 2.</p>
       </div>
     </div>
 
@@ -1430,12 +1270,6 @@
   <div class="welcome-band">
     <h3>Welcome to the <span>HTSA Family,</span> Abraham. 🎉</h3>
     <p>You're not just enrolling in a program — you're joining a community of people who show up, do the work, and build something real. We can't wait to see where this takes you.</p>
-  </div>
-
-  <!-- Performance guarantee — confirmed for this enrollment (before formal terms) -->
-  <div class="enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms">
-    <div class="enrollment-guarantee-banner-title">Performance Guarantee — Confirmed for This Enrollment</div>
-    <p><strong>This performance guarantee applies to you.</strong> HTSA is <strong>confirming the program’s performance guarantee</strong> for your enrollment, provided you complete <strong>all</strong> required steps, milestones, and obligations exactly as described on this page and in your enrollment materials.</p>
   </div>
 
   <!-- TERMS OF SERVICE -->
