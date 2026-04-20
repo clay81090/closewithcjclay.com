@@ -412,6 +412,94 @@
     margin-top: 14px;
   }
 
+  /* Bonus — Chad 1:1 sessions (stands out on invest card) */
+  .invest-bonus-chad {
+    margin: 20px 0 18px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(0, 201, 122, 0.16) 0%, rgba(10, 22, 40, 0.55) 100%);
+    border: 2px solid var(--green);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 8px 28px rgba(0, 201, 122, 0.14);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .invest-bonus-chad-kicker {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+
+  .invest-bonus-chad-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+
+  .invest-bonus-chad-body {
+    font-size: 12px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.76);
+    margin: 0;
+  }
+
+  .invest-bonus-chad-body strong {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  /* Splitit note + detail (under $6k PIF) */
+  .invest-splitit-wrap {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .invest-splitit-intro {
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0 0 12px;
+  }
+
+  .invest-splitit-intro strong {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .invest-splitit-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 156, 122, 0.4);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .invest-splitit-head {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff9c7a;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .invest-splitit-apply {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0 0 10px;
+    line-height: 1.55;
+  }
+
+  .invest-splitit-fine {
+    font-size: 10.5px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.48);
+    margin: 0;
+  }
+
   .invest-badge.financing {
     background: rgba(0,201,122,0.18);
     color: var(--green);
@@ -516,6 +604,56 @@
     text-decoration: none;
     border-bottom: 1px solid rgba(0,154,94,0.4);
     padding-bottom: 1px;
+  }
+
+  .step-pay-pick {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 10px;
+    margin: 14px 0 4px;
+  }
+
+  .step-pay-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.25;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    border: 2px solid transparent;
+    flex: 1 1 160px;
+    min-width: 140px;
+  }
+
+  .step-pay-tab:hover {
+    transform: translateY(-1px);
+  }
+
+  .step-pay-tab--pif {
+    background: var(--navy);
+    color: var(--white);
+    border-color: rgba(10, 22, 40, 0.5);
+  }
+
+  .step-pay-tab--pif:hover {
+    border-color: var(--green);
+    box-shadow: 0 6px 18px rgba(10, 22, 40, 0.2);
+  }
+
+  .step-pay-tab--4pay {
+    background: var(--green);
+    color: var(--navy);
+    box-shadow: 0 10px 22px rgba(0, 201, 122, 0.2);
+  }
+
+  .step-pay-tab--4pay:hover {
+    box-shadow: 0 12px 26px rgba(0, 201, 122, 0.28);
   }
 
   .phone-option {
@@ -739,6 +877,8 @@
     .invest-option-actions { width: 100%; }
     .invest-btn { display: block; width: 100%; text-align: center; }
     .step-item { padding: 16px 20px; gap: 14px; }
+    .step-pay-pick { flex-direction: column; }
+    .step-pay-tab { flex: 1 1 auto; width: 100%; min-width: 0; }
     .pay-pill-btn { display: block; text-align: center; margin-right: 0; }
     .phone-option { padding: 14px 20px; }
     .closing-band { padding: 18px 20px; }
@@ -1008,6 +1148,50 @@
     }
   }
 
+
+  /* Enrollment-specific performance guarantee callout (orange) — optional; include HTML block only when needed */
+  .enrollment-guarantee-banner {
+    margin: 0 36px 22px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border: 2px solid #ea580c;
+    border-left: 6px solid #ea580c;
+    border-radius: 8px;
+    box-shadow: 0 2px 14px rgba(234, 88, 12, 0.18);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .enrollment-guarantee-banner-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #c2410c;
+    margin: 0 0 10px;
+  }
+
+  .enrollment-guarantee-banner p {
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: #9a3412;
+    margin: 0;
+  }
+
+  .enrollment-guarantee-banner p strong {
+    color: #7c2d12;
+    font-weight: 700;
+  }
+
+  .enrollment-guarantee-banner--pre-terms {
+    margin-top: 12px;
+    margin-bottom: 4px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
   @media print {
     @page { margin: 0.5in; size: letter; }
     body { background: white; }
@@ -1015,6 +1199,11 @@
     .ref-strip-quote-body {
       max-height: none;
       overflow: visible;
+    }
+    .enrollment-guarantee-banner {
+      border: 2px solid #ea580c !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
   }
 </style>
@@ -1487,7 +1676,7 @@ Thank God and CJ Clay for that 🙏</blockquote>
               <span class="footer-bc-infinity-sym" aria-hidden="true">∞</span>
             </div>
             <div class="footer-bc-name">CJ Clay</div>
-            <div class="footer-bc-title">HTSA Setter</div>
+            <div class="footer-bc-title">HTSA Closer</div>
             <div class="footer-bc-lines">
               <a href="tel:+16166121735" class="footer-bc-line">📞 &nbsp;(616) 612-1735</a>
               <a href="mailto:cj@highticketsalesacademy.com" class="footer-bc-line">✉️ &nbsp;cj@highticketsalesacademy.com</a>

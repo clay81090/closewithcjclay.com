@@ -861,7 +861,6 @@
     .invoice-meta { text-align: left; }
     .invoice-badge { margin-bottom: 8px; }
     .hero-band { padding: 18px 20px; }
-    .enrollment-guarantee-banner { margin-left: 20px; margin-right: 20px; margin-bottom: 18px; max-width: none; }
     .billing-grid { grid-template-columns: 1fr; }
     .billing-cell { padding: 18px 20px; }
     .billing-cell:first-child { border-right: none; border-bottom: 1px solid var(--mid); }
@@ -1149,7 +1148,8 @@
     }
   }
 
-  /* Enrollment-specific performance guarantee callout (orange) */
+
+  /* Enrollment-specific performance guarantee callout (orange) — optional; include HTML block only when needed */
   .enrollment-guarantee-banner {
     margin: 0 36px 22px;
     padding: 16px 20px;
@@ -1183,7 +1183,6 @@
     font-weight: 700;
   }
 
-  /* Sits above Terms band — align with terms column width */
   .enrollment-guarantee-banner--pre-terms {
     margin-top: 12px;
     margin-bottom: 4px;
@@ -1191,6 +1190,7 @@
     margin-left: auto;
     margin-right: auto;
   }
+
 
   @media print {
     @page { margin: 0.5in; size: letter; }

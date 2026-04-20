@@ -412,6 +412,94 @@
     margin-top: 14px;
   }
 
+  /* Bonus — Chad 1:1 sessions (stands out on invest card) */
+  .invest-bonus-chad {
+    margin: 20px 0 18px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(0, 201, 122, 0.16) 0%, rgba(10, 22, 40, 0.55) 100%);
+    border: 2px solid var(--green);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 8px 28px rgba(0, 201, 122, 0.14);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .invest-bonus-chad-kicker {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+
+  .invest-bonus-chad-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+
+  .invest-bonus-chad-body {
+    font-size: 12px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.76);
+    margin: 0;
+  }
+
+  .invest-bonus-chad-body strong {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  /* Splitit note + detail (under $6k PIF) */
+  .invest-splitit-wrap {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .invest-splitit-intro {
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0 0 12px;
+  }
+
+  .invest-splitit-intro strong {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .invest-splitit-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 156, 122, 0.4);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .invest-splitit-head {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff9c7a;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .invest-splitit-apply {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0 0 10px;
+    line-height: 1.55;
+  }
+
+  .invest-splitit-fine {
+    font-size: 10.5px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.48);
+    margin: 0;
+  }
+
   .invest-badge.financing {
     background: rgba(0,201,122,0.18);
     color: var(--green);
@@ -516,6 +604,56 @@
     text-decoration: none;
     border-bottom: 1px solid rgba(0,154,94,0.4);
     padding-bottom: 1px;
+  }
+
+  .step-pay-pick {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 10px;
+    margin: 14px 0 4px;
+  }
+
+  .step-pay-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.25;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    border: 2px solid transparent;
+    flex: 1 1 160px;
+    min-width: 140px;
+  }
+
+  .step-pay-tab:hover {
+    transform: translateY(-1px);
+  }
+
+  .step-pay-tab--pif {
+    background: var(--navy);
+    color: var(--white);
+    border-color: rgba(10, 22, 40, 0.5);
+  }
+
+  .step-pay-tab--pif:hover {
+    border-color: var(--green);
+    box-shadow: 0 6px 18px rgba(10, 22, 40, 0.2);
+  }
+
+  .step-pay-tab--4pay {
+    background: var(--green);
+    color: var(--navy);
+    box-shadow: 0 10px 22px rgba(0, 201, 122, 0.2);
+  }
+
+  .step-pay-tab--4pay:hover {
+    box-shadow: 0 12px 26px rgba(0, 201, 122, 0.28);
   }
 
   .phone-option {
@@ -739,6 +877,8 @@
     .invest-option-actions { width: 100%; }
     .invest-btn { display: block; width: 100%; text-align: center; }
     .step-item { padding: 16px 20px; gap: 14px; }
+    .step-pay-pick { flex-direction: column; }
+    .step-pay-tab { flex: 1 1 auto; width: 100%; min-width: 0; }
     .pay-pill-btn { display: block; text-align: center; margin-right: 0; }
     .phone-option { padding: 14px 20px; }
     .closing-band { padding: 18px 20px; }
@@ -830,19 +970,25 @@
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 22px 32px;
   }
 
   .ref-strip-links-col {
     flex: 1 1 220px;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
   }
 
   .ref-strip-quote-wrap {
     flex: 1 1 280px;
     min-width: 0;
     max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    min-height: 0;
   }
 
   .ref-strip-quote {
@@ -918,14 +1064,64 @@
   }
 
   .ref-strip-list a {
-    color: var(--navy);
+    color: var(--green);
+    font-weight: 600;
     text-decoration: none;
-    border-bottom: 1px solid rgba(0, 154, 94, 0.22);
+    border-bottom: none;
+    background: rgba(0, 201, 122, 0.16);
+    padding: 0.2em 0.45em;
+    border-radius: 4px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
 
   .ref-strip-list a:hover {
     color: var(--green-dark);
-    border-bottom-color: var(--green-dark);
+    background: rgba(0, 154, 94, 0.22);
+  }
+
+  /* Short member voices under links (left column); same card UI as Trinity, stacked */
+  .ref-strip-mini-stack {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 100%;
+  }
+
+  .ref-strip-quote--compact {
+    padding: 10px 12px 12px;
+  }
+
+  .ref-strip-quote--compact .ref-strip-quote-body {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .ref-strip-quote--compact .ref-strip-quote-attr {
+    margin-top: 8px;
+    padding-top: 6px;
+  }
+
+  /* Trinity (right column): full text, card stretches with row so name lines up with Jessica C. */
+  .ref-strip-quote--trinity {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .ref-strip-quote--trinity .ref-strip-quote-body {
+    flex: 0 0 auto;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .ref-strip-quote--trinity .ref-strip-quote-attr {
+    margin-top: auto;
+    flex-shrink: 0;
   }
 
   @media (max-width: 600px) {
@@ -941,10 +1137,60 @@
       max-width: none;
     }
 
-    .ref-strip-quote-body {
-      max-height: 200px;
+    /* Stacked layout: no side-by-side name alignment; natural flow */
+    .ref-strip-quote--trinity {
+      flex: none;
+      height: auto;
+    }
+
+    .ref-strip-quote--trinity .ref-strip-quote-attr {
+      margin-top: 10px;
     }
   }
+
+
+  /* Enrollment-specific performance guarantee callout (orange) — optional; include HTML block only when needed */
+  .enrollment-guarantee-banner {
+    margin: 0 36px 22px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border: 2px solid #ea580c;
+    border-left: 6px solid #ea580c;
+    border-radius: 8px;
+    box-shadow: 0 2px 14px rgba(234, 88, 12, 0.18);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .enrollment-guarantee-banner-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #c2410c;
+    margin: 0 0 10px;
+  }
+
+  .enrollment-guarantee-banner p {
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: #9a3412;
+    margin: 0;
+  }
+
+  .enrollment-guarantee-banner p strong {
+    color: #7c2d12;
+    font-weight: 700;
+  }
+
+  .enrollment-guarantee-banner--pre-terms {
+    margin-top: 12px;
+    margin-bottom: 4px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 
   @media print {
     @page { margin: 0.5in; size: letter; }
@@ -953,6 +1199,11 @@
     .ref-strip-quote-body {
       max-height: none;
       overflow: visible;
+    }
+    .enrollment-guarantee-banner {
+      border: 2px solid #ea580c !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
   }
 </style>
@@ -1373,9 +1624,26 @@
           <li><a href="https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib" target="_blank" rel="noopener noreferrer">Josh — Alex Hormozi background</a></li>
           <li><a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><em>The Book on High Ticket Sales</em> — Chad Aleo (Amazon)</a></li>
         </ul>
+        <div class="ref-strip-mini-stack">
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">Member voice</div>
+            <blockquote class="ref-strip-quote-body">Just received this news from my first mock call and wanted to share... I'm SUPER grateful to you for helping me move forward with HTSA! Keep doing what you're doing!</blockquote>
+            <p class="ref-strip-quote-attr">— Kate R. · shared with HTSA</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">Member voice</div>
+            <blockquote class="ref-strip-quote-body">I'm really enjoying the program so far and getting a ton of value out of it! Thanks again for helping me cross the line. The work you're doing is legitimately important I hope you know that!!!!</blockquote>
+            <p class="ref-strip-quote-attr">— Jessica C. · shared with HTSA</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">Member voice</div>
+            <blockquote class="ref-strip-quote-body">Hey CJ, Just wanted to say thanks, seriously. You didn't let me slip away after I tried to bail on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support? That's why I'm all in now. Appreciate you!</blockquote>
+            <p class="ref-strip-quote-attr">— Nick S. · shared with HTSA</p>
+          </div>
+        </div>
       </div>
       <div class="ref-strip-quote-wrap">
-        <div class="ref-strip-quote">
+        <div class="ref-strip-quote ref-strip-quote--trinity">
           <div class="ref-strip-quote-meta">Member voice</div>
           <blockquote class="ref-strip-quote-body">Hello, my name is Trinity.
 
