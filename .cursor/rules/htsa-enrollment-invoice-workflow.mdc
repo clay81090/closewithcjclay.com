@@ -1,0 +1,39 @@
+---
+description: How to create new HTSA enrollment invoice HTML fast (copy template, never hand-rebuild)
+globs: htsa-enrollment*.html,htsa_closer*.html
+alwaysApply: true
+---
+
+# New HTSA enrollment page — fast path
+
+**Never** edit an existing client’s `htsa-enrollment-*.html` to create a new one. **Always** duplicate a **gold** template with `cp`, then only replace the personalized fields.
+
+## Pick the base file (then `cp` to `htsa-enrollment-firstname-lastname.html`, lowercase, hyphenated)
+
+| Offer | Use as source |
+|--------|----------------|
+| Closer + cash (Whop PIF / 4-pay / Splitit; **no** ClarityPay/PayVa/Flexxbuy pre-qual links) + optional **orange** performance-guarantee box | `htsa-enrollment-timi-bonner-mccourt.html` (guarantee block already in file; same pattern as `htsa-enrollment-erick-brower.html`) |
+| Closer + Setter (dual curriculum + both investment stacks) | `htsa-enrollment-jocelyn-navarro.html` |
+| Closer-only curriculum reference | `htsa-enrollment-amy-grochala.html` |
+| Setter-only curriculum reference | `htsa-enrollment-kaitlyn-hall.html` |
+
+**Do not** add “3 one-on-one sessions with Chad” or similar unless the user **explicitly** asks in chat.
+
+## Fields to change in the new file only (search/replace)
+
+1. `<title>HTSA Invoice — …`
+2. Hero greeting: `{FirstName}, I really enjoyed…`
+3. `billing-name` + `mailto:` + display email + `tel:` + display phone (use `href="tel:+1XXXXXXXXXX"` with digits only)
+4. Step 1 paragraph that uses their first name (e.g. “pick $6,000 paid in full…”)
+5. “Welcome to the HTSA Family, {FirstName}.”
+
+Do **not** re-type or regenerate the full HTML.
+
+## After creating the file
+
+- `git add` the **new** file only, commit, `git push origin main`
+- Public URL: `https://closewithcjclay.com/htsa-enrollment-{firstname}-{lastname}.html`
+
+## Related
+
+- Mastermind copy: `htsa-mastermind-member-count.mdc` (470+ members)
