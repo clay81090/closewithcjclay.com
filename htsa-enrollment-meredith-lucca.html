@@ -46,10 +46,6 @@
     break-inside: avoid;
   }
 
-  /* Let logo + meta share space without long payment text breaking the row */
-  .header > div { min-width: 0; }
-  .header > div:first-child { flex: 1 1 200px; }
-
   .logo-wrap { display: flex; align-items: center; gap: 14px; }
   .logo-icon { width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; border: 2px solid var(--green); object-fit: cover; }
 
@@ -79,11 +75,7 @@
     margin-top: 10px;
   }
 
-  .invoice-meta {
-    text-align: right;
-    min-width: 0;
-    flex: 0 1 280px;
-  }
+  .invoice-meta { text-align: right; }
 
   .invoice-badge {
     display: inline-block;
@@ -102,8 +94,6 @@
     font-size: 12.5px;
     color: rgba(255,255,255,0.5);
     line-height: 1.85;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
   }
 
   .invoice-meta strong { color: var(--white); font-weight: 600; }
@@ -868,8 +858,7 @@
 
   @media (max-width: 600px) {
     .header { padding: 22px 20px 20px; flex-direction: column; gap: 16px; }
-    .header > div:first-child { flex: 1 1 auto; }
-    .invoice-meta { text-align: left; flex: 1 1 100%; max-width: 100%; }
+    .invoice-meta { text-align: left; }
     .invoice-badge { margin-bottom: 8px; }
     .hero-band { padding: 18px 20px; }
     .billing-grid { grid-template-columns: 1fr; }
@@ -1238,7 +1227,7 @@
       <div class="invoice-badge">Closer Program Overview</div>
       <p><strong>Prepared by:</strong> CJ Clay</p>
       <p><strong>Program:</strong> Certified HTS Closer</p>
-      <p><strong>Payment:</strong> See Program Investment</p>
+      <p><strong>Payment:</strong> Select payment option below</p>
     </div>
   </div>
   <div class="accent-bar"></div>
@@ -1259,7 +1248,7 @@
         <a href="mailto:mjrouillard@gmail.com">mjrouillard@gmail.com</a><br>
         <a href="tel:+16199906746">(619) 990-6746</a><br>
         Program: Certified HTS Closer<br>
-        Payment: PIF, Splitit, or 4-pay (Whop) — no third-party financing
+        Payment: Select payment option below
       </div>
     </div>
     <div class="billing-cell">
@@ -1376,14 +1365,8 @@
       <div class="invest-program-label">Certified High Ticket Closer Program</div>
       <div class="invest-program-desc">All services described above — training platform, AI roleplay, live coaching with Chad, certification, job placement, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
 
-      <div class="invest-bonus-chad">
-        <div class="invest-bonus-chad-kicker">Bonus included for you</div>
-        <div class="invest-bonus-chad-title">3 one-on-one sessions with Chad Aleo</div>
-        <p class="invest-bonus-chad-body">Personal time with Chad beyond group coaching — use them strategically. <strong>Recommendation:</strong> save at least <strong>one session for after you land your offer</strong> and you’re in your role, so you can tighten execution where it counts.</p>
-      </div>
-
       <div class="invest-section-kicker">HTSA In-House Payment Options</div>
-      <p class="invest-access-hint">In-house only: <strong style="color:rgba(255,255,255,0.75);">$6,000 PIF</strong> (or <strong>Splitit</strong> at the bottom of the same Whop checkout), or <strong>4 × $1,750</strong> on Whop ($7,000 total). <strong style="color:rgba(255,255,255,0.55);">No third-party financing</strong> (no ClarityPay, PayVa, Flexxbuy, etc.). Either path includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
+      <p class="invest-access-hint">In-house (Whop) only: <strong style="color:rgba(255,255,255,0.75);">$6,000 PIF</strong>, <strong style="color:rgba(255,255,255,0.75);">Splitit</strong> in the same PIF checkout, or <strong style="color:rgba(255,255,255,0.75);">4 × $1,750</strong> — no ClarityPay, PayVa, or other third-party financing. <strong style="color:rgba(255,255,255,0.75);">Immediate access</strong> once your payment clears.</p>
       <div class="invest-grid">
 
         <div class="invest-option-block">
@@ -1546,7 +1529,7 @@
           </ul>
         </div>
 
-        <p style="margin:0;"><strong style="color:var(--navy);">Performance Guarantee.</strong> HTSA stands behind its program. If you complete all modules, attend your kickoff call, engage with the community, and apply for placements without success within the program timeframe, contact our support team — we'll work with you directly to make it right.</p>
+        <p style="margin:0;"><strong style="color:var(--navy);">Performance Guarantee.</strong> If you satisfy everything the Terms of Service require, you receive the full performance guarantee as stated in those terms. Nothing beyond those terms is promised on this page.</p>
       </div>
     </div>
   </div>
