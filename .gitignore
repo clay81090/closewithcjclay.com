@@ -1,0 +1,5 @@
+# Full bank/csv exports — sensitive; keep local or use private repo only
+taxes/2025/bank-statements/
+
+# OS / editor noise
+.DS_Store

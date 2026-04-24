@@ -87,7 +87,7 @@ body{font-family:var(--font-b);background:var(--navy);color:var(--text-soft);lin
 .about-cj .about-body p{font-size:14px;color:var(--text-soft);margin-bottom:12px;line-height:1.65;}
 .about-cj .about-body p:last-child{margin-bottom:0;}
 
-/* ── YOUR PATH (future pacing) ── */
+/* ── YOUR PATH ── */
 .path-section{padding:28px;border-radius:22px;background:linear-gradient(165deg,rgba(240,192,96,0.07) 0%,var(--navy-card) 45%);border:1px solid rgba(240,192,96,0.2);margin-bottom:56px;position:relative;overflow:hidden;}
 .path-section::before{content:'';position:absolute;top:0;right:0;width:180px;height:180px;background:radial-gradient(circle,rgba(0,201,122,0.12),transparent 70%);pointer-events:none;}
 .path-heart{margin-bottom:20px;position:relative;z-index:1;}
@@ -97,18 +97,90 @@ body{font-family:var(--font-b);background:var(--navy);color:var(--text-soft);lin
 .path-mirror strong{color:var(--text);}
 .path-label{font-family:var(--font-m);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin:18px 0 10px;}
 .path-label:first-of-type{margin-top:0;}
-.industry-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-@media(min-width:540px){.industry-grid{grid-template-columns:repeat(4,1fr);}}
-.ind-pill{display:flex;align-items:center;justify-content:center;text-align:center;min-height:52px;padding:10px 12px;border-radius:14px;border:1.5px solid var(--mid);background:rgba(255,255,255,0.03);cursor:pointer;font-size:12.5px;font-weight:600;color:var(--text-soft);transition:border-color 0.2s,background 0.2s,transform 0.15s;position:relative;z-index:1;}
-.ind-pill:hover{border-color:rgba(0,201,122,0.45);background:rgba(0,201,122,0.06);color:var(--text);}
-.ind-pill input{position:absolute;opacity:0;pointer-events:none;}
-.ind-pill.ind-pill--active{border-color:var(--green-dim);background:rgba(0,201,122,0.12);color:var(--text);box-shadow:0 0 0 1px rgba(0,201,122,0.25);}
+.ind-cat-block{margin-bottom:4px;}
+.ind-cat-label{font-family:var(--font-m);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px;}
+.ind-cat-label:first-child{margin-top:0;}
+.ind-pool-grid{display:flex;flex-wrap:wrap;gap:8px;}
+.ind-chip{font-family:var(--font-b);font-size:11.5px;font-weight:600;padding:9px 12px;border-radius:12px;border:1.5px solid var(--mid);background:rgba(255,255,255,0.04);color:var(--text-soft);cursor:pointer;transition:border-color 0.2s,background 0.2s,opacity 0.2s;text-align:left;line-height:1.3;}
+.ind-chip:hover:not(:disabled){border-color:rgba(0,201,122,0.45);background:rgba(0,201,122,0.08);color:var(--text);}
+.ind-chip.is-picked{border-color:var(--green-dim);background:rgba(0,201,122,0.14);color:var(--text);box-shadow:0 0 0 1px rgba(0,201,122,0.2);}
+.ind-chip:disabled{opacity:0.38;cursor:not-allowed;}
+.ind-pool-wrap{max-height:280px;overflow-y:auto;padding-right:6px;margin:4px 0 14px;border-radius:16px;border:1px solid var(--mid);background:rgba(0,0,0,0.12);padding:14px 14px 10px;}
+.ranked-list{margin:12px 0 10px;min-height:2.5em;}
+.ranked-empty{font-size:13px;color:var(--muted);font-style:italic;margin:0;padding:8px 0;}
+.rank-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--navy-card);border:1px solid var(--mid);margin-bottom:8px;}
+.rank-num{flex-shrink:0;width:28px;height:28px;border-radius:10px;background:rgba(0,201,122,0.18);border:1px solid rgba(0,201,122,0.35);font-family:var(--font-d);font-size:13px;font-weight:800;color:var(--green);display:flex;align-items:center;justify-content:center;}
+.rank-name{flex:1;font-size:13.5px;font-weight:600;color:var(--text);}
+.rank-actions{display:flex;gap:4px;}
+.rank-btn{font-family:var(--font-b);font-size:14px;width:32px;height:32px;border-radius:10px;border:1px solid var(--mid);background:rgba(255,255,255,0.05);color:var(--text-soft);cursor:pointer;line-height:1;}
+.rank-btn:hover{border-color:rgba(0,201,122,0.4);color:var(--text);}
+.rank-remove{font-size:18px;font-weight:700;}
+.clear-ind-btn{margin-top:4px;font-size:12px;padding:8px 14px;border-radius:10px;border:1px dashed var(--mid);background:transparent;color:var(--muted);cursor:pointer;font-family:var(--font-b);}
+.clear-ind-btn:hover{border-color:rgba(240,192,96,0.4);color:var(--gold);}
+/* Income calculator (conservative planning) */
+.calc-wrap{margin-top:22px;padding:20px;border-radius:18px;background:rgba(0,201,122,0.05);border:1px solid rgba(0,201,122,0.2);}
+.calc-wrap .path-label{margin-top:0;}
+.calc-lead{font-size:13px;color:var(--text-soft);line-height:1.6;margin:8px 0 14px;}
+.calc-lead strong{color:var(--text);}
+.calc-grid{display:grid;gap:12px;}
+@media(min-width:560px){.calc-grid{grid-template-columns:repeat(2,1fr);}}
+.calc-field label{display:block;font-family:var(--font-m);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.calc-field input[type="number"],.calc-field input[type="range"],.calc-field select{width:100%;}
+.calc-field input[type="number"],.calc-field select{padding:10px 12px;border-radius:10px;border:1px solid var(--mid);background:#0a1528;color:var(--text);font-size:14px;font-family:var(--font-b);}
+.calc-field input[type="number"]:focus,.calc-field select:focus{outline:none;border-color:rgba(0,201,122,0.4);}
+.calc-field .range-val{font-family:var(--font-m);font-size:11px;color:var(--green-dim);margin-top:4px;}
+.calc-actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 8px;align-items:center;}
+.calc-actions .btn{font-size:12px;padding:9px 16px;}
+.calc-out{margin-top:14px;padding:14px 16px;border-radius:14px;background:var(--navy-card);border:1px solid var(--mid);font-size:13.5px;line-height:1.65;}
+.calc-out strong{color:var(--text);}
+.calc-out .calc-k{font-family:var(--font-m);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--green-dim);display:block;margin-bottom:6px;}
+.calc-disclaimer{font-size:11px;color:var(--muted);margin-top:12px;line-height:1.55;}
+.calc-ramp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px;}
+.calc-ramp-table th,.calc-ramp-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--mid);}
+.calc-ramp-table th{color:var(--muted);font-weight:600;font-family:var(--font-m);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;}
+.calc-step{display:grid;grid-template-columns:auto 1fr;gap:14px 18px;align-items:flex-start;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.calc-step:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.calc-step-badge{flex-shrink:0;width:36px;height:36px;border-radius:12px;background:rgba(0,201,122,0.15);border:1px solid rgba(0,201,122,0.35);font-family:var(--font-d);font-size:15px;font-weight:800;color:var(--green);display:flex;align-items:center;justify-content:center;}
+.calc-step-title{font-family:var(--font-d);font-size:1.05rem;font-weight:700;color:var(--text);margin:0 0 8px;letter-spacing:-0.02em;}
+.calc-step-body{font-size:13px;color:var(--text-soft);line-height:1.6;margin:0 0 12px;}
+.calc-step-body strong{color:var(--text);}
+.calc-goal-input{font-size:18px;font-weight:700;padding:14px 16px;border-radius:12px;border:1px solid var(--mid);background:#0a1528;color:var(--text);width:100%;max-width:280px;font-family:var(--font-b);}
+.calc-goal-input:focus{outline:none;border-color:rgba(0,201,122,0.45);}
+.calc-comm-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+.calc-comm-tab{font-family:var(--font-b);font-size:12.5px;font-weight:600;padding:10px 14px;border-radius:12px;border:1.5px solid var(--mid);background:rgba(255,255,255,0.04);color:var(--text-soft);cursor:pointer;transition:border-color 0.2s,background 0.2s;}
+.calc-comm-tab:hover{border-color:rgba(0,201,122,0.45);color:var(--text);}
+.calc-comm-tab.is-active{border-color:var(--green-dim);background:rgba(0,201,122,0.14);color:var(--text);box-shadow:0 0 0 1px rgba(0,201,122,0.2);}
+.calc-tab-sub{display:block;font-size:9px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--green-dim);margin-top:2px;}
+.calc-step-note{font-size:11.5px;color:var(--muted);line-height:1.55;margin:0 0 10px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.03);border-left:3px solid rgba(0,201,122,0.35);}
+/* Current situation block + friction chips */
+.problem-wrap{margin-top:22px;padding:20px;border-radius:22px;background:linear-gradient(165deg,rgba(192,57,43,0.08) 0%,var(--navy-card) 42%);border:1px solid rgba(192,57,43,0.22);}
+.problem-wrap .path-label{color:rgba(255,180,160,0.85);}
+.pain-grid{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px;}
+.pain-chip{font-family:var(--font-b);font-size:11px;font-weight:600;padding:8px 11px;border-radius:11px;border:1.5px solid var(--mid);background:rgba(255,255,255,0.04);color:var(--text-soft);cursor:pointer;line-height:1.35;text-align:left;max-width:100%;}
+.pain-chip:hover{border-color:rgba(240,192,96,0.45);}
+.pain-chip.is-on{border-color:rgba(192,57,43,0.55);background:rgba(192,57,43,0.12);color:var(--text);}
+.pain-other-wrap{margin-top:10px;}
+.pain-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;}
+.pain-row input{flex:1;padding:10px 12px;border-radius:10px;border:1px solid var(--mid);background:#0a1528;color:var(--text);font-size:13px;}
+.pain-add-btn{font-size:12px;padding:8px 14px;border-radius:10px;border:1px dashed var(--mid);background:transparent;color:var(--gold);cursor:pointer;font-family:var(--font-b);}
+.pain-add-btn:hover{border-color:rgba(240,192,96,0.5);}
+#problemMathOut{margin-top:14px;padding:14px;border-radius:14px;background:rgba(0,0,0,0.2);border:1px solid var(--mid);}
+.calc-pif-row{margin-top:16px;padding:14px 16px;border-radius:14px;background:rgba(240,192,96,0.06);border:1px solid rgba(240,192,96,0.2);}
+.calc-pif-row input[type="range"]{width:100%;max-width:320px;}
+.calc-cash-out{margin-top:12px;padding:12px 14px;border-radius:12px;background:rgba(0,201,122,0.06);border:1px solid rgba(0,201,122,0.18);font-size:13px;line-height:1.6;}
+.calc-advanced{margin-top:18px;border-radius:16px;border:1px solid var(--mid);background:rgba(0,0,0,0.15);overflow:hidden;}
+.calc-advanced summary{cursor:pointer;padding:14px 18px;font-family:var(--font-d);font-size:13px;font-weight:700;color:var(--text);list-style:none;}
+.calc-advanced summary::-webkit-details-marker{display:none;}
+.calc-advanced summary::after{content:'+';float:right;color:var(--green-dim);font-weight:800;}
+.calc-advanced[open] summary::after{content:'−';}
+.calc-advanced .calc-grid{padding:0 18px 18px;}
+#calcRampFoot{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5;}
 .path-other-input{width:100%;margin-top:10px;padding:12px 14px;border-radius:12px;border:1px solid var(--mid);background:rgba(255,255,255,0.04);color:var(--text);font-size:14px;font-family:var(--font-b);}
 .path-other-input:focus{outline:none;border-color:rgba(0,201,122,0.4);}
 .path-other-input::placeholder{color:var(--muted);}
 .income-grid{display:grid;gap:10px;}
 @media(min-width:620px){.income-grid{grid-template-columns:repeat(2,1fr);}}
-@media(min-width:900px){.income-grid{grid-template-columns:repeat(4,1fr);}}
+@media(min-width:900px){.income-grid{grid-template-columns:repeat(3,1fr);}}
 .income-cell{background:var(--navy-card);border:1px solid var(--mid);border-radius:14px;padding:12px 14px;}
 .income-h{font-family:var(--font-m);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-dim);display:block;margin-bottom:8px;}
 .income-cell select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--mid);background:#0a1528;color:var(--text);font-size:13px;font-family:var(--font-b);cursor:pointer;}
@@ -166,7 +238,8 @@ body{font-family:var(--font-b);background:var(--navy);color:var(--text-soft);lin
 .bento-card p{font-size:12.5px;color:var(--muted);line-height:1.55;}
 
 /* ── STATS BAR ── */
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:24px;background:var(--mid);border:1px solid var(--mid);border-radius:18px;overflow:hidden;}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:24px;background:var(--mid);border:1px solid var(--mid);border-radius:18px;overflow:hidden;}
+@media(max-width:900px){.stats-row{grid-template-columns:repeat(2,1fr);}}
 .stat-box{background:var(--navy-card);padding:22px 18px;text-align:center;}
 .stat-val{font-family:var(--font-d);font-size:2.2rem;font-weight:800;color:var(--green);line-height:1;letter-spacing:-0.03em;}
 .stat-label{font-size:11px;color:var(--muted);margin-top:5px;font-family:var(--font-m);letter-spacing:0.08em;text-transform:uppercase;}
@@ -448,6 +521,9 @@ window.PRE_CALL_CONFIG = {
     </div>
     <div class="chip-row">
       <a class="chip" href="#your-path">Your path</a>
+      <a class="chip" href="#current-problem">Current situation</a>
+      <a class="chip" href="#income-calculator">Income math</a>
+      <a class="chip" href="#future-gap">Direction &amp; targets</a>
       <a class="chip" href="#what-hts">The craft</a>
       <a class="chip" href="#why-htsa">Why HTSA</a>
       <a class="chip" href="#watch">Watch list</a>
@@ -461,77 +537,239 @@ window.PRE_CALL_CONFIG = {
 
   <section class="section path-section reveal" id="your-path" data-reveal>
     <div class="path-heart">
-      <span class="path-badge">This is about you</span>
-      <h2 class="section-title" style="margin-bottom:8px;">Name the future you’re chasing.</h2>
-      <p class="section-sub" style="margin-top:0;">Rough numbers are perfect. This isn’t a test — it’s <strong>future pacing</strong> so I show up to our call already picturing <em>your</em> lane. Take two minutes. It changes how we talk.</p>
+      <span class="path-badge">On our call</span>
+      <h2 class="section-title" style="margin-bottom:8px;">Current situation</h2>
+      <p class="section-sub" style="margin-top:0;">A quick snapshot — where you are, a simple income sketch, and what you’re curious about next. Ballpark numbers are fine; we’ll talk through the rest live.</p>
     </div>
     <div class="path-mirror" id="pathMirror"></div>
 
-    <p class="path-label">Industry I’m most passionate about</p>
-    <div class="industry-grid" role="radiogroup" aria-label="Industry focus">
-      <label class="ind-pill"><input type="radio" name="pathIndustry" value="AI / tech sales" /> AI / Tech</label>
-      <label class="ind-pill"><input type="radio" name="pathIndustry" value="Real estate &amp; related" /> Real estate</label>
-      <label class="ind-pill"><input type="radio" name="pathIndustry" value="Fitness / wellness / health" /> Fitness</label>
-      <label class="ind-pill"><input type="radio" name="pathIndustry" value="Other" /> Other</label>
-    </div>
-    <div id="pathOtherWrap" class="hidden">
-      <label class="path-label" for="pathIndustryOther" style="margin-top:14px;">Describe your lane</label>
-      <input type="text" class="path-other-input" id="pathIndustryOther" placeholder="e.g. solar, med device, coaching…" autocomplete="off" />
+    <div class="problem-wrap reveal" id="current-problem" data-reveal>
+      <p class="path-label">Where things stand today</p>
+      <p class="calc-step-body">What’s true <strong>right now</strong> — in your words. Saves with this page so you can come back to it.</p>
+      <div class="calc-grid">
+        <div class="calc-field">
+          <label for="probWeeklyIncome">What you make now (per week, gross)</label>
+          <input type="number" id="probWeeklyIncome" min="0" step="50" placeholder="e.g. 1000" />
+        </div>
+        <div class="calc-field">
+          <label for="probHoursWeek">Hours per week at that job</label>
+          <input type="number" id="probHoursWeek" min="1" max="120" value="40" step="1" />
+          <div class="range-val">Ballpark is fine — most people know weekly hours, not monthly.</div>
+        </div>
+        <div class="calc-field">
+          <label for="probGoalAnnual">Annual income you wish you were at (gross, optional)</label>
+          <input type="number" id="probGoalAnnual" min="0" step="1000" placeholder="e.g. 100000" />
+          <div class="range-val">Used only to show whether “just work more hours” at your current $/hr could get you there.</div>
+        </div>
+      </div>
+      <div id="problemMathOut" aria-live="polite"></div>
+      <p class="path-label" style="margin-top:18px;">What’s not working (tap all that fit)</p>
+      <div class="pain-grid" id="painChipMount" role="group" aria-label="What’s been tough"></div>
+      <div class="pain-other-wrap">
+        <label class="path-label" for="painOtherText" style="margin-top:0;">Other — say it your way</label>
+        <input type="text" class="path-other-input" id="painOtherText" placeholder="Anything specific that’s not listed…" autocomplete="off" />
+      </div>
+      <div id="painExtraRows"></div>
+      <button type="button" class="pain-add-btn" id="painAddRowBtn">+ Add another line</button>
     </div>
 
-    <p class="path-label">Monthly income you’re aiming for (ballpark)</p>
-    <div class="income-grid">
-      <div class="income-cell">
-        <span class="income-h">3 months</span>
-        <select id="inc3" aria-label="Income goal at 3 months">
-          <option value="">Select…</option>
-          <option value="Not sure yet">Not sure yet</option>
-          <option value="Under $3k / mo">Under $3k / mo</option>
-          <option value="$3k–$6k / mo">$3k–$6k / mo</option>
-          <option value="$6k–$10k / mo">$6k–$10k / mo</option>
-          <option value="$10k–$15k / mo">$10k–$15k / mo</option>
-          <option value="$15k–$25k / mo">$15k–$25k / mo</option>
-          <option value="$25k+ / mo">$25k+ / mo</option>
-        </select>
+    <div class="calc-wrap reveal" id="income-calculator" data-reveal>
+      <p class="path-label">Rough income math (not a promise)</p>
+      <p class="calc-lead">Walk <strong>1 → 5</strong> in order while we talk: <strong>offer</strong> → <strong>close %</strong> → <strong>your commission %</strong> → <strong>monthly commission goal</strong> → <strong>hours + spread</strong>. Step 5: <strong>hours/week</strong> and optionally <strong>days/week</strong> (3–7) so <strong>booked calls/day = hours ÷ days</strong> (1 hr per call). Monthly sketch ≈ <strong>weekly × 4</strong>. Cash in your pocket often trails “booked” deals — see <strong>PIF vs payment plan</strong> below.</p>
+
+      <div class="calc-step">
+        <span class="calc-step-badge" aria-hidden="true">1</span>
+        <div>
+          <h3 class="calc-step-title">Average offer size (deal value)</h3>
+          <p class="calc-step-body">Remote high-ticket offers often fall in a <strong>roughly $5k–$20k</strong> band; many land <strong>$8k–$12k</strong>. We default <strong>$5k</strong> to stay conservative — tabs are rounded; your partner may price differently (e.g. PIF vs a slightly higher multi-pay).</p>
+          <div class="calc-comm-row" role="group" aria-label="Average offer size in dollars">
+            <button type="button" class="calc-comm-tab calc-offer-tab is-active" data-offer="5000">$5k<span class="calc-tab-sub">conservative default</span></button>
+            <button type="button" class="calc-comm-tab calc-offer-tab" data-offer="8000">$8k</button>
+            <button type="button" class="calc-comm-tab calc-offer-tab" data-offer="10000">$10k</button>
+            <button type="button" class="calc-comm-tab calc-offer-tab" data-offer="12000">$12k</button>
+            <button type="button" class="calc-comm-tab calc-offer-tab" data-offer="15000">$15k</button>
+            <button type="button" class="calc-comm-tab calc-offer-tab" data-offer="20000">$20k</button>
+          </div>
+          <input type="hidden" id="calcOffer" value="5000" />
+        </div>
       </div>
-      <div class="income-cell">
-        <span class="income-h">6 months</span>
-        <select id="inc6" aria-label="Income goal at 6 months">
-          <option value="">Select…</option>
-          <option value="Not sure yet">Not sure yet</option>
-          <option value="Under $3k / mo">Under $3k / mo</option>
-          <option value="$3k–$6k / mo">$3k–$6k / mo</option>
-          <option value="$6k–$10k / mo">$6k–$10k / mo</option>
-          <option value="$10k–$15k / mo">$10k–$15k / mo</option>
-          <option value="$15k–$25k / mo">$15k–$25k / mo</option>
-          <option value="$25k+ / mo">$25k+ / mo</option>
-        </select>
+
+      <div class="calc-step">
+        <span class="calc-step-badge" aria-hidden="true">2</span>
+        <div>
+          <h3 class="calc-step-title">Close rate (conversation → sale)</h3>
+          <p class="calc-step-body">Industry bands are wide: many see <strong>~15–25%</strong> as a common “average” range on qualified conversations; stronger reps on warm inbound often land <strong>~25–35%</strong>; cold or messy traffic can be much lower. New to the seat — we default <strong>20%</strong>.</p>
+          <div class="calc-comm-row" role="group" aria-label="Close rate percent">
+            <button type="button" class="calc-comm-tab calc-close-tab" data-close="15">15%</button>
+            <button type="button" class="calc-comm-tab calc-close-tab is-active" data-close="20">20%<span class="calc-tab-sub">conservative default</span></button>
+            <button type="button" class="calc-comm-tab calc-close-tab" data-close="25">25%</button>
+            <button type="button" class="calc-comm-tab calc-close-tab" data-close="30">30%</button>
+          </div>
+          <input type="hidden" id="calcClose" value="20" />
+        </div>
       </div>
-      <div class="income-cell">
-        <span class="income-h">12 months</span>
-        <select id="inc12" aria-label="Income goal at 12 months">
-          <option value="">Select…</option>
-          <option value="Not sure yet">Not sure yet</option>
-          <option value="Under $3k / mo">Under $3k / mo</option>
-          <option value="$3k–$6k / mo">$3k–$6k / mo</option>
-          <option value="$6k–$10k / mo">$6k–$10k / mo</option>
-          <option value="$10k–$15k / mo">$10k–$15k / mo</option>
-          <option value="$15k–$25k / mo">$15k–$25k / mo</option>
-          <option value="$25k+ / mo">$25k+ / mo</option>
-        </select>
+
+      <div class="calc-step">
+        <span class="calc-step-badge" aria-hidden="true">3</span>
+        <div>
+          <h3 class="calc-step-title">Your commission on money collected</h3>
+          <p class="calc-step-body">Full commissions in this space are often <strong>about 10–15%</strong> of what the buyer pays; some partners go higher as you prove out. We default <strong>10%</strong> so the sketch stays conservative.</p>
+          <div class="calc-comm-row" role="group" aria-label="Commission percent on collected revenue">
+            <button type="button" class="calc-comm-tab is-active" data-comm="10">10%<span class="calc-tab-sub">conservative default</span></button>
+            <button type="button" class="calc-comm-tab" data-comm="11">11%</button>
+            <button type="button" class="calc-comm-tab" data-comm="12">12%</button>
+            <button type="button" class="calc-comm-tab" data-comm="15">15%</button>
+            <button type="button" class="calc-comm-tab" data-comm="20">20%<span class="calc-tab-sub">upper band</span></button>
+          </div>
+          <input type="hidden" id="calcComm" value="10" />
+        </div>
       </div>
-      <div class="income-cell">
-        <span class="income-h">2 years</span>
-        <select id="inc24" aria-label="Income goal at 2 years">
-          <option value="">Select…</option>
-          <option value="Not sure yet">Not sure yet</option>
-          <option value="Under $3k / mo">Under $3k / mo</option>
-          <option value="$3k–$6k / mo">$3k–$6k / mo</option>
-          <option value="$6k–$10k / mo">$6k–$10k / mo</option>
-          <option value="$10k–$15k / mo">$10k–$15k / mo</option>
-          <option value="$15k–$25k / mo">$15k–$25k / mo</option>
-          <option value="$25k+ / mo">$25k+ / mo</option>
-        </select>
+
+      <div class="calc-step">
+        <span class="calc-step-badge" aria-hidden="true">4</span>
+        <div>
+          <h3 class="calc-step-title">Monthly commission goal</h3>
+          <p class="calc-step-body">Rough monthly <strong>commission to you</strong> (your cut — not the company’s gross).</p>
+          <label for="calcMonthlyGoal" class="visually-hidden">Monthly commission goal in dollars</label>
+          <input type="number" class="calc-goal-input" id="calcMonthlyGoal" min="0" step="100" placeholder="e.g. 10000" />
+          <p class="range-val" style="margin-top:10px;">Farther down the page you can pick a 12‑month income band and <strong>apply it here</strong> in one tap.</p>
+        </div>
+      </div>
+
+      <div class="calc-step">
+        <span class="calc-step-badge" aria-hidden="true">5</span>
+        <div>
+          <h3 class="calc-step-title">Dial, calendar &amp; hours you’ll invest</h3>
+          <p class="calc-step-body">Remote / flexible schedule — we only care about <strong>total hours per week</strong> you’ll put into this path and how you spread them. Rule of thumb: <strong>one booked call ≈ one hour</strong>, so <strong>calls per day on-path = hours/week ÷ days/week</strong>. Monthly numbers below use a simple <strong>~4-week month</strong> (same idea as hours/week × 4). Pick <strong>days per week</strong> when you want to see the split (e.g. 40 hrs → 8 calls/day over 5 days, or spread over 7).</p>
+          <div class="calc-grid">
+            <div class="calc-field">
+              <label for="calcHoursWeekModel">Hours/week for this path (rough)</label>
+              <input type="number" id="calcHoursWeekModel" min="1" max="120" value="40" step="1" />
+              <div class="range-val">Total hours you’re willing to run this lane per week — whenever you work them.</div>
+            </div>
+            <div class="calc-field">
+              <label for="calcWorkDaysWeek">Days per week on this path</label>
+              <select id="calcWorkDaysWeek">
+                <option value="">Select…</option>
+                <option value="3">3 days</option>
+                <option value="4">4 days</option>
+                <option value="5">5 days</option>
+                <option value="6">6 days</option>
+                <option value="7">7 days</option>
+              </select>
+              <div class="range-val">Optional — choose how you’re spreading those hours (e.g. 5 = “weekday” pace, 7 = lighter daily load). Leave unselected until you want the split.</div>
+              <p class="range-val" id="calcCallsDerived" style="margin-top:8px;color:var(--green-dim);font-weight:600;">Calls/day appears after you pick days/week.</p>
+            </div>
+            <div class="calc-field">
+              <label for="calcShow">Show rate (% who actually show)</label>
+              <input type="number" id="calcShow" min="10" max="100" value="75" />
+              <div class="range-val">Booked calls that become real conversations.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <details class="calc-advanced">
+        <summary>Exact overrides (optional)</summary>
+        <p class="calc-step-body" style="margin-bottom:12px;">Use only if you need a number that doesn’t match the tabs — leave blank to use steps 1, 3 &amp; 4 above.</p>
+        <div class="calc-grid">
+          <div class="calc-field">
+            <label for="calcCommFine">Exact commission %</label>
+            <input type="number" id="calcCommFine" min="5" max="40" value="" step="0.5" placeholder="e.g. 12.5" />
+          </div>
+          <div class="calc-field">
+            <label for="calcOfferFine">Exact average offer ($)</label>
+            <input type="number" id="calcOfferFine" min="1000" max="100000" value="" step="100" placeholder="overrides $5k–$20k tabs" />
+          </div>
+          <div class="calc-field">
+            <label for="calcCloseFine">Exact close rate %</label>
+            <input type="number" id="calcCloseFine" min="1" max="60" value="" step="1" placeholder="overrides 15–30% tabs" />
+          </div>
+        </div>
+      </details>
+
+      <div class="calc-pif-row">
+        <p class="path-label" style="margin-top:0;">Cash vs booked (real life)</p>
+        <p class="calc-step-body" style="margin-bottom:10px;">You earn on <strong>cash collected</strong>. Not every buyer pays in full up front — many deals split (e.g. <strong>4 monthly payments</strong>). Slide to match how many of your deals are <strong>paid in full</strong> vs <strong>on a plan</strong> (first payment this week on plans).</p>
+        <label for="calcPifDealPct">Deals paid in full: <strong id="calcPifDealPctLabel">60</strong>% · on payment plan: <strong id="calcPlanDealPctLabel">40</strong>%</label>
+        <input type="range" id="calcPifDealPct" min="0" max="100" value="60" step="5" aria-valuetext="60 percent paid in full" />
+        <p class="range-val">Plans assumed <strong>4 equal payments</strong>; commission = % of each payment as it hits. After a few consistent months, prior plans stack like “residuals.”</p>
+        <div class="calc-cash-out" id="calcCashOutput" aria-live="polite"></div>
+      </div>
+
+      <div class="calc-out" id="calcOutput" aria-live="polite">
+        <span class="calc-k">What this math says</span>
+        <div id="calcOutputMain">Set steps 1–5, then add a monthly commission goal in step 4 to see activity targets.</div>
+        <span class="calc-k" style="margin-top:14px;">Example: getting sharper over ~12 weeks</span>
+        <p style="font-size:12px;color:var(--muted);margin:0 0 8px;">Same calls &amp; show rate — <strong>close rate rises</strong> from an early learning band toward your modeled rate (or toward a ~23% planning benchmark if you used a very low % in overrides). Projected monthly commission if cash matched booked deals:</p>
+        <table class="calc-ramp-table" id="calcRampTable">
+          <thead><tr><th>Checkpoint</th><th>Close %</th><th>~Monthly commission</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <p id="calcRampFoot" class="hidden"></p>
+      </div>
+      <p class="calc-disclaimer">Not financial advice. “Laptop by the pool in week two” skips show rate, collections, and skill ramp. Use this for <strong>honest</strong> range-finding — then outwork the model.</p>
+    </div>
+
+    <div class="gap-wrap reveal" id="future-gap" data-reveal>
+      <p class="path-label">What you’re drawn to &amp; where you’re headed</p>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 14px;line-height:1.55;">Rank what interests you, then ballpark monthly income for <strong>3, 6, and 12 months</strong> out. After you choose 12 months, you can push that band up into <strong>monthly commission goal</strong> in the calculator <em>above</em>.</p>
+
+      <p class="path-label">Industries you’re curious about (up to 5 — #1 = most excited)</p>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 10px;line-height:1.55;">There’s no single “right” lane — tap what fits you and we’ll go deeper on the call.</p>
+      <div class="ind-pool-wrap" id="industryPoolScroll" aria-label="Industry choices">
+        <div id="industryPoolMount"></div>
+      </div>
+      <div id="rankedList" class="ranked-list" aria-live="polite"></div>
+      <button type="button" class="clear-ind-btn" id="clearIndustries">Clear all picks</button>
+
+      <label class="path-label" for="pathIndustryOther">Niche or specifics (optional)</label>
+      <input type="text" class="path-other-input" id="pathIndustryOther" placeholder="e.g. weight loss coaching, med-spa, solar, faith-based programs…" autocomplete="off" />
+
+      <p class="path-label">Monthly income you’re aiming for (ballpark)</p>
+      <div class="income-grid">
+        <div class="income-cell">
+          <span class="income-h">3 months</span>
+          <select id="inc3" aria-label="Income goal at 3 months">
+            <option value="">Select…</option>
+            <option value="Not sure yet">Not sure yet</option>
+            <option value="Under $3k / mo">Under $3k / mo</option>
+            <option value="$3k–$6k / mo">$3k–$6k / mo</option>
+            <option value="$6k–$10k / mo">$6k–$10k / mo</option>
+            <option value="$10k–$15k / mo">$10k–$15k / mo</option>
+            <option value="$15k–$25k / mo">$15k–$25k / mo</option>
+            <option value="$25k+ / mo">$25k+ / mo</option>
+          </select>
+        </div>
+        <div class="income-cell">
+          <span class="income-h">6 months</span>
+          <select id="inc6" aria-label="Income goal at 6 months">
+            <option value="">Select…</option>
+            <option value="Not sure yet">Not sure yet</option>
+            <option value="Under $3k / mo">Under $3k / mo</option>
+            <option value="$3k–$6k / mo">$3k–$6k / mo</option>
+            <option value="$6k–$10k / mo">$6k–$10k / mo</option>
+            <option value="$10k–$15k / mo">$10k–$15k / mo</option>
+            <option value="$15k–$25k / mo">$15k–$25k / mo</option>
+            <option value="$25k+ / mo">$25k+ / mo</option>
+          </select>
+        </div>
+        <div class="income-cell">
+          <span class="income-h">12 months</span>
+          <select id="inc12" aria-label="Income goal at 12 months">
+            <option value="">Select…</option>
+            <option value="Not sure yet">Not sure yet</option>
+            <option value="Under $3k / mo">Under $3k / mo</option>
+            <option value="$3k–$6k / mo">$3k–$6k / mo</option>
+            <option value="$6k–$10k / mo">$6k–$10k / mo</option>
+            <option value="$10k–$15k / mo">$10k–$15k / mo</option>
+            <option value="$15k–$25k / mo">$15k–$25k / mo</option>
+            <option value="$25k+ / mo">$25k+ / mo</option>
+          </select>
+        </div>
+      </div>
+      <div class="calc-actions" style="margin-top:14px;">
+        <button type="button" class="btn outline" id="calcPullGoalBtn">Apply 12‑month band to monthly commission goal (calculator above)</button>
       </div>
     </div>
 
@@ -558,11 +796,12 @@ window.PRE_CALL_CONFIG = {
       <p>It's helping someone make a meaningful decision — usually on Zoom or phone — when the offer matters and the pay reflects the skill. Not cold spray-and-pray. People raised their hand. HTSA trains that skill from the ground up, certifies you with Chad's name behind yours, and places you directly with companies that need closers.</p>
     </div>
     <div class="stats-row">
-      <div class="stat-box"><div class="stat-val">430+</div><div class="stat-label">Placed members</div></div>
+      <div class="stat-box"><div class="stat-val">500+</div><div class="stat-label">Community members</div></div>
+      <div class="stat-box"><div class="stat-val">430+</div><div class="stat-label">Placements*</div></div>
       <div class="stat-box"><div class="stat-val">100%</div><div class="stat-label">Placement rate*</div></div>
       <div class="stat-box"><div class="stat-val">4.8★</div><div class="stat-label">Trustpilot verified</div></div>
     </div>
-    <p style="font-size:11px;color:var(--muted);margin-top:10px;">*Every member who completed certification and worked the full placement process with Nate has been placed. The guarantee has never been triggered. Stats per HTSA; verify on our call.</p>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;">Community number is total HTSA reach (students, alumni, mastermind). Placement count is grads placed in roles. *Every member who completed certification and worked the full placement process with Nate has been placed. The guarantee has never been triggered. Stats per HTSA; verify on our call.</p>
   </section>
 
   <section class="section reveal" id="why-htsa" data-reveal>
@@ -961,6 +1200,20 @@ window.PRE_CALL_CONFIG = {
   try { saved = JSON.parse(localStorage.getItem(storageKey) || '{}') || {}; } catch (e) {}
   var pathStoreKey = 'htsa-path-fields-v1';
 
+  // Curated lanes — closers work across all of these (grouped for scanning, not limits)
+  var INDUSTRY_BY_CAT = {
+    'Health, wellness & growth': ['Healthcare & medical', 'Fitness & wellness', 'Personal development & coaching'],
+    'Business, sales & revenue': ['Sales (B2B / B2C)', 'Real estate & property', 'Insurance & finance education', 'E‑commerce & retail'],
+    'Tech, marketing & operations': ['AI & automations', 'Tech / SaaS', 'Digital marketing', 'Solar & home services'],
+    'People, mission & professional': ['Spirituality & faith', 'Nonprofit & mission-driven', 'Legal & professional services', 'Travel & hospitality'],
+    'Open lane': ['Other (describe below)']
+  };
+  var ALL_INDUSTRIES = [];
+  Object.keys(INDUSTRY_BY_CAT).forEach(function (cat) {
+    INDUSTRY_BY_CAT[cat].forEach(function (name) { ALL_INDUSTRIES.push(name); });
+  });
+  var industryRanked = []; // up to 5, in priority order
+
   var first = document.getElementById('cfgFirstName');
   if (first) first.textContent = cfg.firstName || 'there';
   var noteEl = document.getElementById('cfgPersonal');
@@ -1011,26 +1264,54 @@ window.PRE_CALL_CONFIG = {
     return d.innerHTML;
   }
 
+  // One line for copy/SMS: ranked industries + optional niche
   function getPathIndustry() {
-    var r = document.querySelector('input[name="pathIndustry"]:checked');
-    if (!r) return '';
-    if (r.value === 'Other') {
-      var o = document.getElementById('pathIndustryOther');
-      return (o && o.value.trim()) ? o.value.trim() : 'Other (describe on call)';
-    }
-    return r.value;
+    if (!industryRanked.length) return '';
+    var parts = industryRanked.map(function (name, i) { return (i + 1) + ') ' + name; });
+    var line = 'Top industries (1 = most excited): ' + parts.join('; ');
+    var niche = (document.getElementById('pathIndustryOther') || {}).value || '';
+    if (niche.trim()) line += '. Niche / specifics: ' + niche.trim();
+    return line;
+  }
+
+  function collectPainExtras() {
+    var arr = [];
+    document.querySelectorAll('.pain-extra-input').forEach(function (inp) {
+      if (inp.value.trim()) arr.push(inp.value.trim());
+    });
+    return arr;
   }
 
   function savePathFields() {
-    var r = document.querySelector('input[name="pathIndustry"]:checked');
+    var painPresetKeys = [];
+    document.querySelectorAll('.pain-chip.is-on').forEach(function (b) {
+      var k = b.getAttribute('data-pain');
+      if (k) painPresetKeys.push(k);
+    });
     var payload = {
-      industryVal: r ? r.value : '',
+      industryRanked: industryRanked.slice(),
       industryOther: (document.getElementById('pathIndustryOther') || {}).value || '',
       inc3: (document.getElementById('inc3') || {}).value || '',
       inc6: (document.getElementById('inc6') || {}).value || '',
       inc12: (document.getElementById('inc12') || {}).value || '',
-      inc24: (document.getElementById('inc24') || {}).value || '',
-      win: (document.getElementById('pathWin') || {}).value || ''
+      win: (document.getElementById('pathWin') || {}).value || '',
+      probWeeklyIncome: (document.getElementById('probWeeklyIncome') || {}).value || '',
+      probHoursWeek: (document.getElementById('probHoursWeek') || {}).value || '',
+      probGoalAnnual: (document.getElementById('probGoalAnnual') || {}).value || '',
+      painPresets: painPresetKeys,
+      painOther: (document.getElementById('painOtherText') || {}).value || '',
+      painExtras: collectPainExtras(),
+      calcMonthlyGoal: (document.getElementById('calcMonthlyGoal') || {}).value || '',
+      calcOffer: (document.getElementById('calcOffer') || {}).value || '',
+      calcClose: (document.getElementById('calcClose') || {}).value || '',
+      calcComm: (document.getElementById('calcComm') || {}).value || '',
+      calcHoursWeekModel: (document.getElementById('calcHoursWeekModel') || {}).value || '',
+      calcWorkDaysWeek: (document.getElementById('calcWorkDaysWeek') || {}).value || '',
+      calcShow: (document.getElementById('calcShow') || {}).value || '',
+      calcPifDealPct: (document.getElementById('calcPifDealPct') || {}).value || '',
+      calcCommFine: (document.getElementById('calcCommFine') || {}).value || '',
+      calcOfferFine: (document.getElementById('calcOfferFine') || {}).value || '',
+      calcCloseFine: (document.getElementById('calcCloseFine') || {}).value || ''
     };
     try { localStorage.setItem(pathStoreKey, JSON.stringify(payload)); } catch (e) {}
     updatePathMirror();
@@ -1039,36 +1320,492 @@ window.PRE_CALL_CONFIG = {
   function updatePathMirror() {
     var el = document.getElementById('pathMirror');
     if (!el) return;
-    var ind = getPathIndustry();
-    if (!ind) {
+    if (!industryRanked.length) {
       el.innerHTML = '';
       return;
     }
-    el.innerHTML = 'You’re leaning toward <strong>' + escapeHtml(ind) + '</strong> — we’ll connect the dots on the call. I’m already rooting for this chapter for you.';
+    var n = industryRanked.length;
+    var msg = n === 1
+      ? 'Saved your top interest — we’ll pick this up on the call.'
+      : 'Saved your top ' + n + ' interests — we’ll pick this up on the call.';
+    el.innerHTML = escapeHtml(msg);
+  }
+
+  function renderIndustryPool() {
+    var mount = document.getElementById('industryPoolMount');
+    if (!mount) return;
+    mount.innerHTML = '';
+    Object.keys(INDUSTRY_BY_CAT).forEach(function (cat) {
+      var block = document.createElement('div');
+      block.className = 'ind-cat-block';
+      var lab = document.createElement('p');
+      lab.className = 'ind-cat-label';
+      lab.textContent = cat;
+      block.appendChild(lab);
+      var grid = document.createElement('div');
+      grid.className = 'ind-pool-grid';
+      INDUSTRY_BY_CAT[cat].forEach(function (name) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'ind-chip';
+        b.setAttribute('data-ind', name);
+        b.textContent = name;
+        b.addEventListener('click', function () { toggleIndustry(name); });
+        grid.appendChild(b);
+      });
+      block.appendChild(grid);
+      mount.appendChild(block);
+    });
+    syncIndustryChips();
+  }
+
+  function syncIndustryChips() {
+    document.querySelectorAll('.ind-chip').forEach(function (btn) {
+      var n = btn.getAttribute('data-ind');
+      var on = industryRanked.indexOf(n) >= 0;
+      btn.classList.toggle('is-picked', on);
+      btn.disabled = industryRanked.length >= 5 && !on;
+    });
+  }
+
+  function toggleIndustry(name) {
+    var i = industryRanked.indexOf(name);
+    if (i >= 0) industryRanked.splice(i, 1);
+    else if (industryRanked.length < 5) industryRanked.push(name);
+    syncIndustryChips();
+    renderRanked();
+    savePathFields();
+  }
+
+  function renderRanked() {
+    var box = document.getElementById('rankedList');
+    if (!box) return;
+    if (!industryRanked.length) {
+      box.innerHTML = '<p class="ranked-empty">Tap industries from the list when you’re ready — #1 is what you’re most excited about.</p>';
+      return;
+    }
+    box.innerHTML = '';
+    industryRanked.forEach(function (name, idx) {
+      var row = document.createElement('div');
+      row.className = 'rank-row';
+      var nameSpan = document.createElement('span');
+      nameSpan.className = 'rank-name';
+      nameSpan.textContent = name;
+      var num = document.createElement('span');
+      num.className = 'rank-num';
+      num.textContent = String(idx + 1);
+      var actions = document.createElement('div');
+      actions.className = 'rank-actions';
+      [['up', '↑', 'Move up'], ['down', '↓', 'Move down'], ['remove', '×', 'Remove']].forEach(function (def) {
+        var bt = document.createElement('button');
+        bt.type = 'button';
+        bt.className = 'rank-btn' + (def[0] === 'remove' ? ' rank-remove' : '');
+        bt.setAttribute('data-dir', def[0]);
+        bt.setAttribute('aria-label', def[2]);
+        bt.textContent = def[1];
+        bt.addEventListener('click', function () {
+          var j = industryRanked.indexOf(name);
+          if (j < 0) return;
+          if (def[0] === 'remove') industryRanked.splice(j, 1);
+          else if (def[0] === 'up' && j > 0) {
+            var t = industryRanked[j - 1]; industryRanked[j - 1] = industryRanked[j]; industryRanked[j] = t;
+          } else if (def[0] === 'down' && j < industryRanked.length - 1) {
+            var t2 = industryRanked[j + 1]; industryRanked[j + 1] = industryRanked[j]; industryRanked[j] = t2;
+          }
+          syncIndustryChips();
+          renderRanked();
+          savePathFields();
+        });
+        actions.appendChild(bt);
+      });
+      row.appendChild(num);
+      row.appendChild(nameSpan);
+      row.appendChild(actions);
+      box.appendChild(row);
+    });
   }
 
   function loadPathFields() {
     var raw;
     try { raw = JSON.parse(localStorage.getItem(pathStoreKey) || 'null'); } catch (e) { raw = null; }
-    if (!raw || typeof raw !== 'object') return;
-    document.querySelectorAll('.ind-pill').forEach(function (l) { l.classList.remove('ind-pill--active'); });
-    if (raw.industryVal) {
-      document.querySelectorAll('input[name="pathIndustry"]').forEach(function (inp) {
-        inp.checked = inp.value === raw.industryVal;
-        if (inp.checked && inp.closest('.ind-pill')) inp.closest('.ind-pill').classList.add('ind-pill--active');
+    if (!raw || typeof raw !== 'object') raw = {};
+    industryRanked = [];
+    if (raw.industryRanked && Array.isArray(raw.industryRanked)) {
+      raw.industryRanked.forEach(function (x) {
+        if (x && ALL_INDUSTRIES.indexOf(x) >= 0 && industryRanked.indexOf(x) < 0 && industryRanked.length < 5) industryRanked.push(x);
       });
+    } else if (raw.industryVal) {
+      var mapOld = { 'AI / tech sales': 'AI & automations', 'Real estate & related': 'Real estate & property', 'Fitness / wellness / health': 'Fitness & wellness', 'Other': 'Other (describe below)' };
+      var m = mapOld[raw.industryVal] || raw.industryVal;
+      if (ALL_INDUSTRIES.indexOf(m) >= 0) industryRanked.push(m);
+      else if (raw.industryVal === 'Other') industryRanked.push('Other (describe below)');
     }
-    var ow = document.getElementById('pathOtherWrap');
-    if (ow) ow.classList.toggle('hidden', raw.industryVal !== 'Other');
     var ot = document.getElementById('pathIndustryOther');
     if (ot && raw.industryOther) ot.value = raw.industryOther;
-    ['inc3','inc6','inc12','inc24'].forEach(function (id) {
+    ['inc3', 'inc6', 'inc12'].forEach(function (id) {
       var s = document.getElementById(id);
       if (s && raw[id]) s.value = raw[id];
     });
     var w = document.getElementById('pathWin');
     if (w && raw.win) w.value = raw.win;
+    var pw = document.getElementById('probWeeklyIncome');
+    if (pw && raw.probWeeklyIncome !== undefined && raw.probWeeklyIncome !== null) pw.value = raw.probWeeklyIncome;
+    var ph = document.getElementById('probHoursWeek');
+    if (ph && raw.probHoursWeek) ph.value = raw.probHoursWeek;
+    var pg = document.getElementById('probGoalAnnual');
+    if (pg && raw.probGoalAnnual !== undefined && raw.probGoalAnnual !== null) pg.value = raw.probGoalAnnual;
+    if (raw.painPresets && Array.isArray(raw.painPresets)) {
+      document.querySelectorAll('.pain-chip').forEach(function (b) {
+        var k = b.getAttribute('data-pain');
+        b.classList.toggle('is-on', raw.painPresets.indexOf(k) >= 0);
+      });
+    }
+    var pot = document.getElementById('painOtherText');
+    if (pot && raw.painOther) pot.value = raw.painOther;
+    var per = document.getElementById('painExtraRows');
+    if (per && raw.painExtras && Array.isArray(raw.painExtras)) {
+      per.innerHTML = '';
+      raw.painExtras.forEach(function (line) {
+        if (!line) return;
+        var row = document.createElement('div');
+        row.className = 'pain-row';
+        var inp = document.createElement('input');
+        inp.type = 'text';
+        inp.className = 'pain-extra-input';
+        inp.value = line;
+        inp.placeholder = 'Another line…';
+        inp.addEventListener('input', savePathFields);
+        row.appendChild(inp);
+        per.appendChild(row);
+      });
+    }
+    function setIf(elId, val) {
+      var el = document.getElementById(elId);
+      if (el && val !== undefined && val !== null && val !== '') el.value = val;
+    }
+    setIf('calcMonthlyGoal', raw.calcMonthlyGoal);
+    setIf('calcOffer', raw.calcOffer);
+    setIf('calcClose', raw.calcClose);
+    setIf('calcComm', raw.calcComm);
+    setIf('calcHoursWeekModel', raw.calcHoursWeekModel);
+    setIf('calcWorkDaysWeek', raw.calcWorkDaysWeek);
+    // Older saves had separate calls/day — infer days/week so hours ÷ days ≈ old calls/day
+    if (!raw.calcWorkDaysWeek && raw.calcHoursWeekModel && raw.calcCallsDay) {
+      var _h0 = parseFloat(String(raw.calcHoursWeekModel), 10);
+      var _c0 = parseFloat(String(raw.calcCallsDay), 10);
+      if (_h0 > 0 && _c0 > 0) {
+        var inferred = Math.round(_h0 / _c0);
+        if (inferred >= 1 && inferred <= 7) {
+          var elDw = document.getElementById('calcWorkDaysWeek');
+          if (elDw) elDw.value = String(inferred);
+        }
+      }
+    }
+    setIf('calcShow', raw.calcShow);
+    setIf('calcPifDealPct', raw.calcPifDealPct);
+    setIf('calcCommFine', raw.calcCommFine);
+    setIf('calcOfferFine', raw.calcOfferFine);
+    setIf('calcCloseFine', raw.calcCloseFine);
+    renderIndustryPool();
+    renderRanked();
     updatePathMirror();
+    applyPifLabels();
+    runProblemMath();
+  }
+
+  var PAIN_LABELS = [
+    'Overworked & underpaid',
+    'I work harder than peers — same pay',
+    'Not enough time with kids',
+    'Not enough time with partner / family',
+    'Living paycheck to paycheck',
+    'No savings / emergency fund',
+    'Dead-end job / no growth',
+    'No purpose at work',
+    'Burnt out — time for a new chapter',
+    "I know I'm meant for more",
+    'Always wanted to get into sales',
+    'Passed over for raises / promotions',
+    'Commute or schedule steals my life',
+    'One crisis away from disaster',
+    'Overtime without real upside',
+    'Want income tied to performance',
+    'Credit goes to someone else',
+    'Tired of trading time for money the same way'
+  ];
+
+  function initPainChips() {
+    var mount = document.getElementById('painChipMount');
+    if (!mount || mount.children.length) return;
+    PAIN_LABELS.forEach(function (label) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pain-chip';
+      b.setAttribute('data-pain', label);
+      b.textContent = label;
+      b.addEventListener('click', function () {
+        b.classList.toggle('is-on');
+        savePathFields();
+      });
+      mount.appendChild(b);
+    });
+  }
+
+  function applyPifLabels() {
+    var r = document.getElementById('calcPifDealPct');
+    var a = document.getElementById('calcPifDealPctLabel');
+    var b = document.getElementById('calcPlanDealPctLabel');
+    if (!r || !a || !b) return;
+    var v = parseInt(r.value, 10);
+    if (!isFinite(v)) v = 60;
+    a.textContent = String(v);
+    b.textContent = String(100 - v);
+  }
+
+  function runProblemMath() {
+    var out = document.getElementById('problemMathOut');
+    if (!out) return;
+    var wi = readCalcNum('probWeeklyIncome', 0);
+    var hw = readCalcNum('probHoursWeek', 0);
+    var ga = readCalcNum('probGoalAnnual', 0);
+    if (wi <= 0 || hw <= 0) {
+      out.innerHTML = '';
+      return;
+    }
+    var monthly = wi * 4;
+    var hrsMo = hw * 4;
+    var eff = monthly / hrsMo;
+    var html = '<p class="calc-step-body" style="margin:0;"><strong>Rough pace now:</strong> ~' + formatCalcMoney(monthly) + '/mo gross (weekly × 4) · ~' + hrsMo + ' hrs/mo (hours/week × 4) · ~<strong>' + formatCalcMoney(eff) + '</strong>/hr effective.</p>';
+    if (ga > 0) {
+      var goalM = ga / 12;
+      var hrsNeed = eff > 0 ? goalM / eff : 0;
+      html += '<p class="calc-step-body" style="margin:10px 0 0;">To <strong>gross ~' + formatCalcMoney(ga) + '/yr</strong> at that <em>same hourly pace</em> (same type of job math), you’d need roughly <strong>' + Math.round(hrsNeed) + '</strong> paid hours/month (~' + (hrsNeed / 4).toFixed(0) + ' hrs/week using ×4). You said ~<strong>' + hrsMo + '</strong> hrs/mo now — ';
+      if (hrsNeed > 720) {
+        html += '<span style="color:var(--gold);">that “more hours” path blows past normal hours — the old lane doesn’t scale linearly to big income.</span></p>';
+      } else if (hrsNeed > hrsMo * 1.25) {
+        html += 'that’s a big jump in monthly hours at the <em>old</em> pay structure — worth asking if the game itself needs to change, not just the hours.</p>';
+      } else {
+        html += 'compare that to what you want long-term.</p>';
+      }
+    }
+    out.innerHTML = html;
+  }
+
+  function readCalcNum(id, fallback) {
+    var el = document.getElementById(id);
+    var v = parseFloat(el && el.value);
+    return isFinite(v) ? v : fallback;
+  }
+
+  /** Days/week select: 3–7, or 0 if none chosen */
+  function readDaysWeekSelect() {
+    var el = document.getElementById('calcWorkDaysWeek');
+    if (!el || String(el.value).trim() === '') return 0;
+    var v = parseInt(el.value, 10);
+    return v >= 3 && v <= 7 ? v : 0;
+  }
+
+  // Step 1 tabs OR optional exact % in advanced (fine overrides tabs)
+  function readEffectiveCommissionPct() {
+    var fine = document.getElementById('calcCommFine');
+    if (fine && String(fine.value).trim() !== '') {
+      var fv = parseFloat(fine.value);
+      if (isFinite(fv)) return Math.min(0.5, Math.max(0.01, fv / 100));
+    }
+    return Math.min(0.5, Math.max(0.01, readCalcNum('calcComm', 10) / 100));
+  }
+
+  function syncCommTabHighlight() {
+    var fine = document.getElementById('calcCommFine');
+    if (fine && String(fine.value).trim() !== '') {
+      document.querySelectorAll('.calc-comm-tab:not(.calc-offer-tab):not(.calc-close-tab)').forEach(function (b) { b.classList.remove('is-active'); });
+      return;
+    }
+    var v = readCalcNum('calcComm', 10);
+    document.querySelectorAll('.calc-comm-tab:not(.calc-offer-tab):not(.calc-close-tab)').forEach(function (b) {
+      b.classList.toggle('is-active', parseFloat(b.getAttribute('data-comm')) === v);
+    });
+  }
+
+  function syncOfferTabHighlight() {
+    var fine = document.getElementById('calcOfferFine');
+    if (fine && String(fine.value).trim() !== '') {
+      document.querySelectorAll('.calc-offer-tab').forEach(function (b) { b.classList.remove('is-active'); });
+      return;
+    }
+    var v = readCalcNum('calcOffer', 5000);
+    document.querySelectorAll('.calc-offer-tab').forEach(function (b) {
+      b.classList.toggle('is-active', parseFloat(b.getAttribute('data-offer')) === v);
+    });
+  }
+
+  function syncCloseTabHighlight() {
+    var fine = document.getElementById('calcCloseFine');
+    if (fine && String(fine.value).trim() !== '') {
+      document.querySelectorAll('.calc-close-tab').forEach(function (b) { b.classList.remove('is-active'); });
+      return;
+    }
+    var v = readCalcNum('calcClose', 20);
+    document.querySelectorAll('.calc-close-tab').forEach(function (b) {
+      b.classList.toggle('is-active', parseFloat(b.getAttribute('data-close')) === v);
+    });
+  }
+
+  function syncAllCalcPresetHighlights() {
+    syncCommTabHighlight();
+    syncOfferTabHighlight();
+    syncCloseTabHighlight();
+  }
+
+  function readEffectiveOfferAmount() {
+    var fine = document.getElementById('calcOfferFine');
+    if (fine && String(fine.value).trim() !== '') {
+      var fv = parseFloat(fine.value);
+      if (isFinite(fv)) return Math.max(500, fv);
+    }
+    return Math.max(500, readCalcNum('calcOffer', 5000));
+  }
+
+  function readEffectiveClosePct() {
+    var fine = document.getElementById('calcCloseFine');
+    if (fine && String(fine.value).trim() !== '') {
+      var fv = parseFloat(fine.value);
+      if (isFinite(fv)) return Math.min(0.6, Math.max(0.01, fv / 100));
+    }
+    return Math.min(0.6, Math.max(0.01, readCalcNum('calcClose', 20) / 100));
+  }
+
+  function formatCalcMoney(n) {
+    if (!isFinite(n)) return '—';
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  function incomeBandToMid(band) {
+    if (!band || band === 'Not sure yet') return 0;
+    var map = {
+      'Under $3k / mo': 2500,
+      '$3k–$6k / mo': 4500,
+      '$6k–$10k / mo': 8000,
+      '$10k–$15k / mo': 12500,
+      '$15k–$25k / mo': 20000,
+      '$25k+ / mo': 30000
+    };
+    return map[band] || 0;
+  }
+
+  function runIncomeCalc() {
+    var mainEl = document.getElementById('calcOutputMain');
+    var rampBody = document.querySelector('#calcRampTable tbody');
+    var footEl = document.getElementById('calcRampFoot');
+    if (!mainEl || !rampBody) return;
+
+    var G = readCalcNum('calcMonthlyGoal', 0);
+    var daysW = readDaysWeekSelect();
+    var hwm = readCalcNum('calcHoursWeekModel', 40);
+    var weeksPerMonth = 4;
+    var derivedNote = document.getElementById('calcCallsDerived');
+
+    var S = Math.min(1, Math.max(0.05, readCalcNum('calcShow', 75) / 100));
+    var Cl = readEffectiveClosePct();
+    var O = readEffectiveOfferAmount();
+    var P = readEffectiveCommissionPct();
+    var closeDisplayPct = Cl * 100;
+    var offerDisplay = O;
+    var commPerDeal = O * P;
+    var pctLabel = (P * 100).toFixed(1).replace(/\.0$/, '');
+
+    if (daysW <= 0) {
+      if (derivedNote) derivedNote.innerHTML = 'Pick <strong>3–7 days/week</strong> to see booked calls/day and weekly/monthly volume.';
+      var goalHint = G > 0 ? ' With a monthly goal set, days/week also unlocks the <strong>backward</strong> “how many calls” math.' : '';
+      mainEl.innerHTML = '<p class="calc-step-body" style="margin:0;">You’ve set <strong>' + hwm + '</strong> hrs/week for this path. Choose <strong>days per week</strong> (3–7) when you want to split that into calls/day — or leave it unselected until you’re ready.' + goalHint + '</p>';
+      var cashEl0 = document.getElementById('calcCashOutput');
+      if (cashEl0) cashEl0.innerHTML = '<p style="margin:0;font-size:12.5px;color:var(--muted);">Pick days/week above to estimate deals and cash per week.</p>';
+      rampBody.innerHTML = '';
+      if (footEl) { footEl.textContent = ''; footEl.classList.add('hidden'); }
+      try { savePathFields(); } catch (e2) {}
+      return;
+    }
+
+    /** Booked calls per day = hours per day (≈1 hr per call): hours/week ÷ days/week */
+    var C = Math.max(0.1, hwm / daysW);
+
+    var convPerDay = C * S;
+    var dealsPerDay = convPerDay * Cl;
+    var dealsWeek = dealsPerDay * daysW;
+    var monthlyForward = dealsWeek * commPerDeal * weeksPerMonth;
+
+    var html = '';
+    html += '<p><strong>At these settings</strong> (if every deal paid in full the same month): ~<strong>' + convPerDay.toFixed(1) + '</strong> live conversations/day · ~<strong>' + dealsPerDay.toFixed(2) + '</strong> deals/day · ~<strong>' + formatCalcMoney(monthlyForward) + '</strong>/mo commission <span style="color:var(--muted);">(~' + formatCalcMoney(offerDisplay) + ' offer × ' + pctLabel + '% commission × ' + closeDisplayPct.toFixed(0) + '% close)</span>.</p>';
+    html += '<p style="margin-top:10px;font-size:12.5px;color:var(--muted);">Per week (~<strong>' + daysW + '</strong> days on this path): ~' + (convPerDay * daysW).toFixed(0) + ' conversations · ~' + (dealsPerDay * daysW).toFixed(2) + ' deals.</p>';
+
+    var hrsAvailMo = hwm * 4;
+    var bookedHrsWeek = C * daysW;
+    var bookedHrsMoSketch = bookedHrsWeek * weeksPerMonth;
+    html += '<p style="margin-top:10px;font-size:12.5px;color:var(--muted);"><strong>' + hwm + '</strong> hrs/week ÷ <strong>' + daysW + '</strong> days ≈ <strong>' + C.toFixed(1) + '</strong> booked calls/day (1 hr each). Rough month (~<strong>' + weeksPerMonth + '</strong> weeks): ~<strong>' + bookedHrsMoSketch.toFixed(0) + '</strong> booked call-hours/mo · capacity sketch ~<strong>' + hrsAvailMo + '</strong> hrs/mo (hours/week × 4).</p>';
+
+    if (derivedNote) {
+      derivedNote.innerHTML = '→ <strong>' + C.toFixed(1) + '</strong> booked calls/day: <strong>' + hwm + '</strong> hrs/week ÷ <strong>' + daysW + '</strong> days';
+    }
+
+    if (G > 0 && commPerDeal > 0) {
+      var dealsPerMoNeed = G / commPerDeal;
+      var dealsPerWeekNeed = dealsPerMoNeed / weeksPerMonth;
+      var dealsPerDayNeed = dealsPerWeekNeed / daysW;
+      var convPerDayNeed = Cl > 0 ? dealsPerDayNeed / Cl : 0;
+      var callsPerDayNeed = S > 0 ? convPerDayNeed / S : 0;
+      var callsPerWeekNeed = callsPerDayNeed * daysW;
+      html += '<p style="margin-top:14px;padding-top:12px;border-top:1px solid var(--mid);"><strong>Working backward to ~' + formatCalcMoney(G) + '/mo commission:</strong> need ~<strong>' + dealsPerMoNeed.toFixed(1) + '</strong> deals/mo (~<strong>' + dealsPerWeekNeed.toFixed(2) + '</strong>/week · ~<strong>' + dealsPerDayNeed.toFixed(2) + '</strong> deals/day on-path). At <strong>' + closeDisplayPct.toFixed(0) + '%</strong> close and <strong>' + (readCalcNum('calcShow', 75)) + '%</strong> show: ~<strong>' + convPerDayNeed.toFixed(1) + '</strong> conversations/day · ~<strong>' + callsPerDayNeed.toFixed(1) + '</strong> booked calls/day (~<strong>' + callsPerWeekNeed.toFixed(0) + '</strong>/week across <strong>' + daysW + '</strong> days).</p>';
+      if (callsPerDayNeed > 18) {
+        html += '<p style="margin-top:8px;font-size:12px;color:var(--gold);">That dial load is very high — revisit goal timing, offer size, or the close rate you’re modeling before assuming day-one volume.</p>';
+      }
+    } else if (G <= 0) {
+      html += '<p style="margin-top:12px;font-size:12.5px;color:var(--muted);">Add a monthly commission goal in <strong>step 4</strong> to see roughly how many conversations and booked calls that could take — steps 1–3 &amp; 5 already feed the numbers above.</p>';
+    }
+    mainEl.innerHTML = html;
+
+    var cashEl = document.getElementById('calcCashOutput');
+    if (cashEl) {
+      var pifFrac = readCalcNum('calcPifDealPct', 60) / 100;
+      var planFrac = Math.min(1, Math.max(0, 1 - pifFrac));
+      var payN = 4;
+      var cashPerDealWeek = pifFrac * O + planFrac * (O / payN);
+      var cashWeek = dealsWeek * cashPerDealWeek;
+      var commWeek = cashWeek * P;
+      var naiveWeek = dealsWeek * O * P;
+      cashEl.innerHTML = '<p style="margin:0;"><strong>Same activity — cash truth (illustrative):</strong> ~<strong>' + (pifFrac * 100).toFixed(0) + '%</strong> of deals PIF · ~<strong>' + (planFrac * 100).toFixed(0) + '%</strong> on a <strong>4-payment</strong> plan (commission on <em>first</em> plan payment this week only). At ~<strong>' + dealsWeek.toFixed(1) + '</strong> deals/wk: <strong>cash collected</strong> ≈ ' + formatCalcMoney(cashWeek) + ' → commission ≈ <strong>' + formatCalcMoney(commWeek) + '</strong> at ' + pctLabel + '%. If everything were PIF &amp; collected immediately: ≈ ' + formatCalcMoney(naiveWeek) + '.</p><p style="margin-top:8px;font-size:11.5px;color:var(--muted);">After 2–3 months of consistency, numbers often climb as new deals stack with continuing plan payments from older deals — your check can look more like “new + residuals.”</p>';
+    }
+
+    try { savePathFields(); } catch (e2) {}
+
+    var rampStart = 0.12;
+    var industryBench = 0.23;
+    var rampEnd;
+    if (Cl <= rampStart) {
+      rampEnd = industryBench;
+    } else {
+      rampEnd = Cl;
+    }
+    if (rampEnd <= rampStart) rampEnd = rampStart + 0.01;
+
+    if (footEl) {
+      if (Cl <= rampStart) {
+        footEl.textContent = 'You entered a close % at or below an early “learning month” baseline — this example curve still rises toward a common ~23% planning benchmark. Your main calculator above still uses the close % you typed.';
+        footEl.classList.remove('hidden');
+      } else {
+        footEl.textContent = '';
+        footEl.classList.add('hidden');
+      }
+    }
+
+    var checkpoints = [1, 4, 8, 12];
+    rampBody.innerHTML = '';
+    checkpoints.forEach(function (wk) {
+      var closeW = rampStart + (rampEnd - rampStart) * (wk - 1) / 11;
+      var monthlyW = C * S * closeW * commPerDeal * daysW * weeksPerMonth;
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>Week ' + wk + '</td><td>' + (closeW * 100).toFixed(1) + '%</td><td>' + formatCalcMoney(monthlyW) + '</td>';
+      rampBody.appendChild(tr);
+    });
   }
 
   function buildFullPrepText() {
@@ -1076,12 +1813,41 @@ window.PRE_CALL_CONFIG = {
     lines.push('— HTSA pre-call prep —');
     lines.push('Name on page: ' + (cfg.firstName || 'there'));
     lines.push('');
-    lines.push('INDUSTRY / DIRECTION: ' + (getPathIndustry() || '(not set yet)'));
-    lines.push('Monthly income targets (ballpark):');
+    lines.push('CURRENT SITUATION:');
+    lines.push('  Weekly income (now): ' + ((document.getElementById('probWeeklyIncome') || {}).value || '—'));
+    lines.push('  Hours/week (now): ' + ((document.getElementById('probHoursWeek') || {}).value || '—'));
+    lines.push('  Annual income goal (gross, optional): ' + ((document.getElementById('probGoalAnnual') || {}).value || '—'));
+    var pains = [];
+    document.querySelectorAll('.pain-chip.is-on').forEach(function (b) { pains.push(b.getAttribute('data-pain')); });
+    var pox = document.getElementById('painOtherText');
+    if (pox && pox.value.trim()) pains.push('Other: ' + pox.value.trim());
+    document.querySelectorAll('.pain-extra-input').forEach(function (inp) { if (inp.value.trim()) pains.push(inp.value.trim()); });
+    lines.push('  What’s not working: ' + (pains.length ? pains.join('; ') : '(not selected)'));
+    lines.push('');
+    lines.push('CONSERVATIVE INCOME MATH (sketch — not a promise):');
+    lines.push('  Avg offer ($): ' + ((document.getElementById('calcOffer') || {}).value || '—'));
+    lines.push('  Close %: ' + ((document.getElementById('calcClose') || {}).value || '—'));
+    lines.push('  Commission % (on collected): ' + ((document.getElementById('calcComm') || {}).value || '—'));
+    lines.push('  Monthly commission goal ($): ' + ((document.getElementById('calcMonthlyGoal') || {}).value || '—'));
+    (function () {
+      var _dEl = document.getElementById('calcWorkDaysWeek');
+      var _dw = _dEl && String(_dEl.value).trim() !== '' ? parseInt(_dEl.value, 10) : 0;
+      var _hw = readCalcNum('calcHoursWeekModel', 40);
+      var _cpd = _dw >= 3 && _dw <= 7 ? (_hw / _dw).toFixed(1) : '—';
+      lines.push('  Hrs/wk · days/wk on path · derived calls/day · show %: ' + [
+        (document.getElementById('calcHoursWeekModel') || {}).value || '—',
+        _dw > 0 ? String(_dw) : '—',
+        _cpd,
+        (document.getElementById('calcShow') || {}).value || '—'
+      ].join(' / '));
+    })();
+    lines.push('  Deals paid in full (approx %): ' + ((document.getElementById('calcPifDealPct') || {}).value || '—'));
+    lines.push('');
+    lines.push('DIRECTION & TARGETS: ' + (getPathIndustry() || '(not set yet — rank up to 5 industries on the page)'));
+    lines.push('Monthly income targets (ballpark, 3 / 6 / 12 mo):');
     lines.push('  3 months: ' + ((document.getElementById('inc3') || {}).value || '—'));
     lines.push('  6 months: ' + ((document.getElementById('inc6') || {}).value || '—'));
     lines.push('  12 months: ' + ((document.getElementById('inc12') || {}).value || '—'));
-    lines.push('  2 years: ' + ((document.getElementById('inc24') || {}).value || '—'));
     lines.push('');
     var win = (document.getElementById('pathWin') || {}).value || '';
     lines.push('What a win looks like: ' + (win.trim() || '(not filled in)'));
@@ -1094,25 +1860,140 @@ window.PRE_CALL_CONFIG = {
     return lines.join('\n');
   }
 
-  document.querySelectorAll('.ind-pill input[name="pathIndustry"]').forEach(function (inp) {
-    inp.addEventListener('change', function () {
-      document.querySelectorAll('.ind-pill').forEach(function (l) { l.classList.remove('ind-pill--active'); });
-      if (inp.checked && inp.closest('.ind-pill')) inp.closest('.ind-pill').classList.add('ind-pill--active');
-      var wrap = document.getElementById('pathOtherWrap');
-      if (wrap) wrap.classList.toggle('hidden', inp.value !== 'Other');
+  var clearInd = document.getElementById('clearIndustries');
+  if (clearInd) {
+    clearInd.addEventListener('click', function () {
+      industryRanked = [];
+      syncIndustryChips();
+      renderRanked();
       savePathFields();
     });
-  });
+  }
   var pathOtherEl = document.getElementById('pathIndustryOther');
   if (pathOtherEl) pathOtherEl.addEventListener('input', savePathFields);
-  ['inc3','inc6','inc12','inc24','pathWin'].forEach(function (id) {
+  ['inc3', 'inc6', 'inc12', 'pathWin'].forEach(function (id) {
     var el = document.getElementById(id);
     if (el) {
       el.addEventListener('change', savePathFields);
       el.addEventListener('input', savePathFields);
     }
   });
+
+  ['probWeeklyIncome', 'probHoursWeek', 'probGoalAnnual'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', function () { runProblemMath(); savePathFields(); });
+      el.addEventListener('change', function () { runProblemMath(); savePathFields(); });
+    }
+  });
+  var painOt = document.getElementById('painOtherText');
+  if (painOt) {
+    painOt.addEventListener('input', savePathFields);
+    painOt.addEventListener('change', savePathFields);
+  }
+  var painAdd = document.getElementById('painAddRowBtn');
+  if (painAdd) {
+    painAdd.addEventListener('click', function () {
+      var per = document.getElementById('painExtraRows');
+      if (!per) return;
+      var row = document.createElement('div');
+      row.className = 'pain-row';
+      var inp = document.createElement('input');
+      inp.type = 'text';
+      inp.className = 'pain-extra-input';
+      inp.placeholder = 'Another line…';
+      inp.addEventListener('input', savePathFields);
+      row.appendChild(inp);
+      per.appendChild(row);
+      inp.focus();
+    });
+  }
+
+  ['calcMonthlyGoal', 'calcWorkDaysWeek', 'calcShow', 'calcHoursWeekModel', 'calcCommFine', 'calcOfferFine', 'calcCloseFine'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', function () {
+        syncAllCalcPresetHighlights();
+        runIncomeCalc();
+      });
+      el.addEventListener('change', function () {
+        syncAllCalcPresetHighlights();
+        runIncomeCalc();
+      });
+    }
+  });
+  var pifR = document.getElementById('calcPifDealPct');
+  if (pifR) {
+    pifR.addEventListener('input', function () {
+      applyPifLabels();
+      runIncomeCalc();
+    });
+    pifR.addEventListener('change', function () {
+      applyPifLabels();
+      runIncomeCalc();
+    });
+  }
+
+  document.querySelectorAll('.calc-comm-tab:not(.calc-offer-tab):not(.calc-close-tab)').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var v = btn.getAttribute('data-comm');
+      var hid = document.getElementById('calcComm');
+      var fine = document.getElementById('calcCommFine');
+      if (hid) hid.value = v;
+      if (fine) fine.value = '';
+      document.querySelectorAll('.calc-comm-tab:not(.calc-offer-tab):not(.calc-close-tab)').forEach(function (b) {
+        b.classList.toggle('is-active', b === btn);
+      });
+      runIncomeCalc();
+    });
+  });
+
+  document.querySelectorAll('.calc-offer-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var v = btn.getAttribute('data-offer');
+      var hid = document.getElementById('calcOffer');
+      var fine = document.getElementById('calcOfferFine');
+      if (hid) hid.value = v;
+      if (fine) fine.value = '';
+      document.querySelectorAll('.calc-offer-tab').forEach(function (b) {
+        b.classList.toggle('is-active', b === btn);
+      });
+      runIncomeCalc();
+    });
+  });
+
+  document.querySelectorAll('.calc-close-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var v = btn.getAttribute('data-close');
+      var hid = document.getElementById('calcClose');
+      var fine = document.getElementById('calcCloseFine');
+      if (hid) hid.value = v;
+      if (fine) fine.value = '';
+      document.querySelectorAll('.calc-close-tab').forEach(function (b) {
+        b.classList.toggle('is-active', b === btn);
+      });
+      runIncomeCalc();
+    });
+  });
+
+  var calcPull = document.getElementById('calcPullGoalBtn');
+  if (calcPull) {
+    calcPull.addEventListener('click', function () {
+      var band = (document.getElementById('inc12') || {}).value || '';
+      var mid = incomeBandToMid(band);
+      var goalEl = document.getElementById('calcMonthlyGoal');
+      if (goalEl && mid > 0) {
+        goalEl.value = String(mid);
+        runIncomeCalc();
+        savePathFields();
+      }
+    });
+  }
+
+  initPainChips();
   loadPathFields();
+  syncAllCalcPresetHighlights();
+  runIncomeCalc();
 
   var copyPrepBtn = document.getElementById('copyPrepBtn');
   if (copyPrepBtn) {
