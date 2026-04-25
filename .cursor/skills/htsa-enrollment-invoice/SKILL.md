@@ -64,6 +64,17 @@ Then search/replace **only** inside `htsa-enrollment-firstname-lastname.html`.
 - "Welcome to the HTSA Family, {FirstName}."
 - Run a quick check: `grep` the **old** example name in the new file and confirm **zero** hits (except false positives in long base64 strings)
 
+## Step 2 — "Welcome Email" sub-card (must match current standard)
+
+**Every** new enrollment page (Closer, Setter, or both) must use the **first green sub-card** under **Step 2 — Text CJ "Payment Confirmed"** with this exact **body** copy (source of truth: `htsa-enrollment-amanda-perez.html`):
+
+- Title line: `Welcome Email`
+- Body: *Contains everything — module access, **live group coaching** Zoom links, community access, and your next steps. **Star this as important in your inbox** — all links are in this email. **Suggestion:** add the live group coaching Zoom link from that email to your calendar for **Tuesday — 12:00 PM EST** and **Wednesday — 5:00 PM EST**.*
+
+**Do not** use older wording like "coaching call links" or "Mark it as important" without the Zoom/calendar detail.
+
+The **second** sub-card under Step 2 (`Login Credentials Email`) is unchanged: temporary password, create login, etc.
+
 ## After the file exists
 
 - **Default:** do **not** `git add` / `commit` / `push` **unless the user explicitly asks** to publish.
