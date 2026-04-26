@@ -75,26 +75,20 @@ Then search/replace **only** inside `htsa-enrollment-firstname-lastname.html`.
 
 The **second** sub-card under Step 2 (`Login Credentials Email`) is unchanged: temporary password, create login, etc.
 
-## After the file exists
+## End-to-end workflow (every HTSA enrollment page)
 
-- **Default:** do **not** `git add` / `commit` / `push` **unless the user explicitly asks** to publish.
-- **The link you send (this is the whole point):** After `git push`, run `git rev-parse --short HEAD` in the repo. The **only** copy-paste URL to give CJ or a client is the **entire** string below — **plain `.html` with no `?` is not enough**; browsers and CDNs can still show an old version.
-  - **Correct (forces fresh load for you and them):**  
-    `https://closewithcjclay.com/htsa-enrollment-firstname-lastname.html?v=SHORT_SHA`  
-  - For **SHORT_SHA**, use the id of the commit that last changed *that* page (so the link matches the actual invoice file):  
-    `git log -1 --format=%h -- htsa-enrollment-firstname-lastname.html`  
-  - Or right after *any* push, `git rev-parse --short HEAD` is fine to bust cache. A **new** deploy = a **new** `?v=` = that is the “exact change” in the link.
-- Do this **every** time you return a “live” link. Never hand back only the bare `https://…/page.html` as the *final* link after a push unless the user asked for a short URL; even then, warn that `?v=` is what refreshes both sides.
+1. **Create or fix** the page (copy from a gold template; only edit the new file).
+2. **Commit and push** to `main` (when the user wants it live).
+3. **Give CJ the clean link only** — no query string:
+   - `https://closewithcjclay.com/htsa-enrollment-firstname-lastname.html`
+4. **Before saying the page is ready**, verify (in this order):
+   - **Local/source:** `grep` the new file for wrong template names; confirm `<title>`, billing `mailto` / `tel`, hero, Step 1 / welcome first name, program badge (Closer / Setter / both), and payment blocks match what this client should have.
+   - **Live (when possible):** `curl -sL` (or `fetch`) the **exact** clean URL and confirm HTTP 200 and that the response body contains the **correct full name**, **email**, and **phone** (and no obvious wrong name from the template).
+5. **If live HTTP check is not possible** (no network, timeout, or body not verifiable), **say so clearly** — do not claim you “verified the live site.” Still report what you verified locally.
 
-**Every new** `htsa-enrollment-*.html` (and gold templates) should include these in `<head>` right after `viewport` so browsers revalidate more often:
+**Cache-busted links:** Do **not** add `?v=COMMIT` (or any query string) to client-facing links **unless CJ explicitly asks** for a cache-busted URL. If asked, append `?v=` + short SHA from `git rev-parse --short HEAD` (or the commit that touched that file).
 
-```html
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
-```
-
-(The agent **cannot** purge a global CDN from here; the **query string +** those tags is the reliable combo.)
+**Optional in `<head>` (gold templates may already have these):** no-cache `http-equiv` meta tags help some browsers; they are not a substitute for correct copy and review.
 
 ## Related project rule
 
@@ -116,6 +110,7 @@ Program: Closer | Setter | Closer & Setter
 Financing: Yes | No
 Orange guarantee: Yes | No
 Push to GitHub: Yes | No
+Cache-bust link (?v=commit): only if I ask
 ```
 
 (Adjust `@` mention if your Cursor build lists this skill under a different name in the @ menu.)

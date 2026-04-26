@@ -31,11 +31,12 @@ Do **not** re-type or regenerate the full HTML.
 
 ## After creating the file
 
-- `git add` the **new** file only, commit, `git push origin main`
-- **The live link to send (you + client see the new page):** After `git push`, run `git rev-parse --short HEAD`. The full URL must include the version tag — **this is the complete link, not optional:**  
-  `https://closewithcjclay.com/htsa-enrollment-{firstname}-{lastname}.html?v=SHORT_SHA`  
-  A URL with **no** `?v=…` can still show a cached old invoice. Each new deploy = new commit = new `?v=` value.  
-- New pages should include `http-equiv` no-cache `meta` tags (see `htsa-enrollment-invoice` skill) as extra help.
+1. `git add` the file, commit, `git push origin main` (when publishing).
+2. Give CJ the **clean** link only (default):  
+   `https://closewithcjclay.com/htsa-enrollment-{firstname}-{lastname}.html`  
+   **Do not** add `?v=COMMIT` unless CJ **explicitly** asks for a cache-busted link.
+3. Before “ready”: verify locally (correct slug, name, email, phone, program type, payment setup, no leftover template names). When possible, HTTP-check the **same** clean URL and confirm body contains the right client; if not possible, say so clearly.
+4. Details: see `.cursor/skills/htsa-enrollment-invoice/SKILL.md`.
 
 ## Related
 
