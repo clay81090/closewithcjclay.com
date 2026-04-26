@@ -81,7 +81,9 @@ The **second** sub-card under Step 2 (`Login Credentials Email`) is unchanged: t
 - **The link you send (this is the whole point):** After `git push`, run `git rev-parse --short HEAD` in the repo. The **only** copy-paste URL to give CJ or a client is the **entire** string below — **plain `.html` with no `?` is not enough**; browsers and CDNs can still show an old version.
   - **Correct (forces fresh load for you and them):**  
     `https://closewithcjclay.com/htsa-enrollment-firstname-lastname.html?v=SHORT_SHA`  
-  - `?v=SHORT_SHA` is literally the 7-digit commit that just shipped that change. When the file updates again, a **new** commit means a **new** `?v=` — that is the “exact change” in the link.
+  - For **SHORT_SHA**, use the id of the commit that last changed *that* page (so the link matches the actual invoice file):  
+    `git log -1 --format=%h -- htsa-enrollment-firstname-lastname.html`  
+  - Or right after *any* push, `git rev-parse --short HEAD` is fine to bust cache. A **new** deploy = a **new** `?v=` = that is the “exact change” in the link.
 - Do this **every** time you return a “live” link. Never hand back only the bare `https://…/page.html` as the *final* link after a push unless the user asked for a short URL; even then, warn that `?v=` is what refreshes both sides.
 
 **Every new** `htsa-enrollment-*.html` (and gold templates) should include these in `<head>` right after `viewport` so browsers revalidate more often:
