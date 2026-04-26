@@ -78,8 +78,20 @@ The **second** sub-card under Step 2 (`Login Credentials Email`) is unchanged: t
 ## After the file exists
 
 - **Default:** do **not** `git add` / `commit` / `push` **unless the user explicitly asks** to publish.
-- **Public URL (when the file is on `main` and hosting serves the root):**  
-  `https://closewithcjclay.com/htsa-enrollment-firstname-lastname.html`
+- **Public URL (after `git push`):** run `git rev-parse --short HEAD` in the repo and give the link **with a cache-busting query** so the client does not get a stale page (GitHub Pages + browsers can cache):
+  - `https://closewithcjclay.com/htsa-enrollment-firstname-lastname.html?v=SHORT_SHA`  
+  Example: `?v=1f785ca`  
+  Do this **every time** you hand CJ a “live” link right after a push. Same query pattern when re-sharing an existing file after a content fix and new commit.
+
+**Every new** `htsa-enrollment-*.html` (and gold templates) should include these in `<head>` right after `viewport` so browsers revalidate more often:
+
+```html
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+```
+
+(The agent **cannot** purge a global CDN from here; the **query string +** those tags is the reliable combo.)
 
 ## Related project rule
 

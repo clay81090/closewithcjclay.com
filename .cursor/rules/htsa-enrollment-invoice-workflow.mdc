@@ -32,7 +32,9 @@ Do **not** re-type or regenerate the full HTML.
 ## After creating the file
 
 - `git add` the **new** file only, commit, `git push origin main`
-- Public URL: `https://closewithcjclay.com/htsa-enrollment-{firstname}-{lastname}.html`
+- **Cache:** After `git push`, `git rev-parse --short HEAD` and give CJ:  
+  `https://closewithcjclay.com/htsa-enrollment-{firstname}-{lastname}.html?v=SHORT_SHA`  
+- New pages should include `http-equiv` no-cache `meta` tags (see `htsa-enrollment-invoice` skill) so browsers do not hold stale HTML.
 
 ## Related
 
