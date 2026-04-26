@@ -78,10 +78,11 @@ The **second** sub-card under Step 2 (`Login Credentials Email`) is unchanged: t
 ## After the file exists
 
 - **Default:** do **not** `git add` / `commit` / `push` **unless the user explicitly asks** to publish.
-- **Public URL (after `git push`):** run `git rev-parse --short HEAD` in the repo and give the link **with a cache-busting query** so the client does not get a stale page (GitHub Pages + browsers can cache):
-  - `https://closewithcjclay.com/htsa-enrollment-firstname-lastname.html?v=SHORT_SHA`  
-  Example: `?v=1f785ca`  
-  Do this **every time** you hand CJ a “live” link right after a push. Same query pattern when re-sharing an existing file after a content fix and new commit.
+- **The link you send (this is the whole point):** After `git push`, run `git rev-parse --short HEAD` in the repo. The **only** copy-paste URL to give CJ or a client is the **entire** string below — **plain `.html` with no `?` is not enough**; browsers and CDNs can still show an old version.
+  - **Correct (forces fresh load for you and them):**  
+    `https://closewithcjclay.com/htsa-enrollment-firstname-lastname.html?v=SHORT_SHA`  
+  - `?v=SHORT_SHA` is literally the 7-digit commit that just shipped that change. When the file updates again, a **new** commit means a **new** `?v=` — that is the “exact change” in the link.
+- Do this **every** time you return a “live” link. Never hand back only the bare `https://…/page.html` as the *final* link after a push unless the user asked for a short URL; even then, warn that `?v=` is what refreshes both sides.
 
 **Every new** `htsa-enrollment-*.html` (and gold templates) should include these in `<head>` right after `viewport` so browsers revalidate more often:
 

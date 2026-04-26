@@ -32,9 +32,10 @@ Do **not** re-type or regenerate the full HTML.
 ## After creating the file
 
 - `git add` the **new** file only, commit, `git push origin main`
-- **Cache:** After `git push`, `git rev-parse --short HEAD` and give CJ:  
+- **The live link to send (you + client see the new page):** After `git push`, run `git rev-parse --short HEAD`. The full URL must include the version tag — **this is the complete link, not optional:**  
   `https://closewithcjclay.com/htsa-enrollment-{firstname}-{lastname}.html?v=SHORT_SHA`  
-- New pages should include `http-equiv` no-cache `meta` tags (see `htsa-enrollment-invoice` skill) so browsers do not hold stale HTML.
+  A URL with **no** `?v=…` can still show a cached old invoice. Each new deploy = new commit = new `?v=` value.  
+- New pages should include `http-equiv` no-cache `meta` tags (see `htsa-enrollment-invoice` skill) as extra help.
 
 ## Related
 
