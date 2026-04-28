@@ -293,6 +293,22 @@
     margin: 4px 0 14px;
   }
 
+  /* Kailani: clearly separate cash / in-house from third-party financing */
+  .invest-section-kicker--accent {
+    color: #ff9c7a;
+    margin-bottom: 10px;
+  }
+
+  .invest-zone-rule {
+    border: none;
+    height: 0;
+    margin: 22px 0 18px;
+    padding: 0;
+    border-top: 2px solid #ff9c7a;
+    box-shadow: 0 0 14px rgba(255, 156, 122, 0.12);
+    opacity: 0.92;
+  }
+
   .invest-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -1368,7 +1384,7 @@
       <div class="invest-program-label">Certified High Ticket Closer Program</div>
       <div class="invest-program-desc">All services described above — training platform, AI roleplay, live coaching with Chad, certification, job placement, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
 
-      <div class="invest-section-kicker">HTSA In-House Payment Options</div>
+      <div class="invest-section-kicker invest-section-kicker--accent">In-House Cash Payment Options</div>
       <p class="invest-access-hint">Either option includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
       <div class="invest-grid">
 
@@ -1416,9 +1432,9 @@
 
       </div>
 
-      <hr class="invest-divider" style="margin:20px 0 18px;">
+      <hr class="invest-zone-rule" aria-hidden="true">
 
-      <div class="invest-section-kicker">Financing Options</div>
+      <div class="invest-section-kicker invest-section-kicker--accent">Third-Party Financing Options</div>
       <div class="invest-note" style="margin-top:0;margin-bottom:14px;">The two options above are HTSA in-house payment options. The three options below are third-party financing options for pre-qualification.</div>
 
       <div class="invest-grid">
