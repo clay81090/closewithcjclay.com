@@ -833,6 +833,8 @@
     .invoice-meta { text-align: left; }
     .invoice-badge { margin-bottom: 8px; }
     .hero-band { padding: 18px 20px; }
+    .hts-terms-agreement-wrap { padding-left: 20px; padding-right: 20px; }
+    .invest-pay-zone-hint { padding-left: 20px; padding-right: 20px; }
     .billing-grid { grid-template-columns: 1fr; }
     .billing-cell { padding: 18px 20px; }
     .billing-cell:first-child { border-right: none; border-bottom: 1px solid var(--mid); }
@@ -1163,6 +1165,130 @@
     margin-right: auto;
   }
 
+  /* Terms agreement gate — unlocks payment buttons after Google Apps Script success (Margarita enrollment only) */
+  .hts-terms-agreement-wrap {
+    padding: 18px 36px 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--mid);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .hts-terms-agreement-card {
+    background: linear-gradient(135deg, #f7f9fc 0%, #eef2f8 100%);
+    border: 1px solid var(--mid);
+    border-radius: 10px;
+    padding: 18px 20px 20px;
+  }
+
+  .hts-terms-agreement-card--complete {
+    border-color: rgba(0, 201, 122, 0.4);
+    background: linear-gradient(135deg, #f0fdf7 0%, #e8f9f1 100%);
+  }
+
+  .hts-terms-agreement-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .hts-terms-agreement-lead {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0 0 10px;
+  }
+
+  .hts-terms-agreement-pdf {
+    display: inline-block;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--green-dark);
+    text-decoration: none;
+  }
+
+  .hts-terms-agreement-pdf:hover { text-decoration: underline; }
+
+  .hts-terms-agreement-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12.5px;
+    color: var(--text);
+    margin: 14px 0 12px;
+    cursor: pointer;
+  }
+
+  .hts-terms-agreement-checkbox input {
+    margin-top: 3px;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
+
+  .hts-terms-agreement-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--navy);
+    background: var(--green);
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    cursor: pointer;
+  }
+
+  .hts-terms-agreement-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .hts-terms-agreement-msg {
+    font-size: 12px;
+    color: #b91c1c;
+    margin: 10px 0 0;
+    min-height: 1.2em;
+  }
+
+  .hts-terms-agreement-msg--ok {
+    color: var(--green-dark);
+  }
+
+  .hts-terms-agreement-done-line {
+    font-size: 12.5px;
+    color: var(--navy);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.5;
+    display: none;
+  }
+
+  .hts-terms-agreement-card--complete .hts-terms-agreement-form { display: none !important; }
+  .hts-terms-agreement-card--complete .hts-terms-agreement-done-line { display: block !important; }
+
+  .invest-pay-zone-hint {
+    margin: 0;
+    padding: 10px 36px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #9a3412;
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border-bottom: 1px solid rgba(234, 88, 12, 0.2);
+    display: block;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .invest-pay-zone-hint--off { display: none !important; }
+
+  #invest-pay-zone.invest-pay-zone--locked .invest-box a.invest-btn {
+    pointer-events: none !important;
+    opacity: 0.46 !important;
+    cursor: not-allowed !important;
+  }
+
 
   @media print {
     @page { margin: 0.5in; size: letter; }
@@ -1177,6 +1303,16 @@
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
+    #invest-pay-zone.invest-pay-zone--locked .invest-box a.invest-btn {
+      pointer-events: auto !important;
+      opacity: 1 !important;
+      cursor: pointer !important;
+    }
+    .hts-terms-agreement-wrap {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+    .invest-pay-zone-hint { display: none !important; }
   }
 </style>
 </head>
@@ -1332,7 +1468,31 @@
     <h3>Program Investment</h3>
   </div>
 
-  <div class="invest-wrap">
+  <div class="hts-terms-agreement-wrap">
+    <div id="hts-terms-agreement-panel" class="hts-terms-agreement-card"
+         data-full-name="Margarita De La Rosa"
+         data-email="md.margge@gmail.com"
+         data-client-slug="margarita-de-la-rosa">
+      <div class="hts-terms-agreement-form" id="hts-terms-agreement-form">
+        <div class="hts-terms-agreement-title">Terms agreement</div>
+        <p class="hts-terms-agreement-lead">Open the Terms of Service PDF, confirm you agree, then record your acceptance to unlock payment and financing buttons below.</p>
+        <p style="margin:0;">
+          <a id="hts-terms-pdf-link-top" href="https://closewithcjclay.com/HTSA-Terms-of-Service.pdf" target="_blank" rel="noopener noreferrer" class="hts-terms-agreement-pdf">View Terms of Service (PDF)</a>
+        </p>
+        <label class="hts-terms-agreement-checkbox" for="hts-terms-checkbox">
+          <input type="checkbox" id="hts-terms-checkbox" autocomplete="off" />
+          <span>I have read and agree to the Terms of Service linked above.</span>
+        </label>
+        <button type="button" id="hts-terms-confirm-btn" class="hts-terms-agreement-btn" disabled>Record agreement &amp; unlock payments</button>
+        <p id="hts-terms-agreement-msg" class="hts-terms-agreement-msg" role="status" aria-live="polite"></p>
+      </div>
+      <p id="hts-terms-agreement-done-line" class="hts-terms-agreement-done-line">✓ Terms recorded successfully. Payment and financing buttons below are now active for this browser session.</p>
+    </div>
+  </div>
+
+  <p id="invest-pay-zone-hint" class="invest-pay-zone-hint">Payment and financing buttons stay locked until your Terms agreement has been recorded above.</p>
+
+  <div class="invest-wrap invest-pay-zone invest-pay-zone--locked" id="invest-pay-zone">
     <div class="invest-box">
       <div class="invest-program-label">Certified High Ticket Closer Program</div>
       <div class="invest-program-desc">All services described above — training platform, AI roleplay, live coaching with Chad, certification, job placement, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
@@ -1648,5 +1808,165 @@ Thank God and CJ Clay for that 🙏</blockquote>
   </div>
 
 </div>
+<script>
+(function () {
+  var STORAGE_KEY = 'hts_terms_gate_margarita_de_la_rosa_v1';
+  var GAS_TERMS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec';
+  var TERMS_DOC_URL_FOR_GATE = 'https://closewithcjclay.com/HTSA-Terms-of-Service.pdf';
+  // Fixed label for spreadsheets / logs when the hosted PDF stays the same URL
+  var TERMS_VERSION_ID = 'HTSA-TOS-PDF-closewithcjclay-2026-04';
+
+  function canonicalEnrollmentUrl() {
+    try {
+      var u = new URL(window.location.href);
+      return u.origin + u.pathname + (u.search || '');
+    } catch (err) {
+      return window.location.href.split('#')[0];
+    }
+  }
+
+  /** Treat 2xx as success when body is empty/plain ok, or JSON explicitly ok. */
+  function responseMeansSuccess(resp, rawBody) {
+    var code = resp && resp.status ? resp.status : 0;
+    if (code >= 400 || code === 0) return false;
+    var s = String(rawBody == null ? '' : rawBody).trim();
+    if (!s) return code >= 200 && code < 300;
+    if (s.charAt(0) === '<') return false;
+    if (/^(ok|success)$/i.test(s)) return true;
+    try {
+      var json = JSON.parse(s);
+      if (json.success === false || json.ok === false) return false;
+      if (json.success === true || json.ok === true || json.recorded === true) return true;
+      if (json.status === 'success' || json.status === 'ok') return true;
+      if (json.result === 'ok' || json.result === 'success') return true;
+      // Unknown JSON shape from your script — require explicit success markers
+      return false;
+    } catch (e2) {
+      return false;
+    }
+  }
+
+  function setPayZoneLocked(locked) {
+    var zone = document.getElementById('invest-pay-zone');
+    var hint = document.getElementById('invest-pay-zone-hint');
+    if (!zone) return;
+    if (locked) {
+      zone.classList.add('invest-pay-zone--locked');
+      zone.querySelectorAll('a.invest-btn').forEach(function (a) {
+        a.setAttribute('tabindex', '-1');
+      });
+      if (hint) hint.classList.remove('invest-pay-zone-hint--off');
+    } else {
+      zone.classList.remove('invest-pay-zone--locked');
+      zone.querySelectorAll('a.invest-btn').forEach(function (a) {
+        a.removeAttribute('tabindex');
+      });
+      if (hint) hint.classList.add('invest-pay-zone-hint--off');
+    }
+  }
+
+  function markAgreementRecorded() {
+    var panel = document.getElementById('hts-terms-agreement-panel');
+    var msgEl = document.getElementById('hts-terms-agreement-msg');
+    if (panel) panel.classList.add('hts-terms-agreement-card--complete');
+    if (msgEl) {
+      msgEl.textContent = '';
+      msgEl.classList.remove('hts-terms-agreement-msg--ok');
+    }
+  }
+
+  function postAgreement(panel, btnEl) {
+    var msgEl = document.getElementById('hts-terms-agreement-msg');
+
+    var body = JSON.stringify({
+      fullName: (panel.getAttribute('data-full-name') || '').trim(),
+      email: (panel.getAttribute('data-email') || '').trim(),
+      enrollmentPageUrl: canonicalEnrollmentUrl(),
+      clientSlug: (panel.getAttribute('data-client-slug') || 'margarita-de-la-rosa').trim(),
+      termsUrl: TERMS_DOC_URL_FOR_GATE,
+      termsVersion: TERMS_VERSION_ID,
+      userAgent: navigator.userAgent || ''
+    });
+
+    return fetch(GAS_TERMS_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body,
+      credentials: 'omit',
+      redirect: 'follow',
+      cache: 'no-store',
+      mode: 'cors'
+    }).then(function (resp) {
+      return resp.text().then(function (txt) {
+        return { resp: resp, txt: txt };
+      });
+    }).then(function (parsed) {
+      if (responseMeansSuccess(parsed.resp, parsed.txt)) {
+        try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e3) {}
+        if (msgEl) msgEl.textContent = '';
+        markAgreementRecorded();
+        setPayZoneLocked(false);
+      } else {
+        throw new Error('HTTP or script returned unsuccessful');
+      }
+    }).catch(function () {
+      if (btnEl) btnEl.disabled = false;
+      var cb = document.getElementById('hts-terms-checkbox');
+      if (cb) cb.checked = false;
+      if (btnEl && cb) btnEl.disabled = !cb.checked;
+      if (msgEl) msgEl.textContent = 'Agreement could not be recorded. Check your connection and try again.';
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+        markAgreementRecorded();
+        setPayZoneLocked(false);
+        return;
+      }
+    } catch (e0) {}
+
+    var zone = document.getElementById('invest-pay-zone');
+    if (!zone) return;
+
+    setPayZoneLocked(true);
+
+    zone.addEventListener('click', function (ev) {
+      if (!zone.classList.contains('invest-pay-zone--locked')) return;
+      var link = ev.target.closest && ev.target.closest('a.invest-btn');
+      if (link) {
+        ev.preventDefault();
+        ev.stopPropagation();
+      }
+    }, true);
+
+    var chk = document.getElementById('hts-terms-checkbox');
+    var btn = document.getElementById('hts-terms-confirm-btn');
+
+    function syncDisabled() {
+      if (!chk || !btn) return;
+      btn.disabled = !chk.checked;
+    }
+
+    if (chk) chk.addEventListener('change', syncDisabled);
+    if (btn) {
+      btn.addEventListener('click', function () {
+        if (!chk || !chk.checked) return;
+        var panel = document.getElementById('hts-terms-agreement-panel');
+        if (!panel) return;
+        btn.disabled = true;
+        var msgEl = document.getElementById('hts-terms-agreement-msg');
+        if (msgEl) msgEl.textContent = 'Recording agreement…';
+
+        postAgreement(panel, btn);
+      });
+    }
+    syncDisabled();
+  });
+})();
+</script>
 </body>
 </html>
