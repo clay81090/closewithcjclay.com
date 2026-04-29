@@ -1276,6 +1276,10 @@
     color: var(--green-dark);
   }
 
+  .hts-terms-msg-below-fold {
+    margin-top: 10px;
+  }
+
   .hts-terms-agreement-done-line {
     font-size: 12.5px;
     color: var(--navy);
@@ -1561,8 +1565,8 @@
           <span>I have read and agree to the Terms of Service linked above.</span>
         </label>
         <button type="button" id="hts-terms-confirm-btn" class="hts-terms-agreement-btn" disabled>Record agreement &amp; unlock Trial tab</button>
-        <p id="hts-terms-agreement-msg" class="hts-terms-agreement-msg" role="status" aria-live="polite"></p>
       </div>
+      <p id="hts-terms-agreement-msg" class="hts-terms-agreement-msg hts-terms-msg-below-fold" role="status" aria-live="polite"></p>
       <p id="hts-terms-agreement-done-line" class="hts-terms-agreement-done-line">✓ Terms recorded. The Trial payment button below is active for this browser session.</p>
     </div>
   </div>
@@ -1810,23 +1814,23 @@ Thank God and CJ Clay for that 🙏</blockquote>
     }
   }
 
-  function responseMeansSuccess(resp, rawBody) {
-    var code = resp && resp.status ? resp.status : 0;
-    if (code >= 400 || code === 0) return false;
-    var s = String(rawBody == null ? '' : rawBody).trim();
-    if (!s) return code >= 200 && code < 300;
-    if (s.charAt(0) === '<') return false;
-    if (/^(ok|success)$/i.test(s)) return true;
-    try {
-      var json = JSON.parse(s);
-      if (json.success === false || json.ok === false) return false;
-      if (json.success === true || json.ok === true || json.recorded === true) return true;
-      if (json.status === 'success' || json.status === 'ok') return true;
-      if (json.result === 'ok' || json.result === 'success') return true;
-      return false;
-    } catch (e2) {
-      return false;
-    }
+  /** Google Apps Script–friendly POST (no JSON preflight issues). Sends `payload=` URL-encoded JSON. */
+  function postPayloadToEnrollmentScript(endpoint, payloadObj) {
+    var formBody = new URLSearchParams();
+    formBody.set('payload', JSON.stringify(payloadObj));
+    return fetch(endpoint, {
+      method: 'POST',
+      mode: 'no-cors',
+      credentials: 'omit',
+      body: formBody,
+      redirect: 'follow',
+      cache: 'no-store'
+    });
+    // opaque response — cannot reliably read HTTP status body in browser when no-cors; treat fulfilled fetch as handed off on server unless .catch(network).
+  }
+
+  function TERMS_SUCCESS_MSG() {
+    return 'Agreement submitted. Check your email or spreadsheet for confirmation.';
   }
 
   function setPayZoneLocked(locked) {
@@ -1868,12 +1872,7 @@ Thank God and CJ Clay for that 🙏</blockquote>
 
   function markAgreementRecorded() {
     var panel = document.getElementById('hts-terms-agreement-panel');
-    var msgEl = document.getElementById('hts-terms-agreement-msg');
     if (panel) panel.classList.add('hts-terms-agreement-card--complete');
-    if (msgEl) {
-      msgEl.textContent = '';
-      msgEl.classList.remove('hts-terms-agreement-msg--ok');
-    }
   }
 
   function hydrateSimBanner() {
@@ -1907,36 +1906,22 @@ Thank God and CJ Clay for that 🙏</blockquote>
       userAgent: navigator.userAgent || ''
     };
 
-    return fetch(GAS_TERMS_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bodyObj),
-      credentials: 'omit',
-      redirect: 'follow',
-      cache: 'no-store',
-      mode: 'cors'
-    }).then(function (resp) {
-      return resp.text().then(function (txt) {
-        return { resp: resp, txt: txt };
-      });
-    }).then(function (parsed) {
-      if (responseMeansSuccess(parsed.resp, parsed.txt)) {
-        try { sessionStorage.setItem(STORAGE_TERMS, '1'); } catch (e3) {}
-        if (msgEl) msgEl.textContent = '';
-        markAgreementRecorded();
-        setPayZoneLocked(false);
-        hydrateSimBanner();
-      } else {
-        throw new Error('HTTP or script returned unsuccessful');
+    postPayloadToEnrollmentScript(GAS_TERMS_ENDPOINT, bodyObj).then(function () {
+      try { sessionStorage.setItem(STORAGE_TERMS, '1'); } catch (e3) {}
+      markAgreementRecorded();
+      if (msgEl) {
+        msgEl.textContent = TERMS_SUCCESS_MSG();
+        msgEl.classList.add('hts-terms-agreement-msg--ok');
       }
+      setPayZoneLocked(false);
+      hydrateSimBanner();
     }).catch(function () {
       if (btnEl) btnEl.disabled = false;
       var cb = document.getElementById('hts-terms-checkbox');
       if (cb) cb.checked = false;
       if (btnEl && cb) btnEl.disabled = !cb.checked;
-      if (msgEl) msgEl.textContent = 'Agreement could not be recorded. Check your connection and try again.';
+      if (msgEl) msgEl.textContent = 'Network error — could not reach enrollment script. Retry when online.';
+      if (msgEl) msgEl.classList.remove('hts-terms-agreement-msg--ok');
     });
   }
 
@@ -1959,32 +1944,21 @@ Thank God and CJ Clay for that 🙏</blockquote>
     };
 
     trialBtn.disabled = true;
-    if (msgEl) msgEl.textContent = 'Posting practice payment signal…';
+    if (msgEl) {
+      msgEl.textContent = 'Posting practice payment signal…';
+      msgEl.classList.remove('hts-terms-agreement-msg--ok');
+    }
 
-    return fetch(GAS_TERMS_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bodyObj),
-      credentials: 'omit',
-      redirect: 'follow',
-      cache: 'no-store',
-      mode: 'cors'
-    }).then(function (resp) {
-      return resp.text().then(function (txt) {
-        return { resp: resp, txt: txt };
-      });
-    }).then(function (parsed) {
-      if (responseMeansSuccess(parsed.resp, parsed.txt)) {
-        try { sessionStorage.setItem(STORAGE_SIM_PAY, '1'); } catch (e4) {}
-        if (msgEl) msgEl.textContent = 'Recorded (practice payment). Verify spreadsheet + scripted emails.';
-        hydrateSimBanner();
-      } else {
-        throw new Error('Simulated payment post rejected');
+    postPayloadToEnrollmentScript(GAS_TERMS_ENDPOINT, bodyObj).then(function () {
+      try { sessionStorage.setItem(STORAGE_SIM_PAY, '1'); } catch (e4) {}
+      if (msgEl) {
+        msgEl.textContent = 'Payment signal submitted. Confirm row / receipt in Apps Script.';
+        msgEl.classList.add('hts-terms-agreement-msg--ok');
       }
+      hydrateSimBanner();
     }).catch(function () {
-      if (msgEl) msgEl.textContent = 'Practice payment log failed — check Apps Script.';
+      if (msgEl) msgEl.textContent = 'Network error — simulated payment ping did not reach the script.';
+      if (msgEl) msgEl.classList.remove('hts-terms-agreement-msg--ok');
       trialBtn.disabled = false;
       trialBtn.setAttribute('aria-disabled', 'false');
     });
