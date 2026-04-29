@@ -1529,6 +1529,7 @@
     <div id="hts-terms-agreement-panel" class="hts-terms-agreement-card"
          data-full-name="Angela Verdone"
          data-email="angiejohnson040213@gmail.com"
+         data-phone="+17087521848"
          data-client-slug="angela-verdone">
       <div class="hts-terms-agreement-form" id="hts-terms-agreement-form">
         <div class="hts-terms-agreement-title">Terms agreement</div>
@@ -1922,6 +1923,7 @@ Thank God and CJ Clay for that 🙏</blockquote>
       action: 'recordTermsAgreement',
       fullName: (panel.getAttribute('data-full-name') || '').trim(),
       email: (panel.getAttribute('data-email') || '').trim(),
+      phone: (panel.getAttribute('data-phone') || '').trim(),
       enrollmentPageUrl: canonicalEnrollmentUrl(),
       clientSlug: (panel.getAttribute('data-client-slug') || 'angela-verdone').trim(),
       termsUrl: TERMS_DOC_URL_FOR_GATE,
