@@ -1211,6 +1211,12 @@
 
   .hts-terms-agreement-pdf:hover { text-decoration: underline; }
 
+  /* Clarifications shown inside Terms gate before the acknowledgment checkbox */
+  .hts-terms-agreement-card .hts-terms-gate-clarify {
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
   .hts-terms-agreement-checkbox {
     display: flex;
     align-items: flex-start;
@@ -1479,10 +1485,21 @@
          data-client-slug="margarita-de-la-rosa">
       <div class="hts-terms-agreement-form" id="hts-terms-agreement-form">
         <div class="hts-terms-agreement-title">Terms agreement</div>
-        <p class="hts-terms-agreement-lead">Open the Terms of Service PDF, confirm you agree, then record your acceptance to unlock payment and financing buttons below.</p>
+        <p class="hts-terms-agreement-lead">Open the Terms of Service PDF, review the clarification below about lifetime access and included services, confirm you agree, then record your acceptance to unlock payment and financing buttons below.</p>
         <p style="margin:0;">
-          <a id="hts-terms-pdf-link-top" href="https://closewithcjclay.com/HTSA-Terms-of-Service.pdf" target="_blank" rel="noopener noreferrer" class="hts-terms-agreement-pdf">View Terms of Service (PDF)</a>
+          <a id="hts-terms-pdf-link-top" href="https://closewithcjclay.com/HTSA-Terms-of-Service.pdf" target="_blank" rel="noopener noreferrer" class="hts-terms-agreement-pdf">View Full Terms of Service (PDF)</a>
         </p>
+        <div class="terms-clarify hts-terms-gate-clarify">
+          <div class="terms-clarify-title">Lifetime Access Clarification</div>
+          <p style="margin:0 0 8px;color:var(--navy);font-weight:600;">You receive:</p>
+          <ul class="terms-clarify-list">
+            <li>Lifetime access to the course modules</li>
+            <li>Lifetime access to live group coaching calls with Chad</li>
+            <li>Lifetime access to the closers mastermind community</li>
+            <li><strong style="color:var(--navy);">1-on-1 coaching calls</strong> — included at <strong style="color:var(--navy);">no additional fee</strong>. Calls must be used within three months of your program start date unless otherwise approved by HTSA.</li>
+            <li><strong style="color:var(--navy);">AI role-play platform</strong> — included while you are in the academy. After you complete the program and land your offer, you may keep the platform for <strong style="color:var(--navy);">$35/month</strong> if you choose. It is not mandatory; it is an optional tool if it helps your close rate.</li>
+          </ul>
+        </div>
         <label class="hts-terms-agreement-checkbox" for="hts-terms-checkbox">
           <input type="checkbox" id="hts-terms-checkbox" autocomplete="off" />
           <span>I have read and agree to the Terms of Service linked above.</span>
@@ -1692,31 +1709,6 @@
   <div class="welcome-band">
     <h3>Welcome to the <span>HTSA Family,</span> Margarita. 🎉</h3>
     <p>You're not just enrolling in a program — you're joining a community of people who show up, do the work, and build something real. We can't wait to see where this takes you.</p>
-  </div>
-
-  <!-- TERMS OF SERVICE -->
-  <div style="background:#f7f9fc;border-top:1px solid rgba(0,0,0,0.07);padding:28px 36px;">
-    <div style="max-width:720px;margin:0 auto;">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
-        <div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--navy);">Terms &amp; Enrollment Agreement</div>
-        <a href="https://closewithcjclay.com/HTSA-Terms-of-Service.pdf" target="_blank" rel="noopener noreferrer" style="font-size:11.5px;color:var(--green);font-weight:600;text-decoration:none;white-space:nowrap;">View Full Terms of Service →</a>
-      </div>
-      <div style="font-size:11.5px;color:#555;line-height:1.75;">
-        <div class="terms-clarify">
-          <div class="terms-clarify-title">Lifetime Access Clarification</div>
-          <p style="margin:0 0 8px;color:var(--navy);font-weight:600;">You receive:</p>
-          <ul class="terms-clarify-list">
-            <li>Lifetime access to the course modules</li>
-            <li>Lifetime access to live group coaching calls with Chad</li>
-            <li>Lifetime access to the closers mastermind community</li>
-            <li><strong style="color:var(--navy);">1-on-1 coaching calls</strong> — included at <strong style="color:var(--navy);">no additional fee</strong>. Calls must be used within three months of your program start date unless otherwise approved by HTSA.</li>
-            <li><strong style="color:var(--navy);">AI role-play platform</strong> — included while you are in the academy. After you complete the program and land your offer, you may keep the platform for <strong style="color:var(--navy);">$35/month</strong> if you choose. It is not mandatory; it is an optional tool if it helps your close rate.</li>
-          </ul>
-        </div>
-
-        <p style="margin:0;"><strong style="color:var(--navy);">Performance Guarantee.</strong> HTSA stands behind its program. If you complete all modules, attend your kickoff call, engage with the community, and apply for placements without success within the program timeframe, contact our support team — we'll work with you directly to make it right.</p>
-      </div>
-    </div>
   </div>
 
   <!-- Member stories & book (subtle; site / Trustpilot / YouTube in footer) -->

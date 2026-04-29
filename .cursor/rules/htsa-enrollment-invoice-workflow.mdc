@@ -6,38 +6,90 @@ alwaysApply: true
 
 # New HTSA enrollment page — fast path
 
-**Never** edit an existing client’s `htsa-enrollment-*.html` to create a new one. **Always** duplicate a **gold** template with `cp`, then only replace the personalized fields.
+**Never** edit an existing client's `htsa-enrollment-*.html` to create a new one. **Always** duplicate a **gold** template with `cp`, then only replace the personalized fields.
 
-## Pick the base file (then `cp` to `htsa-enrollment-firstname-lastname.html`, lowercase, hyphenated)
+## 1. Legacy invoices are frozen
 
-| Offer | Use as source |
-|--------|----------------|
-| Closer + cash (Whop PIF / 4-pay / Splitit; **no** ClarityPay/PayVa/Flexxbuy pre-qual links) + optional **orange** performance-guarantee box | `htsa-enrollment-timi-bonner-mccourt.html` (guarantee block already in file; same pattern as `htsa-enrollment-erick-brower.html`) |
-| Closer + Setter (dual curriculum + both investment stacks) | `htsa-enrollment-jocelyn-navarro.html` |
-| Closer-only curriculum reference | `htsa-enrollment-amy-grochala.html` |
-| Setter-only curriculum reference | `htsa-enrollment-kaitlyn-hall.html` |
+- Do **not** retrofit, mass-edit, or “clean up” past `htsa-enrollment-*.html` files already created or sent.
+- Do **not** change legacy pages unless **CJ explicitly asks** for that **specific** file (one-off update).
+- **Margarita De La Rosa** (`htsa-enrollment-margarita-de-la-rosa.html`) is the **first real client invoice** using the **new Terms agreement gate**.
+- Sandbox / rehearsal only: **`htsa-enrollment-cj-clay-practice.html`** (not a production client invoice template for copy-paste blindly—see Terms gate notes below).
 
-**Do not** add “3 one-on-one sessions with Chad” or similar unless the user **explicitly** asks in chat.
+## 2. What CJ supplies for NEW invoices
 
-## Fields to change in the new file only (search/replace)
+For every **new** page, confirm:
 
-1. `<title>HTSA Invoice — …`
-2. Hero greeting: `{FirstName}, I really enjoyed…`
-3. `billing-name` + `mailto:` + display email + `tel:` + display phone (use `href="tel:+1XXXXXXXXXX"` with digits only)
-4. Step 1 paragraph that uses their first name (e.g. “pick $6,000 paid in full…”)
-5. “Welcome to the HTSA Family, {FirstName}.”
+- Full name  
+- Email  
+- Phone  
+- **Program type:** Closer **or** Setter **or** both (Closer & Setter)  
+- **Orange performance guarantee box:** yes / no (**see §3**)  
+- **Payment setup:** in-house cash only **or** in-house cash **plus** financing (ClarityPay / Flexxbuy-style blocks as applicable)  
+- Any **special note** CJ explicitly requested (capture verbatim; add only where asked)
 
-Do **not** re-type or regenerate the full HTML.
+Optional: client slug (`firstname-lastname`, lowercase).
 
-## After creating the file
+## 3. “Guarantee yes/no” means only the orange banner
 
-1. `git add` the file, commit, `git push origin main` (when publishing).
-2. Give CJ the **clean** link only (default):  
-   `https://closewithcjclay.com/htsa-enrollment-{firstname}-{lastname}.html`  
-   **Do not** add `?v=COMMIT` unless CJ **explicitly** asks for a cache-busted link.
-3. Before “ready”: verify locally (correct slug, name, email, phone, program type, payment setup, no leftover template names). When possible, HTTP-check the **same** clean URL and confirm body contains the right client; if not possible, say so clearly.
-4. Details: see `.cursor/skills/htsa-enrollment-invoice/SKILL.md`.
+When CJ says **performance guarantee**, that refers **only** to the optional **orange** `.enrollment-guarantee-banner` block.
+
+- It does **not** mean the normal **Terms of Service agreement** gate (PDF + checklist + acknowledgment + Sheets).
+- Guarantee **yes** → include the orange banner (copy pattern from approved gold examples such as **`htsa-enrollment-timi-bonner-mccourt.html`** as **read-only** reference).
+- Guarantee **no** → omit that orange block on **new** builds. Do **not** remove or rewrite Terms-gate behavior to “compensate.”
+
+Supporting “Performance Guarantee. HTSA stands behind…” wording belongs **inside** that orange banner on guarantee-**yes** **new** invoices—not as a substitute for Margarita-style Terms wording, and **not** by rewriting legacy invoices.
+
+## 4. Terms agreement gate — standard on NEW invoices
+
+The Terms gate ships **before** payment / financing buttons unlock. It includes:
+
+- **Terms PDF** link (full Terms of Service).  
+- **Lifetime Access** / **coaching** / **AI platform** clarification copy (aligned with **`htsa-enrollment-margarita-de-la-rosa.html`**).  
+- Checkbox acknowledgment + button to record agreement.  
+- **Google Apps Script:** posts to the **existing deployed web-app endpoint** configured on the page; **logs to the enrollment Sheet**. It records **Terms acknowledgment only**—**it does not state or imply that payment was completed.**  
+
+**Do not** put the CJ practice **simulated payment** / trial-pay lab flow on **real client** invoice pages. That flow exists **only** on **`htsa-enrollment-cj-clay-practice.html`**.
+
+Structural reference after the gate: **`htsa-enrollment-margarita-de-la-rosa.html`** (live) and **`htsa-enrollment-cj-clay-practice.html`** (sandbox). After **Welcome to the HTSA Family**, flow continues to testimonials / footer—no duplicate Terms block underneath.
+
+## 5. NEW invoice workflow (delivery)
+
+1. Pick the **correct gold template** for program + pricing pattern (often start from **`htsa-enrollment-margarita-de-la-rosa.html`** for the Terms gate + investment layout).
+2. **`cp`** to **`htsa-enrollment-{firstname}-{lastname}.html`** (new filename—never overwrite another client).
+3. Change **only** name, email, phone, program, payment-required fields, slug/data attributes on the Terms gate panel, plus any CJ-requested specials.
+4. **`grep`** the new file: **zero** hits for old template-first names unless intentional.
+5. Smoke-check Terms gate: checkbox → record posts to Sheets (Apps Script reachable); unlock works; **payment** still means real checkout links on prod pages—not the practice simulator.
+6. **Commit/push:** include **only** the **new invoice** file (`git add path/to/htsa-enrollment-newclient.html`) and any **shared rule/skill** updates made in the same task—**never** bulk-add unrelated HTML.
+7. Return **only** the clean client-facing URL:
+
+   `https://closewithcjclay.com/htsa-enrollment-{firstname}-{lastname}.html`
+
+**No** `?v=` cache-busting query unless **CJ explicitly asks**.
+
+## 6. What not to stage or commit
+
+- Do **not** `git add` **`Untitled`**, **`HTSA-Terms-of-Service-cleaned-review.html`**, **`HTSA-Terms-of-Service-cleaned-review.pdf`**, or other unrelated scratch/review artifacts.
+- Do **not** stage or commit **legacy** invoice HTML except when CJ deliberately updates that single file.
+
+**Do not** add “3 one-on-one sessions with Chad” unless the user **explicitly** asks.
+
+## Meaning of legacy vs new — quick reference
+
+- **Orange guarantee** (`enrollment-guarantee-banner`) = CJ’s explicit **yes/no**, separate from Terms.  
+- **Terms gate** = standard on **new** invoices; gates **payment buttons** until recorded.
+
+## Pick gold template (duplicate — never Save-over)
+
+| Scenario | Copy from (`cp` … new file — **do not alter** originals) |
+|----------|------------------------------------------------------------|
+| New invoice — **Terms gate** + closer-style investment | **`htsa-enrollment-margarita-de-la-rosa.html`** |
+| Sandbox / Scripts rehearsal | **`htsa-enrollment-cj-clay-practice.html`** (includes simulated payment; **not** for real clients end-to-end) |
+| Dual Closer & Setter stacks | **`htsa-enrollment-jocelyn-navarro.html`** |
+| Cash / Splitit snippets + orange optional | **`htsa-enrollment-timi-bonner-mccourt.html`** (read-only snippets) |
+| Setter stack | **`htsa-enrollment-kaitlyn-hall.html`** |
+| Orange wording reference | **`htsa-enrollment-erick-brower.html`** |
 
 ## Related
 
-- Mastermind copy: `htsa-mastermind-member-count.mdc` (490+ members)
+- Full procedure: `.cursor/skills/htsa-enrollment-invoice/SKILL.md`
+- Mastermind copyline: **`htsa-mastermind-member-count.mdc`**
