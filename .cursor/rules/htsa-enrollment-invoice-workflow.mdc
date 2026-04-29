@@ -50,11 +50,12 @@ For **every NEW** enrollment invoice: the **Terms agreement gate** MUST appear *
 
 1. Program / curriculum overview  
 2. **Program Investment** heading  
-3. **Terms agreement gate**  
-4. **Locked** investment box: in-house checkout + Splitit helper (if CJ wants Splitit) + third-party financing (only what CJ names)  
-5. **Next Steps After Payment**  
-6. **Welcome to the HTSA Family**  
-7. Reviews / testimonials / footer  
+3. **Orange performance guarantee banner** — only when CJ says guarantee yes  
+4. **Terms agreement gate**  
+5. **Locked** investment box: in-house checkout + Splitit helper (if CJ wants Splitit) + third-party financing (only what CJ names)  
+6. **Next Steps After Payment**  
+7. **Welcome to the HTSA Family**  
+8. Reviews / testimonials / footer  
 
 Do **not** duplicate the Terms clarification band after Welcome—reviews/footer follow Welcome.
 
@@ -135,7 +136,7 @@ hts_terms_gate_<firstname>_<lastname>_v1   // underscores in key to match slug w
 
 When CJ answers **orange performance guarantee yes/no**:
 
-- **`yes`** → include **`enrollment-guarantee-banner`** (copy wording from frozen gold references — **never** edit legacy files in place — **read**/copy blocks only).
+- **`yes`** → include **`enrollment-guarantee-banner`** directly under the **Program Investment** heading and above the **Terms agreement gate** (copy wording from frozen gold references — **never** edit legacy files in place — **read**/copy blocks only).
 - **`no`** → **omit** the orange banner.
 - Terms gate remains **mandatory** on NEW invoices regardless of orange answer.
 

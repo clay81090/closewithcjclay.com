@@ -34,11 +34,12 @@ description: >-
 
 1. Program / curriculum overview  
 2. Program Investment heading  
-3. Terms gate (`#hts-terms-agreement-panel`): PDF → clarifications → checkbox → Record button  
-4. Locked `#invest-pay-zone` wrapping **all** money/financing actions (Whop PIF · 4-pay · Splitit path · ClarityPay · PayVa if CJ names it · Flexxbuy · future checkout links)  
-5. Next Steps After Payment  
-6. Welcome to HTSA Family  
-7. Reviews / testimonials / footer (no duplicate Terms block below Welcome)
+3. Optional orange performance guarantee banner, only when CJ says guarantee yes  
+4. Terms gate (`#hts-terms-agreement-panel`): PDF → clarifications → checkbox → Record button  
+5. Locked `#invest-pay-zone` wrapping **all** money/financing actions (Whop PIF · 4-pay · Splitit path · ClarityPay · PayVa if CJ names it · Flexxbuy · future checkout links)  
+6. Next Steps After Payment  
+7. Welcome to HTSA Family  
+8. Reviews / testimonials / footer (no duplicate Terms block below Welcome)
 
 ---
 
@@ -46,7 +47,7 @@ description: >-
 
 Prospects pursuing **only financing** still must complete the Terms gate first. Locked zone uses classes `invest-wrap invest-pay-zone invest-pay-zone--locked`; JS intercepts `a.invest-btn` (including `invest-btn secondary`). Session unlock persists via `sessionStorage` (`hts_terms_gate_*` key).
 
-Orange `.enrollment-guarantee-banner` is optional and **separate** from the Terms gate.
+Orange `.enrollment-guarantee-banner` is optional and **separate** from the Terms gate. When included, place it under the Program Investment heading and above the Terms gate.
 
 ---
 
