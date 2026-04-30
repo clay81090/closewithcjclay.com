@@ -90,7 +90,7 @@ Every new invoice must POST the Terms agreement to this **exact** endpoint:
 - **Curriculum:** **50** modules; **five** levels of AI roleplay (closer wording).  
 - **Default cash pricing:** PIF **$6,000**; **4-pay** **$1,750** today / **$7,000** total.  
 - **UI:** Newest **Zachary-style** layout (spacing, mobile-ready Terms gate placement).  
-- **Structural duplicate source:** use a modern Closer Terms-gate file as the `cp` source — e.g. **`htsa-enrollment-zachary-taylor.html`** (reference only; **edit only the new file**).  
+- **Structural duplicate source:** prefer **`htsa-enrollment-james-chambers.html`** or **`htsa-enrollment-kristijo-sherman.html`** (2026 footer + Terms stack; **edit only** the new file).  
 - **Whop plan URLs:** Match CJ-supplied links or those in the template you duplicated; do not invent checkout IDs.
 
 ---
