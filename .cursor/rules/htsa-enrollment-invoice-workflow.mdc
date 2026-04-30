@@ -50,7 +50,7 @@ For **every NEW** enrollment invoice: the **Terms agreement gate** MUST appear *
 
 1. Program / curriculum overview  
 2. **Program Investment** heading  
-3. **Orange performance guarantee banner** — only when CJ says guarantee yes  
+3. **Orange performance guarantee banner** — **Closer Program invoices:** include by default unless CJ says otherwise (**standard closing format**). **Setter Program invoices:** include **only when CJ explicitly requests** it (otherwise omit). Same HTML block (`enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms`) and copy as Zachary / Chad deployments.  
 4. **Terms agreement gate**  
 5. **Locked** investment box: in-house checkout + Splitit helper (if CJ wants Splitit) + third-party financing (only what CJ names)  
 6. **Next Steps After Payment**  
@@ -58,6 +58,18 @@ For **every NEW** enrollment invoice: the **Terms agreement gate** MUST appear *
 8. Reviews / testimonials / footer  
 
 Do **not** duplicate the Terms clarification band after Welcome—reviews/footer follow Welcome.
+
+---
+
+## Mobile layout — testimonial strip + footer (match Chad `htsa-enrollment-chad-aleo.html`)
+
+On **`@media (max-width: 600px)`**, newer invoices use:
+
+- **`ref-strip`** and children in **normal block flow** (not flex-shrink / `min-height: 0` traps) so long **Trinity** quote reserves full height.  
+- **`.footer-bc-photo-ring { transform: none; }`** in the footer media block only (avoids upward nudge overlapping testimonial text).  
+- **Desktop**: unchanged flex testimonial layout.
+
+When syncing or creating invoices, compare the **`ref-strip`** mobile block and second **`600px`** footer block to **`htsa-enrollment-chad-aleo.html`** so mobile matches.
 
 ---
 
@@ -132,13 +144,16 @@ hts_terms_gate_<firstname>_<lastname>_v1   // underscores in key to match slug w
 
 ---
 
-## 2. “Guarantee yes/no” = orange banner ONLY — not Terms gate
+## 2. “Guarantee” = orange banner (Closer vs Setter)
 
-When CJ answers **orange performance guarantee yes/no**:
+| Invoice type | Orange performance banner |
+|----------------|---------------------------|
+| **Closer** | **Include by default** (current standard)—omit only if CJ says not to ship it on that page |
+| **Setter** | **Omit unless CJ explicitly asks** to add it for that setter |
 
-- **`yes`** → include **`enrollment-guarantee-banner`** directly under the **Program Investment** heading and above the **Terms agreement gate** (copy wording from frozen gold references — **never** edit legacy files in place — **read**/copy blocks only).
-- **`no`** → **omit** the orange banner.
-- Terms gate remains **mandatory** on NEW invoices regardless of orange answer.
+Markup: **`enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms`** directly under **Program Investment** heading, immediately **above** the Terms agreement gate. Copy wording: duplicate from **`htsa-enrollment-zachary-taylor.html`** / **`htsa-enrollment-chad-aleo.html`** (do not freestyle legal tone).
+
+Terms gate stays **mandatory** on NEW enrollment invoices regardless of orange banner presence.
 
 ## 3. Payment setup — CJ’s words only
 
