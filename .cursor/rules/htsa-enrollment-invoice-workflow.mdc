@@ -6,180 +6,189 @@ alwaysApply: true
 
 # HTSA enrollment invoices — NEW pages only
 
-**Never** edit an existing client’s deployed `htsa-enrollment-*.html` to create a **new** person. Duplicate with `cp`, then replace **only** the new file.
+**Never** edit an existing client’s deployed `htsa-enrollment-*.html` to create a **new** person. **`cp`** the right modern template, then replace **only** the new file. Reference invoices (Zachary, Trameil, CJ practice, Margarita, etc.) are **read-only** unless CJ explicitly asks to edit a named file.
 
 ---
 
-## Canonical reference — Margarita (first real Terms-gate invoice)
+## Minimal CJ input
 
-- **Margarita De La Rosa** is the **first production client** page shipped with the **modern Terms agreement gate**.
-- **Local repo path (canonical source to duplicate):**
+CJ may say only:
 
-  `/Users/charlesclay/Desktop/closewithcjclay.com/closewithcjclay.com/htsa-enrollment-margarita-de-la-rosa.html`
+- **Closer** or **Setter**  
+- **Cash**, **Financing**, or **Both**  
+- Client **name**, **email**, **phone**  
 
-- **Pinned GitHub blob (workflow reference snapshot):**
+Agents apply **defaults** in this rule unless CJ overrides.
 
-  `https://github.com/clay81090/closewithcjclay.com/blob/5f55f39971069805d08a4e78653c7790a66e7acb/htsa-enrollment-margarita-de-la-rosa.html`
-
-- **Sandbox (testing only — includes simulated payment; do not bolt this flow onto production clients):**  
-  **`htsa-enrollment-cj-clay-practice.html`**
-
----
-
-## Core rule — Terms gate BEFORE any payment / financing click
-
-For **every NEW** enrollment invoice: the **Terms agreement gate** MUST appear **before** the buyer can activate **any** of the following (same **`invest-pay-zone--locked`** pattern as Margarita—the zone wraps **all** such controls):
-
-| Gated destinations (non-exhaustive) |
-|-------------------------------------|
-| Whop **Paid in Full** checkout |
-| Whop **4-pay** checkout |
-| **Splitit** (via the Whop PIF checkout path, per on-page Splitit instructions) |
-| **ClarityPay** pre-qualification |
-| **PayVa** pre-qualification (include **only if** CJ specifies it—never invent) |
-| **Flexxbuy** pre-qualification |
-| Any **future** checkout, apply, or pre-qual link added to Program Investment |
-
-**Reason:** Financing-only prospects are still progressing on the enrollment offer—they must acknowledge the Terms **before** any payment or financing action unlocks.
-
-**Implementation checklist:** Locked zone uses class **`invest-pay-zone`** + **`invest-pay-zone--locked`** until record succeeds; clickable prevention targets **`a.invest-btn`** (primary + **`secondary`**). Session unlock persists with **`sessionStorage`** for that browser tab.
+| CJ says | Meaning |
+|--------|---------|
+| **Cash** | Whop PIF + Whop payment plan(s) only — **no** ClarityPay / Flexxbuy tiles. |
+| **Financing** | **ClarityPay + Flexxbuy** pre-qual tiles only (no in-house Whop). *Uncommon.* |
+| **Both** | Whop cash/plan(s) **plus** **ClarityPay + Flexxbuy**. |
 
 ---
 
-## Standard section order — NEW invoices (match Margarita)
+## Orange performance guarantee — default ON
 
-1. Program / curriculum overview  
-2. **Program Investment** heading  
-3. **Orange performance guarantee banner** — **Closer Program invoices:** include by default unless CJ says otherwise (**standard closing format**). **Setter Program invoices:** include **only when CJ explicitly requests** it (otherwise omit). Same HTML block (`enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms`) and copy as Zachary / Chad deployments.  
-4. **Terms agreement gate**  
-5. **Locked** investment box: in-house checkout + Splitit helper (if CJ wants Splitit) + third-party financing (only what CJ names)  
-6. **Next Steps After Payment**  
-7. **Welcome to the HTSA Family**  
-8. Reviews / testimonials / footer  
-
-Do **not** duplicate the Terms clarification band after Welcome—reviews/footer follow Welcome.
+- Include the orange banner for **both Closer and Setter** on every new invoice.  
+- Markup: **`enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms`**.  
+- Position: directly under **Program Investment**, **above** the Terms gate.  
+- Copy: duplicate from **`htsa-enrollment-zachary-taylor.html`** / **`htsa-enrollment-chad-aleo.html`** (do not freestyle legal tone).  
+- **Omit only if** CJ explicitly says **“no guarantee”** or **“omit orange guarantee.”**
 
 ---
 
-## Mobile layout — testimonial strip + footer (match Chad `htsa-enrollment-chad-aleo.html`)
+## Program Investment — fixed section order
+
+1. **Program Investment** heading  
+2. **Orange performance guarantee** (unless explicitly omitted)  
+3. **Terms agreement gate** (`#hts-terms-agreement-panel`): PDF → clarifications → checkbox → **Record agreement & unlock payments**  
+4. **Locked** `#invest-pay-zone`: **all** Whop checkouts, payment plans, ClarityPay, Flexxbuy, and any optional vendors (PayVa, Splitit) CJ requested  
+
+**Core rule:** No payment or financing action works until **`recordTermsAgreement`** succeeds. Locked zone uses **`invest-pay-zone`** + **`invest-pay-zone--locked`** until then; intercept **`a.invest-btn`** (including **`secondary`**). **`sessionStorage`** unlock for that tab — unique key:
+
+```text
+hts_terms_gate_<firstname>_<lastname>_v1
+```
+
+**Gated destinations (non-exhaustive):** Whop **PIF**, Whop **installment** checkouts, **ClarityPay**, **Flexxbuy**, **PayVa** (only if CJ says **PayVa**), **Splitit** (only if CJ says **Splitit**), any future checkout or pre-qual link.
+
+---
+
+## Duplicate sources (modern layout)
+
+| Program | Preferred `cp` source (example) | Notes |
+|---------|----------------------------------|--------|
+| **Closer** | `htsa-enrollment-james-chambers.html` / `htsa-enrollment-kristijo-sherman.html` | **2026** footer + Terms stack; **edit only** the new file. |
+| **Setter** | `htsa-enrollment-trameil-lee.html` | Setter pricing/links defaults; **reference only**. |
+
+**Historical anchor:** Margarita (`htsa-enrollment-margarita-de-la-rosa.html`) was the first production Terms-gate invoice — do not rewrite her page unless CJ asks. For **2026** footer + Terms placement, duplicate from **James** / **Kristijo** / **Trameil** instead of older Closer pages.
+
+**Sandbox:** `htsa-enrollment-cj-clay-practice.html` — behavior reference only; **never** paste simulated practice payment UI onto production clients.
+
+---
+
+## Financing defaults
+
+- **Financing** or **Both:** include **ClarityPay** and **Flexxbuy** by default. Use spelling **Flexxbuy** (two **x**’s).  
+- **PayVa:** include **only** if CJ explicitly requests **PayVa**. **Not** a default.  
+- **Splitit:** include **only** if CJ explicitly requests it.
+
+---
+
+## Closer defaults
+
+- **Program copy:** Certified HTS Closer / Certified High Ticket Closer Program.  
+- **Curriculum:** **50** modules; **five** levels of AI roleplay.  
+- **Default cash pricing:** PIF **$6,000**; **4-pay** **$1,750** today / **$7,000** total.  
+- **Whop URLs:** use CJ-supplied plans or those in the Closer template duplicated — do not invent plan IDs.  
+- If financing is included: **ClarityPay + Flexxbuy** unless CJ names **PayVa** (or another approved provider).
+
+---
+
+## Setter defaults
+
+- **Program copy:** Certified HTS Setter / Certified High Ticket Setter Program; invoice badge **Setter Program Overview**.  
+- **Curriculum:** **30** core modules; **three** levels of AI roleplay; certification **Certified High Ticket Setter**; setter placement language (no closer modules/pricing/timeline).  
+- **Default cash pricing:** PIF **$3,000**; **3-pay** **$1,050** today / **$3,150** total.  
+- **Default links:**  
+  - PIF: `https://whop.com/checkout/plan_qzvfCCb1rIO0L?d2c=true`  
+  - 3-pay: `https://whop.com/checkout/plan_oK3AajTKp0mXK?d2c=true`  
+  - ClarityPay: `https://whop.com/checkout/plan_z5iuUhSgm9seH`  
+  - Flexxbuy: `https://app.flexxbuy.com/high-ticket-sales-academy-llc/apply/`  
+- **Flexxbuy setter note:** *Flexxbuy — Setter: Request $3,500 when applying through Flexxbuy, for application purposes, exactly $500 more than the $3,000 program price.*
+
+---
+
+## Mobile layout — testimonial strip + footer
 
 On **`@media (max-width: 600px)`**, newer invoices use:
 
 - **`ref-strip`** and children in **normal block flow** (not flex-shrink / `min-height: 0` traps) so long **Trinity** quote reserves full height.  
-- **`.footer-bc-photo-ring { transform: none; }`** in the footer media block only (avoids upward nudge overlapping testimonial text).  
-- **Desktop**: unchanged flex testimonial layout.
+- **`.footer-bc-photo-ring { transform: none; }`** in the footer media block only.  
 
-When syncing or creating invoices, compare the **`ref-strip`** mobile block and second **`600px`** footer block to **`htsa-enrollment-chad-aleo.html`** so mobile matches.
-
----
-
-## Terms gate — REQUIRED content & copy (Margarita-aligned)
-
-Duplicate structure from **`htsa-enrollment-margarita-de-la-rosa.html`**, then localize `data-*` only on the **new** file:
-
-- **PDF:** [`https://closewithcjclay.com/HTSA-Terms-of-Service.pdf`](https://closewithcjclay.com/HTSA-Terms-of-Service.pdf) — visible label per Margarita (**“View Full Terms of Service (PDF)”** anchor class **`hts-terms-agreement-pdf`**).
-- **Clarifications** inside the gate (same substantive blocks Margarita uses): Lifetime access; **1-on-1 coaching**; **AI role-play platform** clarification list items.
-- **Checkbox:** *I have read and agree to the Terms of Service linked above.*
-- **Button:** *Record agreement & unlock payments*
-- Buttons below stay visually disabled / intercepted until **`recordTermsAgreement`** posts successfully; **`sessionStorage`** key unlock persists for session.
-- **Never** paste the **CJ practice** simulated-payment UI onto real client invoices.
+Compare **`ref-strip`** mobile block and second **`600px`** footer block to **`htsa-enrollment-chad-aleo.html`**. **Desktop:** preserve Zachary-style flex testimonial layout. **Do not** ship old desktop-only invoices.
 
 ---
 
-## Apps Script endpoint & Terms version constant
+## Footer — 2026 default (new invoices)
 
-Deployments use this **exact** HTTPS endpoint on live pages:
+For **new** enrollment HTML, match the footer pattern in **`htsa-enrollment-james-chambers.html`** / **`htsa-enrollment-kristijo-sherman.html`**:
+
+- Brand-colored **SVG** row: website (globe), YouTube, Instagram, Facebook (`footer-htsa-link` + icons).  
+- **Trustpilot** is **not** in that row — it sits in a **full-width band** under the main footer flex (`footer-reviews-row`) with **five gold stars** (not green) and **`support@highticketsalesacademy.com`** visible.
+
+Do **not** retrofit this across legacy client invoices unless CJ names a file.
+
+---
+
+## Terms gate — REQUIRED content & copy
+
+Duplicate structure from a **modern** Terms-gate invoice, then localize **`data-*`** on the **new** file only:
+
+- **PDF:** [`https://closewithcjclay.com/HTSA-Terms-of-Service.pdf`](https://closewithcjclay.com/HTSA-Terms-of-Service.pdf) — anchor class **`hts-terms-agreement-pdf`**, label **View Full Terms of Service (PDF)**.  
+- **Clarifications:** Lifetime access; **1-on-1 coaching**; **AI role-play platform** items (same substantive blocks as existing production gates).  
+- **Checkbox:** *I have read and agree to the Terms of Service linked above.*  
+- **Button:** *Record agreement & unlock payments*  
+- **Never** paste CJ practice simulated-payment UI onto real client invoices.
+
+**Per-invoice literals on `#hts-terms-agreement-panel`:** `data-full-name`, `data-email`, `data-phone`, `data-client-slug` — all unique; **grep** away Margarita/Zachary/Trameil/etc. leftovers before ship.
+
+---
+
+## Apps Script endpoint & Terms version
+
+**Exact** HTTPS endpoint:
 
 `https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec`
 
-**`termsVersion`** string wired in-page (match Margarita’s script constant **`HTSA-TOS-PDF-closewithcjclay-2026-04`**):
-
-`HTSA-TOS-PDF-closewithcjclay-2026-04`
+**`termsVersion`:** `HTSA-TOS-PDF-closewithcjclay-2026-04`
 
 ---
 
 ## Payload — `recordTermsAgreement` (must include)
 
-JSON fields sent via URL-encoded **`payload=`** POST (see Margarita `/` practice implementations):
+JSON via URL-encoded **`payload=`** POST. Align with `hts-enrollment-webapp-google-apps-script-sample.gs`:
 
 | Field | Source |
 |--------|--------|
 | `action` | `recordTermsAgreement` |
 | `fullName` | `data-full-name` |
 | `email` | `data-email` |
-| `phone` | `data-phone` (E.164-style string matching billing `tel:` — e.g. `+17081234567`) |
-| `enrollmentPageUrl` | `window.location` canonical (path + optional query — no `#` hash noise) |
-| `clientSlug` | `data-client-slug` (lowercase hyphenated slug) |
+| `phone` | `data-phone` (E.164-style, match `tel:`) |
+| `enrollmentPageUrl` | canonical path + query (no `#` hash) |
+| `clientSlug` | `data-client-slug` |
 | `termsUrl` | `https://closewithcjclay.com/HTSA-Terms-of-Service.pdf` |
 | `termsVersion` | `HTSA-TOS-PDF-closewithcjclay-2026-04` |
-| `userAgent` | Client browser string |
-
-Keep **`hts-enrollment-webapp-google-apps-script-sample.gs`** semantics aligned—the sample already logs **phone**.
+| `userAgent` | browser string |
 
 ---
 
-## Per-invoice uniqueness (do not reuse Margarita literals)
+## Pre-ship verification (agent must confirm)
 
-Every **new** file must declare **fresh** literals on **`#hts-terms-agreement-panel`**:
-
-- `data-full-name`
-- `data-email`
-- `data-phone`
-- `data-client-slug`
-
-…and a **unique** `sessionStorage` key constant, pattern:
-
-```text
-hts_terms_gate_<firstname>_<lastname>_v1   // underscores in key to match slug words
-```
-
-**Before committing:** **`grep`** the new invoice for stray **Margarita**/template names, phones, emails, or slugs.
+- Correct **Closer vs Setter** and matching curriculum numbers/wording.  
+- **Cash / Financing / Both** correctly reflected.  
+- Orange guarantee **unless** CJ said omit.  
+- Terms gate **above** all money buttons; all pay/finance controls **inside** locked zone.  
+- Endpoint + `termsVersion` + PDF URL; payload includes **`phone`**.  
+- Unique Terms **`data-*`** + **`sessionStorage`** key.  
+- **No PayVa** unless requested; **no Splitit** unless requested.  
+- **Flexxbuy** spelling (two x’s).  
+- Mobile matches **Zachary + Chad** patterns.  
+- **`grep`:** no phantom client data.  
+- **Git: new invoice file committed and pushed** to the publish branch — otherwise **`https://closewithcjclay.com/htsa-enrollment-{slug}.html` 404s**.
 
 ---
 
-## 1. Legacy / sent invoices are FROZEN
+## NEW invoice workflow + delivery
 
-- Do **not** refactor or “bring up to date” old pages unless **CJ names one exact filepath** for that client.
-- Margarita remains the **timeline anchor** (**first Terms-gate invoice**)—do not rewrite Margarita unless CJ deliberately requests it.
-
----
-
-## 2. “Guarantee” = orange banner (Closer vs Setter)
-
-| Invoice type | Orange performance banner |
-|----------------|---------------------------|
-| **Closer** | **Include by default** (current standard)—omit only if CJ says not to ship it on that page |
-| **Setter** | **Omit unless CJ explicitly asks** to add it for that setter |
-
-Markup: **`enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms`** directly under **Program Investment** heading, immediately **above** the Terms agreement gate. Copy wording: duplicate from **`htsa-enrollment-zachary-taylor.html`** / **`htsa-enrollment-chad-aleo.html`** (do not freestyle legal tone).
-
-Terms gate stays **mandatory** on NEW enrollment invoices regardless of orange banner presence.
-
-## 3. Payment setup — CJ’s words only
-
-| CJ says | You include |
-|---------|--------------|
-| In-house cash **only** | Whop **PIF** + **Splitit** explanation (optional if CJ asks) + **4-pay** blocks **without** external pre-qual links |
-| In-house **+ financing** | All in-house tiers CJ wants **plus financing** tiles **only by name** (**ClarityPay / PayVa / Flexxbuy** combinations CJ explicitly specifies) |
-
-**Never** invent unseen financing vendors.
-
----
-
-## 4. NEW invoice workflow + delivery checklist
-
-1. `cp htsa-enrollment-margarita-de-la-rosa.html → htsa-enrollment-{slug}.html`.  
+1. `cp` modern template → `htsa-enrollment-{slug}.html`.  
 2. Replace client fields (`<title>`, hero, billing, steps, Welcome, **`data-*`**, **`STORAGE_KEY`**, JS slug fallback).  
-3. Adjust investment HTML **only inside the new copy** — no legacy edits.  
-4. **`grep`** — zero phantom names/contacts left from template duplication.  
-5. Verify lock **before** record; unlock **after** successful post.  
-6. **`git add`** **only** the new HTML (and optionally this `.mdc`/`.cursor/skills` when edited in **same chore** — never stage review PDF/HTML scratch files).  
-7. Commit + push.  
-8. Return **exactly**:
-
-   `https://closewithcjclay.com/htsa-enrollment-{slug}.html`
-
-   **Never** paste `?v=` cache-busting parameters unless **CJ explicitly requests** busting CDN/browser cache.
+3. Adjust investment HTML **only** in the new file.  
+4. Run verification checklist; **`grep`** stray names/contacts.  
+5. **`git add`** **only** the new HTML (and rule/skill if edited in the **same** task) — never scratch/review artifacts.  
+6. **`git commit`** + **`git push`** to **`origin/main`** (or the repo’s documented deploy branch) **unless** CJ explicitly says **draft only / do not push**. Live **closewithcjclay.com** pages come from this repository — skipping push is the usual cause of **404** on newly built invoice URLs.  
+7. Return **exactly:** `https://closewithcjclay.com/htsa-enrollment-{slug}.html` — **no** `?v=` unless CJ requests cache-bust.
 
 ---
 
@@ -188,18 +197,14 @@ Terms gate stays **mandatory** on NEW enrollment invoices regardless of orange b
 | File / pattern | Reason |
 |----------------|--------|
 | `Untitled` | Scratch |
-| `HTSA-Terms-of-Service-cleaned-review.html` | Review draft |
-| `HTSA-Terms-of-Service-cleaned-review.pdf` | Review draft PDF |
-| **Any legacy** `htsa-enrollment-*` invoice you were not tasked to touch | Freeze rule |
+| `HTSA-Terms-of-Service-cleaned-review.html` / `.pdf` | Review draft |
+| **Legacy** `htsa-enrollment-*` not explicitly tasked | Freeze rule |
 
-Bonus copy rule CJ dislikes unsolicited: don’t toss in “three one-on-one calls with Chad.”
+Bonus copy: don’t toss in “three one-on-one calls with Chad.”
 
 ---
 
-## Full agent procedure
+## Related
 
-Details: `.cursor/skills/htsa-enrollment-invoice/SKILL.md`
-
-## Related rule
-
+Full agent procedure: `.cursor/skills/htsa-enrollment-invoice/SKILL.md`  
 Facebook Mastermind count: **`htsa-mastermind-member-count.mdc`** (490+ wording).
