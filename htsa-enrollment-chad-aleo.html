@@ -875,6 +875,10 @@
       max-width: none !important;
       width: 100%;
     }
+    /* Keep photo sizing; remove upward transform on small screens so the card doesn’t visually sit over testimonial text */
+    .footer-bc-photo-ring {
+      transform: none;
+    }
     .footer-bc-info,
     .footer-bc-logo-stack,
     .footer-bc-brand-text,
@@ -1099,36 +1103,54 @@
   }
 
   @media (max-width: 600px) {
+    /* Testimonials — normal document flow; long Trinity quote must reserve full height before footer */
     .ref-strip {
-      padding: 14px 20px 36px !important;
-      overflow: visible !important;
       display: block !important;
+      overflow: visible !important;
+      /* Match narrow-screen padding pattern (see Zachary template); extra bottom space before footer */
+      padding: 14px 20px 40px !important;
     }
 
     .ref-strip-inner {
-      flex-direction: column;
-      align-items: stretch !important;
-      overflow: visible !important;
       display: block !important;
+      overflow: visible !important;
+      align-items: stretch !important;
     }
 
     .ref-strip-links-col,
-    .ref-strip-quote-wrap {
+    .ref-strip-quote-wrap,
+    .ref-strip-mini-stack {
       display: block !important;
-      max-width: none !important;
       width: 100% !important;
-      overflow: visible !important;
-    }
-
-    .ref-strip-mini-stack,
-    .ref-strip-quote {
-      display: block !important;
+      max-width: none !important;
       height: auto !important;
-      min-height: 0 !important;
+      min-height: auto !important;
       overflow: visible !important;
+      flex: none !important;
+      align-self: auto !important;
     }
 
-    .ref-strip-quote-body {
+    .ref-strip-quote-wrap {
+      min-height: auto !important;
+    }
+
+    .ref-strip-quote,
+    .ref-strip-quote--trinity {
+      display: block !important;
+      width: 100% !important;
+      max-width: none !important;
+      height: auto !important;
+      min-height: auto !important;
+      overflow: visible !important;
+      flex: none !important;
+    }
+
+    .ref-strip-quote--trinity {
+      flex-direction: unset !important;
+    }
+
+    .ref-strip-quote-body,
+    .ref-strip-quote--trinity .ref-strip-quote-body {
       display: block !important;
       height: auto !important;
       max-height: none !important;
@@ -1136,18 +1158,8 @@
       padding-right: 0 !important;
     }
 
-    /* Stacked layout: no side-by-side name alignment; natural flow */
-    .ref-strip-quote--trinity {
-      display: block !important;
-      flex: none !important;
-      height: auto !important;
-      min-height: 0 !important;
-      margin-top: 10px !important;
-      overflow: visible !important;
-    }
-
     .ref-strip-quote--trinity .ref-strip-quote-attr {
-      margin-top: 10px;
+      margin-top: 10px !important;
     }
   }
 
