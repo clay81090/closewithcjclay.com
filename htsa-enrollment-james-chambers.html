@@ -828,6 +828,64 @@
     color: var(--green-dark);
   }
 
+  /* Footer — prominent reviews + support (full width under main footer row) */
+  .footer-reviews-row {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px 28px;
+  }
+  .footer-reviews-trustpilot {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .footer-reviews-trustpilot:hover {
+    color: var(--green);
+  }
+  .footer-reviews-stars {
+    color: var(--green);
+    font-size: 20px;
+    letter-spacing: 3px;
+    line-height: 1;
+    text-shadow: 0 0 12px rgba(0, 201, 122, 0.35);
+  }
+  .footer-reviews-text {
+    font-family: 'DM Sans', sans-serif;
+  }
+  .footer-reviews-support {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.92);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 201, 122, 0.35);
+    padding-bottom: 2px;
+  }
+  .footer-reviews-support:hover {
+    color: var(--green);
+    border-bottom-color: var(--green);
+  }
+  @media (max-width: 600px) {
+    .footer-reviews-row {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 18px;
+      padding-top: 18px;
+    }
+    .footer-reviews-trustpilot {
+      font-size: 15px;
+    }
+  }
+
   @media (max-width: 600px) {
     .header { padding: 22px 20px 20px; flex-direction: column; gap: 16px; }
     .invoice-meta { text-align: left; }
@@ -1818,10 +1876,8 @@ Thank God and CJ Clay for that 🙏</blockquote>
         <div style="font-family:'Playfair Display',serif;color:var(--white);font-size:17px;font-weight:700;margin-bottom:4px;">High Ticket Sales Academy</div>
         <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:14px;">Certification · Coaching · Placement</div>
         <div style="display:flex;flex-direction:column;gap:5px;">
-          <a href="https://www.highticketsalesacademy.com" target="_blank" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">🌐 &nbsp;highticketsalesacademy.com</a>
-          <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">⭐ &nbsp;Trustpilot Reviews — 4.8 out of 5</a>
-          <a href="https://www.youtube.com/@highticketsalesacademy" target="_blank" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">▶️ &nbsp;youtube.com/@highticketsalesacademy</a>
-          <a href="/cdn-cgi/l/email-protection#a0d3d5d0d0cfd2d4e0c8c9c7c8d4c9c3cbc5d4d3c1ccc5d3c1c3c1c4c5cdd98ec3cfcd" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">✉️ &nbsp;<span class="__cf_email__" data-cfemail="780b0d0808170a0c3810111f100c111b131d0c0b19141d0b191b191c1d1501561b1715">[email&#160;protected]</span></a>
+          <a href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">🌐 &nbsp;highticketsalesacademy.com</a>
+          <a href="https://www.youtube.com/@highticketsalesacademy" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">▶️ &nbsp;youtube.com/@highticketsalesacademy</a>
         </div>
       </div>
 
@@ -1846,6 +1902,14 @@ Thank God and CJ Clay for that 🙏</blockquote>
         </div>
       </div>
 
+    </div>
+
+    <div class="footer-reviews-row">
+      <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="footer-reviews-trustpilot" target="_blank" rel="noopener noreferrer">
+        <span class="footer-reviews-stars" aria-hidden="true">★★★★★</span>
+        <span class="footer-reviews-text">Trustpilot Reviews — 4.8 out of 5</span>
+      </a>
+      <a href="mailto:support@highticketsalesacademy.com" class="footer-reviews-support">support@highticketsalesacademy.com</a>
     </div>
   </div>
 
