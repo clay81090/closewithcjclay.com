@@ -147,7 +147,8 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 5. `grep` for stray template names, emails, phones, slugs.  
 6. **Deploy (mandatory for a working live URL):** `git add` **only** the new `htsa-enrollment-{slug}.html`, **`git commit`**, **`git push origin main`** (or the repo’s default publish branch). The site **closewithcjclay.com** serves files from this repo — if the file never gets pushed, **`https://closewithcjclay.com/htsa-enrollment-{slug}.html` returns 404**.  
 7. **Skip commit/push only if** CJ explicitly says not to (e.g. draft only).  
-8. Return: `https://closewithcjclay.com/htsa-enrollment-{slug}.html` — **no** `?v=` unless CJ asks.
+8. Return: `https://closewithcjclay.com/htsa-enrollment-{slug}.html` — **no** `?v=` unless CJ asks.  
+   - **Critical:** The path segment is **`htsa-enrollment-`** (letters **h-t-s-a**), **not** `hts-enrollment-`. Missing the **`a`** produces **404** on GitHub Pages.
 
 ---
 

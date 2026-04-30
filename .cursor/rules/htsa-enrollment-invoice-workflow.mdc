@@ -188,7 +188,8 @@ JSON via URL-encoded **`payload=`** POST. Align with `hts-enrollment-webapp-goog
 4. Run verification checklist; **`grep`** stray names/contacts.  
 5. **`git add`** **only** the new HTML (and rule/skill if edited in the **same** task) — never scratch/review artifacts.  
 6. **`git commit`** + **`git push`** to **`origin/main`** (or the repo’s documented deploy branch) **unless** CJ explicitly says **draft only / do not push**. Live **closewithcjclay.com** pages come from this repository — skipping push is the usual cause of **404** on newly built invoice URLs.  
-7. Return **exactly:** `https://closewithcjclay.com/htsa-enrollment-{slug}.html` — **no** `?v=` unless CJ requests cache-bust.
+7. Return **exactly:** `https://closewithcjclay.com/htsa-enrollment-{slug}.html` — **no** `?v=` unless CJ requests cache-bust.  
+   - **Typo guard:** Links must use **`htsa-enrollment-`** (with **a**). The pattern **`hts-enrollment-`** (no **a**) **404s**. For Kristijo Sherman, a stub redirect exists at **`hts-enrollment-kristijo-sherman.html`** — prefer the canonical **`htsa-`** URL when sharing.
 
 ---
 
