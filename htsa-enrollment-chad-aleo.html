@@ -829,6 +829,16 @@
   }
 
   @media (max-width: 600px) {
+    body {
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
     .header { padding: 22px 20px 20px; flex-direction: column; gap: 16px; }
     .invoice-meta { text-align: left; }
     .invoice-badge { margin-bottom: 8px; }
@@ -874,6 +884,15 @@
     .footer-bc-card {
       max-width: none !important;
       width: 100%;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 10px !important;
+      padding: 14px 16px !important;
+    }
+    .footer-bc-photo-ring {
+      width: 92px !important;
+      height: 92px !important;
+      transform: none !important;
     }
     .footer-bc-info,
     .footer-bc-logo-stack,
@@ -886,6 +905,14 @@
     }
     .footer-bc-logo-stack {
       align-items: flex-start !important;
+    }
+    .footer-bc-line,
+    .footer-bc-line--cal,
+    .footer-bc-line-text {
+      max-width: 100% !important;
+      white-space: normal !important;
+      overflow-wrap: anywhere !important;
+      word-break: break-word !important;
     }
     div[style*="background:#060f1e"] {
       padding: 12px 20px !important;
