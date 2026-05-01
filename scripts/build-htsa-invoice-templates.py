@@ -125,6 +125,41 @@ def angela_pairs() -> list[tuple[str, str]]:
     ]
 
 
+def thomas_closer_financing_pairs() -> list[tuple[str, str]]:
+    """Thomas Rulof layout: invest-pay-zone + ClarityPay/Flexxbuy, no Splitit."""
+    return [
+        ("hts_terms_gate_thomas_rulof_v1", "{{HTSA_STORAGE_KEY}}"),
+        (
+            "clientSlug: (panel.getAttribute('data-client-slug') || 'thomas-rulof').trim(),",
+            "clientSlug: (panel.getAttribute('data-client-slug') || '{{HTSA_CLIENT_SLUG}}').trim(),",
+        ),
+        ('data-client-slug="thomas-rulof">', 'data-client-slug="{{HTSA_CLIENT_SLUG}}">'),
+        ('data-phone="+18046831541"', 'data-phone="{{HTSA_PHONE_E164}}"'),
+        ('data-email="thomasrulof@gmail.com"', 'data-email="{{HTSA_EMAIL}}"'),
+        ('data-full-name="Thomas Rulof"', 'data-full-name="{{HTSA_FULL_NAME}}"'),
+        ("(Thomas enrollment only)", "(TEMPLATE — set client data before deploy)"),
+        ("<title>HTSA Invoice — Thomas Rulof</title>", "<title>HTSA Invoice — {{HTSA_FULL_NAME}} (template)</title>"),
+        ("Thomas Rulof</div>", "{{HTSA_FULL_NAME}}</div>"),
+        (
+            '<a href="mailto:thomasrulof@gmail.com">thomasrulof@gmail.com</a>',
+            '<a href="mailto:{{HTSA_EMAIL}}">{{HTSA_EMAIL}}</a>',
+        ),
+        (
+            '<a href="tel:+18046831541">+1 (804) 683-1541</a>',
+            '<a href="tel:{{HTSA_PHONE_E164}}">{{HTSA_PHONE_DISPLAY}}</a>',
+        ),
+        ("Thomas, I really enjoyed", "{{HTSA_FIRST_NAME}}, I really enjoyed"),
+        (
+            "Thomas, review the payment and financing options",
+            "{{HTSA_FIRST_NAME}}, review the payment and financing options",
+        ),
+        (
+            "Welcome to the <span>HTSA Family,</span> Thomas. 🎉",
+            "Welcome to the <span>HTSA Family,</span> {{HTSA_FIRST_NAME}}. 🎉",
+        ),
+    ]
+
+
 def trameil_pairs() -> list[tuple[str, str]]:
     return [
         ("hts_terms_gate_trameil_lee_v1", "{{HTSA_STORAGE_KEY}}"),
@@ -171,7 +206,7 @@ def strip_orange_guarantee(html: str) -> str:
     html = pattern.sub("\n\n", html, count=1)
     html = html.replace(
         "  <!-- Performance guarantee — confirmed for this enrollment -->\n\n<div class=\"hts-terms-agreement-wrap\">",
-        "  <!-- Orange performance guarantee omitted (template 01b — use when CJ says no guarantee). -->\n\n  <div class=\"hts-terms-agreement-wrap\">",
+        "  <!-- Orange performance guarantee omitted (no-guarantee template variant). -->\n\n  <div class=\"hts-terms-agreement-wrap\">",
         1,
     )
     return html
@@ -275,6 +310,17 @@ def main() -> None:
 
     t05 = setter_cash_only(t04)
     (TEMPLATES / "htsa-tpl-05-setter-cash-only.html").write_text(t05, encoding="utf-8")
+
+    t06 = add_noindex(
+        multi_replace(
+            (ROOT / "htsa-enrollment-thomas-rulof.html").read_text(encoding="utf-8"),
+            thomas_closer_financing_pairs(),
+        )
+    )
+    (TEMPLATES / "htsa-tpl-06-closer-whop-financing-thomas-ui.html").write_text(t06, encoding="utf-8")
+
+    t06b = strip_orange_guarantee(t06)
+    (TEMPLATES / "htsa-tpl-06b-closer-whop-financing-thomas-ui-no-guarantee.html").write_text(t06b, encoding="utf-8")
 
     print("Wrote templates and snippets OK.")
 

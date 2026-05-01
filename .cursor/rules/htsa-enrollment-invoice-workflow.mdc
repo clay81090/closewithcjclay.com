@@ -1,6 +1,6 @@
 ---
 description: How to create new HTSA enrollment invoice HTML fast (copy template, never hand-rebuild)
-globs: htsa-enrollment*.html,htsa_closer*.html
+globs: htsa-enrollment*.html,htsa_closer*.html,templates/**,scripts/htsa*.py,scripts/build-htsa-invoice-templates.py
 alwaysApply: true
 ---
 
@@ -67,6 +67,8 @@ hts_terms_gate_<firstname>_<lastname>_v1
 | **3** | `templates/htsa-tpl-03-closer-whop-plus-financing-splitit.html` | Closer · Whop + Splitit + financing |
 | **4** | `templates/htsa-tpl-04-setter-cash-financing.html` | Setter · cash + financing |
 | **5** | `templates/htsa-tpl-05-setter-cash-only.html` | Setter · cash only |
+| **6** | `templates/htsa-tpl-06-closer-whop-financing-thomas-ui.html` | Closer · Whop + ClarityPay + Flexxbuy · Thomas / Akila-style UI · no Splitit |
+| **6b** | `templates/htsa-tpl-06b-closer-whop-financing-thomas-ui-no-guarantee.html` | Same as **6** · **no** orange guarantee |
 
 Placeholders: `{{HTSA_FULL_NAME}}`, `{{HTSA_FIRST_NAME}}`, `{{HTSA_EMAIL}}`, `{{HTSA_PHONE_E164}}`, `{{HTSA_PHONE_DISPLAY}}`, `{{HTSA_CLIENT_SLUG}}`, `{{HTSA_STORAGE_KEY}}`. Optional: `python3 scripts/htsa-instantiate-invoice.py …` from repo root. **PayVa:** paste `templates/snippets/payva-financing-block.html` only when CJ requests PayVa. **Splitit block:** `templates/snippets/splitit-under-pif-closer.html`. Rebuild shells: `python3 scripts/build-htsa-invoice-templates.py`. Full CJ prompts: **`templates/README.md`**.  
 

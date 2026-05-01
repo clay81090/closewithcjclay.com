@@ -5,8 +5,8 @@ description: >-
   Defaults: orange guarantee ON, mandatory Terms gate + Apps Script, financing ClarityPay +
   Flexxbuy unless Cash-only. After the HTML is ready: git add, commit, and push the new file
   so closewithcjclay.com serves it (otherwise the live URL 404s). Minimal CJ input: program
-  type, cash/financing/both, name, email, phone. Never edits deployed client HTML unless
-  CJ names the file.
+  type, cash/financing/both, name, email, phone. Prefer frozen shells in templates/. Never
+  edits deployed client HTML unless CJ names the file.
 ---
 
 # HTSA enrollment invoice (agent skill)
@@ -39,6 +39,8 @@ Numbered HTML shells (`noindex` + `{{HTSA_*}}` placeholders) are the **preferred
 | **3** | `templates/htsa-tpl-03-closer-whop-plus-financing-splitit.html` | Closer · Whop + **Splitit** + ClarityPay + Flexxbuy |
 | **4** | `templates/htsa-tpl-04-setter-cash-financing.html` | Setter · PIF/3-pay + ClarityPay + Flexxbuy |
 | **5** | `templates/htsa-tpl-05-setter-cash-only.html` | Setter · PIF/3-pay only |
+| **6** | `templates/htsa-tpl-06-closer-whop-financing-thomas-ui.html` | Closer · Whop + ClarityPay + Flexxbuy · Thomas/Akila-style (`invest-pay-zone`) · no Splitit |
+| **6b** | `templates/htsa-tpl-06b-closer-whop-financing-thomas-ui-no-guarantee.html` | Same as **6** · **no** orange banner |
 
 **PayVa:** not in frozen shells by default — paste `templates/snippets/payva-financing-block.html` when CJ says PayVa. **Splitit:** snippet `templates/snippets/splitit-under-pif-closer.html` to add under PIF on other layouts. **CJ prompts:** **`templates/README.md`**.
 
@@ -201,7 +203,7 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 
 ```
 @htsa-enrollment-invoice NEW invoice:
-Template 1–5 OR Closer OR Setter · Cash OR Financing OR Both · Full name · Email · Phone
+Template 1–6 (or 6b) OR Closer OR Setter · Cash OR Financing OR Both · Full name · Email · Phone
 (Use templates/htsa-tpl-*.html when possible — freeze all other client HTML unless named.)
 After the file is correct: git add, commit, push the new HTML so the live URL works (404 if only local).
 ```

@@ -24,6 +24,12 @@ Copy one block and fill in **Full name**, **Email**, **Phone** (and overrides if
 **Template 5 — Setter Cash only (no ClarityPay / Flexxbuy)**  
 `templates/htsa-tpl-05-setter-cash-only.html`
 
+**Template 6 — Closer Whop + ClarityPay + Flexxbuy (Thomas / Akila UI, orange guarantee)**  
+`templates/htsa-tpl-06-closer-whop-financing-thomas-ui.html` — same layout as `htsa-enrollment-thomas-rulof.html`; **no** Splitit.
+
+**Template 6b — Same as 6, NO orange guarantee**  
+`templates/htsa-tpl-06b-closer-whop-financing-thomas-ui-no-guarantee.html`
+
 ## Placeholders (must all be replaced before deploy)
 
 | Token | Example |
@@ -80,3 +86,5 @@ Sources for `scripts/build-htsa-invoice-templates.py`:
 | `htsa-tpl-03-…` | `htsa-enrollment-angela-verdone.html` (ClarityPay normalized to `plan_z5iuUhSgm9seH`) |
 | `htsa-tpl-04-…` | `htsa-enrollment-trameil-lee.html` |
 | `htsa-tpl-05-…` | Trameil, financing section stripped |
+| `htsa-tpl-06-…` | `htsa-enrollment-thomas-rulof.html` |
+| `htsa-tpl-06b-…` | Same as 06, orange banner removed |
