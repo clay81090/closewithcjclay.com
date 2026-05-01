@@ -25,6 +25,29 @@ CJ may provide only:
 
 The agent infers everything else from the **defaults below** unless CJ overrides.
 
+---
+
+## Frozen templates in `templates/` (fastest path)
+
+Numbered HTML shells (`noindex` + `{{HTSA_*}}` placeholders) are the **preferred** starting point:
+
+| # | File | Use when |
+|---|------|----------|
+| **1** | `templates/htsa-tpl-01-closer-cash.html` | Closer · cash only · orange guarantee |
+| **1b** | `templates/htsa-tpl-01b-closer-cash-no-guarantee.html` | Closer · cash only · **no** orange banner |
+| **2** | `templates/htsa-tpl-02-closer-cash-splitit-4pay.html` | Closer · cash + **Splitit** under PIF + 4-pay |
+| **3** | `templates/htsa-tpl-03-closer-whop-plus-financing-splitit.html` | Closer · Whop + **Splitit** + ClarityPay + Flexxbuy |
+| **4** | `templates/htsa-tpl-04-setter-cash-financing.html` | Setter · PIF/3-pay + ClarityPay + Flexxbuy |
+| **5** | `templates/htsa-tpl-05-setter-cash-only.html` | Setter · PIF/3-pay only |
+
+**PayVa:** not in frozen shells by default — paste `templates/snippets/payva-financing-block.html` when CJ says PayVa. **Splitit:** snippet `templates/snippets/splitit-under-pif-closer.html` to add under PIF on other layouts. **CJ prompts:** **`templates/README.md`**.
+
+**Instantiation:** Replace placeholders by hand, or run `python3 scripts/htsa-instantiate-invoice.py templates/htsa-tpl-….html --full-name … --email … --phone-e164 … [--phone-display …]` from repo root (prints path + live URL). Rebuild shells with `python3 scripts/build-htsa-invoice-templates.py` when reference pages change.
+
+**Hard rule:** Materialize **`htsa-enrollment-{slug}.html`** at repo root only — never turn an existing client file into someone else.
+
+---
+
 **Cash** = Whop paid-in-full + Whop payment-plan options only (no ClarityPay / Flexxbuy tiles).  
 **Financing** = ClarityPay + Flexxbuy only (no in-house Whop pay buttons) — *rare;* CJ usually means **Both**.  
 **Both** = in-house Whop options **plus** ClarityPay + Flexxbuy.
@@ -140,8 +163,8 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 
 ## Build steps
 
-1. Choose duplicate source: **Closer** → prefer **`htsa-enrollment-james-chambers.html`** or **`htsa-enrollment-kristijo-sherman.html`** for **footer + guarantee + Terms order** parity; **Setter** → **`htsa-enrollment-trameil-lee.html`**. (Older templates lack the 2026 footer.)
-2. `cp` → `htsa-enrollment-{slug}.html` — work **only** in the new file.  
+1. **Prefer** a frozen template from **`templates/`** (see table earlier in this skill + **`templates/README.md`**). Otherwise choose duplicate source: **Closer** → **`htsa-enrollment-james-chambers.html`** or **`htsa-enrollment-kristijo-sherman.html`**; **Setter** → **`htsa-enrollment-trameil-lee.html`**.  
+2. `cp` the template → `htsa-enrollment-{slug}.html` **or** run **`scripts/htsa-instantiate-invoice.py`** — work **only** in the new file.  
 3. Set client `data-*`, `STORAGE_KEY`, hero, billing, steps, investment blocks per defaults + CJ overrides.  
 4. Run the **verification checklist** (below).  
 5. `grep` for stray template names, emails, phones, slugs.  
@@ -178,7 +201,7 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 
 ```
 @htsa-enrollment-invoice NEW invoice:
-Closer OR Setter · Cash OR Financing OR Both · Full name · Email · Phone
-(Duplicate modern template only — freeze all other client HTML unless named.)
+Template 1–5 OR Closer OR Setter · Cash OR Financing OR Both · Full name · Email · Phone
+(Use templates/htsa-tpl-*.html when possible — freeze all other client HTML unless named.)
 After the file is correct: git add, commit, push the new HTML so the live URL works (404 if only local).
 ```

@@ -6,7 +6,7 @@ alwaysApply: true
 
 # HTSA enrollment invoices — NEW pages only
 
-**Never** edit an existing client’s deployed `htsa-enrollment-*.html` to create a **new** person. **`cp`** the right modern template, then replace **only** the new file. Reference invoices (Zachary, Trameil, CJ practice, Margarita, etc.) are **read-only** unless CJ explicitly asks to edit a named file.
+**Never** edit an existing client’s deployed `htsa-enrollment-*.html` to create a **new** person. **`cp`** a frozen file from **`templates/htsa-tpl-*.html`** or another modern invoice, then replace **only** the new file. Reference invoices (Zachary, Trameil, CJ practice, Margarita, etc.) are **read-only** unless CJ explicitly asks to edit a named file. See **`templates/README.md`** for numbered templates and copy-paste prompts.
 
 ---
 
@@ -56,6 +56,21 @@ hts_terms_gate_<firstname>_<lastname>_v1
 ---
 
 ## Duplicate sources (modern layout)
+
+### Frozen shells (preferred for NEW invoices)
+
+| Template | File | Program / payment shape |
+|---------|------|-------------------------|
+| **1** | `templates/htsa-tpl-01-closer-cash.html` | Closer · cash · guarantee |
+| **1b** | `templates/htsa-tpl-01b-closer-cash-no-guarantee.html` | Closer · cash · no guarantee |
+| **2** | `templates/htsa-tpl-02-closer-cash-splitit-4pay.html` | Closer · cash + Splitit + 4-pay |
+| **3** | `templates/htsa-tpl-03-closer-whop-plus-financing-splitit.html` | Closer · Whop + Splitit + financing |
+| **4** | `templates/htsa-tpl-04-setter-cash-financing.html` | Setter · cash + financing |
+| **5** | `templates/htsa-tpl-05-setter-cash-only.html` | Setter · cash only |
+
+Placeholders: `{{HTSA_FULL_NAME}}`, `{{HTSA_FIRST_NAME}}`, `{{HTSA_EMAIL}}`, `{{HTSA_PHONE_E164}}`, `{{HTSA_PHONE_DISPLAY}}`, `{{HTSA_CLIENT_SLUG}}`, `{{HTSA_STORAGE_KEY}}`. Optional: `python3 scripts/htsa-instantiate-invoice.py …` from repo root. **PayVa:** paste `templates/snippets/payva-financing-block.html` only when CJ requests PayVa. **Splitit block:** `templates/snippets/splitit-under-pif-closer.html`. Rebuild shells: `python3 scripts/build-htsa-invoice-templates.py`. Full CJ prompts: **`templates/README.md`**.  
+
+### Reference pages (read-only)
 
 | Program | Preferred `cp` source (example) | Notes |
 |---------|----------------------------------|--------|
