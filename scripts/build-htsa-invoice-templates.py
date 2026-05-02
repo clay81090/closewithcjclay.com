@@ -30,37 +30,6 @@ def multi_replace(html: str, pairs: list[tuple[str, str]]) -> str:
     return html
 
 
-def rebecca_pairs() -> list[tuple[str, str]]:
-    return [
-        ("hts_terms_gate_rebecca_singh_v1", "{{HTSA_STORAGE_KEY}}"),
-        (
-            "clientSlug: (panel.getAttribute('data-client-slug') || 'rebecca-singh').trim(),",
-            "clientSlug: (panel.getAttribute('data-client-slug') || '{{HTSA_CLIENT_SLUG}}').trim(),",
-        ),
-        ('data-client-slug="rebecca-singh">', 'data-client-slug="{{HTSA_CLIENT_SLUG}}">'),
-        ('data-phone="+14074731789"', 'data-phone="{{HTSA_PHONE_E164}}"'),
-        ('data-email="rebeccaoctober26@hotmail.com"', 'data-email="{{HTSA_EMAIL}}"'),
-        ('data-full-name="Rebecca Singh"', 'data-full-name="{{HTSA_FULL_NAME}}"'),
-        ("(Rebecca Singh enrollment only)", "(TEMPLATE — set client data before deploy)"),
-        ("<title>HTSA Invoice — Rebecca Singh</title>", "<title>HTSA Invoice — {{HTSA_FULL_NAME}} (template)</title>"),
-        ("Rebecca Singh</div>", "{{HTSA_FULL_NAME}}</div>",),  # billing-name
-        (
-            '<a href="mailto:rebeccaoctober26@hotmail.com">rebeccaoctober26@hotmail.com</a>',
-            '<a href="mailto:{{HTSA_EMAIL}}">{{HTSA_EMAIL}}</a>',
-        ),
-        (
-            '<a href="tel:+14074731789">+1 (407) 473-1789</a>',
-            '<a href="tel:{{HTSA_PHONE_E164}}">{{HTSA_PHONE_DISPLAY}}</a>',
-        ),
-        ("Rebecca, I really enjoyed", "{{HTSA_FIRST_NAME}}, I really enjoyed"),
-        ("Rebecca, review the payment options", "{{HTSA_FIRST_NAME}}, review the payment options"),
-        (
-            "Welcome to the <span>HTSA Family,</span> Rebecca. 🎉",
-            "Welcome to the <span>HTSA Family,</span> {{HTSA_FIRST_NAME}}. 🎉",
-        ),
-    ]
-
-
 def matthew_pairs() -> list[tuple[str, str]]:
     return [
         ("hts_terms_gate_matthew_hedden_v1", "{{HTSA_STORAGE_KEY}}"),
@@ -125,8 +94,8 @@ def angela_pairs() -> list[tuple[str, str]]:
     ]
 
 
-def thomas_closer_financing_pairs() -> list[tuple[str, str]]:
-    """Thomas Rulof layout: invest-pay-zone + ClarityPay/Flexxbuy, no Splitit."""
+def closer_invest_pay_zone_financing_pairs() -> list[tuple[str, str]]:
+    """Placeholder-ize production HTML (invest-pay-zone + Whop + ClarityPay + Flexxbuy). Source file on disk is only the structural duplicate."""
     return [
         ("hts_terms_gate_thomas_rulof_v1", "{{HTSA_STORAGE_KEY}}"),
         (
@@ -286,6 +255,100 @@ def splitit_snippet() -> str:
 """
 
 
+SPLITIT_CSS_BLOCK = """
+  /* Splitit note + detail (under $6k PIF) */
+  .invest-splitit-wrap {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .invest-splitit-intro {
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0 0 12px;
+  }
+
+  .invest-splitit-intro strong {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .invest-splitit-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 156, 122, 0.4);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .invest-splitit-head {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff9c7a;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .invest-splitit-apply {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0 0 10px;
+    line-height: 1.55;
+  }
+
+  .invest-splitit-fine {
+    font-size: 10.5px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.48);
+    margin: 0;
+  }
+"""
+
+
+def inject_splitit_closer_invest_pay_zone(html: str) -> str:
+    """Add Splitit CSS + under-PIF block + step copy (all closer shells include Splitit on cash)."""
+    anchor_css = (
+        "    opacity: 0.92;\n"
+        "  }\n\n"
+        "  .invest-grid {\n"
+        "    display: grid;"
+    )
+    if anchor_css not in html:
+        raise RuntimeError("inject_splitit: CSS anchor not found")
+    if ".invest-splitit-wrap" in html:
+        return html
+    html = html.replace(
+        anchor_css,
+        "    opacity: 0.92;\n  }" + SPLITIT_CSS_BLOCK + "\n\n  .invest-grid {\n    display: grid;",
+        1,
+    )
+    pif_then_opt2 = (
+        '            <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $6,000 →</a>\n'
+        "          </div>\n"
+        "        </div>\n\n"
+        '        <div class="invest-option-block">\n'
+        '          <div class="invest-badge invest-badge--option">Option 2</div>'
+    )
+    if pif_then_opt2 not in html:
+        raise RuntimeError("inject_splitit: PIF / Option 2 anchor not found")
+    html = html.replace(
+        pif_then_opt2,
+        '            <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $6,000 →</a>\n'
+        "          </div>\n"
+        + splitit_snippet()
+        + "        </div>\n\n"
+        '        <div class="invest-option-block">\n'
+        '          <div class="invest-badge invest-badge--option">Option 2</div>',
+        1,
+    )
+    html = html.replace(
+        "then select what you want — <strong>$6,000</strong> paid in full, the <strong>$1,750 × 4-pay</strong> plan",
+        "then select what you want — <strong>$6,000</strong> paid in full (or <strong>Splitit</strong> inside that same Whop checkout), the <strong>$1,750 × 4-pay</strong> plan",
+        1,
+    )
+    return html
+
+
 def main() -> None:
     TEMPLATES.mkdir(parents=True, exist_ok=True)
     SNIPPETS.mkdir(parents=True, exist_ok=True)
@@ -293,14 +356,14 @@ def main() -> None:
     (SNIPPETS / "payva-financing-block.html").write_text(payva_snippet(), encoding="utf-8")
     (SNIPPETS / "splitit-under-pif-closer.html").write_text(splitit_snippet(), encoding="utf-8")
 
-    t01 = add_noindex(multi_replace((ROOT / "htsa-enrollment-rebecca-singh.html").read_text(encoding="utf-8"), rebecca_pairs()))
+    t01 = add_noindex(multi_replace((ROOT / "htsa-enrollment-matthew-hedden.html").read_text(encoding="utf-8"), matthew_pairs()))
     (TEMPLATES / "htsa-tpl-01-closer-cash.html").write_text(t01, encoding="utf-8")
 
     t01b = strip_orange_guarantee(t01)
     (TEMPLATES / "htsa-tpl-01b-closer-cash-no-guarantee.html").write_text(t01b, encoding="utf-8")
 
-    t02 = add_noindex(multi_replace((ROOT / "htsa-enrollment-matthew-hedden.html").read_text(encoding="utf-8"), matthew_pairs()))
-    (TEMPLATES / "htsa-tpl-02-closer-cash-splitit-4pay.html").write_text(t02, encoding="utf-8")
+    # Legacy second filename: identical to tpl-01 (closer cash always includes Splitit + 4-pay).
+    (TEMPLATES / "htsa-tpl-02-closer-cash-splitit-4pay.html").write_text(t01, encoding="utf-8")
 
     t03 = add_noindex(multi_replace((ROOT / "htsa-enrollment-angela-verdone.html").read_text(encoding="utf-8"), angela_pairs()))
     (TEMPLATES / "htsa-tpl-03-closer-whop-plus-financing-splitit.html").write_text(t03, encoding="utf-8")
@@ -311,16 +374,26 @@ def main() -> None:
     t05 = setter_cash_only(t04)
     (TEMPLATES / "htsa-tpl-05-setter-cash-only.html").write_text(t05, encoding="utf-8")
 
-    t06 = add_noindex(
-        multi_replace(
-            (ROOT / "htsa-enrollment-thomas-rulof.html").read_text(encoding="utf-8"),
-            thomas_closer_financing_pairs(),
+    t06 = inject_splitit_closer_invest_pay_zone(
+        add_noindex(
+            multi_replace(
+                (ROOT / "htsa-enrollment-thomas-rulof.html").read_text(encoding="utf-8"),
+                closer_invest_pay_zone_financing_pairs(),
+            )
         )
     )
-    (TEMPLATES / "htsa-tpl-06-closer-whop-financing-thomas-ui.html").write_text(t06, encoding="utf-8")
+    (TEMPLATES / "htsa-tpl-06-closer-whop-financing-invest-pay-zone.html").write_text(t06, encoding="utf-8")
 
     t06b = strip_orange_guarantee(t06)
-    (TEMPLATES / "htsa-tpl-06b-closer-whop-financing-thomas-ui-no-guarantee.html").write_text(t06b, encoding="utf-8")
+    (TEMPLATES / "htsa-tpl-06b-closer-whop-financing-invest-pay-zone-no-guarantee.html").write_text(t06b, encoding="utf-8")
+
+    for old_name in (
+        "htsa-tpl-06-closer-whop-financing-thomas-ui.html",
+        "htsa-tpl-06b-closer-whop-financing-thomas-ui-no-guarantee.html",
+    ):
+        old_path = TEMPLATES / old_name
+        if old_path.exists():
+            old_path.unlink()
 
     print("Wrote templates and snippets OK.")
 

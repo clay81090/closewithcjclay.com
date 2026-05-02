@@ -29,22 +29,24 @@ The agent infers everything else from the **defaults below** unless CJ overrides
 
 ## Frozen templates in `templates/` (fastest path)
 
-Numbered HTML shells (`noindex` + `{{HTSA_*}}` placeholders) are the **preferred** starting point:
+**CJ defaults (frozen shells):** Orange performance guarantee **on** for every shell **except** **1b** and **6b**. **PayVa** is **never** baked into shells — use `templates/snippets/payva-financing-block.html` only when CJ says **PayVa**. **Splitit** (under $6k PIF) is **on** for **all Closer** templates (**1**, **2**, **3**, **6**); **Setter** templates (**4**, **5**) have **no** Splitit. Template HTML uses **`{{HTSA_*}}` placeholders only** — no personal names in filenames as “clients.”
+
+Numbered shells (`noindex` + placeholders):
 
 | # | File | Use when |
 |---|------|----------|
-| **1** | `templates/htsa-tpl-01-closer-cash.html` | Closer · cash only · orange guarantee |
-| **1b** | `templates/htsa-tpl-01b-closer-cash-no-guarantee.html` | Closer · cash only · **no** orange banner |
-| **2** | `templates/htsa-tpl-02-closer-cash-splitit-4pay.html` | Closer · cash + **Splitit** under PIF + 4-pay |
+| **1** | `templates/htsa-tpl-01-closer-cash.html` | Closer · Whop PIF + **Splitit** + 4-pay · guarantee |
+| **1b** | `templates/htsa-tpl-01b-closer-cash-no-guarantee.html` | Closer · same as **1** · **no** orange banner |
+| **2** | `templates/htsa-tpl-02-closer-cash-splitit-4pay.html` | **Same HTML as 1** (legacy filename) |
 | **3** | `templates/htsa-tpl-03-closer-whop-plus-financing-splitit.html` | Closer · Whop + **Splitit** + ClarityPay + Flexxbuy |
-| **4** | `templates/htsa-tpl-04-setter-cash-financing.html` | Setter · PIF/3-pay + ClarityPay + Flexxbuy |
-| **5** | `templates/htsa-tpl-05-setter-cash-only.html` | Setter · PIF/3-pay only |
-| **6** | `templates/htsa-tpl-06-closer-whop-financing-thomas-ui.html` | Closer · Whop + ClarityPay + Flexxbuy · Thomas/Akila-style (`invest-pay-zone`) · no Splitit |
-| **6b** | `templates/htsa-tpl-06b-closer-whop-financing-thomas-ui-no-guarantee.html` | Same as **6** · **no** orange banner |
-
-**PayVa:** not in frozen shells by default — paste `templates/snippets/payva-financing-block.html` when CJ says PayVa. **Splitit:** snippet `templates/snippets/splitit-under-pif-closer.html` to add under PIF on other layouts. **CJ prompts:** **`templates/README.md`**.
+| **4** | `templates/htsa-tpl-04-setter-cash-financing.html` | Setter · PIF/3-pay + ClarityPay + Flexxbuy · **no** Splitit |
+| **5** | `templates/htsa-tpl-05-setter-cash-only.html` | Setter · PIF/3-pay only · **no** Splitit |
+| **6** | `templates/htsa-tpl-06-closer-whop-financing-invest-pay-zone.html` | Closer · `invest-pay-zone` · Whop + **Splitit** + ClarityPay + Flexxbuy |
+| **6b** | `templates/htsa-tpl-06b-closer-whop-financing-invest-pay-zone-no-guarantee.html` | Same as **6** · **no** orange banner |
 
 **Instantiation:** Replace placeholders by hand, or run `python3 scripts/htsa-instantiate-invoice.py templates/htsa-tpl-….html --full-name … --email … --phone-e164 … [--phone-display …]` from repo root (prints path + live URL). Rebuild shells with `python3 scripts/build-htsa-invoice-templates.py` when reference pages change.
+
+**CJ copy-paste prompts:** **`templates/README.md`**.
 
 **Hard rule:** Materialize **`htsa-enrollment-{slug}.html`** at repo root only — never turn an existing client file into someone else.
 
@@ -80,7 +82,7 @@ hts_terms_gate_<firstname>_<lastname>_v1
 
 (use underscore-separated slug words, e.g. `hts_terms_gate_jane_doe_v1`).
 
-**Lock until Terms recorded (non-exhaustive):** Whop PIF, Whop installment plans, **ClarityPay**, **Flexxbuy**, **PayVa** (if CJ explicitly requested), **Splitit** (if CJ explicitly requested), any future checkout or pre-qual link.
+**Lock until Terms recorded (non-exhaustive):** Whop PIF, Whop installment plans, **ClarityPay**, **Flexxbuy**, **PayVa** (if CJ explicitly requested), **Splitit** (default on closer cash; omit only if CJ says **no Splitit**), any future checkout or pre-qual link.
 
 ---
 
@@ -105,7 +107,7 @@ Every new invoice must POST the Terms agreement to this **exact** endpoint:
 
 - If CJ says **Financing** or **Both:** include **ClarityPay** and **Flexxbuy** by default. Spell **Flexxbuy** (two **x**’s).
 - **Do not** include **PayVa** unless CJ explicitly says **PayVa**.
-- **Do not** include **Splitit** unless CJ explicitly requests it.
+- **Splitit:** include on **Closer** cash/Whop by default (all closer frozen shells). **Do not** put Splitit on **Setter** invoices. Omit Splitit on a closer only if CJ explicitly says **no Splitit**.
 
 ---
 
@@ -117,6 +119,7 @@ Every new invoice must POST the Terms agreement to this **exact** endpoint:
 - **UI:** Newest **Zachary-style** layout (spacing, mobile-ready Terms gate placement).  
 - **Structural duplicate source:** prefer **`htsa-enrollment-james-chambers.html`** or **`htsa-enrollment-kristijo-sherman.html`** (2026 footer + Terms stack; **edit only** the new file).  
 - **Whop plan URLs:** Match CJ-supplied links or those in the template you duplicated; do not invent checkout IDs.
+- **Splitit** under PIF: **default on** closer cash (see frozen shells **1**, **2**, **3**, **6**); omit only if CJ says **no Splitit**. **Never** on setter.
 
 ---
 
@@ -186,7 +189,7 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 - Apps Script **endpoint** + **`termsVersion`** + PDF URL correct; **payload includes `phone`**.  
 - Unique **`data-full-name`**, **`data-email`**, **`data-phone`**, **`data-client-slug`** + **`sessionStorage`** key.  
 - No stray prior-client data.  
-- **No PayVa** unless CJ asked; **no Splitit** unless CJ asked.  
+- **No PayVa** unless CJ asked; **Splitit** on closer unless CJ said **no Splitit**; **no Splitit** on setter.  
 - **Flexxbuy** spelled with two x’s.  
 - Mobile layout consistent with recent invoices (Zachary / Chad patterns).  
 - **New invoice file is committed and pushed** so the live URL does not 404.

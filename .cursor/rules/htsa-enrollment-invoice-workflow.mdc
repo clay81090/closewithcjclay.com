@@ -43,7 +43,7 @@ Agents apply **defaults** in this rule unless CJ overrides.
 1. **Program Investment** heading  
 2. **Orange performance guarantee** (unless explicitly omitted)  
 3. **Terms agreement gate** (`#hts-terms-agreement-panel`): PDF → clarifications → checkbox → **Record agreement & unlock payments**  
-4. **Locked** `#invest-pay-zone`: **all** Whop checkouts, payment plans, ClarityPay, Flexxbuy, and any optional vendors (PayVa, Splitit) CJ requested  
+4. **Locked** `#invest-pay-zone`: **all** Whop checkouts, payment plans, ClarityPay, Flexxbuy, **Splitit** (when on page), and optional **PayVa** only when CJ requested  
 
 **Core rule:** No payment or financing action works until **`recordTermsAgreement`** succeeds. Locked zone uses **`invest-pay-zone`** + **`invest-pay-zone--locked`** until then; intercept **`a.invest-btn`** (including **`secondary`**). **`sessionStorage`** unlock for that tab — unique key:
 
@@ -51,7 +51,7 @@ Agents apply **defaults** in this rule unless CJ overrides.
 hts_terms_gate_<firstname>_<lastname>_v1
 ```
 
-**Gated destinations (non-exhaustive):** Whop **PIF**, Whop **installment** checkouts, **ClarityPay**, **Flexxbuy**, **PayVa** (only if CJ says **PayVa**), **Splitit** (only if CJ says **Splitit**), any future checkout or pre-qual link.
+**Gated destinations (non-exhaustive):** Whop **PIF**, Whop **installment** checkouts, **ClarityPay**, **Flexxbuy**, **PayVa** (only if CJ says **PayVa**), **Splitit** (default on closer cash; omit only if CJ says **no Splitit**), any future checkout or pre-qual link.
 
 ---
 
@@ -61,16 +61,16 @@ hts_terms_gate_<firstname>_<lastname>_v1
 
 | Template | File | Program / payment shape |
 |---------|------|-------------------------|
-| **1** | `templates/htsa-tpl-01-closer-cash.html` | Closer · cash · guarantee |
-| **1b** | `templates/htsa-tpl-01b-closer-cash-no-guarantee.html` | Closer · cash · no guarantee |
-| **2** | `templates/htsa-tpl-02-closer-cash-splitit-4pay.html` | Closer · cash + Splitit + 4-pay |
-| **3** | `templates/htsa-tpl-03-closer-whop-plus-financing-splitit.html` | Closer · Whop + Splitit + financing |
-| **4** | `templates/htsa-tpl-04-setter-cash-financing.html` | Setter · cash + financing |
-| **5** | `templates/htsa-tpl-05-setter-cash-only.html` | Setter · cash only |
-| **6** | `templates/htsa-tpl-06-closer-whop-financing-thomas-ui.html` | Closer · Whop + ClarityPay + Flexxbuy · Thomas / Akila-style UI · no Splitit |
-| **6b** | `templates/htsa-tpl-06b-closer-whop-financing-thomas-ui-no-guarantee.html` | Same as **6** · **no** orange guarantee |
+| **1** | `templates/htsa-tpl-01-closer-cash.html` | Closer · Whop PIF + **Splitit** + 4-pay · guarantee |
+| **1b** | `templates/htsa-tpl-01b-closer-cash-no-guarantee.html` | Closer · same as **1** · **no** orange guarantee |
+| **2** | `templates/htsa-tpl-02-closer-cash-splitit-4pay.html` | **Same HTML as 1** (legacy filename) |
+| **3** | `templates/htsa-tpl-03-closer-whop-plus-financing-splitit.html` | Closer · Whop + **Splitit** + ClarityPay + Flexxbuy |
+| **4** | `templates/htsa-tpl-04-setter-cash-financing.html` | Setter · cash + financing · **no** Splitit |
+| **5** | `templates/htsa-tpl-05-setter-cash-only.html` | Setter · cash only · **no** Splitit |
+| **6** | `templates/htsa-tpl-06-closer-whop-financing-invest-pay-zone.html` | Closer · `invest-pay-zone` · Whop + **Splitit** + ClarityPay + Flexxbuy |
+| **6b** | `templates/htsa-tpl-06b-closer-whop-financing-invest-pay-zone-no-guarantee.html` | Same as **6** · **no** orange guarantee |
 
-Placeholders: `{{HTSA_FULL_NAME}}`, `{{HTSA_FIRST_NAME}}`, `{{HTSA_EMAIL}}`, `{{HTSA_PHONE_E164}}`, `{{HTSA_PHONE_DISPLAY}}`, `{{HTSA_CLIENT_SLUG}}`, `{{HTSA_STORAGE_KEY}}`. Optional: `python3 scripts/htsa-instantiate-invoice.py …` from repo root. **PayVa:** paste `templates/snippets/payva-financing-block.html` only when CJ requests PayVa. **Splitit block:** `templates/snippets/splitit-under-pif-closer.html`. Rebuild shells: `python3 scripts/build-htsa-invoice-templates.py`. Full CJ prompts: **`templates/README.md`**.  
+**Frozen-shell defaults:** Orange guarantee **on** except **1b** / **6b**. **PayVa** not in shells — snippet only when CJ says PayVa. **Splitit** on **all Closer** shells; **never** on **Setter** shells. Placeholders: `{{HTSA_FULL_NAME}}`, `{{HTSA_FIRST_NAME}}`, `{{HTSA_EMAIL}}`, `{{HTSA_PHONE_E164}}`, `{{HTSA_PHONE_DISPLAY}}`, `{{HTSA_CLIENT_SLUG}}`, `{{HTSA_STORAGE_KEY}}`. Optional: `python3 scripts/htsa-instantiate-invoice.py …`. Rebuild: `python3 scripts/build-htsa-invoice-templates.py`. Prompts: **`templates/README.md`**.
 
 ### Reference pages (read-only)
 
@@ -89,7 +89,7 @@ Placeholders: `{{HTSA_FULL_NAME}}`, `{{HTSA_FIRST_NAME}}`, `{{HTSA_EMAIL}}`, `{{
 
 - **Financing** or **Both:** include **ClarityPay** and **Flexxbuy** by default. Use spelling **Flexxbuy** (two **x**’s).  
 - **PayVa:** include **only** if CJ explicitly requests **PayVa**. **Not** a default.  
-- **Splitit:** include **only** if CJ explicitly requests it.
+- **Splitit:** **Frozen templates:** all **Closer** shells include Splitit under PIF; **Setter** shells do **not**. For **ad-hoc** invoices **not** built from `templates/`, include Splitit on closer cash unless CJ explicitly says **no Splitit**.
 
 ---
 
@@ -99,6 +99,7 @@ Placeholders: `{{HTSA_FULL_NAME}}`, `{{HTSA_FIRST_NAME}}`, `{{HTSA_EMAIL}}`, `{{
 - **Curriculum:** **50** modules; **five** levels of AI roleplay.  
 - **Default cash pricing:** PIF **$6,000**; **4-pay** **$1,750** today / **$7,000** total.  
 - **Whop URLs:** use CJ-supplied plans or those in the Closer template duplicated — do not invent plan IDs.  
+- **Splitit** under $6k PIF: **default on** closer cash (frozen shells and new closer invoices) unless CJ says **no Splitit**. **Never** on setter.  
 - If financing is included: **ClarityPay + Flexxbuy** unless CJ names **PayVa** (or another approved provider).
 
 ---
@@ -189,7 +190,7 @@ JSON via URL-encoded **`payload=`** POST. Align with `hts-enrollment-webapp-goog
 - Terms gate **above** all money buttons; all pay/finance controls **inside** locked zone.  
 - Endpoint + `termsVersion` + PDF URL; payload includes **`phone`**.  
 - Unique Terms **`data-*`** + **`sessionStorage`** key.  
-- **No PayVa** unless requested; **no Splitit** unless requested.  
+- **No PayVa** unless requested; **Splitit** on closer unless CJ said **no Splitit**; **no Splitit** on setter.  
 - **Flexxbuy** spelling (two x’s).  
 - Mobile matches **Zachary + Chad** patterns.  
 - **`grep`:** no phantom client data.  
