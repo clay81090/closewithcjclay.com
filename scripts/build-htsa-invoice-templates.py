@@ -191,6 +191,18 @@ def setter_cash_only(html: str) -> str:
         "<p>{{HTSA_FIRST_NAME}}, review the <strong>Setter</strong> payment and financing options in Program Investment above — <strong>$3,000</strong> paid in full, the <strong>$1,050 × 3-pay</strong> plan ($3,150 total), or a soft pre-qualification link for <strong>ClarityPay</strong> or <strong>Flexxbuy</strong>. Once your payment clears or your financing is approved, move to Step 2 below.</p>",
         "<p>{{HTSA_FIRST_NAME}}, review the <strong>Setter</strong> payment options in Program Investment above — <strong>$3,000</strong> paid in full or the <strong>$1,050 × 3-pay</strong> plan ($3,150 total). Once your payment clears, move to Step 2 below.</p>",
     )
+    html = html.replace(
+        "then record your acceptance to unlock payment and financing buttons below.",
+        "then record your acceptance to unlock payment buttons below.",
+    )
+    html = html.replace(
+        "Payment and financing buttons stay locked until your Terms agreement has been recorded above.",
+        "Payment buttons stay locked until your Terms agreement has been recorded above.",
+    )
+    html = html.replace(
+        "✓ Terms recorded successfully. Payment and financing buttons below are now active for this browser session.",
+        "✓ Terms recorded successfully. Payment buttons below are now active for this browser session.",
+    )
     return html
 
 
