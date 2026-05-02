@@ -8,6 +8,7 @@ Sources (read-only):
   - Closer cash + financing: htsa-enrollment-thomas-rulof.html + Splitit under PIF + URL normalize
   - Setter: htsa-enrollment-trameil-lee.html
   - Dual header/curriculum chunk: htsa-enrollment-jocelyn-navarro.html (layout only; terms/pay zone = Val/Thomas+Trameil)
+  - Footer (HTML + CSS): htsa-enrollment-kristijo-sherman.html (brand-colored links, IG, Trustpilot + stars row)
 
 Run from repo root: python3 scripts/build-htsa-invoice-templates.py
 """
@@ -18,6 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATES = ROOT / "templates"
 SNIPPETS = TEMPLATES / "snippets"
+KRISTIJO_FOOTER_REF = ROOT / "htsa-enrollment-kristijo-sherman.html"
 
 CLARITY_LEGACY_URL = "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/"
 CLARITY_PLAN_URL = "https://whop.com/checkout/plan_z5iuUhSgm9seH?d2c=true"
@@ -528,6 +530,39 @@ def build_dual_template(
     return add_noindex(out)
 
 
+def kristijo_footer_assets() -> tuple[str, str]:
+    """Footer CSS block + footer HTML from Kristijo (reference-only file)."""
+    t = KRISTIJO_FOOTER_REF.read_text(encoding="utf-8")
+    idx = t.find("  /* Footer HTSA column")
+    if idx == -1:
+        raise RuntimeError("kristijo_footer_assets: CSS marker missing in reference HTML")
+    header_media = t.find("  @media (max-width: 600px) {\n    .header {", idx)
+    if header_media == -1:
+        raise RuntimeError("kristijo_footer_assets: could not find main layout @media block after footer CSS")
+    footer_css = t[idx:header_media]
+    fstart = t.find("  <!-- FOOTER -->")
+    fend = t.find("<script>", fstart)
+    if fstart == -1 or fend == -1:
+        raise RuntimeError("kristijo_footer_assets: footer HTML or <script> boundary missing")
+    footer_html = t[fstart:fend].rstrip() + "\n\n"
+    return footer_css, footer_html
+
+
+def inject_kristijo_footer(html: str, footer_css: str, footer_html: str) -> str:
+    """Insert Kristijo footer CSS (after business-card rules) and replace <!-- FOOTER -->…<script> region."""
+    if "  /* Footer HTSA column" in html:
+        return html
+    anchor = "  .footer-bc-line--cal:hover {\n    color: var(--green-dark);\n  }\n\n"
+    if anchor not in html:
+        raise RuntimeError("inject_kristijo_footer: expected CSS anchor not found (.footer-bc-line--cal:hover)")
+    html = html.replace(anchor, anchor + footer_css, 1)
+    fstart = html.find("  <!-- FOOTER -->")
+    fend = html.find("<script>", fstart)
+    if fstart == -1 or fend == -1:
+        raise RuntimeError("inject_kristijo_footer: footer region or <script> tag not found")
+    return html[:fstart] + footer_html + html[fend:]
+
+
 def main() -> None:
     TEMPLATES.mkdir(parents=True, exist_ok=True)
     SNIPPETS.mkdir(parents=True, exist_ok=True)
@@ -568,6 +603,20 @@ def main() -> None:
     )
 
     strip_legacy_templates()
+
+    footer_css, footer_html = kristijo_footer_assets()
+    p01 = inject_kristijo_footer(p01, footer_css, footer_html)
+    p02 = inject_kristijo_footer(p02, footer_css, footer_html)
+    p03 = inject_kristijo_footer(p03, footer_css, footer_html)
+    p04 = inject_kristijo_footer(p04, footer_css, footer_html)
+    p05 = inject_kristijo_footer(p05, footer_css, footer_html)
+    p06 = inject_kristijo_footer(p06, footer_css, footer_html)
+    dual_footer_title = (
+        '<div class="footer-bc-title">HTSA Closer</div>',
+        '<div class="footer-bc-title">HTSA Closer &amp; Setter</div>',
+    )
+    p05 = p05.replace(dual_footer_title[0], dual_footer_title[1], 1)
+    p06 = p06.replace(dual_footer_title[0], dual_footer_title[1], 1)
 
     (TEMPLATES / "htsa-placement-01-closer-cash-only.html").write_text(p01, encoding="utf-8")
     (TEMPLATES / "htsa-placement-02-closer-cash-financing.html").write_text(p02, encoding="utf-8")
