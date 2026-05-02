@@ -63,6 +63,23 @@ Then **`git add` / `commit` / `push`** the new `htsa-enrollment-{slug}.html`.
 
 ---
 
+## Live URL 404 after you “shipped”?
+
+| Cause | What to do |
+|-------|------------|
+| File never **pushed** to **`origin/main`** | `git push origin main` — the site only serves what’s in the repo. |
+| **Too soon** after push | Wait **1–5 minutes** for GitHub Pages, then try again. |
+| Cached 404 in browser | **Hard-refresh** (⌘⇧R / Ctrl+Shift+R). |
+| Wrong path | Must be **`htsa-enrollment-`…** (with **`a`** in **htsa**). |
+
+Check from terminal (prints HTTP status code, want **200**):
+
+```bash
+sh scripts/check-enrollment-live.sh your-client-slug
+```
+
+---
+
 ## Regenerating from production HTML
 
 From repo root:

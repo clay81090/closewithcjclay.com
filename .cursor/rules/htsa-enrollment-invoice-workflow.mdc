@@ -1,6 +1,6 @@
 ---
 description: How to create new HTSA enrollment invoice HTML fast (copy template, never hand-rebuild)
-globs: htsa-enrollment*.html,htsa_closer*.html,templates/**,scripts/htsa*.py,scripts/build-htsa-invoice-templates.py
+globs: htsa-enrollment*.html,htsa_closer*.html,templates/**,scripts/htsa*.py,scripts/build-htsa-invoice-templates.py,scripts/check-enrollment-live.sh
 alwaysApply: true
 ---
 
@@ -194,6 +194,14 @@ JSON via URL-encoded **`payload=`** POST. Align with `hts-enrollment-webapp-goog
 - **`grep`:** no phantom client data.  
 - **Git: new invoice file committed and pushed** to the publish branch — otherwise **`https://closewithcjclay.com/htsa-enrollment-{slug}.html` 404s**.
 
+### If the live link returns **404** right after you shipped
+
+1. **Confirm the file is on `origin/main`** (not only on your laptop): `git push origin main` must have succeeded.  
+2. **Wait 1–5 minutes** — GitHub Pages rebuilds after each push; clicking the link too early often shows **404** even when the file is correct.  
+3. **Hard-refresh** the tab (**⌘⇧R** / **Ctrl+Shift+R**) in case an old 404 is cached.  
+4. **Sanity-check:** `curl -sI https://closewithcjclay.com/htsa-enrollment-{slug}.html` — you want **`HTTP/2 200`** (not 404).  
+5. **URL typo:** the path must be **`htsa-enrollment-`** (with **`a`**). **`hts-enrollment-`** (no **`a`**) **404s** except any explicit redirect stubs.
+
 ---
 
 ## NEW invoice workflow + delivery
@@ -205,7 +213,8 @@ JSON via URL-encoded **`payload=`** POST. Align with `hts-enrollment-webapp-goog
 5. **`git add`** **only** the new HTML (and rule/skill if edited in the **same** task) — never scratch/review artifacts.  
 6. **`git commit`** + **`git push`** to **`origin/main`** (or the repo’s documented deploy branch) **unless** CJ explicitly says **draft only / do not push**. Live **closewithcjclay.com** pages come from this repository — skipping push is the usual cause of **404** on newly built invoice URLs.  
 7. Return **exactly:** `https://closewithcjclay.com/htsa-enrollment-{slug}.html` — **no** `?v=` unless CJ requests cache-bust.  
-   - **Typo guard:** Links must use **`htsa-enrollment-`** (with **a**). The pattern **`hts-enrollment-`** (no **a**) **404s**. For Kristijo Sherman, a stub redirect exists at **`hts-enrollment-kristijo-sherman.html`** — prefer the canonical **`htsa-`** URL when sharing.
+   - **Typo guard:** Links must use **`htsa-enrollment-`** (with **a**). The pattern **`hts-enrollment-`** (no **a**) **404s**. For Kristijo Sherman, a stub redirect exists at **`hts-enrollment-kristijo-sherman.html`** — prefer the canonical **`htsa-`** URL when sharing.  
+   - **Timing:** After a successful push, allow **1–5 minutes** before the URL serves **200**; brief **404** is normal until GitHub Pages finishes — see **“If the live link returns 404”** above.
 
 ---
 

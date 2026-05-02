@@ -94,6 +94,14 @@ def main() -> None:
     url = f"https://closewithcjclay.com/htsa-enrollment-{slug}.html"
     print(out)
     print(url)
+    print()
+    print("Live URL will 404 until this file is on origin/main and GitHub Pages finishes building.")
+    print("Required:")
+    print(
+        f'  git add {out.name} && git commit -m "Add HTSA enrollment invoice for {args.full_name.strip()}." && git push origin main'
+    )
+    print("After push: wait 1–5 minutes if you still see 404; then hard-refresh (⌘⇧R / Ctrl+Shift+R).")
+    print(f'Verify: curl -sI "{url}" | head -1   # should show HTTP/2 200')
 
 
 if __name__ == "__main__":

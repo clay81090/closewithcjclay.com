@@ -190,7 +190,8 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 - **No PayVa** unless CJ asked; **Splitit** on closer unless CJ said **no Splitit**; **no Splitit** on setter.  
 - **Flexxbuy** spelled with two x’s.  
 - Mobile layout consistent with recent invoices (Zachary / Chad patterns).  
-- **New invoice file is committed and pushed** so the live URL does not 404.
+- **New invoice file is committed and pushed** so the live URL does not 404.  
+- **If the URL 404s immediately after push:** wait **1–5 minutes** (GitHub Pages rebuild), then **hard-refresh**; confirm with `sh scripts/check-enrollment-live.sh {slug}` or `curl -sI https://closewithcjclay.com/htsa-enrollment-{slug}.html`. See workflow rule **“If the live link returns 404”**.
 
 ---
 
@@ -204,7 +205,7 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 
 ```
 @htsa-enrollment-invoice NEW invoice:
-Template 1–6 (or 6b) OR Closer OR Setter · Cash OR Financing OR Both · Full name · Email · Phone
-(Use `templates/htsa-placement-*.html` when possible — freeze all other client HTML unless named.)
-After the file is correct: git add, commit, push the new HTML so the live URL works (404 if only local).
+Pick placement: Closer/Setter/dual × cash/financing — full name · email · phone
+Use `templates/htsa-placement-0X-….html`; freeze other client HTML unless named.
+After the file is correct: git add, commit, push the new HTML (else live URL 404s). Allow 1–5 min for GitHub Pages after push.
 ```
