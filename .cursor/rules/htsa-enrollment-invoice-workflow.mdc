@@ -6,7 +6,7 @@ alwaysApply: true
 
 # HTSA enrollment invoices — NEW pages only
 
-**Never** edit an existing client’s deployed `htsa-enrollment-*.html` to create a **new** person. **`cp`** a frozen file from **`templates/htsa-tpl-*.html`** or another modern invoice, then replace **only** the new file. Reference invoices (Zachary, Trameil, CJ practice, Margarita, etc.) are **read-only** unless CJ explicitly asks to edit a named file. See **`templates/README.md`** for numbered templates and copy-paste prompts.
+**Never** edit an existing client’s deployed `htsa-enrollment-*.html` to create a **new** person. **`cp`** a frozen file from **`templates/htsa-placement-*.html`** (see table below) or another modern invoice, then replace **only** the new file. Reference invoices (Zachary, Trameil, Val, Thomas, Jocelyn layout, CJ practice, Margarita, etc.) are **read-only** unless CJ explicitly asks to edit a named file. See **`templates/README.md`** for copy-paste prompts.
 
 ---
 
@@ -59,18 +59,16 @@ hts_terms_gate_<firstname>_<lastname>_v1
 
 ### Frozen shells (preferred for NEW invoices)
 
-| Template | File | Program / payment shape |
-|---------|------|-------------------------|
-| **1** | `templates/htsa-tpl-01-closer-cash.html` | Closer · Whop PIF + **Splitit** + 4-pay · guarantee |
-| **1b** | `templates/htsa-tpl-01b-closer-cash-no-guarantee.html` | Closer · same as **1** · **no** orange guarantee |
-| **2** | `templates/htsa-tpl-02-closer-cash-splitit-4pay.html` | **Same HTML as 1** (legacy filename) |
-| **3** | `templates/htsa-tpl-03-closer-whop-plus-financing-splitit.html` | Closer · Whop + **Splitit** + ClarityPay + Flexxbuy |
-| **4** | `templates/htsa-tpl-04-setter-cash-financing.html` | Setter · cash + financing · **no** Splitit |
-| **5** | `templates/htsa-tpl-05-setter-cash-only.html` | Setter · cash only · **no** Splitit |
-| **6** | `templates/htsa-tpl-06-closer-whop-financing-invest-pay-zone.html` | Closer · `invest-pay-zone` · Whop + **Splitit** + ClarityPay + Flexxbuy |
-| **6b** | `templates/htsa-tpl-06b-closer-whop-financing-invest-pay-zone-no-guarantee.html` | Same as **6** · **no** orange guarantee |
+| CJ says | File |
+|--------|------|
+| **Closer – Cash only** | `templates/htsa-placement-01-closer-cash-only.html` |
+| **Closer – Cash + Financing** | `templates/htsa-placement-02-closer-cash-financing.html` |
+| **Setter – Cash only** | `templates/htsa-placement-03-setter-cash-only.html` |
+| **Setter – Cash + Financing** | `templates/htsa-placement-04-setter-cash-financing.html` |
+| **Closer & Setter – Cash only** | `templates/htsa-placement-05-closer-setter-cash-only.html` |
+| **Closer & Setter – Cash + Financing** | `templates/htsa-placement-06-closer-setter-cash-financing.html` |
 
-**Frozen-shell defaults:** Orange guarantee **on** except **1b** / **6b**. **PayVa** not in shells — snippet only when CJ says PayVa. **Splitit** on **all Closer** shells; **never** on **Setter** shells. Placeholders: `{{HTSA_FULL_NAME}}`, `{{HTSA_FIRST_NAME}}`, `{{HTSA_EMAIL}}`, `{{HTSA_PHONE_E164}}`, `{{HTSA_PHONE_DISPLAY}}`, `{{HTSA_CLIENT_SLUG}}`, `{{HTSA_STORAGE_KEY}}`. Optional: `python3 scripts/htsa-instantiate-invoice.py …`. Rebuild: `python3 scripts/build-htsa-invoice-templates.py`. Prompts: **`templates/README.md`**.
+**Frozen-shell defaults:** Orange guarantee **on** in every shell. **Omit** the orange banner **only** if CJ explicitly says **no guarantee**. **PayVa** not in shells — snippet only when CJ says PayVa. **Splitit** on **every Closer** cash section (including dual pages); **never** on **Setter**. **Closer – Cash + Financing** is rebuilt from **`htsa-enrollment-thomas-rulof.html`** + **Splitit** under PIF + canonical ClarityPay plan URL. **Dual** pages use the **Jocelyn** combined header/curriculum layout (read-only reference) + Val/Thomas + Trameil pay stacks inside **one** `#invest-pay-zone`. Placeholders: `{{HTSA_FULL_NAME}}`, `{{HTSA_FIRST_NAME}}`, `{{HTSA_EMAIL}}`, `{{HTSA_PHONE_E164}}`, `{{HTSA_PHONE_DISPLAY}}`, `{{HTSA_CLIENT_SLUG}}`, `{{HTSA_STORAGE_KEY}}`. Optional: `python3 scripts/htsa-instantiate-invoice.py …`. Rebuild: `python3 scripts/build-htsa-invoice-templates.py`. Prompts: **`templates/README.md`**.
 
 ### Reference pages (read-only)
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Replaces {{HTSA_*}} placeholders in a frozen template and writes a new root-level invoice.
 # Usage (from repo root):
-#   python3 scripts/htsa-instantiate-invoice.py templates/htsa-tpl-01-closer-cash.html \
+#   python3 scripts/htsa-instantiate-invoice.py templates/htsa-placement-01-closer-cash-only.html \
 #     --full-name "Jane Doe" --email "jane@example.com" --phone-e164 "+15551234567" \
 #     --phone-display "+1 (555) 123-4567"
 #
@@ -38,7 +38,7 @@ def main() -> None:
     ap.add_argument(
         "template",
         type=Path,
-        help="Path under templates/, e.g. templates/htsa-tpl-01-closer-cash.html",
+        help="Path under templates/, e.g. templates/htsa-placement-01-closer-cash-only.html",
     )
     ap.add_argument("--full-name", required=True)
     ap.add_argument("--email", required=True)

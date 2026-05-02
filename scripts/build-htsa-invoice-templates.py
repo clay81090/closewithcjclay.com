@@ -1,17 +1,26 @@
 #!/usr/bin/env python3
 """
-One-off / maintenance: rebuild templates/*.html from current production sources.
+Rebuild templates/htsa-placement-*.html from production reference HTML.
 Does not modify any htsa-enrollment-*.html at repo root.
+
+Sources (read-only):
+  - Closer cash: htsa-enrollment-val-tappan.html
+  - Closer cash + financing: htsa-enrollment-thomas-rulof.html + Splitit under PIF + URL normalize
+  - Setter: htsa-enrollment-trameil-lee.html
+  - Dual header/curriculum chunk: htsa-enrollment-jocelyn-navarro.html (layout only; terms/pay zone = Val/Thomas+Trameil)
+
 Run from repo root: python3 scripts/build-htsa-invoice-templates.py
 """
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATES = ROOT / "templates"
 SNIPPETS = TEMPLATES / "snippets"
+
+CLARITY_LEGACY_URL = "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/"
+CLARITY_PLAN_URL = "https://whop.com/checkout/plan_z5iuUhSgm9seH?d2c=true"
 
 
 def add_noindex(html: str) -> str:
@@ -30,72 +39,57 @@ def multi_replace(html: str, pairs: list[tuple[str, str]]) -> str:
     return html
 
 
-def matthew_pairs() -> list[tuple[str, str]]:
+def normalize_clarity_urls(html: str) -> str:
+    return html.replace(CLARITY_LEGACY_URL, CLARITY_PLAN_URL)
+
+
+def val_tappan_pairs() -> list[tuple[str, str]]:
     return [
-        ("hts_terms_gate_matthew_hedden_v1", "{{HTSA_STORAGE_KEY}}"),
+        ("hts_terms_gate_val_tappan_v1", "{{HTSA_STORAGE_KEY}}"),
         (
-            "clientSlug: (panel.getAttribute('data-client-slug') || 'matthew-hedden').trim(),",
+            "clientSlug: (panel.getAttribute('data-client-slug') || 'val-tappan').trim(),",
             "clientSlug: (panel.getAttribute('data-client-slug') || '{{HTSA_CLIENT_SLUG}}').trim(),",
         ),
-        ('data-client-slug="matthew-hedden">', 'data-client-slug="{{HTSA_CLIENT_SLUG}}">'),
-        ('data-phone="+16096516528"', 'data-phone="{{HTSA_PHONE_E164}}"'),
-        ('data-email="hedden9414@gmail.com"', 'data-email="{{HTSA_EMAIL}}"'),
-        ('data-full-name="Matthew Hedden"', 'data-full-name="{{HTSA_FULL_NAME}}"'),
-        ("<title>HTSA Invoice — Matthew Hedden</title>", "<title>HTSA Invoice — {{HTSA_FULL_NAME}} (template)</title>"),
-        ("Matthew Hedden</div>", "{{HTSA_FULL_NAME}}</div>"),
+        ('data-client-slug="val-tappan">', 'data-client-slug="{{HTSA_CLIENT_SLUG}}">'),
+        ('data-phone="+18014580179"', 'data-phone="{{HTSA_PHONE_E164}}"'),
+        ('data-email="gwamaval@gmail.com"', 'data-email="{{HTSA_EMAIL}}"'),
+        ('data-full-name="Val Tappan"', 'data-full-name="{{HTSA_FULL_NAME}}"'),
+        ("<title>HTSA Invoice — Val Tappan</title>", "<title>HTSA Invoice — {{HTSA_FULL_NAME}} (template)</title>"),
+        ("Val Tappan</div>", "{{HTSA_FULL_NAME}}</div>"),
         (
-            '<a href="mailto:hedden9414@gmail.com">hedden9414@gmail.com</a>',
+            '<a href="mailto:gwamaval@gmail.com">gwamaval@gmail.com</a>',
             '<a href="mailto:{{HTSA_EMAIL}}">{{HTSA_EMAIL}}</a>',
         ),
         (
-            '<a href="tel:+16096516528">+1 (609) 651-6528</a>',
+            '<a href="tel:+18014580179">+1 (801) 458-0179</a>',
             '<a href="tel:{{HTSA_PHONE_E164}}">{{HTSA_PHONE_DISPLAY}}</a>',
         ),
-        ("Matthew, I really enjoyed", "{{HTSA_FIRST_NAME}}, I really enjoyed"),
-        ("Matthew, review the payment options", "{{HTSA_FIRST_NAME}}, review the payment options"),
+        ("Val, I really enjoyed", "{{HTSA_FIRST_NAME}}, I really enjoyed"),
+        ("Val, review the in-house payment options", "{{HTSA_FIRST_NAME}}, review the in-house payment options"),
         (
-            "Welcome to the <span>HTSA Family,</span> Matthew. 🎉",
+            "Welcome to the <span>HTSA Family,</span> Val. 🎉",
             "Welcome to the <span>HTSA Family,</span> {{HTSA_FIRST_NAME}}. 🎉",
         ),
     ]
 
 
-def angela_pairs() -> list[tuple[str, str]]:
+def jocelyn_dual_header_pairs() -> list[tuple[str, str]]:
+    """Placeholder-ize the Jocelyn header + hero + billing + curriculum chunk only."""
     return [
-        ("hts_terms_gate_angela_verdone_v1", "{{HTSA_STORAGE_KEY}}"),
+        ("Jocelyn Navarro</div>", "{{HTSA_FULL_NAME}}</div>"),
         (
-            "clientSlug: (panel.getAttribute('data-client-slug') || 'angela-verdone').trim(),",
-            "clientSlug: (panel.getAttribute('data-client-slug') || '{{HTSA_CLIENT_SLUG}}').trim(),",
-        ),
-        ('data-client-slug="angela-verdone">', 'data-client-slug="{{HTSA_CLIENT_SLUG}}">'),
-        ('data-phone="+17087521848"', 'data-phone="{{HTSA_PHONE_E164}}"'),
-        ('data-email="angiejohnson040213@gmail.com"', 'data-email="{{HTSA_EMAIL}}"'),
-        ('data-full-name="Angela Verdone"', 'data-full-name="{{HTSA_FULL_NAME}}"'),
-        ("<title>HTSA Invoice — Angela Verdone</title>", "<title>HTSA Invoice — {{HTSA_FULL_NAME}} (template)</title>"),
-        ("Angela Verdone</div>", "{{HTSA_FULL_NAME}}</div>"),
-        (
-            '<a href="mailto:angiejohnson040213@gmail.com">angiejohnson040213@gmail.com</a>',
+            '<a href="mailto:jocelynnavarro9717955@gmail.com">jocelynnavarro9717955@gmail.com</a>',
             '<a href="mailto:{{HTSA_EMAIL}}">{{HTSA_EMAIL}}</a>',
         ),
         (
-            '<a href="tel:+17087521848">+1 (708) 752-1848</a>',
+            '<a href="tel:+15749716184">(574) 971-6184</a>',
             '<a href="tel:{{HTSA_PHONE_E164}}">{{HTSA_PHONE_DISPLAY}}</a>',
         ),
-        ("Angela, I really enjoyed", "{{HTSA_FIRST_NAME}}, I really enjoyed"),
-        ("<p>Angela, review the payment and financing options", "<p>{{HTSA_FIRST_NAME}}, review the payment and financing options"),
-        (
-            "Welcome to the <span>HTSA Family,</span> Angela. 🎉",
-            "Welcome to the <span>HTSA Family,</span> {{HTSA_FIRST_NAME}}. 🎉",
-        ),
-        (
-            "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/",
-            "https://whop.com/checkout/plan_z5iuUhSgm9seH",
-        ),
+        ("Jocelyn, I really enjoyed", "{{HTSA_FIRST_NAME}}, I really enjoyed"),
     ]
 
 
 def closer_invest_pay_zone_financing_pairs() -> list[tuple[str, str]]:
-    """Placeholder-ize production HTML (invest-pay-zone + Whop + ClarityPay + Flexxbuy). Source file on disk is only the structural duplicate."""
     return [
         ("hts_terms_gate_thomas_rulof_v1", "{{HTSA_STORAGE_KEY}}"),
         (
@@ -164,21 +158,6 @@ def trameil_pairs() -> list[tuple[str, str]]:
             "Welcome to the <span>HTSA Family,</span> {{HTSA_FIRST_NAME}}. 🎉",
         ),
     ]
-
-
-def strip_orange_guarantee(html: str) -> str:
-    pattern = re.compile(
-        r"\s*<div class=\"enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms\">\s*"
-        r"<div class=\"enrollment-guarantee-banner-title\">.*?</div>\s*<p>.*?</p>\s*</div>\s*",
-        re.DOTALL,
-    )
-    html = pattern.sub("\n\n", html, count=1)
-    html = html.replace(
-        "  <!-- Performance guarantee — confirmed for this enrollment -->\n\n<div class=\"hts-terms-agreement-wrap\">",
-        "  <!-- Orange performance guarantee omitted (no-guarantee template variant). -->\n\n  <div class=\"hts-terms-agreement-wrap\">",
-        1,
-    )
-    return html
 
 
 def setter_cash_only(html: str) -> str:
@@ -306,7 +285,6 @@ SPLITIT_CSS_BLOCK = """
 
 
 def inject_splitit_closer_invest_pay_zone(html: str) -> str:
-    """Add Splitit CSS + under-PIF block + step copy (all closer shells include Splitit on cash)."""
     anchor_css = (
         "    opacity: 0.92;\n"
         "  }\n\n"
@@ -349,6 +327,195 @@ def inject_splitit_closer_invest_pay_zone(html: str) -> str:
     return html
 
 
+def extract_between(html: str, start_marker: str, end_marker: str) -> str:
+    a = html.find(start_marker)
+    if a == -1:
+        raise RuntimeError(f"extract_between: start not found: {start_marker!r}")
+    b = html.find(end_marker, a)
+    if b == -1:
+        raise RuntimeError(f"extract_between: end not found: {end_marker!r}")
+    return html[a:b]
+
+
+def extract_pay_zone_inner(html: str) -> str:
+    needle = 'id="invest-pay-zone">'
+    if needle not in html:
+        raise RuntimeError("invest-pay-zone id not found")
+    start = html.find(needle) + len(needle)
+    marker = "  <!-- NEXT STEPS -->"
+    end = html.find(marker, start)
+    if end == -1:
+        raise RuntimeError("NEXT STEPS not found after invest-pay-zone")
+    return html[start:end].strip()
+
+
+def extract_first_invest_box(inner: str) -> str:
+    token = '<div class="invest-box">'
+    start = inner.find(token)
+    if start == -1:
+        raise RuntimeError("invest-box not found in pay zone inner")
+    pos = start + len(token)
+    depth = 1
+    while depth and pos < len(inner):
+        next_div = inner.find("<div", pos)
+        next_close = inner.find("</div>", pos)
+        if next_close < 0:
+            raise RuntimeError("unclosed invest-box")
+        if next_div >= 0 and next_div < next_close:
+            depth += 1
+            pos = next_div + 4
+        else:
+            depth -= 1
+            if depth == 0:
+                return inner[start : next_close + 6]
+            pos = next_close + 6
+    raise RuntimeError("invest-box parse failed")
+
+
+def extract_terms_and_hint(val_html: str) -> tuple[str, str, str]:
+    """Returns (guarantee+terms block, hint line full <p...>, invest header sec-head)."""
+    inv_head = extract_between(val_html, "  <!-- INVESTMENT -->\n", "  <!-- Performance guarantee")
+    g1 = "  <!-- Performance guarantee — confirmed for this enrollment -->\n"
+    g2 = '  <p id="invest-pay-zone-hint"'
+    chunk = extract_between(val_html, g1, g2)
+    hint_para = extract_between(val_html, g2, '  <div class="invest-wrap invest-pay-zone')
+    return (inv_head.strip(), chunk.strip(), hint_para.rstrip())
+
+
+def adapt_terms_dual(terms_chunk: str, *, financing: bool) -> str:
+    s = terms_chunk.replace(
+        "<li>Lifetime access to the closers mastermind community</li>",
+        "<li>Lifetime access to the closers and setters mastermind communities</li>",
+    )
+    s = s.replace(
+        "if it helps your close rate.</li>",
+        "if it helps your performance in your role.</li>",
+    )
+    s = multi_replace(
+        s,
+        [
+            ('data-full-name="Val Tappan"', 'data-full-name="{{HTSA_FULL_NAME}}"'),
+            ('data-email="gwamaval@gmail.com"', 'data-email="{{HTSA_EMAIL}}"'),
+            ('data-phone="+18014580179"', 'data-phone="{{HTSA_PHONE_E164}}"'),
+            ('data-client-slug="val-tappan">', 'data-client-slug="{{HTSA_CLIENT_SLUG}}">'),
+        ],
+    )
+    if financing:
+        s = s.replace(
+            "then record your acceptance to unlock payment buttons below.",
+            "then record your acceptance to unlock payment and financing buttons below.",
+        )
+        s = s.replace(
+            "✓ Terms recorded successfully. Payment buttons below are now active for this browser session.",
+            "✓ Terms recorded successfully. Payment and financing buttons below are now active for this browser session.",
+        )
+    return s
+
+
+def adapt_hint_dual(hint_para: str, *, financing: bool) -> str:
+    if financing:
+        return hint_para.replace(
+            "Payment buttons stay locked until your Terms agreement has been recorded above.",
+            "Payment and financing buttons stay locked until your Terms agreement has been recorded above.",
+        )
+    return hint_para
+
+
+def compose_dual_pay_zone(closer_box: str, setter_box: str) -> str:
+    rule = '\n      <hr class="invest-zone-rule" aria-hidden="true">\n\n      '
+    return (
+        '<div class="invest-wrap invest-pay-zone invest-pay-zone--locked" id="invest-pay-zone">\n'
+        f"      {closer_box.strip()}\n"
+        f"{rule}"
+        f"{setter_box.strip()}\n"
+        "  </div>"
+    )
+
+
+VAL_STEP1_SINGLE = (
+    "        <h4>Step 1 — Choose Your Payment</h4>\n"
+    "        <p>{{HTSA_FIRST_NAME}}, review the in-house payment options in Program Investment above, then select what you want — "
+    "<strong>$6,000</strong> paid in full (or <strong>Splitit</strong> inside that same Whop checkout) or the <strong>$1,750 × 4-pay</strong> plan "
+    "($7,000 total). Once your payment clears, move to Step 2 below.</p>"
+)
+
+DUAL_STEP1_CASH = (
+    "        <h4>Step 1 — Choose Your Payment</h4>\n"
+    "        <p>{{HTSA_FIRST_NAME}}, review the <strong>Closer</strong> and <strong>Setter</strong> payment options in Program Investment above. "
+    "For <strong>Closer</strong>: <strong>$6,000</strong> paid in full (or <strong>Splitit</strong> in that same Whop checkout) or the "
+    "<strong>$1,750 × 4-pay</strong> plan ($7,000 total). For <strong>Setter</strong>: <strong>$3,000</strong> paid in full or the "
+    "<strong>$1,050 × 3-pay</strong> plan ($3,150 total). Complete the payment for the program you are starting first, then move to Step 2.</p>"
+)
+
+DUAL_STEP1_FIN = (
+    "        <h4>Step 1 — Choose Your Payment or Financing</h4>\n"
+    "        <p>{{HTSA_FIRST_NAME}}, review <strong>Closer</strong> and <strong>Setter</strong> options in Program Investment above. "
+    "Each program has in-house Whop checkout (<strong>Closer:</strong> $6k PIF with Splitit in checkout, or $1,750 × 4-pay; "
+    "<strong>Setter:</strong> $3k PIF or $1,050 × 3-pay) plus optional <strong>ClarityPay</strong> and <strong>Flexxbuy</strong> pre-qual links. "
+    "Complete payment or financing for the program you are starting first, then move to Step 2.</p>"
+)
+
+
+def strip_legacy_templates() -> None:
+    for p in TEMPLATES.glob("htsa-tpl-*.html"):
+        p.unlink()
+
+
+def build_dual_template(
+    *,
+    val_src: str,
+    jocelyn_src: str,
+    closer_html: str,
+    setter_html: str,
+    financing: bool,
+) -> str:
+    dual_top = extract_between(jocelyn_src, "  <!-- HEADER -->", "  <!-- CLOSER INVESTMENT -->")
+    dual_top = multi_replace(dual_top, jocelyn_dual_header_pairs())
+
+    inv_head, terms_chunk_raw, hint_raw = extract_terms_and_hint(val_src)
+    terms_dual = adapt_terms_dual(terms_chunk_raw, financing=financing)
+    hint_dual = adapt_hint_dual(hint_raw, financing=financing)
+    closer_box = extract_first_invest_box(extract_pay_zone_inner(closer_html))
+    setter_box = extract_first_invest_box(extract_pay_zone_inner(setter_html))
+    pay_zone = compose_dual_pay_zone(closer_box, setter_box)
+
+    investment_body = (
+        "  <!-- INVESTMENT -->\n"
+        + inv_head
+        + "\n\n  "
+        + terms_dual
+        + "\n\n  "
+        + hint_dual
+        + "\n\n  "
+        + pay_zone
+        + "\n"
+    )
+
+    out = val_src
+    old_upper = extract_between(out, "  <!-- HEADER -->", "  <!-- INVESTMENT -->")
+    out = out.replace(old_upper, dual_top + "\n\n  <!-- INVESTMENT -->", 1)
+
+    inv_mark = "  <!-- INVESTMENT -->\n"
+    next_mark = "  <!-- NEXT STEPS -->"
+    a = out.find(inv_mark)
+    b = out.find(next_mark, a)
+    if a == -1 or b == -1:
+        raise RuntimeError("dual: could not find investment / next steps region")
+    out = out[:a] + investment_body + "\n\n  " + out[b:]
+
+    out = out.replace(
+        '<div class="footer-bc-title">HTSA Closer</div>',
+        '<div class="footer-bc-title">HTSA Closer &amp; Setter</div>',
+    )
+
+    out = multi_replace(out, val_tappan_pairs())
+    if financing:
+        out = out.replace(VAL_STEP1_SINGLE, DUAL_STEP1_FIN, 1)
+    else:
+        out = out.replace(VAL_STEP1_SINGLE, DUAL_STEP1_CASH, 1)
+    return add_noindex(out)
+
+
 def main() -> None:
     TEMPLATES.mkdir(parents=True, exist_ok=True)
     SNIPPETS.mkdir(parents=True, exist_ok=True)
@@ -356,46 +523,48 @@ def main() -> None:
     (SNIPPETS / "payva-financing-block.html").write_text(payva_snippet(), encoding="utf-8")
     (SNIPPETS / "splitit-under-pif-closer.html").write_text(splitit_snippet(), encoding="utf-8")
 
-    t01 = add_noindex(multi_replace((ROOT / "htsa-enrollment-matthew-hedden.html").read_text(encoding="utf-8"), matthew_pairs()))
-    (TEMPLATES / "htsa-tpl-01-closer-cash.html").write_text(t01, encoding="utf-8")
-
-    t01b = strip_orange_guarantee(t01)
-    (TEMPLATES / "htsa-tpl-01b-closer-cash-no-guarantee.html").write_text(t01b, encoding="utf-8")
-
-    # Legacy second filename: identical to tpl-01 (closer cash always includes Splitit + 4-pay).
-    (TEMPLATES / "htsa-tpl-02-closer-cash-splitit-4pay.html").write_text(t01, encoding="utf-8")
-
-    t03 = add_noindex(multi_replace((ROOT / "htsa-enrollment-angela-verdone.html").read_text(encoding="utf-8"), angela_pairs()))
-    (TEMPLATES / "htsa-tpl-03-closer-whop-plus-financing-splitit.html").write_text(t03, encoding="utf-8")
-
-    t04 = add_noindex(multi_replace((ROOT / "htsa-enrollment-trameil-lee.html").read_text(encoding="utf-8"), trameil_pairs()))
-    (TEMPLATES / "htsa-tpl-04-setter-cash-financing.html").write_text(t04, encoding="utf-8")
-
-    t05 = setter_cash_only(t04)
-    (TEMPLATES / "htsa-tpl-05-setter-cash-only.html").write_text(t05, encoding="utf-8")
-
-    t06 = inject_splitit_closer_invest_pay_zone(
-        add_noindex(
-            multi_replace(
-                (ROOT / "htsa-enrollment-thomas-rulof.html").read_text(encoding="utf-8"),
-                closer_invest_pay_zone_financing_pairs(),
-            )
-        )
+    val_raw = (ROOT / "htsa-enrollment-val-tappan.html").read_text(encoding="utf-8")
+    jocelyn_raw = (ROOT / "htsa-enrollment-jocelyn-navarro.html").read_text(encoding="utf-8")
+    thomas_raw = normalize_clarity_urls(
+        (ROOT / "htsa-enrollment-thomas-rulof.html").read_text(encoding="utf-8")
     )
-    (TEMPLATES / "htsa-tpl-06-closer-whop-financing-invest-pay-zone.html").write_text(t06, encoding="utf-8")
+    trameil_raw = (ROOT / "htsa-enrollment-trameil-lee.html").read_text(encoding="utf-8")
 
-    t06b = strip_orange_guarantee(t06)
-    (TEMPLATES / "htsa-tpl-06b-closer-whop-financing-invest-pay-zone-no-guarantee.html").write_text(t06b, encoding="utf-8")
+    p01 = add_noindex(multi_replace(val_raw, val_tappan_pairs()))
+    p03 = add_noindex(multi_replace(trameil_raw, trameil_pairs()))
+    p03 = setter_cash_only(p03)
+    p04 = add_noindex(multi_replace(trameil_raw, trameil_pairs()))
 
-    for old_name in (
-        "htsa-tpl-06-closer-whop-financing-thomas-ui.html",
-        "htsa-tpl-06b-closer-whop-financing-thomas-ui-no-guarantee.html",
-    ):
-        old_path = TEMPLATES / old_name
-        if old_path.exists():
-            old_path.unlink()
+    p02 = inject_splitit_closer_invest_pay_zone(
+        add_noindex(multi_replace(thomas_raw, closer_invest_pay_zone_financing_pairs()))
+    )
+    p02 = normalize_clarity_urls(p02)
 
-    print("Wrote templates and snippets OK.")
+    p05 = build_dual_template(
+        val_src=val_raw,
+        jocelyn_src=jocelyn_raw,
+        closer_html=p01,
+        setter_html=p03,
+        financing=False,
+    )
+    p06 = build_dual_template(
+        val_src=val_raw,
+        jocelyn_src=jocelyn_raw,
+        closer_html=p02,
+        setter_html=p04,
+        financing=True,
+    )
+
+    strip_legacy_templates()
+
+    (TEMPLATES / "htsa-placement-01-closer-cash-only.html").write_text(p01, encoding="utf-8")
+    (TEMPLATES / "htsa-placement-02-closer-cash-financing.html").write_text(p02, encoding="utf-8")
+    (TEMPLATES / "htsa-placement-03-setter-cash-only.html").write_text(p03, encoding="utf-8")
+    (TEMPLATES / "htsa-placement-04-setter-cash-financing.html").write_text(p04, encoding="utf-8")
+    (TEMPLATES / "htsa-placement-05-closer-setter-cash-only.html").write_text(p05, encoding="utf-8")
+    (TEMPLATES / "htsa-placement-06-closer-setter-cash-financing.html").write_text(p06, encoding="utf-8")
+
+    print("Wrote htsa-placement-01…06, snippets. Removed legacy htsa-tpl-*.html if present.")
 
 
 if __name__ == "__main__":

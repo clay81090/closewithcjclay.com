@@ -19,9 +19,11 @@ description: >-
 
 CJ may provide only:
 
-- **Program:** Closer **or** Setter  
+- **Program:** Closer **or** Setter **or** **Closer & Setter** (both on one page)  
 - **Payment mode:** Cash **or** Financing **or** Both  
 - **Client:** full name, email, phone  
+
+Or CJ can name the **placement row** verbatim: *Closer – Cash only*, *Closer – Cash + Financing*, *Setter – Cash only*, *Setter – Cash + Financing*, *Closer & Setter – Cash only*, *Closer & Setter – Cash + Financing* (maps to `templates/htsa-placement-0X-….html`).
 
 The agent infers everything else from the **defaults below** unless CJ overrides.
 
@@ -29,22 +31,18 @@ The agent infers everything else from the **defaults below** unless CJ overrides
 
 ## Frozen templates in `templates/` (fastest path)
 
-**CJ defaults (frozen shells):** Orange performance guarantee **on** for every shell **except** **1b** and **6b**. **PayVa** is **never** baked into shells — use `templates/snippets/payva-financing-block.html` only when CJ says **PayVa**. **Splitit** (under $6k PIF) is **on** for **all Closer** templates (**1**, **2**, **3**, **6**); **Setter** templates (**4**, **5**) have **no** Splitit. Template HTML uses **`{{HTSA_*}}` placeholders only** — no personal names in filenames as “clients.”
+**CJ defaults (frozen shells):** Orange performance guarantee **on** in **every** shell. **Omit** it **only** if CJ explicitly says **no guarantee**. **PayVa** is **never** baked into shells — use `templates/snippets/payva-financing-block.html` only when CJ says **PayVa**. **Splitit** (under $6k PIF) is **on** for **all Closer** cash sections; **Setter** has **no** Splitit. Template HTML uses **`{{HTSA_*}}` placeholders only** — no personal names in filenames as “clients.”
 
-Numbered shells (`noindex` + placeholders):
+| CJ row | File |
+|--------|------|
+| **Closer – Cash only** | `templates/htsa-placement-01-closer-cash-only.html` |
+| **Closer – Cash + Financing** | `templates/htsa-placement-02-closer-cash-financing.html` |
+| **Setter – Cash only** | `templates/htsa-placement-03-setter-cash-only.html` |
+| **Setter – Cash + Financing** | `templates/htsa-placement-04-setter-cash-financing.html` |
+| **Closer & Setter – Cash only** | `templates/htsa-placement-05-closer-setter-cash-only.html` |
+| **Closer & Setter – Cash + Financing** | `templates/htsa-placement-06-closer-setter-cash-financing.html` |
 
-| # | File | Use when |
-|---|------|----------|
-| **1** | `templates/htsa-tpl-01-closer-cash.html` | Closer · Whop PIF + **Splitit** + 4-pay · guarantee |
-| **1b** | `templates/htsa-tpl-01b-closer-cash-no-guarantee.html` | Closer · same as **1** · **no** orange banner |
-| **2** | `templates/htsa-tpl-02-closer-cash-splitit-4pay.html` | **Same HTML as 1** (legacy filename) |
-| **3** | `templates/htsa-tpl-03-closer-whop-plus-financing-splitit.html` | Closer · Whop + **Splitit** + ClarityPay + Flexxbuy |
-| **4** | `templates/htsa-tpl-04-setter-cash-financing.html` | Setter · PIF/3-pay + ClarityPay + Flexxbuy · **no** Splitit |
-| **5** | `templates/htsa-tpl-05-setter-cash-only.html` | Setter · PIF/3-pay only · **no** Splitit |
-| **6** | `templates/htsa-tpl-06-closer-whop-financing-invest-pay-zone.html` | Closer · `invest-pay-zone` · Whop + **Splitit** + ClarityPay + Flexxbuy |
-| **6b** | `templates/htsa-tpl-06b-closer-whop-financing-invest-pay-zone-no-guarantee.html` | Same as **6** · **no** orange banner |
-
-**Instantiation:** Replace placeholders by hand, or run `python3 scripts/htsa-instantiate-invoice.py templates/htsa-tpl-….html --full-name … --email … --phone-e164 … [--phone-display …]` from repo root (prints path + live URL). Rebuild shells with `python3 scripts/build-htsa-invoice-templates.py` when reference pages change.
+**Instantiation:** Replace placeholders by hand, or run `python3 scripts/htsa-instantiate-invoice.py templates/htsa-placement-….html --full-name … --email … --phone-e164 … [--phone-display …]` from repo root (prints path + live URL). Rebuild shells with `python3 scripts/build-htsa-invoice-templates.py` when reference pages change.
 
 **CJ copy-paste prompts:** **`templates/README.md`**.
 
@@ -207,6 +205,6 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 ```
 @htsa-enrollment-invoice NEW invoice:
 Template 1–6 (or 6b) OR Closer OR Setter · Cash OR Financing OR Both · Full name · Email · Phone
-(Use templates/htsa-tpl-*.html when possible — freeze all other client HTML unless named.)
+(Use `templates/htsa-placement-*.html` when possible — freeze all other client HTML unless named.)
 After the file is correct: git add, commit, push the new HTML so the live URL works (404 if only local).
 ```
