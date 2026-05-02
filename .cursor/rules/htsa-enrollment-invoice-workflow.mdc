@@ -1,6 +1,6 @@
 ---
 description: How to create new HTSA enrollment invoice HTML fast (copy template, never hand-rebuild)
-globs: htsa-enrollment*.html,htsa_closer*.html,templates/**,scripts/htsa*.py,scripts/build-htsa-invoice-templates.py,scripts/check-enrollment-live.sh
+globs: htsa-enrollment*.html,htsa_closer*.html,templates/**,templates/HTSA-SECONDARY-PAYMENT-OPTIONS.md,scripts/htsa*.py,scripts/build-htsa-invoice-templates.py,scripts/check-enrollment-live.sh
 alwaysApply: true
 ---
 
@@ -19,6 +19,19 @@ CJ may say only:
 - Client **name**, **email**, **phone**  
 
 Agents apply **defaults** in this rule unless CJ overrides.
+
+---
+
+## Secondary payment options (Whop) — **not** the main six
+
+**Canonical reference:** `templates/HTSA-SECONDARY-PAYMENT-OPTIONS.md`
+
+- **Primary** pricing and Whop links for new invoices come from the **frozen placement shells** (`htsa-placement-01` … `06`) unless CJ overrides ad hoc.
+- **Secondary** plans (e.g. closer **$6k 2-pay Action Taker**, **$6.6k 3-pay**, **$5k PIF experience**; setter **$3k 2-pay**) are **documented only** in `HTSA-SECONDARY-PAYMENT-OPTIONS.md`.
+- **Never** swap in secondary URLs **unless** CJ explicitly says so — e.g. *use secondary payment options*, *other Whop plans*, *$5k PIF for experience*, *Action Taker 2-pay*, etc.
+- On the HTML invoice, keep secondary offers in a **separate** subsection (divider + kicker like **Secondary payment options** or **Other payment options**) **inside** `#invest-pay-zone`, reusing the **same** investment row / button **classes** and sizing as primary rows — change only amounts, labels, and `href`s.
+
+---
 
 | CJ says | Meaning |
 |--------|---------|

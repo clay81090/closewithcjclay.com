@@ -2,6 +2,12 @@
 
 Shells in `templates/` use **`noindex`** and **`{{HTSA_*}}` placeholders only** (no client names baked in). **Never edit** a deployed `htsa-enrollment-*.html` to create a new person — copy a shell, fill placeholders, save a **new** root file.
 
+## Secondary Whop plans (not in the six shells)
+
+Alternate checkouts (2-pay / 3-pay / $5k PIF closer, setter 2-pay) live in **`HTSA-SECONDARY-PAYMENT-OPTIONS.md`**. Use that file **only** when CJ asks for **secondary / other** payment options or a named override (e.g. **$5k PIF for experience**). Do **not** mix those URLs into the main six templates unless CJ instructs you to ship them on a specific invoice.
+
+---
+
 ## CJ command → template file
 
 | Column 1 (what CJ types) | Column 2 (frozen shell) |

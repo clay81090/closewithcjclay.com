@@ -5,7 +5,8 @@ description: >-
   Defaults: orange guarantee ON, mandatory Terms gate + Apps Script, financing ClarityPay +
   Flexxbuy unless Cash-only. After the HTML is ready: git add, commit, and push the new file
   so closewithcjclay.com serves it (otherwise the live URL 404s). Minimal CJ input: program
-  type, cash/financing/both, name, email, phone. Prefer frozen shells in templates/. Never
+  type, cash/financing/both, name, email, phone. Prefer frozen shells in templates/. Secondary
+  Whop plans: templates/HTSA-SECONDARY-PAYMENT-OPTIONS.md (use only when CJ asks). Never
   edits deployed client HTML unless CJ names the file.
 ---
 
@@ -47,6 +48,19 @@ The agent infers everything else from the **defaults below** unless CJ overrides
 **CJ copy-paste prompts:** **`templates/README.md`**.
 
 **Hard rule:** Materialize **`htsa-enrollment-{slug}.html`** at repo root only — never turn an existing client file into someone else.
+
+---
+
+## Secondary (alternate) Whop plans — `templates/HTSA-SECONDARY-PAYMENT-OPTIONS.md`
+
+**Not** part of the main six shells. Stores CJ’s **other** Whop checkouts:
+
+- **Closer:** $6,000 **2-pay** (Action Taker — on-call discount framing), **$6,600** 3-pay ($2,200×3), **$5,000 PIF** (experience / discount — **not** the default $6k PIF).
+- **Setter:** **$3,000** 2-pay ($1,500 + $1,500 in 30 days).
+
+**When to use:** Only if CJ names an offer from that list or says to add **secondary / other payment options**. **Do not** silently replace primary template links with secondary URLs.
+
+**How to add on a page:** After the primary options (still inside `#invest-pay-zone`), add a horizontal rule + `invest-section-kicker` (match existing template wording style), then **duplicate** the same `invest-option` / `invest-row` / `invest-price-big` / `invest-btn` markup as the primary block — **only** change numbers, button copy, and `href`. Keeps font, height, and mobile behavior identical.
 
 ---
 
