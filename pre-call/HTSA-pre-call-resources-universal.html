@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Before Our Call — HTSA | CJ Clay</title>
+<meta name="color-scheme" content="dark">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -26,21 +27,8 @@
     --font-body: 'DM Sans', system-ui, sans-serif;
   }
 
-  @media (prefers-color-scheme: light) {
-    :root {
-      --navy: #f0f4fb;
-      --navy-mid: #ffffff;
-      --text: #0a1628;
-      --text-soft: rgba(26, 37, 64, 0.82);
-      --muted: #5a6a85;
-      --card: rgba(255, 255, 255, 0.86);
-      --glass: rgba(255, 255, 255, 0.78);
-      --ring: rgba(0, 201, 122, 0.45);
-      --light: #0a1628;
-    }
-    .ambient { opacity: 0.45; }
-    .noise { opacity: 0.035; }
-  }
+  /* Always use premium dark UI (matches engagement / invoice pages). No light-mode flip — avoids “all white” on phones in light mode. */
+  html { color-scheme: dark; }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 

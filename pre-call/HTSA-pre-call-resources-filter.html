@@ -4,15 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HTSA Engagement Plan | CJ Clay</title>
+<meta name="color-scheme" content="dark">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+html { color-scheme: dark; }
 :root {
-  --navy: #060e1c;
-  --navy-mid: #0a1628;
+  /* Aligned with pre-call universal (dark) + invoice greens for consistent “HTSA premium” look */
+  --navy: #060d18;
+  --navy-mid: #0f1f35;
   --navy-card: #0f1e35;
   --navy-light: #142440;
-  --green: #00c97a;
-  --green-dim: #00b06b;
+  --green: #00e699;
+  --green-dim: #00c97a;
   --green-dark: #009a5e;
   --green-glow: rgba(0,201,122,0.18);
   --green-soft: rgba(0,201,122,0.08);
@@ -50,16 +53,16 @@ body {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 55% at 15% -5%,rgba(0,201,122,0.18),transparent 55%),
-    radial-gradient(ellipse 55% 45% at 92% 18%,rgba(64,100,200,0.10),transparent 50%),
-    radial-gradient(ellipse 60% 50% at 50% 105%,rgba(0,154,94,0.09),transparent 55%),
-    linear-gradient(180deg,var(--navy) 0%,#07111f 100%);
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(0, 230, 153, 0.22), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 90% 20%, rgba(64, 120, 255, 0.12), transparent 45%),
+    radial-gradient(ellipse 50% 60% at 50% 100%, rgba(0, 201, 122, 0.08), transparent 55%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
 }
 .orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .orb { position: absolute; border-radius: 50%; filter: blur(70px); animation: floatOrb 20s var(--ease) infinite; }
-.orb:nth-child(1) { width: 380px; height: 380px; background: rgba(0,201,122,0.14); top: -100px; left: -120px; animation-delay: 0s; }
-.orb:nth-child(2) { width: 300px; height: 300px; background: rgba(80,120,255,0.09); bottom: 8%; right: -100px; animation-delay: -7s; animation-duration: 24s; }
-.orb:nth-child(3) { width: 220px; height: 220px; background: rgba(0,154,94,0.12); top: 42%; left: 38%; animation-delay: -13s; animation-duration: 28s; }
+.orb:nth-child(1) { width: 380px; height: 380px; background: rgba(0, 230, 153, 0.22); top: -100px; left: -120px; animation-delay: 0s; }
+.orb:nth-child(2) { width: 300px; height: 300px; background: rgba(100, 140, 255, 0.14); bottom: 8%; right: -100px; animation-delay: -7s; animation-duration: 24s; }
+.orb:nth-child(3) { width: 220px; height: 220px; background: rgba(0, 201, 122, 0.18); top: 42%; left: 38%; animation-delay: -13s; animation-duration: 28s; }
 @keyframes floatOrb {
   0%,100% { transform: translate(0,0) scale(1); }
   33% { transform: translate(28px,-18px) scale(1.04); }
