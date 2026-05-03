@@ -1,13 +1,15 @@
 # Pre-call (closewithcjclay.com)
 
-**Canonical page (send this link):**  
-**https://closewithcjclay.com/pre-call/HTSA-pre-call-resources-filter.html**
+Two **different** pages (both dark / premium UI — neither should appear “all white”):
 
 | File | Purpose |
 |------|---------|
-| `HTSA-pre-call-resources-filter.html` | Full **engagement / game-plan** experience (dark premium UI, phased flow, localStorage, calculators). |
-| `HTSA-pre-call-resources-universal.html` | **Redirect only** — any old bookmarks to the retired checklist page land on `filter` above. |
-| `snapshots/` | Frozen `*-codex-snapshot.html` exports for backup; do not edit for day-to-day work. |
+| `HTSA-pre-call-resources-universal.html` | **Before Our Call** — checklist / resources flow (`PRE_CALL_CONFIG`, videos, progress ring). |
+| `HTSA-pre-call-resources-filter.html` | **Engagement / game-plan** — Codex phased conversation tool (calculators, phases, recap). |
 
-Recover the old universal checklist from Git:  
-`git log --oneline -- pre-call/HTSA-pre-call-resources-universal.html` then `git show <commit>:pre-call/HTSA-pre-call-resources-universal.html`.
+**Links**
+
+- https://closewithcjclay.com/pre-call/HTSA-pre-call-resources-universal.html  
+- https://closewithcjclay.com/pre-call/HTSA-pre-call-resources-filter.html  
+
+`Snapshots/` — frozen copies when importing from Codex (`*-codex-snapshot.html`). Safe to ignore day-to-day; delete later if you want less clutter in the folder listing.
