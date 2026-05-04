@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<title>HTSA Invoice — {{HTSA_FULL_NAME}} (template)</title>
+<title>HTSA Invoice — Nadav Salazar</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -1527,7 +1527,7 @@
   <!-- HERO BAND -->
   <div class="hero-band">
     <h2>Certified High Ticket Closer Program</h2>
-    <p>{{HTSA_FIRST_NAME}}, I really enjoyed speaking with you earlier. It was clear from our conversation that you're someone who takes their future seriously and is ready to make a real change — and that's exactly the kind of person we love working with here at High Ticket Sales Academy.</p>
+    <p>Nadav, I really enjoyed speaking with you earlier. It was clear from our conversation that you're someone who takes their future seriously and is ready to make a real change — and that's exactly the kind of person we love working with here at High Ticket Sales Academy.</p>
     <p style="margin-top:10px;">Everything you need to review and get started is right here. The biggest difference at HTSA is that you are not just another number — we are not influencers, but true experts in the field of high ticket sales. You have around-the-clock support, and once certified, our team walks you directly into roles from a network of 300+ partner companies. Take your time reviewing and reach out to CJ with any questions or assistance with enrollment.</p>
   </div>
 
@@ -1535,10 +1535,10 @@
   <div class="billing-grid">
     <div class="billing-cell">
       <div class="billing-label">Prepared For</div>
-      <div class="billing-name">{{HTSA_FULL_NAME}}</div>
+      <div class="billing-name">Nadav Salazar</div>
       <div class="billing-detail">
-        <a href="mailto:{{HTSA_EMAIL}}">{{HTSA_EMAIL}}</a><br>
-        <a href="tel:{{HTSA_PHONE_E164}}">{{HTSA_PHONE_DISPLAY}}</a><br>
+        <a href="mailto:nadavslaz2004@gmail.com">nadavslaz2004@gmail.com</a><br>
+        <a href="tel:+19542038870">+1 (954) 203-8870</a><br>
         Program: Certified HTS Closer<br>
         Payment: Select payment option below
       </div>
@@ -1660,10 +1660,10 @@
 
   <div class="hts-terms-agreement-wrap">
     <div id="hts-terms-agreement-panel" class="hts-terms-agreement-card"
-         data-full-name="{{HTSA_FULL_NAME}}"
-         data-email="{{HTSA_EMAIL}}"
-         data-phone="{{HTSA_PHONE_E164}}"
-         data-client-slug="{{HTSA_CLIENT_SLUG}}">
+         data-full-name="Nadav Salazar"
+         data-email="nadavslaz2004@gmail.com"
+         data-phone="+19542038870"
+         data-client-slug="nadav-salazar">
       <div class="hts-terms-agreement-form" id="hts-terms-agreement-form">
         <div class="hts-terms-agreement-title">Terms agreement</div>
         <p class="hts-terms-agreement-lead">Open the Terms of Service PDF, review the clarification below about lifetime access and included services, confirm you agree, then record your acceptance to unlock payment buttons below.</p>
@@ -1762,7 +1762,7 @@
       <div class="step-num">1</div>
       <div class="step-content">
         <h4>Step 1 — Choose Your Payment</h4>
-        <p>{{HTSA_FIRST_NAME}}, review the in-house payment options in Program Investment above, then select what you want — <strong>$6,000</strong> paid in full (or <strong>Splitit</strong> inside that same Whop checkout) or the <strong>$1,750 × 4-pay</strong> plan ($7,000 total). Once your payment clears, move to Step 2 below.</p>
+        <p>Nadav, review the in-house payment options in Program Investment above, then select what you want — <strong>$6,000</strong> paid in full (or <strong>Splitit</strong> inside that same Whop checkout) or the <strong>$1,750 × 4-pay</strong> plan ($7,000 total). Once your payment clears, move to Step 2 below.</p>
       </div>
     </div>
 
@@ -1828,7 +1828,7 @@
 
   <!-- WELCOME -->
   <div class="welcome-band">
-    <h3>Welcome to the <span>HTSA Family,</span> {{HTSA_FIRST_NAME}}. 🎉</h3>
+    <h3>Welcome to the <span>HTSA Family,</span> Nadav. 🎉</h3>
     <p>You're not just enrolling in a program — you're joining a community of people who show up, do the work, and build something real. We can't wait to see where this takes you.</p>
   </div>
 
@@ -1936,7 +1936,7 @@ Thank God and CJ Clay for that 🙏</blockquote>
 
 <script>
 (function () {
-  var STORAGE_KEY = '{{HTSA_STORAGE_KEY}}';
+  var STORAGE_KEY = 'hts_terms_gate_nadav_salazar_v1';
   var GAS_TERMS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec';
   var TERMS_DOC_URL_FOR_GATE = 'https://closewithcjclay.com/HTSA-Terms-of-Service.pdf';
   // Fixed label for spreadsheets / logs when the hosted PDF stays the same URL
@@ -2002,7 +2002,7 @@ Thank God and CJ Clay for that 🙏</blockquote>
       email: (panel.getAttribute('data-email') || '').trim(),
       phone: (panel.getAttribute('data-phone') || '').trim(),
       enrollmentPageUrl: canonicalEnrollmentUrl(),
-      clientSlug: (panel.getAttribute('data-client-slug') || '{{HTSA_CLIENT_SLUG}}').trim(),
+      clientSlug: (panel.getAttribute('data-client-slug') || 'nadav-salazar').trim(),
       termsUrl: TERMS_DOC_URL_FOR_GATE,
       termsVersion: TERMS_VERSION_ID,
       userAgent: navigator.userAgent || ''
