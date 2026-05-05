@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<meta name="description" content="HTSA Closer program invoice and enrollment for Xavier Cunningham.">
-<link rel="canonical" href="https://closewithcjclay.com/htsa-enrollment-xavier-cunningham.html">
 <title>HTSA Invoice — Xavier Cunningham</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -295,6 +294,69 @@
     margin: 4px 0 14px;
   }
 
+  /* Clearly separate cash / in-house from third-party financing */
+  .invest-section-kicker--accent {
+    color: #ff9c7a;
+    margin-bottom: 10px;
+  }
+
+  .invest-zone-rule {
+    border: none;
+    height: 0;
+    margin: 22px 0 18px;
+    padding: 0;
+    border-top: 2px solid #ff9c7a;
+    box-shadow: 0 0 14px rgba(255, 156, 122, 0.12);
+    opacity: 0.92;
+  }
+
+  /* Splitit note + detail (under $6k PIF) */
+  .invest-splitit-wrap {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .invest-splitit-intro {
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0 0 12px;
+  }
+
+  .invest-splitit-intro strong {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .invest-splitit-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 156, 122, 0.4);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .invest-splitit-head {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff9c7a;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .invest-splitit-apply {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0 0 10px;
+    line-height: 1.55;
+  }
+
+  .invest-splitit-fine {
+    font-size: 10.5px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.48);
+    margin: 0;
+  }
+
   .invest-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -417,7 +479,7 @@
     margin-top: 14px;
   }
 
-  /* Bonus — Chad 1:1 sessions (stands out on invest card) */
+  /* Bonus — Val 1:1 sessions (stands out on invest card) */
   .invest-bonus-chad {
     margin: 20px 0 18px;
     padding: 16px 18px;
@@ -456,53 +518,6 @@
 
   .invest-bonus-chad-body strong {
     color: rgba(255, 255, 255, 0.95);
-  }
-
-  /* Splitit note + detail (under $6k PIF) */
-  .invest-splitit-wrap {
-    margin-top: 16px;
-    padding-top: 14px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .invest-splitit-intro {
-    font-size: 11.5px;
-    line-height: 1.55;
-    color: rgba(255, 255, 255, 0.55);
-    margin: 0 0 12px;
-  }
-
-  .invest-splitit-intro strong {
-    color: rgba(255, 255, 255, 0.88);
-  }
-
-  .invest-splitit-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 156, 122, 0.4);
-    border-radius: 10px;
-    padding: 14px 16px;
-  }
-
-  .invest-splitit-head {
-    font-size: 13px;
-    font-weight: 700;
-    color: #ff9c7a;
-    margin-bottom: 8px;
-    letter-spacing: 0.02em;
-  }
-
-  .invest-splitit-apply {
-    font-size: 11.5px;
-    color: rgba(255, 255, 255, 0.78);
-    margin: 0 0 10px;
-    line-height: 1.55;
-  }
-
-  .invest-splitit-fine {
-    font-size: 10.5px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.48);
-    margin: 0;
   }
 
   .invest-badge.financing {
@@ -861,11 +876,98 @@
     color: var(--green-dark);
   }
 
+  /* Footer HTSA column — social / site links with brand-colored icons */
+  .footer-htsa-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.62);
+    text-decoration: none;
+    line-height: 1.35;
+  }
+  .footer-htsa-link:hover {
+    color: rgba(255,255,255,0.95);
+  }
+  .footer-htsa-link__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+  .footer-htsa-link__icon svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Footer — prominent reviews + support (full width under main footer row) */
+  .footer-reviews-row {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px 28px;
+  }
+  .footer-reviews-trustpilot {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .footer-reviews-trustpilot:hover {
+    color: var(--green);
+  }
+  .footer-reviews-stars {
+    color: #e2b227;
+    font-size: 20px;
+    letter-spacing: 3px;
+    line-height: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 0 12px rgba(226, 178, 39, 0.35);
+  }
+  .footer-reviews-text {
+    font-family: 'DM Sans', sans-serif;
+  }
+  .footer-reviews-support {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.92);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 201, 122, 0.35);
+    padding-bottom: 2px;
+  }
+  .footer-reviews-support:hover {
+    color: var(--green);
+    border-bottom-color: var(--green);
+  }
+  @media (max-width: 600px) {
+    .footer-reviews-row {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 18px;
+      padding-top: 18px;
+    }
+    .footer-reviews-trustpilot {
+      font-size: 15px;
+    }
+  }
+
   @media (max-width: 600px) {
     .header { padding: 22px 20px 20px; flex-direction: column; gap: 16px; }
     .invoice-meta { text-align: left; }
     .invoice-badge { margin-bottom: 8px; }
     .hero-band { padding: 18px 20px; }
+    .hts-terms-agreement-wrap { padding-left: 20px; padding-right: 20px; }
+    .invest-pay-zone-hint { padding-left: 20px; padding-right: 20px; }
     .billing-grid { grid-template-columns: 1fr; }
     .billing-cell { padding: 18px 20px; }
     .billing-cell:first-child { border-right: none; border-bottom: 1px solid var(--mid); }
@@ -905,6 +1007,10 @@
     .footer-bc-card {
       max-width: none !important;
       width: 100%;
+    }
+    /* Keep photo sizing; remove upward transform on small screens so the card doesn’t visually sit over testimonial text */
+    .footer-bc-photo-ring {
+      transform: none;
     }
     .footer-bc-info,
     .footer-bc-logo-stack,
@@ -1130,26 +1236,63 @@
   }
 
   @media (max-width: 600px) {
+    /* Testimonials — normal document flow; long Trinity quote must reserve full height before footer */
     .ref-strip {
-      padding: 14px 20px 16px !important;
+      display: block !important;
+      overflow: visible !important;
+      /* Match narrow-screen padding pattern; extra bottom space before footer */
+      padding: 14px 20px 40px !important;
     }
 
     .ref-strip-inner {
-      flex-direction: column;
+      display: block !important;
+      overflow: visible !important;
+      align-items: stretch !important;
+    }
+
+    .ref-strip-links-col,
+    .ref-strip-quote-wrap,
+    .ref-strip-mini-stack {
+      display: block !important;
+      width: 100% !important;
+      max-width: none !important;
+      height: auto !important;
+      min-height: auto !important;
+      overflow: visible !important;
+      flex: none !important;
+      align-self: auto !important;
     }
 
     .ref-strip-quote-wrap {
-      max-width: none;
+      min-height: auto !important;
     }
 
-    /* Stacked layout: no side-by-side name alignment; natural flow */
+    .ref-strip-quote,
     .ref-strip-quote--trinity {
-      flex: none;
-      height: auto;
+      display: block !important;
+      width: 100% !important;
+      max-width: none !important;
+      height: auto !important;
+      min-height: auto !important;
+      overflow: visible !important;
+      flex: none !important;
+    }
+
+    .ref-strip-quote--trinity {
+      flex-direction: unset !important;
+    }
+
+    .ref-strip-quote-body,
+    .ref-strip-quote--trinity .ref-strip-quote-body {
+      display: block !important;
+      height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
+      padding-right: 0 !important;
     }
 
     .ref-strip-quote--trinity .ref-strip-quote-attr {
-      margin-top: 10px;
+      margin-top: 10px !important;
     }
   }
 
@@ -1196,6 +1339,160 @@
     margin-right: auto;
   }
 
+  /* Spousal paired-enrollment callout (blue) — Xavier / custom enrollments */
+  .enrollment-guarantee-banner--spousal {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 2px solid #2563eb;
+    border-left: 6px solid #1d4ed8;
+    box-shadow: 0 2px 14px rgba(37, 99, 235, 0.16);
+  }
+
+  .enrollment-guarantee-banner--spousal .enrollment-guarantee-banner-title {
+    color: #1d4ed8;
+  }
+
+  .enrollment-guarantee-banner--spousal p {
+    color: #1e3a5f;
+  }
+
+  .enrollment-guarantee-banner--spousal p strong {
+    color: #1e40af;
+  }
+
+  /* Terms agreement gate — unlocks payment buttons after Google Apps Script success (Val enrollment only) */
+  .hts-terms-agreement-wrap {
+    padding: 18px 36px 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--mid);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .hts-terms-agreement-card {
+    background: linear-gradient(135deg, #f7f9fc 0%, #eef2f8 100%);
+    border: 1px solid var(--mid);
+    border-radius: 10px;
+    padding: 18px 20px 20px;
+  }
+
+  .hts-terms-agreement-card--complete {
+    border-color: rgba(0, 201, 122, 0.4);
+    background: linear-gradient(135deg, #f0fdf7 0%, #e8f9f1 100%);
+  }
+
+  .hts-terms-agreement-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .hts-terms-agreement-lead {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0 0 10px;
+  }
+
+  .hts-terms-agreement-pdf {
+    display: inline-block;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--green-dark);
+    text-decoration: none;
+  }
+
+  .hts-terms-agreement-pdf:hover { text-decoration: underline; }
+
+  /* Clarifications shown inside Terms gate before the acknowledgment checkbox */
+  .hts-terms-agreement-card .hts-terms-gate-clarify {
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
+  .hts-terms-agreement-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12.5px;
+    color: var(--text);
+    margin: 14px 0 12px;
+    cursor: pointer;
+  }
+
+  .hts-terms-agreement-checkbox input {
+    margin-top: 3px;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
+
+  .hts-terms-agreement-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--navy);
+    background: var(--green);
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    cursor: pointer;
+  }
+
+  .hts-terms-agreement-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .hts-terms-agreement-msg {
+    font-size: 12px;
+    color: #b91c1c;
+    margin: 10px 0 0;
+    min-height: 1.2em;
+  }
+
+  .hts-terms-agreement-msg--ok {
+    color: var(--green-dark);
+  }
+
+  .hts-terms-msg-below-fold {
+    margin-top: 10px;
+  }
+
+  .hts-terms-agreement-done-line {
+    font-size: 12.5px;
+    color: var(--navy);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.5;
+    display: none;
+  }
+
+  .hts-terms-agreement-card--complete .hts-terms-agreement-form { display: none !important; }
+  .hts-terms-agreement-card--complete .hts-terms-agreement-done-line { display: block !important; }
+
+  .invest-pay-zone-hint {
+    margin: 0;
+    padding: 10px 36px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #9a3412;
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border-bottom: 1px solid rgba(234, 88, 12, 0.2);
+    display: block;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .invest-pay-zone-hint--off { display: none !important; }
+
+  #invest-pay-zone.invest-pay-zone--locked .invest-box a.invest-btn {
+    pointer-events: none !important;
+    opacity: 0.46 !important;
+    cursor: not-allowed !important;
+  }
+
 
   @media print {
     @page { margin: 0.5in; size: letter; }
@@ -1210,6 +1507,22 @@
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
+    .enrollment-guarantee-banner--spousal {
+      border: 2px solid #2563eb !important;
+      border-left: 6px solid #1d4ed8 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    #invest-pay-zone.invest-pay-zone--locked .invest-box a.invest-btn {
+      pointer-events: auto !important;
+      opacity: 1 !important;
+      cursor: pointer !important;
+    }
+    .hts-terms-agreement-wrap {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+    .invest-pay-zone-hint { display: none !important; }
   }
 </style>
 </head>
@@ -1220,7 +1533,7 @@
   <div class="header">
     <div>
       <div class="logo-wrap">
-        <img class="logo-icon" src="data:image/jpeg;base64,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" alt="Chad Aleo">
+        <img class="logo-icon" src="data:image/jpeg;base64,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" alt="High Ticket Sales Academy">
         <div>
           <div class="logo-text">High Ticket<br>Sales Academy</div>
           <div class="logo-sub">Where Sales Reps Meet Their Forever Career</div>
@@ -1240,8 +1553,8 @@
   <!-- HERO BAND -->
   <div class="hero-band">
     <h2>Certified High Ticket Closer Program</h2>
-    <p>Xavier, I really enjoyed speaking with you earlier — we covered a lot, including the car sale. It was clear from our conversation that you're someone who takes their future seriously and is ready to make a real change — and that's exactly the kind of person we love working with here at High Ticket Sales Academy.</p>
-    <p style="margin-top:10px;">Everything you need to review and get started is right here. The biggest difference at HTSA is that you are not just another number — we are not influencers, but true experts in the field of high ticket sales. <strong>Chad Aleo trains you personally.</strong> You have around-the-clock support, and once certified, our team walks you directly into roles from a network of 300+ partner companies. Take your time reviewing and reach out to CJ with any questions or assistance with enrollment.</p>
+    <p>Xavier, I really enjoyed speaking with you earlier. It was clear from our conversation that you're someone who takes their future seriously and is ready to make a real change — and that's exactly the kind of person we love working with here at High Ticket Sales Academy.</p>
+    <p style="margin-top:10px;">Everything you need to review and get started is right here. The biggest difference at HTSA is that you are not just another number — we are not influencers, but true experts in the field of high ticket sales. You have around-the-clock support, and once certified, our team walks you directly into roles from a network of 300+ partner companies. Take your time reviewing and reach out to CJ with any questions or assistance with enrollment.</p>
   </div>
 
   <!-- BILLING -->
@@ -1365,12 +1678,59 @@
     <h3>Program Investment</h3>
   </div>
 
-  <div class="invest-wrap">
+  <!-- Performance guarantee — confirmed for this enrollment -->
+  <div class="enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms">
+    <div class="enrollment-guarantee-banner-title">Performance Guarantee — Confirmed for This Enrollment</div>
+    <p><strong>This performance guarantee applies to you.</strong> HTSA is <strong>confirming the program’s performance guarantee</strong> for your enrollment, provided you complete <strong>all</strong> required steps, milestones, and obligations exactly as described on this page and in your enrollment materials.</p>
+  </div>
+
+  <div class="enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms enrollment-guarantee-banner--spousal">
+    <div class="enrollment-guarantee-banner-title">Spousal Discount Guarantee — Confirmed for This Enrollment</div>
+    <p><strong>This spousal paired-enrollment offer applies to you.</strong> When both spouses enroll together through this agreement, your <strong>total combined program investment is $9,000</strong> (not per person). This rate is <strong>confirmed for your enrollment</strong> and carries <strong>no expiration date</strong>. Complete payment in line with the options below and guidance from your enrollment advisor so both enrollments are captured correctly.</p>
+  </div>
+
+  <div class="hts-terms-agreement-wrap">
+    <div id="hts-terms-agreement-panel" class="hts-terms-agreement-card"
+         data-full-name="Xavier Cunningham"
+         data-email="x_cunningham@yahoo.com"
+         data-phone="+17316950288"
+         data-client-slug="xavier-cunningham">
+      <div class="hts-terms-agreement-form" id="hts-terms-agreement-form">
+        <div class="hts-terms-agreement-title">Terms agreement</div>
+        <p class="hts-terms-agreement-lead">Open the Terms of Service PDF, review the clarification below about lifetime access and included services, confirm you agree, then record your acceptance to unlock payment buttons below.</p>
+        <p style="margin:0;">
+          <a id="hts-terms-pdf-link-top" href="https://closewithcjclay.com/HTSA-Terms-of-Service.pdf" target="_blank" rel="noopener noreferrer" class="hts-terms-agreement-pdf">View Full Terms of Service (PDF)</a>
+        </p>
+        <div class="terms-clarify hts-terms-gate-clarify">
+          <div class="terms-clarify-title">Lifetime Access Clarification</div>
+          <p style="margin:0 0 8px;color:var(--navy);font-weight:600;">You receive:</p>
+          <ul class="terms-clarify-list">
+            <li>Lifetime access to the course modules</li>
+            <li>Lifetime access to live group coaching calls with Chad</li>
+            <li>Lifetime access to the closers mastermind community</li>
+            <li><strong style="color:var(--navy);">1-on-1 coaching calls</strong> — included at <strong style="color:var(--navy);">no additional fee</strong>. Calls must be used within three months of your program start date unless otherwise approved by HTSA.</li>
+            <li><strong style="color:var(--navy);">AI role-play platform</strong> — included while you are in the academy. After you complete the program and land your offer, you may keep the platform for <strong style="color:var(--navy);">$35/month</strong> if you choose. It is not mandatory; it is an optional tool if it helps your close rate.</li>
+          </ul>
+        </div>
+        <label class="hts-terms-agreement-checkbox" for="hts-terms-checkbox">
+          <input type="checkbox" id="hts-terms-checkbox" autocomplete="off" />
+          <span>I have read and agree to the Terms of Service linked above.</span>
+        </label>
+        <button type="button" id="hts-terms-confirm-btn" class="hts-terms-agreement-btn" disabled>Record agreement &amp; unlock payments</button>
+      </div>
+      <p id="hts-terms-agreement-msg" class="hts-terms-agreement-msg hts-terms-msg-below-fold" role="status" aria-live="polite"></p>
+      <p id="hts-terms-agreement-done-line" class="hts-terms-agreement-done-line">✓ Terms recorded successfully. Payment buttons below are now active for this browser session.</p>
+    </div>
+  </div>
+
+  <p id="invest-pay-zone-hint" class="invest-pay-zone-hint">Payment buttons stay locked until your Terms agreement has been recorded above.</p>
+
+  <div class="invest-wrap invest-pay-zone invest-pay-zone--locked" id="invest-pay-zone">
     <div class="invest-box">
       <div class="invest-program-label">Certified High Ticket Closer Program</div>
       <div class="invest-program-desc">All services described above — training platform, AI roleplay, live coaching with Chad, certification, job placement, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
 
-      <div class="invest-section-kicker">HTSA In-House Payment Options</div>
+      <div class="invest-section-kicker invest-section-kicker--accent">In-House Cash Payment Options</div>
       <p class="invest-access-hint">Either option includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
       <div class="invest-grid">
 
@@ -1387,7 +1747,15 @@
             </div>
           </div>
           <div class="invest-option-actions invest-option-actions--pay">
-            <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="invest-btn" target="_blank">Choose PIF — Pay $6,000 →</a>
+            <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $6,000 →</a>
+          </div>
+          <div class="invest-splitit-wrap">
+            <p class="invest-splitit-intro">On the Whop checkout page, scroll to the <strong>bottom of the payment options</strong> — you'll see <strong>Splitit</strong> (monthly payments on your card). That's where you can set up the plan below.</p>
+            <div class="invest-splitit-card">
+              <div class="invest-splitit-head">Splitit — $500/month × 12 months</div>
+              <p class="invest-splitit-apply"><strong>Apply here:</strong> use the same <strong>green "Choose PIF — Pay $6,000"</strong> button above, then select <strong>Splitit</strong> at the bottom of Whop's payment methods to complete setup.</p>
+              <p class="invest-splitit-fine">No credit check — uses the existing limit on your Visa or Mastercard. A hold is placed on your card for the total amount. As you make each $500 monthly payment, that same amount is released back to your available credit.</p>
+            </div>
           </div>
         </div>
 
@@ -1404,109 +1772,12 @@
             </div>
           </div>
           <div class="invest-option-actions invest-option-actions--pay">
-            <a href="https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" class="invest-btn" target="_blank">Choose 4-Pay — Pay $1,750 Today →</a>
+            <a href="https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose 4-Pay — Pay $1,750 Today →</a>
           </div>
         </div>
 
       </div>
 
-      <hr class="invest-divider" style="margin:20px 0 18px;">
-
-      <div class="invest-section-kicker">Financing Options</div>
-      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">The two options above are HTSA in-house payment options. The three options below are third-party financing options for pre-qualification.</div>
-
-      <div class="invest-grid">
-
-        <div class="invest-option-block financing">
-          <div class="invest-badge financing">Financing Option 1</div>
-          <div class="invest-option-head">
-            <div>
-              <div class="invest-option-title">ClarityPay</div>
-              <div class="invest-option-sub">Best for someone who wants a fast decision and monthly payments with no early payoff penalty.</div>
-            </div>
-            <div class="invest-price-stack">
-              <div class="invest-price-big" style="font-size:22px;">Instant</div>
-              <div class="invest-price-mini">soft pre-qualify</div>
-            </div>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Typical Credit Profile</span>
-            <span class="invest-value">Around 580+ credit</span>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Enrollment Timing</span>
-            <span class="invest-value">Enroll same day if approved</span>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Payment Structure</span>
-            <span class="invest-value">Monthly payments • no early payoff penalty</span>
-          </div>
-          <div class="invest-option-actions">
-            <a href="https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" class="invest-btn secondary" target="_blank">Pre-Qualify with ClarityPay →</a>
-          </div>
-        </div>
-
-        <div class="invest-option-block financing">
-          <div class="invest-badge financing">Financing Option 2</div>
-          <div class="invest-option-head">
-            <div>
-              <div class="invest-option-title">PayVa</div>
-              <div class="invest-option-sub">Strong option for higher credit profiles who want instant approval and immediate checkout.</div>
-            </div>
-            <div class="invest-price-stack">
-              <div class="invest-price-big" style="font-size:22px;">Instant</div>
-              <div class="invest-price-mini">soft pre-qualify</div>
-            </div>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Typical Credit Profile</span>
-            <span class="invest-value">Around 620+ credit</span>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Enrollment Timing</span>
-            <span class="invest-value">Enroll same day if approved</span>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Important</span>
-            <span class="invest-value" style="color:#ff9c7a;">No early payoff unless within 45 days</span>
-          </div>
-          <div class="invest-option-actions">
-            <a href="https://app.payva.com/checkout/overview/3ELuF3gxhI" class="invest-btn secondary" target="_blank">Pre-Qualify with PayVa →</a>
-          </div>
-        </div>
-
-        <div class="invest-option-block financing">
-          <div class="invest-badge financing">Financing Option 3</div>
-          <div class="invest-option-head">
-            <div>
-              <div class="invest-option-title">Flexxbuy</div>
-              <div class="invest-option-sub">Apply once and see lender options. Best when someone wants broader approval chances across multiple lenders.</div>
-            </div>
-            <div class="invest-price-stack">
-              <div class="invest-price-big" style="font-size:22px;">2–5 Days</div>
-              <div class="invest-price-mini">after approval</div>
-            </div>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Typical Credit Profile</span>
-            <span class="invest-value">Broader credit range</span>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Enrollment Timing</span>
-            <span class="invest-value">Funds in 2–5 business days</span>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Payment Structure</span>
-            <span class="invest-value">Funds to your bank, then pay HTSA</span>
-          </div>
-          <div class="invest-option-actions">
-            <a href="https://app.flexxbuy.com/high-ticket-sales-academy-llc/apply/" class="invest-btn secondary" target="_blank">Pre-Qualify with Flexxbuy →</a>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="invest-note" style="color:#ff9c7a;"><strong>★ Soft pre-qualification only.</strong> Once you complete one of the in-house payment options above or get approved through one of the financing options, text CJ right away so access can be granted.</div>
     </div>
   </div>
 
@@ -1521,8 +1792,8 @@
     <div class="step-item">
       <div class="step-num">1</div>
       <div class="step-content">
-        <h4>Step 1 — Choose Your Payment or Check Pre-Qualification</h4>
-        <p>Xavier, review the payment and financing options in Program Investment above, then select the one you want — pay in full, the 4-pay plan, or a soft pre-qualification link for financing. Once your payment is complete or your financing is approved, move to Step 2 below.</p>
+        <h4>Step 1 — Choose Your Payment</h4>
+        <p>Xavier, review the in-house payment options in Program Investment above, then select what you want — <strong>$6,000</strong> paid in full (or <strong>Splitit</strong> inside that same Whop checkout) or the <strong>$1,750 × 4-pay</strong> plan ($7,000 total). Once your payment clears, move to Step 2 below.</p>
       </div>
     </div>
 
@@ -1592,31 +1863,6 @@
     <p>You're not just enrolling in a program — you're joining a community of people who show up, do the work, and build something real. We can't wait to see where this takes you.</p>
   </div>
 
-  <!-- TERMS OF SERVICE -->
-  <div style="background:#f7f9fc;border-top:1px solid rgba(0,0,0,0.07);padding:28px 36px;">
-    <div style="max-width:720px;margin:0 auto;">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
-        <div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--navy);">Terms &amp; Enrollment Agreement</div>
-        <a href="HTSA-Terms-of-Service.pdf" target="_blank" style="font-size:11.5px;color:var(--green);font-weight:600;text-decoration:none;white-space:nowrap;">View Full Terms of Service →</a>
-      </div>
-      <div style="font-size:11.5px;color:#555;line-height:1.75;">
-        <div class="terms-clarify">
-          <div class="terms-clarify-title">Lifetime Access Clarification</div>
-          <p style="margin:0 0 8px;color:var(--navy);font-weight:600;">You receive:</p>
-          <ul class="terms-clarify-list">
-            <li>Lifetime access to the course modules</li>
-            <li>Lifetime access to live group coaching calls with Chad</li>
-            <li>Lifetime access to the closers mastermind community</li>
-            <li><strong style="color:var(--navy);">1-on-1 coaching calls</strong> — included at <strong style="color:var(--navy);">no additional fee</strong>. Calls must be used within three months of your program start date unless otherwise approved by HTSA.</li>
-            <li><strong style="color:var(--navy);">AI role-play platform</strong> — included while you are in the academy. After you complete the program and land your offer, you may keep the platform for <strong style="color:var(--navy);">$35/month</strong> if you choose. It is not mandatory; it is an optional tool if it helps your close rate.</li>
-          </ul>
-        </div>
-
-        <p style="margin:0;"><strong style="color:var(--navy);">Performance Guarantee.</strong> HTSA stands behind its program. If you complete all modules, attend your kickoff call, engage with the community, and apply for placements without success within the program timeframe, contact our support team — we'll work with you directly to make it right.</p>
-      </div>
-    </div>
-  </div>
-
   <!-- Member stories & book (subtle; site / Trustpilot / YouTube in footer) -->
   <div class="ref-strip">
     <div class="ref-strip-inner">
@@ -1652,7 +1898,7 @@
           <div class="ref-strip-quote-meta">Member voice</div>
           <blockquote class="ref-strip-quote-body">Hello, my name is Trinity.
 
-I'm a single mother of two beautiful children; I've just started my journey with high ticket sales. I'm extremely grateful that I found my path with this company. I was in a low space in my life and I was almost at the verge of giving up — holding on, knowing my children need me to keep going, kept me alive that much to hold on. I prayed for help morning and night with nobody to talk to about what I'm dealing with. But I kept looking for a way out. I can write paragraphs about my life, but I know I was meant to be online to come across Chad's advertisement on the High Ticket Sales Academy. I listened and jumped into the opportunity by signing up.
+I'm a single mother of two beautiful children; I've just started my journey with high ticket sales. I'm extremely grateful that I found my path with this company. I was in a low space in my life and I was almost at the verge of giving up — holding on, knowing my children need me to keep going, kept me alive that much to hold on. I prayed for help morning and night with nobody to talk to about what I'm dealing with. But I kept looking for a way out. I can write paragraphs about my life, but I know I was meant to be online to come across Val's advertisement on the High Ticket Sales Academy. I listened and jumped into the opportunity by signing up.
 
 Then I got a call from CJ — the most genuine and caring person I ever met. On the phone he lifted me up, and only if you heard the call you would feel it immediately… He gave me hope and assurance that it will be okay, kept me motivated and kept me positive. He is a big part of my testimony on leaping into faith with the amazing opportunity; he kept me lifted the whole way and I appreciate it completely. I wouldn't be here right now typing this if it wasn't for him.
 
@@ -1674,10 +1920,10 @@ Thank God and CJ Clay for that 🙏</blockquote>
         <div style="font-family:'Playfair Display',serif;color:var(--white);font-size:17px;font-weight:700;margin-bottom:4px;">High Ticket Sales Academy</div>
         <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:14px;">Certification · Coaching · Placement</div>
         <div style="display:flex;flex-direction:column;gap:5px;">
-          <a href="https://www.highticketsalesacademy.com" target="_blank" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">🌐 &nbsp;highticketsalesacademy.com</a>
-          <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">⭐ &nbsp;Trustpilot Reviews — 4.8 out of 5</a>
-          <a href="https://www.youtube.com/@highticketsalesacademy" target="_blank" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">▶️ &nbsp;youtube.com/@highticketsalesacademy</a>
-          <a href="/cdn-cgi/l/email-protection#a0d3d5d0d0cfd2d4e0c8c9c7c8d4c9c3cbc5d4d3c1ccc5d3c1c3c1c4c5cdd98ec3cfcd" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">✉️ &nbsp;<span class="__cf_email__" data-cfemail="780b0d0808170a0c3810111f100c111b131d0c0b19141d0b191b191c1d1501561b1715">[email&#160;protected]</span></a>
+          <a href="https://www.highticketsalesacademy.com" class="footer-htsa-link" target="_blank" rel="noopener noreferrer"><span class="footer-htsa-link__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" focusable="false"><circle cx="12" cy="12" r="10" fill="#1976D2"/><path fill="#43A047" d="M12 2.2c-1.2 2-1.8 4.2-1 6.2.9 2.2 2.8 3.5 3.8 5.5 1 2-1 5.2-2.8 7.4 4.5-1.2 7.7-5.3 7.7-10.1 0-4.4-3-8.2-7.7-9z"/><path fill="#81C784" d="M4.2 12.5c.8-1.3 2.4-2 3.8-1.2 1.5.8 2 2.5 1.4 3.9-.7 1.5-2.3 2.8-4 3.5-.9-1.8-1.3-3.8-1.2-6.2z" opacity=".9"/></svg></span><span>highticketsalesacademy.com</span></a>
+          <a href="https://www.youtube.com/@highticketsalesacademy" class="footer-htsa-link" target="_blank" rel="noopener noreferrer"><span class="footer-htsa-link__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" focusable="false"><path fill="#FF0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#fff" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span><span>youtube.com/@highticketsalesacademy</span></a>
+          <a href="https://www.instagram.com/highticketsalesacademy/" class="footer-htsa-link" target="_blank" rel="noopener noreferrer"><span class="footer-htsa-link__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" focusable="false"><defs><linearGradient id="htsFooterIgGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#f58529"/><stop offset="25%" style="stop-color:#dd2a7b"/><stop offset="50%" style="stop-color:#8134af"/><stop offset="100%" style="stop-color:#515bd4"/></linearGradient></defs><path fill="url(#htsFooterIgGrad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></span><span>@highticketsalesacademy</span></a>
+          <a href="https://www.facebook.com/HTSAcadamy/" class="footer-htsa-link" target="_blank" rel="noopener noreferrer"><span class="footer-htsa-link__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" focusable="false"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span><span>facebook.com/HTSAcadamy</span></a>
         </div>
       </div>
 
@@ -1703,6 +1949,14 @@ Thank God and CJ Clay for that 🙏</blockquote>
       </div>
 
     </div>
+
+    <div class="footer-reviews-row">
+      <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="footer-reviews-trustpilot" target="_blank" rel="noopener noreferrer">
+        <span class="footer-reviews-stars" aria-hidden="true">★★★★★</span>
+        <span class="footer-reviews-text">Trustpilot Reviews — 4.8 out of 5</span>
+      </a>
+      <a href="mailto:support@highticketsalesacademy.com" class="footer-reviews-support">support@highticketsalesacademy.com</a>
+    </div>
   </div>
 
   <div style="background:#060f1e;padding:12px 36px;text-align:center;font-size:10px;color:rgba(255,255,255,0.18);">
@@ -1710,5 +1964,148 @@ Thank God and CJ Clay for that 🙏</blockquote>
   </div>
 
 </div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'hts_terms_gate_xavier_cunningham_v1';
+  var GAS_TERMS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec';
+  var TERMS_DOC_URL_FOR_GATE = 'https://closewithcjclay.com/HTSA-Terms-of-Service.pdf';
+  // Fixed label for spreadsheets / logs when the hosted PDF stays the same URL
+  var TERMS_VERSION_ID = 'HTSA-TOS-PDF-closewithcjclay-2026-04';
+
+  function canonicalEnrollmentUrl() {
+    try {
+      var u = new URL(window.location.href);
+      return u.origin + u.pathname + (u.search || '');
+    } catch (err) {
+      return window.location.href.split('#')[0];
+    }
+  }
+
+  /** Google Apps Script friendly: no JSON preflight; body is payload=<json> */
+  function postPayloadToEnrollmentScript(endpoint, payloadObj) {
+    var formBody = new URLSearchParams();
+    formBody.set('payload', JSON.stringify(payloadObj));
+    return fetch(endpoint, {
+      method: 'POST',
+      mode: 'no-cors',
+      credentials: 'omit',
+      body: formBody,
+      redirect: 'follow',
+      cache: 'no-store'
+    });
+  }
+
+  function termsSuccessMessage() {
+    return 'Agreement submitted. Check your email or spreadsheet for confirmation.';
+  }
+
+  function setPayZoneLocked(locked) {
+    var zone = document.getElementById('invest-pay-zone');
+    var hint = document.getElementById('invest-pay-zone-hint');
+    if (!zone) return;
+    if (locked) {
+      zone.classList.add('invest-pay-zone--locked');
+      zone.querySelectorAll('a.invest-btn').forEach(function (a) {
+        a.setAttribute('tabindex', '-1');
+      });
+      if (hint) hint.classList.remove('invest-pay-zone-hint--off');
+    } else {
+      zone.classList.remove('invest-pay-zone--locked');
+      zone.querySelectorAll('a.invest-btn').forEach(function (a) {
+        a.removeAttribute('tabindex');
+      });
+      if (hint) hint.classList.add('invest-pay-zone-hint--off');
+    }
+  }
+
+  function markAgreementRecorded() {
+    var panel = document.getElementById('hts-terms-agreement-panel');
+    if (panel) panel.classList.add('hts-terms-agreement-card--complete');
+  }
+
+  function postAgreement(panel, btnEl) {
+    var msgEl = document.getElementById('hts-terms-agreement-msg');
+
+    var bodyObj = {
+      action: 'recordTermsAgreement',
+      fullName: (panel.getAttribute('data-full-name') || '').trim(),
+      email: (panel.getAttribute('data-email') || '').trim(),
+      phone: (panel.getAttribute('data-phone') || '').trim(),
+      enrollmentPageUrl: canonicalEnrollmentUrl(),
+      clientSlug: (panel.getAttribute('data-client-slug') || 'xavier-cunningham').trim(),
+      termsUrl: TERMS_DOC_URL_FOR_GATE,
+      termsVersion: TERMS_VERSION_ID,
+      userAgent: navigator.userAgent || ''
+    };
+
+    postPayloadToEnrollmentScript(GAS_TERMS_ENDPOINT, bodyObj).then(function () {
+      try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e3) {}
+      markAgreementRecorded();
+      if (msgEl) {
+        msgEl.textContent = termsSuccessMessage();
+        msgEl.classList.add('hts-terms-agreement-msg--ok');
+      }
+      setPayZoneLocked(false);
+    }).catch(function () {
+      if (btnEl) btnEl.disabled = false;
+      var cb = document.getElementById('hts-terms-checkbox');
+      if (cb) cb.checked = false;
+      if (btnEl && cb) btnEl.disabled = !cb.checked;
+      if (msgEl) {
+        msgEl.textContent = 'Network error — could not reach enrollment script. Retry when online.';
+        msgEl.classList.remove('hts-terms-agreement-msg--ok');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+        markAgreementRecorded();
+        setPayZoneLocked(false);
+        return;
+      }
+    } catch (e0) {}
+
+    var zone = document.getElementById('invest-pay-zone');
+    if (!zone) return;
+
+    setPayZoneLocked(true);
+
+    zone.addEventListener('click', function (ev) {
+      if (!zone.classList.contains('invest-pay-zone--locked')) return;
+      var link = ev.target.closest && ev.target.closest('a.invest-btn');
+      if (link) {
+        ev.preventDefault();
+        ev.stopPropagation();
+      }
+    }, true);
+
+    var chk = document.getElementById('hts-terms-checkbox');
+    var btn = document.getElementById('hts-terms-confirm-btn');
+
+    function syncDisabled() {
+      if (!chk || !btn) return;
+      btn.disabled = !chk.checked;
+    }
+
+    if (chk) chk.addEventListener('change', syncDisabled);
+    if (btn) {
+      btn.addEventListener('click', function () {
+        if (!chk || !chk.checked) return;
+        var panel = document.getElementById('hts-terms-agreement-panel');
+        if (!panel) return;
+        btn.disabled = true;
+        var msgEl = document.getElementById('hts-terms-agreement-msg');
+        if (msgEl) msgEl.textContent = 'Recording agreement…';
+
+        postAgreement(panel, btn);
+      });
+    }
+    syncDisabled();
+  });
+})();
+</script>
 </body>
 </html>
