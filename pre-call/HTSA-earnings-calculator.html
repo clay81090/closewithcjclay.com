@@ -21,6 +21,7 @@ html { color-scheme: dark; }
   --text-soft: rgba(232,240,255,0.72);
   --muted: #6b7fa0;
   --gold: #f0c060;
+  --danger: #ff8c82;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --font-d: 'Syne', system-ui, sans-serif;
   --font-s: 'Playfair Display', Georgia, serif;
@@ -266,6 +267,7 @@ body {
 }
 .metric-value.green { color: var(--green); }
 .metric-value.gold { color: var(--gold); }
+.metric-value.danger { color: var(--danger); }
 
 .range-wrap {
   padding: 14px 16px;
@@ -361,19 +363,49 @@ tr:last-child td { border-bottom: none; }
   <header class="hero" id="top">
     <div class="hero-badge"><span class="badge-dot" aria-hidden="true"></span> HTSA tool</div>
     <h1><em>Earnings</em><br>calculator</h1>
-    <p class="hero-lead">Set a <strong>goal income</strong>, then model <strong>conservative high-ticket commissions</strong> and a full <strong>12-month ramp</strong> with residuals — same math as the full pre-call planner, stripped to what you need on a call.</p>
+    <p class="hero-lead">Start with <strong>current income and hours</strong>, then <strong>goal income</strong> to expose the hours gap on their current path. After that, model <strong>high-ticket commissions</strong> and a <strong>12-month ramp</strong> with residuals.</p>
   </header>
 
-  <section class="section" id="goal-income" aria-labelledby="goal-heading">
+  <section class="section" id="current-reality" aria-labelledby="current-heading">
     <div class="phase-card">
       <div class="phase-topline">
-        <span class="phase-chip">Goal income</span>
+        <span class="phase-chip">Current reality</span>
       </div>
       <div class="section-head" style="margin-bottom:16px;">
-        <h2 class="section-title" id="goal-heading">Where they want to land</h2>
-        <p class="section-sub">Monthly target and ideal schedule — we’ll compare this to the year-one average from the model below.</p>
+        <h2 class="section-title" id="current-heading">Current situation</h2>
+        <p class="section-sub">Numbers and labels only — no story questions. Used for hourly value and “hours required on the current path” math.</p>
       </div>
       <div class="grid-2">
+        <div class="field">
+          <label for="prospectName">Prospect name</label>
+          <input id="prospectName" type="text" autocomplete="name" placeholder="e.g. Dan Thompson">
+        </div>
+        <div class="field">
+          <label for="currentRole">Current role / job</label>
+          <input id="currentRole" type="text" autocomplete="organization-title" placeholder="e.g. Sales Manager">
+        </div>
+        <div class="field">
+          <label for="currentMonthlyIncome">Current monthly income</label>
+          <input id="currentMonthlyIncome" type="number" min="0" step="100" placeholder="e.g. 4000" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="currentWeeklyHours">Current weekly hours worked</label>
+          <input id="currentWeeklyHours" type="number" min="1" max="168" step="1" placeholder="e.g. 55" autocomplete="off">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="income-gap" aria-labelledby="gap-heading">
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Gap clarification</span>
+      </div>
+      <div class="section-head" style="margin-bottom:16px;">
+        <h2 class="section-title" id="gap-heading">Show the current path does not support the desired future.</h2>
+        <p class="section-sub">This is the first place where income-gap math is allowed to appear.</p>
+      </div>
+      <div class="grid-2" style="margin-bottom:4px;">
         <div class="field">
           <label for="goalMonthlyIncome">Goal monthly income</label>
           <input id="goalMonthlyIncome" type="number" min="0" step="100" placeholder="e.g. 15000" autocomplete="off">
@@ -383,9 +415,15 @@ tr:last-child td { border-bottom: none; }
           <input id="desiredWeeklyHours" type="number" min="1" max="120" step="1" placeholder="e.g. 25" autocomplete="off">
         </div>
       </div>
-      <div class="math-panel compare-goal" id="goalYearCompare">
-        <span class="recap-kicker">Goal vs. year-one model</span>
-        Enter a goal monthly income and complete the calculator below to see how the projected first-year average compares.
+      <div class="metrics-grid" id="gapMetrics">
+        <div class="metric"><span class="metric-label">Current hourly value</span><div class="metric-value" id="gapHourly">-</div></div>
+        <div class="metric"><span class="metric-label">Required weekly hours</span><div class="metric-value danger" id="gapRequiredHours">-</div></div>
+        <div class="metric"><span class="metric-label">Extra weekly hours needed</span><div class="metric-value gold" id="gapExtraHours">-</div></div>
+        <div class="metric"><span class="metric-label">Increase required</span><div class="metric-value" id="gapIncrease">-</div></div>
+      </div>
+      <div class="math-panel" id="gapRecap">
+        <span class="recap-kicker">Gap clarification</span>
+        Enter current income, current hours, and goal monthly income to see how many hours per week the <em>current</em> path would require.
       </div>
     </div>
   </section>
@@ -529,6 +567,22 @@ tr:last-child td { border-bottom: none; }
     </div>
   </section>
 
+  <section class="section" id="goal-vs-year" aria-labelledby="compare-heading">
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Benchmark</span>
+      </div>
+      <div class="section-head" style="margin-bottom:12px;">
+        <h2 class="section-title" id="compare-heading">Goal vs. year-one model</h2>
+        <p class="section-sub">After you’ve set goal income and run the HTSA projection below, this line compares their stated target to the projected first-year average.</p>
+      </div>
+      <div class="math-panel compare-goal" id="goalYearCompare">
+        <span class="recap-kicker">Goal vs. year-one model</span>
+        Enter a goal monthly income and adjust the HTSA model above to see how the projected first-year average compares.
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <p>HTSA earnings calculator · same projection engine as the engagement planner · CJ Clay</p>
   </footer>
@@ -537,6 +591,10 @@ tr:last-child td { border-bottom: none; }
 <script>
 (function () {
   var state = {
+    prospectName: '',
+    currentRole: '',
+    currentMonthlyIncome: '',
+    currentWeeklyHours: '',
     goalMonthlyIncome: '',
     desiredWeeklyHours: '',
     offerPrice: 6000,
@@ -581,6 +639,39 @@ tr:last-child td { border-bottom: none; }
   function numberText(value, suffix) {
     var num = normalizeNumber(value, 0);
     return num ? round(num, 0) + ' ' + suffix : 'not entered';
+  }
+
+  function signedHours(value) {
+    var num = normalizeNumber(value, 0);
+    return (num > 0 ? '+' : '') + round(num, 1) + ' hrs';
+  }
+
+  function renderGapMath() {
+    var currentMonthly = normalizeNumber(state.currentMonthlyIncome, 0);
+    var currentHours = normalizeNumber(state.currentWeeklyHours, 0);
+    var goalMonthly = normalizeNumber(state.goalMonthlyIncome, 0);
+
+    var hourly = currentMonthly > 0 && currentHours > 0 ? currentMonthly / (currentHours * 4) : 0;
+    var requiredWeekly = hourly > 0 && goalMonthly > 0 ? goalMonthly / (hourly * 4) : 0;
+    var extraWeekly = requiredWeekly > 0 ? requiredWeekly - currentHours : 0;
+    var pctIncrease = currentMonthly > 0 && goalMonthly > 0 ? ((goalMonthly - currentMonthly) / currentMonthly) * 100 : 0;
+
+    document.getElementById('gapHourly').textContent = hourly ? money(hourly) : '-';
+    document.getElementById('gapRequiredHours').textContent = requiredWeekly ? round(requiredWeekly, 1) + ' hrs' : '-';
+    document.getElementById('gapExtraHours').textContent = requiredWeekly ? signedHours(extraWeekly) : '-';
+    document.getElementById('gapIncrease').textContent = goalMonthly ? round(pctIncrease, 0) + '%' : '-';
+
+    var text = 'At their current model, they would need current income and future income entered before this section can do its job.';
+    if (hourly && requiredWeekly) {
+      var realism = requiredWeekly > 168
+        ? 'There are only 168 hours in a week, so this is not an effort problem. It is a vehicle problem.'
+        : requiredWeekly > 90
+        ? 'That pushes into an obviously brutal weekly schedule, which makes the current path mathematically weak.'
+        : 'Even if it is technically possible on paper, it is still asking the old vehicle to do something it was not designed to do well.';
+      text = 'At their current model, they would need to work about ' + round(requiredWeekly, 1) + ' hours/week to hit ' + money(goalMonthly) + '/month. That means an extra ' + round(Math.max(extraWeekly, 0), 1) + ' hours/week on top of where they are now. ' + realism;
+    }
+
+    document.getElementById('gapRecap').innerHTML = '<span class="recap-kicker">Gap clarification</span>' + text;
   }
 
   function getOpportunityInputs() {
@@ -846,6 +937,10 @@ tr:last-child td { border-bottom: none; }
   }
 
   function readStateFromDom() {
+    state.prospectName = document.getElementById('prospectName').value;
+    state.currentRole = document.getElementById('currentRole').value;
+    state.currentMonthlyIncome = document.getElementById('currentMonthlyIncome').value;
+    state.currentWeeklyHours = document.getElementById('currentWeeklyHours').value;
     state.goalMonthlyIncome = document.getElementById('goalMonthlyIncome').value;
     state.desiredWeeklyHours = document.getElementById('desiredWeeklyHours').value;
     state.offerPrice = normalizeNumber(document.getElementById('offerPrice').value, 6000);
@@ -863,11 +958,16 @@ tr:last-child td { border-bottom: none; }
 
   function refresh() {
     readStateFromDom();
+    renderGapMath();
     renderPossibilityMath();
     renderProjection();
   }
 
   var ids = [
+    'prospectName',
+    'currentRole',
+    'currentMonthlyIncome',
+    'currentWeeklyHours',
     'goalMonthlyIncome',
     'desiredWeeklyHours',
     'offerPrice',
