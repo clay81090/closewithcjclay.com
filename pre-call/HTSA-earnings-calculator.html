@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Earnings Calculator | HTSA</title>
 <meta name="description" content="Goal income and first-year commission projection — HTSA possibility math.">
 <meta name="color-scheme" content="dark">
@@ -38,6 +38,7 @@ body {
   font-size: 15px;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
 }
 .ambient {
   position: fixed;
@@ -68,7 +69,17 @@ body {
   opacity: 0.048;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.shell { position: relative; z-index: 2; max-width: 980px; margin: 0 auto; padding: 0 20px 100px; }
+.shell {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 20px 100px;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  padding-bottom: max(100px, env(safe-area-inset-bottom, 0px));
+  width: 100%;
+}
 
 .hero {
   min-height: 52vh;
@@ -195,6 +206,11 @@ body {
 .metrics-grid { grid-template-columns: repeat(4, 1fr); margin-top: 14px; }
 .summary-grid { grid-template-columns: repeat(2, 1fr); margin-top: 16px; }
 
+.metrics-grid--year-summary {
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 10px;
+}
+
 .field { margin-bottom: 14px; }
 .field label {
   display: block;
@@ -261,9 +277,10 @@ body {
 }
 .metric-value {
   font-family: var(--font-d);
-  font-size: 1.65rem;
-  line-height: 1.05;
+  font-size: clamp(1.25rem, 4.2vw, 1.65rem);
+  line-height: 1.1;
   color: var(--text);
+  word-break: break-word;
 }
 .metric-value.green { color: var(--green); }
 .metric-value.gold { color: var(--gold); }
@@ -289,6 +306,18 @@ body {
   border-radius: 18px;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-color: rgba(0,201,122,0.45) rgba(255,255,255,0.06);
+}
+.table-scroll-hint {
+  display: none;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(0,201,122,0.06);
+  border: 1px solid rgba(0,201,122,0.15);
 }
 table { width: 100%; border-collapse: collapse; min-width: 720px; }
 th, td {
@@ -343,12 +372,56 @@ tr:last-child td { border-bottom: none; }
 
 @media (max-width: 900px) {
   .grid-3, .metrics-grid, .phase-row-grid, .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .metrics-grid--year-summary { grid-template-columns: repeat(2, 1fr); }
 }
+
 @media (max-width: 640px) {
-  .shell { padding: 0 16px 90px; }
+  .table-scroll-hint { display: block; }
+  .shell {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-bottom: max(96px, calc(24px + env(safe-area-inset-bottom, 0px)));
+  }
+  .section { margin-bottom: 20px; }
+  .hero {
+    min-height: auto;
+    padding-top: max(56px, env(safe-area-inset-top, 0px));
+    padding-bottom: 24px;
+  }
+  .hero h1 { max-width: 100%; }
+  .hero-lead { max-width: none; }
+  .phase-card,
+  .summary-card,
+  .chart-card { padding: 16px 14px; border-radius: 18px; }
+  .mini-card { padding: 14px; }
+  .metric { padding: 14px; }
   .grid-2, .grid-3, .metrics-grid, .summary-grid, .phase-row-grid { grid-template-columns: 1fr; }
-  .hero { min-height: auto; padding-top: 72px; }
+  .metrics-grid--year-summary { grid-template-columns: 1fr !important; }
+  .section-title { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: anywhere; }
+  .section-sub { font-size: 13px; max-width: none; }
+  .field { margin-bottom: 12px; }
+  .field input {
+    font-size: 16px; /* avoids iOS zoom-on-focus */
+    min-height: 48px;
+    padding: 14px 16px;
+    border-radius: 14px;
+  }
+  .range-wrap input[type="range"] {
+    min-height: 44px;
+    margin: 4px 0;
+  }
+  .chart-legend {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  th, td { padding: 10px 10px; font-size: 12px; }
 }
+
+@media (min-width: 641px) {
+  .table-scroll-hint { display: none !important; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
@@ -524,6 +597,7 @@ tr:last-child td { border-bottom: none; }
           <input id="phaseClose4" type="number" min="10" max="40" step="1" value="30">
         </div>
       </div>
+      <p class="table-scroll-hint" id="tableScrollHint" aria-hidden="true">Swipe sideways to see all columns.</p>
       <div class="phase-table-wrap">
         <table>
           <thead>
@@ -544,7 +618,7 @@ tr:last-child td { border-bottom: none; }
       <div class="summary-grid">
         <div class="summary-card">
           <span class="recap-kicker">Year-one summary</span>
-          <div class="metrics-grid" style="grid-template-columns:repeat(2,1fr);margin-top:10px;">
+          <div class="metrics-grid metrics-grid--year-summary">
             <div class="metric"><span class="metric-label">Total first-year commissions</span><div class="metric-value green" id="yearTotal">-</div></div>
             <div class="metric"><span class="metric-label">Average monthly income</span><div class="metric-value" id="yearAvgMonthly">-</div></div>
             <div class="metric"><span class="metric-label">Average weekly income</span><div class="metric-value" id="yearAvgWeekly">-</div></div>
