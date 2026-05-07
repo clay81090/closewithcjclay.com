@@ -3,3 +3,6 @@ taxes/2025/bank-statements/
 
 # OS / editor noise
 .DS_Store
+
+# Local-only sandbox (carousel experiments, scratch invoices) — never push
+practice/
