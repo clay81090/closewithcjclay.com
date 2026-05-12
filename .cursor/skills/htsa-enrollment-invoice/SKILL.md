@@ -32,7 +32,7 @@ The agent infers everything else from the **defaults below** unless CJ overrides
 
 ## Frozen templates in `templates/` (fastest path)
 
-**CJ defaults (frozen shells):** Orange performance guarantee **on** in **every** shell. **Omit** it **only** if CJ explicitly says **no guarantee**. **PayVa** is **never** baked into shells — use `templates/snippets/payva-financing-block.html` only when CJ says **PayVa**. **Splitit** (under $6k PIF) is **on** for **all Closer** cash sections; **Setter** has **no** Splitit. Template HTML uses **`{{HTSA_*}}` placeholders only** — no personal names in filenames as “clients.”
+**CJ defaults (frozen shells):** Orange performance guarantee **on** in **every** shell. **Omit** it **only** if CJ explicitly says **no guarantee**. **PayVa** is **never** baked into shells — use `templates/snippets/payva-financing-block.html` only when CJ says **PayVa**. **`htsa-placement-01` (Closer cash only)** has **no Splitit** — Whop PIF + 4-pay only. **Other Closer** frozen shells include **Splitit** under $6k PIF unless CJ says **no Splitit**; **Setter** has **no** Splitit. Template HTML uses **`{{HTSA_*}}` placeholders only** — no personal names in filenames as “clients.”
 
 | CJ row | File |
 |--------|------|
@@ -94,7 +94,7 @@ hts_terms_gate_<firstname>_<lastname>_v1
 
 (use underscore-separated slug words, e.g. `hts_terms_gate_jane_doe_v1`).
 
-**Lock until Terms recorded (non-exhaustive):** Whop PIF, Whop installment plans, **ClarityPay**, **Flexxbuy**, **PayVa** (if CJ explicitly requested), **Splitit** (default on closer cash; omit only if CJ says **no Splitit**), any future checkout or pre-qual link.
+**Lock until Terms recorded (non-exhaustive):** Whop PIF, Whop installment plans, **ClarityPay**, **Flexxbuy**, **PayVa** (if CJ explicitly requested), **Splitit** (when on page; **not** on **`htsa-placement-01`**), any future checkout or pre-qual link.
 
 ---
 
@@ -119,7 +119,7 @@ Every new invoice must POST the Terms agreement to this **exact** endpoint:
 
 - If CJ says **Financing** or **Both:** include **ClarityPay** and **Flexxbuy** by default. Spell **Flexxbuy** (two **x**’s).
 - **Do not** include **PayVa** unless CJ explicitly says **PayVa**.
-- **Splitit:** include on **Closer** cash/Whop by default (all closer frozen shells). **Do not** put Splitit on **Setter** invoices. Omit Splitit on a closer only if CJ explicitly says **no Splitit**.
+- **Splitit:** **`htsa-placement-01`** omits it. **Other Closer** frozen shells / ad-hoc closer cash: include under PIF unless CJ says **no Splitit**. **Do not** put Splitit on **Setter** invoices.
 
 ---
 
@@ -131,7 +131,7 @@ Every new invoice must POST the Terms agreement to this **exact** endpoint:
 - **UI:** Newest **Zachary-style** layout (spacing, mobile-ready Terms gate placement).  
 - **Structural duplicate source:** prefer **`htsa-enrollment-james-chambers.html`** or **`htsa-enrollment-kristijo-sherman.html`** (2026 footer + Terms stack; **edit only** the new file).  
 - **Whop plan URLs:** Match CJ-supplied links or those in the template you duplicated; do not invent checkout IDs.
-- **Splitit** under PIF: **default on** closer cash (see frozen shells **1**, **2**, **3**, **6**); omit only if CJ says **no Splitit**. **Never** on setter.
+- **Splitit** under PIF: **not** on **`htsa-placement-01`**. **Default on** other closer cash frozen shells (**02**, **05**, **06**, etc.) unless CJ says **no Splitit**. **Never** on setter.
 
 ---
 
@@ -201,7 +201,7 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 - Apps Script **endpoint** + **`termsVersion`** + PDF URL correct; **payload includes `phone`**.  
 - Unique **`data-full-name`**, **`data-email`**, **`data-phone`**, **`data-client-slug`** + **`sessionStorage`** key.  
 - No stray prior-client data.  
-- **No PayVa** unless CJ asked; **Splitit** on closer unless CJ said **no Splitit**; **no Splitit** on setter.  
+- **No PayVa** unless CJ asked; **Splitit** only where the page includes it (**placement-01** has none); **no Splitit** on setter.  
 - **Flexxbuy** spelled with two x’s.  
 - Mobile layout consistent with recent invoices (Zachary / Chad patterns).  
 - **New invoice file is committed and pushed** so the live URL does not 404.  

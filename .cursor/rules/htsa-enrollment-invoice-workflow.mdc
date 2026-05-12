@@ -64,7 +64,7 @@ Agents apply **defaults** in this rule unless CJ overrides.
 hts_terms_gate_<firstname>_<lastname>_v1
 ```
 
-**Gated destinations (non-exhaustive):** Whop **PIF**, Whop **installment** checkouts, **ClarityPay**, **Flexxbuy**, **PayVa** (only if CJ says **PayVa**), **Splitit** (default on closer cash; omit only if CJ says **no Splitit**), any future checkout or pre-qual link.
+**Gated destinations (non-exhaustive):** Whop **PIF**, Whop **installment** checkouts, **ClarityPay**, **Flexxbuy**, **PayVa** (only if CJ says **PayVa**), **Splitit** (when on page — **not** on **`htsa-placement-01`**; other closer cash shells include it under PIF unless CJ says **no Splitit**), any future checkout or pre-qual link.
 
 ---
 
@@ -81,7 +81,7 @@ hts_terms_gate_<firstname>_<lastname>_v1
 | **Closer & Setter – Cash only** | `templates/htsa-placement-05-closer-setter-cash-only.html` |
 | **Closer & Setter – Cash + Financing** | `templates/htsa-placement-06-closer-setter-cash-financing.html` |
 
-**Frozen-shell defaults:** Orange guarantee **on** in every shell. **Omit** the orange banner **only** if CJ explicitly says **no guarantee**. **PayVa** not in shells — snippet only when CJ says PayVa. **Splitit** on **every Closer** cash section (including dual pages); **never** on **Setter**. **Closer – Cash + Financing** is rebuilt from **`htsa-enrollment-thomas-rulof.html`** + **Splitit** under PIF + canonical ClarityPay plan URL. **Dual** pages use the **Jocelyn** combined header/curriculum layout (read-only reference) + Val/Thomas + Trameil pay stacks inside **one** `#invest-pay-zone`. Placeholders: `{{HTSA_FULL_NAME}}`, `{{HTSA_FIRST_NAME}}`, `{{HTSA_EMAIL}}`, `{{HTSA_PHONE_E164}}`, `{{HTSA_PHONE_DISPLAY}}`, `{{HTSA_CLIENT_SLUG}}`, `{{HTSA_STORAGE_KEY}}`. Optional: `python3 scripts/htsa-instantiate-invoice.py …`. Rebuild: `python3 scripts/build-htsa-invoice-templates.py`. Prompts: **`templates/README.md`**.
+**Frozen-shell defaults:** Orange guarantee **on** in every shell. **Omit** the orange banner **only** if CJ explicitly says **no guarantee**. **PayVa** not in shells — snippet only when CJ says PayVa. **`htsa-placement-01` (Closer cash only)** is **Whop PIF + 4-pay only** — **no Splitit**. **Other Closer** shells (**02**, **05**/**06** cash stacks, etc.) include **Splitit** under PIF unless CJ says **no Splitit**; **never** on **Setter**. **Closer – Cash + Financing** is rebuilt from **`htsa-enrollment-thomas-rulof.html`** + **Splitit** under PIF + canonical ClarityPay plan URL. **Dual** pages use the **Jocelyn** combined header/curriculum layout (read-only reference) + Val/Thomas + Trameil pay stacks inside **one** `#invest-pay-zone`. Placeholders: `{{HTSA_FULL_NAME}}`, `{{HTSA_FIRST_NAME}}`, `{{HTSA_EMAIL}}`, `{{HTSA_PHONE_E164}}`, `{{HTSA_PHONE_DISPLAY}}`, `{{HTSA_CLIENT_SLUG}}`, `{{HTSA_STORAGE_KEY}}`. Optional: `python3 scripts/htsa-instantiate-invoice.py …`. Rebuild: `python3 scripts/build-htsa-invoice-templates.py`. Prompts: **`templates/README.md`**.
 
 ### Reference pages (read-only)
 
@@ -100,7 +100,7 @@ hts_terms_gate_<firstname>_<lastname>_v1
 
 - **Financing** or **Both:** include **ClarityPay** and **Flexxbuy** by default. Use spelling **Flexxbuy** (two **x**’s).  
 - **PayVa:** include **only** if CJ explicitly requests **PayVa**. **Not** a default.  
-- **Splitit:** **Frozen templates:** all **Closer** shells include Splitit under PIF; **Setter** shells do **not**. For **ad-hoc** invoices **not** built from `templates/`, include Splitit on closer cash unless CJ explicitly says **no Splitit**.
+- **Splitit:** **Frozen templates:** **`htsa-placement-01`** omits Splitit; **other Closer** shells include Splitit under PIF; **Setter** shells do **not**. For **ad-hoc** invoices **not** built from `templates/`, include Splitit on closer cash unless CJ explicitly says **no Splitit** (or you duplicate **placement-01**’s cash-only stack).
 
 ---
 
@@ -110,7 +110,7 @@ hts_terms_gate_<firstname>_<lastname>_v1
 - **Curriculum:** **50** modules; **five** levels of AI roleplay.  
 - **Default cash pricing:** PIF **$6,000**; **4-pay** **$1,750** today / **$7,000** total.  
 - **Whop URLs:** use CJ-supplied plans or those in the Closer template duplicated — do not invent plan IDs.  
-- **Splitit** under $6k PIF: **default on** closer cash (frozen shells and new closer invoices) unless CJ says **no Splitit**. **Never** on setter.  
+- **Splitit** under $6k PIF: **not** on **`htsa-placement-01`**. **Default on** other closer cash (frozen shells **02**/**05**/**06** and ad-hoc) unless CJ says **no Splitit**. **Never** on setter.  
 - If financing is included: **ClarityPay + Flexxbuy** unless CJ names **PayVa** (or another approved provider).
 
 ---
@@ -201,7 +201,7 @@ JSON via URL-encoded **`payload=`** POST. Align with `hts-enrollment-webapp-goog
 - Terms gate **above** all money buttons; all pay/finance controls **inside** locked zone.  
 - Endpoint + `termsVersion` + PDF URL; payload includes **`phone`**.  
 - Unique Terms **`data-*`** + **`sessionStorage`** key.  
-- **No PayVa** unless requested; **Splitit** on closer unless CJ said **no Splitit**; **no Splitit** on setter.  
+- **No PayVa** unless requested; **Splitit** only where the page includes it (**placement-01** has none); **no Splitit** on setter.  
 - **Flexxbuy** spelling (two x’s).  
 - Mobile matches **Zachary + Chad** patterns.  
 - **`grep`:** no phantom client data.  
