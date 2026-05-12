@@ -25,8 +25,9 @@ Alternate checkouts (2-pay / 3-pay / $5k PIF closer, setter 2-pay) live in **`HT
 |--------|------|
 | **Orange guarantee** | **On** in every shell. Remove it **only** if CJ says *no guarantee*. |
 | **PayVa** | **Never** in shells. Add **`snippets/payva-financing-block.html`** only when CJ says **PayVa**. |
-| **Splitit** | **On** under **Closer** $6k PIF (including dual pages). **Not** on **Setter**. |
-| **Layout** | Built from read-only **`htsa-enrollment-val-tappan.html`**, **`htsa-enrollment-thomas-rulof.html`**, **`htsa-enrollment-trameil-lee.html`**, and dual header/curriculum from **`htsa-enrollment-jocelyn-navarro.html`** (do not edit client files when regenerating). |
+| **Splitit** | **On** under **Closer** $6k PIF on **02, 05, 06** (and ad-hoc closer cash). **Not** on **01** (Closer cash only = Whop PIF + 4-pay only). **Not** on **Setter**. |
+| **ClarityPay (Whop)** | **Closer** financing: **$7,200** `…/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/` · **Setter** financing: **$3,600** `plan_z5iuUhSgm9seH?d2c=true` — never swap. |
+| **Mastermind / Trustpilot** | Facebook step: **515+** members · Footer band: **4.9 out of 5** (gold stars). |
 
 ---
 
