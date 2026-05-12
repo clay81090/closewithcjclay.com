@@ -107,24 +107,6 @@
     background: linear-gradient(90deg, var(--green) 0%, var(--green-dark) 55%, var(--navy) 100%);
   }
 
-  .practice-runner-banner {
-    background: linear-gradient(135deg, #fffbeb 0%, rgba(253, 230, 138, 0.45) 100%);
-    border-bottom: 1px solid rgba(234, 88, 12, 0.25);
-    padding: 14px 36px;
-    font-size: 12px;
-    line-height: 1.55;
-    color: #92400e;
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  .practice-runner-banner strong { font-weight: 700; letter-spacing: 0.03em; }
-
-  .invoice-badge--practice {
-    background: #f59e0b !important;
-    color: #1a1a1a !important;
-  }
-
   .hero-band {
     background: linear-gradient(135deg, #f7f9fc 0%, #edf0f7 100%);
     padding: 22px 36px;
@@ -847,13 +829,97 @@
     color: var(--green-dark);
   }
 
+
+  /* Footer HTSA column — social / site links with brand-colored icons */
+  .footer-htsa-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.62);
+    text-decoration: none;
+    line-height: 1.35;
+  }
+  .footer-htsa-link:hover {
+    color: rgba(255,255,255,0.95);
+  }
+  .footer-htsa-link__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+  .footer-htsa-link__icon svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Footer — prominent reviews + support (full width under main footer row) */
+  .footer-reviews-row {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px 28px;
+  }
+  .footer-reviews-trustpilot {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .footer-reviews-trustpilot:hover {
+    color: var(--green);
+  }
+  .footer-reviews-stars {
+    color: #e2b227;
+    font-size: 20px;
+    letter-spacing: 3px;
+    line-height: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 0 12px rgba(226, 178, 39, 0.35);
+  }
+  .footer-reviews-text {
+    font-family: 'DM Sans', sans-serif;
+  }
+  .footer-reviews-support {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.92);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 201, 122, 0.35);
+    padding-bottom: 2px;
+  }
+  .footer-reviews-support:hover {
+    color: var(--green);
+    border-bottom-color: var(--green);
+  }
+  @media (max-width: 600px) {
+    .footer-reviews-row {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 18px;
+      padding-top: 18px;
+    }
+    .footer-reviews-trustpilot {
+      font-size: 15px;
+    }
+  }
   @media (max-width: 600px) {
     .header { padding: 22px 20px 20px; flex-direction: column; gap: 16px; }
     .invoice-meta { text-align: left; }
     .invoice-badge { margin-bottom: 8px; }
     .hero-band { padding: 18px 20px; }
     .hts-terms-agreement-wrap { padding-left: 20px; padding-right: 20px; }
-    .practice-runner-banner { padding-left: 20px !important; padding-right: 20px !important; }
     .invest-pay-zone-hint { padding-left: 20px; padding-right: 20px; }
     .billing-grid { grid-template-columns: 1fr; }
     .billing-cell { padding: 18px 20px; }
@@ -894,6 +960,10 @@
     .footer-bc-card {
       max-width: none !important;
       width: 100%;
+    }
+    /* Keep photo sizing; remove upward transform on small screens so the card doesn't visually sit over testimonial text */
+    .footer-bc-photo-ring {
+      transform: none;
     }
     .footer-bc-info,
     .footer-bc-logo-stack,
@@ -1342,9 +1412,9 @@
   }
 
   .hts-practice-tab--active {
-    background: rgba(245, 158, 11, 0.25);
-    border-color: rgba(245, 158, 11, 0.55);
-    color: #fcd34d;
+    background: rgba(0, 201, 122, 0.2);
+    border-color: rgba(0, 201, 122, 0.45);
+    color: #b8f5d9;
   }
 
   .hts-practice-tabpanel {
@@ -1356,7 +1426,7 @@
   }
 
   .invest-box--practice-demo .invest-program-label {
-    color: #fcd34d !important;
+    color: rgba(255, 255, 255, 0.92) !important;
   }
 
   .invest-box--practice-demo button.invest-btn {
@@ -1414,7 +1484,7 @@
       <div class="header-tagline" style="margin-top:12px;">Certification &nbsp;·&nbsp; Coaching &nbsp;·&nbsp; Placement</div>
     </div>
     <div class="invoice-meta">
-      <div class="invoice-badge invoice-badge--practice">Practice · Sandbox Closer Invoice</div>
+      <div class="invoice-badge">Closer Program Overview</div>
       <p><strong>Prepared by:</strong> CJ Clay</p>
       <p><strong>Program:</strong> Certified HTS Closer</p>
       <p><strong>Payment:</strong> Select payment option below</p>
@@ -1422,16 +1492,11 @@
   </div>
   <div class="accent-bar"></div>
 
-  <div class="practice-runner-banner" role="region" aria-label="Practice mode notice">
-    <strong>PRACTICE MODE — INTERNAL USE ONLY:</strong>
-    Checkout links are replaced with a simulated “Trial payment” button. Sheet rows and emails only fire through your Apps Script — no charges run from this page.
-    <span style="display:block;margin-top:10px;"><strong>Live URL:</strong> <a href="https://closewithcjclay.com/htsa-enrollment-cj-clay-practice.html" target="_blank" rel="noopener noreferrer">closewithcjclay.com/htsa-enrollment-cj-clay-practice.html</a> · <strong>Production ClarityPay (do not swap):</strong> Closer <strong>$7,200</strong> → <code>…/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/</code> · Setter <strong>$3,600</strong> → <code>plan_z5iuUhSgm9seH?d2c=true</code> · Member stories / Trustpilot / Mastermind counts match current <code>templates/htsa-placement-*.html</code>.</span>
-  </div>
   <!-- HERO BAND -->
   <div class="hero-band">
     <h2>Certified High Ticket Closer Program</h2>
-    <p>CJ, this sandbox page lets you rehearse Terms agreement → unlock → simulate payment so you can validate your Sheets logging and outbound mail rules without touching a live checkout.</p>
-    <p style="margin-top:10px;">Treat the surrounding curriculum bullets as filler while you QA your automation triggers — they aren’t contractual copy for this rehearsal.</p>
+    <p>CJ, this page mirrors a live closer invoice: same header, curriculum, Terms gate, unlock behavior, and footer as production — checkout buttons are simulated so you can rehearse Apps Script + Sheets flows without charging a card.</p>
+    <p style="margin-top:10px;">Production <strong>Closer ClarityPay</strong> is <strong>$7,200</strong> on Whop: <a href="https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" target="_blank" rel="noopener noreferrer">open the ClarityPay checkout link</a>. Everything below the Trial button is layout reference; real enrollments use the hosted payment rows on client pages.</p>
   </div>
 
   <!-- BILLING -->
@@ -1594,7 +1659,7 @@
   <div class="invest-wrap invest-pay-zone invest-pay-zone--locked" id="invest-pay-zone">
     <div class="invest-box invest-box--practice-demo">
       <div class="invest-program-label">PRACTICE — Closer enrollment (no live checkout)&nbsp;&nbsp;·&nbsp;&nbsp;Certified HTS Closer</div>
-      <div class="invest-program-desc">This block is intentionally slimmed down: there are <strong>zero</strong> Whop/Clarity/Flexxbuy URLs here. Confirm Terms above, visit the Trial tab, and press the simulated button to spoof a successful payment signal.</div>
+      <div class="invest-program-desc">Sandbox only: use the Trial button after Terms — no live Whop charge. Reference production <strong>Closer ClarityPay $7,200</strong>: <a href="https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.95);text-decoration:underline;">Whop checkout (ClarityPay)</a>.</div>
 
       <div class="hts-practice-tabs" role="tablist" aria-label="Practice payment tabs">
         <span class="hts-practice-tab hts-practice-tab--active" role="tab" aria-selected="true">Trial payment</span>
@@ -1610,7 +1675,7 @@
         </div>
       </div>
 
-      <div class="invest-note" style="color:#fcd34d;margin-top:16px;"><strong>★ Practice reminder:</strong> Nothing on this page sends email by itself — only your Google Apps Script does, using the JSON payloads below.</div>
+      <div class="invest-note" style="color:rgba(255,255,255,0.72);margin-top:16px;"><strong>Practice reminder:</strong> Nothing on this page sends email by itself — only your Google Apps Script does, using the JSON payloads below.</div>
     </div>
   </div>
 
@@ -1692,8 +1757,8 @@
 
   <!-- WELCOME -->
   <div class="welcome-band">
-    <h3><span>Sandbox rehearsal</span> — CJ. 🚀</h3>
-    <p>This copy stays from the polished invoice template purely for layout practice — mentally swap anything about “students” versus “sandbox tests” whenever you iterate this builder.</p>
+    <h3>Welcome to the <span>HTSA Family,</span> CJ. 🎉</h3>
+    <p>You're not just enrolling in a program — you're joining a community of people who show up, do the work, and build something real. We can't wait to see where this takes you.</p>
   </div>
 
   <!-- Member stories & book (subtle; site / Trustpilot / YouTube in footer) -->
@@ -1775,11 +1840,12 @@ So far it's been nothing but positive, and I feel confident about the move. If y
         <div style="font-family:'Playfair Display',serif;color:var(--white);font-size:17px;font-weight:700;margin-bottom:4px;">High Ticket Sales Academy</div>
         <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:14px;">Certification · Coaching · Placement</div>
         <div style="display:flex;flex-direction:column;gap:5px;">
-          <a href="https://www.highticketsalesacademy.com" target="_blank" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">🌐 &nbsp;highticketsalesacademy.com</a>
-          <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">⭐ &nbsp;Trustpilot Reviews — 4.9 out of 5</a>
-          <a href="https://www.youtube.com/@highticketsalesacademy" target="_blank" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">▶️ &nbsp;youtube.com/@highticketsalesacademy</a>
-          <a href="/cdn-cgi/l/email-protection#a0d3d5d0d0cfd2d4e0c8c9c7c8d4c9c3cbc5d4d3c1ccc5d3c1c3c1c4c5cdd98ec3cfcd" style="font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;">✉️ &nbsp;<span class="__cf_email__" data-cfemail="780b0d0808170a0c3810111f100c111b131d0c0b19141d0b191b191c1d1501561b1715">[email&#160;protected]</span></a>
+          <a href="https://www.highticketsalesacademy.com" class="footer-htsa-link" target="_blank" rel="noopener noreferrer"><span class="footer-htsa-link__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" focusable="false"><circle cx="12" cy="12" r="10" fill="#1976D2"/><path fill="#43A047" d="M12 2.2c-1.2 2-1.8 4.2-1 6.2.9 2.2 2.8 3.5 3.8 5.5 1 2-1 5.2-2.8 7.4 4.5-1.2 7.7-5.3 7.7-10.1 0-4.4-3-8.2-7.7-9z"/><path fill="#81C784" d="M4.2 12.5c.8-1.3 2.4-2 3.8-1.2 1.5.8 2 2.5 1.4 3.9-.7 1.5-2.3 2.8-4 3.5-.9-1.8-1.3-3.8-1.2-6.2z" opacity=".9"/></svg></span><span>highticketsalesacademy.com</span></a>
+          <a href="https://www.youtube.com/@highticketsalesacademy" class="footer-htsa-link" target="_blank" rel="noopener noreferrer"><span class="footer-htsa-link__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" focusable="false"><path fill="#FF0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#fff" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span><span>youtube.com/@highticketsalesacademy</span></a>
+          <a href="https://www.instagram.com/highticketsalesacademy/" class="footer-htsa-link" target="_blank" rel="noopener noreferrer"><span class="footer-htsa-link__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" focusable="false"><defs><linearGradient id="htsFooterIgGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#f58529"/><stop offset="25%" style="stop-color:#dd2a7b"/><stop offset="50%" style="stop-color:#8134af"/><stop offset="100%" style="stop-color:#515bd4"/></linearGradient></defs><path fill="url(#htsFooterIgGrad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></span><span>@highticketsalesacademy</span></a>
+          <a href="https://www.facebook.com/HTSAcadamy/" class="footer-htsa-link" target="_blank" rel="noopener noreferrer"><span class="footer-htsa-link__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" focusable="false"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span><span>facebook.com/HTSAcadamy</span></a>
         </div>
+
       </div>
 
       <!-- CJ Business Card -->
@@ -1803,6 +1869,15 @@ So far it's been nothing but positive, and I feel confident about the move. If y
         </div>
       </div>
 
+    </div>
+
+
+    <div class="footer-reviews-row">
+      <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="footer-reviews-trustpilot" target="_blank" rel="noopener noreferrer">
+        <span class="footer-reviews-stars" aria-hidden="true">★★★★★</span>
+        <span class="footer-reviews-text">Trustpilot Reviews — 4.9 out of 5</span>
+      </a>
+      <a href="mailto:support@highticketsalesacademy.com" class="footer-reviews-support">support@highticketsalesacademy.com</a>
     </div>
   </div>
 
