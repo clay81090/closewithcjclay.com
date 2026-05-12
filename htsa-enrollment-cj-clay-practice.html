@@ -309,6 +309,53 @@
     box-shadow: 0 0 14px rgba(255, 156, 122, 0.12);
     opacity: 0.92;
   }
+  /* Splitit note + detail (under $6k PIF) */
+  .invest-splitit-wrap {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .invest-splitit-intro {
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0 0 12px;
+  }
+
+  .invest-splitit-intro strong {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .invest-splitit-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 156, 122, 0.4);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .invest-splitit-head {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff9c7a;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .invest-splitit-apply {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0 0 10px;
+    line-height: 1.55;
+  }
+
+  .invest-splitit-fine {
+    font-size: 10.5px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.48);
+    margin: 0;
+  }
+
 
   .invest-grid {
     display: grid;
@@ -1495,8 +1542,8 @@
   <!-- HERO BAND -->
   <div class="hero-band">
     <h2>Certified High Ticket Closer Program</h2>
-    <p>CJ, this page mirrors a live closer invoice: same header, curriculum, Terms gate, unlock behavior, and footer as production — checkout buttons are simulated so you can rehearse Apps Script + Sheets flows without charging a card.</p>
-    <p style="margin-top:10px;">Production <strong>Closer ClarityPay</strong> is <strong>$7,200</strong> on Whop: <a href="https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" target="_blank" rel="noopener noreferrer">open the ClarityPay checkout link</a>. Everything below the Trial button is layout reference; real enrollments use the hosted payment rows on client pages.</p>
+    <p>CJ, this page mirrors a live closer invoice: same header, curriculum, Terms gate, footer, and <strong>full Program Investment stack</strong> (Whop PIF, 4-pay, Splitit note, ClarityPay, Flexxbuy). Links are <strong>live</strong> after you record Terms — only the optional simulator at the bottom is for fake payment signals to Apps Script.</p>
+    <p style="margin-top:10px;">Production <strong>Closer ClarityPay</strong> is <strong>$7,200</strong> on Whop: <a href="https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" target="_blank" rel="noopener noreferrer">open the ClarityPay checkout link</a>. Program Investment below matches live closer invoices (Whop + ClarityPay + Flexxbuy) after you record Terms; the optional simulator at the bottom is for Apps Script testing only.</p>
   </div>
 
   <!-- BILLING -->
@@ -1628,7 +1675,7 @@
          data-client-slug="cj-clay-practice">
       <div class="hts-terms-agreement-form" id="hts-terms-agreement-form">
         <div class="hts-terms-agreement-title">Terms agreement</div>
-        <p class="hts-terms-agreement-lead">Open the Terms of Service PDF, review the clarification below about lifetime access and included services, confirm you agree, then record your acceptance to unlock the Trial payment sandbox below.</p>
+        <p class="hts-terms-agreement-lead">Open the Terms of Service PDF, review the clarification below about lifetime access and included services, confirm you agree, then record your acceptance to unlock payment and financing buttons below.</p>
         <p style="margin:0;">
           <a id="hts-terms-pdf-link-top" href="https://closewithcjclay.com/HTSA-Terms-of-Service.pdf" target="_blank" rel="noopener noreferrer" class="hts-terms-agreement-pdf">View Full Terms of Service (PDF)</a>
         </p>
@@ -1647,35 +1694,146 @@
           <input type="checkbox" id="hts-terms-checkbox" autocomplete="off" />
           <span>I have read and agree to the Terms of Service linked above.</span>
         </label>
-        <button type="button" id="hts-terms-confirm-btn" class="hts-terms-agreement-btn" disabled>Record agreement &amp; unlock Trial tab</button>
+        <button type="button" id="hts-terms-confirm-btn" class="hts-terms-agreement-btn" disabled>Record agreement &amp; unlock payments</button>
       </div>
       <p id="hts-terms-agreement-msg" class="hts-terms-agreement-msg hts-terms-msg-below-fold" role="status" aria-live="polite"></p>
-      <p id="hts-terms-agreement-done-line" class="hts-terms-agreement-done-line">✓ Terms recorded. The Trial payment button below is active for this browser session.</p>
+      <p id="hts-terms-agreement-done-line" class="hts-terms-agreement-done-line">✓ Terms recorded successfully. Payment and financing buttons below are now active for this browser session.</p>
     </div>
   </div>
 
-  <p id="invest-pay-zone-hint" class="invest-pay-zone-hint">The Trial payment simulator stays locked until your Terms agreement has been recorded above.</p>
+  <p id="invest-pay-zone-hint" class="invest-pay-zone-hint">Payment and financing buttons stay locked until your Terms agreement has been recorded above.</p>
 
   <div class="invest-wrap invest-pay-zone invest-pay-zone--locked" id="invest-pay-zone">
-    <div class="invest-box invest-box--practice-demo">
-      <div class="invest-program-label">PRACTICE — Closer enrollment (no live checkout)&nbsp;&nbsp;·&nbsp;&nbsp;Certified HTS Closer</div>
-      <div class="invest-program-desc">Sandbox only: use the Trial button after Terms — no live Whop charge. Reference production <strong>Closer ClarityPay $7,200</strong>: <a href="https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.95);text-decoration:underline;">Whop checkout (ClarityPay)</a>.</div>
+    <div class="invest-box">
+      <div class="invest-program-label">Certified High Ticket Closer Program</div>
+      <div class="invest-program-desc">All services described above — training platform, AI roleplay, live coaching with Chad, certification, job placement, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
 
-      <div class="hts-practice-tabs" role="tablist" aria-label="Practice payment tabs">
-        <span class="hts-practice-tab hts-practice-tab--active" role="tab" aria-selected="true">Trial payment</span>
-      </div>
-      <div class="hts-practice-tabpanel" role="tabpanel">
-        <p class="invest-access-hint practice-trial-caption">No card is charged — this replaces every production checkout route for this rehearsal page.</p>
-        <div class="invest-option-actions invest-option-actions--pay" style="margin-top:4px;">
-          <button type="button" class="invest-btn" id="hts-trial-sim-pay-btn" disabled aria-disabled="true">Simulate successful payment →</button>
+      <div class="invest-section-kicker invest-section-kicker--accent">In-House Cash Payment Options</div>
+      <p class="invest-access-hint">Either option includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
+      <div class="invest-grid">
+
+        <div class="invest-option-block">
+          <div class="invest-badge invest-badge--option">Option 1</div>
+          <div class="invest-option-head invest-option-head--pay">
+            <div>
+              <div class="invest-option-title">Paid in Full</div>
+              <div class="invest-option-sub">Best value — pay the remainder by day 30 and your total is only $6,000.</div>
+            </div>
+            <div class="invest-price-stack">
+              <div class="invest-price-big">$6,000</div>
+              <div class="invest-price-mini">One payment</div>
+            </div>
+          </div>
+          <div class="invest-option-actions invest-option-actions--pay">
+            <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $6,000 →</a>
+          </div>
+          <div class="invest-splitit-wrap">
+            <p class="invest-splitit-intro">On the Whop checkout page, scroll to the <strong>bottom of the payment options</strong> — you'll see <strong>Splitit</strong> (monthly payments on your card). That's where you can set up the plan below.</p>
+            <div class="invest-splitit-card">
+              <div class="invest-splitit-head">Splitit — $500/month × 12 months</div>
+              <p class="invest-splitit-apply"><strong>Apply here:</strong> use the same <strong>green "Choose PIF — Pay $6,000"</strong> button above, then select <strong>Splitit</strong> at the bottom of Whop's payment methods to complete setup.</p>
+              <p class="invest-splitit-fine">No credit check — uses the existing limit on your Visa or Mastercard. A hold is placed on your card for the total amount. As you make each $500 monthly payment, that same amount is released back to your available credit.</p>
+            </div>
+          </div>
         </div>
-        <p id="hts-trial-sim-msg" class="hts-terms-agreement-msg" role="status" aria-live="polite" style="color:rgba(255,255,255,0.75);margin-top:12px;"></p>
-        <div id="hts-trial-sim-done" style="display:none;margin-top:14px;background:rgba(0,201,122,0.12);border:1px solid rgba(0,201,122,0.35);border-radius:8px;padding:14px;color:rgba(255,255,255,0.92);font-size:12.5px;line-height:1.55;">
-          <strong>Payment simulated.</strong> Your Apps Script should log this as a practice row and can fan out receipt emails (clay81090@gmail.com + Christian per your script rules). Live enrollments should still only email after real processor webhooks.
+
+        <div class="invest-option-block">
+          <div class="invest-badge invest-badge--option">Option 2</div>
+          <div class="invest-option-head invest-option-head--pay">
+            <div>
+              <div class="invest-option-title">4 Monthly Payments</div>
+              <div class="invest-option-sub">4 payments of $1,750 — First Payment Due Today.</div>
+            </div>
+            <div class="invest-price-stack">
+              <div class="invest-price-big">$1,750</div>
+              <div class="invest-price-mini">$7,000 total · 4 installments</div>
+            </div>
+          </div>
+          <div class="invest-option-actions invest-option-actions--pay">
+            <a href="https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose 4-Pay — Pay $1,750 Today →</a>
+          </div>
         </div>
+
       </div>
 
-      <div class="invest-note" style="color:rgba(255,255,255,0.72);margin-top:16px;"><strong>Practice reminder:</strong> Nothing on this page sends email by itself — only your Google Apps Script does, using the JSON payloads below.</div>
+      <hr class="invest-zone-rule" aria-hidden="true">
+
+      <div class="invest-section-kicker invest-section-kicker--accent">Third-Party Financing Options</div>
+      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">The two options above are HTSA in-house payment options. The two options below are third-party financing options for pre-qualification.</div>
+
+      <div class="invest-grid">
+
+        <div class="invest-option-block financing">
+          <div class="invest-badge financing">Financing Option 1</div>
+          <div class="invest-option-head">
+            <div>
+              <div class="invest-option-title">ClarityPay</div>
+              <div class="invest-option-sub">Best for someone who wants a fast decision and monthly payments with no early payoff penalty.</div>
+            </div>
+            <div class="invest-price-stack">
+              <div class="invest-price-big">$7,200</div>
+              <div class="invest-price-mini">soft pre-qualify at checkout</div>
+            </div>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Typical Credit Profile</span>
+            <span class="invest-value">Around 650+ credit</span>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Enrollment Timing</span>
+            <span class="invest-value">Enroll same day if approved</span>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Payment Structure</span>
+            <span class="invest-value">Monthly payments • no early payoff penalty</span>
+          </div>
+          <div class="invest-option-actions">
+            <a href="https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" class="invest-btn secondary" target="_blank" rel="noopener noreferrer">Pre-Qualify with ClarityPay →</a>
+          </div>
+        </div>
+
+        <div class="invest-option-block financing">
+          <div class="invest-badge financing">Financing Option 2</div>
+          <div class="invest-option-head">
+            <div>
+              <div class="invest-option-title">Flexxbuy</div>
+              <div class="invest-option-sub">Apply once and see lender options. Best when someone wants broader approval chances across multiple lenders.</div>
+            </div>
+            <div class="invest-price-stack">
+              <div class="invest-price-big" style="font-size:22px;">2–5 Days</div>
+              <div class="invest-price-mini">after approval</div>
+            </div>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Typical Credit Profile</span>
+            <span class="invest-value">Broader credit range</span>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Enrollment Timing</span>
+            <span class="invest-value">Funds in 2–5 business days</span>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Payment Structure</span>
+            <span class="invest-value">Funds to your bank, then pay HTSA</span>
+          </div>
+          <div class="invest-option-actions">
+            <a href="https://app.flexxbuy.com/high-ticket-sales-academy-llc/apply/" class="invest-btn secondary" target="_blank">Pre-Qualify with Flexxbuy →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="invest-note" style="color:#ff9c7a;"><strong>★ Soft pre-qualification only.</strong> Once you complete one of the in-house payment options above or get approved through one of the financing options, text CJ right away so access can be granted.</div>
+      <hr class="invest-zone-rule" />
+      <div class="invest-section-kicker invest-section-kicker--accent">Practice sandbox — optional</div>
+      <p class="invest-access-hint">Use <strong>Simulate successful payment</strong> only to test your Apps Script / Sheets flow. <strong>Whop, ClarityPay, and Flexxbuy</strong> buttons above are <strong>live</strong> production checkouts — use only if you intend to charge or pre-qual.</p>
+      <div class="invest-option-actions invest-option-actions--pay" style="margin-top:4px;">
+        <button type="button" class="invest-btn" id="hts-trial-sim-pay-btn" disabled aria-disabled="true">Simulate successful payment →</button>
+      </div>
+      <p id="hts-trial-sim-msg" class="hts-terms-agreement-msg" role="status" aria-live="polite" style="color:rgba(255,255,255,0.75);margin-top:12px;"></p>
+      <div id="hts-trial-sim-done" style="display:none;margin-top:14px;background:rgba(0,201,122,0.12);border:1px solid rgba(0,201,122,0.35);border-radius:8px;padding:14px;color:rgba(255,255,255,0.92);font-size:12.5px;line-height:1.55;">
+        <strong>Payment simulated.</strong> Your Apps Script should log this as a practice row. Live enrollments still rely on real processor webhooks.
+      </div>
     </div>
   </div>
 
@@ -1691,7 +1849,7 @@
       <div class="step-num">1</div>
       <div class="step-content">
         <h4>Step 1 — Choose Your Payment or Check Pre-Qualification</h4>
-        <p>CJ — run through Terms → Trial payment here. Production invoices still rely on hosted checkouts plus real payouts before any receipt mail triggers.</p>
+        <p>CJ — record Terms, then use the real payment/financing buttons to verify links, or use <strong>Simulate successful payment</strong> at the bottom to test Apps Script only.</p>
       </div>
     </div>
 
