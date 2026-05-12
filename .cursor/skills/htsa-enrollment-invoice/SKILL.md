@@ -118,6 +118,7 @@ Every new invoice must POST the Terms agreement to this **exact** endpoint:
 ## Financing defaults
 
 - If CJ says **Financing** or **Both:** include **ClarityPay** and **Flexxbuy** by default. Spell **Flexxbuy** (two **x**’s).
+- **ClarityPay Whop checkouts (do not swap):** **Closer** = **$7,200** `https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/`; **Setter** = **$3,600** `https://whop.com/checkout/plan_z5iuUhSgm9seH?d2c=true`. **Never** put the Setter Clarity plan on Closer-only stacks (or the Closer $7,200 link on Setter-only stacks).
 - **Do not** include **PayVa** unless CJ explicitly says **PayVa**.
 - **Splitit:** **`htsa-placement-01`** omits it. **Other Closer** frozen shells / ad-hoc closer cash: include under PIF unless CJ says **no Splitit**. **Do not** put Splitit on **Setter** invoices.
 
@@ -131,6 +132,7 @@ Every new invoice must POST the Terms agreement to this **exact** endpoint:
 - **UI:** Newest **Zachary-style** layout (spacing, mobile-ready Terms gate placement).  
 - **Structural duplicate source:** prefer **`htsa-enrollment-james-chambers.html`** or **`htsa-enrollment-kristijo-sherman.html`** (2026 footer + Terms stack; **edit only** the new file).  
 - **Whop plan URLs:** Match CJ-supplied links or those in the template you duplicated; do not invent checkout IDs.
+- **Closer + financing:** **ClarityPay** tile must use the **$7,200** checkout (`…/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/`), **not** `plan_z5iuUhSgm9seH` (Setter / $3,600).
 - **Splitit** under PIF: **not** on **`htsa-placement-01`**. **Default on** other closer cash frozen shells (**02**, **05**, **06**, etc.) unless CJ says **no Splitit**. **Never** on setter.
 
 ---
@@ -144,7 +146,7 @@ Every new invoice must POST the Terms agreement to this **exact** endpoint:
   - PIF: `https://whop.com/checkout/plan_qzvfCCb1rIO0L?d2c=true`  
   - 3-pay: `https://whop.com/checkout/plan_oK3AajTKp0mXK?d2c=true`  
 - **Financing links:**  
-  - ClarityPay: `https://whop.com/checkout/plan_z5iuUhSgm9seH`  
+  - ClarityPay (**$3,600** at checkout): `https://whop.com/checkout/plan_z5iuUhSgm9seH?d2c=true`  
   - Flexxbuy: `https://app.flexxbuy.com/high-ticket-sales-academy-llc/apply/`  
 - **Flexxbuy setter note (include when Flexxbuy is on the page):**  
   *Flexxbuy — Setter: Request $3,500 when applying through Flexxbuy, for application purposes, exactly $500 more than the $3,000 program price.*  
@@ -166,7 +168,7 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 
 - **HTSA column:** Site / YouTube / Instagram / Facebook as **inline SVG icons in brand colors** (globe blues & greens, YouTube red, Instagram gradient, Facebook blue) + link text — **`footer-htsa-link`** pattern.  
 - **Do not** put Trustpilot in that small stack.  
-- **Full-width row** below the main footer flex (**`footer-reviews-row`**): prominent Trustpilot link with **five gold stars** (**`#e2b227`**, not green) + “Trustpilot Reviews — 4.8 out of 5”, plus visible **`support@highticketsalesacademy.com`** (`mailto`).  
+- **Full-width row** below the main footer flex (**`footer-reviews-row`**): prominent Trustpilot link with **five gold stars** (**`#e2b227`**, not green) + “Trustpilot Reviews — **4.9** out of 5”, plus visible **`support@highticketsalesacademy.com`** (`mailto`).  
 - Keep the **CJ business card** column as in those files.
 
 ---

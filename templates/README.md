@@ -97,7 +97,7 @@ python3 scripts/build-htsa-invoice-templates.py
 | Output | Sources (read-only) |
 |--------|---------------------|
 | `htsa-placement-01-closer-cash-only.html` | `htsa-enrollment-val-tappan.html` |
-| `htsa-placement-02-closer-cash-financing.html` | `htsa-enrollment-thomas-rulof.html` + **Splitit** under PIF; ClarityPay → `plan_z5iuUhSgm9seH` |
+| `htsa-placement-02-closer-cash-financing.html` | `htsa-enrollment-thomas-rulof.html` + **Splitit** under PIF; **Closer ClarityPay** → `$7,200` checkout `1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf` (**not** setter `plan_z5iuUhSgm9seH`) |
 | `htsa-placement-03-setter-cash-only.html` | `htsa-enrollment-trameil-lee.html` (financing stripped) |
 | `htsa-placement-04-setter-cash-financing.html` | `htsa-enrollment-trameil-lee.html` |
 | `htsa-placement-05-closer-setter-cash-only.html` | Val + Trameil (cash) invest stacks; **Jocelyn** header/curriculum chunk |
