@@ -2,6 +2,8 @@
 name: htsa-enrollment-invoice
 description: >-
   Builds new HTSA enrollment invoices from modern Terms-gate templates (Closer vs Setter).
+  CJ on-call shortcut: paste block (name, Email:, Phone Number:, program line or templates/ path)
+  → agent runs htsa-paste-invoice.py or instantiate with --overwrite --ship; see rule "CJ paste shortcut".
   CJ placement table: templates/HTSA-ENROLLMENT-PLACEMENT-NOTES.md. Defaults: orange guarantee ON,
   mandatory Terms gate + Apps Script, financing ClarityPay +
   Flexxbuy unless Cash-only. After the HTML is ready: git add, commit, and push the new file
@@ -14,6 +16,29 @@ description: >-
 # HTSA enrollment invoice (agent skill)
 
 **Authoritative rules live in** `.cursor/rules/htsa-enrollment-invoice-workflow.mdc`. This skill adds implementation detail for Cursor agents.
+
+---
+
+## CJ paste shortcut (this is the “Boom.”)
+
+When CJ drops **only** this pattern, **treat it as a complete work order** — no follow-up quiz about “which template?”
+
+```text
+Full Name
+
+Email: someone@example.com
+
+Phone Number: +1 (978) 404-0928
+
+Setter - Cash only
+```
+
+**You (the agent) must:** parse name / email / phone / program line; map “Setter - Cash only” → **`03`** (or use `templates/htsa-placement-….html` if given); phone display → **E.164** (`+1978…`); run **`python3 scripts/htsa-paste-invoice.py`** with that text on stdin **or** equivalent `htsa-instantiate-invoice.py … --overwrite --ship`; return **`https://closewithcjclay.com/htsa-enrollment-{slug}.html`**.
+
+- **Paste script (Terminal):** `python3 scripts/htsa-paste-invoice.py` then paste block, **Ctrl-D**. Default **`--ship`**. **`--dry-run`** to verify parse; **`--no-ship`** to skip git.
+- If CJ says **do not redo** a named invoice (already perfect), **skip** — do not overwrite.
+
+**Placement phrases → id:** Closer cash only `01` · Closer cash + financing `02` · Setter cash only `03` · Setter cash + financing `04` · Closer & Setter cash only `05` · Closer & Setter cash + financing `06`.
 
 ---
 

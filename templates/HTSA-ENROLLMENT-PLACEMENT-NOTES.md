@@ -96,6 +96,8 @@ Then **commit and push** the new `htsa-enrollment-{slug}.html` so GitHub Pages s
 
 **Live URL:** `https://closewithcjclay.com/htsa-enrollment-{slug}.html` (must be `htsa-enrollment-`, not `hts-enrollment-`).
 
+**CJ paste block → ship:** `python3 scripts/htsa-paste-invoice.py` (stdin; ships by default). See `.cursor/rules/htsa-enrollment-invoice-workflow.mdc` → **CJ paste shortcut**.
+
 ## Cursor
 
 - `@templates/HTSA-ENROLLMENT-PLACEMENT-NOTES.md` — this file + placement table.

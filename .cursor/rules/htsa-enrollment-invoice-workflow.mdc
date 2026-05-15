@@ -10,6 +10,32 @@ alwaysApply: true
 
 ---
 
+## CJ paste shortcut (primary on-call flow)
+
+When CJ pastes **only** a block in this shape (blank lines OK), **do not** ask them to type long shell commands. **Parse the block, map placement, normalize phone to E.164, run instantiate with `--overwrite --ship`, return the live URL.**
+
+**Canonical paste:**
+
+```text
+Full Name
+
+Email: client@example.com
+
+Phone Number: +1 (555) 123-4567
+
+Setter - Cash only
+```
+
+**Program line** (usually last): CJ may type **plain English** matching the six rows (`Closer – Cash only`, `Setter - Cash + Financing`, `Closer & Setter – Cash only`, etc.) **or** `templates/htsa-placement-0X-….html` **or** both joined with ` or ` (prefer the `templates/…` segment when the file exists).
+
+**Mapping:** Closer cash only → `01` · Closer cash + financing → `02` · Setter cash only → `03` · Setter cash + financing → `04` · Dual cash only → `05` · Dual cash + financing → `06`.
+
+**Implementation:** From repo root, either (a) run `python3 scripts/htsa-paste-invoice.py` with the block on **stdin** (ends with Ctrl-D), which calls **`htsa-instantiate-invoice.py`** with **`--overwrite --ship`** by default, or (b) parse manually and invoke the same.
+
+**Respect explicit “do not touch”:** If CJ says an invoice is **already perfect** or **do not redo** a named file, **do not** overwrite that HTML.
+
+---
+
 ## Minimal CJ input
 
 CJ may say only:

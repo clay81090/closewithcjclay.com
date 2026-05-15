@@ -19,6 +19,14 @@ Prints `https://closewithcjclay.com/htsa-enrollment-{slug}.html` — copy that t
 
 Also accepts: `02`, `placement-05`, `p4`, or a full path under `templates/`.
 
+**Even shorter (same paste CJ uses in chat):** save the block to a file or pipe stdin:
+
+```bash
+python3 scripts/htsa-paste-invoice.py   # paste CJ block, then Ctrl-D
+```
+
+(`--dry-run` to verify parsing; `--no-ship` to skip git push.)
+
 ## Six live layout demos (Jordan Example)
 
 To refresh these after `python3 scripts/build-htsa-invoice-templates.py`:
