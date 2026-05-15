@@ -44,7 +44,7 @@ The agent infers everything else from the **defaults below** unless CJ overrides
 | **Closer & Setter – Cash only** | `templates/htsa-placement-05-closer-setter-cash-only.html` |
 | **Closer & Setter – Cash + Financing** | `templates/htsa-placement-06-closer-setter-cash-financing.html` |
 
-**Instantiation:** Replace placeholders by hand, or run `python3 scripts/htsa-instantiate-invoice.py templates/htsa-placement-….html --full-name … --email … --phone-e164 … [--phone-display …]` from repo root (prints path + live URL). Rebuild shells with `python3 scripts/build-htsa-invoice-templates.py` when reference pages change.
+**Instantiation:** Replace placeholders by hand, or run `python3 scripts/htsa-instantiate-invoice.py 01 …` from repo root — first arg can be **`01`–`06`** (or `templates/htsa-placement-….html`). Use **`--overwrite --ship`** on calls to replace the same slug and push one file. After `build-htsa-invoice-templates.py`, run **`rebuild-htsa-demo-enrollment-pages.py`** to refresh the six **`htsa-enrollment-demo-*`** URLs. See **`templates/README.md`**.
 
 **CJ quick reference (Notion-friendly):** **`templates/HTSA-ENROLLMENT-PLACEMENT-NOTES.md`**.  
 **CJ copy-paste prompts:** **`templates/README.md`**.

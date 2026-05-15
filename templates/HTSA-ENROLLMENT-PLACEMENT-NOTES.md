@@ -21,6 +21,26 @@ Authoritative for **which frozen file** to use. Full agent procedure: `.cursor/s
 - **05 / 06** — Jocelyn header + combined curriculum on Val shell; one Terms gate + one `#invest-pay-zone`; Closer invest-box then Setter invest-box; footer card title **Closer & Setter**; no PayVa.
 - **Guarantee** — Orange block in all six; omit only if CJ says **no guarantee**.
 
+## Live reference pages (visual / copy)
+
+- **`htsa-enrollment-luz-gonzales.html`** — Production **Closer**, **cash + financing** stack done right: Whop PIF / 4-pay, **Splitit** under PIF, ClarityPay ($7,200) + Flexxbuy. Use when checking “full” closer financing UX (placement **02** is the frozen rebuild target).
+- **`htsa-enrollment-wayne-wintermute.html`** — Canonical **header, hero, billing, member strip, footer** pull for template rebuilds. **No Splitit** on this live page (cash-only pay zone); for closer **without** Splitit use placement **01**.
+
+## Six live demos (frozen layout, Jordan Example / fake contact)
+
+After rebuilding shells, run `python3 scripts/rebuild-htsa-demo-enrollment-pages.py` and push. **`noindex`** — for previews and internal links, not SEO.
+
+| # | URL |
+|---|-----|
+| 01 | `https://closewithcjclay.com/htsa-enrollment-demo-01-closer-cash-only.html` |
+| 02 | `https://closewithcjclay.com/htsa-enrollment-demo-02-closer-cash-financing.html` |
+| 03 | `https://closewithcjclay.com/htsa-enrollment-demo-03-setter-cash-only.html` |
+| 04 | `https://closewithcjclay.com/htsa-enrollment-demo-04-setter-cash-financing.html` |
+| 05 | `https://closewithcjclay.com/htsa-enrollment-demo-05-closer-setter-cash-only.html` |
+| 06 | `https://closewithcjclay.com/htsa-enrollment-demo-06-closer-setter-cash-financing.html` |
+
+**Real clients** keep their own `htsa-enrollment-{client}.html` URLs (e.g. Jocelyn). Demos are separate canonical-layout bookmarks.
+
 ## Rebuild frozen templates
 
 From repo root:
@@ -29,7 +49,7 @@ From repo root:
 python3 scripts/build-htsa-invoice-templates.py
 ```
 
-Writes `htsa-placement-01`…`06`; removes legacy `htsa-tpl-*.html` if present. **Read-only** pull of Member voice strip + footer row from `htsa-enrollment-wayne-wintermute.html` (Wayne’s **live** file is not modified). Normalizes Mastermind copy to **520+** and Trustpilot line to **4.9 stars out of 5** on write.
+Writes `htsa-placement-01`…`06`; removes legacy `htsa-tpl-*.html` if present. **Read-only** pull of Member voice strip + footer row from `htsa-enrollment-wayne-wintermute.html` (Wayne’s **live** file is not modified). Normalizes Mastermind copy to **520+** and Trustpilot line to **4.9 stars out of 5** on write. Then run **`python3 scripts/rebuild-htsa-demo-enrollment-pages.py`** to refresh the six **`htsa-enrollment-demo-*`** preview pages.
 
 ## ClarityPay (never swap)
 

@@ -2,6 +2,42 @@
 
 **CJ reference (placement table + links):** [`HTSA-ENROLLMENT-PLACEMENT-NOTES.md`](HTSA-ENROLLMENT-PLACEMENT-NOTES.md)
 
+## On a call — one command (after templates are current)
+
+From repo root you can use **placement `01`–`06`** instead of typing the full template path. **`--overwrite`** replaces an existing invoice for the same slug. **`--ship`** adds, commits, and pushes **only that file** so the live link updates fast (still allow **1–5 minutes** for GitHub Pages).
+
+```bash
+python3 scripts/htsa-instantiate-invoice.py 03 \
+  --full-name "CLIENT FULL NAME" \
+  --email "client@email.com" \
+  --phone-e164 "+15551234567" \
+  --phone-display "+1 (555) 123-4567" \
+  --overwrite --ship
+```
+
+Prints `https://closewithcjclay.com/htsa-enrollment-{slug}.html` — copy that to text.
+
+Also accepts: `02`, `placement-05`, `p4`, or a full path under `templates/`.
+
+## Six live layout demos (Jordan Example)
+
+To refresh these after `python3 scripts/build-htsa-invoice-templates.py`:
+
+```bash
+python3 scripts/rebuild-htsa-demo-enrollment-pages.py
+```
+
+Then push. URLs (same layout as the six shells; **noindex**):
+
+| Row | Live demo URL |
+|-----|----------------|
+| 01 Closer cash | `https://closewithcjclay.com/htsa-enrollment-demo-01-closer-cash-only.html` |
+| 02 Closer cash + financing | `https://closewithcjclay.com/htsa-enrollment-demo-02-closer-cash-financing.html` |
+| 03 Setter cash | `https://closewithcjclay.com/htsa-enrollment-demo-03-setter-cash-only.html` |
+| 04 Setter cash + financing | `https://closewithcjclay.com/htsa-enrollment-demo-04-setter-cash-financing.html` |
+| 05 Dual cash | `https://closewithcjclay.com/htsa-enrollment-demo-05-closer-setter-cash-only.html` |
+| 06 Dual cash + financing | `https://closewithcjclay.com/htsa-enrollment-demo-06-closer-setter-cash-financing.html` |
+
 Shells in `templates/` use **`noindex`** and **`{{HTSA_*}}` placeholders only** (no client names baked in). **Never edit** a deployed `htsa-enrollment-*.html` to create a new person — copy a shell, fill placeholders, save a **new** root file.
 
 ## Secondary Whop plans (not in the six shells)
@@ -47,14 +83,15 @@ Replace **`FULL NAME`**, **`EMAIL`**, **`+1XXXXXXXXXX`** (E.164), and optional `
 From repo root — swap the template path for the row you need:
 
 ```bash
-python3 scripts/htsa-instantiate-invoice.py templates/htsa-placement-01-closer-cash-only.html \
+python3 scripts/htsa-instantiate-invoice.py 01 \
   --full-name "FULL NAME" \
   --email "EMAIL" \
   --phone-e164 "+1XXXXXXXXXX" \
-  --phone-display "+1 (XXX) XXX-XXXX"
+  --phone-display "+1 (XXX) XXX-XXXX" \
+  --overwrite --ship
 ```
 
-Then **`git add` / `commit` / `push`** the new `htsa-enrollment-{slug}.html`.
+First arg: **`01`–`06`** or full `templates/htsa-placement-….html`. Then **`git add` / `commit` / `push`** are optional if you passed **`--ship`**.
 
 ---
 

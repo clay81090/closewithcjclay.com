@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<title>HTSA Invoice — Luz Gonzales</title>
+<title>HTSA Demo — 03 Setter, cash only</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -309,53 +309,6 @@
     box-shadow: 0 0 14px rgba(255, 156, 122, 0.12);
     opacity: 0.92;
   }
-  /* Splitit note + detail (under $6k PIF) */
-  .invest-splitit-wrap {
-    margin-top: 16px;
-    padding-top: 14px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .invest-splitit-intro {
-    font-size: 11.5px;
-    line-height: 1.55;
-    color: rgba(255, 255, 255, 0.55);
-    margin: 0 0 12px;
-  }
-
-  .invest-splitit-intro strong {
-    color: rgba(255, 255, 255, 0.88);
-  }
-
-  .invest-splitit-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 156, 122, 0.4);
-    border-radius: 10px;
-    padding: 14px 16px;
-  }
-
-  .invest-splitit-head {
-    font-size: 13px;
-    font-weight: 700;
-    color: #ff9c7a;
-    margin-bottom: 8px;
-    letter-spacing: 0.02em;
-  }
-
-  .invest-splitit-apply {
-    font-size: 11.5px;
-    color: rgba(255, 255, 255, 0.78);
-    margin: 0 0 10px;
-    line-height: 1.55;
-  }
-
-  .invest-splitit-fine {
-    font-size: 10.5px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.48);
-    margin: 0;
-  }
-
 
   .invest-grid {
     display: grid;
@@ -968,6 +921,10 @@
     .hero-band { padding: 18px 20px; }
     .hts-terms-agreement-wrap { padding-left: 20px; padding-right: 20px; }
     .invest-pay-zone-hint { padding-left: 20px; padding-right: 20px; }
+    .enrollment-guarantee-banner--pre-terms {
+      margin-left: 20px !important;
+      margin-right: 20px !important;
+    }
     .billing-grid { grid-template-columns: 1fr; }
     .billing-cell { padding: 18px 20px; }
     .billing-cell:first-child { border-right: none; border-bottom: 1px solid var(--mid); }
@@ -1507,7 +1464,7 @@
   <div class="header">
     <div>
       <div class="logo-wrap">
-        <img class="logo-icon" src="data:image/jpeg;base64,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" alt="Chad Aleo">
+        <img class="logo-icon" src="data:image/jpeg;base64,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" alt="High Ticket Sales Academy">
         <div>
           <div class="logo-text">High Ticket<br>Sales Academy</div>
           <div class="logo-sub">Where Sales Reps Meet Their Forever Career</div>
@@ -1516,9 +1473,9 @@
       <div class="header-tagline" style="margin-top:12px;">Certification &nbsp;·&nbsp; Coaching &nbsp;·&nbsp; Placement</div>
     </div>
     <div class="invoice-meta">
-      <div class="invoice-badge">Closer Program Overview</div>
+      <div class="invoice-badge">Setter Program Overview</div>
       <p><strong>Prepared by:</strong> CJ Clay</p>
-      <p><strong>Program:</strong> Certified HTS Closer</p>
+      <p><strong>Program:</strong> Certified HTS Setter</p>
       <p><strong>Payment:</strong> Select payment option below</p>
     </div>
   </div>
@@ -1526,20 +1483,20 @@
 
   <!-- HERO BAND -->
   <div class="hero-band">
-    <h2>Certified High Ticket Closer Program</h2>
-    <p>Luz, I really enjoyed speaking with you earlier. It was clear from our conversation that you're someone who takes their future seriously and is ready to make a real change — and that's exactly the kind of person we love working with here at High Ticket Sales Academy.</p>
-    <p style="margin-top:10px;">Everything you need to review and get started is right here. The biggest difference at HTSA is that you are not just another number — we are not influencers, but true experts in the field of high ticket sales. <strong>Chad Aleo trains you personally.</strong> You have around-the-clock support, and once certified, our team walks you directly into roles from a network of 300+ partner companies. Take your time reviewing and reach out to CJ with any questions or assistance with enrollment.</p>
+    <h2>Certified High Ticket Setter Program</h2>
+    <p>Jordan, I really enjoyed speaking with you earlier. It was clear from our conversation that you're someone who takes their future seriously and is ready to make a real change — and that's exactly the kind of person we love working with here at High Ticket Sales Academy.</p>
+    <p style="margin-top:10px;">Everything you need to review and get started is right here. The biggest difference at HTSA is that you are not just another number — we are not influencers, but true experts in the field of high ticket sales. You have around-the-clock support, and once certified, our team walks you directly into roles from a network of 300+ partner companies. Take your time reviewing and reach out to CJ with any questions or assistance with enrollment.</p>
   </div>
 
   <!-- BILLING -->
   <div class="billing-grid">
     <div class="billing-cell">
       <div class="billing-label">Prepared For</div>
-      <div class="billing-name">Luz Gonzales</div>
+      <div class="billing-name">Jordan Example</div>
       <div class="billing-detail">
-        <a href="mailto:gonzalesluz9802@gmail.com">gonzalesluz9802@gmail.com</a><br>
-        <a href="tel:+12098146395">+1 (209) 814-6395</a><br>
-        Program: Certified HTS Closer<br>
+        <a href="mailto:enrollment-demo@highticketsalesacademy.com">enrollment-demo@highticketsalesacademy.com</a><br>
+        <a href="tel:+15555550100">+1 (555) 555-0100</a><br>
+        Program: Certified HTS Setter<br>
         Payment: Select payment option below
       </div>
     </div>
@@ -1547,7 +1504,7 @@
       <div class="billing-label">Prepared By</div>
       <div class="billing-name">CJ Clay</div>
       <div class="billing-detail">
-        HTSA Closer &amp; Enrollment Advisor<br>
+        HTSA Setter &amp; Enrollment Advisor<br>
         (616) 612-1735<br>
         <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="67040d270f0e000f130e040c021314060b021406040603020a1e4904080a">[email&#160;protected]</a><br>
         highticketsalesacademy.com
@@ -1576,7 +1533,7 @@
       <div class="cur-icon">🎓</div>
       <div class="cur-content">
         <h4>Structured Online Training Platform</h4>
-        <p>Self-paced platform with lifetime access. The Closer Certification includes 50 in-depth modules and five levels of advanced AI roleplay — all designed to ensure you're ready before your first interview.</p>
+        <p>Self-paced platform with lifetime access. The Setter Certification includes 30 core modules and three levels of AI-based roleplay — all designed to ensure you're ready before your first interview.</p>
       </div>
     </div>
 
@@ -1584,7 +1541,7 @@
       <div class="cur-icon">🏆</div>
       <div class="cur-content">
         <h4>Certification and One-on-One Assessment</h4>
-        <p>Upon completion of coursework and a one-on-one assessment, you graduate as a Certified High Ticket Closer. This credential signals to hiring companies that you are trained, prepared, and ready to perform.</p>
+        <p>Upon completion of coursework and a one-on-one assessment, you graduate as a Certified High Ticket Setter. This credential signals to hiring companies that you are trained, prepared, and ready to perform.</p>
       </div>
     </div>
 
@@ -1592,7 +1549,7 @@
       <div class="cur-icon">🤝</div>
       <div class="cur-content">
         <h4>Interview Preparation and Job Placement Support</h4>
-        <p>Includes resume optimization, interview preparation, and access to our placement system. Most closers are in a role within 30 to 60 days of starting the program.</p>
+        <p>Includes resume optimization, interview preparation, and access to our placement system. Setter roles are the fastest to place — most students are in a remote role within 2 to 3 weeks of certification.</p>
       </div>
     </div>
 
@@ -1660,13 +1617,13 @@
 
   <div class="hts-terms-agreement-wrap">
     <div id="hts-terms-agreement-panel" class="hts-terms-agreement-card"
-         data-full-name="Luz Gonzales"
-         data-email="gonzalesluz9802@gmail.com"
-         data-phone="+12098146395"
-         data-client-slug="luz-gonzales">
+         data-full-name="Jordan Example"
+         data-email="enrollment-demo@highticketsalesacademy.com"
+         data-phone="+15555550100"
+         data-client-slug="demo-03-setter-cash-only">
       <div class="hts-terms-agreement-form" id="hts-terms-agreement-form">
         <div class="hts-terms-agreement-title">Terms agreement</div>
-        <p class="hts-terms-agreement-lead">Open the Terms of Service PDF, review the clarification below about lifetime access and included services, confirm you agree, then record your acceptance to unlock payment and financing buttons below.</p>
+        <p class="hts-terms-agreement-lead">Open the Terms of Service PDF, review the clarification below about lifetime access and included services, confirm you agree, then record your acceptance to unlock payment buttons below.</p>
         <p style="margin:0;">
           <a id="hts-terms-pdf-link-top" href="https://closewithcjclay.com/HTSA-Terms-of-Service.pdf" target="_blank" rel="noopener noreferrer" class="hts-terms-agreement-pdf">View Full Terms of Service (PDF)</a>
         </p>
@@ -1676,7 +1633,7 @@
           <ul class="terms-clarify-list">
             <li>Lifetime access to the course modules</li>
             <li>Lifetime access to live group coaching calls with Chad</li>
-            <li>Lifetime access to the closers mastermind community</li>
+            <li>Lifetime access to the setters mastermind community</li>
             <li><strong style="color:var(--navy);">1-on-1 coaching calls</strong> — included at <strong style="color:var(--navy);">no additional fee</strong>. Calls must be used within three months of your program start date unless otherwise approved by HTSA.</li>
             <li><strong style="color:var(--navy);">AI role-play platform</strong> — included while you are in the academy. After you complete the program and land your offer, you may keep the platform for <strong style="color:var(--navy);">$35/month</strong> if you choose. It is not mandatory; it is an optional tool if it helps your close rate.</li>
           </ul>
@@ -1688,18 +1645,18 @@
         <button type="button" id="hts-terms-confirm-btn" class="hts-terms-agreement-btn" disabled>Record agreement &amp; unlock payments</button>
       </div>
       <p id="hts-terms-agreement-msg" class="hts-terms-agreement-msg hts-terms-msg-below-fold" role="status" aria-live="polite"></p>
-      <p id="hts-terms-agreement-done-line" class="hts-terms-agreement-done-line">✓ Terms recorded successfully. Payment and financing buttons below are now active for this browser session.</p>
+      <p id="hts-terms-agreement-done-line" class="hts-terms-agreement-done-line">✓ Terms recorded successfully. Payment buttons below are now active for this browser session.</p>
     </div>
   </div>
 
-  <p id="invest-pay-zone-hint" class="invest-pay-zone-hint">Payment and financing buttons stay locked until your Terms agreement has been recorded above.</p>
+  <p id="invest-pay-zone-hint" class="invest-pay-zone-hint">Payment buttons stay locked until your Terms agreement has been recorded above.</p>
 
   <div class="invest-wrap invest-pay-zone invest-pay-zone--locked" id="invest-pay-zone">
     <div class="invest-box">
-      <div class="invest-program-label">Certified High Ticket Closer Program</div>
-      <div class="invest-program-desc">All services described above — training platform, AI roleplay, live coaching with Chad, certification, job placement, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
+      <div class="invest-program-label">Certified High Ticket Setter Program</div>
+      <div class="invest-program-desc">All services described in the Setter curriculum — training platform, AI roleplay, certification, placement support, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
 
-      <div class="invest-section-kicker invest-section-kicker--accent">In-House Cash Payment Options</div>
+      <div class="invest-section-kicker invest-section-kicker--accent">HTSA In-House Payment Options</div>
       <p class="invest-access-hint">Either option includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
       <div class="invest-grid">
 
@@ -1708,23 +1665,15 @@
           <div class="invest-option-head invest-option-head--pay">
             <div>
               <div class="invest-option-title">Paid in Full</div>
-              <div class="invest-option-sub">Best value — pay the remainder by day 30 and your total is only $6,000.</div>
+              <div class="invest-option-sub">One payment — best value (save $150 vs. the 3-pay plan).</div>
             </div>
             <div class="invest-price-stack">
-              <div class="invest-price-big">$6,000</div>
+              <div class="invest-price-big">$3,000</div>
               <div class="invest-price-mini">One payment</div>
             </div>
           </div>
           <div class="invest-option-actions invest-option-actions--pay">
-            <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $6,000 →</a>
-          </div>
-          <div class="invest-splitit-wrap">
-            <p class="invest-splitit-intro">On the Whop checkout page, scroll to the <strong>bottom of the payment options</strong> — you'll see <strong>Splitit</strong> (monthly payments on your card). That's where you can set up the plan below.</p>
-            <div class="invest-splitit-card">
-              <div class="invest-splitit-head">Splitit — $500/month × 12 months</div>
-              <p class="invest-splitit-apply"><strong>Apply here:</strong> use the same <strong>green "Choose PIF — Pay $6,000"</strong> button above, then select <strong>Splitit</strong> at the bottom of Whop's payment methods to complete setup.</p>
-              <p class="invest-splitit-fine">No credit check — uses the existing limit on your Visa or Mastercard. A hold is placed on your card for the total amount. As you make each $500 monthly payment, that same amount is released back to your available credit.</p>
-            </div>
+            <a href="https://whop.com/checkout/plan_qzvfCCb1rIO0L?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $3,000 →</a>
           </div>
         </div>
 
@@ -1732,89 +1681,21 @@
           <div class="invest-badge invest-badge--option">Option 2</div>
           <div class="invest-option-head invest-option-head--pay">
             <div>
-              <div class="invest-option-title">4 Monthly Payments</div>
-              <div class="invest-option-sub">4 payments of $1,750 — First Payment Due Today.</div>
+              <div class="invest-option-title">3 Monthly Payments</div>
+              <div class="invest-option-sub">3 payments of $1,050 — First Payment Due Today.</div>
             </div>
             <div class="invest-price-stack">
-              <div class="invest-price-big">$1,750</div>
-              <div class="invest-price-mini">$7,000 total · 4 installments</div>
+              <div class="invest-price-big">$1,050</div>
+              <div class="invest-price-mini">$3,150 total · 3 installments</div>
             </div>
           </div>
           <div class="invest-option-actions invest-option-actions--pay">
-            <a href="https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose 4-Pay — Pay $1,750 Today →</a>
+            <a href="https://whop.com/checkout/plan_oK3AajTKp0mXK?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose 3-Pay — Pay $1,050 Today →</a>
           </div>
         </div>
 
       </div>
-
-      <hr class="invest-zone-rule" aria-hidden="true">
-
-      <div class="invest-section-kicker invest-section-kicker--accent">Third-Party Financing Options</div>
-      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">The two options above are HTSA in-house payment options. The two options below are third-party financing options for pre-qualification.</div>
-
-      <div class="invest-grid">
-
-        <div class="invest-option-block financing">
-          <div class="invest-badge financing">Financing Option 1</div>
-          <div class="invest-option-head">
-            <div>
-              <div class="invest-option-title">ClarityPay</div>
-              <div class="invest-option-sub">Best for someone who wants a fast decision and monthly payments with no early payoff penalty.</div>
-            </div>
-            <div class="invest-price-stack">
-              <div class="invest-price-big">$7,200</div>
-              <div class="invest-price-mini">soft pre-qualify at checkout</div>
-            </div>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Typical Credit Profile</span>
-            <span class="invest-value">Around 650+ credit</span>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Enrollment Timing</span>
-            <span class="invest-value">Enroll same day if approved</span>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Payment Structure</span>
-            <span class="invest-value">Monthly payments • no early payoff penalty</span>
-          </div>
-          <div class="invest-option-actions">
-            <a href="https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" class="invest-btn secondary" target="_blank" rel="noopener noreferrer">Pre-Qualify with ClarityPay →</a>
-          </div>
-        </div>
-
-        <div class="invest-option-block financing">
-          <div class="invest-badge financing">Financing Option 2</div>
-          <div class="invest-option-head">
-            <div>
-              <div class="invest-option-title">Flexxbuy</div>
-              <div class="invest-option-sub">Apply once and see lender options. Best when someone wants broader approval chances across multiple lenders.</div>
-            </div>
-            <div class="invest-price-stack">
-              <div class="invest-price-big" style="font-size:22px;">2–5 Days</div>
-              <div class="invest-price-mini">after approval</div>
-            </div>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Typical Credit Profile</span>
-            <span class="invest-value">Broader credit range</span>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Enrollment Timing</span>
-            <span class="invest-value">Funds in 2–5 business days</span>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Payment Structure</span>
-            <span class="invest-value">Funds to your bank, then pay HTSA</span>
-          </div>
-          <div class="invest-option-actions">
-            <a href="https://app.flexxbuy.com/high-ticket-sales-academy-llc/apply/" class="invest-btn secondary" target="_blank">Pre-Qualify with Flexxbuy →</a>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="invest-note" style="color:#ff9c7a;"><strong>★ Soft pre-qualification only.</strong> Once you complete one of the in-house payment options above or get approved through one of the financing options, text CJ right away so access can be granted.</div>
+      <div class="invest-note" style="color:#ff9c7a;"><strong>★ Payment required.</strong> Once you complete one of the Setter in-house payment options above, text CJ right away so Setter access can be granted.</div>
     </div>
   </div>
 
@@ -1830,7 +1711,7 @@
       <div class="step-num">1</div>
       <div class="step-content">
         <h4>Step 1 — Choose Your Payment or Check Pre-Qualification</h4>
-        <p>Luz, review the payment and financing options in Program Investment above, then select what you want — <strong>$6,000</strong> paid in full (or <strong>Splitit</strong> inside that same Whop checkout), the <strong>$1,750 × 4-pay</strong> plan ($7,000 total), <strong>ClarityPay</strong> (<strong>$7,200</strong> at checkout), or <strong>Flexxbuy</strong>. Once your payment clears or your financing is approved, move to Step 2 below.</p>
+        <p>Jordan, review the <strong>Setter</strong> payment options in Program Investment above — <strong>$3,000</strong> paid in full or the <strong>$1,050 × 3-pay</strong> plan ($3,150 total). Once your payment clears, move to Step 2 below.</p>
       </div>
     </div>
 
@@ -1890,13 +1771,13 @@
   </div>
 
   <div class="closing-band">
-    <blockquote>"The path to your dream life doesn't begin when everything is perfect — it begins the moment you decide to stop waiting and start moving. Every great closer, every top earner, every person who built the life they wanted started exactly where you are right now. The only difference between where you are and where you want to be is a decision."</blockquote>
+    <blockquote>"The path to your dream life doesn't begin when everything is perfect — it begins the moment you decide to stop waiting and start moving. Every great setter, every top earner, every person who built the life they wanted started exactly where you are right now. The only difference between where you are and where you want to be is a decision."</blockquote>
     <div class="quote-attr">— The decision is yours. We'll handle everything else.</div>
   </div>
 
   <!-- WELCOME -->
   <div class="welcome-band">
-    <h3>Welcome to the <span>HTSA Family,</span> Luz. 🎉</h3>
+    <h3>Welcome to the <span>HTSA Family,</span> Jordan. 🎉</h3>
     <p>You're not just enrolling in a program — you're joining a community of people who show up, do the work, and build something real. We can't wait to see where this takes you.</p>
   </div>
 
@@ -2012,7 +1893,7 @@ So far it's been nothing but positive, and I feel confident about the move. If y
     <div class="footer-reviews-row">
       <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="footer-reviews-trustpilot" target="_blank" rel="noopener noreferrer">
         <span class="footer-reviews-stars" aria-hidden="true">★★★★★</span>
-        <span class="footer-reviews-text">Trustpilot Reviews — 4.9 out of 5</span>
+        <span class="footer-reviews-text">Trustpilot Reviews — 4.9 stars out of 5</span>
       </a>
       <a href="mailto:support@highticketsalesacademy.com" class="footer-reviews-support">support@highticketsalesacademy.com</a>
     </div>
@@ -2026,7 +1907,7 @@ So far it's been nothing but positive, and I feel confident about the move. If y
 
 <script>
 (function () {
-  var STORAGE_KEY = 'hts_terms_gate_luz_gonzales_v1';
+  var STORAGE_KEY = 'hts_terms_gate_demo_03_setter_cash_only_v1';
   var GAS_TERMS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec';
   var TERMS_DOC_URL_FOR_GATE = 'https://closewithcjclay.com/HTSA-Terms-of-Service.pdf';
   // Fixed label for spreadsheets / logs when the hosted PDF stays the same URL
@@ -2092,7 +1973,7 @@ So far it's been nothing but positive, and I feel confident about the move. If y
       email: (panel.getAttribute('data-email') || '').trim(),
       phone: (panel.getAttribute('data-phone') || '').trim(),
       enrollmentPageUrl: canonicalEnrollmentUrl(),
-      clientSlug: (panel.getAttribute('data-client-slug') || 'luz-gonzales').trim(),
+      clientSlug: (panel.getAttribute('data-client-slug') || 'demo-03-setter-cash-only').trim(),
       termsUrl: TERMS_DOC_URL_FOR_GATE,
       termsVersion: TERMS_VERSION_ID,
       userAgent: navigator.userAgent || ''

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Rebuild templates/htsa-placement-*.html from production reference HTML.
-Does not modify any htsa-enrollment-*.html at repo root.
+Does not modify any htsa-enrollment-*.html at repo root except when you separately run
+scripts/rebuild-htsa-demo-enrollment-pages.py (refreshes htsa-enrollment-demo-*.html).
 
 Sources (read-only):
   - Closer cash: htsa-enrollment-val-tappan.html
