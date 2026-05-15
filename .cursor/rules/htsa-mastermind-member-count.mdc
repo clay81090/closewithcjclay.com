@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Mastermind member count
 
-In the “Join the HTSA Mastermind Community” step, use **515+ members** (not 440+, 470+, 490+, or other numbers unless CJ updates this rule).
+In the “Join the HTSA Mastermind Community” step, use **520+ members** for new invoices and frozen templates rebuilt via `scripts/build-htsa-invoice-templates.py`. (Legacy pages may still show older counts until updated.)
 
 Example sentence:  
-`Request access to the private Facebook Mastermind — where all live coaching call replays are posted and 515+ members support each other 24/7.`
+`Request access to the private Facebook Mastermind — where all live coaching call replays are posted and 520+ members support each other 24/7.`

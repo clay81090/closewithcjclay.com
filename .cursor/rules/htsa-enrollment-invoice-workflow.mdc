@@ -204,7 +204,7 @@ JSON via URL-encoded **`payload=`** POST. Align with `hts-enrollment-webapp-goog
 - **No PayVa** unless requested; **Splitit** only where the page includes it (**placement-01** has none); **no Splitit** on setter.  
 - **Flexxbuy** spelling (two x’s).  
 - **Closer** ClarityPay → **$7,200** checkout (`1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf`); **Setter** ClarityPay → **$3,600** (`plan_z5iuUhSgm9seH?d2c=true`) — **never** swap them.  
-- Footer Trustpilot row: **4.9 out of 5**; Mastermind step: **515+** members (see **`htsa-mastermind-member-count.mdc`**).  
+- Footer Trustpilot row: **4.9 stars out of 5**; Mastermind step: **520+** members (see **`htsa-mastermind-member-count.mdc`**).  
 - Mobile matches **Zachary + Chad** patterns.  
 - **`grep`:** no phantom client data.  
 - **Git: new invoice file committed and pushed** to the publish branch — otherwise **`https://closewithcjclay.com/htsa-enrollment-{slug}.html` 404s**.
@@ -248,4 +248,5 @@ Bonus copy: don’t toss in “three one-on-one calls with Chad.”
 ## Related
 
 Full agent procedure: `.cursor/skills/htsa-enrollment-invoice/SKILL.md`  
-Facebook Mastermind count: **`htsa-mastermind-member-count.mdc`** (**515+** wording).
+Facebook Mastermind count: **`htsa-mastermind-member-count.mdc`** (**520+** wording).  
+**Rebuild frozen shells:** from repo root run `python3 scripts/build-htsa-invoice-templates.py` — templates pull **Member voice** testimonials + colored footer icons from **`htsa-enrollment-wayne-wintermute.html`**; **never** run a step that replaces **Closer** ClarityPay (`…/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/`) with the **Setter** plan (`plan_z5iuUhSgm9seH`).

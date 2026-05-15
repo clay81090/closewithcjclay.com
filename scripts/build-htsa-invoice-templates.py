@@ -5,24 +5,24 @@ Does not modify any htsa-enrollment-*.html at repo root.
 
 Sources (read-only):
   - Closer cash: htsa-enrollment-val-tappan.html
-  - Closer cash + financing: htsa-enrollment-thomas-rulof.html + Splitit under PIF + URL normalize
+  - Closer cash + financing: htsa-enrollment-thomas-rulof.html + Splitit under PIF
+    (Closer ClarityPay must stay on the $7,200 Whop checkout — never the Setter plan.)
   - Setter: htsa-enrollment-trameil-lee.html
   - Dual header/curriculum chunk: htsa-enrollment-jocelyn-navarro.html (layout only; terms/pay zone = Val/Thomas+Trameil)
-  - Footer (HTML + CSS): htsa-enrollment-kristijo-sherman.html (brand-colored links, IG, Trustpilot + stars row)
+  - Member stories CSS+HTML + footer (HTML + footer-link CSS): htsa-enrollment-wayne-wintermute.html
 
 Run from repo root: python3 scripts/build-htsa-invoice-templates.py
 """
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATES = ROOT / "templates"
 SNIPPETS = TEMPLATES / "snippets"
-KRISTIJO_FOOTER_REF = ROOT / "htsa-enrollment-kristijo-sherman.html"
-
-CLARITY_LEGACY_URL = "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/"
-CLARITY_PLAN_URL = "https://whop.com/checkout/plan_z5iuUhSgm9seH?d2c=true"
+# Canonical layout: testimonials strip, colored footer icons, Trustpilot band.
+CANONICAL_LAYOUT_REF = ROOT / "htsa-enrollment-wayne-wintermute.html"
 
 
 def add_noindex(html: str) -> str:
@@ -39,10 +39,6 @@ def multi_replace(html: str, pairs: list[tuple[str, str]]) -> str:
     for old, new in sorted(pairs, key=lambda x: -len(x[0])):
         html = html.replace(old, new)
     return html
-
-
-def normalize_clarity_urls(html: str) -> str:
-    return html.replace(CLARITY_LEGACY_URL, CLARITY_PLAN_URL)
 
 
 def val_tappan_pairs() -> list[tuple[str, str]]:
@@ -73,6 +69,49 @@ def val_tappan_pairs() -> list[tuple[str, str]]:
             "Welcome to the <span>HTSA Family,</span> {{HTSA_FIRST_NAME}}. 🎉",
         ),
     ]
+
+
+def sync_ref_strip_from_wayne(html: str, wayne_text: str) -> str:
+    """Replace ref-strip CSS + HTML with Wayne's six-card Member voice layout (no Trinity column)."""
+    css_start = "  /* Subtle member stories + book (above footer; site / Trustpilot / YouTube stay in footer) */\n"
+    css_end = "  /* Enrollment-specific performance guarantee callout (orange) — optional; include HTML block only when needed */\n"
+    html_start = "  <!-- Member stories & book (subtle; site / Trustpilot / YouTube in footer) -->\n"
+    html_end = "  <!-- FOOTER -->\n"
+
+    ws, we = wayne_text.find(css_start), wayne_text.find(css_end)
+    if ws == -1 or we == -1:
+        raise RuntimeError("sync_ref_strip: Wayne CSS markers not found")
+    new_css = wayne_text[ws:we]
+
+    hs, he = html.find(css_start), html.find(css_end)
+    if hs == -1 or he == -1:
+        raise RuntimeError("sync_ref_strip: target CSS markers not found")
+    html = html[:hs] + new_css + html[he:]
+
+    whs, whe = wayne_text.find(html_start), wayne_text.find(html_end)
+    if whs == -1 or whe == -1:
+        raise RuntimeError("sync_ref_strip: Wayne HTML markers not found")
+    new_body = wayne_text[whs:whe]
+
+    hhs, hhe = html.find(html_start), html.find(html_end)
+    if hhs == -1 or hhe == -1:
+        raise RuntimeError("sync_ref_strip: target HTML markers not found")
+    html = html[:hhs] + new_body + html[hhe:]
+    return html
+
+
+def apply_canonical_enrollment_copy(html: str) -> str:
+    """Trustpilot line + Mastermind member count — single source of truth for new invoices."""
+    html = html.replace(
+        "Trustpilot Reviews — 4.9 out of 5",
+        "Trustpilot Reviews — 4.9 stars out of 5",
+    )
+    html = re.sub(
+        r"posted and \d+\+ members support each other",
+        "posted and 520+ members support each other",
+        html,
+    )
+    return html
 
 
 def jocelyn_dual_header_pairs() -> list[tuple[str, str]]:
@@ -530,36 +569,36 @@ def build_dual_template(
     return add_noindex(out)
 
 
-def kristijo_footer_assets() -> tuple[str, str]:
-    """Footer CSS block + footer HTML from Kristijo (reference-only file)."""
-    t = KRISTIJO_FOOTER_REF.read_text(encoding="utf-8")
+def canonical_footer_assets() -> tuple[str, str]:
+    """Footer link-row CSS + footer HTML from Wayne (colored icons, Trustpilot band)."""
+    t = CANONICAL_LAYOUT_REF.read_text(encoding="utf-8")
     idx = t.find("  /* Footer HTSA column")
     if idx == -1:
-        raise RuntimeError("kristijo_footer_assets: CSS marker missing in reference HTML")
+        raise RuntimeError("canonical_footer_assets: CSS marker missing in Wayne reference HTML")
     header_media = t.find("  @media (max-width: 600px) {\n    .header {", idx)
     if header_media == -1:
-        raise RuntimeError("kristijo_footer_assets: could not find main layout @media block after footer CSS")
+        raise RuntimeError("canonical_footer_assets: could not find main layout @media block after footer CSS")
     footer_css = t[idx:header_media]
     fstart = t.find("  <!-- FOOTER -->")
     fend = t.find("<script>", fstart)
     if fstart == -1 or fend == -1:
-        raise RuntimeError("kristijo_footer_assets: footer HTML or <script> boundary missing")
+        raise RuntimeError("canonical_footer_assets: footer HTML or <script> boundary missing")
     footer_html = t[fstart:fend].rstrip() + "\n\n"
     return footer_css, footer_html
 
 
-def inject_kristijo_footer(html: str, footer_css: str, footer_html: str) -> str:
-    """Insert Kristijo footer CSS (after business-card rules) and replace <!-- FOOTER -->…<script> region."""
+def inject_canonical_footer(html: str, footer_css: str, footer_html: str) -> str:
+    """Insert Wayne footer CSS (after business-card rules) and replace <!-- FOOTER -->…<script> region."""
     if "  /* Footer HTSA column" in html:
         return html
     anchor = "  .footer-bc-line--cal:hover {\n    color: var(--green-dark);\n  }\n\n"
     if anchor not in html:
-        raise RuntimeError("inject_kristijo_footer: expected CSS anchor not found (.footer-bc-line--cal:hover)")
+        raise RuntimeError("inject_canonical_footer: expected CSS anchor not found (.footer-bc-line--cal:hover)")
     html = html.replace(anchor, anchor + footer_css, 1)
     fstart = html.find("  <!-- FOOTER -->")
     fend = html.find("<script>", fstart)
     if fstart == -1 or fend == -1:
-        raise RuntimeError("inject_kristijo_footer: footer region or <script> tag not found")
+        raise RuntimeError("inject_canonical_footer: footer region or <script> tag not found")
     return html[:fstart] + footer_html + html[fend:]
 
 
@@ -572,20 +611,22 @@ def main() -> None:
 
     val_raw = (ROOT / "htsa-enrollment-val-tappan.html").read_text(encoding="utf-8")
     jocelyn_raw = (ROOT / "htsa-enrollment-jocelyn-navarro.html").read_text(encoding="utf-8")
-    thomas_raw = normalize_clarity_urls(
-        (ROOT / "htsa-enrollment-thomas-rulof.html").read_text(encoding="utf-8")
-    )
+    thomas_raw = (ROOT / "htsa-enrollment-thomas-rulof.html").read_text(encoding="utf-8")
     trameil_raw = (ROOT / "htsa-enrollment-trameil-lee.html").read_text(encoding="utf-8")
+    wayne_text = CANONICAL_LAYOUT_REF.read_text(encoding="utf-8")
 
     p01 = add_noindex(multi_replace(val_raw, val_tappan_pairs()))
+    p01 = sync_ref_strip_from_wayne(p01, wayne_text)
     p03 = add_noindex(multi_replace(trameil_raw, trameil_pairs()))
     p03 = setter_cash_only(p03)
+    p03 = sync_ref_strip_from_wayne(p03, wayne_text)
     p04 = add_noindex(multi_replace(trameil_raw, trameil_pairs()))
+    p04 = sync_ref_strip_from_wayne(p04, wayne_text)
 
     p02 = inject_splitit_closer_invest_pay_zone(
         add_noindex(multi_replace(thomas_raw, closer_invest_pay_zone_financing_pairs()))
     )
-    p02 = normalize_clarity_urls(p02)
+    p02 = sync_ref_strip_from_wayne(p02, wayne_text)
 
     p05 = build_dual_template(
         val_src=val_raw,
@@ -594,6 +635,7 @@ def main() -> None:
         setter_html=p03,
         financing=False,
     )
+    p05 = sync_ref_strip_from_wayne(p05, wayne_text)
     p06 = build_dual_template(
         val_src=val_raw,
         jocelyn_src=jocelyn_raw,
@@ -601,22 +643,30 @@ def main() -> None:
         setter_html=p04,
         financing=True,
     )
+    p06 = sync_ref_strip_from_wayne(p06, wayne_text)
 
     strip_legacy_templates()
 
-    footer_css, footer_html = kristijo_footer_assets()
-    p01 = inject_kristijo_footer(p01, footer_css, footer_html)
-    p02 = inject_kristijo_footer(p02, footer_css, footer_html)
-    p03 = inject_kristijo_footer(p03, footer_css, footer_html)
-    p04 = inject_kristijo_footer(p04, footer_css, footer_html)
-    p05 = inject_kristijo_footer(p05, footer_css, footer_html)
-    p06 = inject_kristijo_footer(p06, footer_css, footer_html)
+    footer_css, footer_html = canonical_footer_assets()
+    p01 = inject_canonical_footer(p01, footer_css, footer_html)
+    p02 = inject_canonical_footer(p02, footer_css, footer_html)
+    p03 = inject_canonical_footer(p03, footer_css, footer_html)
+    p04 = inject_canonical_footer(p04, footer_css, footer_html)
+    p05 = inject_canonical_footer(p05, footer_css, footer_html)
+    p06 = inject_canonical_footer(p06, footer_css, footer_html)
     dual_footer_title = (
         '<div class="footer-bc-title">HTSA Closer</div>',
         '<div class="footer-bc-title">HTSA Closer &amp; Setter</div>',
     )
     p05 = p05.replace(dual_footer_title[0], dual_footer_title[1], 1)
     p06 = p06.replace(dual_footer_title[0], dual_footer_title[1], 1)
+
+    p01 = apply_canonical_enrollment_copy(p01)
+    p02 = apply_canonical_enrollment_copy(p02)
+    p03 = apply_canonical_enrollment_copy(p03)
+    p04 = apply_canonical_enrollment_copy(p04)
+    p05 = apply_canonical_enrollment_copy(p05)
+    p06 = apply_canonical_enrollment_copy(p06)
 
     (TEMPLATES / "htsa-placement-01-closer-cash-only.html").write_text(p01, encoding="utf-8")
     (TEMPLATES / "htsa-placement-02-closer-cash-financing.html").write_text(p02, encoding="utf-8")

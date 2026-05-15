@@ -176,7 +176,7 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 ## Legacy freeze
 
 - Do **not** retrofit old invoices unless CJ names the **exact** `htsa-enrollment-*.html` path.  
-- **Margarita** remains the historical “first Terms-gate” anchor; for **current** layout + **2026 footer** (social SVGs, gold Trustpilot row, support email), prefer **James Chambers** / **Kristijo Sherman** (Closer) or **Trameil** (Setter) as duplicate sources.
+- **Margarita** remains the historical “first Terms-gate” anchor; **frozen `htsa-placement-01…06`** get **Member voice** testimonials + **colored footer icons** from **`htsa-enrollment-wayne-wintermute.html`** via `scripts/build-htsa-invoice-templates.py`. For one-off edits without rebuilding, **James Chambers** / **Kristijo Sherman** (Closer) or **Trameil** (Setter) remain useful references.
 
 ---
 
