@@ -2,7 +2,8 @@
 name: htsa-enrollment-invoice
 description: >-
   Builds new HTSA enrollment invoices from modern Terms-gate templates (Closer vs Setter).
-  Defaults: orange guarantee ON, mandatory Terms gate + Apps Script, financing ClarityPay +
+  CJ placement table: templates/HTSA-ENROLLMENT-PLACEMENT-NOTES.md. Defaults: orange guarantee ON,
+  mandatory Terms gate + Apps Script, financing ClarityPay +
   Flexxbuy unless Cash-only. After the HTML is ready: git add, commit, and push the new file
   so closewithcjclay.com serves it (otherwise the live URL 404s). Minimal CJ input: program
   type, cash/financing/both, name, email, phone. Prefer frozen shells in templates/. Secondary
@@ -45,6 +46,7 @@ The agent infers everything else from the **defaults below** unless CJ overrides
 
 **Instantiation:** Replace placeholders by hand, or run `python3 scripts/htsa-instantiate-invoice.py templates/htsa-placement-….html --full-name … --email … --phone-e164 … [--phone-display …]` from repo root (prints path + live URL). Rebuild shells with `python3 scripts/build-htsa-invoice-templates.py` when reference pages change.
 
+**CJ quick reference (Notion-friendly):** **`templates/HTSA-ENROLLMENT-PLACEMENT-NOTES.md`**.  
 **CJ copy-paste prompts:** **`templates/README.md`**.
 
 **Hard rule:** Materialize **`htsa-enrollment-{slug}.html`** at repo root only — never turn an existing client file into someone else.
@@ -168,7 +170,7 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 
 - **HTSA column:** Site / YouTube / Instagram / Facebook as **inline SVG icons in brand colors** (globe blues & greens, YouTube red, Instagram gradient, Facebook blue) + link text — **`footer-htsa-link`** pattern.  
 - **Do not** put Trustpilot in that small stack.  
-- **Full-width row** below the main footer flex (**`footer-reviews-row`**): prominent Trustpilot link with **five gold stars** (**`#e2b227`**, not green) + “Trustpilot Reviews — **4.9** out of 5”, plus visible **`support@highticketsalesacademy.com`** (`mailto`).  
+- **Full-width row** below the main footer flex (**`footer-reviews-row`**): prominent Trustpilot link with **five gold stars** (**`#e2b227`**, not green) + “Trustpilot Reviews — **4.9 stars** out of 5”, plus visible **`support@highticketsalesacademy.com`** (`mailto`).  
 - Keep the **CJ business card** column as in those files.
 
 ---
@@ -213,7 +215,7 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 
 ## Related
 
-`.cursor/rules/htsa-enrollment-invoice-workflow.mdc` · `htsa-mastermind-member-count.mdc` (490+ mastermind wording)
+`.cursor/rules/htsa-enrollment-invoice-workflow.mdc` · `htsa-mastermind-member-count.mdc` (520+ mastermind wording) · `templates/HTSA-ENROLLMENT-PLACEMENT-NOTES.md`
 
 ---
 

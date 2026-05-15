@@ -1,5 +1,7 @@
 # HTSA enrollment invoice — frozen HTML templates
 
+**CJ reference (placement table + links):** [`HTSA-ENROLLMENT-PLACEMENT-NOTES.md`](HTSA-ENROLLMENT-PLACEMENT-NOTES.md)
+
 Shells in `templates/` use **`noindex`** and **`{{HTSA_*}}` placeholders only** (no client names baked in). **Never edit** a deployed `htsa-enrollment-*.html` to create a new person — copy a shell, fill placeholders, save a **new** root file.
 
 ## Secondary Whop plans (not in the six shells)
