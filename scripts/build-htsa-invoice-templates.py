@@ -533,6 +533,93 @@ VAL_STEP1_SINGLE = (
     "($7,000 total). Once your payment clears, move to Step 2 below.</p>"
 )
 
+# Placement-01: Whop PIF + 4-pay only (rules — no Splitit callout on page).
+PLACEMENT_01_STEP1 = (
+    "        <h4>Step 1 — Choose Your Payment</h4>\n"
+    "        <p>{{HTSA_FIRST_NAME}}, review the in-house payment options in Program Investment above, then select what you want — "
+    "<strong>$6,000</strong> paid in full or the <strong>$1,750 × 4-pay</strong> plan "
+    "($7,000 total). Once your payment clears, move to Step 2 below.</p>"
+)
+
+_PLACEMENT_01_SPLITIT_CSS = (
+    "  /* Splitit note + detail (under $6k PIF) */\n"
+    "  .invest-splitit-wrap {\n"
+    "    margin-top: 16px;\n"
+    "    padding-top: 14px;\n"
+    "    border-top: 1px solid rgba(255, 255, 255, 0.1);\n"
+    "  }\n\n"
+    "  .invest-splitit-intro {\n"
+    "    font-size: 11.5px;\n"
+    "    line-height: 1.55;\n"
+    "    color: rgba(255, 255, 255, 0.55);\n"
+    "    margin: 0 0 12px;\n"
+    "  }\n\n"
+    "  .invest-splitit-intro strong {\n"
+    "    color: rgba(255, 255, 255, 0.88);\n"
+    "  }\n\n"
+    "  .invest-splitit-card {\n"
+    "    background: rgba(255, 255, 255, 0.05);\n"
+    "    border: 1px solid rgba(255, 156, 122, 0.4);\n"
+    "    border-radius: 10px;\n"
+    "    padding: 14px 16px;\n"
+    "  }\n\n"
+    "  .invest-splitit-head {\n"
+    "    font-size: 13px;\n"
+    "    font-weight: 700;\n"
+    "    color: #ff9c7a;\n"
+    "    margin-bottom: 8px;\n"
+    "    letter-spacing: 0.02em;\n"
+    "  }\n\n"
+    "  .invest-splitit-apply {\n"
+    "    font-size: 11.5px;\n"
+    "    color: rgba(255, 255, 255, 0.78);\n"
+    "    margin: 0 0 10px;\n"
+    "    line-height: 1.55;\n"
+    "  }\n\n"
+    "  .invest-splitit-fine {\n"
+    "    font-size: 10.5px;\n"
+    "    line-height: 1.6;\n"
+    "    color: rgba(255, 255, 255, 0.48);\n"
+    "    margin: 0;\n"
+    "  }\n\n"
+)
+
+_PLACEMENT_01_SPLITIT_HTML = (
+    '          <div class="invest-splitit-wrap">\n'
+    '            <p class="invest-splitit-intro">On the Whop checkout page, scroll to the <strong>bottom of the payment options</strong> — '
+    "you'll see <strong>Splitit</strong> (monthly payments on your card). That's where you can set up the plan below.</p>\n"
+    '            <div class="invest-splitit-card">\n'
+    '              <div class="invest-splitit-head">Splitit — $500/month × 12 months</div>\n'
+    '              <p class="invest-splitit-apply"><strong>Apply here:</strong> use the same <strong>green "Choose PIF — Pay $6,000"</strong> '
+    "button above, then select <strong>Splitit</strong> at the bottom of Whop's payment methods to complete setup.</p>\n"
+    "              <p class=\"invest-splitit-fine\">No credit check — uses the existing limit on your Visa or Mastercard. A hold is placed on "
+    "your card for the total amount. As you make each $500 monthly payment, that same amount is released back to your available credit.</p>\n"
+    "            </div>\n"
+    "          </div>\n"
+)
+
+_PLACEMENT_01_HERO_OLD = (
+    "{{HTSA_FIRST_NAME}}, I really enjoyed speaking with you earlier. Your background as a retired engineer came through in how thoughtfully "
+    "you approached the opportunity, and it was clear from our conversation that you're someone who takes their future seriously and is ready "
+    "to make a real change — exactly the kind of person we love working with here at High Ticket Sales Academy."
+)
+
+_PLACEMENT_01_HERO_NEW = (
+    "{{HTSA_FIRST_NAME}}, I really enjoyed speaking with you earlier. It was clear from our conversation that you're someone who takes their "
+    "future seriously and is ready to make a real change — and that's exactly the kind of person we love working with here at High Ticket Sales Academy."
+)
+
+
+def placement_01_closer_cash_only(html: str) -> str:
+    """Closer cash-only shell 01: generic hero, no Splitit block/CSS, Step 1 matches PIF + 4-pay only."""
+    html = html.replace(_PLACEMENT_01_HERO_OLD, _PLACEMENT_01_HERO_NEW, 1)
+    if _PLACEMENT_01_SPLITIT_CSS in html:
+        html = html.replace(_PLACEMENT_01_SPLITIT_CSS, "", 1)
+    html = html.replace(_PLACEMENT_01_SPLITIT_HTML, "", 1)
+    html = html.replace(VAL_STEP1_SINGLE, PLACEMENT_01_STEP1, 1)
+    return html
+
+
 DUAL_STEP1_CASH = (
     "        <h4>Step 1 — Choose Your Payment</h4>\n"
     "        <p>{{HTSA_FIRST_NAME}}, review the <strong>Closer</strong> and <strong>Setter</strong> payment options in Program Investment above. "
@@ -656,8 +743,10 @@ def main() -> None:
     trameil_raw = (ROOT / "htsa-enrollment-trameil-lee.html").read_text(encoding="utf-8")
     wayne_text = CANONICAL_LAYOUT_REF.read_text(encoding="utf-8")
 
-    p01 = add_noindex(multi_replace(val_raw, val_tappan_pairs()))
-    p01 = sync_ref_strip_from_wayne(p01, wayne_text)
+    # Closer cash-only "01" omits Splitit; dual 05/06 still use Val-style closer (Splitit under PIF).
+    p01_val = add_noindex(multi_replace(val_raw, val_tappan_pairs()))
+    p01_val = sync_ref_strip_from_wayne(p01_val, wayne_text)
+    p01 = placement_01_closer_cash_only(p01_val)
     p03 = add_noindex(multi_replace(trameil_raw, trameil_pairs()))
     p03 = setter_cash_only(p03)
     p03 = sync_ref_strip_from_wayne(p03, wayne_text)
@@ -672,7 +761,7 @@ def main() -> None:
     p05 = build_dual_template(
         val_src=val_raw,
         jocelyn_src=jocelyn_raw,
-        closer_html=p01,
+        closer_html=p01_val,
         setter_html=p03,
         financing=False,
     )
