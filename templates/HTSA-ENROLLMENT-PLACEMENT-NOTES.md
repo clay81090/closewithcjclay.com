@@ -17,7 +17,7 @@ Authoritative for **which frozen file** to use. Full agent procedure: `.cursor/s
 
 - **01** — Source: `htsa-enrollment-val-tappan.html` — $6k PIF + 4-pay only (**no Splitit**); Terms + Apps Script + orange banner; `{{HTSA_*}}`.
 - **02** — Source: `htsa-enrollment-thomas-rulof.html` + Splitit under PIF + **Closer** ClarityPay **$7,200** `https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/` + Flexxbuy. **Never** Setter `plan_z5iuUhSgm9seH` on Closer. No PayVa.
-- **03 / 04** — Source: `htsa-enrollment-trameil-lee.html`; **03** has financing stripped; Terms/hint = payment-only (not “financing”).
+- **03 / 04** — Source: `htsa-enrollment-trameil-lee.html`; **03** has financing stripped; Terms/hint = payment-only (not “financing”). **03** header `Payment:` and Prepared For `Payment:` use the **short Wayne line** (*Select payment option below*); no `Pricing:` row in billing. Whop/USD amounts stay **only** under Program Investment (`setter_cash_only` in `scripts/build-htsa-invoice-templates.py`).
 - **05 / 06** — Jocelyn header + combined curriculum on Val shell; one Terms gate + one `#invest-pay-zone`; Closer invest-box then Setter invest-box; footer card title **Closer & Setter**; no PayVa.
 - **Guarantee** — Orange block in all six; omit only if CJ says **no guarantee**.
 

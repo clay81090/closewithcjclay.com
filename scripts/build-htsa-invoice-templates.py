@@ -176,6 +176,10 @@ def trameil_pairs() -> list[tuple[str, str]]:
         ('data-email="tleelhs@gmail.com"', 'data-email="{{HTSA_EMAIL}}"'),
         ('data-full-name="Trameil Lee"', 'data-full-name="{{HTSA_FULL_NAME}}"'),
         (
+            "<title>HTSA Setter Invoice — Trameil Lee</title>",
+            "<title>Certified HTS Setter — {{HTSA_FULL_NAME}} | Certified High Ticket Setter Program (template)</title>",
+        ),
+        (
             "<title>Certified HTS Setter — Trameil Lee | Certified High Ticket Setter Program</title>",
             "<title>Certified HTS Setter — {{HTSA_FULL_NAME}} | Certified High Ticket Setter Program (template)</title>",
         ),
@@ -202,6 +206,11 @@ def trameil_pairs() -> list[tuple[str, str]]:
 
 
 def setter_cash_only(html: str) -> str:
+    """Strip third-party financing; keep header/billing Payment line short (Wayne layout).
+
+    Full Whop amounts belong in Program Investment only — long Payment lines in the
+    header broke flex layout and no longer matched canonical closer invoices.
+    """
     marker_start = (
         '\n      <hr class="invest-zone-rule" aria-hidden="true">\n\n'
         '      <div class="invest-section-kicker invest-section-kicker--accent">Third-Party Financing Options</div>'
@@ -220,14 +229,45 @@ def setter_cash_only(html: str) -> str:
         "Once you complete one of the Setter in-house payment options above, text CJ right away so Setter access can be granted.</div>"
     )
     html = html[:i] + new_note + html[j + len(marker_note) :]
+
+    wayne_payment_meta = '<p><strong>Payment:</strong> Select payment option below</p>'
+    html = html.replace(
+        "<p><strong>Payment:</strong> USD — in-house Whop ($3,000 PIF or $3,150 / 3-pay)</p>",
+        wayne_payment_meta,
+    )
     html = html.replace(
         "<p><strong>Payment:</strong> USD — select option below</p>",
-        "<p><strong>Payment:</strong> USD — in-house Whop ($3,000 PIF or $3,150 / 3-pay)</p>",
+        wayne_payment_meta,
+    )
+
+    hero_p2_trameil = (
+        '<p style="margin-top:10px;">Everything you need to review and get started is right here. '
+        "The biggest difference at HTSA is that you are not just another number — we are true experts in high ticket sales, "
+        "with <strong>around-the-clock support</strong> and placement into roles from a network of 300+ partner companies. "
+        "Take your time reviewing and reach out to CJ with any questions or assistance with enrollment.</p>"
+    )
+    hero_p2_wayne = (
+        '<p style="margin-top:10px;">Everything you need to review and get started is right here. '
+        "The biggest difference at HTSA is that you are not just another number — we are not influencers, but true experts "
+        "in the field of high ticket sales. You have around-the-clock support, and once certified, our team walks you directly "
+        "into roles from a network of 300+ partner companies. Take your time reviewing and reach out to CJ with any questions "
+        "or assistance with enrollment.</p>"
+    )
+    html = html.replace(hero_p2_trameil, hero_p2_wayne)
+
+    billing_wayne_tail = "Program: Certified HTS Setter<br>\n        Payment: Select payment option below"
+    html = html.replace(
+        "Program: Certified HTS Setter<br>\n        Pricing: <strong>U.S. dollars (USD)</strong><br>\n        Payment: Select option below (charged in USD)",
+        billing_wayne_tail,
     )
     html = html.replace(
-        "Payment: Select option below (charged in USD)",
-        "Payment: In-house Whop — $3,000 PIF or $1,050 × 3-pay ($3,150 total); USD",
+        "Program: Certified HTS Setter<br>\n        Pricing: <strong>U.S. dollars (USD)</strong><br>\n        Payment: In-house Whop — $3,000 PIF or $1,050 × 3-pay ($3,150 total); USD",
+        billing_wayne_tail,
     )
+
+    # Logo alt matches Wayne / Val (brand), not a personal name.
+    if 'class="logo-icon"' in html and 'alt="Chad Aleo"' in html:
+        html = html.replace('alt="Chad Aleo"', 'alt="High Ticket Sales Academy"', 1)
     html = html.replace(
         "<p>{{HTSA_FIRST_NAME}}, review the <strong>Setter</strong> payment and financing options in Program Investment above — <strong>$3,000</strong> paid in full, the <strong>$1,050 × 3-pay</strong> plan ($3,150 total), or a soft pre-qualification link for <strong>ClarityPay</strong> or <strong>Flexxbuy</strong>. Once your payment clears or your financing is approved, move to Step 2 below.</p>",
         "<p>{{HTSA_FIRST_NAME}}, review the <strong>Setter</strong> payment options in Program Investment above — <strong>$3,000</strong> paid in full or the <strong>$1,050 × 3-pay</strong> plan ($3,150 total). Once your payment clears, move to Step 2 below.</p>",

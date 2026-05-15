@@ -118,6 +118,7 @@ hts_terms_gate_<firstname>_<lastname>_v1
 ## Setter defaults
 
 - **Program copy:** Certified HTS Setter / Certified High Ticket Setter Program; invoice badge **Setter Program Overview**.  
+- **Header / billing (placement-03 only):** `Payment:` in the dark header and in **Prepared For** must stay the short line **Select payment option below** (Wayne-style). Do **not** paste long Whop / USD amount copy there — pricing belongs under **Program Investment** only. Frozen file behavior comes from `setter_cash_only` in `scripts/build-htsa-invoice-templates.py`.  
 - **Curriculum:** **30** core modules; **three** levels of AI roleplay; certification **Certified High Ticket Setter**; setter placement language (no closer modules/pricing/timeline).  
 - **Default cash pricing:** PIF **$3,000**; **3-pay** **$1,050** today / **$3,150** total.  
 - **Default links:**  

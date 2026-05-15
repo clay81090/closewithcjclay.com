@@ -33,7 +33,7 @@ The agent infers everything else from the **defaults below** unless CJ overrides
 
 ## Frozen templates in `templates/` (fastest path)
 
-**CJ defaults (frozen shells):** Orange performance guarantee **on** in **every** shell. **Omit** it **only** if CJ explicitly says **no guarantee**. **PayVa** is **never** baked into shells — use `templates/snippets/payva-financing-block.html` only when CJ says **PayVa**. **`htsa-placement-01` (Closer cash only)** has **no Splitit** — Whop PIF + 4-pay only. **Other Closer** frozen shells include **Splitit** under $6k PIF unless CJ says **no Splitit**; **Setter** has **no** Splitit. Template HTML uses **`{{HTSA_*}}` placeholders only** — no personal names in filenames as “clients.”
+**CJ defaults (frozen shells):** Orange performance guarantee **on** in **every** shell. **Omit** it **only** if CJ explicitly says **no guarantee**. **PayVa** is **never** baked into shells — use `templates/snippets/payva-financing-block.html` only when CJ says **PayVa**. **`htsa-placement-01` (Closer cash only)** has **no Splitit** — Whop PIF + 4-pay only. **Other Closer** frozen shells include **Splitit** under $6k PIF unless CJ says **no Splitit**; **Setter** has **no** Splitit. **`htsa-placement-03`** keeps header + billing `Payment:` as the short **Select payment option below** line (Wayne-style); amounts live only under Program Investment (`setter_cash_only` in the build script). Template HTML uses **`{{HTSA_*}}` placeholders only** — no personal names in filenames as “clients.”
 
 | CJ row | File |
 |--------|------|
