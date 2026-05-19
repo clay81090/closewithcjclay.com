@@ -12,7 +12,7 @@ alwaysApply: true
 
 ## CJ paste shortcut (primary on-call flow)
 
-When CJ pastes **only** a block in this shape (blank lines OK), **do not** ask them to type long shell commands. **Parse the block, map placement, normalize phone to E.164, run instantiate with `--overwrite --ship`, return the live URL.**
+When CJ pastes **only** a block in this shape (blank lines OK), **do not** ask them to type long shell commands. **Parse the block, map placement, normalize phone to E.164, run instantiate with `--overwrite --ship`, wait for script output `READY`, then return the live URL** (never before `READY` — avoids GitHub Pages 404).
 
 **Canonical paste:**
 
@@ -255,8 +255,9 @@ JSON via URL-encoded **`payload=`** POST. Align with `hts-enrollment-webapp-goog
 5. **`git add`** **only** the new HTML (and rule/skill if edited in the **same** task) — never scratch/review artifacts.  
 6. **`git commit`** + **`git push`** to **`origin/main`** (or the repo’s documented deploy branch) **unless** CJ explicitly says **draft only / do not push**. Live **closewithcjclay.com** pages come from this repository — skipping push is the usual cause of **404** on newly built invoice URLs.  
 7. Return **exactly:** `https://closewithcjclay.com/htsa-enrollment-{slug}.html` — **no** `?v=` unless CJ requests cache-bust.  
-   - **Typo guard:** Links must use **`htsa-enrollment-`** (with **a**). The pattern **`hts-enrollment-`** (no **a**) **404s**. For Kristijo Sherman, a stub redirect exists at **`hts-enrollment-kristijo-sherman.html`** — prefer the canonical **`htsa-`** URL when sharing.  
-   - **Timing:** After a successful push, allow **1–5 minutes** before the URL serves **200**; brief **404** is normal until GitHub Pages finishes — see **“If the live link returns 404”** above.
+   - **`htsa-instantiate-invoice.py --ship`** (and **`htsa-paste-invoice.py`**, which calls it) **polls the live URL** for up to **6 minutes** after push and only prints **`READY`** + the URL when **`HTTP 2xx`** — **do not send CJ the link until you see `READY`** (or run `sh scripts/check-enrollment-live.sh {slug}`).  
+   - **Typo guard:** Links must use **`htsa-enrollment-`** (with **a**). The pattern **`hts-enrollment-`** (no **a**) **404s** except redirect stubs.  
+   - **Manual check:** `sh scripts/check-enrollment-live.sh {slug}` — same poll loop, exits **0** when live.
 
 ---
 

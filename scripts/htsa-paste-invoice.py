@@ -23,6 +23,9 @@ From repo root — paste, then EOF (Ctrl-D) or use a here-doc:
 Options:
   --no-ship     Write HTML only (no git commit/push)
   --dry-run     Print parsed fields and exit
+
+With default --ship, htsa-instantiate-invoice.py polls until the live URL returns
+HTTP 2xx, then prints READY and the URL. Do not share the link before READY.
 """
 from __future__ import annotations
 

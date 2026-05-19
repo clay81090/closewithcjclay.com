@@ -16,7 +16,14 @@ import argparse
 import re
 import subprocess
 import sys
+import time
+import urllib.error
+import urllib.request
 from pathlib import Path
+
+# After push, poll closewithcjclay.com until GitHub Pages serves the new file.
+LIVE_POLL_INTERVAL_SEC = 10
+LIVE_POLL_TIMEOUT_SEC = 360  # 6 minutes
 
 
 PLACEMENT_TEMPLATES: dict[str, str] = {
@@ -89,6 +96,42 @@ def run_git_ship(root: Path, filename: str, message: str) -> None:
     subprocess.run(["git", "push", "origin", "main"], cwd=root, check=True)
 
 
+def http_status(url: str) -> int | None:
+    """HEAD first, then GET — returns status code or None on network failure."""
+    for method in ("HEAD", "GET"):
+        try:
+            req = urllib.request.Request(url, method=method)
+            with urllib.request.urlopen(req, timeout=25) as resp:
+                return resp.status
+        except urllib.error.HTTPError as e:
+            return e.code
+        except OSError:
+            continue
+    return None
+
+
+def wait_for_live_url(
+    url: str,
+    *,
+    timeout_sec: int = LIVE_POLL_TIMEOUT_SEC,
+    interval_sec: int = LIVE_POLL_INTERVAL_SEC,
+) -> bool:
+    """Poll until url returns HTTP 2xx (GitHub Pages after push)."""
+    deadline = time.monotonic() + timeout_sec
+    attempt = 0
+    print(f"Waiting for live page (up to {timeout_sec // 60} min)…", file=sys.stderr)
+    while time.monotonic() < deadline:
+        attempt += 1
+        code = http_status(url)
+        if code is not None and 200 <= code < 300:
+            print(f"  attempt {attempt}: HTTP {code} — ready.", file=sys.stderr)
+            return True
+        label = f"HTTP {code}" if code is not None else "no response"
+        print(f"  attempt {attempt}: {label} — retry in {interval_sec}s…", file=sys.stderr)
+        time.sleep(interval_sec)
+    return False
+
+
 def main() -> None:
     root = Path(__file__).resolve().parent.parent
     ap = argparse.ArgumentParser(description="Create htsa-enrollment-{slug}.html from a frozen template.")
@@ -129,6 +172,18 @@ def main() -> None:
         default="",
         help="With --ship, custom commit subject (default: auto from client name).",
     )
+    ap.add_argument(
+        "--no-wait-live",
+        action="store_true",
+        help="With --ship, return immediately after push (do not poll for HTTP 200).",
+    )
+    ap.add_argument(
+        "--wait-timeout",
+        type=int,
+        default=LIVE_POLL_TIMEOUT_SEC,
+        metavar="SEC",
+        help=f"Max seconds to poll for live 200 with --ship (default {LIVE_POLL_TIMEOUT_SEC}).",
+    )
     args = ap.parse_args()
 
     tpl = resolve_template(args.template, root)
@@ -161,9 +216,7 @@ def main() -> None:
 
     out.write_text(text, encoding="utf-8")
     url = f"https://closewithcjclay.com/htsa-enrollment-{slug}.html"
-    print(out)
-    print(url)
-    print()
+    print(out, file=sys.stderr)
 
     if args.ship:
         msg = args.commit_message.strip() or f"Update HTSA enrollment invoice for {args.full_name.strip()}."
@@ -172,17 +225,36 @@ def main() -> None:
         except subprocess.CalledProcessError as e:
             print("git ship failed — commit/push yourself.", file=sys.stderr)
             raise SystemExit(e.returncode) from e
-        print("Pushed to origin/main. Allow 1–5 minutes for GitHub Pages, then hard-refresh.")
+        print("Pushed to origin/main.", file=sys.stderr)
+        if args.no_wait_live:
+            print(url)
+            print(
+                "\n(no live wait) Run: sh scripts/check-enrollment-live.sh "
+                f"{slug}",
+                file=sys.stderr,
+            )
+        elif wait_for_live_url(url, timeout_sec=args.wait_timeout):
+            # Last stdout line = verified URL for agents / CJ to copy.
+            print("READY")
+            print(url)
+        else:
+            print(
+                f"Push OK but {url} did not return HTTP 200 within {args.wait_timeout}s.",
+                file=sys.stderr,
+            )
+            print(
+                f"Retry: sh scripts/check-enrollment-live.sh {slug}",
+                file=sys.stderr,
+            )
+            print(url, file=sys.stderr)
+            raise SystemExit(2)
     else:
-        print("Live URL will 404 until this file is on origin/main and GitHub Pages finishes building.")
-        print("Or rerun with --ship to add, commit, and push in one step.")
-        print("Required (manual):")
+        print(url)
         print(
-            f'  git add {out.name} && git commit -m "Add HTSA enrollment invoice for {args.full_name.strip()}." && git push origin main'
+            "\nLocal file only — live URL will 404 until pushed. "
+            "Rerun with --overwrite --ship to publish and wait for 200.",
+            file=sys.stderr,
         )
-        print("After push: wait 1–5 minutes if you still see 404; then hard-refresh (⌘⇧R / Ctrl+Shift+R).")
-
-    print(f'Verify: curl -sI "{url}" | head -1   # should show HTTP/2 200 after deploy')
 
 
 if __name__ == "__main__":

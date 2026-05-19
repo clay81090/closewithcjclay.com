@@ -33,9 +33,9 @@ Phone Number: +1 (978) 404-0928
 Setter - Cash only
 ```
 
-**You (the agent) must:** parse name / email / phone / program line; map “Setter - Cash only” → **`03`** (or use `templates/htsa-placement-….html` if given); phone display → **E.164** (`+1978…`); run **`python3 scripts/htsa-paste-invoice.py`** with that text on stdin **or** equivalent `htsa-instantiate-invoice.py … --overwrite --ship`; return **`https://closewithcjclay.com/htsa-enrollment-{slug}.html`**.
+**You (the agent) must:** parse name / email / phone / program line; map “Setter - Cash only” → **`03`** (or use `templates/htsa-placement-….html` if given); phone display → **E.164** (`+1978…`); run **`python3 scripts/htsa-paste-invoice.py`** with that text on stdin **or** equivalent `htsa-instantiate-invoice.py … --overwrite --ship`; **wait for script output `READY`** then return the URL on the next line — **never send the link before `READY`** (avoids GitHub Pages 404).
 
-- **Paste script (Terminal):** `python3 scripts/htsa-paste-invoice.py` then paste block, **Ctrl-D**. Default **`--ship`**. **`--dry-run`** to verify parse; **`--no-ship`** to skip git.
+- **Paste script (Terminal):** `python3 scripts/htsa-paste-invoice.py` then paste block, **Ctrl-D**. Default **`--ship`** (push + poll until live). **`--dry-run`** to verify parse; **`--no-ship`** to skip git. Manual poll: **`sh scripts/check-enrollment-live.sh {slug}`**.
 - If CJ says **do not redo** a named invoice (already perfect), **skip** — do not overwrite.
 
 **Placement phrases → id:** Closer cash only `01` · Closer cash + financing `02` · Setter cash only `03` · Setter cash + financing `04` · Closer & Setter cash only `05` · Closer & Setter cash + financing `06`.
@@ -233,8 +233,8 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 - **No PayVa** unless CJ asked; **Splitit** only where the page includes it (**placement-01** has none); **no Splitit** on setter.  
 - **Flexxbuy** spelled with two x’s.  
 - Mobile layout consistent with recent invoices (Zachary / Chad patterns).  
-- **New invoice file is committed and pushed** so the live URL does not 404.  
-- **If the URL 404s immediately after push:** wait **1–5 minutes** (GitHub Pages rebuild), then **hard-refresh**; confirm with `sh scripts/check-enrollment-live.sh {slug}` or `curl -sI https://closewithcjclay.com/htsa-enrollment-{slug}.html`. See workflow rule **“If the live link returns 404”**.
+- **New invoice file is committed and pushed**; with **`--ship`**, instantiate script **polls until HTTP 2xx** before printing **`READY`**.  
+- **Do not return the URL to CJ until `READY`** (or `check-enrollment-live.sh` exits 0). If poll times out, say push succeeded and retry in 1–2 min — see workflow rule **“If the live link returns 404”**.
 
 ---
 
