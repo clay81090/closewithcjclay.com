@@ -1066,6 +1066,63 @@
   .terms-clarify-list li:last-child {
     margin-bottom: 0;
   }
+  /* Scrollable enrollment terms quick-read (partnership tone; refunds last) */
+  .terms-clarify-scroll {
+    max-height: 220px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 6px;
+    margin: 0 0 10px;
+  }
+
+  .terms-clarify-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .terms-clarify-scroll::-webkit-scrollbar-thumb {
+    background: rgba(0, 154, 94, 0.35);
+    border-radius: 3px;
+  }
+
+  .terms-clarify-group {
+    margin-bottom: 14px;
+  }
+
+  .terms-clarify-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .terms-clarify-group-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin: 0 0 6px;
+  }
+
+  .terms-clarify-group .terms-clarify-list {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #334155;
+  }
+
+  .terms-clarify-partnership-lead {
+    margin: 0 0 12px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: #334155;
+  }
+
+  .terms-clarify-footnote {
+    margin: 10px 0 0;
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+
 
   /* Subtle member stories + book (above footer; site / Trustpilot / YouTube stay in footer) */
   .ref-strip {
@@ -1671,25 +1728,57 @@
          data-client-slug="{{HTSA_CLIENT_SLUG}}">
       <div class="hts-terms-agreement-form" id="hts-terms-agreement-form">
         <div class="hts-terms-agreement-title">Terms agreement</div>
-        <p class="hts-terms-agreement-lead">Open the Terms of Service PDF, review the clarification below about lifetime access and included services, confirm you agree, then record your acceptance to unlock payment and financing buttons below.</p>
+                <p class="hts-terms-agreement-lead">Quick read below (~30 sec) → check the box → <strong>Record agreement</strong> → choose payment. Full legal Terms stay in the PDF.</p>
         <p style="margin:0;">
           <a id="hts-terms-pdf-link-top" href="https://closewithcjclay.com/HTSA-Terms-of-Service.pdf" target="_blank" rel="noopener noreferrer" class="hts-terms-agreement-pdf">View Full Terms of Service (PDF)</a>
         </p>
         <div class="terms-clarify hts-terms-gate-clarify">
-          <div class="terms-clarify-title">Lifetime Access Clarification</div>
-          <p style="margin:0 0 8px;color:var(--navy);font-weight:600;">You receive:</p>
-          <ul class="terms-clarify-list">
-            <li>Lifetime access to the course modules</li>
-            <li>Lifetime access to live group coaching calls with Chad</li>
-            <li>Lifetime access to the closers and setters mastermind communities</li>
-            <li><strong style="color:var(--navy);">1-on-1 coaching calls</strong> — included at <strong style="color:var(--navy);">no additional fee</strong>. Calls must be used within three months of your program start date unless otherwise approved by HTSA.</li>
-            <li><strong style="color:var(--navy);">AI role-play platform</strong> — included while you are in the academy. After you complete the program and land your offer, you may keep the platform for <strong style="color:var(--navy);">$35/month</strong> if you choose. It is not mandatory; it is an optional tool if it helps your performance in your role.</li>
-          </ul>
+          <div class="terms-clarify-title">Enrollment summary — plain English</div>
+          <p class="terms-clarify-partnership-lead"><strong>Fair deal:</strong> you show up and do the work; HTSA trains, coaches, and supports placement. The orange box above confirms <strong>your</strong> performance guarantee for this enrollment.</p>
+          <div class="terms-clarify-scroll" tabindex="0" aria-label="Enrollment terms summary">
+            <div class="terms-clarify-group">
+              <div class="terms-clarify-group-title">What’s included (HTSA’s part)</div>
+              <ul class="terms-clarify-list">
+                <li><strong>Lifetime access</strong> to your program’s course modules.</li>
+                <li><strong>Live group coaching</strong> (Tues 12:00 PM EST · Wed 5:00 PM EST) — lifetime access.</li>
+                <li><strong>Facebook Mastermind</strong> — lifetime access to the closers and setters communities.</li>
+                <li><strong>1-on-1 coaching</strong> included — schedule within <strong>3 months</strong> of your start unless HTSA approves an extension.</li>
+                <li><strong>AI role-play</strong> while you’re in the academy; optional <strong>$35/month</strong> after placement if you keep it.</li>
+              </ul>
+            </div>
+            <div class="terms-clarify-group">
+              <div class="terms-clarify-group-title">Your commitment (your part)</div>
+              <ul class="terms-clarify-list">
+                <li>Complete <strong>all</strong> course materials, roleplays, 1-on-1 training, and certification.</li>
+                <li>Attend at least <strong>one group coaching call per week</strong> while in the program.</li>
+                <li>Apply to at least <strong>50</strong> qualifying high-ticket closer or SDR/Setter roles — keep proof (screenshots or emails).</li>
+                <li>Participate in good faith — this is a partnership, not a passive purchase.</li>
+              </ul>
+            </div>
+            <div class="terms-clarify-group">
+              <div class="terms-clarify-group-title">Your performance guarantee (this enrollment)</div>
+              <ul class="terms-clarify-list">
+                <li>The orange <strong>Performance Guarantee — Confirmed</strong> banner means HTSA has <strong>confirmed your guarantee for this enrollment</strong> on this page.</li>
+                <li>The PDF may list other eligibility rules (such as prior sales experience). <strong>For you, that experience requirement is waived</strong> — your guarantee follows the orange confirmation and the steps in <em>Your commitment</em> above.</li>
+                <li>If you complete <strong>your part</strong> and do not secure a qualifying role within <strong>6 months</strong> of certification, you may qualify for a <strong>full refund</strong> (documentation required).</li>
+              </ul>
+            </div>
+            <div class="terms-clarify-group">
+              <div class="terms-clarify-group-title">Refund policy (read last)</div>
+              <ul class="terms-clarify-list">
+                <li>Fees are in <strong>U.S. dollars (USD)</strong>. Missed payments may suspend access; balances 14+ days late may go to collections.</li>
+                <li><strong>No refunds</strong> after purchase except under your confirmed performance guarantee above.</li>
+                <li><strong>All sales are final.</strong> You must be <strong>18+</strong> (or have a guardian sign). By checking the box you agree to the full PDF Terms and this summary.</li>
+              </ul>
+            </div>
+          </div>
+          <p class="terms-clarify-footnote">This summary helps you enroll quickly; the PDF is the full contract (payment, IP, recordings, and all other terms).</p>
         </div>
         <label class="hts-terms-agreement-checkbox" for="hts-terms-checkbox">
           <input type="checkbox" id="hts-terms-checkbox" autocomplete="off" />
-          <span>I have read and agree to the Terms of Service linked above.</span>
+          <span>I agree to the HTSA Terms of Service and Refund Policy (PDF), including <strong>no refund except the performance guarantee confirmed for my enrollment</strong>.</span>
         </label>
+
         <button type="button" id="hts-terms-confirm-btn" class="hts-terms-agreement-btn" disabled>Record agreement &amp; unlock payments</button>
       </div>
       <p id="hts-terms-agreement-msg" class="hts-terms-agreement-msg hts-terms-msg-below-fold" role="status" aria-live="polite"></p>
@@ -1705,7 +1794,7 @@
       <div class="invest-program-desc">All services described above — training platform, AI roleplay, live coaching with Chad, certification, job placement, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
 
       <div class="invest-section-kicker invest-section-kicker--accent">In-House Cash Payment Options</div>
-      <p class="invest-access-hint">Either option includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
+      <p class="invest-access-hint">All three options include <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
       <div class="invest-grid">
 
         <div class="invest-option-block">
@@ -1713,7 +1802,7 @@
           <div class="invest-option-head invest-option-head--pay">
             <div>
               <div class="invest-option-title">Paid in Full</div>
-              <div class="invest-option-sub">Best value — pay the remainder by day 30 and your total is only $6,000.</div>
+              <div class="invest-option-sub">Best overall value — $6,000 one-time (save $600 vs. the 12-month Splitit plan).</div>
             </div>
             <div class="invest-price-stack">
               <div class="invest-price-big">$6,000</div>
@@ -1723,18 +1812,38 @@
           <div class="invest-option-actions invest-option-actions--pay">
             <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $6,000 →</a>
           </div>
-          <div class="invest-splitit-wrap">
-            <p class="invest-splitit-intro">On the Whop checkout page, scroll to the <strong>bottom of the payment options</strong> — you'll see <strong>Splitit</strong> (monthly payments on your card). That's where you can set up the plan below.</p>
-            <div class="invest-splitit-card">
-              <div class="invest-splitit-head">Splitit — $500/month × 12 months</div>
-              <p class="invest-splitit-apply"><strong>Apply here:</strong> use the same <strong>green "Choose PIF — Pay $6,000"</strong> button above, then select <strong>Splitit</strong> at the bottom of Whop's payment methods to complete setup.</p>
-              <p class="invest-splitit-fine">No credit check — uses the existing limit on your Visa or Mastercard. A hold is placed on your card for the total amount. As you make each $500 monthly payment, that same amount is released back to your available credit.</p>
+        </div>
+
+        <div class="invest-option-block invest-option-block--splitit">
+          <div class="invest-badge invest-badge--popular">Option 2 · 0% for 12 months</div>
+          <div class="invest-option-head invest-option-head--pay">
+            <div>
+              <div class="invest-option-title">Splitit — $550/month × 12 months</div>
+              <div class="invest-option-sub">0% interest. No loan application. Start tonight — keep cash in your account while you train.</div>
             </div>
+            <div class="invest-price-stack">
+              <div class="invest-price-big">$550/month</div>
+              <div class="invest-price-mini">$6,600 total program investment</div>
+            </div>
+          </div>
+          <div class="invest-option-actions invest-option-actions--pay">
+            <a href="https://whop.com/checkout/4PcFLUerpZ8E73EomZ-xA27-pI2s-WLo0-Wd4UsuNEfoL2/" class="invest-btn" target="_blank" rel="noopener noreferrer">Start With Splitit — $550/month →</a>
+          </div>
+          <div class="invest-splitit-card">
+            <div class="invest-splitit-head">How Splitit Works</div>
+            <p class="invest-splitit-fine">Uses the existing limit on your Visa or Mastercard. No loan application and no hard credit pull.</p>
+            <p class="invest-splitit-fine">A temporary authorization is placed for the total amount while you make your monthly payments. As each payment is made, that same amount is released back to your available credit.</p>
+            <ul class="invest-splitit-bullets">
+              <li>✔ Immediate access</li>
+              <li>✔ 0% interest</li>
+              <li>✔ No credit check</li>
+              <li>✔ Keep cash available while training</li>
+            </ul>
           </div>
         </div>
 
         <div class="invest-option-block">
-          <div class="invest-badge invest-badge--option">Option 2</div>
+          <div class="invest-badge invest-badge--option">Option 3</div>
           <div class="invest-option-head invest-option-head--pay">
             <div>
               <div class="invest-option-title">4 Monthly Payments</div>
@@ -1953,8 +2062,8 @@
     <div class="step-item">
       <div class="step-num">1</div>
       <div class="step-content">
-        <h4>Step 1 — Choose Your Payment or Financing</h4>
-        <p>{{HTSA_FIRST_NAME}}, review <strong>Closer</strong> and <strong>Setter</strong> options in Program Investment above. Each program has in-house Whop checkout (<strong>Closer:</strong> $6k PIF with Splitit in checkout, or $1,750 × 4-pay; <strong>Setter:</strong> $3k PIF or $1,050 × 3-pay) plus optional <strong>ClarityPay</strong> and <strong>Flexxbuy</strong> pre-qual links. Complete payment or financing for the program you are starting first, then move to Step 2.</p>
+        <h4>Step 1 — Choose Your Payment</h4>
+        <p>{{HTSA_FIRST_NAME}}, review the in-house payment options in Program Investment above, then select what you want — <strong>$6,000</strong> paid in full (or <strong>Splitit</strong> inside that same Whop checkout) or the <strong>$1,750 × 4-pay</strong> plan ($7,000 total). Once your payment clears, move to Step 2 below.</p>
       </div>
     </div>
 
@@ -2000,7 +2109,7 @@
       <div class="step-num">4</div>
       <div class="step-content">
         <h4>Join the HTSA Mastermind Community</h4>
-        <p>Request access to the private Facebook Mastermind — where all live coaching call replays are posted and 520+ members support each other 24/7.</p>
+        <p>Request access to the private Facebook Mastermind — where all live coaching call replays are posted and 540+ members support each other 24/7.</p>
         <a href="https://www.facebook.com/groups/1039656943556821" class="step-link" target="_blank">Request Access on Facebook →</a>
       </div>
     </div>

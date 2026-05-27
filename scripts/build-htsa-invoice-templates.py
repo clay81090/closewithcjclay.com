@@ -5,8 +5,8 @@ Does not modify any htsa-enrollment-*.html at repo root except when you separate
 scripts/rebuild-htsa-demo-enrollment-pages.py (refreshes htsa-enrollment-demo-*.html).
 
 Sources (read-only):
-  - Closer cash: htsa-enrollment-val-tappan.html
-  - Closer cash + financing: htsa-enrollment-thomas-rulof.html + Splitit under PIF
+  - Closer cash: htsa-enrollment-val-tappan.html → three in-house options (PIF · Splitit · 4-pay)
+  - Closer cash + financing: htsa-enrollment-thomas-rulof.html + same three-option closer stack
     (Closer ClarityPay must stay on the $7,200 Whop checkout — never the Setter plan.)
   - Setter: htsa-enrollment-trameil-lee.html
   - Dual header/curriculum chunk: htsa-enrollment-jocelyn-navarro.html (layout only; terms/pay zone = Val/Thomas+Trameil)
@@ -109,10 +109,63 @@ def apply_canonical_enrollment_copy(html: str) -> str:
     )
     html = re.sub(
         r"posted and \d+\+ members support each other",
-        "posted and 520+ members support each other",
+        "posted and 540+ members support each other",
         html,
     )
     return html
+
+
+TERMS_MASTERMIND_LINES = {
+    "closer": "<strong>Facebook Mastermind</strong> — lifetime access to the closers community.",
+    "setter": "<strong>Facebook Mastermind</strong> — lifetime access to the setters community.",
+    "dual": "<strong>Facebook Mastermind</strong> — lifetime access to the closers and setters communities.",
+}
+
+ORANGE_GUARANTEE_BEFORE_TERMS = """  <!-- Performance guarantee — confirmed for this enrollment -->
+  <div class="enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms">
+    <div class="enrollment-guarantee-banner-title">Performance Guarantee — Confirmed for This Enrollment</div>
+    <p><strong>This performance guarantee applies to you.</strong> HTSA is <strong>confirming the program’s performance guarantee</strong> for your enrollment, provided you complete <strong>all</strong> required steps, milestones, and obligations exactly as described on this page and in your enrollment materials.</p>
+  </div>
+
+"""
+
+
+def inject_terms_scroll_css(html: str) -> str:
+    if "terms-clarify-scroll" in html or "terms-clarify-partnership-lead" in html:
+        return html
+    css = (SNIPPETS / "terms-gate-quick-read.css").read_text(encoding="utf-8")
+    anchor = "\n\n  /* Subtle member stories + book (above footer; site / Trustpilot / YouTube stay in footer) */"
+    pos = html.find(anchor)
+    if pos == -1:
+        return html
+    return html[:pos] + "\n" + css + html[pos:]
+
+
+def apply_terms_gate_quick_read(html: str, program: str = "closer") -> str:
+    """Partnership-tone scroll summary; orange banner overrides PDF 2-year experience for this enrollment."""
+    html = inject_terms_scroll_css(html)
+    form = (SNIPPETS / "terms-gate-quick-read-form.html").read_text(encoding="utf-8")
+    form = form.replace(
+        "{{HTSA_TERMS_MASTERMIND_LINE}}",
+        TERMS_MASTERMIND_LINES.get(program, TERMS_MASTERMIND_LINES["closer"]),
+    )
+    pattern = (
+        r'<p class="hts-terms-agreement-lead">.*?</label>\s*\n\s*'
+        r'<button type="button" id="hts-terms-confirm-btn"'
+    )
+    if not re.search(pattern, html, flags=re.DOTALL):
+        return html
+    replacement = form + '\n        <button type="button" id="hts-terms-confirm-btn"'
+    return re.sub(pattern, replacement, html, count=1, flags=re.DOTALL)
+
+
+def ensure_orange_guarantee_before_terms(html: str) -> str:
+    if '<div class="enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms">' in html:
+        return html
+    needle = '  <div class="hts-terms-agreement-wrap">'
+    if needle not in html:
+        return html
+    return html.replace(needle, ORANGE_GUARANTEE_BEFORE_TERMS + needle, 1)
 
 
 def jocelyn_dual_header_pairs() -> list[tuple[str, str]]:
@@ -316,38 +369,76 @@ def payva_snippet() -> str:
 """
 
 
-def splitit_snippet() -> str:
-    return """          <div class="invest-splitit-wrap">
-            <p class="invest-splitit-intro">On the Whop checkout page, scroll to the <strong>bottom of the payment options</strong> — you'll see <strong>Splitit</strong> (monthly payments on your card). That's where you can set up the plan below.</p>
-            <div class="invest-splitit-card">
-              <div class="invest-splitit-head">Splitit — $500/month × 12 months</div>
-              <p class="invest-splitit-apply"><strong>Apply here:</strong> use the same <strong>green "Choose PIF — Pay $6,000"</strong> button above, then select <strong>Splitit</strong> at the bottom of Whop's payment methods to complete setup.</p>
-              <p class="invest-splitit-fine">No credit check — uses the existing limit on your Visa or Mastercard. A hold is placed on your card for the total amount. As you make each $500 monthly payment, that same amount is released back to your available credit.</p>
+SPLITIT_WHOP_URL = (
+    "https://whop.com/checkout/4PcFLUerpZ8E73EomZ-xA27-pI2s-WLo0-Wd4UsuNEfoL2/"
+)
+
+CLOSER_ACCESS_HINT = (
+    'All three options include <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> '
+    "once your payment clears."
+)
+
+CLOSER_PIF_SUB = (
+    "Best overall value — $6,000 one-time (save $600 vs. the 12-month Splitit plan)."
+)
+
+CLOSER_STEP1 = (
+    "        <h4>Step 1 — Choose Your Payment</h4>\n"
+    "        <p>{{HTSA_FIRST_NAME}}, review the in-house payment options in Program Investment above, then choose what fits you best — "
+    "<strong>$6,000</strong> paid in full, <strong>Splitit at $550/month</strong> ($6,600 total over 12 months at 0% interest), "
+    "or the <strong>$1,750 × 4-pay</strong> plan ($7,000 total). Once your payment clears, move to Step 2 below.</p>"
+)
+
+
+def splitit_option2_block() -> str:
+    return f"""        <div class="invest-option-block invest-option-block--splitit">
+          <div class="invest-badge invest-badge--popular">Option 2 · 0% for 12 months</div>
+          <div class="invest-option-head invest-option-head--pay">
+            <div>
+              <div class="invest-option-title">Splitit — $550/month × 12 months</div>
+              <div class="invest-option-sub">0% interest. No loan application. Start tonight — keep cash in your account while you train.</div>
+            </div>
+            <div class="invest-price-stack">
+              <div class="invest-price-big">$550/month</div>
+              <div class="invest-price-mini">$6,600 total program investment</div>
             </div>
           </div>
+          <div class="invest-option-actions invest-option-actions--pay">
+            <a href="{SPLITIT_WHOP_URL}" class="invest-btn" target="_blank" rel="noopener noreferrer">Start With Splitit — $550/month →</a>
+          </div>
+          <div class="invest-splitit-card">
+            <div class="invest-splitit-head">How Splitit Works</div>
+            <p class="invest-splitit-fine">Uses the existing limit on your Visa or Mastercard. No loan application and no hard credit pull.</p>
+            <p class="invest-splitit-fine">A temporary authorization is placed for the total amount while you make your monthly payments. As each payment is made, that same amount is released back to your available credit.</p>
+            <ul class="invest-splitit-bullets">
+              <li>✔ Immediate access</li>
+              <li>✔ 0% interest</li>
+              <li>✔ No credit check</li>
+              <li>✔ Keep cash available while training</li>
+            </ul>
+          </div>
+        </div>
+
 """
 
 
-SPLITIT_CSS_BLOCK = """
-  /* Splitit note + detail (under $6k PIF) */
-  .invest-splitit-wrap {
-    margin-top: 16px;
-    padding-top: 14px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+CLOSER_CASH_CSS_BLOCK = """
+  /* Closer in-house: Splitit Option 2 (featured) + orange explainer card */
+  .invest-option-block--splitit {
+    border: 1px solid rgba(255, 156, 122, 0.55);
+    background: rgba(255, 156, 122, 0.06);
+    box-shadow: 0 0 0 1px rgba(255, 156, 122, 0.12), 0 8px 24px rgba(255, 156, 122, 0.08);
   }
 
-  .invest-splitit-intro {
-    font-size: 11.5px;
-    line-height: 1.55;
-    color: rgba(255, 255, 255, 0.55);
-    margin: 0 0 12px;
-  }
-
-  .invest-splitit-intro strong {
-    color: rgba(255, 255, 255, 0.88);
+  .invest-badge--popular {
+    background: rgba(255, 156, 122, 0.18);
+    color: #ff9c7a;
+    border: 1px solid rgba(255, 156, 122, 0.45);
+    letter-spacing: 1.2px;
   }
 
   .invest-splitit-card {
+    margin-top: 14px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 156, 122, 0.4);
     border-radius: 10px;
@@ -362,23 +453,56 @@ SPLITIT_CSS_BLOCK = """
     letter-spacing: 0.02em;
   }
 
-  .invest-splitit-apply {
-    font-size: 11.5px;
-    color: rgba(255, 255, 255, 0.78);
-    margin: 0 0 10px;
-    line-height: 1.55;
-  }
-
   .invest-splitit-fine {
     font-size: 10.5px;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.48);
-    margin: 0;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0 0 8px;
+  }
+
+  .invest-splitit-bullets {
+    margin: 10px 0 0;
+    padding: 0 0 0 16px;
+    font-size: 11px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.72);
   }
 """
 
 
-def inject_splitit_closer_invest_pay_zone(html: str) -> str:
+def splitit_snippet() -> str:
+    """Legacy snippet name — returns Option 2 block for snippets/ copy."""
+    return splitit_option2_block()
+
+
+def remove_legacy_splitit_under_pif(html: str) -> str:
+    """Remove old nested Splitit block under Option 1 PIF (full wrap + card)."""
+    pattern = (
+        r"\n\s*<div class=\"invest-splitit-wrap\">"
+        r"[\s\S]*?"
+        r"<p class=\"invest-splitit-fine\">[\s\S]*?</p>\s*\n"
+        r"\s*</div>\s*\n"
+        r"\s*</div>"
+    )
+    return re.sub(pattern, "\n", html, count=0)
+
+
+def has_splitit_option2_block(html: str) -> bool:
+    return 'class="invest-option-block invest-option-block--splitit"' in html
+
+
+def inject_closer_cash_css(html: str) -> str:
+    if ".invest-option-block--splitit {" in html and ".invest-badge--popular {" in html:
+        return html
+    old_splitit_css = "  /* Splitit note + detail (under $6k PIF) */"
+    if old_splitit_css in html:
+        html = re.sub(
+            r"  /\* Splitit note \+ detail \(under \$6k PIF\) \*/[\s\S]*?(?=  \.invest-grid \{)",
+            CLOSER_CASH_CSS_BLOCK.lstrip("\n") + "\n\n",
+            html,
+            count=1,
+        )
+        return html
     anchor_css = (
         "    opacity: 0.92;\n"
         "  }\n\n"
@@ -386,39 +510,100 @@ def inject_splitit_closer_invest_pay_zone(html: str) -> str:
         "    display: grid;"
     )
     if anchor_css not in html:
-        raise RuntimeError("inject_splitit: CSS anchor not found")
-    if ".invest-splitit-wrap" in html:
-        return html
-    html = html.replace(
+        raise RuntimeError("inject_closer_cash_css: CSS anchor not found")
+    return html.replace(
         anchor_css,
-        "    opacity: 0.92;\n  }" + SPLITIT_CSS_BLOCK + "\n\n  .invest-grid {\n    display: grid;",
+        "    opacity: 0.92;\n  }" + CLOSER_CASH_CSS_BLOCK + "\n\n  .invest-grid {\n    display: grid;",
         1,
     )
-    pif_then_opt2 = (
-        '            <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $6,000 →</a>\n'
-        "          </div>\n"
-        "        </div>\n\n"
-        '        <div class="invest-option-block">\n'
-        '          <div class="invest-badge invest-badge--option">Option 2</div>'
-    )
-    if pif_then_opt2 not in html:
-        raise RuntimeError("inject_splitit: PIF / Option 2 anchor not found")
+
+
+def apply_closer_three_inhouse_options(html: str) -> str:
+    """Closer cash stack: Option 1 PIF · Option 2 Splitit · Option 3 4-pay."""
+    html = inject_closer_cash_css(html)
+    html = remove_legacy_splitit_under_pif(html)
     html = html.replace(
-        pif_then_opt2,
-        '            <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $6,000 →</a>\n'
-        "          </div>\n"
-        + splitit_snippet()
-        + "        </div>\n\n"
-        '        <div class="invest-option-block">\n'
-        '          <div class="invest-badge invest-badge--option">Option 2</div>',
-        1,
+        'Choose PIF — Pay $6,000 →</a>\n          </div>\n          </div>\n        </div>',
+        'Choose PIF — Pay $6,000 →</a>\n          </div>\n        </div>',
+    )
+
+    html = html.replace(
+        'Either option includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.',
+        CLOSER_ACCESS_HINT,
     )
     html = html.replace(
-        "then select what you want — <strong>$6,000</strong> paid in full, the <strong>$1,750 × 4-pay</strong> plan",
-        "then select what you want — <strong>$6,000</strong> paid in full (or <strong>Splitit</strong> inside that same Whop checkout), the <strong>$1,750 × 4-pay</strong> plan",
-        1,
+        "Best value — pay the remainder by day 30 and your total is only $6,000.",
+        CLOSER_PIF_SUB,
     )
+
+    four_pay_opt2 = (
+        '        <div class="invest-option-block">\n'
+        '          <div class="invest-badge invest-badge--option">Option 2</div>\n'
+        '          <div class="invest-option-head invest-option-head--pay">\n'
+        '            <div>\n'
+        '              <div class="invest-option-title">4 Monthly Payments</div>'
+    )
+    four_pay_opt3 = (
+        '        <div class="invest-option-block">\n'
+        '          <div class="invest-badge invest-badge--option">Option 3</div>\n'
+        '          <div class="invest-option-head invest-option-head--pay">\n'
+        '            <div>\n'
+        '              <div class="invest-option-title">4 Monthly Payments</div>'
+    )
+
+    if not has_splitit_option2_block(html):
+        if four_pay_opt2 not in html and four_pay_opt3 in html:
+            html = html.replace(
+                four_pay_opt3,
+                splitit_option2_block() + four_pay_opt3,
+                1,
+            )
+        elif four_pay_opt2 in html:
+            html = html.replace(
+                four_pay_opt2,
+                splitit_option2_block() + four_pay_opt3,
+                1,
+            )
+        else:
+            raise RuntimeError("apply_closer_three_inhouse_options: 4-pay anchor not found")
+    elif four_pay_opt2 in html:
+        html = html.replace(
+            four_pay_opt2,
+            splitit_option2_block() + four_pay_opt3,
+            1,
+        )
+
+    html = update_closer_step1_paragraphs(html)
     return html
+
+
+def update_closer_step1_paragraphs(html: str) -> str:
+    old_patterns = [
+        (
+            "{{HTSA_FIRST_NAME}}, review the in-house payment options in Program Investment above, then select what you want — "
+            "<strong>$6,000</strong> paid in full or the <strong>$1,750 × 4-pay</strong> plan "
+            "($7,000 total). Once your payment clears, move to Step 2 below."
+        ),
+        (
+            "{{HTSA_FIRST_NAME}}, review the in-house payment options in Program Investment above, then select what you want — "
+            "<strong>$6,000</strong> paid in full (or <strong>Splitit</strong> inside that same Whop checkout) or the "
+            "<strong>$1,750 × 4-pay</strong> plan ($7,000 total). Once your payment clears, move to Step 2 below."
+        ),
+        (
+            "{{HTSA_FIRST_NAME}}, review the in-house payment options in Program Investment above, then select what you want — "
+            "<strong>$6,000</strong> paid in full, the <strong>$1,750 × 4-pay</strong> plan"
+        ),
+    ]
+    step1_p = CLOSER_STEP1.split("<p>", 1)[1].rsplit("</p>", 1)[0]
+    for old in old_patterns:
+        if old in html:
+            html = html.replace(old, step1_p, 1)
+    return html
+
+
+def inject_splitit_closer_invest_pay_zone(html: str) -> str:
+    """Backward-compatible name — applies three-option closer cash stack."""
+    return apply_closer_three_inhouse_options(html)
 
 
 def extract_between(html: str, start_marker: str, end_marker: str) -> str:
@@ -526,77 +711,7 @@ def compose_dual_pay_zone(closer_box: str, setter_box: str) -> str:
     )
 
 
-VAL_STEP1_SINGLE = (
-    "        <h4>Step 1 — Choose Your Payment</h4>\n"
-    "        <p>{{HTSA_FIRST_NAME}}, review the in-house payment options in Program Investment above, then select what you want — "
-    "<strong>$6,000</strong> paid in full (or <strong>Splitit</strong> inside that same Whop checkout) or the <strong>$1,750 × 4-pay</strong> plan "
-    "($7,000 total). Once your payment clears, move to Step 2 below.</p>"
-)
-
-# Placement-01: Whop PIF + 4-pay only (rules — no Splitit callout on page).
-PLACEMENT_01_STEP1 = (
-    "        <h4>Step 1 — Choose Your Payment</h4>\n"
-    "        <p>{{HTSA_FIRST_NAME}}, review the in-house payment options in Program Investment above, then select what you want — "
-    "<strong>$6,000</strong> paid in full or the <strong>$1,750 × 4-pay</strong> plan "
-    "($7,000 total). Once your payment clears, move to Step 2 below.</p>"
-)
-
-_PLACEMENT_01_SPLITIT_CSS = (
-    "  /* Splitit note + detail (under $6k PIF) */\n"
-    "  .invest-splitit-wrap {\n"
-    "    margin-top: 16px;\n"
-    "    padding-top: 14px;\n"
-    "    border-top: 1px solid rgba(255, 255, 255, 0.1);\n"
-    "  }\n\n"
-    "  .invest-splitit-intro {\n"
-    "    font-size: 11.5px;\n"
-    "    line-height: 1.55;\n"
-    "    color: rgba(255, 255, 255, 0.55);\n"
-    "    margin: 0 0 12px;\n"
-    "  }\n\n"
-    "  .invest-splitit-intro strong {\n"
-    "    color: rgba(255, 255, 255, 0.88);\n"
-    "  }\n\n"
-    "  .invest-splitit-card {\n"
-    "    background: rgba(255, 255, 255, 0.05);\n"
-    "    border: 1px solid rgba(255, 156, 122, 0.4);\n"
-    "    border-radius: 10px;\n"
-    "    padding: 14px 16px;\n"
-    "  }\n\n"
-    "  .invest-splitit-head {\n"
-    "    font-size: 13px;\n"
-    "    font-weight: 700;\n"
-    "    color: #ff9c7a;\n"
-    "    margin-bottom: 8px;\n"
-    "    letter-spacing: 0.02em;\n"
-    "  }\n\n"
-    "  .invest-splitit-apply {\n"
-    "    font-size: 11.5px;\n"
-    "    color: rgba(255, 255, 255, 0.78);\n"
-    "    margin: 0 0 10px;\n"
-    "    line-height: 1.55;\n"
-    "  }\n\n"
-    "  .invest-splitit-fine {\n"
-    "    font-size: 10.5px;\n"
-    "    line-height: 1.6;\n"
-    "    color: rgba(255, 255, 255, 0.48);\n"
-    "    margin: 0;\n"
-    "  }\n\n"
-)
-
-_PLACEMENT_01_SPLITIT_HTML = (
-    '          <div class="invest-splitit-wrap">\n'
-    '            <p class="invest-splitit-intro">On the Whop checkout page, scroll to the <strong>bottom of the payment options</strong> — '
-    "you'll see <strong>Splitit</strong> (monthly payments on your card). That's where you can set up the plan below.</p>\n"
-    '            <div class="invest-splitit-card">\n'
-    '              <div class="invest-splitit-head">Splitit — $500/month × 12 months</div>\n'
-    '              <p class="invest-splitit-apply"><strong>Apply here:</strong> use the same <strong>green "Choose PIF — Pay $6,000"</strong> '
-    "button above, then select <strong>Splitit</strong> at the bottom of Whop's payment methods to complete setup.</p>\n"
-    "              <p class=\"invest-splitit-fine\">No credit check — uses the existing limit on your Visa or Mastercard. A hold is placed on "
-    "your card for the total amount. As you make each $500 monthly payment, that same amount is released back to your available credit.</p>\n"
-    "            </div>\n"
-    "          </div>\n"
-)
+VAL_STEP1_SINGLE = CLOSER_STEP1
 
 _PLACEMENT_01_HERO_OLD = (
     "{{HTSA_FIRST_NAME}}, I really enjoyed speaking with you earlier. Your background as a retired engineer came through in how thoughtfully "
@@ -611,27 +726,22 @@ _PLACEMENT_01_HERO_NEW = (
 
 
 def placement_01_closer_cash_only(html: str) -> str:
-    """Closer cash-only shell 01: generic hero, no Splitit block/CSS, Step 1 matches PIF + 4-pay only."""
-    html = html.replace(_PLACEMENT_01_HERO_OLD, _PLACEMENT_01_HERO_NEW, 1)
-    if _PLACEMENT_01_SPLITIT_CSS in html:
-        html = html.replace(_PLACEMENT_01_SPLITIT_CSS, "", 1)
-    html = html.replace(_PLACEMENT_01_SPLITIT_HTML, "", 1)
-    html = html.replace(VAL_STEP1_SINGLE, PLACEMENT_01_STEP1, 1)
-    return html
+    """Closer cash-only shell 01: generic hero only (three-option stack applied earlier)."""
+    return html.replace(_PLACEMENT_01_HERO_OLD, _PLACEMENT_01_HERO_NEW, 1)
 
 
 DUAL_STEP1_CASH = (
     "        <h4>Step 1 — Choose Your Payment</h4>\n"
     "        <p>{{HTSA_FIRST_NAME}}, review the <strong>Closer</strong> and <strong>Setter</strong> payment options in Program Investment above. "
-    "For <strong>Closer</strong>: <strong>$6,000</strong> paid in full (or <strong>Splitit</strong> in that same Whop checkout) or the "
-    "<strong>$1,750 × 4-pay</strong> plan ($7,000 total). For <strong>Setter</strong>: <strong>$3,000</strong> paid in full or the "
+    "For <strong>Closer</strong>: <strong>$6,000</strong> paid in full, <strong>Splitit at $550/month</strong> ($6,600 total at 0% over 12 months), "
+    "or the <strong>$1,750 × 4-pay</strong> plan ($7,000 total). For <strong>Setter</strong>: <strong>$3,000</strong> paid in full or the "
     "<strong>$1,050 × 3-pay</strong> plan ($3,150 total). Complete the payment for the program you are starting first, then move to Step 2.</p>"
 )
 
 DUAL_STEP1_FIN = (
     "        <h4>Step 1 — Choose Your Payment or Financing</h4>\n"
     "        <p>{{HTSA_FIRST_NAME}}, review <strong>Closer</strong> and <strong>Setter</strong> options in Program Investment above. "
-    "Each program has in-house Whop checkout (<strong>Closer:</strong> $6k PIF with Splitit in checkout, or $1,750 × 4-pay; "
+    "Each program has in-house Whop checkout (<strong>Closer:</strong> $6k PIF, Splitit $550/mo ($6,600 total), or $1,750 × 4-pay; "
     "<strong>Setter:</strong> $3k PIF or $1,050 × 3-pay) plus optional <strong>ClarityPay</strong> and <strong>Flexxbuy</strong> pre-qual links. "
     "Complete payment or financing for the program you are starting first, then move to Step 2.</p>"
 )
@@ -735,7 +845,7 @@ def main() -> None:
     SNIPPETS.mkdir(parents=True, exist_ok=True)
 
     (SNIPPETS / "payva-financing-block.html").write_text(payva_snippet(), encoding="utf-8")
-    (SNIPPETS / "splitit-under-pif-closer.html").write_text(splitit_snippet(), encoding="utf-8")
+    (SNIPPETS / "splitit-under-pif-closer.html").write_text(splitit_option2_block(), encoding="utf-8")
 
     val_raw = (ROOT / "htsa-enrollment-val-tappan.html").read_text(encoding="utf-8")
     jocelyn_raw = (ROOT / "htsa-enrollment-jocelyn-navarro.html").read_text(encoding="utf-8")
@@ -743,9 +853,9 @@ def main() -> None:
     trameil_raw = (ROOT / "htsa-enrollment-trameil-lee.html").read_text(encoding="utf-8")
     wayne_text = CANONICAL_LAYOUT_REF.read_text(encoding="utf-8")
 
-    # Closer cash-only "01" omits Splitit; dual 05/06 still use Val-style closer (Splitit under PIF).
     p01_val = add_noindex(multi_replace(val_raw, val_tappan_pairs()))
     p01_val = sync_ref_strip_from_wayne(p01_val, wayne_text)
+    p01_val = apply_closer_three_inhouse_options(p01_val)
     p01 = placement_01_closer_cash_only(p01_val)
     p03 = add_noindex(multi_replace(trameil_raw, trameil_pairs()))
     p03 = setter_cash_only(p03)
@@ -753,7 +863,7 @@ def main() -> None:
     p04 = add_noindex(multi_replace(trameil_raw, trameil_pairs()))
     p04 = sync_ref_strip_from_wayne(p04, wayne_text)
 
-    p02 = inject_splitit_closer_invest_pay_zone(
+    p02 = apply_closer_three_inhouse_options(
         add_noindex(multi_replace(thomas_raw, closer_invest_pay_zone_financing_pairs()))
     )
     p02 = sync_ref_strip_from_wayne(p02, wayne_text)
@@ -797,6 +907,21 @@ def main() -> None:
     p04 = apply_canonical_enrollment_copy(p04)
     p05 = apply_canonical_enrollment_copy(p05)
     p06 = apply_canonical_enrollment_copy(p06)
+
+    p01 = apply_terms_gate_quick_read(p01, "closer")
+    p02 = apply_terms_gate_quick_read(p02, "closer")
+    p03 = apply_terms_gate_quick_read(p03, "setter")
+    p04 = apply_terms_gate_quick_read(p04, "setter")
+    p05 = apply_terms_gate_quick_read(p05, "dual")
+    p06 = apply_terms_gate_quick_read(p06, "dual")
+
+    practice_path = ROOT / "htsa-enrollment-cj-clay-practice.html"
+    if practice_path.is_file():
+        practice_html = practice_path.read_text(encoding="utf-8")
+        practice_html = ensure_orange_guarantee_before_terms(practice_html)
+        practice_html = apply_terms_gate_quick_read(practice_html, "closer")
+        practice_html = apply_canonical_enrollment_copy(practice_html)
+        practice_path.write_text(practice_html, encoding="utf-8")
 
     (TEMPLATES / "htsa-placement-01-closer-cash-only.html").write_text(p01, encoding="utf-8")
     (TEMPLATES / "htsa-placement-02-closer-cash-financing.html").write_text(p02, encoding="utf-8")
