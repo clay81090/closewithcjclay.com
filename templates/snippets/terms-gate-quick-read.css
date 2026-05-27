@@ -1,4 +1,4 @@
-  /* Scrollable enrollment terms quick-read (partnership tone; refunds before fair-deal close) */
+  /* Scrollable enrollment terms quick-read */
   .terms-clarify.hts-terms-gate-clarify {
     padding-top: 0;
   }
@@ -36,7 +36,7 @@
   }
 
   .terms-clarify-group {
-    margin-bottom: 14px;
+    margin-bottom: 28px;
   }
 
   .terms-clarify-group:last-child {

@@ -1147,6 +1147,86 @@
   }
 
 
+/* Scrollable enrollment terms quick-read */
+  .terms-clarify.hts-terms-gate-clarify {
+    padding-top: 0;
+  }
+
+  .terms-clarify-summary-banner {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #0b3d2e;
+    background: linear-gradient(180deg, #ecfdf5 0%, #e3f6ec 100%);
+    border-bottom: 1px solid rgba(0, 154, 94, 0.28);
+    padding: 9px 14px;
+    margin: 0 0 12px;
+    border-radius: 3px 3px 0 0;
+  }
+
+  .terms-clarify-scroll {
+    max-height: 220px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 6px;
+    margin: 0;
+  }
+
+  .terms-clarify-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .terms-clarify-scroll::-webkit-scrollbar-thumb {
+    background: rgba(0, 154, 94, 0.35);
+    border-radius: 3px;
+  }
+
+  .terms-clarify-group {
+    margin-bottom: 28px;
+  }
+
+  .terms-clarify-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .terms-clarify-group-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin: 0 0 6px;
+  }
+
+  .terms-clarify-group .terms-clarify-list {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #334155;
+  }
+
+  .terms-clarify-pdf-row {
+    margin: 14px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--mid);
+  }
+
+  .terms-clarify-pdf-row .hts-terms-agreement-pdf {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .terms-clarify-footnote {
+    margin: 8px 0 0;
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+
+
 
   /* Subtle member stories + book (above footer; site / Trustpilot / YouTube stay in footer) */
   .ref-strip {
@@ -1762,7 +1842,7 @@
          data-client-slug="cj-clay-practice">
       <div class="hts-terms-agreement-form" id="hts-terms-agreement-form">
         <div class="hts-terms-agreement-title">Terms agreement</div>
-                                <p class="hts-terms-agreement-lead">Quick read below (~30 sec) → check the box → <strong>Record agreement</strong> → choose payment.</p>
+                                        <p class="hts-terms-agreement-lead">Quick read below (~30 sec) → check the box → <strong>Record agreement</strong> → choose payment.</p>
         <div class="terms-clarify hts-terms-gate-clarify">
           <div class="terms-clarify-summary-banner">Enrollment summary — plain English</div>
           <div class="terms-clarify-scroll" tabindex="0" aria-label="Enrollment terms summary">
@@ -1790,7 +1870,7 @@
               <ul class="terms-clarify-list">
                 <li>The orange <strong>Performance Guarantee — Confirmed</strong> banner means HTSA has <strong>confirmed your guarantee for this enrollment</strong> on this page.</li>
                 <li>The PDF may list other eligibility rules (such as prior sales experience). <strong>For you, that experience requirement is waived</strong> — your guarantee follows the orange confirmation and the steps in <em>Your commitment</em> above.</li>
-                <li>If you complete <strong>your part</strong> and do not secure a qualifying role within <strong>6 months</strong> of certification, you may qualify for a <strong>full refund</strong> (documentation required).</li>
+                <li>If you complete <strong>your part</strong> and do not secure a qualifying role within <strong>6 months</strong> of certification (or at least <strong>50 interviews completed</strong>), you may qualify for a <strong>full refund</strong> (documentation required).</li>
               </ul>
             </div>
             <div class="terms-clarify-group">
@@ -1799,14 +1879,6 @@
                 <li>Fees are in <strong>U.S. dollars (USD)</strong>. Missed payments may suspend access; balances 14+ days late may go to collections.</li>
                 <li><strong>No refunds</strong> after purchase except under your confirmed performance guarantee above.</li>
                 <li><strong>All sales are final.</strong> You must be <strong>18+</strong> (or have a guardian sign). By checking the box you agree to the full PDF Terms and this summary.</li>
-              </ul>
-            </div>
-            <div class="terms-clarify-group">
-              <div class="terms-clarify-group-title">Fair deal</div>
-              <ul class="terms-clarify-list">
-                <li><strong>Your part:</strong> you show up, complete the program steps, and apply in good faith.</li>
-                <li><strong>HTSA’s part:</strong> we train, coach, and support you through certification and placement.</li>
-                <li><strong>Your guarantee is confirmed</strong> for this enrollment (orange box above) when you do your part.</li>
               </ul>
             </div>
           </div>
