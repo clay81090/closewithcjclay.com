@@ -130,20 +130,36 @@ ORANGE_GUARANTEE_BEFORE_TERMS = """  <!-- Performance guarantee — confirmed fo
 """
 
 
-def inject_terms_scroll_css(html: str) -> str:
-    if "terms-clarify-scroll" in html or "terms-clarify-partnership-lead" in html:
-        return html
-    css = (SNIPPETS / "terms-gate-quick-read.css").read_text(encoding="utf-8")
-    anchor = "\n\n  /* Subtle member stories + book (above footer; site / Trustpilot / YouTube stay in footer) */"
+def refresh_terms_gate_css(html: str) -> str:
+    """Replace or insert scroll/banner/pdf CSS from templates/snippets/terms-gate-quick-read.css."""
+    css = (SNIPPETS / "terms-gate-quick-read.css").read_text(encoding="utf-8").strip() + "\n\n"
+    start_markers = (
+        "  /* Scrollable enrollment terms quick-read",
+        "  /* Practice preview: scrollable TOS quick-read",
+    )
+    end_marker = "\n\n  /* Subtle member stories + book (above footer; site / Trustpilot / YouTube stay in footer) */"
+    for start in start_markers:
+        si = html.find(start)
+        if si == -1:
+            continue
+        ei = html.find(end_marker, si)
+        if ei == -1:
+            continue
+        return html[:si] + css + html[ei:]
+    anchor = end_marker
     pos = html.find(anchor)
     if pos == -1:
         return html
     return html[:pos] + "\n" + css + html[pos:]
 
 
+def inject_terms_scroll_css(html: str) -> str:
+    return refresh_terms_gate_css(html)
+
+
 def apply_terms_gate_quick_read(html: str, program: str = "closer") -> str:
     """Partnership-tone scroll summary; orange banner overrides PDF 2-year experience for this enrollment."""
-    html = inject_terms_scroll_css(html)
+    html = refresh_terms_gate_css(html)
     form = (SNIPPETS / "terms-gate-quick-read-form.html").read_text(encoding="utf-8")
     form = form.replace(
         "{{HTSA_TERMS_MASTERMIND_LINE}}",

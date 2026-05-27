@@ -1067,14 +1067,32 @@
     margin-bottom: 0;
   }
 
-  /* Practice preview: scrollable TOS quick-read (grouped bullets) */
+/* Scrollable enrollment terms quick-read (partnership tone; refunds before fair-deal close) */
+  .terms-clarify.hts-terms-gate-clarify {
+    padding-top: 0;
+  }
+
+  .terms-clarify-summary-banner {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #0b3d2e;
+    background: linear-gradient(180deg, #ecfdf5 0%, #e3f6ec 100%);
+    border-bottom: 1px solid rgba(0, 154, 94, 0.28);
+    padding: 9px 14px;
+    margin: 0 0 12px;
+    border-radius: 3px 3px 0 0;
+  }
+
   .terms-clarify-scroll {
     max-height: 220px;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     padding-right: 6px;
-    margin: 0 0 10px;
+    margin: 0;
   }
 
   .terms-clarify-scroll::-webkit-scrollbar {
@@ -1110,12 +1128,25 @@
     color: #334155;
   }
 
+  .terms-clarify-pdf-row {
+    margin: 14px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--mid);
+  }
+
+  .terms-clarify-pdf-row .hts-terms-agreement-pdf {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
   .terms-clarify-footnote {
-    margin: 10px 0 0;
+    margin: 8px 0 0;
     font-size: 11px;
     line-height: 1.45;
     color: var(--muted);
   }
+
+
 
   /* Subtle member stories + book (above footer; site / Trustpilot / YouTube stay in footer) */
   .ref-strip {
@@ -1731,12 +1762,9 @@
          data-client-slug="cj-clay-practice">
       <div class="hts-terms-agreement-form" id="hts-terms-agreement-form">
         <div class="hts-terms-agreement-title">Terms agreement</div>
-                        <p class="hts-terms-agreement-lead">Quick read below (~30 sec) → check the box → <strong>Record agreement</strong> → choose payment. Full legal Terms stay in the PDF.</p>
-        <p style="margin:0;">
-          <a id="hts-terms-pdf-link-top" href="https://closewithcjclay.com/HTSA-Terms-of-Service.pdf" target="_blank" rel="noopener noreferrer" class="hts-terms-agreement-pdf">View Full Terms of Service (PDF)</a>
-        </p>
+                                <p class="hts-terms-agreement-lead">Quick read below (~30 sec) → check the box → <strong>Record agreement</strong> → choose payment.</p>
         <div class="terms-clarify hts-terms-gate-clarify">
-          <div class="terms-clarify-title">Enrollment summary — plain English</div>
+          <div class="terms-clarify-summary-banner">Enrollment summary — plain English</div>
           <div class="terms-clarify-scroll" tabindex="0" aria-label="Enrollment terms summary">
             <div class="terms-clarify-group">
               <div class="terms-clarify-group-title">What’s included (HTSA’s part)</div>
@@ -1782,6 +1810,9 @@
               </ul>
             </div>
           </div>
+          <p class="terms-clarify-pdf-row" style="margin:0;">
+            <a id="hts-terms-pdf-link-top" href="https://closewithcjclay.com/HTSA-Terms-of-Service.pdf" target="_blank" rel="noopener noreferrer" class="hts-terms-agreement-pdf">View Full Terms of Service (PDF)</a>
+          </p>
           <p class="terms-clarify-footnote">This summary helps you enroll quickly; the PDF is the full contract (payment, IP, recordings, and all other terms).</p>
         </div>
         <label class="hts-terms-agreement-checkbox" for="hts-terms-checkbox">
