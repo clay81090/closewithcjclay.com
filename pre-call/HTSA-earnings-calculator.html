@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- deploy: 65-35-standard-mix -->
+<!-- deploy: disclaimer-compact-green -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -377,52 +377,52 @@ body {
   line-height: 1.55;
 }
 .legal-disclaimer {
-  margin: 12px 0 0;
-  padding: 14px 14px 13px;
-  border-radius: 14px;
-  border: 2px solid #e04545;
-  background: linear-gradient(180deg, #faf9f7 0%, #f3f1ed 100%);
-  box-shadow: 0 4px 20px rgba(224, 69, 69, 0.12);
-}
-.legal-disclaimer-head {
   display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: 9px;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 230, 153, 0.38);
+  background: rgba(7, 17, 31, 0.78);
 }
 .legal-disclaimer-icon {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 6px;
   background: linear-gradient(145deg, #e04545 0%, #c62828 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(198, 40, 40, 0.35);
+  box-shadow: 0 1px 6px rgba(198, 40, 40, 0.3);
 }
 .legal-disclaimer-icon svg {
-  width: 16px;
-  height: 16px;
+  width: 13px;
+  height: 13px;
   display: block;
-}
-.legal-disclaimer-label {
-  font-family: var(--font-d);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #c62828;
-  line-height: 1;
 }
 .legal-disclaimer-body {
   margin: 0;
-  font-size: 11.5px;
-  line-height: 1.58;
-  color: #1a1f28;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--text-soft);
+  flex: 1;
+  min-width: 0;
+}
+.legal-disclaimer-label {
+  display: inline;
+  font-family: var(--font-m);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-right: 5px;
 }
 .legal-disclaimer-body strong {
-  color: #0d1117;
+  color: var(--text);
   font-weight: 600;
 }
 .chart-explainer {
@@ -620,9 +620,10 @@ tr:last-child td { border-bottom: none; }
   table { min-width: 680px; }
   .footer { padding: 24px 8px 12px; font-size: 11px; line-height: 1.5; }
   .industry-ref-box { padding: 12px 14px; }
-  .legal-disclaimer { padding: 12px; border-radius: 12px; }
-  .legal-disclaimer-icon { width: 26px; height: 26px; }
-  .legal-disclaimer-body { font-size: 11px; }
+  .legal-disclaimer { padding: 8px 10px; gap: 7px; }
+  .legal-disclaimer-icon { width: 20px; height: 20px; }
+  .legal-disclaimer-icon svg { width: 12px; height: 12px; }
+  .legal-disclaimer-body { font-size: 10.5px; line-height: 1.42; }
   .industry-ref-table th,
   .industry-ref-table td {
     display: block;
@@ -801,16 +802,13 @@ tr:last-child td { border-bottom: none; }
         </table>
         <p class="industry-ref-note"><strong>PIF vs. 4-pay slider:</strong> This model keeps <strong>4-pay on the same offer price</strong> as PIF (conservative). In the real world, 4-pay is often priced higher (HTSA example: $7k total vs. $6k PIF). More 4-pay = more <strong>residual stacking</strong> in the year-one chart below — not more upfront cash.</p>
         <div class="legal-disclaimer" role="note" aria-labelledby="legal-disclaimer-label">
-          <div class="legal-disclaimer-head">
-            <span class="legal-disclaimer-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 8v5M12 16.5h.01" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
-                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            <span class="legal-disclaimer-label" id="legal-disclaimer-label">Disclaimer</span>
-          </div>
-          <p class="legal-disclaimer-body"><strong>Not a guarantee.</strong> No specific income is promised. These inputs reflect how the math works when you hit the show rate, close rate, offer, commission %, and PIF/4-pay mix you choose — <strong>real income potential</strong>, not a legal earnings promise.</p>
+          <span class="legal-disclaimer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 8v5M12 16.5h.01" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <p class="legal-disclaimer-body" id="legal-disclaimer-label"><span class="legal-disclaimer-label">Disclaimer</span><strong>Not a guarantee.</strong> No specific income is promised. These inputs reflect how the math works at your show rate, close rate, offer, commission %, and PIF/4-pay mix — <strong>real income potential</strong>, not a legal earnings promise.</p>
         </div>
       </aside>
 
