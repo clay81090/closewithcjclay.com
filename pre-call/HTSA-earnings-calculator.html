@@ -29,7 +29,7 @@ html { color-scheme: dark; }
   --font-m: 'DM Mono', monospace;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 body {
   font-family: var(--font-b);
   background: var(--navy);
@@ -39,6 +39,8 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
+  padding-top: env(safe-area-inset-top, 0px);
+  touch-action: manipulation;
 }
 .ambient {
   position: fixed;
@@ -235,6 +237,11 @@ body {
   outline: none;
   border-color: rgba(0,201,122,0.45);
   background: rgba(0,201,122,0.05);
+  box-shadow: 0 0 0 3px rgba(0, 201, 122, 0.18);
+}
+.field input:focus-visible {
+  outline: 2px solid var(--green-dim);
+  outline-offset: 2px;
 }
 .field-note { font-size: 11px; color: var(--muted); margin-top: 6px; }
 
@@ -244,6 +251,8 @@ body {
   border-radius: 16px;
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--mid);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 .math-panel strong { color: var(--text); }
 .math-panel.compare-goal {
@@ -298,7 +307,33 @@ body {
   margin-bottom: 8px;
 }
 .range-readout strong { color: var(--gold); }
-.range-wrap input[type="range"] { width: 100%; }
+.range-wrap input[type="range"] {
+  width: 100%;
+  height: 8px;
+  margin: 10px 0 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255,255,255,0.12);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.range-wrap input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--navy);
+  box-shadow: 0 2px 12px rgba(240,192,96,0.45);
+}
+.range-wrap input[type="range"]::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--navy);
+  box-shadow: 0 2px 12px rgba(240,192,96,0.45);
+}
 
 .phase-table-wrap {
   margin-top: 14px;
@@ -307,7 +342,26 @@ body {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
   scrollbar-color: rgba(0,201,122,0.45) rgba(255,255,255,0.06);
+  position: relative;
+  max-width: 100%;
+}
+.phase-table-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(6, 13, 24, 0.92));
+  opacity: 0;
+  transition: opacity 0.2s var(--ease);
+  border-radius: 0 14px 14px 0;
+}
+.phase-table-wrap.can-scroll-right::after {
+  opacity: 1;
 }
 .table-scroll-hint {
   display: none;
@@ -377,6 +431,10 @@ tr:last-child td { border-bottom: none; }
 
 @media (max-width: 640px) {
   .table-scroll-hint { display: block; }
+  .orb { filter: blur(50px); opacity: 0.85; }
+  .orb:nth-child(1) { width: 240px; height: 240px; }
+  .orb:nth-child(2) { width: 200px; height: 200px; }
+  .orb:nth-child(3) { width: 160px; height: 160px; }
   .shell {
     padding-left: max(16px, env(safe-area-inset-left, 0px));
     padding-right: max(16px, env(safe-area-inset-right, 0px));
@@ -385,20 +443,27 @@ tr:last-child td { border-bottom: none; }
   .section { margin-bottom: 20px; }
   .hero {
     min-height: auto;
-    padding-top: max(56px, env(safe-area-inset-top, 0px));
-    padding-bottom: 24px;
+    padding: 20px 0 24px;
   }
-  .hero h1 { max-width: 100%; }
-  .hero-lead { max-width: none; }
+  .hero-badge { font-size: 10px; letter-spacing: 0.18em; margin-bottom: 14px; }
+  .hero h1 { max-width: 100%; font-size: clamp(1.75rem, 8.5vw, 2.5rem); }
+  .hero-lead { max-width: none; font-size: 1rem; line-height: 1.55; }
+  .phase-topline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .phase-chip { max-width: 100%; }
   .phase-card,
   .summary-card,
-  .chart-card { padding: 16px 14px; border-radius: 18px; }
-  .mini-card { padding: 14px; }
+  .chart-card,
+  .mini-card { padding: 16px 14px; border-radius: 18px; }
   .metric { padding: 14px; }
+  .math-panel { padding: 14px; font-size: 14px; line-height: 1.6; }
   .grid-2, .grid-3, .metrics-grid, .summary-grid, .phase-row-grid { grid-template-columns: 1fr; }
   .metrics-grid--year-summary { grid-template-columns: 1fr !important; }
   .section-title { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: anywhere; }
-  .section-sub { font-size: 13px; max-width: none; }
+  .section-sub { font-size: 13px; max-width: none; line-height: 1.55; }
   .field { margin-bottom: 12px; }
   .field input {
     font-size: 16px; /* avoids iOS zoom-on-focus */
@@ -406,16 +471,35 @@ tr:last-child td { border-bottom: none; }
     padding: 14px 16px;
     border-radius: 14px;
   }
+  .range-wrap { padding: 12px 14px; }
   .range-wrap input[type="range"] {
     min-height: 44px;
-    margin: 4px 0;
+    margin: 8px 0 2px;
   }
+  .range-wrap input[type="range"]::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+  }
+  .range-wrap input[type="range"]::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+  }
+  .chart-card svg { min-height: 180px; }
   .chart-legend {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
   }
-  th, td { padding: 10px 10px; font-size: 12px; }
+  .phase-table-wrap { border-radius: 14px; }
+  th, td { padding: 10px 10px; font-size: 11.5px; line-height: 1.45; }
+  table { min-width: 680px; }
+  .footer { padding: 24px 8px 12px; font-size: 11px; line-height: 1.5; }
+}
+
+@media (max-width: 380px) {
+  .hero h1 { font-size: 1.65rem; }
+  .metric-value { font-size: 1.2rem; }
+  table { min-width: 640px; }
 }
 
 @media (min-width: 641px) {
@@ -459,11 +543,11 @@ tr:last-child td { border-bottom: none; }
         </div>
         <div class="field">
           <label for="currentMonthlyIncome">Current monthly income</label>
-          <input id="currentMonthlyIncome" type="number" min="0" step="100" placeholder="e.g. 4000" autocomplete="off">
+          <input id="currentMonthlyIncome" type="number" inputmode="decimal" min="0" step="100" placeholder="e.g. 4000" autocomplete="off">
         </div>
         <div class="field">
           <label for="currentWeeklyHours">Current weekly hours worked</label>
-          <input id="currentWeeklyHours" type="number" min="1" max="168" step="1" placeholder="e.g. 55" autocomplete="off">
+          <input id="currentWeeklyHours" type="number" inputmode="numeric" min="1" max="168" step="1" placeholder="e.g. 55" autocomplete="off">
         </div>
       </div>
     </div>
@@ -481,11 +565,11 @@ tr:last-child td { border-bottom: none; }
       <div class="grid-2" style="margin-bottom:4px;">
         <div class="field">
           <label for="goalMonthlyIncome">Goal monthly income</label>
-          <input id="goalMonthlyIncome" type="number" min="0" step="100" placeholder="e.g. 15000" autocomplete="off">
+          <input id="goalMonthlyIncome" type="number" inputmode="decimal" min="0" step="100" placeholder="e.g. 15000" autocomplete="off">
         </div>
         <div class="field">
           <label for="desiredWeeklyHours">Desired weekly hours</label>
-          <input id="desiredWeeklyHours" type="number" min="1" max="120" step="1" placeholder="e.g. 25" autocomplete="off">
+          <input id="desiredWeeklyHours" type="number" inputmode="numeric" min="1" max="120" step="1" placeholder="e.g. 25" autocomplete="off">
         </div>
       </div>
       <div class="metrics-grid" id="gapMetrics">
@@ -597,7 +681,7 @@ tr:last-child td { border-bottom: none; }
           <input id="phaseClose4" type="number" min="10" max="40" step="1" value="30">
         </div>
       </div>
-      <p class="table-scroll-hint" id="tableScrollHint" aria-hidden="true">Swipe sideways to see all columns.</p>
+      <p class="table-scroll-hint" id="tableScrollHint" role="note">Swipe sideways to see all columns →</p>
       <div class="phase-table-wrap">
         <table>
           <thead>
@@ -1030,11 +1114,20 @@ tr:last-child td { border-bottom: none; }
     state.phaseClose4 = normalizeNumber(document.getElementById('phaseClose4').value, 30);
   }
 
+  function updateTableScrollAffordance() {
+    var tableWrap = document.querySelector('.phase-table-wrap');
+    if (!tableWrap) return;
+    var overflow = tableWrap.scrollWidth > tableWrap.clientWidth + 2;
+    var atEnd = tableWrap.scrollLeft + tableWrap.clientWidth >= tableWrap.scrollWidth - 6;
+    tableWrap.classList.toggle('can-scroll-right', overflow && !atEnd);
+  }
+
   function refresh() {
     readStateFromDom();
     renderGapMath();
     renderPossibilityMath();
     renderProjection();
+    requestAnimationFrame(updateTableScrollAffordance);
   }
 
   var ids = [
@@ -1075,6 +1168,14 @@ tr:last-child td { border-bottom: none; }
   });
 
   document.getElementById('pifSlider').value = clamp(normalizeNumber(state.pifPct, 50), 0, 100);
+
+  var tableWrap = document.querySelector('.phase-table-wrap');
+  if (tableWrap) {
+    tableWrap.addEventListener('scroll', updateTableScrollAffordance, { passive: true });
+    window.addEventListener('resize', updateTableScrollAffordance, { passive: true });
+    window.addEventListener('orientationchange', updateTableScrollAffordance, { passive: true });
+  }
+
   refresh();
 })();
 </script>
