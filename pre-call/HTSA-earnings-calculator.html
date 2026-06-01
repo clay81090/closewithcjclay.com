@@ -379,13 +379,13 @@ body {
   margin: 0;
   padding: 10px 12px;
   border-radius: 10px;
-  background: rgba(240,192,96,0.06);
-  border: 1px solid rgba(240,192,96,0.22);
+  background: rgba(255, 100, 90, 0.08);
+  border: 1px solid rgba(255, 140, 130, 0.35);
   font-size: 11px;
-  color: var(--text-soft);
+  color: var(--danger);
   line-height: 1.55;
 }
-.industry-ref-disclaimer strong { color: var(--gold); font-weight: 600; }
+.industry-ref-disclaimer strong { color: #ffb8b2; font-weight: 600; }
 .chart-explainer {
   margin: 10px 0 0;
   font-size: 11.5px;
@@ -721,8 +721,8 @@ tr:last-child td { border-bottom: none; }
         </div>
         <div class="field">
           <label for="pifPct">Paid in full (%)</label>
-          <input id="pifPct" type="number" inputmode="decimal" min="0" max="100" step="1" value="65">
-          <div class="field-note">Remaining % goes to 4-pay (preset 65% / 35%).</div>
+          <input id="pifPct" type="number" inputmode="decimal" min="0" max="100" step="1" value="60">
+          <div class="field-note">Remaining % goes to 4-pay (preset 60% / 40%).</div>
         </div>
       </div>
 
@@ -753,7 +753,7 @@ tr:last-child td { border-bottom: none; }
             </tr>
             <tr>
               <th scope="row">Schedule</th>
-              <td>Full-time closers often <strong>35–40+ hrs/week</strong> · CJ’s live mix ≈ <strong>65% PIF/financing · 35% 4-pay</strong></td>
+              <td>Full-time closers often <strong>35–40+ hrs/week</strong> · CJ’s live mix ≈ <strong>60% PIF/financing · 40% 4-pay</strong></td>
             </tr>
           </tbody>
         </table>
@@ -763,10 +763,10 @@ tr:last-child td { border-bottom: none; }
 
       <div class="range-wrap" style="margin-top:6px;">
         <div class="range-readout">
-          <strong id="pifPctReadout">65%</strong> paid in full · <strong id="fourPayPctReadout">35%</strong> on 4-pay.
+          <strong id="pifPctReadout">60%</strong> paid in full · <strong id="fourPayPctReadout">40%</strong> on 4-pay.
           <span class="range-readout-sub">Drag to shift deals between upfront PIF commission (cash now) and 4-pay (¼ commission per month × 4 — stacks in the chart).</span>
         </div>
-        <input id="pifSlider" type="range" min="0" max="100" step="1" value="65" aria-label="PIF versus 4-pay split">
+        <input id="pifSlider" type="range" min="0" max="100" step="1" value="60" aria-label="PIF versus 4-pay split">
       </div>
       <div class="metrics-grid" style="margin-top:18px;">
         <div class="metric"><span class="metric-label">Weekly calls</span><div class="metric-value" id="htsaWeeklyCalls">-</div></div>
@@ -901,7 +901,7 @@ tr:last-child td { border-bottom: none; }
     daysPerWeek: 5,
     closeRate: 20,
     showRate: 75,
-    pifPct: 65,
+    pifPct: 60,
     phaseClose1: 20,
     phaseClose2: 25,
     phaseClose3: 28,
@@ -980,8 +980,8 @@ tr:last-child td { border-bottom: none; }
       daysPerWeek: Math.max(0, normalizeNumber(state.daysPerWeek, 5)),
       closeRate: clamp(normalizeNumber(state.closeRate, 20), 10, 50) / 100,
       showRate: clamp(normalizeNumber(state.showRate, 75), 10, 100) / 100,
-      pifPct: clamp(normalizeNumber(state.pifPct, 65), 0, 100) / 100,
-      fourPayPct: 1 - (clamp(normalizeNumber(state.pifPct, 65), 0, 100) / 100)
+      pifPct: clamp(normalizeNumber(state.pifPct, 60), 0, 100) / 100,
+      fourPayPct: 1 - (clamp(normalizeNumber(state.pifPct, 60), 0, 100) / 100)
     };
   }
 
@@ -1247,7 +1247,7 @@ tr:last-child td { border-bottom: none; }
     state.daysPerWeek = normalizeNumber(document.getElementById('daysPerWeek').value, 5);
     state.closeRate = normalizeNumber(document.getElementById('closeRate').value, 20);
     state.showRate = normalizeNumber(document.getElementById('showRate').value, 75);
-    state.pifPct = clamp(normalizeNumber(document.getElementById('pifPct').value, 65), 0, 100);
+    state.pifPct = clamp(normalizeNumber(document.getElementById('pifPct').value, 60), 0, 100);
     state.phaseClose1 = normalizeNumber(document.getElementById('phaseClose1').value, 20);
     state.phaseClose2 = normalizeNumber(document.getElementById('phaseClose2').value, 25);
     state.phaseClose3 = normalizeNumber(document.getElementById('phaseClose3').value, 28);
@@ -1294,7 +1294,7 @@ tr:last-child td { border-bottom: none; }
     var el = document.getElementById(id);
     el.addEventListener('input', function () {
       if (id === 'pifPct') {
-        state.pifPct = clamp(normalizeNumber(el.value, 65), 0, 100);
+        state.pifPct = clamp(normalizeNumber(el.value, 60), 0, 100);
         document.getElementById('pifSlider').value = state.pifPct;
       }
       refresh();
@@ -1302,12 +1302,12 @@ tr:last-child td { border-bottom: none; }
   });
 
   document.getElementById('pifSlider').addEventListener('input', function (event) {
-    state.pifPct = clamp(normalizeNumber(event.target.value, 65), 0, 100);
+    state.pifPct = clamp(normalizeNumber(event.target.value, 60), 0, 100);
     document.getElementById('pifPct').value = state.pifPct;
     refresh();
   });
 
-  document.getElementById('pifSlider').value = clamp(normalizeNumber(state.pifPct, 65), 0, 100);
+  document.getElementById('pifSlider').value = clamp(normalizeNumber(state.pifPct, 60), 0, 100);
 
   var tableWrap = document.querySelector('.phase-table-wrap');
   if (tableWrap) {
