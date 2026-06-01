@@ -305,8 +305,94 @@ body {
   font-size: 12px;
   color: var(--text-soft);
   margin-bottom: 8px;
+  line-height: 1.55;
 }
 .range-readout strong { color: var(--gold); }
+.range-readout-sub {
+  display: block;
+  margin-top: 6px;
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.industry-ref-box {
+  margin: 14px 0 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(0,201,122,0.2);
+}
+.industry-ref-kicker {
+  display: block;
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 4px;
+}
+.industry-ref-title {
+  font-family: var(--font-d);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.industry-ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 10px;
+  min-width: 0;
+}
+.industry-ref-table th,
+.industry-ref-table td {
+  padding: 7px 0;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 12px;
+  line-height: 1.45;
+  vertical-align: top;
+}
+.industry-ref-table tr:last-child th,
+.industry-ref-table tr:last-child td { border-bottom: none; }
+.industry-ref-table th {
+  width: 34%;
+  padding-right: 10px;
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  font-weight: 500;
+}
+.industry-ref-table td { color: var(--text-soft); }
+.industry-ref-table td strong { color: var(--text); font-weight: 600; }
+.industry-ref-note {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+.industry-ref-disclaimer {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(240,192,96,0.06);
+  border: 1px solid rgba(240,192,96,0.22);
+  font-size: 11px;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+.industry-ref-disclaimer strong { color: var(--gold); font-weight: 600; }
+.chart-explainer {
+  margin: 10px 0 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 52ch;
+}
 .range-wrap input[type="range"] {
   width: 100%;
   height: 8px;
@@ -494,6 +580,18 @@ tr:last-child td { border-bottom: none; }
   th, td { padding: 10px 10px; font-size: 11.5px; line-height: 1.45; }
   table { min-width: 680px; }
   .footer { padding: 24px 8px 12px; font-size: 11px; line-height: 1.5; }
+  .industry-ref-box { padding: 12px 14px; }
+  .industry-ref-table th,
+  .industry-ref-table td {
+    display: block;
+    width: 100%;
+    padding: 4px 0;
+  }
+  .industry-ref-table th {
+    padding-top: 8px;
+    border-bottom: none;
+  }
+  .industry-ref-table tr:first-child th { padding-top: 0; }
 }
 
 @media (max-width: 380px) {
@@ -592,42 +690,83 @@ tr:last-child td { border-bottom: none; }
       </div>
       <div class="section-head" style="margin-bottom:16px;">
         <h2 class="section-title" id="possibility-heading">What the high-ticket vehicle could look like</h2>
-        <p class="section-sub">Conservative by default. Adjust offer, commission, activity, and PIF vs. 4-pay mix.</p>
+        <p class="section-sub">Defaults mirror a full-time closer pace ($8k offer, 10% commission, 75% show). Drag the slider to split PIF vs. 4-pay.</p>
       </div>
       <div class="grid-3">
         <div class="field">
           <label for="offerPrice">Offer price</label>
-          <input id="offerPrice" type="number" min="1000" step="100" value="6000">
+          <input id="offerPrice" type="number" inputmode="decimal" min="1000" step="100" value="8000">
+          <div class="field-note">Preset $8k — typical HTSA member landing zone.</div>
         </div>
         <div class="field">
           <label for="commissionPct">Commission percentage</label>
-          <input id="commissionPct" type="number" min="1" max="50" step="1" value="10">
+          <input id="commissionPct" type="number" inputmode="decimal" min="1" max="50" step="1" value="10">
         </div>
         <div class="field">
           <label for="callsPerDay">Calls per day</label>
-          <input id="callsPerDay" type="number" min="1" max="20" step="1" value="3">
+          <input id="callsPerDay" type="number" inputmode="numeric" min="1" max="20" step="1" value="8">
+          <div class="field-note">8/day × 5 days ≈ 40 hrs/week full-time pace.</div>
         </div>
         <div class="field">
           <label for="daysPerWeek">Days per week</label>
-          <input id="daysPerWeek" type="number" min="1" max="7" step="1" value="5">
+          <input id="daysPerWeek" type="number" inputmode="numeric" min="1" max="7" step="1" value="5">
         </div>
         <div class="field">
           <label for="closeRate">Close rate (%)</label>
-          <input id="closeRate" type="number" min="10" max="40" step="1" value="20">
+          <input id="closeRate" type="number" inputmode="decimal" min="10" max="50" step="1" value="20">
         </div>
         <div class="field">
           <label for="showRate">Show rate (%)</label>
-          <input id="showRate" type="number" min="10" max="100" step="1" value="75">
+          <input id="showRate" type="number" inputmode="decimal" min="10" max="100" step="1" value="75">
         </div>
         <div class="field">
           <label for="pifPct">Paid in full (%)</label>
-          <input id="pifPct" type="number" min="0" max="100" step="1" value="50">
-          <div class="field-note">4-pay automatically uses the remaining percentage.</div>
+          <input id="pifPct" type="number" inputmode="decimal" min="0" max="100" step="1" value="65">
+          <div class="field-note">Remaining % goes to 4-pay (preset 65% / 35%).</div>
         </div>
       </div>
+
+      <aside class="industry-ref-box" aria-labelledby="industry-ref-title">
+        <span class="industry-ref-kicker">Industry basics</span>
+        <div class="industry-ref-title" id="industry-ref-title">How to read this model</div>
+        <table class="industry-ref-table">
+          <tbody>
+            <tr>
+              <th scope="row">Offer size</th>
+              <td><strong>$8k–$12k</strong> avg. for HTSA members · <strong>$5k–$25k</strong> broad range · <strong>$25k+</strong> usually experienced closers</td>
+            </tr>
+            <tr>
+              <th scope="row">Commission</th>
+              <td>~<strong>90%</strong> of companies pay <strong>10%–15%</strong> (“accelerator”) — e.g. <strong>40%+ close rate → 15%</strong></td>
+            </tr>
+            <tr>
+              <th scope="row">Show rate</th>
+              <td>Industry standard <strong>75%</strong> — 8 booked ≈ <strong>6 conversations</strong></td>
+            </tr>
+            <tr>
+              <th scope="row">Close rate</th>
+              <td>Lower <strong>20%</strong> · Good <strong>25%</strong> · Great <strong>35%+</strong> · Best <strong>40–50%</strong></td>
+            </tr>
+            <tr>
+              <th scope="row">Payment mix</th>
+              <td>Most offers: <strong>PIF + 4-pay</strong> (e.g. HTSA <strong>$6k PIF</strong> or <strong>$7k</strong> as 4×$1,750)</td>
+            </tr>
+            <tr>
+              <th scope="row">Schedule</th>
+              <td>Full-time closers often <strong>35–40+ hrs/week</strong> · CJ’s live mix ≈ <strong>65% PIF/financing · 35% 4-pay</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="industry-ref-note"><strong>PIF vs. 4-pay slider:</strong> This model keeps <strong>4-pay on the same offer price</strong> as PIF (conservative). In the real world, 4-pay is often priced higher (HTSA example: $7k total vs. $6k PIF). More 4-pay = more <strong>residual stacking</strong> in the year-one chart below — not more upfront cash.</p>
+        <p class="industry-ref-disclaimer"><strong>Not a guarantee.</strong> No specific income is promised. These inputs reflect how the math works when you hit the show rate, close rate, offer, commission %, and PIF/4-pay mix you choose — <strong>real income potential</strong>, not a legal earnings promise.</p>
+      </aside>
+
       <div class="range-wrap" style="margin-top:6px;">
-        <div class="range-readout"><strong id="pifPctReadout">50%</strong> paid in full and <strong id="fourPayPctReadout">50%</strong> on 4-pay.</div>
-        <input id="pifSlider" type="range" min="0" max="100" step="1" value="50" aria-label="PIF versus 4-pay split">
+        <div class="range-readout">
+          <strong id="pifPctReadout">65%</strong> paid in full · <strong id="fourPayPctReadout">35%</strong> on 4-pay.
+          <span class="range-readout-sub">Drag to shift deals between upfront PIF commission (cash now) and 4-pay (¼ commission per month × 4 — stacks in the chart).</span>
+        </div>
+        <input id="pifSlider" type="range" min="0" max="100" step="1" value="65" aria-label="PIF versus 4-pay split">
       </div>
       <div class="metrics-grid" style="margin-top:18px;">
         <div class="metric"><span class="metric-label">Weekly calls</span><div class="metric-value" id="htsaWeeklyCalls">-</div></div>
@@ -666,19 +805,19 @@ tr:last-child td { border-bottom: none; }
       <div class="phase-row-grid">
         <div class="field">
           <label for="phaseClose1">Months 1-3 close rate</label>
-          <input id="phaseClose1" type="number" min="10" max="40" step="1" value="20">
+          <input id="phaseClose1" type="number" inputmode="decimal" min="10" max="50" step="1" value="20">
         </div>
         <div class="field">
           <label for="phaseClose2">Months 4-6 close rate</label>
-          <input id="phaseClose2" type="number" min="10" max="40" step="1" value="25">
+          <input id="phaseClose2" type="number" inputmode="decimal" min="10" max="50" step="1" value="25">
         </div>
         <div class="field">
           <label for="phaseClose3">Months 7-9 close rate</label>
-          <input id="phaseClose3" type="number" min="10" max="40" step="1" value="28">
+          <input id="phaseClose3" type="number" inputmode="decimal" min="10" max="50" step="1" value="28">
         </div>
         <div class="field">
           <label for="phaseClose4">Months 10-12 close rate</label>
-          <input id="phaseClose4" type="number" min="10" max="40" step="1" value="30">
+          <input id="phaseClose4" type="number" inputmode="decimal" min="10" max="50" step="1" value="30">
         </div>
       </div>
       <p class="table-scroll-hint" id="tableScrollHint" role="note">Swipe sideways to see all columns →</p>
@@ -720,6 +859,7 @@ tr:last-child td { border-bottom: none; }
             <span id="chartMinLabel">Month 1</span>
             <span id="chartPeakLabel">Month 12</span>
           </div>
+          <p class="chart-explainer"><strong>Reading the curve:</strong> Month 1 is mostly new PIF + first 4-pay installments. Later months climb as prior 4-pay deals keep paying and close rate ramps by quarter — not a promised raise, just how residual stacking works at your inputs.</p>
         </div>
       </div>
     </div>
@@ -755,13 +895,13 @@ tr:last-child td { border-bottom: none; }
     currentWeeklyHours: '',
     goalMonthlyIncome: '',
     desiredWeeklyHours: '',
-    offerPrice: 6000,
+    offerPrice: 8000,
     commissionPct: 10,
-    callsPerDay: 3,
+    callsPerDay: 8,
     daysPerWeek: 5,
     closeRate: 20,
     showRate: 75,
-    pifPct: 50,
+    pifPct: 65,
     phaseClose1: 20,
     phaseClose2: 25,
     phaseClose3: 28,
@@ -834,14 +974,14 @@ tr:last-child td { border-bottom: none; }
 
   function getOpportunityInputs() {
     return {
-      offerPrice: Math.max(0, normalizeNumber(state.offerPrice, 6000)),
+      offerPrice: Math.max(0, normalizeNumber(state.offerPrice, 8000)),
       commissionPct: clamp(normalizeNumber(state.commissionPct, 10), 0, 100) / 100,
-      callsPerDay: Math.max(0, normalizeNumber(state.callsPerDay, 3)),
+      callsPerDay: Math.max(0, normalizeNumber(state.callsPerDay, 8)),
       daysPerWeek: Math.max(0, normalizeNumber(state.daysPerWeek, 5)),
-      closeRate: clamp(normalizeNumber(state.closeRate, 20), 10, 40) / 100,
+      closeRate: clamp(normalizeNumber(state.closeRate, 20), 10, 50) / 100,
       showRate: clamp(normalizeNumber(state.showRate, 75), 10, 100) / 100,
-      pifPct: clamp(normalizeNumber(state.pifPct, 50), 0, 100) / 100,
-      fourPayPct: 1 - (clamp(normalizeNumber(state.pifPct, 50), 0, 100) / 100)
+      pifPct: clamp(normalizeNumber(state.pifPct, 65), 0, 100) / 100,
+      fourPayPct: 1 - (clamp(normalizeNumber(state.pifPct, 65), 0, 100) / 100)
     };
   }
 
@@ -883,10 +1023,10 @@ tr:last-child td { border-bottom: none; }
   function renderProjection() {
     var inputs = getOpportunityInputs();
     var rates = [
-      clamp(normalizeNumber(state.phaseClose1, 20), 10, 40) / 100,
-      clamp(normalizeNumber(state.phaseClose2, 25), 10, 40) / 100,
-      clamp(normalizeNumber(state.phaseClose3, 28), 10, 40) / 100,
-      clamp(normalizeNumber(state.phaseClose4, 30), 10, 40) / 100
+      clamp(normalizeNumber(state.phaseClose1, 20), 10, 50) / 100,
+      clamp(normalizeNumber(state.phaseClose2, 25), 10, 50) / 100,
+      clamp(normalizeNumber(state.phaseClose3, 28), 10, 50) / 100,
+      clamp(normalizeNumber(state.phaseClose4, 30), 10, 50) / 100
     ];
     var monthlyScheduledCalls = inputs.callsPerDay * inputs.daysPerWeek * 4;
     var monthlyShownCalls = monthlyScheduledCalls * inputs.showRate;
@@ -1101,13 +1241,13 @@ tr:last-child td { border-bottom: none; }
     state.currentWeeklyHours = document.getElementById('currentWeeklyHours').value;
     state.goalMonthlyIncome = document.getElementById('goalMonthlyIncome').value;
     state.desiredWeeklyHours = document.getElementById('desiredWeeklyHours').value;
-    state.offerPrice = normalizeNumber(document.getElementById('offerPrice').value, 6000);
+    state.offerPrice = normalizeNumber(document.getElementById('offerPrice').value, 8000);
     state.commissionPct = normalizeNumber(document.getElementById('commissionPct').value, 10);
     state.callsPerDay = normalizeNumber(document.getElementById('callsPerDay').value, 3);
     state.daysPerWeek = normalizeNumber(document.getElementById('daysPerWeek').value, 5);
     state.closeRate = normalizeNumber(document.getElementById('closeRate').value, 20);
     state.showRate = normalizeNumber(document.getElementById('showRate').value, 75);
-    state.pifPct = clamp(normalizeNumber(document.getElementById('pifPct').value, 50), 0, 100);
+    state.pifPct = clamp(normalizeNumber(document.getElementById('pifPct').value, 65), 0, 100);
     state.phaseClose1 = normalizeNumber(document.getElementById('phaseClose1').value, 20);
     state.phaseClose2 = normalizeNumber(document.getElementById('phaseClose2').value, 25);
     state.phaseClose3 = normalizeNumber(document.getElementById('phaseClose3').value, 28);
@@ -1154,7 +1294,7 @@ tr:last-child td { border-bottom: none; }
     var el = document.getElementById(id);
     el.addEventListener('input', function () {
       if (id === 'pifPct') {
-        state.pifPct = clamp(normalizeNumber(el.value, 50), 0, 100);
+        state.pifPct = clamp(normalizeNumber(el.value, 65), 0, 100);
         document.getElementById('pifSlider').value = state.pifPct;
       }
       refresh();
@@ -1162,12 +1302,12 @@ tr:last-child td { border-bottom: none; }
   });
 
   document.getElementById('pifSlider').addEventListener('input', function (event) {
-    state.pifPct = clamp(normalizeNumber(event.target.value, 50), 0, 100);
+    state.pifPct = clamp(normalizeNumber(event.target.value, 65), 0, 100);
     document.getElementById('pifPct').value = state.pifPct;
     refresh();
   });
 
-  document.getElementById('pifSlider').value = clamp(normalizeNumber(state.pifPct, 50), 0, 100);
+  document.getElementById('pifSlider').value = clamp(normalizeNumber(state.pifPct, 65), 0, 100);
 
   var tableWrap = document.querySelector('.phase-table-wrap');
   if (tableWrap) {
