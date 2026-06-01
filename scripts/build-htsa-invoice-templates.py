@@ -25,6 +25,37 @@ SNIPPETS = TEMPLATES / "snippets"
 # Canonical layout: testimonials strip, colored footer icons, Trustpilot band.
 CANONICAL_LAYOUT_REF = ROOT / "htsa-enrollment-wayne-wintermute.html"
 
+# Success Coach kickoff (Chris) — default for new invoices after Mark stepped back from calls.
+CHRIS_KICKOFF_URL = (
+    "https://meetings.hubspot.com/chris-vadinsky/chris-15-minute-kickoff-call-"
+    "?uuid=518022ce-e2ba-4363-b678-470f8f9bce70"
+)
+_KICKOFF_MARK_BLOCK = """        <h4>Book Your Kickoff Call with Mark (Success Coach)</h4>
+        <p>Mark is your Success Coach Director. This 15-minute Zoom call maps out your placement goals and makes sure you have everything you need before you begin the modules.</p>
+        <a href="https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call" class="step-link" target="_blank">Book Kickoff Call →</a>"""
+_KICKOFF_CHRIS_BLOCK = f"""        <h4>Book Your Kickoff Call with Chris (Success Coach)</h4>
+        <p>Chris is one of our Success Coaches. This 15-minute Zoom call maps out your placement goals and makes sure you have everything you need before you begin the modules.</p>
+        <a href="{CHRIS_KICKOFF_URL}" class="step-link" target="_blank" rel="noopener noreferrer">Book Kickoff Call →</a>"""
+
+
+def apply_success_coach_kickoff_chris(html: str) -> str:
+    """Replace Mark kickoff step with Chris (Success Coach) + HubSpot link."""
+    if _KICKOFF_CHRIS_BLOCK in html:
+        return html
+    if _KICKOFF_MARK_BLOCK in html:
+        return html.replace(_KICKOFF_MARK_BLOCK, _KICKOFF_CHRIS_BLOCK, 1)
+    # Legacy / partial variants
+    html = re.sub(
+        r"<h4>Book Your Kickoff Call with Mark \(Success Coach\)</h4>\s*"
+        r"<p>Mark is your Success Coach Director\..*?</p>\s*"
+        r'<a href="[^"]*" class="step-link"[^>]*>Book Kickoff Call →</a>',
+        _KICKOFF_CHRIS_BLOCK,
+        html,
+        count=1,
+        flags=re.DOTALL,
+    )
+    return html
+
 
 def add_noindex(html: str) -> str:
     if "noindex" in html:
@@ -931,12 +962,20 @@ def main() -> None:
     p05 = apply_terms_gate_quick_read(p05, "dual")
     p06 = apply_terms_gate_quick_read(p06, "dual")
 
+    p01 = apply_success_coach_kickoff_chris(p01)
+    p02 = apply_success_coach_kickoff_chris(p02)
+    p03 = apply_success_coach_kickoff_chris(p03)
+    p04 = apply_success_coach_kickoff_chris(p04)
+    p05 = apply_success_coach_kickoff_chris(p05)
+    p06 = apply_success_coach_kickoff_chris(p06)
+
     practice_path = ROOT / "htsa-enrollment-cj-clay-practice.html"
     if practice_path.is_file():
         practice_html = practice_path.read_text(encoding="utf-8")
         practice_html = ensure_orange_guarantee_before_terms(practice_html)
         practice_html = apply_terms_gate_quick_read(practice_html, "closer")
         practice_html = apply_canonical_enrollment_copy(practice_html)
+        practice_html = apply_success_coach_kickoff_chris(practice_html)
         practice_path.write_text(practice_html, encoding="utf-8")
 
     (TEMPLATES / "htsa-placement-01-closer-cash-only.html").write_text(p01, encoding="utf-8")
