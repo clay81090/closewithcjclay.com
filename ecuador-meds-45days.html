@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ecuador meds — 45-day trip</title>
+<style>
+:root {
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f7f6f3;
+  --color-background-success: #edf3ed;
+  --color-background-warning: #fbf3db;
+  --color-background-info: #e7f3f8;
+  --color-text-primary: #37352f;
+  --color-text-secondary: rgba(55, 53, 47, 0.65);
+  --color-text-success: #0f7b6c;
+  --color-text-warning: #9b6b00;
+  --color-text-info: #0b6e99;
+  --color-border-tertiary: rgba(55, 53, 47, 0.16);
+  --color-border-secondary: rgba(55, 53, 47, 0.24);
+  --border-radius-lg: 12px;
+  --border-radius-md: 8px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 24px 16px 40px; font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, sans-serif; background: #f7f6f3; color: var(--color-text-primary); }
+main { max-width: 1200px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<main>
+<style>
+  .t { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .t th { background: var(--color-background-secondary); font-weight: 500; font-size: 11px; color: var(--color-text-secondary); text-align: left; padding: 9px 11px; border-bottom: 0.5px solid var(--color-border-tertiary); line-height: 1.4; }
+  .t td { padding: 11px 11px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); vertical-align: middle; }
+  .t tr:last-child td { border-bottom: none; }
+  .t tr:hover td { background: var(--color-background-secondary); }
+  .bold { font-weight: 500; }
+  .muted { color: var(--color-text-secondary); font-size: 11px; }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+  .green { background: var(--color-background-success); color: var(--color-text-success); }
+  .amber { background: var(--color-background-warning); color: var(--color-text-warning); }
+  .blue { background: var(--color-background-info); color: var(--color-text-info); }
+</style>
+
+<div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden;">
+
+  <div style="padding: 14px 16px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+    <div><div style="font-size: 11px; color: var(--color-text-secondary);">Pickup date</div><div class="bold">Mon, June 8</div></div>
+    <div style="width: 0.5px; height: 26px; background: var(--color-border-tertiary);"></div>
+    <div><div style="font-size: 11px; color: var(--color-text-secondary);">Departure</div><div class="bold">June 10</div></div>
+    <div style="width: 0.5px; height: 26px; background: var(--color-border-tertiary);"></div>
+    <div><div style="font-size: 11px; color: var(--color-text-secondary);">Return</div><div class="bold">July 25</div></div>
+    <div style="width: 0.5px; height: 26px; background: var(--color-border-tertiary);"></div>
+    <div><div style="font-size: 11px; color: var(--color-text-secondary);">Trip length</div><div class="bold" style="font-size: 20px;">45 days</div></div>
+    <div style="width: 0.5px; height: 26px; background: var(--color-border-tertiary);"></div>
+    <div><div style="font-size: 11px; color: var(--color-text-secondary);">Coverage</div><div class="bold">60 days from June 8</div></div>
+  </div>
+
+  <table class="t">
+    <thead>
+      <tr>
+        <th>Medication</th>
+        <th>Last filled</th>
+        <th>Qty / dose</th>
+        <th>Used by<br>June 8</th>
+        <th>Pills on hand<br>June 8</th>
+        <th>Days supply<br>on hand June 8</th>
+        <th>Pills needed<br>for 60 days</th>
+        <th>Doctor writes for</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="bold">Adderall</span><br><span class="muted">Schedule II · 1/day</span></td>
+        <td>May 15<br><span class="muted">24 days before pickup</span></td>
+        <td>30 pills<br><span class="muted">1 per day</span></td>
+        <td>24 × 1 = <span class="bold">24</span></td>
+        <td>30 − 24 = <span class="bold">6 pills</span></td>
+        <td><span class="pill amber">6 days</span></td>
+        <td>60 pills</td>
+        <td><span class="pill blue">54 pills</span><br><span class="muted">60 needed − 6 on hand</span></td>
+      </tr>
+      <tr>
+        <td><span class="bold">Clonazepam</span><br><span class="muted">Schedule IV · 3/day</span></td>
+        <td>May 22<br><span class="muted">17 days before pickup</span></td>
+        <td>90 pills<br><span class="muted">3 per day</span></td>
+        <td>17 × 3 = <span class="bold">51</span></td>
+        <td>90 − 51 = <span class="bold">39 pills</span></td>
+        <td><span class="pill green">13 days</span></td>
+        <td>180 pills</td>
+        <td><span class="pill blue">141 pills</span><br><span class="muted">180 needed − 39 on hand</span></td>
+      </tr>
+      <tr>
+        <td><span class="bold">Temazepam</span><br><span class="muted">Schedule IV · 1/day</span></td>
+        <td>May 22<br><span class="muted">17 days before pickup</span></td>
+        <td>30 pills<br><span class="muted">1 per day</span></td>
+        <td>17 × 1 = <span class="bold">17</span></td>
+        <td>30 − 17 = <span class="bold">13 pills</span></td>
+        <td><span class="pill green">13 days</span></td>
+        <td>60 pills</td>
+        <td><span class="pill blue">47 pills</span><br><span class="muted">60 needed − 13 on hand</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="padding: 16px; background: var(--color-background-secondary); border-top: 1px solid var(--color-border-secondary);">
+    <div style="font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.04em;">For the doctor — write these exact quantities (60-day / 2-month supply)</div>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+
+      <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 16px; text-align: center; min-width: 160px;">
+        <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Adderall</div>
+        <div style="font-size: 24px; font-weight: 500;">54 pills</div>
+        <div style="font-size: 11px; color: var(--color-text-secondary); margin: 2px 0;">+ 6 on hand = 60 total</div>
+        <div style="margin-top: 8px; border-top: 0.5px solid var(--color-border-tertiary); padding-top: 8px;">
+          <div style="font-size: 11px; color: var(--color-text-secondary);">Covered through</div>
+          <div style="font-weight: 500; color: var(--color-text-success); font-size: 15px;">August 7</div>
+          <div style="font-size: 11px; color: var(--color-text-secondary);">13 days past July 25 ✓</div>
+        </div>
+      </div>
+
+      <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 16px; text-align: center; min-width: 160px;">
+        <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Clonazepam</div>
+        <div style="font-size: 24px; font-weight: 500;">141 pills</div>
+        <div style="font-size: 11px; color: var(--color-text-secondary); margin: 2px 0;">+ 39 on hand = 180 total</div>
+        <div style="margin-top: 8px; border-top: 0.5px solid var(--color-border-tertiary); padding-top: 8px;">
+          <div style="font-size: 11px; color: var(--color-text-secondary);">Covered through</div>
+          <div style="font-weight: 500; color: var(--color-text-success); font-size: 15px;">August 7</div>
+          <div style="font-size: 11px; color: var(--color-text-secondary);">13 days past July 25 ✓</div>
+        </div>
+      </div>
+
+      <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 16px; text-align: center; min-width: 160px;">
+        <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Temazepam</div>
+        <div style="font-size: 24px; font-weight: 500;">47 pills</div>
+        <div style="font-size: 11px; color: var(--color-text-secondary); margin: 2px 0;">+ 13 on hand = 60 total</div>
+        <div style="margin-top: 8px; border-top: 0.5px solid var(--color-border-tertiary); padding-top: 8px;">
+          <div style="font-size: 11px; color: var(--color-text-secondary);">Covered through</div>
+          <div style="font-weight: 500; color: var(--color-text-success); font-size: 15px;">August 7</div>
+          <div style="font-size: 11px; color: var(--color-text-secondary);">13 days past July 25 ✓</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+</main>
+</body>
+</html>
