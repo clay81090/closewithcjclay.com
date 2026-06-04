@@ -40,22 +40,94 @@ main { max-width: 1200px; margin: 0 auto; }
   .green { background: var(--color-background-success); color: var(--color-text-success); }
   .amber { background: var(--color-background-warning); color: var(--color-text-warning); }
   .blue { background: var(--color-background-info); color: var(--color-text-info); }
+
+.ecuador-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
+.ecuador-trip-meta { padding: 14px 16px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+.ecuador-meta-divider { width: 0.5px; height: 26px; background: var(--color-border-tertiary); flex-shrink: 0; }
+.ecuador-table-wrap { position: relative; }
+.ecuador-scroll-hint { display: none; margin: 0; padding: 8px 12px 0; font-size: 11px; color: var(--color-text-secondary); text-align: center; }
+.ecuador-doctor-section { padding: 16px; background: var(--color-background-secondary); border-top: 1px solid var(--color-border-secondary); }
+.ecuador-doctor-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+.ecuador-doctor-cards { display: flex; gap: 12px; flex-wrap: wrap; }
+.ecuador-doctor-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 16px; text-align: center; min-width: 160px; flex: 1 1 160px; }
+
+@media (max-width: 640px) {
+  body { padding: 10px 8px 24px; -webkit-text-size-adjust: 100%; }
+  main { width: 100%; min-width: 0; }
+  .ecuador-card { overflow: visible; border-radius: 10px; }
+  .ecuador-trip-meta {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 12px;
+    padding: 14px 12px !important;
+  }
+  .ecuador-meta-divider { display: none !important; }
+  .ecuador-trip-meta > div:nth-child(7),
+  .ecuador-trip-meta > div:nth-child(9) { grid-column: 1 / -1; }
+  .ecuador-table-wrap { padding: 0 0 12px; }
+  .t thead { display: none; }
+  .t { font-size: 12px; width: 100%; min-width: 0; }
+  .t tbody tr {
+    display: block;
+    margin: 0 10px 12px;
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--color-background-primary);
+  }
+  .t tbody td {
+    display: grid;
+    grid-template-columns: minmax(108px, 44%) 1fr;
+    gap: 6px 10px;
+    align-items: start;
+    padding: 10px 12px;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    text-align: right;
+    line-height: 1.45;
+  }
+  .t tbody td:last-child { border-bottom: none; }
+  .t tbody td:first-child {
+    display: block;
+    text-align: left;
+    background: var(--color-background-secondary);
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    padding: 12px;
+  }
+  .t tbody td:not(:first-child)::before {
+    content: attr(data-label);
+    text-align: left;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    line-height: 1.35;
+    white-space: normal;
+  }
+  .t tr:hover td { background: inherit; }
+  .t tbody tr:hover { box-shadow: 0 1px 4px rgba(55, 53, 47, 0.08); }
+  .ecuador-doctor-section { padding: 14px 10px !important; }
+  .ecuador-doctor-title { font-size: 11px; line-height: 1.45; }
+  .ecuador-doctor-cards { flex-direction: column; gap: 10px; }
+  .ecuador-doctor-card { min-width: 0 !important; width: 100%; flex: 1 1 auto; }
+  .pill { font-size: 11px; }
+}
+
 </style>
 
-<div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden;">
+<div class="ecuador-card">
 
-  <div style="padding: 14px 16px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+  <div class="ecuador-trip-meta">
     <div><div style="font-size: 11px; color: var(--color-text-secondary);">Pickup date</div><div class="bold">Mon, June 8</div></div>
-    <div style="width: 0.5px; height: 26px; background: var(--color-border-tertiary);"></div>
+    <div class="ecuador-meta-divider" aria-hidden="true"></div>
     <div><div style="font-size: 11px; color: var(--color-text-secondary);">Departure</div><div class="bold">June 10</div></div>
-    <div style="width: 0.5px; height: 26px; background: var(--color-border-tertiary);"></div>
+    <div class="ecuador-meta-divider" aria-hidden="true"></div>
     <div><div style="font-size: 11px; color: var(--color-text-secondary);">Return</div><div class="bold">July 25</div></div>
-    <div style="width: 0.5px; height: 26px; background: var(--color-border-tertiary);"></div>
+    <div class="ecuador-meta-divider" aria-hidden="true"></div>
     <div><div style="font-size: 11px; color: var(--color-text-secondary);">Trip length</div><div class="bold" style="font-size: 20px;">45 days</div></div>
-    <div style="width: 0.5px; height: 26px; background: var(--color-border-tertiary);"></div>
+    <div class="ecuador-meta-divider" aria-hidden="true"></div>
     <div><div style="font-size: 11px; color: var(--color-text-secondary);">Coverage</div><div class="bold">60 days from June 8</div></div>
   </div>
 
+  <div class="ecuador-table-wrap">
   <table class="t">
     <thead>
       <tr>
@@ -71,43 +143,43 @@ main { max-width: 1200px; margin: 0 auto; }
     </thead>
     <tbody>
       <tr>
-        <td><span class="bold">Adderall</span><br><span class="muted">Schedule II · 1/day</span></td>
-        <td>May 15<br><span class="muted">24 days before pickup</span></td>
-        <td>30 pills<br><span class="muted">1 per day</span></td>
-        <td>24 × 1 = <span class="bold">24</span></td>
-        <td>30 − 24 = <span class="bold">6 pills</span></td>
-        <td><span class="pill amber">6 days</span></td>
-        <td>60 pills</td>
-        <td><span class="pill blue">54 pills</span><br><span class="muted">60 needed − 6 on hand</span></td>
+        <td data-label="Medication"><span class="bold">Adderall</span><br><span class="muted">Schedule II · 1/day</span></td>
+        <td data-label="Last filled">May 15<br><span class="muted">24 days before pickup</span></td>
+        <td data-label="Qty / dose">30 pills<br><span class="muted">1 per day</span></td>
+        <td data-label="Used by June 8">24 × 1 = <span class="bold">24</span></td>
+        <td data-label="Pills on hand June 8">30 − 24 = <span class="bold">6 pills</span></td>
+        <td data-label="Days supply on hand June 8"><span class="pill amber">6 days</span></td>
+        <td data-label="Pills needed for 60 days">60 pills</td>
+        <td data-label="Doctor writes for"><span class="pill blue">54 pills</span><br><span class="muted">60 needed − 6 on hand</span></td>
       </tr>
       <tr>
-        <td><span class="bold">Clonazepam</span><br><span class="muted">Schedule IV · 3/day</span></td>
-        <td>May 22<br><span class="muted">17 days before pickup</span></td>
-        <td>90 pills<br><span class="muted">3 per day</span></td>
-        <td>17 × 3 = <span class="bold">51</span></td>
-        <td>90 − 51 = <span class="bold">39 pills</span></td>
-        <td><span class="pill green">13 days</span></td>
-        <td>180 pills</td>
-        <td><span class="pill blue">141 pills</span><br><span class="muted">180 needed − 39 on hand</span></td>
+        <td data-label="Medication"><span class="bold">Clonazepam</span><br><span class="muted">Schedule IV · 3/day</span></td>
+        <td data-label="Last filled">May 22<br><span class="muted">17 days before pickup</span></td>
+        <td data-label="Qty / dose">90 pills<br><span class="muted">3 per day</span></td>
+        <td data-label="Used by June 8">17 × 3 = <span class="bold">51</span></td>
+        <td data-label="Pills on hand June 8">90 − 51 = <span class="bold">39 pills</span></td>
+        <td data-label="Days supply on hand June 8"><span class="pill green">13 days</span></td>
+        <td data-label="Pills needed for 60 days">180 pills</td>
+        <td data-label="Doctor writes for"><span class="pill blue">141 pills</span><br><span class="muted">180 needed − 39 on hand</span></td>
       </tr>
       <tr>
-        <td><span class="bold">Temazepam</span><br><span class="muted">Schedule IV · 1/day</span></td>
-        <td>May 22<br><span class="muted">17 days before pickup</span></td>
-        <td>30 pills<br><span class="muted">1 per day</span></td>
-        <td>17 × 1 = <span class="bold">17</span></td>
-        <td>30 − 17 = <span class="bold">13 pills</span></td>
-        <td><span class="pill green">13 days</span></td>
-        <td>60 pills</td>
-        <td><span class="pill blue">47 pills</span><br><span class="muted">60 needed − 13 on hand</span></td>
+        <td data-label="Medication"><span class="bold">Temazepam</span><br><span class="muted">Schedule IV · 1/day</span></td>
+        <td data-label="Last filled">May 22<br><span class="muted">17 days before pickup</span></td>
+        <td data-label="Qty / dose">30 pills<br><span class="muted">1 per day</span></td>
+        <td data-label="Used by June 8">17 × 1 = <span class="bold">17</span></td>
+        <td data-label="Pills on hand June 8">30 − 17 = <span class="bold">13 pills</span></td>
+        <td data-label="Days supply on hand June 8"><span class="pill green">13 days</span></td>
+        <td data-label="Pills needed for 60 days">60 pills</td>
+        <td data-label="Doctor writes for"><span class="pill blue">47 pills</span><br><span class="muted">60 needed − 13 on hand</span></td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 
-  <div style="padding: 16px; background: var(--color-background-secondary); border-top: 1px solid var(--color-border-secondary);">
-    <div style="font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.04em;">For the doctor — write these exact quantities (60-day / 2-month supply)</div>
-    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+  <div class="ecuador-doctor-section">
+    <div class="ecuador-doctor-title">For the doctor — write these exact quantities (60-day / 2-month supply)</div>
+    <div class="ecuador-doctor-cards">
 
-      <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 16px; text-align: center; min-width: 160px;">
+      <div class="ecuador-doctor-card">
         <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Adderall</div>
         <div style="font-size: 24px; font-weight: 500;">54 pills</div>
         <div style="font-size: 11px; color: var(--color-text-secondary); margin: 2px 0;">+ 6 on hand = 60 total</div>
@@ -118,7 +190,7 @@ main { max-width: 1200px; margin: 0 auto; }
         </div>
       </div>
 
-      <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 16px; text-align: center; min-width: 160px;">
+      <div class="ecuador-doctor-card">
         <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Clonazepam</div>
         <div style="font-size: 24px; font-weight: 500;">141 pills</div>
         <div style="font-size: 11px; color: var(--color-text-secondary); margin: 2px 0;">+ 39 on hand = 180 total</div>
@@ -129,7 +201,7 @@ main { max-width: 1200px; margin: 0 auto; }
         </div>
       </div>
 
-      <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 16px; text-align: center; min-width: 160px;">
+      <div class="ecuador-doctor-card">
         <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px;">Temazepam</div>
         <div style="font-size: 24px; font-weight: 500;">47 pills</div>
         <div style="font-size: 11px; color: var(--color-text-secondary); margin: 2px 0;">+ 13 on hand = 60 total</div>
