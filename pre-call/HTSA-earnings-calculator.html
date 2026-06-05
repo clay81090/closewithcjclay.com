@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- deploy: 2026-06-01-fourpay-markup-ratio-v7 -->
+<!-- deploy: 2026-06-01-fourpay-flat-markup-v8 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -814,7 +814,7 @@ tr:last-child td { border-bottom: none; }
         <div class="field">
           <label for="offerPrice">PIF offer price</label>
           <input id="offerPrice" type="number" inputmode="decimal" min="1000" step="100" value="8000">
-          <div class="field-note">4-pay auto-prices higher — e.g. $6k PIF → $7k 4-pay · $10k PIF → $12k 4-pay.</div>
+          <div class="field-note">4-pay adds a flat premium — <strong>+$1,000</strong> under $10k PIF · <strong>+$2,000</strong> at $10k+ (e.g. $6k→$7k · $10k→$12k).</div>
         </div>
         <div class="field">
           <label for="commissionPct">Commission percentage</label>
@@ -867,7 +867,7 @@ tr:last-child td { border-bottom: none; }
             </tr>
             <tr>
               <th scope="row">Payment mix</th>
-              <td>Most offers: <strong>PIF + 4-pay</strong> — 4-pay priced <strong>higher</strong> (e.g. <strong>$6k</strong> PIF / <strong>$7k</strong> 4-pay · <strong>$10k</strong> PIF / <strong>$12k</strong> 4-pay)</td>
+              <td>Most offers: <strong>PIF + 4-pay</strong> — Chad adds a flat premium on 4-pay (<strong>+$1k</strong> on a $6k PIF → <strong>$7k</strong> · <strong>+$2k</strong> on $10k PIF → <strong>$12k</strong>)</td>
             </tr>
             <tr>
               <th scope="row">Schedule</th>
@@ -875,7 +875,7 @@ tr:last-child td { border-bottom: none; }
             </tr>
           </tbody>
         </table>
-        <p class="industry-ref-note">Enter your <strong>PIF price</strong> above — 4-pay total is calculated higher automatically. See the green math box.</p>
+        <p class="industry-ref-note">Enter your <strong>PIF price</strong> — 4-pay is that price <strong>plus a flat premium</strong> (not the same total). See the green math box.</p>
         <div class="legal-disclaimer" role="note" aria-labelledby="legal-disclaimer-label">
           <span class="legal-disclaimer-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1100,21 +1100,21 @@ tr:last-child td { border-bottom: none; }
   var FOUR_PAY_INSTALLMENTS = 4;
   var FOUR_PAY_FOLLOWING_MONTHS = FOUR_PAY_INSTALLMENTS - 1;
 
-  function fourPayMarkupRatio(pifOfferPrice) {
-    return pifOfferPrice >= 10000 ? 1.2 : 7 / 6;
+  function fourPayFlatMarkup(pifOfferPrice) {
+    return pifOfferPrice >= 10000 ? 2000 : 1000;
   }
 
   function getDealEconomics(inputs) {
     var pifOfferPrice = inputs.offerPrice;
-    var markupRatio = fourPayMarkupRatio(pifOfferPrice);
-    var fourPayOfferPrice = pifOfferPrice * markupRatio;
+    var flatMarkup = fourPayFlatMarkup(pifOfferPrice);
+    var fourPayOfferPrice = pifOfferPrice + flatMarkup;
     var paymentAmount = fourPayOfferPrice / FOUR_PAY_INSTALLMENTS;
     var pifCommissionPerDeal = pifOfferPrice * inputs.commissionPct;
     var fourPayInstallmentCommission = paymentAmount * inputs.commissionPct;
     return {
       pifOfferPrice: pifOfferPrice,
       fourPayOfferPrice: fourPayOfferPrice,
-      markupRatio: markupRatio,
+      flatMarkup: flatMarkup,
       paymentAmount: paymentAmount,
       pifCommissionPerDeal: pifCommissionPerDeal,
       fourPayInstallmentCommission: fourPayInstallmentCommission,
@@ -1145,11 +1145,9 @@ tr:last-child td { border-bottom: none; }
     var pifLabel = round(weeklyPifDeals, 1);
     var fourLabel = round(weeklyFourDeals, 1);
 
-    var markupPct = round((econ.markupRatio - 1) * 100, 1);
-
     el.innerHTML =
       '<div class="clm-deal">PIF <strong>' + money(econ.pifOfferPrice) + '</strong> → <span class="clm-amt-gold">' + money(econ.pifCommissionPerDeal) + '</span> &nbsp;·&nbsp; 4-pay <strong>' + money(econ.fourPayOfferPrice) + '</strong> (4 × <strong>' + money(econ.paymentAmount) + '</strong>) → <span class="clm-amt">' + money(econ.fourPayInstallmentCommission) + '</span> when they sign</div>' +
-      '<div class="clm-row" style="padding-top:0;font-size:13px;color:var(--muted);"><span>4-pay total is +' + markupPct + '% vs. PIF</span><span></span></div>' +
+      '<div class="clm-row" style="padding-top:0;font-size:13px;color:var(--muted);"><span>4-pay = PIF + <strong>' + money(econ.flatMarkup) + '</strong></span><span></span></div>' +
       '<span class="clm-label">This week — ' + dealsLabel + ' deals closed</span>' +
       '<div class="clm-row"><span>' + pifLabel + ' PIF × ' + money(econ.pifCommissionPerDeal) + '</span><span class="clm-amt-gold">' + money(weekPif) + '</span></div>' +
       '<div class="clm-row"><span>' + fourLabel + ' 4-pay × ' + money(econ.fourPayInstallmentCommission) + '</span><span class="clm-amt">' + money(weekFour) + '</span></div>' +
