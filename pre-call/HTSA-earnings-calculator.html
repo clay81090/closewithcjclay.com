@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- deploy: 2026-06-01-fourpay-installments-v5 -->
+<!-- deploy: 2026-06-01-commission-live-math-v6 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -378,6 +378,78 @@ body {
   font-size: 12px;
   color: var(--text-soft);
   line-height: 1.55;
+}
+
+.commission-live-math {
+  margin-top: 16px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(0, 201, 122, 0.07);
+  border: 1px solid rgba(0, 201, 122, 0.28);
+  font-family: var(--font-b);
+  font-size: 15px;
+  line-height: 1.55;
+  color: #c8e8d8;
+}
+.commission-live-math .clm-deal {
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(0, 201, 122, 0.2);
+  color: var(--text-soft);
+}
+.commission-live-math .clm-deal strong { color: var(--text); font-weight: 600; }
+.commission-live-math .clm-amt {
+  color: var(--green);
+  font-weight: 600;
+}
+.commission-live-math .clm-amt-gold {
+  color: var(--gold);
+  font-weight: 600;
+}
+.commission-live-math .clm-label {
+  display: block;
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.commission-live-math .clm-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 5px 0;
+  color: var(--text-soft);
+}
+.commission-live-math .clm-row span:last-child {
+  text-align: right;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.commission-live-math .clm-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 201, 122, 0.25);
+  font-weight: 600;
+  color: var(--text);
+}
+.commission-live-math .clm-total .clm-amt { font-size: 1.1em; }
+.commission-live-math .clm-follow {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.12);
+}
+.commission-live-math .clm-follow .clm-row { color: rgba(200, 232, 216, 0.85); }
+.commission-live-math .clm-note {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
 }
 .legal-disclaimer {
   display: flex;
@@ -803,8 +875,7 @@ tr:last-child td { border-bottom: none; }
             </tr>
           </tbody>
         </table>
-        <p class="industry-ref-note"><strong>PIF vs. 4-pay slider:</strong> This model keeps <strong>4-pay on the same offer price</strong> as PIF (conservative). On an <strong>$8k</strong> offer at <strong>10%</strong>: <strong>PIF = $800</strong> at signing. <strong>4-pay = 4×$2k</strong> — you earn <strong>$200</strong> the month they sign (first payment), then <strong>$200</strong> in each of the <strong>next 3 months</strong> ($800 total). In the real world, 4-pay is often priced higher (example: <strong>$12k</strong> on 4-pay vs. <strong>$10k PIF</strong>). More 4-pay = more <strong>residual stacking</strong> in the year-one chart — not more upfront cash.</p>
-        <p class="industry-ref-note" id="fourPayCommissionExample" style="margin-top:8px;"></p>
+        <p class="industry-ref-note">4-pay uses the <strong>same offer price</strong> as PIF in this model. See the live math box below your inputs.</p>
         <div class="legal-disclaimer" role="note" aria-labelledby="legal-disclaimer-label">
           <span class="legal-disclaimer-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -818,32 +889,18 @@ tr:last-child td { border-bottom: none; }
 
       <div class="range-wrap" style="margin-top:6px;">
         <div class="range-readout">
-          <strong id="pifPctReadout">65%</strong> PIF/financing · <strong id="fourPayPctReadout">35%</strong> on 4-pay — <strong>industry average</strong>.
-          <span class="range-readout-sub">Drag to shift deals between PIF/financing (full commission at signing) and 4-pay (commission on each payment — first installment the month they sign, then 3 more monthly installments).</span>
+          <strong id="pifPctReadout">65%</strong> PIF/financing · <strong id="fourPayPctReadout">35%</strong> 4-pay <span style="color:var(--muted);font-weight:400;">(industry average)</span>
         </div>
         <input id="pifSlider" type="range" min="0" max="100" step="1" value="65" aria-label="PIF versus 4-pay split">
       </div>
+
+      <div class="commission-live-math" id="commissionLiveMath" aria-live="polite"></div>
+
       <div class="metrics-grid" style="margin-top:18px;">
         <div class="metric"><span class="metric-label">Weekly calls</span><div class="metric-value" id="htsaWeeklyCalls">-</div></div>
         <div class="metric"><span class="metric-label">Weekly closed deals</span><div class="metric-value green" id="htsaWeeklyDeals">-</div></div>
         <div class="metric"><span class="metric-label">Weekly commission potential</span><div class="metric-value gold" id="htsaWeeklyCommission">-</div></div>
         <div class="metric"><span class="metric-label">Monthly commission potential</span><div class="metric-value" id="htsaMonthlyCommission">-</div></div>
-      </div>
-      <div class="summary-grid">
-        <div class="mini-card">
-          <span class="mini-kicker">Immediate cash</span>
-          <h4 id="htsaPifCash">-</h4>
-          <p>Full commission on PIF/financing deals at signing (monthlyized snapshot).</p>
-        </div>
-        <div class="mini-card">
-          <span class="mini-kicker">4-pay — month one</span>
-          <h4 id="htsaResidual">-</h4>
-          <p>First-installment commission on 4-pay deals closed this month (signing-month payment only — installments 2–4 stack in the year-one chart).</p>
-        </div>
-      </div>
-      <div class="math-panel" id="htsaRecap">
-        <span class="recap-kicker">Conservative possibility</span>
-        Adjust numbers above to see an honest commission snapshot.
       </div>
     </div>
   </section>
@@ -914,7 +971,7 @@ tr:last-child td { border-bottom: none; }
             <span id="chartMinLabel">Month 1</span>
             <span id="chartPeakLabel">Month 12</span>
           </div>
-          <p class="chart-explainer"><strong>Reading the curve:</strong> Month 1 reflects PIF/financing commissions plus each 4-pay deal’s <strong>first installment</strong> (paid the month they sign). The next <strong>3 months</strong> collect installments 2–4 from prior 4-pay deals; later months stack more as volume grows. Illustrative — not a guaranteed raise. Benchmark against the <strong>year-one average</strong>, not month 12.</p>
+          <p class="chart-explainer">Later months climb as 4-pay deals from prior months keep paying. Use the <strong>year-one average</strong> — not month 12.</p>
         </div>
       </div>
     </div>
@@ -1064,12 +1121,34 @@ tr:last-child td { border-bottom: none; }
     return inputs.pifPct * econ.pifCommissionPerDeal + inputs.fourPayPct * econ.fourPayInstallmentCommission;
   }
 
-  function renderFourPayCommissionExample(inputs) {
-    var el = document.getElementById('fourPayCommissionExample');
+  function renderCommissionLiveMath(inputs, econ, weeklyDeals, weeklyPifDeals, weeklyFourDeals) {
+    var el = document.getElementById('commissionLiveMath');
     if (!el) return;
-    var econ = getDealEconomics(inputs);
+
+    var weekPif = weeklyPifDeals * econ.pifCommissionPerDeal;
+    var weekFour = weeklyFourDeals * econ.fourPayInstallmentCommission;
+    var weekTotal = weekPif + weekFour;
+    var monthNew = weekTotal * 4;
+    var monthFourFollow = weekFour * 4;
+
+    var dealsLabel = round(weeklyDeals, 1);
+    var pifLabel = round(weeklyPifDeals, 1);
+    var fourLabel = round(weeklyFourDeals, 1);
+
     el.innerHTML =
-      '<strong>At your offer (' + money(inputs.offerPrice) + ' @ ' + round(inputs.commissionPct * 100, 0) + '%):</strong> PIF/financing = <strong>' + money(econ.pifCommissionPerDeal) + '</strong> at signing. 4-pay = <strong>4×' + money(econ.paymentAmount) + '</strong> — <strong>' + money(econ.fourPayInstallmentCommission) + '</strong> the month they sign, then <strong>' + money(econ.fourPayInstallmentCommission) + '</strong> in each of the next <strong>3 months</strong> (' + money(econ.fourPayTotalCommission) + ' total per deal).';
+      '<div class="clm-deal">1 deal · <strong>' + money(inputs.offerPrice) + '</strong> on 4-pay (4 × <strong>' + money(econ.paymentAmount) + '</strong>) → <span class="clm-amt">' + money(econ.fourPayInstallmentCommission) + '</span> when they sign · PIF on same offer → <span class="clm-amt-gold">' + money(econ.pifCommissionPerDeal) + '</span></div>' +
+      '<span class="clm-label">This week — ' + dealsLabel + ' deals closed</span>' +
+      '<div class="clm-row"><span>' + pifLabel + ' PIF × ' + money(econ.pifCommissionPerDeal) + '</span><span class="clm-amt-gold">' + money(weekPif) + '</span></div>' +
+      '<div class="clm-row"><span>' + fourLabel + ' 4-pay × ' + money(econ.fourPayInstallmentCommission) + '</span><span class="clm-amt">' + money(weekFour) + '</span></div>' +
+      '<div class="clm-total"><span>This week total</span><span class="clm-amt">' + money(weekTotal) + '</span></div>' +
+      '<div class="clm-total" style="margin-top:4px;border-top:none;padding-top:0;"><span>× 4 weeks = this month (new closes)</span><span class="clm-amt">' + money(monthNew) + '</span></div>' +
+      '<div class="clm-follow">' +
+      '<span class="clm-label">Same ' + fourLabel + ' four-pay deals — you also get</span>' +
+      '<div class="clm-row"><span>Month 2</span><span class="clm-amt">' + money(monthFourFollow) + '</span></div>' +
+      '<div class="clm-row"><span>Month 3</span><span class="clm-amt">' + money(monthFourFollow) + '</span></div>' +
+      '<div class="clm-row"><span>Month 4</span><span class="clm-amt">' + money(monthFourFollow) + '</span></div>' +
+      '</div>' +
+      '<p class="clm-note">Stay consistent and these stack. Year-one chart below adds it all up.</p>';
   }
 
   function sumResiduals(queue) {
@@ -1088,9 +1167,7 @@ tr:last-child td { border-bottom: none; }
     var weeklyFourFirstInstallment = weeklyFourDeals * econ.fourPayInstallmentCommission;
     var weeklyCommission = weeklyPifCash + weeklyFourFirstInstallment;
     var monthlyCommission = weeklyCommission * 4;
-    var monthlyFourPaySigningMonth = weeklyFourDeals * 4 * econ.fourPayInstallmentCommission;
-
-    renderFourPayCommissionExample(inputs);
+    renderCommissionLiveMath(inputs, econ, weeklyDeals, weeklyPifDeals, weeklyFourDeals);
 
     document.getElementById('pifPctReadout').textContent = round(inputs.pifPct * 100, 0) + '%';
     document.getElementById('fourPayPctReadout').textContent = round(inputs.fourPayPct * 100, 0) + '%';
@@ -1098,11 +1175,6 @@ tr:last-child td { border-bottom: none; }
     document.getElementById('htsaWeeklyDeals').textContent = round(weeklyDeals, 2);
     document.getElementById('htsaWeeklyCommission').textContent = money(weeklyCommission);
     document.getElementById('htsaMonthlyCommission').textContent = money(monthlyCommission);
-    document.getElementById('htsaPifCash').textContent = money(weeklyPifCash * 4);
-    document.getElementById('htsaResidual').textContent = money(monthlyFourPaySigningMonth);
-
-    var text = 'At ' + round(inputs.callsPerDay, 0) + ' scheduled calls/day over ' + round(inputs.daysPerWeek, 0) + ' days/week and a ' + round(inputs.showRate * 100, 0) + '% show rate, that creates about ' + round(weeklyShownCalls, 2) + ' real conversations/week. From there, a ' + regularClosePct(inputs.closeRate) + '% close rate creates about ' + round(weeklyDeals, 2) + ' deals/week. With a ' + round(inputs.commissionPct * 100, 0) + '% commission on a ' + money(inputs.offerPrice) + ' offer and a ' + round(inputs.pifPct * 100, 0) + '/' + round(inputs.fourPayPct * 100, 0) + ' PIF to 4-pay mix, the model lands around ' + money(monthlyCommission) + '/month in collected commission on a conservative basis.';
-    document.getElementById('htsaRecap').innerHTML = '<span class="recap-kicker">Conservative possibility</span>' + text;
   }
 
   function regularClosePct(rate) {
