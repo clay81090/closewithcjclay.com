@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- deploy: 2026-06-01-disclaimer-v3 -->
+<!-- deploy: 2026-06-01-client-ramp-v4 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Earnings Calculator | HTSA</title>
-<meta name="description" content="Goal income and first-year commission projection — HTSA possibility math.">
+<meta name="description" content="Pre-call earnings calculator — model your goal income, close rate, call volume, and first-year commission ramp.">
 <meta name="color-scheme" content="dark">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -664,7 +664,7 @@ tr:last-child td { border-bottom: none; }
   <header class="hero" id="top">
     <div class="hero-badge"><span class="badge-dot" aria-hidden="true"></span> HTSA tool</div>
     <h1><em>Earnings</em><br>calculator</h1>
-    <p class="hero-lead">Start with <strong>current income and hours</strong>, then <strong>goal income</strong> to expose the hours gap on their current path. After that, model <strong>high-ticket commissions</strong> and a <strong>12-month ramp</strong> with residuals.</p>
+    <p class="hero-lead">Before your call: enter your <strong>current income and hours</strong>, then your <strong>goal monthly income</strong>. Scroll down to model high-ticket commissions — adjust offer price, call volume, and close rate to see <strong>what it would take to hit your goal</strong>, plus a conservative <strong>12-month ramp</strong> with 4-pay residuals.</p>
   </header>
 
   <section class="section" id="current-reality" aria-labelledby="current-heading">
@@ -674,7 +674,7 @@ tr:last-child td { border-bottom: none; }
       </div>
       <div class="section-head" style="margin-bottom:16px;">
         <h2 class="section-title" id="current-heading">Current situation</h2>
-        <p class="section-sub">Numbers and labels only — no story questions. Used for hourly value and “hours required on the current path” math.</p>
+        <p class="section-sub">Your numbers only — used to calculate your hourly value and how many hours your <em>current</em> path would require to reach your goal.</p>
       </div>
       <div class="grid-2">
         <div class="field">
@@ -703,8 +703,8 @@ tr:last-child td { border-bottom: none; }
         <span class="phase-chip">Gap clarification</span>
       </div>
       <div class="section-head" style="margin-bottom:16px;">
-        <h2 class="section-title" id="gap-heading">Show the current path does not support the desired future.</h2>
-        <p class="section-sub">This is the first place where income-gap math is allowed to appear.</p>
+        <h2 class="section-title" id="gap-heading">Can your current path reach your goal?</h2>
+        <p class="section-sub">Compare your goal income to what your current hourly rate would actually require in hours per week.</p>
       </div>
       <div class="grid-2" style="margin-bottom:4px;">
         <div class="field">
@@ -724,7 +724,7 @@ tr:last-child td { border-bottom: none; }
       </div>
       <div class="math-panel" id="gapRecap">
         <span class="recap-kicker">Gap clarification</span>
-        Enter current income, current hours, and goal monthly income to see how many hours per week the <em>current</em> path would require.
+        Enter your current income, weekly hours, and goal monthly income to see how many hours per week your <em>current</em> path would require.
       </div>
     </div>
   </section>
@@ -736,7 +736,7 @@ tr:last-child td { border-bottom: none; }
       </div>
       <div class="section-head" style="margin-bottom:16px;">
         <h2 class="section-title" id="possibility-heading">What the high-ticket vehicle could look like</h2>
-        <p class="section-sub">Defaults mirror a full-time closer pace ($8k offer, 10% commission, 75% show). Drag the slider to split PIF vs. 4-pay.</p>
+        <p class="section-sub">Adjust offer price, commission %, calls per day, and close rate to model your situation. Defaults mirror a full-time closer pace ($8k offer, 10% commission, 75% show).</p>
       </div>
       <div class="grid-3">
         <div class="field">
@@ -768,7 +768,7 @@ tr:last-child td { border-bottom: none; }
         <div class="field">
           <label for="pifPct">Paid in full (%)</label>
           <input id="pifPct" type="number" inputmode="decimal" min="0" max="100" step="1" value="65">
-          <div class="field-note">Remaining % goes to 4-pay (preset 65% / 35%).</div>
+          <div class="field-note">Industry-average mix: 65% PIF/financing · 35% 4-pay. Adjust if your offer differs.</div>
         </div>
       </div>
 
@@ -799,7 +799,7 @@ tr:last-child td { border-bottom: none; }
             </tr>
             <tr>
               <th scope="row">Schedule</th>
-              <td>Full-time closers often <strong>35–40+ hrs/week</strong> · Standard mix ≈ <strong>65% PIF/financing · 35% 4-pay</strong></td>
+              <td>Full-time closers often <strong>35–40+ hrs/week</strong> · Industry-average mix ≈ <strong>65% PIF/financing · 35% 4-pay</strong></td>
             </tr>
           </tbody>
         </table>
@@ -817,8 +817,8 @@ tr:last-child td { border-bottom: none; }
 
       <div class="range-wrap" style="margin-top:6px;">
         <div class="range-readout">
-          <strong id="pifPctReadout">65%</strong> paid in full · <strong id="fourPayPctReadout">35%</strong> on 4-pay.
-          <span class="range-readout-sub">Drag to shift deals between upfront PIF commission (cash now) and 4-pay (¼ commission per month × 4 — stacks in the chart).</span>
+          <strong id="pifPctReadout">65%</strong> PIF/financing · <strong id="fourPayPctReadout">35%</strong> on 4-pay — <strong>industry average</strong>.
+          <span class="range-readout-sub">Drag to shift deals between upfront PIF/financing commission (cash now) and 4-pay (¼ commission per month × 4 — stacks in the year-one chart).</span>
         </div>
         <input id="pifSlider" type="range" min="0" max="100" step="1" value="65" aria-label="PIF versus 4-pay split">
       </div>
@@ -853,8 +853,8 @@ tr:last-child td { border-bottom: none; }
         <span class="phase-chip">First-year ramp</span>
       </div>
       <div class="section-head" style="margin-bottom:16px;">
-        <h2 class="section-title" id="ramp-heading">Model the first year, then let the skill curve work</h2>
-        <p class="section-sub">Close rates can rise each quarter. Residuals from 4-pay deals stack across months.</p>
+        <h2 class="section-title" id="ramp-heading">First-year ramp (conservative)</h2>
+        <p class="section-sub">Preset: <strong>20% close rate</strong> in quarters 1–2, <strong>25%</strong> in quarters 3–4. Residuals from 4-pay deals stack over the year — use the <strong>year-one average</strong> below, not the late-month peak.</p>
       </div>
       <div class="phase-row-grid">
         <div class="field">
@@ -863,15 +863,15 @@ tr:last-child td { border-bottom: none; }
         </div>
         <div class="field">
           <label for="phaseClose2">Months 4-6 close rate</label>
-          <input id="phaseClose2" type="number" inputmode="decimal" min="10" max="50" step="1" value="25">
+          <input id="phaseClose2" type="number" inputmode="decimal" min="10" max="50" step="1" value="20">
         </div>
         <div class="field">
           <label for="phaseClose3">Months 7-9 close rate</label>
-          <input id="phaseClose3" type="number" inputmode="decimal" min="10" max="50" step="1" value="28">
+          <input id="phaseClose3" type="number" inputmode="decimal" min="10" max="50" step="1" value="25">
         </div>
         <div class="field">
           <label for="phaseClose4">Months 10-12 close rate</label>
-          <input id="phaseClose4" type="number" inputmode="decimal" min="10" max="50" step="1" value="30">
+          <input id="phaseClose4" type="number" inputmode="decimal" min="10" max="50" step="1" value="25">
         </div>
       </div>
       <p class="table-scroll-hint" id="tableScrollHint" role="note">Swipe sideways to see all columns →</p>
@@ -913,7 +913,7 @@ tr:last-child td { border-bottom: none; }
             <span id="chartMinLabel">Month 1</span>
             <span id="chartPeakLabel">Month 12</span>
           </div>
-          <p class="chart-explainer"><strong>Reading the curve:</strong> Month 1 is mostly new PIF + first 4-pay installments. Later months climb as prior 4-pay deals keep paying and close rate ramps by quarter — not a promised raise, just how residual stacking works at your inputs.</p>
+          <p class="chart-explainer"><strong>Reading the curve:</strong> Month 1 reflects new PIF/financing plus first 4-pay installments only. Later months rise as prior 4-pay deals keep paying and close rate steps up by quarter — illustrative stacking, not a guaranteed raise. Benchmark against the <strong>year-one average</strong>, not month 12.</p>
         </div>
       </div>
     </div>
@@ -926,11 +926,11 @@ tr:last-child td { border-bottom: none; }
       </div>
       <div class="section-head" style="margin-bottom:12px;">
         <h2 class="section-title" id="compare-heading">Goal vs. year-one model</h2>
-        <p class="section-sub">After you’ve set goal income and run the HTSA projection below, this line compares their stated target to the projected first-year average.</p>
+        <p class="section-sub">With your goal income entered above, this section shows what close rate or call volume you’d need at your chosen offer price — and how the year-one model compares to your target.</p>
       </div>
       <div class="math-panel compare-goal" id="goalYearCompare">
         <span class="recap-kicker">Goal vs. year-one model</span>
-        Enter a goal monthly income and adjust the HTSA model above to see how the projected first-year average compares.
+        Enter your goal monthly income and adjust the model above to see required close rate, call volume, and how the year-one average compares.
       </div>
     </div>
   </section>
@@ -957,9 +957,9 @@ tr:last-child td { border-bottom: none; }
     showRate: 75,
     pifPct: 65,
     phaseClose1: 20,
-    phaseClose2: 25,
-    phaseClose3: 28,
-    phaseClose4: 30
+    phaseClose2: 20,
+    phaseClose3: 25,
+    phaseClose4: 25
   };
 
   function normalizeNumber(value, fallback) {
@@ -1013,14 +1013,14 @@ tr:last-child td { border-bottom: none; }
     document.getElementById('gapExtraHours').textContent = requiredWeekly ? signedHours(extraWeekly) : '-';
     document.getElementById('gapIncrease').textContent = goalMonthly ? round(pctIncrease, 0) + '%' : '-';
 
-    var text = 'At their current model, they would need current income and future income entered before this section can do its job.';
+    var text = 'Enter your current income, weekly hours, and goal monthly income to see how many hours per week your current path would require.';
     if (hourly && requiredWeekly) {
       var realism = requiredWeekly > 168
-        ? 'There are only 168 hours in a week, so this is not an effort problem. It is a vehicle problem.'
+        ? 'There are only 168 hours in a week — this is not an effort problem. It is a vehicle problem.'
         : requiredWeekly > 90
-        ? 'That pushes into an obviously brutal weekly schedule, which makes the current path mathematically weak.'
-        : 'Even if it is technically possible on paper, it is still asking the old vehicle to do something it was not designed to do well.';
-      text = 'At their current model, they would need to work about ' + round(requiredWeekly, 1) + ' hours/week to hit ' + money(goalMonthly) + '/month. That means an extra ' + round(Math.max(extraWeekly, 0), 1) + ' hours/week on top of where they are now. ' + realism;
+        ? 'That is an unrealistic weekly schedule on your current path.'
+        : 'Even if it looks possible on paper, your current vehicle was not built to scale income this way.';
+      text = 'At your current hourly rate, you would need about <strong>' + round(requiredWeekly, 1) + ' hours/week</strong> to reach <strong>' + money(goalMonthly) + '/month</strong> — an extra <strong>' + round(Math.max(extraWeekly, 0), 1) + ' hours/week</strong> above where you are now. ' + realism;
     }
 
     document.getElementById('gapRecap').innerHTML = '<span class="recap-kicker">Gap clarification</span>' + text;
@@ -1037,6 +1037,15 @@ tr:last-child td { border-bottom: none; }
       pifPct: clamp(normalizeNumber(state.pifPct, 65), 0, 100) / 100,
       fourPayPct: 1 - (clamp(normalizeNumber(state.pifPct, 65), 0, 100) / 100)
     };
+  }
+
+  function monthlyShownPerCallDay(inputs) {
+    return inputs.daysPerWeek * 4 * inputs.showRate;
+  }
+
+  function collectedPerDealMonthOne(inputs) {
+    var commissionPerDeal = inputs.offerPrice * inputs.commissionPct;
+    return inputs.pifPct * commissionPerDeal + inputs.fourPayPct * (commissionPerDeal / 4);
   }
 
   function sumResiduals(queue) {
@@ -1078,12 +1087,12 @@ tr:last-child td { border-bottom: none; }
     var inputs = getOpportunityInputs();
     var rates = [
       clamp(normalizeNumber(state.phaseClose1, 20), 10, 50) / 100,
-      clamp(normalizeNumber(state.phaseClose2, 25), 10, 50) / 100,
-      clamp(normalizeNumber(state.phaseClose3, 28), 10, 50) / 100,
-      clamp(normalizeNumber(state.phaseClose4, 30), 10, 50) / 100
+      clamp(normalizeNumber(state.phaseClose2, 20), 10, 50) / 100,
+      clamp(normalizeNumber(state.phaseClose3, 25), 10, 50) / 100,
+      clamp(normalizeNumber(state.phaseClose4, 25), 10, 50) / 100
     ];
-    var monthlyScheduledCalls = inputs.callsPerDay * inputs.daysPerWeek * 4;
-    var monthlyShownCalls = monthlyScheduledCalls * inputs.showRate;
+    var weeklyShownCalls = inputs.callsPerDay * inputs.daysPerWeek * inputs.showRate;
+    var monthlyShownCalls = weeklyShownCalls * 4;
     var commissionPerDeal = inputs.offerPrice * inputs.commissionPct;
     var residualQueue = [];
     var months = [];
@@ -1263,9 +1272,25 @@ tr:last-child td { border-bottom: none; }
     var proj = state._projection || {};
     var avg = proj.avgMonthly || 0;
     var hours = numberText(state.desiredWeeklyHours, 'hours/week');
+    var inputs = getOpportunityInputs();
+    var perDeal = collectedPerDealMonthOne(inputs);
+    var shownPerCallDay = monthlyShownPerCallDay(inputs);
+    var pathHtml = '';
+
+    if (goal && perDeal > 0 && shownPerCallDay > 0 && inputs.callsPerDay > 0 && inputs.closeRate > 0) {
+      var reqClose = goal / (inputs.callsPerDay * shownPerCallDay * perDeal);
+      var reqCalls = goal / (inputs.closeRate * shownPerCallDay * perDeal);
+      pathHtml =
+        '<p style="margin:10px 0 0;"><strong>To reach ' + money(goal) + '/month</strong> at a <strong>' + money(inputs.offerPrice) + '</strong> offer, <strong>' + round(inputs.commissionPct * 100, 0) + '%</strong> commission, and the current PIF/4-pay mix (snapshot math — month one, before residual stacking): about <strong>' + round(reqClose * 100, 1) + '% close rate</strong> at <strong>' + round(inputs.callsPerDay, 0) + ' calls/day</strong>, <em>or</em> about <strong>' + round(reqCalls, 1) + ' calls/day</strong> at <strong>' + round(inputs.closeRate * 100, 0) + '% close rate</strong>.</p>';
+    }
 
     if (!goal) {
-      el.innerHTML = '<span class="recap-kicker">Goal vs. year-one model</span><p style="margin:0;"><strong>Goal:</strong> not set. <strong>Year-one average (model):</strong> ' + money(avg) + '/month at ' + hours + ' desired schedule.</p>';
+      el.innerHTML =
+        '<span class="recap-kicker">Goal vs. year-one model</span><p style="margin:0;"><strong>Goal income:</strong> not set yet. <strong>Year-one average (model):</strong> ' +
+        money(avg) +
+        '/month · <strong>Desired schedule:</strong> ' +
+        hours +
+        '.</p>';
       return;
     }
 
@@ -1273,11 +1298,11 @@ tr:last-child td { border-bottom: none; }
     var pct = goal > 0 ? Math.round((delta / goal) * 100) : 0;
     var verdict =
       delta >= 0
-        ? 'At these inputs, the <strong>year-one average</strong> is about <strong>' + money(avg) + '/month</strong> — roughly <strong>' + (pct >= 0 ? '+' : '') + pct + '%</strong> vs. the stated goal of <strong>' + money(goal) + '/month</strong>.'
-        : 'At these inputs, the <strong>year-one average</strong> is about <strong>' + money(avg) + '/month</strong> — about <strong>' + Math.abs(pct) + '% below</strong> the goal of <strong>' + money(goal) + '/month</strong>. Tighten activity, close rate, or offer/commission in the model to close the gap.';
+        ? 'Your <strong>year-one average</strong> at these inputs is about <strong>' + money(avg) + '/month</strong> — roughly <strong>' + (pct >= 0 ? '+' : '') + pct + '%</strong> vs. your goal of <strong>' + money(goal) + '/month</strong>.'
+        : 'Your <strong>year-one average</strong> at these inputs is about <strong>' + money(avg) + '/month</strong> — about <strong>' + Math.abs(pct) + '% below</strong> your goal of <strong>' + money(goal) + '/month</strong>. Raise call volume, close rate, or offer/commission in the model to close the gap.';
 
     el.innerHTML =
-      '<span class="recap-kicker">Goal vs. year-one model</span><p style="margin:0 0 10px;"><strong>Goal income:</strong> ' +
+      '<span class="recap-kicker">Goal vs. year-one model</span><p style="margin:0 0 10px;"><strong>Your goal:</strong> ' +
       money(goal) +
       '/month · <strong>Desired schedule:</strong> ' +
       hours +
@@ -1285,7 +1310,8 @@ tr:last-child td { border-bottom: none; }
       verdict +
       ' <strong>Year-one total commissions:</strong> ' +
       money(proj.totalIncome || 0) +
-      '.</p>';
+      '.</p>' +
+      pathHtml;
   }
 
   function readStateFromDom() {
@@ -1303,9 +1329,9 @@ tr:last-child td { border-bottom: none; }
     state.showRate = normalizeNumber(document.getElementById('showRate').value, 75);
     state.pifPct = clamp(normalizeNumber(document.getElementById('pifPct').value, 65), 0, 100);
     state.phaseClose1 = normalizeNumber(document.getElementById('phaseClose1').value, 20);
-    state.phaseClose2 = normalizeNumber(document.getElementById('phaseClose2').value, 25);
-    state.phaseClose3 = normalizeNumber(document.getElementById('phaseClose3').value, 28);
-    state.phaseClose4 = normalizeNumber(document.getElementById('phaseClose4').value, 30);
+    state.phaseClose2 = normalizeNumber(document.getElementById('phaseClose2').value, 20);
+    state.phaseClose3 = normalizeNumber(document.getElementById('phaseClose3').value, 25);
+    state.phaseClose4 = normalizeNumber(document.getElementById('phaseClose4').value, 25);
   }
 
   function updateTableScrollAffordance() {
