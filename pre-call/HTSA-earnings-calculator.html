@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- deploy: 2026-06-01-commission-live-math-v6 -->
+<!-- deploy: 2026-06-01-fourpay-markup-ratio-v7 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -812,9 +812,9 @@ tr:last-child td { border-bottom: none; }
       </div>
       <div class="grid-3">
         <div class="field">
-          <label for="offerPrice">Offer price</label>
+          <label for="offerPrice">PIF offer price</label>
           <input id="offerPrice" type="number" inputmode="decimal" min="1000" step="100" value="8000">
-          <div class="field-note">Preset $8k — typical HTSA member landing zone.</div>
+          <div class="field-note">4-pay auto-prices higher — e.g. $6k PIF → $7k 4-pay · $10k PIF → $12k 4-pay.</div>
         </div>
         <div class="field">
           <label for="commissionPct">Commission percentage</label>
@@ -867,7 +867,7 @@ tr:last-child td { border-bottom: none; }
             </tr>
             <tr>
               <th scope="row">Payment mix</th>
-              <td>Most offers: <strong>PIF + 4-pay</strong> (e.g. <strong>$10k PIF</strong> or <strong>$12k</strong> on 4-pay — 4×$3k/mo)</td>
+              <td>Most offers: <strong>PIF + 4-pay</strong> — 4-pay priced <strong>higher</strong> (e.g. <strong>$6k</strong> PIF / <strong>$7k</strong> 4-pay · <strong>$10k</strong> PIF / <strong>$12k</strong> 4-pay)</td>
             </tr>
             <tr>
               <th scope="row">Schedule</th>
@@ -875,7 +875,7 @@ tr:last-child td { border-bottom: none; }
             </tr>
           </tbody>
         </table>
-        <p class="industry-ref-note">4-pay uses the <strong>same offer price</strong> as PIF in this model. See the live math box below your inputs.</p>
+        <p class="industry-ref-note">Enter your <strong>PIF price</strong> above — 4-pay total is calculated higher automatically. See the green math box.</p>
         <div class="legal-disclaimer" role="note" aria-labelledby="legal-disclaimer-label">
           <span class="legal-disclaimer-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1100,11 +1100,21 @@ tr:last-child td { border-bottom: none; }
   var FOUR_PAY_INSTALLMENTS = 4;
   var FOUR_PAY_FOLLOWING_MONTHS = FOUR_PAY_INSTALLMENTS - 1;
 
+  function fourPayMarkupRatio(pifOfferPrice) {
+    return pifOfferPrice >= 10000 ? 1.2 : 7 / 6;
+  }
+
   function getDealEconomics(inputs) {
-    var paymentAmount = inputs.offerPrice / FOUR_PAY_INSTALLMENTS;
-    var pifCommissionPerDeal = inputs.offerPrice * inputs.commissionPct;
+    var pifOfferPrice = inputs.offerPrice;
+    var markupRatio = fourPayMarkupRatio(pifOfferPrice);
+    var fourPayOfferPrice = pifOfferPrice * markupRatio;
+    var paymentAmount = fourPayOfferPrice / FOUR_PAY_INSTALLMENTS;
+    var pifCommissionPerDeal = pifOfferPrice * inputs.commissionPct;
     var fourPayInstallmentCommission = paymentAmount * inputs.commissionPct;
     return {
+      pifOfferPrice: pifOfferPrice,
+      fourPayOfferPrice: fourPayOfferPrice,
+      markupRatio: markupRatio,
       paymentAmount: paymentAmount,
       pifCommissionPerDeal: pifCommissionPerDeal,
       fourPayInstallmentCommission: fourPayInstallmentCommission,
@@ -1135,8 +1145,11 @@ tr:last-child td { border-bottom: none; }
     var pifLabel = round(weeklyPifDeals, 1);
     var fourLabel = round(weeklyFourDeals, 1);
 
+    var markupPct = round((econ.markupRatio - 1) * 100, 1);
+
     el.innerHTML =
-      '<div class="clm-deal">1 deal · <strong>' + money(inputs.offerPrice) + '</strong> on 4-pay (4 × <strong>' + money(econ.paymentAmount) + '</strong>) → <span class="clm-amt">' + money(econ.fourPayInstallmentCommission) + '</span> when they sign · PIF on same offer → <span class="clm-amt-gold">' + money(econ.pifCommissionPerDeal) + '</span></div>' +
+      '<div class="clm-deal">PIF <strong>' + money(econ.pifOfferPrice) + '</strong> → <span class="clm-amt-gold">' + money(econ.pifCommissionPerDeal) + '</span> &nbsp;·&nbsp; 4-pay <strong>' + money(econ.fourPayOfferPrice) + '</strong> (4 × <strong>' + money(econ.paymentAmount) + '</strong>) → <span class="clm-amt">' + money(econ.fourPayInstallmentCommission) + '</span> when they sign</div>' +
+      '<div class="clm-row" style="padding-top:0;font-size:13px;color:var(--muted);"><span>4-pay total is +' + markupPct + '% vs. PIF</span><span></span></div>' +
       '<span class="clm-label">This week — ' + dealsLabel + ' deals closed</span>' +
       '<div class="clm-row"><span>' + pifLabel + ' PIF × ' + money(econ.pifCommissionPerDeal) + '</span><span class="clm-amt-gold">' + money(weekPif) + '</span></div>' +
       '<div class="clm-row"><span>' + fourLabel + ' 4-pay × ' + money(econ.fourPayInstallmentCommission) + '</span><span class="clm-amt">' + money(weekFour) + '</span></div>' +
@@ -1381,7 +1394,7 @@ tr:last-child td { border-bottom: none; }
       var reqClose = goal / (inputs.callsPerDay * shownPerCallDay * perDeal);
       var reqCalls = goal / (inputs.closeRate * shownPerCallDay * perDeal);
       pathHtml =
-        '<p style="margin:10px 0 0;"><strong>To reach ' + money(goal) + '/month</strong> at a <strong>' + money(inputs.offerPrice) + '</strong> offer, <strong>' + round(inputs.commissionPct * 100, 0) + '%</strong> commission, and the current PIF/4-pay mix (snapshot math — month one, before residual stacking): about <strong>' + round(reqClose * 100, 1) + '% close rate</strong> at <strong>' + round(inputs.callsPerDay, 0) + ' calls/day</strong>, <em>or</em> about <strong>' + round(reqCalls, 1) + ' calls/day</strong> at <strong>' + round(inputs.closeRate * 100, 0) + '% close rate</strong>.</p>';
+        '<p style="margin:10px 0 0;"><strong>To reach ' + money(goal) + '/month</strong> at <strong>' + money(inputs.offerPrice) + '</strong> PIF (4-pay priced higher automatically), <strong>' + round(inputs.commissionPct * 100, 0) + '%</strong> commission, and your current PIF/4-pay mix: about <strong>' + round(reqClose * 100, 1) + '% close rate</strong> at <strong>' + round(inputs.callsPerDay, 0) + ' calls/day</strong>, <em>or</em> about <strong>' + round(reqCalls, 1) + ' calls/day</strong> at <strong>' + round(inputs.closeRate * 100, 0) + '% close rate</strong>.</p>';
     }
 
     if (!goal) {
