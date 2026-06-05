@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- deploy: 2026-06-01-fourpay-flat-markup-v8 -->
+<!-- deploy: 2026-06-01-client-safe-copy-v9 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -814,7 +814,7 @@ tr:last-child td { border-bottom: none; }
         <div class="field">
           <label for="offerPrice">PIF offer price</label>
           <input id="offerPrice" type="number" inputmode="decimal" min="1000" step="100" value="8000">
-          <div class="field-note">4-pay adds a flat premium — <strong>+$1,000</strong> under $10k PIF · <strong>+$2,000</strong> at $10k+ (e.g. $6k→$7k · $10k→$12k).</div>
+          <div class="field-note">Use the base PIF number you want to model. This tool estimates a slightly higher 4-pay total for planning only.</div>
         </div>
         <div class="field">
           <label for="commissionPct">Commission percentage</label>
@@ -839,7 +839,7 @@ tr:last-child td { border-bottom: none; }
         </div>
         <div class="field">
           <label for="pifPct">Paid in full (%)</label>
-          <input id="pifPct" type="number" inputmode="decimal" min="0" max="100" step="1" value="65">
+          <input id="pifPct" type="number" inputmode="decimal" min="0" max="100" step="5" value="65">
           <div class="field-note">Industry-average mix: 65% PIF/financing · 35% 4-pay. Adjust if your offer differs.</div>
         </div>
       </div>
@@ -867,7 +867,7 @@ tr:last-child td { border-bottom: none; }
             </tr>
             <tr>
               <th scope="row">Payment mix</th>
-              <td>Most offers: <strong>PIF + 4-pay</strong> — Chad adds a flat premium on 4-pay (<strong>+$1k</strong> on a $6k PIF → <strong>$7k</strong> · <strong>+$2k</strong> on $10k PIF → <strong>$12k</strong>)</td>
+              <td>Most offers: <strong>PIF + 4-pay</strong> — 4-pay is often priced slightly higher than PIF (for example, <strong>$10k</strong> PIF and <strong>$12k</strong> 4-pay).</td>
             </tr>
             <tr>
               <th scope="row">Schedule</th>
@@ -875,7 +875,7 @@ tr:last-child td { border-bottom: none; }
             </tr>
           </tbody>
         </table>
-        <p class="industry-ref-note">Enter your <strong>PIF price</strong> — 4-pay is that price <strong>plus a flat premium</strong> (not the same total). See the green math box.</p>
+        <p class="industry-ref-note">Enter your <strong>PIF price</strong>. The calculator models 4-pay as a slightly higher total for forecasting only (not a customer-facing quote).</p>
         <div class="legal-disclaimer" role="note" aria-labelledby="legal-disclaimer-label">
           <span class="legal-disclaimer-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -890,8 +890,9 @@ tr:last-child td { border-bottom: none; }
       <div class="range-wrap" style="margin-top:6px;">
         <div class="range-readout">
           <strong id="pifPctReadout">65%</strong> PIF/financing · <strong id="fourPayPctReadout">35%</strong> 4-pay <span style="color:var(--muted);font-weight:400;">(industry average)</span>
+          <span class="range-readout-sub">Adjust in 5% steps.</span>
         </div>
-        <input id="pifSlider" type="range" min="0" max="100" step="1" value="65" aria-label="PIF versus 4-pay split">
+        <input id="pifSlider" type="range" min="0" max="100" step="5" value="65" aria-label="PIF versus 4-pay split">
       </div>
 
       <div class="commission-live-math" id="commissionLiveMath" aria-live="polite"></div>
