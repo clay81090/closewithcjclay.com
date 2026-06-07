@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formal Notice of Non-Performance — CJ Clay vs FitBiz CPA Group</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+
+  :root {
+    --navy: #1B2A4A;
+    --blue: #1F4E79;
+    --blue-light: #D6E4F4;
+    --red: #C00000;
+    --red-light: #FCE4E4;
+    --green: #1E5631;
+    --green-light: #E2EFD9;
+    --yellow: #FFF8DC;
+    --yellow-border: #D4A017;
+    --orange: #8B4000;
+    --gray: #F5F5F5;
+    --mid-gray: #CCCCCC;
+    --dark-gray: #444;
+    --text: #1a1a1a;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text);
+    background: #f0f0f0;
+    padding: 24px 16px;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    background: white;
+    padding: 56px 64px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+
+  /* HEADER */
+  .doc-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    text-align: center;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .doc-subtitle {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    color: var(--blue);
+    text-align: center;
+    font-style: italic;
+    font-weight: 300;
+    padding-bottom: 20px;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 28px;
+  }
+
+  /* PARTIES BLOCK */
+  .parties {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 12px;
+  }
+  .party-block .label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .party-block .name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+  .party-block .detail {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.5;
+  }
+  .meta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 10px 0;
+    border-top: 1px solid var(--mid-gray);
+    border-bottom: 2px solid var(--navy);
+    margin-bottom: 36px;
+    font-size: 12px;
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  /* SECTIONS */
+  h1.section {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    padding-bottom: 6px;
+    border-bottom: 2.5px solid var(--blue);
+    margin: 36px 0 14px;
+  }
+  h2.sub {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--blue);
+    margin: 22px 0 10px;
+  }
+
+  p { margin-bottom: 10px; font-size: 13.5px; }
+
+  a { color: var(--blue); text-decoration: underline; word-break: break-all; }
+  a:hover { color: var(--navy); }
+
+  ul { margin: 8px 0 12px 24px; }
+  ul li { margin-bottom: 6px; font-size: 13.5px; line-height: 1.6; }
+
+  /* FLAGS */
+  .flag {
+    border-left: 4px solid var(--yellow-border);
+    background: var(--yellow);
+    padding: 10px 14px;
+    margin: 14px 0;
+    font-size: 13px;
+    color: var(--orange);
+    border-radius: 0 4px 4px 0;
+  }
+  .flag.green {
+    border-color: var(--green);
+    background: var(--green-light);
+    color: var(--green);
+  }
+  .flag.red {
+    border-color: var(--red);
+    background: var(--red-light);
+    color: var(--red);
+    font-weight: 600;
+  }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 16px;
+    font-size: 12.5px;
+  }
+  th {
+    background: var(--navy);
+    color: white;
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  td {
+    padding: 7px 10px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  tr:nth-child(even) td { background: var(--gray); }
+  tr:hover td { background: #eef4fb; }
+
+  .tag-red { color: var(--red); font-weight: 700; }
+  .tag-yellow { color: var(--orange); font-weight: 700; }
+  .tag-green { color: var(--green); font-weight: 700; }
+
+  td.delivered-no { background: var(--red-light) !important; }
+  td.delivered-partial { background: var(--yellow) !important; }
+
+  /* TIMELINE TABLE */
+  .timeline-table td:first-child { white-space: nowrap; font-style: italic; font-size: 11.5px; color: #666; }
+  .timeline-table td:nth-child(2) { font-weight: 600; }
+  .timeline-table tr.highlight-red td { background: var(--red-light) !important; font-weight: 700; }
+
+  /* SIGNATURE */
+  .signature {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--mid-gray);
+  }
+  .sig-name { font-size: 18px; font-weight: 700; color: var(--navy); margin: 12px 0 4px; }
+  .sig-detail { font-size: 12px; color: #666; }
+
+  /* EXHIBITS */
+  .exhibits {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--mid-gray);
+  }
+  .exhibits h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--navy); margin-bottom: 10px; font-weight: 700; }
+  .exhibits li { font-size: 12px; margin-bottom: 5px; color: #444; }
+
+  /* FOOTER NOTE */
+  .footer-note {
+    margin-top: 32px;
+    padding-top: 12px;
+    border-top: 1px solid #ddd;
+    font-size: 11px;
+    color: #999;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* OPTION BOXES */
+  .option-box {
+    border: 2px solid;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 12px 0;
+  }
+  .option-box.stay { border-color: var(--green); background: var(--green-light); }
+  .option-box.refund { border-color: var(--red); background: var(--red-light); }
+  .option-box .opt-label { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+  .option-box.stay .opt-label { color: var(--green); }
+  .option-box.refund .opt-label { color: var(--red); }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; padding: 36px 48px; }
+    a { color: var(--navy); text-decoration: none; }
+    .flag, tr:hover td { background: inherit !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-title">FORMAL NOTICE OF ENGAGEMENT NON-PERFORMANCE</div>
+  <div class="doc-subtitle">Demand for Deliverables or Full Refund &nbsp;|&nbsp; Invoice #2347 &nbsp;|&nbsp; June 7, 2026</div>
+
+  <div class="parties">
+    <div class="party-block">
+      <div class="label">From</div>
+      <div class="name">Charles J. (CJ) Clay</div>
+      <div class="detail">
+        clay81090@gmail.com<br>
+        (843) 283-3409<br>
+        605 Trelago Way, Unit 107, Maitland FL 32751
+      </div>
+    </div>
+    <div class="party-block">
+      <div class="label">To</div>
+      <div class="name">FitBiz CPA Group, LLC</div>
+      <div class="detail">
+        Asad Ahmad, CPA — <a href="mailto:asad@fitbizcpa.org">asad@fitbizcpa.org</a><br>
+        Stephanie Cooray, Sr. Associate — <a href="mailto:stephanie@fitbizcpa.org">stephanie@fitbizcpa.org</a><br>
+        Jason Flowers, CPA — <a href="mailto:jay.flowers@fitbizcpa.org">jay.flowers@fitbizcpa.org</a><br>
+        1111 Brickell Ave, Miami FL 33131 &nbsp;|&nbsp; (407) 990-2002
+      </div>
+    </div>
+  </div>
+  <div class="meta-row">
+    <div>DATE: June 7, 2026</div>
+    <div>RE: Invoice #2347 | Engagement dated April 16, 2026 | DocuSign ID: 06F390C8-0038-8DAB-8002-819F5D6C1DC3</div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <h1 class="section">1. Purpose of This Notice</h1>
+  <p>This letter constitutes a formal notice to FitBiz CPA Group, LLC of material non-performance under the signed engagement agreement dated April 16, 2026. As of the date of this letter, <strong>fifty (50) days</strong> have elapsed since payment of the $1,325.00 retainer. Zero deliverables have been produced. No 1120-S has been filed or drafted. No 1040 has been prepared. No bookkeeping cleanup report has been provided. No 941 compliance action has been taken. No tax strategy communication has been issued.</p>
+  <p>I am requesting, in writing, one of the following by end of business <strong>Friday, June 13, 2026</strong>:</p>
+  <ul>
+    <li>A confirmed meeting with a licensed CPA at your firm — not a scheduling link, but a confirmed date and time — followed by a written work product delivery timeline; <strong>OR</strong></li>
+    <li>A full refund of $1,325.00 to the Mastercard ending in 7930 used for payment on April 18, 2026.</li>
+  </ul>
+  <div class="flag red">If no substantive response is received by June 13, 2026, I will (a) dispute the charge with my credit card issuer, (b) file a complaint with the Florida Department of Business and Professional Regulation (DBPR), and (c) notify Kristin Castello at Nelson Financial Planning, who made the referral, of the outcome of this engagement.</div>
+
+  <!-- SECTION 2 -->
+  <h1 class="section">2. What I Delivered — Before Our First Meeting</h1>
+  <p>On April 14, 2026 — the night before our first contact — I provided a comprehensive tax reconstruction document at the following URL, which remained available throughout the engagement:</p>
+  <div style="margin: 16px 0; padding: 16px 20px; background: #1B2A4A; border-radius: 6px; text-align: center;">
+    <div style="color: #aac4e8; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; font-weight: 600;">Primary Document — Provided April 14, 2026</div>
+    <a href="https://closewithcjclay.com/CJClay_2025_CPA_Tax_Reconstruction.html" target="_blank"
+       style="display:inline-block; color: #39FF14; font-size: 15px; font-weight: 700; text-decoration: none; word-break: break-all; letter-spacing: 0.3px; border: 2px solid #39FF14; padding: 8px 16px; border-radius: 4px; margin: 4px 0;">
+      🔗 closewithcjclay.com/CJClay_2025_CPA_Tax_Reconstruction.html
+    </a>
+    <div style="color: #aac4e8; font-size: 11px; margin-top: 8px;">Contains complete income, entity, payroll, and classification documentation</div>
+  </div>
+  <p>This document took over a week to build. Kristin Castello, the CPA who referred me to FitBiz, noted that it goes a very long way and that she wishes every client came in this prepared. It contained, before you were ever asked a question:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:47%">Information Included in HTML (April 14, 2026)</th>
+        <th style="width:53%">Direct Relevance to Open Items Later Asked</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Full address history with move-in dates for all three addresses</td><td>Directly resolves the "address discrepancy" question Asad asked April 21 and Stephanie asked April 23 — answered before they were questions</td></tr>
+      <tr><td>Full name and DOB for CJ and spouse (Tanya Melisa Cercado Mera)</td><td>DOB question asked April 21 — already on the face of every prior year tax return uploaded April 17</td></tr>
+      <tr><td>FrankCrum W-2 section: exact payroll dates, net deposits ($3,247.19 ×3), classification as W-2 wages, explanation of why payroll deposited to LLC account</td><td>Completely answers Item 1 (BambooHR/FrankCrum $20,735.94) without ever being asked</td></tr>
+      <tr><td>BambooHR identified as HD Roofing commission processor, no 1099 issued, income confirmed via bank deposits</td><td>Also answers Item 1 in full. HD Roofing & Solar appears on uploaded bank statements and paystub (YTD $47,257.61)</td></tr>
+      <tr><td>Shareholder contributions: Zelle transfers from personal 4207 to LLC identified as capital injections</td><td>Completely answers Item 2 (Contributions $5,201)</td></tr>
+      <tr><td>Full S-Corp distribution section: owner draws flowing to K-1, not salary</td><td>Completely answers Item 3 (Distributions -$35,650)</td></tr>
+      <tr><td>Rob Omelia listed as referral payment; Dylan Quintilone listed under professional fees with full abandonment narrative</td><td>Partially answers Item 4 (misc transactions) before it was asked</td></tr>
+      <tr><td>Personal account 4207 usage explained: partner mismanagement, wrong account deposits, treatment recommendation, gifts excluded</td><td>Completely answers Item 5 (personal account used for business)</td></tr>
+      <tr><td>Complete 941 payroll non-filing narrative: Dylan Quintilone abandonment, documented timeline, penalty abatement recommendation</td><td>Part of original scope — never required asking</td></tr>
+      <tr><td>All entity statuses: C Clay Contracting (dissolving), Millennial One (no income, no financials), new entity plan</td><td>Completely answers the Millennial One LLC financials question asked April 21 and 23</td></tr>
+      <tr><td>All income sources with amounts: FrankCrum W-2 $19,231, HD Roofing $47,258, Apex $600, Farmasi 1099 $13,154</td><td>Complete income picture — no guesswork required</td></tr>
+      <tr><td>$5,000 Zelle from "LLC HD ROOFING &amp; SOLAR" on 05/12/2025 memo "Mason - partial commission"</td><td>Plainly labeled HD Roofing commission income — same payer as all other HD deposits. Required no clarification.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="flag green">✅ 4 of 5 open items sent May 8 were 100% answered in the HTML uploaded April 18. The team did not read the primary document before sending the open items list.</div>
+
+  <!-- SECTION 3 -->
+  <h1 class="section">3. Documents Uploaded — April 17, 2026</h1>
+  <p>The TaxDome portal confirms the following documents were uploaded on April 17, 2026 — one day after the initial meeting and the same day as payment:</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:65%">Document</th><th>Uploaded</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>YearEndSummary_Credit Card_2025.xlsx</td><td>Apr 17</td></tr>
+      <tr><td>P&amp;L - 2024.pdf</td><td>Apr 17</td></tr>
+      <tr><td>Millennial One Home Solutions LLC (SunBiz).pdf</td><td>Apr 17</td></tr>
+      <tr><td>MILLENNIAL_ONE_HOME_SOLUTIONS_LLC_1120S.pdf</td><td>Apr 17</td></tr>
+      <tr><td>Form 1040 Record of Account (2024).pdf</td><td>Apr 17</td></tr>
+      <tr><td>C Clay Contracting LLC (SunBiz).pdf</td><td>Apr 17</td></tr>
+      <tr><td>Annual Renewal Notices (Both LLCs).pdf</td><td>Apr 17</td></tr>
+      <tr><td>Amended 1040 (August 2024).pdf</td><td>Apr 17</td></tr>
+      <tr><td>Acorns 1099 Composite (2025).pdf</td><td>Apr 17</td></tr>
+      <tr><td>Account Transcript ___-__-9648 1040 202412.pdf</td><td>Apr 17</td></tr>
+      <tr><td>7004 Late Filing_Both LLCs (April 15 2026).heic</td><td>Apr 17</td></tr>
+      <tr><td>2553 (2024) Millennial One Home Solutions LLC.pdf</td><td>Apr 17</td></tr>
+      <tr><td>2026 Bank Transactions (Personal Account).csv</td><td>Apr 17</td></tr>
+      <tr><td>2026 Bank Transactions (C Clay Contracting LLC).csv</td><td>Apr 17</td></tr>
+      <tr><td>2025_W2_1845 Roofing.jpg</td><td>Apr 17</td></tr>
+      <tr><td>2025_Never Received 1099_HD Roofing.jpg</td><td>Apr 17</td></tr>
+      <tr><td>2025 IRS Payment Receipt (Made April 14 2026).png</td><td>Apr 17</td></tr>
+      <tr><td>2025 Certificate of Status (Millennial One LLC).pdf</td><td>Apr 17</td></tr>
+      <tr><td>2025 Bank Transactions (Personal Account).csv</td><td>Apr 17</td></tr>
+      <tr><td>2025 Bank Transactions (C Clay Contracting LLC).csv</td><td>Apr 17</td></tr>
+      <tr><td>2025_1099_Farmasi.jpg</td><td>Apr 17</td></tr>
+      <tr><td>2025_1099_APEX Roofing.jpg</td><td>Apr 17</td></tr>
+      <tr><td>2024_W2_Gusto (C Clay Contracting LLC).pdf</td><td>Apr 17</td></tr>
+      <tr><td>2024 Tax Return Documents (Clay Charles J and Tanya Melisa Cercado Mera)-SIGNED.pdf</td><td>Apr 17</td></tr>
+      <tr><td>2024 Payroll - Gusto (C Clay Contracting LLC).pdf</td><td>Apr 17</td></tr>
+      <tr><td>2023 Tax Return Documents (Clay Charles J and Tany - Client Copy).pdf</td><td>Apr 17</td></tr>
+      <tr><td>Wave Login.pdf</td><td>Apr 27</td></tr>
+      <tr><td>CJ_Clay_CPA_Bookkeeping_Response.pdf</td><td>May 21</td></tr>
+    </tbody>
+  </table>
+  <div class="flag green">✅ Every document category required by the engagement letter ("Bank Statements for All Accounts," "All relevant business credit card statements," "All relevant tax returns") was provided within 24 hours of signing.</div>
+
+  <!-- SECTION 4 -->
+  <h1 class="section">4. Complete Chronological Record</h1>
+  <p>All timestamps sourced directly from email headers and TaxDome system notifications:</p>
+
+  <table class="timeline-table">
+    <thead>
+      <tr><th style="width:13%">Date/Time</th><th style="width:16%">From</th><th style="width:10%">To</th><th>Action / Quote</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Apr 14, 10:46 PM</td><td>CJ Clay</td><td>Asad Ahmad</td><td>Initial outreach with HTML tax reconstruction document (link below), 2024 tax return attached, full situation described, urgent nature stated.<br><br><a href="https://closewithcjclay.com/CJClay_2025_CPA_Tax_Reconstruction.html" target="_blank" style="display:inline-block; background:#1B2A4A; color:#fff; padding:5px 12px; border-radius:4px; font-weight:700; font-size:12px; text-decoration:none; word-break:break-all;">closewithcjclay.com/CJClay_2025_CPA_Tax_Reconstruction.html</a></td></tr>
+      <tr><td>Apr 15, 10:35 AM</td><td>Asad Ahmad, CPA</td><td>CJ + Stephanie</td><td>Confirmed full scope: "2025 tax return prep, S-Corp filings, bookkeeping, payroll compliance including missed 941 filings, general cleanup from a prior tax professional who stepped away mid-year."</td></tr>
+      <tr><td>Apr 16, 3:00 PM</td><td>Zoom Meeting</td><td>Both parties</td><td>Initial call held. Scope confirmed. Verbal commitment that filing would occur <strong>"likely by Wednesday"</strong> — within days of this meeting.</td></tr>
+      <tr><td>Apr 16, 3:38 PM</td><td>Asad Ahmad, CPA</td><td>CJ + Operations</td><td>Scope of work email sent. "Once approved and Docusign is completed we will send over open items and next steps."</td></tr>
+      <tr><td>Apr 16, 3:41 PM</td><td>TaxDome System</td><td>CJ</td><td>Client portal invitation sent and activated.</td></tr>
+      <tr><td>Apr 17, 3:18 PM</td><td>CJ Clay</td><td>Asad Ahmad</td><td>"I appreciate your time yesterday and I am uploading what you need now. I was too sick with a fever to upload all of this yesterday." Document upload begins despite illness.</td></tr>
+      <tr><td>Apr 17, 5:00 PM</td><td>Asad via DocuSign</td><td>CJ</td><td>Engagement agreement sent for signature.</td></tr>
+      <tr><td>Apr 17, 5:22 PM</td><td>DocuSign</td><td>Both</td><td>Engagement agreement fully executed by both parties.</td></tr>
+      <tr><td>Apr 18, 10:36 PM</td><td>CJ Clay</td><td>Asad + Kelly</td><td>"Meant to message earlier, payment complete." $1,325 paid — Mastercard 7930, Invoice #2347.</td></tr>
+      <tr><td>Apr 18</td><td>TaxDome</td><td>CJ</td><td>28 documents confirmed in portal. Full income, entity, payroll, and bank statement record uploaded.</td></tr>
+      <tr><td>Apr 20, 2:12 PM</td><td>Asad Ahmad, CPA</td><td>CJ + Kelly</td><td><strong>"We have started the accounting recategorization and classifications; we will send you an update shortly."</strong></td></tr>
+      <tr><td>Apr 21, 3:33 PM</td><td>Asad Ahmad, CPA</td><td>CJ + Stephanie</td><td>Open items list sent asking for DOB, address confirmation, Millennial One financials. Noted "I checked Tax Dome, but these items weren't there." — CRITICAL: All of this was in the HTML and uploaded tax returns already on file.</td></tr>
+      <tr><td>Apr 21, 4:32 PM</td><td>CJ Clay</td><td>Asad Ahmad</td><td>Responded same day despite documented illness. Provided DOBs, full address history, confirmed no Millennial One financials. Explicitly stated: <strong>"If you don't get a quick enough response via email please text or call my phone number."</strong> This request was never honored.</td></tr>
+      <tr><td>Apr 21, 6:27 PM</td><td>Asad Ahmad, CPA</td><td>Stephanie + CJ</td><td>"Stephanie please forward this urgently to the tax team." — Implies information had not reached the working team 3 days after payment.</td></tr>
+      <tr><td>Apr 21, 11:50 AM</td><td>Asad Ahmad, CPA</td><td>Stephanie + CJ</td><td>Asked CJ to confirm Wave accounting access was sent.</td></tr>
+      <tr><td>Apr 23, 10:58 AM</td><td>Stephanie Cooray</td><td>CJ</td><td>Stephanie sent <em>identical</em> questions to what Asad had already asked and CJ had already answered April 21 — DOB, address, Millennial One financials. Internal disorganization confirmed.</td></tr>
+      <tr><td>Apr 23, 11:39 AM</td><td>Asad Ahmad, CPA</td><td>Stephanie + CJ</td><td>"Charles already responded to me regarding this matter. Apologies for the confusion." — Confirming the team was not coordinating.</td></tr>
+      <tr><td>Apr 27, 7:46 PM</td><td>CJ Clay</td><td>Kelly Thomas</td><td>Wave login PDF uploaded to TaxDome unsorted folder. Repeated request: <strong>"If you need something urgently, text my phone; I can get it to you much faster because I'm on sales calls all day."</strong> Never honored.</td></tr>
+      <tr><td>May 4, 5:13 PM</td><td>Asad Ahmad, CPA</td><td>CJ + Kelly</td><td><strong>"Thanks for uploading everything CJ. We don't have any other open items."</strong> — Confirmed in writing. No deliverables produced in the 16 days since payment.</td></tr>
+      <tr><td>May 5 (×2)</td><td>CJ Clay</td><td>Asad + Kelly</td><td>Two follow-ups requesting a confirmed meeting time. Calendar link provided. No confirmed time returned.</td></tr>
+      <tr><td>May 8, 5:34 PM</td><td>Asad Ahmad, CPA</td><td>CJ</td><td>Zoom link sent for May 8 5:30–6:00 PM meeting.</td></tr>
+      <tr><td>May 8, 5:49 PM</td><td>Asad via Google Docs</td><td>CJ</td><td>Shared Google Doc titled "CJ Clay Open Items Bookkeeping" — open items document shared for review. Note: Asad confirmed "no open items" on May 4, four days earlier.</td></tr>
+      <tr><td>May 8, 6:01 PM</td><td>TaxDome</td><td>CJ</td><td>"CJ Clay Open Items Bookkeeping .pdf" also uploaded to TaxDome portal.</td></tr>
+      <tr><td>May 8 (evening)</td><td>Asad Ahmad</td><td>Auto-Reply</td><td>Medical emergency out-of-office activated. "I am currently out of office for the foreseeable future." Stephanie Cooray and Jason Flowers, CPA, both remain active staff.</td></tr>
+      <tr><td>May 21, 11:25 PM</td><td>CJ Clay</td><td>Asad Ahmad</td><td>Complete 10-page written response to May 8 open items attached and uploaded to TaxDome. 4 of 5 items had already been answered in April 17-18 uploads — had the team reviewed the primary HTML document, the list would not have been necessary.</td></tr>
+      <tr><td>May 22, 12:28 PM</td><td>Asad Ahmad, CPA</td><td>CJ</td><td>"Thank you, I got it. Sorry I am out of office due to a medical emergency but my team is handling everything."</td></tr>
+      <tr class="highlight-red"><td>June 7, 2026</td><td>CJ Clay</td><td>All FitBiz Staff</td><td>THIS LETTER. 50 days since payment. Zero deliverables produced.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 5 -->
+  <h1 class="section">5. Engagement Agreement — How It Applies</h1>
+  <h2 class="sub">5a. What Was Promised vs. What Was Delivered</h2>
+
+  <table>
+    <thead>
+      <tr><th style="width:40%">Contracted Deliverable</th><th style="width:15%">Status</th><th>Evidence of Non-Performance</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Bookkeeping Cleanup for 2025 (Jan–Dec), Bank Account Reconciliations and Categorizations</td><td class="delivered-no"><span class="tag-red">NOT DELIVERED</span></td><td>No P&L, no categorization report provided to client in 50 days</td></tr>
+      <tr><td>CPA Reviewed Financials (P&L, Balance Sheet)</td><td class="delivered-no"><span class="tag-red">NOT DELIVERED</span></td><td>No financial review document received</td></tr>
+      <tr><td>Comprehensive Tax Deductions and Savings (Up to 45–60%)</td><td class="delivered-no"><span class="tag-red">NOT DELIVERED</span></td><td>No deduction analysis, no tax strategy, no savings estimate provided</td></tr>
+      <tr><td>S-Corp Penalty Abatement</td><td class="delivered-no"><span class="tag-red">NOT DELIVERED</span></td><td>No penalty abatement filing, letter, or strategy produced</td></tr>
+      <tr><td>Business Return Preparation and e-Filing (1120-S, K-1 Package)</td><td class="delivered-no"><span class="tag-red">NOT DELIVERED</span></td><td>No 1120-S draft, no K-1 package. <strong>Note:</strong> A Form 7004 extension request was filed independently by CJ and referring tax professional Kristin Castello on April 14, 2026 — before FitBiz was engaged and with no FitBiz involvement. This only extended the filing deadline to <strong>September 15, 2026</strong>. The actual 1120-S return — the contracted deliverable — has not been prepared or filed.</td></tr>
+      <tr><td>Personal Return Preparation and e-Filing (1040, Sch 1, Sch C, Sch E)</td><td class="delivered-no"><span class="tag-red">NOT DELIVERED</span></td><td>No 1040 draft produced</td></tr>
+      <tr><td>Ongoing CPA Meeting and Support</td><td class="delivered-partial"><span class="tag-yellow">MINIMAL</span></td><td>One initial meeting (April 16). One subsequent meeting (May 8). No active support since May 8.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="flag">⚠️ <strong>IMPORTANT — Form 7004 vs. Form 1120-S:</strong> Two Form 7004 extension requests were filed by CJ Clay and Kristin Castello on April 14, 2026 — mailed certified mail to IRS Ogden UT 84201-0045, confirmed received. One for C Clay Contracting LLC (EIN 93-2778268) and one for Millennial One Home Solutions LLC (EIN 99-3756670). FitBiz CPA Group played zero role in these filings. A Form 7004 is only an application for more time to file — it is NOT a tax return. The actual Form 1120-S S-Corp returns, which ARE the contracted deliverables, have not been prepared or filed by FitBiz. Extended deadline: <strong>September 15, 2026</strong>.</div>
+
+  <h2 class="sub">5b. The "Client Responsibilities" Clause — Does Not Apply Here</h2>
+  <p>The engagement letter states: <em>"Our services are dependent upon the accuracy, completeness and timeliness of the representations and information that we receive from you. Failure to receive such support in a timely manner may negatively affect our ability to fulfill the scope requirements."</em></p>
+  <p>This clause is not a defense available to FitBiz CPA Group here because:</p>
+  <ul>
+    <li>Every document listed in the engagement letter's required documentation section (bank statements, credit card statements, all relevant tax returns) was uploaded on April 17–18, 2026 — one day after signing.</li>
+    <li>The primary tax reconstruction HTML was provided before the engagement was even signed, on April 14, 2026, answering virtually every foundational question.</li>
+    <li>On May 4, Asad confirmed in writing: <strong>"We don't have any other open items"</strong> — yet four days later on May 8 he sent an open items list of questions already answered in the April 18 uploads. This sequence suggests the team had not yet reviewed the primary documents at that point. CJ responded to the May 8 list on May 21 with a complete written response covering every item.</li>
+    <li>When CJ provided the May 21 response document, it was comprehensive, professionally formatted, and covered every item requested.</li>
+  </ul>
+  <div class="flag green">✅ The client responsibilities clause requires timely information from the client. CJ provided everything on April 17–18 and completed follow-up on May 21. The firm's own team lead confirmed on May 4 that all items were received. The obligation was fully met.</div>
+
+  <h2 class="sub">5c. The Indemnification Clause</h2>
+  <p>The engagement letter contains a mutual indemnification clause protecting FitBiz from third-party claims arising from good faith completion of services. This clause explicitly excepts <em>"gross negligence or intentional acts of the FitBiz CPA, LLC."</em> Accepting a $1,325 retainer, committing to file within a week, and producing zero deliverables in 50 days constitutes material breach of contract at minimum, and potentially gross negligence given the time-sensitive nature of tax filing obligations.</p>
+
+  <!-- SECTION 6 -->
+  <h1 class="section">6. Harm and Ongoing Damage</h1>
+  <p>Every day that passes without a filed 1120-S and 1040 causes measurable financial harm:</p>
+  <ul>
+    <li>Failure-to-file penalties on Form 1120-S: 5% of unpaid tax per month, up to 25%</li>
+    <li>Failure-to-pay penalties on personal 1040 balance: 0.5% per month on any unpaid balance</li>
+    <li>Interest accruing daily on outstanding 2025 tax liability</li>
+    <li>Missed opportunity to file 941 payroll abatement argument — harder to pursue the longer it remains unfiled</li>
+    <li>The primary reason I hired FitBiz specifically was to address the 941 non-filing issue that my prior tax professional, Dylan Quintilone (Enrolled Agent), abandoned mid-engagement in August 2025 — a documented abandonment after a financial crisis caused by a former business partner. The 941 issue has now gone unaddressed for nearly a year.</li>
+  </ul>
+  <p style="font-style:italic; color:#555; margin-top:10px;">I came to FitBiz CPA in a difficult financial situation following a business collapse. I had already experienced one professional abandonment. I hired FitBiz specifically to prevent further deterioration. The inaction of the past 50 days has made that worse, not better.</p>
+
+  <!-- SECTION 7 -->
+  <h1 class="section">7. What I Am Requesting</h1>
+  <p>I want this resolved. I am not looking to escalate unnecessarily. I genuinely hope Asad recovers from his personal emergency. But FitBiz CPA Group is a firm with multiple licensed professionals — not a sole practitioner. The firm has an obligation to its clients.</p>
+  <p>By end of business <strong>Friday, June 13, 2026</strong>, I require ONE of the following:</p>
+
+  <div class="option-box stay">
+    <div class="opt-label">Option 1 — Stay and Complete the Engagement</div>
+    A licensed CPA at your firm confirms: (a) a confirmed meeting date and time this week — not a scheduling link; (b) a written 30-day completion schedule; (c) a status report showing what has been completed in your internal system; and (d) direct phone or text contact at (843) 283-3409 to establish communication going forward.
+  </div>
+
+  <div class="option-box refund">
+    <div class="opt-label">Option 2 — Full Refund and Mutual Release</div>
+    A full refund of $1,325.00 to Mastercard ending in 7930 is processed within 5 business days, and FitBiz CPA provides written confirmation that the engagement is terminated with no further obligations on either party. I will then engage another firm immediately.
+  </div>
+
+  <p style="margin-top:14px;">If I do not receive a substantive, human response (not an auto-reply) by June 13, 2026, I will proceed as follows:</p>
+  <ul>
+    <li>Dispute the $1,325.00 charge with my credit card issuer (services paid for but not rendered — well documented above)</li>
+    <li>File a complaint with the Florida Department of Business and Professional Regulation (DBPR) against the licensed CPAs involved</li>
+    <li>Notify Kristin Castello at Nelson Financial Planning, who made the referral, of the outcome of this engagement</li>
+  </ul>
+
+  <!-- SECTION 8 -->
+  <h1 class="section">8. A Personal Note</h1>
+  <p>I do not take pleasure in writing this letter. I came to FitBiz CPA as a referral from a mutual professional contact, and I believed I was in good hands. I prepared more thoroughly for this engagement than any client likely has — I built a week-long reconstruction document, responded to every request same-day or near-same-day, and made myself as easy to work with as possible.</p>
+  <p>I understand emergencies happen. But a firm of your size has the resources to serve clients during a lead partner's absence. Stephanie Cooray and Jason Flowers are both listed as active staff and were copied on correspondence throughout this engagement. Directing me to them by name in auto-replies while those same people take no action is not a solution.</p>
+  <p>I need my taxes filed. I need my 941 issue resolved. I need someone who will actively work to save me money where I am legally entitled to save it. I hope that can be FitBiz CPA Group. If it cannot, I need my retainer back so I can find someone who will.</p>
+
+  <!-- SIGNATURE -->
+  <div class="signature">
+    <p>Respectfully submitted,</p>
+    <div class="sig-name">Charles J. (CJ) Clay</div>
+    <div class="sig-detail">clay81090@gmail.com &nbsp;|&nbsp; (843) 283-3409</div>
+    <div class="sig-detail">605 Trelago Way, Unit 107, Maitland, FL 32751</div>
+    <div class="sig-detail">Date: June 7, 2026</div>
+  </div>
+
+  <!-- EXHIBITS -->
+  <div class="exhibits">
+    <h3>Attachments / Referenced Documents</h3>
+    <ul>
+      <li><strong>Exhibit A</strong> — Signed Engagement Letter (DocuSign Envelope ID: 06F390C8-0038-8DAB-8002-819F5D6C1DC3) — April 17, 2026 <em>[Attach PDF]</em></li>
+      <li><strong>Exhibit B</strong> — Payment Receipt, Invoice #2347, Square, $1,325.00 — April 18, 2026 <em>[Attach PDF]</em></li>
+      <li><strong>Exhibit C</strong> — Tax Reconstruction HTML (provided April 14, 2026):<br>
+        <a href="https://closewithcjclay.com/CJClay_2025_CPA_Tax_Reconstruction.html" target="_blank" style="display:inline-block; margin-top:4px; background:#1B2A4A; color:#fff; padding:5px 12px; border-radius:4px; font-weight:700; font-size:12px; text-decoration:none; word-break:break-all;">closewithcjclay.com/CJClay_2025_CPA_Tax_Reconstruction.html</a>
+      </li>
+      <li><strong>Exhibit D</strong> — TaxDome portal screenshot confirming all documents uploaded April 17, 2026 <em>[Attach screenshot]</em></li>
+      <li><strong>Exhibit E</strong> — CJ_Clay_CPA_Bookkeeping_Response.pdf — uploaded May 21, 2026 <em>[Attach PDF]</em></li>
+      <li><strong>Exhibit F</strong> — Full email correspondence thread, April 14 – June 7, 2026 <em>[Attach printed PDFs]</em></li>
+      <li><strong>Exhibit G</strong> — CJ Clay Open Items Bookkeeping PDF (sent by FitBiz May 8, 2026) <em>[Attach PDF]</em></li>
+    </ul>
+  </div>
+
+  <div class="footer-note">
+    This document was prepared by Charles J. Clay on June 7, 2026. All dates and quotes are sourced directly from email headers, TaxDome system notifications, and DocuSign records. This letter is a professional and factual record of a legitimate contractual dispute and is not intended as harassment or intimidation.
+  </div>
+
+</div>
+</body>
+</html>
