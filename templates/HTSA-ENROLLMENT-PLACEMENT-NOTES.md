@@ -15,16 +15,24 @@ Authoritative for **which frozen file** to use. Full agent procedure: `.cursor/s
 
 ## Shell notes
 
-- **01** — Source: `htsa-enrollment-val-tappan.html` — $6k PIF + 4-pay only (**no Splitit**); Terms + Apps Script + orange banner; `{{HTSA_*}}`.
-- **02** — Source: `htsa-enrollment-thomas-rulof.html` + Splitit under PIF + **Closer** ClarityPay **$7,200** `https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/` + Flexxbuy. **Never** Setter `plan_z5iuUhSgm9seH` on Closer. No PayVa.
+- **01** — Source: `htsa-enrollment-val-tappan.html` — **three in-house Closer options:** $6k PIF · **Splitit** $550/mo ($6,600) · 4-pay $7k; Terms + Apps Script + orange banner; `{{HTSA_*}}`.
+- **02** — Source: `htsa-enrollment-thomas-rulof.html` + same **three-option** closer stack + **Closer** ClarityPay **$7,200** `https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/` + Flexxbuy. **Never** Setter `plan_z5iuUhSgm9seH` on Closer. No PayVa.
 - **03 / 04** — Source: `htsa-enrollment-trameil-lee.html`; **03** has financing stripped; Terms/hint = payment-only (not “financing”). **03** header `Payment:` and Prepared For `Payment:` use the **short Wayne line** (*Select payment option below*); no `Pricing:` row in billing. Whop/USD amounts stay **only** under Program Investment (`setter_cash_only` in `scripts/build-htsa-invoice-templates.py`).
 - **05 / 06** — Jocelyn header + combined curriculum on Val shell; one Terms gate + one `#invest-pay-zone`; Closer invest-box then Setter invest-box; footer card title **Closer & Setter**; no PayVa.
 - **Guarantee** — Orange block in all six; omit only if CJ says **no guarantee**.
 
 ## Live reference pages (visual / copy)
 
-- **`htsa-enrollment-luz-gonzales.html`** — Production **Closer**, **cash + financing** stack done right: Whop PIF / 4-pay, **Splitit** under PIF, ClarityPay ($7,200) + Flexxbuy. Use when checking “full” closer financing UX (placement **02** is the frozen rebuild target).
-- **`htsa-enrollment-wayne-wintermute.html`** — Canonical **header, hero, billing, member strip, footer** pull for template rebuilds. **No Splitit** on this live page (cash-only pay zone); for closer **without** Splitit use placement **01**.
+- **`htsa-enrollment-luz-gonzales.html`** — Production **Closer**, **cash + financing** reference (legacy nested Splitit UX). Frozen **02** uses the new **Option 2 Splitit** layout from `build-htsa-invoice-templates.py`.
+- **`htsa-enrollment-wayne-wintermute.html`** — Canonical **header, hero, billing, member strip, footer** pull for template rebuilds.
+
+## Closer in-house Whop (primary — shells 01, 02, 05, 06)
+
+| Opt | Offer | Total | URL |
+| --- | --- | --- | --- |
+| 1 | PIF | $6,000 | `https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true` |
+| 2 | Splitit $550/mo × 12 | $6,600 | `https://whop.com/checkout/4PcFLUerpZ8E73EomZ-xA27-pI2s-WLo0-Wd4UsuNEfoL2/` |
+| 3 | 4-pay | $7,000 | `https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true` |
 
 ## Six live demos (frozen layout, Jordan Example / fake contact)
 
@@ -49,7 +57,7 @@ From repo root:
 python3 scripts/build-htsa-invoice-templates.py
 ```
 
-Writes `htsa-placement-01`…`06`; removes legacy `htsa-tpl-*.html` if present. **Read-only** pull of Member voice strip + footer row from `htsa-enrollment-wayne-wintermute.html` (Wayne’s **live** file is not modified). Normalizes Mastermind copy to **520+** and Trustpilot line to **4.9 stars out of 5** on write. Then run **`python3 scripts/rebuild-htsa-demo-enrollment-pages.py`** to refresh the six **`htsa-enrollment-demo-*`** preview pages.
+Writes `htsa-placement-01`…`06`; removes legacy `htsa-tpl-*.html` if present. **Read-only** pull of Member voice strip + footer row from `htsa-enrollment-wayne-wintermute.html` (Wayne’s **live** file is not modified). Normalizes Mastermind copy to **585+** and Trustpilot line to **4.9 stars out of 5** on write. **Step 3 kickoff** defaults to **Mark** at `https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call`. Then run **`python3 scripts/rebuild-htsa-demo-enrollment-pages.py`** to refresh the six **`htsa-enrollment-demo-*`** preview pages.
 
 ## ClarityPay (never swap)
 
@@ -92,7 +100,7 @@ python3 scripts/htsa-instantiate-invoice.py templates/htsa-placement-0X-….html
   --phone-display "+1 (XXX) XXX-XXXX"
 ```
 
-Then **commit and push** the new `htsa-enrollment-{slug}.html` so GitHub Pages serves it.
+Then **commit and push** the new `htsa-enrollment-{slug}.html` so GitHub Pages serves it. With **`--ship`**, the instantiate script polls until **HTTP 200** and prints **`READY`** — do not text the URL before **`READY`**.
 
 **Live URL:** `https://closewithcjclay.com/htsa-enrollment-{slug}.html` (must be `htsa-enrollment-`, not `hts-enrollment-`).
 
