@@ -2,6 +2,34 @@
 
 **CJ reference (placement table + links):** [`HTSA-ENROLLMENT-PLACEMENT-NOTES.md`](HTSA-ENROLLMENT-PLACEMENT-NOTES.md)
 
+## Terminal shortcut — `htsa` (free, no Agent)
+
+One-time: open a **new** Terminal tab (or run `source ~/.zshrc`) so the alias loads.
+
+```bash
+htsa
+```
+
+Then paste your block, for example:
+
+```text
+Hayden Moss
+
+Email: moss.hayden5@gmail.com
+
+Phone Number: +1 (801) 725-9260
+
+Closer - Cash + Financing
+```
+
+Press **Ctrl-D** once when done. Wait for **`READY`** and the live URL — do not text the link before that.
+
+**Program lines:** `Closer - Cash only` · `Closer - Cash + Financing` · `Setter - Cash only` · `Setter - Cash + Financing` · `Closer & Setter – Cash only` · `Closer & Setter – Cash + Financing`
+
+**Do not** paste the client block alone into the shell prompt — always run `htsa` (or `python3 scripts/htsa-paste-invoice.py`) **first**, then paste, then **Ctrl-D**.
+
+---
+
 ## On a call — one command (after templates are current)
 
 From repo root you can use **placement `01`–`06`** instead of typing the full template path. **`--overwrite`** replaces an existing invoice for the same slug. **`--ship`** adds, commits, and pushes **only that file** so the live link updates fast (still allow **1–5 minutes** for GitHub Pages).
@@ -15,7 +43,7 @@ python3 scripts/htsa-instantiate-invoice.py 03 \
   --overwrite --ship
 ```
 
-Prints `https://closewithcjclay.com/htsa-enrollment-{slug}.html` — copy that to text.
+Prints **`READY`** then `https://closewithcjclay.com/htsa-enrollment-{slug}.html` — **wait for READY** (HTTP 200 poll) before texting the link.
 
 Also accepts: `02`, `placement-05`, `p4`, or a full path under `templates/`.
 
@@ -25,7 +53,19 @@ Also accepts: `02`, `placement-05`, `p4`, or a full path under `templates/`.
 python3 scripts/htsa-paste-invoice.py   # paste CJ block, then Ctrl-D
 ```
 
-(`--dry-run` to verify parsing; `--no-ship` to skip git push.)
+(`--dry-run` to verify parsing; `--no-ship` to skip git push. Default **`--ship`** polls until live URL returns **200** and prints **`READY`**.)
+
+## Closer — in-house options (all Closer shells: 01, 02, 05, 06)
+
+**Order:** Option 1 → Option 2 → Option 3 (Splitit is its **own** option — not nested under PIF).
+
+| Opt | Name | Total | Button | Whop URL |
+|-----|------|-------|--------|----------|
+| **1** | Paid in full | **$6,000** | Choose PIF — Pay $6,000 → | `https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true` |
+| **2** | Splitit · $550/mo × 12 · 0% | **$6,600** | Start With Splitit — $550/month → | `https://whop.com/checkout/4PcFLUerpZ8E73EomZ-xA27-pI2s-WLo0-Wd4UsuNEfoL2/` |
+| **3** | 4-pay | **$7,000** ($1,750 today) | Choose 4-Pay — Pay $1,750 Today → | `https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true` |
+
+Option 2 uses the **featured orange** card + **How Splitit Works** explainer. **Never** on Setter (03, 04, Setter box in dual pages).
 
 ## Six live layout demos (Jordan Example)
 
@@ -71,9 +111,9 @@ Alternate checkouts (2-pay / 3-pay / $5k PIF closer, setter 2-pay) live in **`HT
 |--------|------|
 | **Orange guarantee** | **On** in every shell. Remove it **only** if CJ says *no guarantee*. |
 | **PayVa** | **Never** in shells. Add **`snippets/payva-financing-block.html`** only when CJ says **PayVa**. |
-| **Splitit** | **On** under **Closer** $6k PIF on **02, 05, 06** (and ad-hoc closer cash). **Not** on **01** (Closer cash only = Whop PIF + 4-pay only). **Not** on **Setter**. |
+| **Splitit** | **Option 2** on **all Closer** shells (**01, 02, 05, 06**): dedicated Whop checkout **$550/mo × 12** ($6,600 total). **Not** on **Setter**. Omit only if CJ says **no Splitit**. |
 | **ClarityPay (Whop)** | **Closer** financing: **$7,200** `…/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/` · **Setter** financing: **$3,600** `plan_z5iuUhSgm9seH?d2c=true` — never swap. |
-| **Mastermind / Trustpilot** | Facebook step: **520+** members · Footer band: **4.9 stars out of 5** (gold stars). |
+| **Mastermind / Trustpilot** | Facebook step: **530+** members · Footer band: **4.9 stars out of 5** (gold stars). |
 
 ---
 
@@ -144,12 +184,12 @@ python3 scripts/build-htsa-invoice-templates.py
 
 | Output | Sources (read-only) |
 |--------|---------------------|
-| **Member voice strip + footer** (all six) | After each shell is composed, testimonials HTML/CSS + footer link-row CSS/HTML are synced from **`htsa-enrollment-wayne-wintermute.html`**; copy then **520+** mastermind + **4.9 stars** Trustpilot line is applied. |
-| `htsa-placement-01-closer-cash-only.html` | `htsa-enrollment-val-tappan.html` |
-| `htsa-placement-02-closer-cash-financing.html` | `htsa-enrollment-thomas-rulof.html` + **Splitit** under PIF; **Closer ClarityPay** → `$7,200` checkout `1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf` (**not** setter `plan_z5iuUhSgm9seH`) |
+| **Member voice strip + footer** (all six) | After each shell is composed, testimonials HTML/CSS + footer link-row CSS/HTML are synced from **`htsa-enrollment-wayne-wintermute.html`**; copy then **530+** mastermind + **4.9 stars** Trustpilot line is applied. |
+| `htsa-placement-01-closer-cash-only.html` | `htsa-enrollment-val-tappan.html` + **three-option** closer stack (PIF · Splitit · 4-pay) |
+| `htsa-placement-02-closer-cash-financing.html` | `htsa-enrollment-thomas-rulof.html` + same **three-option** closer stack; **Closer ClarityPay** → `$7,200` checkout `1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf` (**not** setter `plan_z5iuUhSgm9seH`) |
 | `htsa-placement-03-setter-cash-only.html` | `htsa-enrollment-trameil-lee.html` (financing stripped) |
 | `htsa-placement-04-setter-cash-financing.html` | `htsa-enrollment-trameil-lee.html` |
-| `htsa-placement-05-closer-setter-cash-only.html` | Val + Trameil (cash) invest stacks; **Jocelyn** header/curriculum chunk |
-| `htsa-placement-06-closer-setter-cash-financing.html` | Thomas+Splitit + Trameil (full); **Jocelyn** chunk; **no PayVa** |
+| `htsa-placement-05-closer-setter-cash-only.html` | Val (three-option closer) + Trameil (cash) invest stacks; **Jocelyn** header/curriculum chunk |
+| `htsa-placement-06-closer-setter-cash-financing.html` | Thomas (three-option closer) + Trameil (full); **Jocelyn** chunk; **no PayVa** |
 
 Legacy `htsa-tpl-*.html` filenames are **removed** when you run the build script; use **`htsa-placement-*`** only.

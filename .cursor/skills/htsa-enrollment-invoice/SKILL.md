@@ -35,7 +35,7 @@ Setter - Cash only
 
 **You (the agent) must:** parse name / email / phone / program line; map “Setter - Cash only” → **`03`** (or use `templates/htsa-placement-….html` if given); phone display → **E.164** (`+1978…`); run **`python3 scripts/htsa-paste-invoice.py`** with that text on stdin **or** equivalent `htsa-instantiate-invoice.py … --overwrite --ship`; **wait for script output `READY`** then return the URL on the next line — **never send the link before `READY`** (avoids GitHub Pages 404).
 
-- **Paste script (Terminal):** `python3 scripts/htsa-paste-invoice.py` then paste block, **Ctrl-D**. Default **`--ship`** (push + poll until live). **`--dry-run`** to verify parse; **`--no-ship`** to skip git. Manual poll: **`sh scripts/check-enrollment-live.sh {slug}`**.
+- **Paste script (Terminal):** **`htsa`** (in `~/.zshrc`) or `python3 scripts/htsa-paste-invoice.py` — paste block, **Ctrl-D**. Default **`--ship`** (push + poll until live). **`--dry-run`** to verify parse; **`--no-ship`** to skip git. Manual poll: **`sh scripts/check-enrollment-live.sh {slug}`**. Never paste the client block at the raw `%` prompt without running `htsa` first.
 - If CJ says **do not redo** a named invoice (already perfect), **skip** — do not overwrite.
 
 **Placement phrases → id:** Closer cash only `01` · Closer cash + financing `02` · Setter cash only `03` · Setter cash + financing `04` · Closer & Setter cash only `05` · Closer & Setter cash + financing `06`.

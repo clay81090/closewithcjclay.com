@@ -30,7 +30,9 @@ Setter - Cash only
 
 **Mapping:** Closer cash only → `01` · Closer cash + financing → `02` · Setter cash only → `03` · Setter cash + financing → `04` · Dual cash only → `05` · Dual cash + financing → `06`.
 
-**Implementation:** From repo root, either (a) run `python3 scripts/htsa-paste-invoice.py` with the block on **stdin** (ends with Ctrl-D), which calls **`htsa-instantiate-invoice.py`** with **`--overwrite --ship`** by default, or (b) parse manually and invoke the same.
+**Implementation:** From repo root, either (a) run **`htsa`** in Terminal (shell function in CJ’s `~/.zshrc` — paste block, **Ctrl-D**, wait for **`READY`**), (b) run `python3 scripts/htsa-paste-invoice.py` with the block on **stdin** (ends with Ctrl-D), which calls **`htsa-instantiate-invoice.py`** with **`--overwrite --ship`** by default, or (c) parse manually and invoke the same.
+
+**Terminal (free — no Agent):** `htsa` → paste canonical block → **Ctrl-D**. Do **not** paste the block alone at the shell `%` prompt (zsh will treat each line as a command). New Terminal tab or `source ~/.zshrc` after setup.
 
 **Respect explicit “do not touch”:** If CJ says an invoice is **already perfect** or **do not redo** a named file, **do not** overwrite that HTML.
 
