@@ -143,6 +143,19 @@ def sync_ref_strip_from_wayne(html: str, wayne_text: str) -> str:
     return html
 
 
+def apply_footer_bc_title(html: str) -> str:
+    """CJ business card title on enrollment footers."""
+    html = html.replace(
+        '<div class="footer-bc-title">HTSA Closer</div>',
+        '<div class="footer-bc-title">HTSA - Career Transformation Coach</div>',
+    )
+    html = html.replace(
+        '<div class="footer-bc-title">HTSA Closer &amp; Setter</div>',
+        '<div class="footer-bc-title">HTSA - Career Transformation Coach &amp; Setter</div>',
+    )
+    return html
+
+
 def apply_canonical_enrollment_copy(html: str) -> str:
     """Trustpilot line + Mastermind member count — single source of truth for new invoices."""
     html = html.replace(
@@ -151,7 +164,7 @@ def apply_canonical_enrollment_copy(html: str) -> str:
     )
     html = re.sub(
         r"posted and \d+\+ members support each other",
-        "posted and 585+ members support each other",
+        "posted and 590+ members support each other",
         html,
     )
     return html
@@ -635,6 +648,86 @@ def apply_closer_three_inhouse_options(html: str) -> str:
     return html
 
 
+CLOSER_FIN_ACCESS_HINT = (
+    'Both options include <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.'
+)
+CLOSER_FIN_PIF_SUB = "Best overall value — $6,000 one-time (save $1,000 vs. the 4-pay plan)."
+CLOSER_FIN_STEP1_P = (
+    "{{HTSA_FIRST_NAME}}, review the payment and financing options in Program Investment above, then select what you want — "
+    "<strong>$6,000</strong> paid in full, the <strong>$1,750 × 4-pay</strong> plan ($7,000 total), or "
+    "<strong>ClarityPay</strong> at <strong>$600/month × 12 months</strong> (0% APR, $7,200 total — 620+ credit score to qualify). "
+    "Once your payment clears or your financing is approved, move to Step 2 below."
+)
+
+_CLOSER_CLARITY_FINANCING_SECTION = """      <div class="invest-section-kicker invest-section-kicker--accent">Third-Party Financing</div>
+      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">The options above are HTSA in-house payment options. The option below is third-party financing through ClarityPay for pre-qualification.</div>
+
+      <div class="invest-grid">
+
+        <div class="invest-option-block financing">
+          <div class="invest-badge financing">ClarityPay</div>
+          <div class="invest-option-head">
+            <div>
+              <div class="invest-option-title">ClarityPay — 12 months at 0% APR</div>
+              <div class="invest-option-sub">$600/month × 12 months — $7,200 total program investment. Need <strong>620+ credit score</strong> to qualify.</div>
+            </div>
+            <div class="invest-price-stack">
+              <div class="invest-price-big">$600/month</div>
+              <div class="invest-price-mini">$7,200 total · 12 months · 0% APR</div>
+            </div>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Credit Requirement</span>
+            <span class="invest-value">620+ credit score to qualify</span>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Interest Rate</span>
+            <span class="invest-value">0% APR · no early payoff penalty</span>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Enrollment Timing</span>
+            <span class="invest-value">Enroll same day if approved</span>
+          </div>
+          <div class="invest-option-actions">
+            <a href="https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" class="invest-btn secondary" target="_blank">Pre-Qualify with ClarityPay →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="invest-note" style="color:#ff9c7a;"><strong>★ Soft pre-qualification only.</strong> Once you complete one of the in-house payment options above or get approved through ClarityPay, text CJ right away so access can be granted.</div>"""
+
+
+def apply_closer_cash_financing_modern_stack(html: str) -> str:
+    """Closer cash + financing: PIF + 4-pay in-house; ClarityPay only ($600/mo × 12, 0% APR, $7,200). No Splitit or Flexxbuy."""
+    html = html.replace(CLOSER_ACCESS_HINT, CLOSER_FIN_ACCESS_HINT)
+    html = html.replace(CLOSER_PIF_SUB, CLOSER_FIN_PIF_SUB)
+    if has_splitit_option2_block(html):
+        html = re.sub(
+            r"\n        <div class=\"invest-option-block invest-option-block--splitit\">[\s\S]*?"
+            r"</div>\n\n        <div class=\"invest-option-block\">\n"
+            r"          <div class=\"invest-badge invest-badge--option\">Option 3</div>",
+            '\n        <div class="invest-option-block">\n'
+            '          <div class="invest-badge invest-badge--option">Option 2</div>',
+            html,
+            count=1,
+        )
+    html = re.sub(
+        r"      <div class=\"invest-section-kicker invest-section-kicker--accent\">Third-Party Financing Options?</div>[\s\S]*?"
+        r"<div class=\"invest-note\" style=\"color:#ff9c7a;\"><strong>★ Soft pre-qualification only\.</strong> Once you complete one of the in-house payment options above or get approved through[^<]+</div>",
+        _CLOSER_CLARITY_FINANCING_SECTION,
+        html,
+        count=1,
+    )
+    html = re.sub(
+        r"<p>\{\{HTSA_FIRST_NAME\}\}, review the payment and financing options in Program Investment above[^<]+</p>",
+        f"<p>{CLOSER_FIN_STEP1_P}</p>",
+        html,
+        count=1,
+    )
+    return html
+
+
 def update_closer_step1_paragraphs(html: str) -> str:
     old_patterns = [
         (
@@ -799,8 +892,10 @@ DUAL_STEP1_CASH = (
 DUAL_STEP1_FIN = (
     "        <h4>Step 1 — Choose Your Payment or Financing</h4>\n"
     "        <p>{{HTSA_FIRST_NAME}}, review <strong>Closer</strong> and <strong>Setter</strong> options in Program Investment above. "
-    "Each program has in-house Whop checkout (<strong>Closer:</strong> $6k PIF, Splitit $550/mo ($6,600 total), or $1,750 × 4-pay; "
-    "<strong>Setter:</strong> $3k PIF or $1,050 × 3-pay) plus optional <strong>ClarityPay</strong> and <strong>Flexxbuy</strong> pre-qual links. "
+    "For <strong>Closer</strong>: <strong>$6,000</strong> paid in full, the <strong>$1,750 × 4-pay</strong> plan ($7,000 total), or "
+    "<strong>ClarityPay</strong> at <strong>$600/month × 12 months</strong> (0% APR, $7,200 total — 620+ credit score to qualify). "
+    "For <strong>Setter</strong>: <strong>$3,000</strong> paid in full, the <strong>$1,050 × 3-pay</strong> plan ($3,150 total), or "
+    "optional <strong>ClarityPay</strong> / <strong>Flexxbuy</strong> pre-qual links. "
     "Complete payment or financing for the program you are starting first, then move to Step 2.</p>"
 )
 
@@ -924,6 +1019,7 @@ def main() -> None:
     p02 = apply_closer_three_inhouse_options(
         add_noindex(multi_replace(thomas_raw, closer_invest_pay_zone_financing_pairs()))
     )
+    p02 = apply_closer_cash_financing_modern_stack(p02)
     p02 = sync_ref_strip_from_wayne(p02, wayne_text)
 
     p05 = build_dual_template(
@@ -953,8 +1049,8 @@ def main() -> None:
     p05 = inject_canonical_footer(p05, footer_css, footer_html)
     p06 = inject_canonical_footer(p06, footer_css, footer_html)
     dual_footer_title = (
-        '<div class="footer-bc-title">HTSA Closer</div>',
-        '<div class="footer-bc-title">HTSA Closer &amp; Setter</div>',
+        '<div class="footer-bc-title">HTSA - Career Transformation Coach</div>',
+        '<div class="footer-bc-title">HTSA - Career Transformation Coach &amp; Setter</div>',
     )
     p05 = p05.replace(dual_footer_title[0], dual_footer_title[1], 1)
     p06 = p06.replace(dual_footer_title[0], dual_footer_title[1], 1)
@@ -979,6 +1075,10 @@ def main() -> None:
     p04 = apply_success_coach_kickoff_mark(p04)
     p05 = apply_success_coach_kickoff_mark(p05)
     p06 = apply_success_coach_kickoff_mark(p06)
+
+    p01, p02, p03, p04, p05, p06 = [
+        apply_footer_bc_title(p) for p in (p01, p02, p03, p04, p05, p06)
+    ]
 
     practice_path = ROOT / "htsa-enrollment-cj-clay-practice.html"
     if practice_path.is_file():

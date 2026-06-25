@@ -228,9 +228,9 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 - Apps Script **endpoint** + **`termsVersion`** + PDF URL correct; **payload includes `phone`**.  
 - Unique **`data-full-name`**, **`data-email`**, **`data-phone`**, **`data-client-slug`** + **`sessionStorage`** key.  
 - No stray prior-client data.  
-- **No PayVa** unless CJ asked; **Splitit** on all **Closer** in-house stacks (Option 2); **no Splitit** on setter.  
-- **Flexxbuy** spelled with two x’s.  
-- **Step 3 kickoff:** **Mark** (Success Coach Director) — `https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call` (Chris link is temporary fallback only if CJ asks).  
+- **No PayVa** unless CJ asked; **Splitit** on **Closer – Cash only** (`01`, `05` closer stack) unless CJ says omit; **no Splitit / no Flexxbuy** on **Closer – Cash + Financing** (`02`, dual closer stack) unless CJ asks.  
+- **Closer ClarityPay (default):** $600/mo × 12 · 0% APR · $7,200 total · 620+ credit score · Whop `1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf`.  
+- **Footer business card:** `HTSA - Career Transformation Coach` (dual: `… & Setter`).  
 - Mobile layout consistent with recent invoices (Zachary / Chad patterns).  
 - **New invoice file is committed and pushed**; with **`--ship`**, instantiate script **polls until HTTP 2xx** before printing **`READY`**.  
 - **Do not return the URL to CJ until `READY`** (or `check-enrollment-live.sh` exits 0). If poll times out, say push succeeded and retry in 1–2 min — see workflow rule **“If the live link returns 404”**.
@@ -239,7 +239,7 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 
 ## Related
 
-`.cursor/rules/htsa-enrollment-invoice-workflow.mdc` · `htsa-mastermind-member-count.mdc` (**585+** mastermind wording) · `templates/HTSA-ENROLLMENT-PLACEMENT-NOTES.md`
+`.cursor/rules/htsa-enrollment-invoice-workflow.mdc` · `htsa-mastermind-member-count.mdc` (**590+** mastermind wording) · `templates/HTSA-ENROLLMENT-PLACEMENT-NOTES.md`
 
 ---
 

@@ -63,7 +63,7 @@ Agents apply **defaults** in this rule unless CJ overrides.
 |--------|---------|
 | **Cash** | Whop PIF + Whop payment plan(s) only — **no** ClarityPay / Flexxbuy tiles. |
 | **Financing** | **ClarityPay + Flexxbuy** pre-qual tiles only (no in-house Whop). *Uncommon.* |
-| **Both** | Whop cash/plan(s) **plus** **ClarityPay + Flexxbuy**. |
+| **Both** | Whop cash/plan(s) **plus** **ClarityPay** on **Closer – Cash + Financing** (`02`, dual `06` closer stack). **No Flexxbuy** on Closer financing pages unless CJ asks. **Setter** financing (`04`, dual setter stack) may still include ClarityPay + Flexxbuy. |
 
 ---
 
@@ -107,7 +107,7 @@ hts_terms_gate_<firstname>_<lastname>_v1
 | **Closer & Setter – Cash only** | `templates/htsa-placement-05-closer-setter-cash-only.html` |
 | **Closer & Setter – Cash + Financing** | `templates/htsa-placement-06-closer-setter-cash-financing.html` |
 
-**Frozen-shell defaults:** Orange guarantee **on** in every shell. **Omit** the orange banner **only** if CJ explicitly says **no guarantee**. **PayVa** not in shells — snippet only when CJ says PayVa. **Closer in-house (01, 02, 05, 06):** **Option 1** $6k PIF · **Option 2** Splitit $550/mo × 12 ($6,600 total, dedicated Whop checkout `4PcFLUerpZ8E73…`) · **Option 3** 4-pay $7k — Splitit is **not** nested under PIF. **Never** Splitit on **Setter**. **Closer – Cash + Financing** mirrors **`htsa-enrollment-thomas-rulof.html`** + three-option closer stack; **Closer ClarityPay** is the **$7,200** Whop checkout (`…/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/`) — **not** the Setter Clarity plan (`plan_z5iuUhSgm9seH`, **$3,600**). **Setter – Cash + Financing** uses **$3,600** ClarityPay (`plan_z5iuUhSgm9seH` with `?d2c=true`). **Dual** pages use the **Jocelyn** combined header/curriculum layout (read-only reference) + Val/Thomas + Trameil pay stacks inside **one** `#invest-pay-zone` (**Closer** and **Setter** Clarity links each match their program). Placeholders: `{{HTSA_FULL_NAME}}`, `{{HTSA_FIRST_NAME}}`, `{{HTSA_EMAIL}}`, `{{HTSA_PHONE_E164}}`, `{{HTSA_PHONE_DISPLAY}}`, `{{HTSA_CLIENT_SLUG}}`, `{{HTSA_STORAGE_KEY}}`. Optional: `python3 scripts/htsa-instantiate-invoice.py …`. Rebuild: `python3 scripts/build-htsa-invoice-templates.py`. Prompts: **`templates/README.md`**.
+**Frozen-shell defaults:** Orange guarantee **on** in every shell. **Omit** the orange banner **only** if CJ explicitly says **no guarantee**. **PayVa** not in shells — snippet only when CJ says PayVa. **Closer – Cash only (`01`, `05` closer stack):** **Option 1** $6k PIF · **Option 2** Splitit $550/mo × 12 ($6,600 total) · **Option 3** 4-pay $7k. **Closer – Cash + Financing (`02`, `06` closer stack):** **Option 1** $6k PIF · **Option 2** $1,750 × 4-pay ($7k total) · **ClarityPay only** (no Splitit, no Flexxbuy) — **$600/mo × 12 months**, **0% APR**, **$7,200 total**, **620+ credit score to qualify**, Whop checkout `…/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/`. **Never** Splitit on **Setter**. **Setter – Cash + Financing** uses **$3,600** ClarityPay (`plan_z5iuUhSgm9seH` with `?d2c=true`) plus Flexxbuy unless CJ omits. **Dual** pages use the **Jocelyn** combined header/curriculum layout (read-only reference) + pay stacks inside **one** `#invest-pay-zone`. **Footer business card (CJ):** `HTSA - Career Transformation Coach` (dual: `HTSA - Career Transformation Coach & Setter`). Placeholders: `{{HTSA_FULL_NAME}}`, …
 
 ### Reference pages (read-only)
 
@@ -124,7 +124,7 @@ hts_terms_gate_<firstname>_<lastname>_v1
 
 ## Financing defaults
 
-- **Financing** or **Both:** include **ClarityPay** and **Flexxbuy** by default. Use spelling **Flexxbuy** (two **x**’s).  
+- **Financing** or **Both (Closer):** **ClarityPay only** on **`02` / dual closer stack** — **no Flexxbuy** unless CJ asks. **Setter** `04` / dual setter stack: ClarityPay + Flexxbuy by default. Use spelling **Flexxbuy** (two **x**’s).  
 - **PayVa:** include **only** if CJ explicitly requests **PayVa**. **Not** a default.  
 - **Splitit:** **All Closer** frozen shells (**01, 02, 05, 06**) use **Option 2** Splitit ($550/mo × 12, $6,600 total, dedicated Whop checkout). **Not** on **Setter**. Omit only if CJ says **no Splitit**.
 
@@ -137,7 +137,7 @@ hts_terms_gate_<firstname>_<lastname>_v1
 - **Default cash pricing:** PIF **$6,000**; **4-pay** **$1,750** today / **$7,000** total.  
 - **Whop URLs:** use CJ-supplied plans or those in the Closer template duplicated — do not invent plan IDs.  
 - **Splitit** (Closer Option 2): **$550/mo × 12**, **$6,600** total — `https://whop.com/checkout/4PcFLUerpZ8E73EomZ-xA27-pI2s-WLo0-Wd4UsuNEfoL2/` on **all Closer** shells unless CJ says **no Splitit**. **Never** on setter.  
-- If financing is included: **ClarityPay + Flexxbuy** unless CJ names **PayVa** (or another approved provider). **Closer** ClarityPay Whop checkout is the **$7,200** plan: `https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/` — **never** the Setter `plan_z5iuUhSgm9seH` link on Closer-only or Closer stacks in dual pages.
+- If financing is included on **Closer**: **ClarityPay only** ($600/mo × 12, 0% APR, $7,200 total, 620+ credit) unless CJ names **Flexxbuy** or **PayVa**. **Closer** ClarityPay Whop checkout: `https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/` — **never** the Setter `plan_z5iuUhSgm9seH` link on Closer-only or Closer stacks in dual pages.
 
 ---
 
@@ -228,11 +228,12 @@ JSON via URL-encoded **`payload=`** POST. Align with `hts-enrollment-webapp-goog
 - Terms gate **above** all money buttons; all pay/finance controls **inside** locked zone.  
 - Endpoint + `termsVersion` + PDF URL; payload includes **`phone`**.  
 - Unique Terms **`data-*`** + **`sessionStorage`** key.  
-- **No PayVa** unless requested; **Splitit** on all **Closer** in-house stacks (Option 2); **no Splitit** on setter.  
+- **No PayVa** unless requested; **Splitit** on **Closer – Cash only** shells (`01`, `05` closer stack) unless CJ says **no Splitit**; **no Splitit** on **`02` / dual closer financing stack**. **No Flexxbuy** on Closer financing unless CJ asks.  
 - **Flexxbuy** spelling (two x’s).  
 - **Step 3 kickoff (default):** **Mark** — heading *Book Your Kickoff Call with Mark (Success Coach)*; link `https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call`. Use Chris only if CJ explicitly requests it.  
-- **Closer** ClarityPay → **$7,200** checkout (`1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf`); **Setter** ClarityPay → **$3,600** (`plan_z5iuUhSgm9seH?d2c=true`) — **never** swap them.  
-- Footer Trustpilot row: **4.9 stars out of 5**; Mastermind step: **585+** members (see **`htsa-mastermind-member-count.mdc`**).  
+- **Closer** ClarityPay → **$7,200** checkout (`1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf`); copy **$600/mo × 12 months · 0% APR · 620+ credit score to qualify**. **Setter** ClarityPay → **$3,600** (`plan_z5iuUhSgm9seH?d2c=true`) — **never** swap them.  
+- **Footer business card:** `HTSA - Career Transformation Coach` (dual: `… & Setter`).  
+- Footer Trustpilot row: **4.9 stars out of 5**; Mastermind step: **590+** members (see **`htsa-mastermind-member-count.mdc`**).  
 - Mobile matches **Zachary + Chad** patterns.  
 - **`grep`:** no phantom client data.  
 - **Git: new invoice file committed and pushed** to the publish branch — otherwise **`https://closewithcjclay.com/htsa-enrollment-{slug}.html` 404s**.
@@ -277,5 +278,5 @@ Bonus copy: don’t toss in “three one-on-one calls with Chad.”
 ## Related
 
 Full agent procedure: `.cursor/skills/htsa-enrollment-invoice/SKILL.md`  
-Facebook Mastermind count: **`htsa-mastermind-member-count.mdc`** (**585+** wording).  
+Facebook Mastermind count: **`htsa-mastermind-member-count.mdc`** (**590+** wording).  
 **Rebuild frozen shells:** from repo root run `python3 scripts/build-htsa-invoice-templates.py` — templates pull **Member voice** testimonials + colored footer icons from **`htsa-enrollment-wayne-wintermute.html`**; **never** run a step that replaces **Closer** ClarityPay (`…/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/`) with the **Setter** plan (`plan_z5iuUhSgm9seH`).

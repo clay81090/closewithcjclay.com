@@ -16,7 +16,7 @@ Authoritative for **which frozen file** to use. Full agent procedure: `.cursor/s
 ## Shell notes
 
 - **01** — Source: `htsa-enrollment-val-tappan.html` — **three in-house Closer options:** $6k PIF · **Splitit** $550/mo ($6,600) · 4-pay $7k; Terms + Apps Script + orange banner; `{{HTSA_*}}`.
-- **02** — Source: `htsa-enrollment-thomas-rulof.html` + same **three-option** closer stack + **Closer** ClarityPay **$7,200** `https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/` + Flexxbuy. **Never** Setter `plan_z5iuUhSgm9seH` on Closer. No PayVa.
+- **02** — **Closer – Cash + Financing:** $6k PIF · $1,750 × 4-pay ($7k) · **ClarityPay only** ($600/mo × 12, 0% APR, $7,200 total, 620+ credit) `https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/`. **No Splitit. No Flexxbuy.** **Never** Setter `plan_z5iuUhSgm9seH` on Closer. No PayVa.
 - **03 / 04** — Source: `htsa-enrollment-trameil-lee.html`; **03** has financing stripped; Terms/hint = payment-only (not “financing”). **03** header `Payment:` and Prepared For `Payment:` use the **short Wayne line** (*Select payment option below*); no `Pricing:` row in billing. Whop/USD amounts stay **only** under Program Investment (`setter_cash_only` in `scripts/build-htsa-invoice-templates.py`).
 - **05 / 06** — Jocelyn header + combined curriculum on Val shell; one Terms gate + one `#invest-pay-zone`; Closer invest-box then Setter invest-box; footer card title **Closer & Setter**; no PayVa.
 - **Guarantee** — Orange block in all six; omit only if CJ says **no guarantee**.
@@ -57,7 +57,7 @@ From repo root:
 python3 scripts/build-htsa-invoice-templates.py
 ```
 
-Writes `htsa-placement-01`…`06`; removes legacy `htsa-tpl-*.html` if present. **Read-only** pull of Member voice strip + footer row from `htsa-enrollment-wayne-wintermute.html` (Wayne’s **live** file is not modified). Normalizes Mastermind copy to **585+** and Trustpilot line to **4.9 stars out of 5** on write. **Step 3 kickoff** defaults to **Mark** at `https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call`. Then run **`python3 scripts/rebuild-htsa-demo-enrollment-pages.py`** to refresh the six **`htsa-enrollment-demo-*`** preview pages.
+Writes `htsa-placement-01`…`06`; removes legacy `htsa-tpl-*.html` if present. **Read-only** pull of Member voice strip + footer row from `htsa-enrollment-wayne-wintermute.html` (Wayne’s **live** file is not modified). Normalizes Mastermind copy to **590+** and Trustpilot line to **4.9 stars out of 5** on write. **Footer business card:** `HTSA - Career Transformation Coach`. **Step 3 kickoff** defaults to **Mark** at `https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call`. Then run **`python3 scripts/rebuild-htsa-demo-enrollment-pages.py`** to refresh the six **`htsa-enrollment-demo-*`** preview pages.
 
 ## ClarityPay (never swap)
 
