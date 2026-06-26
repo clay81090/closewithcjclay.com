@@ -4,7 +4,7 @@
 
 ## Terminal shortcut — `htsa` (free, no Agent)
 
-One-time: open a **new** Terminal tab (or run `source ~/.zshrc`) so the alias loads.
+One-time: open a **new** Terminal tab in Cursor (kill old tabs that say `command not found: htsa`). Cursor is set to **zsh (login)** so `htsa` loads from `~/.htsa-shell/htsa.zsh` via `~/.zprofile` + `~/.zshrc` — no `source ~/.zshrc` needed.
 
 ```bash
 htsa
