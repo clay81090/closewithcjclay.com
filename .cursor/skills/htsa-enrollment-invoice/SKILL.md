@@ -239,7 +239,7 @@ When building **new** pages, **duplicate footer markup from** **`htsa-enrollment
 
 ## Related
 
-`.cursor/rules/htsa-enrollment-invoice-workflow.mdc` · `htsa-mastermind-member-count.mdc` (**590+** mastermind wording) · `templates/HTSA-ENROLLMENT-PLACEMENT-NOTES.md`
+`.cursor/rules/htsa-enrollment-invoice-workflow.mdc` · `htsa-mastermind-member-count.mdc` (**600+** mastermind wording) · `templates/HTSA-ENROLLMENT-PLACEMENT-NOTES.md`
 
 ---
 

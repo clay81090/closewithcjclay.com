@@ -32,7 +32,7 @@ Setter - Cash only
 
 **Implementation:** From repo root, either (a) run **`htsa`** in Terminal (shell function in CJ’s `~/.zshrc` — paste block, **Ctrl-D**, wait for **`READY`**), (b) run `python3 scripts/htsa-paste-invoice.py` with the block on **stdin** (ends with Ctrl-D), which calls **`htsa-instantiate-invoice.py`** with **`--overwrite --ship`** by default, or (c) parse manually and invoke the same.
 
-**Terminal (free — no Agent):** `htsa` → paste canonical block → **Ctrl-D**. Do **not** paste the block alone at the shell `%` prompt (zsh will treat each line as a command). New Terminal tab or `source ~/.zshrc` after setup.
+**Terminal (free — no Agent):** `htsa` → paste canonical block → **Ctrl-D**. Do **not** paste the block alone at the shell `%` prompt (zsh will treat each line as a command). Cursor uses **zsh (login)** so `htsa` auto-loads from `~/.htsa-shell/htsa.zsh` — open a **new** Terminal tab after setup (close old tabs that still say `command not found`).
 
 **Respect explicit “do not touch”:** If CJ says an invoice is **already perfect** or **do not redo** a named file, **do not** overwrite that HTML.
 
@@ -235,7 +235,7 @@ JSON via URL-encoded **`payload=`** POST. Align with `hts-enrollment-webapp-goog
 - **Step 3 kickoff (default):** **Mark** — heading *Book Your Kickoff Call with Mark (Success Coach)*; link `https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call`. Use Chris only if CJ explicitly requests it.  
 - **Closer** ClarityPay → **$7,200** checkout (`1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf`); copy **$600/mo × 12 months · 0% APR · 620+ credit score to qualify**. **Setter** ClarityPay → **$3,600** (`plan_z5iuUhSgm9seH?d2c=true`) — **never** swap them.  
 - **Footer business card:** `HTSA - Career Transformation Coach` (dual: `… & Setter`).  
-- Footer Trustpilot row: **4.9 stars out of 5**; Mastermind step: **590+** members (see **`htsa-mastermind-member-count.mdc`**).  
+- Footer Trustpilot row: **4.9 stars out of 5**; Mastermind step: **600+** members (see **`htsa-mastermind-member-count.mdc`**).  
 - Mobile matches **Zachary + Chad** patterns.  
 - **`grep`:** no phantom client data.  
 - **Git: new invoice file committed and pushed** to the publish branch — otherwise **`https://closewithcjclay.com/htsa-enrollment-{slug}.html` 404s**.
@@ -280,5 +280,5 @@ Bonus copy: don’t toss in “three one-on-one calls with Chad.”
 ## Related
 
 Full agent procedure: `.cursor/skills/htsa-enrollment-invoice/SKILL.md`  
-Facebook Mastermind count: **`htsa-mastermind-member-count.mdc`** (**590+** wording).  
+Facebook Mastermind count: **`htsa-mastermind-member-count.mdc`** (**600+** wording).  
 **Rebuild frozen shells:** from repo root run `python3 scripts/build-htsa-invoice-templates.py` — templates pull **Member voice** testimonials + colored footer icons from **`htsa-enrollment-wayne-wintermute.html`**; **never** run a step that replaces **Closer** ClarityPay (`…/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/`) with the **Setter** plan (`plan_z5iuUhSgm9seH`).
