@@ -596,6 +596,7 @@
     align-items: center;
     gap: 8px;
     overflow: hidden;
+    font-family: inherit;
     background: linear-gradient(135deg, var(--green-dim) 0%, var(--green-dark) 100%);
     color: #041018 !important;
     text-decoration: none;
@@ -816,6 +817,133 @@
 
   .hidden { display: none !important; }
 
+  /* In-page YouTube embed (opens under each video row) */
+  .video-embed-panel {
+    display: none;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--mid);
+    grid-column: 1 / -1;
+    animation: embedIn 0.35s var(--ease-out);
+  }
+
+  .video-embed-panel.is-open { display: block; }
+
+  @keyframes embedIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .video-embed {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #000;
+    border: 1px solid var(--mid);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+  }
+
+  .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .video-caption {
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .video-embed-actions {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .video-embed-actions a {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--green-dim);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 201, 122, 0.35);
+  }
+
+  .video-embed-actions a:hover { border-bottom-color: var(--green-dim); }
+
+  .btn-close-embed {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--mid);
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-close-embed:hover {
+    border-color: var(--green-dim);
+    color: var(--text);
+  }
+
+  .watch-card.has-embed-open {
+    border-color: rgba(0, 230, 153, 0.35);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+
+  /* CJ presenter bar — add ?presenter=1 to URL on your Zoom share */
+  .presenter-bar {
+    margin-bottom: 24px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: rgba(255, 200, 80, 0.08);
+    border: 1px dashed rgba(255, 200, 80, 0.45);
+    font-size: 13px;
+    color: var(--text-soft);
+  }
+
+  .presenter-bar strong { color: #ffd84d; }
+
+  .presenter-bar label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  .presenter-bar input { accent-color: #ffd84d; width: 18px; height: 18px; }
+
+  .watch-subhead {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 28px 0 12px 4px;
+  }
+
+  .watch-card { display: block; }
+
+  .watch-card-inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
   /* Floating dock */
   .dock {
     position: fixed;
@@ -929,7 +1057,11 @@
     personalNote: '',
     bookingUrl: 'https://meetings.hubspot.com/charles660/cj',
     enrollmentUrl: '',
-    textPhone: '6166121735'
+    textPhone: '6166121735',
+    /* Dana testimonial: false by default — turn on with showDana: true or ?dana=1 */
+    showDana: false,
+    /* Add ?presenter=1 to your Zoom link to show the Dana toggle bar */
+    presenterMode: false
   };
 </script>
 
@@ -1035,103 +1167,210 @@
       <p class="section-kicker">04 · The sequence</p>
       <h2 class="section-title">Watch &amp; read in this order.</h2>
     </div>
-    <p class="journey-intro">Check each step — it’s “good friction”: tiny commitments that prime you to show up sharp.</p>
+    <p class="journey-intro">Tap <strong>Play here</strong> — video opens on this page (fullscreen still works). Check each step when you’re done.</p>
 
-    <ol class="watch-list">
-      <li class="watch-item" data-step="s1">
-        <div class="watch-card">
-          <div class="step-idx" data-step-idx="s1">1</div>
-          <div class="watch-body">
-            <h4>HTSA on YouTube — Chad &amp; the brand voice</h4>
-            <p class="hint">Skim recent uploads first. Get the vibe before the stories hit.</p>
-            <div class="watch-actions">
-              <a class="btn-link" href="https://www.youtube.com/@highticketsalesacademy" target="_blank" rel="noopener noreferrer">Open channel →</a>
-              <label class="chk"><input type="checkbox" data-check="s1" /> Got the gist</label>
+    <div class="presenter-bar hidden" id="presenterBar" aria-live="polite">
+      <strong>Presenter mode</strong> — only you see this bar.<br>
+      <label><input type="checkbox" id="toggleDana" /> Show <strong>Dana</strong> testimonial to viewer</label>
+    </div>
+
+    <ol class="watch-list" id="watchList">
+      <li class="watch-item" data-step="s_chad">
+        <div class="watch-card" id="card-s_chad">
+          <div class="watch-card-inner">
+            <div class="step-idx" data-step-idx="s_chad">1</div>
+            <div class="watch-body">
+              <h4>Meet Chad — CEO &amp; Founder at HTSA</h4>
+              <p class="hint">Start here — who built this and what the academy stands for.</p>
+              <div class="watch-actions">
+                <button type="button" class="btn-link btn-play-video" data-step-id="s_chad" data-yt-id="eLAWEwE7pl4">Play here →</button>
+                <label class="chk"><input type="checkbox" data-check="s_chad" /> Watched</label>
+              </div>
+            </div>
+          </div>
+          <div class="video-embed-panel" id="embed-s_chad" hidden>
+            <div class="video-embed"><iframe title="Meet Chad — HTSA CEO" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+            <p class="video-caption">Chad Aleo — founder of High Ticket Sales Academy.</p>
+            <div class="video-embed-actions">
+              <button type="button" class="btn-close-embed" data-close="s_chad">Close video</button>
+              <a href="https://youtu.be/eLAWEwE7pl4" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
             </div>
           </div>
         </div>
       </li>
-      <li class="watch-item" data-step="s2">
-        <div class="watch-card">
-          <div class="step-idx" data-step-idx="s2">2</div>
-          <div class="watch-body">
-            <h4>Taylor Conroy — why he hires our members</h4>
-            <p class="hint">Outside authority: why companies trust HTSA-trained closers.</p>
-            <div class="watch-actions">
-              <a class="btn-link" href="https://youtu.be/bd65afldLmE" target="_blank" rel="noopener noreferrer">Play video →</a>
-              <label class="chk"><input type="checkbox" data-check="s2" /> Watched</label>
+      <li class="watch-item" data-step="s_taylor">
+        <div class="watch-card" id="card-s_taylor">
+          <div class="watch-card-inner">
+            <div class="step-idx" data-step-idx="s_taylor">2</div>
+            <div class="watch-body">
+              <h4>Taylor Conroy (TEDx Coach) — why he hires our members</h4>
+              <p class="hint">Outside authority: why companies trust HTSA-trained closers.</p>
+              <div class="watch-actions">
+                <button type="button" class="btn-link btn-play-video" data-step-id="s_taylor" data-yt-id="bd65afldLmE">Play here →</button>
+                <label class="chk"><input type="checkbox" data-check="s_taylor" /> Watched</label>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
-      <li class="watch-item" data-step="s3">
-        <div class="watch-card">
-          <div class="step-idx" data-step-idx="s3">3</div>
-          <div class="watch-body">
-            <h4>Josh — Hormozi-world path</h4>
-            <p class="hint">Relatable lane into high-ticket.</p>
-            <div class="watch-actions">
-              <a class="btn-link" href="https://youtu.be/5pVlD6EKy1k" target="_blank" rel="noopener noreferrer">Play video →</a>
-              <label class="chk"><input type="checkbox" data-check="s3" /> Watched</label>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="watch-item" data-step="s4">
-        <div class="watch-card">
-          <div class="step-idx" data-step-idx="s4">4</div>
-          <div class="watch-body">
-            <h4>Brianna — Tony Robbins team</h4>
-            <p class="hint">Proof from someone with serious sales reps.</p>
-            <div class="watch-actions">
-              <a class="btn-link" href="https://youtu.be/TWacdj9x45o" target="_blank" rel="noopener noreferrer">Play video →</a>
-              <label class="chk"><input type="checkbox" data-check="s4" /> Watched</label>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="watch-item" data-step="s5">
-        <div class="watch-card">
-          <div class="step-idx" data-step-idx="s5">5</div>
-          <div class="watch-body">
-            <h4>Cassie — single-mom story</h4>
-            <p class="hint">Emotional proof — a lot of people see themselves here.</p>
-            <div class="watch-actions">
-              <a class="btn-link" href="https://youtu.be/WOVqPR-ufYM" target="_blank" rel="noopener noreferrer">Play video →</a>
-              <label class="chk"><input type="checkbox" data-check="s5" /> Watched</label>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="watch-item" data-step="s6">
-        <div class="watch-card">
-          <div class="step-idx" data-step-idx="s6">6</div>
-          <div class="watch-body">
-            <h4>Trustpilot — third-party heat</h4>
-            <p class="hint">Independent reviews. Skim the themes, not every line.</p>
-            <div class="watch-actions">
-              <a class="btn-link secondary" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Read reviews →</a>
-              <label class="chk"><input type="checkbox" data-check="s6" /> Skimmed</label>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="watch-item" data-step="s7">
-        <div class="watch-card">
-          <div class="step-idx" data-step-idx="s7">7</div>
-          <div class="watch-body">
-            <h4>Official site — the full picture</h4>
-            <p class="hint">Don’t spiral — bookmark questions for our call.</p>
-            <div class="watch-actions">
-              <a class="btn-link secondary" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Open site →</a>
-              <label class="chk"><input type="checkbox" data-check="s7" /> Visited</label>
+          <div class="video-embed-panel" id="embed-s_taylor" hidden>
+            <div class="video-embed"><iframe title="Taylor Conroy — HTSA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+            <p class="video-caption">Taylor Conroy — TEDx coach on why he hires HTSA members.</p>
+            <div class="video-embed-actions">
+              <button type="button" class="btn-close-embed" data-close="s_taylor">Close video</button>
+              <a href="https://youtu.be/bd65afldLmE" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
             </div>
           </div>
         </div>
       </li>
     </ol>
 
-    <p class="amazon-note reveal" data-reveal>Want depth? <a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><em>The Book on High Ticket Sales</em></a> — Chad Aleo.</p>
+    <p class="watch-subhead">Client success stories</p>
+
+    <ol class="watch-list" style="margin-top:0;">
+      <li class="watch-item dana-item hidden" data-step="s_dana" id="danaStep">
+        <div class="watch-card" id="card-s_dana">
+          <div class="watch-card-inner">
+            <div class="step-idx" data-step-idx="s_dana">★</div>
+            <div class="watch-body">
+              <h4>Dana — unprompted HTSA personal review</h4>
+              <p class="hint">Real member — no script, just her experience.</p>
+              <div class="watch-actions">
+                <button type="button" class="btn-link btn-play-video" data-step-id="s_dana" data-yt-id="FqlY37NaIsk">Play here →</button>
+                <label class="chk"><input type="checkbox" data-check="s_dana" /> Watched</label>
+              </div>
+            </div>
+          </div>
+          <div class="video-embed-panel" id="embed-s_dana" hidden>
+            <div class="video-embed"><iframe title="Dana — HTSA review" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+            <p class="video-caption">Dana — unprompted personal HTSA review.</p>
+            <div class="video-embed-actions">
+              <button type="button" class="btn-close-embed" data-close="s_dana">Close video</button>
+              <a href="https://youtu.be/FqlY37NaIsk" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="watch-item" data-step="s_josh">
+        <div class="watch-card" id="card-s_josh">
+          <div class="watch-card-inner">
+            <div class="step-idx" data-step-idx="s_josh">3</div>
+            <div class="watch-body">
+              <h4>Josh — Alex Hormozi background</h4>
+              <p class="hint">High-profile path into high-ticket.</p>
+              <div class="watch-actions">
+                <button type="button" class="btn-link btn-play-video" data-step-id="s_josh" data-yt-id="5pVlD6EKy1k">Play here →</button>
+                <label class="chk"><input type="checkbox" data-check="s_josh" /> Watched</label>
+              </div>
+            </div>
+          </div>
+          <div class="video-embed-panel" id="embed-s_josh" hidden>
+            <div class="video-embed"><iframe title="Josh — HTSA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+            <p class="video-caption">Josh — Hormozi-world background into HTSA.</p>
+            <div class="video-embed-actions">
+              <button type="button" class="btn-close-embed" data-close="s_josh">Close video</button>
+              <a href="https://youtu.be/5pVlD6EKy1k" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="watch-item" data-step="s_brianna">
+        <div class="watch-card" id="card-s_brianna">
+          <div class="watch-card-inner">
+            <div class="step-idx" data-step-idx="s_brianna">4</div>
+            <div class="watch-body">
+              <h4>Brianna — Tony Robbins team</h4>
+              <p class="hint">Credibility from someone with serious sales reps.</p>
+              <div class="watch-actions">
+                <button type="button" class="btn-link btn-play-video" data-step-id="s_brianna" data-yt-id="TWacdj9x45o">Play here →</button>
+                <label class="chk"><input type="checkbox" data-check="s_brianna" /> Watched</label>
+              </div>
+            </div>
+          </div>
+          <div class="video-embed-panel" id="embed-s_brianna" hidden>
+            <div class="video-embed"><iframe title="Brianna — HTSA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+            <p class="video-caption">Brianna — placed on the Tony Robbins team.</p>
+            <div class="video-embed-actions">
+              <button type="button" class="btn-close-embed" data-close="s_brianna">Close video</button>
+              <a href="https://youtu.be/TWacdj9x45o" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="watch-item" data-step="s_cassie">
+        <div class="watch-card" id="card-s_cassie">
+          <div class="watch-card-inner">
+            <div class="step-idx" data-step-idx="s_cassie">5</div>
+            <div class="watch-body">
+              <h4>Cassie — single mom story</h4>
+              <p class="hint">Relatable success — a lot of people see themselves here.</p>
+              <div class="watch-actions">
+                <button type="button" class="btn-link btn-play-video" data-step-id="s_cassie" data-yt-id="WOVqPR-ufYM">Play here →</button>
+                <label class="chk"><input type="checkbox" data-check="s_cassie" /> Watched</label>
+              </div>
+            </div>
+          </div>
+          <div class="video-embed-panel" id="embed-s_cassie" hidden>
+            <div class="video-embed"><iframe title="Cassie — HTSA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+            <p class="video-caption">Cassie — single mom, relatable HTSA success story.</p>
+            <div class="video-embed-actions">
+              <button type="button" class="btn-close-embed" data-close="s_cassie">Close video</button>
+              <a href="https://youtu.be/WOVqPR-ufYM" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+
+    <p class="watch-subhead">Key resources</p>
+
+    <ol class="watch-list" style="margin-top:0;">
+      <li class="watch-item" data-step="s_trust">
+        <div class="watch-card">
+          <div class="watch-card-inner">
+            <div class="step-idx" data-step-idx="s_trust">6</div>
+            <div class="watch-body">
+              <h4>Trustpilot reviews — 4.9 out of 5</h4>
+              <p class="hint">Independent reviews. Skim the themes, not every line.</p>
+              <div class="watch-actions">
+                <a class="btn-link secondary" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Read reviews →</a>
+                <label class="chk"><input type="checkbox" data-check="s_trust" /> Skimmed</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="watch-item" data-step="s_book">
+        <div class="watch-card">
+          <div class="watch-card-inner">
+            <div class="step-idx" data-step-idx="s_book">7</div>
+            <div class="watch-body">
+              <h4>Chad’s book — <em>The Book on High Ticket Sales</em></h4>
+              <p class="hint">Optional depth before or after our call.</p>
+              <div class="watch-actions">
+                <a class="btn-link secondary" href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer">View on Amazon →</a>
+                <label class="chk"><input type="checkbox" data-check="s_book" /> Bookmarked</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="watch-item" data-step="s_site">
+        <div class="watch-card">
+          <div class="watch-card-inner">
+            <div class="step-idx" data-step-idx="s_site">8</div>
+            <div class="watch-body">
+              <h4>HTSA website — the full picture</h4>
+              <p class="hint">Don’t spiral — bookmark questions for our call.</p>
+              <div class="watch-actions">
+                <a class="btn-link secondary" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Open site →</a>
+                <label class="chk"><input type="checkbox" data-check="s_site" /> Visited</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+
+    <p class="amazon-note reveal" data-reveal>Also on YouTube: <a href="https://www.youtube.com/@highticketsalesacademy" target="_blank" rel="noopener noreferrer">@highticketsalesacademy</a></p>
   </section>
 
   <section class="section reveal" id="who" data-reveal>
@@ -1188,7 +1427,7 @@
     <p style="margin-top:10px;">
       <a href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Site</a>
       <a href="https://www.youtube.com/@highticketsalesacademy" target="_blank" rel="noopener noreferrer">YouTube</a>
-      <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
+      <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Trustpilot · 4.9/5</a>
     </p>
   </footer>
 </main>
@@ -1196,9 +1435,36 @@
 <script>
 (function () {
   var cfg = window.PRE_CALL_CONFIG || {};
-  var storageKey = 'htsa-precall-checks-v2';
+  var storageKey = 'htsa-precall-checks-v3';
   var R = 26;
   var CIRC = 2 * Math.PI * R;
+
+  /* URL overrides: ?dana=1 · ?presenter=1 */
+  var params = new URLSearchParams(window.location.search);
+  var showDana = params.has('dana')
+    ? params.get('dana') === '1' || params.get('dana') === 'true'
+    : !!cfg.showDana;
+  var presenterMode = params.has('presenter')
+    ? params.get('presenter') === '1' || params.get('presenter') === 'true'
+    : !!cfg.presenterMode;
+
+  var BASE_IDS = ['s_chad','s_taylor','s_josh','s_brianna','s_cassie','s_trust','s_book','s_site','e1','e2','e3'];
+  var DANA_ID = 's_dana';
+
+  function getActiveIds() {
+    var ids = BASE_IDS.slice();
+    if (showDana) ids.splice(2, 0, DANA_ID);
+    return ids;
+  }
+
+  function applyDanaVisibility() {
+    var el = document.getElementById('danaStep');
+    if (el) el.classList.toggle('hidden', !showDana);
+    if (!showDana && saved[DANA_ID]) {
+      delete saved[DANA_ID];
+      persist();
+    }
+  }
 
   var first = document.getElementById('cfgFirstName');
   if (first) first.textContent = cfg.firstName || 'there';
@@ -1230,7 +1496,6 @@
     if (enrollRow) enrollRow.classList.remove('hidden');
   }
 
-  var ids = ['s1','s2','s3','s4','s5','s6','s7','e1','e2','e3'];
   var saved = {};
   try {
     saved = JSON.parse(localStorage.getItem(storageKey) || '{}') || {};
@@ -1248,6 +1513,7 @@
   }
 
   function updateProgress() {
+    var ids = getActiveIds();
     var done = 0;
     ids.forEach(function (id) {
       if (saved[id]) done++;
@@ -1280,6 +1546,79 @@
     });
   }
 
+  function closeAllEmbeds() {
+    document.querySelectorAll('.video-embed-panel.is-open').forEach(function (panel) {
+      panel.classList.remove('is-open');
+      panel.hidden = true;
+      var iframe = panel.querySelector('iframe');
+      if (iframe) iframe.src = '';
+    });
+    document.querySelectorAll('.watch-card.has-embed-open').forEach(function (c) {
+      c.classList.remove('has-embed-open');
+    });
+  }
+
+  function openEmbed(stepId, ytId) {
+    var panel = document.getElementById('embed-' + stepId);
+    var card = document.getElementById('card-' + stepId);
+    if (!panel || !ytId) return;
+
+    var wasOpen = panel.classList.contains('is-open');
+    closeAllEmbeds();
+    if (wasOpen) return;
+
+    panel.classList.add('is-open');
+    panel.hidden = false;
+    if (card) card.classList.add('has-embed-open');
+
+    var iframe = panel.querySelector('iframe');
+    if (iframe) {
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(ytId)
+        + '?rel=0&modestbranding=1&playsinline=1&autoplay=1';
+    }
+
+    setTimeout(function () {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 80);
+  }
+
+  document.querySelectorAll('.btn-play-video').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      openEmbed(btn.getAttribute('data-step-id'), btn.getAttribute('data-yt-id'));
+    });
+  });
+
+  document.querySelectorAll('.btn-close-embed').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var stepId = btn.getAttribute('data-close');
+      var panel = document.getElementById('embed-' + stepId);
+      if (panel) {
+        panel.classList.remove('is-open');
+        panel.hidden = true;
+        var iframe = panel.querySelector('iframe');
+        if (iframe) iframe.src = '';
+      }
+      var card = document.getElementById('card-' + stepId);
+      if (card) card.classList.remove('has-embed-open');
+    });
+  });
+
+  /* Presenter bar — Dana toggle */
+  var presenterBar = document.getElementById('presenterBar');
+  var toggleDana = document.getElementById('toggleDana');
+  if (presenterBar && presenterMode) {
+    presenterBar.classList.remove('hidden');
+    if (toggleDana) {
+      toggleDana.checked = showDana;
+      toggleDana.addEventListener('change', function () {
+        showDana = toggleDana.checked;
+        applyDanaVisibility();
+        updateProgress();
+      });
+    }
+  }
+  applyDanaVisibility();
+
   function fireConfetti() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var layer = document.getElementById('celebrate');
@@ -1302,7 +1641,7 @@
       var id = el.getAttribute('data-check');
       saved[id] = el.checked;
       persist();
-      // Confetti only when user just completed 100% this session (not on every reload)
+      var ids = getActiveIds();
       var done = 0;
       ids.forEach(function (i) { if (saved[i]) done++; });
       if (done === ids.length && !sessionStorage.getItem('htsa-precall-confetti-done')) {
@@ -1314,15 +1653,12 @@
 
   updateProgress();
 
-  /* Scroll reveal */
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reduceMotion) {
     var reveals = document.querySelectorAll('[data-reveal]');
     var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          en.target.classList.add('is-visible');
-        }
+        if (en.isIntersecting) en.target.classList.add('is-visible');
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     reveals.forEach(function (el) { obs.observe(el); });

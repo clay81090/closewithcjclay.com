@@ -20,6 +20,9 @@ All links below are **direct-to-consumer** where applicable (`?d2c=true`). The $
 | **2-Pay (Action Taker)** | **$6,000** | $3,000 down — $3,000 due in 30 days | **“Action Taker Discount.”** Intended **on the call** unless CJ states otherwise. | `https://whop.com/checkout/plan_oMi6XYvybZY4F?d2c=true` |
 | **3-Pay** | **$6,600** | $2,200/mo × 3 months (due every 30 days) | | `https://whop.com/checkout/plan_YfsUaarlyP9e1?d2c=true` |
 | **PIF (experience / discount)** | **$5,000** | Paid in full | Reserved for **experience** or **discount** — **not** the default $6,000 PIF. | `https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true` |
+| **PIF balance (day-30 remainder)** | **$4,250** | One-time (Whop ACH / bank transfer) | **After $1,750 already paid** → completes **$6,000 PIF** total (avoids 4-pay / finance premium). Not on frozen shells — CJ sends ad hoc or adds to a custom invoice. First saved use: **Cody Dale** (Jun 2026). Optional prefill: append `?email=CLIENT%40EMAIL.COM&email.disabled=1` | `https://whop.com/checkout/6HGikz2DEePqj5xzLH-E8gN-27Xu-MqoH-038LDTsjAgF9/` |
+
+**$4,250 balance math:** $1,750 (first payment — Whop, Stripe split, Chime, etc.) + **$4,250** (this link) = **$6,000** program total.
 
 ---
 
