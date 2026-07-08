@@ -113,7 +113,7 @@ Alternate checkouts (2-pay / 3-pay / $5k PIF closer, setter 2-pay) live in **`HT
 | **PayVa** | **Never** in shells. Add **`snippets/payva-financing-block.html`** only when CJ says **PayVa**. |
 | **Splitit** | **Option 2** on **all Closer** shells (**01, 02, 05, 06**): dedicated Whop checkout **$550/mo × 12** ($6,600 total). **Not** on **Setter**. Omit only if CJ says **no Splitit**. |
 | **ClarityPay (Whop)** | **Closer** financing: **$7,200** `…/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/` · **Setter** financing: **$3,600** `plan_z5iuUhSgm9seH?d2c=true` — never swap. |
-| **Mastermind / Trustpilot** | Facebook step: **615+** members · Footer band: **4.9 stars out of 5** (gold stars). |
+| **Mastermind / Trustpilot** | Facebook step: **620+** members · Footer band: **4.9 stars out of 5** (gold stars). |
 
 ---
 
@@ -184,7 +184,7 @@ python3 scripts/build-htsa-invoice-templates.py
 
 | Output | Sources (read-only) |
 |--------|---------------------|
-| **Member voice strip + footer** (all six) | After each shell is composed, testimonials HTML/CSS + footer link-row CSS/HTML are synced from **`htsa-enrollment-wayne-wintermute.html`**; copy then **615+** mastermind + **4.9 stars** Trustpilot line is applied. |
+| **Member voice strip + footer** (all six) | After each shell is composed, testimonials HTML/CSS + footer link-row CSS/HTML are synced from **`htsa-enrollment-wayne-wintermute.html`**; copy then **620+** mastermind + **4.9 stars** Trustpilot line is applied. |
 | `htsa-placement-01-closer-cash-only.html` | `htsa-enrollment-val-tappan.html` + **three-option** closer stack (PIF · Splitit · 4-pay) |
 | `htsa-placement-02-closer-cash-financing.html` | `htsa-enrollment-thomas-rulof.html` + same **three-option** closer stack; **Closer ClarityPay** → `$7,200` checkout `1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf` (**not** setter `plan_z5iuUhSgm9seH`) |
 | `htsa-placement-03-setter-cash-only.html` | `htsa-enrollment-trameil-lee.html` (financing stripped) |
