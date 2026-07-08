@@ -143,6 +143,51 @@ def sync_ref_strip_from_wayne(html: str, wayne_text: str) -> str:
     return html
 
 
+def apply_cj_resources_section(html: str) -> str:
+    """Section 4 curated resources (Amanda-style) — CSS + HTML before phone option."""
+    if "cj-resources-wrap" in html:
+        return html
+    css = (SNIPPETS / "cj-resources-section.css").read_text(encoding="utf-8")
+    body = (SNIPPETS / "cj-resources-section.html").read_text(encoding="utf-8")
+    locked_pos = html.find("#invest-pay-zone.invest-pay-zone--locked")
+    if locked_pos == -1:
+        raise RuntimeError("apply_cj_resources_section: locked pay-zone CSS not found")
+    print_anchor = "\n  @media print {"
+    print_pos = html.find(print_anchor, locked_pos)
+    if print_pos == -1:
+        raise RuntimeError("apply_cj_resources_section: @media print anchor not found")
+    html = html[:print_pos] + "\n" + css + html[print_pos:]
+    phone_marker = "  <!-- PHONE OPTION -->"
+    if phone_marker not in html:
+        raise RuntimeError("apply_cj_resources_section: PHONE OPTION marker not found")
+    html = html.replace(phone_marker, body + "\n" + phone_marker, 1)
+    return html
+
+
+_REF_STRIP_LINKS_LIST = re.compile(
+    r"(<div class=\"ref-strip-links-col\">\s*)"
+    r"<div class=\"ref-strip-label\">Member stories · optional</div>\s*"
+    r"<ul class=\"ref-strip-list\">.*?</ul>\s*",
+    flags=re.DOTALL,
+)
+
+_REF_STRIP_VOICES_POINTER = (
+    '<div class="ref-strip-label">Member voices</div>\n'
+    "        <p style=\"font-size:12px;line-height:1.6;color:var(--muted);margin:0 0 14px;max-width:280px;\">"
+    "Video resources and CJ's picks are in <strong style=\"color:var(--navy);\">Section 4 above</strong>. "
+    "Below are written testimonials from members.</p>\n        "
+)
+
+
+def apply_ref_strip_member_voices_only(html: str) -> str:
+    """Replace ref-strip link list with pointer to Section 4; keep member voice quotes."""
+    if "Section 4 above" in html:
+        return html
+    if _REF_STRIP_LINKS_LIST.search(html):
+        return _REF_STRIP_LINKS_LIST.sub(r"\1" + _REF_STRIP_VOICES_POINTER, html, count=1)
+    return html
+
+
 def apply_footer_bc_title(html: str) -> str:
     """CJ business card title on enrollment footers."""
     html = html.replace(
@@ -720,10 +765,11 @@ def apply_closer_cash_financing_modern_stack(html: str) -> str:
         count=1,
     )
     html = re.sub(
-        r"<p>\{\{HTSA_FIRST_NAME\}\}, review the payment and financing options in Program Investment above[^<]+</p>",
+        r"<p>\{\{HTSA_FIRST_NAME\}\}, review the payment and financing options in Program Investment above.*?</p>",
         f"<p>{CLOSER_FIN_STEP1_P}</p>",
         html,
         count=1,
+        flags=re.DOTALL,
     )
     return html
 
@@ -1080,6 +1126,13 @@ def main() -> None:
         apply_footer_bc_title(p) for p in (p01, p02, p03, p04, p05, p06)
     ]
 
+    p01, p02, p03, p04, p05, p06 = [
+        apply_cj_resources_section(p) for p in (p01, p02, p03, p04, p05, p06)
+    ]
+    p01, p02, p03, p04, p05, p06 = [
+        apply_ref_strip_member_voices_only(p) for p in (p01, p02, p03, p04, p05, p06)
+    ]
+
     practice_path = ROOT / "htsa-enrollment-cj-clay-practice.html"
     if practice_path.is_file():
         practice_html = practice_path.read_text(encoding="utf-8")
@@ -1087,6 +1140,8 @@ def main() -> None:
         practice_html = apply_terms_gate_quick_read(practice_html, "closer")
         practice_html = apply_canonical_enrollment_copy(practice_html)
         practice_html = apply_success_coach_kickoff_mark(practice_html)
+        practice_html = apply_cj_resources_section(practice_html)
+        practice_html = apply_ref_strip_member_voices_only(practice_html)
         practice_path.write_text(practice_html, encoding="utf-8")
 
     (TEMPLATES / "htsa-placement-01-closer-cash-only.html").write_text(p01, encoding="utf-8")

@@ -1554,6 +1554,138 @@
   }
 
 
+  /* CJ curated resources — featured picks + link cards */
+  .cj-resources-wrap {
+    padding: 0 36px 28px;
+    background: var(--white);
+    border-bottom: 1px solid var(--mid);
+  }
+
+  .cj-resources-lead {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--muted);
+    margin: 0 0 18px;
+    max-width: 720px;
+  }
+
+  .cj-resources-lead strong {
+    color: var(--navy);
+  }
+
+  .cj-resources-kicker {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin: 0 0 12px;
+  }
+
+  .cj-resources-featured {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .cj-resource-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 1px solid var(--mid);
+    border-radius: 10px;
+    padding: 16px 18px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
+
+  .cj-resource-card:hover {
+    border-color: rgba(0, 154, 94, 0.45);
+    box-shadow: 0 4px 18px rgba(6, 15, 30, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .cj-resource-card--featured {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border: 2px solid #f59e0b;
+    border-left: 5px solid #f59e0b;
+  }
+
+  .cj-resource-card--featured:hover {
+    border-color: #d97706;
+    box-shadow: 0 6px 22px rgba(245, 158, 11, 0.22);
+  }
+
+  .cj-resource-card-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #b45309;
+    margin-bottom: 6px;
+  }
+
+  .cj-resource-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0 0 6px;
+    line-height: 1.35;
+  }
+
+  .cj-resource-card-desc {
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+
+  .cj-resource-card-cta {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--green);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .cj-resource-card-cta::after {
+    content: "→";
+  }
+
+  .cj-resources-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .cj-resource-card--compact {
+    padding: 14px 16px;
+  }
+
+  .cj-resource-card--compact .cj-resource-card-title {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  .cj-resource-card--compact .cj-resource-card-desc {
+    font-size: 11.5px;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 600px) {
+    .cj-resources-wrap {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .cj-resources-featured,
+    .cj-resources-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media print {
     @page { margin: 0.5in; size: letter; }
     body { background: white; }
@@ -2081,6 +2213,95 @@
 
   </div>
 
+  <!-- CJ CURATED RESOURCES -->
+  <div class="sec-head">
+    <div class="sec-num">4</div>
+    <h3>Resources — CJ's Picks for You</h3>
+  </div>
+
+  <div class="cj-resources-wrap">
+    <p class="cj-resources-lead"><strong>{{HTSA_FIRST_NAME}}</strong> — start with the ⭐ picks below. These are the videos and links I most want you to review while you're deciding.</p>
+
+    <p class="cj-resources-kicker">⭐ Start here — CJ's top picks</p>
+    <div class="cj-resources-featured">
+
+      <a href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
+        <div class="cj-resource-card-badge">⭐ CJ's #1 pick</div>
+        <div class="cj-resource-card-title">Dana — unsolicited personal review</div>
+        <p class="cj-resource-card-desc">She recorded this completely on her own — we had no idea until she posted it. Life coach with a community of about 17,000 followers. She walks through why she chose HTSA, what to expect, and her experience start to finish.</p>
+        <span class="cj-resource-card-cta">Watch on YouTube</span>
+      </a>
+
+      <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
+        <div class="cj-resource-card-badge">⭐ Verified reviews</div>
+        <div class="cj-resource-card-title">Trustpilot — 4.9 out of 5 stars</div>
+        <p class="cj-resource-card-desc">Read what real members say about HTSA — unfiltered, third-party reviews from people who went through the program.</p>
+        <span class="cj-resource-card-cta">Read Trustpilot reviews</span>
+      </a>
+
+      <a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
+        <div class="cj-resource-card-badge">⭐ From our network</div>
+        <div class="cj-resource-card-title">Taylor Conroy (TEDx Coach) — why he hires our members</div>
+        <p class="cj-resource-card-desc">Taylor is a TEDx coach who actively hires HTSA-certified closers. Hear directly from a hiring manager why he trusts our members.</p>
+        <span class="cj-resource-card-cta">Watch on YouTube</span>
+      </a>
+
+      <a href="https://drive.google.com/file/d/1Zo2ID5sdF8ZYP8rZD_fisNgj-eNpuQxM/view?usp=sharing" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
+        <div class="cj-resource-card-badge">⭐ Fresh placement story</div>
+        <div class="cj-resource-card-title">Taylor Decourcey — newer member perspective</div>
+        <p class="cj-resource-card-desc">Newer placement with a fresher perspective (placed ~February 2026). This video is not posted publicly yet — you're seeing it here first.</p>
+        <span class="cj-resource-card-cta">Watch Taylor's story</span>
+      </a>
+
+    </div>
+
+    <p class="cj-resources-kicker">More success stories from our network</p>
+    <div class="cj-resources-grid">
+
+      <a href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+        <div class="cj-resource-card-title">Cassie — single mom success story</div>
+        <p class="cj-resource-card-desc">Relatable story — single mom who made the transition work around real life.</p>
+        <span class="cj-resource-card-cta">Watch on YouTube</span>
+      </a>
+
+      <a href="https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+        <div class="cj-resource-card-title">Josh — Alex Hormozi background</div>
+        <p class="cj-resource-card-desc">High-profile sales background — hear how HTSA fit into his path.</p>
+        <span class="cj-resource-card-cta">Watch on YouTube</span>
+      </a>
+
+      <a href="https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+        <div class="cj-resource-card-title">Brianna — Tony Robbins team</div>
+        <p class="cj-resource-card-desc">Credibility from a big-name organization — her HTSA experience.</p>
+        <span class="cj-resource-card-cta">Watch on YouTube</span>
+      </a>
+
+      <a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+        <div class="cj-resource-card-title">HTSA Website — more stories &amp; outcomes</div>
+        <p class="cj-resource-card-desc">Many more member outcomes, screenshots, and program details on our main site.</p>
+        <span class="cj-resource-card-cta">Visit highticketsalesacademy.com</span>
+      </a>
+
+    </div>
+
+    <p class="cj-resources-kicker" style="margin-top:18px;">Key resources</p>
+    <div class="cj-resources-grid">
+
+      <a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+        <div class="cj-resource-card-title">Chad's Book — <em>The Book on High Ticket Sales</em></div>
+        <p class="cj-resource-card-desc">The ultimate guide by HTSA founder Chad Aleo — available on Amazon.</p>
+        <span class="cj-resource-card-cta">View on Amazon</span>
+      </a>
+
+      <a href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+        <div class="cj-resource-card-title">Top 20 Companies in High Ticket Sales</div>
+        <p class="cj-resource-card-desc">Industry overview PDF — where HTSA fits in the landscape.</p>
+        <span class="cj-resource-card-cta">Open PDF</span>
+      </a>
+
+    </div>
+  </div>
+
   <!-- PHONE OPTION -->
   <div class="phone-option">
     <div style="font-size:20px; flex-shrink:0;">📞</div>
@@ -2102,14 +2323,8 @@
   <div class="ref-strip">
     <div class="ref-strip-inner">
       <div class="ref-strip-links-col">
-        <div class="ref-strip-label">Member stories · optional</div>
-        <ul class="ref-strip-list">
-          <li><a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" target="_blank" rel="noopener noreferrer">Taylor Conroy (TEDx coach) — why he hires our members</a></li>
-          <li><a href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" target="_blank" rel="noopener noreferrer">Cassie — single mom, relatable success story</a></li>
-          <li><a href="https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8" target="_blank" rel="noopener noreferrer">Brianna — Tony Robbins team</a></li>
-          <li><a href="https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib" target="_blank" rel="noopener noreferrer">Josh — Alex Hormozi background</a></li>
-          <li><a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><em>The Book on High Ticket Sales</em> — Chad Aleo (Amazon)</a></li>
-        </ul>
+        <div class="ref-strip-label">Member voices</div>
+        <p style="font-size:12px;line-height:1.6;color:var(--muted);margin:0 0 14px;max-width:280px;">Video resources and CJ's picks are in <strong style="color:var(--navy);">Section 4 above</strong>. Below are written testimonials from members.</p>
         <div class="ref-strip-mini-stack">
           <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">Member voice</div>
