@@ -57,13 +57,16 @@
   .reveal{opacity:0; transform:translateY(28px); transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.3,1);}
   .reveal.in{opacity:1; transform:translateY(0);}
 
-  /* NAV */
+  /* NAV — solid black from first paint so hero text never shows through */
   .nav{
     position:fixed; top:0; left:0; right:0; z-index:100;
-    padding:22px 0; transition:background .4s ease, padding .4s ease, border-color .4s ease;
-    border-bottom:1px solid transparent;
+    background:#0A0A0B;
+    backdrop-filter:blur(10px);
+    padding:14px 0;
+    transition:padding .4s ease, border-color .4s ease;
+    border-bottom:1px solid var(--line);
   }
-  .nav.scrolled{background:rgba(10,10,11,0.86); backdrop-filter:blur(10px); padding:14px 0; border-color:var(--line);}
+  .nav.scrolled{padding:12px 0;}
   .nav-inner{display:flex; align-items:center; justify-content:space-between; max-width:1160px; margin:0 auto; padding:0 28px;}
   .logo{font-family:'Lora', serif; font-weight:600; font-size:19px; letter-spacing:0.5px; color:var(--ivory);}
   .logo span{color:var(--gold);}
