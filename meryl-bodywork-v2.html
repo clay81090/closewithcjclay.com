@@ -57,13 +57,13 @@
   .reveal{opacity:0; transform:translateY(28px); transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.3,1);}
   .reveal.in{opacity:1; transform:translateY(0);}
 
-  /* NAV — solid black from first paint so hero text never shows through */
+  /* NAV — sits ABOVE the hero (in page flow), then sticks black on scroll */
   .nav{
-    position:fixed; top:0; left:0; right:0; z-index:100;
+    position:sticky; top:0; z-index:100;
     background:#0A0A0B;
     backdrop-filter:blur(10px);
     padding:14px 0;
-    transition:padding .4s ease, border-color .4s ease;
+    transition:padding .4s ease;
     border-bottom:1px solid var(--line);
   }
   .nav.scrolled{padding:12px 0;}
@@ -89,9 +89,9 @@
     .nav-cta{padding:8px 14px; font-size:11px;}
   }
 
-  /* HERO */
+  /* HERO — starts below the banner; nothing covered */
   .hero{
-    position:relative; min-height:100vh; display:flex; align-items:flex-end;
+    position:relative; min-height:calc(100vh - 58px); display:flex; align-items:flex-end;
     background:var(--charcoal);
   }
   .hero-bg{position:absolute; inset:0; overflow:hidden;}
