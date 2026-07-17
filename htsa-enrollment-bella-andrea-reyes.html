@@ -462,6 +462,31 @@
     letter-spacing: 1.4px;
   }
 
+  .invest-badge--suggested {
+    background: rgba(0, 201, 122, 0.16);
+    color: var(--green);
+    border: 1px solid rgba(0, 201, 122, 0.45);
+    letter-spacing: 1.2px;
+  }
+  .invest-option-block--suggested {
+    border-color: rgba(0, 201, 122, 0.55);
+    box-shadow: 0 0 0 1px rgba(0, 201, 122, 0.18);
+  }
+  .cj-path-note {
+    margin: 0 0 18px;
+    padding: 14px 18px;
+    background: #f4f7fb;
+    border-left: 3px solid var(--green);
+    border-radius: 0 8px 8px 0;
+  }
+  .cj-path-note p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .cj-path-note strong { color: var(--navy); }
+
   .invest-access-hint {
     font-size: 11.5px;
     color: rgba(255, 255, 255, 0.48);
@@ -1744,12 +1769,8 @@
   <!-- HERO BAND -->
   <div class="hero-band">
     <h2>Certified High Ticket Closer &amp; Setter Programs</h2>
-    <p>Bella, I really enjoyed speaking with you earlier. You're exploring both the <strong>Certified Closer</strong> and <strong>Certified Setter</strong> tracks — everything below is organized so you can review each program’s curriculum and investment separately.</p>
-    <p style="margin-top:10px;">Everything you need to review and get started is right here. The biggest difference at HTSA is that you are not just another number — we are true experts in high ticket sales, with <strong>around-the-clock support</strong> and placement into roles from a network of 300+ partner companies. Take your time reviewing and reach out to CJ with any questions or assistance with enrollment.</p>
-    <div style="margin-top:16px;padding:16px 18px;border-radius:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,156,122,0.45);">
-      <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#ff9c7a;letter-spacing:0.02em;">CJ’s recommendation for your situation</p>
-      <p style="margin:0;font-size:13.5px;line-height:1.65;color:rgba(255,255,255,0.92);"><strong>ClarityPay is likely not going to work</strong> if you don’t have established credit history yet — so don’t bank on that path. Your best real options are the <strong>Closer 4-pay ($1,750 × 4)</strong> or the <strong>Setter 3-pay ($1,050 × 3)</strong>. The <strong>fastest, most efficient way into high-ticket sales</strong> for you is usually <strong>Setter at $1,050 × 3</strong> — get in, get placed, get paid. When you’re ready later, come back through our <strong>Closer Academy</strong> at that same payment structure again. That’s about <strong>$6,300 total</strong> across both programs — even better overall than jumping straight into the <strong>$7,000 Closer 4-pay</strong>.</p>
-    </div>
+    <p>Bella, I really enjoyed speaking with you earlier. Based on where you are right now — especially without established credit history yet — <strong>ClarityPay is probably not the right path</strong>. The cleanest, fastest way into high-ticket sales for you is usually the <strong>Setter 3-pay ($1,050 × 3)</strong>: get in, get placed, get paid, then come back for Closer later at that same structure (~<strong>$6,300 total</strong> across both, better than jumping straight into the <strong>$7,000 Closer 4-pay</strong>). Closer options are still listed below if you want them.</p>
+    <p style="margin-top:10px;">Everything you need is on this page — curriculum, guarantee, terms, and payment options. We’re not influencers; we’re operators. <strong>Chad trains you personally</strong>, you get around-the-clock support, and once certified our team helps place you through 300+ partner companies. Review at your pace, and text me if you want help enrolling.</p>
   </div>
 
   <!-- BILLING -->
@@ -1951,6 +1972,10 @@
 
     <p id="invest-pay-zone-hint" class="invest-pay-zone-hint">Payment and financing buttons stay locked until your Terms agreement has been recorded above.</p>
 
+  <div class="cj-path-note">
+    <p><strong>My suggestion:</strong> start with the <strong>Setter 3-pay ($1,050 today)</strong> marked with a ★ below. It’s the simplest entry, and you can return for Closer later. Skip ClarityPay for now unless your credit situation changes.</p>
+  </div>
+
   <div class="invest-wrap invest-pay-zone invest-pay-zone--locked" id="invest-pay-zone">
       <div class="invest-box">
       <div class="invest-program-label">Certified High Ticket Closer Program</div>
@@ -1999,7 +2024,7 @@
       <hr class="invest-zone-rule" aria-hidden="true">
 
       <div class="invest-section-kicker invest-section-kicker--accent">Third-Party Financing</div>
-      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">The options above are HTSA in-house payment options. ClarityPay is listed below for completeness — <strong style="color:#ff9c7a;">for Bella, Clarity is likely not a fit without credit history</strong>, so prioritize Closer 4-pay ($1,750) or Setter 3-pay ($1,050) instead.</div>
+      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">In-house Closer options are above. ClarityPay is listed for completeness — usually not a fit without credit history.</div>
 
       <div class="invest-grid">
 
@@ -2008,7 +2033,7 @@
           <div class="invest-option-head">
             <div>
               <div class="invest-option-title">ClarityPay — 12 months at 0% APR</div>
-              <div class="invest-option-sub">$600/month × 12 months — $7,200 total program investment. Need <strong>620+ credit score</strong> to qualify. <strong style="color:#ff9c7a;">Likely not available without credit history.</strong></div>
+              <div class="invest-option-sub">$600/month × 12 months — $7,200 total program investment. Needs <strong>620+ credit score</strong> to qualify.</div>
             </div>
             <div class="invest-price-stack">
               <div class="invest-price-big">$600/month</div>
@@ -2064,12 +2089,12 @@
           </div>
         </div>
 
-        <div class="invest-option-block">
-          <div class="invest-badge invest-badge--popular">Recommended for Bella</div>
+        <div class="invest-option-block invest-option-block--suggested">
+          <div class="invest-badge invest-badge--suggested">★ Suggested</div>
           <div class="invest-option-head invest-option-head--pay">
             <div>
-              <div class="invest-option-title">3 Monthly Payments</div>
-              <div class="invest-option-sub">3 payments of $1,050 — First Payment Due Today. Fastest efficient entry into HTS — then return for Closer later at the same structure (~$6,300 total vs $7,000 Closer 4-pay).</div>
+              <div class="invest-option-title">★ 3 Monthly Payments</div>
+              <div class="invest-option-sub">3 payments of $1,050 — first payment due today. Best starting path for you; return for Closer later at the same structure.</div>
             </div>
             <div class="invest-price-stack">
               <div class="invest-price-big">$1,050</div>
@@ -2077,7 +2102,7 @@
             </div>
           </div>
           <div class="invest-option-actions invest-option-actions--pay">
-            <a href="https://whop.com/checkout/plan_oK3AajTKp0mXK?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose 3-Pay — Pay $1,050 Today →</a>
+            <a href="https://whop.com/checkout/plan_oK3AajTKp0mXK?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">★ Choose 3-Pay — Pay $1,050 Today →</a>
           </div>
         </div>
 
@@ -2086,7 +2111,7 @@
       <hr class="invest-zone-rule" aria-hidden="true">
 
       <div class="invest-section-kicker invest-section-kicker--accent">Third-Party Financing</div>
-      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">In-house Setter options are above. ClarityPay is below for completeness — <strong style="color:#ff9c7a;">likely not a fit without credit history</strong>. Prefer Setter 3-pay ($1,050) or Closer 4-pay ($1,750).</div>
+      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">In-house Setter options are above. ClarityPay is listed for completeness — usually not a fit without credit history.</div>
 
       <div class="invest-grid">
 
@@ -2095,7 +2120,7 @@
           <div class="invest-option-head">
             <div>
               <div class="invest-option-title">ClarityPay</div>
-              <div class="invest-option-sub">Monthly payments with no early payoff penalty when approved. <strong style="color:#ff9c7a;">Likely not available without credit history.</strong></div>
+              <div class="invest-option-sub">Monthly payments with no early payoff penalty when approved.</div>
             </div>
             <div class="invest-price-stack">
               <div class="invest-price-big" style="font-size:22px;">Instant</div>
@@ -2138,7 +2163,7 @@
       <div class="step-num">1</div>
       <div class="step-content">
         <h4>Step 1 — Choose Your Payment</h4>
-        <p>Bella, review Program Investment above. <strong>ClarityPay is likely not going to work without credit history</strong> — so focus on real options: <strong>Closer 4-pay ($1,750 × 4 / $7,000 total)</strong>, <strong>Closer $6,000 PIF</strong>, or the recommended path — <strong>Setter 3-pay ($1,050 × 3 / $3,150 total)</strong>, then return later for Closer at that same structure (~<strong>$6,300 total</strong> across both, better than $7,000 Closer 4-pay alone). Setter also has <strong>$3,000 PIF</strong> if you want it clean. Once your payment clears, move to Step 2 below.</p>
+        <p>Bella, choose your path in Program Investment above. My suggestion is the ★ <strong>Setter 3-pay ($1,050 × 3)</strong>. Closer PIF / 4-pay are available if you prefer to start there. Once payment clears, move to Step 2 below.</p>
       </div>
     </div>
 
