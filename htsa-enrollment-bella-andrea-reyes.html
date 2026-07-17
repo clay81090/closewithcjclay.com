@@ -314,22 +314,26 @@
     box-shadow: 0 0 14px rgba(255, 156, 122, 0.12);
     opacity: 0.92;
   }
-  /* Closer in-house: Splitit Option 2 (featured) + orange explainer card */
-  .invest-option-block--splitit {
-    border: 1px solid rgba(255, 156, 122, 0.55);
-    background: rgba(255, 156, 122, 0.06);
-    box-shadow: 0 0 0 1px rgba(255, 156, 122, 0.12), 0 8px 24px rgba(255, 156, 122, 0.08);
+
+  /* Splitit note + detail (under $6k PIF) */
+  .invest-splitit-wrap {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .invest-badge--popular {
-    background: rgba(255, 156, 122, 0.18);
-    color: #ff9c7a;
-    border: 1px solid rgba(255, 156, 122, 0.45);
-    letter-spacing: 1.2px;
+  .invest-splitit-intro {
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0 0 12px;
+  }
+
+  .invest-splitit-intro strong {
+    color: rgba(255, 255, 255, 0.88);
   }
 
   .invest-splitit-card {
-    margin-top: 14px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 156, 122, 0.4);
     border-radius: 10px;
@@ -344,21 +348,19 @@
     letter-spacing: 0.02em;
   }
 
+  .invest-splitit-apply {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0 0 10px;
+    line-height: 1.55;
+  }
+
   .invest-splitit-fine {
     font-size: 10.5px;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.55);
-    margin: 0 0 8px;
+    color: rgba(255, 255, 255, 0.48);
+    margin: 0;
   }
-
-  .invest-splitit-bullets {
-    margin: 10px 0 0;
-    padding: 0 0 0 16px;
-    font-size: 11px;
-    line-height: 1.65;
-    color: rgba(255, 255, 255, 0.72);
-  }
-
 
   .invest-grid {
     display: grid;
@@ -482,7 +484,7 @@
     margin-top: 14px;
   }
 
-  /* Bonus — Chad 1:1 sessions (stands out on invest card) */
+  /* Bonus — Val 1:1 sessions (stands out on invest card) */
   .invest-bonus-chad {
     margin: 20px 0 18px;
     padding: 16px 18px;
@@ -1422,7 +1424,7 @@
     margin-right: auto;
   }
 
-  /* Terms agreement gate — unlocks payment buttons after Google Apps Script success (TEMPLATE — set client data before deploy) */
+  /* Terms agreement gate — unlocks payment buttons after Google Apps Script success (Val enrollment only) */
   .hts-terms-agreement-wrap {
     padding: 18px 36px 0;
     background: var(--white);
@@ -1731,9 +1733,9 @@
       <div class="header-tagline" style="margin-top:12px;">Certification &nbsp;·&nbsp; Coaching &nbsp;·&nbsp; Placement</div>
     </div>
     <div class="invoice-meta">
-      <div class="invoice-badge">Closer Program Overview</div>
+      <div class="invoice-badge">Closer &amp; Setter Overview</div>
       <p><strong>Prepared by:</strong> CJ Clay</p>
-      <p><strong>Program:</strong> Certified HTS Closer</p>
+      <p><strong>Program:</strong> Certified HTS Closer &amp; Setter</p>
       <p><strong>Payment:</strong> Select payment option below</p>
     </div>
   </div>
@@ -1741,9 +1743,13 @@
 
   <!-- HERO BAND -->
   <div class="hero-band">
-    <h2>Certified High Ticket Closer Program</h2>
-    <p>Bella, I really enjoyed speaking with you earlier. It was clear from our conversation that you're someone who takes their future seriously and is ready to make a real change — and that's exactly the kind of person we love working with here at High Ticket Sales Academy.</p>
-    <p style="margin-top:10px;">Everything you need to review and get started is right here. The biggest difference at HTSA is that you are not just another number — we are not influencers, but true experts in the field of high ticket sales. <strong>Chad Aleo trains you personally.</strong> You have around-the-clock support, and once certified, our team walks you directly into roles from a network of 300+ partner companies. Take your time reviewing and reach out to CJ with any questions or assistance with enrollment.</p>
+    <h2>Certified High Ticket Closer &amp; Setter Programs</h2>
+    <p>Bella, I really enjoyed speaking with you earlier. You're exploring both the <strong>Certified Closer</strong> and <strong>Certified Setter</strong> tracks — everything below is organized so you can review each program’s curriculum and investment separately.</p>
+    <p style="margin-top:10px;">Everything you need to review and get started is right here. The biggest difference at HTSA is that you are not just another number — we are true experts in high ticket sales, with <strong>around-the-clock support</strong> and placement into roles from a network of 300+ partner companies. Take your time reviewing and reach out to CJ with any questions or assistance with enrollment.</p>
+    <div style="margin-top:16px;padding:16px 18px;border-radius:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,156,122,0.45);">
+      <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#ff9c7a;letter-spacing:0.02em;">CJ’s recommendation for your situation</p>
+      <p style="margin:0;font-size:13.5px;line-height:1.65;color:rgba(255,255,255,0.92);"><strong>ClarityPay is likely not going to work</strong> if you don’t have established credit history yet — so don’t bank on that path. Your best real options are the <strong>Closer 4-pay ($1,750 × 4)</strong> or the <strong>Setter 3-pay ($1,050 × 3)</strong>. The <strong>fastest, most efficient way into high-ticket sales</strong> for you is usually <strong>Setter at $1,050 × 3</strong> — get in, get placed, get paid. When you’re ready later, come back through our <strong>Closer Academy</strong> at that same payment structure again. That’s about <strong>$6,300 total</strong> across both programs — even better overall than jumping straight into the <strong>$7,000 Closer 4-pay</strong>.</p>
+    </div>
   </div>
 
   <!-- BILLING -->
@@ -1754,7 +1760,7 @@
       <div class="billing-detail">
         <a href="mailto:carrey_2000@hotmail.com">carrey_2000@hotmail.com</a><br>
         <a href="tel:+17867575973">+1 (786) 757-5973</a><br>
-        Program: Certified HTS Closer<br>
+        Program: Certified HTS Closer &amp; Setter<br>
         Payment: Select payment option below
       </div>
     </div>
@@ -1773,17 +1779,19 @@
   <!-- CURRICULUM HEADER -->
   <div class="sec-head">
     <div class="sec-num">1</div>
-    <h3>Program Curriculum — Full Description of Included Services</h3>
+    <h3>Program Curriculum — Closer &amp; Setter (Combined)</h3>
   </div>
 
   <!-- CURRICULUM -->
   <div class="curriculum-wrap">
 
+    <div class="curriculum-part-head" style="border-top:none;background:linear-gradient(180deg,#f0f4f8 0%,#f7f9fc 100%);">Certified High Ticket (Closer/Setter) Program Overview</div>
+
     <div class="cur-item">
       <div class="cur-icon">📡</div>
       <div class="cur-content">
         <h4>Live Group Coaching (Lifetime Access)</h4>
-        <p>Lifetime access to live Zoom coaching sessions held Tuesdays at 12:00 PM EST and Wednesdays at 5:00 PM EST. Led by Chad Aleo, Christian Cherniawski, and select guest experts. Focused on real-world execution, confidence, and performance refinement.</p>
+        <p>Students receive lifetime access to live Zoom coaching sessions held Tuesdays at 12:00 PM EST and Wednesdays at 5:00 PM EST. Sessions are led by Chad Aleo, Christian Cherniawski, and select guest experts. Coaching is identical for Setter and Closer students and focuses on real-world execution, confidence, and performance refinement.</p>
       </div>
     </div>
 
@@ -1791,7 +1799,7 @@
       <div class="cur-icon">🎓</div>
       <div class="cur-content">
         <h4>Structured Online Training Platform</h4>
-        <p>Self-paced platform with lifetime access. The Closer Certification includes 50 in-depth modules and five levels of advanced AI roleplay — all designed to ensure you're ready before your first interview.</p>
+        <p>Training is delivered through a comprehensive online platform with lifetime access. The Setter Certification includes 30 core modules and three levels of AI-based roleplay. The Closer Certification includes 50 in-depth modules and five levels of advanced AI roleplay. All training is self-paced and designed to ensure job readiness prior to interviews.</p>
       </div>
     </div>
 
@@ -1799,7 +1807,7 @@
       <div class="cur-icon">🏆</div>
       <div class="cur-content">
         <h4>Certification and One-on-One Assessment</h4>
-        <p>Upon completion of coursework and a one-on-one assessment, you graduate as a Certified High Ticket Closer. This credential signals to hiring companies that you are trained, prepared, and ready to perform.</p>
+        <p>This is a formal certification program. Upon completion of coursework and a one-on-one assessment, students graduate as a Certified High Ticket Setter or Certified High Ticket Closer. This certification signals to hiring companies that the individual is trained, prepared, and ready to perform.</p>
       </div>
     </div>
 
@@ -1807,7 +1815,7 @@
       <div class="cur-icon">🤝</div>
       <div class="cur-content">
         <h4>Interview Preparation and Job Placement Support</h4>
-        <p>Includes resume optimization, interview preparation, and access to our placement system. Most closers are in a role within 30 to 60 days of starting the program.</p>
+        <p>Both tracks include resume optimization, interview preparation, and access to our job placement system. Setter roles are generally easier to place, particularly for individuals without prior sales experience. That said, many Closers with no previous sales background have also been successfully placed. Placement is based on performance, coachability, and execution.</p>
       </div>
     </div>
 
@@ -1815,7 +1823,7 @@
       <div class="cur-icon">🌐</div>
       <div class="cur-content">
         <h4>Professional Community and Job Network</h4>
-        <p>Lifetime access to a private professional community connecting you with hiring companies, experienced sales professionals, and ongoing peer support.</p>
+        <p>Students receive lifetime access to a private professional community and job network, connecting them with hiring companies, experienced sales professionals, and ongoing peer support.</p>
       </div>
     </div>
 
@@ -1823,7 +1831,7 @@
       <div class="cur-icon">🛠</div>
       <div class="cur-content">
         <h4>Execution and Performance Tools</h4>
-        <p>Proven tools and frameworks for goal setting, KPI tracking, and daily execution to support long-term consistency and income growth.</p>
+        <p>The program includes proven tools and frameworks for goal setting, KPI tracking, CRM organization, and daily execution to support long-term consistency and success.</p>
       </div>
     </div>
 
@@ -1831,7 +1839,7 @@
       <div class="cur-icon">📄</div>
       <div class="cur-content">
         <h4>Professional Resume and LinkedIn Optimization</h4>
-        <p>Templates and profile optimization tailored specifically to high-ticket sales roles.</p>
+        <p>Each student receives professionally designed resume templates and LinkedIn profile optimization tailored specifically to high-ticket sales roles.</p>
       </div>
     </div>
 
@@ -1839,7 +1847,7 @@
       <div class="cur-icon">📅</div>
       <div class="cur-content">
         <h4>Personalized 30-Day Action Plan</h4>
-        <p>You'll work directly with our team to build a plan focused on getting placed and transitioning smoothly into your role.</p>
+        <p>Students work directly with the team to develop a personalized 30-day action plan focused on securing placement and transitioning smoothly into their role.</p>
       </div>
     </div>
 
@@ -1847,21 +1855,24 @@
       <div class="cur-icon">📈</div>
       <div class="cur-content">
         <h4>Post-Hire Performance Support</h4>
-        <p>Continued call review and performance feedback for the first 90 days after placement to make sure you're off to a strong start.</p>
+        <p>Once placed, students receive continued call review and performance feedback for the first 90 days to ensure strong execution and early success.</p>
       </div>
     </div>
 
     <div class="cur-item" style="border-bottom:none;">
       <div class="cur-icon">🤖</div>
       <div class="cur-content">
-        <h4>AI Roleplay and Real-Time Coaching Support</h4>
-        <p>Unlimited AI roleplay to practice before speaking with real prospects, plus a 24/7 AI sales coach to help with call flow, objection handling, and confidence — including during live calls.</p>
+        <h4>AI Role-play and Real Time Coaching Support</h4>
+        <p>Unlimited AI role-play allows students to practice sales conversations in a controlled environment prior to speaking with real prospects. Students also receive access to an AI sales coach available 24/7 to assist with call flow, objection handling, and confidence, including during live calls.</p>
       </div>
     </div>
 
   </div>
 
-  <!-- INVESTMENT -->
+
+
+  <!-- INVESTMENT -->  <!-- INVESTMENT -->
+<!-- INVESTMENT -->
   <div class="sec-head">
     <div class="sec-num">2</div>
     <h3>Program Investment</h3>
@@ -1890,7 +1901,7 @@
               <ul class="terms-clarify-list">
                 <li><strong>Lifetime access</strong> to your program’s course modules.</li>
                 <li><strong>Live group coaching</strong> (Tues 12:00 PM EST · Wed 5:00 PM EST) — lifetime access.</li>
-                <li><strong>Facebook Mastermind</strong> — lifetime access to the closers community.</li>
+                <li><strong>Facebook Mastermind</strong> — lifetime access to the closers and setters communities.</li>
                 <li><strong>1-on-1 coaching</strong> included — schedule within <strong>3 months</strong> of your start unless HTSA approves an extension.</li>
                 <li><strong>AI role-play</strong> while you’re in the academy; optional <strong>$35/month</strong> after placement if you keep it.</li>
               </ul>
@@ -1938,10 +1949,10 @@
     </div>
   </div>
 
-  <p id="invest-pay-zone-hint" class="invest-pay-zone-hint">Payment and financing buttons stay locked until your Terms agreement has been recorded above.</p>
+    <p id="invest-pay-zone-hint" class="invest-pay-zone-hint">Payment and financing buttons stay locked until your Terms agreement has been recorded above.</p>
 
   <div class="invest-wrap invest-pay-zone invest-pay-zone--locked" id="invest-pay-zone">
-    <div class="invest-box">
+      <div class="invest-box">
       <div class="invest-program-label">Certified High Ticket Closer Program</div>
       <div class="invest-program-desc">All services described above — training platform, AI roleplay, live coaching with Chad, certification, job placement, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
 
@@ -1988,7 +1999,7 @@
       <hr class="invest-zone-rule" aria-hidden="true">
 
       <div class="invest-section-kicker invest-section-kicker--accent">Third-Party Financing</div>
-      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">The options above are HTSA in-house payment options. The option below is third-party financing through ClarityPay for pre-qualification.</div>
+      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">The options above are HTSA in-house payment options. ClarityPay is listed below for completeness — <strong style="color:#ff9c7a;">for Bella, Clarity is likely not a fit without credit history</strong>, so prioritize Closer 4-pay ($1,750) or Setter 3-pay ($1,050) instead.</div>
 
       <div class="invest-grid">
 
@@ -1997,7 +2008,7 @@
           <div class="invest-option-head">
             <div>
               <div class="invest-option-title">ClarityPay — 12 months at 0% APR</div>
-              <div class="invest-option-sub">$600/month × 12 months — $7,200 total program investment. Need <strong>620+ credit score</strong> to qualify.</div>
+              <div class="invest-option-sub">$600/month × 12 months — $7,200 total program investment. Need <strong>620+ credit score</strong> to qualify. <strong style="color:#ff9c7a;">Likely not available without credit history.</strong></div>
             </div>
             <div class="invest-price-stack">
               <div class="invest-price-big">$600/month</div>
@@ -2025,9 +2036,97 @@
 
       <div class="invest-note" style="color:#ff9c7a;"><strong>★ Soft pre-qualification only.</strong> Once you complete one of the in-house payment options above or get approved through ClarityPay, text CJ right away so access can be granted.</div>
     </div>
+
+      <hr class="invest-zone-rule" aria-hidden="true">
+
+      <div class="invest-box">
+      <div class="invest-program-label">Certified High Ticket Setter Program</div>
+      <div class="invest-program-desc">All services described in the Setter curriculum — training platform, AI roleplay, certification, placement support, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
+
+      <div class="invest-section-kicker invest-section-kicker--accent">HTSA In-House Payment Options</div>
+      <p class="invest-access-hint">Either option includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
+      <div class="invest-grid">
+
+        <div class="invest-option-block">
+          <div class="invest-badge invest-badge--option">Option 1</div>
+          <div class="invest-option-head invest-option-head--pay">
+            <div>
+              <div class="invest-option-title">Paid in Full</div>
+              <div class="invest-option-sub">One payment — best value (save $150 vs. the 3-pay plan).</div>
+            </div>
+            <div class="invest-price-stack">
+              <div class="invest-price-big">$3,000</div>
+              <div class="invest-price-mini">One payment</div>
+            </div>
+          </div>
+          <div class="invest-option-actions invest-option-actions--pay">
+            <a href="https://whop.com/checkout/plan_qzvfCCb1rIO0L?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $3,000 →</a>
+          </div>
+        </div>
+
+        <div class="invest-option-block">
+          <div class="invest-badge invest-badge--popular">Recommended for Bella</div>
+          <div class="invest-option-head invest-option-head--pay">
+            <div>
+              <div class="invest-option-title">3 Monthly Payments</div>
+              <div class="invest-option-sub">3 payments of $1,050 — First Payment Due Today. Fastest efficient entry into HTS — then return for Closer later at the same structure (~$6,300 total vs $7,000 Closer 4-pay).</div>
+            </div>
+            <div class="invest-price-stack">
+              <div class="invest-price-big">$1,050</div>
+              <div class="invest-price-mini">$3,150 total · 3 installments</div>
+            </div>
+          </div>
+          <div class="invest-option-actions invest-option-actions--pay">
+            <a href="https://whop.com/checkout/plan_oK3AajTKp0mXK?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose 3-Pay — Pay $1,050 Today →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="invest-zone-rule" aria-hidden="true">
+
+      <div class="invest-section-kicker invest-section-kicker--accent">Third-Party Financing</div>
+      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">In-house Setter options are above. ClarityPay is below for completeness — <strong style="color:#ff9c7a;">likely not a fit without credit history</strong>. Prefer Setter 3-pay ($1,050) or Closer 4-pay ($1,750).</div>
+
+      <div class="invest-grid">
+
+        <div class="invest-option-block financing">
+          <div class="invest-badge financing">ClarityPay</div>
+          <div class="invest-option-head">
+            <div>
+              <div class="invest-option-title">ClarityPay</div>
+              <div class="invest-option-sub">Monthly payments with no early payoff penalty when approved. <strong style="color:#ff9c7a;">Likely not available without credit history.</strong></div>
+            </div>
+            <div class="invest-price-stack">
+              <div class="invest-price-big" style="font-size:22px;">Instant</div>
+              <div class="invest-price-mini">soft pre-qualify</div>
+            </div>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Typical Credit Profile</span>
+            <span class="invest-value">Around 580+ credit</span>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Enrollment Timing</span>
+            <span class="invest-value">Enroll same day if approved</span>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Payment Structure</span>
+            <span class="invest-value">Monthly payments • no early payoff penalty</span>
+          </div>
+          <div class="invest-option-actions">
+            <a href="https://whop.com/checkout/plan_z5iuUhSgm9seH" class="invest-btn secondary" target="_blank" rel="noopener noreferrer">Pre-Qualify with ClarityPay →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="invest-note" style="color:#ff9c7a;"><strong>★ Soft pre-qualification only.</strong> Once you complete one of the Setter in-house payment options above or get approved through ClarityPay, text CJ right away so Setter access can be granted.</div>
+    </div>
   </div>
 
-  <!-- NEXT STEPS -->
+
+    <!-- NEXT STEPS -->
   <div class="sec-head">
     <div class="sec-num">3</div>
     <h3>Next Steps After Payment</h3>
@@ -2038,8 +2137,8 @@
     <div class="step-item">
       <div class="step-num">1</div>
       <div class="step-content">
-        <h4>Step 1 — Choose Your Payment or Check Pre-Qualification</h4>
-        <p>Bella, review the payment and financing options in Program Investment above, then select what you want — <strong>$6,000</strong> paid in full, the <strong>$1,750 × 4-pay</strong> plan ($7,000 total), or <strong>ClarityPay</strong> at <strong>$600/month × 12 months</strong> (0% APR, $7,200 total — 620+ credit score to qualify). Once your payment clears or your financing is approved, move to Step 2 below.</p>
+        <h4>Step 1 — Choose Your Payment</h4>
+        <p>Bella, review Program Investment above. <strong>ClarityPay is likely not going to work without credit history</strong> — so focus on real options: <strong>Closer 4-pay ($1,750 × 4 / $7,000 total)</strong>, <strong>Closer $6,000 PIF</strong>, or the recommended path — <strong>Setter 3-pay ($1,050 × 3 / $3,150 total)</strong>, then return later for Closer at that same structure (~<strong>$6,300 total</strong> across both, better than $7,000 Closer 4-pay alone). Setter also has <strong>$3,000 PIF</strong> if you want it clean. Once your payment clears, move to Step 2 below.</p>
       </div>
     </div>
 
