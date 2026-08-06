@@ -1,0 +1,13 @@
+---
+description: No dashes in CJ enrollment emails and texts
+alwaysApply: true
+---
+
+# No dashes in client email/text copy
+
+When writing enrollment emails, texts, or similar client-facing messages for CJ:
+
+- Do **not** use em dashes (—), en dashes (–), or hyphen dashes as punctuation between clauses.
+- Prefer commas, periods, or short separate sentences instead.
+- Do **not** use dash bullet lists in emails/texts. Use plain line breaks or numbered lists (1. 2. 3.) if a list is needed.
+- Payment options can still use amounts like `$6,000` and `×` for multipliers. Avoid stylistic dashes in prose.
