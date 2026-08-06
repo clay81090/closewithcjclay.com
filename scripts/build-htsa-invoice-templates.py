@@ -209,7 +209,7 @@ def apply_canonical_enrollment_copy(html: str) -> str:
     )
     html = re.sub(
         r"posted and \d+\+ members support each other",
-        "posted and 620+ members support each other",
+        "posted and 680+ members support each other",
         html,
     )
     return html
