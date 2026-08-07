@@ -195,11 +195,6 @@
       "body": "CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I'm so grateful. I landed my dream role 65 days in, and you played a real part in that."
     },
     {
-      "name": "Kate Robinson",
-      "context": "text message",
-      "body": "CJ, I'm SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you're doing!"
-    },
-    {
       "name": "Brittany Levine",
       "context": "text message",
       "body": "CJ, thank you so much for taking the time to read through my answers before we ever got on a call. That meant a lot. Hearing that you actually read my stuff made me want to work with you specifically, not someone else. I appreciate the kind words more than you know, and I'm really excited to get started with you."
@@ -218,6 +213,11 @@
       "name": "HTSA Member",
       "context": "unprompted review",
       "body": "CJ, thank you for getting me signed up and for sticking with me while we built a plan to join. We worked on it for three months before I came in, and you never made me feel rushed. You showed me from the start that these are really great people, every single one of them."
+    },
+    {
+      "name": "Kate Robinson",
+      "context": "text message",
+      "body": "CJ, I'm SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you're doing!"
     }
   ],
   "footer_note": "High Ticket Sales Academy"
