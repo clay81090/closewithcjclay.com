@@ -136,6 +136,35 @@
 
   .hero-band p strong { color: var(--text); font-weight: 600; }
 
+  /* Resource page — warm letter-style intro spacing */
+  .hero-band--letter {
+    padding: 28px 36px 30px;
+  }
+  .hero-band--letter p {
+    margin: 0;
+    line-height: 1.78;
+    max-width: 100%;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .hero-band--letter p + p {
+    margin-top: 18px;
+  }
+  .hero-band--letter p strong { color: var(--navy); font-weight: 600; }
+  .hero-band--letter p em { font-style: italic; color: var(--muted); }
+
+  .invest-btn--confirmed {
+    background: var(--navy) !important;
+    cursor: default;
+    pointer-events: none;
+  }
+  .rl-confirm-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+    line-height: 1.55;
+  }
+
   .billing-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -545,6 +574,11 @@
     padding: 12px 20px;
     border-radius: 8px;
     text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1.3;
+  }
     white-space: nowrap;
     box-shadow: 0 10px 22px rgba(0,201,122,0.15);
   }
@@ -1788,11 +1822,11 @@
   <div class="accent-bar"></div>
 
   <!-- EMAIL INTRO -->
-  <div class="hero-band">
+  <div class="hero-band hero-band--letter">
     <p>You made a decision and I'm not going to fight you on it. Deciding is the hard part — most people in your seat stall for six months and do nothing.</p>
     <p>But there's a reason I'm writing anyway, and it isn't the sale. On your call with Richard, you told him what actually worried you: <strong>getting scammed, or not getting what you were promised.</strong> And he told you straight — <em>"there are bad apples out there, if you're investing any money, be wary of that."</em> He was right. And right now you're about to hand money to a company you found through an ad, without asking the questions that separate the real ones from the rest. That's the part I can't sit on.</p>
     <p>You also said something else that stuck with me. You'd sat through <strong>three webinars</strong> and they <em>"basically talk about the same things."</em> You're right, and that's exactly the problem. Everyone's pitch is identical. Training, community, coaching, income. It sounds the same because it <strong>is</strong> the same — until the money's gone and you find out what you actually bought.</p>
-    <p style="margin-top:10px;">So here are the questions that tell them apart. Ask whoever you chose. If they answer these well, you picked a good one and I'll genuinely be happy for you.</p>
+    <p>So here are the questions that tell them apart. Ask whoever you chose. If they answer these well, you picked a good one and I'll genuinely be happy for you.</p>
   </div>
 
   <!-- BILLING -->
@@ -1813,7 +1847,7 @@
         HTSA Career Coach<br>
         (616) 612-1735<br>
         <a href="mailto:cj@highticketsalesacademy.com">cj@highticketsalesacademy.com</a><br>
-        <a href="https://meetings.hubspot.com/charles660/cj" target="_blank" rel="noopener noreferrer">Book a call with CJ</a>
+        Call scheduled: 2pm EST
       </div>
     </div>
   </div>
@@ -1874,8 +1908,11 @@
     <h3>What I&#x27;m actually asking for</h3>
   </div>
   <div class="rl-ask-wrap">
-    <p>Twenty to thirty minutes. That's it.</p><p>Here's the honest math on that, and there's no version where it costs you:</p><p><strong>If you chose well</strong> — thirty minutes confirms it. You start with more confidence than you have right now, you know exactly what to hold them to, and you know who to call if it ever stops matching what you were promised.</p><p><strong>If you didn't</strong> — you're still inside your 72 hours. You'd have saved yourself thousands of dollars and six months of your life.</p><p><strong>Thirty minutes can't cost you more than it saves you.</strong> That's the whole pitch.</p><p>And one more thing that's on me, not you: your call with Richard was Tuesday. Mine wasn't until Friday. That's three days where you had the pitch and none of the answers. If we'd talked Tuesday you'd have had all of this before you had to decide anything. That gap is our fault.</p><p>Whatever you decide — please ask them those seven. That's the part I actually care about.</p>
-    <p style="margin-top:16px;"><a href="https://meetings.hubspot.com/charles660/cj" class="invest-btn" target="_blank" rel="noopener noreferrer">Book 20 minutes with CJ</a></p>
+    <p>We're already booked for <strong>2pm EST</strong> — thirty minutes. If you can make it, tap confirm below so I know you saw this page.</p><p>Here's the honest math on that call, and there's no version where it costs you:</p><p><strong>If you chose well</strong> — thirty minutes confirms it. You start with more confidence than you have right now, you know exactly what to hold them to, and you know who to call if it ever stops matching what you were promised.</p><p><strong>If you didn't</strong> — you're still inside your 72 hours. You'd have saved yourself thousands of dollars and six months of your life.</p><p><strong>Thirty minutes can't cost you more than it saves you.</strong> That's the whole pitch.</p><p>And one more thing that's on me, not you: your call with Richard was Tuesday. Mine wasn't until Friday. That's three days where you had the pitch and none of the answers. If we'd talked Tuesday you'd have had all of this before you had to decide anything. That gap is our fault.</p><p>Whatever you decide — please ask them those seven. That's the part I actually care about.</p>
+    <p style="margin-top:16px;">
+      <button type="button" id="rl-confirm-call" class="invest-btn">Confirm 2pm Call (30 minutes)</button>
+    </p>
+    <p id="rl-confirm-note" class="rl-confirm-note">One tap — no forms. Just lets me know you saw this.</p>
   </div>
 
   <!-- RESOURCES -->
@@ -2233,13 +2270,65 @@ So far it's been nothing but positive, and I feel confident about the move. If y
 </div>
 <script>
 (function(){
-  var slug="Tf8lcoiY3Ad9tCouxMZsBx1X";
-  if(sessionStorage.getItem('htsa_rv_'+slug)) return;
-  sessionStorage.setItem('htsa_rv_'+slug,'1');
-  fetch('/r/_manifest.json?v='+Date.now()).then(function(r){return r.json();}).then(function(m){
-    if(!m.links||!m.links[slug]) return;
-    m.links[slug]._local_viewed_at=new Date().toISOString();
-  }).catch(function(){});
+  var GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
+  var slug = "Tf8lcoiY3Ad9tCouxMZsBx1X";
+  var confirmLabel = "Confirm 2pm Call (30 minutes)";
+  var scheduledNote = "We're already on the calendar for 2pm EST today.";
+  var meta = {
+    fullName: "Tammy Berry",
+    email: "tammyberry100@yahoo.com",
+    phone: "+17573242539",
+    clientSlug: "tammy-berry",
+    resourceSlug: slug
+  };
+
+  function canonicalUrl() {
+    try {
+      var u = new URL(window.location.href);
+      return u.origin + u.pathname;
+    } catch (e) { return window.location.href.split('#')[0]; }
+  }
+
+  function postEvent(event, extra) {
+    var body = Object.assign({
+      action: 'recordResourcePageEvent',
+      event: event,
+      enrollmentPageUrl: canonicalUrl(),
+      userAgent: navigator.userAgent || '',
+      timestamp: new Date().toISOString()
+    }, meta, extra || {});
+    var form = new URLSearchParams();
+    form.set('payload', JSON.stringify(body));
+    fetch(GAS_ENDPOINT, { method: 'POST', mode: 'no-cors', body: form, cache: 'no-store' }).catch(function(){});
+  }
+
+  if (!sessionStorage.getItem('htsa_rl_open_'+slug)) {
+    sessionStorage.setItem('htsa_rl_open_'+slug, '1');
+    postEvent('page_open');
+  }
+
+  var confirmBtn = document.getElementById('rl-confirm-call');
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', function() {
+      if (confirmBtn.getAttribute('data-confirmed') === '1') return;
+      confirmBtn.setAttribute('data-confirmed', '1');
+      confirmBtn.textContent = 'Confirmed — see you at 2pm EST ✓';
+      confirmBtn.classList.add('invest-btn--confirmed');
+      var note = document.getElementById('rl-confirm-note');
+      if (note) note.textContent = 'Thank you, Tammy. I got it — see you soon.';
+      postEvent('call_confirm', { scheduledCall: scheduledNote });
+    });
+  }
+
+  document.querySelectorAll('.cj-resource-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var titleEl = card.querySelector('.cj-resource-card-title');
+      postEvent('link_click', {
+        linkLabel: titleEl ? titleEl.textContent.trim() : '',
+        linkUrl: card.getAttribute('href') || ''
+      });
+    });
+  });
 })();
 </script>
 </body>
