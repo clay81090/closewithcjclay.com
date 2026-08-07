@@ -231,6 +231,85 @@ def render_resources_html(first_name: str) -> str:
   </div>"""
 
 
+GAS_TRACKING_ENDPOINT = (
+    "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec"
+)
+
+
+def resource_tracking_script(slug: str, data: dict) -> str:
+    """Log page opens, confirm clicks, and resource link clicks to Google Sheets via Apps Script."""
+    prospect_name = data.get("prospect_name", "")
+    email = data.get("email", "")
+    phone = data.get("phone_e164", "")
+    prospect_id = data.get("prospect_id", "")
+    confirm_label = data.get("confirm_call_label", "Confirm 2pm Call (30 minutes)")
+    scheduled = data.get("scheduled_call_note", "2pm EST")
+
+    return f"""<script>
+(function(){{
+  var GAS_ENDPOINT = {json.dumps(GAS_TRACKING_ENDPOINT)};
+  var slug = {json.dumps(slug)};
+  var confirmLabel = {json.dumps(confirm_label)};
+  var scheduledNote = {json.dumps(scheduled)};
+  var meta = {{
+    fullName: {json.dumps(prospect_name)},
+    email: {json.dumps(email)},
+    phone: {json.dumps(phone)},
+    clientSlug: {json.dumps(prospect_id)},
+    resourceSlug: slug
+  }};
+
+  function canonicalUrl() {{
+    try {{
+      var u = new URL(window.location.href);
+      return u.origin + u.pathname;
+    }} catch (e) {{ return window.location.href.split('#')[0]; }}
+  }}
+
+  function postEvent(event, extra) {{
+    var body = Object.assign({{
+      action: 'recordResourcePageEvent',
+      event: event,
+      enrollmentPageUrl: canonicalUrl(),
+      userAgent: navigator.userAgent || '',
+      timestamp: new Date().toISOString()
+    }}, meta, extra || {{}});
+    var form = new URLSearchParams();
+    form.set('payload', JSON.stringify(body));
+    fetch(GAS_ENDPOINT, {{ method: 'POST', mode: 'no-cors', body: form, cache: 'no-store' }}).catch(function(){{}});
+  }}
+
+  if (!sessionStorage.getItem('htsa_rl_open_'+slug)) {{
+    sessionStorage.setItem('htsa_rl_open_'+slug, '1');
+    postEvent('page_open');
+  }}
+
+  var confirmBtn = document.getElementById('rl-confirm-call');
+  if (confirmBtn) {{
+    confirmBtn.addEventListener('click', function() {{
+      if (confirmBtn.getAttribute('data-confirmed') === '1') return;
+      confirmBtn.setAttribute('data-confirmed', '1');
+      confirmBtn.textContent = 'Confirmed — see you at 2pm EST ✓';
+      confirmBtn.classList.add('invest-btn--confirmed');
+      var note = document.getElementById('rl-confirm-note');
+      if (note) note.textContent = 'Thank you, Tammy. I got it — see you soon.';
+      postEvent('call_confirm', {{ scheduledCall: scheduledNote }});
+    }});
+  }}
+
+  document.querySelectorAll('.cj-resource-card').forEach(function(card) {{
+    card.addEventListener('click', function() {{
+      var titleEl = card.querySelector('.cj-resource-card-title');
+      postEvent('link_click', {{
+        linkLabel: titleEl ? titleEl.textContent.trim() : '',
+        linkUrl: card.getAttribute('href') || ''
+      }});
+    }});
+  }});
+}})();
+</script>"""
+
+
 def tracking_script(slug: str) -> str:
     token = os.environ.get("RESOURCE_LINK_TRACK_TOKEN", "").strip()
     if not token:
@@ -333,13 +412,15 @@ def render_active_page(slug: str, data: dict) -> str:
     calendar_url = escape(data.get("calendar_url", "https://meetings.hubspot.com/charles660/cj"))
     ask_heading = escape(data.get("ask_heading", "What I'm asking for"))
     ask_body = data.get("ask_body_html", "")
+    confirm_label = escape(data.get("confirm_call_label", "Confirm 2pm Call (30 minutes)"))
+    scheduled_note = escape(data.get("scheduled_call_note", "2pm EST"))
     gate_html = gate_script(data.get("first_name", "Friend"), data.get("first_name_gate", False))
 
     opener_parts = []
     for p in data.get("opener_paragraphs", []):
         opener_parts.append(f"<p>{p}</p>")
     if data.get("questions_intro"):
-        opener_parts.append(f'<p style="margin-top:10px;">{data["questions_intro"]}</p>')
+        opener_parts.append(f"<p>{data['questions_intro']}</p>")
     opener_html = "\n    ".join(opener_parts)
 
     ref_strip = enrollment_snippet("ref-strip-snippet.html").replace(
@@ -386,7 +467,7 @@ def render_active_page(slug: str, data: dict) -> str:
   <div class="accent-bar"></div>
 
   <!-- EMAIL INTRO -->
-  <div class="hero-band">
+  <div class="hero-band hero-band--letter">
     {opener_html}
   </div>
 
@@ -408,7 +489,7 @@ def render_active_page(slug: str, data: dict) -> str:
         HTSA Career Coach<br>
         (616) 612-1735<br>
         <a href="mailto:cj@highticketsalesacademy.com">cj@highticketsalesacademy.com</a><br>
-        <a href="{calendar_url}" target="_blank" rel="noopener noreferrer">Book a call with CJ</a>
+        Call scheduled: 2pm EST
       </div>
     </div>
   </div>
@@ -429,7 +510,10 @@ def render_active_page(slug: str, data: dict) -> str:
   </div>
   <div class="rl-ask-wrap">
     {ask_body}
-    <p style="margin-top:16px;"><a href="{calendar_url}" class="invest-btn" target="_blank" rel="noopener noreferrer">Book 20 minutes with CJ</a></p>
+    <p style="margin-top:16px;">
+      <button type="button" id="rl-confirm-call" class="invest-btn">{confirm_label}</button>
+    </p>
+    <p id="rl-confirm-note" class="rl-confirm-note">One tap — no forms. Just lets me know you saw this.</p>
   </div>
 
   <!-- RESOURCES -->
@@ -444,7 +528,7 @@ def render_active_page(slug: str, data: dict) -> str:
   {footer_html}
 
 </div>
-{tracking_script(slug)}
+{resource_tracking_script(slug, data)}
 </body>
 </html>"""
 

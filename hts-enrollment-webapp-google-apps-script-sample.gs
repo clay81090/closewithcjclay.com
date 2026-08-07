@@ -70,6 +70,10 @@ function routeEnrollmentAction_(payload) {
       appendEnrollmentRow_('simulated_payment', payload);
       sendPracticeReceipts_(payload);
       break;
+    case 'recordResourcePageEvent':
+      appendEnrollmentRow_('resource_' + String(payload.event || 'unknown'), payload);
+      sendResourcePageNotification_(payload);
+      break;
     default:
       appendEnrollmentRow_('legacy_unknown', payload);
   }
@@ -127,6 +131,52 @@ function sendPracticeReceipts_(payload) {
       body: body
     });
   }
+}
+
+/**
+ * Email CJ when a private resource page is opened or a scheduled call is confirmed.
+ * Set NOTIFY_CJ_EMAIL script property to override default cj@highticketsalesacademy.com
+ */
+function sendResourcePageNotification_(payload) {
+  var event = String(payload.event || '');
+  if (event !== 'page_open' && event !== 'call_confirm') {
+    return;
+  }
+
+  var props = PropertiesService.getScriptProperties();
+  var to = props.getProperty('NOTIFY_CJ_EMAIL') || 'cj@highticketsalesacademy.com';
+  var name = String(payload.fullName || 'Prospect');
+  var slug = String(payload.clientSlug || payload.resourceSlug || '');
+  var url = String(payload.enrollmentPageUrl || '');
+  var subject;
+  var body;
+
+  if (event === 'call_confirm') {
+    subject = '[HTSA] ' + name + ' confirmed call';
+    body = Utilities.formatString(
+      '%s confirmed the scheduled call on their resource page.\n\nScheduled: %s\nPage: %s\nSlug: %s\nEmail: %s\nPhone: %s\nTime: %s\n',
+      name,
+      String(payload.scheduledCall || '2pm EST'),
+      url,
+      slug,
+      String(payload.email || ''),
+      String(payload.phone || ''),
+      String(payload.timestamp || new Date().toISOString())
+    );
+  } else {
+    subject = '[HTSA] ' + name + ' opened resource page';
+    body = Utilities.formatString(
+      '%s opened their private resource page.\n\nPage: %s\nSlug: %s\nEmail: %s\nPhone: %s\nTime: %s\n',
+      name,
+      url,
+      slug,
+      String(payload.email || ''),
+      String(payload.phone || ''),
+      String(payload.timestamp || new Date().toISOString())
+    );
+  }
+
+  MailApp.sendEmail({ to: to, subject: subject, body: body });
 }
 
 function respondJson_(obj) {

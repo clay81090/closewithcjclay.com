@@ -8,6 +8,8 @@
   "prepared_date": "Aug 7, 2026",
   "first_name_gate": false,
   "calendar_url": "https://meetings.hubspot.com/charles660/cj",
+  "confirm_call_label": "Confirm 2pm Call (30 minutes)",
+  "scheduled_call_note": "We're already on the calendar for 2pm EST today.",
   "opener_paragraphs": [
     "You made a decision and I'm not going to fight you on it. Deciding is the hard part — most people in your seat stall for six months and do nothing.",
     "But there's a reason I'm writing anyway, and it isn't the sale. On your call with Richard, you told him what actually worried you: <strong>getting scammed, or not getting what you were promised.</strong> And he told you straight — <em>\"there are bad apples out there, if you're investing any money, be wary of that.\"</em> He was right. And right now you're about to hand money to a company you found through an ad, without asking the questions that separate the real ones from the rest. That's the part I can't sit on.",
@@ -116,6 +118,6 @@
     }
   ],
   "ask_heading": "What I'm actually asking for",
-  "ask_body_html": "<p>Twenty to thirty minutes. That's it.</p><p>Here's the honest math on that, and there's no version where it costs you:</p><p><strong>If you chose well</strong> — thirty minutes confirms it. You start with more confidence than you have right now, you know exactly what to hold them to, and you know who to call if it ever stops matching what you were promised.</p><p><strong>If you didn't</strong> — you're still inside your 72 hours. You'd have saved yourself thousands of dollars and six months of your life.</p><p><strong>Thirty minutes can't cost you more than it saves you.</strong> That's the whole pitch.</p><p>And one more thing that's on me, not you: your call with Richard was Tuesday. Mine wasn't until Friday. That's three days where you had the pitch and none of the answers. If we'd talked Tuesday you'd have had all of this before you had to decide anything. That gap is our fault.</p><p>Whatever you decide — please ask them those seven. That's the part I actually care about.</p>",
+  "ask_body_html": "<p>We're already booked for <strong>2pm EST</strong> — thirty minutes. If you can make it, tap confirm below so I know you saw this page.</p><p>Here's the honest math on that call, and there's no version where it costs you:</p><p><strong>If you chose well</strong> — thirty minutes confirms it. You start with more confidence than you have right now, you know exactly what to hold them to, and you know who to call if it ever stops matching what you were promised.</p><p><strong>If you didn't</strong> — you're still inside your 72 hours. You'd have saved yourself thousands of dollars and six months of your life.</p><p><strong>Thirty minutes can't cost you more than it saves you.</strong> That's the whole pitch.</p><p>And one more thing that's on me, not you: your call with Richard was Tuesday. Mine wasn't until Friday. That's three days where you had the pitch and none of the answers. If we'd talked Tuesday you'd have had all of this before you had to decide anything. That gap is our fault.</p><p>Whatever you decide — please ask them those seven. That's the part I actually care about.</p>",
   "footer_note": "High Ticket Sales Academy"
 }
