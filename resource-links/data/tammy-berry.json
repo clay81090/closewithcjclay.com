@@ -57,7 +57,8 @@
         "Who do you practice with — <strong>other brand-new people</strong>, or something real?",
         "How do you know when you're actually ready?"
       ],
-      "ours_html": "<strong>Ours:</strong> you practice on a <strong>real $12,500 offer</strong>, running full calls as if you were already their closer — and you're graded on every call, every category. You can build your own offer in it too. There's an AI roleplay system with five levels that get progressively harder, so you've already met the difficult buyers and the ugly objections before you meet a real one.<br><br>The point is that you <strong>produce in week one</strong> — instead of taking a month to find your feet and getting cut for not producing."
+      "ours_html": "<strong>Ours:</strong> you practice on a <strong>real $12,500 offer</strong>, running full calls as if you were already their closer — graded on every call, every category. Five levels of AI roleplay get progressively harder, so you've met the difficult buyers before you meet a real one. The point: you <strong>produce in week one</strong>, not after a month of finding your feet.",
+      "include_curriculum": true
     },
     {
       "title": "Can you see real proof — and talk to real people?",
@@ -120,6 +121,58 @@
   "ask_heading": "What I'm actually asking for",
   "ask_body_html": "<p>We're already booked for <strong>2pm EST</strong> — thirty minutes. If you can make it, tap confirm below so I know you saw this page.</p><p>Here's the honest math on that call, and there's no version where it costs you:</p><p><strong>If you chose well</strong> — thirty minutes confirms it. You start with more confidence than you have right now, you know exactly what to hold them to, and you know who to call if it ever stops matching what you were promised.</p><p><strong>If you didn't</strong> — you're still inside your 72 hours. You'd have saved yourself thousands of dollars and six months of your life.</p><p><strong>Thirty minutes can't cost you more than it saves you.</strong> That's the whole pitch.</p><p>And one more thing that's on me, not you: your call with Richard was Tuesday. Mine wasn't until Friday. That's three days where you had the pitch and none of the answers. If we'd talked Tuesday you'd have had all of this before you had to decide anything. That gap is our fault.</p><p>Whatever you decide — please ask them those seven. That's the part I actually care about.</p>",
   "personal_reviews_title": "A few of CJ's Personal Reviews",
+  "curriculum_items": [
+    {
+      "icon": "📡",
+      "title": "Live Group Coaching",
+      "desc": "Lifetime access. Tues 12 PM EST & Wed 5 PM EST with Chad, Christian, and guest experts."
+    },
+    {
+      "icon": "🎓",
+      "title": "Online Training Platform",
+      "desc": "Self-paced, lifetime access. 50 in-depth modules plus five levels of AI roleplay."
+    },
+    {
+      "icon": "🏆",
+      "title": "Certification & Assessment",
+      "desc": "One-on-one assessment with Chad. Graduate as a Certified High Ticket Closer."
+    },
+    {
+      "icon": "🤝",
+      "title": "Interview Prep & Placement",
+      "desc": "Resume optimization, interview prep, and one-on-one placement support."
+    },
+    {
+      "icon": "🌐",
+      "title": "Community & Job Network",
+      "desc": "Lifetime private community with hiring companies and peer support."
+    },
+    {
+      "icon": "🛠",
+      "title": "Execution & Performance Tools",
+      "desc": "Frameworks for goal setting, KPI tracking, and daily execution."
+    },
+    {
+      "icon": "📄",
+      "title": "Resume & LinkedIn Optimization",
+      "desc": "Templates and profile optimization built for high-ticket sales roles."
+    },
+    {
+      "icon": "📅",
+      "title": "30-Day Action Plan",
+      "desc": "Personalized plan with our team focused on getting you placed."
+    },
+    {
+      "icon": "📈",
+      "title": "Post-Hire Support",
+      "desc": "Call review and performance feedback for your first 90 days on the job."
+    },
+    {
+      "icon": "🤖",
+      "title": "AI Roleplay & 24/7 Coach",
+      "desc": "Unlimited AI practice plus real-time coaching support, even on live calls."
+    }
+  ],
   "personal_reviews": [
     {
       "name": "Nick Sotirianos",

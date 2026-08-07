@@ -124,7 +124,19 @@ def enrollment_snippet(name: str) -> str:
     return ""
 
 
-def render_questions_html(questions: list) -> str:
+def render_curriculum_compact_html(items: list) -> str:
+    cards = []
+    for item in items:
+        cards.append(
+            f"""<div class="rl-cur-item">
+  <div class="rl-cur-icon">{item["icon"]}</div>
+  <div class="rl-cur-body"><h5>{item["title"]}</h5><p>{item["desc"]}</p></div>
+</div>"""
+        )
+    return f'<div class="rl-curriculum-grid">{"".join(cards)}</div>'
+
+
+def render_questions_html(questions: list, curriculum_items: list | None = None) -> str:
     parts = []
     for i, q in enumerate(questions, 1):
         probes = q.get("probes") or []
@@ -134,12 +146,15 @@ def render_questions_html(questions: list) -> str:
             probe_html = f"<ul>{items}</ul>"
         subtitle = q.get("subtitle", "")
         sub_html = f'<p class="rl-q-sub">{subtitle}</p>' if subtitle else ""
+        ours = q["ours_html"]
+        if q.get("include_curriculum") and curriculum_items:
+            ours += render_curriculum_compact_html(curriculum_items)
         parts.append(
             f"""<div class="rl-q-item">
   <h4>{i}. {q["title"]}</h4>
   {sub_html}
   {probe_html}
-  <div class="rl-q-ours">{q["ours_html"]}</div>
+  <div class="rl-q-ours">{ours}</div>
 </div>"""
         )
     return "\n".join(parts)
@@ -557,7 +572,7 @@ def render_active_page(slug: str, data: dict) -> str:
     <h3>Questions That Tell Them Apart</h3>
   </div>
   <div class="rl-q-wrap">
-{render_questions_html(data.get("questions", []))}
+{render_questions_html(data.get("questions", []), data.get("curriculum_items"))}
   </div>
 
   <!-- ASK -->

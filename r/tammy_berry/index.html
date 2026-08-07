@@ -1901,6 +1901,48 @@
   @media (max-width: 600px) {
     .rl-member-contacts { grid-template-columns: 1fr; }
   }
+
+  /* Compact curriculum grid inside green answer boxes */
+  .rl-curriculum-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 10px;
+    margin-top: 12px;
+  }
+  .rl-cur-item {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(0, 154, 94, 0.18);
+    border-radius: 6px;
+    padding: 9px 10px;
+    min-height: 0;
+  }
+  .rl-cur-icon {
+    font-size: 14px;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+    line-height: 1.2;
+    margin-top: 1px;
+  }
+  .rl-cur-body h5 {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0 0 3px;
+    line-height: 1.3;
+  }
+  .rl-cur-body p {
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.45;
+    margin: 0;
+  }
+  @media (max-width: 640px) {
+    .rl-curriculum-grid { grid-template-columns: 1fr; }
+  }
   .rl-ask-wrap { padding: 24px 36px 28px; border-bottom: 1px solid var(--mid); background: linear-gradient(135deg, #f7f9fc 0%, #edf0f7 100%); }
   .rl-ask-wrap h4 { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--navy); margin: 0 0 12px; }
   .rl-ask-wrap p { font-size: 13px; color: var(--text); line-height: 1.65; margin: 0 0 12px; }
@@ -2006,7 +2048,37 @@
   <h4>4. What does training actually look like?</h4>
   
   <ul><li>Self-paced, or are you locked into 12 weeks?</li><li>Who do you practice with — <strong>other brand-new people</strong>, or something real?</li><li>How do you know when you're actually ready?</li></ul>
-  <div class="rl-q-ours"><strong>Ours:</strong> you practice on a <strong>real $12,500 offer</strong>, running full calls as if you were already their closer — and you're graded on every call, every category. You can build your own offer in it too. There's an AI roleplay system with five levels that get progressively harder, so you've already met the difficult buyers and the ugly objections before you meet a real one.<br><br>The point is that you <strong>produce in week one</strong> — instead of taking a month to find your feet and getting cut for not producing.</div>
+  <div class="rl-q-ours"><strong>Ours:</strong> you practice on a <strong>real $12,500 offer</strong>, running full calls as if you were already their closer — graded on every call, every category. Five levels of AI roleplay get progressively harder, so you've met the difficult buyers before you meet a real one. The point: you <strong>produce in week one</strong>, not after a month of finding your feet.<div class="rl-curriculum-grid"><div class="rl-cur-item">
+  <div class="rl-cur-icon">📡</div>
+  <div class="rl-cur-body"><h5>Live Group Coaching</h5><p>Lifetime access. Tues 12 PM EST & Wed 5 PM EST with Chad, Christian, and guest experts.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">🎓</div>
+  <div class="rl-cur-body"><h5>Online Training Platform</h5><p>Self-paced, lifetime access. 50 in-depth modules plus five levels of AI roleplay.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">🏆</div>
+  <div class="rl-cur-body"><h5>Certification & Assessment</h5><p>One-on-one assessment with Chad. Graduate as a Certified High Ticket Closer.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">🤝</div>
+  <div class="rl-cur-body"><h5>Interview Prep & Placement</h5><p>Resume optimization, interview prep, and one-on-one placement support.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">🌐</div>
+  <div class="rl-cur-body"><h5>Community & Job Network</h5><p>Lifetime private community with hiring companies and peer support.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">🛠</div>
+  <div class="rl-cur-body"><h5>Execution & Performance Tools</h5><p>Frameworks for goal setting, KPI tracking, and daily execution.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">📄</div>
+  <div class="rl-cur-body"><h5>Resume & LinkedIn Optimization</h5><p>Templates and profile optimization built for high-ticket sales roles.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">📅</div>
+  <div class="rl-cur-body"><h5>30-Day Action Plan</h5><p>Personalized plan with our team focused on getting you placed.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">📈</div>
+  <div class="rl-cur-body"><h5>Post-Hire Support</h5><p>Call review and performance feedback for your first 90 days on the job.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">🤖</div>
+  <div class="rl-cur-body"><h5>AI Roleplay & 24/7 Coach</h5><p>Unlimited AI practice plus real-time coaching support, even on live calls.</p></div>
+</div></div></div>
 </div>
 <div class="rl-q-item">
   <h4>5. Can you see real proof — and talk to real people?</h4>
