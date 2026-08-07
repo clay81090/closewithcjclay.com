@@ -38,6 +38,14 @@ ENROLLMENT_SHELL = ROOT / "htsa-enrollment-chad-beldon.html"
 
 EXPIRE_DAYS = 14
 SLUG_MIN_LEN = 16
+CUSTOM_SLUG_RE = re.compile(r"^[a-z0-9_-]{3,40}$")
+
+
+def normalize_custom_slug(raw: str) -> str:
+    slug = raw.strip().lower().replace(" ", "_")
+    if not CUSTOM_SLUG_RE.match(slug):
+        raise SystemExit("Custom slug must be 3–40 chars: lowercase letters, numbers, underscore, hyphen")
+    return slug
 
 
 def utcnow() -> datetime:
@@ -559,9 +567,12 @@ def git_ship(paths: list[str], message: str) -> None:
 def cmd_create(args: argparse.Namespace) -> None:
     data = load_prospect_data(args.prospect_id)
     reg = load_registry()
-    slug = args.slug or gen_slug()
-    if len(slug) < SLUG_MIN_LEN:
-        raise SystemExit(f"Slug must be {SLUG_MIN_LEN}+ chars")
+    if args.slug:
+        slug = normalize_custom_slug(args.slug)
+    else:
+        slug = gen_slug()
+        if len(slug) < SLUG_MIN_LEN:
+            raise SystemExit(f"Auto slug must be {SLUG_MIN_LEN}+ chars")
     if slug in reg.get("links", {}):
         raise SystemExit(f"Slug already exists: {slug}")
 
