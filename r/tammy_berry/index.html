@@ -1943,6 +1943,94 @@
   @media (max-width: 640px) {
     .rl-curriculum-grid { grid-template-columns: 1fr; }
   }
+
+  /* Private page email gate */
+  .email-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: linear-gradient(135deg, var(--navy) 0%, #0d1f38 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .email-gate-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 28px 26px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    text-align: center;
+  }
+  .email-gate-badge {
+    display: inline-block;
+    background: var(--green);
+    color: var(--navy);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+  .email-gate-lead {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .email-gate-sub {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .email-gate-card label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  .email-gate-card input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--mid);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    margin-bottom: 12px;
+  }
+  .email-gate-card input:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(0, 201, 122, 0.15);
+  }
+  .email-gate-card .invest-btn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+  }
+  .email-gate-err {
+    font-size: 12px;
+    color: #c53030;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+  .email-gate-foot {
+    font-size: 10.5px;
+    color: var(--muted);
+    margin-top: 14px;
+    line-height: 1.5;
+  }
   .rl-ask-wrap { padding: 24px 36px 28px; border-bottom: 1px solid var(--mid); background: linear-gradient(135deg, #f7f9fc 0%, #edf0f7 100%); }
   .rl-ask-wrap h4 { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--navy); margin: 0 0 12px; }
   .rl-ask-wrap p { font-size: 13px; color: var(--text); line-height: 1.65; margin: 0 0 12px; }
@@ -1965,7 +2053,49 @@
 </script>
 </head>
 <body>
+<div id="email-gate" class="email-gate">
+  <div class="email-gate-card">
+    <div class="email-gate-badge">Private Page</div>
+    <p class="email-gate-lead">Prepared for Tammy</p>
+    <p class="email-gate-sub">This link is personal. Enter the email address it was sent to and only that address will open it.</p>
+    <label for="email-gate-input">Your email</label>
+    <input id="email-gate-input" type="email" autocomplete="email" inputmode="email" placeholder="you@email.com" />
+    <button type="button" id="email-gate-btn" class="invest-btn">Open my page</button>
+    <p id="email-gate-err" class="email-gate-err" hidden>This page is not available for that email. If someone forwarded this link, it will not work without the original recipient email.</p>
+    <p class="email-gate-foot">Do not share this link. It is intended for Tammy only.</p>
+  </div>
+</div>
+<script>
+(function(){
+  var slug="tammy_berry";
+  var allowed=["tammyberry100@yahoo.com", "cj@highticketsalesacademy.com"];
+  var storageKey="htsa_rl_email_tammy_berry";
+  var gate=document.getElementById('email-gate');
+  var main=document.getElementById('main-content');
+  if(!gate||!main) return;
 
+  function normEmail(v){ return (v||'').trim().toLowerCase(); }
+  function isAllowed(v){ return allowed.indexOf(normEmail(v))!==-1; }
+
+  function unlock(){
+    gate.remove();
+    main.hidden=false;
+    if(window.__htsaRlUnlock) window.__htsaRlUnlock();
+  }
+
+  if(sessionStorage.getItem(storageKey)==='1'){ unlock(); return; }
+
+  main.hidden=true;
+  document.getElementById('email-gate-btn').addEventListener('click',function(){
+    var v=normEmail(document.getElementById('email-gate-input').value);
+    if(isAllowed(v)){ sessionStorage.setItem(storageKey,'1'); unlock(); }
+    else document.getElementById('email-gate-err').hidden=false;
+  });
+  document.getElementById('email-gate-input').addEventListener('keydown',function(e){
+    if(e.key==='Enter') document.getElementById('email-gate-btn').click();
+  });
+})();
+</script>
 <div class="page" id="main-content">
 
   <!-- HEADER -->
@@ -2497,8 +2627,14 @@
 
   if (!sessionStorage.getItem('htsa_rl_open_'+slug)) {
     sessionStorage.setItem('htsa_rl_open_'+slug, '1');
-    postEvent('page_open');
+    if(!document.getElementById('email-gate')) postEvent('page_open');
   }
+
+  window.__htsaRlUnlock=function(){
+    if(sessionStorage.getItem('htsa_rl_open_'+slug)) return;
+    sessionStorage.setItem('htsa_rl_open_'+slug, '1');
+    postEvent('page_open');
+  };
 
   var confirmBtn = document.getElementById('rl-confirm-call');
   if (confirmBtn) {
