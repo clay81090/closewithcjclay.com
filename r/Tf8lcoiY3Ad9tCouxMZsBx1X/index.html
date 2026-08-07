@@ -324,32 +324,7 @@
 </script>
 </head>
 <body>
-<div id="name-gate" class="name-gate">
-  <div class="name-gate-card">
-    <p class="name-gate-lead">This page was prepared for <strong>Tammy</strong>.</p>
-    <label for="gate-input">Enter your first name to continue</label>
-    <input id="gate-input" type="text" autocomplete="given-name" inputmode="text" />
-    <button type="button" id="gate-btn" class="invest-btn">Continue</button>
-    <p id="gate-err" class="name-gate-err" hidden>That doesn't match. If this page wasn't meant for you, please close it.</p>
-  </div>
-</div>
-<script>
-(function(){
-  var expected="tammy";
-  var gate=document.getElementById('name-gate');
-  var main=document.getElementById('main-content');
-  if(!gate||!main) return;
-  main.hidden=true;
-  document.getElementById('gate-btn').addEventListener('click',function(){
-    var v=(document.getElementById('gate-input').value||'').trim().toLowerCase();
-    if(v===expected){ gate.remove(); main.hidden=false; }
-    else document.getElementById('gate-err').hidden=false;
-  });
-  document.getElementById('gate-input').addEventListener('keydown',function(e){
-    if(e.key==='Enter') document.getElementById('gate-btn').click();
-  });
-})();
-</script>
+
 <div class="page" id="main-content">
   <div class="header">
     <div class="logo-wrap">
