@@ -2065,41 +2065,6 @@
     <p class="email-gate-foot">Do not share this link. It is intended for Tammy only.</p>
   </div>
 </div>
-<script>
-(function(){
-  function init(){
-    var slug="tammy_berry";
-    var allowed=["tammyberry100@yahoo.com", "cj@highticketsalesacademy.com"];
-    var storageKey="htsa_rl_email_tammy_berry";
-    var gate=document.getElementById('email-gate');
-    var main=document.getElementById('main-content');
-    if(!gate||!main) return;
-
-    function normEmail(v){ return (v||'').trim().toLowerCase(); }
-    function isAllowed(v){ return allowed.indexOf(normEmail(v))!==-1; }
-
-    function unlock(){
-      gate.remove();
-      main.hidden=false;
-      if(window.__htsaRlUnlock) window.__htsaRlUnlock();
-    }
-
-    if(sessionStorage.getItem(storageKey)==='1'){ unlock(); return; }
-
-    main.hidden=true;
-    document.getElementById('email-gate-btn').addEventListener('click',function(){
-      var v=normEmail(document.getElementById('email-gate-input').value);
-      if(isAllowed(v)){ sessionStorage.setItem(storageKey,'1'); unlock(); }
-      else document.getElementById('email-gate-err').hidden=false;
-    });
-    document.getElementById('email-gate-input').addEventListener('keydown',function(e){
-      if(e.key==='Enter') document.getElementById('email-gate-btn').click();
-    });
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
-  else init();
-})();
-</script>
 <div class="page" id="main-content" hidden>
 
   <!-- HEADER -->
@@ -2595,6 +2560,36 @@
 </script>
 
 </div>
+<script>
+(function(){
+  var allowed=["tammyberry100@yahoo.com", "cj@highticketsalesacademy.com"];
+  var storageKey="htsa_rl_email_tammy_berry";
+  var gate=document.getElementById('email-gate');
+  var main=document.getElementById('main-content');
+  if(!gate||!main) return;
+
+  function normEmail(v){ return (v||'').trim().toLowerCase(); }
+  function isAllowed(v){ return allowed.indexOf(normEmail(v))!==-1; }
+
+  function unlock(){
+    gate.remove();
+    main.hidden=false;
+    if(window.__htsaRlUnlock) window.__htsaRlUnlock();
+  }
+
+  if(sessionStorage.getItem(storageKey)==='1'){ unlock(); return; }
+
+  main.hidden=true;
+  document.getElementById('email-gate-btn').addEventListener('click',function(){
+    var v=normEmail(document.getElementById('email-gate-input').value);
+    if(isAllowed(v)){ sessionStorage.setItem(storageKey,'1'); unlock(); }
+    else document.getElementById('email-gate-err').hidden=false;
+  });
+  document.getElementById('email-gate-input').addEventListener('keydown',function(e){
+    if(e.key==='Enter') document.getElementById('email-gate-btn').click();
+  });
+})();
+</script>
 <script>
 (function(){
   var GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
