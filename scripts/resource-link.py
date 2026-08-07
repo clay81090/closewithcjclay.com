@@ -33,8 +33,8 @@ REGISTRY_PATH = ROOT / "resource-links" / "registry.json"
 MANIFEST_PATH = ROOT / "r" / "_manifest.json"
 R_DIR = ROOT / "r"
 EXPIRED_TEMPLATE = ROOT / "resource-links" / "templates" / "expired.html"
-PAGE_TEMPLATE = ROOT / "resource-links" / "templates" / "page.html"
-LOGO_SNIPPET_PATH = ROOT / "resource-links" / "assets" / "logo-snippet.html"
+ASSETS_DIR = ROOT / "resource-links" / "assets"
+ENROLLMENT_SHELL = ROOT / "htsa-enrollment-chad-beldon.html"
 
 EXPIRE_DAYS = 14
 SLUG_MIN_LEN = 16
@@ -90,14 +90,30 @@ def load_prospect_data(prospect_id: str) -> dict:
 
 
 def logo_html() -> str:
-    if LOGO_SNIPPET_PATH.is_file():
-        return LOGO_SNIPPET_PATH.read_text(encoding="utf-8").strip()
-    return """<div class="logo-wrap">
-        <div>
-          <div class="logo-text">High Ticket<br>Sales Academy</div>
-          <div class="logo-sub">Where Sales Reps Meet Their Forever Career</div>
-        </div>
-      </div>"""
+    snippet = ASSETS_DIR / "logo-snippet.html"
+    if snippet.is_file():
+        return snippet.read_text(encoding="utf-8").strip()
+    if ENROLLMENT_SHELL.is_file():
+        html = ENROLLMENT_SHELL.read_text(encoding="utf-8")
+        m = re.search(r"<div class=\"logo-wrap\">.*?</div>\s*</div>", html, re.DOTALL)
+        if m:
+            return m.group(0)
+    return """<div class="logo-wrap"><div><div class="logo-text">High Ticket<br>Sales Academy</div><div class="logo-sub">Where Sales Reps Meet Their Forever Career</div></div></div>"""
+
+
+def enrollment_css() -> str:
+    path = ASSETS_DIR / "enrollment-styles.css"
+    if path.is_file():
+        return path.read_text(encoding="utf-8")
+    html = ENROLLMENT_SHELL.read_text(encoding="utf-8")
+    return re.search(r"<style>(.*?)</style>", html, re.DOTALL).group(1)
+
+
+def enrollment_snippet(name: str) -> str:
+    path = ASSETS_DIR / name
+    if path.is_file():
+        return path.read_text(encoding="utf-8").strip()
+    return ""
 
 
 def render_questions_html(questions: list) -> str:
@@ -107,54 +123,112 @@ def render_questions_html(questions: list) -> str:
         probe_html = ""
         if probes:
             items = "".join(f"<li>{p}</li>" for p in probes)
-            probe_html = f"<ul class=\"q-probes\">{items}</ul>"
+            probe_html = f"<ul>{items}</ul>"
         subtitle = q.get("subtitle", "")
-        sub_html = f'<p class="q-sub">{subtitle}</p>' if subtitle else ""
+        sub_html = f'<p class="rl-q-sub">{subtitle}</p>' if subtitle else ""
         parts.append(
-            f"""<details class="q-item">
-  <summary><span class="q-num">{i}</span><span class="q-title">{q["title"]}</span></summary>
-  <div class="q-body">
-    {sub_html}
-    {probe_html}
-    <div class="q-ours">{q["ours_html"]}</div>
-  </div>
-</details>"""
-        )
-    return "\n".join(parts)
-
-
-def render_videos_html(videos: list) -> str:
-    parts = []
-    for v in videos:
-        featured = v.get("featured")
-        feat_cls = " video-card--featured" if featured else ""
-        feat_badge = (
-            f'<div class="video-badge">{escape(v.get("featured_label", "Featured"))}</div>'
-            if featured
-            else ""
-        )
-        if v.get("is_link_card"):
-            parts.append(
-                f"""<a class="video-card video-card--link{feat_cls}" href="{escape(v["external_url"])}" target="_blank" rel="noopener noreferrer">
-  {feat_badge}
-  <div class="video-card-title">{escape(v["title"])}</div>
-  <div class="video-card-desc">{v["description"]}</div>
-  <span class="video-link-cta">Open Trustpilot →</span>
-</a>"""
-            )
-            continue
-        yid = v.get("youtube_id")
-        if not yid:
-            continue
-        parts.append(
-            f"""<div class="video-card{feat_cls}">
-  {feat_badge}
-  <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/{escape(yid)}" title="{escape(v["title"])}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-  <div class="video-card-title">{escape(v["title"])}</div>
-  <div class="video-card-desc">{v["description"]}</div>
+            f"""<div class="rl-q-item">
+  <h4>{i}. {q["title"]}</h4>
+  {sub_html}
+  {probe_html}
+  <div class="rl-q-ours">{q["ours_html"]}</div>
 </div>"""
         )
     return "\n".join(parts)
+
+
+def resource_card(href: str, badge: str, title: str, desc: str, cta: str, variant: str = "compact") -> str:
+    cls = "cj-resource-card"
+    if variant == "featured":
+        cls += " cj-resource-card--featured"
+    elif variant == "placement":
+        cls += " cj-resource-card--placement"
+    elif variant == "compact":
+        cls += " cj-resource-card--compact"
+    badge_html = f'<div class="cj-resource-card-badge">{badge}</div>' if badge else ""
+    return f"""<a href="{escape(href)}" class="{cls}" target="_blank" rel="noopener noreferrer">
+  {badge_html}
+  <div class="cj-resource-card-title">{title}</div>
+  <p class="cj-resource-card-desc">{desc}</p>
+  <span class="cj-resource-card-cta">{cta}</span>
+</a>"""
+
+
+def render_resources_html(first_name: str) -> str:
+    featured = [
+        resource_card(
+            "https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE",
+            "⭐ If you only watch one",
+            "Taylor Conroy (TEDx Coach) — why he hires our members",
+            "Taylor is a TEDx coach who actively hires HTSA-certified closers. Hear directly from a hiring manager why he trusts our members.",
+            "Watch on YouTube",
+            "featured",
+        ),
+        resource_card(
+            "https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S",
+            "⭐ CJ's #1 pick",
+            "Dana — unsolicited personal review",
+            "She recorded this completely on her own — we had no idea until she posted it. Life coach with a community of about 17,000 followers.",
+            "Watch on YouTube",
+            "featured",
+        ),
+        resource_card(
+            "https://drive.google.com/file/d/1Zo2ID5sdF8ZYP8rZD_fisNgj-eNpuQxM/view?usp=sharing",
+            "⭐ Fresh placement story",
+            "Taylor DeCourcey — newer member perspective",
+            "Newer placement with a fresher perspective. Hear what the first months actually looked like after certification.",
+            "Watch Taylor's story",
+            "featured",
+        ),
+        resource_card(
+            "https://www.trustpilot.com/review/highticketsalesacademy.com",
+            "⭐ Verified reviews",
+            "Trustpilot — 4.9 out of 5 stars",
+            "Read what real members say about HTSA — unfiltered, third-party reviews from people who went through the program.",
+            "Read Trustpilot reviews",
+            "featured",
+        ),
+    ]
+    placement = [
+        resource_card(
+            "https://canva.link/qcl7l45n7behw3k",
+            "⭐ Placement proof",
+            "Why Our Members Actually Get Placed",
+            "See how one-on-one placement works in practice — real interviews, real companies, and what the process looks like step by step.",
+            "View placement overview",
+            "placement",
+        ),
+        resource_card(
+            "https://canva.link/na9nxjm9a1e4vjz",
+            "⭐ Real timeline",
+            "Christa's Journey — Posted Month by Month",
+            "Not a polished testimonial — her actual journey, posted step by step in our community as it happened.",
+            "View Christa's timeline",
+            "placement",
+        ),
+    ]
+    compact = [
+        resource_card("https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf", "", "Cassie — single mom success story", "Relatable story — single mom who made the transition work around real life.", "Watch on YouTube"),
+        resource_card("https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib", "", "Josh — Alex Hormozi background", "High-profile sales background — hear how HTSA fit into his path.", "Watch on YouTube"),
+        resource_card("https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8", "", "Brianna — Tony Robbins team", "Credibility from a big-name organization — her HTSA experience.", "Watch on YouTube"),
+        resource_card("https://youtu.be/eLAWEwE7pl4?si=VfiqAxeOKFnoJ_Mm", "", "Chad — in his own words", "Who actually trains you and why that matters.", "Watch on YouTube"),
+        resource_card("https://www.highticketsalesacademy.com", "", "HTSA Website — more stories &amp; outcomes", "Many more member outcomes, screenshots, and program details on our main site.", "Visit highticketsalesacademy.com"),
+        resource_card("https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH", "", "Chad's Book — <em>The Book on High Ticket Sales</em>", "The ultimate guide by HTSA founder Chad Aleo — available on Amazon.", "View on Amazon"),
+        resource_card("https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf", "", "Top 20 Companies in High Ticket Sales", "Industry overview PDF — where HTSA fits in the landscape.", "Open PDF"),
+    ]
+    feat_grid = "\n".join(featured)
+    place_grid = "\n".join(placement)
+    compact_grid = "\n".join(compact)
+    return f"""
+  <div class="cj-resources-wrap">
+    <p class="cj-resources-lead"><strong>{escape(first_name)}</strong> — start with the ⭐ picks below. These are the videos and links I most want you to review.</p>
+    <p class="cj-resources-kicker">⭐ Start here — CJ's top picks</p>
+    <div class="cj-resources-featured">{feat_grid}</div>
+    <p class="cj-resources-kicker">⭐ Placement — why our members get results</p>
+    <div class="cj-resources-featured">{place_grid}</div>
+    <p class="cj-resources-kicker">More success stories from our network</p>
+    <div class="cj-resources-grid">{compact_grid}</div>
+  </div>"""
 
 
 def tracking_script(slug: str) -> str:
@@ -250,30 +324,129 @@ def manifest_guard_script(slug: str) -> str:
 
 
 def render_active_page(slug: str, data: dict) -> str:
-    tpl = PAGE_TEMPLATE.read_text(encoding="utf-8")
-    opener = "".join(f"<p>{p}</p>" for p in data.get("opener_paragraphs", []))
-    subs = {
-        "SLUG": slug,
-        "PROSPECT_NAME": escape(data["prospect_name"]),
-        "FIRST_NAME": escape(data.get("first_name", data["prospect_name"].split()[0])),
-        "PREPARED_DATE": escape(data.get("prepared_date", "")),
-        "LOGO_HTML": logo_html(),
-        "OPENER_HTML": opener,
-        "QUESTIONS_INTRO": data.get("questions_intro", ""),
-        "QUESTIONS_HTML": render_questions_html(data.get("questions", [])),
-        "VIDEOS_HTML": render_videos_html(data.get("videos", [])),
-        "ASK_HEADING": escape(data.get("ask_heading", "What I'm asking for")),
-        "ASK_BODY_HTML": data.get("ask_body_html", ""),
-        "CALENDAR_URL": escape(data.get("calendar_url", "https://meetings.hubspot.com/charles660/cj")),
-        "FOOTER_NOTE": escape(data.get("footer_note", "High Ticket Sales Academy")),
-        "GATE_HTML": gate_script(data.get("first_name", "Friend"), data.get("first_name_gate", False)),
-        "MANIFEST_GUARD": manifest_guard_script(slug),
-        "TRACKING_SCRIPT": tracking_script(slug),
-    }
-    out = tpl
-    for k, v in subs.items():
-        out = out.replace("{{" + k + "}}", v)
-    return out
+    first_name = escape(data.get("first_name", data["prospect_name"].split()[0]))
+    prospect_name = escape(data["prospect_name"])
+    email = escape(data.get("email", ""))
+    phone_display = escape(data.get("phone_display", ""))
+    phone_e164 = escape(data.get("phone_e164", ""))
+    prepared_date = escape(data.get("prepared_date", ""))
+    calendar_url = escape(data.get("calendar_url", "https://meetings.hubspot.com/charles660/cj"))
+    ask_heading = escape(data.get("ask_heading", "What I'm asking for"))
+    ask_body = data.get("ask_body_html", "")
+    gate_html = gate_script(data.get("first_name", "Friend"), data.get("first_name_gate", False))
+
+    opener_parts = []
+    for p in data.get("opener_paragraphs", []):
+        opener_parts.append(f"<p>{p}</p>")
+    if data.get("questions_intro"):
+        opener_parts.append(f'<p style="margin-top:10px;">{data["questions_intro"]}</p>')
+    opener_html = "\n    ".join(opener_parts)
+
+    ref_strip = enrollment_snippet("ref-strip-snippet.html").replace(
+        "Section 4 above", "the video picks above"
+    )
+    footer_html = enrollment_snippet("footer-snippet.html")
+    logo = logo_html()
+    css = enrollment_css()
+
+    email_line = f'<a href="mailto:{email}">{email}</a><br>' if email else ""
+    phone_line = f'<a href="tel:{phone_e164}">{phone_display}</a><br>' if phone_display else ""
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<title>HTSA — {prospect_name}</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+{css}
+</style>
+{manifest_guard_script(slug)}
+</head>
+<body>
+{gate_html}
+<div class="page" id="main-content">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      {logo}
+      <div class="header-tagline" style="margin-top:12px;">Certification &nbsp;·&nbsp; Coaching &nbsp;·&nbsp; Placement</div>
+    </div>
+    <div class="invoice-meta">
+      <div class="invoice-badge">Private Resource Page</div>
+      <p><strong>Prepared by:</strong> CJ Clay</p>
+      <p><strong>Prepared for:</strong> {prospect_name}</p>
+      <p><strong>Date:</strong> {prepared_date}</p>
+    </div>
+  </div>
+  <div class="accent-bar"></div>
+
+  <!-- EMAIL INTRO -->
+  <div class="hero-band">
+    {opener_html}
+  </div>
+
+  <!-- BILLING -->
+  <div class="billing-grid">
+    <div class="billing-cell">
+      <div class="billing-label">Prepared For</div>
+      <div class="billing-name">{prospect_name}</div>
+      <div class="billing-detail">
+        {email_line}
+        {phone_line}
+        Private resource page — for {first_name} only
+      </div>
+    </div>
+    <div class="billing-cell">
+      <div class="billing-label">Prepared By</div>
+      <div class="billing-name">CJ Clay</div>
+      <div class="billing-detail">
+        HTSA Career Coach<br>
+        (616) 612-1735<br>
+        <a href="mailto:cj@highticketsalesacademy.com">cj@highticketsalesacademy.com</a><br>
+        <a href="{calendar_url}" target="_blank" rel="noopener noreferrer">Book a call with CJ</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div class="sec-head">
+    <div class="sec-num">1</div>
+    <h3>Questions That Tell Them Apart</h3>
+  </div>
+  <div class="rl-q-wrap">
+{render_questions_html(data.get("questions", []))}
+  </div>
+
+  <!-- ASK -->
+  <div class="sec-head">
+    <div class="sec-num">2</div>
+    <h3>{ask_heading}</h3>
+  </div>
+  <div class="rl-ask-wrap">
+    {ask_body}
+    <p style="margin-top:16px;"><a href="{calendar_url}" class="invest-btn" target="_blank" rel="noopener noreferrer">Book 20 minutes with CJ</a></p>
+  </div>
+
+  <!-- RESOURCES -->
+  <div class="sec-head">
+    <div class="sec-num">3</div>
+    <h3>Videos, Proof &amp; Member Stories</h3>
+  </div>
+{render_resources_html(data.get("first_name", data["prospect_name"].split()[0]))}
+
+  {ref_strip}
+
+  {footer_html}
+
+</div>
+{tracking_script(slug)}
+</body>
+</html>"""
 
 
 def render_expired_page() -> str:
