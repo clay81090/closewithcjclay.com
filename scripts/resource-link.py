@@ -256,25 +256,19 @@ def render_resources_html(first_name: str) -> str:
 
 def render_personal_reviews_html(reviews: list, title: str = "A few of CJ's Personal Reviews") -> str:
     """Build ref-strip from prospect-specific personal review quotes."""
-    def card_html(r: dict) -> str:
+    cards = []
+    for r in reviews:
         context = r.get("context", "shared with HTSA")
-        return f"""          <div class="ref-strip-quote ref-strip-quote--compact">
+        cards.append(
+            f"""          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">{r["body"]}</blockquote>
             <p class="ref-strip-quote-attr">— {r["name"]} · {context}</p>
           </div>"""
-
-    left_reviews = [r for r in reviews if not r.get("bottom_right")]
-    right_reviews = [r for r in reviews if r.get("bottom_right")]
-
-    if not right_reviews:
-        mid = (len(reviews) + 1) // 2
-        left_reviews = reviews[:mid]
-        right_reviews = reviews[mid:]
-
-    left = "\n".join(card_html(r) for r in left_reviews)
-    right = "\n".join(card_html(r) for r in right_reviews)
-    right_wrap_class = "ref-strip-quote-wrap ref-strip-quote-wrap--pin-bottom" if right_reviews else "ref-strip-quote-wrap"
+        )
+    # Last review goes in the right column; all others stack on the left.
+    left = "\n".join(cards[:-1]) if len(cards) > 1 else "\n".join(cards)
+    right = cards[-1] if len(cards) > 1 else ""
     return f"""<!-- CJ personal reviews (prospect-specific) -->
   <div class="ref-strip">
     <div class="ref-strip-inner">
@@ -285,7 +279,7 @@ def render_personal_reviews_html(reviews: list, title: str = "A few of CJ's Pers
 {left}
         </div>
       </div>
-      <div class="{right_wrap_class}" style="gap:14px;">
+      <div class="ref-strip-quote-wrap" style="gap:14px;">
 {right}
       </div>
     </div>

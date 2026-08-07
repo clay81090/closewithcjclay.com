@@ -1208,10 +1208,6 @@
     min-height: 0;
   }
 
-  .ref-strip-quote-wrap--pin-bottom {
-    justify-content: flex-end;
-  }
-
   .ref-strip-quote {
     background: rgba(255, 255, 255, 0.82);
     border: 1px solid rgba(26, 37, 64, 0.08);
@@ -1375,10 +1371,6 @@
 
     .ref-strip-quote-wrap {
       min-height: auto !important;
-    }
-
-    .ref-strip-quote-wrap--pin-bottom {
-      justify-content: flex-start !important;
     }
 
     .ref-strip-quote,
