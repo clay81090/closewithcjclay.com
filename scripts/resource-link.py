@@ -314,6 +314,16 @@ def resource_tracking_script(slug: str, data: dict) -> str:
       }});
     }});
   }});
+
+  document.querySelectorAll('.rl-member-card').forEach(function(card) {{
+    card.addEventListener('click', function() {{
+      var nameEl = card.querySelector('.rl-member-name');
+      postEvent('member_text_click', {{
+        linkLabel: nameEl ? nameEl.textContent.trim() : '',
+        linkUrl: card.getAttribute('href') || ''
+      }});
+    }});
+  }});
 }})();
 </script>"""
 

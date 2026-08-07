@@ -1813,6 +1813,82 @@
     border: 1px solid rgba(0,154,94,0.25);
     box-shadow: 0 4px 16px rgba(10, 22, 40, 0.08);
   }
+  .rl-member-intro {
+    margin: 14px 0 12px;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .rl-member-contacts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .rl-member-card {
+    display: block;
+    background: var(--white);
+    border: 1px solid rgba(0,154,94,0.28);
+    border-left: 4px solid var(--green-dark);
+    border-radius: 8px;
+    padding: 14px 14px 12px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .rl-member-card:hover {
+    border-color: var(--green);
+    box-shadow: 0 4px 16px rgba(0, 201, 122, 0.18);
+    transform: translateY(-1px);
+  }
+  .rl-member-name {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.35;
+    margin-bottom: 4px;
+  }
+  .rl-member-tag {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin-top: 2px;
+  }
+  .rl-member-detail {
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 8px 0 6px;
+  }
+  .rl-member-offer {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .rl-member-phone {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .rl-member-cta {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--green-dark);
+  }
+  .rl-member-cta::after {
+    content: ' →';
+  }
+  @media (max-width: 600px) {
+    .rl-member-contacts { grid-template-columns: 1fr; }
+  }
   .rl-ask-wrap { padding: 24px 36px 28px; border-bottom: 1px solid var(--mid); background: linear-gradient(135deg, #f7f9fc 0%, #edf0f7 100%); }
   .rl-ask-wrap h4 { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--navy); margin: 0 0 12px; }
   .rl-ask-wrap p { font-size: 13px; color: var(--text); line-height: 1.65; margin: 0 0 12px; }
@@ -1924,7 +2000,7 @@
   <h4>5. Can you see real proof — and talk to real people?</h4>
   
   <ul><li>Video testimonials, or just names on a page?</li><li>Are the companies <strong>verifiable</strong> and are they top-tier?</li><li>If you ask to speak to someone they placed, do they say yes — or do they get defensive and ask why you'd need that?</li></ul>
-  <div class="rl-q-ours"><strong>Ours:</strong> our people are at Tony Robbins, Alex Hormozi, Grant Cardone, John Maxwell, Taylor Conroy, Samantha Skelly. And <strong>if you want to talk to someone we placed, just say the word.</strong> I'll send you as many as you want. That question should never make anyone uncomfortable.</div>
+  <div class="rl-q-ours"><strong>Ours:</strong> our people are at Tony Robbins, Alex Hormozi, Grant Cardone, John Maxwell, Taylor Conroy, Samantha Skelly. And <strong>if you want to talk to someone we placed, just say the word.</strong> I'll send you as many as you want. That question should never make anyone uncomfortable.<br><br><p class="rl-member-intro">I already reached out to both of them and let them know you may text. Matt is one of our earliest members — HTSA has placed him <strong>twice</strong> in the last two and a half years, both times into upgraded offers. Taylor was placed less than five months ago and is already crushing it. <strong>Please watch her video testimonial in the picks below first</strong> — then feel free to reach out to either of them directly.</p><div class="rl-member-contacts"><a href="sms:+18596089706" class="rl-member-card"><div class="rl-member-name">Matt Seitz<span class="rl-member-tag">Veteran HTSA Member</span></div><div class="rl-member-detail">HTSA placed him 2 times over the last 2½ years (upgraded offers)</div><div class="rl-member-offer">Real Estate Investing Offer</div><div class="rl-member-phone">(859) 608-9706</div><span class="rl-member-cta">Text Matt</span></a><a href="sms:+15053224489" class="rl-member-card"><div class="rl-member-name">Taylor DeCourcey<span class="rl-member-tag">Newer HTSA Member</span></div><div class="rl-member-detail">Landed her offer in 32 days and signed <strong>$97k revenue</strong> her first month</div><div class="rl-member-offer">Contractor Growth Agency Offer</div><div class="rl-member-phone">(505) 322-4489</div><span class="rl-member-cta">Text Taylor</span></a></div></div>
 </div>
 <div class="rl-q-item">
   <h4>6. What do the bad reviews say?</h4>
@@ -2363,6 +2439,16 @@ So far it's been nothing but positive, and I feel confident about the move. If y
       var titleEl = card.querySelector('.cj-resource-card-title');
       postEvent('link_click', {
         linkLabel: titleEl ? titleEl.textContent.trim() : '',
+        linkUrl: card.getAttribute('href') || ''
+      });
+    });
+  });
+
+  document.querySelectorAll('.rl-member-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var nameEl = card.querySelector('.rl-member-name');
+      postEvent('member_text_click', {
+        linkLabel: nameEl ? nameEl.textContent.trim() : '',
         linkUrl: card.getAttribute('href') || ''
       });
     });
