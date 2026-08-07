@@ -239,6 +239,38 @@ def render_resources_html(first_name: str) -> str:
   </div>"""
 
 
+def render_personal_reviews_html(reviews: list, title: str = "A few of CJ's Personal Reviews") -> str:
+    """Build ref-strip from prospect-specific personal review quotes."""
+    cards = []
+    for r in reviews:
+        context = r.get("context", "shared with HTSA")
+        cards.append(
+            f"""          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">{r["body"]}</blockquote>
+            <p class="ref-strip-quote-attr">— {r["name"]} · {context}</p>
+          </div>"""
+        )
+    mid = (len(cards) + 1) // 2
+    left = "\n".join(cards[:mid])
+    right = "\n".join(cards[mid:])
+    return f"""<!-- CJ personal reviews (prospect-specific) -->
+  <div class="ref-strip">
+    <div class="ref-strip-inner">
+      <div class="ref-strip-links-col">
+        <div class="ref-strip-label">{title}</div>
+        <p style="font-size:12px;line-height:1.6;color:var(--muted);margin:0 0 14px;max-width:320px;">Real messages and posts from people who worked directly with CJ, not copied from Trustpilot.</p>
+        <div class="ref-strip-mini-stack">
+{left}
+        </div>
+      </div>
+      <div class="ref-strip-quote-wrap" style="gap:14px;">
+{right}
+      </div>
+    </div>
+  </div>"""
+
+
 GAS_TRACKING_ENDPOINT = (
     "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec"
 )
@@ -441,8 +473,15 @@ def render_active_page(slug: str, data: dict) -> str:
         opener_parts.append(f"<p>{data['questions_intro']}</p>")
     opener_html = "\n    ".join(opener_parts)
 
-    ref_strip = enrollment_snippet("ref-strip-snippet.html").replace(
-        "Section 4 above", "the video picks above"
+    ref_strip = (
+        render_personal_reviews_html(
+            data["personal_reviews"],
+            data.get("personal_reviews_title", "A few of CJ's Personal Reviews"),
+        )
+        if data.get("personal_reviews")
+        else enrollment_snippet("ref-strip-snippet.html").replace(
+            "Section 4 above", "the video picks above"
+        )
     )
     footer_html = enrollment_snippet("footer-snippet.html")
     logo = logo_html()

@@ -119,5 +119,53 @@
   ],
   "ask_heading": "What I'm actually asking for",
   "ask_body_html": "<p>We're already booked for <strong>2pm EST</strong> — thirty minutes. If you can make it, tap confirm below so I know you saw this page.</p><p>Here's the honest math on that call, and there's no version where it costs you:</p><p><strong>If you chose well</strong> — thirty minutes confirms it. You start with more confidence than you have right now, you know exactly what to hold them to, and you know who to call if it ever stops matching what you were promised.</p><p><strong>If you didn't</strong> — you're still inside your 72 hours. You'd have saved yourself thousands of dollars and six months of your life.</p><p><strong>Thirty minutes can't cost you more than it saves you.</strong> That's the whole pitch.</p><p>And one more thing that's on me, not you: your call with Richard was Tuesday. Mine wasn't until Friday. That's three days where you had the pitch and none of the answers. If we'd talked Tuesday you'd have had all of this before you had to decide anything. That gap is our fault.</p><p>Whatever you decide — please ask them those seven. That's the part I actually care about.</p>",
+  "personal_reviews_title": "A few of CJ's Personal Reviews",
+  "personal_reviews": [
+    {
+      "name": "Nick Sotirianos",
+      "context": "text message",
+      "body": "Hey CJ, just wanted to say thanks, seriously. You and Mark didn't let me slip away after I almost bailed on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support? That's why I'm all in now. Appreciate you both pulling me through. Means a lot."
+    },
+    {
+      "name": "Trinity Isabel",
+      "context": "Facebook post",
+      "body": "CJ, you're the most genuine and caring person I've ever met on the phone. You lifted me up when I was in a low place. You gave me hope, kept me motivated, and kept me positive the whole way. You're a big part of my testimony. I wouldn't be here right now if it wasn't for you."
+    },
+    {
+      "name": "Amy Colombo",
+      "context": "text message",
+      "body": "CJ, the program has been great so far and I've made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you."
+    },
+    {
+      "name": "Zachary Allen",
+      "context": "mastermind community",
+      "body": "CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I'm so grateful. I landed my dream role 65 days in, and you played a real part in that."
+    },
+    {
+      "name": "Kate Robinson",
+      "context": "text message",
+      "body": "CJ, I'm SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you're doing!"
+    },
+    {
+      "name": "Brittany Levine",
+      "context": "text message",
+      "body": "CJ, thank you so much for taking the time to read through my answers before we ever got on a call. That meant a lot. Hearing that you actually read my stuff made me want to work with you specifically, not someone else. I appreciate the kind words more than you know, and I'm really excited to get started with you."
+    },
+    {
+      "name": "Riley Colston",
+      "context": "text message",
+      "body": "CJ, I just wanted to thank you for closing me on the program. I can already tell I'll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process."
+    },
+    {
+      "name": "Zach Scanlon",
+      "context": "text message",
+      "body": "CJ, amazing dude. Thanks for the incredible sales process. You know what you're doing."
+    },
+    {
+      "name": "HTSA Member",
+      "context": "unprompted review",
+      "body": "CJ, thank you for getting me signed up and for sticking with me while we built a plan to join. We worked on it for three months before I came in, and you never made me feel rushed. You showed me from the start that these are really great people, every single one of them."
+    }
+  ],
   "footer_note": "High Ticket Sales Academy"
 }
