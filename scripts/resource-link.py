@@ -314,6 +314,9 @@ def cmd_create(args: argparse.Namespace) -> None:
         "slug": slug,
         "prospect_id": args.prospect_id,
         "prospect_name": data["prospect_name"],
+        "email": data.get("email"),
+        "phone_e164": data.get("phone_e164"),
+        "phone_display": data.get("phone_display"),
         "created_at": iso(created),
         "expires_at": iso(expires),
         "status": "active",
@@ -374,6 +377,10 @@ def cmd_list(_: argparse.Namespace) -> None:
             f"{slug}\t{link.get('status')}\tviews={link.get('view_count', 0)}\t"
             f"{link.get('prospect_name')}\texpires={link.get('expires_at')}"
         )
+        if link.get("email"):
+            print(f"  email: {link['email']}")
+        if link.get("phone_display"):
+            print(f"  phone: {link['phone_display']}")
         if link.get("last_viewed_at"):
             print(f"  last viewed: {link['last_viewed_at']}")
 
