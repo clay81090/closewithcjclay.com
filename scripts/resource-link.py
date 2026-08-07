@@ -256,19 +256,25 @@ def render_resources_html(first_name: str) -> str:
 
 def render_personal_reviews_html(reviews: list, title: str = "A few of CJ's Personal Reviews") -> str:
     """Build ref-strip from prospect-specific personal review quotes."""
-    cards = []
-    for r in reviews:
+    def card_html(r: dict) -> str:
         context = r.get("context", "shared with HTSA")
-        cards.append(
-            f"""          <div class="ref-strip-quote ref-strip-quote--compact">
+        return f"""          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">{r["body"]}</blockquote>
             <p class="ref-strip-quote-attr">— {r["name"]} · {context}</p>
           </div>"""
-        )
-    mid = (len(cards) + 1) // 2
-    left = "\n".join(cards[:mid])
-    right = "\n".join(cards[mid:])
+
+    left_reviews = [r for r in reviews if not r.get("bottom_right")]
+    right_reviews = [r for r in reviews if r.get("bottom_right")]
+
+    if not right_reviews:
+        mid = (len(reviews) + 1) // 2
+        left_reviews = reviews[:mid]
+        right_reviews = reviews[mid:]
+
+    left = "\n".join(card_html(r) for r in left_reviews)
+    right = "\n".join(card_html(r) for r in right_reviews)
+    right_wrap_class = "ref-strip-quote-wrap ref-strip-quote-wrap--pin-bottom" if right_reviews else "ref-strip-quote-wrap"
     return f"""<!-- CJ personal reviews (prospect-specific) -->
   <div class="ref-strip">
     <div class="ref-strip-inner">
@@ -279,7 +285,7 @@ def render_personal_reviews_html(reviews: list, title: str = "A few of CJ's Pers
 {left}
         </div>
       </div>
-      <div class="ref-strip-quote-wrap" style="gap:14px;">
+      <div class="{right_wrap_class}" style="gap:14px;">
 {right}
       </div>
     </div>
@@ -336,8 +342,14 @@ def resource_tracking_script(slug: str, data: dict) -> str:
 
   if (!sessionStorage.getItem('htsa_rl_open_'+slug)) {{
     sessionStorage.setItem('htsa_rl_open_'+slug, '1');
-    postEvent('page_open');
+    if(!document.getElementById('email-gate')) postEvent('page_open');
   }}
+
+  window.__htsaRlUnlock=function(){{
+    if(sessionStorage.getItem('htsa_rl_open_'+slug)) return;
+    sessionStorage.setItem('htsa_rl_open_'+slug, '1');
+    postEvent('page_open');
+  }};
 
   var confirmBtn = document.getElementById('rl-confirm-call');
   if (confirmBtn) {{
@@ -420,6 +432,73 @@ def tracking_script(slug: str) -> str:
 </script>"""
 
 
+def email_gate_overlay(data: dict) -> str:
+    """Email gate overlay HTML only (script runs at end of body)."""
+    first_name = escape(data.get("first_name", "Friend"))
+    return f"""<div id="email-gate" class="email-gate">
+  <div class="email-gate-card">
+    <div class="email-gate-badge">Private Page</div>
+    <p class="email-gate-lead">Prepared for {first_name}</p>
+    <p class="email-gate-sub">This link is personal. Enter the email address it was sent to and only that address will open it.</p>
+    <label for="email-gate-input">Your email</label>
+    <input id="email-gate-input" type="email" autocomplete="email" inputmode="email" placeholder="you@email.com" />
+    <button type="button" id="email-gate-btn" class="invest-btn">Open my page</button>
+    <p id="email-gate-err" class="email-gate-err" hidden>This page is not available for that email. If someone forwarded this link, it will not work without the original recipient email.</p>
+    <p class="email-gate-foot">Do not share this link. It is intended for {first_name} only.</p>
+  </div>
+</div>"""
+
+
+def email_gate_init_script(slug: str, data: dict) -> str:
+    """Initialize email gate after #main-content exists in the DOM."""
+    allowed = list(data.get("allowed_emails") or [])
+    prospect_email = (data.get("email") or "").strip().lower()
+    if prospect_email and prospect_email not in [e.lower() for e in allowed]:
+        allowed.append(prospect_email)
+    for owner in data.get("owner_emails") or ["cj@highticketsalesacademy.com"]:
+        owner = owner.strip().lower()
+        if owner and owner not in [e.lower() for e in allowed]:
+            allowed.append(owner)
+    allowed_json = json.dumps([e.lower() for e in allowed])
+    storage_key = f"htsa_rl_email_{slug}"
+
+    return f"""<script>
+(function(){{
+  var allowed={allowed_json};
+  var storageKey={json.dumps(storage_key)};
+  var gate=document.getElementById('email-gate');
+  var main=document.getElementById('main-content');
+  if(!gate||!main) return;
+
+  function normEmail(v){{ return (v||'').trim().toLowerCase(); }}
+  function isAllowed(v){{ return allowed.indexOf(normEmail(v))!==-1; }}
+
+  function unlock(){{
+    gate.remove();
+    main.hidden=false;
+    if(window.__htsaRlUnlock) window.__htsaRlUnlock();
+  }}
+
+  if(sessionStorage.getItem(storageKey)==='1'){{ unlock(); return; }}
+
+  main.hidden=true;
+  document.getElementById('email-gate-btn').addEventListener('click',function(){{
+    var v=normEmail(document.getElementById('email-gate-input').value);
+    if(isAllowed(v)){{ sessionStorage.setItem(storageKey,'1'); unlock(); }}
+    else document.getElementById('email-gate-err').hidden=false;
+  }});
+  document.getElementById('email-gate-input').addEventListener('keydown',function(e){{
+    if(e.key==='Enter') document.getElementById('email-gate-btn').click();
+  }});
+}})();
+</script>"""
+
+
+def email_gate_script(slug: str, data: dict) -> str:
+    """Soft lock overlay + init script (init is placed at end of body in render)."""
+    return email_gate_overlay(data)
+
+
 def gate_script(first_name: str, enabled: bool) -> str:
     if not enabled:
         return ""
@@ -435,19 +514,23 @@ def gate_script(first_name: str, enabled: bool) -> str:
 </div>
 <script>
 (function(){{
-  var expected={json.dumps(first_name.lower())};
-  var gate=document.getElementById('name-gate');
-  var main=document.getElementById('main-content');
-  if(!gate||!main) return;
-  main.hidden=true;
-  document.getElementById('gate-btn').addEventListener('click',function(){{
-    var v=(document.getElementById('gate-input').value||'').trim().toLowerCase();
-    if(v===expected){{ gate.remove(); main.hidden=false; }}
-    else document.getElementById('gate-err').hidden=false;
-  }});
-  document.getElementById('gate-input').addEventListener('keydown',function(e){{
-    if(e.key==='Enter') document.getElementById('gate-btn').click();
-  }});
+  function init(){{
+    var expected={json.dumps(first_name.lower())};
+    var gate=document.getElementById('name-gate');
+    var main=document.getElementById('main-content');
+    if(!gate||!main) return;
+    main.hidden=true;
+    document.getElementById('gate-btn').addEventListener('click',function(){{
+      var v=(document.getElementById('gate-input').value||'').trim().toLowerCase();
+      if(v===expected){{ gate.remove(); main.hidden=false; }}
+      else document.getElementById('gate-err').hidden=false;
+    }});
+    document.getElementById('gate-input').addEventListener('keydown',function(e){{
+      if(e.key==='Enter') document.getElementById('gate-btn').click();
+    }});
+  }}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
 }})();
 </script>"""
 
@@ -479,7 +562,16 @@ def render_active_page(slug: str, data: dict) -> str:
     ask_body = data.get("ask_body_html", "")
     confirm_label = escape(data.get("confirm_call_label", "Confirm 2pm Call (30 minutes)"))
     scheduled_note = escape(data.get("scheduled_call_note", "2pm EST"))
-    gate_html = gate_script(data.get("first_name", "Friend"), data.get("first_name_gate", False))
+    if data.get("email_gate"):
+        gate_html = email_gate_script(slug, data)
+        gate_init_html = email_gate_init_script(slug, data)
+    elif data.get("first_name_gate"):
+        gate_html = gate_script(data.get("first_name", "Friend"), True)
+        gate_init_html = ""
+    else:
+        gate_html = ""
+        gate_init_html = ""
+    main_hidden = " hidden" if data.get("email_gate") or data.get("first_name_gate") else ""
 
     opener_parts = []
     for p in data.get("opener_paragraphs", []):
@@ -521,7 +613,7 @@ def render_active_page(slug: str, data: dict) -> str:
 </head>
 <body>
 {gate_html}
-<div class="page" id="main-content">
+<div class="page" id="main-content"{main_hidden}>
 
   <!-- HEADER -->
   <div class="header">
@@ -600,6 +692,7 @@ def render_active_page(slug: str, data: dict) -> str:
   {footer_html}
 
 </div>
+{gate_init_html}
 {resource_tracking_script(slug, data)}
 </body>
 </html>"""

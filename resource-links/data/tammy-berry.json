@@ -6,6 +6,11 @@
   "phone_e164": "+17573242539",
   "phone_display": "+1 (757) 324-2539",
   "prepared_date": "Aug 7, 2026",
+  "email_gate": true,
+  "allowed_emails": [
+    "tammyberry100@yahoo.com",
+    "cj@highticketsalesacademy.com"
+  ],
   "first_name_gate": false,
   "calendar_url": "https://meetings.hubspot.com/charles660/cj",
   "confirm_call_label": "Confirm 2pm Call (30 minutes)",
@@ -217,6 +222,7 @@
     {
       "name": "Kate Robinson",
       "context": "text message",
+      "bottom_right": true,
       "body": "CJ, I'm SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you're doing!"
     }
   ],
