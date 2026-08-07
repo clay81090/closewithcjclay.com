@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Private resource — High Ticket Sales Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --green: #00c97a;
+    --green-dark: #009a5e;
+    --light: #f2f5f9;
+    --mid: #e2e8f0;
+    --text: #1a2540;
+    --muted: #5a6a85;
+    --white: #ffffff;
+    --protect-bg: #fff5f5;
+    --protect-border: #e53e3e;
+    --protect-text: #742a2a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--light);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: 0 4px 40px rgba(0,0,0,0.10);
+    min-height: 100vh;
+  }
+  .header {
+    background: var(--navy);
+    padding: 24px 20px 20px;
+  }
+  .logo-wrap { display: flex; align-items: center; gap: 14px; }
+  .logo-icon { width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; border: 2px solid var(--green); object-fit: cover; }
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .logo-sub {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-top: 4px;
+  }
+  .header-prepared {
+    margin-top: 16px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+  }
+  .header-prepared strong { color: var(--white); }
+  .accent-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--green) 0%, var(--green-dark) 55%, var(--navy) 100%);
+  }
+  .body-pad { padding: 24px 20px 32px; }
+  .body-pad p {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .body-pad p:last-child { margin-bottom: 0; }
+  .protect-box {
+    background: var(--protect-bg);
+    border: 2px solid var(--protect-border);
+    border-radius: 10px;
+    padding: 18px 16px;
+    margin: 20px 0 24px;
+  }
+  .protect-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--protect-border);
+    margin-bottom: 8px;
+  }
+  .protect-box p {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--protect-text);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .sec-head {
+    background: var(--navy);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 -20px 20px;
+  }
+  .sec-head h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .sec-num {
+    width: 24px; height: 24px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    color: var(--navy);
+    flex-shrink: 0;
+  }
+  .q-item {
+    border: 1px solid var(--mid);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .q-item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 14px;
+  }
+  .q-item summary::-webkit-details-marker { display: none; }
+  .q-num {
+    width: 26px; height: 26px;
+    background: var(--green);
+    color: var(--navy);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .q-body { padding: 0 16px 16px 54px; }
+  .q-sub { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+  .q-probes {
+    margin: 0 0 12px 18px;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .q-probes li { margin-bottom: 6px; }
+  .q-ours {
+    background: linear-gradient(135deg, #f0fdf7, #e8f9f1);
+    border: 1px solid rgba(0,154,94,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .q-ours a { color: var(--green-dark); font-weight: 600; }
+  .video-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .video-card {
+    border: 1px solid var(--mid);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .video-card--featured {
+    border-color: var(--green);
+    box-shadow: 0 0 0 1px rgba(0,201,122,0.25);
+  }
+  .video-badge {
+    background: var(--green);
+    color: var(--navy);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+  }
+  .video-embed {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    background: #000;
+  }
+  .video-embed iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+  .video-card-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--navy);
+    padding: 12px 14px 4px;
+  }
+  .video-card-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    padding: 0 14px 14px;
+    line-height: 1.55;
+  }
+  .video-card--link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding-bottom: 14px;
+  }
+  .video-link-cta {
+    display: inline-block;
+    margin: 0 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green-dark);
+  }
+  .ask-block {
+    background: linear-gradient(135deg, #f7f9fc 0%, #edf0f7 100%);
+    border: 1px solid var(--mid);
+    border-radius: 10px;
+    padding: 20px 16px;
+    margin: 24px 0;
+  }
+  .ask-block h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .ask-block p { font-size: 14px; margin-bottom: 12px; }
+  .invest-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--green);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 22px rgba(0,201,122,0.15);
+    margin-top: 16px;
+  }
+  .footer-sign {
+    border-top: 1px solid var(--mid);
+    padding: 24px 20px 32px;
+    text-align: center;
+  }
+  .footer-sign .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .footer-sign p { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .footer-sign a { color: var(--green-dark); font-weight: 600; text-decoration: none; }
+  .name-gate {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,22,40,0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+  }
+  .name-gate-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 24px 20px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+  }
+  .name-gate-lead { font-size: 14px; margin-bottom: 16px; color: var(--text); }
+  .name-gate-card label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .name-gate-card input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--mid);
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  .name-gate-err { font-size: 12px; color: #c53030; margin-top: 10px; }
+  @media (min-width: 480px) {
+    .header { padding: 28px 36px 24px; }
+    .body-pad { padding: 28px 36px 36px; }
+    .sec-head { margin: 0 -36px 20px; padding: 13px 36px; }
+    .footer-sign { padding: 28px 36px 40px; }
+  }
+</style>
+<script>
+(function(){
+  var slug="Tf8lcoiY3Ad9tCouxMZsBx1X";
+  fetch('/r/_manifest.json?v='+Date.now(),{cache:'no-store'})
+    .then(function(r){return r.json();})
+    .then(function(m){
+      var link=m.links&&m.links[slug];
+      var expired=!link||link.status!=='active'||(link.expires_at&&new Date(link.expires_at)<new Date());
+      if(expired){ window.location.replace('/r/_expired.html'); }
+    }).catch(function(){});
+})();
+</script>
+</head>
+<body>
+<div id="name-gate" class="name-gate">
+  <div class="name-gate-card">
+    <p class="name-gate-lead">This page was prepared for <strong>Tammy</strong>.</p>
+    <label for="gate-input">Enter your first name to continue</label>
+    <input id="gate-input" type="text" autocomplete="given-name" inputmode="text" />
+    <button type="button" id="gate-btn" class="invest-btn">Continue</button>
+    <p id="gate-err" class="name-gate-err" hidden>That doesn't match. If this page wasn't meant for you, please close it.</p>
+  </div>
+</div>
+<script>
+(function(){
+  var expected="tammy";
+  var gate=document.getElementById('name-gate');
+  var main=document.getElementById('main-content');
+  if(!gate||!main) return;
+  main.hidden=true;
+  document.getElementById('gate-btn').addEventListener('click',function(){
+    var v=(document.getElementById('gate-input').value||'').trim().toLowerCase();
+    if(v===expected){ gate.remove(); main.hidden=false; }
+    else document.getElementById('gate-err').hidden=false;
+  });
+  document.getElementById('gate-input').addEventListener('keydown',function(e){
+    if(e.key==='Enter') document.getElementById('gate-btn').click();
+  });
+})();
+</script>
+<div class="page" id="main-content">
+  <div class="header">
+    <div class="logo-wrap">
+        <img class="logo-icon" src="data:image/jpeg;base64,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" alt="Val Tappan">
+        <div>
+          <div class="logo-text">High Ticket<br>Sales Academy</div>
+          <div class="logo-sub">Where Sales Reps Meet Their Forever Career</div>
+        </div>
+    <p class="header-prepared">Prepared for <strong>Tammy</strong> — Aug 7, 2026</p>
+  </div>
+  <div class="accent-bar"></div>
+
+  <div class="body-pad">
+    <p>You made a decision and I'm not going to fight you on it. Deciding is the hard part — most people in your seat stall for six months and do nothing.</p><p>But there's a reason I'm writing anyway, and it isn't the sale. On your call with Richard, you told him what actually worried you: <strong>getting scammed, or not getting what you were promised.</strong> And he told you straight — <em>"there are bad apples out there, if you're investing any money, be wary of that."</em> He was right. And right now you're about to hand money to a company you found through an ad, without asking the questions that separate the real ones from the rest. That's the part I can't sit on.</p><p>You also said something else that stuck with me. You'd sat through <strong>three webinars</strong> and they <em>"basically talk about the same things."</em> You're right, and that's exactly the problem. Everyone's pitch is identical. Training, community, coaching, income. It sounds the same because it <strong>is</strong> the same — until the money's gone and you find out what you actually bought.</p>
+
+    <div class="protect-box" role="note">
+      <div class="protect-label">Your consumer protection right</div>
+      <p>Federal law gives you 3 days to cancel — no matter what the contract says.</p>
+    </div>
+
+    <div class="sec-head">
+      <div class="sec-num">?</div>
+      <h3>Seven questions to ask before you pay anyone</h3>
+    </div>
+    <p>So here are the questions that tell them apart. Ask whoever you chose. If they answer these well, you picked a good one and I'll genuinely be happy for you.</p>
+    <div class="questions-wrap" style="margin-top:16px;">
+      <details class="q-item">
+  <summary><span class="q-num">1</span><span class="q-title">Who is actually training you — and what have they done?</span></summary>
+  <div class="q-body">
+    <p class="q-sub">Not who ran the ad. <strong>Who trains you.</strong></p>
+    <ul class="q-probes"><li>How long have they personally sold in this industry — not taught it, <em>done</em> it?</li><li>How much revenue have they actually closed?</li><li>Do they train you directly, or does that cost more?</li><li>Are they an operator, or an influencer with a media budget?</li></ul>
+    <div class="q-ours"><strong>Ours:</strong> Chad. Roughly <strong>$28 million</strong> in revenue closed, mentored by Tony Robbins, best-selling author on Amazon. He trains <strong>twice a week, personally</strong>, and he's the one who grades your final call and certifies you. Not a coach who's six months ahead of you.</div>
+  </div>
+</details>
+<details class="q-item">
+  <summary><span class="q-num">2</span><span class="q-title">How do you actually get placed?</span></summary>
+  <div class="q-body">
+    <p class="q-sub">This is the question. Ask them to walk it step by step.</p>
+    <ul class="q-probes"><li>Is it <strong>one-on-one placement</strong>, or a <strong>job board</strong>?</li><li>If it's a board — how many of those companies could you find free on Indeed, LinkedIn, or a Facebook group?</li><li>Do you know which ones are actually hiring? Which are legitimate? Which want a closer versus a cold caller?</li><li>Do you pay a <strong>monthly fee</strong> to keep access to the board?</li><li>How long does it typically take — and do they have an average, or just a story?</li></ul>
+    <div class="q-ours"><strong>Ours:</strong> we place you one-on-one with companies in our network of <strong>300+</strong>, as many as you want. I don't know of another company in this space that does one-on-one placement — if you find one, that's genuinely worth knowing and I'd want to hear about it.<br><br>What that looks like in practice: one of my members did <strong>17 interviews</strong> — not applications, interviews. Another had <strong>12 offers of interviews inside 3 days</strong> and finished 6 first rounds, all in the exact field he asked for.<br><br><strong>Average time to land: 38 days for closers. 23 days for setters.</strong></div>
+  </div>
+</details>
+<details class="q-item">
+  <summary><span class="q-num">3</span><span class="q-title">Is placement guaranteed — in writing?</span></summary>
+  <div class="q-body">
+    <p class="q-sub">Not <em>"we'll work with you until you land it."</em> That's a feeling. Ask for the <strong>actual written language.</strong></p>
+    <ul class="q-probes"><li>What happens if you're not placed?</li><li>What if you get placed and it doesn't work out — do they replace you free, or do you pay again?</li><li>Is coaching and placement support <strong>lifetime</strong>, or is there a monthly charge to stay in?</li></ul>
+    <div class="q-ours"><strong>Ours:</strong> If you complete <strong>your part</strong> and do not secure a qualifying role within <strong>6 months</strong> of certification (or at least <strong>50 interviews completed</strong>), you may qualify for a <strong>full refund</strong> (documentation required). Lifetime placement, no recurring fee. If a placement doesn't work out, we replace you at no cost.</div>
+  </div>
+</details>
+<details class="q-item">
+  <summary><span class="q-num">4</span><span class="q-title">What does training actually look like?</span></summary>
+  <div class="q-body">
+    
+    <ul class="q-probes"><li>Self-paced, or are you locked into 12 weeks?</li><li>Who do you practice with — <strong>other brand-new people</strong>, or something real?</li><li>How do you know when you're actually ready?</li></ul>
+    <div class="q-ours"><strong>Ours:</strong> you practice on a <strong>real $12,500 offer</strong>, running full calls as if you were already their closer — and you're graded on every call, every category. You can build your own offer in it too. There's an AI roleplay system with five levels that get progressively harder, so you've already met the difficult buyers and the ugly objections before you meet a real one.<br><br>The point is that you <strong>produce in week one</strong> — instead of taking a month to find your feet and getting cut for not producing.</div>
+  </div>
+</details>
+<details class="q-item">
+  <summary><span class="q-num">5</span><span class="q-title">Can you see real proof — and talk to real people?</span></summary>
+  <div class="q-body">
+    
+    <ul class="q-probes"><li>Video testimonials, or just names on a page?</li><li>Are the companies <strong>verifiable</strong> and are they top-tier?</li><li>If you ask to speak to someone they placed, do they say yes — or do they get defensive and ask why you'd need that?</li></ul>
+    <div class="q-ours"><strong>Ours:</strong> our people are at Tony Robbins, Alex Hormozi, Grant Cardone, John Maxwell, Taylor Conroy, Samantha Skelly. And <strong>if you want to talk to someone we placed, just say the word.</strong> I'll send you as many as you want. That question should never make anyone uncomfortable.</div>
+  </div>
+</details>
+<details class="q-item">
+  <summary><span class="q-num">6</span><span class="q-title">What do the bad reviews say?</span></summary>
+  <div class="q-body">
+    <p class="q-sub">Not "are they good." <strong>What do the bad ones say.</strong></p>
+    
+    <div class="q-ours"><strong>Ours:</strong> Trustpilot, public and unedited — I can't remove one of them. Our lowest review is a 3-star, and what it says is that <strong>it took more effort than he expected.</strong> Which, honestly, it should — if the plan is six figures.<br><br><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">trustpilot.com/review/highticketsalesacademy.com</a></div>
+  </div>
+</details>
+<details class="q-item">
+  <summary><span class="q-num">7</span><span class="q-title">What does their refund policy actually say?</span></summary>
+  <div class="q-body">
+    
+    <ul class="q-probes"><li>Read it before you sign, not after.</li></ul>
+    <div class="q-ours"><strong>And know this regardless:</strong> federal law gives you 3 days — 72 hours — to cancel, no matter what the contract says. That protection exists whether they mention it or not. Most won't mention it.</div>
+  </div>
+</details>
+    </div>
+
+    <div class="sec-head" style="margin-top:28px;">
+      <div class="sec-num">▶</div>
+      <h3>If you'd rather watch than read</h3>
+    </div>
+    <div class="video-grid">
+      <div class="video-card video-card--featured">
+  <div class="video-badge">If you only watch one</div>
+  <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/bd65afldLmE" title="Taylor Conroy" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="video-card-title">Taylor Conroy</div>
+  <div class="video-card-desc">CEO, TEDx coaching company. He hires our people — from the buyer's side, what he looks for and why he hires from us.</div>
+</div>
+<div class="video-card">
+  
+  <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/FqlY37NaIsk" title="Dana" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="video-card-title">Dana</div>
+  <div class="video-card-desc">A review she made entirely on her own. Life coach with 17k followers. We had no idea she'd recorded it until it was already posted.</div>
+</div>
+<div class="video-card">
+  
+  <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/WOVqPR-ufYM" title="Cassie" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="video-card-title">Cassie</div>
+  <div class="video-card-desc">Single mom. Probably closest to starting where you're starting.</div>
+</div>
+<div class="video-card">
+  
+  <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/eLAWEwE7pl4" title="Chad" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="video-card-title">Chad</div>
+  <div class="video-card-desc">In his own words — who trains you and why it matters.</div>
+</div>
+<a class="video-card video-card--link" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">
+  
+  <div class="video-card-title">Trustpilot Reviews</div>
+  <div class="video-card-desc">Public, unedited reviews — including our lowest-rated one.</div>
+  <span class="video-link-cta">Open Trustpilot →</span>
+</a>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:12px;font-style:italic;">(And if it matters to you — we have more women than men.)</p>
+
+    <div class="ask-block">
+      <h4>What I&#x27;m actually asking for</h4>
+      <p>Twenty to thirty minutes. That's it.</p><p>Here's the honest math on that, and there's no version where it costs you:</p><p><strong>If you chose well</strong> — thirty minutes confirms it. You start with more confidence than you have right now, you know exactly what to hold them to, and you know who to call if it ever stops matching what you were promised.</p><p><strong>If you didn't</strong> — you're still inside your 72 hours. You'd have saved yourself thousands of dollars and six months of your life.</p><p><strong>Thirty minutes can't cost you more than it saves you.</strong> That's the whole pitch.</p><p>And one more thing that's on me, not you: your call with Richard was Tuesday. Mine wasn't until Friday. That's three days where you had the pitch and none of the answers. If we'd talked Tuesday you'd have had all of this before you had to decide anything. That gap is our fault.</p><p>Whatever you decide — please ask them those seven. That's the part I actually care about.</p>
+      <a href="https://meetings.hubspot.com/charles660/cj" class="invest-btn" target="_blank" rel="noopener noreferrer">Book 20 minutes with CJ →</a>
+    </div>
+  </div>
+
+  <div class="footer-sign">
+    <div class="name">CJ Clay</div>
+    <p>High Ticket Sales Academy</p>
+    <p><a href="tel:6166121735">(616) 612-1735</a></p>
+    <p><a href="mailto:cj@highticketsalesacademy.com">cj@highticketsalesacademy.com</a></p>
+  </div>
+</div>
+<script>
+(function(){
+  var slug="Tf8lcoiY3Ad9tCouxMZsBx1X";
+  if(sessionStorage.getItem('htsa_rv_'+slug)) return;
+  sessionStorage.setItem('htsa_rv_'+slug,'1');
+  fetch('/r/_manifest.json?v='+Date.now()).then(function(r){return r.json();}).then(function(m){
+    if(!m.links||!m.links[slug]) return;
+    m.links[slug]._local_viewed_at=new Date().toISOString();
+  }).catch(function(){});
+})();
+</script>
+</body>
+</html>
