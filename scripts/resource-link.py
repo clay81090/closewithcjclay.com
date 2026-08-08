@@ -266,20 +266,18 @@ def render_personal_reviews_html(reviews: list, title: str = "A few of CJ's Pers
             <p class="ref-strip-quote-attr">— {r["name"]} · {context}</p>
           </div>"""
         )
-    # Last review goes in the right column; all others stack on the left.
-    left = "\n".join(cards[:-1]) if len(cards) > 1 else "\n".join(cards)
-    right = cards[-1] if len(cards) > 1 else ""
+    mid = (len(cards) + 1) // 2
+    left = "\n".join(cards[:mid])
+    right = "\n".join(cards[mid:])
     return f"""<!-- CJ personal reviews (prospect-specific) -->
   <div class="ref-strip">
-    <div class="ref-strip-inner">
-      <div class="ref-strip-links-col">
-        <div class="ref-strip-label">{title}</div>
-        <p style="font-size:12px;line-height:1.6;color:var(--muted);margin:0 0 14px;max-width:320px;">Real messages and posts from people who worked directly with CJ, not copied from Trustpilot.</p>
-        <div class="ref-strip-mini-stack">
+    <div class="ref-strip-label">{title}</div>
+    <p class="ref-strip-personal-intro">Real messages and posts from people who worked directly with CJ, not copied from Trustpilot.</p>
+    <div class="ref-strip-inner ref-strip-inner--personal-reviews">
+      <div class="ref-strip-mini-stack">
 {left}
-        </div>
       </div>
-      <div class="ref-strip-quote-wrap" style="gap:14px;">
+      <div class="ref-strip-mini-stack">
 {right}
       </div>
     </div>
