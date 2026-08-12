@@ -313,7 +313,7 @@ def render_about_htsa() -> str:
     """Part 1 — Chad only. Book banner + Trustpilot live here (not duplicated below)."""
     return """  <div class="sec-head">
     <div class="sec-num">1</div>
-    <h3>Who Trains You</h3>
+    <h3>Who Mentors You</h3>
   </div>
   <div class="rl-q-wrap">
     <div class="rl-q-item">
