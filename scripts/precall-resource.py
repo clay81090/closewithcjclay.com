@@ -145,20 +145,21 @@ def resource_card(href: str, badge: str, title: str, desc: str, cta: str, varian
 
 
 def render_resources_html(first: str) -> str:
+    # Dana first (CJ's #1 pick). Chad's book lives in Part 1 only — do not duplicate here.
     featured = [
-        resource_card(
-            "https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE",
-            "⭐ If you only watch one",
-            "Taylor Conroy (TEDx Coach) — why he hires our members",
-            "Taylor is a TEDx coach who actively hires HTSA-certified closers. Hear directly from a hiring manager why he trusts our members.",
-            "Watch on YouTube",
-            "featured",
-        ),
         resource_card(
             "https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S",
             "⭐ CJ's #1 pick",
             "Dana — unsolicited personal review",
             "She recorded this completely on her own — we had no idea until she posted it. Life coach with a community of about 17,000 followers.",
+            "Watch on YouTube",
+            "featured",
+        ),
+        resource_card(
+            "https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE",
+            "⭐ If you only watch one",
+            "Taylor Conroy (TEDx Coach) — why he hires our members",
+            "Taylor is a TEDx coach who actively hires HTSA-certified closers. Hear directly from a hiring manager why he trusts our members.",
             "Watch on YouTube",
             "featured",
         ),
@@ -201,11 +202,15 @@ def render_resources_html(first: str) -> str:
         resource_card("https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf", "", "Cassie — single mom success story", "Relatable story — single mom who made the transition work around real life.", "Watch on YouTube"),
         resource_card("https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib", "", "Josh — Alex Hormozi background", "High-profile sales background — hear how HTSA fit into his path.", "Watch on YouTube"),
         resource_card("https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8", "", "Brianna — Tony Robbins team", "Credibility from a big-name organization — her HTSA experience.", "Watch on YouTube"),
-        resource_card("https://youtu.be/eLAWEwE7pl4?si=VfiqAxeOKFnoJ_Mm", "", "Chad — in his own words", "Who actually trains you and why that matters.", "Watch on YouTube"),
         resource_card("https://www.highticketsalesacademy.com", "", "HTSA Website — more stories &amp; outcomes", "Many more member outcomes, screenshots, and program details on our main site.", "Visit highticketsalesacademy.com"),
-        resource_card("https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH", "", "Chad's Book — <em>The Book on High Ticket Sales</em>", "The ultimate guide by HTSA founder Chad Aleo — available on Amazon.", "View on Amazon"),
         resource_card("https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf", "", "Top 20 Companies in High Ticket Sales", "Industry overview PDF — where HTSA fits in the landscape.", "Open PDF"),
     ]
+    trustpilot = (
+        '<p style="margin:18px 0 0;"><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" '
+        'class="rl-trustpilot-link" target="_blank" rel="noopener noreferrer">'
+        '<span class="rl-trustpilot-stars" aria-hidden="true">★★★★★</span>'
+        '<span class="rl-trustpilot-text">Trustpilot Reviews — 4.9 stars out of 5</span></a></p>'
+    )
     return f"""
   <div class="cj-resources-wrap">
     <p class="cj-resources-lead"><strong>{escape(first)}</strong> — if you watch one thing before we talk, make it the first one.</p>
@@ -215,6 +220,7 @@ def render_resources_html(first: str) -> str:
     <div class="cj-resources-featured">{"".join(placement)}</div>
     <p class="cj-resources-kicker">More success stories from our network</p>
     <div class="cj-resources-grid">{"".join(compact)}</div>
+    {trustpilot}
   </div>"""
 
 
@@ -301,39 +307,18 @@ def render_call_card(data: dict) -> str:
 
 
 def render_about_htsa() -> str:
+    """Part 1 — Chad only. Book banner lives here (not duplicated in resources)."""
     return """  <div class="sec-head">
     <div class="sec-num">1</div>
-    <h3>About HTSA</h3>
+    <h3>Who Trains You</h3>
   </div>
   <div class="rl-q-wrap">
     <div class="rl-q-item">
-      <h4>Who trains you</h4>
       <div class="rl-q-ours">
-        <p><strong>Chad Aleo.</strong> Roughly <strong>$28 million</strong> in revenue closed as a working closer before he built the academy. Mentored by Tony Robbins. Best-selling author on Amazon.</p>
-        <p style="margin-top:12px;">He trains live twice a week — Tuesdays 12 PM EST, Wednesdays 5 PM EST — and does your final one-on-one certification personally.</p>
+        <p>You're validated and placed directly by Chad Aleo himself — not a random coach.</p>
+        <p style="margin-top:12px;"><a href="https://youtu.be/eLAWEwE7pl4?si=VfiqAxeOKFnoJ_Mm" class="step-link" target="_blank" rel="noopener noreferrer">⭐ Meet Chad — CEO &amp; Founder at HTSA</a></p>
         <p style="margin-top:14px;"><a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><img class="rl-proof-img" src="https://closewithcjclay.com/resource-links/assets/chad-aleo-book-banner.png" alt="Chad Aleo, best-selling author of The Book on High Ticket Sales"></a></p>
-        <div class="rl-proof-caption">Chad Aleo · Best-Selling Author · <em>The Book on High Ticket Sales</em> — view on Amazon</div>
-      </div>
-    </div>
-    <div class="rl-q-item">
-      <h4>How placement works</h4>
-      <div class="rl-q-ours">
-        <p>We place you <strong>one-on-one</strong> with companies from our network of <strong>300+ partners</strong> — as many as you want. Not a job board, not a list you pay monthly to access. We make the introduction directly.</p>
-        <p style="margin-top:12px;">One member did <strong>17 interviews</strong>. Another had <strong>12 interview offers inside 3 days</strong> and finished 6 first rounds, all in the field he asked for.</p>
-        <p style="margin-top:14px;"><img class="rl-proof-img" src="https://closewithcjclay.com/resource-links/assets/tammy-17-job-offers-review.png" alt="Trustpilot review: member received over 17 job offers after HTSA"></p>
-      </div>
-    </div>
-    <div class="rl-q-item">
-      <h4>What the training looks like</h4>
-      <div class="rl-q-ours">
-        <p>Self-paced, lifetime access. You practice on a <strong>real $12,500 offer</strong>, running full calls as if you were already their closer — graded every call. Five levels of AI roleplay get progressively harder, so you've met the difficult buyers before you meet a real one.</p>
-      </div>
-    </div>
-    <div class="rl-q-item">
-      <h4>Where our members work</h4>
-      <div class="rl-q-ours">
-        <p>Tony Robbins · Alex Hormozi · Grant Cardone · John Maxwell · Taylor Conroy · Samantha Skelly — plus partners across health and wellness, coaching, business services, financial services, AI and marketing.</p>
-        <p style="margin-top:14px;"><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="rl-trustpilot-link" target="_blank" rel="noopener noreferrer"><span class="rl-trustpilot-stars" aria-hidden="true">★★★★★</span><span class="rl-trustpilot-text">Trustpilot Reviews — 4.9 stars out of 5</span></a></p>
+        <div class="rl-proof-caption">Chad Aleo · <em>The Book on High Ticket Sales</em> — view on Amazon</div>
       </div>
     </div>
   </div>"""
@@ -439,9 +424,9 @@ def render_page(data: dict) -> str:
     phone_line = f'<a href="tel:{phone_e164}">{phone_display}</a><br>' if phone_display else ""
 
     hero = f"""  <div class="hero-band hero-band--letter">
-    <p><strong>{first}</strong> — welcome, and looking forward to it.</p>
-    <p>Forty-five minutes. We'll cover what matters to you and make sure this is a good fit for both of us, and the right move for your next chapter. High ticket sales is a career that leads everywhere — every company, every vertical wants a closer, and that makes you invaluable in the marketplace. The world is remote now.</p>
-    <p>Everything below is here if you want it. <strong>Don't be late.</strong></p>
+    <p><strong>{first}</strong> — everything you'd want before we talk is right here.</p>
+    <p>On the call we'll cover where you're at, what you're after, and whether this is the right move for your next chapter. High ticket sales is one of the few careers that travels — every company in every vertical needs someone who can close, and that's what makes a good closer invaluable in the marketplace. The world went remote, and the demand followed it.</p>
+    <p>Have a look at whatever's useful. Look forward to connecting.</p>
   </div>"""
 
     call_card = render_call_card(data) if show_call else ""
@@ -582,17 +567,16 @@ def assert_clean(html: str) -> None:
         ("rl-curriculum-grid", "curriculum grid"),
         ("rl-member-contacts", "member contacts"),
         ("whop.com/checkout", "Whop checkout"),
-        ("ask them", "ask them framing"),
-        ("bad apples", "bad apples"),
         ("Need to reschedule", "reschedule link"),
         ("Add to Calendar", "calendar button"),
-        ("38 days", "placement average"),
-        ("23 days", "setter average"),
-        ("72 hour", "72-hour refund"),
-        ("72-hour", "72-hour refund"),
+        ("Don't be late", "don't be late"),
+        ("$28 million", "$28M line"),
     ]:
         if needle.lower() in body.lower():
             bad.append(label)
+    # Book Amazon link should appear once (Part 1 only)
+    if body.count("Book-High-Ticket-Sales-Ultimate") != 1:
+        bad.append("book link count != 1")
     if bad:
         raise SystemExit("Stale / forbidden content: " + ", ".join(bad))
 
