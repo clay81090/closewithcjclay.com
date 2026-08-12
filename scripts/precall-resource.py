@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Pre-call resource pages at closewithcjclay.com/r/<first_last>/.
 
-Standing template from CURSOR_BUILD_PRECALL_RESOURCE_TEMPLATE.md.
-No email gate, no pricing, no terms, no curriculum, no guarantee banner.
+Standing template: resources only. No discovery, no demo, no pricing, no gate.
+Confirm button only on the call card.
 
 Usage:
   python3 scripts/precall-resource.py create \\
@@ -10,10 +10,10 @@ Usage:
     --email "sarahnitterauer@gmail.com" \\
     --phone-e164 "+18282158111" \\
     --phone-display "+1 (828) 215-8111" \\
-    --call-time "3:00 PM" --timezone "EST" --call-format "Phone or Zoom" \\
+    --call-day "Wednesday" --call-date "Aug 12" \\
+    --call-time "3:00 PM" --timezone "EST" \\
+    --call-format "Phone or Zoom" \\
     --ship
-
-  # Optional: --call-day "Wednesday" --call-date "Aug 12" --call-iso "2026-08-12T15:00:00-04:00"
 """
 
 from __future__ import annotations
@@ -22,6 +22,7 @@ import argparse
 import json
 import re
 import subprocess
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -44,7 +45,6 @@ GAS_ENDPOINT = (
     "https://script.google.com/macros/s/"
     "AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec"
 )
-HUBSPOT_RESCHEDULE = "https://meetings.hubspot.com/charles660/cj"
 CUSTOM_SLUG_RE = re.compile(r"^[a-z0-9_-]{3,40}$")
 LIVE_POLL_INTERVAL_SEC = 10
 LIVE_POLL_TIMEOUT_SEC = 360
@@ -110,16 +110,8 @@ def load_defaults() -> dict:
 
 
 def enrollment_css() -> str:
-    """Base enrollment CSS with email-gate block removed (pre-call has no gate)."""
-    css = (ASSETS_DIR / "enrollment-styles.css").read_text(encoding="utf-8")
-    # Drop private-page email gate styles from embedded CSS.
-    start = css.find("  /* Private page email gate */")
-    if start != -1:
-        # Cut through end of .email-gate-foot block
-        end = css.find("  .rl-ask-wrap", start)
-        if end != -1:
-            css = css[:start] + css[end:]
-    return css
+    """Reuse Tammy CSS as-is (no edits). Email-gate CSS is unused without the HTML."""
+    return (ASSETS_DIR / "enrollment-styles.css").read_text(encoding="utf-8")
 
 
 def logo_html() -> str:
@@ -130,7 +122,6 @@ def logo_html() -> str:
 def footer_html() -> str:
     """Footer markup only — strip enrollment Terms-gate <script> leftovers."""
     raw = (ASSETS_DIR / "footer-snippet.html").read_text(encoding="utf-8")
-    # Keep HTML through copyright bar; drop any trailing Terms scripts.
     cut = raw.find("<script>")
     html = raw[:cut] if cut != -1 else raw
     return html.strip()
@@ -217,7 +208,7 @@ def render_resources_html(first: str) -> str:
     ]
     return f"""
   <div class="cj-resources-wrap">
-    <p class="cj-resources-lead"><strong>{escape(first)}</strong> — if you only watch one thing before we talk, make it the first one.</p>
+    <p class="cj-resources-lead"><strong>{escape(first)}</strong> — if you watch one thing before we talk, make it the first one.</p>
     <p class="cj-resources-kicker">⭐ Start here — CJ's top picks</p>
     <div class="cj-resources-featured">{"".join(featured)}</div>
     <p class="cj-resources-kicker">⭐ Placement — why our members get results</p>
@@ -256,48 +247,12 @@ def render_personal_reviews_html(reviews: list, title: str) -> str:
   </div>"""
 
 
-FAQ_ITEMS = [
-    (
-        "What does the program actually include?",
-        "Self-paced modules plus five levels of AI roleplay on a real offer, live coaching twice a week with Chad, one-on-one certification assessment, resume and interview prep, one-on-one placement, and 90 days of post-hire call review. Lifetime access to training, coaching, and community.",
-    ),
-    (
-        "How long until I'm placed?",
-        "Certification takes most people about 30 days self-paced. Average time to land after that: <strong>38 days for closers, 23 days for setters.</strong>",
-    ),
-    (
-        "Do I need sales experience?",
-        "No. About half our members come in without it. Experienced reps come in for the reps, the placement network, and accountability rather than the fundamentals.",
-    ),
-    (
-        "What kinds of companies?",
-        "300+ partners across health and wellness, coaching, business services, financial services, AI and marketing agencies, and real estate education. Members have placed with teams at Tony Robbins, Alex Hormozi, Grant Cardone, John Maxwell, Taylor Conroy, and Samantha Skelly.",
-    ),
-    (
-        "What does it pay?",
-        "Typical partner offer is $8k–$12k, commission usually 10–15%. What you make is a function of how many conversations you take and how good you get. <strong>No income is promised and none is implied.</strong>",
-    ),
-    (
-        "How much time does it take?",
-        "Self-paced except Chad's two live calls a week, and those are recorded. Members with full-time jobs typically finish in three to six weeks.",
-    ),
-    (
-        "How is placement handled?",
-        "One-on-one. We introduce you directly to partner companies — you're not applying through a job board or paying a monthly fee for access to a list.",
-    ),
-]
-
-
-def render_faq_html() -> str:
-    parts = []
-    for q, a in FAQ_ITEMS:
-        parts.append(
-            f"""<details class="rl-faq-item">
-  <summary>{escape(q)}</summary>
-  <div class="rl-faq-body">{a}</div>
-</details>"""
-        )
-    return "\n".join(parts)
+def has_call_details(data: dict) -> bool:
+    return bool(
+        (data.get("call_time") or "").strip()
+        or (data.get("call_day") or "").strip()
+        or (data.get("call_date") or "").strip()
+    )
 
 
 def call_when_line(data: dict) -> str:
@@ -317,55 +272,69 @@ def call_when_line(data: dict) -> str:
     return " · ".join(bits) if bits else "Time to be confirmed"
 
 
-def has_call_details(data: dict) -> bool:
-    return bool((data.get("call_time") or "").strip() or (data.get("call_day") or "").strip() or (data.get("call_date") or "").strip())
-
-
-def resolve_call_iso(data: dict) -> str | None:
-    """Return ISO datetime for ICS. If only time given, use next occurrence in America/New_York."""
-    raw = (data.get("call_iso") or "").strip()
-    if raw:
-        return raw
+def billing_call_line(data: dict) -> str:
+    day = (data.get("call_day") or "").strip()
     time_s = (data.get("call_time") or "").strip()
-    if not time_s:
-        return None
-    m = re.match(r"^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$", time_s.strip(), re.I)
-    if not m:
-        return None
-    hour = int(m.group(1))
-    minute = int(m.group(2) or 0)
-    ampm = m.group(3).upper()
-    if ampm == "PM" and hour != 12:
-        hour += 12
-    if ampm == "AM" and hour == 12:
-        hour = 0
-    tz = ZoneInfo("America/New_York")
-    now = datetime.now(tz)
-    candidate = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
-    if candidate <= now:
-        candidate += timedelta(days=1)
-    return candidate.isoformat()
+    tz = (data.get("call_timezone") or "EST").strip()
+    if day and time_s:
+        return f"{day} at {time_s} {tz}"
+    if time_s:
+        return f"{time_s} {tz}"
+    return "Call details on this page"
 
 
-def render_call_card(data: dict, first: str) -> str:
+def render_call_card(data: dict) -> str:
     if not has_call_details(data):
         return ""
     when = escape(call_when_line(data))
     fmt = escape((data.get("call_format") or "Zoom").strip())
     confirm_day = escape((data.get("call_day") or "soon").strip() or "soon")
-    call_iso = resolve_call_iso(data) or ""
     return f"""
-  <div class="rl-call-card" id="rl-call-card"
-       data-call-iso="{escape(call_iso)}"
-       data-page-url="https://closewithcjclay.com/r/{escape(data['slug'])}/"
-       data-confirm-day="{confirm_day}">
-    <div class="rl-call-card-kicker">📅 Your call with CJ</div>
-    <div class="rl-call-card-when">{when}</div>
-    <p class="rl-call-card-meta">About 45 minutes · {fmt}</p>
-    <div class="rl-call-card-actions">
-      <button type="button" id="rl-add-calendar" class="invest-btn">Add to Calendar</button>
-      <button type="button" id="rl-confirm-call" class="invest-btn secondary">Confirm I'll be there</button>
-      <a href="{HUBSPOT_RESCHEDULE}" id="rl-reschedule" class="step-link" target="_blank" rel="noopener noreferrer">Need to reschedule?</a>
+  <div style="padding:18px 36px 22px;border-bottom:1px solid var(--mid);">
+    <div class="rl-q-ours" id="rl-call-card" data-confirm-day="{confirm_day}">
+      <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--green-dark);">📅 Your call with CJ</p>
+      <p style="margin:0 0 4px;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);line-height:1.3;">{when}</p>
+      <p style="margin:0 0 14px;font-size:13px;color:var(--muted);">45 minutes · {fmt}</p>
+      <button type="button" id="rl-confirm-call" class="invest-btn">Confirm I'll be there</button>
+    </div>
+  </div>"""
+
+
+def render_about_htsa() -> str:
+    return """  <div class="sec-head">
+    <div class="sec-num">1</div>
+    <h3>About HTSA</h3>
+  </div>
+  <div class="rl-q-wrap">
+    <div class="rl-q-item">
+      <h4>Who trains you</h4>
+      <div class="rl-q-ours">
+        <p><strong>Chad Aleo.</strong> Roughly <strong>$28 million</strong> in revenue closed as a working closer before he built the academy. Mentored by Tony Robbins. Best-selling author on Amazon.</p>
+        <p style="margin-top:12px;">He trains live twice a week — Tuesdays 12 PM EST, Wednesdays 5 PM EST — and does your final one-on-one certification personally.</p>
+        <p style="margin-top:14px;"><a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><img class="rl-proof-img" src="https://closewithcjclay.com/resource-links/assets/chad-aleo-book-banner.png" alt="Chad Aleo, best-selling author of The Book on High Ticket Sales"></a></p>
+        <div class="rl-proof-caption">Chad Aleo · Best-Selling Author · <em>The Book on High Ticket Sales</em> — view on Amazon</div>
+      </div>
+    </div>
+    <div class="rl-q-item">
+      <h4>How placement works</h4>
+      <div class="rl-q-ours">
+        <p>We place you <strong>one-on-one</strong> with companies from our network of <strong>300+ partners</strong> — as many as you want. Not a job board, not a list you pay monthly to access. We make the introduction directly.</p>
+        <p style="margin-top:12px;">One member did <strong>17 interviews</strong>. Another had <strong>12 interview offers inside 3 days</strong> and finished 6 first rounds, all in the field he asked for.</p>
+        <p style="margin-top:14px;"><img class="rl-proof-img" src="https://closewithcjclay.com/resource-links/assets/tammy-17-job-offers-review.png" alt="Trustpilot review: member received over 17 job offers after HTSA"></p>
+      </div>
+    </div>
+    <div class="rl-q-item">
+      <h4>What the training looks like</h4>
+      <div class="rl-q-ours">
+        <p>Self-paced, lifetime access. You practice on a <strong>real $12,500 offer</strong>, running full calls as if you were already their closer — graded every call. Five levels of AI roleplay get progressively harder, so you've met the difficult buyers before you meet a real one.</p>
+      </div>
+    </div>
+    <div class="rl-q-item">
+      <h4>Where our members work</h4>
+      <div class="rl-q-ours">
+        <p>Tony Robbins · Alex Hormozi · Grant Cardone · John Maxwell · Taylor Conroy · Samantha Skelly — plus partners across health and wellness, coaching, business services, financial services, AI and marketing.</p>
+        <p style="margin-top:14px;"><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="rl-trustpilot-link" target="_blank" rel="noopener noreferrer"><span class="rl-trustpilot-stars" aria-hidden="true">★★★★★</span><span class="rl-trustpilot-text">Trustpilot Reviews — 4.9 stars out of 5</span></a></p>
+      </div>
     </div>
   </div>"""
 
@@ -424,77 +393,6 @@ def tracking_script(data: dict) -> str:
     }});
   }}
 
-  var reschedule = document.getElementById('rl-reschedule');
-  if (reschedule) {{
-    reschedule.addEventListener('click', function() {{
-      postEvent('reschedule_click');
-    }});
-  }}
-
-  function pad(n) {{ return String(n).padStart(2, '0'); }}
-  function toIcsUtc(d) {{
-    return d.getUTCFullYear() + pad(d.getUTCMonth()+1) + pad(d.getUTCDate()) + 'T' +
-      pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + pad(d.getUTCSeconds()) + 'Z';
-  }}
-
-  var calBtn = document.getElementById('rl-add-calendar');
-  var callCard = document.getElementById('rl-call-card');
-  if (calBtn && callCard) {{
-    calBtn.addEventListener('click', function() {{
-      var iso = callCard.getAttribute('data-call-iso') || '';
-      var pageUrl = callCard.getAttribute('data-page-url') || canonicalUrl();
-      if (!iso) {{
-        window.open({json.dumps(HUBSPOT_RESCHEDULE)}, '_blank');
-        postEvent('calendar_add', {{ fallback: 'hubspot' }});
-        return;
-      }}
-      var start = new Date(iso);
-      if (isNaN(start.getTime())) {{
-        window.open({json.dumps(HUBSPOT_RESCHEDULE)}, '_blank');
-        postEvent('calendar_add', {{ fallback: 'hubspot' }});
-        return;
-      }}
-      var end = new Date(start.getTime() + 45*60*1000);
-      var stamp = toIcsUtc(new Date());
-      var uid = 'precall-' + slug + '@closewithcjclay.com';
-      var desc = 'HTSA call with CJ Clay.\\nPhone: (616) 612-1735\\nPage: ' + pageUrl;
-      var ics = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'PRODID:-//HTSA//Pre-Call//EN',
-        'CALSCALE:GREGORIAN',
-        'METHOD:PUBLISH',
-        'BEGIN:VEVENT',
-        'UID:' + uid,
-        'DTSTAMP:' + stamp,
-        'DTSTART:' + toIcsUtc(start),
-        'DTEND:' + toIcsUtc(end),
-        'SUMMARY:HTSA Call — CJ Clay',
-        'DESCRIPTION:' + desc.replace(/\\n/g, '\\\\n'),
-        'LOCATION:Phone or Zoom with CJ Clay',
-        'END:VEVENT',
-        'END:VCALENDAR'
-      ].join('\\r\\n');
-      var blob = new Blob([ics], {{ type: 'text/calendar;charset=utf-8' }});
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'htsa-call-cj-clay.ics';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      postEvent('calendar_add');
-    }});
-  }}
-
-  document.querySelectorAll('details.rl-faq-item').forEach(function(el) {{
-    el.addEventListener('toggle', function() {{
-      if (el.open) {{
-        var label = (el.querySelector('summary') || {{}}).textContent || '';
-        postEvent('faq_open', {{ faqLabel: label.trim() }});
-      }}
-    }});
-  }});
-
   document.querySelectorAll('a.cj-resource-card').forEach(function(a) {{
     a.addEventListener('click', function() {{
       var title = (a.querySelector('.cj-resource-card-title') || {{}}).textContent || '';
@@ -530,7 +428,7 @@ def render_page(data: dict) -> str:
     prepared = escape(data.get("prepared_date", ""))
     show_call = has_call_details(data)
     badge = "Pre-Call Resources" if show_call else "Resources"
-    call_note = escape(call_when_line(data)) if show_call else "Resources for your HTSA conversation"
+    call_note = escape(billing_call_line(data)) if show_call else "Resources for your HTSA conversation"
     defaults = load_defaults()
     reviews = data.get("personal_reviews") or defaults.get("personal_reviews") or []
     reviews_title = data.get("personal_reviews_title") or defaults.get(
@@ -541,62 +439,15 @@ def render_page(data: dict) -> str:
     phone_line = f'<a href="tel:{phone_e164}">{phone_display}</a><br>' if phone_display else ""
 
     hero = f"""  <div class="hero-band hero-band--letter">
-    <p>Hi <strong>{first}</strong> — looking forward to our call.</p>
-    <p>I put this page together so you're not hunting through your inbox. Everything you'd want to look at before we talk is right here — what the program actually is, who trains you, and what people who've been through it say.</p>
-    <p>Nothing here is a sales page. There's no pricing on this page and nothing to sign. Have a look at whatever's useful, ignore the rest, and bring your questions to the call.</p>
+    <p><strong>{first}</strong> — welcome, and looking forward to it.</p>
+    <p>Forty-five minutes. We'll cover what matters to you and make sure this is a good fit for both of us, and the right move for your next chapter. High ticket sales is a career that leads everywhere — every company, every vertical wants a closer, and that makes you invaluable in the marketplace. The world is remote now.</p>
+    <p>Everything below is here if you want it. <strong>Don't be late.</strong></p>
   </div>"""
 
-    call_card = render_call_card(data, first) if show_call else ""
-
-    expect = f"""  <div class="sec-head">
-    <div class="sec-num">1</div>
-    <h3>What to Expect on Our Call</h3>
-  </div>
-  <div class="rl-q-wrap">
-    <div class="rl-q-item">
-      <h4>What this call actually is</h4>
-      <div class="rl-q-ours">
-        <p>Forty-five minutes, straight questions, no pitch deck. I want to understand where you are, what you've tried, and what you actually want — then I'll tell you honestly whether this is a fit. <strong>I turn more people away from this than I put in it,</strong> and I'd rather find that out on a Tuesday than after you've spent money.</p>
-        <p style="margin-top:12px;"><strong>One thing worth saying up front so we're not talking past each other:</strong> we're not a staffing agency and I'm not hiring you. HTSA certifies closers and then places them with partner companies who pay commission. It's a program you invest in, and then you go earn. I mention it now because I'd rather you know that before we talk than be surprised by it.</p>
-      </div>
-    </div>
-    <div class="rl-q-item">
-      <h4>How to be ready</h4>
-      <ul class="rl-expect-list">
-        <li><strong>Somewhere you can talk.</strong> Not the car, not a lobby. You'll want to think.</li>
-        <li><strong>Forty-five uninterrupted minutes.</strong> If you've only got twenty, message me and we'll move it — a rushed call helps neither of us.</li>
-        <li><strong>Something to write with.</strong> There'll be a few numbers.</li>
-        <li><strong>If someone else is part of the decision, have them there.</strong> Easier than relaying it later.</li>
-      </ul>
-    </div>
-  </div>"""
-
-    faq = f"""  <div class="sec-head">
-    <div class="sec-num">2</div>
-    <h3>Quick Answers</h3>
-  </div>
-  <div class="rl-faq-wrap">
-{render_faq_html()}
-  </div>"""
-
-    train = f"""  <div class="sec-head">
-    <div class="sec-num">3</div>
-    <h3>Who Actually Trains You</h3>
-  </div>
-  <div class="rl-q-wrap">
-    <div class="rl-q-item">
-      <div class="rl-q-ours">
-        <p><strong>Chad Aleo.</strong> Roughly <strong>$28 million</strong> in revenue closed as a working closer before he built the academy. Mentored by Tony Robbins. Best-selling author on Amazon.</p>
-        <p style="margin-top:12px;">He trains <strong>live twice a week</strong> — Tuesdays 12 PM EST and Wednesdays 5 PM EST — and he does your final one-on-one certification assessment personally. Not a coach who's six months ahead of you.</p>
-        <p style="margin-top:14px;"><a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><img class="rl-proof-img" src="https://closewithcjclay.com/resource-links/assets/chad-aleo-book-banner.png" alt="Chad Aleo, best-selling author of The Book on High Ticket Sales"></a></p>
-        <div class="rl-proof-caption">Chad Aleo · Best-Selling Author · <em>The Book on High Ticket Sales</em></div>
-        <p style="margin-top:14px;"><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="rl-trustpilot-link" target="_blank" rel="noopener noreferrer"><span class="rl-trustpilot-stars" aria-hidden="true">★★★★★</span><span class="rl-trustpilot-text">Trustpilot Reviews — 4.9 stars out of 5</span></a></p>
-      </div>
-    </div>
-  </div>"""
+    call_card = render_call_card(data) if show_call else ""
 
     resources = f"""  <div class="sec-head">
-    <div class="sec-num">4</div>
+    <div class="sec-num">2</div>
     <h3>Videos, Proof &amp; Member Stories</h3>
   </div>
 {render_resources_html(data.get("first_name") or first_name(data["prospect_name"]))}"""
@@ -656,9 +507,7 @@ def render_page(data: dict) -> str:
     </div>
   </div>
 
-{expect}
-{faq}
-{train}
+{render_about_htsa()}
 {resources}
 
   {render_personal_reviews_html(reviews, reviews_title)}
@@ -705,17 +554,47 @@ def http_status(url: str) -> int | None:
 def wait_for_live(url: str) -> bool:
     deadline = time.monotonic() + LIVE_POLL_TIMEOUT_SEC
     attempt = 0
-    print(f"Waiting for live page (up to {LIVE_POLL_TIMEOUT_SEC // 60} min)…", file=__import__("sys").stderr)
+    print(f"Waiting for live page (up to {LIVE_POLL_TIMEOUT_SEC // 60} min)…", file=sys.stderr)
     while time.monotonic() < deadline:
         attempt += 1
         code = http_status(url)
         if code is not None and 200 <= code < 300:
-            print(f"  attempt {attempt}: HTTP {code} — ready.", file=__import__("sys").stderr)
+            print(f"  attempt {attempt}: HTTP {code} — ready.", file=sys.stderr)
             return True
         label = f"HTTP {code}" if code is not None else "no response"
-        print(f"  attempt {attempt}: {label} — retry in {LIVE_POLL_INTERVAL_SEC}s…", file=__import__("sys").stderr)
+        print(f"  attempt {attempt}: {label} — retry in {LIVE_POLL_INTERVAL_SEC}s…", file=sys.stderr)
         time.sleep(LIVE_POLL_INTERVAL_SEC)
     return False
+
+
+def assert_clean(html: str) -> None:
+    body = re.sub(r"<style>.*?</style>", "", html, flags=re.DOTALL)
+    bad = []
+    for needle, label in [
+        ('id="email-gate"', "email-gate"),
+        ("invest-pay-zone", "invest-pay-zone"),
+        ("hts-terms-agreement", "terms gate"),
+        ("enrollment-guarantee-banner", "guarantee banner"),
+        ("Val Tappan", "Val Tappan"),
+        ("tammy_berry", "tammy_berry"),
+        ("chad_beldon", "chad_beldon"),
+        ("chad-beldon", "chad-beldon"),
+        ("rl-curriculum-grid", "curriculum grid"),
+        ("rl-member-contacts", "member contacts"),
+        ("whop.com/checkout", "Whop checkout"),
+        ("ask them", "ask them framing"),
+        ("bad apples", "bad apples"),
+        ("Need to reschedule", "reschedule link"),
+        ("Add to Calendar", "calendar button"),
+        ("38 days", "placement average"),
+        ("23 days", "setter average"),
+        ("72 hour", "72-hour refund"),
+        ("72-hour", "72-hour refund"),
+    ]:
+        if needle.lower() in body.lower():
+            bad.append(label)
+    if bad:
+        raise SystemExit("Stale / forbidden content: " + ", ".join(bad))
 
 
 def build_data(args: argparse.Namespace) -> dict:
@@ -737,7 +616,6 @@ def build_data(args: argparse.Namespace) -> dict:
         "call_time": (args.call_time or "").strip(),
         "call_timezone": (args.timezone or "EST").strip(),
         "call_format": (args.call_format or "Zoom").strip(),
-        "call_iso": (args.call_iso or "").strip(),
         "show_member_contacts": False,
     }
 
@@ -772,34 +650,13 @@ def cmd_create(args: argparse.Namespace) -> None:
     out_dir = R_DIR / slug
     out_dir.mkdir(parents=True, exist_ok=True)
     html = render_page(data)
+    assert_clean(html)
     (out_dir / "index.html").write_text(html, encoding="utf-8")
     if EXPIRED_TEMPLATE.is_file():
         (R_DIR / "_expired.html").write_text(EXPIRED_TEMPLATE.read_text(encoding="utf-8"), encoding="utf-8")
 
     url = f"https://closewithcjclay.com/r/{slug}/"
     print(url)
-
-    # Stale-string guard on rendered body (ignore unused CSS class names)
-    body_only = html
-    if "<style>" in html and "</style>" in html:
-        body_only = re.sub(r"<style>.*?</style>", "", html, flags=re.DOTALL)
-    bad_hits = []
-    if 'id="email-gate"' in body_only or "id='email-gate'" in body_only:
-        bad_hits.append("email-gate element")
-    if "invest-pay-zone" in body_only:
-        bad_hits.append("invest-pay-zone")
-    if "hts-terms-agreement" in body_only:
-        bad_hits.append("hts-terms-agreement")
-    if "enrollment-guarantee-banner" in body_only:
-        bad_hits.append("enrollment-guarantee-banner")
-    if "Val Tappan" in body_only:
-        bad_hits.append("Val Tappan")
-    if "tammy_berry" in body_only:
-        bad_hits.append("tammy_berry")
-    if "chad_beldon" in body_only or "chad-beldon" in body_only:
-        bad_hits.append("chad_beldon")
-    if bad_hits:
-        raise SystemExit("Stale strings found: " + ", ".join(bad_hits))
 
     if args.ship:
         git_ship(
@@ -810,11 +667,10 @@ def cmd_create(args: argparse.Namespace) -> None:
                 "resource-links/registry.json",
                 f"resource-links/data/{prospect_id}.json",
                 "resource-links/data/_precall-defaults.json",
-                "resource-links/assets/enrollment-styles.css",
                 "resource-links/assets/logo-snippet.html",
                 "scripts/precall-resource.py",
             ],
-            f"Add pre-call resource page for {data['prospect_name']} (/r/{slug}).",
+            f"Rebuild pre-call resources for {data['prospect_name']} (/r/{slug}).",
         )
         if wait_for_live(url):
             print("READY")
@@ -838,7 +694,6 @@ def main() -> None:
     p.add_argument("--call-time", default="")
     p.add_argument("--timezone", default="EST")
     p.add_argument("--call-format", default="Zoom")
-    p.add_argument("--call-iso", default="", help="ISO datetime for ICS, e.g. 2026-08-12T15:00:00-04:00")
     p.add_argument("--ship", action="store_true")
     p.set_defaults(func=cmd_create)
     args = ap.parse_args()
