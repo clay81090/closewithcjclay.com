@@ -202,14 +202,17 @@ def render_resources_html(first: str) -> str:
         resource_card("https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf", "", "Cassie — single mom success story", "Relatable story — single mom who made the transition work around real life.", "Watch on YouTube"),
         resource_card("https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib", "", "Josh — Alex Hormozi background", "High-profile sales background — hear how HTSA fit into his path.", "Watch on YouTube"),
         resource_card("https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8", "", "Brianna — Tony Robbins team", "Credibility from a big-name organization — her HTSA experience.", "Watch on YouTube"),
-        resource_card("https://www.highticketsalesacademy.com", "", "HTSA Website — more stories &amp; outcomes", "Many more member outcomes, screenshots, and program details on our main site.", "Visit highticketsalesacademy.com"),
         resource_card("https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf", "", "Top 20 Companies in High Ticket Sales", "Industry overview PDF — where HTSA fits in the landscape.", "Open PDF"),
     ]
-    trustpilot = (
-        '<p style="margin:18px 0 0;"><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" '
-        'class="rl-trustpilot-link" target="_blank" rel="noopener noreferrer">'
-        '<span class="rl-trustpilot-stars" aria-hidden="true">★★★★★</span>'
-        '<span class="rl-trustpilot-text">Trustpilot Reviews — 4.9 stars out of 5</span></a></p>'
+    website = (
+        '<div style="display:flex;justify-content:center;margin-top:12px;">'
+        '<a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact" '
+        'style="max-width:420px;width:100%;border:1.5px solid #1976D2;background:#fff;box-shadow:none;" '
+        'target="_blank" rel="noopener noreferrer">'
+        '<div class="cj-resource-card-title">HTSA Website — more stories &amp; outcomes</div>'
+        '<p class="cj-resource-card-desc">Many more member outcomes, screenshots, and program details on our main site.</p>'
+        '<span class="cj-resource-card-cta">Visit highticketsalesacademy.com</span>'
+        "</a></div>"
     )
     return f"""
   <div class="cj-resources-wrap">
@@ -220,7 +223,7 @@ def render_resources_html(first: str) -> str:
     <div class="cj-resources-featured">{"".join(placement)}</div>
     <p class="cj-resources-kicker">More success stories from our network</p>
     <div class="cj-resources-grid">{"".join(compact)}</div>
-    {trustpilot}
+    {website}
   </div>"""
 
 
@@ -307,7 +310,7 @@ def render_call_card(data: dict) -> str:
 
 
 def render_about_htsa() -> str:
-    """Part 1 — Chad only. Book banner lives here (not duplicated in resources)."""
+    """Part 1 — Chad only. Book banner + Trustpilot live here (not duplicated below)."""
     return """  <div class="sec-head">
     <div class="sec-num">1</div>
     <h3>Who Trains You</h3>
@@ -319,6 +322,7 @@ def render_about_htsa() -> str:
         <p style="margin-top:12px;"><a href="https://youtu.be/eLAWEwE7pl4?si=VfiqAxeOKFnoJ_Mm" class="step-link" target="_blank" rel="noopener noreferrer">⭐ Meet Chad — CEO &amp; Founder at HTSA</a></p>
         <p style="margin-top:14px;"><a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><img class="rl-proof-img" src="https://closewithcjclay.com/resource-links/assets/chad-aleo-book-banner.png" alt="Chad Aleo, best-selling author of The Book on High Ticket Sales"></a></p>
         <div class="rl-proof-caption">Chad Aleo · <em>The Book on High Ticket Sales</em> — view on Amazon</div>
+        <p style="margin-top:14px;"><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="rl-trustpilot-link" target="_blank" rel="noopener noreferrer"><span class="rl-trustpilot-stars" aria-hidden="true">★★★★★</span><span class="rl-trustpilot-text">Trustpilot Reviews — 4.9 stars out of 5</span></a></p>
       </div>
     </div>
   </div>"""
