@@ -204,11 +204,15 @@ def render_resources_html(first: str) -> str:
         resource_card("https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8", "", "Brianna — Tony Robbins team", "Credibility from a big-name organization — her HTSA experience.", "Watch on YouTube"),
         resource_card("https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf", "", "Top 20 Companies in High Ticket Sales", "Industry overview PDF — where HTSA fits in the landscape.", "Open PDF"),
     ]
+    # Blue accent (footer globe / site blue) + thin Trustpilot-star gold outside — same card shape as featured/placement.
     website = (
         '<div style="display:flex;justify-content:center;margin-top:12px;">'
         '<a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact" '
-        'style="max-width:420px;width:100%;border:1.5px solid #1976D2;background:#fff;box-shadow:none;" '
-        'target="_blank" rel="noopener noreferrer">'
+        'style="max-width:420px;width:100%;'
+        "background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);"
+        "border:3px solid #1976D2;border-left:5px solid #1565C0;"
+        "box-shadow:0 0 0 1.5px #e2b227,0 4px 14px rgba(10,22,40,0.08);"
+        '" target="_blank" rel="noopener noreferrer">'
         '<div class="cj-resource-card-title">HTSA Website — more stories &amp; outcomes</div>'
         '<p class="cj-resource-card-desc">Many more member outcomes, screenshots, and program details on our main site.</p>'
         '<span class="cj-resource-card-cta">Visit highticketsalesacademy.com</span>'
