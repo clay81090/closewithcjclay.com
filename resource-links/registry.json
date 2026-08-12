@@ -12,7 +12,21 @@
       "status": "active",
       "view_count": 0,
       "last_viewed_at": null
+    },
+    "sarah_nitterauer": {
+      "slug": "sarah_nitterauer",
+      "prospect_id": "sarah-nitterauer",
+      "prospect_name": "Sarah Nitterauer",
+      "email": "sarahnitterauer@gmail.com",
+      "phone_e164": "+18282158111",
+      "phone_display": "+1 (828) 215-8111",
+      "page_type": "precall",
+      "created_at": "2026-08-12T03:38:56Z",
+      "expires_at": "2026-11-10T03:38:56Z",
+      "status": "active",
+      "view_count": 0,
+      "last_viewed_at": null
     }
   },
-  "updated_at": "2026-08-07T14:30:00Z"
+  "updated_at": "2026-08-12T03:38:56Z"
 }
