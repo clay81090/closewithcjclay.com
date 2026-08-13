@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-12T04:45:11Z",
+  "updated_at": "2026-08-13T03:13:05Z",
   "links": {
     "tammy_berry": {
       "status": "active",
@@ -10,6 +10,12 @@
     "sarah_nitterauer": {
       "status": "active",
       "expires_at": "2026-11-10T04:45:11Z",
+      "view_count": 0,
+      "last_viewed_at": null
+    },
+    "cj_jackson": {
+      "status": "active",
+      "expires_at": "2026-11-11T03:13:05Z",
       "view_count": 0,
       "last_viewed_at": null
     }
