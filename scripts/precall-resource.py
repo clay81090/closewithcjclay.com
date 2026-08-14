@@ -431,7 +431,15 @@ def render_page(data: dict) -> str:
     email_line = f'<a href="mailto:{email}">{email}</a><br>' if email else ""
     phone_line = f'<a href="tel:{phone_e164}">{phone_display}</a><br>' if phone_display else ""
 
-    hero = f"""  <div class="hero-band hero-band--letter">
+    custom_hero = data.get("hero_paragraphs")
+    if custom_hero:
+        parts = []
+        for p in custom_hero:
+            body = p if p.lstrip().startswith("<") else escape(p)
+            parts.append(f"    <p>{body}</p>")
+        hero = "  <div class=\"hero-band hero-band--letter\">\n" + "\n".join(parts) + "\n  </div>"
+    else:
+        hero = f"""  <div class="hero-band hero-band--letter">
     <p><strong>{first}</strong> — everything you'd want before we talk is right here.</p>
     <p>On the call we'll cover where you're at, what you're after, and whether this is the right move for your next chapter. High ticket sales is one of the few careers that travels — every company in every vertical needs someone who can close, and that's what makes a good closer invaluable in the marketplace. The world went remote, and the demand followed it.</p>
     <p>Have a look at whatever's useful. Look forward to connecting.</p>
