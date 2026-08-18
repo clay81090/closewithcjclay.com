@@ -152,7 +152,49 @@
       "status": "active",
       "view_count": 0,
       "last_viewed_at": null
+    },
+    "bernice_joseph": {
+      "slug": "bernice_joseph",
+      "prospect_id": "bernice-joseph",
+      "prospect_name": "Bernice Joseph",
+      "email": "bernicejoseph33@gmail.com",
+      "phone_e164": "+13057219754",
+      "phone_display": "+1 (305) 721-9754",
+      "page_type": "precall",
+      "created_at": "2026-08-18T03:17:49Z",
+      "expires_at": "2026-11-16T03:17:49Z",
+      "status": "active",
+      "view_count": 0,
+      "last_viewed_at": null
+    },
+    "montgomery_dodson": {
+      "slug": "montgomery_dodson",
+      "prospect_id": "montgomery-dodson",
+      "prospect_name": "Montgomery Dodson",
+      "email": "montgomery.dodson@gmail.com",
+      "phone_e164": "+19186016211",
+      "phone_display": "+1 (918) 601-6211",
+      "page_type": "precall",
+      "created_at": "2026-08-18T03:17:49Z",
+      "expires_at": "2026-11-16T03:17:49Z",
+      "status": "active",
+      "view_count": 0,
+      "last_viewed_at": null
+    },
+    "christian_cherniawski": {
+      "slug": "christian_cherniawski",
+      "prospect_id": "christian-cherniawski",
+      "prospect_name": "Christian Cherniawski",
+      "email": "christian@highticketsalesacademy.com",
+      "phone_e164": "+15178193305",
+      "phone_display": "+1 (517) 819-3305",
+      "page_type": "precall",
+      "created_at": "2026-08-18T03:17:49Z",
+      "expires_at": "2026-11-16T03:17:49Z",
+      "status": "active",
+      "view_count": 0,
+      "last_viewed_at": null
     }
   },
-  "updated_at": "2026-08-17T01:52:24Z"
+  "updated_at": "2026-08-18T03:17:49Z"
 }

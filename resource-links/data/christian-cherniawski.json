@@ -1,0 +1,22 @@
+{
+  "page_type": "precall",
+  "prospect_id": "christian-cherniawski",
+  "prospect_name": "Christian Cherniawski",
+  "first_name": "Christian",
+  "email": "christian@highticketsalesacademy.com",
+  "phone_e164": "+15178193305",
+  "phone_display": "+1 (517) 819-3305",
+  "prepared_date": "Aug 17, 2026",
+  "slug": "christian_cherniawski",
+  "call_day": "Tuesday",
+  "call_date": "Aug 18",
+  "call_time": "4:00 PM",
+  "call_timezone": "EST",
+  "call_format": "Phone or Zoom",
+  "show_member_contacts": false,
+  "hero_paragraphs": [
+    "<strong>Christian</strong> \u2014 looking forward to connecting tomorrow.",
+    "Everything on this page is the same resource stack CJ sends prospects before discovery calls.",
+    "Have a look at whatever is useful. See you tomorrow at 4:00 PM EST."
+  ]
+}
