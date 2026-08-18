@@ -1214,27 +1214,32 @@
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   }
 
-  /* Personal notes to CJ — transparent navy so they contrast with white HTSA reviews */
+  /* Personal notes to CJ — same navy block UI as invest-box / welcome-band */
   .ref-strip-quote--personal {
-    background: rgba(10, 22, 40, 0.14);
-    border-color: rgba(10, 22, 40, 0.28);
-    box-shadow: 0 2px 12px rgba(10, 22, 40, 0.08);
+    background: var(--navy);
+    border: 1px solid rgba(0, 201, 122, 0.22);
+    box-shadow: 0 2px 12px rgba(10, 22, 40, 0.18);
   }
 
   .ref-strip-quote--personal .ref-strip-quote-meta {
-    color: var(--navy);
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .ref-strip-quote--personal .ref-strip-quote-body {
+    color: rgba(255, 255, 255, 0.78);
   }
 
   .ref-strip-quote--personal .ref-strip-quote-attr {
-    border-top-color: rgba(10, 22, 40, 0.22);
+    color: var(--white);
+    border-top-color: rgba(255, 255, 255, 0.12);
   }
 
   .ref-strip-name-mark {
-    background: rgba(10, 22, 40, 0.18);
-    color: inherit;
-    font-style: inherit;
+    background: var(--green);
+    color: var(--navy);
+    font-style: normal;
     font-weight: 700;
-    padding: 0 0.22em;
+    padding: 0 0.28em;
     border-radius: 3px;
   }
 
