@@ -211,13 +211,14 @@ def main() -> None:
     text = text.replace(" (template)</title>", "</title>")
 
     # Member Voices: blue personal reviews + centered banner (Joseph reference).
-    scripts_dir = Path(__file__).resolve().parent
-    if str(scripts_dir) not in sys.path:
-        sys.path.insert(0, str(scripts_dir))
-    from build_htsa_invoice_templates import sync_member_voices_ref_strip
-
     if "  <!-- Member stories & book" in text:
-        text = sync_member_voices_ref_strip(text)
+        import importlib.util
+
+        build_path = Path(__file__).resolve().parent / "build-htsa-invoice-templates.py"
+        spec = importlib.util.spec_from_file_location("htsa_invoice_templates", build_path)
+        build_mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(build_mod)
+        text = build_mod.sync_member_voices_ref_strip(text)
 
     out = root / f"htsa-enrollment-{slug}.html"
     if out.exists() and not args.overwrite:
