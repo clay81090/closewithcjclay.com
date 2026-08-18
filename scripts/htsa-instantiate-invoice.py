@@ -210,6 +210,15 @@ def main() -> None:
     # Production titles should not say "(template)".
     text = text.replace(" (template)</title>", "</title>")
 
+    # Member Voices: blue personal reviews + centered banner (Joseph reference).
+    scripts_dir = Path(__file__).resolve().parent
+    if str(scripts_dir) not in sys.path:
+        sys.path.insert(0, str(scripts_dir))
+    from build_htsa_invoice_templates import sync_member_voices_ref_strip
+
+    if "  <!-- Member stories & book" in text:
+        text = sync_member_voices_ref_strip(text)
+
     out = root / f"htsa-enrollment-{slug}.html"
     if out.exists() and not args.overwrite:
         raise SystemExit(f"Refusing to overwrite existing file: {out}\nPass --overwrite to replace.")

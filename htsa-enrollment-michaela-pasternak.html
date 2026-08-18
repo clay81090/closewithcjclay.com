@@ -1154,9 +1154,30 @@
   .ref-strip {
     background: linear-gradient(180deg, #eef2f7 0%, #e8edf4 100%);
     border-top: 1px solid var(--mid);
-    padding: 16px 36px 18px;
+    padding: 20px 36px 22px;
     page-break-inside: avoid;
     break-inside: avoid;
+  }
+
+  .ref-strip-banner {
+    text-align: center;
+    margin: 0 0 18px;
+  }
+
+  .ref-strip-banner .ref-strip-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.6px;
+    color: var(--navy);
+    margin: 0 0 8px;
+  }
+
+  .ref-strip-banner-desc {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0 auto;
+    max-width: 520px;
   }
 
   .ref-strip-inner {
@@ -1165,24 +1186,23 @@
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
-    gap: 22px 32px;
+    gap: 14px 28px;
   }
 
-  .ref-strip-links-col {
-    flex: 1 1 220px;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-  }
-
+  .ref-strip-links-col,
   .ref-strip-quote-wrap {
-    flex: 1 1 280px;
+    flex: 1 1 0;
     min-width: 0;
-    max-width: 420px;
     display: flex;
     flex-direction: column;
+    gap: 10px;
     align-self: stretch;
     min-height: 0;
+  }
+
+  .ref-strip-mini-stack > .ref-strip-quote,
+  .ref-strip-quote-wrap > .ref-strip-quote {
+    flex: 1 1 auto;
   }
 
   .ref-strip-quote {
@@ -1191,6 +1211,38 @@
     border-radius: 8px;
     padding: 12px 14px 14px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Personal notes to CJ — same blue card as HTSA Website block on /r/ pages */
+  .ref-strip-quote--personal {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 3px solid #1976D2;
+    border-left: 5px solid #1565C0;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1.5px #e2b227, 0 4px 14px rgba(10, 22, 40, 0.08);
+  }
+
+  .ref-strip-quote--personal .ref-strip-quote-meta {
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .ref-strip-quote--personal .ref-strip-quote-body {
+    color: var(--muted);
+  }
+
+  .ref-strip-quote--personal .ref-strip-quote-attr {
+    color: var(--navy);
+    border-top-color: rgba(25, 118, 210, 0.22);
+  }
+
+  .ref-strip-name-mark {
+    background: none;
+    color: var(--navy);
+    font-style: normal;
+    font-weight: 700;
+    padding: 0;
+    border-radius: 0;
   }
 
   .ref-strip-quote-meta {
@@ -1276,11 +1328,12 @@
 
   /* Short member voices under links (left column); same card UI as Trinity, stacked */
   .ref-strip-mini-stack {
-    margin-top: 14px;
+    margin-top: 0;
     display: flex;
     flex-direction: column;
     gap: 10px;
     max-width: 100%;
+    flex: 1 1 auto;
   }
 
   .ref-strip-quote--compact {
@@ -1331,6 +1384,11 @@
       display: block !important;
       overflow: visible !important;
       align-items: stretch !important;
+    }
+
+    .ref-strip-banner {
+      text-align: center;
+      margin-bottom: 16px;
     }
 
     .ref-strip-links-col,
@@ -2200,18 +2258,27 @@
 
   <!-- Member stories & book (subtle; site / Trustpilot / YouTube in footer) -->
   <div class="ref-strip">
+    <div class="ref-strip-banner">
+      <div class="ref-strip-label">Member voices</div>
+      <p class="ref-strip-banner-desc">Video resources and CJ's picks are in <strong style="color:var(--navy);">Section 4 above</strong>. Below are written testimonials from HTSA members.</p>
+    </div>
     <div class="ref-strip-inner">
       <div class="ref-strip-links-col">
-        <div class="ref-strip-label">Member voices</div>
-        <p style="font-size:12px;line-height:1.6;color:var(--muted);margin:0 0 14px;max-width:280px;">Video resources and CJ's picks are in <strong style="color:var(--navy);">Section 4 above</strong>. Below are written testimonials from members.</p>
         <div class="ref-strip-mini-stack">
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">Member voice</div>
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">Hey <mark class="ref-strip-name-mark">CJ</mark>, it's Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could've made for my life right now.
+
+I think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!</blockquote>
+            <p class="ref-strip-quote-attr">— Janaye · shared with HTSA</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+            <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">Just received this news from my first mock call and wanted to share... I'm SUPER grateful to you for helping me move forward with HTSA! Keep doing what you're doing!</blockquote>
             <p class="ref-strip-quote-attr">— Kate R. · shared with HTSA</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">Member voice</div>
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+            <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">I'm really enjoying the program so far and getting a ton of value out of it! Thanks again for helping me cross the line. The work you're doing is legitimately important I hope you know that!!!!</blockquote>
             <p class="ref-strip-quote-attr">— Jessica C. · shared with HTSA</p>
           </div>
@@ -2230,7 +2297,7 @@ I'd highly recommend HTSA to anyone looking to break into sales or level up prof
           </div>
         </div>
       </div>
-      <div class="ref-strip-quote-wrap" style="gap:14px;">
+      <div class="ref-strip-quote-wrap">
         <div class="ref-strip-quote ref-strip-quote--compact">
           <div class="ref-strip-quote-meta">Member voice</div>
           <blockquote class="ref-strip-quote-body">Before joining High Ticket Sales Academy, I had zero background in high-ticket sales. I didn't know the frameworks, the language, or even how the industry really worked — and walking in without that foundation felt intimidating at first.
@@ -2253,9 +2320,9 @@ Overall, it was a great investment.</blockquote>
 So far it's been nothing but positive, and I feel confident about the move. If you're an experienced rep on the fence about high-ticket, I'd absolutely recommend HTSA — take the step.</blockquote>
           <p class="ref-strip-quote-attr">— Morgan M. · shared with HTSA</p>
         </div>
-        <div class="ref-strip-quote ref-strip-quote--compact">
-          <div class="ref-strip-quote-meta">Member voice</div>
-          <blockquote class="ref-strip-quote-body">Hey CJ, Just wanted to say thanks, seriously. You didn't let me slip away after I tried to bail on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support? That's why I'm all in now. Appreciate you!</blockquote>
+        <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote-meta">To CJ</div>
+          <blockquote class="ref-strip-quote-body">Hey <mark class="ref-strip-name-mark">CJ</mark>, Just wanted to say thanks, seriously. You didn't let me slip away after I tried to bail on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support? That's why I'm all in now. Appreciate you!</blockquote>
           <p class="ref-strip-quote-attr">— Nick S. · shared with HTSA</p>
         </div>
       </div>

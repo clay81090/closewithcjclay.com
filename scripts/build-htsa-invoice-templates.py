@@ -10,7 +10,8 @@ Sources (read-only):
     (Closer ClarityPay must stay on the $7,200 Whop checkout — never the Setter plan.)
   - Setter: htsa-enrollment-trameil-lee.html
   - Dual header/curriculum chunk: htsa-enrollment-jocelyn-navarro.html (layout only; terms/pay zone = Val/Thomas+Trameil)
-  - Member stories CSS+HTML + footer (HTML + footer-link CSS): htsa-enrollment-wayne-wintermute.html
+  - Member Voices CSS+HTML (blue personal reviews + banner): htsa-enrollment-joseph-golen.html
+  - Footer (HTML + footer-link CSS): htsa-enrollment-wayne-wintermute.html
 
 Run from repo root: python3 scripts/build-htsa-invoice-templates.py
 """
@@ -22,8 +23,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATES = ROOT / "templates"
 SNIPPETS = TEMPLATES / "snippets"
-# Canonical layout: testimonials strip, colored footer icons, Trustpilot band.
+# Footer: colored icons, Trustpilot band.
 CANONICAL_LAYOUT_REF = ROOT / "htsa-enrollment-wayne-wintermute.html"
+# Member Voices: centered banner, Janaye first, blue HTSA Website block for personal CJ reviews.
+MEMBER_VOICES_REF = ROOT / "htsa-enrollment-joseph-golen.html"
 
 # Success Coach kickoff (Mark) — default for new invoices. Chris link is temporary fallback only.
 MARK_KICKOFF_URL = "https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call"
@@ -114,8 +117,20 @@ def val_tappan_pairs() -> list[tuple[str, str]]:
     ]
 
 
+def sync_member_voices_ref_strip(html: str, ref_text: str | None = None) -> str:
+    """Replace ref-strip CSS + HTML with Joseph's Member Voices layout (blue personal reviews)."""
+    if ref_text is None:
+        ref_text = MEMBER_VOICES_REF.read_text(encoding="utf-8")
+    return _sync_ref_strip_block(html, ref_text)
+
+
 def sync_ref_strip_from_wayne(html: str, wayne_text: str) -> str:
-    """Replace ref-strip CSS + HTML with Wayne's six-card Member voice layout (no Trinity column)."""
+    """Legacy name — prefer sync_member_voices_ref_strip."""
+    return _sync_ref_strip_block(html, wayne_text)
+
+
+def _sync_ref_strip_block(html: str, wayne_text: str) -> str:
+    """Replace ref-strip CSS + HTML from a reference invoice."""
     css_start = "  /* Subtle member stories + book (above footer; site / Trustpilot / YouTube stay in footer) */\n"
     css_end = "  /* Enrollment-specific performance guarantee callout (orange) — optional; include HTML block only when needed */\n"
     html_start = "  <!-- Member stories & book (subtle; site / Trustpilot / YouTube in footer) -->\n"
@@ -1051,22 +1066,23 @@ def main() -> None:
     thomas_raw = (ROOT / "htsa-enrollment-thomas-rulof.html").read_text(encoding="utf-8")
     trameil_raw = (ROOT / "htsa-enrollment-trameil-lee.html").read_text(encoding="utf-8")
     wayne_text = CANONICAL_LAYOUT_REF.read_text(encoding="utf-8")
+    member_voices_text = MEMBER_VOICES_REF.read_text(encoding="utf-8")
 
     p01_val = add_noindex(multi_replace(val_raw, val_tappan_pairs()))
-    p01_val = sync_ref_strip_from_wayne(p01_val, wayne_text)
+    p01_val = sync_member_voices_ref_strip(p01_val, member_voices_text)
     p01_val = apply_closer_three_inhouse_options(p01_val)
     p01 = placement_01_closer_cash_only(p01_val)
     p03 = add_noindex(multi_replace(trameil_raw, trameil_pairs()))
     p03 = setter_cash_only(p03)
-    p03 = sync_ref_strip_from_wayne(p03, wayne_text)
+    p03 = sync_member_voices_ref_strip(p03, member_voices_text)
     p04 = add_noindex(multi_replace(trameil_raw, trameil_pairs()))
-    p04 = sync_ref_strip_from_wayne(p04, wayne_text)
+    p04 = sync_member_voices_ref_strip(p04, member_voices_text)
 
     p02 = apply_closer_three_inhouse_options(
         add_noindex(multi_replace(thomas_raw, closer_invest_pay_zone_financing_pairs()))
     )
     p02 = apply_closer_cash_financing_modern_stack(p02)
-    p02 = sync_ref_strip_from_wayne(p02, wayne_text)
+    p02 = sync_member_voices_ref_strip(p02, member_voices_text)
 
     p05 = build_dual_template(
         val_src=val_raw,
@@ -1075,7 +1091,7 @@ def main() -> None:
         setter_html=p03,
         financing=False,
     )
-    p05 = sync_ref_strip_from_wayne(p05, wayne_text)
+    p05 = sync_member_voices_ref_strip(p05, member_voices_text)
     p06 = build_dual_template(
         val_src=val_raw,
         jocelyn_src=jocelyn_raw,
@@ -1083,7 +1099,7 @@ def main() -> None:
         setter_html=p04,
         financing=True,
     )
-    p06 = sync_ref_strip_from_wayne(p06, wayne_text)
+    p06 = sync_member_voices_ref_strip(p06, member_voices_text)
 
     strip_legacy_templates()
 

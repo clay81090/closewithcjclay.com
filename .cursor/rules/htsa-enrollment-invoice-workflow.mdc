@@ -169,6 +169,24 @@ Compare **`ref-strip`** mobile block and second **`600px`** footer block to **`h
 
 ---
 
+## Member Voices — default layout (blue personal reviews)
+
+**Every new enrollment invoice** uses the **Joseph / CJ trial** Member Voices block unless CJ explicitly says otherwise.
+
+**Reference:** `htsa-enrollment-joseph-golen.html` (CSS + HTML). **`scripts/htsa-instantiate-invoice.py`** and **`scripts/build-htsa-invoice-templates.py`** sync this automatically from that file.
+
+**Layout:**
+1. **Centered banner** above both columns: **Member voices** + pointer to Section 4.  
+2. **Left column:** **Janaye** first, then Kate R., Jessica C., Austin G.  
+3. **Right column:** David S., Morgan M., Nick S.  
+4. **Blue cards** (same styling as **HTSA Website** block on `/r/` precall pages): **Janaye, Kate R., Jessica C., Nick S.** — class **`ref-strip-quote--personal`**, label **To CJ**, light blue gradient, blue border, gold outer ring.  
+5. **White cards** for general HTSA member reviews: **Austin, David, Morgan** — **Member voice** label.  
+6. **CJ name** in personal reviews: **`ref-strip-name-mark`** (bold navy, no grey pill).
+
+**Do not** revert to old left-column title or all-white cards on new invoices without CJ asking.
+
+---
+
 ## Footer — 2026 default (new invoices)
 
 For **new** enrollment HTML, match the footer pattern in **`htsa-enrollment-james-chambers.html`** / **`htsa-enrollment-kristijo-sherman.html`**:
@@ -237,6 +255,7 @@ JSON via URL-encoded **`payload=`** POST. Align with `hts-enrollment-webapp-goog
 - **Footer business card:** `HTSA - Career Transformation Coach` (dual: `… & Setter`).  
 - Footer Trustpilot row: **4.9 stars out of 5**; Mastermind step: **680+** members (see **`htsa-mastermind-member-count.mdc`**).  
 - Mobile matches **Zachary + Chad** patterns.  
+- **Member Voices:** centered banner, Janaye first, **blue** personal CJ cards (Joseph reference), white HTSA member cards.  
 - **`grep`:** no phantom client data.  
 - **Git: new invoice file committed and pushed** to the publish branch — otherwise **`https://closewithcjclay.com/htsa-enrollment-{slug}.html` 404s**.
 
