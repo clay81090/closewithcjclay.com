@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>OOCEMR Decision Framework — CJ Clay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#07090f; --s1:#0c1220; --s2:#101828; --s3:#141f30;
+      --bd:rgba(255,255,255,.06); --bd2:rgba(255,255,255,.12); --bd3:rgba(255,255,255,.18);
+      --cyan:#00e5ff; --cyan2:#00b0cc;
+      --green:#00ff88; --green2:#00c96a; --green-bg:rgba(0,255,136,.08);
+      --red:#ff4040; --red2:#cc2020; --red-bg:rgba(255,64,64,.08);
+      --amber:#ffaa00; --amber-bg:rgba(255,170,0,.08);
+      --purple:#9b6dff;
+      --white:#eef2ff; --muted:#4a5a7a; --muted2:#7a8da8;
+      --mono:'Space Mono',monospace; --display:'Syne',sans-serif; --body:'Inter',sans-serif;
+      --r:12px; --r2:8px; --r3:4px;
+      --shadow:0 4px 24px rgba(0,0,0,.4);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--body);color:var(--white);background:var(--bg);min-height:100vh;line-height:1.5}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+      background:linear-gradient(rgba(0,229,255,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.012) 1px,transparent 1px);
+      background-size:36px 36px}
+    .wrap{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:28px 20px 100px}
+
+    /* ── HEADER ── */
+    header.top{text-align:center;margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid var(--bd)}
+    header.top h1{font-family:var(--display);font-size:28px;font-weight:800;letter-spacing:-.02em;
+      background:linear-gradient(135deg,var(--cyan),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .top-sub{color:var(--muted2);font-size:13px;line-height:1.65;max-width:660px;margin:8px auto 20px}
+    .step-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:16px}
+    .snav{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;padding:7px 14px;border-radius:20px;
+      background:var(--s2);border:1px solid var(--bd);cursor:pointer;transition:.2s;user-select:none}
+    .snav:hover{border-color:var(--cyan2);color:var(--cyan)}
+    .snav.active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,255,.1)}
+    .snav-num{width:18px;height:18px;border-radius:50%;background:rgba(0,229,255,.15);color:var(--cyan);
+      display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700}
+    .toolbar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+    .btn{font-family:var(--mono);font-size:10px;padding:9px 16px;border-radius:var(--r2);cursor:pointer;
+      border:1px solid var(--bd);background:var(--s2);color:var(--white);transition:.15s;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+    .btn:hover{border-color:var(--cyan2);color:var(--white)}
+    .btn.primary{background:rgba(0,229,255,.12);border-color:var(--cyan);color:var(--cyan)}
+    .btn.green{background:rgba(0,255,136,.12);border-color:var(--green);color:var(--green)}
+    .btn.amber{background:rgba(255,170,0,.08);border-color:var(--amber);color:var(--amber)}
+    .btn.muted{color:var(--muted2);font-size:9px}
+    .hint{font-size:11px;color:var(--muted);font-style:italic;margin-top:6px}
+
+    /* ── STEP SHELL ── */
+    .step{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:24px;overflow:visible;scroll-margin-top:20px;transition:border-color .3s}
+    .step:hover{border-color:var(--bd2)}
+    .step-hd{padding:20px 24px;border-bottom:1px solid var(--bd);display:flex;align-items:flex-start;gap:16px}
+    .step-icon{width:40px;height:40px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+      font-family:var(--mono);font-weight:700;font-size:15px;background:rgba(0,229,255,.15);color:var(--cyan);
+      box-shadow:0 0 16px rgba(0,229,255,.12)}
+    .step-title{font-family:var(--display);font-size:17px;font-weight:700;margin:0 0 4px}
+    .step-desc{font-size:12px;color:var(--muted2);line-height:1.6;margin:0;max-width:820px}
+    .step-bd{padding:24px}
+
+    /* ── FORM BASICS ── */
+    label.lbl{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:6px}
+    input[type=text],textarea,select{width:100%;background:var(--s2);border:1px solid var(--bd2);color:var(--white);
+      font-family:var(--body);font-size:13px;padding:10px 12px;border-radius:var(--r2);line-height:1.55;transition:border-color .2s}
+    input[type=text]:focus,textarea:focus{outline:none;border-color:var(--cyan2)}
+    textarea{resize:none;field-sizing:content;min-height:2.8em}
+    textarea.tall{min-height:110px}
+    .field{margin-bottom:16px}
+
+    /* ── OUTCOMES ── */
+    .outcome-pool{display:flex;flex-direction:column;gap:8px;min-height:48px;padding:12px;background:var(--s2);
+      border:2px dashed var(--bd2);border-radius:var(--r2);margin-bottom:20px}
+    .outcome-pool{min-height:0}
+    .outcome-pool:not(:empty){min-height:40px;padding:10px;margin-top:8px;border:1px dashed var(--bd2);border-radius:var(--r2)}
+    .outcome-pool:empty{display:none}
+    .outcome-chip{padding:10px 12px;background:var(--s1);border:1px solid var(--bd2);border-radius:var(--r2);
+      font-size:13px;cursor:grab;line-height:1.5;transition:border-color .15s,box-shadow .15s;word-break:break-word;
+      display:flex;align-items:flex-start;gap:8px}
+    .outcome-chip:hover{border-color:var(--cyan2);box-shadow:0 0 8px rgba(0,229,255,.12)}
+    .outcome-chip.dragging{opacity:.45;box-shadow:0 0 20px rgba(0,229,255,.3)}
+    .chip-text{flex:1;line-height:1.5}
+    .chip-del{flex-shrink:0;background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;
+      padding:0;line-height:1;margin-top:-1px;transition:color .15s}
+    .chip-del:hover{color:var(--red)}
+    .priority-slots{display:grid;gap:16px}
+    .slot{display:flex;align-items:flex-start;gap:14px;padding-bottom:12px;border-bottom:1px solid var(--bd);margin-bottom:4px}
+    .slot:last-child{border-bottom:0}
+    .slot-rank{width:38px;flex-shrink:0;padding-top:14px;text-align:center;font-family:var(--mono);font-weight:700;font-size:22px;color:var(--cyan)}
+    .slot-body{flex:1;min-width:0;display:grid;grid-template-columns:minmax(180px,1fr) minmax(200px,1.5fr);gap:12px;align-items:start}
+    @media(max-width:620px){.slot-body{grid-template-columns:1fr}}
+    .slot-drop{min-height:52px;padding:10px 12px;background:rgba(0,229,255,.03);border:2px dashed rgba(0,229,255,.2);
+      border-radius:var(--r2);display:flex;flex-direction:column;gap:6px;transition:.15s}
+    .slot-drop.over{border-color:var(--cyan);background:rgba(0,229,255,.1)}
+    .slot-drop:not(:empty){border-style:solid;border-color:rgba(0,229,255,.35);background:rgba(0,229,255,.04)}
+    .slot-drop:empty::after{content:'← drag here, or type above to auto-fill';font-size:10px;color:var(--muted);font-style:italic;display:block;padding:4px 0}
+    .slot-drop .outcome-chip{cursor:grab;margin:0}
+    .why-block{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r2);padding:10px 12px}
+    .why-input{background:transparent;border:0;padding:0;font-size:12px;color:var(--muted2);line-height:1.65;min-height:2.8em;width:100%}
+    .why-input:focus{outline:none;color:var(--white)}
+
+    /* ── OPTIONS ── */
+    .opt-grid{display:grid;gap:14px}
+    @media(min-width:768px){.opt-grid{grid-template-columns:repeat(3,1fr)}}
+    .opt-card{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);padding:16px}
+    .opt-badge{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+    .opt-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--amber)}
+    .opt-name{font-size:13px;line-height:1.55;min-height:5em;border-color:rgba(255,170,0,.25)}
+
+    /* ── CONSEQUENCES TABLE ── */
+    .compare-wrap{overflow-x:auto;border:1px solid var(--bd);border-radius:var(--r);background:var(--s2)}
+    .compare-table{width:100%;border-collapse:collapse;font-size:12px;min-width:600px}
+    .compare-table th{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em;
+      padding:14px 16px;text-align:left;border-bottom:1px solid var(--bd);background:rgba(255,255,255,.02)}
+    .compare-table th.plus-h{color:var(--green)}.compare-table th.minus-h{color:var(--red)}
+    .compare-table td{vertical-align:top;padding:14px 16px;border-bottom:1px solid var(--bd);line-height:1.6}
+    .compare-table tr:last-child td{border-bottom:0}
+    .compare-table tr.row-winner{background:rgba(0,255,136,.07);box-shadow:inset 4px 0 0 var(--green)}
+    .compare-table tr.row-out{opacity:.38}
+    .compare-table tr.row-out td{text-decoration:line-through;text-decoration-color:rgba(255,64,64,.5)}
+    .opt-col{width:17%;min-width:130px}.cell-plus{width:33%;background:rgba(0,255,136,.03)}.cell-minus{width:33%;background:rgba(255,64,64,.03)}.cell-mark{width:17%;min-width:100px;text-align:center}
+    .opt-col-num{font-family:var(--mono);font-size:9px;color:var(--amber);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em}
+    .opt-col-name{font-family:var(--display);font-size:12px;font-weight:700;line-height:1.4;word-break:break-word}
+    .cell-ta{width:100%;background:var(--s1);border:1px solid var(--bd);color:var(--white);font-size:12px;padding:10px;border-radius:var(--r2);line-height:1.65;min-height:160px}
+    .cell-ta.plus-ta{border-color:rgba(0,255,136,.2)}.cell-ta.minus-ta{border-color:rgba(255,64,64,.2)}
+    .mark-btns{display:flex;flex-direction:column;gap:6px;padding:4px 0}
+    .mark-btn{font-family:var(--mono);font-size:9px;padding:9px 8px;border-radius:var(--r2);cursor:pointer;
+      border:1px solid var(--bd2);background:var(--s1);color:var(--muted2);transition:.15s;letter-spacing:.02em}
+    .mark-btn:hover{border-color:var(--cyan2);color:var(--white)}
+    .mark-btn.circle.on{border-color:var(--green);color:var(--green);background:rgba(0,255,136,.15);box-shadow:0 0 12px rgba(0,255,136,.2)}
+    .mark-btn.cross.on{border-color:var(--red);color:var(--red);background:rgba(255,64,64,.1)}
+    .compare-legend{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:14px;font-size:11px;color:var(--muted2)}
+    .compare-legend span{display:flex;align-items:center;gap:6px}
+    .leg-dot{width:10px;height:10px;border-radius:2px}
+    .leg-dot.win{background:var(--green)}.leg-dot.out{background:var(--red);opacity:.6}
+
+    /* ── EVALUATE ── */
+    .eval-intro{display:grid;gap:12px;margin-bottom:24px}
+    @media(min-width:900px){.eval-intro{grid-template-columns:1fr 1fr}}
+    .eval-callout{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);padding:16px}
+    .eval-callout-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);margin-bottom:8px}
+    .eval-callout-text{font-size:13px;color:var(--muted2);line-height:1.65}
+    .eval-callout-text strong{color:var(--white)}
+
+    /* Outcome match grid */
+    .match-wrap{overflow-x:auto;border:1px solid var(--bd);border-radius:var(--r);background:var(--s2);margin-bottom:24px}
+    .match-table{width:100%;border-collapse:collapse;min-width:520px}
+    .match-table th{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em;
+      padding:14px 16px;border-bottom:2px solid var(--bd2);background:rgba(255,255,255,.03)}
+    .match-table th:first-child{text-align:left}
+    .match-table th.mth-opt{text-align:center;font-size:10px;max-width:200px}
+    .match-table .mth-opt-name{font-family:var(--display);font-size:11px;font-weight:700;color:var(--white);margin-top:4px;word-break:break-word;white-space:normal;line-height:1.3}
+    .match-table td{padding:10px 16px;border-bottom:1px solid var(--bd);vertical-align:middle}
+    .match-table tr:last-child td{border-bottom:0}
+    .match-outcome-label{font-size:12px;line-height:1.5;display:flex;align-items:flex-start;gap:8px}
+    .match-rank-badge{font-family:var(--mono);font-size:9px;color:var(--cyan);background:rgba(0,229,255,.1);
+      border-radius:4px;padding:2px 6px;flex-shrink:0;margin-top:2px}
+    .match-cell{text-align:center}
+    .match-btn{width:40px;height:40px;border-radius:50%;border:2px solid var(--bd2);background:var(--s1);
+      cursor:pointer;font-size:16px;display:inline-flex;align-items:center;justify-content:center;transition:.15s;color:var(--muted2)}
+    .match-btn:hover{border-color:var(--cyan2)}
+    .match-btn.yes{background:rgba(0,255,136,.18);border-color:var(--green);color:var(--green)}
+    .match-btn.no{background:rgba(255,64,64,.18);border-color:var(--red);color:var(--red)}
+    .match-btn.maybe{background:rgba(255,170,0,.15);border-color:var(--amber);color:var(--amber)}
+    .score-row td{padding:16px;font-family:var(--mono);background:rgba(255,255,255,.02);border-top:2px solid var(--bd2)!important}
+    .score-badge{font-size:22px;font-weight:700;display:block;margin-bottom:4px}
+    .verdict{font-size:9px;text-transform:uppercase;letter-spacing:.1em;padding:3px 8px;border-radius:4px;display:inline-block}
+    .verdict.strong{color:var(--green);background:rgba(0,255,136,.12);border:1px solid rgba(0,255,136,.3)}
+    .verdict.partial{color:var(--amber);background:rgba(255,170,0,.1);border:1px solid rgba(255,170,0,.3)}
+    .verdict.poor{color:var(--red);background:rgba(255,64,64,.1);border:1px solid rgba(255,64,64,.3)}
+    .timeline-row td{padding:14px 16px;border-top:1px solid var(--bd)!important;background:rgba(255,255,255,.01)}
+    .timeline-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+    .tl-pills{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+    .tl-btn{font-family:var(--mono);font-size:8px;padding:5px 8px;border-radius:4px;cursor:pointer;
+      border:1px solid var(--bd);background:var(--s1);color:var(--muted2);transition:.12s;white-space:nowrap}
+    .tl-btn:hover{border-color:var(--cyan2)}
+    .tl-btn.on{border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,255,.12)}
+    .tl-btn.on.fast{border-color:var(--green);color:var(--green);background:rgba(0,255,136,.12)}
+    .tl-btn.on.slow{border-color:var(--red);color:var(--red);background:rgba(255,64,64,.1)}
+
+    /* Reality cards */
+    .reality-grid{display:grid;gap:14px;margin-top:0}
+    @media(min-width:900px){.reality-grid{grid-template-columns:repeat(3,1fr)}}
+    .reality-card{background:var(--s2);border:2px solid var(--bd);border-radius:var(--r);overflow:hidden;transition:opacity .3s,border-color .3s,box-shadow .3s}
+    .reality-card.is-winner{border-color:var(--green);box-shadow:0 0 0 2px rgba(0,255,136,.35),0 0 40px rgba(0,255,136,.28),inset 0 0 20px rgba(0,255,136,.06)}
+    .reality-card.is-out{opacity:.4}
+    .reality-card.is-shadow{opacity:.42}
+    .rc-head{padding:12px 14px;border-bottom:1px solid var(--bd);background:rgba(255,255,255,.02)}
+    .rc-opt-num{font-family:var(--mono);font-size:9px;color:var(--amber);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+    .rc-opt-name{font-family:var(--display);font-size:12px;font-weight:700;line-height:1.35;word-break:break-word}
+    .rc-body{padding:14px}
+    .rc-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+    .rc-label.best{color:var(--green)}.rc-label.worst{color:var(--red)}
+    .rc-ta{width:100%;background:var(--s1);border:1px solid var(--bd);color:var(--white);
+      font-size:12px;padding:10px;border-radius:var(--r2);line-height:1.65;margin-bottom:12px;resize:none;field-sizing:content;min-height:80px}
+    .rc-ta.best{border-color:rgba(0,255,136,.2)}.rc-ta.worst{border-color:rgba(255,64,64,.2)}
+
+    /* ── MITIGATE ── */
+    .mit-path{border:2px solid rgba(0,255,136,.4);background:linear-gradient(135deg,rgba(0,255,136,.07),rgba(0,229,255,.04));
+      border-radius:var(--r);padding:20px;margin-bottom:20px}
+    .mit-path-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+    .mit-path-label::before{content:'✓';width:18px;height:18px;border-radius:50%;background:var(--green);color:#000;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+    .mit-path-name{font-family:var(--display);font-size:16px;font-weight:700;color:var(--green)}
+    .mit-eliminated{background:var(--s2);border:1px solid rgba(255,64,64,.2);border-radius:var(--r2);padding:12px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px}
+    .mit-elim-x{color:var(--red);font-size:14px;flex-shrink:0;margin-top:1px}
+    .mit-elim-name{font-size:12px;text-decoration:line-through;text-decoration-color:rgba(255,64,64,.5);color:var(--muted2);line-height:1.4}
+    .mit-section-title{font-family:var(--display);font-size:14px;font-weight:700;margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+    .mit-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+    .con-neutralizer{display:grid;gap:10px;margin-bottom:20px}
+    .cn-row{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r2);overflow:hidden;transition:border-color .2s}
+    .cn-row:hover{border-color:var(--bd2)}
+    .cn-top{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-bottom:1px solid var(--bd);background:rgba(255,64,64,.04)}
+    .cn-x{color:var(--red);font-size:13px;flex-shrink:0;margin-top:2px}
+    .cn-con{font-size:12px;color:var(--muted2);line-height:1.5;flex:1}
+    .cn-bottom{padding:10px 14px;background:rgba(0,255,136,.03)}
+    .cn-arrow{font-family:var(--mono);font-size:9px;color:var(--muted2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+    .cn-input{width:100%;background:transparent;border:0;border-bottom:1px solid var(--bd2);color:var(--white);font-size:12px;padding:6px 0;line-height:1.6;resize:none;field-sizing:content;min-height:2.8em;font-family:var(--body)}
+    .cn-input:focus{outline:none;border-bottom-color:var(--green)}
+    .cn-input::placeholder{color:var(--muted)}
+
+    /* ── RESOLVE ── */
+    .resolve-box{text-align:center;padding:32px 24px;background:linear-gradient(135deg,rgba(0,255,136,.09),rgba(0,229,255,.05));
+      border:2px solid var(--green);border-radius:var(--r);box-shadow:0 0 40px rgba(0,255,136,.08)}
+    .resolve-box h3{font-family:var(--display);font-size:22px;font-weight:800;margin-bottom:8px;color:var(--green)}
+    .resolve-sub{font-size:13px;color:var(--muted2);margin-bottom:20px;line-height:1.6}
+    .resolve-pick{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:20px 0}
+    .resolve-opt{padding:16px 22px;border:2px solid var(--bd2);border-radius:var(--r);cursor:pointer;font-size:13px;
+      background:var(--s2);transition:.25s;max-width:340px;line-height:1.5;text-align:left;word-break:break-word;opacity:.55}
+    .resolve-opt:hover{border-color:var(--cyan2);opacity:.8}
+    .resolve-opt.selected{border-color:var(--green);box-shadow:0 0 0 2px rgba(0,255,136,.4),0 0 32px rgba(0,255,136,.3);background:rgba(0,255,136,.12);opacity:1}
+    .resolve-opt.struck{opacity:.3;pointer-events:none;text-decoration:line-through}
+    .commit-area{max-width:560px;margin:20px auto 0;text-align:left}
+    .commit-final{font-size:14px;line-height:1.75;color:var(--muted2);margin-top:16px;text-align:center}
+    .commit-final strong{color:var(--white)}
+
+    /* ── MISC ── */
+    .section-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+    .section-label::after{content:'';flex:1;height:1px;background:var(--bd)}
+    .toast{position:fixed;bottom:24px;right:24px;padding:12px 20px;background:var(--s2);border:1px solid var(--green);
+      color:var(--green);font-family:var(--mono);font-size:11px;border-radius:var(--r2);opacity:0;transition:.3s;z-index:99;
+      box-shadow:0 4px 20px rgba(0,255,136,.2);pointer-events:none}
+    .toast.show{opacity:1}
+    .no-winner-msg{background:var(--s2);border:1px solid rgba(255,170,0,.3);border-radius:var(--r2);padding:16px;
+      font-size:13px;color:var(--muted2);text-align:center}
+    .no-winner-msg strong{color:var(--amber)}
+    @media print{.toolbar,.step-nav,.mark-btns,.tl-pills{display:none}body::before{display:none}.step{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>OOCEMR Decision Framework</h1>
+    <p class="top-sub">Tony Robbins · Put the decision on paper. Walk all six steps honestly. <strong>Whatever you circle at the end is what you commit to 100%</strong> — no second-guessing after this.</p>
+    <div class="step-nav" id="stepNav">
+      <div class="snav" data-go="s-o1"><div class="snav-num">O</div>Outcomes</div>
+      <div class="snav" data-go="s-o2"><div class="snav-num">O</div>Options</div>
+      <div class="snav" data-go="s-c"><div class="snav-num">C</div>Consequences</div>
+      <div class="snav" data-go="s-e"><div class="snav-num">E</div>Evaluate</div>
+      <div class="snav" data-go="s-m"><div class="snav-num">M</div>Mitigate</div>
+      <div class="snav" data-go="s-r"><div class="snav-num">R</div>Resolve</div>
+    </div>
+    <div class="toolbar">
+      <button class="btn primary" id="btnSave">💾 Save</button>
+      <button class="btn" id="btnLoad" title="Restore your last saved progress">📂 Restore</button>
+      <button class="btn" id="btnUndo" title="Undo last change">↩ Undo</button>
+      <button class="btn amber" id="btnCylas">Cylas (AI Analysis)</button>
+      <button class="btn" id="btnClear">Clear All</button>
+      <button class="btn green" onclick="window.print()">🖨 Print / PDF</button>
+    </div>
+    <div style="margin-top:16px;display:inline-flex;align-items:center;gap:12px;padding:10px 18px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.2);border-radius:var(--r2)">
+      <span style="font-size:18px;opacity:.8">▶</span>
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Watch First — Tony Robbins</div>
+        <a href="https://youtu.be/yXWAkgdTx8g?si=ANbCixNtVp7CR71k" style="color:var(--cyan);font-size:13px;font-weight:500;text-decoration:none" target="_blank">6-Step Decision Making Framework →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- O1: OUTCOMES -->
+  <section class="step" id="s-o1">
+    <div class="step-hd">
+      <div class="step-icon">O</div>
+      <div>
+        <h2 class="step-title">Outcomes — Start with what you WANT, not what you fear</h2>
+        <p class="step-desc">Type each outcome and press Add — it fills the next slot automatically. Drag chips to reorder. Write the real <em>why</em> beside each one. Add as many as you need.</p>
+      </div>
+    </div>
+    <div class="step-bd">
+      <div style="display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:18px">
+        <div>
+          <label class="lbl">Name</label>
+          <input type="text" id="userName" placeholder="e.g. Cylas Brooks" style="max-width:280px" />
+        </div>
+        <div id="analysisDate" style="font-family:var(--mono);font-size:10px;color:var(--muted);padding-bottom:10px"></div>
+      </div>
+      <label class="lbl">Type an outcome and press Enter or Add — fills next slot automatically</label>
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <input type="text" id="outcomeInput" placeholder="e.g. Spain trip with family, $150k year one, time with kids…" />
+        <button type="button" class="btn primary" id="btnAddOutcome">+ Add</button>
+      </div>
+      <div class="priority-slots" id="prioritySlots"></div>
+      <div class="outcome-pool" id="outcomePool" style="margin-top:12px"></div>
+    </div>
+  </section>
+
+  <!-- O2: OPTIONS -->
+  <section class="step" id="s-o2">
+    <div class="step-hd">
+      <div class="step-icon">O</div>
+      <div>
+        <h2 class="step-title">Options — You need at least 3 for a real choice</h2>
+        <p class="step-desc">1 option = no choice. 2 = dilemma. 3+ = a real decision. Option 1 is always "stay the course." Be specific and honest with each path.</p>
+      </div>
+    </div>
+    <div class="step-bd">
+      <div class="opt-grid">
+        <div class="opt-card">
+          <div class="opt-badge"><div class="opt-badge-dot"></div>OPTION 1</div>
+          <label class="lbl">Keep doing what you're doing</label>
+          <textarea class="opt-name" data-i="0" rows="3" placeholder="Current path — job, business, status quo"></textarea>
+        </div>
+        <div class="opt-card">
+          <div class="opt-badge"><div class="opt-badge-dot"></div>OPTION 2</div>
+          <label class="lbl">The new path you're considering</label>
+          <textarea class="opt-name" data-i="1" rows="3" placeholder="e.g. High Ticket Sales Academy"></textarea>
+        </div>
+        <div class="opt-card">
+          <div class="opt-badge"><div class="opt-badge-dot"></div>OPTION 3</div>
+          <label class="lbl">Another path (DIY, pivot, other industry…)</label>
+          <textarea class="opt-name" data-i="2" rows="3" placeholder="e.g. DIY apply, medical sales, insurance, real estate only…"></textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C: CONSEQUENCES -->
+  <section class="step" id="s-c">
+    <div class="step-hd">
+      <div class="step-icon">C</div>
+      <div>
+        <h2 class="step-title">Consequences — All 3 options, side by side</h2>
+        <p class="step-desc">Be specific — not "more money" but "$150k lets me take my family to Spain." Not "hard" but "30–60 day ramp, $1,750/mo for 4 months." Circle the winner. Cross off the losers.</p>
+      </div>
+    </div>
+    <div class="step-bd">
+      <div class="compare-legend">
+        <span><span class="leg-dot win"></span>Green row = your winner</span>
+        <span><span class="leg-dot out"></span>Faded = eliminated</span>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead><tr>
+            <th>Option</th>
+            <th class="plus-h">+ Pros / Upsides</th>
+            <th class="minus-h">− Cons / Downsides</th>
+            <th>Your call</th>
+          </tr></thead>
+          <tbody id="consequenceBody"></tbody>
+        </table>
+      </div>
+      <p class="hint" style="margin-top:10px">Tip: one bullet per line. Be specific — name the dollars, the days, the dream.</p>
+    </div>
+  </section>
+
+  <!-- E: EVALUATE -->
+  <section class="step" id="s-e">
+    <div class="step-hd">
+      <div class="step-icon">E</div>
+      <div>
+        <h2 class="step-title">Evaluate — Does each option actually deliver what you said you want?</h2>
+        <p class="step-desc">For each outcome you listed, mark whether each option delivers it. Pick the realistic timeline. The winner should be obvious — if it's not, you haven't been completely honest yet.</p>
+      </div>
+    </div>
+    <div class="step-bd">
+      <div style="background:linear-gradient(135deg,rgba(255,64,64,.08),rgba(255,64,64,.04));border:1px solid rgba(255,64,64,.3);border-radius:var(--r);padding:14px 18px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start">
+        <span style="font-size:20px;flex-shrink:0">⚠️</span>
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:5px">The Biggest Risk</div>
+          <div style="font-size:13px;color:var(--muted2);line-height:1.6">Doing <strong style="color:var(--white)">nothing</strong> is not safe — it is a choice to stay exactly where you are. Fear is normal. But the cost of inaction compounds every year you wait. Be honest below about what each path <em>actually</em> delivers.</div>
+        </div>
+      </div>
+      <div class="section-label">The Outcome Test — Does each option deliver what you said you want?</div>
+      <div class="match-key-box" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:var(--r2);padding:12px 16px;align-items:center">
+        <span style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-right:4px">Symbol Key:</span>
+        <span style="display:flex;align-items:center;gap:6px;font-size:12px"><span style="font-size:17px;color:var(--green)">✓</span><span style="color:var(--muted2)">Yes — this option delivers this outcome</span></span>
+        <span style="color:var(--bd2);font-size:16px">|</span>
+        <span style="display:flex;align-items:center;gap:6px;font-size:12px"><span style="font-size:17px;color:var(--red)">✗</span><span style="color:var(--muted2)">No — this option does NOT deliver it</span></span>
+        <span style="color:var(--bd2);font-size:16px">|</span>
+        <span style="display:flex;align-items:center;gap:6px;font-size:12px"><span style="font-size:17px;color:var(--amber)">~</span><span style="color:var(--muted2)">Maybe — possible but not guaranteed</span></span>
+        <span style="color:var(--bd2);font-size:16px">|</span>
+        <span style="display:flex;align-items:center;gap:6px;font-size:12px"><span style="font-size:17px;color:var(--muted)">·</span><span style="color:var(--muted)">Not yet evaluated — click to set</span></span>
+      </div>
+      <div class="match-wrap">
+        <table class="match-table" id="matchTable">
+          <thead><tr>
+            <th style="text-align:left;min-width:220px">Your Outcomes (priority order)</th>
+            <th class="mth-opt" data-mth-h="0">Option 1</th>
+            <th class="mth-opt" data-mth-h="1">Option 2</th>
+            <th class="mth-opt" data-mth-h="2">Option 3</th>
+          </tr></thead>
+          <tbody id="matchBody"></tbody>
+          <tfoot>
+            <tr class="score-row" id="scoreRow"></tr>
+            <tr class="timeline-row" id="tlRow"></tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="section-label" style="margin-top:24px">Reality Check — Best &amp; Worst Case</div>
+      <div class="reality-grid" id="realityGrid"></div>
+    </div>
+  </section>
+
+  <!-- M: MITIGATE -->
+  <section class="step" id="s-m">
+    <div class="step-hd">
+      <div class="step-icon">M</div>
+      <div>
+        <h2 class="step-title">Mitigate — Neutralize the obstacles, build your game plan</h2>
+        <p class="step-desc">You've already circled your winner and crossed off the losers. Now take every downside of your winning path and build a specific solution for each one. Reduce the downside, keep the upside.</p>
+      </div>
+    </div>
+    <div class="step-bd" id="mitigateBd"></div>
+  </section>
+
+  <!-- R: RESOLVE -->
+  <section class="step" id="s-r">
+    <div class="step-hd">
+      <div class="step-icon">R</div>
+      <div>
+        <h2 class="step-title">Resolve &amp; Commit — Circle your answer. Then go.</h2>
+        <p class="step-desc">Decide · Commit · Resolve. After this, there is no "maybe." Massive action is the cure-all.</p>
+      </div>
+    </div>
+    <div class="step-bd">
+      <div class="resolve-box">
+        <h3>Circle your decision</h3>
+        <p class="resolve-sub">Click the option you commit to 100%. Crossed-off options are eliminated.</p>
+        <div class="resolve-pick" id="resolvePick"></div>
+        <div class="commit-area">
+          <label class="lbl">Write your commitment in your own words</label>
+          <textarea id="commitStatement" class="tall" placeholder="I commit 100% to ___. Starting today I will ___."></textarea>
+        </div>
+        <p class="commit-final" style="margin-top:20px"><strong>Whatever you circled above IS what you go for.</strong><br>Not "maybe." Not "I'll sleep on it." Decide. Commit. Resolve. Then take massive action.</p>
+      </div>
+
+      <!-- Closing perspective -->
+      <div style="margin-top:24px;border-top:1px solid var(--bd);padding-top:20px">
+        <p style="font-size:13px;color:var(--muted2);line-height:1.9;margin-bottom:12px">If you went through all of this and couldn't find one single thing that doesn't hold up — this isn't a risk. It's a calculated move toward the life you described when you first picked up the phone.</p>
+        <p style="font-size:13px;color:var(--muted2);line-height:1.9">The only thing that can stop you now is the fear that you're not capable. And making you capable is exactly what this is for. <em style="color:var(--white)">Why wait?</em></p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── CONSTANTS ───────────────────────────────────────────────────────────────
+const STORAGE_KEY = 'oocemr_v3';
+const PRIORITY_COUNT = 5;
+
+const TIMELINE_OPTIONS = [
+  { label: '< 6 months', speed: 'fast' },
+  { label: '6–12 months', speed: 'fast' },
+  { label: '12–18 months', speed: '' },
+  { label: '1–2 years', speed: '' },
+  { label: '3–5 years', speed: 'slow' },
+  { label: '5+ years', speed: 'slow' },
+  { label: 'Never', speed: 'slow' },
+];
+
+// ─── CYLAS DEMO DATA ─────────────────────────────────────────────────────────
+const CYLAS = {
+  userName: 'Cylas Brooks',
+  outcomes: [
+    { text: 'Spiritual alignment — sell what I believe in & actually change lives (God\'s path for me)',
+      why: 'Faith is a pillar · I hate tricking people · dumpster work drains me · HTSA lets me choose medical, fitness, or RE offers where I genuinely help people — energy shifts when work matches purpose' },
+    { text: 'Family — Spain summer, time with kids before bed, wife has options',
+      why: 'Wife is a teacher · two small kids · dream: 3–4AM calls, beach & museums afternoons with family · not missing dinner because of showings or dumpster fires' },
+    { text: 'Freedom to actually live — not 5am–10:30pm every day tied to every business',
+      why: 'Remote high-ticket = control my schedule · take kids to dinner & walks · do things with family instead of always reacting to the next crisis' },
+    { text: '$150k/year in Oklahoma — real security, no more wearing every hat',
+      why: '$120–160k is over the moon here · house is only debt · cars paid off · wife can choose to work or not · even 60-day ramp is fine if outcome is right' },
+    { text: 'One focus — sales & consulting only, stress off from ops/accounting/KPIs',
+      why: 'Stacking RE + flips + dumpster made income go DOWN · I want one well-oiled machine where I just sell & consult' },
+  ],
+  options: [
+    'Keep current path: real estate + dumpster company ($4k/mo SBA) + DME medical sales W-2 + all the hats',
+    'High Ticket Sales Academy — train, certify, get placed into 350+ vetted companies. Part-time (25 hrs → $80k+) or full-time (40 hrs → $150k+). Your choice of offer: medical, fitness, RE, wellness. 100% placement record.',
+    'Medical sales DIY — apply on Indeed & LinkedIn using nursing + sales background alone. No training, no guaranteed placement.',
+  ],
+  consequences: [
+    { plus: 'Known income streams (RE commissions + dumpster cash flow)\nNo upfront training investment\nStay connected to current RE clients',
+      minus: '5am–10:30pm constant grind — no freedom to live\nDME medical sales W-2 going nowhere — bad fit, never hit their commission structure\nDumpster work not aligned with faith or purpose\nNights & weekends for RE showings\n$4k/mo SBA — can\'t just walk away\nDriver may quit → back in the truck\nStacking businesses made income go DOWN\nSpain dream stays a dream\nSpiritual drain from work that doesn\'t change lives' },
+    { plus: 'Choose offers you believe in — medical, fitness, RE, wellness — change lives daily\nReplace DME (promised $120k+, delivered nothing) with something that delivers\nWork aligned with faith & purpose — energy shifts the day you start\nRemote — home every night, Spain possible in year one\nQUIT DME immediately — free those hours, zero loss\nHire additional dumpster driver → business keeps running without you\nPart-time (25 hrs): $80k+ year one — replace DME income and then some\nFull-time (40 hrs): $150k+ year one — full life replacement\n350+ vetted companies: not one bad company like DME — every industry, all proven\n100% placement success rate — training + placement is what HTSA does\nStandard plan: $1,750 × 4 pays — first commission covers it\nClarity Pay ~$250/mo if cash flow is a concern (keep it in your pocket)',
+      minus: '$6–7k total investment (Clarity Pay = $250/mo if needed)\n30–60 day ramp before strong commissions — not instant\nNeed to hire additional dumpster driver or plan exit\nSBA payment continues — covered by dumpster cash flow\nRequires intention and a real plan, not passive hope' },
+    { plus: 'Uses nursing background — familiar territory\nNo upfront training tuition',
+      minus: 'Medical sales still often travel/in-person — not remote\nNo guaranteed placement — months applying alone on job boards\nCompanies want experience you don\'t have yet in device sales\nUncertain income timeline — could be 6–18 months before earning\nSame solo DIY path that fails for most\n$150k year one very unlikely' },
+  ],
+  evalMatch: [
+    ['N','N','N','N','N'],
+    ['Y','Y','Y','Y','Y'],
+    ['M','N','N','M','N'],
+  ],
+  evalTimeline: [5, 2, 4],
+  evalBest: [
+    'Dumpster company eventually runs smoothly. RE stays consistent. DME W-2 provides a base. But you\'re still in 5am–10:30pm mode in 2–5 years. No Spain. No dinner with kids. No purpose. More of the same produces more of the same.',
+    'Part-time: Quit DME, hire driver, start HTSA 25 hrs → $80k+ year one while dumpster keeps cash-flowing. Work in medical, fitness, or RE — something you actually believe in. Home for dinner every night. Present. Wife sees the difference immediately.\n\nFull-time: $150k+ year one realistic avg. Mortgage payoff becomes a real conversation. That trip you\'ve been putting off — actually possible. More importantly: doing work that fills you up, changing lives, one hat instead of five. You chose the offer. You set your schedule. You show up as a husband and a father.',
+    'Land a medical device role in 6 months using nursing background as a foot in the door.',
+  ],
+  evalWorst: [
+    'DOING NOTHING IS THE WORST CASE. Another year of 5am–10:30pm. Driver quits → you\'re back in the truck. DME goes nowhere. Spain stays a dream. Income flat or drops. Spiritual drain deepens. Same stress. Different day. This is the path you\'re already on.',
+    'You\'re average at it. You earn ~$10k/month ($120k/yr) doing something you believe in, from home, without a boss. That\'s still better than DME which promised $120k and gave you nothing. Worst case here is still better than the best case of doing nothing. The only thing that stops you is fear of your own ability — and teaching skill + placing people is exactly what HTSA does.',
+    '12+ months applying alone, no placement guarantee, zero training. SBA clock still running. Dumpster still needs your attention. End up back at square one — still grinding, still no Spain, still wearing every hat.',
+  ],
+  struck: [false, false, true],
+  resolveIndex: 1,
+  mitigateNeutralizations: {
+    '$6–7k total investment (Clarity Pay = $250/mo if needed)': 'Standard: $1,750 × 4 pays. At 120 calls/mo (30/wk), avg closer hits 20%+ = ~24 closes/mo. Even at a conservative 7%, that\'s 8 closes. Your first 1–2 closes cover payment #1 — ROI lands before the ramp ends. Prefer to hold cash? Clarity Pay ~$250/mo. Either way, the investment is not what stops you.',
+    '30–60 day ramp before strong commissions — not instant': 'QUIT DME immediately — you free those hours at zero loss. DME wasn\'t paying you anyway. Replace those hours with HTSA. Day one is a net gain.',
+    'Need to hire additional dumpster driver or plan exit': 'Hire a driver — cost is $1,500–2,500/mo. Dumpster keeps cash-flowing. You step back from operations. This is the same move whether you do HTSA or not. Do it now.',
+    'SBA payment continues — covered by dumpster cash flow': 'Dumpster + hired driver keeps SBA covered. HTSA income adds on top. You\'re not taking on new fixed costs — you\'re replacing DME hours with something that actually pays.',
+    'Requires intention and a real plan, not passive hope': 'That\'s the point. You got on that call because you were sick of hoping things would change. HTSA gives you a plan, a skill, coaching, and placement. Inaction = more of the same.',
+  },
+  mitigateNotes: 'THE PLAN — NO ALL-OR-NOTHING REQUIRED:\n\n1. QUIT DME immediately — it promised $120k+, delivered nothing. Free those hours today.\n2. HIRE additional dumpster driver — business runs without you in the truck. $1,500–2,500/mo.\n3. START HTSA part-time (25 hrs/week) — replace DME hours, not add more. ~$80k+ year one.\n4. EVALUATE at 60–90 days: if you love it and income is building → go full-time HTSA, plan dumpster exit. If dumpster is thriving → stay part-time HTSA + keep dumpster with driver. Your call.\n5. PAYMENT: $1,750 × 4 pays (standard) — your first commission covers it. Clarity Pay ~$250/mo if you prefer to hold onto cash.\n\nThis was NEVER about adding a 4th thing. From day one on that call, you wanted to REPLACE the grind. Fear kicked in this weekend — that\'s normal and human. But the risk of doing nothing is staying exactly where you are.',
+  commitStatement: 'I commit to High Ticket Sales Academy. I will quit DME immediately — it was not delivering and never will. I will hire an additional driver for the dumpster so it keeps running without me. I start HTSA part-time (25 hrs/week) and evaluate results at 60 days. I choose an offer in a field I believe in — medical, fitness, or RE — where I actually change someone\'s life. I make this decision from clarity, not fear. The real risk is more of the same. I was built to do more than wear every hat just to survive. It\'s time to do work that means something and be home for the people who need me most.',
+};
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let outcomeId = 0;
+let selectedResolve = null;
+let evalMatchData = [['','','','',''],['','','','',''],['','','','','']];
+let evalTimeline = [null, null, null];
+let mitigateNeutralizations = {};
+
+// ─── DOM CACHE ────────────────────────────────────────────────────────────────
+const pool = document.getElementById('outcomePool');
+const slotsEl = document.getElementById('prioritySlots');
+const consequenceBody = document.getElementById('consequenceBody');
+const matchBody = document.getElementById('matchBody');
+const scoreRow = document.getElementById('scoreRow');
+const tlRow = document.getElementById('tlRow');
+const realityGrid = document.getElementById('realityGrid');
+const mitigateBd = document.getElementById('mitigateBd');
+const resolvePick = document.getElementById('resolvePick');
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+function ar(el){ if(!el)return; el.style.height='auto'; el.style.height=Math.max(el.scrollHeight,40)+'px' }
+function arAll(){ document.querySelectorAll('textarea').forEach(ar) }
+function getOptName(i){ return document.querySelector(`.opt-name[data-i="${i}"]`)?.value.trim()||`Option ${i+1}` }
+function isStruck(i){ return !!document.querySelector(`.strike-cb[data-i="${i}"]`)?.checked }
+function tlIndex(prob){
+  const targets=[50,25,15]; // just used for legacy compat — not used in new
+  let b=3,bd=Infinity;
+  TIMELINE_OPTIONS.forEach((l,idx)=>{const d=Math.abs((l._prob||50)-prob);if(d<bd){bd=d;b=idx}});
+  return b;
+}
+function getSlottedOutcomes(){
+  const out=[];
+  document.querySelectorAll('.slot-drop[data-slot]').forEach(slot=>{
+    const rank=+slot.dataset.slot;
+    const chip=slot.querySelector('.outcome-chip');
+    if(chip?.dataset.text) out.push({rank,text:chip.dataset.text});
+  });
+  return out.sort((a,b)=>a.rank-b.rank);
+}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._tid); t._tid=setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+// ─── OUTCOMES ─────────────────────────────────────────────────────────────────
+let slotCount=0;
+
+function makeChip(text,id){
+  const el=document.createElement('div');
+  el.className='outcome-chip'; el.draggable=true; el.dataset.id=id; el.dataset.text=text;
+  const span=document.createElement('span'); span.className='chip-text'; span.textContent=text;
+  const del=document.createElement('button'); del.type='button'; del.className='chip-del'; del.title='Remove'; del.textContent='×';
+  del.addEventListener('mousedown',e=>e.stopPropagation());
+  del.addEventListener('click',e=>{e.stopPropagation();e.preventDefault();el.remove();rebuildMatchGrid()});
+  el.appendChild(span); el.appendChild(del);
+  el.addEventListener('dragstart',e=>{el.classList.add('dragging');e.dataTransfer.setData('text/plain',id)});
+  el.addEventListener('dragend',()=>el.classList.remove('dragging'));
+  return el;
+}
+function dropZone(zone){
+  zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('over')});
+  zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
+  zone.addEventListener('drop',e=>{
+    e.preventDefault(); zone.classList.remove('over');
+    const chip=document.querySelector(`.outcome-chip[data-id="${e.dataTransfer.getData('text/plain')}"]`);
+    if(chip) zone.appendChild(chip);
+    rebuildMatchGrid();
+  });
+}
+function createSlot(num){
+  const row=document.createElement('div');
+  row.className='slot';
+  row.innerHTML=`<div class="slot-rank">${num}</div>
+    <div class="slot-body">
+      <div class="slot-drop" data-slot="${num}"></div>
+      <div class="why-block">
+        <label class="lbl">Why #${num} matters to you</label>
+        <textarea class="why-input" data-slot="${num}" placeholder="The real reason this outcome matters — go deep"></textarea>
+      </div>
+    </div>`;
+  slotsEl.appendChild(row);
+  row.querySelector('.why-input').addEventListener('input',e=>ar(e.target));
+  dropZone(row.querySelector('.slot-drop'));
+  slotCount=num;
+  return row;
+}
+
+// Build initial slots
+for(let i=1;i<=PRIORITY_COUNT;i++) createSlot(i);
+dropZone(pool);
+
+document.getElementById('btnAddOutcome').onclick=addOutcome;
+document.getElementById('outcomeInput').addEventListener('keydown',e=>{if(e.key==='Enter')addOutcome()});
+function addOutcome(text){
+  const t=typeof text==='string'?text:document.getElementById('outcomeInput').value.trim();
+  if(!t)return;
+  // Find next empty slot
+  let targetSlot=null;
+  document.querySelectorAll('.slot-drop[data-slot]').forEach(s=>{
+    if(!targetSlot&&!s.querySelector('.outcome-chip')) targetSlot=s;
+  });
+  // Create new slot if all are full
+  if(!targetSlot){
+    const newRow=createSlot(slotCount+1);
+    targetSlot=newRow.querySelector('.slot-drop');
+  }
+  const chip=makeChip(t,'o'+(++outcomeId));
+  targetSlot.appendChild(chip);
+  // Focus the why input for that slot
+  const slotNum=targetSlot.dataset.slot;
+  const why=document.querySelector(`.why-input[data-slot="${slotNum}"]`);
+  if(why) setTimeout(()=>why.focus(),80);
+  if(typeof text!=='string') document.getElementById('outcomeInput').value='';
+  rebuildMatchGrid();
+}
+
+// ─── CONSEQUENCE TABLE ────────────────────────────────────────────────────────
+function buildConsequenceTable(){
+  const prevP=[...document.querySelectorAll('.tc-plus')].map(t=>t.value);
+  const prevM=[...document.querySelectorAll('.tc-minus')].map(t=>t.value);
+  consequenceBody.innerHTML='';
+  for(let i=0;i<3;i++){
+    const tr=document.createElement('tr');
+    tr.dataset.i=i; tr.className=rowClass(i);
+    tr.innerHTML=`
+      <td class="opt-col">
+        <div class="opt-col-num">OPTION ${i+1}</div>
+        <div class="opt-col-name" data-opt-col="${i}">${esc(getOptName(i))}</div>
+      </td>
+      <td class="cell-plus"><textarea class="cell-ta plus-ta tc-plus" data-i="${i}" placeholder="One pro per line — be specific"></textarea></td>
+      <td class="cell-minus"><textarea class="cell-ta minus-ta tc-minus" data-i="${i}" placeholder="One con per line — be specific"></textarea></td>
+      <td class="cell-mark">
+        <div class="mark-btns">
+          <button type="button" class="mark-btn circle" data-i="${i}">○ Circle winner</button>
+          <button type="button" class="mark-btn cross" data-i="${i}">✕ Cross off</button>
+        </div>
+      </td>`;
+    consequenceBody.appendChild(tr);
+    if(prevP[i]!==undefined){tr.querySelector('.tc-plus').value=prevP[i]}
+    if(prevM[i]!==undefined){tr.querySelector('.tc-minus').value=prevM[i]}
+    tr.querySelectorAll('.cell-ta').forEach(ta=>{ta.addEventListener('input',()=>{ar(ta);buildMitigate()}); ar(ta)});
+    tr.querySelector('.mark-btn.circle').onclick=()=>setWinner(i);
+    tr.querySelector('.mark-btn.cross').onclick=()=>toggleCross(i);
+  }
+  syncRowMarks();
+}
+
+function rowClass(i){
+  let c='';
+  if(selectedResolve===i)c+=' row-winner';
+  if(isStruck(i))c+=' row-out';
+  return c.trim();
+}
+function syncRowMarks(){
+  document.querySelectorAll('#consequenceBody tr').forEach(tr=>{
+    const i=+tr.dataset.i;
+    tr.className=rowClass(i);
+    tr.querySelector('.mark-btn.circle')?.classList.toggle('on',selectedResolve===i);
+    tr.querySelector('.mark-btn.cross')?.classList.toggle('on',isStruck(i));
+  });
+  buildResolve();
+  buildRealityCards();
+  buildMitigate();
+}
+function setWinner(i){
+  selectedResolve=i;
+  const cb=document.querySelector(`.strike-cb[data-i="${i}"]`);
+  if(cb) cb.checked=false;
+  syncRowMarks();
+  toast('Winner circled — scroll to Resolve & Commit to finalize');
+}
+function toggleCross(i){
+  const cb=document.querySelector(`.strike-cb[data-i="${i}"]`);
+  if(!cb)return;
+  cb.checked=!cb.checked;
+  if(cb.checked&&selectedResolve===i) selectedResolve=null;
+  syncRowMarks();
+}
+
+// ─── EVALUATE: OUTCOME MATCH GRID ─────────────────────────────────────────────
+function rebuildMatchGrid(){
+  // Update column headers
+  for(let i=0;i<3;i++){
+    const h=document.querySelector(`[data-mth-h="${i}"]`);
+    if(h) h.innerHTML=`<div style="font-size:9px;color:var(--amber);margin-bottom:4px">OPTION ${i+1}</div><div class="mth-opt-name">${esc(getOptName(i))}</div>`;
+  }
+  // Body rows
+  matchBody.innerHTML='';
+  const outcomes=getSlottedOutcomes();
+  if(outcomes.length===0){
+    matchBody.innerHTML=`<tr><td colspan="4" style="text-align:center;color:var(--muted);font-size:12px;padding:24px">Fill in your Outcomes section first — drag items into priority slots.</td></tr>`;
+  } else {
+    outcomes.forEach(({rank,text})=>{
+      const tr=document.createElement('tr');
+      let cells='';
+      for(let oi=0;oi<3;oi++){
+        const val=evalMatchData[oi]?.[rank-1]||'';
+        const icon=val==='Y'?'✓':val==='N'?'✗':val==='M'?'~':'·';
+        cells+=`<td class="match-cell"><button type="button" class="match-btn ${val==='Y'?'yes':val==='N'?'no':val==='M'?'maybe':''}" data-oi="${oi}" data-ri="${rank-1}" title="Click to cycle: Yes / No / Maybe">${icon}</button></td>`;
+      }
+      tr.innerHTML=`<td><div class="match-outcome-label"><span class="match-rank-badge">#${rank}</span><span>${esc(text)}</span></div></td>${cells}`;
+      matchBody.appendChild(tr);
+    });
+  }
+  // Score row
+  scoreRow.innerHTML='<td style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">SCORE</td>';
+  for(let oi=0;oi<3;oi++){
+    let yes=0,tot=Math.max(outcomes.length,1);
+    for(let ri=0;ri<tot;ri++){
+      const v=evalMatchData[oi]?.[ri]||'';
+      if(v==='Y')yes+=1; else if(v==='M')yes+=0.5;
+    }
+    const pct=tot>0?yes/tot:0;
+    const verdict=pct>=0.9?'STRONG MATCH':pct>=0.5?'PARTIAL MATCH':pct>=0.2?'POOR FIT':'NOT A FIT';
+    const vc=pct>=0.9?'strong':pct>=0.5?'partial':'poor';
+    const col=pct>=0.9?'var(--green)':pct>=0.5?'var(--amber)':'var(--red)';
+    scoreRow.innerHTML+=`<td style="text-align:center"><span class="score-badge" style="color:${col}">${yes}/${tot}</span><span class="verdict ${vc}">${verdict}</span></td>`;
+  }
+  // Timeline row
+  tlRow.innerHTML='<td><div class="timeline-label">When does it hit your #1 outcome?</div></td>';
+  for(let oi=0;oi<3;oi++){
+    const sel=evalTimeline[oi];
+    let pills='<div class="tl-pills">';
+    TIMELINE_OPTIONS.forEach((tl,idx)=>{
+      const on=sel===idx;
+      pills+=`<button type="button" class="tl-btn${on?' on'+(tl.speed?' '+tl.speed:''):''}" data-oi="${oi}" data-ti="${idx}">${tl.label}</button>`;
+    });
+    pills+='</div>';
+    tlRow.innerHTML+=`<td>${pills}</td>`;
+  }
+  // Re-attach listeners
+  matchBody.querySelectorAll('.match-btn').forEach(btn=>{
+    btn.onclick=()=>{
+      const oi=+btn.dataset.oi, ri=+btn.dataset.ri;
+      const cur=evalMatchData[oi][ri]||'';
+      const next=cur===''?'Y':cur==='Y'?'N':cur==='N'?'M':'';
+      evalMatchData[oi][ri]=next;
+      rebuildMatchGrid();
+    };
+  });
+  document.querySelectorAll('.tl-btn').forEach(btn=>{
+    btn.onclick=()=>{
+      evalTimeline[+btn.dataset.oi]=+btn.dataset.ti;
+      rebuildMatchGrid();
+    };
+  });
+}
+
+// ─── EVALUATE: REALITY CARDS ──────────────────────────────────────────────────
+function buildRealityCards(){
+  const prevBest=[...document.querySelectorAll('.rc-ta.best')].map(t=>t.value);
+  const prevWorst=[...document.querySelectorAll('.rc-ta.worst')].map(t=>t.value);
+  realityGrid.innerHTML='';
+  const hasWinner=selectedResolve!==null;
+  for(let i=0;i<3;i++){
+    const div=document.createElement('div');
+    const winner=selectedResolve===i, out=isStruck(i);
+    const shadow=hasWinner&&!winner&&!out;
+    div.className=`reality-card${winner?' is-winner':''}${out?' is-out':''}${shadow?' is-shadow':''}`;
+    div.innerHTML=`
+      <div class="rc-head">
+        <div class="rc-opt-num">OPTION ${i+1}${winner?' — ✓ YOUR WINNER':out?' — ✗ ELIMINATED':''}</div>
+        <div class="rc-opt-name">${esc(getOptName(i))}</div>
+      </div>
+      <div class="rc-body">
+        <label class="rc-label best">✓ Best realistic outcome</label>
+        <textarea class="rc-ta best eval-best-ta" data-i="${i}" placeholder="If this goes as well as you could honestly expect…"></textarea>
+        <label class="rc-label worst">✗ Worst realistic outcome</label>
+        <textarea class="rc-ta worst eval-worst-ta" data-i="${i}" placeholder="If this doesn't work out, what actually happens?"></textarea>
+      </div>`;
+    realityGrid.appendChild(div);
+    const bt=div.querySelector('.eval-best-ta'), wt=div.querySelector('.eval-worst-ta');
+    bt.value=prevBest[i]||''; wt.value=prevWorst[i]||'';
+    [bt,wt].forEach(ta=>{ta.addEventListener('input',()=>ar(ta)); ar(ta)});
+  }
+}
+
+// ─── MITIGATE ─────────────────────────────────────────────────────────────────
+function buildMitigate(){
+  mitigateBd.innerHTML='';
+  // --- Winner + Eliminated ---
+  const eliminated=[0,1,2].filter(i=>isStruck(i));
+  const winner=selectedResolve;
+
+  if(winner===null){
+    mitigateBd.innerHTML=`<div class="no-winner-msg">Go to <strong>Consequences</strong> and click <strong>○ Circle winner</strong> on your chosen path first.</div>`;
+    // Still show notes
+    const nf=document.createElement('div');
+    nf.style.marginTop='16px';
+    nf.innerHTML=`<label class="lbl">Creative combinations & game plan notes</label><textarea id="mitigateNotes" class="tall" placeholder="How can you combine the best of each option? Part-time start? Financing? Timeline?"></textarea>`;
+    mitigateBd.appendChild(nf);
+    document.getElementById('mitigateNotes').addEventListener('input',e=>ar(e.target));
+    return;
+  }
+
+  // Winner card
+  const pathDiv=document.createElement('div');
+  pathDiv.className='mit-path';
+  pathDiv.innerHTML=`<div class="mit-path-label">PATH FORWARD</div><div class="mit-path-name">${esc(getOptName(winner))}</div>`;
+  mitigateBd.appendChild(pathDiv);
+
+  // FT/PT commitment toggle
+  const commitToggle=document.createElement('div');
+  commitToggle.style.cssText='margin-bottom:20px;background:var(--s2);border:1px solid var(--bd2);border-radius:var(--r);padding:16px 20px';
+  commitToggle.innerHTML=`
+    <div style="font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:12px">
+      How will you start? — Pick your commitment level
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <button class="ct-btn" data-ct="pt" style="flex:1;min-width:220px;padding:14px 16px;border:2px solid var(--bd2);border-radius:var(--r2);
+        background:var(--s1);cursor:pointer;text-align:left;transition:.15s">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--amber);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Part-time · 20–25 hrs/week</div>
+        <div style="font-size:13px;color:var(--white);font-weight:600;margin-bottom:4px">$80k+ Year One</div>
+        <div style="font-size:11px;color:var(--muted2);line-height:1.55">Quit DME · Hire dumpster driver · Keep dumpster running · Replace DME hours with HTSA · Evaluate at 60 days</div>
+      </button>
+      <button class="ct-btn" data-ct="ft" style="flex:1;min-width:220px;padding:14px 16px;border:2px solid var(--bd2);border-radius:var(--r2);
+        background:var(--s1);cursor:pointer;text-align:left;transition:.15s">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Full-time · 40 hrs/week</div>
+        <div style="font-size:13px;color:var(--white);font-weight:600;margin-bottom:4px">$150k+ Year One</div>
+        <div style="font-size:11px;color:var(--muted2);line-height:1.55">Full replacement of current grind · Spain trip year one · One income, one focus, one mission aligned with purpose</div>
+      </button>
+    </div>
+    <div id="ctNote" style="margin-top:12px;font-size:12px;color:var(--muted2);display:none;line-height:1.6;padding:10px 14px;background:rgba(0,229,255,.05);border:1px solid rgba(0,229,255,.15);border-radius:var(--r2)"></div>`;
+  mitigateBd.appendChild(commitToggle);
+  commitToggle.querySelectorAll('.ct-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      commitToggle.querySelectorAll('.ct-btn').forEach(b=>{
+        b.style.borderColor='var(--bd2)';b.style.background='var(--s1)';
+      });
+      btn.style.borderColor=btn.dataset.ct==='pt'?'var(--amber)':'var(--green)';
+      btn.style.background=btn.dataset.ct==='pt'?'rgba(255,170,0,.08)':'rgba(0,255,136,.08)';
+      const note=commitToggle.querySelector('#ctNote');
+      note.style.display='block';
+      if(btn.dataset.ct==='pt'){
+        note.innerHTML='<strong style="color:var(--amber)">Part-time plan:</strong> Quit DME today (free those hours, zero income loss — it wasn\'t paying you anyway). Hire an additional dumpster driver ($1,500–2,500/mo). Start HTSA 25 hrs/week. At 60–90 days you decide: love it + strong income → go full-time, plan dumpster exit. Still earning well part-time → keep both. Clarity Pay ~$250/mo available if cash flow is a concern during transition.';
+      } else {
+        note.innerHTML='<strong style="color:var(--green)">Full-time plan:</strong> Quit DME immediately. Hire dumpster driver or begin exit process. Commit 40 hrs/week to HTSA. Choose offer aligned with faith and purpose. $150k+ year one is the expectation — Spain trip, mortgage payoff, wife has options. This is full life replacement, not just income swap.';
+      }
+    });
+  });
+
+  // Eliminated
+  if(eliminated.length){
+    const elDiv=document.createElement('div');
+    elDiv.innerHTML=`<div class="section-label">Eliminated options</div>`;
+    eliminated.forEach(i=>{
+      const d=document.createElement('div');
+      d.className='mit-eliminated';
+      d.innerHTML=`<span class="mit-elim-x">✗</span><span class="mit-elim-name">Option ${i+1} — ${esc(getOptName(i))}</span>`;
+      elDiv.appendChild(d);
+    });
+    mitigateBd.appendChild(elDiv);
+  }
+
+  // Con neutralizer
+  const minusTa=document.querySelector(`.tc-minus[data-i="${winner}"]`);
+  const cons=(minusTa?.value||'').split('\n').map(l=>l.trim()).filter(Boolean);
+
+  if(cons.length){
+    const neuDiv=document.createElement('div');
+    neuDiv.innerHTML=`<div class="section-label" style="margin-top:20px">Neutralize every obstacle in your path</div>`;
+    const grid=document.createElement('div');
+    grid.className='con-neutralizer';
+    cons.forEach(con=>{
+      const saved=mitigateNeutralizations[con]||'';
+      const row=document.createElement('div');
+      row.className='cn-row';
+      row.innerHTML=`
+        <div class="cn-top">
+          <span class="cn-x">✗</span>
+          <span class="cn-con">${esc(con)}</span>
+        </div>
+        <div class="cn-bottom">
+          <div class="cn-arrow">↳ How you neutralize this:</div>
+          <textarea class="cn-input" data-con="${esc(con)}" placeholder="Specific plan to reduce or eliminate this downside…">${esc(saved)}</textarea>
+        </div>`;
+      grid.appendChild(row);
+      const input=row.querySelector('.cn-input');
+      input.addEventListener('input',e=>{
+        mitigateNeutralizations[con]=e.target.value;
+        ar(e.target);
+      });
+      ar(input);
+    });
+    neuDiv.appendChild(grid);
+    mitigateBd.appendChild(neuDiv);
+  } else {
+    const tip=document.createElement('p');
+    tip.style.cssText='font-size:12px;color:var(--muted2);margin-bottom:16px';
+    tip.textContent='Add cons in the Consequences section for your winning option — they\'ll appear here to neutralize.';
+    mitigateBd.appendChild(tip);
+  }
+
+  // Combo notes
+  const notesDiv=document.createElement('div');
+  notesDiv.innerHTML=`<div class="section-label" style="margin-top:20px">Creative combinations & 60-day game plan</div>
+    <textarea id="mitigateNotes" class="tall" placeholder="How do you combine the best elements? What's your specific 30/60/90 day plan? Part-time? Financing? Exit timeline for other businesses?"></textarea>`;
+  mitigateBd.appendChild(notesDiv);
+  document.getElementById('mitigateNotes').addEventListener('input',e=>ar(e.target));
+}
+
+// ─── RESOLVE ──────────────────────────────────────────────────────────────────
+function buildResolve(){
+  resolvePick.innerHTML='';
+  for(let i=0;i<3;i++){
+    const out=isStruck(i);
+    const btn=document.createElement('button');
+    btn.type='button';
+    btn.className='resolve-opt'+(selectedResolve===i?' selected':'')+(out?' struck':'');
+    btn.textContent=getOptName(i);
+    if(!out) btn.onclick=()=>{selectedResolve=i;syncRowMarks()};
+    resolvePick.appendChild(btn);
+  }
+}
+
+// ─── MITIGATE STRIKES (hidden checkboxes for state) ───────────────────────────
+function ensureStrikeCbs(){
+  if(document.querySelector('.strike-cb')) return;
+  const hidden=document.createElement('div');
+  hidden.style.display='none';
+  for(let i=0;i<3;i++){
+    const cb=document.createElement('input');
+    cb.type='checkbox'; cb.className='strike-cb'; cb.dataset.i=i;
+    cb.onchange=()=>{if(cb.checked&&selectedResolve===i)selectedResolve=null; syncRowMarks()};
+    hidden.appendChild(cb);
+  }
+  document.body.appendChild(hidden);
+}
+
+// ─── SYNC LABELS ──────────────────────────────────────────────────────────────
+function syncLabels(){
+  for(let i=0;i<3;i++){
+    const col=document.querySelector(`[data-opt-col="${i}"]`);
+    if(col) col.textContent=getOptName(i);
+  }
+  rebuildMatchGrid();
+  buildRealityCards();
+  buildMitigate();
+  buildResolve();
+}
+
+document.querySelectorAll('.opt-name').forEach(ta=>{
+  ta.addEventListener('input',()=>{syncLabels();ar(ta)});
+  ar(ta);
+});
+
+// ─── SAVE / LOAD ──────────────────────────────────────────────────────────────
+function gatherState(){
+  const outcomes=[];
+  document.querySelectorAll('.slot-drop').forEach(slot=>{
+    const rank=slot.dataset.slot;
+    const chip=slot.querySelector('.outcome-chip');
+    const why=document.querySelector(`.why-input[data-slot="${rank}"]`)?.value||'';
+    outcomes.push({rank,text:chip?.dataset.text||'',why});
+  });
+  pool.querySelectorAll('.outcome-chip').forEach(c=>outcomes.push({rank:0,text:c.dataset.text||'',why:''}));
+  return {
+    userName:document.getElementById('userName').value,
+    options:[...document.querySelectorAll('.opt-name')].map(t=>t.value),
+    outcomes,
+    consequences:[...document.querySelectorAll('.tc-plus')].map((p,i)=>({plus:p.value,minus:document.querySelector(`.tc-minus[data-i="${i}"]`)?.value||''})),
+    evalMatch:evalMatchData,
+    evalTimeline,
+    evalBest:[...document.querySelectorAll('.eval-best-ta')].map(t=>t?.value||''),
+    evalWorst:[...document.querySelectorAll('.eval-worst-ta')].map(t=>t?.value||''),
+    mitigateNeutralizations,
+    mitigateNotes:document.getElementById('mitigateNotes')?.value||'',
+    struck:[0,1,2].map(i=>isStruck(i)),
+    resolveIndex:selectedResolve,
+    commitStatement:document.getElementById('commitStatement').value,
+  };
+}
+
+function applyState(state){
+  if(!state)return;
+  document.getElementById('userName').value=state.userName||'';
+  pool.innerHTML='';
+  document.querySelectorAll('.slot-drop').forEach(s=>s.innerHTML='');
+  (state.outcomes||[]).forEach(o=>{
+    if(!o.text)return;
+    const chip=makeChip(o.text,'o'+(++outcomeId));
+    if(o.rank&&+o.rank>0){
+      document.querySelector(`.slot-drop[data-slot="${o.rank}"]`)?.appendChild(chip);
+      const w=document.querySelector(`.why-input[data-slot="${o.rank}"]`);
+      if(w){w.value=o.why||'';ar(w)}
+    } else pool.appendChild(chip);
+  });
+  (state.options||[]).forEach((v,i)=>{const t=document.querySelector(`.opt-name[data-i="${i}"]`);if(t){t.value=v;ar(t)}});
+  buildConsequenceTable();
+  (state.consequences||[]).forEach((c,i)=>{
+    const p=document.querySelector(`.tc-plus[data-i="${i}"]`), m=document.querySelector(`.tc-minus[data-i="${i}"]`);
+    if(p){p.value=c.plus||'';ar(p)} if(m){m.value=c.minus||'';ar(m)}
+  });
+  if(state.evalMatch) evalMatchData=state.evalMatch;
+  if(state.evalTimeline) evalTimeline=state.evalTimeline;
+  if(state.mitigateNeutralizations) mitigateNeutralizations=state.mitigateNeutralizations;
+  (state.struck||[]).forEach((v,i)=>{const cb=document.querySelector(`.strike-cb[data-i="${i}"]`);if(cb)cb.checked=!!v});
+  selectedResolve=state.resolveIndex??null;
+  syncRowMarks();
+  rebuildMatchGrid();
+  buildRealityCards();
+  (state.evalBest||[]).forEach((v,i)=>{const t=document.querySelector(`.eval-best-ta[data-i="${i}"]`);if(t){t.value=v;ar(t)}});
+  (state.evalWorst||[]).forEach((v,i)=>{const t=document.querySelector(`.eval-worst-ta[data-i="${i}"]`);if(t){t.value=v;ar(t)}});
+  buildMitigate();
+  const mn=document.getElementById('mitigateNotes');
+  if(mn){mn.value=state.mitigateNotes||'';ar(mn)}
+  const cs=document.getElementById('commitStatement');
+  if(cs){cs.value=state.commitStatement||'';ar(cs)}
+}
+
+function loadCylas(){
+  pool.innerHTML='';
+  document.querySelectorAll('.slot-drop').forEach(s=>s.innerHTML='');
+  outcomeId=0; evalMatchData=[['','','','',''],['','','','',''],['','','','','']]; evalTimeline=[null,null,null]; mitigateNeutralizations={};
+  CYLAS.outcomes.forEach((o,idx)=>{
+    const chip=makeChip(o.text,'o'+(++outcomeId));
+    const slot=document.querySelector(`.slot-drop[data-slot="${idx+1}"]`);
+    if(slot){slot.appendChild(chip); const w=document.querySelector(`.why-input[data-slot="${idx+1}"]`); if(w){w.value=o.why;ar(w)}}
+  });
+  document.getElementById('userName').value=CYLAS.userName;
+  CYLAS.options.forEach((v,i)=>{const t=document.querySelector(`.opt-name[data-i="${i}"]`);if(t){t.value=v;ar(t)}});
+  buildConsequenceTable();
+  CYLAS.consequences.forEach((c,i)=>{
+    const p=document.querySelector(`.tc-plus[data-i="${i}"]`), m=document.querySelector(`.tc-minus[data-i="${i}"]`);
+    if(p){p.value=c.plus;ar(p)} if(m){m.value=c.minus;ar(m)}
+  });
+  evalMatchData=CYLAS.evalMatch.map(r=>[...r]);
+  evalTimeline=[...CYLAS.evalTimeline];
+  CYLAS.struck.forEach((v,i)=>{const cb=document.querySelector(`.strike-cb[data-i="${i}"]`);if(cb)cb.checked=v});
+  selectedResolve=CYLAS.resolveIndex;
+  mitigateNeutralizations={...CYLAS.mitigateNeutralizations};
+  syncRowMarks();
+  rebuildMatchGrid();
+  buildRealityCards();
+  CYLAS.evalBest.forEach((v,i)=>{const t=document.querySelector(`.eval-best-ta[data-i="${i}"]`);if(t){t.value=v;ar(t)}});
+  CYLAS.evalWorst.forEach((v,i)=>{const t=document.querySelector(`.eval-worst-ta[data-i="${i}"]`);if(t){t.value=v;ar(t)}});
+  buildMitigate();
+  const mn=document.getElementById('mitigateNotes'); if(mn){mn.value=CYLAS.mitigateNotes;ar(mn)}
+  const cs=document.getElementById('commitStatement'); if(cs){cs.value=CYLAS.commitStatement;ar(cs)}
+  toast('Loaded Cylas Brooks example ✓');
+}
+
+// ─── UNDO ─────────────────────────────────────────────────────────────────────
+let undoState=null;
+function captureUndo(){ undoState=JSON.stringify(gatherState()); }
+
+// ─── BUTTON WIRING ────────────────────────────────────────────────────────────
+document.getElementById('btnSave').onclick=()=>{
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(gatherState()));
+  toast('Progress saved ✓');
+};
+document.getElementById('btnLoad').onclick=()=>{
+  try{captureUndo();applyState(JSON.parse(localStorage.getItem(STORAGE_KEY)));toast('Progress restored ✓')}
+  catch{toast('Nothing saved yet')}
+};
+document.getElementById('btnUndo').onclick=()=>{
+  if(!undoState){toast('Nothing to undo');return;}
+  applyState(JSON.parse(undoState));
+  undoState=null;
+  toast('Undone ✓');
+};
+document.getElementById('btnCylas').onclick=()=>{captureUndo();loadCylas()};
+document.getElementById('btnClear').onclick=()=>{
+  if(!confirm('Clear everything and start fresh?'))return;
+  captureUndo();
+  localStorage.removeItem(STORAGE_KEY); location.reload();
+};
+document.querySelectorAll('.snav').forEach(s=>{
+  s.onclick=()=>document.getElementById(s.dataset.go)?.scrollIntoView({behavior:'smooth'});
+});
+
+// Scroll-based step highlight
+const stepSections=document.querySelectorAll('.step');
+const navItems=document.querySelectorAll('.snav');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navItems.forEach(n=>n.classList.remove('active'));
+      const idx=[...stepSections].indexOf(e.target);
+      if(idx>=0&&navItems[idx]) navItems[idx].classList.add('active');
+    }
+  });
+},{threshold:.25});
+stepSections.forEach(s=>io.observe(s));
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+function init(){
+  // Date display
+  const d=new Date();
+  const dateEl=document.getElementById('analysisDate');
+  if(dateEl) dateEl.textContent='Analysis date: '+d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  ensureStrikeCbs();
+  buildConsequenceTable();
+  rebuildMatchGrid();
+  buildRealityCards();
+  buildMitigate();
+  buildResolve();
+  arAll();
+  if(new URLSearchParams(location.search).get('demo')==='cylas') loadCylas();
+}
+init();
+</script>
+</body>
+</html>
