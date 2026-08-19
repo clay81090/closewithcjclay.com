@@ -7,7 +7,8 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<meta name="htsa-page-rev" content="2026-08-19-v3" />
+<meta name="htsa-page-rev" content="2026-08-19-v4" />
+<link rel="canonical" href="https://closewithcjclay.com/htsa-enrollment-alejandro-ospina.html">
 <title>HTSA Invoice — Alejandro Ospina</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -1961,7 +1962,6 @@
         <video
           controls
           playsinline
-          webkit-playsinline
           preload="metadata"
           controlslist="nodownload"
           title="HTSA Placement This Week, August 18, 2026. Members on live group coaching talking about placement.">
@@ -2657,6 +2657,26 @@ So far it's been nothing but positive, and I feel confident about the move. If y
     }
     syncDisabled();
   });
+})();
+</script>
+<script>
+(function () {
+  var CANONICAL = 'https://closewithcjclay.com/htsa-enrollment-alejandro-ospina.html';
+  var RELOAD_KEY = 'htsa_alejandro_ospina_cache_fix';
+  try {
+    if (location.pathname.indexOf('htsa-enrollment-alejandro-ospina') !== -1 && location.search) {
+      history.replaceState(null, '', CANONICAL);
+    }
+    var hasVideo = document.querySelector('.htsa-proof-embed video');
+    if (!hasVideo && !sessionStorage.getItem(RELOAD_KEY)) {
+      sessionStorage.setItem(RELOAD_KEY, '1');
+      location.replace(CANONICAL + '?_=' + Date.now());
+      return;
+    }
+    if (location.search && hasVideo) {
+      history.replaceState(null, '', CANONICAL);
+    }
+  } catch (e) {}
 })();
 </script>
 </body>
