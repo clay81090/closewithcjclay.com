@@ -194,7 +194,21 @@
       "status": "active",
       "view_count": 0,
       "last_viewed_at": null
+    },
+    "cj_clay": {
+      "slug": "cj_clay",
+      "prospect_id": "cj-clay",
+      "prospect_name": "CJ Clay",
+      "email": "clay81090@gmail.com",
+      "phone_e164": "+18432833409",
+      "phone_display": "+1 (843) 283-3409",
+      "page_type": "precall",
+      "created_at": "2026-08-19T20:50:38Z",
+      "expires_at": "2026-11-17T20:50:38Z",
+      "status": "active",
+      "view_count": 0,
+      "last_viewed_at": null
     }
   },
-  "updated_at": "2026-08-18T03:17:49Z"
+  "updated_at": "2026-08-19T20:50:38Z"
 }

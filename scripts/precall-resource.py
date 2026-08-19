@@ -127,6 +127,24 @@ def footer_html() -> str:
     return html.strip()
 
 
+WEEK_AT_HTSA_VIDEO = "/media/this-week-at-htsa-2026-08-18.mp4"
+
+
+def render_week_at_htsa_embed() -> str:
+    """In-page player. Does not open a new tab."""
+    src = escape(WEEK_AT_HTSA_VIDEO)
+    return f"""    <div class="htsa-proof-embed">
+      <div class="htsa-proof-embed-kicker">Recorded this week · Aug 18</div>
+      <div class="htsa-proof-embed-title">This Week at HTSA · live group coaching</div>
+      <p class="htsa-proof-embed-desc">Four people on our live group coaching call talking about getting placed with us. Play it right here. Pause anytime. Use the fullscreen control if you want it larger.</p>
+      <video controls playsinline preload="metadata" controlslist="nodownload" title="This Week at HTSA, August 18. Members on live group coaching talking about placement.">
+        <source src="{src}" type="video/mp4">
+        Your browser does not play this video here. Open <a href="{src}">this file</a> instead.
+      </video>
+    </div>
+"""
+
+
 def resource_card(href: str, badge: str, title: str, desc: str, cta: str, variant: str = "compact") -> str:
     cls = "cj-resource-card"
     if variant == "featured":
@@ -224,6 +242,7 @@ def render_resources_html(first: str) -> str:
     <p class="cj-resources-kicker">⭐ Start here — CJ's top picks</p>
     <div class="cj-resources-featured">{"".join(featured)}</div>
     <p class="cj-resources-kicker">⭐ Placement — why our members get results</p>
+{render_week_at_htsa_embed()}
     <div class="cj-resources-featured">{"".join(placement)}</div>
     <p class="cj-resources-kicker">More success stories from our network</p>
     <div class="cj-resources-grid">{"".join(compact)}</div>
@@ -668,6 +687,8 @@ def cmd_create(args: argparse.Namespace) -> None:
                 f"resource-links/data/{prospect_id}.json",
                 "resource-links/data/_precall-defaults.json",
                 "resource-links/assets/logo-snippet.html",
+                "resource-links/assets/enrollment-styles.css",
+                "media/this-week-at-htsa-2026-08-18.mp4",
                 "scripts/precall-resource.py",
             ],
             f"Rebuild pre-call resources for {data['prospect_name']} (/r/{slug}).",

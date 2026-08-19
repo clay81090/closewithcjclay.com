@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-18T03:17:49Z",
+  "updated_at": "2026-08-19T20:50:38Z",
   "links": {
     "tammy_berry": {
       "status": "active",
@@ -82,6 +82,12 @@
     "christian_cherniawski": {
       "status": "active",
       "expires_at": "2026-11-16T03:17:49Z",
+      "view_count": 0,
+      "last_viewed_at": null
+    },
+    "cj_clay": {
+      "status": "active",
+      "expires_at": "2026-11-17T20:50:38Z",
       "view_count": 0,
       "last_viewed_at": null
     }
