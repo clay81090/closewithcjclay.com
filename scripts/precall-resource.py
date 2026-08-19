@@ -135,6 +135,7 @@ def render_week_at_htsa_embed() -> str:
     src = escape(WEEK_AT_HTSA_VIDEO)
     return f"""    <div class="htsa-proof-embed">
       <div class="htsa-proof-embed-kicker">Recorded this week · Aug 18 · 4:07</div>
+      <div class="htsa-proof-embed-must-watch">MUST WATCH!!!</div>
       <div class="htsa-proof-embed-title">HTSA · Placement This Week (Aug 18, 2026)</div>
       <p class="htsa-proof-embed-desc">Four people on our live group coaching call talking about getting placed with us. Play it right here. Pause anytime. Use the fullscreen control if you want it larger.</p>
       <video controls playsinline preload="metadata" controlslist="nodownload" title="HTSA Placement This Week, August 18, 2026. Members on live group coaching talking about placement.">

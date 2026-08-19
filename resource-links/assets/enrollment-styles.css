@@ -1645,6 +1645,20 @@
     margin: 0 0 6px;
   }
 
+  .htsa-proof-embed-must-watch {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: linear-gradient(135deg, #ff6b00 0%, #ea580c 55%, #dc2626 100%);
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin: 0 0 10px;
+    box-shadow: 0 4px 16px rgba(234, 88, 12, 0.45);
+  }
+
   .htsa-proof-embed-title {
     font-size: 14px;
     font-weight: 600;
