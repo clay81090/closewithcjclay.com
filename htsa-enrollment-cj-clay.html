@@ -237,6 +237,50 @@
     line-height: 1.6;
   }
 
+  /* In-page proof clip (live group coaching / placement). Stays on this page. */
+  .htsa-proof-embed {
+    padding: 4px 36px 20px;
+    border-bottom: 1px solid var(--mid);
+    background: #f7f9fc;
+  }
+
+  .htsa-proof-embed-inner {
+    max-width: 640px;
+  }
+
+  .htsa-proof-embed-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin: 0 0 6px;
+  }
+
+  .htsa-proof-embed-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 0 0 6px;
+  }
+
+  .htsa-proof-embed-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0 0 12px;
+  }
+
+  .htsa-proof-embed video {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    background: #0a1628;
+    border: 1px solid var(--mid);
+  }
+
   .invest-wrap {
     padding: 28px 36px;
     border-bottom: 1px solid var(--mid);
@@ -977,6 +1021,7 @@
     .billing-cell:first-child { border-right: none; border-bottom: 1px solid var(--mid); }
     .sec-head { padding: 12px 20px; }
     .cur-item { padding: 14px 20px; gap: 12px; }
+    .htsa-proof-embed { padding: 4px 20px 18px; }
     .cur-icon { font-size: 16px; width: 22px; }
     .invest-wrap { padding: 16px 20px; }
     .invest-box { padding: 18px 16px; }
@@ -1843,6 +1888,23 @@
       <div class="cur-content">
         <h4>Live Group Coaching (Lifetime Access)</h4>
         <p>Lifetime access to live Zoom coaching sessions held Tuesdays at 12:00 PM EST and Wednesdays at 5:00 PM EST. Led by Chad Aleo, Christian Cherniawski, and select guest experts. Focused on real-world execution, confidence, and performance refinement.</p>
+      </div>
+    </div>
+
+    <div class="htsa-proof-embed">
+      <div class="htsa-proof-embed-inner">
+        <div class="htsa-proof-embed-kicker">Recorded this week · Aug 18</div>
+        <div class="htsa-proof-embed-title">This Week at HTSA · live group coaching</div>
+        <p class="htsa-proof-embed-desc">Four people on our live group coaching call talking about getting placed with us. Play it right here. Pause anytime. Use the fullscreen control if you want it larger.</p>
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          controlslist="nodownload"
+          title="This Week at HTSA, August 18. Members on live group coaching talking about placement.">
+          <source src="media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
+          Your browser does not play this video here. Open <a href="media/this-week-at-htsa-2026-08-18.mp4">this file</a> instead.
+        </video>
       </div>
     </div>
 
