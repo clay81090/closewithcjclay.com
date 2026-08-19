@@ -242,7 +242,6 @@ def render_resources_html(first: str) -> str:
     <p class="cj-resources-kicker">⭐ Start here — CJ's top picks</p>
     <div class="cj-resources-featured">{"".join(featured)}</div>
     <p class="cj-resources-kicker">⭐ Placement — why our members get results</p>
-{render_week_at_htsa_embed()}
     <div class="cj-resources-featured">{"".join(placement)}</div>
     <p class="cj-resources-kicker">More success stories from our network</p>
     <div class="cj-resources-grid">{"".join(compact)}</div>
@@ -333,14 +332,15 @@ def render_call_card(data: dict) -> str:
 
 
 def render_about_htsa() -> str:
-    """Part 1 — Chad only. Book banner + Trustpilot live here (not duplicated below)."""
-    return """  <div class="sec-head">
+    """Part 1 — placement clip first, then Chad. Book banner + Trustpilot live here (not duplicated below)."""
+    return f"""  <div class="sec-head">
     <div class="sec-num">1</div>
     <h3>Who Mentors You</h3>
   </div>
   <div class="rl-q-wrap">
     <div class="rl-q-item">
       <div class="rl-q-ours">
+{render_week_at_htsa_embed()}
         <p>You're validated and placed directly by Chad Aleo himself — not a random coach.</p>
         <p style="margin-top:12px;"><a href="https://youtu.be/eLAWEwE7pl4?si=VfiqAxeOKFnoJ_Mm" class="step-link" target="_blank" rel="noopener noreferrer">⭐ Meet Chad — CEO &amp; Founder at HTSA</a></p>
         <p style="margin-top:14px;"><a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><img class="rl-proof-img" src="https://closewithcjclay.com/resource-links/assets/chad-aleo-book-banner.png" alt="Chad Aleo, best-selling author of The Book on High Ticket Sales"></a></p>
