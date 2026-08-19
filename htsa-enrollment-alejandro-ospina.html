@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<meta name="htsa-page-rev" content="2026-08-18-v2" />
+<meta name="htsa-page-rev" content="2026-08-19-v3" />
 <title>HTSA Invoice — Alejandro Ospina</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -236,6 +236,64 @@
     font-size: 12px;
     color: var(--muted);
     line-height: 1.6;
+  }
+
+  /* In-page proof clip (live group coaching / placement). Stays on this page. */
+  .htsa-proof-embed {
+    padding: 4px 36px 20px;
+    border-bottom: 1px solid var(--mid);
+    background: #f7f9fc;
+  }
+
+  .htsa-proof-embed-inner {
+    max-width: 640px;
+  }
+
+  .htsa-proof-embed-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin: 0 0 6px;
+  }
+
+  .htsa-proof-embed-must-watch {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: linear-gradient(135deg, #ff6b00 0%, #ea580c 55%, #dc2626 100%);
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin: 0 0 10px;
+    box-shadow: 0 4px 16px rgba(234, 88, 12, 0.45);
+  }
+
+  .htsa-proof-embed-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 0 0 6px;
+  }
+
+  .htsa-proof-embed-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0 0 12px;
+  }
+
+  .htsa-proof-embed video {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    background: #0a1628;
+    border: 1px solid var(--mid);
   }
 
   .invest-wrap {
@@ -978,6 +1036,7 @@
     .billing-cell:first-child { border-right: none; border-bottom: 1px solid var(--mid); }
     .sec-head { padding: 12px 20px; }
     .cur-item { padding: 14px 20px; gap: 12px; }
+    .htsa-proof-embed { padding: 4px 20px 18px; }
     .cur-icon { font-size: 16px; width: 22px; }
     .invest-wrap { padding: 16px 20px; }
     .invest-box { padding: 18px 16px; }
@@ -1893,6 +1952,25 @@
       </div>
     </div>
 
+    <div class="htsa-proof-embed">
+      <div class="htsa-proof-embed-inner">
+        <div class="htsa-proof-embed-kicker">Recorded this week · Aug 18 · 4:07</div>
+        <div class="htsa-proof-embed-must-watch">MUST WATCH!!!</div>
+        <div class="htsa-proof-embed-title">HTSA · Placement This Week (Aug 18, 2026)</div>
+        <p class="htsa-proof-embed-desc">Four people on our live group coaching call talking about getting placed with us. Play it right here. Pause anytime. Use the fullscreen control if you want it larger.</p>
+        <video
+          controls
+          playsinline
+          webkit-playsinline
+          preload="metadata"
+          controlslist="nodownload"
+          title="HTSA Placement This Week, August 18, 2026. Members on live group coaching talking about placement.">
+          <source src="/media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
+          Your browser does not play this video here. Open <a href="/media/this-week-at-htsa-2026-08-18.mp4">this file</a> instead.
+        </video>
+      </div>
+    </div>
+
     <div class="cur-item">
       <div class="cur-icon">🎓</div>
       <div class="cur-content">
@@ -2213,7 +2291,7 @@
   </div>
 
   <div class="cj-resources-wrap">
-    <p class="cj-resources-lead"><strong>Alejandro</strong> — start with the ⭐ picks below. These are the videos and links I most want you to review while you're deciding.</p>
+    <p class="cj-resources-lead"><strong>Alejandro</strong> — start with the <strong>MUST WATCH</strong> clip in Section 1 above, then the ⭐ picks below.</p>
 
     <p class="cj-resources-kicker">⭐ Start here — CJ's top picks</p>
     <div class="cj-resources-featured">
