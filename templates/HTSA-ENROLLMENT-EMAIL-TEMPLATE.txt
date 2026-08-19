@@ -1,22 +1,39 @@
-Subject: [First Name] — your enrollment page is ready
+# HTSA post-call enrollment email (generic)
+# Use after a discovery / enrollment conversation.
+# Fill bracketed lines. Do not use em dashes or en dashes in the send version.
+# Paste the live enrollment URL only after the page shows READY.
+# Optional: HubSpot follow-up block (keep or delete).
 
-Hey [First Name],
+Subject: Great speaking with you, [FIRST_NAME]
 
-It was great speaking with you today. After getting to know you and hearing your goals, I genuinely believe you'd do very well here at HTSA. You're exactly the kind of person we look for: coachable, motivated, and looking for a real long-term career, not just another job. HTSA is also the only academy in the industry that guarantees placement and continues placing members for life, which says a lot about the confidence we have in both our training and our placement team.
+Hey [FIRST_NAME],
 
-Here is your personalized enrollment page:
+It was great speaking with you today. After hearing more about your background, I genuinely believe you could do extremely well here at HTSA. [1 or 2 sentences on why they fit: relevant experience, how they show up with people, work ethic, or how they learn.]
 
-https://closewithcjclay.com/htsa-enrollment-[client-slug].html
+You also said you want [what they said they want: help people, freedom, income, career change, etc.]. That matters. The best closers aren’t just good talkers. They listen, build trust, and help someone make the right decision. From our conversation, you already have a lot of that.
 
-Everything you need is on that page: program details, Terms of Service and guarantee, payment options, and simple next steps after you enroll.
+You have a powerful story, and I know I only heard a small piece of it today. Between that, your work ethic, and your energy, I have zero doubt you’d be a rockstar, [FIRST_NAME]. You’re not looking for just another job. You’re looking for something you can actually build with, and I think this could be a great fit.
 
-Take a few minutes to review it while today's conversation is still fresh. If anything feels unclear, reply to this email or text me and I'll walk you through it personally. If you're ready to move forward tonight, you can enroll directly from the page.
+HTSA is also the only academy in the industry that guarantees placement and continues placing members for life.
 
-Either way works — I'm here to help you get started the right way.
+I’ll get your personalized enrollment page over to you right after this. Everything you need will be there: program details, Terms of Service and guarantee, payment options, and next steps. You can self-enroll on the page, or give me 10 to 15 minutes and I’ll walk you through it over the phone or Zoom.
+
+We also need to pin down our quick follow-up for [FOLLOW_UP_DAY]. Grab any 15 to 30 minute opening that works:
+https://meetings.hubspot.com/charles660
+
+You won’t see availability after 6:00 PM on the calendar, but I can make just about any time after that work. If none of the times fit, text me what does and I’ll make it happen.
+
+Go through everything, write down any questions, and we’ll cover them [FOLLOW_UP_DAY]. Really enjoyed meeting you today, [FIRST_NAME]. I’m excited to keep this going.
 
 Talk soon,
-
 CJ Clay
-High Ticket Sales Academy
 (616) 612-1735
 cj@highticketsalesacademy.com
+
+
+# --- WHEN THE ENROLLMENT PAGE IS LIVE, INSERT THIS BLOCK (replace the “I’ll get your… over to you” paragraph) ---
+#
+# Here is your personalized enrollment page:
+# https://closewithcjclay.com/htsa-enrollment-[client-slug].html
+#
+# Everything you need is there: program details, Terms of Service and guarantee, payment options, and next steps. You can self-enroll on the page, or give me 10 to 15 minutes and I’ll walk you through it over the phone or Zoom.
