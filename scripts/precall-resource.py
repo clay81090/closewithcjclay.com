@@ -255,7 +255,7 @@ def render_personal_reviews_html(reviews: list, title: str) -> str:
     for r in reviews:
         context = r.get("context", "shared with HTSA")
         cards.append(
-            f"""          <div class="ref-strip-quote ref-strip-quote--compact">
+            f"""          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">{r["body"]}</blockquote>
             <p class="ref-strip-quote-attr">— {r["name"]} · {context}</p>

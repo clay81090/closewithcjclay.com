@@ -1328,6 +1328,29 @@
     padding: 10px 12px 12px;
   }
 
+  /* Personal notes to CJ — same blue card as HTSA Website block */
+  .ref-strip-quote--personal {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 3px solid #1976D2;
+    border-left: 5px solid #1565C0;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1.5px #e2b227, 0 4px 14px rgba(10, 22, 40, 0.08);
+  }
+
+  .ref-strip-quote--personal .ref-strip-quote-meta {
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .ref-strip-quote--personal .ref-strip-quote-body {
+    color: var(--muted);
+  }
+
+  .ref-strip-quote--personal .ref-strip-quote-attr {
+    color: var(--navy);
+    border-top-color: rgba(25, 118, 210, 0.22);
+  }
+
   .ref-strip-quote--compact .ref-strip-quote-body {
     max-height: none;
     overflow: visible;

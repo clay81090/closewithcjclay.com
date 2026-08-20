@@ -1338,6 +1338,29 @@
     padding: 10px 12px 12px;
   }
 
+  /* Personal notes to CJ — same blue card as HTSA Website block */
+  .ref-strip-quote--personal {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 3px solid #1976D2;
+    border-left: 5px solid #1565C0;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1.5px #e2b227, 0 4px 14px rgba(10, 22, 40, 0.08);
+  }
+
+  .ref-strip-quote--personal .ref-strip-quote-meta {
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .ref-strip-quote--personal .ref-strip-quote-body {
+    color: var(--muted);
+  }
+
+  .ref-strip-quote--personal .ref-strip-quote-attr {
+    color: var(--navy);
+    border-top-color: rgba(25, 118, 210, 0.22);
+  }
+
   .ref-strip-quote--compact .ref-strip-quote-body {
     max-height: none;
     overflow: visible;
@@ -1634,6 +1657,63 @@
     text-transform: uppercase;
     color: var(--green);
     margin: 0 0 12px;
+  }
+
+  /* In-page This Week at HTSA clip (precall). Stays on the page. */
+  .htsa-proof-embed {
+    margin: 0 0 18px;
+    padding: 16px 16px 14px;
+    background: #f7f9fc;
+    border: 1px solid var(--mid);
+    border-radius: 12px;
+    max-width: 640px;
+  }
+
+  .htsa-proof-embed-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin: 0 0 6px;
+  }
+
+  .htsa-proof-embed-must-watch {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: linear-gradient(135deg, #ff6b00 0%, #ea580c 55%, #dc2626 100%);
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin: 0 0 10px;
+    box-shadow: 0 4px 16px rgba(234, 88, 12, 0.45);
+  }
+
+  .htsa-proof-embed-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 0 0 6px;
+  }
+
+  .htsa-proof-embed-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0 0 12px;
+  }
+
+  .htsa-proof-embed video {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    background: #0a1628;
+    border: 1px solid var(--mid);
   }
 
   .cj-resources-featured {
@@ -2236,6 +2316,17 @@
   <div class="rl-q-wrap">
     <div class="rl-q-item">
       <div class="rl-q-ours">
+    <div class="htsa-proof-embed">
+      <div class="htsa-proof-embed-kicker">Recorded this week · Aug 18 · 4:07</div>
+      <div class="htsa-proof-embed-must-watch">MUST WATCH!!!</div>
+      <div class="htsa-proof-embed-title">HTSA · Placement This Week (Aug 18, 2026)</div>
+      <p class="htsa-proof-embed-desc">Watch this before the testimonials below. Four people on our live group coaching call talking about getting placed with us. This is the level we operate at on placement, which is usually the biggest question people have. Play it right here. Pause anytime. Use the fullscreen control if you want it larger.</p>
+      <video controls playsinline preload="metadata" controlslist="nodownload" title="HTSA Placement This Week, August 18, 2026. Members on live group coaching talking about placement.">
+        <source src="/media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
+        Your browser does not play this video here. Open <a href="/media/this-week-at-htsa-2026-08-18.mp4">this file</a> instead.
+      </video>
+    </div>
+
         <p>You're validated and placed directly by Chad Aleo himself — not a random coach.</p>
         <p style="margin-top:12px;"><a href="https://youtu.be/eLAWEwE7pl4?si=VfiqAxeOKFnoJ_Mm" class="step-link" target="_blank" rel="noopener noreferrer">⭐ Meet Chad — CEO &amp; Founder at HTSA</a></p>
         <p style="margin-top:14px;"><a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><img class="rl-proof-img" src="https://closewithcjclay.com/resource-links/assets/chad-aleo-book-banner.png" alt="Chad Aleo, best-selling author of The Book on High Ticket Sales"></a></p>
@@ -2316,49 +2407,49 @@
     <p class="ref-strip-personal-intro">Real messages and posts from people who worked directly with CJ, not copied from Trustpilot.</p>
     <div class="ref-strip-inner ref-strip-inner--personal-reviews">
       <div class="ref-strip-mini-stack">
-          <div class="ref-strip-quote ref-strip-quote--compact">
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you're doing.</blockquote>
             <p class="ref-strip-quote-attr">— Zach Scanlon · text message</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">CJ, I just wanted to thank you for closing me on the program. I can already tell I'll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process.</blockquote>
             <p class="ref-strip-quote-attr">— Riley Colston · text message</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">CJ, the program has been great so far and I've made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you.</blockquote>
             <p class="ref-strip-quote-attr">— Amy Colombo · text message</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I'm so grateful. I landed my dream role 65 days in, and you played a real part in that.</blockquote>
             <p class="ref-strip-quote-attr">— Zachary Allen · mastermind community</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">CJ, thank you so much for taking the time to read through my answers before we ever got on a call. That meant a lot. Hearing that you actually read my stuff made me want to work with you specifically, not someone else. I appreciate the kind words more than you know, and I'm really excited to get started with you.</blockquote>
             <p class="ref-strip-quote-attr">— Brittany Levine · text message</p>
           </div>
       </div>
       <div class="ref-strip-mini-stack">
-          <div class="ref-strip-quote ref-strip-quote--compact">
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">Hey CJ, just wanted to say thanks, seriously. You and Mark didn't let me slip away after I almost bailed on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support? That's why I'm all in now. Appreciate you both pulling me through. Means a lot.</blockquote>
             <p class="ref-strip-quote-attr">— Nick Sotirianos · text message</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">CJ, you're the most genuine and caring person I've ever met on the phone. You lifted me up when I was in a low place. You gave me hope, kept me motivated, and kept me positive the whole way. You're a big part of my testimony. I wouldn't be here right now if it wasn't for you.</blockquote>
             <p class="ref-strip-quote-attr">— Trinity Isabel · Facebook post</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">CJ, thank you for getting me signed up and for sticking with me while we built a plan to join. We worked on it for three months before I came in, and you never made me feel rushed. You showed me from the start that these are really great people, every single one of them.</blockquote>
             <p class="ref-strip-quote-attr">— HTSA Member · unprompted review</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">CJ, I'm SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you're doing!</blockquote>
             <p class="ref-strip-quote-attr">— Kate Robinson · text message</p>
