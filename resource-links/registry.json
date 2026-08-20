@@ -222,7 +222,21 @@
       "status": "active",
       "view_count": 0,
       "last_viewed_at": null
+    },
+    "joe_goldstone": {
+      "slug": "joe_goldstone",
+      "prospect_id": "joe-goldstone",
+      "prospect_name": "Joe Goldstone",
+      "email": "joegoldstonee@gmail.com",
+      "phone_e164": "+19178371185",
+      "phone_display": "+1 (917) 837-1185",
+      "page_type": "precall",
+      "created_at": "2026-08-20T01:32:25Z",
+      "expires_at": "2026-11-18T01:32:25Z",
+      "status": "active",
+      "view_count": 0,
+      "last_viewed_at": null
     }
   },
-  "updated_at": "2026-08-20T00:39:34Z"
+  "updated_at": "2026-08-20T01:32:25Z"
 }

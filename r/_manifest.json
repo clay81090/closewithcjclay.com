@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-20T00:39:34Z",
+  "updated_at": "2026-08-20T01:32:25Z",
   "links": {
     "tammy_berry": {
       "status": "active",
@@ -94,6 +94,12 @@
     "mario_enoch": {
       "status": "active",
       "expires_at": "2026-11-18T00:39:34Z",
+      "view_count": 0,
+      "last_viewed_at": null
+    },
+    "joe_goldstone": {
+      "status": "active",
+      "expires_at": "2026-11-18T01:32:25Z",
       "view_count": 0,
       "last_viewed_at": null
     }
