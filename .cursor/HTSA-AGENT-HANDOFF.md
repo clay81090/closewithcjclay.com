@@ -116,9 +116,13 @@ Frame: this is recent, real members talking about getting placed, and it answers
 - Billing Prepared For / By
 - §1 Who Mentors You: **MUST WATCH video → Chad → book banner → Trustpilot**
 - §2 Videos, Proof & Member Stories (featured + placement Canva cards + compact YouTube + HTSA site card)
-- CJ personal reviews strip
+- CJ personal reviews strip: **white cards only** (not blue). Centered **CJ Reviews** banner above both columns. All cards are CJ’s personal notes (To CJ). Do **not** mix in Trustpilot / general HTSA Member Voices here. Janaye review sits at the **top of the right column** to balance height toward the footer.
 - Footer (2026 style)
 - **Forbidden:** curriculum grid, Whop checkout, Terms gate, pricing, email gate, “Need to reschedule,” calendar buttons (see `assert_clean` in `precall-resource.py`)
+
+**Precall vs enrollment reviews:**
+- **Precall `/r/`:** white CJ Reviews only (`render_personal_reviews_html` in `precall-resource.py` + `_precall-defaults.json`).
+- **Enrollment invoices:** blue personal cards + white HTSA member cards under **Member voices** (Joseph layout). Do not confuse the two.
 
 ### Precall text pattern (default; no dashes)
 
@@ -144,6 +148,9 @@ Then take a look at the highlighted testimonials and anything else that helps. S
 | Mario Enoch | `/r/mario_enoch/` | Thu Aug 20 10:00 AM EST |
 | Joe Goldstone | `/r/joe_goldstone/` | Thu Aug 20 3:00 PM EST Zoom |
 | Briana Brewer | `/r/briana_brewer/` | Thu Aug 20 5:00 PM EST |
+| Jackie Knight | `/r/jackie_knight/` | Thu Aug 20 1:00 PM EST |
+| Travis Simecek | `/r/travis_simecek/` | Thu Aug 20 2:00 PM EST |
+| Tracy Nannery | `/r/tracy_nannery/` | Fri Aug 21 1:00 PM EST |
 
 Data JSON: `resource-links/data/{prospect-id}.json` · registry: `resource-links/registry.json` · `r/_manifest.json`
 
@@ -315,4 +322,4 @@ Then paste the next client block.
 
 ---
 
-*Last updated: Aug 20, 2026 — MUST WATCH = Aug 18 placement clip until CJ says otherwise; precall texts must explain why (placement trust before testimonials).*
+*Last updated: Aug 20, 2026 — Precall CJ Reviews = white cards + centered banner + Janaye top-right; enrollment Member Voices stay blue/white mix. MUST WATCH = Aug 18 clip until CJ says otherwise.*

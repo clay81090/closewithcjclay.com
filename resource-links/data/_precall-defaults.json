@@ -1,6 +1,11 @@
 {
-  "personal_reviews_title": "A few of CJ's Personal Reviews",
+  "personal_reviews_title": "CJ Reviews",
   "personal_reviews": [
+    {
+      "name": "Janaye",
+      "context": "text message",
+      "body": "Hey CJ, it's Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could've made for my life right now.\n\nI think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!"
+    },
     {
       "name": "Zach Scanlon",
       "context": "text message",

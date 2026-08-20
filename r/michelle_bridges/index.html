@@ -1324,41 +1324,31 @@
     max-width: 520px;
   }
 
-  .ref-strip-inner--personal-reviews {
-    align-items: stretch;
-  }
-
-  .ref-strip-inner--personal-reviews .ref-strip-mini-stack {
-    flex: 1 1 280px;
-    min-width: 0;
-    margin-top: 0;
-  }
-
   .ref-strip-quote--compact {
     padding: 10px 12px 12px;
   }
 
-  /* Personal notes to CJ — same blue card as HTSA Website block */
-  .ref-strip-quote--personal {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 3px solid #1976D2;
-    border-left: 5px solid #1565C0;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1.5px #e2b227, 0 4px 14px rgba(10, 22, 40, 0.08);
+  /* Centered section header (same idea as enrollment Member voices banner) */
+  .ref-strip-banner {
+    text-align: center;
+    margin: 0 0 18px;
   }
 
-  .ref-strip-quote--personal .ref-strip-quote-meta {
-    color: var(--navy);
+  .ref-strip-banner .ref-strip-label {
+    font-size: 12px;
     font-weight: 700;
-  }
-
-  .ref-strip-quote--personal .ref-strip-quote-body {
-    color: var(--muted);
-  }
-
-  .ref-strip-quote--personal .ref-strip-quote-attr {
+    letter-spacing: 2.6px;
+    text-transform: uppercase;
     color: var(--navy);
-    border-top-color: rgba(25, 118, 210, 0.22);
+    margin: 0 0 8px;
+  }
+
+  .ref-strip-banner-desc {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0 auto;
+    max-width: 520px;
   }
 
   .ref-strip-quote--compact .ref-strip-quote-body {
@@ -1370,6 +1360,24 @@
   .ref-strip-quote--compact .ref-strip-quote-attr {
     margin-top: 8px;
     padding-top: 6px;
+  }
+
+  /* CJ Reviews columns: stretch so bottoms line up toward the footer */
+  .ref-strip-inner--personal-reviews {
+    align-items: stretch;
+  }
+
+  .ref-strip-inner--personal-reviews .ref-strip-mini-stack {
+    flex: 1 1 280px;
+    min-width: 0;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ref-strip-inner--personal-reviews .ref-strip-mini-stack > .ref-strip-quote {
+    flex: 1 1 auto;
   }
 
   /* Trinity (right column): full text, card stretches with row so name lines up with Jessica C. */
@@ -2401,57 +2409,64 @@
     <div style="display:flex;justify-content:center;margin-top:12px;"><a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact" style="max-width:420px;width:100%;background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border:3px solid #1976D2;border-left:5px solid #1565C0;box-shadow:0 0 0 1.5px #e2b227,0 4px 14px rgba(10,22,40,0.08);" target="_blank" rel="noopener noreferrer"><div class="cj-resource-card-title">HTSA Website — more stories &amp; outcomes</div><p class="cj-resource-card-desc">Many more member outcomes, screenshots, and program details on our main site.</p><span class="cj-resource-card-cta">Visit highticketsalesacademy.com</span></a></div>
   </div>
 
-  <!-- CJ personal reviews -->
+  <!-- CJ personal reviews (precall: white cards only) -->
   <div class="ref-strip">
-    <div class="ref-strip-label">A few of CJ&#x27;s Personal Reviews</div>
-    <p class="ref-strip-personal-intro">Real messages and posts from people who worked directly with CJ, not copied from Trustpilot.</p>
+    <div class="ref-strip-banner">
+      <div class="ref-strip-label">CJ Reviews</div>
+      <p class="ref-strip-banner-desc">Real messages from people who worked directly with CJ.</p>
+    </div>
     <div class="ref-strip-inner ref-strip-inner--personal-reviews">
       <div class="ref-strip-mini-stack">
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you're doing.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you&#x27;re doing.</blockquote>
             <p class="ref-strip-quote-attr">— Zach Scanlon · text message</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, I just wanted to thank you for closing me on the program. I can already tell I'll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, I just wanted to thank you for closing me on the program. I can already tell I&#x27;ll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process.</blockquote>
             <p class="ref-strip-quote-attr">— Riley Colston · text message</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, the program has been great so far and I've made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, the program has been great so far and I&#x27;ve made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you.</blockquote>
             <p class="ref-strip-quote-attr">— Amy Colombo · text message</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I'm so grateful. I landed my dream role 65 days in, and you played a real part in that.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I&#x27;m so grateful. I landed my dream role 65 days in, and you played a real part in that.</blockquote>
             <p class="ref-strip-quote-attr">— Zachary Allen · mastermind community</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, thank you so much for taking the time to read through my answers before we ever got on a call. That meant a lot. Hearing that you actually read my stuff made me want to work with you specifically, not someone else. I appreciate the kind words more than you know, and I'm really excited to get started with you.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, thank you so much for taking the time to read through my answers before we ever got on a call. That meant a lot. Hearing that you actually read my stuff made me want to work with you specifically, not someone else. I appreciate the kind words more than you know, and I&#x27;m really excited to get started with you.</blockquote>
             <p class="ref-strip-quote-attr">— Brittany Levine · text message</p>
           </div>
       </div>
       <div class="ref-strip-mini-stack">
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">Hey CJ, just wanted to say thanks, seriously. You and Mark didn't let me slip away after I almost bailed on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support? That's why I'm all in now. Appreciate you both pulling me through. Means a lot.</blockquote>
+            <blockquote class="ref-strip-quote-body">Hey CJ, it&#x27;s Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could&#x27;ve made for my life right now.<br><br>I think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!</blockquote>
+            <p class="ref-strip-quote-attr">— Janaye · text message</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">Hey CJ, just wanted to say thanks, seriously. You and Mark didn&#x27;t let me slip away after I almost bailed on our call. You stayed patient, kept it real, and showed me why this team&#x27;s different. That kind of support? That&#x27;s why I&#x27;m all in now. Appreciate you both pulling me through. Means a lot.</blockquote>
             <p class="ref-strip-quote-attr">— Nick Sotirianos · text message</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, you're the most genuine and caring person I've ever met on the phone. You lifted me up when I was in a low place. You gave me hope, kept me motivated, and kept me positive the whole way. You're a big part of my testimony. I wouldn't be here right now if it wasn't for you.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, you&#x27;re the most genuine and caring person I&#x27;ve ever met on the phone. You lifted me up when I was in a low place. You gave me hope, kept me motivated, and kept me positive the whole way. You&#x27;re a big part of my testimony. I wouldn&#x27;t be here right now if it wasn&#x27;t for you.</blockquote>
             <p class="ref-strip-quote-attr">— Trinity Isabel · Facebook post</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">CJ, thank you for getting me signed up and for sticking with me while we built a plan to join. We worked on it for three months before I came in, and you never made me feel rushed. You showed me from the start that these are really great people, every single one of them.</blockquote>
             <p class="ref-strip-quote-attr">— HTSA Member · unprompted review</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, I'm SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you're doing!</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, I&#x27;m SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you&#x27;re doing!</blockquote>
             <p class="ref-strip-quote-attr">— Kate Robinson · text message</p>
           </div>
       </div>

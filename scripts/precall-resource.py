@@ -251,23 +251,39 @@ def render_resources_html(first: str) -> str:
 
 
 def render_personal_reviews_html(reviews: list, title: str) -> str:
-    cards = []
-    for r in reviews:
+    """CJ-only personal reviews on precall pages. White cards (not blue enrollment Member Voices)."""
+
+    def card_html(r: dict) -> str:
         context = r.get("context", "shared with HTSA")
-        cards.append(
-            f"""          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+        body = escape(r.get("body", "")).replace("\n", "<br>")
+        return f"""          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">{r["body"]}</blockquote>
-            <p class="ref-strip-quote-attr">— {r["name"]} · {context}</p>
+            <blockquote class="ref-strip-quote-body">{body}</blockquote>
+            <p class="ref-strip-quote-attr">— {escape(r["name"])} · {escape(context)}</p>
           </div>"""
-        )
-    mid = (len(cards) + 1) // 2
-    left = "\n".join(cards[:mid])
-    right = "\n".join(cards[mid:])
-    return f"""<!-- CJ personal reviews -->
+
+    # Prefer Janaye at the top of the right column (fills the shorter side).
+    right_lead: list[dict] = []
+    rest: list[dict] = []
+    for r in reviews:
+        name = (r.get("name") or "").strip().lower()
+        if name.startswith("janaye") and not right_lead:
+            right_lead.append(r)
+        else:
+            rest.append(r)
+
+    mid = (len(rest) + 1) // 2
+    left_reviews = rest[:mid]
+    right_reviews = right_lead + rest[mid:]
+
+    left = "\n".join(card_html(r) for r in left_reviews)
+    right = "\n".join(card_html(r) for r in right_reviews)
+    return f"""<!-- CJ personal reviews (precall: white cards only) -->
   <div class="ref-strip">
-    <div class="ref-strip-label">{escape(title)}</div>
-    <p class="ref-strip-personal-intro">Real messages and posts from people who worked directly with CJ, not copied from Trustpilot.</p>
+    <div class="ref-strip-banner">
+      <div class="ref-strip-label">{escape(title)}</div>
+      <p class="ref-strip-banner-desc">Real messages from people who worked directly with CJ.</p>
+    </div>
     <div class="ref-strip-inner ref-strip-inner--personal-reviews">
       <div class="ref-strip-mini-stack">
 {left}

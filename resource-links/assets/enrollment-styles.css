@@ -1314,41 +1314,31 @@
     max-width: 520px;
   }
 
-  .ref-strip-inner--personal-reviews {
-    align-items: stretch;
-  }
-
-  .ref-strip-inner--personal-reviews .ref-strip-mini-stack {
-    flex: 1 1 280px;
-    min-width: 0;
-    margin-top: 0;
-  }
-
   .ref-strip-quote--compact {
     padding: 10px 12px 12px;
   }
 
-  /* Personal notes to CJ — same blue card as HTSA Website block */
-  .ref-strip-quote--personal {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 3px solid #1976D2;
-    border-left: 5px solid #1565C0;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1.5px #e2b227, 0 4px 14px rgba(10, 22, 40, 0.08);
+  /* Centered section header (same idea as enrollment Member voices banner) */
+  .ref-strip-banner {
+    text-align: center;
+    margin: 0 0 18px;
   }
 
-  .ref-strip-quote--personal .ref-strip-quote-meta {
-    color: var(--navy);
+  .ref-strip-banner .ref-strip-label {
+    font-size: 12px;
     font-weight: 700;
-  }
-
-  .ref-strip-quote--personal .ref-strip-quote-body {
-    color: var(--muted);
-  }
-
-  .ref-strip-quote--personal .ref-strip-quote-attr {
+    letter-spacing: 2.6px;
+    text-transform: uppercase;
     color: var(--navy);
-    border-top-color: rgba(25, 118, 210, 0.22);
+    margin: 0 0 8px;
+  }
+
+  .ref-strip-banner-desc {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0 auto;
+    max-width: 520px;
   }
 
   .ref-strip-quote--compact .ref-strip-quote-body {
@@ -1360,6 +1350,24 @@
   .ref-strip-quote--compact .ref-strip-quote-attr {
     margin-top: 8px;
     padding-top: 6px;
+  }
+
+  /* CJ Reviews columns: stretch so bottoms line up toward the footer */
+  .ref-strip-inner--personal-reviews {
+    align-items: stretch;
+  }
+
+  .ref-strip-inner--personal-reviews .ref-strip-mini-stack {
+    flex: 1 1 280px;
+    min-width: 0;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ref-strip-inner--personal-reviews .ref-strip-mini-stack > .ref-strip-quote {
+    flex: 1 1 auto;
   }
 
   /* Trinity (right column): full text, card stretches with row so name lines up with Jessica C. */
