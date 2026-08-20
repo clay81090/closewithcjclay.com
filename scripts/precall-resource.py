@@ -137,7 +137,7 @@ def render_week_at_htsa_embed() -> str:
       <div class="htsa-proof-embed-kicker">Recorded this week · Aug 18 · 4:07</div>
       <div class="htsa-proof-embed-must-watch">MUST WATCH!!!</div>
       <div class="htsa-proof-embed-title">HTSA · Placement This Week (Aug 18, 2026)</div>
-      <p class="htsa-proof-embed-desc">Four people on our live group coaching call talking about getting placed with us. Play it right here. Pause anytime. Use the fullscreen control if you want it larger.</p>
+      <p class="htsa-proof-embed-desc">Watch this before the testimonials below. Four people on our live group coaching call talking about getting placed with us. This is the level we operate at on placement, which is usually the biggest question people have. Play it right here. Pause anytime. Use the fullscreen control if you want it larger.</p>
       <video controls playsinline preload="metadata" controlslist="nodownload" title="HTSA Placement This Week, August 18, 2026. Members on live group coaching talking about placement.">
         <source src="{src}" type="video/mp4">
         Your browser does not play this video here. Open <a href="{src}">this file</a> instead.
