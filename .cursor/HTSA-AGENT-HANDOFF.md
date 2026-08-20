@@ -80,6 +80,13 @@ python3 scripts/precall-resource.py create \
 
 ### MUST WATCH video (critical)
 
+**Why this clip exists (sales / trust):**
+- Almost every prospect’s #1 fear is **placement** (“Will I actually get a role?”).
+- The clip shows the **caliber and level HTSA operates at on placement**: real members on a live group coaching call talking about getting placed.
+- It **handles a huge objection before the call** and builds trust **before** CJ gets on Zoom/phone.
+- **Standing file until CJ says otherwise:** Aug 18, 2026 ~4:07 clip. No newer video. Do not swap until CJ uploads a replacement and says to use it.
+
+**On the page:**
 - **Embedded in-page** under **Section 1 — Who Mentors You**, **above** Chad’s Meet Chad link / book / Trustpilot.
 - Bright orange/red badge: **`MUST WATCH!!!`**
 - Plays on the page (no new tab). `controls` + `playsinline`. Works on **phone and web**.
@@ -87,11 +94,16 @@ python3 scripts/precall-resource.py create \
   - `WEEK_AT_HTSA_VIDEO = "/media/this-week-at-htsa-2026-08-18.mp4"`
   - `render_week_at_htsa_embed()` → used inside `render_about_htsa()`
 - Styles live in `resource-links/assets/enrollment-styles.css` (`.htsa-proof-embed*`).
-- **Current published file:** `media/this-week-at-htsa-2026-08-18.mp4`  
-  Source on disk often named: `HTSA - Placement This Week (Aug 18th, 2026).mp4` (~**4:07**, ~35MB).  
-  **Do not** use the old ~60MB full “This Week at HTSA” dump.
-- **If CJ uploads a new MUST WATCH clip:** copy it over `media/this-week-at-htsa-2026-08-18.mp4` (or update the constant + filename), rebuild practice `/r/cj_clay/` if needed, commit + push the media + script/CSS, then new precalls pick it up automatically. GitHub warns above 50MB; keep clips short when possible.
+- **Published file:** `media/this-week-at-htsa-2026-08-18.mp4`  
+  Source name: `HTSA - Placement This Week (Aug 18th, 2026).mp4` (~**4:07**, ~35MB).  
+  **Do not** use the old ~60MB full dump.
 - **Existing** precall pages do **not** auto-update unless rebuilt. New pages from the script get the current embed.
+
+**In every precall text / email (required):**
+Do not only say “watch the video.” Tell them **why** before they scroll to testimonials:
+1. Watch MUST WATCH first (placement / how HTSA places people).
+2. Then look at the highlighted testimonials and other resources.
+Frame: this is recent, real members talking about getting placed, and it answers the #1 thing people worry about.
 
 ### Practice / gold reference
 
@@ -110,15 +122,19 @@ python3 scripts/precall-resource.py create \
 
 ### Precall text pattern (default; no dashes)
 
+Always include the **why** (placement proof before testimonials). Adjust Zoom vs phone and day/time from the appointment line. **Text only** when CJ says so.
+
 ```text
 Hey {First}, looking forward to our call {day} at {time} {tz}. Here’s everything I want you to look at before we talk:
 
 https://closewithcjclay.com/r/{slug}/
 
-Start with the MUST WATCH video at the top. It’s about 4 minutes. Then glance at the rest if you have time. See you {tomorrow / soon}.
+Before you scroll to the testimonials, start with the MUST WATCH video at the top. It’s about 4 minutes from this week’s live group coaching. You’ll hear people talk about getting placed with us. That is usually the biggest question people have, and this shows the level we operate at when it comes to placement.
+
+Then take a look at the highlighted testimonials and anything else that helps. See you {tomorrow / soon}.
 ```
 
-Adjust Zoom vs phone from the appointment line. **Text only** when CJ says so.
+**Email variant** (when CJ wants email too): same structure, slightly fuller greeting, still no dashes. Subject example: `Great speaking with you, {First}` or `Looking forward to our call, {First}`.
 
 ### Recent precall examples (Aug 19–20, 2026)
 
@@ -299,4 +315,4 @@ Then paste the next client block.
 
 ---
 
-*Last updated: Aug 20, 2026 — covers MUST WATCH placement clip, precall auto-flow, enrollment ship rules, Alejandro canonical URL, Mario/Joe/Briana precalls.*
+*Last updated: Aug 20, 2026 — MUST WATCH = Aug 18 placement clip until CJ says otherwise; precall texts must explain why (placement trust before testimonials).*
