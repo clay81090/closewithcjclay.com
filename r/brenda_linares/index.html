@@ -2153,6 +2153,12 @@
     border-bottom: 1px solid rgba(0, 154, 94, 0.2);
     border-left: 4px solid var(--navy);
   }
+  .rl-call-card--missed {
+    background: linear-gradient(135deg, #fff5f5 0%, #fee2e2 100%);
+    border-top-color: rgba(220, 38, 38, 0.22);
+    border-bottom-color: rgba(220, 38, 38, 0.22);
+    border-left-color: #dc2626;
+  }
   .rl-call-card-kicker {
     font-size: 10px;
     font-weight: 700;
@@ -2160,6 +2166,12 @@
     text-transform: uppercase;
     color: var(--green-dark);
     margin: 0 0 8px;
+  }
+  .rl-call-card-kicker--missed {
+    color: #dc2626;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
   }
   .rl-call-card-when {
     font-family: 'Playfair Display', serif;
@@ -2184,6 +2196,7 @@
     border: none;
     cursor: pointer;
     text-decoration: none;
+    display: inline-block;
   }
   .rl-call-card-actions .step-link {
     font-size: 12px;
@@ -2272,7 +2285,7 @@
       <div class="header-tagline" style="margin-top:12px;">Certification &nbsp;·&nbsp; Coaching &nbsp;·&nbsp; Placement</div>
     </div>
     <div class="invoice-meta">
-      <div class="invoice-badge">Resources</div>
+      <div class="invoice-badge">Pre-Call Resources</div>
       <p><strong>Prepared by:</strong> CJ Clay</p>
       <p><strong>Prepared for:</strong> Brenda Linares</p>
       <p><strong>Date:</strong> Aug 21, 2026</p>
@@ -2286,6 +2299,14 @@
     <p>Have a look at whatever's useful. Look forward to connecting.</p>
   </div>
 
+  <div class="rl-call-card rl-call-card--missed" id="rl-call-card" data-call-status="missed">
+    <p class="rl-call-card-kicker rl-call-card-kicker--missed">Missed meeting</p>
+    <p class="rl-call-card-when">Friday, Aug 21 · 3:00 PM EST</p>
+    <p class="rl-call-card-meta">We didn’t connect at this time · Phone or Zoom</p>
+    <div class="rl-call-card-actions">
+      <a href="https://meetings.hubspot.com/charles660/cj" class="invest-btn" target="_blank" rel="noopener noreferrer">Reschedule Appointment →</a>
+    </div>
+  </div>
 
   <div class="billing-grid">
     <div class="billing-cell">
@@ -2294,7 +2315,7 @@
       <div class="billing-detail">
         <a href="mailto:chester200910@gmail.com">chester200910@gmail.com</a><br>
         <a href="tel:+16266538447">+1 (626) 653-8447</a><br>
-        Resources for your HTSA conversation
+        Missed · Friday at 3:00 PM EST
       </div>
     </div>
     <div class="billing-cell">
@@ -2523,7 +2544,7 @@
 (function(){
   var GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
   var slug = "brenda_linares";
-  var confirmDay = "soon";
+  var confirmDay = "Friday";
   var meta = {
     fullName: "Brenda Linares",
     email: "chester200910@gmail.com",

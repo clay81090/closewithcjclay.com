@@ -325,10 +325,19 @@ def billing_call_line(data: dict) -> str:
     time_s = (data.get("call_time") or "").strip()
     tz = (data.get("call_timezone") or "EST").strip()
     if day and time_s:
-        return f"{day} at {time_s} {tz}"
-    if time_s:
-        return f"{time_s} {tz}"
+        when = f"{day} at {time_s} {tz}"
+    elif time_s:
+        when = f"{time_s} {tz}"
+    else:
+        when = ""
+    if data.get("missed_meeting"):
+        return f"Missed · {when}" if when else "Missed meeting · reschedule below"
+    if when:
+        return when
     return "Call details on this page"
+
+
+CJ_BOOKING_URL = "https://meetings.hubspot.com/charles660/cj"
 
 
 def render_call_card(data: dict) -> str:
@@ -337,12 +346,26 @@ def render_call_card(data: dict) -> str:
     when = escape(call_when_line(data))
     fmt = escape((data.get("call_format") or "Zoom").strip())
     confirm_day = escape((data.get("call_day") or "soon").strip() or "soon")
+    missed = bool(data.get("missed_meeting"))
+    booking = escape((data.get("booking_url") or CJ_BOOKING_URL).strip() or CJ_BOOKING_URL)
+
+    if missed:
+        return f"""
+  <div class="rl-call-card rl-call-card--missed" id="rl-call-card" data-call-status="missed">
+    <p class="rl-call-card-kicker rl-call-card-kicker--missed">Missed meeting</p>
+    <p class="rl-call-card-when">{when}</p>
+    <p class="rl-call-card-meta">We didn’t connect at this time · {fmt}</p>
+    <div class="rl-call-card-actions">
+      <a href="{booking}" class="invest-btn" target="_blank" rel="noopener noreferrer">Reschedule Appointment →</a>
+    </div>
+  </div>"""
+
     return f"""
-  <div style="padding:18px 36px 22px;border-bottom:1px solid var(--mid);">
-    <div class="rl-q-ours" id="rl-call-card" data-confirm-day="{confirm_day}">
-      <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--green-dark);">📅 Your call with CJ</p>
-      <p style="margin:0 0 4px;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);line-height:1.3;">{when}</p>
-      <p style="margin:0 0 14px;font-size:13px;color:var(--muted);">45 minutes · {fmt}</p>
+  <div class="rl-call-card" id="rl-call-card" data-confirm-day="{confirm_day}">
+    <p class="rl-call-card-kicker">📅 Your call with CJ</p>
+    <p class="rl-call-card-when">{when}</p>
+    <p class="rl-call-card-meta">45 minutes · {fmt}</p>
+    <div class="rl-call-card-actions">
       <button type="button" id="rl-confirm-call" class="invest-btn">Confirm I'll be there</button>
     </div>
   </div>"""
@@ -652,6 +675,8 @@ def build_data(args: argparse.Namespace) -> dict:
         "call_time": (args.call_time or "").strip(),
         "call_timezone": (args.timezone or "EST").strip(),
         "call_format": (args.call_format or "Zoom").strip(),
+        "missed_meeting": bool(getattr(args, "missed", False)),
+        "booking_url": (getattr(args, "booking_url", None) or CJ_BOOKING_URL).strip(),
         "show_member_contacts": False,
     }
 
@@ -732,6 +757,16 @@ def main() -> None:
     p.add_argument("--call-time", default="")
     p.add_argument("--timezone", default="EST")
     p.add_argument("--call-format", default="Zoom")
+    p.add_argument(
+        "--missed",
+        action="store_true",
+        help="No-show / missed meeting card: red Missed meeting + green Reschedule button",
+    )
+    p.add_argument(
+        "--booking-url",
+        default=CJ_BOOKING_URL,
+        help=f"HubSpot booking URL for reschedule button (default: {CJ_BOOKING_URL})",
+    )
     p.add_argument("--ship", action="store_true")
     p.set_defaults(func=cmd_create)
     args = ap.parse_args()

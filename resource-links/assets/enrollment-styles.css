@@ -2143,6 +2143,12 @@
     border-bottom: 1px solid rgba(0, 154, 94, 0.2);
     border-left: 4px solid var(--navy);
   }
+  .rl-call-card--missed {
+    background: linear-gradient(135deg, #fff5f5 0%, #fee2e2 100%);
+    border-top-color: rgba(220, 38, 38, 0.22);
+    border-bottom-color: rgba(220, 38, 38, 0.22);
+    border-left-color: #dc2626;
+  }
   .rl-call-card-kicker {
     font-size: 10px;
     font-weight: 700;
@@ -2150,6 +2156,12 @@
     text-transform: uppercase;
     color: var(--green-dark);
     margin: 0 0 8px;
+  }
+  .rl-call-card-kicker--missed {
+    color: #dc2626;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
   }
   .rl-call-card-when {
     font-family: 'Playfair Display', serif;
@@ -2174,6 +2186,7 @@
     border: none;
     cursor: pointer;
     text-decoration: none;
+    display: inline-block;
   }
   .rl-call-card-actions .step-link {
     font-size: 12px;
