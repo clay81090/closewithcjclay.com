@@ -188,6 +188,60 @@
   #themeToggle:hover{color:var(--accent); border-color:var(--accent)}
   #themeToggle:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
 
+  /* --- dedicated phone layout --- */
+  @media (max-width:600px){
+    html{scroll-padding-top:12px}
+    body{font-size:16.5px; line-height:1.58; overflow-x:hidden}
+    .shell{width:100%; padding:0 12px 60px}
+    .shell > *,main,section.part{min-width:0; overflow-x:hidden}
+    main{width:100%}
+
+    .masthead{padding:72px 2px 24px; margin-bottom:24px}
+    .eyebrow{font-size:10px; line-height:1.5; letter-spacing:.12em; margin-bottom:12px; max-width:28ch}
+    .masthead h1{font-size:clamp(36px,12vw,48px); line-height:.98; overflow-wrap:anywhere}
+    .masthead .sub{font-size:16px; line-height:1.35; margin-bottom:18px}
+    .standfirst{font-size:18px; line-height:1.46; margin-bottom:20px}
+    .stamp-row{display:grid; gap:6px; font-size:10.5px; line-height:1.45}
+
+    nav.toc{margin-bottom:22px; padding:0 2px 18px}
+    nav.toc ol{grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px 12px}
+    nav.toc a{grid-template-columns:22px minmax(0,1fr); font-size:12.5px}
+
+    section.part{padding:22px 16px 26px; margin-bottom:16px; scroll-margin-top:10px}
+    section.part > h2,section.part > h3,section.part > h4{max-width:none}
+    h2{font-size:28px}
+    h3{font-size:19px; margin-top:30px}
+    h4{font-size:16px; line-height:1.35}
+    p,ul,ol{max-width:none}
+    ul,ol{padding-left:21px}
+
+    .part-lede{font-size:17px; padding-bottom:16px; margin-bottom:20px}
+    .box{padding:16px 14px 2px; margin:18px 0}
+    blockquote{padding-left:14px; margin-left:0}
+    .cards,.kpis{grid-template-columns:1fr}
+    .card,.kpi{padding:15px 14px}
+
+    .scroller,.figwrap{max-width:100%; overflow-x:auto; overscroll-behavior-inline:contain; -webkit-overflow-scrolling:touch}
+    .scroller{margin:18px 0 22px}
+    .figwrap{padding:16px 12px 14px}
+    .figwrap.wide svg{min-width:720px}
+    table{font-size:14px}
+    th,td{padding:10px 12px}
+
+    .wf{margin:20px 0 24px}
+    .wf-head{display:block; padding:14px 15px}
+    .wf-price{display:block; margin-top:7px; line-height:1.45}
+    .wf-body{padding:16px 14px 4px}
+    .steps li{padding-left:34px}
+    dl.glossary dt{padding-right:0}
+    .src-list a{overflow-wrap:anywhere}
+
+    #themeToggle{
+      top:max(10px,env(safe-area-inset-top)); right:12px;
+      min-height:42px; padding:7px 11px; font-size:10px;
+    }
+  }
+
   /* --- print / PDF --- */
   @media print{
     :root{--ground:#fff!important;--surface:#fff!important;--surface-2:#f4f6f7!important}
