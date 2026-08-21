@@ -55,6 +55,22 @@ Appointment: Thursday August 20 at 10am EST
 
 Optional: “text only”, “Zoom”, “Phone or Zoom”, day/date/time/timezone.
 
+**No-show / missed meeting:** If CJ says they were a no-show / no answer / missed the call, pass `--missed` **and** keep the original appointment day/date/time. The page shows the meeting time, a red **Missed meeting** label, and a green **Reschedule Appointment** button to CJ’s HubSpot link (`https://meetings.hubspot.com/charles660/cj` unless CJ gives another URL). Example:
+
+```bash
+python3 scripts/precall-resource.py create \
+  --full-name "Brenda Linares" \
+  --email "chester200910@gmail.com" \
+  --phone-e164 "+16266538447" \
+  --phone-display "+1 (626) 653-8447" \
+  --call-day "Friday" --call-date "Aug 21" --call-time "3:00 PM" \
+  --timezone "EST" --call-format "Phone or Zoom" \
+  --missed \
+  --ship
+```
+
+Text should still include the `/r/` link **and** the booking URL.
+
 ### Agent must do (no quiz)
 
 1. Parse name, email, phone → display + E.164 (`+1…`).
