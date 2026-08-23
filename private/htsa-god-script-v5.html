@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#0a1628">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>HTSA God Script v5</title>
+<style>
+
+:root{--navy:#0a1628;--navy2:#132040;--navy3:#1c2d52;--green:#00c97a;--gd:#009a5e;--gl:#e6faf2;--gm:#b3f0d8;--light:#f2f5f9;--mid:#e2e8f0;--mid2:#cbd5e1;--text:#1a2540;--muted:#5a6a85;--muted2:#8a9ab5;--white:#fff;--warn-bg:#fff8e6;--warn-bd:#f5d78e;--warn-tx:#7a5500;--red-bg:#fff0f0;--red-bd:#f5b8b8;--red-tx:#8a1010;--blue-bg:#eef5fd;--blue-bd:#b8d4f5;--blue-tx:#0d3d72;--amber:#b3720a;--amber-bg:#fff4e0;--amber-bd:#f0c674;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--light);color:var(--text);min-height:100dvh;line-height:1.6;padding-bottom:2rem}
+.header{background:var(--navy);padding:0 1rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;border-bottom:3px solid var(--green);min-height:52px;position:sticky;top:0;z-index:100}
+.logo{font-family:Georgia,"Times New Roman",serif;font-size:14px;font-weight:700;color:var(--white);display:flex;align-items:center;gap:7px;white-space:nowrap}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+.logo-sub{font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--green);font-weight:600}
+.nav{display:flex;gap:3px;flex-wrap:wrap;flex:1;padding:.4rem 0;min-width:0}
+.nav-btn{font-size:9px;font-weight:600;padding:5px 7px;border-radius:4px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--muted2);cursor:pointer;white-space:nowrap;touch-action:manipulation;transition:all .15s}
+.nav-btn:hover{background:var(--navy3);color:var(--white)}
+.nav-btn.active{background:var(--green);color:var(--navy);border-color:var(--green);font-weight:700}
+.timer-strip{background:var(--navy2);border-bottom:1px solid rgba(255,255,255,.06);padding:6px 1rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:52px;z-index:99}
+.timer-disp{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:20px;font-weight:700;color:var(--green);min-width:70px}
+.timer-phase{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);padding:2px 8px;border-radius:3px;background:var(--navy3)}
+.btn-t{font-size:11px;font-weight:600;padding:5px 11px;min-height:34px;border-radius:5px;border:1px solid rgba(255,255,255,.15);cursor:pointer;background:var(--navy3);color:var(--white);touch-action:manipulation}
+.btn-t.green{background:var(--green);color:var(--navy);border-color:var(--green)}
+.btn-t.pinred{background:#c0284a;color:#fff;border-color:#e0456a;font-weight:700;animation:pulseRed 2.4s infinite}
+.btn-t.pinred:hover{background:#e0456a}
+@keyframes pulseRed{0%,100%{box-shadow:0 0 0 0 rgba(224,69,106,.55)}50%{box-shadow:0 0 0 6px rgba(224,69,106,0)}}
+.prospect-input{background:var(--navy3);border:1px solid rgba(255,255,255,.15);border-radius:5px;padding:4px 9px;font-size:12px;font-family:inherit;color:var(--white);width:150px}
+.buyer-row{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-left:auto}
+.buyer-pill{font-size:10px;font-weight:600;padding:4px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:transparent;color:var(--muted2);cursor:pointer}
+.buyer-pill.active{background:var(--green);color:var(--navy);border-color:var(--green)}
+.buyer-tip{display:none;width:100%;margin-top:4px;font-size:11px;color:rgba(255,255,255,.85);background:var(--navy3);border-radius:5px;padding:6px 10px}
+.buyer-tip.show{display:block}
+.section{display:none;padding:1.25rem;max-width:860px;margin:0 auto}
+.section.active{display:block}
+.sec-head{margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid var(--mid)}
+.sec-num{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted2)}
+.sec-title{font-family:Georgia,"Times New Roman",serif;font-size:22px;font-weight:700;color:var(--navy);margin:.15rem 0}
+.sec-sub{font-size:12px;color:var(--muted)}
+.flow-banner{background:linear-gradient(90deg,var(--gl),var(--blue-bg));border:1px solid var(--gm);border-radius:7px;padding:10px 14px;margin:.75rem 0;font-size:12px;font-weight:600;color:var(--navy)}
+.box{border-radius:7px;padding:.85rem 1.1rem;margin:.6rem 0}
+.box-why{background:var(--white);border:1px solid var(--mid)}
+.box-warn{background:var(--warn-bg);border:1px solid var(--warn-bd)}
+.box-green{background:var(--gl);border:1px solid var(--gm)}
+.box-red{background:var(--red-bg);border:1px solid var(--red-bd)}
+.box-blue{background:var(--blue-bg);border:1px solid var(--blue-bd)}
+.box-navy{background:var(--navy);border:1px solid var(--navy3)}
+.box-amber{background:var(--amber-bg);border:1px solid var(--amber-bd)}
+.box-label{font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.35rem}
+.box-why .box-label{color:var(--muted)}.box-warn .box-label{color:#b37a00}.box-green .box-label{color:var(--gd)}.box-red .box-label{color:#b31010}.box-blue .box-label{color:#1a60aa}.box-navy .box-label{color:var(--green)}.box-amber .box-label{color:var(--amber)}
+.box-text{font-size:13px;line-height:1.75}.box-navy .box-text{color:rgba(255,255,255,.88)}
+.script-label{font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:1rem 0 .25rem}
+.script-box{background:var(--navy);border:1px solid var(--navy3);border-left:3px solid var(--green);border-radius:0 7px 7px 0;padding:.9rem 1.1rem;margin:.25rem 0 .9rem;font-size:14px;line-height:1.9;color:rgba(255,255,255,.92)}
+.script-box em{font-size:11px;color:var(--muted2);font-style:italic}
+.script-box strong{color:var(--green);font-weight:700}
+.script-box.pinned{border-left-color:#e0456a;box-shadow:0 0 0 1px rgba(224,69,106,.35)}
+.pause{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--green);background:rgba(0,201,122,.12);padding:1px 7px;border-radius:3px;margin:0 3px}
+.step-label{font-size:13px;font-weight:700;color:var(--navy);margin:1.1rem 0 .2rem;display:flex;align-items:center;gap:7px}
+.step-label::before{content:'';width:3px;height:14px;background:var(--green);border-radius:2px;flex-shrink:0}
+.step-label.hot::before{background:#e0456a}
+.step-label.hot{color:#a01840}
+.step-sub{font-size:11px;color:var(--muted);margin-bottom:.5rem}
+.div{height:1px;background:var(--mid);margin:1.25rem 0}
+.branch-wrap{display:flex;flex-direction:column;gap:.4rem;margin:.4rem 0 .9rem}
+.branch{border:1px solid var(--mid);border-radius:7px;overflow:hidden;background:var(--white)}
+.branch-if{display:flex;gap:9px;align-items:flex-start;padding:.6rem .9rem;background:var(--light);cursor:pointer;user-select:none;touch-action:manipulation;min-height:44px}
+.branch-if:hover{background:var(--mid)}
+.branch-tag{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);min-width:18px;padding-top:2px}
+.branch-cond{font-size:12.5px;color:var(--muted);font-style:italic;flex:1;line-height:1.5}
+.branch-arrow{font-size:9px;color:var(--muted2);transition:transform .2s}
+.branch.open .branch-arrow{transform:rotate(90deg)}
+.branch-body{padding:.8rem .9rem;display:none;border-top:1px solid var(--mid)}
+.branch.open .branch-body{display:block}
+.branch-then{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);margin-bottom:.3rem}
+.branch-say{font-size:13.5px;color:var(--text);line-height:1.85}
+.branch-say strong{color:var(--gd);font-weight:700}
+.branch-warn{font-size:12.5px;color:#8a1010;line-height:1.7;margin-top:.4rem;font-style:italic}
+.branch-note{font-size:12px;color:var(--muted);line-height:1.7;margin-top:.4rem}
+.branch-analogy{margin-top:.65rem;padding:.65rem .85rem;background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:5px}
+.ba-label{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue-tx);margin-bottom:.3rem}
+.ba-body{font-size:12.5px;color:var(--blue-tx);line-height:1.7}
+.tab-row{display:flex;flex-wrap:wrap;gap:5px;margin:.5rem 0}
+.tab-btn{font-size:11px;font-weight:600;padding:5px 11px;min-height:38px;border-radius:5px;border:1px solid var(--mid2);background:var(--white);color:var(--muted);cursor:pointer;touch-action:manipulation;transition:all .15s}
+.tab-btn:hover{border-color:var(--navy);color:var(--navy)}
+.tab-btn.active{background:var(--navy);color:var(--green);border-color:var(--navy)}
+.tab-btn.amber-tab{border-color:var(--amber-bd);color:var(--amber)}
+.tab-btn.amber-tab.active{background:var(--amber);color:#fff;border-color:var(--amber)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.story-btn{font-size:10px;font-weight:600;padding:4px 9px;min-height:36px;border-radius:5px;border:1px solid var(--mid2);background:var(--white);color:var(--muted);cursor:pointer;touch-action:manipulation}
+.story-btn:hover{border-color:var(--gd);color:var(--gd)}
+.story-btn.active{background:var(--gl);color:var(--gd);border-color:var(--gd)}
+.story-btn.amber{border-color:var(--amber-bd);color:var(--amber)}
+.story-btn.amber.active{background:var(--amber);color:#fff;border-color:var(--amber)}
+.story-btn.proof{border-color:var(--gd);color:var(--gd);font-weight:700}
+.story-btn.proof.active{background:var(--gd);color:#fff}
+.q-card{background:var(--navy);border:1px solid var(--navy3);border-left:3px solid var(--green);border-radius:0 7px 7px 0;padding:.9rem 1.1rem;margin:.4rem 0}
+.q-card .box-label{color:var(--green)}
+.q-text{font-size:14.5px;font-weight:600;color:var(--white);margin-bottom:.2rem;line-height:1.6}
+.q-note{font-size:11px;color:var(--muted2);font-style:italic}
+.notes-area{width:100%;min-height:80px;font-family:inherit;font-size:13px;padding:9px 11px;border:1px solid var(--mid);border-radius:7px;resize:vertical;color:var(--text);background:var(--white)}
+.notes-area:focus{outline:none;border-color:var(--green)}
+.notes-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.5rem 0}
+.pill-list{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0}
+.chad-pill{font-size:10px;font-weight:600;padding:5px 10px;border-radius:5px;background:var(--warn-bg);border:1px solid var(--warn-bd);color:var(--warn-tx)}
+.proof-card{background:var(--white);border:1px solid var(--gm);border-left:3px solid var(--gd);border-radius:0 7px 7px 0;padding:.9rem 1.1rem;margin:.4rem 0}
+.proof-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--gd);text-decoration:none;background:var(--gl);border:1px solid var(--gm);border-radius:5px;padding:6px 12px;margin-top:.5rem}
+.proof-link:hover{background:var(--gm)}
+.open-item{font-size:12.5px;line-height:1.75;padding:.5rem 0;border-bottom:1px dashed var(--mid)}
+.open-item:last-child{border-bottom:none}
+@media(max-width:600px){.notes-grid{grid-template-columns:1fr}.section{padding:.9rem}.nav-btn{font-size:8px;padding:4px 5px}}
+@media print{.header,.timer-strip{position:static}.section{display:block!important;page-break-inside:avoid}.branch-body{display:block!important}}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo"><div class="logo-dot"></div><div><div>HTSA God Script</div><div class="logo-sub">v5 · Chad spine · offline</div></div></div>
+  <nav class="nav">
+    <button class="nav-btn active" onclick="show('s1')">01 Rapport</button>
+    <button class="nav-btn" onclick="show('s2')">02 Frame</button>
+    <button class="nav-btn" onclick="show('s3')">03 Hell</button>
+    <button class="nav-btn" onclick="show('s4')">04 Heaven</button>
+    <button class="nav-btn" onclick="show('s5')">05 Story</button>
+    <button class="nav-btn" onclick="show('s6')">06 Pre-Close</button>
+    <button class="nav-btn" onclick="show('s7')">07 Demo</button>
+    <button class="nav-btn" onclick="show('s8')">08 Choice</button>
+    <button class="nav-btn" onclick="show('s9')">09 Price</button>
+    <button class="nav-btn" onclick="show('s10')">10 Obj</button>
+    <button class="nav-btn" onclick="show('s11')">11 Frames</button>
+    <button class="nav-btn" onclick="show('s12')">12 Qs</button>
+    <button class="nav-btn" onclick="show('s13')">13 Notes</button>
+    <button class="nav-btn" onclick="show('sc')">Compliance</button>
+  </nav>
+</div>
+
+<div class="timer-strip">
+  <div class="timer-disp" id="tdisp">0:00</div>
+  <div class="timer-phase" id="tphase">not started</div>
+  <button class="btn-t green" onclick="startStop()" id="tbtn">Start</button>
+  <button class="btn-t" onclick="resetTimer()">Reset</button>
+  <button class="btn-t pinred" onclick="goSilence()">⚠ THEY WENT QUIET</button>
+  <input class="prospect-input" id="pname" placeholder="Prospect name..." oninput="document.getElementById('pdisp').textContent=this.value?'▸ '+this.value:''">
+  <span style="font-size:12px;font-weight:600;color:var(--white)" id="pdisp"></span>
+  <div class="buyer-row">
+    <button class="buyer-pill active" onclick="setBuyer('g',this)">Generic</button>
+    <button class="buyer-pill" onclick="setBuyer('n',this)">New/Launcher</button>
+    <button class="buyer-pill" onclick="setBuyer('i',this)">In Sales</button>
+    <button class="buyer-pill" onclick="setBuyer('p',this)">Pro/Skilled</button>
+  </div>
+  <div class="buyer-tip show" id="buyerTip">Generic: follow Chad spine as written. Discovery by min 3–5. One story. Pre-close → demo → Choice of Two → price.</div>
+</div>
+
+<div class="section active" id="s1"><div class="sec-head"><div class="sec-num">Section 01 · 0–3 min</div><div class="sec-title">Rapport + How They Found Us</div><div class="sec-sub">1–2 min MAX. Assume and lead. Location + how they found us + links check. Then frame.</div></div><div class="flow-banner">Goal: Comfort without soft energy. Get into discovery by minute 3–5.</div>
+<div class="box-warn box"><div class="box-label">⚠ Banned openers</div><div class="box-text">Do NOT ask "Is this still a good time? Does this work for you? I hope it does." That invites reschedule and uncertainty.</div></div>
+<div class="script-label">SAY — open</div>
+<div class="script-box">"Hey <strong>[Name]</strong>, this is CJ from High Ticket Sales Academy. How are you today?"</div>
+<div class="script-box">"You're calling from <strong>[city]</strong> — how's the weather out there?" <em>[or one common thing. Keep it short.]</em></div>
+<div class="script-box">"How did you find out about us here at HTSA?"</div>
+<div class="script-box">"What stood out to you? What did you like about it?"</div>
+<div class="script-box">"Did you get a chance to check out the links and testimonials I emailed you?"</div>
+<div class="q-card"><div class="box-label">follow-up</div><div class="q-text">"What did you learn from that?" / "What stuck with you?"</div></div>
+<div class="tab-row" id="rapport-tabs"><button class="tab-btn active" onclick="showTab('rapport-tabs','rp1',this)">Standard</button><button class="tab-btn" onclick="showTab('rapport-tabs','rp2',this)">Experienced</button><button class="tab-btn" onclick="showTab('rapport-tabs','rp3',this)">Setter Handoff</button></div><div class="tab-panel active" id="rp1"><div class="box-blue box"><div class="box-label">Standard</div><div class="box-text">Use greeting above. Lead. Don't soft-sell the open.</div></div>
+</div><div class="tab-panel" id="rp2"><div class="script-box">Same open — skip baby-talk. Treat them like a peer from the first sentence. Still ask how they found us.</div>
+</div><div class="tab-panel" id="rp3"><div class="script-box">"<strong>[Setter]</strong> mentioned you two covered <strong>[one line — role / why looking]</strong>. I don't need the résumé dump — I want to hear it from you. Fair?"</div>
+</div><div class="branch-wrap"><div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">Just tell me the price / how much is it — in first 2 minutes</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Steak / context before price</div><div class="branch-say">"Fair question — and I will cover the investment today. Price without context is like asking what a steak costs before you know if it's a grocery steak or Gordon Ramsay on Valentine's. Give me a few minutes on your situation and how we help, then I'll walk the numbers clean. Deal?"</div><div class="branch-analogy"><div class="ba-label">Analogy</div><div class="ba-body">Steak / Gordon Ramsay</div></div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">Application lead — no setter call</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Alternate opener</div><div class="branch-say">"I saw your application — you're listed as <strong>[role]</strong>. Before we get into us, what are you doing day to day that has you looking at something different?"</div></div></div>
+</div><button class="btn-t green" style="margin-top:.5rem" onclick="show('s2')">→ Frame</button>
+</div>
+
+<div class="section" id="s2"><div class="sec-head"><div class="sec-num">Section 02 · 3–5 min</div><div class="sec-title">Frame</div><div class="sec-sub">Mutual evaluation. Get the YES. Do not skip.</div></div><div class="flow-banner">Goal: They agree to the process — dig → fit check → if fit, next steps at the end.</div>
+<div class="box-warn box"><div class="box-label">⚠ Delete entirely</div><div class="box-text">"I operate differently / I'm not here to pitch you / I'm not a robot." They know you're selling.</div></div>
+<div class="tab-row" id="frame-tabs"><button class="tab-btn active" onclick="showTab('frame-tabs','fp1',this)">Standard / New</button><button class="tab-btn" onclick="showTab('frame-tabs','fp2',this)">Pro / Experienced</button><button class="tab-btn" onclick="showTab('frame-tabs','fp3',this)">Setter Handoff</button></div><div class="tab-panel active" id="fp1"><div class="script-label">STANDARD / NEW — Chad opener</div>
+<div class="script-box">"Cool — thanks for being on time. Really my goal today is to figure out what you're looking to accomplish in high ticket sales. I want to determine what success looks like for you, figure out where you'll need the most support transitioning — and at the end of this call, if it makes sense, we'll talk about what it looks like to get started with our team. Does that sound good to you?"</div>
+<div class="script-box">"I'll dig into your background and goals, then we'll see together if this is right. If I don't think it's a fit, I'll shoot you straight and point you somewhere better. If it IS a fit, I'll walk you through exactly how we help people get started and what next steps look like. Sound good?"</div>
+<div class="box-blue box"><div class="box-label">Must get YES</div><div class="box-text">MUST get the verbal yes before discovery.</div></div>
+</div><div class="tab-panel" id="fp2"><div class="script-label">PRO / EXPERIENCED</div>
+<div class="script-box">"For someone at your level this isn't a learn-to-sell pitch. It's whether this vehicle and our placement path fit what you want next. I'll be direct. Fair?"</div>
+</div><div class="tab-panel" id="fp3"><div class="script-label">SETTER HANDOFF</div>
+<div class="script-box">Same frame — add: "I'm not going to re-run Vincent's/Jessica's whole call. I want the real week from you."</div>
+</div>
+<div class="div"></div>
+<div class="step-label hot">2.1 — 🔴 THE MINUTE-4 STAKEHOLDER ASK — main line, not optional</div>
+<div class="script-box pinned">"Before we get into it — with something this size, is there anyone who'd be part of this decision with you? I ask now instead of at the end because I'd rather have them on with us than have you sell it to them from memory three hours from now."</div>
+<div class="box-red box"><div class="box-label">🔴 Why this belongs here</div><div class="box-text">This is the single highest-ROI question in the script and it belongs HERE, at minute 4 — not at minute 47. Three documented losses (Kate, Kristi, Gwendolynn) came back to a partner who was never in the room. Two were winnable. Asking now is ~80% of the fix; every handle in Section 10 is the other 20%.</div></div>
+<div class="branch-wrap"><div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">Third party controls money / spouse / parent will have to approve spend</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Access-gate early (~min 4)</div><div class="branch-say">"Before we go deep — is <strong>[partner]</strong> someone who needs to be looped in before you'd make a move, or are you driving this decision? If they need to be in, I'd rather three-way them later than send you off alone."</div></div></div>
+</div><button class="btn-t green" style="margin-top:.5rem" onclick="show('s3')">→ Hell Island</button>
+</div>
+
+<div class="section" id="s3"><div class="sec-head"><div class="sec-num">Section 03 · 5–18 min</div><div class="sec-title">Discovery — Hell Island</div><div class="sec-sub">Questions only. No product. THEY TALK 80%. Discovery starts HERE — not minute 15.</div></div><div class="flow-banner">Goal: Current role, likes, dislikes, earnings, stress driver. Affirm. Write their exact words.</div>
+<div class="box-warn box"><div class="box-label">⚠ Talk-time</div><div class="box-text">THEY TALK 80% HERE. Ask. Shut up. Never accept the first answer — one more layer. Write exact words. Do NOT pitch. Do NOT chase industry tangents.</div></div>
+<div class="box-warn box"><div class="box-label">⚠ Never ask</div><div class="box-text">NEVER ask: "What's the most you've ever made in a year?" If they say $500k you lose frame.</div></div>
+<div class="step-label">3.1 — Current role</div>
+<div class="script-box">"You mentioned you're working in <strong>[role]</strong> — tell me more about that role."</div>
+<div class="q-card"><div class="box-label">like</div><div class="q-text">"What do you like about it?"</div></div>
+<div class="q-card"><div class="box-label">dislike</div><div class="q-text">"What do you NOT like about it that has you looking?"</div></div>
+<div class="q-card"><div class="box-label">earnings</div><div class="q-text">"What are you earning in that role right now?" / "Real average monthly take-home — not the best month?"</div></div>
+<div class="q-card"><div class="box-label">stress</div><div class="q-text">"Is it the earnings or the lack of time freedom causing you the most stress?"</div></div>
+<div class="step-label">3.2 — Optional sales background</div>
+<div class="q-card"><div class="box-label">sales</div><div class="q-text">"Have you sold before?" / "What makes you good at sales when you're on?"</div></div>
+<div class="q-card"><div class="box-label">network</div><div class="q-text">"Do you know anyone in high ticket sales now?"</div></div>
+<div class="step-label">3.3 — Affirm</div>
+<div class="script-box">"I love that you have that experience as a <strong>[role]</strong>. The people who do best here are good communicators who are hungry to grow."</div>
+<div class="step-label">3.4 — Money reality (need, not peak)</div>
+<div class="q-card"><div class="box-label">income win</div><div class="q-text">"What monthly number would feel like a real win looking back a year from now?"</div><div class="q-note">Beat 0: get THEIR numbers in THEIR words before you give any income figure.</div></div>
+<div class="step-label">3.5 — Pain dig (2–3 layers)</div>
+<div class="q-card"><div class="box-label">pain</div><div class="q-text">"What do you not like that has you open to something different?"</div></div>
+<div class="q-card"><div class="box-label">example</div><div class="q-text">"Give me a real example from the last 30–60 days."</div></div>
+<div class="q-card"><div class="box-label">feeling</div><div class="q-text">"What does that do to you — not professionally, when you're honest with yourself?"</div><div class="q-note">After emotional answer: FULL SILENCE 5–7+ seconds. Do not fill.</div></div>
+<div class="branch-wrap"><div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">They still like the job / sound positive</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Surface the gap</div><div class="branch-say">"Sounds like there's stuff you still respect about it. What's around it that's making you look elsewhere — why not just double down where you are?"</div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">They drift into their whole life story</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Redirect without losing rapport</div><div class="branch-say">"I want that — and so we don't burn the hour, walk me through a normal Tuesday chapter by chapter. Morning to night."</div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">They minimize pain / surface answer</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Expand in time</div><div class="branch-say">"If nothing changes — two weeks from now, two months, two years — where does this go?"</div><div class="branch-analogy"><div class="ba-label">Analogy</div><div class="ba-body">Brushing Teeth</div></div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">"I'm okay / decent money" but they booked</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Anchor the real reason</div><div class="branch-say">"You're doing okay and you still carved out time for this call. What had you show up today — not the polite answer?"</div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">Goal is high but current model is clearly capped</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Run the math (their numbers)</div><div class="branch-say">"If you worked twice as hard next month at this model — how much more would you actually take home? … So effort up, reward barely moves. Fair?"</div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">Already AT or ABOVE $10–15k/mo</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Do NOT pitch income averages</div><div class="branch-say">"Got it — you're already in the band a lot of people are chasing. So this isn't about 'making ten to fifteen.' It's about how you earn it — hours, location, ceiling, offer size. We'll stay on that."</div></div></div>
+</div><button class="btn-t green" style="margin-top:.5rem" onclick="show('s4')">→ Heaven + Gap</button>
+</div>
+
+<div class="section" id="s4"><div class="sec-head"><div class="sec-num">Section 04 · 18–26 min</div><div class="sec-title">Heaven Island + Gap</div><div class="sec-sub">Their vision in THEIR words. Recap. Gap = vehicle, not ability.</div></div><div class="flow-banner">Freedom vs money attraction → deepen why → Tuesday vision → recap → gap bridge.</div>
+<div class="step-label">4.1 — Attraction</div>
+<div class="script-box">"Based on what you know about high ticket sales, what has you most attracted — the freedom of working anywhere, or the earning potential?"</div>
+<div class="tab-row" id="attr-tabs"><button class="tab-btn active" onclick="showTab('attr-tabs','ap1',this)">If Freedom</button><button class="tab-btn" onclick="showTab('attr-tabs','ap2',this)">If Money</button></div><div class="tab-panel active" id="ap1"><div class="script-box">"Why is freedom important to you?"</div>
+<div class="script-box">"If you were working remotely, what would that enable you to do?"</div>
+</div><div class="tab-panel" id="ap2"><div class="script-box">"Why is making more money important to you?"</div>
+<div class="script-box">"If you were making more, what would that let you do that you can't now?"</div>
+</div><div class="step-label">4.2 — Tuesday vision</div>
+<div class="q-card"><div class="box-label">tuesday</div><div class="q-text">"Twelve months locked in — walk me through a specific Tuesday. Where are you, who are you with, what have you done you couldn't do before?"</div></div>
+<div class="q-card"><div class="box-label">what else</div><div class="q-text">"What else?"</div><div class="q-note">2–3x — never paint it for them</div></div>
+<div class="step-label">4.3 — Recap</div>
+<div class="script-box">"I think I've got a good feel — you told me <strong>[X]</strong>, <strong>[Y]</strong>, <strong>[Z]</strong>. Anything I'm missing?"</div>
+<div class="step-label">4.4 — Gap</div>
+<div class="script-box">"Right now you're <strong>[their words]</strong>. What you want is <strong>[their words]</strong>. The gap isn't your ability — it's the vehicle. Fair?"</div>
+<div class="q-card"><div class="box-label">plan B</div><div class="q-text">"What's your plan B? If this isn't it, what's the other path? If it's clear and better, do that. If there isn't one, this stops being should-I and becomes when."</div></div>
+<div class="branch-wrap"><div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">"I'm just exploring / not really ready"</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Surface real timeline</div><div class="branch-say">"Exploring for how long — and what would have to be true for this to stop being exploring and start being a decision?"</div></div></div>
+</div><button class="btn-t green" style="margin-top:.5rem" onclick="show('s5')">→ Story</button>
+</div>
+
+<div class="section" id="s5"><div class="sec-head"><div class="sec-num">Section 05 · 26–29 min</div><div class="sec-title">Story Bridge + Support / Hours</div><div class="sec-sub">ONE story only. Short. Then support need + hours (kills time objection).</div></div><div class="flow-banner">Proof peer → "does that sound close" → where they need help → 10–12 hrs check.</div>
+<div class="box-blue box"><div class="box-label">Rule</div><div class="box-text">Pick ONE story. 3–4 sentences MAX. Chad's complaint is length. Closing Q: "Does that sound close to what you're trying to do?"</div></div>
+<div class="box-warn box"><div class="box-label">⚠ Amber-marked stories = pattern only</div><div class="box-text">Stories tabbed in amber below (Josh Sosa, Brianna Carroll, Nate Hamrick) have unsourced dollar figures. Tell the shape of the move — not the number — until CJ confirms in PROOF_LIBRARY.</div></div>
+<div class="tab-row" id="story-tabs" style="flex-wrap:wrap"><button class="story-btn active" onclick="showTab('story-tabs','stp1',this)">Matt Seitz</button><button class="story-btn amber" onclick="showTab('story-tabs','stp2',this)">⚠ Josh Sosa</button><button class="story-btn" onclick="showTab('story-tabs','stp3',this)">Cassi Lara</button><button class="story-btn amber" onclick="showTab('story-tabs','stp4',this)">⚠ Brianna Carroll</button><button class="story-btn amber" onclick="showTab('story-tabs','stp5',this)">⚠ Nate Hamrick</button><button class="story-btn" onclick="showTab('story-tabs','stp6',this)">Jake Kores</button><button class="story-btn" onclick="showTab('story-tabs','stp7',this)">Ava Curnow</button><button class="story-btn" onclick="showTab('story-tabs','stp8',this)">Brendan Boudin</button><button class="story-btn" onclick="showTab('story-tabs','stp9',this)">Mike Kaz</button><button class="story-btn" onclick="showTab('story-tabs','stp10',this)">Jeroen / Jay</button><button class="story-btn" onclick="showTab('story-tabs','stp11',this)">Christian C.</button><button class="story-btn" onclick="showTab('story-tabs','stp12',this)">Christa Kieffer</button><button class="story-btn" onclick="showTab('story-tabs','stp13',this)">Chris Vadinsky</button><button class="story-btn" onclick="showTab('story-tabs','stp14',this)">Austin Rose</button><button class="story-btn" onclick="showTab('story-tabs','stp15',this)">CJ Clay</button></div><div class="tab-panel active" id="stp1"><div class="box-green box"><div class="box-label">Matt Seitz — Corporate / ~$70k ceiling</div><div class="box-text"></div></div>
+<div class="script-box">"Matt was a business consultant around seventy K, traveling, knew it wasn't the long-term family life. He became one of our first trainees, fastest start at his company, still top three — well into six figures, more than double — bought a home near the Florida coast. He wasn't failing. The path wasn't his ceiling."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp2"><div class="box-amber box"><div class="box-label">⚠️UNSOURCED — Josh Sosa — Young / hungry / dream company</div><div class="box-text">Placement with Hormozi is confirmed with video. Timeline and income are [CONFIRM] — tell the placement, drop the dollar figure.</div></div>
+<div class="script-box">"Josh was in college with no sales experience and one goal — Acquisition.com. We placed him on another closer offer first so he'd have real reps, then he landed the dream seat and moved his family to Vegas. Setter path into closer. He didn't skip steps — he moved intentional and fast."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp3"><div class="box-green box"><div class="box-label">Cassi Lara — Parent / flexibility / "not a salesperson"</div><div class="box-text"></div></div>
+<div class="script-box">"Cassi was a stay-at-home mom five years — needed remote to be present for her kids. Setter about a month, then closer; first full closer month around nine K from home. Not the most experienced — coachable and committed."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp4"><div class="box-amber box"><div class="box-label">⚠️UNSOURCED — Brianna Carroll — Dream role / Tony Robbins</div><div class="box-text">Placement is confirmed with video. Timeline and income are [CONFIRM] — drop "about two months" until sourced.</div></div>
+<div class="script-box">"Brianna had one goal — close for Tony Robbins. We placed her at another coaching company first so she'd have high-ticket experience, she leveraged that relationship, went through a brutal multi-phase interview, and landed the dream role. Clear target, position, execute."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp5"><div class="box-amber box"><div class="box-label">⚠️UNSOURCED — Nate Hamrick — Already in sales / burned out / high earner</div><div class="box-text">PROOF_LIBRARY lists Nate as [CONFIRM — CJ] on numbers, timeline and offer. Do NOT say "one seventy," "three hundred K" or "twenty K plus a month" until confirmed. This is the exact story a high-earner prospect will fact-check.</div></div>
+<div class="script-box">"Nate was crushing it in insurance — and doing seventy-hour weeks for it. His wife hated it. He moved the same skill into high ticket and now runs it remote at forty to fifty hours, worked from Hawaii and Italy without his income dropping. Same skill. Better model."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp6"><div class="box-green box"><div class="box-label">Jake Kores — Car sales veteran / wants remote</div><div class="box-text"></div></div>
+<div class="script-box">"Jake did ten years in cars, up to around two fifty K — sick of six days at the dealership. Flew through portal, mocks, coaching — top stock-trading offer in under two weeks. He could work hard. He wanted a better model for the effort."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp7"><div class="box-green box"><div class="box-label">Ava Curnow — In-home sales / travel burnout</div><div class="box-text"></div></div>
+<div class="script-box">"Ava sold windows for Renewal by Andersen — two-hundred-mile radius grind. Trained on weekends while driving, landed a fitness offer — month five sold over four hundred thirty K in revenue. She didn't need more potential. She needed a path that rewarded what she had."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp8"><div class="box-green box"><div class="box-label">Brendan Boudin — Already in HT / wrong offer</div><div class="box-text"></div></div>
+<div class="script-box">"Brendan already had the skill — the offer economics couldn't support ten K plus consistently. We repositioned him; new offer in under a month — fifteen then eighteen. Wrong vehicle. Not a skill restart."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp9"><div class="box-green box"><div class="box-label">Mike Kaz — Business owner / 80-hr weeks</div><div class="box-text"></div></div>
+<div class="script-box">"Mike ran online fitness coaching eighty hours a week doing everything — about five K net most months. Through HTSA he went setter — month three about nineteen K commissions — now closer eighteen to twenty-two K consistent. He wanted to sell, earn, and get his life back — not more fires."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp10"><div class="box-green box"><div class="box-label">Jeroen / Jay — Phone sales / quick income jump</div><div class="box-text"></div></div>
+<div class="script-box">"Jay was in Denmark on phone sales for energy contracts — seven to eight K a month. Trained while working; about two months later a twenty-four K offer to realtors — first week two sales, forty-eight hundred in commissions. Low-ticket volume to high-ticket leverage."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp11"><div class="box-green box"><div class="box-label">Christian C. — Operator / sold a company</div><div class="box-text"></div></div>
+<div class="script-box">"Christian ran a ten-year event sales company — AT&amp;T, Comcast — about five hundred K as operator of a seventy-five person company, constant travel and stress. Sold in 2019, no right arena. With Chad, two forty K plus year one in HT. Biggest change: low stress, nights and weekends, family — same skills, different vehicle."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp12"><div class="box-green box"><div class="box-label">Christa Kieffer — Setter → closer — lead with $3k</div><div class="box-text"></div></div>
+<div class="script-box">"Christa took a setter seat at an ideal company to prove from the inside. Month one three K — then eight — then ten and sales team manager — then twenty-two and a half. Always tell the three K first. Strategic entry, not a fairy tale month one."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp13"><div class="box-green box"><div class="box-label">Chris Vadinsky — Brand new / no sales</div><div class="box-text"></div></div>
+<div class="script-box">"Chris had a PT degree, couldn't find a PT job. About a month with us into an SDR seat — first two promotions inside two months. Win was right path plus momentum — not finished product day one."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp14"><div class="box-green box"><div class="box-label">Austin Rose — Construction / minimal formal sales</div><div class="box-text"></div></div>
+<div class="script-box">"Austin was a high-end finish carpenter — some selling on his own jobs. Setter program, record hundred fifty AI practice calls, landed a role on the first interview. Work ethic and reps beat perfect background."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="tab-panel" id="stp15"><div class="box-green box"><div class="box-label">CJ Clay — Burned / skeptical / DIY — only if TRUE</div><div class="box-text"></div></div>
+<div class="script-box">"I was thirty-two K in the hole after embezzlement — borrowed to join. Day sixteen certified, day twenty-six placed, year one breaking records. It wasn't resources. It was resourcefulness. I found a way."</div>
+<div class="script-box">"Does that sound close to what you're trying to do?"</div>
+</div><div class="div"></div>
+<div class="script-box">"Where do you think you'll need the most help — the training on how to do it, or help getting a job in the industry?"</div>
+<div class="script-box">"How many hours a week could you put into training? Is 10–12 reasonable, or more?"</div>
+<div class="box-blue box"><div class="box-label">Hours</div><div class="box-text">Hours question preempts "I don't have time."</div></div>
+<button class="btn-t green" style="margin-top:.5rem" onclick="show('s6')">→ Pre-Close</button>
+</div>
+
+<div class="section" id="s6"><div class="sec-head"><div class="sec-num">Section 06 · 29–30 min</div><div class="sec-title">Pre-Close Tie-Down</div><div class="sec-sub">Highest-leverage 60 seconds. Own section on purpose.</div></div><div class="flow-banner">Surface blockers BEFORE demo. Curious tone — not pressure.</div>
+<div class="script-box">"Everything you're telling me makes me think you'll be a great fit because <strong>[2–3 specifics from their words]</strong>, and I'm excited for you."</div>
+<div class="script-box">"If you feel this is a good fit after we go through the details, is there anything you can think of that would stop you from working with our team now?"</div>
+<div class="box-blue box"><div class="box-label">Curious tone</div><div class="box-text">Wait. If they name a blocker — handle NOW or park with a plan. Do not steamroll into demo.</div></div>
+<div class="script-box">"Let me take a few minutes and walk you through exactly how we train you and get you started. Then we'll open it up for questions. Sound good?"</div>
+<div class="box-blue box"><div class="box-label">Temp-check if soft</div><div class="box-text">"1 to 10, where are you actually at right now?" Under 8 = objection you haven't heard.</div></div>
+<div class="branch-wrap"><div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">Temp 9–10</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Go to demo → price path clear</div><div class="branch-say">"Perfect — let's walk how it works."</div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">Temp 7–8</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Isolate the gap</div><div class="branch-say">"What's the two points — what would make this a nine or ten?"</div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">Temp 5–6</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Stay in discovery — no price yet</div><div class="branch-say">"Something's still open. Better we dig that now than pitch past it. What's the real hesitation?"</div></div></div>
+</div><button class="btn-t green" style="margin-top:.5rem" onclick="show('s7')">→ Demo</button>
+</div>
+
+<div class="section" id="s7"><div class="sec-head"><div class="sec-num">Section 07 · 30–42 min</div><div class="sec-title">Demo — Train + Place</div><div class="sec-sub">Product appears HERE — not before. Pen and paper. Two goals. Cert → coaching → AI → mock → placement → lifetime.</div></div><div class="flow-banner">They understand train + place. Questions. Then Choice of Two.</div>
+<div class="box-warn box"><div class="box-label">⚠ Banned in demo</div><div class="box-text">Show-rate lectures, "some offers 85% some 10%," drowning them in industry trivia.</div></div>
+<div class="script-box">"100% of the people who work with us and finish certification land a job after certification when they work the process with our team."</div>
+<div class="script-box">"Do you have a pen and paper handy?"</div>
+<div class="script-box">"We have two goals: one — train you as an effective closer. Two — get you interviews with our network of 160+ companies hiring in this space."</div>
+<div class="step-label">7.1 — Certification</div>
+<div class="script-box">"High Ticket Sales Certification — about 50 lessons, typically around 20 hours. Experienced sellers often run 6–8 hours at 1.5x. Lifetime access."</div>
+<div class="step-label">7.2 — Group coaching</div>
+<div class="script-box">"Live group coaching twice a week on Zoom with Chad Aleo and trainers — real feedback, not theory."</div>
+<div class="step-label">7.3 — Community</div>
+<div class="script-box">"Private Facebook mastermind — 24/7. Resource, not the main event."</div>
+<div class="step-label">7.4 — AI roleplay</div>
+<div class="script-box">"AI roleplay platform — took about six months to build, real client scripts, AI from real calls, feedback after every rep. You sharpen before companies see you."</div>
+<div class="step-label">7.5 — Mock + Chad gate</div>
+<div class="script-box">"One-on-one roleplay with a coach, team reviews, Chad confirms you're ready. That's the cert gate partners want."</div>
+<div class="step-label">7.6 — Placement</div>
+<div class="script-box">"Placement: resume template and training, in-house opportunities list, roadmap call with Nate. He feeds 2–3 best-fit opportunities at a time, helps applications, makes sure your app gets pulled. Average under three weeks when you show up for the process. Rinse and repeat."</div>
+<div class="step-label">7.7 — Lifetime</div>
+<div class="script-box">"Lifetime access after placement — coaching, training, community. Outgrow a seat later, we help you upgrade. No second tuition."</div>
+<div class="step-label hot">7.8 — 🔴 NAME THE HARD PART BEFORE THEY FIND IT</div>
+<div class="script-box pinned">"One honest thing so you're not surprised: the first two weeks of AI reps are miserable. Everybody hates them. The people who make it knew that going in."</div>
+<div class="box-blue box"><div class="box-label">Why this line earns its place</div><div class="box-text">Costs one sentence, skipped on 81% of calls. A volunteered weakness buys more credibility than any testimonial, and it pre-empts the outcome-fear objection before it forms. Say it plainly — do not soften it back into a benefit.</div></div>
+<div class="script-box">"What questions do you have about how it all works?"</div>
+<div class="box-blue box"><div class="box-label">Tie-down</div><div class="box-text">Listen for real confidence. Flat "yeah I guess" = stop and dig before Choice of Two.</div></div>
+<div class="branch-wrap"><div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">They name a competitor / another program</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Contrast MECHANISM — never trash the name</div><div class="branch-say">"Respect looking around. A lot of programs train and hand you a certificate. What we sell hard is the back half — recruitment into paid seats with partners who already want closers. Training without placement is a course. Training with Nate is a career move. Make sense?"</div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">Setter quoted a number that doesn't match</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Correct cleanly — don't blame setter</div><div class="branch-say">"Good you asked — let me give you the exact structures so you're not working off a round number. Here's how it actually works…"</div></div></div>
+</div><button class="btn-t green" style="margin-top:.5rem" onclick="show('s8')">→ Choice of Two</button>
+</div>
+
+<div class="section" id="s8"><div class="sec-head"><div class="sec-num">Section 08 · 42–44 min</div><div class="sec-title">Choice of Two Positives</div><div class="sec-sub">Chad asked for this by name. Own section. Enthusiasm. WAIT.</div></div><div class="flow-banner">They pick a positive. If weak → do NOT proceed to price.</div>
+<div class="script-box">"Now that you've heard how it works, I'm curious what stands out to you most…<br>1. Most people say they love the hands-on training with actual experts<br>2. Some love that they get lifetime access supporting their whole career"</div>
+<div class="box-blue box"><div class="box-label">Enthusiasm</div><div class="box-text">Say with enthusiasm. WAIT for the answer.</div></div>
+<div class="box-warn box"><div class="box-label">⚠ If weak</div><div class="box-text">If they don't sound confident → do NOT proceed. Ask more questions. Find the underlying objection.</div></div>
+<div class="script-box">"That's one of my favorites too. I can tell you're motivated to be successful and that's exactly who we're looking for. I think you're going to be a great fit with HTSA."</div>
+<div class="box-blue box"><div class="box-label">Assumptive</div><div class="box-text">MUST be assumptive and excited. Sales is a transfer of energy.</div></div>
+<div class="script-box">"So let's do this — let me walk you through the financial side and next steps, and if it all makes sense we'll get you set up on the training platform right at the end of this call. Sound good?"</div>
+<button class="btn-t green" style="margin-top:.5rem" onclick="show('s9')">→ Price → Close</button>
+</div>
+
+<div class="section" id="s9"><div class="sec-head"><div class="sec-num">Section 09 · 44–50 min</div><div class="sec-title">Price → Close → Enroll</div><div class="sec-sub">Slow down. Choice of two payment paths. Shut up. On yes: STOP SELLING. START ENROLLING.</div></div><div class="flow-banner">Select structure → card → enroll. Nothing new after commitment.</div>
+<div class="box-red box"><div class="box-label">STOP SELLING AFTER YES</div><div class="box-text">ONCE THEY SAY YES: STOP SELLING. START ENROLLING. Nothing new after commitment — no features, no new costs, no testimonials, no re-reading the page. A committed buyer only needs a button.</div></div>
+<div class="box-warn box"><div class="box-label">⚠ Two structures max</div><div class="box-text">Do NOT volunteer the next concession tier unasked. Max TWO structures live at once.</div></div>
+<div class="script-box">"Most programs in this space are ten thousand and up. Cole Gordon's RCA is about twelve on a plan / ten upfront. Value's there — it doesn't need to cost that."</div>
+<div class="script-box">"What you get with us that you don't get there: direct access to Chad — you don't get Cole — plus lifetime small-group coaching, and Nate doing one-on-one placement conversations, not group interviews."</div>
+<div class="box-blue box"><div class="box-label">SLOW DOWN</div><div class="box-text">🔴 Slow down here.</div></div>
+<div class="script-box">"Seven thousand broken into four payments of seventeen fifty, a month apart, and we get you started now."</div>
+<div class="script-box">"If you can pay in full we discount a thousand — so six thousand upfront."</div>
+<div class="script-box">"Either way, we get you started today."</div>
+<div class="script-box">"I'm excited for you to meet Chad, Nate, Mark."</div>
+<div class="script-box">"So what works better for you — break it into payments, or save the money and pay upfront?"</div>
+<div class="box-red box"><div class="box-label">SHUT UP AND WAIT</div><div class="box-text">NOW SHUT UP AND WAIT. First to speak loses.</div></div>
+
+<div class="div" id="silence-anchor"></div>
+<div class="step-label hot">9.0 — 🔴 THE SILENCE. What to do when they don't answer the choice.</div>
+<div class="box-red box"><div class="box-label">This is where the five lost calls died</div><div class="box-text">HTSA is thin here; JOLT/Challenger fill it. <strong>The instinct is to add information. Adding information is what loses it.</strong> They are not unconvinced — they cannot choose. Recommend, don't ask.</div></div>
+<div class="box-warn box"><div class="box-label">❌ NEVER HERE</div><div class="box-text">Every one of these hands the decision back: "What stood out to you?" · "Any questions I can answer?" · "What are you thinking?" · "Go with your gut" · re-running the value. Diagnose-and-recommend wins 36%. Diagnose-only wins 14%.</div></div>
+<div class="script-label">THE RECOMMENDATION — population → advocacy → blame → default ask</div>
+<div class="script-box pinned">"Most people in your spot start with the four-pay. But let me just tell you what I'd do if I were you, because I think you're overthinking a smaller decision than it feels like — I'd do the four-pay, starting tonight. And if that turns out to be wrong, that's on me. You can call me and tell me I got it wrong. But I don't think I am. Any reason not to?"</div>
+<div class="box-blue box"><div class="box-label">Why it works</div><div class="box-text">Guidance alone moves 18%→44%. Advocacy +74%. Both together 48% — and they get used on only 16% of calls. "That's on me" is free: people fear errors they <em>caused</em> 2–3× more than errors they allowed. That one sentence relocates the fear off them.</div></div>
+<div class="script-label">Shortest version if the recommendation feels heavy</div>
+<div class="script-box">"I'd put you on the four-pay tonight. Any reason not to?"</div>
+
+<div class="step-label hot">9.0b — If the silence turns into a money answer, SPLIT IT before you handle it</div>
+<div class="script-box">"Can I ask you straight — is the money genuinely not there right now? Or is it there, and you're not sure this is where it should go? Those are two totally different conversations and I'd handle them differently."</div>
+<div class="box-warn box"><div class="box-label">⚠ ~80% are the second</div><div class="box-text">Answer a <em>certainty</em> objection with a payment plan and you lose — you just made the thing they're unsure about cheaper, not safer.</div></div>
+
+<div class="branch-wrap">
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">Capacity — the money is genuinely not there</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Size the risk honestly, then smallest authorized structure — or walk</div><div class="branch-say">"Uncomfortable, or can't-pay-rent? … If it's uncomfortable: that's normal, everyone who's done this felt it on the day — so let's make it as small as it goes. Does that work, or does it still not work?"</div><div class="branch-say" style="margin-top:.5rem">"If it's can't-eat-can't-pay-rent: then don't do this right now. If it puts you underwater you'd be closing calls stressed about rent and it'd show in your voice. Here's what I'd do instead — <strong>[real, specific]</strong>. Let's talk <strong>[specific date]</strong>."</div><div class="branch-note">Walking is the most credible thing you'll say all call. Mean it.</div></div></div>
+
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">Priority — the money exists, they're not sure it belongs here</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">🔴 Keenan. Two words, then their own gap, then total silence.</div><div class="branch-say">"I'm confused. You told me you're at <strong>[their current number]</strong> and you want to be at <strong>[their target]</strong>. You said the path you're on now doesn't get there — that was your read, not mine. So help me understand how six thousand is too much for the thing that closes that."</div><div class="branch-warn">Then say nothing. Literally nothing. Make them justify where the price is too high — they'll hear themselves fail to defend a position built from their own numbers. This is the strongest money response in any of the books.</div></div></div>
+
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">"Can you do better on the price?"</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Interrogate the reason — NEVER counter</div><div class="branch-say">"What would the lower number actually change for you?"</div><div class="branch-note">"Don't have six" → capacity. "Want to be sure" → outcome fear. "Cheaper elsewhere" → mechanism contrast.</div><div class="branch-warn">❌ Never offer a structure they didn't ask for. One documented miss cost $1,000 unasked and turned two options into three at the exact moment they needed fewer. More options at the decision moment is not generosity — it's paralysis you manufactured.</div></div></div>
+
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">"What if it doesn't work for me" — outcome fear</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Name a real weakness. True criticism beats a pep talk with a sharp buyer.</div><div class="branch-say">"I'll give you a straight answer instead of a pep talk. The part I'd actually watch with you is <strong>[specific + true, from discovery]</strong>. That's real — and it's exactly what the first month is built for. What I wouldn't worry about with you is <strong>[genuine strength you heard them show]</strong>."</div><div class="branch-say" style="margin-top:.5rem">Calibrate: "If this didn't work out — is that uncomfortable, or is that can't-pay-rent? Those are two different conversations."</div><div class="branch-note">Safety nets move 22% → 46%. Used on only 14% of calls.</div></div></div>
+
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">"I want to look into it more" AFTER price</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Radical candor + a lock with no bad answer</div><div class="branch-say">"Can I be straight with you? Another call won't tell you anything I haven't already told you. You'll just have two versions of the same three things and no way to line them up. So let me ask the useful version — if you look into it and nothing new comes up, is it done? Or is there something else underneath this?"</div><div class="branch-note">🔴 There is no bad answer. "Yes, it's done" = a commitment. "Well, also…" = they just handed you the real objection.</div></div></div>
+</div>
+
+<div class="div"></div>
+<div class="script-box">"Perfect — let me verify the email on the account… phone… mailing address on the card…"</div>
+<div class="script-box">"Do you have the card on you, or do you need a minute to grab it?"</div>
+<div class="step-label">9.1 — Alternate closes (2nd–5th attempts)</div>
+<div class="script-box">"Does that work for you?"</div>
+<div class="script-box">"Why don't we just do that?"</div>
+<div class="script-box">"Let's get you started — sound good?"</div>
+<div class="script-box">"What's the address on the card you want to use?"</div>
+<div class="script-box">"Did you get a second to grab that card?"</div>
+<div class="script-box">"Are you opposed to moving forward with this payment method today?"</div>
+<div class="step-label">9.2 — On-the-fence sequence</div>
+<div class="script-box">"Will this get you closer to your goals?"</div>
+<div class="script-box">"Will this help you move quicker and get better results than doing it yourself?"</div>
+<div class="script-box">"Do you have enough money available to move forward right now?"</div>
+<div class="script-box">"Then the only logical decision is to move forward and bet on yourself. You have exactly what you need to be successful. Are you ready to get started?"</div>
+<div class="branch-wrap"><div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">Financing / monthly interest</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Soft prequalify BEFORE recommending credit-gated structure</div><div class="branch-say">"There's also a monthly path through our financing partner — takes about ninety seconds to prequalify. Want to see if that door opens before we lock a structure? Exact monthly is an approval outcome — not a number I invent."</div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">"I'd do PIF but need to save up"</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Redirect to 4-pay</div><div class="branch-say">"You don't need to wait to save the six. Four of seventeen fifty gets you started now — same training, same placement. Waiting usually costs more than the discount."</div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">"I need to save up money first"</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Flip the math</div><div class="branch-say">"What does waiting ninety days cost you relative to the life you described — not just the thousand discount?"</div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">Someone else's money / credit / approval</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Three-way NOW</div><div class="branch-say">"Is she around right now? Let's three-way her in. You tell her what you're building, I'll answer whatever she asks. Five minutes."</div><div class="branch-warn">BANNED: "just let me know what he says" / "let me know what happens"</div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">They're distracted / with family / driving</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Park with FIXED day and time</div><div class="branch-say">"I want you sharp for this. Let's lock <strong>___day at ___</strong> — I'll send the invite now. 'I'll text you some times' is not a plan."</div></div></div>
+<div class="branch" onclick="tog(this)"><div class="branch-if"><span class="branch-tag">if</span><span class="branch-cond">They shopped many programs / can't tell them apart</span><span class="branch-arrow">›</span></div><div class="branch-body"><div class="branch-then">Recommend — don't add more info</div><div class="branch-say">"You've got enough info. Here's my recommendation based on what you told me: <strong>[one clear next step]</strong>. More research usually adds fear, not clarity."</div></div></div>
+</div><button class="btn-t green" style="margin-top:.5rem" onclick="show('s10')">→ Objections</button>
+</div>
+
+<div class="section" id="s10"><div class="sec-head"><div class="sec-num">Section 10</div><div class="sec-title">Objection Handling</div><div class="sec-sub">Priority: Money → Think → Partner → Fear. Door-lock — finish one before jumping. Official HTSA first.</div></div><div class="flow-banner">Isolate → handle → re-close. Never abandon at 60%.</div>
+<div class="box-warn box"><div class="box-label">⚠ Order</div><div class="box-text">Logistical before fear. Money before everything. Fear last.</div></div>
+
+<div class="step-label hot">10.0 — 🔴 TRIAGE. Two questions before you open your mouth.</div>
+<div class="box-blue box"><div class="box-label">Q1 — have they expressed intent?</div><div class="box-text">If yes, this is not a persuasion problem and re-pitching makes it worse. Go to §9.0 and recommend. If no, you have a discovery problem, not an objection — go back, don't push forward.</div></div>
+<div class="box-blue box"><div class="box-label">Q2 — which one is it?</div><div class="box-text">Every objection is one of four things wearing a costume: <strong>valuation</strong> (can't choose) · <strong>information</strong> (thinks they haven't done enough homework) · <strong>outcome fear</strong> (what if it doesn't work <em>for me</em>) · <strong>money</strong> (capacity vs priority). "I need to think about it" and "I need to talk to my spouse" are not objections — they're <em>containers</em> with one of those four inside. Open the container before you answer it.</div></div>
+<div class="script-box">"Sure — what's the actual thing you'd be thinking about? I ask because it's almost always one of three: the money, whether it works for you specifically, or something you haven't said out loud. Which is it?"</div>
+<div class="box-warn box"><div class="box-label">⚠ Worse than no</div><div class="box-text">"I need to think about it" is statistically worse than being told no. Never re-pitch into it. Route it. Door-lock: finish one objection before jumping to the next. Never abandon at 60% — a half-handled objection comes back at the close with interest.</div></div>
+
+<div class="tab-row" id="obj-tabs" style="flex-wrap:wrap"><button class="tab-btn active" onclick="showTab('obj-tabs','ob1',this)" style="border-color:var(--red-bd);color:var(--red-tx)">Spouse / Partner</button><button class="tab-btn" onclick="showTab('obj-tabs','ob2',this)" style="border-color:var(--red-bd);color:var(--red-tx)">Can't Afford</button><button class="tab-btn" onclick="showTab('obj-tabs','ob3',this)" style="border-color:var(--red-bd);color:var(--red-tx)">Need to Think</button><button class="tab-btn" onclick="showTab('obj-tabs','ob4',this)" style="border-color:var(--red-bd);color:var(--red-tx)">Don't Want to Pay for a Job</button><button class="tab-btn" onclick="showTab('obj-tabs','ob5',this)" style="border-color:var(--red-bd);color:var(--red-tx)">Pay After I Land the Job</button><button class="tab-btn" onclick="showTab('obj-tabs','ob6',this)" style="border-color:var(--red-bd);color:var(--red-tx)">Already Know How to Sell</button><button class="tab-btn" onclick="showTab('obj-tabs','ob7',this)" style="border-color:var(--red-bd);color:var(--red-tx)">Busy / Wrong Time</button><button class="tab-btn" onclick="showTab('obj-tabs','ob8',this)" style="border-color:var(--red-bd);color:var(--red-tx)">DIY / Figure It Out Alone</button><button class="tab-btn" onclick="showTab('obj-tabs','ob9',this)" style="border-color:var(--red-bd);color:var(--red-tx)">Can I Start Next Month?</button><button class="tab-btn" onclick="showTab('obj-tabs','ob10',this)" style="border-color:var(--red-bd);color:var(--red-tx)">Talk to Other Company</button></div>
+
+<div class="tab-panel active" id="ob1"><div class="script-label">HTSA official 10.1</div>
+<div class="script-box">"I totally understand, this is a big decision. I'm guessing you've probably talked to them already about making a career change — have they been supportive of you in that? (yes) Awesome. Would they be excited if they found out you were moving forward in a new career with more earnings and flexibility? (yes) That's great. Based on what you've told me I'm sure they're going to be supportive — and the good news is it takes 2–4 weeks to get through certification and you're not changing jobs until you're ready, so you have plenty of time to work out logistics with them through this process. That said, do you have any other questions, or are you just excited to get started?"</div>
+<div class="box-red box"><div class="box-label">🔴 Sibling depth — pre-handle → coach → lock. Run ALL THREE.</div><div class="box-text">The official handle above assumes the partner is supportive; this is what you run when you don't know that.</div></div>
+<div class="script-box">"What's he going to say when you tell him?" <em>(listen)</em></div>
+<div class="script-box">"Most partners hear a number like that and say no before they hear anything else. Is that him?" <em>(listen)</em></div>
+<div class="script-box">"Then three things. <strong>Don't lead with the money</strong> — lead with what it pays in twelve months, <em>then</em> the number. If he asks why you can't just go get a sales job — these roles aren't posted, they're filled through the company's network, and that's what you're actually buying. And honestly, would you rather I just talk to him? Fifteen minutes. I'd rather answer his questions myself than have you defend something you learned about an hour ago."</div>
+<div class="script-box">The lock: "When are you two in the same room? … Then fifteen minutes tomorrow at <strong>[time]</strong>, either way. And if he's good with it — is it done, or is there something else too?"</div>
+<div class="box-warn box"><div class="box-label">❌ VERBATIM FROM CJ'S OWN CALLS — never again</div><div class="box-text">"I'm here if you need me — whatever I can do to help, let me know." (Gwendolynn 1:16:46) · "You let him know you got the options." (Kate L412) · "We'll reconnect" with no time attached. Either you arm them or the deal dies in a room you're not in.</div></div>
+<div class="box-blue box"><div class="box-label">Analogy</div><div class="box-text">Heavy Is the Head / If they were here right now</div></div>
+</div>
+
+<div class="tab-panel" id="ob2"><div class="script-label">HTSA official 10.2</div>
+<div class="script-box">"I totally understand, it's a big investment. For myself there's always hesitation before I jump into something like this. A lot of times that hesitation comes from fear, and the times I've made the most progress are when I had courage and took the next step even when I was afraid. Based on everything you've told me about what you want to accomplish, it's going to cost you a lot more than $6k to stay stuck doing what you're doing for another year. Do you agree with that?"</div>
+<div class="box-blue box"><div class="box-label">Sibling — money ladder start</div><div class="box-text">"Money aside — do you feel this could be the answer for you?" → "Is it the upfront amount, or if we broke it up would that help?"</div></div>
+<div class="box-blue box"><div class="box-label">Analogy</div><div class="box-text">Cost of Waiting Math / $200K House resourcefulness / Cost vs Price</div></div>
+<div class="script-box">"So — based on that, are you ready to get started, or is there something else in the way?"</div>
+</div>
+
+<div class="tab-panel" id="ob3"><div class="script-label">HTSA official 10.3</div>
+<div class="script-box">"I get it. Sometimes it feels like the best thing is to sit and think, and that's normal. But I've seen tons of times where someone who's a perfect fit takes a step back to think, and then all the negative voices in their head tell them not to, and I talk to them a year later and they're in the same place. When you're at a crossroads, sometimes the best thing is to listen to your gut, because most people on their deathbed don't regret the chances they took — they regret the ones they didn't. I know from our conversation you're going to be a killer at this, and with our support we're not going to let you fail. So what does your gut tell you?"</div>
+<div class="box-blue box"><div class="box-label">Sibling — define raw "think"</div><div class="box-text">"Is it the money, needing to run it by someone, or you're still not sure this is the right path?"</div></div>
+<div class="box-blue box"><div class="box-label">Analogy</div><div class="box-text">Island / Mountain · Fat Guy · What new info will exist? · 90,000 Hours · 4,000 Dots</div></div>
+<div class="script-box">"So — based on that, are you ready to get started, or is there something else in the way?"</div>
+</div>
+
+<div class="tab-panel" id="ob4"><div class="script-label">HTSA official 10.4</div>
+<div class="script-box">"Yep — if you want to put in the work to find the job on your own, we have free training that helps you do that. The people who work with us understand that getting access to a network we've spent 3 years vetting, plus a fast-pass into the role and lifetime support, saves them way more than it costs. Curious for you — are you someone who wants to figure this out on your own, or would you rather have access to our vetted network?"</div>
+<div class="box-blue box"><div class="box-label">Analogy</div><div class="box-text">Disney FastPass</div></div>
+<div class="script-box">"So — based on that, are you ready to get started, or is there something else in the way?"</div>
+</div>
+
+<div class="tab-panel" id="ob5"><div class="script-label">HTSA official 10.5</div>
+<div class="script-box">"Got a twenty-thousand-dollar roof, twenty-year guarantee, ten-man crew, done in two days. Terms were half up front to reserve the spot, half the day they started. That's normal anywhere the provider carries the risk of doing the work before you're fully on the other side."</div>
+<div class="box-blue box"><div class="box-label">Analogy</div><div class="box-text">Roof / Half Up Front</div></div>
+<div class="script-box">"So — based on that, are you ready to get started, or is there something else in the way?"</div>
+</div>
+
+<div class="tab-panel" id="ob6"><div class="script-label">DIY / already know sales</div>
+<div class="script-box">"Best salespeople are learners. We've had people who crushed company-side sales still run the same cert process — no exceptions. Willing to get validated so partners will pull your app?"</div>
+<div class="box-blue box"><div class="box-label">Analogy</div><div class="box-text">Best salespeople are learners / Revenue Check / Usain Bolt treadmill</div></div>
+<div class="script-box">"So — based on that, are you ready to get started, or is there something else in the way?"</div>
+</div>
+
+<div class="tab-panel" id="ob7"><div class="script-label">Busy objection</div>
+<div class="script-box">"Busy is the point. You'll still be busy in six months — question is at this income in this vehicle, or remote with a better model."</div>
+<div class="box-blue box"><div class="box-label">Analogy</div><div class="box-text">Busy is the point</div></div>
+<div class="script-box">"So — based on that, are you ready to get started, or is there something else in the way?"</div>
+</div>
+
+<div class="tab-panel" id="ob8"><div class="script-label">Sibling to 10.4</div>
+<div class="script-box">"You can go DIY. The question is months of guessing vs FastPass into companies already hiring. What's more expensive — tuition, or another year figuring it out alone?"</div>
+<div class="box-blue box"><div class="box-label">Analogy</div><div class="box-text">Disney FastPass</div></div>
+<div class="script-box">"So — based on that, are you ready to get started, or is there something else in the way?"</div>
+</div>
+
+<div class="tab-panel" id="ob9"><div class="script-label">10.8 — "Can I start next month?" — read it before you answer it</div>
+<div class="box-blue box"><div class="box-label">Two objections, same words</div><div class="box-text">The tell is whether a real date with a real reason is attached.</div></div>
+<div class="script-box">IF real date, real reason (procrastination, not avoidance): "Let's enroll tonight while it's decided, and date your start for the fifteenth — so you're not making this decision twice."</div>
+<div class="script-box">IF vague — "maybe next quarter," no reason: "When someone says next quarter with no reason attached, it usually means no and nobody's said it out loud. Which is completely fine. Where are you actually at?"</div>
+</div>
+
+<div class="tab-panel" id="ob10"><div class="script-label">10.9 — "I want to talk to the other company"</div>
+<div class="script-box">"Take it — I'd think less of you if you didn't. But line them up on the same three questions or you'll just have two pitches and no way to choose: how you actually get placed, what happens after you're placed, and whether they'll say a real number with a real timeframe attached. Ask me the same three. And if they answer the way you're hoping and it still comes back to us — are we doing this tomorrow?"</div>
+<div class="box-blue box"><div class="box-label">Why</div><div class="box-text">Give the evaluation criteria BEFORE they go looking. Ungoverned research is how a decided buyer becomes an undecided one. Contrast mechanism, never the name.</div></div>
+</div>
+<button class="btn-t green" style="margin-top:.5rem" onclick="show('s11')">→ Frames</button>
+</div>
+
+<div class="section" id="s11"><div class="sec-head"><div class="sec-num">Section 11</div><div class="sec-title">Stories, Proof &amp; Frames</div><div class="sec-sub">Reference only. Pick ONE story. Never stack.</div></div>
+
+<div class="step-label hot">🔴 The three strongest proof assets — sourced, linkable, underused</div>
+<div class="box-blue box"><div class="box-text">These aren't ramp stories — they're different categories of evidence, and they beat a member testimonial when the resistance is trust rather than belief. Send the link live on the call.</div></div>
+<div class="tab-row" id="proof-tabs" style="flex-wrap:wrap"><button class="story-btn proof active" onclick="showTab('proof-tabs','pr1',this)">⭐ Taylor Conroy</button><button class="story-btn proof" onclick="showTab('proof-tabs','pr2',this)">Dana</button><button class="story-btn proof" onclick="showTab('proof-tabs','pr3',this)">Cassie</button><button class="story-btn proof" onclick="showTab('proof-tabs','pr4',this)">Taylor DeCourcey</button><button class="story-btn proof" onclick="showTab('proof-tabs','pr5',this)">Trustpilot</button></div>
+
+<div class="tab-panel active" id="pr1"><div class="proof-card"><div class="box-label" style="color:var(--gd);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.35rem">TRIGGER: "How do I know companies actually hire from this?" / placement skepticism</div><div class="box-text">"Let me send you something better than me talking. Taylor Conroy runs a TEDx coaching company — he <em>hires</em> our people. He recorded a whole thing from the employer's side about what he looks for and why he pulls from us. That's not a member saying the program worked. That's a buyer saying he buys."</div><a class="proof-link" href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" target="_blank" rel="noopener">▶ Watch — Taylor Conroy (buyer's side)</a><div class="box-text" style="margin-top:.5rem;font-style:italic;color:var(--muted)">The most powerful asset in the library. Reach for this before any income story when the doubt is about placement.</div></div>
+</div>
+<div class="tab-panel" id="pr2"><div class="proof-card"><div class="box-label" style="color:var(--gd);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.35rem">TRIGGER: "Is this a scam" / skeptic / been burned before</div><div class="box-text">"Dana's a life coach, about seventeen thousand followers, placed June eleventh. She recorded and posted a full review with zero involvement from us — we found out when it went up. Nobody asked her, nobody comped her."</div><a class="proof-link" href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" target="_blank" rel="noopener">▶ Watch — Dana (unprompted)</a><div class="box-warn box" style="margin-top:.6rem"><div class="box-label">🔴 Only genuinely unprompted proof</div><div class="box-text">Never describe any other testimonial that way.</div></div></div>
+</div>
+<div class="tab-panel" id="pr3"><div class="proof-card"><div class="box-label" style="color:var(--gd);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.35rem">TRIGGER: Starting from zero, especially a parent or caretaker</div><div class="box-text">"Cassie was a single mom starting from zero — ten thousand inside twenty-seven days."</div><a class="proof-link" href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" target="_blank" rel="noopener">▶ Watch — Cassie</a><div class="box-warn box" style="margin-top:.6rem"><div class="box-label">[CONFIRM]</div><div class="box-text">Revenue vs commission framing not yet confirmed. Until CJ confirms, say "ten thousand" without labeling it as take-home income.</div></div></div>
+</div>
+<div class="tab-panel" id="pr4"><div class="proof-card"><div class="box-label" style="color:var(--gd);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.35rem">TRIGGER: "How fast does this actually move?"</div><div class="box-text">"Taylor was placed about four months ago. Her first month she generated ninety-eight thousand five hundred in revenue for the company she closes for."</div><div class="box-warn box" style="margin-top:.6rem"><div class="box-label">🔴 Revenue, never her income</div><div class="box-text">Her commission rate isn't confirmed — revenue is a fact, income would be a guess.</div></div></div>
+</div>
+<div class="tab-panel" id="pr5"><div class="proof-card"><div class="box-label" style="color:var(--gd);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.35rem">TRIGGER: Trust / scam fear</div><div class="box-text">"Pull it up with me right now — Trustpilot, four-nine out of five. Read it while I'm on the phone. Don't take my word for any of this."</div><a class="proof-link" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener">▶ Open Trustpilot</a></div>
+</div>
+
+<div class="div"></div>
+<div class="step-label">Story library (ramp stories — pick ONE)</div>
+<div class="box-warn box"><div class="box-label">🔴 Stories marked ⚠️UNSOURCED (in Section 05) have unconfirmed dollar figures</div><div class="box-text">Tell them as pattern — the shape of the move, the before-and-after — and leave the precise number out until CJ confirms it. Full library with tabs lives in Section 05 (Story Bridge). Jason Lee is pulled entirely — not sourced. Use Mike Kaz or Christian Cherniawski for business owners instead.</div></div>
+
+<div class="div"></div>
+<div class="step-label hot">🔴 FLAGGED-MOVE GUARD — read before reaching for a frame after price</div>
+<div class="box-red box"><div class="box-text">Three of these misfire at exactly the same moment: right after price, when they go quiet.<br><br><strong>Emotional-future frames</strong> (4,000 Dots · 90,000 Hours · Tony Robbins pain-of-staying · Fat Guy) — ❌ do NOT use once purchase intent has been expressed or when they're stalling post-price. Heaven-painting a buyer who already said yes re-opens a closed decision. These belong in discovery and gap, not at the decision moment. → Post-price, use §9.0 instead.<br><br><strong>Paralysis frames</strong> — ❌ do NOT use before you've made an actual recommendation. Naming their indecision without giving them a path is just pressure.<br><br><strong>Competitor contrast</strong> — mechanism only, never volunteer a name.</div></div>
+
+<div class="step-label">Analogies &amp; frames</div>
+<div class="tab-row" id="frame-lib-tabs" style="flex-wrap:wrap"><button class="tab-btn active" onclick="showTab('frame-lib-tabs','fl1',this)" style="font-size:10px">Steak</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl2',this)" style="font-size:10px">Island</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl3',this)" style="font-size:10px">Fat Guy</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl4',this)" style="font-size:10px">Disney FastPass</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl5',this)" style="font-size:10px">90,000 Hours</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl6',this)" style="font-size:10px">4,000 Dots</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl7',this)" style="font-size:10px">Tony Robbins</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl8',this)" style="font-size:10px">Cost of Waiting Math</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl9',this)" style="font-size:10px">$200K House</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl10',this)" style="font-size:10px">Heavy Is the Head</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl11',this)" style="font-size:10px">Trustpilot Right Now</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl12',this)" style="font-size:10px">No real competition ex</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl13',this)" style="font-size:10px">If they were here righ</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl14',this)" style="font-size:10px">Usain Bolt treadmill</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl15',this)" style="font-size:10px">Doctor</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl16',this)" style="font-size:10px">Brushing Teeth</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl17',this)" style="font-size:10px">Revenue Check</button><button class="tab-btn" onclick="showTab('frame-lib-tabs','fl18',this)" style="font-size:10px">Busy is the point</button></div><div class="tab-panel active" id="fl1"><div class="box-green box"><div class="box-label">Steak / Gordon Ramsay — USE: Price in first 2 minutes</div><div class="box-text"></div></div>
+<div class="script-box">"Price without context is meaningless. Eighty-dollar grocery steak vs Gordon Ramsay Valentine's tasting — five hundred felt cheap because of what was behind it. Give me five minutes on context."</div>
+</div><div class="tab-panel" id="fl2"><div class="box-green box"><div class="box-label">Island / Mountain — USE: Primary think-about-it</div><div class="box-text"></div></div>
+<div class="script-box">"Perspective drives decisions drives results. From the boat you only see water. From the mountain you see the whole island. Stay circling water or decide to climb. What decision puts you in the best position for the life you described?"</div>
+</div><div class="tab-panel" id="fl3"><div class="box-green box"><div class="box-label">Fat Guy — Decision Pattern — USE: Intellectually agree, won't act</div><div class="box-text"></div></div>
+<div class="script-box">"Three-fifty-pound guy says diet starts tomorrow forever — until he can't chase the ice cream truck or help his kid. The weight is the decision pattern. You already named yours. Keep carrying it or decide now?"</div>
+</div><div class="tab-panel" id="fl4"><div class="box-green box"><div class="box-label">Disney FastPass — USE: DIY vs HTSA / near placement</div><div class="box-text"></div></div>
+<div class="script-box">"Theme park: normal line vs FastPass. DIY high ticket can take a year and you still might not get hired. We're the FastPass into companies already hiring."</div>
+</div><div class="tab-panel" id="fl5"><div class="box-green box"><div class="box-label">90,000 Hours — USE: Time urgency</div><div class="box-text"></div></div>
+<div class="script-box">"Life in thirds — work, sleep, life — about ninety thousand hours each. How many more hours do you want in the wrong vehicle?"</div>
+</div><div class="tab-panel" id="fl6"><div class="box-green box"><div class="box-label">4,000 Dots — USE: Mortality / weeks</div><div class="box-text"></div></div>
+<div class="script-box">"About four thousand weeks of adult life. Waiting burns dots that were meant for the Tuesday you just described."</div>
+</div><div class="tab-panel" id="fl7"><div class="box-green box"><div class="box-label">Tony Robbins — pain of staying — USE: Cost of inaction</div><div class="box-text"></div></div>
+<div class="script-box">"People change when the pain of staying is greater than the pain of change. What's the real cost to you if nothing changes six months from now?"</div>
+</div><div class="tab-panel" id="fl8"><div class="box-green box"><div class="box-label">Cost of Waiting Math — USE: Think / delay</div><div class="box-text"></div></div>
+<div class="script-box">"What new information exists next week that you don't have today? Usually nothing — you just lose a week of momentum."</div>
+</div><div class="tab-panel" id="fl9"><div class="box-green box"><div class="box-label">$200K House / Resourcefulness — USE: Money fog</div><div class="box-text"></div></div>
+<div class="script-box">"If this was a two-hundred-thousand-dollar house that got you the life you want in a year, you'd figure out six thousand. Same resourcefulness. Apply it here."</div>
+</div><div class="tab-panel" id="fl10"><div class="box-green box"><div class="box-label">Heavy Is the Head — USE: Spouse / permission</div><div class="box-text"></div></div>
+<div class="script-box">"Who carries the household crown? Betting on yourself and informing is different from asking permission to grow."</div>
+</div><div class="tab-panel" id="fl11"><div class="box-green box"><div class="box-label">Trustpilot Right Now — USE: Trust / scam fear</div><div class="box-text"></div></div>
+<div class="script-box">"Pull it up with me right now — Trustpilot, four-nine out of five. Read it while I'm on the phone. Don't take my word for any of this."</div>
+<a class="proof-link" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener">▶ Open Trustpilot</a>
+</div><div class="tab-panel" id="fl12"><div class="box-green box"><div class="box-label">No real competition exists — USE: Comparison shopping</div><div class="box-text"></div></div>
+<div class="script-box">"You're not choosing between ten identical products. You're choosing mechanism — certificate vs placement network."</div>
+</div><div class="tab-panel" id="fl13"><div class="box-green box"><div class="box-label">If they were here right now — USE: Spouse</div><div class="box-text"></div></div>
+<div class="script-box">"If they were on this call right now, what would you want them to hear — and what would they ask me?"</div>
+</div><div class="tab-panel" id="fl14"><div class="box-green box"><div class="box-label">Usain Bolt treadmill — USE: Already in sales, wrong model</div><div class="box-text"></div></div>
+<div class="script-box">"Usain Bolt on a treadmill that won't go full speed — not the athlete. The machine."</div>
+</div><div class="tab-panel" id="fl15"><div class="box-green box"><div class="box-label">Doctor / Lawyer / Hamster Wheel — USE: Corporate W2 / capped raises</div><div class="box-text"></div></div>
+<div class="script-box">"Seven to ten years and six figures of debt for one lane forever — vs about ninety days for a skill every industry needs. Three percent raise and a pizza party is their scoreboard. Two good closes can change your month."</div>
+</div><div class="tab-panel" id="fl16"><div class="box-green box"><div class="box-label">Brushing Teeth — USE: Minimize pain</div><div class="box-text"></div></div>
+<div class="script-box">"Skip one day — fine. Skip a year — you're in a different conversation with the dentist. Where does this pattern go in six to twelve months?"</div>
+</div><div class="tab-panel" id="fl17"><div class="box-green box"><div class="box-label">Revenue Check — USE: Business owner / already sell</div><div class="box-text"></div></div>
+<div class="script-box">"Company-side revenue and closing remote high ticket are related muscles — not the same game. Willingness to get certified is what partners require."</div>
+</div><div class="tab-panel" id="fl18"><div class="box-green box"><div class="box-label">Busy is the point — USE: Time objection</div><div class="box-text"></div></div>
+<div class="script-box">"Busy is the point. You'll still be busy in six months — question is at this income in this vehicle, or remote with a better model."</div>
+</div><div class="div"></div>
+<div class="step-label">Profile reframes</div>
+<div class="box-navy box"><div class="box-label">Corporate / W2</div><div class="box-text">"If you worked twice as hard next month — how much more money would you actually make?" → "Effort up, reward barely moves — fair?" → Doctor / Hamster Wheel → Matt Seitz</div></div>
+<div class="box-navy box"><div class="box-label">Already in sales</div><div class="box-text">Usain Bolt + "If you stay six to twelve more months — does that get you to [goal]?" → Nate / Jake / Ava / Jay</div></div>
+<div class="box-navy box"><div class="box-label">Business owner</div><div class="box-text">"What percent of your week is selling vs ops and fires?" → "What if selling was the only job and leads were warm from home?" → Mike Kaz / Christian</div></div>
+<div class="box-navy box"><div class="box-label">Young / college</div><div class="box-text">"What made you look at this vs the 'normal' path?" → Josh Sosa</div></div>
+<div class="box-navy box"><div class="box-label">Not a salesperson</div><div class="box-text">"This isn't chasing strangers — they raised their hand; you help them get clarity." → Cassi Lara</div></div>
+<div class="box-navy box"><div class="box-label">License / already started something</div><div class="box-text">"Keep what you started. High ticket on top makes you portable across industries — you're not trapped in one lane."</div></div>
+<button class="btn-t green" style="margin-top:.5rem" onclick="show('s12')">→ Question Bank</button>
+</div>
+
+<div class="section" id="s12"><div class="sec-head"><div class="sec-num">Section 12</div><div class="sec-title">Discovery Question Bank</div><div class="sec-sub">Grab mid-call. One question → silence → next. Never accept first answer.</div></div><div class="box-warn box"><div class="box-label">⚠ Rule</div><div class="box-text">Ask. Shut up. One more layer. Exact words. They talk 80%.</div></div>
+<div class="step-label">opening</div>
+<div class="q-card"><div class="box-label">opening</div><div class="q-text">"How did you find out about us here at HTSA?"</div></div>
+<div class="q-card"><div class="box-label">opening</div><div class="q-text">"What stood out? What did you like?"</div></div>
+<div class="q-card"><div class="box-label">opening</div><div class="q-text">"What did you learn from the links and testimonials?"</div></div>
+<div class="step-label">current reality</div>
+<div class="q-card"><div class="box-label">current reality</div><div class="q-text">"Tell me more about that role — walk me through a normal day."</div></div>
+<div class="q-card"><div class="box-label">current reality</div><div class="q-text">"How long have you been doing that?"</div></div>
+<div class="q-card"><div class="box-label">current reality</div><div class="q-text">"If you could keep one part of it, what would it be?"</div></div>
+<div class="step-label">what they like</div>
+<div class="q-card"><div class="box-label">what they like</div><div class="q-text">"What do you like about it?"</div></div>
+<div class="step-label">why looking</div>
+<div class="q-card"><div class="box-label">why looking</div><div class="q-text">"What do you NOT like that has you looking?"</div></div>
+<div class="q-card"><div class="box-label">why looking</div><div class="q-text">"What started making this feel off?"</div></div>
+<div class="q-card"><div class="box-label">why looking</div><div class="q-text">"Getting away from something vs toward something bigger — which is louder?"</div></div>
+<div class="step-label">money reality</div>
+<div class="q-card"><div class="box-label">money reality</div><div class="q-text">"What are you earning right now — real monthly average?"</div></div>
+<div class="q-card"><div class="box-label">money reality</div><div class="q-text">"Monthly number that would feel like a real win?"</div></div>
+<div class="q-card"><div class="box-label">money reality</div><div class="q-text">"If nothing changes twelve months — same, a little more, or capped?"</div></div>
+<div class="step-label">pain dig</div>
+<div class="q-card"><div class="box-label">pain dig</div><div class="q-text">"Real example last thirty to sixty days?"</div></div>
+<div class="q-card"><div class="box-label">pain dig</div><div class="q-text">"What does that do to you personally — when you're honest?"</div></div>
+<div class="q-card"><div class="box-label">pain dig</div><div class="q-text">"Better, same, or worse over time?"</div></div>
+<div class="step-label">gap</div>
+<div class="q-card"><div class="box-label">gap</div><div class="q-text">"Right now [their words]. Want [their words]. Gap is vehicle not ability — fair?"</div></div>
+<div class="q-card"><div class="box-label">gap</div><div class="q-text">"What's your plan B?"</div></div>
+<div class="step-label">direction</div>
+<div class="q-card"><div class="box-label">direction</div><div class="q-text">"Where do you need the most help — training or getting the job?"</div></div>
+<div class="q-card"><div class="box-label">direction</div><div class="q-text">"How many hours a week for training — is ten to twelve reasonable?"</div></div>
+<div class="step-label">attraction</div>
+<div class="q-card"><div class="box-label">attraction</div><div class="q-text">"Freedom or earning potential — what has you most attracted?"</div></div>
+<div class="q-card"><div class="box-label">attraction</div><div class="q-text">"Why is that important to you?"</div></div>
+<div class="step-label">tuesday vision</div>
+<div class="q-card"><div class="box-label">tuesday vision</div><div class="q-text">"Twelve months locked in — specific Tuesday. Where, who, what changed?"</div></div>
+<div class="q-card"><div class="box-label">tuesday vision</div><div class="q-text">"What else?" (repeat)</div></div>
+<div class="step-label">cost of inaction</div>
+<div class="q-card"><div class="box-label">cost of inaction</div><div class="q-text">"If next twelve months look like last twelve — what does that cost you?"</div></div>
+<div class="q-card"><div class="box-label">cost of inaction</div><div class="q-text">"How would you feel looking back six months from now if nothing changed?"</div></div>
+<div class="step-label">timing</div>
+<div class="q-card"><div class="box-label">timing</div><div class="q-text">"How long have you been in exploring mode?"</div></div>
+<div class="q-card"><div class="box-label">timing</div><div class="q-text">"What would make this a decision instead of exploring?"</div></div>
+<div class="step-label">support</div>
+<div class="q-card"><div class="box-label">support</div><div class="q-text">"Who else is involved in this decision?"</div></div>
+<div class="q-card"><div class="box-label">support</div><div class="q-text">"What happens if they say no?"</div></div>
+<div class="step-label">hours</div>
+<div class="q-card"><div class="box-label">hours</div><div class="q-text">"Ten to twelve hours a week — reasonable or more?"</div></div>
+<button class="btn-t green" style="margin-top:.5rem" onclick="show('s13')">→ Live Notes</button>
+</div>
+
+<div class="section" id="s13"><div class="sec-head"><div class="sec-num">Section 13</div><div class="sec-title">Live Call Notes</div><div class="sec-sub">Fill during the call. Exact words beat summaries. No localStorage — session only.</div></div><div class="box-warn box"><div class="box-label">⚠ Follow-ups</div><div class="box-text">Vague ("I'll text you times") are not follow-ups. Specific day and time or the deal has no owner.</div></div>
+<div class="notes-grid"><div><div class="script-label">Current Situation</div><textarea class="notes-area" id="n1" placeholder="Current Situation…"></textarea></div><div><div class="script-label">Pain (exact words)</div><textarea class="notes-area" id="n2" placeholder="Pain (exact words)…"></textarea></div><div><div class="script-label">Income (current → goal)</div><textarea class="notes-area" id="n3" placeholder="Income (current → goal)…"></textarea></div><div><div class="script-label">Heaven Island (exact words)</div><textarea class="notes-area" id="n4" placeholder="Heaven Island (exact words)…"></textarea></div><div><div class="script-label">Story Used + Why</div><textarea class="notes-area" id="n5" placeholder="Story Used + Why…"></textarea></div><div><div class="script-label">Objections Hit + What Worked</div><textarea class="notes-area" id="n6" placeholder="Objections Hit + What Worked…"></textarea></div><div><div class="script-label">1–10 temp + when checked</div><textarea class="notes-area" id="n7" placeholder="1–10 temp + when checked…"></textarea></div><div><div class="script-label">Partner / third-party money? (Y/N + plan)</div><textarea class="notes-area" id="n8" placeholder="Partner / third-party money? (Y/N + plan)…"></textarea></div><div><div class="script-label">Outcome + Next Step (specific day/time or enrolled)</div><textarea class="notes-area" id="n9" placeholder="Outcome + Next Step (specific day/time or enrolled)…"></textarea></div></div><div class="div"></div>
+<div class="step-label">Chad corrections checklist</div>
+<div class="pill-list"><span class="chad-pill">No "is this a good time / I hope it works"</span><span class="chad-pill">No "I operate differently / not here to pitch / not a robot"</span><span class="chad-pill">No "most you ever made in a year"</span><span class="chad-pill">Discovery by minute 3–5</span><span class="chad-pill">No show-rate / offer-mix lectures</span><span class="chad-pill">No pitching in discovery</span><span class="chad-pill">No chasing industry tangents</span><span class="chad-pill">Pre-close tie-down before demo</span><span class="chad-pill">Choice of Two Positives before price</span><span class="chad-pill">Slow down at price · shut up after choice ask</span><span class="chad-pill">On yes: enroll, don't re-sell</span></div><div class="step-label">Lost-call fixes (Aug 9)</div>
+<div class="pill-list"><span class="chad-pill">Talk-time reminder on discovery</span><span class="chad-pill">Stop-selling banner on close</span><span class="chad-pill">Third-party money → three-way</span><span class="chad-pill">Temp-check the yes (1–10)</span><span class="chad-pill">Fixed-time follow-up only</span><span class="chad-pill">🔴 Stakeholder ask on main line at min 4</span><span class="chad-pill">🔴 §9.0 reachable in one tap when they go quiet</span></div>
+<div class="div"></div>
+<div class="step-label">🔴 Open items for CJ — not for the call, for the build</div>
+<div class="box-why box">
+<div class="open-item">1. <strong>PRICING_AUTHORITY §9f ruling (A/B/C).</strong> Blocking. Recommendation: Option A ($3,200 × 2 = $6,400) — the only one producing a descending ladder without giving away $250 on every PIF.</div>
+<div class="open-item">2. <strong>Nate Hamrick's actual numbers, timeline and offer.</strong> Best story for burned-out high earners, currently unsourced. Highest-value confirm.</div>
+<div class="open-item">3. <strong>Josh Sosa + Brianna Carroll timelines/income.</strong> Placements confirmed on video; numbers aren't.</div>
+<div class="open-item">4. <strong>Cassie's $10k — revenue or commission?</strong> Changes how it can be said.</div>
+<div class="open-item">5. <strong>Jason Lee — anything at all,</strong> or drop him from the roster permanently.</div>
+<div class="open-item">6. <strong>Clarity ~620 floor — hard cutoff or soft guideline?</strong> Affects whether we prequalify before recommending.</div>
+<div class="open-item">7. <strong>Hours preference — confirm 20–25 hrs/week part-time.</strong></div>
+</div>
+<button class="btn-t green" style="margin-top:.5rem" onclick="show('sc')">→ Compliance</button>
+</div>
+
+<div class="section" id="sc"><div class="sec-head"><div class="sec-num">Compliance</div><div class="sec-title">Pricing + Income + Banned</div><div class="sec-sub">PRICING_AUTHORITY · INCOME_CLAIM_POLICY · live guardrails</div></div><div class="box-warn box"><div class="box-label">⚠ PRICING — only these structures</div><div class="box-text"><ul style="margin-left:1.1rem;font-size:13px;line-height:1.8"><li><strong>PIF $6,000</strong> (best total price)</li><li><strong>4-pay $1,750 × 4 = $7,000</strong> (default plan in HTSA close)</li><li>3-pay $2,200 × 3 = $6,600 (on request)</li><li><strong>2-pay $3,000 × 2 = $6,000 — ON REQUEST ONLY. NEVER OFFER IT.</strong> It totals the same as PIF, so offering it hands away the PIF discount for free. If they ask, quote it; do not volunteer it.</li><li>Entry $1,750 today; clear remaining to $6,000 PIF total in 30 days or rolls to 4-pay</li><li>Experience tier $4,000 (2+ yrs remote HT sales ONLY)</li><li>Financing order: Clarity Pay → FlexxBuy (if Clarity denies) → Splitit</li><li>⚠ FlexxBuy pays client, 2–5 days — deal NOT closed until funded. Book next contact.</li></ul></div></div>
+<div class="box-warn box"><div class="box-label">⚠ INCOME CLAIMS</div><div class="box-text">✅ "$10–15k/mo" AVERAGE with time unit, never month one, never a promise<br>✅ Christa Kieffer curve: $3k → $8k → $10k → $22k, sales manager month 5. ALWAYS lead with $3k.<br>❌ "a lot of people make $10k in month one"<br>❌ Unprompted income above $15k/mo without she-asked + rarity + path + mechanism<br>❌ Certainty words: for sure / guaranteed / you'll be at / easily / minimum / at least<br>❌ Christa's $100k = revenue collected, never her income<br>🔴 IF prospect already makes $10–15k+/mo → DO NOT pitch income averages. Sell ceiling, hours, lifestyle, offer size.<br>🔴 <strong>UNCONFIRMED MEMBER NUMBERS</strong> — say the shape, not the figure. PROOF_LIBRARY marks Nate Hamrick, Josh Sosa and Brianna Carroll as [CONFIRM] — tell those as pattern, drop the precise number until CJ confirms. Sourced-and-safe: Christa Kieffer, Taylor DeCourcey (revenue only), Cassie, Dana, Taylor Conroy, Trustpilot.<br>❌ Never state a member's commission when only their revenue is confirmed. Revenue is a fact; income would be a guess.</div></div>
+<div class="box-red box"><div class="box-label">BANNED ALWAYS</div><div class="box-text">Fake urgency / scarcity / wallowing / isolation social proof<br>Refund/guarantee/cancel terms not in PRICING_AUTHORITY<br>Naming a competitor to disparage — contrast MECHANISM only (Cole/RCA comparison in official script IS approved)<br>Invented personal stories (must be TRUE)<br>Open-ended diagnosis at decision moment ("what stood out?" / "any questions?" / "what are you thinking?") after intent — recommend instead<br>Asking "what's the most you've ever made in a year?"<br>Explaining show rates / average offer mix / "some offers 85% some 10%"<br>"Is this still a good time / I hope this works for you"<br>"I operate differently / I'm not here to pitch you / I'm not a robot"</div></div>
+<div class="box-blue box"><div class="box-label">Chad + JOLT</div><div class="box-text">Confused buyers don't buy; don't re-sell after intent; contain exploration; take frame early.</div></div>
+<div class="box-green box"><div class="box-label">On-call close reminder</div><div class="box-text">4-pay $1,750 vs PIF $6k → SHUT UP → if silent, RECOMMEND (§9.0) → on yes STOP SELLING and enroll.</div></div>
+</div>
+
+<script>
+
+const NAV_IDS=['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','sc'];
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el)el.classList.add('active');
+  const idx=NAV_IDS.indexOf(id);
+  const btns=document.querySelectorAll('.nav-btn');
+  if(idx>=0&&btns[idx])btns[idx].classList.add('active');
+  window.scrollTo(0,0);
+}
+function tog(el){el.classList.toggle('open')}
+function showTab(groupId,targetId,btn){
+  const group=document.getElementById(groupId);
+  if(group)group.querySelectorAll('.tab-btn,.story-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  const sec=btn?btn.closest('.section'):document;
+  const prefix=targetId.replace(/\d+$/,'');
+  sec.querySelectorAll('[id^="'+prefix+'"]').forEach(p=>{
+    if(p.id && p.id.match(new RegExp('^'+prefix+'\\d+$'))) p.classList.remove('active');
+  });
+  const t=document.getElementById(targetId);
+  if(t)t.classList.add('active');
+}
+function goSilence(){
+  show('s9');
+  setTimeout(()=>{
+    const anchor=document.getElementById('silence-anchor');
+    if(anchor)anchor.scrollIntoView({behavior:'smooth',block:'start'});
+  },50);
+}
+const BUYER_TIPS={
+  g:'Generic: follow Chad spine as written. Discovery by min 3–5. One story. Pre-close → demo → Choice of Two → price.',
+  n:'New / Career Launcher: identity + hunger. Josh Sosa / Cassi / Chris V. Keep energy high. Hours check early. Don\'t over-pitch income.',
+  i:'Already in sales: situation audit, not poetry. Nate / Jake / Ava / Jay. Sell vehicle + hours + ceiling — not "learn to sell."',
+  p:'Pro / Skilled: peer frame. Skip beginner talk. Placement + offer fit. Christian / Brendan / Mike. Never pitch $10–15k averages if already there.'
+};
+function setBuyer(k,btn){
+  document.querySelectorAll('.buyer-pill').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  const tip=document.getElementById('buyerTip');
+  if(tip){tip.textContent=BUYER_TIPS[k]||'';tip.classList.add('show');}
+}
+let on=false,el=0,iv=null;
+const phases=['01 Rapport','02 Frame','03 Hell Island','04 Heaven + Gap','05 Story','06 Pre-Close','07 Demo','08 Choice of 2','09 Price/Close','10 Library'];
+const times=[0,3,5,18,26,29,30,42,44,50];
+function fmt(s){return Math.floor(s/60)+':'+(s%60<10?'0':'')+(s%60)}
+function phase(){
+  const m=Math.floor(el/60);
+  let p=phases[0];
+  for(let i=times.length-1;i>=0;i--){if(m>=times[i]){p=phases[i];break;}}
+  document.getElementById('tphase').textContent=p;
+}
+function startStop(){
+  if(on){clearInterval(iv);on=false;document.getElementById('tbtn').textContent='Resume';}
+  else{iv=setInterval(()=>{el++;document.getElementById('tdisp').textContent=fmt(el);phase();},1000);on=true;document.getElementById('tbtn').textContent='Pause';}
+}
+function resetTimer(){
+  clearInterval(iv);on=false;el=0;
+  document.getElementById('tdisp').textContent='0:00';
+  document.getElementById('tbtn').textContent='Start';
+  document.getElementById('tphase').textContent='not started';
+}
+
+</script>
+</body>
+</html>
