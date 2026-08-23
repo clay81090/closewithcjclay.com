@@ -523,6 +523,123 @@
     color: rgba(255, 255, 255, 0.95);
   }
 
+  .invest-bonus-chad--nested {
+    margin: 14px 0 0;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 201, 122, 0.42);
+    background: linear-gradient(165deg, rgba(0, 201, 122, 0.14) 0%, rgba(10, 22, 40, 0.55) 48%, rgba(6, 14, 28, 0.72) 100%);
+    box-shadow: inset 0 1px 0 rgba(0, 201, 122, 0.12), 0 8px 20px rgba(0, 0, 0, 0.18);
+  }
+
+  .invest-bonus-chad--nested .invest-bonus-chad-kicker {
+    color: #7dffc4;
+    letter-spacing: 0.1em;
+  }
+
+  .invest-bonus-chad--nested .invest-bonus-chad-title {
+    color: #e8fff4;
+  }
+
+  .invest-bonus-chad--nested .invest-option-actions--pay {
+    margin-top: 14px;
+    margin-bottom: 0;
+  }
+
+  .invest-bonus-chad-bullets {
+    font-size: 12px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.76);
+    margin: 10px 0 0;
+    padding: 0 0 0 1.15em;
+    list-style: disc;
+  }
+
+  .invest-bonus-chad-bullets li {
+    margin: 0 0 8px;
+    padding: 0;
+  }
+
+  .invest-bonus-chad-bullets li:last-child {
+    margin-bottom: 0;
+  }
+
+  .invest-bonus-chad-bullets strong {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .invest-option-block--flexible {
+    border-color: rgba(0, 201, 122, 0.35);
+    background: linear-gradient(165deg, rgba(0, 201, 122, 0.10) 0%, rgba(255, 255, 255, 0.03) 42%, rgba(255, 255, 255, 0.02) 100%);
+    box-shadow: 0 0 0 1px rgba(0, 201, 122, 0.08), 0 12px 28px rgba(0, 0, 0, 0.18);
+  }
+
+  .invest-flexible-lead {
+    margin: 14px 0 0;
+    font-size: 13px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .invest-flexible-lead strong {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .invest-flexible-path {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 14px 0 0;
+  }
+
+  .invest-flexible-row {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 22, 40, 0.35);
+  }
+
+  .invest-flexible-row--best {
+    border-color: rgba(0, 201, 122, 0.45);
+    background: rgba(0, 201, 122, 0.10);
+  }
+
+  .invest-flexible-when {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--green);
+    line-height: 1.35;
+    padding-top: 2px;
+  }
+
+  .invest-flexible-row--best .invest-flexible-when {
+    color: #7dffc4;
+  }
+
+  .invest-flexible-copy {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0;
+  }
+
+  .invest-flexible-copy strong {
+    color: rgba(255, 255, 255, 0.96);
+  }
+
+  .invest-flexible-note {
+    margin: 14px 0 0;
+    font-size: 12px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.62);
+  }
+
   .invest-badge.financing {
     background: rgba(0,201,122,0.18);
     color: var(--green);
@@ -2012,7 +2129,7 @@
           <div class="invest-option-head invest-option-head--pay">
             <div>
               <div class="invest-option-title">Paid in Full</div>
-              <div class="invest-option-sub">Best overall value — $6,000 one-time (save $1,000 vs. the 4-pay plan).</div>
+              <div class="invest-option-sub">Best overall value. $6,000 one-time (save vs. the full Flexible Start timeline).</div>
             </div>
             <div class="invest-price-stack">
               <div class="invest-price-big">$6,000</div>
@@ -2024,64 +2141,47 @@
           </div>
         </div>
 
-        <div class="invest-option-block">
-          <div class="invest-badge invest-badge--option">Option 2</div>
+        <div class="invest-option-block invest-option-block--flexible">
+          <div class="invest-badge invest-badge--option">Option 2 · Built for Dina</div>
           <div class="invest-option-head invest-option-head--pay">
             <div>
-              <div class="invest-option-title">4 Monthly Payments</div>
-              <div class="invest-option-sub">4 payments of $1,750 — First Payment Due Today.</div>
+              <div class="invest-option-title">Flexible Start Plan</div>
+              <div class="invest-option-sub">Built for you, Dina. Pay it off early and save, or take your time. Either way, you start today.</div>
             </div>
             <div class="invest-price-stack">
               <div class="invest-price-big">$1,750</div>
-              <div class="invest-price-mini">$7,000 total · 4 installments</div>
+              <div class="invest-price-mini">to start · as low as $6,000 total</div>
             </div>
           </div>
+
+          <p class="invest-flexible-lead">You start today with just <strong>$1,750</strong>. No need to wait until everything is perfect to move forward. That is the real cost to begin. From there, it is completely up to you:</p>
+
+          <div class="invest-flexible-path" role="list" aria-label="Flexible payoff timeline">
+            <div class="invest-flexible-row invest-flexible-row--best" role="listitem">
+              <div class="invest-flexible-when">Day 30<br>2nd payment</div>
+              <p class="invest-flexible-copy">Pay off the remaining balance by Day 30: total comes to just <strong>$6,000</strong>, the same as paying in full.</p>
+            </div>
+            <div class="invest-flexible-row" role="listitem">
+              <div class="invest-flexible-when">Day 60<br>3rd payment</div>
+              <p class="invest-flexible-copy">Pay off the remaining balance by Day 60: total comes to <strong>$6,600</strong>. Text CJ for that payoff link when you are ready.</p>
+            </div>
+            <div class="invest-flexible-row" role="listitem">
+              <div class="invest-flexible-when">Full timeline</div>
+              <p class="invest-flexible-copy">No rush at all: if you need the full timeline, you simply stay on the standard plan at <strong>$1,750</strong> per payment, 4 payments, <strong>$7,000</strong> total.</p>
+            </div>
+          </div>
+
+          <p class="invest-flexible-note">There is no penalty for taking your time and no hoops to jump through to save. It just comes down to how soon you are able to pay it off. Many members cover their later payments directly out of commissions once they are placed, so this is built to move at your pace, not against it.</p>
+
           <div class="invest-option-actions invest-option-actions--pay">
-            <a href="https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose 4-Pay — Pay $1,750 Today →</a>
+            <a href="https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Start Today — $1,750 →</a>
+            <a href="https://whop.com/checkout/6HGikz2DEePqj5xzLH-E8gN-27Xu-MqoH-038LDTsjAgF9/" class="invest-btn secondary" target="_blank" rel="noopener noreferrer">Day 30 payoff — $4,250 →</a>
           </div>
         </div>
 
       </div>
 
-      <hr class="invest-zone-rule" aria-hidden="true">
-
-      <div class="invest-section-kicker invest-section-kicker--accent">Third-Party Financing</div>
-      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">The options above are HTSA in-house payment options. The option below is third-party financing through ClarityPay for pre-qualification.</div>
-
-      <div class="invest-grid">
-
-        <div class="invest-option-block financing">
-          <div class="invest-badge financing">ClarityPay</div>
-          <div class="invest-option-head">
-            <div>
-              <div class="invest-option-title">ClarityPay — 12 months at 0% APR</div>
-              <div class="invest-option-sub">$600/month × 12 months — $7,200 total program investment. Need <strong>620+ credit score</strong> to qualify.</div>
-            </div>
-            <div class="invest-price-stack">
-              <div class="invest-price-big">$600/month</div>
-              <div class="invest-price-mini">$7,200 total · 12 months · 0% APR</div>
-            </div>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Credit Requirement</span>
-            <span class="invest-value">620+ credit score to qualify</span>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Interest Rate</span>
-            <span class="invest-value">0% APR · no early payoff penalty</span>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Enrollment Timing</span>
-            <span class="invest-value">Enroll same day if approved</span>
-          </div>
-          <div class="invest-option-actions">
-            <a href="https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" class="invest-btn secondary" target="_blank">Pre-Qualify with ClarityPay →</a>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="invest-note" style="color:#ff9c7a;"><strong>★ Soft pre-qualification only.</strong> Once you complete one of the in-house payment options above or get approved through ClarityPay, text CJ right away so access can be granted.</div>
+      <div class="invest-note" style="margin-top:18px;color:rgba(255,255,255,0.5);"><strong style="color:#ff9c7a;">Next:</strong> After you pay, jump to <strong style="color:var(--white);">Step 1</strong> below. Text CJ so we can grant access right away.</div>
     </div>
   </div>
 
@@ -2096,8 +2196,8 @@
     <div class="step-item">
       <div class="step-num">1</div>
       <div class="step-content">
-        <h4>Step 1 — Choose Your Payment or Check Pre-Qualification</h4>
-        <p>Dina, review the payment and financing options in Program Investment above, then select what you want — <strong>$6,000</strong> paid in full, the <strong>$1,750 × 4-pay</strong> plan ($7,000 total), or <strong>ClarityPay</strong> at <strong>$600/month × 12 months</strong> (0% APR, $7,200 total — 620+ credit score to qualify). Once your payment clears or your financing is approved, move to Step 2 below.</p>
+        <h4>Step 1 — Choose Your Payment</h4>
+        <p>Dina, review the payment options in Program Investment above, then select what you want — <strong>$6,000</strong> paid in full, or your <strong>Flexible Start Plan</strong> at <strong>$1,750</strong> to start (as low as <strong>$6,000</strong> if paid off by Day 30, <strong>$6,600</strong> by Day 60, or <strong>$7,000</strong> over the full 4-pay). Once your payment clears, move to Step 2 below.</p>
       </div>
     </div>
 
