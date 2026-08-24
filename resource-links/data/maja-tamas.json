@@ -1,0 +1,19 @@
+{
+  "page_type": "precall",
+  "prospect_id": "maja-tamas",
+  "prospect_name": "Maja Tamas",
+  "first_name": "Maja",
+  "email": "majatamas66@gmail.com",
+  "phone_e164": "+12135895322",
+  "phone_display": "+1 (213) 589-5322",
+  "prepared_date": "Aug 23, 2026",
+  "slug": "maja_tamas",
+  "call_day": "Monday",
+  "call_date": "Aug 24",
+  "call_time": "2:00 PM",
+  "call_timezone": "EST",
+  "call_format": "Phone or Zoom",
+  "missed_meeting": false,
+  "booking_url": "https://meetings.hubspot.com/charles660/cj",
+  "show_member_contacts": false
+}

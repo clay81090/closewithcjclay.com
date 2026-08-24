@@ -376,7 +376,21 @@
       "status": "active",
       "view_count": 0,
       "last_viewed_at": null
+    },
+    "maja_tamas": {
+      "slug": "maja_tamas",
+      "prospect_id": "maja-tamas",
+      "prospect_name": "Maja Tamas",
+      "email": "majatamas66@gmail.com",
+      "phone_e164": "+12135895322",
+      "phone_display": "+1 (213) 589-5322",
+      "page_type": "precall",
+      "created_at": "2026-08-24T02:04:28Z",
+      "expires_at": "2026-11-22T02:04:28Z",
+      "status": "active",
+      "view_count": 0,
+      "last_viewed_at": null
     }
   },
-  "updated_at": "2026-08-24T02:03:56Z"
+  "updated_at": "2026-08-24T02:04:28Z"
 }
