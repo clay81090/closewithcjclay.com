@@ -1,0 +1,19 @@
+{
+  "page_type": "precall",
+  "prospect_id": "venecia-codner",
+  "prospect_name": "Venecia Codner",
+  "first_name": "Venecia",
+  "email": "carefree2441@gmail.com",
+  "phone_e164": "+5165031426",
+  "phone_display": "+51 (65) 031426",
+  "prepared_date": "Aug 23, 2026",
+  "slug": "venecia_codner",
+  "call_day": "Monday",
+  "call_date": "Aug 24",
+  "call_time": "10:00 AM",
+  "call_timezone": "EST",
+  "call_format": "Phone or Zoom",
+  "missed_meeting": false,
+  "booking_url": "https://meetings.hubspot.com/charles660/cj",
+  "show_member_contacts": false
+}
