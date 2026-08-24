@@ -390,7 +390,21 @@
       "status": "active",
       "view_count": 0,
       "last_viewed_at": null
+    },
+    "sabrina_kerr": {
+      "slug": "sabrina_kerr",
+      "prospect_id": "sabrina-kerr",
+      "prospect_name": "Sabrina Kerr",
+      "email": "sabrinakerr2519@gmail.com",
+      "phone_e164": "+14809770754",
+      "phone_display": "+1 (480) 977-0754",
+      "page_type": "precall",
+      "created_at": "2026-08-24T02:05:11Z",
+      "expires_at": "2026-11-22T02:05:11Z",
+      "status": "active",
+      "view_count": 0,
+      "last_viewed_at": null
     }
   },
-  "updated_at": "2026-08-24T02:04:28Z"
+  "updated_at": "2026-08-24T02:05:11Z"
 }
