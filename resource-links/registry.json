@@ -488,7 +488,21 @@
       "status": "active",
       "view_count": 0,
       "last_viewed_at": null
+    },
+    "aniushka_vaquiro": {
+      "slug": "aniushka_vaquiro",
+      "prospect_id": "aniushka-vaquiro",
+      "prospect_name": "Aniushka Vaquiro",
+      "email": "aniushkamarie2117@icloud.com",
+      "phone_e164": "+19194141082",
+      "phone_display": "+1 (919) 414-1082",
+      "page_type": "precall",
+      "created_at": "2026-08-25T03:12:10Z",
+      "expires_at": "2026-11-23T03:12:10Z",
+      "status": "active",
+      "view_count": 0,
+      "last_viewed_at": null
     }
   },
-  "updated_at": "2026-08-25T03:11:38Z"
+  "updated_at": "2026-08-25T03:12:10Z"
 }
