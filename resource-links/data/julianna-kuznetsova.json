@@ -1,0 +1,19 @@
+{
+  "page_type": "precall",
+  "prospect_id": "julianna-kuznetsova",
+  "prospect_name": "Julianna Kuznetsova",
+  "first_name": "Julianna",
+  "email": "www.julianna@kuzie.express",
+  "phone_e164": "+13609075251",
+  "phone_display": "+1 (360) 907-5251",
+  "prepared_date": "Aug 24, 2026",
+  "slug": "julianna_kuznetsova",
+  "call_day": "Tuesday",
+  "call_date": "Aug 25",
+  "call_time": "2:00 PM",
+  "call_timezone": "EST",
+  "call_format": "Phone or Zoom",
+  "missed_meeting": false,
+  "booking_url": "https://meetings.hubspot.com/charles660/cj",
+  "show_member_contacts": false
+}
