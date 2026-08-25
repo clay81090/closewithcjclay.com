@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-25T03:08:48Z",
+  "updated_at": "2026-08-25T03:09:30Z",
   "links": {
     "tammy_berry": {
       "status": "active",
@@ -184,6 +184,12 @@
     "david_alegre": {
       "status": "active",
       "expires_at": "2026-11-23T03:08:48Z",
+      "view_count": 0,
+      "last_viewed_at": null
+    },
+    "melanie_danz": {
+      "status": "active",
+      "expires_at": "2026-11-23T03:09:30Z",
       "view_count": 0,
       "last_viewed_at": null
     }
