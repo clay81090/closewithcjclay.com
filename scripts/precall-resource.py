@@ -152,6 +152,8 @@ def resource_card(href: str, badge: str, title: str, desc: str, cta: str, varian
         cls += " cj-resource-card--featured"
     elif variant == "placement":
         cls += " cj-resource-card--placement"
+    elif variant == "blue":
+        cls += " cj-resource-card--compact cj-resource-card--blue"
     else:
         cls += " cj-resource-card--compact"
     badge_html = f'<div class="cj-resource-card-badge">{badge}</div>' if badge else ""
@@ -217,26 +219,30 @@ def render_resources_html(first: str) -> str:
             "placement",
         ),
     ]
-    compact = [
+    # White row: Cassie / Josh / Brianna. Blue row: Top 20 + HTSA website.
+    stories = [
         resource_card("https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf", "", "Cassie — single mom success story", "Relatable story — single mom who made the transition work around real life.", "Watch on YouTube"),
         resource_card("https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib", "", "Josh — Alex Hormozi background", "High-profile sales background — hear how HTSA fit into his path.", "Watch on YouTube"),
         resource_card("https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8", "", "Brianna — Tony Robbins team", "Credibility from a big-name organization — her HTSA experience.", "Watch on YouTube"),
-        resource_card("https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf", "", "Top 20 Companies in High Ticket Sales", "Industry overview PDF — where HTSA fits in the landscape.", "Open PDF"),
     ]
-    # Blue accent (footer globe / site blue) + thin Trustpilot-star gold outside — same card shape as featured/placement.
-    website = (
-        '<div style="display:flex;justify-content:center;margin-top:12px;">'
-        '<a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact" '
-        'style="max-width:420px;width:100%;'
-        "background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);"
-        "border:3px solid #1976D2;border-left:5px solid #1565C0;"
-        "box-shadow:0 0 0 1.5px #e2b227,0 4px 14px rgba(10,22,40,0.08);"
-        '" target="_blank" rel="noopener noreferrer">'
-        '<div class="cj-resource-card-title">HTSA Website — more stories &amp; outcomes</div>'
-        '<p class="cj-resource-card-desc">Many more member outcomes, screenshots, and program details on our main site.</p>'
-        '<span class="cj-resource-card-cta">Visit highticketsalesacademy.com</span>'
-        "</a></div>"
-    )
+    blue_row = [
+        resource_card(
+            "https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf",
+            "",
+            "Top 20 Companies in High Ticket Sales",
+            "Industry overview PDF — where HTSA fits in the landscape.",
+            "Open PDF",
+            "blue",
+        ),
+        resource_card(
+            "https://www.highticketsalesacademy.com",
+            "",
+            "HTSA Website — more stories &amp; outcomes",
+            "Many more member outcomes, screenshots, and program details on our main site.",
+            "Visit highticketsalesacademy.com",
+            "blue",
+        ),
+    ]
     return f"""
   <div class="cj-resources-wrap">
     <p class="cj-resources-lead"><strong>{escape(first)}</strong> — if you watch one thing before we talk, make it the first one.</p>
@@ -245,8 +251,8 @@ def render_resources_html(first: str) -> str:
     <p class="cj-resources-kicker">⭐ Placement — why our members get results</p>
     <div class="cj-resources-featured">{"".join(placement)}</div>
     <p class="cj-resources-kicker">More success stories from our network</p>
-    <div class="cj-resources-grid">{"".join(compact)}</div>
-    {website}
+    <div class="cj-resources-grid cj-resources-grid--stories">{"".join(stories)}</div>
+    <div class="cj-resources-grid cj-resources-grid--blue">{"".join(blue_row)}</div>
   </div>"""
 
 
