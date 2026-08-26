@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>The Math — CJ Clay · HTSA</title>
+<style>
+  :root{
+    --ink:#0b1220;
+    --ink-2:#1a2332;
+    --muted:#6b7684;
+    --line:#e6ebf1;
+    --line-2:#d6dee7;
+    --paper:#fafbfc;
+    --card:#ffffff;
+    --soft:#f4f7fa;
+    --accent:#0b3a66;      /* single restrained blue for links + rule + labels */
+    --loss:#a63a1c;        /* single restrained warm accent for gap / leak */
+    --gain:#0d7a4a;        /* single restrained forest for the win */
+  }
+
+  *{ box-sizing:border-box; }
+  html{ color-scheme:light; scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font:16px/1.6 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{ color:var(--accent); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+
+  /* ── Layout ── */
+  .page{
+    max-width:820px;
+    margin:0 auto;
+    padding:28px 28px 96px;
+  }
+  .page-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    gap:16px; padding-bottom:14px; margin-bottom:28px;
+    border-bottom:1px solid var(--line);
+  }
+  .brand{
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    font-weight:700; color:var(--ink);
+  }
+  .brand-sub{
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); font-weight:500;
+  }
+
+  /* ── Sticky controls (collapsed by default) ── */
+  .controls{
+    position:sticky; top:0; z-index:20;
+    background:rgba(250,251,252,.94);
+    backdrop-filter:saturate(180%) blur(10px);
+    -webkit-backdrop-filter:saturate(180%) blur(10px);
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin-bottom:32px;
+  }
+  .controls > summary{
+    list-style:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px; padding:12px 14px;
+    font-size:13px; color:var(--ink); font-weight:600;
+  }
+  .controls > summary::-webkit-details-marker{ display:none; }
+  .controls > summary::after{
+    content:"Adjust numbers ▾";
+    font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--muted); font-weight:600;
+  }
+  .controls[open] > summary::after{ content:"Hide ▴"; }
+  .controls .status{
+    display:flex; gap:14px; flex-wrap:wrap; align-items:baseline;
+    font-size:13px; color:var(--muted); font-weight:500;
+  }
+  .controls .status b{ color:var(--ink); font-weight:600; }
+  .controls .body{
+    padding:4px 14px 14px;
+    border-top:1px solid var(--line);
+  }
+  .grid-inputs{
+    display:grid; grid-template-columns:repeat(4, minmax(0,1fr));
+    gap:10px; margin-top:12px;
+  }
+  .grid-inputs.advanced{ grid-template-columns:repeat(4, minmax(0,1fr)); }
+  @media (max-width:720px){
+    .grid-inputs, .grid-inputs.advanced{ grid-template-columns:1fr 1fr; }
+  }
+  label.f{ display:flex; flex-direction:column; gap:4px; min-width:0; }
+  label.f > span{
+    font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted); font-weight:600;
+  }
+  label.f > input, label.f > select{
+    width:100%; background:var(--card); color:var(--ink);
+    border:1px solid var(--line-2); border-radius:6px;
+    padding:9px 10px; font:500 14px/1.2 inherit; outline:none;
+    -webkit-appearance:none; appearance:none;
+  }
+  label.f > input:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(11,58,102,.12);
+  }
+  label.f > .hint{
+    font-size:10px; letter-spacing:.02em;
+    color:var(--muted); font-weight:500; margin-top:3px;
+    line-height:1.35;
+  }
+  label.f > .hint b{ color:var(--ink); font-weight:650; }
+  .adv{
+    margin-top:12px; padding-top:10px; border-top:1px dashed var(--line);
+  }
+  .adv > summary{
+    cursor:pointer; list-style:none;
+    font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; padding:4px 0;
+  }
+  .adv > summary::-webkit-details-marker{ display:none; }
+  .adv > summary::before{ content:"+ "; }
+  .adv[open] > summary::before{ content:"− "; }
+  .actions{
+    display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;
+  }
+  .btn{
+    appearance:none; background:var(--card); color:var(--ink);
+    border:1px solid var(--line-2); border-radius:6px;
+    padding:7px 12px; font:600 12px/1 inherit; letter-spacing:.02em;
+    cursor:pointer;
+  }
+  .btn:hover{ border-color:var(--ink); }
+  .btn.primary{ background:var(--ink); color:#fff; border-color:var(--ink); }
+
+  /* ── Typography ── */
+  h1{
+    font-size:clamp(28px, 4.2vw, 40px);
+    line-height:1.1; letter-spacing:-.02em;
+    margin:0 0 12px; font-weight:700; color:var(--ink);
+  }
+  h1 .who{ color:var(--accent); }
+  .lede{
+    font-size:17px; color:var(--muted); margin:0 0 6px; max-width:640px;
+  }
+  .rule{
+    height:2px; width:44px; background:var(--ink);
+    border-radius:2px; margin:22px 0 0;
+  }
+  section{ margin-top:44px; }
+  h2{
+    font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); font-weight:700;
+    margin:0 0 18px; padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  h2 b{ color:var(--ink); font-weight:700; }
+  h3{
+    font-size:17px; letter-spacing:-.01em; font-weight:600;
+    margin:24px 0 10px; color:var(--ink);
+  }
+  p{ margin:0 0 12px; }
+  strong{ font-weight:650; color:var(--ink); }
+
+  /* ── Cards / grids ── */
+  .grid-3{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; }
+  .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:640px){
+    .grid-3, .grid-2{ grid-template-columns:1fr; }
+  }
+  .card{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:8px; padding:16px 18px;
+  }
+  .card.soft{ background:var(--soft); border-color:var(--line); }
+  .card .lbl{
+    font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); font-weight:700; margin-bottom:8px;
+  }
+  .card .big{
+    font-size:clamp(26px, 3.6vw, 34px);
+    font-weight:700; letter-spacing:-.02em; line-height:1;
+    color:var(--ink); font-variant-numeric:tabular-nums;
+  }
+  .card .big.loss{ color:var(--loss); }
+  .card .big.gain{ color:var(--gain); }
+  .card .sub{ font-size:13px; color:var(--muted); margin-top:8px; }
+
+  /* ── Hero cost of waiting number ── */
+  .hero-loss{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:8px; padding:22px 22px;
+    display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+    flex-wrap:wrap;
+  }
+  .hero-loss .num{
+    font-size:clamp(38px, 6vw, 56px);
+    font-weight:700; letter-spacing:-.03em; line-height:1;
+    color:var(--loss); font-variant-numeric:tabular-nums;
+  }
+  .hero-loss .cap{
+    font-size:13px; color:var(--muted); max-width:320px;
+  }
+  .hero-loss .cap b{ color:var(--ink); }
+
+  /* ── Tables ── */
+  table{ width:100%; border-collapse:collapse; margin:10px 0 6px; font-size:15px; }
+  th{
+    text-align:left; font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted); font-weight:700;
+    padding:10px 10px; border-bottom:1px solid var(--line-2);
+  }
+  td{
+    padding:11px 10px; border-bottom:1px solid var(--line);
+    color:var(--ink);
+  }
+  td.n, th.n{
+    text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;
+  }
+  tr.total td{
+    font-weight:650; border-bottom:2px solid var(--ink);
+    background:var(--soft);
+  }
+  .caption{ font-size:13px; color:var(--muted); margin-top:8px; }
+
+  /* ── Quote block ── */
+  .q{
+    border-left:2px solid var(--ink);
+    padding:4px 0 4px 18px; margin:22px 0;
+    font-size:17px; line-height:1.5; color:var(--ink);
+  }
+
+  /* ── 4,004 weeks grid (one dot = one week, one row = one year) ── */
+  .weeks-viz{
+    margin:18px 0 12px;
+    padding:20px 18px 18px;
+    background:var(--soft); border:1px solid var(--line);
+    border-radius:10px;
+  }
+  .weeks-header{
+    font-size:15px; line-height:1.55; color:var(--ink);
+    margin:0 0 18px;
+  }
+  .weeks-header .g{ color:var(--gain); font-weight:650; }
+
+  .age-inline{
+    display:inline-block; width:3.6em;
+    padding:4px 8px; margin:0 3px;
+    background:var(--card); color:var(--ink);
+    border:1px solid var(--line-2); border-radius:5px;
+    font:700 16px/1 inherit;
+    text-align:center; font-variant-numeric:tabular-nums;
+    -webkit-appearance:none; appearance:none; outline:none;
+  }
+  .age-inline:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(11,58,102,.12);
+  }
+
+  .weeks-grid-wrap{
+    position:relative; max-width:520px; margin:0 auto;
+  }
+  .weeks-grid{
+    display:grid; grid-template-columns:repeat(52, 1fr);
+    gap:1px; width:100%; aspect-ratio:52/77;
+    background:var(--line);
+    padding:1px; border-radius:2px;
+  }
+  .w{
+    aspect-ratio:1; background:var(--card); border-radius:1px;
+  }
+  .w.spent{ background:#c3ccd6; }
+  .w.sleep{ background:#9fb0c2; }
+  .w.work{  background:#c78a4a; }
+  .w.live{  background:var(--gain); }
+
+  .age-mark{
+    position:absolute; left:-8px; right:-8px;
+    height:0; border-top:2px solid var(--ink);
+    pointer-events:none; transition:top .18s ease-out;
+  }
+  .age-mark::after{
+    content:attr(data-label);
+    position:absolute; right:0; top:-11px;
+    font-size:9px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--card); background:var(--ink);
+    padding:3px 7px; border-radius:3px;
+    font-weight:700; white-space:nowrap;
+    box-shadow:0 1px 0 rgba(0,0,0,.08);
+  }
+
+  .weeks-legend{
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    gap:10px; margin-top:16px;
+    font-size:12px; color:var(--muted);
+  }
+  .weeks-legend .lg{
+    display:flex; gap:7px; align-items:baseline;
+  }
+  .weeks-legend .sw{
+    width:11px; height:11px; border-radius:2px;
+    display:inline-block; flex:none; transform:translateY(1px);
+  }
+  .weeks-legend b{
+    color:var(--ink); font-weight:650;
+    font-variant-numeric:tabular-nums;
+  }
+  @media (max-width:640px){
+    .weeks-legend{ grid-template-columns:1fr 1fr; }
+    .weeks-grid-wrap{ max-width:100%; }
+  }
+
+  /* ── Lists / footer ── */
+  ul{ margin:0 0 12px 18px; padding:0; }
+  li{ margin:0 0 7px; }
+  .foot{
+    margin-top:56px; padding-top:18px;
+    border-top:1px solid var(--line);
+    font-size:12px; color:var(--muted); line-height:1.6;
+  }
+  .foot b{ color:var(--ink); font-weight:650; }
+
+  /* ── Print ── */
+  @media print{
+    body{ background:#fff; }
+    .page{ padding:24px 0; max-width:none; }
+    .controls, .no-print{ display:none !important; }
+    section{ break-inside:avoid; }
+    a{ color:var(--ink); }
+    .dots{ background:#fff; border-color:#ddd; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="page-head">
+    <div class="brand">CJ Clay · HTSA</div>
+    <div class="brand-sub">Remote High Ticket Sales · The Math</div>
+  </header>
+
+  <!-- ============= INTRO ============= -->
+  <section class="intro" style="margin-top:0">
+    <h1>The math for <span class="who" id="whoTitle">this decision</span>.</h1>
+    <p class="lede">Every figure below updates from the inputs. Where a range exists, the conservative end is used on purpose, so the decision gets made on arithmetic rather than a feeling.</p>
+    <div class="rule"></div>
+  </section>
+
+  <!-- ============= CONTROLS ============= -->
+  <details class="controls no-print" id="controls">
+    <summary>
+      <span class="status" id="statusStrip">
+        <span>Gap <b id="sGap">—</b>/mo</span>
+        <span>Leak <b id="sDaily">—</b>/day</span>
+        <span>HTSA - Tuition <b id="sTui">—</b></span>
+      </span>
+    </summary>
+    <div class="body">
+      <div class="grid-inputs">
+        <label class="f"><span>First name</span><input id="name" type="text" placeholder="e.g. Dina" autocomplete="off"></label>
+        <label class="f"><span>Current $/mo</span><input id="current" type="number" min="0" step="100" value="2000"></label>
+        <label class="f"><span>Goal $/mo</span><input id="goal" type="number" min="0" step="100" value="6000"></label>
+        <label class="f"><span>HTSA - Tuition</span><input id="tuition" type="number" min="0" step="100" value="6000"></label>
+      </div>
+
+      <details class="adv">
+        <summary>Advanced inputs (age, job, hours, seat math)</summary>
+        <div class="grid-inputs advanced" style="margin-top:10px">
+          <label class="f"><span>Age</span><input id="age" type="number" min="18" max="80" step="1" value="38"></label>
+          <label class="f"><span>Current job / vehicle</span><input id="job" type="text" placeholder="e.g. bartender" autocomplete="off"></label>
+          <label class="f"><span>Hours / week now</span><input id="hours" type="number" min="1" max="100" step="1" value="40"></label>
+          <label class="f"><span>Booked calls / wk</span><input id="booked" type="number" min="1" max="80" step="1" value="40"></label>
+          <label class="f"><span>Show rate %</span><input id="show" type="number" min="1" max="100" step="1" value="75"></label>
+          <label class="f"><span>Close rate % (low)</span><input id="closeLow" type="number" min="1" max="50" step="1" value="10"></label>
+          <label class="f"><span>Close rate % (avg)</span><input id="closeAvg" type="number" min="1" max="50" step="1" value="20"></label>
+          <label class="f"><span>Commission %</span><input id="comm" type="number" min="1" max="30" step="1" value="10"><small class="hint"><b>Closer 10% min</b> · <b>Setter 5% min</b></small></label>
+        </div>
+      </details>
+
+      <div class="actions">
+        <button class="btn" type="button" id="btnReset">Reset</button>
+        <button class="btn" type="button" id="btnSave">Save on this Mac</button>
+        <button class="btn" type="button" id="btnCopy">Copy shareable link</button>
+        <button class="btn primary" type="button" onclick="window.print()">Print / PDF</button>
+      </div>
+    </div>
+  </details>
+
+  <!-- ============= 1. CURRENT VS GOAL ============= -->
+  <section>
+    <h2>1 · <b>Where they are</b> vs where they said they want to be</h2>
+    <p><span id="who1">They</span> currently earn income as a <strong id="jobLabel">—</strong>. The question is not whether they can work harder. It is whether the current vehicle can get them to the number they said they want.</p>
+
+    <div class="grid-3" style="margin-top:12px">
+      <div class="card">
+        <div class="lbl">Current</div>
+        <div class="big" id="mCurrent">—</div>
+        <div class="sub" id="mCurrentSub">per month</div>
+      </div>
+      <div class="card">
+        <div class="lbl">Goal</div>
+        <div class="big gain" id="mGoal">—</div>
+        <div class="sub">per month, their number</div>
+      </div>
+      <div class="card">
+        <div class="lbl">Monthly gap</div>
+        <div class="big loss" id="mGap">—</div>
+        <div class="sub" id="mGapSub">leaking every 30 days</div>
+      </div>
+    </div>
+
+    <h3>What the current vehicle would have to do</h3>
+    <table>
+      <tr><td>Current hourly value <span class="caption">(current $ ÷ hours ÷ 4)</span></td><td class="n" id="mHourly">—</td></tr>
+      <tr><td>Hours per week needed at that rate to hit the goal</td><td class="n" id="mReqHrs">—</td></tr>
+      <tr><td>Extra hours per week on top of today</td><td class="n" id="mExtra">—</td></tr>
+      <tr class="total"><td>Income jump required without changing the vehicle</td><td class="n" id="mPct">—</td></tr>
+    </table>
+    <div class="q" id="gapRecap">Enter current income, hours, and goal to see the vehicle math.</div>
+  </section>
+
+  <!-- ============= 2. COST OF WAITING ============= -->
+  <section>
+    <h2>2 · <b>The cost of waiting</b></h2>
+    <p>Waiting is not free and it is not neutral. It is an active monthly forfeiture of the gap above.</p>
+
+    <div class="hero-loss">
+      <div>
+        <div class="lbl" style="font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:8px">One year of waiting</div>
+        <div class="num" id="loss12">—</div>
+      </div>
+      <div class="cap" id="loss12Cap">Forfeited income if the decision is deferred a full year at today's gap.</div>
+    </div>
+
+    <table style="margin-top:16px">
+      <thead><tr><th>If the decision waits</th><th class="n">Unearned income</th><th class="n">Net loss vs starting now</th></tr></thead>
+      <tbody id="waitTable"></tbody>
+    </table>
+
+    <div class="q" id="waitQuote">—</div>
+  </section>
+
+  <!-- ============= 3. SEAT MATH ============= -->
+  <section>
+    <h2>3 · <b>What the seat produces</b></h2>
+    <p>Built from the worst reasonable end of every range. Nothing here assumes anyone is good at this yet.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="lbl">Used in this model</div>
+        <table style="margin:0">
+          <tr><td>Offer price</td><td class="n">$5,000</td></tr>
+          <tr><td>Commission <span style="color:var(--muted); font-size:12px">(Closer 10% min · Setter 5% min)</span></td><td class="n" id="tComm">10%</td></tr>
+          <tr><td>Booked / week</td><td class="n" id="tBooked">40</td></tr>
+          <tr><td>Show rate</td><td class="n" id="tShow">75%</td></tr>
+          <tr><td>Close rate</td><td class="n" id="tCloseLow">10%</td></tr>
+        </table>
+      </div>
+      <div class="card soft">
+        <div class="lbl">Actual industry ranges</div>
+        <table style="margin:0">
+          <tr><td>Typical offer</td><td class="n">$8k to $12k</td></tr>
+          <tr><td>Commission (rises with milestones)</td><td class="n">10% to 15%</td></tr>
+          <tr><td>Industry average close rate</td><td class="n">around 20%</td></tr>
+          <tr><td>Placed closer average</td><td class="n">$10k to $15k / mo</td></tr>
+          <tr><td>Placed setter average</td><td class="n">$5k to $7k / mo</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <h3>Low end build (worst reasonable inputs)</h3>
+    <table>
+      <thead><tr><th>Step</th><th class="n">Result</th></tr></thead>
+      <tbody id="buildTable"></tbody>
+    </table>
+
+    <p class="caption">Every input above is at or below the bottom of its real range. A 10% close rate is not a good close rate. It is roughly half of the industry average. At an average close on a mid-range offer, the same calendar produces meaningfully more, which is what the next section frames.</p>
+  </section>
+
+  <!-- ============= 4. RETURN ON TUITION ============= -->
+  <section>
+    <h2>4 · <b>Return on the HTSA - Tuition</b></h2>
+    <p>One cost, once. No monthly fees. Lifetime access to training, coaching, and placement, including a future move to a different company.</p>
+
+    <table>
+      <thead><tr><th>First year outcome</th><th class="n">Net after HTSA - Tuition</th><th class="n">Return on HTSA - Tuition</th></tr></thead>
+      <tbody id="roiTable"></tbody>
+    </table>
+
+    <div class="grid-2" style="margin-top:16px">
+      <div class="card">
+        <div class="lbl">Same HTSA - Tuition in the market</div>
+        <div class="big" id="mMarket">—</div>
+        <div class="sub">One year at roughly the long run S&amp;P average. Real, passive, appropriate for capital being preserved.</div>
+      </div>
+      <div class="card soft">
+        <div class="lbl">Same HTSA - Tuition into a skill</div>
+        <div class="big gain" id="mSkill">—</div>
+        <div class="sub">Even at the slow start frame. The variable here is effort, which they control. A market position cannot be improved by working harder at it. This one can.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= 5. TIME MATH ============= -->
+  <section>
+    <h2>5 · <b>The time math</b> · 4,000 weeks</h2>
+    <p>Average U.S. life expectancy is about <strong>77 years</strong>. That is roughly <strong>4,004 weeks</strong>. Total.</p>
+
+    <div class="weeks-viz">
+      <p class="weeks-header">
+        Enter your age
+        <input type="number" id="age2" class="age-inline" min="18" max="80" step="1" value="38" aria-label="Age">
+        and watch the line move. <b>Every square below is one week.</b> Everything above the line is already lived (about <b id="pctLived">—</b> of an average life). Of the weeks that remain, sleep and work take two thirds. The <span class="g">green squares at the bottom are the life to be lived</span>, the time you actually control.
+      </p>
+      <div class="weeks-grid-wrap">
+        <div class="weeks-grid" id="weeks"></div>
+        <div class="age-mark" id="ageMark" data-label="you are here"></div>
+      </div>
+      <div class="weeks-legend" id="weeksLegend"></div>
+    </div>
+
+    <table style="margin-top:16px">
+      <tbody id="timeTable"></tbody>
+    </table>
+
+    <p style="margin-top:14px"><strong id="primeLine">—</strong></p>
+    <p class="caption">Those working weeks get spent no matter what. The only question is what they pay, and whether they are spent somewhere worth being.</p>
+  </section>
+
+  <!-- ============= 6. HONEST SUMMARY ============= -->
+  <section>
+    <h2>6 · <b>Honest summary</b></h2>
+    <ul id="summaryList"></ul>
+    <p style="margin-top:14px"><strong>Any question about any figure on this page is welcome.</strong> That is the reason it exists, so the decision gets made on arithmetic rather than a feeling in either direction.</p>
+  </section>
+
+  <div class="foot">
+    <b>CJ Clay</b> · High Ticket Sales Academy<br>
+    Every figure is stated at the conservative end of its range. Member averages describe placed members, not forecasts for any individual. Ramp time varies. Full guarantee terms live in the written agreement.
+  </div>
+</div>
+
+<script>
+(function(){
+  var STORAGE = 'htsa-gap-math-v2';
+  var ids = ['name','age','job','current','hours','goal','tuition','booked','show','closeLow','closeAvg','comm'];
+
+  function $(id){ return document.getElementById(id); }
+  function num(id, fallback){
+    var v = parseFloat($(id).value);
+    return isFinite(v) ? v : fallback;
+  }
+  function money(n){
+    if (!isFinite(n)) return '—';
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+  function pct(n){ return (isFinite(n) ? Math.round(n) : 0) + '%'; }
+  function Who(){
+    var n = ($('name').value || '').trim();
+    return n || 'They';
+  }
+
+  // seat math: booked × show × close × offer × commission (weekly), ×4 for monthly
+  function monthlyFrom(offer, closePct){
+    var booked = num('booked', 40);
+    var show = num('show', 75) / 100;
+    var close = closePct / 100;
+    var comm = num('comm', 10) / 100;
+    return booked * show * close * offer * comm * 4;
+  }
+
+  function gather(){
+    var out = {};
+    ids.forEach(function(id){
+      var el = $(id);
+      out[id] = (el.type === 'number') ? num(id, parseFloat(el.value)||0) : el.value;
+    });
+    return out;
+  }
+
+  function render(){
+    var s = gather();
+    var gap = Math.max(0, s.goal - s.current);
+    var daily = gap / 30;
+    var weeklyGap = gap / 4.333;
+    var hourly = (s.current > 0 && s.hours > 0) ? s.current / (s.hours * 4) : 0;
+    var reqHrs = (hourly > 0 && s.goal > 0) ? s.goal / (hourly * 4) : 0;
+    var extra = reqHrs > 0 ? reqHrs - s.hours : 0;
+    var increase = s.current > 0 ? ((s.goal - s.current) / s.current) * 100 : 0;
+
+    var m5low = monthlyFrom(5000, s.closeLow);
+    var yCons = m5low * 12;
+    var ySlow = 50000;
+    var ySolid = 100000;
+
+    // Intro / labels
+    $('whoTitle').textContent = (s.name || '').trim() || 'this decision';
+    $('who1').textContent = Who();
+    $('jobLabel').textContent = (s.job || '').trim() || 'their current role';
+
+    // Sticky status (visible when controls collapsed)
+    $('sGap').textContent = money(gap);
+    $('sDaily').textContent = money(daily);
+    $('sTui').textContent = money(s.tuition);
+
+    // Section 1
+    $('mCurrent').textContent = money(s.current);
+    $('mCurrentSub').textContent = s.hours ? (s.hours + ' hrs/week now') : 'per month';
+    $('mGoal').textContent = money(s.goal);
+    $('mGap').textContent = money(gap);
+    $('mGapSub').textContent = money(weeklyGap) + ' forfeited per week';
+    $('mHourly').textContent = hourly ? ('$' + Math.round(hourly).toLocaleString()) : '—';
+    $('mReqHrs').textContent = reqHrs ? reqHrs.toFixed(1) + ' hrs' : '—';
+    $('mExtra').textContent = reqHrs
+      ? ((extra >= 0 ? '+' : '') + extra.toFixed(1) + ' hrs vs today')
+      : '—';
+    $('mPct').textContent = s.current ? pct(increase) : '—';
+
+    var realism = '';
+    if (reqHrs > 168) realism = 'There are only 168 hours in a week. This is not an effort problem, it is a vehicle problem.';
+    else if (reqHrs > 90) realism = 'That schedule is not a life. The current vehicle was not built to scale this way.';
+    else if (reqHrs > s.hours * 1.4) realism = 'Even if it looks possible on paper, it is a large lifestyle tax for the same hourly rate.';
+    else if (reqHrs) realism = 'Possible on paper. The honest question is whether grinding more hours in the same vehicle is the right path.';
+
+    $('gapRecap').innerHTML = (hourly && reqHrs)
+      ? ('At the current hourly rate on <strong>' + (s.job || 'this job') + '</strong>, hitting <strong>' + money(s.goal) + '/mo</strong> would take about <strong>' + reqHrs.toFixed(1) + ' hours per week</strong>, an extra <strong>' + Math.max(0, extra).toFixed(1) + ' hours</strong> on top of ' + s.hours + '. That is a <strong>' + pct(increase) + '</strong> income jump without changing the vehicle. ' + realism)
+      : 'Enter current income, weekly hours, and goal monthly income above.';
+
+    // Section 2 · cost of waiting
+    var waits = [1,3,6,12];
+    $('waitTable').innerHTML = waits.map(function(m){
+      var coi = gap * m;
+      var net = coi - s.tuition;
+      var cls = (m === 12) ? ' class="total"' : '';
+      var label = m + ' month' + (m>1?'s':'');
+      var netTxt = (net >= 0)
+        ? (money(net) + ' more lost than a full HTSA - Tuition')
+        : ('still ' + money(Math.abs(net)) + ' under a full HTSA - Tuition');
+      return '<tr' + cls + '><td>' + label + '</td><td class="n">' + money(coi) + '</td><td class="n">' + netTxt + '</td></tr>';
+    }).join('');
+
+    $('loss12').textContent = money(gap * 12);
+    var ratio = s.tuition > 0 ? ((gap * 12) / s.tuition) : 0;
+    $('loss12Cap').innerHTML = 'Forfeited income if the decision is deferred a full year at today\'s gap. That is roughly <b>' + ratio.toFixed(1) + '× the HTSA - Tuition</b> of ' + money(s.tuition) + '.';
+
+    $('waitQuote').innerHTML = 'A <strong>6 month delay</strong> costs about <strong>' + money(gap*6) + '</strong> in income that will not be earned. HTSA - Tuition of <strong>' + money(s.tuition) + '</strong> is the valve. Waiting is the expensive option.';
+
+    // Section 3 · seat math
+    $('tComm').textContent = s.comm + '%';
+    $('tBooked').textContent = s.booked;
+    $('tShow').textContent = s.show + '%';
+    $('tCloseLow').textContent = s.closeLow + '%';
+
+    var shown = s.booked * (s.show/100);
+    var dealsLow = shown * (s.closeLow/100);
+    var perDeal5 = 5000 * (s.comm/100);
+    $('buildTable').innerHTML =
+      '<tr><td>' + s.booked + ' appointments booked per week</td><td class="n">' + s.booked + '</td></tr>' +
+      '<tr><td>' + s.show + '% show rate</td><td class="n">' + shown.toFixed(1) + ' live conversations</td></tr>' +
+      '<tr><td>' + s.closeLow + '% close rate</td><td class="n">' + dealsLow.toFixed(2) + ' deals</td></tr>' +
+      '<tr><td>Deals × $' + perDeal5.toFixed(0) + ' commission ($5k × ' + s.comm + '%)</td><td class="n">' + money(dealsLow * perDeal5) + ' / week</td></tr>' +
+      '<tr class="total"><td>Monthly (×4 weeks)</td><td class="n">' + money(m5low) + '</td></tr>';
+
+    // Section 4 · ROI
+    function roiRow(label, year, isTotal){
+      var net = year - s.tuition;
+      var r = s.tuition > 0 ? (net / s.tuition) * 100 : 0;
+      return '<tr' + (isTotal ? ' class="total"' : '') + '><td>' + label + ' · ' + money(year) + '</td><td class="n">' + money(net) + '</td><td class="n"><strong>' + Math.round(r).toLocaleString() + '%</strong></td></tr>';
+    }
+    $('roiTable').innerHTML =
+      roiRow('Slow start', ySlow, false) +
+      roiRow('Conservative model', yCons, false) +
+      roiRow('Solid first year', ySolid, true);
+
+    $('mMarket').textContent = money(s.tuition * 0.10);
+    $('mSkill').textContent = money(Math.max(0, ySlow - s.tuition)) + '+';
+
+    // Section 5 · 4,004 weeks grid (52 cols × 77 rows, 1 dot = 1 week, 1 row = 1 year)
+    var COLS = 52, ROWS = 77, TOTAL = COLS * ROWS; // 4,004
+    var ageClamped = Math.max(0, Math.min(ROWS, s.age));
+    var lived = Math.min(TOTAL, ageClamped * COLS);
+    var rem = Math.max(0, TOTAL - lived);
+    var sleep = Math.round(rem / 3);
+    var work = Math.round(rem / 3);
+    var live = rem - sleep - work;
+
+    // "Active prime" table math (kept for the summary table below)
+    var primeYears = Math.max(0, 70 - s.age);
+    var primeWeeks = primeYears * 52;
+    var primeSleep = Math.round(primeWeeks / 3);
+    var primeWork = Math.round(primeWeeks / 3);
+    var primeLive = primeWeeks - primeSleep - primeWork;
+
+    // Sync the two age inputs (advanced panel + inline)
+    if ($('age2').value !== String(s.age)) $('age2').value = s.age;
+
+    // Build the grid once, then recolor
+    var weeksEl = $('weeks');
+    if (weeksEl.childElementCount !== TOTAL){
+      weeksEl.innerHTML = '';
+      var gridFrag = document.createDocumentFragment();
+      for (var g=0; g<TOTAL; g++){
+        var wDot = document.createElement('span');
+        wDot.className = 'w';
+        gridFrag.appendChild(wDot);
+      }
+      weeksEl.appendChild(gridFrag);
+    }
+    var kids = weeksEl.children;
+    for (var k=0; k<TOTAL; k++){
+      var c = 'w';
+      if (k < lived) c += ' spent';
+      else if (k < lived + sleep) c += ' sleep';
+      else if (k < lived + sleep + work) c += ' work';
+      else c += ' live';
+      if (kids[k].className !== c) kids[k].className = c;
+    }
+
+    // Position the "you are here" line at the exact age boundary
+    var ageMark = $('ageMark');
+    var agePct = TOTAL > 0 ? (lived / TOTAL) * 100 : 0;
+    ageMark.style.top = agePct + '%';
+    ageMark.style.display = (ageClamped >= 1 && ageClamped < ROWS) ? '' : 'none';
+    ageMark.setAttribute('data-label', 'you are here · age ' + s.age);
+
+    // Percent lived + legend counts
+    $('pctLived').textContent = Math.round((lived / TOTAL) * 100) + '%';
+    $('weeksLegend').innerHTML =
+      '<div class="lg"><span class="sw" style="background:#c3ccd6"></span>Lived <b>' + lived.toLocaleString() + '</b></div>' +
+      '<div class="lg"><span class="sw" style="background:#9fb0c2"></span>Sleep left <b>' + sleep.toLocaleString() + '</b></div>' +
+      '<div class="lg"><span class="sw" style="background:#c78a4a"></span>Work left <b>' + work.toLocaleString() + '</b></div>' +
+      '<div class="lg"><span class="sw" style="background:var(--gain)"></span>Life to be lived <b>' + live.toLocaleString() + '</b></div>';
+
+    $('timeTable').innerHTML =
+      '<tr><td>Total weeks in an average life</td><td class="n">4,000</td></tr>' +
+      '<tr><td>Already lived at age ' + s.age + ' (' + s.age + ' × 52)</td><td class="n">' + lived.toLocaleString() + '</td></tr>' +
+      '<tr><td><strong>Percentage of life already spent</strong></td><td class="n"><strong>' + Math.round((lived/totalWeeks)*100) + '%</strong></td></tr>' +
+      '<tr><td colspan="2" style="padding-top:16px;color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase">Active prime remaining · age ' + s.age + ' to 70</td></tr>' +
+      '<tr><td>' + primeYears + ' years × 52</td><td class="n">' + primeWeeks.toLocaleString() + '</td></tr>' +
+      '<tr><td>Less sleep (about 1/3)</td><td class="n">−' + primeSleep.toLocaleString() + '</td></tr>' +
+      '<tr><td>Less working to survive (about 1/3)</td><td class="n">−' + primeWork.toLocaleString() + '</td></tr>' +
+      '<tr class="total"><td>Weeks that are life to be lived</td><td class="n">' + primeLive.toLocaleString() + '</td></tr>';
+
+    $('primeLine').textContent = primeLive.toLocaleString() + ' weeks. About ' + (primeLive/52).toFixed(1) + ' years of awake, active, prime time that is not sleep and not work. That is the real cost of the decision, not just the HTSA - Tuition.';
+
+    // Section 6 · summary
+    $('summaryList').innerHTML =
+      '<li><strong>Downside is defined.</strong> ' + money(s.tuition) + ' with a written conditional refund if placement milestones are met and placement does not happen.</li>' +
+      '<li><strong>Upside is not capped by a salary band.</strong> It scales with the offer size and close rate they deliver on the seat.</li>' +
+      '<li><strong>Main variable is effort.</strong> Calls taken and practice volume. That is the one input a person fully controls.</li>' +
+      '<li><strong>Staying has a price too.</strong> About ' + money(daily) + ' per day and ' + money(gap) + ' per month while the gap stays open.</li>' +
+      '<li><strong>Current vehicle audit:</strong> ' + (reqHrs ? (reqHrs.toFixed(1) + ' hours per week needed at today\'s rate to hit ' + money(s.goal) + '/mo.') : 'enter hours and goal above.') + '</li>';
+  }
+
+  // ── Query-string prefill: ?name=Dina&current=2000&goal=6000&age=38&job=bartender ──
+  function loadFromUrl(){
+    var q = new URLSearchParams(window.location.search);
+    ids.forEach(function(id){
+      if (q.has(id)) $(id).value = q.get(id);
+    });
+  }
+
+  // ── LocalStorage prefill (only if URL didn't provide values) ──
+  function loadFromStorage(){
+    try{
+      var saved = JSON.parse(localStorage.getItem(STORAGE) || 'null');
+      if (!saved) return;
+      var q = new URLSearchParams(window.location.search);
+      ids.forEach(function(id){
+        if (q.has(id)) return;
+        if (saved[id] != null && saved[id] !== '') $(id).value = saved[id];
+      });
+    }catch(e){}
+  }
+
+  function copyShareLink(){
+    var s = gather();
+    var q = new URLSearchParams();
+    ids.forEach(function(id){
+      var v = s[id];
+      if (v == null || v === '') return;
+      q.set(id, v);
+    });
+    var url = window.location.origin + window.location.pathname + '?' + q.toString();
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(function(){
+        $('btnCopy').textContent = 'Link copied ✓';
+        setTimeout(function(){ $('btnCopy').textContent = 'Copy shareable link'; }, 1400);
+      });
+    } else {
+      window.prompt('Copy this link:', url);
+    }
+  }
+
+  function bind(){
+    ids.forEach(function(id){
+      $(id).addEventListener('input', render);
+      $(id).addEventListener('change', render);
+    });
+    // Inline age input at Section 5 mirrors #age (advanced panel) both ways
+    ['input','change'].forEach(function(ev){
+      $('age2').addEventListener(ev, function(){
+        $('age').value = $('age2').value;
+        render();
+      });
+    });
+    $('btnSave').onclick = function(){
+      localStorage.setItem(STORAGE, JSON.stringify(gather()));
+      $('btnSave').textContent = 'Saved ✓';
+      setTimeout(function(){ $('btnSave').textContent = 'Save on this Mac'; }, 1200);
+    };
+    $('btnReset').onclick = function(){
+      localStorage.removeItem(STORAGE);
+      $('name').value = '';
+      $('age').value = 38;
+      $('job').value = '';
+      $('current').value = 2000;
+      $('hours').value = 40;
+      $('goal').value = 6000;
+      $('tuition').value = 6000;
+      $('booked').value = 40;
+      $('show').value = 75;
+      $('closeLow').value = 10;
+      $('closeAvg').value = 20;
+      $('comm').value = 10;
+      render();
+    };
+    $('btnCopy').onclick = copyShareLink;
+
+    loadFromUrl();
+    loadFromStorage();
+    render();
+
+    // If URL has params (prospect view), keep controls collapsed. Otherwise open for CJ.
+    var q = new URLSearchParams(window.location.search);
+    if (q.toString().length === 0) $('controls').setAttribute('open','');
+  }
+
+  bind();
+})();
+</script>
+</body>
+</html>
