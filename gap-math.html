@@ -89,9 +89,12 @@
     display:grid; grid-template-columns:repeat(4, minmax(0,1fr));
     gap:10px; margin-top:12px;
   }
-  .grid-inputs.advanced{ grid-template-columns:repeat(4, minmax(0,1fr)); }
-  @media (max-width:720px){
-    .grid-inputs, .grid-inputs.advanced{ grid-template-columns:1fr 1fr; }
+  .grid-inputs.grid-personal{ grid-template-columns:repeat(5, minmax(0,1fr)); }
+  @media (max-width:900px){
+    .grid-inputs.grid-personal{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+  }
+  @media (max-width:640px){
+    .grid-inputs, .grid-inputs.grid-personal{ grid-template-columns:1fr 1fr; }
   }
   label.f{ display:flex; flex-direction:column; gap:4px; min-width:0; }
   label.f > span{
@@ -115,71 +118,105 @@
   }
   label.f > .hint b{ color:var(--ink); font-weight:650; }
 
-  /* ── Segmented pill controls (Section 3) ── */
-  .pills-panel{
+  /* ── Section 3 assumption strip ── */
+  .assumption-strip{
     background:var(--soft); border:1px solid var(--line);
-    border-radius:10px; padding:6px 18px;
+    border-radius:8px; padding:12px 16px;
     margin:14px 0 20px;
+    font-size:13px; color:var(--muted); line-height:1.55;
   }
-  .pill-row{
-    display:grid; grid-template-columns:160px 1fr;
-    gap:14px; align-items:center; padding:12px 0;
+  .assumption-strip .row{
+    display:flex; flex-wrap:wrap; gap:6px 14px;
+    align-items:center;
   }
-  .pill-row + .pill-row{ border-top:1px solid var(--line); }
-  .pill-label{
-    font-size:11px; letter-spacing:.12em;
-    text-transform:uppercase; color:var(--muted);
-    font-weight:700;
-  }
-  .pills{ display:flex; flex-wrap:wrap; gap:6px; }
-  .pill{
-    padding:8px 13px; border-radius:6px;
-    border:1px solid var(--line-2); background:var(--card);
-    color:var(--ink); font:600 13px/1 inherit;
-    cursor:pointer; transition:all .12s ease;
-    min-width:52px; text-align:center;
-    font-variant-numeric:tabular-nums;
-    -webkit-appearance:none; appearance:none;
-  }
-  .pill:hover{ border-color:var(--ink); }
-  .pill.on{
-    background:var(--ink); color:var(--card);
-    border-color:var(--ink);
-  }
-  .pill-fixed{
-    display:flex; align-items:center; gap:10px;
-    padding:11px 0 4px; margin-top:2px;
-    border-top:1px dashed var(--line-2);
-    font-size:12px; color:var(--muted);
-  }
-  .pill-fixed .lbl{
-    font-size:9px; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--muted); font-weight:700;
-    padding:3px 7px; background:var(--card);
-    border:1px solid var(--line-2); border-radius:3px;
-  }
-  .pill-fixed b{ color:var(--ink); font-weight:650; }
-  @media (max-width:640px){
-    .pill-row{ grid-template-columns:1fr; gap:6px; }
-  }
-
-  /* ── Dual math trace table ── */
-  .math-trace th .th-sub{
-    display:block; font-size:10px; font-weight:500;
-    color:var(--muted); text-transform:none;
-    letter-spacing:0; margin-top:3px;
-  }
-  .math-trace td:first-child{ color:var(--muted); font-size:14px; }
-  .math-trace tr.total td{ background:var(--soft); }
-
-  /* ── Result cards (Section 3) ── */
-  .result-vs{
-    font-size:12px; color:var(--muted); margin-top:8px;
+  .assumption-strip b{ color:var(--ink); font-weight:650; }
+  .assumption-strip .why{
+    font-size:12px; color:var(--muted); margin-top:6px;
     line-height:1.5;
   }
-  .result-vs b{ color:var(--ink); font-weight:650; }
-  .result-vs .win{ color:var(--gain); font-weight:650; }
-  .result-vs .miss{ color:var(--loss); font-weight:650; }
+
+  /* ── Three tier outcome cards (Section 3) ── */
+  .tier-cards{
+    display:grid; grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:12px;
+  }
+  @media (max-width:720px){ .tier-cards{ grid-template-columns:1fr; } }
+  .tier-card{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:10px; padding:16px 18px;
+    display:flex; flex-direction:column; gap:0;
+  }
+  .tier-card.mid{ border-color:var(--ink); box-shadow:0 4px 12px rgba(11,18,32,.06); }
+  .tier-card .tier-name{
+    font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); font-weight:700;
+  }
+  .tier-card .tier-close{
+    font-size:12px; color:var(--muted); font-weight:500;
+    margin-top:2px; margin-bottom:14px;
+  }
+  .tier-card .tier-close b{ color:var(--ink); font-weight:650; }
+  .tier-card .tier-monthly{
+    font-family:inherit; font-size:clamp(24px, 3.4vw, 32px);
+    font-weight:700; letter-spacing:-.02em; line-height:1;
+    color:var(--ink); font-variant-numeric:tabular-nums;
+  }
+  .tier-card.mid .tier-monthly{ color:var(--ink); }
+  .tier-card .tier-monthly-sub{
+    font-size:12px; color:var(--muted); margin-top:4px;
+  }
+  .tier-card .tier-vs{
+    font-size:12px; color:var(--muted); margin-top:12px;
+    padding-top:12px; border-top:1px solid var(--line);
+    line-height:1.55;
+  }
+  .tier-card .tier-vs b{ color:var(--ink); font-weight:650; }
+  .tier-card .tier-vs .win{ color:var(--gain); font-weight:650; }
+  .tier-card .tier-vs .miss{ color:var(--loss); font-weight:650; }
+
+  /* ── Worked math trace (single line) ── */
+  .math-trace{
+    margin:16px 0 8px;
+    padding:12px 16px;
+    background:var(--card); border:1px solid var(--line);
+    border-radius:8px;
+    font-size:13px; color:var(--muted); line-height:1.6;
+    font-variant-numeric:tabular-nums;
+  }
+  .math-trace .lbl{
+    font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); font-weight:700; margin-bottom:6px;
+    display:block;
+  }
+  .math-trace b{ color:var(--ink); font-weight:650; }
+  .math-trace .step{ display:inline; }
+  .math-trace .arrow{ color:var(--line-2); margin:0 4px; }
+
+  /* ── Floor reality-check callout ── */
+  .floor-note{
+    margin-top:14px; padding:12px 16px;
+    background:var(--soft); border-left:2px solid var(--ink);
+    border-radius:0 6px 6px 0;
+    font-size:13px; color:var(--ink); line-height:1.55;
+  }
+  .floor-note b{ font-weight:650; }
+
+  /* ── Inline editable numbers (age, tuition) ── */
+  .inline-num{
+    display:inline-block;
+    padding:4px 9px; margin:0 3px;
+    background:var(--card); color:var(--ink);
+    border:1px solid var(--line-2); border-radius:5px;
+    font:700 16px/1 inherit;
+    text-align:center; font-variant-numeric:tabular-nums;
+    -webkit-appearance:none; appearance:none; outline:none;
+  }
+  .inline-num:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(11,58,102,.12);
+  }
+  .inline-num.w-age{ width:3.6em; }
+  .inline-num.w-tui{ width:5.4em; }
 
   /* ── Industry ranges disclosure ── */
   .ranges{
@@ -332,20 +369,6 @@
   }
   .weeks-header .g{ color:var(--gain); font-weight:650; }
 
-  .age-inline{
-    display:inline-block; width:3.6em;
-    padding:4px 8px; margin:0 3px;
-    background:var(--card); color:var(--ink);
-    border:1px solid var(--line-2); border-radius:5px;
-    font:700 16px/1 inherit;
-    text-align:center; font-variant-numeric:tabular-nums;
-    -webkit-appearance:none; appearance:none; outline:none;
-  }
-  .age-inline:focus{
-    border-color:var(--accent);
-    box-shadow:0 0 0 3px rgba(11,58,102,.12);
-  }
-
   .weeks-grid-wrap{
     position:relative; max-width:520px; margin:0 auto;
   }
@@ -445,19 +468,13 @@
       </span>
     </summary>
     <div class="body">
-      <div class="grid-inputs" style="grid-template-columns:repeat(3, minmax(0,1fr))">
+      <div class="grid-inputs grid-personal">
         <label class="f"><span>First name</span><input id="name" type="text" placeholder="e.g. Dina" autocomplete="off"></label>
-        <label class="f"><span>Age</span><input id="age" type="number" min="18" max="80" step="1" value="38"></label>
+        <label class="f"><span>Current job</span><input id="job" type="text" placeholder="e.g. bartender" autocomplete="off"></label>
         <label class="f"><span>Current $/mo</span><input id="current" type="number" min="0" step="100" value="2000"></label>
+        <label class="f"><span>Hours / week</span><input id="hours" type="number" min="1" max="100" step="1" value="40"></label>
         <label class="f"><span>Goal $/mo</span><input id="goal" type="number" min="0" step="100" value="6000"></label>
-        <label class="f"><span>Hours / week now</span><input id="hours" type="number" min="1" max="100" step="1" value="40"></label>
-        <label class="f"><span>HTSA - Tuition</span><input id="tuition" type="number" min="0" step="100" value="6000"></label>
       </div>
-
-      <!-- Seat math values (updated via segmented pills in Section 3) -->
-      <input type="hidden" id="booked" value="40">
-      <input type="hidden" id="offer" value="8000">
-      <input type="hidden" id="close" value="15">
 
       <div class="actions">
         <button class="btn" type="button" id="btnReset">Reset</button>
@@ -471,7 +488,7 @@
   <!-- ============= 1. CURRENT VS GOAL ============= -->
   <section>
     <h2>1 · <b>Where they are</b> vs where they said they want to be</h2>
-    <p><span id="who1">They</span> currently earn <strong id="curSentence">—</strong> per month. The question is not whether they can work harder. It is whether the current vehicle can get them to the number they said they want.</p>
+    <p><span id="who1">They</span> currently earn <strong id="curSentence">—</strong> per month<span id="jobPhrase"></span>. The question is not whether they can work harder. It is whether the current vehicle can get them to the number they said they want.</p>
 
     <div class="grid-3" style="margin-top:12px">
       <div class="card">
@@ -525,50 +542,51 @@
   <!-- ============= 3. SEAT MATH ============= -->
   <section>
     <h2>3 · <b>What the seat could produce</b></h2>
-    <p>Two models built from the same calendar. The <strong>conservative floor</strong> on the left uses the worst reasonable inputs. <strong>Your model</strong> on the right uses what is set below. Show rate and commission are held fixed so the math cannot be gamed into an unrealistic result.</p>
+    <p>Three scenarios built from the same calendar and the same offer size. Conservative, average, and doing well close rates. Show rate and commission are held fixed so the math cannot be gamed into an unrealistic result.</p>
 
-    <div class="pills-panel">
-      <div class="pill-row">
-        <div class="pill-label">Weekly calls booked</div>
-        <div class="pills" id="pills-booked"></div>
+    <div class="assumption-strip">
+      <div class="row">
+        <span><b>40</b> weekly calls</span>
+        <span>·</span>
+        <span><b>75%</b> show rate</span>
+        <span>·</span>
+        <span><b>10%</b> commission</span>
+        <span>·</span>
+        <span>Offer: <b id="assumeOffer">$8k</b></span>
       </div>
-      <div class="pill-row">
-        <div class="pill-label">Offer price</div>
-        <div class="pills" id="pills-offer"></div>
+      <div class="why" id="offerWhy">—</div>
+    </div>
+
+    <div class="tier-cards">
+      <div class="tier-card">
+        <div class="tier-name">Conservative</div>
+        <div class="tier-close"><b>15%</b> close rate</div>
+        <div class="tier-monthly" id="tierConMonthly">—</div>
+        <div class="tier-monthly-sub" id="tierConDetail">—</div>
+        <div class="tier-vs" id="tierConVs">—</div>
       </div>
-      <div class="pill-row">
-        <div class="pill-label">Close rate</div>
-        <div class="pills" id="pills-close"></div>
+      <div class="tier-card mid">
+        <div class="tier-name">Average</div>
+        <div class="tier-close"><b>20%</b> close rate · industry average</div>
+        <div class="tier-monthly" id="tierAvgMonthly">—</div>
+        <div class="tier-monthly-sub" id="tierAvgDetail">—</div>
+        <div class="tier-vs" id="tierAvgVs">—</div>
       </div>
-      <div class="pill-fixed">
-        <span class="lbl">Fixed</span>
-        Show rate <b>75%</b> &nbsp;·&nbsp; Commission <b>10%</b> (Closer 10% min · Setter 5% min)
+      <div class="tier-card">
+        <div class="tier-name">Doing well</div>
+        <div class="tier-close"><b>25%</b> close rate</div>
+        <div class="tier-monthly" id="tierWellMonthly">—</div>
+        <div class="tier-monthly-sub" id="tierWellDetail">—</div>
+        <div class="tier-vs" id="tierWellVs">—</div>
       </div>
     </div>
 
-    <table class="math-trace">
-      <thead>
-        <tr>
-          <th>Step</th>
-          <th class="n">Conservative floor<span class="th-sub">$5k offer · 10% close</span></th>
-          <th class="n">Your model<span class="th-sub" id="modelSubTitle">—</span></th>
-        </tr>
-      </thead>
-      <tbody id="mathTrace"></tbody>
-    </table>
-
-    <div class="grid-2" style="margin-top:16px">
-      <div class="card">
-        <div class="lbl">Conservative floor · monthly</div>
-        <div class="big" id="floorMonthly">—</div>
-        <div class="result-vs" id="floorVs">—</div>
-      </div>
-      <div class="card soft">
-        <div class="lbl">Your model · monthly</div>
-        <div class="big gain" id="modelMonthly">—</div>
-        <div class="result-vs" id="modelVs">—</div>
-      </div>
+    <div class="math-trace">
+      <span class="lbl">The math (Average scenario)</span>
+      <span id="mathTraceLine">—</span>
     </div>
+
+    <div class="floor-note" id="floorNote">—</div>
 
     <details class="ranges">
       <summary>See the actual industry ranges these compare against</summary>
@@ -580,14 +598,12 @@
         <tr><td>Placed setter average</td><td class="n">$5k to $7k / mo</td></tr>
       </table>
     </details>
-
-    <p class="caption">Numbers do not lie. The floor uses a $5,000 offer at a 10% close rate, which is roughly half of the industry average. Even at that floor, the seat clears most current incomes. The default model uses a 15% close rate, still below the ~20% industry average, so no assumption of a top performer is required.</p>
   </section>
 
   <!-- ============= 4. RETURN ON TUITION ============= -->
   <section>
     <h2>4 · <b>Return on the HTSA - Tuition</b></h2>
-    <p>One cost, once. No monthly fees. Lifetime access to training, coaching, and placement, including a future move to a different company.</p>
+    <p>One cost, once. HTSA - Tuition: <input id="tuition" class="inline-num w-tui" type="number" min="0" step="100" value="6000" aria-label="HTSA Tuition">. No monthly fees. Lifetime access to training, coaching, and placement, including a future move to a different company.</p>
 
     <table>
       <thead><tr><th>First year outcome</th><th class="n">Net after HTSA - Tuition</th><th class="n">Return on HTSA - Tuition</th></tr></thead>
@@ -616,7 +632,7 @@
     <div class="weeks-viz">
       <p class="weeks-header">
         Enter your age
-        <input type="number" id="age2" class="age-inline" min="18" max="80" step="1" value="38" aria-label="Age">
+        <input type="number" id="age" class="inline-num w-age" min="18" max="80" step="1" value="38" aria-label="Age">
         and watch the line move. <b>Every square below is one week.</b> Everything above the line is already lived (about <b id="pctLived">—</b> of an average life). Of the weeks that remain, sleep and work take two thirds. The <span class="g">green squares at the bottom are the life to be lived</span>, the time you actually control.
       </p>
       <div class="weeks-grid-wrap">
@@ -649,25 +665,18 @@
 
 <script>
 (function(){
-  var STORAGE = 'htsa-gap-math-v3';
-  // Ids in centralized state. Query-string prefill and localStorage save use these.
-  var ids = ['name','age','current','goal','hours','tuition','booked','offer','close'];
+  var STORAGE = 'htsa-gap-math-v4';
+  // Every user-editable field on the page.
+  var ids = ['name','job','current','goal','hours','age','tuition'];
 
-  // Fixed model constants (labeled in the UI so nothing looks hidden).
-  var SHOW_FIXED = 75;   // %
-  var COMM_FIXED = 10;   // %
+  // Fixed seat-math constants (labeled in the UI so nothing is hidden).
+  var SHOW_FIXED   = 75; // %
+  var COMM_FIXED   = 10; // %
+  var BOOKED_FIXED = 40; // weekly calls, industry-standard full-time pace
 
   // Sensible defaults used for Reset and to strip default values from short-links.
   var DEFAULTS = {
-    age: 38, current: 2000, goal: 6000, hours: 40, tuition: 6000,
-    booked: 40, offer: 8000, close: 15
-  };
-
-  // Segmented pill options for Section 3.
-  var PILL_OPTIONS = {
-    booked: [25, 30, 35, 40, 45, 50, 55, 60],
-    offer:  [5000, 8000, 12000, 24000],
-    close:  [10, 15, 20, 25, 30]
+    age: 38, current: 2000, goal: 6000, hours: 40, tuition: 6000
   };
 
   function $(id){ return document.getElementById(id); }
@@ -686,9 +695,18 @@
     return n || 'They';
   }
 
-  // Seat math for a single scenario. Show rate + commission are fixed.
-  function computeSeat(offer, closePct, booked){
-    var conversations = booked * (SHOW_FIXED / 100);
+  // Auto-pick the offer size that is most relevant to this prospect.
+  // Higher current or goal income implies they are ready for higher-ticket sales.
+  function pickOffer(current, goal){
+    var top = Math.max(current || 0, goal || 0);
+    if (top >= 20000) return 24000; // elite / high-ticket future opportunities
+    if (top >= 12000) return 12000; // experienced sales background
+    return 8000;                    // mainstream default
+  }
+
+  // Seat math for a single close-rate scenario. Offer + calls + show + commission are inputs.
+  function computeSeat(offer, closePct){
+    var conversations = BOOKED_FIXED * (SHOW_FIXED / 100);
     var deals = conversations * (closePct / 100);
     var perDeal = offer * (COMM_FIXED / 100);
     var weekly = deals * perDeal;
@@ -705,25 +723,6 @@
     return out;
   }
 
-  // Renders the pill buttons for a given control. Only builds once, then flips .on.
-  function renderPills(id, current){
-    var container = document.getElementById('pills-' + id);
-    if (!container) return;
-    if (container.childElementCount !== PILL_OPTIONS[id].length){
-      container.innerHTML = PILL_OPTIONS[id].map(function(v){
-        var label;
-        if (id === 'offer') label = offerLabel(v);
-        else if (id === 'close') label = v + '%';
-        else label = String(v);
-        return '<button type="button" class="pill" data-pill="' + id + '" data-v="' + v + '">' + label + '</button>';
-      }).join('');
-    }
-    Array.prototype.forEach.call(container.children, function(btn){
-      var v = parseFloat(btn.getAttribute('data-v'));
-      btn.classList.toggle('on', v === current);
-    });
-  }
-
   function render(){
     var s = gather();
     var gap = Math.max(0, s.goal - s.current);
@@ -734,11 +733,14 @@
     var extra = reqHrs > 0 ? reqHrs - s.hours : 0;
     var increase = s.current > 0 ? ((s.goal - s.current) / s.current) * 100 : 0;
 
-    // Two seat scenarios computed from the same calendar.
-    var floor = computeSeat(5000, 10, s.booked);
-    var model = computeSeat(s.offer, s.close, s.booked);
+    // Section 3: pick the offer size that fits this prospect's tier, then run three close-rate scenarios.
+    var pickedOffer = pickOffer(s.current, s.goal);
+    var tierCon  = computeSeat(pickedOffer, 15);
+    var tierAvg  = computeSeat(pickedOffer, 20);
+    var tierWell = computeSeat(pickedOffer, 25);
+    var floorRef = computeSeat(5000, 15); // $5k / 15% reality-check for the callout beneath the cards
 
-    var yModel = model.monthly * 12;
+    var yModel = tierAvg.monthly * 12;
     var ySlow = 50000;
     var ySolid = 100000;
 
@@ -746,6 +748,9 @@
     $('whoTitle').textContent = (s.name || '').trim() || 'this decision';
     $('who1').textContent = Who();
     $('curSentence').textContent = money(s.current);
+
+    var jobText = (s.job || '').trim();
+    $('jobPhrase').textContent = jobText ? (', as a ' + jobText) : '';
 
     // ── Sticky status ──
     $('sGap').textContent = money(gap);
@@ -771,8 +776,9 @@
     else if (reqHrs > s.hours * 1.4) realism = 'Even if it looks possible on paper, it is a large lifestyle tax for the same hourly rate.';
     else if (reqHrs) realism = 'Possible on paper. The honest question is whether grinding more hours in the same vehicle is the right path.';
 
+    var jobIn = jobText ? (' as a <strong>' + jobText + '</strong>') : '';
     $('gapRecap').innerHTML = (hourly && reqHrs)
-      ? ('At the current hourly rate, hitting <strong>' + money(s.goal) + '/mo</strong> would take about <strong>' + reqHrs.toFixed(1) + ' hours per week</strong>, an extra <strong>' + Math.max(0, extra).toFixed(1) + ' hours</strong> on top of ' + s.hours + '. That is a <strong>' + pct(increase) + '</strong> income jump without changing the vehicle. ' + realism)
+      ? ('At the current hourly rate' + jobIn + ', hitting <strong>' + money(s.goal) + '/mo</strong> would take about <strong>' + reqHrs.toFixed(1) + ' hours per week</strong>, an extra <strong>' + Math.max(0, extra).toFixed(1) + ' hours</strong> on top of ' + s.hours + '. That is a <strong>' + pct(increase) + '</strong> income jump without changing the vehicle. ' + realism)
       : 'Enter current income, weekly hours, and goal monthly income above.';
 
     // ── Section 2 · cost of waiting ──
@@ -794,43 +800,62 @@
 
     $('waitQuote').innerHTML = 'A <strong>6 month delay</strong> costs about <strong>' + money(gap*6) + '</strong> in income that will not be earned. HTSA - Tuition of <strong>' + money(s.tuition) + '</strong> is the valve. Waiting is the expensive option.';
 
-    // ── Section 3 · dual seat math (floor + your model) ──
-    renderPills('booked', s.booked);
-    renderPills('offer', s.offer);
-    renderPills('close', s.close);
-    $('modelSubTitle').textContent = offerLabel(s.offer) + ' offer · ' + s.close + '% close';
+    // ── Section 3 · three-tier seat math (Conservative · Average · Doing well) ──
+    $('assumeOffer').textContent = offerLabel(pickedOffer);
+    var tierReason;
+    if (pickedOffer >= 24000) tierReason = 'Elite / high-ticket offer selected because current or goal income is $20k/mo or higher.';
+    else if (pickedOffer >= 12000) tierReason = 'Higher-ticket offer selected because current or goal income is $12k/mo or higher.';
+    else tierReason = 'Mainstream $8k offer selected because current and goal are under $12k/mo. At a higher goal this steps up to $12k, then $24k.';
+    $('offerWhy').textContent = tierReason;
 
-    // Dual-column math trace mirroring CJ's spoken sequence.
-    $('mathTrace').innerHTML =
-      '<tr><td>Weekly calls booked</td><td class="n">' + s.booked + '</td><td class="n">' + s.booked + '</td></tr>' +
-      '<tr><td>× 75% show rate</td><td class="n">' + floor.conversations.toFixed(1) + ' conversations</td><td class="n">' + model.conversations.toFixed(1) + ' conversations</td></tr>' +
-      '<tr><td>× close rate</td><td class="n">10% → ' + floor.deals.toFixed(1) + ' sales</td><td class="n">' + s.close + '% → ' + model.deals.toFixed(1) + ' sales</td></tr>' +
-      '<tr><td>Offer × 10% commission</td><td class="n">$5,000 → $' + floor.perDeal.toLocaleString() + '/sale</td><td class="n">' + offerLabel(s.offer) + ' → $' + model.perDeal.toLocaleString() + '/sale</td></tr>' +
-      '<tr><td>Weekly commission</td><td class="n">' + money(floor.weekly) + '</td><td class="n">' + money(model.weekly) + '</td></tr>' +
-      '<tr class="total"><td>Monthly (× 4 weeks)</td><td class="n">' + money(floor.monthly) + '</td><td class="n">' + money(model.monthly) + '</td></tr>';
-
-    // Result-card comparison strings vs current + goal.
-    function vsStrings(monthly){
+    // Comparison string for a single tier vs current + goal.
+    function tierVs(monthly){
       var parts = [];
       if (s.current > 0){
         var mult = monthly / s.current;
         if (mult >= 1.5) parts.push('<b>' + mult.toFixed(1) + '×</b> current ' + money(s.current));
-        else if (monthly > s.current) parts.push('<b>' + money(monthly - s.current) + '</b> above current ' + money(s.current));
-        else parts.push('<span class="miss">' + money(s.current - monthly) + '</span> under current ' + money(s.current));
+        else if (monthly > s.current) parts.push('<b>' + money(monthly - s.current) + '</b> above current');
+        else parts.push('<span class="miss">' + money(s.current - monthly) + '</span> under current');
       }
       if (s.goal > 0){
         var diff = monthly - s.goal;
         if (diff >= 0) parts.push('<span class="win">' + money(diff) + ' above the ' + money(s.goal) + ' goal ✓</span>');
-        else parts.push('<span class="miss">' + money(Math.abs(diff)) + ' short of the ' + money(s.goal) + ' goal</span>');
+        else parts.push('<span class="miss">' + money(Math.abs(diff)) + '</span> short of the ' + money(s.goal) + ' goal');
       }
       return parts.join('<br>');
     }
-    $('floorMonthly').textContent = money(floor.monthly) + '/mo';
-    $('floorVs').innerHTML = vsStrings(floor.monthly);
-    $('modelMonthly').textContent = money(model.monthly) + '/mo';
-    $('modelVs').innerHTML = vsStrings(model.monthly);
 
-    // ── Section 4 · ROI (middle row now consumes the earnings-model number) ──
+    // "X.X sales/wk · $Y/wk" detail line beneath each tier's monthly number.
+    function tierDetail(t){
+      return t.deals.toFixed(1) + ' sales/wk · ' + money(t.weekly) + '/wk';
+    }
+
+    $('tierConMonthly').textContent = money(tierCon.monthly) + '/mo';
+    $('tierConDetail').textContent  = tierDetail(tierCon);
+    $('tierConVs').innerHTML        = tierVs(tierCon.monthly);
+
+    $('tierAvgMonthly').textContent = money(tierAvg.monthly) + '/mo';
+    $('tierAvgDetail').textContent  = tierDetail(tierAvg);
+    $('tierAvgVs').innerHTML        = tierVs(tierAvg.monthly);
+
+    $('tierWellMonthly').textContent = money(tierWell.monthly) + '/mo';
+    $('tierWellDetail').textContent  = tierDetail(tierWell);
+    $('tierWellVs').innerHTML        = tierVs(tierWell.monthly);
+
+    // Worked-math trace for the Average scenario (one visible line under the cards).
+    $('mathTraceLine').innerHTML =
+      '<span class="step">40 calls</span> ' +
+      '<span class="arrow">×</span> <span class="step">75% show = <b>30 conversations</b></span> ' +
+      '<span class="arrow">×</span> <span class="step">20% close = <b>' + tierAvg.deals.toFixed(1) + ' sales/wk</b></span> ' +
+      '<span class="arrow">×</span> <span class="step">' + offerLabel(pickedOffer) + ' × 10% = <b>$' + tierAvg.perDeal.toLocaleString() + '/sale</b></span> ' +
+      '<span class="arrow">=</span> <span class="step"><b>' + money(tierAvg.weekly) + '/wk</b></span> ' +
+      '<span class="arrow">×</span> <span class="step">4 weeks = <b>' + money(tierAvg.monthly) + '/mo</b></span>';
+
+    // Floor reality-check callout beneath the cards.
+    $('floorNote').innerHTML =
+      '<b>Reality check:</b> Even at a $5k offer floor (worst reasonable case), the same calendar at a conservative 15% close still models <b>' + money(floorRef.monthly) + '/mo</b>. That clears most current incomes on its own.';
+
+    // ── Section 4 · ROI (middle row uses the Average tier annualized) ──
     function roiRow(label, year, isTotal){
       var net = year - s.tuition;
       var r = s.tuition > 0 ? (net / s.tuition) * 100 : 0;
@@ -838,7 +863,7 @@
     }
     $('roiTable').innerHTML =
       roiRow('Slow start', ySlow, false) +
-      roiRow('Your model × 12', yModel, false) +
+      roiRow('Average scenario × 12', yModel, false) +
       roiRow('Solid first year', ySolid, true);
 
     $('mMarket').textContent = money(s.tuition * 0.10);
@@ -864,8 +889,6 @@
     $('s5Intro').textContent = nm
       ? (nm + ', at ' + s.age + ', this is what the remaining time actually looks like.')
       : ('At ' + s.age + ', this is what the remaining time actually looks like.');
-
-    if ($('age2').value !== String(s.age)) $('age2').value = s.age;
 
     var weeksEl = $('weeks');
     if (weeksEl.childElementCount !== TOTAL){
@@ -916,9 +939,9 @@
     // ── Section 6 · summary ──
     $('summaryList').innerHTML =
       '<li><strong>Downside is defined.</strong> ' + money(s.tuition) + ' with a written conditional refund if placement milestones are met and placement does not happen.</li>' +
-      '<li><strong>Even the floor clears current income.</strong> A $5k offer at a 10% close rate models ' + money(floor.monthly) + '/mo, above their current ' + money(s.current) + '.</li>' +
-      '<li><strong>Their model exceeds their goal.</strong> At ' + offerLabel(s.offer) + ' and a ' + s.close + '% close, the same calendar models ' + money(model.monthly) + '/mo vs their goal of ' + money(s.goal) + '.</li>' +
-      '<li><strong>Staying has a price too.</strong> About ' + money(daily) + ' per day and ' + money(gap) + ' per month while the gap stays open.</li>' +
+      '<li><strong>Even conservative clears the goal.</strong> A ' + offerLabel(pickedOffer) + ' offer at a 15% close rate models ' + money(tierCon.monthly) + '/mo.</li>' +
+      '<li><strong>Average (20% close) produces ' + money(tierAvg.monthly) + '/mo,</strong> vs current ' + money(s.current) + ' and goal ' + money(s.goal) + '.</li>' +
+      '<li><strong>Staying has a price.</strong> About ' + money(daily) + ' per day and ' + money(gap) + ' per month while the gap stays open.</li>' +
       '<li><strong>Time is finite.</strong> At age ' + s.age + ', about ' + primeLive.toLocaleString() + ' prime weeks remain that are not sleep and not work.</li>';
   }
 
@@ -971,23 +994,6 @@
       $(id).addEventListener('input', render);
       $(id).addEventListener('change', render);
     });
-    // Section 5 inline age input mirrors the top-panel age input both ways.
-    ['input','change'].forEach(function(ev){
-      $('age2').addEventListener(ev, function(){
-        $('age').value = $('age2').value;
-        render();
-      });
-    });
-    // Delegated click handler for segmented pills in Section 3.
-    document.addEventListener('click', function(e){
-      var btn = e.target.closest && e.target.closest('.pill');
-      if (!btn) return;
-      var id = btn.getAttribute('data-pill');
-      var v = parseFloat(btn.getAttribute('data-v'));
-      if (!id || !isFinite(v)) return;
-      $(id).value = v;
-      render();
-    });
     $('btnSave').onclick = function(){
       localStorage.setItem(STORAGE, JSON.stringify(gather()));
       $('btnSave').textContent = 'Saved ✓';
@@ -996,14 +1002,12 @@
     $('btnReset').onclick = function(){
       localStorage.removeItem(STORAGE);
       $('name').value = '';
-      $('age').value = DEFAULTS.age;
+      $('job').value = '';
       $('current').value = DEFAULTS.current;
       $('goal').value = DEFAULTS.goal;
       $('hours').value = DEFAULTS.hours;
+      $('age').value = DEFAULTS.age;
       $('tuition').value = DEFAULTS.tuition;
-      $('booked').value = DEFAULTS.booked;
-      $('offer').value = DEFAULTS.offer;
-      $('close').value = DEFAULTS.close;
       render();
     };
     $('btnCopy').onclick = copyShareLink;
