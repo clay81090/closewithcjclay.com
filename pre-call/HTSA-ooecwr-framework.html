@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OOECWR Framework | HTSA</title>
+<meta name="description" content="OOECWR discovery framework for high-ticket sales calls — Outcome, Obstacle, Evidence, Consequence, Want, Result.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html { color-scheme: dark; }
+:root {
+  --navy: #060d18;
+  --navy-mid: #0f1f35;
+  --navy-card: #0f1e35;
+  --green: #00e699;
+  --green-dim: #00c97a;
+  --green-dark: #009a5e;
+  --mid: rgba(255,255,255,0.10);
+  --text: #e8f0ff;
+  --text-soft: rgba(232,240,255,0.72);
+  --muted: #6b7fa0;
+  --gold: #f0c060;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --font-d: 'Syne', system-ui, sans-serif;
+  --font-s: 'Playfair Display', Georgia, serif;
+  --font-b: 'DM Sans', system-ui, sans-serif;
+  --font-m: 'DM Mono', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: var(--font-b);
+  background: var(--navy);
+  color: var(--text-soft);
+  line-height: 1.65;
+  font-size: 15px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  padding-top: env(safe-area-inset-top, 0px);
+  touch-action: manipulation;
+}
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(0, 230, 153, 0.22), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 90% 20%, rgba(64, 120, 255, 0.12), transparent 45%),
+    radial-gradient(ellipse 50% 60% at 50% 100%, rgba(0, 201, 122, 0.08), transparent 55%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+}
+.orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.orb { position: absolute; border-radius: 50%; filter: blur(70px); animation: floatOrb 20s var(--ease) infinite; }
+.orb:nth-child(1) { width: 380px; height: 380px; background: rgba(0, 230, 153, 0.22); top: -100px; left: -120px; }
+.orb:nth-child(2) { width: 300px; height: 300px; background: rgba(100, 140, 255, 0.14); bottom: 8%; right: -100px; animation-delay: -7s; animation-duration: 24s; }
+.orb:nth-child(3) { width: 220px; height: 220px; background: rgba(0, 201, 122, 0.18); top: 42%; left: 38%; animation-delay: -13s; animation-duration: 28s; }
+@keyframes floatOrb {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(28px,-18px) scale(1.04); }
+  66% { transform: translate(-22px,14px) scale(0.97); }
+}
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.048;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.shell {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 20px 100px;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  padding-bottom: max(100px, env(safe-area-inset-bottom, 0px));
+  width: 100%;
+}
+.hero {
+  min-height: 42vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 72px 0 28px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 20px;
+}
+.badge-dot {
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 18px var(--green);
+}
+.hero h1 {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--text);
+  max-width: 18ch;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--green) 0%, #4de8b0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-lead {
+  margin-top: 18px;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  max-width: 52ch;
+  color: var(--text-soft);
+}
+.hero-lead strong { color: var(--text); font-weight: 600; }
+
+.letter-strip {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  margin: 8px 0 28px;
+}
+.letter-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 6px;
+  border-radius: 14px;
+  background: rgba(15, 30, 53, 0.85);
+  border: 1px solid var(--mid);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.letter-pill:hover {
+  border-color: rgba(0, 230, 153, 0.45);
+  transform: translateY(-2px);
+}
+.letter-pill .L {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: var(--green);
+  line-height: 1;
+}
+.letter-pill .W {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+
+.section { margin-bottom: 18px; }
+.phase-card {
+  padding: 22px;
+  border-radius: 22px;
+  background: linear-gradient(165deg, rgba(0,201,122,0.04) 0%, var(--navy-card) 42%);
+  border: 1px solid var(--mid);
+  position: relative;
+  overflow: hidden;
+}
+.phase-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  opacity: 0.85;
+}
+.phase-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.phase-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 100px;
+  border: 1px solid rgba(0,201,122,0.2);
+  background: rgba(0,201,122,0.08);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green);
+  font-family: var(--font-m);
+}
+.phase-letter {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--green);
+  line-height: 1;
+}
+.section-title {
+  font-family: var(--font-d);
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+.section-sub {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 14px;
+  max-width: 58ch;
+}
+.q-list {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.q-list li {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(6, 13, 24, 0.55);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.q-list li::before {
+  content: "Q";
+  display: inline-block;
+  margin-right: 8px;
+  font-family: var(--font-m);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--green-dim);
+  letter-spacing: 0.08em;
+}
+label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  font-family: var(--font-m);
+}
+textarea, input[type="text"] {
+  width: 100%;
+  background: rgba(6, 13, 24, 0.75);
+  border: 1px solid var(--mid);
+  border-radius: 12px;
+  color: var(--text);
+  font-family: var(--font-b);
+  font-size: 15px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s var(--ease);
+}
+textarea {
+  min-height: 88px;
+  resize: vertical;
+  line-height: 1.55;
+}
+textarea:focus, input[type="text"]:focus {
+  border-color: rgba(0, 230, 153, 0.45);
+}
+.top-bar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 22px;
+}
+.btn-clear {
+  appearance: none;
+  border: 1px solid rgba(255,140,130,0.35);
+  background: rgba(255,140,130,0.08);
+  color: #ffb0a8;
+  font-family: var(--font-b);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-clear:hover { background: rgba(255,140,130,0.14); }
+.tip-card {
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(240, 192, 96, 0.28);
+  background: rgba(240, 192, 96, 0.06);
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: var(--text-soft);
+}
+.tip-card strong { color: var(--gold); }
+.footer-note {
+  margin-top: 28px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .letter-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .top-bar { grid-template-columns: 1fr; }
+  .btn-clear { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+<div class="ambient" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+<div class="noise" aria-hidden="true"></div>
+
+<main class="shell">
+  <header class="hero" id="top">
+    <div class="hero-badge"><span class="badge-dot" aria-hidden="true"></span> HTSA tool</div>
+    <h1><em>OOECWR</em><br>framework</h1>
+    <p class="hero-lead">On-call discovery map. Move through <strong>Outcome → Obstacle → Evidence → Consequence → Want → Result</strong>. Capture their words. Use their language in the close.</p>
+  </header>
+
+  <nav class="letter-strip" aria-label="OOECWR steps">
+    <a class="letter-pill" href="#outcome"><span class="L">O</span><span class="W">Outcome</span></a>
+    <a class="letter-pill" href="#obstacle"><span class="L">O</span><span class="W">Obstacle</span></a>
+    <a class="letter-pill" href="#evidence"><span class="L">E</span><span class="W">Evidence</span></a>
+    <a class="letter-pill" href="#consequence"><span class="L">C</span><span class="W">Consequence</span></a>
+    <a class="letter-pill" href="#want"><span class="L">W</span><span class="W">Want</span></a>
+    <a class="letter-pill" href="#result"><span class="L">R</span><span class="W">Result</span></a>
+  </nav>
+
+  <div class="tip-card">
+    <strong>How to use:</strong> Ask, then shut up. Write their exact words in the notes. Do not pitch inside discovery. Bridge to the offer only after Result is clear.
+  </div>
+
+  <div class="top-bar">
+    <div>
+      <label for="prospectName">Prospect name</label>
+      <input id="prospectName" type="text" autocomplete="name" placeholder="e.g. Bryce Burri">
+    </div>
+    <button type="button" class="btn-clear" id="clearNotes">Clear notes</button>
+  </div>
+
+  <section class="section" id="outcome">
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Step 1</span>
+        <span class="phase-letter" aria-hidden="true">O</span>
+      </div>
+      <h2 class="section-title">Outcome</h2>
+      <p class="section-sub">What do they want? Ideal income, lifestyle, role, freedom. Get the destination in their words.</p>
+      <ul class="q-list">
+        <li>If this call went perfectly, what would change for you?</li>
+        <li>What does the ideal role look like day to day?</li>
+        <li>What monthly income would actually feel like winning?</li>
+      </ul>
+      <label for="noteOutcome">Their words</label>
+      <textarea id="noteOutcome" placeholder="Write the outcome in their exact language…"></textarea>
+    </div>
+  </section>
+
+  <section class="section" id="obstacle">
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Step 2</span>
+        <span class="phase-letter" aria-hidden="true">O</span>
+      </div>
+      <h2 class="section-title">Obstacle</h2>
+      <p class="section-sub">What is in the way right now? Job, skill gap, no network, money pressure, partner buy-in, timing.</p>
+      <ul class="q-list">
+        <li>What has stopped you from already being there?</li>
+        <li>What have you already tried that did not work?</li>
+        <li>What feels hardest about making a change right now?</li>
+      </ul>
+      <label for="noteObstacle">Their words</label>
+      <textarea id="noteObstacle" placeholder="Write the obstacle in their exact language…"></textarea>
+    </div>
+  </section>
+
+  <section class="section" id="evidence">
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Step 3</span>
+        <span class="phase-letter" aria-hidden="true">E</span>
+      </div>
+      <h2 class="section-title">Evidence</h2>
+      <p class="section-sub">Make the problem real. Recent examples, hours, income, stress, missed opportunities.</p>
+      <ul class="q-list">
+        <li>Give me a real example from the last 30 to 60 days.</li>
+        <li>What does that look like in hours, money, or stress at home?</li>
+        <li>Is this getting better, the same, or worse over time?</li>
+      </ul>
+      <label for="noteEvidence">Their words</label>
+      <textarea id="noteEvidence" placeholder="Write the evidence in their exact language…"></textarea>
+    </div>
+  </section>
+
+  <section class="section" id="consequence">
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Step 4</span>
+        <span class="phase-letter" aria-hidden="true">C</span>
+      </div>
+      <h2 class="section-title">Consequence</h2>
+      <p class="section-sub">Cost of staying the same. Soft delivery. Let them say it out loud.</p>
+      <ul class="q-list">
+        <li>If nothing changes for six months, where does this go?</li>
+        <li>What does staying here cost you personally?</li>
+        <li>Who else feels this if it stays the same?</li>
+      </ul>
+      <label for="noteConsequence">Their words</label>
+      <textarea id="noteConsequence" placeholder="Write the consequence in their exact language…"></textarea>
+    </div>
+  </section>
+
+  <section class="section" id="want">
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Step 5</span>
+        <span class="phase-letter" aria-hidden="true">W</span>
+      </div>
+      <h2 class="section-title">Want</h2>
+      <p class="section-sub">Why this, why now. Emotional driver under the income goal.</p>
+      <ul class="q-list">
+        <li>Why is this important to you right now?</li>
+        <li>What becomes possible if this works?</li>
+        <li>On a scale of 1 to 10, how ready are you to move if the fit is right?</li>
+      </ul>
+      <label for="noteWant">Their words</label>
+      <textarea id="noteWant" placeholder="Write the want / why-now in their exact language…"></textarea>
+    </div>
+  </section>
+
+  <section class="section" id="result">
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Step 6</span>
+        <span class="phase-letter" aria-hidden="true">R</span>
+      </div>
+      <h2 class="section-title">Result</h2>
+      <p class="section-sub">Lock the vision and the gap. Then bridge to the vehicle (HTSA), not more discovery.</p>
+      <ul class="q-list">
+        <li>So the result you want is [their words]. Did I get that right?</li>
+        <li>What is missing is not ability. It is the vehicle. Fair?</li>
+        <li>If we can close that gap with training and placement, are you open to looking at how that works?</li>
+      </ul>
+      <label for="noteResult">Their words</label>
+      <textarea id="noteResult" placeholder="Write the locked result + gap bridge…"></textarea>
+    </div>
+  </section>
+
+  <p class="footer-note">Notes save in this browser only. HTSA · OOECWR discovery tool</p>
+</main>
+
+<script>
+(function () {
+  var KEY = 'htsa_ooecwr_notes_v1';
+  var ids = ['prospectName', 'noteOutcome', 'noteObstacle', 'noteEvidence', 'noteConsequence', 'noteWant', 'noteResult'];
+
+  function read() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}'); }
+    catch (e) { return {}; }
+  }
+
+  function write(data) {
+    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
+  }
+
+  function load() {
+    var data = read();
+    ids.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && data[id]) el.value = data[id];
+    });
+  }
+
+  function save() {
+    var data = {};
+    ids.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    write(data);
+  }
+
+  ids.forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', save);
+  });
+
+  document.getElementById('clearNotes').addEventListener('click', function () {
+    if (!confirm('Clear all OOECWR notes for this browser?')) return;
+    ids.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    write({});
+  });
+
+  load();
+})();
+</script>
+</body>
+</html>
