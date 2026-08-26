@@ -530,7 +530,21 @@
       "status": "active",
       "view_count": 0,
       "last_viewed_at": null
+    },
+    "mark_haller": {
+      "slug": "mark_haller",
+      "prospect_id": "mark-haller",
+      "prospect_name": "Mark Haller",
+      "email": "mark.haller@sourceoneled.com",
+      "phone_e164": "+16162993469",
+      "phone_display": "+1 (616) 299-3469",
+      "page_type": "precall",
+      "created_at": "2026-08-26T04:48:04Z",
+      "expires_at": "2026-11-24T04:48:04Z",
+      "status": "active",
+      "view_count": 0,
+      "last_viewed_at": null
     }
   },
-  "updated_at": "2026-08-26T04:47:21Z"
+  "updated_at": "2026-08-26T04:48:04Z"
 }
