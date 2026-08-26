@@ -541,61 +541,42 @@
 
   <!-- ============= 3. SEAT MATH ============= -->
   <section>
-    <h2>3 · <b>What the seat could produce</b></h2>
-    <p>Three scenarios built from the same calendar and the same offer size. Conservative, average, and doing well close rates. Show rate and commission are held fixed so the math cannot be gamed into an unrealistic result.</p>
+    <h2>3 · <b>What it would actually take</b></h2>
+    <p>This is not a maximum income calculator. It works backwards from the number <span id="who3">they</span> already named and asks one question: how many hours a week does that number take? The answer depends almost entirely on one thing, and it is not effort.</p>
 
     <div class="assumption-strip">
       <div class="row">
-        <span><b>40</b> weekly calls</span>
+        <span>Target: <b id="assumeTarget">—</b>/mo</span>
         <span>·</span>
         <span><b>75%</b> show rate</span>
         <span>·</span>
         <span><b>10%</b> commission</span>
         <span>·</span>
-        <span>Offer: <b id="assumeOffer">$8k</b></span>
+        <span><b id="assumeClose">—</b> close rate</span>
       </div>
-      <div class="why" id="offerWhy">—</div>
+      <div class="why" id="assumeWhy">—</div>
     </div>
 
-    <div class="tier-cards">
-      <div class="tier-card">
-        <div class="tier-name">Conservative</div>
-        <div class="tier-close"><b>15%</b> close rate</div>
-        <div class="tier-monthly" id="tierConMonthly">—</div>
-        <div class="tier-monthly-sub" id="tierConDetail">—</div>
-        <div class="tier-vs" id="tierConVs">—</div>
-      </div>
-      <div class="tier-card mid">
-        <div class="tier-name">Average</div>
-        <div class="tier-close"><b>20%</b> close rate · industry average</div>
-        <div class="tier-monthly" id="tierAvgMonthly">—</div>
-        <div class="tier-monthly-sub" id="tierAvgDetail">—</div>
-        <div class="tier-vs" id="tierAvgVs">—</div>
-      </div>
-      <div class="tier-card">
-        <div class="tier-name">Doing well</div>
-        <div class="tier-close"><b>25%</b> close rate</div>
-        <div class="tier-monthly" id="tierWellMonthly">—</div>
-        <div class="tier-monthly-sub" id="tierWellDetail">—</div>
-        <div class="tier-vs" id="tierWellVs">—</div>
-      </div>
-    </div>
+    <div class="tier-cards" id="tierCards"></div>
 
     <div class="math-trace">
-      <span class="lbl">The math (Average scenario)</span>
+      <span class="lbl">Worked backwards from the target</span>
       <span id="mathTraceLine">—</span>
     </div>
 
-    <div class="floor-note" id="floorNote">—</div>
+    <div class="floor-note" id="offerNote">—</div>
+    <div class="floor-note" id="rampNote" style="margin-top:10px">—</div>
 
     <details class="ranges">
       <summary>See the actual industry ranges these compare against</summary>
       <table>
-        <tr><td>Typical offer</td><td class="n">$8k to $12k</td></tr>
+        <tr><td>Offer sizes in this market</td><td class="n">$5k to $24k</td></tr>
         <tr><td>Commission (rises with milestones)</td><td class="n">10% to 15%</td></tr>
         <tr><td>Industry average close rate</td><td class="n">around 20%</td></tr>
+        <tr><td>A good rep closes around</td><td class="n">30%</td></tr>
         <tr><td>Placed closer average</td><td class="n">$10k to $15k / mo</td></tr>
         <tr><td>Placed setter average</td><td class="n">$5k to $7k / mo</td></tr>
+        <tr><td>Hours floor for getting placed</td><td class="n">15 / week</td></tr>
       </table>
     </details>
   </section>
@@ -609,6 +590,7 @@
       <thead><tr><th>First year outcome</th><th class="n">Net after HTSA - Tuition</th><th class="n">Return on HTSA - Tuition</th></tr></thead>
       <tbody id="roiTable"></tbody>
     </table>
+    <p class="caption" id="roiCaption">—</p>
 
     <div class="grid-2" style="margin-top:16px">
       <div class="card">
@@ -619,7 +601,7 @@
       <div class="card soft">
         <div class="lbl">Same HTSA - Tuition into a skill</div>
         <div class="big gain" id="mSkill">—</div>
-        <div class="sub">Even at the slow start frame. The variable here is effort, which they control. A market position cannot be improved by working harder at it. This one can.</div>
+        <div class="sub" id="mSkillSub">—</div>
       </div>
     </div>
   </section>
@@ -670,9 +652,25 @@
   var ids = ['name','job','current','goal','hours','age','tuition'];
 
   // Fixed seat-math constants (labeled in the UI so nothing is hidden).
-  var SHOW_FIXED   = 75; // %
-  var COMM_FIXED   = 10; // %
-  var BOOKED_FIXED = 40; // weekly calls, industry-standard full-time pace
+  // Sourced from INCOME_MATH_ENGINE.md: show 75%, commission 10%, 4 weeks/month.
+  var SHOW_FIXED = 75; // %
+  var COMM_FIXED = 10; // %
+
+  // Close rates. 20% is deliberately below the ~23.5% industry average.
+  // A proven closer already earning real money gets their real rate, not a beginner's.
+  var CLOSE_RAMP     = 15;    // months 1-6 while they are still new
+  var CLOSE_UNPROVEN = 20;    // planning benchmark for someone with no sales record
+  var CLOSE_PROVEN   = 30;    // what a good rep actually closes
+  var PROVEN_INCOME  = 15000; // $/mo current income that implies an existing sales record
+
+  // The three real offer sizes in this market. Fixed, so the only thing that
+  // moves between cards is the offer, which is the entire point of the section.
+  var OFFER_TIERS = [5000, 10000, 20000];
+
+  // Weekly hour bands. 1 booked call is treated as roughly 1 working hour at steady state.
+  var HOURS_FLOOR = 15; // below this, placement gets harder regardless of the math
+  var HOURS_PT    = 25; // realistic part time
+  var HOURS_FT    = 40; // full time
 
   // Sensible defaults used for Reset and to strip default values from short-links.
   var DEFAULTS = {
@@ -695,23 +693,28 @@
     return n || 'They';
   }
 
-  // Auto-pick the offer size that is most relevant to this prospect.
-  // Higher current or goal income implies they are ready for higher-ticket sales.
-  function pickOffer(current, goal){
-    var top = Math.max(current || 0, goal || 0);
-    if (top >= 20000) return 24000; // elite / high-ticket future opportunities
-    if (top >= 12000) return 12000; // experienced sales background
-    return 8000;                    // mainstream default
+  // REVERSE math: booked calls per week needed to reach a monthly target on a given
+  // offer. This is the direction that keeps every number relevant to the person in
+  // front of it, because the target is theirs rather than a maxed-out calendar.
+  function callsFor(target, offer, closePct){
+    var perDeal = offer * (COMM_FIXED / 100);
+    if (target <= 0 || perDeal <= 0 || closePct <= 0) return 0;
+    var weeklyDeals   = (target / 4) / perDeal; // x4, not x4.33, to stay conservative
+    var conversations = weeklyDeals / (closePct / 100);
+    return conversations / (SHOW_FIXED / 100);
   }
 
-  // Seat math for a single close-rate scenario. Offer + calls + show + commission are inputs.
-  function computeSeat(offer, closePct){
-    var conversations = BOOKED_FIXED * (SHOW_FIXED / 100);
-    var deals = conversations * (closePct / 100);
+  // FORWARD math: what a given weekly call volume produces at a given close rate.
+  // Used for the first-year ramp, where the close rate moves but the calendar does not.
+  function monthlyFrom(offer, calls, closePct){
+    var conversations = calls * (SHOW_FIXED / 100);
+    var deals   = conversations * (closePct / 100);
     var perDeal = offer * (COMM_FIXED / 100);
-    var weekly = deals * perDeal;
-    var monthly = weekly * 4; // Intentionally x4, not x4.33, to stay conservative.
-    return { conversations: conversations, deals: deals, perDeal: perDeal, weekly: weekly, monthly: monthly };
+    var weekly  = deals * perDeal;
+    return {
+      conversations: conversations, deals: deals, perDeal: perDeal,
+      weekly: weekly, monthly: weekly * 4
+    };
   }
 
   function gather(){
@@ -733,16 +736,44 @@
     var extra = reqHrs > 0 ? reqHrs - s.hours : 0;
     var increase = s.current > 0 ? ((s.goal - s.current) / s.current) * 100 : 0;
 
-    // Section 3: pick the offer size that fits this prospect's tier, then run three close-rate scenarios.
-    var pickedOffer = pickOffer(s.current, s.goal);
-    var tierCon  = computeSeat(pickedOffer, 15);
-    var tierAvg  = computeSeat(pickedOffer, 20);
-    var tierWell = computeSeat(pickedOffer, 25);
-    var floorRef = computeSeat(5000, 15); // $5k / 15% reality-check for the callout beneath the cards
+    // ── Section 3 · target-anchored reverse math ──
+    // Anchor to the higher of current income and stated goal. For a high earner the
+    // goal is not to reach an average, it is to not go backwards.
+    var anchor    = Math.max(s.current, s.goal);
+    var proven    = s.current >= PROVEN_INCOME;
+    var planClose = proven ? CLOSE_PROVEN : CLOSE_UNPROVEN;
 
-    var yModel = tierAvg.monthly * 12;
-    var ySlow = 50000;
-    var ySolid = 100000;
+    // Same target, three offer sizes. Hours are what move.
+    var tiers = OFFER_TIERS.map(function(offer){
+      var calls = callsFor(anchor, offer, planClose);
+      var m = monthlyFrom(offer, calls, planClose);
+      return {
+        offer: offer, calls: calls, perDeal: m.perDeal,
+        deals: m.deals, conversations: m.conversations
+      };
+    });
+
+    // The plannable offer, in order of preference: the smallest tier that lands in a
+    // realistic part-time week and still clears the hours floor companies hire on,
+    // then the smallest that fits a full week, then whatever is left for tiny targets.
+    function firstTier(lo, hi){
+      return tiers.filter(function(t){ return t.calls >= lo && t.calls <= hi; })[0];
+    }
+    var plan = firstTier(HOURS_FLOOR, HOURS_PT)
+            || firstTier(HOURS_FLOOR, HOURS_FT)
+            || tiers.filter(function(t){ return t.calls > 0 && t.calls <= HOURS_FT; })[0]
+            || tiers[tiers.length - 1];
+
+    // A target that needs more than a full week on the biggest offer modeled is a
+    // ceiling, not a plan. Nothing downstream should present it as one.
+    var reachable = plan.calls > 0 && plan.calls <= HOURS_FT;
+
+    // First year on that plan, with the ramp attached rather than assumed away.
+    var mRamp = monthlyFrom(plan.offer, plan.calls, CLOSE_RAMP);
+    var mPlan = monthlyFrom(plan.offer, plan.calls, planClose);
+    var yCon    = mRamp.monthly * 12;                          // 15% all twelve months
+    var yBlend  = (mRamp.monthly * 6) + (mPlan.monthly * 6);   // 15% then planClose
+    var yStrong = mPlan.monthly * 12;                          // planClose held all year
 
     // ── Intro / labels ──
     $('whoTitle').textContent = (s.name || '').trim() || 'this decision';
@@ -800,74 +831,81 @@
 
     $('waitQuote').innerHTML = 'A <strong>6 month delay</strong> costs about <strong>' + money(gap*6) + '</strong> in income that will not be earned. HTSA - Tuition of <strong>' + money(s.tuition) + '</strong> is the valve. Waiting is the expensive option.';
 
-    // ── Section 3 · three-tier seat math (Conservative · Average · Doing well) ──
-    $('assumeOffer').textContent = offerLabel(pickedOffer);
-    var tierReason;
-    if (pickedOffer >= 24000) tierReason = 'Elite / high-ticket offer selected because current or goal income is $20k/mo or higher.';
-    else if (pickedOffer >= 12000) tierReason = 'Higher-ticket offer selected because current or goal income is $12k/mo or higher.';
-    else tierReason = 'Mainstream $8k offer selected because current and goal are under $12k/mo. At a higher goal this steps up to $12k, then $24k.';
-    $('offerWhy').textContent = tierReason;
+    // ── Section 3 · same target, three offer sizes ──
+    $('who3').textContent = (s.name || '').trim() || 'they';
+    $('assumeTarget').textContent = money(anchor);
+    $('assumeClose').textContent  = planClose + '%';
+    $('assumeWhy').textContent = (s.current > s.goal)
+      ? ('The target is current income of ' + money(s.current) + '/mo, because the job here is to not go backwards. A ' + planClose + '% close rate is used because someone already at this income has a real sales record, and pricing them at a beginner rate would be inaccurate.')
+      : ('The target is the stated goal of ' + money(s.goal) + '/mo, not the most a full calendar could produce. ' + (proven
+          ? ('A ' + planClose + '% close rate is used because a current income of ' + money(s.current) + '/mo implies an existing sales record.')
+          : ('A ' + planClose + '% close rate is used on purpose, which is below the industry average of about 23%. A good rep closes around 30%.')));
 
-    // Comparison string for a single tier vs current + goal.
-    function tierVs(monthly){
-      var parts = [];
-      if (s.current > 0){
-        var mult = monthly / s.current;
-        if (mult >= 1.5) parts.push('<b>' + mult.toFixed(1) + '×</b> current ' + money(s.current));
-        else if (monthly > s.current) parts.push('<b>' + money(monthly - s.current) + '</b> above current');
-        else parts.push('<span class="miss">' + money(s.current - monthly) + '</span> under current');
+    $('tierCards').innerHTML = tiers.map(function(t){
+      var isPlan = reachable && (t.offer === plan.offer);
+      var h = Math.round(t.calls);
+      var read;
+      if (!(t.calls > 0)){
+        read = 'Enter a goal above.';
+      } else if (t.calls > HOURS_FT){
+        read = '<span class="miss">Not a realistic plan.</span> That works out to ' + h + ' hours a week with a full calendar every single week. This is the wrong seat for this number.';
+      } else if (t.calls > HOURS_PT){
+        read = 'Full time. Reachable, but it takes the whole week.';
+      } else if (t.calls >= HOURS_FLOOR){
+        read = '<span class="win">Realistic part time.</span>' + (isPlan ? ' This is the plan used below.' : '');
+      } else {
+        read = 'Under the ' + HOURS_FLOOR + ' hour floor for getting placed. A company would rather hire one person for forty hours than three people for twelve.';
       }
-      if (s.goal > 0){
-        var diff = monthly - s.goal;
-        if (diff >= 0) parts.push('<span class="win">' + money(diff) + ' above the ' + money(s.goal) + ' goal ✓</span>');
-        else parts.push('<span class="miss">' + money(Math.abs(diff)) + '</span> short of the ' + money(s.goal) + ' goal');
-      }
-      return parts.join('<br>');
-    }
+      return '<div class="tier-card' + (isPlan ? ' mid' : '') + '">' +
+        '<div class="tier-name">' + offerLabel(t.offer) + ' offer</div>' +
+        '<div class="tier-close"><b>' + money(t.perDeal) + '</b> per sale</div>' +
+        '<div class="tier-monthly">' + (t.calls > 0 ? (h + ' hrs') : '—') + '</div>' +
+        '<div class="tier-monthly-sub">per week to reach ' + money(anchor) + '/mo</div>' +
+        '<div class="tier-vs">' + (t.calls > 0 ? (t.deals.toFixed(1) + ' sales per week<br>') : '') + read + '</div>' +
+      '</div>';
+    }).join('');
 
-    // "X.X sales/wk · $Y/wk" detail line beneath each tier's monthly number.
-    function tierDetail(t){
-      return t.deals.toFixed(1) + ' sales/wk · ' + money(t.weekly) + '/wk';
-    }
+    // Worked trace, run backwards from the target to the calendar it requires.
+    $('mathTraceLine').innerHTML = (anchor > 0)
+      ? ('<span class="step"><b>' + money(anchor) + '/mo</b></span> ' +
+         '<span class="arrow">÷</span> <span class="step">4 weeks = <b>' + money(anchor / 4) + '/wk</b></span> ' +
+         '<span class="arrow">÷</span> <span class="step">' + money(plan.perDeal) + ' per sale (' + offerLabel(plan.offer) + ' × 10%) = <b>' + plan.deals.toFixed(1) + ' sales/wk</b></span> ' +
+         '<span class="arrow">÷</span> <span class="step">' + planClose + '% close = <b>' + plan.conversations.toFixed(1) + ' conversations</b></span> ' +
+         '<span class="arrow">÷</span> <span class="step">75% show = <b>' + Math.round(plan.calls) + ' booked calls/wk</b></span>')
+      : 'Enter a goal above.';
 
-    $('tierConMonthly').textContent = money(tierCon.monthly) + '/mo';
-    $('tierConDetail').textContent  = tierDetail(tierCon);
-    $('tierConVs').innerHTML        = tierVs(tierCon.monthly);
+    // The reframe: hours collapse as offer size rises. Effort is not the variable.
+    var loTier = tiers[0], hiTier = tiers[tiers.length - 1];
+    $('offerNote').innerHTML = (anchor > 0)
+      ? ('<b>The variable is the offer, not the effort.</b> Same ' + money(anchor) + ' a month. About <b>' + Math.round(loTier.calls) + ' hours a week</b> on a ' + offerLabel(loTier.offer) + ' offer, or about <b>' + Math.round(hiTier.calls) + ' hours</b> on a ' + offerLabel(hiTier.offer) + '. Nothing changed except which offer they get placed on. That is a placement question, and it is the part we actually control.')
+      : '<b>The variable is the offer, not the effort.</b> Enter a goal above to see how the hours change with offer size.';
 
-    $('tierAvgMonthly').textContent = money(tierAvg.monthly) + '/mo';
-    $('tierAvgDetail').textContent  = tierDetail(tierAvg);
-    $('tierAvgVs').innerHTML        = tierVs(tierAvg.monthly);
+    // The ramp. Per policy, the math is never shown without it.
+    $('rampNote').innerHTML =
+      '<b>Month one is not that number.</b> Christa, one of ours, made $3,000 her first month. Then $8,000. Then $10,000. Then $22,000. She runs a sales team now. The $3,000 is the honest first month, and the $22,000 is real too, it is just month four. Every figure above is the ceiling of the seat rather than a forecast, and the thing that decides it is consistency, not talent.';
 
-    $('tierWellMonthly').textContent = money(tierWell.monthly) + '/mo';
-    $('tierWellDetail').textContent  = tierDetail(tierWell);
-    $('tierWellVs').innerHTML        = tierVs(tierWell.monthly);
-
-    // Worked-math trace for the Average scenario (one visible line under the cards).
-    $('mathTraceLine').innerHTML =
-      '<span class="step">40 calls</span> ' +
-      '<span class="arrow">×</span> <span class="step">75% show = <b>30 conversations</b></span> ' +
-      '<span class="arrow">×</span> <span class="step">20% close = <b>' + tierAvg.deals.toFixed(1) + ' sales/wk</b></span> ' +
-      '<span class="arrow">×</span> <span class="step">' + offerLabel(pickedOffer) + ' × 10% = <b>$' + tierAvg.perDeal.toLocaleString() + '/sale</b></span> ' +
-      '<span class="arrow">=</span> <span class="step"><b>' + money(tierAvg.weekly) + '/wk</b></span> ' +
-      '<span class="arrow">×</span> <span class="step">4 weeks = <b>' + money(tierAvg.monthly) + '/mo</b></span>';
-
-    // Floor reality-check callout beneath the cards.
-    $('floorNote').innerHTML =
-      '<b>Reality check:</b> Even at a $5k offer floor (worst reasonable case), the same calendar at a conservative 15% close still models <b>' + money(floorRef.monthly) + '/mo</b>. That clears most current incomes on its own.';
-
-    // ── Section 4 · ROI (middle row uses the Average tier annualized) ──
+    // ── Section 4 · ROI, traced to the three scenarios above ──
     function roiRow(label, year, isTotal){
       var net = year - s.tuition;
       var r = s.tuition > 0 ? (net / s.tuition) * 100 : 0;
       return '<tr' + (isTotal ? ' class="total"' : '') + '><td>' + label + ' · ' + money(year) + '</td><td class="n">' + money(net) + '</td><td class="n"><strong>' + Math.round(r).toLocaleString() + '%</strong></td></tr>';
     }
-    $('roiTable').innerHTML =
-      roiRow('Slow start', ySlow, false) +
-      roiRow('Average scenario × 12', yModel, false) +
-      roiRow('Solid first year', ySolid, true);
+    if (reachable){
+      $('roiTable').innerHTML =
+        roiRow('Conservative, 15% close all twelve months', yCon, false) +
+        roiRow('Expected ramp, 15% for six months then ' + planClose + '%', yBlend, true) +
+        roiRow('Strong year, ' + planClose + '% held all twelve months', yStrong, false);
+      $('roiCaption').textContent = 'All three rows run the same ' + offerLabel(plan.offer) + ' offer and the same ' + Math.round(plan.calls) + ' hour week from Section 3. The highlighted row is the one worth planning on. The strong year is simply the ' + money(anchor) + ' a month target held for twelve months, so no figure here exceeds the number they named.';
+      $('mSkill').textContent = money(Math.max(0, yCon - s.tuition));
+      $('mSkillSub').textContent = 'Net of the HTSA - Tuition, at the conservative 15% close rate held for the entire first year. The variable here is effort and consistency, which they control. A market position cannot be improved by working harder at it. This one can.';
+    } else {
+      $('roiTable').innerHTML = '<tr><td colspan="3">' + money(anchor) + ' a month is not reachable at a sane number of hours on any offer size modeled here. Even the ' + offerLabel(plan.offer) + ' offer would take about ' + Math.round(plan.calls) + ' hours a week with a full calendar every single week. A return figure on that would be fiction, so none is shown. Put in a target worth planning on and the math fills back in.</td></tr>';
+      $('roiCaption').textContent = 'This blank is deliberate. A number that requires a perfect calendar and ' + Math.round(plan.calls) + ' hours a week is a ceiling, not a plan, and selling it as one would be dishonest.';
+      $('mSkill').textContent = '—';
+      $('mSkillSub').textContent = 'Shown once the target above is reachable at a realistic number of hours.';
+    }
 
     $('mMarket').textContent = money(s.tuition * 0.10);
-    $('mSkill').textContent = money(Math.max(0, ySlow - s.tuition)) + '+';
 
     // ── Section 5 · 4,004 weeks grid ──
     var COLS = 52, ROWS = 77, TOTAL = COLS * ROWS;
@@ -937,12 +975,18 @@
     $('primeLine').textContent = primeLive.toLocaleString() + ' weeks. About ' + (primeLive/52).toFixed(1) + ' years of awake, active, prime time that is not sleep and not work. That is the real cost of the decision, not just the HTSA - Tuition.';
 
     // ── Section 6 · summary ──
+    var ownNumbers = nm ? (nm + '\u2019s own numbers') : 'their own numbers';
+    var seatBullets = reachable
+      ? ('<li><strong>The goal is an hours question, not a miracle.</strong> ' + money(anchor) + ' a month works out to about ' + Math.round(plan.calls) + ' hours a week on a ' + offerLabel(plan.offer) + ' offer at a ' + planClose + '% close rate. The same number on a ' + offerLabel(OFFER_TIERS[0]) + ' offer takes about ' + Math.round(tiers[0].calls) + ' hours, which is why the offer matters more than the effort.</li>' +
+         '<li><strong>The first year is stated with the ramp attached.</strong> A conservative twelve months at a 15% close models ' + money(yCon) + '. Holding ' + planClose + '% models ' + money(yStrong) + '. Month one looks like Christa\u2019s $3,000 rather than either of those.</li>')
+      : ('<li><strong>The target is not reachable at a sane number of hours.</strong> ' + money(anchor) + ' a month would take about ' + Math.round(plan.calls) + ' hours a week even on the ' + offerLabel(plan.offer) + ' offer. That is a ceiling, not a plan. Put in a number worth planning on and the rest of the page fills in.</li>');
+
     $('summaryList').innerHTML =
       '<li><strong>Downside is defined.</strong> ' + money(s.tuition) + ' with a written conditional refund if placement milestones are met and placement does not happen.</li>' +
-      '<li><strong>Even conservative clears the goal.</strong> A ' + offerLabel(pickedOffer) + ' offer at a 15% close rate models ' + money(tierCon.monthly) + '/mo.</li>' +
-      '<li><strong>Average (20% close) produces ' + money(tierAvg.monthly) + '/mo,</strong> vs current ' + money(s.current) + ' and goal ' + money(s.goal) + '.</li>' +
+      seatBullets +
       '<li><strong>Staying has a price.</strong> About ' + money(daily) + ' per day and ' + money(gap) + ' per month while the gap stays open.</li>' +
-      '<li><strong>Time is finite.</strong> At age ' + s.age + ', about ' + primeLive.toLocaleString() + ' prime weeks remain that are not sleep and not work.</li>';
+      '<li><strong>Time is finite.</strong> At age ' + s.age + ', about ' + primeLive.toLocaleString() + ' prime weeks remain that are not sleep and not work.</li>' +
+      '<li><strong>Nothing on this page asks for belief.</strong> Every figure came from ' + ownNumbers + '. The only variable the arithmetic cannot solve is the decision itself, and the decision-making that produced ' + money(s.current) + ' a month is the one input that has to change for the output to change.</li>';
   }
 
   // ── Query-string prefill ──
