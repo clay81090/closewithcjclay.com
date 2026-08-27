@@ -920,7 +920,7 @@
     <table>
       <tr><td>Current hourly value <span class="caption">(current $ ÷ hours ÷ 4)</span></td><td class="n" id="mHourly">—</td></tr>
       <tr><td>Hours per week needed at that rate to hit the goal</td><td class="n" id="mReqHrs">—</td></tr>
-      <tr><td>Extra hours per week on top of today</td><td class="n" id="mExtra">—</td></tr>
+      <tr><td>Additional hours needed each week at the current rate</td><td class="n" id="mExtra">—</td></tr>
       <tr><td>Ideal workweek they actually want</td><td class="n" id="mIdealHrs">—</td></tr>
       <tr><td>Time they want back every week</td><td class="n" id="mHoursBack">—</td></tr>
       <tr class="total"><td>Income jump required without changing the vehicle</td><td class="n" id="mPct">—</td></tr>
@@ -1388,8 +1388,13 @@
     $('mGapSub').textContent = money(weeklyGap) + ' per week between current income and the goal';
     $('mHourly').textContent = hourly ? ('$' + Math.round(hourly).toLocaleString()) : '—';
     $('mReqHrs').textContent = reqHrs ? reqHrs.toFixed(1) + ' hrs' : '—';
+    var extraHoursLabel = Math.abs(extra).toFixed(1).replace(/\.0$/, '');
     $('mExtra').textContent = reqHrs
-      ? ((extra >= 0 ? '+' : '') + extra.toFixed(1) + ' hrs vs today')
+      ? (extra > 0
+          ? extraHoursLabel + ' hrs added to your current ' + s.hours + '-hr week'
+          : extra < 0
+            ? extraHoursLabel + ' fewer hrs than your current ' + s.hours + '-hr week'
+            : 'No added hours beyond your current ' + s.hours + '-hr week')
       : '—';
     $('mIdealHrs').textContent = s.idealHours + ' hrs/week';
     $('mHoursBack').textContent = hoursBack ? (hoursBack + ' hrs/week · ' + (hoursBack * 52).toLocaleString() + ' hrs/year') : 'No reduction entered';
