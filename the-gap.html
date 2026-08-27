@@ -322,6 +322,47 @@
   p{ margin:0 0 12px; }
   strong{ font-weight:650; color:var(--ink); }
 
+  /* ── Chapter transition ── */
+  .part-label, .chapter-kicker{
+    font-size:10px; line-height:1; letter-spacing:.18em;
+    text-transform:uppercase; font-weight:750;
+  }
+  .part-label{ color:var(--accent); margin-bottom:14px; }
+  .time-section{ margin-top:64px; }
+  .chapter-break{
+    position:relative; overflow:hidden;
+    margin-bottom:32px; padding:clamp(30px,6vw,54px);
+    border-radius:14px;
+    background:
+      radial-gradient(circle at 88% 20%,rgba(0,201,122,.16),transparent 30%),
+      linear-gradient(145deg,#071426 0%,#0b1d32 58%,#0d2940 100%);
+    box-shadow:0 18px 44px rgba(8,20,38,.18);
+  }
+  .chapter-break::after{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:4px;
+    background:var(--green);
+  }
+  .chapter-kicker{ color:var(--green); margin-bottom:20px; }
+  .chapter-break h2{
+    max-width:650px; margin:0 0 18px; padding:0; border:0;
+    color:#fff; font-size:clamp(34px,6.3vw,58px); line-height:1.02;
+    letter-spacing:-.045em; text-transform:none; font-weight:720;
+  }
+  .chapter-break p{
+    max-width:620px; margin:0;
+    color:#c9d4e2; font-size:clamp(17px,2.4vw,21px); line-height:1.5;
+  }
+  .chapter-break p span{ color:#fff; font-weight:700; }
+  .time-question{
+    margin:0 0 10px; font-size:clamp(25px,4vw,34px);
+    line-height:1.12; letter-spacing:-.025em; font-weight:700;
+  }
+  .time-intro{ max-width:700px; font-size:18px; color:var(--muted); }
+  @media (max-width:640px){
+    .time-section{ margin-top:48px; }
+    .chapter-break{ border-radius:10px; margin-bottom:26px; }
+  }
+
   /* ── Cards / grids ── */
   .grid-3{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; }
   .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
@@ -608,6 +649,7 @@
 
   <!-- ============= INTRO ============= -->
   <section class="intro" style="margin-top:0">
+    <div class="part-label">Part One · The Gap</div>
     <h1>The gap for <span class="who" id="whoTitle">you</span>.</h1>
     <p class="lede">Every figure below updates from the inputs. Where a range exists, the conservative end is used on purpose, so the decision gets made on arithmetic rather than a feeling.</p>
     <div class="rule"></div>
@@ -788,36 +830,9 @@
     </details>
   </section>
 
-  <!-- ============= 4. PROOF ============= -->
+  <!-- ============= 4. RETURN ON TUITION ============= -->
   <section>
-    <h2>4 · <b>Proof before promises</b></h2>
-    <p>The numbers above are a planning model, not an income guarantee. These are separate proof points you can inspect directly—independent reviews, the employer side of placement, and a member speaking in her own words.</p>
-
-    <div class="grid-3" style="margin-top:12px">
-      <div class="card">
-        <div class="lbl">Independent reviews</div>
-        <h3 style="margin:0 0 8px">Trustpilot</h3>
-        <div class="sub">Read the public reviews yourself. Do not take our summary as the evidence.</div>
-        <p style="margin-top:12px"><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener">Open independent reviews →</a></p>
-      </div>
-      <div class="card">
-        <div class="lbl">Employer-side proof</div>
-        <h3 style="margin:0 0 8px">Why companies hire</h3>
-        <div class="sub">Hear from Taylor Conroy on what an employer looks for and why he hires academy talent.</div>
-        <p style="margin-top:12px"><a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" target="_blank" rel="noopener">Watch the employer perspective →</a></p>
-      </div>
-      <div class="card">
-        <div class="lbl">Member perspective</div>
-        <h3 style="margin:0 0 8px">Dana's review</h3>
-        <div class="sub">A member-published review in her own words, linked directly so you can judge it for yourself.</div>
-        <p style="margin-top:12px"><a href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" target="_blank" rel="noopener">Watch Dana's review →</a></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============= 5. RETURN ON TUITION ============= -->
-  <section>
-    <h2>5 · <b>Putting HTSA tuition in context</b></h2>
+    <h2>4 · <b>Putting HTSA tuition in context</b></h2>
     <p><strong id="tuitionPlanLabel">Paid in full · $6,000.</strong> <span id="tuitionTerms">One payment and the lowest total price.</span> Every option includes lifetime access to training, coaching, and placement support, including future placement moves.</p>
 
     <div class="grid-3" style="margin-top:16px">
@@ -849,16 +864,22 @@
     </details>
   </section>
 
-  <!-- ============= 6. TIME MATH ============= -->
-  <section>
-    <h2>6 · <b>The time math</b> · 4,000 weeks</h2>
-    <p><strong id="s5Intro">—</strong> Average U.S. life expectancy is about <strong>77 years</strong>, or roughly <strong>4,004 weeks</strong>. Total.</p>
+  <!-- ============= PART TWO. TIME ============= -->
+  <section class="time-section" aria-labelledby="timeChapterTitle">
+    <div class="chapter-break">
+      <div class="chapter-kicker">Part Two · The Time</div>
+      <h2 id="timeChapterTitle">Money can be replaced.<br>Time cannot.</h2>
+      <p>At age <span id="chapterAge">38</span>, how much of your life is actually still yours?</p>
+    </div>
+
+    <h3 class="time-question">How much time do you actually have left?</h3>
+    <p class="time-intro"><strong id="s5Intro">—</strong> An average life is about <strong>77 years</strong>, or roughly <strong>4,004 weeks</strong>. Every square below is one week.</p>
 
     <div class="weeks-viz">
       <p class="weeks-header">
         Enter your age
         <input type="number" id="age" class="inline-num w-age" min="18" max="80" step="1" value="38" aria-label="Age">
-        and watch the line move. <b>Every square below is one week.</b> Everything above the line is already lived (about <b id="pctLived">—</b> of an average life). Of the weeks that remain, sleep and work take two thirds. The <span class="g">green squares at the bottom are the life to be lived</span>, the time you actually control.
+        and watch the line move. Everything above the line is already lived (about <b id="pctLived">—</b> of an average life). Of the weeks that remain, sleep and work take two thirds. The <span class="g">green squares at the bottom are the life to be lived</span>, the time you actually control.
       </p>
       <div class="weeks-grid-wrap">
         <div class="weeks-grid" id="weeks"></div>
@@ -875,9 +896,36 @@
     <p class="caption">Those working weeks get spent no matter what. The only question is what they pay, and whether they are spent somewhere worth being.</p>
   </section>
 
-  <!-- ============= 7. DECISION ============= -->
+  <!-- ============= 5. PROOF ============= -->
   <section>
-    <h2>7 · <b>The decision</b></h2>
+    <h2>5 · <b>Proof before the decision</b></h2>
+    <p>Do not take this page as the proof. Verify the company, the employer side of placement, and a member's experience directly before deciding what the numbers mean for you.</p>
+
+    <div class="grid-3" style="margin-top:12px">
+      <div class="card">
+        <div class="lbl">Independent reviews</div>
+        <h3 style="margin:0 0 8px">Trustpilot</h3>
+        <div class="sub">Read the public reviews yourself. Do not take our summary as the evidence.</div>
+        <p style="margin-top:12px"><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener">Open independent reviews →</a></p>
+      </div>
+      <div class="card">
+        <div class="lbl">Employer-side proof</div>
+        <h3 style="margin:0 0 8px">Why companies hire</h3>
+        <div class="sub">Hear from Taylor Conroy on what an employer looks for and why he hires academy talent.</div>
+        <p style="margin-top:12px"><a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" target="_blank" rel="noopener">Watch the employer perspective →</a></p>
+      </div>
+      <div class="card">
+        <div class="lbl">Member perspective</div>
+        <h3 style="margin:0 0 8px">Dana's review</h3>
+        <div class="sub">A member-published review in her own words, linked directly so you can judge it for yourself.</div>
+        <p style="margin-top:12px"><a href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" target="_blank" rel="noopener">Watch Dana's review →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= 6. DECISION ============= -->
+  <section>
+    <h2>6 · <b>The decision</b></h2>
     <div class="decision-box">
       <h3>Tomorrow only changes when a decision changes.</h3>
       <p>Fear does not mean the path is wrong. It means the decision matters. The logical move is to verify the downside, inspect the proof, decide whether the vehicle can reach the life you described, and then act on what the evidence says.</p>
@@ -890,9 +938,9 @@
     </div>
   </section>
 
-  <!-- ============= 8. HONEST SUMMARY ============= -->
+  <!-- ============= 7. HONEST SUMMARY ============= -->
   <section>
-    <h2>8 · <b>Honest summary</b></h2>
+    <h2>7 · <b>Honest summary</b></h2>
     <ul id="summaryList"></ul>
     <p style="margin-top:14px"><strong>Questions about any figure on this page are welcome.</strong> This page exists so the decision can be made from transparent assumptions rather than pressure or guesswork.</p>
     <p class="caption" style="margin-top:16px">This page is a planning model, not an earnings guarantee. Results vary by placement, offer, activity, close rate, and ramp time. Member averages describe placed members, not forecasts for any individual. The written agreement controls all guarantee terms.</p>
@@ -1243,7 +1291,7 @@
     $('mMonthlyGain').textContent = plan.feasible ? (money(Math.max(0, Math.min(tierAvg.monthly, MODEL_CEILING) - s.current)) + '/mo') : 'Plan adjustment';
     $('mPayback').textContent = gap > 0 ? (s.tuition / gap).toFixed(1) : '—';
 
-    // ── Section 5 · 4,004 weeks grid ──
+    // ── Part Two · 4,004 weeks grid ──
     var COLS = 52, ROWS = 77, TOTAL = COLS * ROWS;
     var ageClamped = Math.max(0, Math.min(ROWS, s.age));
     var lived = Math.min(TOTAL, ageClamped * COLS);
@@ -1260,9 +1308,10 @@
 
     // Personalized intro line (name only if provided; no name = clean sentence).
     var nm = (s.name || '').trim();
+    $('chapterAge').textContent = s.age;
     $('s5Intro').textContent = nm
-      ? (nm + ', at ' + s.age + ', this is what the remaining time actually looks like.')
-      : ('At ' + s.age + ', this is what the remaining time actually looks like.');
+      ? (nm + ', this is what the remaining time actually looks like.')
+      : 'This is what the remaining time actually looks like.';
 
     var weeksEl = $('weeks');
     if (weeksEl.childElementCount !== TOTAL){
@@ -1310,7 +1359,7 @@
 
     $('primeLine').textContent = primeLive.toLocaleString() + ' weeks. About ' + (primeLive/52).toFixed(1) + ' years of awake, active time that is neither sleep nor work. That is the broader cost of the decision—not only the selected HTSA tuition.';
 
-    // ── Section 8 · summary ──
+    // ── Section 7 · summary ──
     $('summaryList').innerHTML =
       '<li><strong>Downside is defined.</strong> ' + money(s.tuition) + ' with a written conditional refund if placement milestones are met and placement does not happen.</li>' +
       '<li><strong>The lifestyle goal is visible.</strong> They want to move from ' + s.hours + ' to ' + s.idealHours + ' hours/week' + (hoursBack ? (', reclaiming ' + hoursBack + ' hours every week') : '') + '.</li>' +
