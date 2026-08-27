@@ -1,0 +1,19 @@
+{
+  "page_type": "precall",
+  "prospect_id": "jc-rivera",
+  "prospect_name": "JC Rivera",
+  "first_name": "JC",
+  "email": "itsjeanrivera@gmail.com",
+  "phone_e164": "+18722026243",
+  "phone_display": "+1 (872) 202-6243",
+  "prepared_date": "Aug 26, 2026",
+  "slug": "jc_rivera",
+  "call_day": "Thursday",
+  "call_date": "Aug 27",
+  "call_time": "10:00 AM",
+  "call_timezone": "EST",
+  "call_format": "Zoom",
+  "missed_meeting": false,
+  "booking_url": "https://meetings.hubspot.com/charles660/cj",
+  "show_member_contacts": false
+}

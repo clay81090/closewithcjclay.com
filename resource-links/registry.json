@@ -558,7 +558,21 @@
       "status": "active",
       "view_count": 0,
       "last_viewed_at": null
+    },
+    "jc_rivera": {
+      "slug": "jc_rivera",
+      "prospect_id": "jc-rivera",
+      "prospect_name": "JC Rivera",
+      "email": "itsjeanrivera@gmail.com",
+      "phone_e164": "+18722026243",
+      "phone_display": "+1 (872) 202-6243",
+      "page_type": "precall",
+      "created_at": "2026-08-27T03:56:58Z",
+      "expires_at": "2026-11-25T03:56:58Z",
+      "status": "active",
+      "view_count": 0,
+      "last_viewed_at": null
     }
   },
-  "updated_at": "2026-08-26T17:32:45Z"
+  "updated_at": "2026-08-27T03:56:58Z"
 }
