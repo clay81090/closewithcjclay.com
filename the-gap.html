@@ -15,13 +15,17 @@
     --paper:#fafbfc;
     --card:#ffffff;
     --soft:#f4f7fa;
-    --accent:#0b3a66;      /* single restrained blue for links + rule + labels */
-    --loss:#a63a1c;        /* single restrained warm accent for gap / leak */
-    --gain:#0d7a4a;        /* single restrained forest for the win */
+    --accent:#0b3a66;
+    --loss:#145487;
+    --gain:#00a866;
     --white:#ffffff;
     --green:#00c97a;
     --green-dark:#00a866;
     --navy:#081426;
+    --sky:#9ed4f1;
+    --sky-soft:rgba(158,212,241,.22);
+    --green-soft:rgba(0,201,122,.12);
+    --navy-soft:rgba(8,20,38,.07);
   }
 
   *{ box-sizing:border-box; }
@@ -44,17 +48,26 @@
     padding:28px 28px 96px;
   }
   .page-head{
+    position:relative;
     display:flex; align-items:baseline; justify-content:space-between;
     gap:16px; padding-bottom:14px; margin-bottom:28px;
-    border-bottom:1px solid var(--line);
+  }
+  .page-head::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
+    background:linear-gradient(90deg,var(--green) 0 42px,var(--navy) 42px 118px,var(--line) 118px);
   }
   .brand{
+    display:flex; align-items:center; gap:8px;
     font-size:12px; letter-spacing:.14em; text-transform:uppercase;
-    font-weight:700; color:var(--ink);
+    font-weight:750; color:var(--navy);
+  }
+  .brand::before{
+    content:""; width:8px; height:8px; flex:none; border-radius:50%;
+    background:var(--green); box-shadow:0 0 0 4px var(--green-soft);
   }
   .brand-sub{
     font-size:11px; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--muted); font-weight:500;
+    color:var(--accent); font-weight:600;
   }
 
   /* ── Sticky controls (collapsed by default) ── */
@@ -64,8 +77,10 @@
     backdrop-filter:saturate(180%) blur(10px);
     -webkit-backdrop-filter:saturate(180%) blur(10px);
     border:1px solid var(--line);
+    border-top:3px solid var(--green);
     border-radius:10px;
     margin-bottom:32px;
+    box-shadow:0 12px 34px rgba(8,20,38,.055);
   }
   .controls-head{
     display:flex; align-items:center; justify-content:space-between;
@@ -305,7 +320,7 @@
     font-size:17px; color:var(--muted); margin:0 0 6px; max-width:640px;
   }
   .rule{
-    height:2px; width:44px; background:var(--ink);
+    height:3px; width:76px; background:linear-gradient(90deg,var(--navy) 0 58%,var(--green) 58%);
     border-radius:2px; margin:22px 0 0;
   }
   section{ margin-top:44px; }
@@ -327,7 +342,11 @@
     font-size:10px; line-height:1; letter-spacing:.18em;
     text-transform:uppercase; font-weight:750;
   }
-  .part-label{ color:var(--accent); margin-bottom:14px; }
+  .part-label{
+    display:inline-flex; color:var(--green-dark); margin-bottom:14px;
+    padding:7px 10px; border:1px solid rgba(0,168,102,.2);
+    border-radius:999px; background:var(--green-soft);
+  }
   .time-section{ margin-top:64px; }
   .chapter-break{
     position:relative; overflow:hidden;
@@ -372,6 +391,7 @@
   .card{
     background:var(--card); border:1px solid var(--line);
     border-radius:8px; padding:16px 18px;
+    box-shadow:0 5px 18px rgba(8,20,38,.035);
   }
   .card.soft{ background:var(--soft); border-color:var(--line); }
   .card .lbl{
@@ -389,7 +409,8 @@
 
   /* ── Hero cost of waiting number ── */
   .hero-loss{
-    background:var(--card); border:1px solid var(--line);
+    background:linear-gradient(135deg,var(--sky-soft),rgba(255,255,255,.92));
+    border:1px solid rgba(20,84,135,.18); border-left:4px solid var(--accent);
     border-radius:8px; padding:22px 22px;
     display:flex; align-items:baseline; justify-content:space-between; gap:16px;
     flex-wrap:wrap;
@@ -440,14 +461,24 @@
   .weeks-viz{
     margin:18px 0 12px;
     padding:20px 18px 18px;
-    background:var(--soft); border:1px solid var(--line);
+    background:linear-gradient(180deg,#fff,var(--soft));
+    border:1px solid var(--line);
     border-radius:10px;
+    box-shadow:0 12px 32px rgba(8,20,38,.055);
   }
   .weeks-header{
     font-size:15px; line-height:1.55; color:var(--ink);
     margin:0 0 18px;
   }
-  .weeks-header .g{ color:var(--gain); font-weight:650; }
+  .weeks-header .g{
+    color:var(--green-dark); font-weight:700;
+    padding:1px 4px; border-radius:3px; background:var(--green-soft);
+  }
+  #pctLived{
+    display:inline-block; padding:1px 6px; border-radius:4px;
+    color:var(--navy); background:rgba(158,212,241,.42);
+    box-shadow:inset 0 0 0 1px rgba(20,84,135,.1);
+  }
 
   .weeks-grid-wrap{
     position:relative; max-width:520px; margin:0 auto;
@@ -461,24 +492,24 @@
   .w{
     aspect-ratio:1; background:var(--card); border-radius:1px;
   }
-  .w.spent{ background:#c3ccd6; }
-  .w.sleep{ background:#9fb0c2; }
-  .w.work{  background:#c78a4a; }
-  .w.live{  background:var(--gain); }
+  .w.spent{ background:#d8dee6; }
+  .w.sleep{ background:var(--sky); }
+  .w.work{  background:var(--navy); }
+  .w.live{  background:var(--green); }
 
   .age-mark{
     position:absolute; left:-8px; right:-8px;
-    height:0; border-top:2px solid var(--ink);
+    height:0; border-top:2px solid var(--green);
     pointer-events:none; transition:top .18s ease-out;
   }
   .age-mark::after{
     content:attr(data-label);
     position:absolute; right:0; top:-11px;
     font-size:9px; letter-spacing:.12em; text-transform:uppercase;
-    color:var(--card); background:var(--ink);
+    color:var(--white); background:var(--navy);
     padding:3px 7px; border-radius:3px;
     font-weight:700; white-space:nowrap;
-    box-shadow:0 1px 0 rgba(0,0,0,.08);
+    box-shadow:0 0 0 1px var(--green),0 3px 10px rgba(8,20,38,.18);
   }
 
   .weeks-legend{
@@ -497,9 +528,114 @@
     color:var(--ink); font-weight:650;
     font-variant-numeric:tabular-nums;
   }
+  .time-impact-grid{
+    display:grid; grid-template-columns:.8fr 1.2fr; gap:14px;
+    margin:22px 0 18px;
+  }
+  .time-impact-card{
+    min-width:0; border-radius:10px; padding:20px 22px;
+  }
+  .time-impact-card .impact-label{
+    margin-bottom:8px; font-size:10px; line-height:1.3;
+    letter-spacing:.15em; text-transform:uppercase; font-weight:750;
+  }
+  .time-impact-card .impact-value{
+    font-size:clamp(34px,5vw,48px); line-height:1;
+    letter-spacing:-.035em; font-weight:760; font-variant-numeric:tabular-nums;
+  }
+  .time-impact-card .impact-note{ margin-top:10px; font-size:13px; line-height:1.45; }
+  .time-impact-card.spent{
+    color:var(--navy); background:var(--sky-soft);
+    border:1px solid rgba(20,84,135,.17);
+  }
+  .time-impact-card.spent .impact-label{ color:var(--accent); }
+  .time-impact-card.spent .impact-note{ color:#4e6174; }
+  .time-impact-card.remaining{
+    color:var(--white);
+    background:
+      radial-gradient(circle at 95% 5%,rgba(0,201,122,.17),transparent 35%),
+      var(--navy);
+    border:1px solid rgba(0,201,122,.3);
+    box-shadow:0 12px 28px rgba(8,20,38,.14);
+  }
+  .time-impact-card.remaining .impact-label,
+  .time-impact-card.remaining .impact-value{ color:var(--green); }
+  .time-impact-card.remaining .impact-note{ color:#cbd5e2; }
+  .time-impact-card.remaining .impact-note strong{ color:#fff; }
+  .time-table .impact-row td{ background:var(--sky-soft); color:var(--navy); }
+  .time-table tr.total td{
+    background:var(--green-soft);
+    border-bottom-color:var(--green-dark);
+  }
+  .prime-callout{
+    margin:16px 0 10px; padding:16px 18px;
+    border-left:4px solid var(--green); border-radius:0 8px 8px 0;
+    background:linear-gradient(90deg,var(--green-soft),rgba(0,201,122,.035));
+  }
+  .prime-callout strong{ color:var(--navy); }
+  .life-bridge{
+    position:relative; overflow:hidden;
+    margin-top:30px; padding:clamp(24px,4.5vw,38px);
+    border:1px solid rgba(8,20,38,.11); border-top:3px solid var(--green);
+    border-radius:12px; background:var(--white);
+    box-shadow:0 14px 36px rgba(8,20,38,.075);
+  }
+  .life-bridge::after{
+    content:""; position:absolute; width:210px; height:210px;
+    right:-120px; top:-130px; border-radius:50%;
+    background:var(--green-soft); pointer-events:none;
+  }
+  .life-bridge-kicker{
+    position:relative; z-index:1;
+    margin-bottom:10px; color:var(--green-dark);
+    font-size:10px; letter-spacing:.16em; text-transform:uppercase; font-weight:750;
+  }
+  .life-bridge h3{
+    position:relative; z-index:1;
+    margin:0 0 12px; color:var(--navy);
+    font-size:clamp(25px,4vw,34px); line-height:1.1; letter-spacing:-.025em;
+  }
+  .life-bridge > p{ max-width:680px; color:#536276; }
+  .life-shift{
+    display:grid; grid-template-columns:1fr auto 1fr;
+    align-items:stretch; gap:10px; margin:22px 0 18px;
+  }
+  .life-shift-side{
+    display:flex; align-items:center; justify-content:center;
+    min-height:64px; padding:13px 16px; border-radius:8px;
+    text-align:center; font-size:13px; font-weight:700;
+  }
+  .life-shift-side.from{
+    color:#586678; background:var(--navy-soft);
+    border:1px solid rgba(8,20,38,.08);
+  }
+  .life-shift-side.to{
+    color:var(--navy); background:var(--green-soft);
+    border:1px solid rgba(0,168,102,.2);
+  }
+  .life-shift-arrow{
+    display:flex; align-items:center; color:var(--green-dark);
+    font-size:24px; font-weight:700;
+  }
+  .life-benefits{
+    display:flex; flex-wrap:wrap; gap:7px; margin:0 0 18px;
+  }
+  .life-benefit{
+    padding:6px 9px; border-radius:999px;
+    color:var(--accent); background:var(--sky-soft);
+    border:1px solid rgba(20,84,135,.11);
+    font-size:11px; font-weight:700; letter-spacing:.02em;
+  }
+  .life-bridge .life-bridge-close{
+    margin:0; padding-top:16px; border-top:1px solid var(--line);
+    color:var(--navy); font-weight:650;
+  }
   @media (max-width:640px){
     .weeks-legend{ grid-template-columns:1fr 1fr; }
     .weeks-grid-wrap{ max-width:100%; }
+    .time-impact-grid{ grid-template-columns:1fr; }
+    .life-shift{ grid-template-columns:1fr; }
+    .life-shift-arrow{ justify-content:center; transform:rotate(90deg); }
   }
 
   /* ── Lists ── */
@@ -888,12 +1024,47 @@
       <div class="weeks-legend" id="weeksLegend"></div>
     </div>
 
-    <table style="margin-top:16px">
+    <div class="time-impact-grid" aria-label="Personalized time remaining">
+      <div class="time-impact-card spent">
+        <div class="impact-label">Average life already lived</div>
+        <div class="impact-value" id="pctLivedImpact">—</div>
+        <div class="impact-note">These weeks cannot be earned back.</div>
+      </div>
+      <div class="time-impact-card remaining">
+        <div class="impact-label">Awake, active time that is actually yours</div>
+        <div class="impact-value"><span id="primeWeeksImpact">—</span> weeks</div>
+        <div class="impact-note">About <strong id="primeYearsImpact">—</strong> before age 70, after approximate sleep and work.</div>
+      </div>
+    </div>
+
+    <table class="time-table" style="margin-top:16px">
       <tbody id="timeTable"></tbody>
     </table>
 
-    <p style="margin-top:14px"><strong id="primeLine">—</strong></p>
+    <p class="prime-callout"><strong id="primeLine">—</strong></p>
     <p class="caption">Those working weeks get spent no matter what. The only question is what they pay, and whether they are spent somewhere worth being.</p>
+
+    <div class="life-bridge">
+      <div class="life-bridge-kicker">The opportunity inside the work</div>
+      <h3>Build work around your life.</h3>
+      <p>Remote closing does not make work disappear. It still requires skill, calls, follow up, and performance. What it can change is the relationship between work and life.</p>
+
+      <div class="life-shift" aria-label="The shift from work controlling life to work supporting life">
+        <div class="life-shift-side from">A life built around work</div>
+        <div class="life-shift-arrow" aria-hidden="true">→</div>
+        <div class="life-shift-side to">Work built around your life</div>
+      </div>
+
+      <div class="life-benefits" aria-label="Potential benefits of remote high ticket sales">
+        <span class="life-benefit">Location flexibility</span>
+        <span class="life-benefit">Schedule control</span>
+        <span class="life-benefit">More time with family</span>
+        <span class="life-benefit">A portable sales skill</span>
+        <span class="life-benefit">Income leverage</span>
+      </div>
+
+      <p class="life-bridge-close">Instead of life revolving around a job, remote closing can let the job revolve around life. Part of the one third normally spent working can overlap with actually living: being where you want to be, staying present with the people who matter, and building a life you do not need to escape from.</p>
+    </div>
   </section>
 
   <!-- ============= 5. PROOF ============= -->
@@ -1340,17 +1511,21 @@
     ageMark.style.display = (ageClamped >= 1 && ageClamped < ROWS) ? '' : 'none';
     ageMark.setAttribute('data-label', 'you are here · age ' + s.age);
 
-    $('pctLived').textContent = Math.round((lived / TOTAL) * 100) + '%';
+    var livedPct = Math.round((lived / TOTAL) * 100);
+    $('pctLived').textContent = livedPct + '%';
+    $('pctLivedImpact').textContent = livedPct + '%';
+    $('primeWeeksImpact').textContent = primeLive.toLocaleString();
+    $('primeYearsImpact').textContent = (primeLive / 52).toFixed(1) + ' years';
     $('weeksLegend').innerHTML =
-      '<div class="lg"><span class="sw" style="background:#c3ccd6"></span>Lived <b>' + lived.toLocaleString() + '</b></div>' +
-      '<div class="lg"><span class="sw" style="background:#9fb0c2"></span>Sleep left <b>' + sleep.toLocaleString() + '</b></div>' +
-      '<div class="lg"><span class="sw" style="background:#c78a4a"></span>Work left <b>' + work.toLocaleString() + '</b></div>' +
-      '<div class="lg"><span class="sw" style="background:var(--gain)"></span>Life to be lived <b>' + live.toLocaleString() + '</b></div>';
+      '<div class="lg"><span class="sw" style="background:#d8dee6"></span>Lived <b>' + lived.toLocaleString() + '</b></div>' +
+      '<div class="lg"><span class="sw" style="background:var(--sky)"></span>Sleep left <b>' + sleep.toLocaleString() + '</b></div>' +
+      '<div class="lg"><span class="sw" style="background:var(--navy)"></span>Work left <b>' + work.toLocaleString() + '</b></div>' +
+      '<div class="lg"><span class="sw" style="background:var(--green)"></span>Life to be lived <b>' + live.toLocaleString() + '</b></div>';
 
     $('timeTable').innerHTML =
       '<tr><td>Total weeks in an average life</td><td class="n">4,004</td></tr>' +
       '<tr><td>Already lived at age ' + s.age + ' (' + s.age + ' × 52)</td><td class="n">' + lived.toLocaleString() + '</td></tr>' +
-      '<tr><td><strong>Percentage of life already spent</strong></td><td class="n"><strong>' + Math.round((lived/TOTAL)*100) + '%</strong></td></tr>' +
+      '<tr class="impact-row"><td><strong>Percentage of life already spent</strong></td><td class="n"><strong>' + livedPct + '%</strong></td></tr>' +
       '<tr><td colspan="2" style="padding-top:16px;color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase">Active prime remaining · age ' + s.age + ' to 70</td></tr>' +
       '<tr><td>' + primeYears + ' years × 52</td><td class="n">' + primeWeeks.toLocaleString() + '</td></tr>' +
       '<tr><td>Less sleep (about 1/3)</td><td class="n">−' + primeSleep.toLocaleString() + '</td></tr>' +
