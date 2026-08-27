@@ -312,6 +312,19 @@
   .ranges[open] > summary::after{ content:"  ▴"; }
   .ranges table{ margin:0 14px 12px; width:calc(100% - 28px); font-size:14px; }
   .ranges td{ padding:8px 0; border-bottom:1px solid var(--line); }
+  .setter-subset{
+    margin:0 14px 12px; padding:0;
+    border-top:1px solid var(--line);
+  }
+  .setter-subset summary{
+    cursor:pointer; padding:9px 0 4px;
+    color:var(--muted); font-size:10px; font-weight:700;
+    letter-spacing:.1em; text-transform:uppercase;
+  }
+  .setter-subset p{
+    margin:4px 0 8px; color:var(--muted);
+    font-size:12px; line-height:1.5;
+  }
   .ranges tr:last-child td{ border-bottom:none; }
   .adv{
     margin-top:12px; padding-top:10px; border-top:1px dashed var(--line);
@@ -895,8 +908,8 @@
 
   <!-- ============= 1. CURRENT VS GOAL ============= -->
   <section>
-    <h2>1 · <b>Where they are</b> vs where they said they want to be</h2>
-    <p><span id="currentSituation">They earn — per month.</span> The question is not whether they can work harder. It is whether their current career path can produce the income and schedule they said they want.</p>
+    <h2>1 · <b>Where you are</b> vs where you said you want to be</h2>
+    <p><span id="currentSituation">You earn — per month.</span> The question is not whether you can work harder. It is whether your current career path can produce the income and schedule you said you want.</p>
 
     <div class="grid-3" style="margin-top:12px">
       <div class="card">
@@ -907,7 +920,7 @@
       <div class="card">
         <div class="lbl">Goal</div>
         <div class="big gain" id="mGoal">—</div>
-        <div class="sub">their stated monthly target</div>
+        <div class="sub">your stated monthly target</div>
       </div>
       <div class="card">
         <div class="lbl">Monthly gap</div>
@@ -921,7 +934,7 @@
       <tr><td>Current hourly value <span class="caption">(current $ ÷ hours ÷ 4)</span></td><td class="n" id="mHourly">—</td></tr>
       <tr><td>Hours per week needed at that rate to hit the goal</td><td class="n" id="mReqHrs">—</td></tr>
       <tr><td>Additional hours needed each week at the current rate</td><td class="n" id="mExtra">—</td></tr>
-      <tr><td>Ideal workweek they actually want</td><td class="n" id="mIdealHrs">—</td></tr>
+      <tr><td>Ideal workweek you actually want</td><td class="n" id="mIdealHrs">—</td></tr>
       <tr><td>Time you want back every week</td><td class="n" id="mHoursBack">—</td></tr>
       <tr class="total"><td>Income jump required without changing the vehicle</td><td class="n" id="mPct">—</td></tr>
     </table>
@@ -1027,11 +1040,14 @@
         <tr><td>Offer used for this plan</td><td class="n" id="rangeOffer">—</td></tr>
         <tr><td>Most common offer band</td><td class="n">$8k to $12k</td></tr>
         <tr><td>Full offer range represented</td><td class="n">$5k to $40k</td></tr>
-        <tr><td>Commission (rises with milestones)</td><td class="n">10% to 15%</td></tr>
+        <tr><td>Closer commission (rises with milestones)</td><td class="n">10% to 15%</td></tr>
         <tr><td>Expected planning benchmark</td><td class="n">20% close rate</td></tr>
         <tr><td>Placed closer average</td><td class="n">$10k to $15k / mo</td></tr>
-        <tr><td>Placed setter average</td><td class="n">$5k to $7k / mo</td></tr>
       </table>
+      <details class="setter-subset">
+        <summary>Setter reference</summary>
+        <p>Setters typically earn 5% to 7% commission. The placed setter average is $5k to $7k per month.</p>
+      </details>
     </details>
   </section>
 
@@ -1371,8 +1387,8 @@
     var jobText = (s.job || '').trim();
     var subject = (s.name || '').trim();
     $('currentSituation').textContent = subject
-      ? (subject + ' earns ' + money(s.current) + ' per month' + (jobText ? ' in their current role: ' + jobText : '') + '.')
-      : ('They earn ' + money(s.current) + ' per month' + (jobText ? ' in their current role: ' + jobText : '') + '.');
+      ? (subject + ', you earn ' + money(s.current) + ' per month' + (jobText ? ' in your current role: ' + jobText : '') + '.')
+      : ('You earn ' + money(s.current) + ' per month' + (jobText ? ' in your current role: ' + jobText : '') + '.');
 
     // ── Sticky status ──
     $('sGap').textContent = money(gap);
@@ -1406,9 +1422,9 @@
     else if (reqHrs > s.hours * 1.4) realism = 'Even if it looks possible on paper, it is a large lifestyle tax for the same hourly rate.';
     else if (reqHrs) realism = 'Possible on paper. The honest question is whether grinding more hours in the same vehicle is the right path.';
 
-    var jobIn = jobText ? (' in the current role (<strong>' + escapeHtml(jobText) + '</strong>)') : '';
+    var jobIn = jobText ? (' in your current role (<strong>' + escapeHtml(jobText) + '</strong>)') : '';
     $('gapRecap').innerHTML = (hourly && reqHrs)
-      ? ('At the current hourly rate' + jobIn + ', hitting <strong>' + money(s.goal) + '/mo</strong> would take about <strong>' + reqHrs.toFixed(1) + ' hours per week</strong>. Their actual lifestyle target is <strong>' + s.idealHours + ' hours/week</strong>' + (hoursBack ? (', reclaiming <strong>' + hoursBack + ' hours every week</strong>') : '') + '. That is a <strong>' + pct(increase) + '</strong> income jump without changing the vehicle. ' + realism)
+      ? ('At your current hourly rate' + jobIn + ', hitting <strong>' + money(s.goal) + '/mo</strong> would take about <strong>' + reqHrs.toFixed(1) + ' hours per week</strong>. Your actual lifestyle target is <strong>' + s.idealHours + ' hours/week</strong>' + (hoursBack ? (', reclaiming <strong>' + hoursBack + ' hours every week</strong>') : '') + '. That is a <strong>' + pct(increase) + '</strong> income jump without changing the vehicle. ' + realism)
       : 'Enter current income, weekly hours, and goal monthly income above.';
 
     // ── Section 2 · cost of waiting ──
@@ -1451,7 +1467,7 @@
     }
     tierReason += ' Higher offers exist for exceptional interviews and experienced closers, but they are not used to force this projection.';
     if (s.track === 'full' && s.idealHours <= 25){
-      tierReason += ' Note: the selected full-time activity track may conflict with the ' + s.idealHours + '-hour lifestyle target; this version keeps that tradeoff visible instead of calling them the same thing.';
+      tierReason += ' Note: the selected full-time activity track may conflict with the ' + s.idealHours + '-hour lifestyle target; this version keeps that tradeoff visible instead of treating those targets as the same thing.';
     }
     $('offerWhy').textContent = tierReason;
 
@@ -1619,7 +1635,7 @@
     // ── Section 7 · summary ──
     $('summaryList').innerHTML =
       '<li><strong>Downside is defined.</strong> ' + money(s.tuition) + ' with a written conditional refund if placement milestones are met and placement does not happen.</li>' +
-      '<li><strong>The lifestyle goal is visible.</strong> They want to move from ' + s.hours + ' to ' + s.idealHours + ' hours/week' + (hoursBack ? (', reclaiming ' + hoursBack + ' hours every week') : '') + '.</li>' +
+      '<li><strong>The lifestyle goal is visible.</strong> You want to move from ' + s.hours + ' to ' + s.idealHours + ' hours/week' + (hoursBack ? (', reclaiming ' + hoursBack + ' hours every week') : '') + '.</li>' +
       '<li><strong>The activity is visible.</strong> This model uses ' + plannedCalls + ' completed calls each week inside the selected ' + trackLabel + ' band.</li>' +
       '<li><strong>The conservative case is actually conservative.</strong> ' + (offerArticle(pickedOffer) === 'an' ? 'An' : 'A') + ' ' + offerLabel(pickedOffer) + ' offer at a 15% close rate models ' + projectionLabel(tierCon.monthly) + '.</li>' +
       (plan.feasible
