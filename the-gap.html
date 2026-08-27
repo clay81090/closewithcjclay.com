@@ -406,6 +406,41 @@
   .card .big.loss{ color:var(--loss); }
   .card .big.gain{ color:var(--gain); }
   .card .sub{ font-size:13px; color:var(--muted); margin-top:8px; }
+  .proof-grid{ align-items:stretch; }
+  .proof-card{
+    display:flex; flex-direction:column; min-width:0;
+  }
+  .proof-card .proof-link{ margin-top:auto; padding-top:14px; }
+  .proof-video{
+    display:block; width:100%; aspect-ratio:16/9; object-fit:cover;
+    margin:14px 0 0; border:1px solid var(--line);
+    border-radius:7px; background:var(--navy);
+  }
+  .proof-trustpilot{
+    display:flex; align-items:center; justify-content:center; gap:16px;
+    width:100%; margin-top:12px; padding:20px 22px;
+    color:var(--white); background:var(--navy);
+    border:1px solid rgba(0,201,122,.22); border-radius:8px;
+    text-decoration:none; box-shadow:0 8px 24px rgba(8,20,38,.13);
+    transition:transform .15s ease, box-shadow .15s ease, color .15s ease;
+  }
+  .proof-trustpilot:hover{
+    color:var(--green); transform:translateY(-1px);
+    box-shadow:0 11px 28px rgba(8,20,38,.19);
+  }
+  .proof-trustpilot-stars{
+    flex:none; color:#e2b227; font-size:25px; line-height:1;
+    letter-spacing:4px;
+    text-shadow:0 1px 2px rgba(0,0,0,.35),0 0 12px rgba(226,178,39,.35);
+  }
+  .proof-trustpilot-text{
+    color:inherit; font-size:clamp(15px,2.3vw,20px);
+    font-weight:700; letter-spacing:.015em;
+  }
+  @media (max-width:640px){
+    .proof-trustpilot{ flex-direction:column; gap:10px; text-align:center; }
+    .proof-trustpilot-stars{ font-size:22px; }
+  }
 
   /* ── Hero cost of waiting number ── */
   .hero-loss{
@@ -1072,26 +1107,34 @@
     <h2>5 · <b>Proof before the decision</b></h2>
     <p>Do not take this page as the proof. Verify the company, the employer side of placement, and a member's experience directly before deciding what the numbers mean for you.</p>
 
-    <div class="grid-3" style="margin-top:12px">
-      <div class="card">
-        <div class="lbl">Independent reviews</div>
-        <h3 style="margin:0 0 8px">Trustpilot</h3>
-        <div class="sub">Read the public reviews yourself. Do not take our summary as the evidence.</div>
-        <p style="margin-top:12px"><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener">Open independent reviews →</a></p>
+    <div class="grid-3 proof-grid" style="margin-top:12px">
+      <div class="card proof-card">
+        <div class="lbl">Recent placement proof · Aug 18 · 4:07</div>
+        <h3 style="margin:0 0 8px">Placement, in their own words</h3>
+        <div class="sub">Four members on a live HTSA coaching call discuss getting placed through the academy.</div>
+        <video class="proof-video" controls playsinline preload="metadata" controlslist="nodownload" title="HTSA members discuss placement on the August 18, 2026 live coaching call">
+          <source src="/media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
+          Your browser cannot play this video here. <a href="/media/this-week-at-htsa-2026-08-18.mp4">Open the video instead.</a>
+        </video>
       </div>
-      <div class="card">
+      <div class="card proof-card">
         <div class="lbl">Employer-side proof</div>
-        <h3 style="margin:0 0 8px">Why companies hire</h3>
+        <h3 style="margin:0 0 8px">Taylor Conroy: Why he hires from HTSA</h3>
         <div class="sub">Hear from Taylor Conroy on what an employer looks for and why he hires academy talent.</div>
-        <p style="margin-top:12px"><a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" target="_blank" rel="noopener">Watch the employer perspective →</a></p>
+        <p class="proof-link"><a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" target="_blank" rel="noopener">Watch Taylor's perspective →</a></p>
       </div>
-      <div class="card">
-        <div class="lbl">Member perspective</div>
-        <h3 style="margin:0 0 8px">Dana's review</h3>
-        <div class="sub">A member-published review in her own words, linked directly so you can judge it for yourself.</div>
-        <p style="margin-top:12px"><a href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" target="_blank" rel="noopener">Watch Dana's review →</a></p>
+      <div class="card proof-card">
+        <div class="lbl">Unsolicited member review</div>
+        <h3 style="margin:0 0 8px">Dana's unsolicited review</h3>
+        <div class="sub">Dana recorded and published this on her own. Hear her experience directly, in her own words.</div>
+        <p class="proof-link"><a href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" target="_blank" rel="noopener">Watch Dana's review →</a></p>
       </div>
     </div>
+
+    <a class="proof-trustpilot" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener" aria-label="Read HTSA reviews on Trustpilot, rated 4.9 stars out of 5">
+      <span class="proof-trustpilot-stars" aria-hidden="true">★★★★★</span>
+      <span class="proof-trustpilot-text">Trustpilot Reviews — 4.9 stars out of 5</span>
+    </a>
   </section>
 
   <!-- ============= 6. DECISION ============= -->
