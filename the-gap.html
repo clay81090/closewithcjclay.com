@@ -310,6 +310,33 @@
   .ranges > summary::-webkit-details-marker{ display:none; }
   .ranges > summary::after{ content:"  ▾"; font-size:10px; }
   .ranges[open] > summary::after{ content:"  ▴"; }
+  .ranges.ranges--attention{
+    border:2px solid rgba(20,84,135,.72);
+    background:linear-gradient(90deg,var(--sky-soft),#fff 42%);
+    box-shadow:0 0 0 3px rgba(158,212,241,.16),0 5px 15px rgba(8,20,38,.055);
+    transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease;
+  }
+  .ranges.ranges--attention:hover{
+    border-color:var(--green-dark);
+    box-shadow:0 0 0 4px var(--green-soft),0 7px 18px rgba(8,20,38,.08);
+    transform:translateY(-1px);
+  }
+  .ranges.ranges--attention > summary{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:14px; padding:13px 15px; color:var(--navy); font-weight:800;
+  }
+  .ranges.ranges--attention > summary::after{
+    content:"Click to open  ▾"; flex:none;
+    padding:5px 8px; border:1px solid rgba(0,168,102,.2);
+    border-radius:999px; color:var(--green-dark); background:var(--green-soft);
+    font-size:9px; letter-spacing:.08em; white-space:nowrap;
+  }
+  .ranges.ranges--attention[open] > summary::after{ content:"Click to close  ▴"; }
+  @media (max-width:520px){
+    .ranges.ranges--attention > summary{
+      align-items:flex-start; flex-direction:column; gap:8px;
+    }
+  }
   .ranges table{ margin:0 14px 12px; width:calc(100% - 28px); font-size:14px; }
   .ranges td{ padding:8px 0; border-bottom:1px solid var(--line); }
   .setter-subset{
@@ -1029,12 +1056,12 @@
       </button>
     </div>
 
-    <details class="ranges">
+    <details class="ranges ranges--attention">
       <summary>How completed calls relate to a 75% show rate</summary>
       <p style="margin:0 14px 12px;font-size:13px;color:var(--muted)">The primary math uses completed sales conversations, not booked appointments. At a 75% show rate, <b id="scheduledEquivalent">—</b> booked appointments would produce approximately <b id="completedEquivalent">—</b> completed calls. The show rate is context only and cannot be adjusted to inflate the result.</p>
     </details>
 
-    <details class="ranges">
+    <details class="ranges ranges--attention">
       <summary>See the actual industry ranges these compare against</summary>
       <table>
         <tr><td>Offer used for this plan</td><td class="n" id="rangeOffer">—</td></tr>
