@@ -1,0 +1,1247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>The Math — CJ Clay · HTSA</title>
+<style>
+  :root{
+    --ink:#0b1220;
+    --ink-2:#1a2332;
+    --muted:#6b7684;
+    --line:#e6ebf1;
+    --line-2:#d6dee7;
+    --paper:#fafbfc;
+    --card:#ffffff;
+    --soft:#f4f7fa;
+    --accent:#0b3a66;      /* single restrained blue for links + rule + labels */
+    --loss:#a63a1c;        /* single restrained warm accent for gap / leak */
+    --gain:#0d7a4a;        /* single restrained forest for the win */
+  }
+
+  *{ box-sizing:border-box; }
+  html{ color-scheme:light; scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font:16px/1.6 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{ color:var(--accent); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+
+  /* ── Layout ── */
+  .page{
+    max-width:820px;
+    margin:0 auto;
+    padding:28px 28px 96px;
+  }
+  .page-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    gap:16px; padding-bottom:14px; margin-bottom:28px;
+    border-bottom:1px solid var(--line);
+  }
+  .brand{
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    font-weight:700; color:var(--ink);
+  }
+  .brand-sub{
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); font-weight:500;
+  }
+
+  /* ── Controls: always visible, never collapsed ── */
+  .controls{
+    background:var(--card);
+    border:1px solid var(--line-2);
+    border-radius:10px;
+    margin-bottom:32px;
+    box-shadow:0 1px 3px rgba(11,18,32,.04);
+  }
+  .controls .status{
+    display:flex; gap:14px; flex-wrap:wrap; align-items:baseline;
+    font-size:13px; color:var(--muted); font-weight:500;
+    margin-top:14px; padding-top:12px;
+    border-top:1px solid var(--line);
+  }
+  .controls .status b{ color:var(--ink); font-weight:650; }
+  .controls .body{ padding:16px; }
+  .grid-inputs{
+    display:grid; grid-template-columns:repeat(4, minmax(0,1fr));
+    gap:10px;
+  }
+  .grid-inputs.grid-personal{ grid-template-columns:repeat(5, minmax(0,1fr)); }
+  .grid-inputs.grid-plan{
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    margin-top:10px;
+  }
+  @media (max-width:900px){
+    .grid-inputs.grid-personal{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+    .grid-inputs.grid-plan{ grid-template-columns:1fr; }
+  }
+  @media (max-width:640px){
+    .grid-inputs, .grid-inputs.grid-personal{ grid-template-columns:1fr 1fr; }
+    .grid-inputs.grid-plan{ grid-template-columns:1fr; }
+  }
+  label.f > select{
+    background-image:linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+                     linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+    background-position:calc(100% - 15px) calc(50% + 1px), calc(100% - 10px) calc(50% + 1px);
+    background-size:5px 5px, 5px 5px;
+    background-repeat:no-repeat;
+    padding-right:30px; cursor:pointer;
+  }
+  label.f > select:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(11,58,102,.12);
+  }
+  label.f{ display:flex; flex-direction:column; gap:4px; min-width:0; }
+  label.f > span{
+    font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted); font-weight:600;
+  }
+  label.f > input, label.f > select{
+    width:100%; background:var(--card); color:var(--ink);
+    border:1px solid var(--line-2); border-radius:6px;
+    padding:9px 10px; font:500 14px/1.2 inherit; outline:none;
+    -webkit-appearance:none; appearance:none;
+  }
+  label.f > input:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(11,58,102,.12);
+  }
+  label.f > .hint{
+    font-size:10px; letter-spacing:.02em;
+    color:var(--muted); font-weight:500; margin-top:3px;
+    line-height:1.35;
+  }
+  label.f > .hint b{ color:var(--ink); font-weight:650; }
+
+  /* ── Section 3 assumption strip ── */
+  .assumption-strip{
+    background:var(--soft); border:1px solid var(--line);
+    border-radius:8px; padding:12px 16px;
+    margin:14px 0 20px;
+    font-size:13px; color:var(--muted); line-height:1.55;
+  }
+  .assumption-strip .row{
+    display:flex; flex-wrap:wrap; gap:6px 14px;
+    align-items:center;
+  }
+  .assumption-strip b{ color:var(--ink); font-weight:650; }
+  .assumption-strip .why{
+    font-size:12px; color:var(--muted); margin-top:6px;
+    line-height:1.5;
+  }
+
+  /* ── Three tier outcome cards (Section 3) ── */
+  .tier-cards{
+    display:grid; grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:12px;
+  }
+  @media (max-width:720px){ .tier-cards{ grid-template-columns:1fr; } }
+  .tier-card{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:10px; padding:16px 18px;
+    display:flex; flex-direction:column; gap:0;
+  }
+  .tier-card.mid{ border-color:var(--ink); box-shadow:0 4px 12px rgba(11,18,32,.06); }
+  .tier-card .tier-name{
+    font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); font-weight:700;
+  }
+  .tier-card .tier-close{
+    font-size:12px; color:var(--muted); font-weight:500;
+    margin-top:2px; margin-bottom:14px;
+  }
+  .tier-card .tier-close b{ color:var(--ink); font-weight:650; }
+  .tier-card .tier-monthly{
+    font-family:inherit; font-size:clamp(24px, 3.4vw, 32px);
+    font-weight:700; letter-spacing:-.02em; line-height:1;
+    color:var(--ink); font-variant-numeric:tabular-nums;
+  }
+  .tier-card.mid .tier-monthly{ color:var(--ink); }
+  .tier-card .tier-monthly-sub{
+    font-size:12px; color:var(--muted); margin-top:4px;
+  }
+  .tier-card .tier-vs{
+    font-size:12px; color:var(--muted); margin-top:12px;
+    padding-top:12px; border-top:1px solid var(--line);
+    line-height:1.55;
+  }
+  .tier-card .tier-vs b{ color:var(--ink); font-weight:650; }
+  .tier-card .tier-vs .win{ color:var(--gain); font-weight:650; }
+  .tier-card .tier-vs .miss{ color:var(--loss); font-weight:650; }
+
+  /* ── Worked math trace (single line) ── */
+  .math-trace{
+    margin:16px 0 8px;
+    padding:12px 16px;
+    background:var(--card); border:1px solid var(--line);
+    border-radius:8px;
+    font-size:13px; color:var(--muted); line-height:1.6;
+    font-variant-numeric:tabular-nums;
+  }
+  .math-trace .lbl{
+    font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); font-weight:700; margin-bottom:6px;
+    display:block;
+  }
+  .math-trace b{ color:var(--ink); font-weight:650; }
+  .math-trace .step{ display:inline; }
+  .math-trace .arrow{ color:var(--line-2); margin:0 4px; }
+
+  /* ── Floor reality-check callout ── */
+  .floor-note{
+    margin-top:14px; padding:12px 16px;
+    background:var(--soft); border-left:2px solid var(--ink);
+    border-radius:0 6px 6px 0;
+    font-size:13px; color:var(--ink); line-height:1.55;
+  }
+  .floor-note b{ font-weight:650; }
+
+  /* ── Inline editable numbers (age, tuition) ── */
+  .inline-num{
+    display:inline-block;
+    padding:4px 9px; margin:0 3px;
+    background:var(--card); color:var(--ink);
+    border:1px solid var(--line-2); border-radius:5px;
+    font:700 16px/1 inherit;
+    text-align:center; font-variant-numeric:tabular-nums;
+    -webkit-appearance:none; appearance:none; outline:none;
+  }
+  .inline-num:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(11,58,102,.12);
+  }
+  .inline-num.w-age{ width:3.6em; }
+  .inline-num.w-tui{ width:5.4em; }
+
+  /* ── Industry ranges disclosure ── */
+  .ranges{
+    margin:18px 0 8px;
+    border:1px solid var(--line); border-radius:6px;
+    background:var(--card);
+  }
+  .ranges > summary{
+    cursor:pointer; list-style:none;
+    padding:10px 14px;
+    font-size:11px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--muted);
+    font-weight:700;
+  }
+  .ranges > summary::-webkit-details-marker{ display:none; }
+  .ranges > summary::after{ content:"  ▾"; font-size:10px; }
+  .ranges[open] > summary::after{ content:"  ▴"; }
+  .ranges table{ margin:0 14px 12px; width:calc(100% - 28px); font-size:14px; }
+  .ranges td{ padding:8px 0; border-bottom:1px solid var(--line); }
+  .ranges tr:last-child td{ border-bottom:none; }
+  .adv{
+    margin-top:12px; padding-top:10px; border-top:1px dashed var(--line);
+  }
+  .adv > summary{
+    cursor:pointer; list-style:none;
+    font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; padding:4px 0;
+  }
+  .adv > summary::-webkit-details-marker{ display:none; }
+  .adv > summary::before{ content:"+ "; }
+  .adv[open] > summary::before{ content:"− "; }
+  .actions{
+    display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;
+  }
+  .btn{
+    appearance:none; background:var(--card); color:var(--ink);
+    border:1px solid var(--line-2); border-radius:6px;
+    padding:7px 12px; font:600 12px/1 inherit; letter-spacing:.02em;
+    cursor:pointer;
+  }
+  .btn:hover{ border-color:var(--ink); }
+  .btn.primary{ background:var(--ink); color:#fff; border-color:var(--ink); }
+
+  /* ── Typography ── */
+  h1{
+    font-size:clamp(28px, 4.2vw, 40px);
+    line-height:1.1; letter-spacing:-.02em;
+    margin:0 0 12px; font-weight:700; color:var(--ink);
+  }
+  h1 .who{ color:var(--accent); }
+  .lede{
+    font-size:17px; color:var(--muted); margin:0 0 6px; max-width:640px;
+  }
+  .rule{
+    height:2px; width:44px; background:var(--ink);
+    border-radius:2px; margin:22px 0 0;
+  }
+  section{ margin-top:44px; }
+  h2{
+    font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); font-weight:700;
+    margin:0 0 18px; padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  h2 b{ color:var(--ink); font-weight:700; }
+  h3{
+    font-size:17px; letter-spacing:-.01em; font-weight:600;
+    margin:24px 0 10px; color:var(--ink);
+  }
+  p{ margin:0 0 12px; }
+  strong{ font-weight:650; color:var(--ink); }
+
+  /* ── Cards / grids ── */
+  .grid-3{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; }
+  .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:640px){
+    .grid-3, .grid-2{ grid-template-columns:1fr; }
+  }
+  .card{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:8px; padding:16px 18px;
+  }
+  .card.soft{ background:var(--soft); border-color:var(--line); }
+  .card .lbl{
+    font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); font-weight:700; margin-bottom:8px;
+  }
+  .card .big{
+    font-size:clamp(26px, 3.6vw, 34px);
+    font-weight:700; letter-spacing:-.02em; line-height:1;
+    color:var(--ink); font-variant-numeric:tabular-nums;
+  }
+  .card .big.loss{ color:var(--loss); }
+  .card .big.gain{ color:var(--gain); }
+  .card .sub{ font-size:13px; color:var(--muted); margin-top:8px; }
+
+  /* ── Hero cost of waiting number ── */
+  .hero-loss{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:8px; padding:22px 22px;
+    display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+    flex-wrap:wrap;
+  }
+  .hero-loss .num{
+    font-size:clamp(38px, 6vw, 56px);
+    font-weight:700; letter-spacing:-.03em; line-height:1;
+    color:var(--loss); font-variant-numeric:tabular-nums;
+  }
+  .hero-loss .cap{
+    font-size:13px; color:var(--muted); max-width:320px;
+  }
+  .hero-loss .cap b{ color:var(--ink); }
+
+  /* ── Tables ── */
+  table{ width:100%; border-collapse:collapse; margin:10px 0 6px; font-size:15px; }
+  th{
+    text-align:left; font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted); font-weight:700;
+    padding:10px 10px; border-bottom:1px solid var(--line-2);
+  }
+  td{
+    padding:11px 10px; border-bottom:1px solid var(--line);
+    color:var(--ink);
+  }
+  td.n, th.n{
+    text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;
+  }
+  tr.total td{
+    font-weight:650; border-bottom:2px solid var(--ink);
+    background:var(--soft);
+  }
+  .caption{ font-size:13px; color:var(--muted); margin-top:8px; }
+
+  /* ── Quote block ── */
+  .q{
+    border-left:2px solid var(--ink);
+    padding:4px 0 4px 18px; margin:22px 0;
+    font-size:17px; line-height:1.5; color:var(--ink);
+  }
+
+  /* ── 4,004 weeks grid (one dot = one week, one row = one year) ── */
+  .weeks-viz{
+    margin:18px 0 12px;
+    padding:20px 18px 18px;
+    background:var(--soft); border:1px solid var(--line);
+    border-radius:10px;
+  }
+  .weeks-header{
+    font-size:15px; line-height:1.55; color:var(--ink);
+    margin:0 0 18px;
+  }
+  .weeks-header .g{ color:var(--gain); font-weight:650; }
+
+  .weeks-grid-wrap{
+    position:relative; max-width:520px; margin:0 auto;
+  }
+  .weeks-grid{
+    display:grid; grid-template-columns:repeat(52, 1fr);
+    gap:1px; width:100%; aspect-ratio:52/77;
+    background:var(--line);
+    padding:1px; border-radius:2px;
+  }
+  .w{
+    aspect-ratio:1; background:var(--card); border-radius:1px;
+  }
+  .w.spent{ background:#c3ccd6; }
+  .w.sleep{ background:#9fb0c2; }
+  .w.work{  background:#c78a4a; }
+  .w.live{  background:var(--gain); }
+
+  .age-mark{
+    position:absolute; left:-8px; right:-8px;
+    height:0; border-top:2px solid var(--ink);
+    pointer-events:none; transition:top .18s ease-out;
+  }
+  .age-mark::after{
+    content:attr(data-label);
+    position:absolute; right:0; top:-11px;
+    font-size:9px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--card); background:var(--ink);
+    padding:3px 7px; border-radius:3px;
+    font-weight:700; white-space:nowrap;
+    box-shadow:0 1px 0 rgba(0,0,0,.08);
+  }
+
+  .weeks-legend{
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    gap:10px; margin-top:16px;
+    font-size:12px; color:var(--muted);
+  }
+  .weeks-legend .lg{
+    display:flex; gap:7px; align-items:baseline;
+  }
+  .weeks-legend .sw{
+    width:11px; height:11px; border-radius:2px;
+    display:inline-block; flex:none; transform:translateY(1px);
+  }
+  .weeks-legend b{
+    color:var(--ink); font-weight:650;
+    font-variant-numeric:tabular-nums;
+  }
+  @media (max-width:640px){
+    .weeks-legend{ grid-template-columns:1fr 1fr; }
+    .weeks-grid-wrap{ max-width:100%; }
+  }
+
+  /* ── Closing call to action ── */
+  .cta{
+    margin-top:28px; padding:26px 24px;
+    background:var(--ink); color:#fff;
+    border-radius:10px;
+  }
+  .cta-head{
+    font-size:clamp(20px, 2.8vw, 26px);
+    font-weight:700; letter-spacing:-.02em; line-height:1.2;
+  }
+  .cta-sub{
+    color:#c3ccd6; font-size:15px; margin:10px 0 0; max-width:520px;
+  }
+  .cta-actions{
+    display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;
+  }
+  .cta-btn{
+    display:inline-block;
+    padding:11px 18px; border-radius:6px;
+    font-size:14px; font-weight:600; letter-spacing:.01em;
+    border:1px solid rgba(255,255,255,.28);
+    color:#fff; text-decoration:none; white-space:nowrap;
+  }
+  .cta-btn:hover{ border-color:#fff; text-decoration:none; }
+  .cta-btn.primary{
+    background:#fff; color:var(--ink); border-color:#fff;
+  }
+  .cta-btn.primary:hover{ background:#eef2f6; }
+  @media (max-width:520px){
+    .cta-actions{ flex-direction:column; }
+    .cta-btn{ text-align:center; }
+  }
+
+  /* ── Lists / footer ── */
+  ul{ margin:0 0 12px 18px; padding:0; }
+  li{ margin:0 0 7px; }
+  .foot{
+    margin-top:56px; padding-top:18px;
+    border-top:1px solid var(--line);
+    font-size:12px; color:var(--muted); line-height:1.6;
+  }
+  .foot b{ color:var(--ink); font-weight:650; }
+
+  /* ── Print ── */
+  @media print{
+    body{ background:#fff; }
+    .page{ padding:24px 0; max-width:none; }
+    .controls, .no-print{ display:none !important; }
+    section{ break-inside:avoid; }
+    a{ color:var(--ink); }
+    .dots{ background:#fff; border-color:#ddd; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="page-head">
+    <div class="brand">CJ Clay · HTSA</div>
+    <div class="brand-sub">Remote High Ticket Sales · The Math</div>
+  </header>
+
+  <!-- ============= INTRO ============= -->
+  <section class="intro" style="margin-top:0">
+    <h1>The math for <span class="who" id="whoTitle">this decision</span>.</h1>
+    <p class="lede">Every figure below updates from the inputs. Where a range exists, the conservative end is used on purpose, so the decision gets made on arithmetic rather than a feeling.</p>
+    <div class="rule"></div>
+  </section>
+
+  <!-- ============= CONTROLS (always visible) ============= -->
+  <div class="controls no-print" id="controls">
+    <div class="body">
+      <div class="grid-inputs grid-personal">
+        <label class="f"><span>First name</span><input id="name" type="text" placeholder="e.g. Dina" autocomplete="off"></label>
+        <label class="f"><span>Current job</span><input id="job" type="text" placeholder="e.g. bartender" autocomplete="off"></label>
+        <label class="f"><span>Current $/mo</span><input id="current" type="number" min="0" step="100" value="2000"></label>
+        <label class="f"><span>Hours / week now</span><input id="hours" type="number" min="1" max="100" step="1" value="40"></label>
+        <label class="f"><span>Goal $/mo</span><input id="goal" type="number" min="0" step="100" value="6000"></label>
+      </div>
+
+      <div class="grid-inputs grid-plan">
+        <label class="f"><span>Sales experience</span>
+          <select id="exp">
+            <option value="0">Under 1 year</option>
+            <option value="1">1 to 3 years</option>
+            <option value="2">3 to 7 years</option>
+            <option value="3">7+ years</option>
+          </select>
+        </label>
+        <label class="f"><span>Commitment</span>
+          <select id="commit">
+            <option value="ft">Full time · 30 to 40 calls a week</option>
+            <option value="pt">Part time · 15 to 25 calls a week</option>
+          </select>
+        </label>
+        <label class="f"><span>HTSA - Tuition</span>
+          <select id="tuitionPlan">
+            <option value="pif">$6,000 · paid in full</option>
+            <option value="4pay">$7,000 · 4 pay at $1,750/mo</option>
+            <option value="clarity">$7,200 · ClarityPay 12 mo at $600/mo, 0% APR</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="status" id="statusStrip">
+        <span>Gap <b id="sGap">—</b>/mo</span>
+        <span>Leak <b id="sDaily">—</b>/day</span>
+        <span>HTSA - Tuition <b id="sTui">—</b></span>
+        <span>Offer modeled <b id="sOffer">—</b></span>
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="button" id="btnReset">Reset</button>
+        <button class="btn" type="button" id="btnSave">Save on this Mac</button>
+        <button class="btn" type="button" id="btnCopy">Copy shareable link</button>
+        <button class="btn primary" type="button" onclick="window.print()">Print / PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============= 1. CURRENT VS GOAL ============= -->
+  <section>
+    <h2>1 · <b>Where they are</b> vs where they said they want to be</h2>
+    <p><span id="who1">They</span> currently earn <strong id="curSentence">—</strong> per month<span id="jobPhrase"></span>. The question is not whether they can work harder. It is whether the current vehicle can get them to the number they said they want.</p>
+
+    <div class="grid-3" style="margin-top:12px">
+      <div class="card">
+        <div class="lbl">Current</div>
+        <div class="big" id="mCurrent">—</div>
+        <div class="sub" id="mCurrentSub">per month</div>
+      </div>
+      <div class="card">
+        <div class="lbl">Goal</div>
+        <div class="big gain" id="mGoal">—</div>
+        <div class="sub">per month, their number</div>
+      </div>
+      <div class="card">
+        <div class="lbl">Monthly gap</div>
+        <div class="big loss" id="mGap">—</div>
+        <div class="sub" id="mGapSub">leaking every 30 days</div>
+      </div>
+    </div>
+
+    <h3>What the current vehicle would have to do</h3>
+    <table>
+      <tr><td>Current hourly value <span class="caption">(current $ ÷ hours ÷ 4)</span></td><td class="n" id="mHourly">—</td></tr>
+      <tr><td>Hours per week needed at that rate to hit the goal</td><td class="n" id="mReqHrs">—</td></tr>
+      <tr><td>Extra hours per week on top of today</td><td class="n" id="mExtra">—</td></tr>
+      <tr class="total"><td>Income jump required without changing the vehicle</td><td class="n" id="mPct">—</td></tr>
+    </table>
+    <div class="q" id="gapRecap">Enter current income, hours, and goal to see the vehicle math.</div>
+  </section>
+
+  <!-- ============= 2. COST OF WAITING ============= -->
+  <section>
+    <h2>2 · <b>The cost of waiting</b></h2>
+    <p>Waiting is not free and it is not neutral. It is an active monthly forfeiture of the gap above.</p>
+
+    <div class="hero-loss">
+      <div>
+        <div class="lbl" style="font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:8px">One year of waiting</div>
+        <div class="num" id="loss12">—</div>
+      </div>
+      <div class="cap" id="loss12Cap">Forfeited income if the decision is deferred a full year at today's gap.</div>
+    </div>
+
+    <table style="margin-top:16px">
+      <thead><tr><th>If the decision waits</th><th class="n">Unearned income</th><th class="n">Net loss vs starting now</th></tr></thead>
+      <tbody id="waitTable"></tbody>
+    </table>
+
+    <div class="q" id="waitQuote">—</div>
+  </section>
+
+  <!-- ============= 3. SEAT MATH ============= -->
+  <section>
+    <h2>3 · <b>What the seat produces</b></h2>
+    <p>Three things decide the income in this job: how many calls <span id="who3">they</span> take a week, what percentage of them close, and the size of the offer being sold. That is the whole model. Everything below is those three numbers multiplied out, with the commission held at the low end on purpose.</p>
+
+    <div class="assumption-strip">
+      <div class="row">
+        <span>Offer modeled: <b id="assumeOffer">—</b></span>
+        <span>·</span>
+        <span><b id="assumeCalls">—</b> calls a week</span>
+        <span>·</span>
+        <span><b>10%</b> commission</span>
+        <span>·</span>
+        <span><b>4</b> weeks a month</span>
+      </div>
+      <div class="why" id="assumeWhy">—</div>
+    </div>
+
+    <div class="tier-cards" id="tierCards"></div>
+
+    <div class="math-trace">
+      <span class="lbl">The math on the average case</span>
+      <span id="mathTraceLine">—</span>
+    </div>
+
+    <div class="floor-note" id="gapWarn" style="display:none">—</div>
+    <div class="floor-note" id="commitNote" style="margin-top:10px">—</div>
+    <div class="floor-note" id="rampNote" style="margin-top:10px">—</div>
+
+    <details class="ranges">
+      <summary>See the actual industry ranges these compare against</summary>
+      <table>
+        <tr><td>Our offers overall</td><td class="n">$5k to $15k</td></tr>
+        <tr><td>Where most of them land</td><td class="n">$8k to $12k</td></tr>
+        <tr><td>Top end placements</td><td class="n">up to $40k</td></tr>
+        <tr><td>Commission (rises with milestones)</td><td class="n">10% to 15%</td></tr>
+        <tr><td>Industry average close rate</td><td class="n">around 20%</td></tr>
+        <tr><td>A strong rep closes around</td><td class="n">30%</td></tr>
+        <tr><td>Full time schedule</td><td class="n">30 to 40 calls / wk</td></tr>
+        <tr><td>Part time schedule</td><td class="n">15 to 25 calls / wk</td></tr>
+        <tr><td>Placed closer average</td><td class="n">$10k to $15k / mo</td></tr>
+        <tr><td>Placed setter average</td><td class="n">$5k to $7k / mo</td></tr>
+      </table>
+    </details>
+  </section>
+
+  <!-- ============= 4. PROOF ============= -->
+  <section>
+    <h2>4 · <b>Proof before promises</b></h2>
+    <p>Everything above is a planning model, not a guarantee. These are separate proof points that can be inspected directly, without taking any summary at face value.</p>
+
+    <div class="grid-3" style="margin-top:12px">
+      <div class="card">
+        <div class="lbl">Independent reviews</div>
+        <h3 style="margin:0 0 8px">Trustpilot, 4.9 out of 5</h3>
+        <div class="sub">Public reviews on a platform we do not control. Read them yourself rather than trusting our description of them.</div>
+        <p style="margin-top:12px"><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener">Open independent reviews →</a></p>
+      </div>
+      <div class="card">
+        <div class="lbl">Employer side</div>
+        <h3 style="margin:0 0 8px">Why companies hire us</h3>
+        <div class="sub">Taylor Conroy on what he looks for in a closer and why he hires academy talent. Placement is the whole bottleneck, so hear it from the buyer.</div>
+        <p style="margin-top:12px"><a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" target="_blank" rel="noopener">Watch the employer perspective →</a></p>
+      </div>
+      <div class="card">
+        <div class="lbl">Member side</div>
+        <h3 style="margin:0 0 8px">Dana, in her own words</h3>
+        <div class="sub">A member published review, linked directly so it can be judged on its own merits.</div>
+        <p style="margin-top:12px"><a href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" target="_blank" rel="noopener">Watch Dana's review →</a></p>
+      </div>
+    </div>
+    <p class="caption">There is also a private Facebook mastermind of 680+ members, lifetime access to the training, and lifetime placement support including a future move to a different company.</p>
+  </section>
+
+  <!-- ============= 5. RETURN ON TUITION ============= -->
+  <section>
+    <h2>5 · <b>Return on the HTSA - Tuition</b></h2>
+    <p id="tuitionLine">—</p>
+
+    <div class="floor-note" id="paybackNote">—</div>
+
+    <table style="margin-top:18px">
+      <thead><tr><th>First year at <span id="roiCommit">—</span></th><th class="n">Net after HTSA - Tuition</th><th class="n">Return on HTSA - Tuition</th></tr></thead>
+      <tbody id="roiTable"></tbody>
+    </table>
+    <p class="caption" id="roiCaption">—</p>
+
+    <div class="grid-2" style="margin-top:16px">
+      <div class="card">
+        <div class="lbl">Same HTSA - Tuition in the market</div>
+        <div class="big" id="mMarket">—</div>
+        <div class="sub">One year at roughly the long run S&amp;P average. Real, passive, appropriate for capital being preserved.</div>
+      </div>
+      <div class="card soft">
+        <div class="lbl">Same HTSA - Tuition into a skill</div>
+        <div class="big gain" id="mSkill">—</div>
+        <div class="sub" id="mSkillSub">—</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= 6. TIME MATH ============= -->
+  <section>
+    <h2>6 · <b>The time math</b> · 4,000 weeks</h2>
+    <p><strong id="s5Intro">—</strong> Average U.S. life expectancy is about <strong>77 years</strong>, or roughly <strong>4,004 weeks</strong>. Total.</p>
+
+    <div class="weeks-viz">
+      <p class="weeks-header">
+        Enter your age
+        <input type="number" id="age" class="inline-num w-age" min="18" max="80" step="1" value="38" aria-label="Age">
+        and watch the line move. <b>Every square below is one week.</b> Everything above the line is already lived (about <b id="pctLived">—</b> of an average life). Of the weeks that remain, sleep and work take two thirds. The <span class="g">green squares at the bottom are the life to be lived</span>, the time you actually control.
+      </p>
+      <div class="weeks-grid-wrap">
+        <div class="weeks-grid" id="weeks"></div>
+        <div class="age-mark" id="ageMark" data-label="you are here"></div>
+      </div>
+      <div class="weeks-legend" id="weeksLegend"></div>
+    </div>
+
+    <table style="margin-top:16px">
+      <tbody id="timeTable"></tbody>
+    </table>
+
+    <p style="margin-top:14px"><strong id="primeLine">—</strong></p>
+    <p class="caption">Those working weeks get spent no matter what. The only question is what they pay, and whether they are spent somewhere worth being.</p>
+  </section>
+
+  <!-- ============= 7. HONEST SUMMARY ============= -->
+  <section>
+    <h2>7 · <b>Honest summary</b></h2>
+    <ul id="summaryList"></ul>
+    <p style="margin-top:14px"><strong>Any question about any figure on this page is welcome.</strong> That is the reason it exists, so the decision gets made on arithmetic rather than a feeling in either direction.</p>
+  </section>
+
+  <!-- ============= 8. THE DECISION ============= -->
+  <section>
+    <h2>8 · <b>The part the math cannot do</b></h2>
+
+    <div class="q" style="font-size:19px">Nothing changes until the pain of staying the same gets bigger than the pain of changing.</div>
+
+    <p>Every number on this page came from answers <span id="who8">they</span> gave. The arithmetic can size the gap, price the delay, and count the weeks that are left. It cannot make the decision. That part has never been a math problem.</p>
+
+    <p><strong>Perception shapes decisions. Decisions shape actions. Actions shape results.</strong> If the way decisions have been getting made so far produced a job, an income, and a schedule that already got described as not what they want, then running the next decision through that same filter is very likely to produce more of the same. That is not a criticism. It is just how the loop works, and it is the one input on this page nobody else can change.</p>
+
+    <h3>What people who move quickly tend to have in common</h3>
+    <p>They decide fast once something makes logical sense, because they have learned that hesitation is itself a decision with a price. They spend their energy on how to make it work instead of only on what could go wrong. They are not more certain than anyone else. They have just stopped needing certainty before acting.</p>
+
+    <h3>The honest worst case</h3>
+    <p>The worst case is not zero, and it is worth saying plainly. Somebody in the slowest part of the pack takes most of a year to ramp and lands somewhere near <strong>$70,000</strong> in a first year, while a fast starter can clear <strong>$150,000</strong>. Those describe placed members rather than a forecast for anyone specific, and the difference between them is almost never talent. It is consistency over months that are not exciting.</p>
+    <p>Underneath even that: the ability to sell is not a job skill, it is a life skill. Getting hired, raising money, being taken seriously, defending an idea, all of it is selling. Learn it once and it does not expire, it does not get automated away, and it cannot be repossessed. Add lifetime access to the training and lifetime placement support, including help moving to a different company later, and the floor under this decision is considerably higher than it looks from the outside.</p>
+
+    <h3>The only question left</h3>
+    <p>Not whether the money makes sense. Section 5 already answered that. The real one is whether the next twelve months are going to look like the last twelve, and whether that is acceptable given how few weeks are actually left in Section 6.</p>
+
+    <div class="cta">
+      <div class="cta-head">Let's finish this conversation properly</div>
+      <p class="cta-sub">Bring every objection, including the ones that feel rude. A decision made on real answers holds up. One made on enthusiasm does not.</p>
+      <div class="cta-actions">
+        <a class="cta-btn primary" href="https://meetings.hubspot.com/charles660/cj" target="_blank" rel="noopener">Book a time with CJ →</a>
+        <a class="cta-btn" href="tel:+16166121735">Call or text 616-612-1735</a>
+        <a class="cta-btn" href="mailto:cj@highticketsalesacademy.com">cj@highticketsalesacademy.com</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <b>CJ Clay</b> · High Ticket Sales Academy<br>
+    Every figure is stated at the conservative end of its range. Member averages describe placed members, not forecasts for any individual. Ramp time varies. Full guarantee terms live in the written agreement.
+  </div>
+</div>
+
+<script>
+(function(){
+  var STORAGE = 'htsa-gap-math-v2';
+  // Every user-editable field on the page.
+  var ids = ['name','job','current','goal','hours','age','exp','commit','tuitionPlan'];
+
+  // The model is three numbers multiplied out: calls a week, close rate, offer size.
+  // Show rate is deliberately NOT modeled. "Calls a week" here means calls actually
+  // taken, so there is no second percentage for anyone to argue with.
+  var COMM_FIXED  = 10; // %, low end on purpose. Rises to 12-15 with milestones.
+  var WEEKS_MONTH = 4;  // 4.33 is accurate. 4 is used to under-promise.
+
+  // Weekly call volume by commitment. Both are the MINIMUM of their band.
+  var CALLS_FT = 30; // full time is 30 to 40
+  var CALLS_PT = 15; // part time is 15 to 25
+
+  // The three close rates shown. 20% sits just under the industry average.
+  var CLOSE_SLOW = 15;
+  var CLOSE_AVG  = 20;
+  var CLOSE_HIGH = 30;
+
+  // Offer sizes we actually place people on.
+  var OFFER_TIERS = [5000, 8000, 10000, 15000, 20000];
+
+  // Starting offer by sales experience. This is a placement reality, not a reward:
+  // bigger offers hire on proof, so a beginner starts lower regardless of ambition.
+  var EXP_OFFER = { 0: 5000, 1: 8000, 2: 10000, 3: 15000 };
+  // Ceiling by experience. A big stated goal must never push someone onto an offer
+  // nobody would actually place them on, which is the fastest way to lose trust.
+  var EXP_MAX   = { 0: 8000, 1: 10000, 2: 15000, 3: 20000 };
+  var EXP_LABEL = { 0: 'under a year of sales experience', 1: 'one to three years of sales experience',
+                    2: 'three to seven years of sales experience', 3: 'seven or more years of sales experience' };
+
+  // Tuition options. Total is what the ROI is measured against.
+  var TUITION = {
+    pif:     { total: 6000, label: '$6,000 paid in full',  terms: 'One payment of $6,000, nothing after that.' },
+    '4pay':  { total: 7000, label: '$7,000 on the 4 pay',  terms: 'Four payments of $1,750, one a month, then it is done.' },
+    clarity: { total: 7200, label: '$7,200 through ClarityPay', terms: 'Twelve payments of $600 at 0% APR, subject to approval and a 620+ credit score.' }
+  };
+
+  var DEFAULTS = {
+    age: 38, current: 2000, goal: 6000, hours: 40,
+    exp: '0', commit: 'ft', tuitionPlan: 'pif'
+  };
+
+  function $(id){ return document.getElementById(id); }
+  function num(id, fallback){
+    var v = parseFloat($(id).value);
+    return isFinite(v) ? v : fallback;
+  }
+  function money(n){
+    if (!isFinite(n)) return '—';
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+  function pct(n){ return (isFinite(n) ? Math.round(n) : 0) + '%'; }
+  function offerLabel(v){ return '$' + (v/1000) + 'k'; }
+  // "an $8k offer", not "a $8k offer".
+  function anOffer(v){
+    return (/^(8|11|18)/.test(String(v/1000)) ? 'an ' : 'a ') + offerLabel(v);
+  }
+  function Who(){
+    var n = ($('name').value || '').trim();
+    return n || 'They';
+  }
+
+  // The entire income model. Calls taken, times close rate, times commission on the
+  // offer, times four weeks. Nothing hidden between the inputs and the output.
+  function monthlyFrom(offer, calls, closePct){
+    var deals   = calls * (closePct / 100);
+    var perDeal = offer * (COMM_FIXED / 100);
+    var weekly  = deals * perDeal;
+    return { deals: deals, perDeal: perDeal, weekly: weekly, monthly: weekly * WEEKS_MONTH };
+  }
+
+  // Offer size is set by what someone can realistically get placed on, then raised
+  // only if their own target needs more room, and never past the ceiling their
+  // track record supports. Bigger offers hire on proof, not on ambition.
+  function pickOffer(expLevel, anchor){
+    var base = EXP_OFFER[expLevel] || 5000;
+    var cap  = EXP_MAX[expLevel]  || 8000;
+    // Full time at the average close rate should be able to reach the target.
+    var needed = anchor > 0 ? anchor / (CALLS_FT * (CLOSE_AVG/100) * (COMM_FIXED/100) * WEEKS_MONTH) : 0;
+    var want   = Math.min(Math.max(base, needed), cap);
+    for (var i = 0; i < OFFER_TIERS.length; i++){
+      if (OFFER_TIERS[i] >= want) return OFFER_TIERS[i];
+    }
+    return cap;
+  }
+
+  // Which schedule to show by default. If part time already covers what they said
+  // they want, lead with part time. Leading with full time in that case inflates
+  // the headline number past their own stated goal for no reason.
+  function suggestCommit(offer, anchor){
+    var pt = offer * (COMM_FIXED/100) * CALLS_PT * (CLOSE_AVG/100) * WEEKS_MONTH;
+    return (anchor > 0 && pt >= anchor) ? 'pt' : 'ft';
+  }
+
+  // Set once the schedule is chosen deliberately, so the auto-suggestion stops
+  // overriding it on every keystroke.
+  var commitTouched = false;
+
+  function gather(){
+    var out = {};
+    ids.forEach(function(id){
+      var el = $(id);
+      out[id] = (el.type === 'number') ? num(id, DEFAULTS[id] || 0) : el.value;
+    });
+    out.tuition = (TUITION[out.tuitionPlan] || TUITION.pif).total;
+    return out;
+  }
+
+  function render(){
+    var s = gather();
+    var gap = Math.max(0, s.goal - s.current);
+    var daily = gap / 30;
+    var weeklyGap = gap / 4.333;
+    var hourly = (s.current > 0 && s.hours > 0) ? s.current / (s.hours * 4) : 0;
+    var reqHrs = (hourly > 0 && s.goal > 0) ? s.goal / (hourly * 4) : 0;
+    var extra = reqHrs > 0 ? reqHrs - s.hours : 0;
+    var increase = s.current > 0 ? ((s.goal - s.current) / s.current) * 100 : 0;
+
+    // ── Section 3 · offer sized to experience, then run at both schedules ──
+    // Anchor to the higher of current income and stated goal, so a high earner is
+    // never shown a plan that quietly reads as a pay cut.
+    var anchor    = Math.max(s.current, s.goal);
+    var expLevel  = String(s.exp || '0');
+    var offer     = pickOffer(expLevel, anchor);
+
+    // Until CJ or the prospect picks a schedule, lead with whichever one actually
+    // fits the stated goal rather than always defaulting to the bigger number.
+    if (!commitTouched){
+      var suggested = suggestCommit(offer, anchor);
+      if ($('commit').value !== suggested){ $('commit').value = suggested; s.commit = suggested; }
+    }
+    var isFT      = (s.commit !== 'pt');
+    var callsSel  = isFT ? CALLS_FT : CALLS_PT;
+    var callsAlt  = isFT ? CALLS_PT : CALLS_FT;
+    var commitName    = isFT ? 'full time' : 'part time';
+    var commitNameAlt = isFT ? 'part time' : 'full time';
+    var commitBand    = isFT ? '30 to 40 calls a week' : '15 to 25 calls a week';
+
+    // Three close rates at the chosen schedule, plus the same three at the other
+    // schedule so neither option is hidden from the page.
+    var rates = [
+      { key:'slow', name:'Slower start',    close:CLOSE_SLOW, note:'Still learning the offer and the objections.' },
+      { key:'avg',  name:'Average',         close:CLOSE_AVG,  note:'Just under the industry average close rate.' },
+      { key:'high', name:'Doing well',      close:CLOSE_HIGH, note:'What a strong rep closes once they are dialed in.' }
+    ].map(function(r){
+      return {
+        key:r.key, name:r.name, close:r.close, note:r.note,
+        sel: monthlyFrom(offer, callsSel, r.close),
+        alt: monthlyFrom(offer, callsAlt, r.close)
+      };
+    });
+    var rAvg = rates[1];
+
+    var perDeal = offer * (COMM_FIXED / 100);
+    var yearSel = rates.map(function(r){ return r.sel.monthly * 12; });
+
+    // ── Intro / labels ──
+    $('whoTitle').textContent = (s.name || '').trim() || 'this decision';
+    $('who1').textContent = Who();
+    $('curSentence').textContent = money(s.current);
+
+    var jobText = (s.job || '').trim();
+    $('jobPhrase').textContent = jobText ? (', as a ' + jobText) : '';
+
+    // ── Sticky status ──
+    $('sGap').textContent = money(gap);
+    $('sDaily').textContent = money(daily);
+    $('sTui').textContent = money(s.tuition);
+
+    // ── Section 1 · gap ──
+    $('mCurrent').textContent = money(s.current);
+    $('mCurrentSub').textContent = s.hours ? (s.hours + ' hrs/week now') : 'per month';
+    $('mGoal').textContent = money(s.goal);
+    $('mGap').textContent = money(gap);
+    $('mGapSub').textContent = money(weeklyGap) + ' forfeited per week';
+    $('mHourly').textContent = hourly ? ('$' + Math.round(hourly).toLocaleString()) : '—';
+    $('mReqHrs').textContent = reqHrs ? reqHrs.toFixed(1) + ' hrs' : '—';
+    $('mExtra').textContent = reqHrs
+      ? ((extra >= 0 ? '+' : '') + extra.toFixed(1) + ' hrs vs today')
+      : '—';
+    $('mPct').textContent = s.current ? pct(increase) : '—';
+
+    var realism = '';
+    if (reqHrs > 168) realism = 'There are only 168 hours in a week. This is not an effort problem, it is a vehicle problem.';
+    else if (reqHrs > 90) realism = 'That schedule is not a life. The current vehicle was not built to scale this way.';
+    else if (reqHrs > s.hours * 1.4) realism = 'Even if it looks possible on paper, it is a large lifestyle tax for the same hourly rate.';
+    else if (reqHrs) realism = 'Possible on paper. The honest question is whether grinding more hours in the same vehicle is the right path.';
+
+    var jobIn = jobText ? (' as a <strong>' + jobText + '</strong>') : '';
+    $('gapRecap').innerHTML = (hourly && reqHrs)
+      ? ('At the current hourly rate' + jobIn + ', hitting <strong>' + money(s.goal) + '/mo</strong> would take about <strong>' + reqHrs.toFixed(1) + ' hours per week</strong>, an extra <strong>' + Math.max(0, extra).toFixed(1) + ' hours</strong> on top of ' + s.hours + '. That is a <strong>' + pct(increase) + '</strong> income jump without changing the vehicle. ' + realism)
+      : 'Enter current income, weekly hours, and goal monthly income above.';
+
+    // ── Section 2 · cost of waiting ──
+    var waits = [1,3,6,12];
+    $('waitTable').innerHTML = waits.map(function(m){
+      var coi = gap * m;
+      var net = coi - s.tuition;
+      var cls = (m === 12) ? ' class="total"' : '';
+      var label = m + ' month' + (m>1?'s':'');
+      var netTxt = (net >= 0)
+        ? (money(net) + ' more lost than a full HTSA - Tuition')
+        : ('still ' + money(Math.abs(net)) + ' under a full HTSA - Tuition');
+      return '<tr' + cls + '><td>' + label + '</td><td class="n">' + money(coi) + '</td><td class="n">' + netTxt + '</td></tr>';
+    }).join('');
+
+    $('loss12').textContent = money(gap * 12);
+    var ratio = s.tuition > 0 ? ((gap * 12) / s.tuition) : 0;
+    $('loss12Cap').innerHTML = 'Forfeited income if the decision is deferred a full year at today\'s gap. That is roughly <b>' + ratio.toFixed(1) + '× the HTSA - Tuition</b> of ' + money(s.tuition) + '.';
+
+    $('waitQuote').innerHTML = 'A <strong>6 month delay</strong> costs about <strong>' + money(gap*6) + '</strong> in income that will not be earned. HTSA - Tuition of <strong>' + money(s.tuition) + '</strong> is the valve. Waiting is the expensive option.';
+
+    // ── Section 3 · three close rates at the chosen schedule ──
+    $('who3').textContent   = (s.name || '').trim() || 'they';
+    $('sOffer').textContent = offerLabel(offer);
+    $('assumeOffer').textContent = offerLabel(offer) + ' (' + money(perDeal) + ' a sale)';
+    $('assumeCalls').textContent = callsSel;
+
+    var whyOffer = 'This models ' + anOffer(offer) + ' offer, because of ' + (EXP_LABEL[expLevel] || 'the experience selected') + '. ';
+    if (offer > (EXP_OFFER[expLevel] || 5000)){
+      whyOffer += 'It is stepped up from there because a target of ' + money(anchor) + ' a month does not fit on a smaller offer. ';
+    }
+    whyOffer += 'Our offers run ' + offerLabel(OFFER_TIERS[0]) + ' to $15k with most landing between $8k and $12k, and a few placements well above that, so this sits at the conservative end of what is available.';
+    $('assumeWhy').textContent = whyOffer;
+
+    // If even a full-time week at the average close rate cannot reach the stated
+    // goal on the offers this experience level supports, say so rather than
+    // quietly inflating the offer to make the number work.
+    var ftAvg = monthlyFrom(offer, CALLS_FT, CLOSE_AVG).monthly;
+    var shortfall = (anchor > 0 && ftAvg < anchor);
+    $('gapWarn').style.display = shortfall ? '' : 'none';
+    if (shortfall){
+      $('gapWarn').innerHTML = '<b>Worth saying plainly.</b> ' + money(anchor) + ' a month does not fit on ' +
+        anOffer(offer) + ' offer, which is the ceiling for ' + (EXP_LABEL[expLevel] || 'this experience level') +
+        '. Full time at an average close rate gets to about ' + money(ftAvg) +
+        '. Getting to ' + money(anchor) + ' means moving up to a bigger offer, and those hire on a track record. ' +
+        'That is a placement question rather than an effort question, it is the part we actually help with, and it is why the first placement matters more than the first paycheck.';
+    }
+
+    $('tierCards').innerHTML = rates.map(function(r){
+      return '<div class="tier-card' + (r.key === 'avg' ? ' mid' : '') + '">' +
+        '<div class="tier-name">' + r.name + '</div>' +
+        '<div class="tier-close"><b>' + r.close + '%</b> close rate</div>' +
+        '<div class="tier-monthly">' + money(r.sel.monthly) + '</div>' +
+        '<div class="tier-monthly-sub">a month ' + commitName + ' · ' + r.sel.deals.toFixed(1) + ' sales a week</div>' +
+        '<div class="tier-vs">' +
+          '<b>' + money(r.alt.monthly) + '</b> a month ' + commitNameAlt + ' (' + callsAlt + ' calls)<br>' +
+          r.note +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    // One visible line of arithmetic for the average case. No hidden percentages.
+    $('mathTraceLine').innerHTML =
+      '<span class="step"><b>' + callsSel + ' calls a week</b></span> ' +
+      '<span class="arrow">×</span> <span class="step">' + CLOSE_AVG + '% close = <b>' + rAvg.sel.deals.toFixed(1) + ' sales a week</b></span> ' +
+      '<span class="arrow">×</span> <span class="step">' + money(perDeal) + ' a sale (' + offerLabel(offer) + ' × 10%) = <b>' + money(rAvg.sel.weekly) + ' a week</b></span> ' +
+      '<span class="arrow">×</span> <span class="step">4 weeks = <b>' + money(rAvg.sel.monthly) + ' a month</b></span>';
+
+    // Full time versus part time, framed as a placement reality rather than effort.
+    $('commitNote').innerHTML =
+      '<b>Full time versus part time is a placement decision, not just an income one.</b> ' +
+      'Full time is 30 to 40 calls a week and keeps every door open. Part time is 15 to 25 and still has plenty of seats, but it closes some of them. ' +
+      'These companies are not startups hiring anyone with a pulse, they want skilled closers, and one person covering forty is easier to hire than three people covering twelve. ' +
+      'The page is currently modeling <b>' + commitName + ' at ' + callsSel + ' calls a week</b>, which is the bottom of the ' + commitBand + ' band.';
+
+    // The ramp. The math is never shown without it.
+    $('rampNote').innerHTML =
+      '<b>Month one is not that number.</b> Christa, one of ours, made $3,000 her first month. Then $8,000. Then $10,000. Then $22,000. She runs a sales team now. The $3,000 is the honest first month, and the $22,000 is real too, it is just month four. Everything above is what the seat produces at a steady state, not what a first month looks like, and the thing that decides it is consistency rather than talent.';
+
+    // ── Section 4 · ROI, traced to the three scenarios above ──
+    function roiRow(label, year, isTotal){
+      var net = year - s.tuition;
+      var r = s.tuition > 0 ? (net / s.tuition) * 100 : 0;
+      return '<tr' + (isTotal ? ' class="total"' : '') + '><td>' + label + ' · ' + money(year) + '</td><td class="n">' + money(net) + '</td><td class="n"><strong>' + Math.round(r).toLocaleString() + '%</strong></td></tr>';
+    }
+    var tui = TUITION[s.tuitionPlan] || TUITION.pif;
+    $('tuitionLine').innerHTML = 'One cost, once: <strong>' + tui.label + '</strong>. ' + tui.terms +
+      ' Nothing monthly after that, and it buys lifetime access to the training, the coaching, and placement support, including help moving to a different company later.';
+    $('roiCommit').textContent = commitName + ', ' + callsSel + ' calls a week';
+
+    // The most grounded way to read the cost: how many sales cover it.
+    var salesToRepay = perDeal > 0 ? Math.ceil(s.tuition / perDeal) : 0;
+    var weeksToRepay = rAvg.sel.deals > 0 ? (salesToRepay / rAvg.sel.deals) : 0;
+    $('paybackNote').innerHTML = '<b>The clearest way to read the cost.</b> At ' + money(perDeal) +
+      ' a sale, the ' + money(s.tuition) + ' tuition is covered by <b>' + salesToRepay + ' sales</b>. At the average ' +
+      CLOSE_AVG + '% close rate ' + commitName + ', that is roughly <b>' +
+      (weeksToRepay < 1 ? 'the first week' : (weeksToRepay < 1.5 ? 'about one week' : (weeksToRepay.toFixed(1) + ' weeks'))) +
+      '</b> of steady work. Everything after that is the return. The ramp still applies, so treat this as the pace once they are placed and running, not as week one.';
+
+    $('roiTable').innerHTML =
+      roiRow(rates[0].name + ', ' + rates[0].close + '% close', yearSel[0], false) +
+      roiRow(rates[1].name + ', ' + rates[1].close + '% close', yearSel[1], true) +
+      roiRow(rates[2].name + ', ' + rates[2].close + '% close', yearSel[2], false);
+
+    $('roiCaption').textContent = 'Every row is the same ' + offerLabel(offer) + ' offer at ' + callsSel +
+      ' calls a week held for twelve months, with only the close rate changing. The highlighted row is the average and the one worth planning on. None of these are first year forecasts, because month one looks like Christa\u2019s $3,000 rather than any of them.';
+
+    $('mMarket').textContent = money(s.tuition * 0.10);
+    $('mSkill').textContent  = money(Math.max(0, yearSel[1] - s.tuition));
+    $('mSkillSub').textContent = 'Net of the ' + money(s.tuition) + ' HTSA - Tuition at the average close rate, ' + commitName +
+      '. The variable here is consistency, which they control. A market position cannot be improved by working harder at it. This one can.';
+
+    // ── Section 5 · 4,004 weeks grid ──
+    var COLS = 52, ROWS = 77, TOTAL = COLS * ROWS;
+    var ageClamped = Math.max(0, Math.min(ROWS, s.age));
+    var lived = Math.min(TOTAL, ageClamped * COLS);
+    var rem = Math.max(0, TOTAL - lived);
+    var sleep = Math.round(rem / 3);
+    var work = Math.round(rem / 3);
+    var live = rem - sleep - work;
+
+    var primeYears = Math.max(0, 70 - s.age);
+    var primeWeeks = primeYears * 52;
+    var primeSleep = Math.round(primeWeeks / 3);
+    var primeWork = Math.round(primeWeeks / 3);
+    var primeLive = primeWeeks - primeSleep - primeWork;
+
+    // Personalized intro line (name only if provided; no name = clean sentence).
+    var nm = (s.name || '').trim();
+    $('s5Intro').textContent = nm
+      ? (nm + ', at ' + s.age + ', this is what the remaining time actually looks like.')
+      : ('At ' + s.age + ', this is what the remaining time actually looks like.');
+
+    var weeksEl = $('weeks');
+    if (weeksEl.childElementCount !== TOTAL){
+      weeksEl.innerHTML = '';
+      var gridFrag = document.createDocumentFragment();
+      for (var g=0; g<TOTAL; g++){
+        var wDot = document.createElement('span');
+        wDot.className = 'w';
+        gridFrag.appendChild(wDot);
+      }
+      weeksEl.appendChild(gridFrag);
+    }
+    var kids = weeksEl.children;
+    for (var k=0; k<TOTAL; k++){
+      var c = 'w';
+      if (k < lived) c += ' spent';
+      else if (k < lived + sleep) c += ' sleep';
+      else if (k < lived + sleep + work) c += ' work';
+      else c += ' live';
+      if (kids[k].className !== c) kids[k].className = c;
+    }
+
+    var ageMark = $('ageMark');
+    var agePct = TOTAL > 0 ? (lived / TOTAL) * 100 : 0;
+    ageMark.style.top = agePct + '%';
+    ageMark.style.display = (ageClamped >= 1 && ageClamped < ROWS) ? '' : 'none';
+    ageMark.setAttribute('data-label', 'you are here · age ' + s.age);
+
+    $('pctLived').textContent = Math.round((lived / TOTAL) * 100) + '%';
+    $('weeksLegend').innerHTML =
+      '<div class="lg"><span class="sw" style="background:#c3ccd6"></span>Lived <b>' + lived.toLocaleString() + '</b></div>' +
+      '<div class="lg"><span class="sw" style="background:#9fb0c2"></span>Sleep left <b>' + sleep.toLocaleString() + '</b></div>' +
+      '<div class="lg"><span class="sw" style="background:#c78a4a"></span>Work left <b>' + work.toLocaleString() + '</b></div>' +
+      '<div class="lg"><span class="sw" style="background:var(--gain)"></span>Life to be lived <b>' + live.toLocaleString() + '</b></div>';
+
+    $('timeTable').innerHTML =
+      '<tr><td>Total weeks in an average life</td><td class="n">4,004</td></tr>' +
+      '<tr><td>Already lived at age ' + s.age + ' (' + s.age + ' × 52)</td><td class="n">' + lived.toLocaleString() + '</td></tr>' +
+      '<tr><td><strong>Percentage of life already spent</strong></td><td class="n"><strong>' + Math.round((lived/TOTAL)*100) + '%</strong></td></tr>' +
+      '<tr><td colspan="2" style="padding-top:16px;color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase">Active prime remaining · age ' + s.age + ' to 70</td></tr>' +
+      '<tr><td>' + primeYears + ' years × 52</td><td class="n">' + primeWeeks.toLocaleString() + '</td></tr>' +
+      '<tr><td>Less sleep (about 1/3)</td><td class="n">−' + primeSleep.toLocaleString() + '</td></tr>' +
+      '<tr><td>Less working to survive (about 1/3)</td><td class="n">−' + primeWork.toLocaleString() + '</td></tr>' +
+      '<tr class="total"><td>Weeks that are life to be lived</td><td class="n">' + primeLive.toLocaleString() + '</td></tr>';
+
+    $('primeLine').textContent = primeLive.toLocaleString() + ' weeks. About ' + (primeLive/52).toFixed(1) + ' years of awake, active, prime time that is not sleep and not work. That is the real cost of the decision, not just the HTSA - Tuition.';
+
+    // ── Section 6 · summary ──
+    var ownNumbers = nm ? (nm + '\u2019s own numbers') : 'their own numbers';
+    $('who8').textContent = nm || 'they';
+
+    $('summaryList').innerHTML =
+      '<li><strong>Downside is defined.</strong> ' + tui.label + ', with a written conditional refund if placement milestones are met and placement does not happen.</li>' +
+      '<li><strong>Three numbers decide the income.</strong> Calls a week, close rate, offer size. At ' + callsSel + ' calls ' + commitName + ' on a ' + offerLabel(offer) + ' offer, an average ' + CLOSE_AVG + '% close is ' + money(rAvg.sel.monthly) + ' a month. The same close rate ' + commitNameAlt + ' is ' + money(rAvg.alt.monthly) + '.</li>' +
+      '<li><strong>The range is stated honestly.</strong> A slower ' + CLOSE_SLOW + '% close is ' + money(rates[0].sel.monthly) + ' a month and a strong ' + CLOSE_HIGH + '% is ' + money(rates[2].sel.monthly) + '. Month one is none of those, it looks like Christa\u2019s $3,000.</li>' +
+      '<li><strong>Staying has a price.</strong> About ' + money(daily) + ' a day and ' + money(gap) + ' a month while the gap stays open.</li>' +
+      '<li><strong>Time is finite.</strong> At age ' + s.age + ', about ' + primeLive.toLocaleString() + ' prime weeks remain that are not sleep and not work.</li>' +
+      '<li><strong>Nothing on this page asks for belief.</strong> Every figure came from ' + ownNumbers + '. The only variable the arithmetic cannot solve is the decision itself, and the decision-making that produced ' + money(s.current) + ' a month is the one input that has to change for the output to change.</li>';
+  }
+
+  // ── Query-string prefill ──
+  function loadFromUrl(){
+    var q = new URLSearchParams(window.location.search);
+    ids.forEach(function(id){
+      if (q.has(id)) $(id).value = q.get(id);
+    });
+  }
+
+  // ── LocalStorage prefill (URL wins over storage) ──
+  function loadFromStorage(){
+    try{
+      var saved = JSON.parse(localStorage.getItem(STORAGE) || 'null');
+      if (!saved) return;
+      var q = new URLSearchParams(window.location.search);
+      ids.forEach(function(id){
+        if (q.has(id)) return;
+        if (saved[id] != null && saved[id] !== '') $(id).value = saved[id];
+      });
+    }catch(e){}
+  }
+
+  // Short shareable link: only include values that differ from the default.
+  function copyShareLink(){
+    var s = gather();
+    var q = new URLSearchParams();
+    ids.forEach(function(id){
+      var v = s[id];
+      if (v == null || v === '') return;
+      if (id === 'name') { q.set(id, v); return; }
+      if (DEFAULTS[id] != null && String(v) === String(DEFAULTS[id])) return;
+      q.set(id, v);
+    });
+    var params = q.toString();
+    var url = window.location.origin + window.location.pathname + (params ? '?' + params : '');
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(function(){
+        $('btnCopy').textContent = 'Link copied ✓';
+        setTimeout(function(){ $('btnCopy').textContent = 'Copy shareable link'; }, 1400);
+      });
+    } else {
+      window.prompt('Copy this link:', url);
+    }
+  }
+
+  function bind(){
+    ids.forEach(function(id){
+      $(id).addEventListener('input', render);
+      $(id).addEventListener('change', render);
+    });
+    $('commit').addEventListener('change', function(){ commitTouched = true; });
+    $('btnSave').onclick = function(){
+      localStorage.setItem(STORAGE, JSON.stringify(gather()));
+      $('btnSave').textContent = 'Saved ✓';
+      setTimeout(function(){ $('btnSave').textContent = 'Save on this Mac'; }, 1200);
+    };
+    $('btnReset').onclick = function(){
+      localStorage.removeItem(STORAGE);
+      $('name').value = '';
+      $('job').value = '';
+      $('current').value      = DEFAULTS.current;
+      $('goal').value         = DEFAULTS.goal;
+      $('hours').value        = DEFAULTS.hours;
+      $('age').value          = DEFAULTS.age;
+      $('exp').value          = DEFAULTS.exp;
+      $('commit').value       = DEFAULTS.commit;
+      $('tuitionPlan').value  = DEFAULTS.tuitionPlan;
+      render();
+    };
+    $('btnCopy').onclick = copyShareLink;
+
+    loadFromUrl();
+    loadFromStorage();
+
+    // A schedule arriving from a shared link or a saved session was chosen on
+    // purpose, so the auto-suggestion must not overwrite it.
+    var q0 = new URLSearchParams(window.location.search);
+    if (q0.has('commit')) commitTouched = true;
+    try{
+      var saved0 = JSON.parse(localStorage.getItem(STORAGE) || 'null');
+      if (saved0 && saved0.commit) commitTouched = true;
+    }catch(e){}
+
+    render();
+  }
+
+  bind();
+})();
+</script>
+</body>
+</html>
