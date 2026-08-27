@@ -572,7 +572,21 @@
       "status": "active",
       "view_count": 0,
       "last_viewed_at": null
+    },
+    "jamie_pietropaolo": {
+      "slug": "jamie_pietropaolo",
+      "prospect_id": "jamie-pietropaolo",
+      "prospect_name": "Jamie Pietropaolo",
+      "email": "jamiecp@protonmail.com",
+      "phone_e164": "+13108838893",
+      "phone_display": "+1 (310) 883-8893",
+      "page_type": "precall",
+      "created_at": "2026-08-27T16:42:10Z",
+      "expires_at": "2026-11-25T16:42:10Z",
+      "status": "active",
+      "view_count": 0,
+      "last_viewed_at": null
     }
   },
-  "updated_at": "2026-08-27T03:56:58Z"
+  "updated_at": "2026-08-27T16:42:10Z"
 }

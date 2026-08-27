@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-27T03:56:58Z",
+  "updated_at": "2026-08-27T16:42:10Z",
   "links": {
     "tammy_berry": {
       "status": "active",
@@ -244,6 +244,12 @@
     "jc_rivera": {
       "status": "active",
       "expires_at": "2026-11-25T03:56:58Z",
+      "view_count": 0,
+      "last_viewed_at": null
+    },
+    "jamie_pietropaolo": {
+      "status": "active",
+      "expires_at": "2026-11-25T16:42:10Z",
       "view_count": 0,
       "last_viewed_at": null
     }

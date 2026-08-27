@@ -1,0 +1,19 @@
+{
+  "page_type": "precall",
+  "prospect_id": "jamie-pietropaolo",
+  "prospect_name": "Jamie Pietropaolo",
+  "first_name": "Jamie",
+  "email": "jamiecp@protonmail.com",
+  "phone_e164": "+13108838893",
+  "phone_display": "+1 (310) 883-8893",
+  "prepared_date": "Aug 27, 2026",
+  "slug": "jamie_pietropaolo",
+  "call_day": "Thursday",
+  "call_date": "Aug 27",
+  "call_time": "1:00 PM",
+  "call_timezone": "EST",
+  "call_format": "Zoom",
+  "missed_meeting": false,
+  "booking_url": "https://meetings.hubspot.com/charles660/cj",
+  "show_member_contacts": false
+}
