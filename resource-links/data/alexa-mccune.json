@@ -15,5 +15,11 @@
   "call_format": "Zoom",
   "missed_meeting": false,
   "booking_url": "https://meetings.hubspot.com/charles660/cj",
-  "show_member_contacts": false
+  "show_booking_card": true,
+  "show_member_contacts": false,
+  "hero_paragraphs": [
+    "<strong>Alexa</strong> — thank you for communicating and keeping me in the loop. I completely understand, and I hope your daughter is feeling better soon.",
+    "Looking forward to reconnecting when the timing works for your family. In the meantime, everything you'd want before we talk is right here.",
+    "On the call we'll cover where you're at, what you're after, and whether this is the right move for your next chapter. Have a look at whatever's useful."
+  ]
 }
