@@ -1081,7 +1081,7 @@
 
     <section class="hero" id="hero" aria-labelledby="heroTitle">
       <div class="selection-pill">You were personally selected</div>
-      <h1 id="heroTitle">I picked 10 people. You're one of them.</h1>
+      <h1 id="heroTitle">You were clear you were interested. I put this together for you.</h1>
       <p class="hero-lede">We already had the long conversation. This one is 15 minutes — I just want to show you what I was able to put together.</p>
       <p class="availability-strip">10 spots · first come · closes Friday, Sept 4</p>
       <a class="cta-button" data-cta="hero" href="#book">Book My 15 Minute Call</a>
@@ -1215,7 +1215,7 @@
 
     if (person) {
       document.getElementById("heroTitle").textContent =
-        `${person.name} — I picked 10 people. You're one of them.`;
+        `${person.name} — you were clear you were interested.`;
 
       if (person.note) {
         const note = document.createElement("p");
