@@ -459,79 +459,22 @@
       line-height: 1.6;
     }
 
-    .lifespan-toggle::-webkit-details-marker {
-      display: none;
-    }
-
-    .lifespan-toggle::after {
-      flex: 0 0 auto;
-      color: var(--green-dark);
-      content: "⌄";
-      font-size: 20px;
-      line-height: 1;
-      transition: transform 160ms ease;
-    }
-
-    .lifespan-details[open] .lifespan-toggle::after {
-      transform: rotate(180deg);
-    }
-
-    .lifespan-toggle:focus-visible {
-      box-shadow: inset 0 0 0 3px rgba(0, 201, 122, 0.25);
-      outline: none;
-    }
-
     .lifespan-section {
       background: #fbfcfe;
     }
 
-    .lifespan-details {
-      width: 100%;
+    .lifespan-section h2 {
+      margin-bottom: 4px;
     }
 
-    .lifespan-toggle {
-      display: flex;
-      min-height: 72px;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 15px 17px;
-      border: 1px solid #b8cce5;
-      border-radius: 13px;
-      background: linear-gradient(145deg, #f1f7ff, #ffffff);
-      box-shadow: 0 8px 22px rgba(10, 22, 40, 0.06);
-      cursor: pointer;
-      list-style: none;
-    }
-
-    .lifespan-toggle:hover {
-      border-color: var(--green-strong);
-      box-shadow: 0 10px 26px rgba(10, 22, 40, 0.09);
-    }
-
-    .lifespan-toggle-copy {
-      display: block;
-    }
-
-    .lifespan-toggle-title {
-      display: block;
-      color: var(--navy);
-      font-family: "Playfair Display", serif;
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1.15;
-    }
-
-    .lifespan-toggle-subline {
-      display: block;
-      margin-top: 3px;
+    .lifespan-section-lede {
       color: var(--muted);
-      font-size: 11px;
-      line-height: 1.4;
+      font-size: 12px;
+      line-height: 1.5;
     }
 
     .lifespan-content {
-      padding: 18px 2px 2px;
+      padding: 16px 2px 2px;
     }
 
     .lifespan-intro {
@@ -946,19 +889,6 @@
         margin-bottom: 3px;
       }
 
-      .lifespan-toggle {
-        min-height: 64px;
-        padding: 10px 12px;
-      }
-
-      .lifespan-toggle-title {
-        font-size: 17px;
-      }
-
-      .lifespan-toggle-subline {
-        font-size: 10px;
-      }
-
       .age-control {
         align-items: flex-start;
         flex-direction: column;
@@ -1032,7 +962,6 @@
       }
 
       .cta-button,
-      .lifespan-toggle::after,
       .sticky-book {
         transition: none;
       }
@@ -1100,46 +1029,40 @@
       </div>
     </section>
 
-    <section class="section lifespan-section" aria-label="Optional lifespan perspective">
-      <details class="lifespan-details" id="lifespanDetails">
-        <summary class="lifespan-toggle">
-          <span class="lifespan-toggle-copy">
-            <span class="lifespan-toggle-title">See where you actually are.</span>
-            <span class="lifespan-toggle-subline">Enter your age and I'll show you the one thing that made me send this. Takes 10 seconds.</span>
-          </span>
-        </summary>
-
-        <div class="lifespan-content">
-          <p class="lifespan-intro">The 79 blocks below represent an average 79 year lifespan in America. Each block is one year.</p>
-          <div class="age-control">
-            <div class="age-field">
-              <label for="ageInput">Your age</label>
-              <input id="ageInput" type="number" min="18" max="78" inputmode="numeric" value="38">
-            </div>
-            <p class="age-readout" id="ageReadout" aria-live="polite"></p>
+    <section class="section lifespan-section" aria-labelledby="lifespanTitle">
+      <div class="section-kicker">One week at a time</div>
+      <h2 id="lifespanTitle">See where you actually are.</h2>
+      <p class="lifespan-section-lede">Enter your age and I'll show you the one thing that made me send this. Takes 10 seconds.</p>
+      <div class="lifespan-content">
+        <p class="lifespan-intro">The 79 blocks below represent an average 79 year lifespan in America. Each block is one year.</p>
+        <div class="age-control">
+          <div class="age-field">
+            <label for="ageInput">Your age</label>
+            <input id="ageInput" type="number" min="18" max="78" inputmode="numeric" value="38">
           </div>
-
-          <div class="year-grid" id="yearGrid" aria-label="79 squares representing an average 79 year life in America"></div>
-          <div class="year-legend" aria-hidden="true">
-            <span><i class="legend-dot legend-dot--lived"></i>Years lived</span>
-            <span><i class="legend-dot legend-dot--current"></i>Your current year</span>
-            <span><i class="legend-dot"></i>Years remaining before 70</span>
-            <span><i class="legend-dot legend-dot--later"></i>Later years</span>
-          </div>
-
-          <p class="time-summary" id="timeSummary" aria-live="polite"></p>
-          <div class="life-two" aria-label="A rough picture of remaining life">
-            <span><b id="sleepYears">0 years</b>sleeping</span>
-            <span><b id="awakeYears">0 years</b>awake, and yours to decide what to do with</span>
-          </div>
-          <p class="life-explanation">These are simple estimates. Sleeping uses one third of the remaining years. The other two thirds represent awake time, including work, family, relationships, and the life you still get to shape.</p>
-          <blockquote class="signed-note">
-            Over the last three days, I chose my wife and made work fit around our life. I want you to have a career that gives you the power to make that choice too.
-            <cite>CJ Clay</cite>
-          </blockquote>
-          <p class="inline-cta"><a class="cta-button" data-cta="lifespan" href="#book">Book my 15 minutes</a></p>
+          <p class="age-readout" id="ageReadout" aria-live="polite"></p>
         </div>
-      </details>
+
+        <div class="year-grid" id="yearGrid" aria-label="79 squares representing an average 79 year life in America"></div>
+        <div class="year-legend" aria-hidden="true">
+          <span><i class="legend-dot legend-dot--lived"></i>Years lived</span>
+          <span><i class="legend-dot legend-dot--current"></i>Your current year</span>
+          <span><i class="legend-dot"></i>Years remaining before 70</span>
+          <span><i class="legend-dot legend-dot--later"></i>Later years</span>
+        </div>
+
+        <p class="time-summary" id="timeSummary" aria-live="polite"></p>
+        <div class="life-two" aria-label="A rough picture of remaining life">
+          <span><b id="sleepYears">0 years</b>sleeping</span>
+          <span><b id="awakeYears">0 years</b>awake, and yours to decide what to do with</span>
+        </div>
+        <p class="life-explanation">These are simple estimates. Sleeping uses one third of the remaining years. The other two thirds represent awake time, including work, family, relationships, and the life you still get to shape.</p>
+        <blockquote class="signed-note">
+          Over the last three days, I chose my wife and made work fit around our life. I want you to have a career that gives you the power to make that choice too.
+          <cite>CJ Clay</cite>
+        </blockquote>
+        <p class="inline-cta"><a class="cta-button" data-cta="lifespan" href="#book">Book my 15 minutes</a></p>
+      </div>
     </section>
 
     <section class="final-section" aria-labelledby="finalTitle">
@@ -1209,17 +1132,7 @@
       }
     }
 
-    // Keep every disclosure reliably operable with Enter and Space.
-    document.querySelectorAll("details > summary").forEach((summary) => {
-      summary.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          summary.parentElement.open = !summary.parentElement.open;
-        }
-      });
-    });
-
-    // Build and update the optional lifespan view while it remains collapsed.
+    // Build and update the lifespan view shown directly on the page.
     const LIFE_YEARS = 79;
     const ageInput = document.getElementById("ageInput");
     const ageReadout = document.getElementById("ageReadout");
