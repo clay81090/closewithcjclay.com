@@ -316,6 +316,146 @@
       box-shadow: 0 12px 34px rgba(10, 22, 40, 0.06);
     }
 
+    .timeline-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .timeline-fact {
+      padding: 13px 15px;
+      border: 1px solid var(--blue-border);
+      border-radius: 10px;
+      background: var(--blue-light);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .timeline-fact strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--navy);
+      font-size: 18px;
+    }
+
+    .age-control {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--grey);
+    }
+
+    .age-field {
+      display: flex;
+      flex: 0 0 auto;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .age-field label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .age-field input {
+      width: 96px;
+      min-height: 48px;
+      padding: 8px 12px;
+      border: 2px solid var(--blue-border);
+      border-radius: 10px;
+      background: var(--white);
+      color: var(--navy);
+      font: 800 20px/1 "DM Sans", sans-serif;
+      text-align: center;
+    }
+
+    .age-field input:focus {
+      border-color: var(--green-strong);
+      box-shadow: 0 0 0 4px rgba(0, 201, 122, 0.13);
+      outline: none;
+    }
+
+    .age-readout {
+      max-width: 490px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .age-readout strong {
+      color: var(--navy);
+    }
+
+    .year-grid {
+      display: grid;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      gap: 8px;
+      max-width: 620px;
+      margin-bottom: 14px;
+    }
+
+    .year-dot {
+      aspect-ratio: 1;
+      border-radius: 5px;
+      background: rgba(97, 227, 139, 0.38);
+      transition: background 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+    }
+
+    .year-dot--lived {
+      background: #c4ccd6;
+    }
+
+    .year-dot--current {
+      background: var(--green-strong);
+      box-shadow: 0 0 0 4px rgba(0, 201, 122, 0.15);
+      transform: scale(1.08);
+    }
+
+    .year-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .year-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      background: rgba(97, 227, 139, 0.55);
+    }
+
+    .legend-dot--lived {
+      background: #c4ccd6;
+    }
+
+    .legend-dot--current {
+      background: var(--green-strong);
+    }
+
+    .week-label {
+      margin-bottom: 11px;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
     .week-grid {
       display: grid;
       grid-template-columns: repeat(13, 1fr);
@@ -327,20 +467,15 @@
     .week-dot {
       aspect-ratio: 1;
       border-radius: 4px;
-      background: #e1e6ec;
+      background: rgba(97, 227, 139, 0.38);
     }
 
-    .week-dot:nth-child(-n+8) {
-      background: #cbd4df;
+    .week-dot--past {
+      background: #c4ccd6;
     }
 
-    .week-dot:nth-child(9) {
-      background: var(--navy);
-      box-shadow: 0 0 0 3px rgba(10, 22, 40, 0.1);
-    }
-
-    .week-dot:nth-child(10) {
-      background: var(--green);
+    .week-dot--current {
+      background: var(--green-strong);
       box-shadow: 0 0 0 4px rgba(0, 201, 122, 0.15);
     }
 
@@ -356,6 +491,38 @@
     .week-message span {
       padding: 0 0.18em;
       background: linear-gradient(transparent 58%, rgba(97, 227, 139, 0.55) 58%);
+    }
+
+    .life-excerpt {
+      margin-top: 28px;
+      padding: 23px 24px;
+      border-radius: 14px;
+      background: var(--navy);
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .life-thirds {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .life-thirds span {
+      padding: 9px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .life-excerpt strong {
+      color: var(--green);
     }
 
     .final-section {
@@ -458,9 +625,27 @@
         padding: 21px;
       }
 
+      .age-control {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .timeline-facts {
+        grid-template-columns: 1fr;
+      }
+
+      .year-grid {
+        gap: 6px;
+      }
+
       .week-grid {
         grid-template-columns: repeat(13, 1fr);
         gap: 6px;
+      }
+
+      .life-thirds {
+        grid-template-columns: 1fr;
       }
 
       .footer {
@@ -545,12 +730,42 @@
 
     <section class="section weeks-section" aria-labelledby="weekTitle">
       <div class="section-kicker">One week at a time</div>
-      <h2 id="weekTitle">A year is only 52 weeks.</h2>
-      <p class="section-copy">Most weeks do not feel important while they are passing. Then enough of them pass, and life still looks the same.</p>
+      <h2 id="weekTitle">Time feels abundant until you can see it.</h2>
+      <p class="section-copy">Enter your age to find the year you are living now. Every square represents one year. It is a simple reminder that every year is made of weeks that never return.</p>
 
       <div class="week-graphic">
+        <div class="timeline-facts" aria-label="Timeline scale">
+          <div class="timeline-fact"><strong>52 weeks</strong>make one year</div>
+          <div class="timeline-fact"><strong>79 years</strong>represent the average lifespan in America</div>
+        </div>
+
+        <div class="age-control">
+          <div class="age-field">
+            <label for="ageInput">Your age</label>
+            <input id="ageInput" type="number" min="18" max="78" inputmode="numeric" value="38">
+          </div>
+          <p class="age-readout" id="ageReadout" aria-live="polite"></p>
+        </div>
+
+        <div class="year-grid" id="yearGrid" aria-label="79 squares representing an average 79 year life in America"></div>
+        <div class="year-legend" aria-hidden="true">
+          <span><i class="legend-dot legend-dot--lived"></i>Years lived</span>
+          <span><i class="legend-dot legend-dot--current"></i>Your current year</span>
+          <span><i class="legend-dot"></i>Years remaining</span>
+        </div>
+
+        <p class="week-label" id="weekLabel">This year is only 52 weeks.</p>
         <div class="week-grid" id="weekGrid" aria-label="52 squares representing the 52 weeks in one year"></div>
         <p class="week-message">Another week can pass without anything changing. Or you can take <span>15 minutes</span> to look at a different path.</p>
+
+        <div class="life-excerpt">
+          <div class="life-thirds" aria-label="A rough picture of how life is spent">
+            <span>About one third working</span>
+            <span>About one third sleeping</span>
+            <span>The rest trying to live</span>
+          </div>
+          <p>We spend roughly a third of our lives working, a third sleeping, and the rest trying to actually live. I would love nothing more than to help you build a career that revolves around your life instead of forcing your life to revolve around your career. That is the same choice I made over the last three days. <strong>I chose my wife, and I made work fit around our life.</strong> Make this decision count. Stop waiting for tomorrow.</p>
+        </div>
       </div>
     </section>
 
@@ -569,14 +784,69 @@
   </main>
 
   <script>
-    // Build one simple square for every week in a year.
+    // Show the visitor where their current year sits in an average 79 year life.
+    const LIFE_YEARS = 79;
+    const ageInput = document.getElementById("ageInput");
+    const ageReadout = document.getElementById("ageReadout");
+    const yearGrid = document.getElementById("yearGrid");
+    const yearDots = [];
+
+    for (let year = 1; year <= LIFE_YEARS; year += 1) {
+      const square = document.createElement("span");
+      square.className = "year-dot";
+      square.setAttribute("aria-hidden", "true");
+      yearGrid.appendChild(square);
+      yearDots.push(square);
+    }
+
+    function renderAge() {
+      const enteredAge = Number.parseInt(ageInput.value, 10);
+      const age = Number.isFinite(enteredAge)
+        ? Math.min(78, Math.max(18, enteredAge))
+        : 38;
+      const currentYear = age + 1;
+
+      yearDots.forEach((dot, index) => {
+        dot.className = "year-dot";
+        if (index < age) dot.classList.add("year-dot--lived");
+        if (index === age) dot.classList.add("year-dot--current");
+      });
+
+      ageReadout.innerHTML = `At age <strong>${age}</strong>, you are living year <strong>${currentYear}</strong> of an average 79 year life in America. Grey shows the years lived. Green shows the time still ahead.`;
+      yearGrid.setAttribute(
+        "aria-label",
+        `At age ${age}, year ${currentYear} is highlighted among 79 years representing the average lifespan in America`
+      );
+    }
+
+    ageInput.addEventListener("input", renderAge);
+    ageInput.addEventListener("change", () => {
+      const age = Number.parseInt(ageInput.value, 10);
+      ageInput.value = Number.isFinite(age)
+        ? Math.min(78, Math.max(18, age))
+        : 38;
+      renderAge();
+    });
+    renderAge();
+
+    // Build 52 squares and highlight the current calendar week.
     const weekGrid = document.getElementById("weekGrid");
+    const now = new Date();
+    const yearStart = new Date(now.getFullYear(), 0, 1);
+    const elapsedDays = Math.floor((now - yearStart) / 86400000);
+    const currentWeek = Math.min(52, Math.floor(elapsedDays / 7) + 1);
+
     for (let week = 1; week <= 52; week += 1) {
       const square = document.createElement("span");
       square.className = "week-dot";
+      if (week < currentWeek) square.classList.add("week-dot--past");
+      if (week === currentWeek) square.classList.add("week-dot--current");
       square.setAttribute("aria-hidden", "true");
       weekGrid.appendChild(square);
     }
+
+    document.getElementById("weekLabel").textContent =
+      `This year is only 52 weeks. You are in week ${currentWeek}.`;
   </script>
 </body>
 </html>
