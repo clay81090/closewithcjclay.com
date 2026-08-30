@@ -419,6 +419,11 @@
       transform: scale(1.08);
     }
 
+    .year-dot--later {
+      background: rgba(97, 227, 139, 0.16);
+      box-shadow: inset 0 0 0 1px rgba(0, 154, 94, 0.16);
+    }
+
     .year-legend {
       display: flex;
       flex-wrap: wrap;
@@ -447,6 +452,23 @@
 
     .legend-dot--current {
       background: var(--green-strong);
+    }
+
+    .legend-dot--later {
+      background: rgba(97, 227, 139, 0.16);
+      box-shadow: inset 0 0 0 1px rgba(0, 154, 94, 0.18);
+    }
+
+    .time-summary {
+      margin: 2px 0 22px;
+      padding: 13px 16px;
+      border: 1px solid rgba(0, 201, 122, 0.22);
+      border-radius: 10px;
+      background: rgba(97, 227, 139, 0.1);
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
     }
 
     .week-message {
@@ -489,6 +511,14 @@
       font-size: 12px;
       font-weight: 700;
       text-align: center;
+    }
+
+    .life-thirds .life-third-value {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--green);
+      font-size: 18px;
+      line-height: 1.15;
     }
 
     .life-excerpt strong {
@@ -706,18 +736,20 @@
         <div class="year-legend" aria-hidden="true">
           <span><i class="legend-dot legend-dot--lived"></i>Years lived</span>
           <span><i class="legend-dot legend-dot--current"></i>Your current year</span>
-          <span><i class="legend-dot"></i>Years remaining</span>
+          <span><i class="legend-dot"></i>Years remaining before 70</span>
+          <span><i class="legend-dot legend-dot--later"></i>Later years</span>
         </div>
 
+        <p class="time-summary" id="timeSummary" aria-live="polite"></p>
         <p class="week-message">Another week can pass without anything changing. Or you can take <span>15 minutes</span> to look at a different path.</p>
 
         <div class="life-excerpt">
-          <div class="life-thirds" aria-label="A rough picture of how life is spent">
-            <span>About one third working</span>
-            <span>About one third sleeping</span>
-            <span>The rest trying to live</span>
+          <div class="life-thirds" aria-label="A rough picture of how remaining life is spent">
+            <span><b class="life-third-value" id="workYears">0 years</b>working</span>
+            <span><b class="life-third-value" id="sleepYears">0 years</b>sleeping</span>
+            <span><b class="life-third-value" id="livingYears">0 years</b>awake and not working</span>
           </div>
-          <p>We spend roughly a third of our lives working, a third sleeping, and the rest trying to actually live. I would love nothing more than to help you build a career that revolves around your life instead of forcing your life to revolve around your career. That is the same choice I made over the last three days. <strong>I chose my wife, and I made work fit around our life.</strong> Make this decision count. Stop waiting for tomorrow.</p>
+          <p>These are simple estimates using the idea that we spend roughly a third of our lives working, a third sleeping, and the rest trying to actually live. Later years still matter. The point is that your healthiest and highest energy years are not unlimited. I would love nothing more than to help you build a career that revolves around your life instead of forcing your life to revolve around your career. That is the same choice I made over the last three days. <strong>I chose my wife, and I made work fit around our life.</strong> Make this decision count. Stop waiting for tomorrow.</p>
         </div>
       </div>
     </section>
@@ -741,6 +773,10 @@
     const LIFE_YEARS = 79;
     const ageInput = document.getElementById("ageInput");
     const ageReadout = document.getElementById("ageReadout");
+    const timeSummary = document.getElementById("timeSummary");
+    const workYears = document.getElementById("workYears");
+    const sleepYears = document.getElementById("sleepYears");
+    const livingYears = document.getElementById("livingYears");
     const yearGrid = document.getElementById("yearGrid");
     const yearDots = [];
 
@@ -763,9 +799,21 @@
         dot.className = "year-dot";
         if (index < age) dot.classList.add("year-dot--lived");
         if (index === age) dot.classList.add("year-dot--current");
+        if (index > age && index >= 70) dot.classList.add("year-dot--later");
       });
 
-      ageReadout.innerHTML = `At age <strong>${age}</strong>, you are living year <strong>${currentYear}</strong> of an average 79 year life in America. Grey shows the years lived. Green shows the time still ahead.`;
+      const yearsRemaining = LIFE_YEARS - age;
+      const yearsBefore70 = Math.max(0, 70 - age);
+      const estimatedThird = yearsRemaining / 3;
+      const formattedThird = Number.isInteger(estimatedThird)
+        ? String(estimatedThird)
+        : estimatedThird.toFixed(1);
+
+      ageReadout.innerHTML = `At age <strong>${age}</strong>, you are living year <strong>${currentYear}</strong> of an average 79 year life in America.`;
+      timeSummary.innerHTML = `<strong>${yearsRemaining} years</strong> remain on this model. <strong>${yearsBefore70}</strong> of them come before age 70.`;
+      workYears.textContent = `${formattedThird} years`;
+      sleepYears.textContent = `${formattedThird} years`;
+      livingYears.textContent = `${formattedThird} years`;
       yearGrid.setAttribute(
         "aria-label",
         `At age ${age}, year ${currentYear} is highlighted among 79 years representing the average lifespan in America`
