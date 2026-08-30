@@ -65,37 +65,75 @@
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      padding: 20px 48px;
+      padding: 12px 48px;
       background: var(--white);
       border-bottom: 1px solid var(--grey);
     }
 
-    .brand-name {
+    .brand-profile {
       display: flex;
       align-items: center;
       gap: 10px;
-      color: var(--navy);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      min-width: 0;
     }
 
-    .brand-dot {
-      width: 12px;
-      height: 12px;
+    .brand-photo {
+      width: 44px;
+      height: 44px;
+      flex: 0 0 auto;
+      border: 2px solid var(--green-strong);
       border-radius: 50%;
-      background: var(--green-strong);
-      box-shadow: 0 0 0 6px rgba(0, 201, 122, 0.12);
+      object-fit: cover;
+      object-position: left center;
     }
 
-    .brand-context {
-      color: #355274;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-align: right;
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-name {
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
+    }
+
+    .brand-role {
+      margin-top: 1px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.25;
+    }
+
+    .brand-phone {
+      color: #23704f;
+      font-size: 10px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .trust-badge {
+      display: flex;
+      flex: 0 0 auto;
+      flex-direction: column;
+      align-items: flex-end;
+      color: var(--navy);
+      line-height: 1.15;
+      text-align: right;
+      text-decoration: none;
+    }
+
+    .trust-stars {
+      color: #e3a008;
+      font-size: 15px;
+      letter-spacing: 1px;
+    }
+
+    .trust-copy {
+      margin-top: 2px;
+      font-size: 9px;
+      font-weight: 700;
     }
 
     .hero {
@@ -380,7 +418,7 @@
     .year-dot {
       aspect-ratio: 1;
       border-radius: 5px;
-      background: #78aee8;
+      background: #8fdca9;
       transition: background 140ms ease, box-shadow 140ms ease, transform 140ms ease;
     }
 
@@ -395,8 +433,8 @@
     }
 
     .year-dot--later {
-      background: rgba(97, 227, 139, 0.16);
-      box-shadow: inset 0 0 0 1px rgba(0, 154, 94, 0.16);
+      background: #e4ece7;
+      box-shadow: inset 0 0 0 1px #cad8cf;
     }
 
     .year-legend {
@@ -418,7 +456,7 @@
       width: 10px;
       height: 10px;
       border-radius: 3px;
-      background: #78aee8;
+      background: #8fdca9;
     }
 
     .legend-dot--lived {
@@ -430,8 +468,8 @@
     }
 
     .legend-dot--later {
-      background: rgba(97, 227, 139, 0.16);
-      box-shadow: inset 0 0 0 1px rgba(0, 154, 94, 0.18);
+      background: #e4ece7;
+      box-shadow: inset 0 0 0 1px #cad8cf;
     }
 
     .time-summary {
@@ -559,20 +597,32 @@
       }
 
       .brand-bar {
-        align-items: flex-start;
-        padding-top: 17px;
-        padding-bottom: 17px;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 14px;
+      }
+
+      .brand-photo {
+        width: 40px;
+        height: 40px;
       }
 
       .brand-name {
-        font-size: 11px;
-        letter-spacing: 0.14em;
+        font-size: 10px;
+        letter-spacing: 0.1em;
       }
 
-      .brand-context {
-        max-width: 118px;
+      .brand-role,
+      .brand-phone {
         font-size: 9px;
-        letter-spacing: 0.12em;
+      }
+
+      .trust-stars {
+        font-size: 13px;
+      }
+
+      .trust-copy {
+        font-size: 8px;
       }
 
       .hero {
@@ -635,11 +685,18 @@
 <body>
   <main class="page">
     <header class="brand-bar">
-      <div class="brand-name">
-        <span class="brand-dot" aria-hidden="true"></span>
-        <span>CJ Clay · HTSA</span>
+      <div class="brand-profile">
+        <img class="brand-photo" src="/CJ_HEADSHOT.png" alt="CJ Clay">
+        <div class="brand-copy">
+          <div class="brand-name">CJ Clay · HTSA</div>
+          <div class="brand-role">Career Transformation Coach</div>
+          <a class="brand-phone" href="tel:+16166121735">(616) 612-1735</a>
+        </div>
       </div>
-      <div class="brand-context">Private invitation</div>
+      <a class="trust-badge" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer" aria-label="Read HTSA reviews on Trustpilot, rated 4.9 out of 5">
+        <span class="trust-stars" aria-hidden="true">★★★★★</span>
+        <span class="trust-copy">Trustpilot · 4.9 out of 5</span>
+      </a>
     </header>
 
     <section class="hero" aria-labelledby="pageTitle">
