@@ -667,11 +667,14 @@
     }
 
     .text-back {
-      display: inline-block;
-      margin-top: 10px;
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      margin: 6px auto 0;
       color: rgba(255, 255, 255, 0.69);
       font-size: 10px;
       text-decoration: none;
+      text-align: center;
     }
 
     .text-back span {
@@ -679,6 +682,15 @@
       font-weight: 700;
       text-decoration: underline;
       text-underline-offset: 2px;
+    }
+
+    .final-section .final-push {
+      margin: 8px auto 0;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.35;
+      text-align: center;
     }
 
     .footer {
@@ -1026,7 +1038,7 @@
             <span><b id="sleepYears">0 years</b>sleeping</span>
             <span><b id="awakeYears">0 years</b>awake, and yours to decide what to do with</span>
           </div>
-          <p>I would love nothing more than to help you build a career that revolves around your life instead of forcing your life to revolve around your career. That is the same choice I made over the last three days. <strong>I chose my wife, and I made work fit around our life.</strong> <strong>Make this decision count. Stop waiting for tomorrow.</strong></p>
+          <p>I would love nothing more than to help you build a career that revolves around your life instead of forcing your life to revolve around your career. That is the same choice I made over the last three days. <strong>I chose my wife, and I made work fit around our life.</strong> <strong>Make this decision count.</strong></p>
         </div>
       </div>
     </section>
@@ -1035,6 +1047,7 @@
       <h2 id="finalTitle">This is the time to reconnect.</h2>
       <p>If you've been thinking about this, asked for more information, or wanted me to call you, this is the time to reconnect. Book your 15 minute call before the 10 spots are claimed.</p>
       <a class="cta-button" data-cta="final" href="#book">Book My 15 Minute Call</a>
+      <p class="final-push">Stop waiting for tomorrow. Get aggressive now.</p>
       <a class="text-back" href="sms:+16166121735">None of these times work? Text me at <span>(616) 612-1735</span> and I'll make one work.</a>
     </section>
 
