@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a1628">
+  <title>Your Private Invitation with CJ | High Ticket Sales Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-soft: #142741;
+      --green: #61e38b;
+      --green-strong: #00c97a;
+      --blue-light: #edf5ff;
+      --blue-border: #c7dbf4;
+      --grey-light: #f2f5f8;
+      --grey: #dce3eb;
+      --text: #17243b;
+      --muted: #5c6c82;
+      --white: #ffffff;
+      --shadow: 0 22px 60px rgba(10, 22, 40, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(97, 227, 139, 0.12), transparent 32rem),
+        var(--grey-light);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(920px, calc(100% - 32px));
+      margin: 24px auto;
+      overflow: hidden;
+      background: var(--white);
+      border: 1px solid rgba(10, 22, 40, 0.08);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .brand-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 48px;
+      background: var(--white);
+      border-bottom: 1px solid var(--grey);
+    }
+
+    .brand-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--green-strong);
+      box-shadow: 0 0 0 6px rgba(0, 201, 122, 0.12);
+    }
+
+    .brand-context {
+      color: #355274;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      position: relative;
+      padding: 62px 48px 58px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 86% 14%, rgba(97, 227, 139, 0.18), transparent 20rem),
+        linear-gradient(145deg, var(--navy), var(--navy-soft));
+      color: var(--white);
+      text-align: center;
+    }
+
+    .hero::after {
+      position: absolute;
+      right: -90px;
+      bottom: -125px;
+      width: 270px;
+      height: 270px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .selection-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      padding: 8px 14px;
+      border: 1px solid rgba(97, 227, 139, 0.42);
+      border-radius: 999px;
+      background: rgba(97, 227, 139, 0.1);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .selection-pill::before {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 0 5px rgba(97, 227, 139, 0.11);
+      content: "";
+    }
+
+    .hero h1 {
+      max-width: 720px;
+      margin: 0 auto 18px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.35rem, 6.8vw, 4.35rem);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+    }
+
+    .hero-lede {
+      max-width: 610px;
+      margin: 0 auto 30px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: clamp(1rem, 2vw, 1.16rem);
+    }
+
+    .availability {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 620px;
+      margin: 0 auto 30px;
+    }
+
+    .availability-item {
+      padding: 15px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.07);
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .availability-item strong {
+      display: block;
+      margin-top: 2px;
+      color: var(--white);
+      font-size: 17px;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .cta-button {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      min-height: 58px;
+      align-items: center;
+      justify-content: center;
+      padding: 17px 30px;
+      border: 2px solid var(--white);
+      border-radius: 12px;
+      background: var(--green);
+      box-shadow: 0 12px 28px rgba(0, 201, 122, 0.26);
+      color: var(--navy);
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-decoration: none;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .cta-button:hover,
+    .cta-button:focus-visible {
+      background: #7aee9d;
+      box-shadow: 0 15px 34px rgba(0, 201, 122, 0.34);
+      transform: translateY(-2px);
+    }
+
+    .cta-button:focus-visible {
+      outline: 3px solid rgba(97, 227, 139, 0.35);
+      outline-offset: 4px;
+    }
+
+    .cta-note {
+      margin-top: 12px;
+      color: rgba(255, 255, 255, 0.66);
+      font-size: 12px;
+    }
+
+    .section {
+      padding: 52px 48px;
+    }
+
+    .section + .section {
+      border-top: 1px solid var(--grey);
+    }
+
+    .section-kicker {
+      margin-bottom: 9px;
+      color: #087b50;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .section h2 {
+      max-width: 700px;
+      margin-bottom: 14px;
+      color: var(--navy);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+    }
+
+    .section-copy {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .video-frame {
+      margin-top: 24px;
+      padding: 12px;
+      border: 1px solid var(--grey);
+      border-radius: 16px;
+      background: var(--grey-light);
+    }
+
+    .video-frame video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 10px;
+      background: var(--navy);
+      object-fit: contain;
+    }
+
+    .video-caption {
+      padding: 13px 5px 2px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .personal-note {
+      background: var(--blue-light);
+    }
+
+    .personal-note-card {
+      padding: 28px;
+      border: 1px solid var(--blue-border);
+      border-left: 5px solid var(--green-strong);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .personal-note-card p {
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .weeks-section {
+      background: #fbfcfe;
+    }
+
+    .week-graphic {
+      margin-top: 28px;
+      padding: 28px;
+      border: 1px solid var(--grey);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: 0 12px 34px rgba(10, 22, 40, 0.06);
+    }
+
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(13, 1fr);
+      gap: 9px;
+      max-width: 620px;
+      margin-bottom: 22px;
+    }
+
+    .week-dot {
+      aspect-ratio: 1;
+      border-radius: 4px;
+      background: #e1e6ec;
+    }
+
+    .week-dot:nth-child(-n+8) {
+      background: #cbd4df;
+    }
+
+    .week-dot:nth-child(9) {
+      background: var(--navy);
+      box-shadow: 0 0 0 3px rgba(10, 22, 40, 0.1);
+    }
+
+    .week-dot:nth-child(10) {
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgba(0, 201, 122, 0.15);
+    }
+
+    .week-message {
+      max-width: 650px;
+      color: var(--navy);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.35rem, 3vw, 1.85rem);
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .week-message span {
+      padding: 0 0.18em;
+      background: linear-gradient(transparent 58%, rgba(97, 227, 139, 0.55) 58%);
+    }
+
+    .final-section {
+      padding: 58px 48px 62px;
+      background:
+        radial-gradient(circle at 15% 110%, rgba(97, 227, 139, 0.17), transparent 22rem),
+        var(--navy);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .final-section h2 {
+      max-width: 680px;
+      margin: 0 auto 16px;
+      color: var(--white);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.08;
+    }
+
+    .final-section p {
+      max-width: 650px;
+      margin: 0 auto 28px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 48px;
+      background: #07111f;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 11px;
+    }
+
+    .footer strong {
+      color: var(--green);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 680px) {
+      .page {
+        width: 100%;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+      }
+
+      .brand-bar,
+      .section,
+      .final-section {
+        padding-right: 22px;
+        padding-left: 22px;
+      }
+
+      .brand-bar {
+        align-items: flex-start;
+        padding-top: 17px;
+        padding-bottom: 17px;
+      }
+
+      .brand-name {
+        font-size: 11px;
+        letter-spacing: 0.14em;
+      }
+
+      .brand-context {
+        max-width: 118px;
+        font-size: 9px;
+        letter-spacing: 0.12em;
+      }
+
+      .hero {
+        padding: 48px 22px 46px;
+      }
+
+      .availability {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-button {
+        width: 100%;
+        max-width: 430px;
+        padding-right: 18px;
+        padding-left: 18px;
+      }
+
+      .section {
+        padding-top: 42px;
+        padding-bottom: 42px;
+      }
+
+      .personal-note-card,
+      .week-graphic {
+        padding: 21px;
+      }
+
+      .week-grid {
+        grid-template-columns: repeat(13, 1fr);
+        gap: 6px;
+      }
+
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 18px 22px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .week-grid {
+        gap: 5px;
+      }
+
+      .week-dot {
+        border-radius: 3px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .cta-button {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="brand-bar">
+      <div class="brand-name">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>CJ Clay · HTSA</span>
+      </div>
+      <div class="brand-context">Private invitation</div>
+    </header>
+
+    <section class="hero" aria-labelledby="pageTitle">
+      <div class="selection-pill">You were personally selected</div>
+      <h1 id="pageTitle">A private opportunity to reconnect with CJ.</h1>
+      <p class="hero-lede">I set aside a small number of short conversations for people I believe deserve another look at what is possible.</p>
+
+      <div class="availability" aria-label="Invitation availability">
+        <div class="availability-item">
+          Limited availability
+          <strong>10 spots available through CJ</strong>
+        </div>
+        <div class="availability-item">
+          Private invitation
+          <strong>Open through Friday, September 4th</strong>
+        </div>
+      </div>
+
+      <a class="cta-button" href="https://meetings.hubspot.com/charles660" target="_blank" rel="noopener noreferrer">
+        Book My 15 Minute Call
+      </a>
+      <p class="cta-note">The 15 minute option is selected automatically.</p>
+    </section>
+
+    <section class="section" aria-labelledby="videoTitle">
+      <div class="section-kicker">See what is happening inside HTSA</div>
+      <h2 id="videoTitle">August 18th coaching and placement update</h2>
+      <div class="video-frame">
+        <video controls playsinline preload="metadata" controlslist="nodownload" title="HTSA coaching and placement update from August 18th, 2026">
+          <source src="/media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
+          Your browser cannot play this video. You can <a href="/media/this-week-at-htsa-2026-08-18.mp4">open it directly here</a>.
+        </video>
+        <p class="video-caption">See the level of coaching, support, and opportunity we are building toward inside HTSA.</p>
+      </div>
+    </section>
+
+    <section class="section personal-note" aria-labelledby="whyTitle">
+      <div class="personal-note-card">
+        <div class="section-kicker">Why you received this</div>
+        <h2 id="whyTitle">This was not sent to everyone.</h2>
+        <p>I personally reviewed more than 600 conversations from this year and selected the people I felt were especially suited for remote sales. The details of the special offer will be explained during your 15 minute conversation.</p>
+      </div>
+    </section>
+
+    <section class="section weeks-section" aria-labelledby="weekTitle">
+      <div class="section-kicker">One week at a time</div>
+      <h2 id="weekTitle">A year is only 52 weeks.</h2>
+      <p class="section-copy">Most weeks do not feel important while they are passing. Then enough of them pass, and life still looks the same.</p>
+
+      <div class="week-graphic">
+        <div class="week-grid" id="weekGrid" aria-label="52 squares representing the 52 weeks in one year"></div>
+        <p class="week-message">Another week can pass without anything changing. Or you can take <span>15 minutes</span> to look at a different path.</p>
+      </div>
+    </section>
+
+    <section class="final-section" aria-labelledby="finalTitle">
+      <h2 id="finalTitle">This is the time to reconnect.</h2>
+      <p>If you have been thinking about this, asked for more information, or wanted me to call you, this is the time to reconnect. Book your 15 minute call before the 10 spots are claimed.</p>
+      <a class="cta-button" href="https://meetings.hubspot.com/charles660" target="_blank" rel="noopener noreferrer">
+        Book My 15 Minute Call
+      </a>
+    </section>
+
+    <footer class="footer">
+      <strong>High Ticket Sales Academy</strong>
+      <span>Certification · Coaching · Placement</span>
+    </footer>
+  </main>
+
+  <script>
+    // Build one simple square for every week in a year.
+    const weekGrid = document.getElementById("weekGrid");
+    for (let week = 1; week <= 52; week += 1) {
+      const square = document.createElement("span");
+      square.className = "week-dot";
+      square.setAttribute("aria-hidden", "true");
+      weekGrid.appendChild(square);
+    }
+  </script>
+</body>
+</html>
