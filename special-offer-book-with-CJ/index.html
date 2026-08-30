@@ -345,52 +345,119 @@
       line-height: 1.75;
     }
 
-    .weeks-section {
+    .lifespan-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .lifespan-toggle::after {
+      flex: 0 0 auto;
+      color: var(--green-dark);
+      content: "⌄";
+      font-size: 20px;
+      line-height: 1;
+      transition: transform 160ms ease;
+    }
+
+    .lifespan-details[open] .lifespan-toggle::after {
+      transform: rotate(180deg);
+    }
+
+    .lifespan-toggle:focus-visible {
+      box-shadow: inset 0 0 0 3px rgba(0, 201, 122, 0.25);
+      outline: none;
+    }
+
+    .lifespan-section {
       background: #fbfcfe;
     }
 
-    .week-graphic {
-      margin-top: 28px;
-      padding: 28px;
-      border: 1px solid var(--grey);
-      border-radius: 16px;
-      background: var(--white);
-      box-shadow: 0 12px 34px rgba(10, 22, 40, 0.06);
+    .lifespan-details {
+      width: 100%;
+    }
+
+    .lifespan-toggle {
+      display: flex;
+      min-height: 72px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 15px 17px;
+      border: 1px solid #b8cce5;
+      border-radius: 13px;
+      background: linear-gradient(145deg, #f1f7ff, #ffffff);
+      box-shadow: 0 8px 22px rgba(10, 22, 40, 0.06);
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .lifespan-toggle:hover {
+      border-color: var(--green-strong);
+      box-shadow: 0 10px 26px rgba(10, 22, 40, 0.09);
+    }
+
+    .lifespan-toggle-copy {
+      display: block;
+    }
+
+    .lifespan-toggle-title {
+      display: block;
+      color: var(--navy);
+      font-family: "Playfair Display", serif;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .lifespan-toggle-subline {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .lifespan-content {
+      padding: 18px 2px 2px;
+    }
+
+    .lifespan-intro {
+      margin-bottom: 13px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
     }
 
     .age-control {
       display: flex;
       align-items: center;
-      gap: 18px;
-      margin-bottom: 24px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--grey);
+      gap: 14px;
+      margin-bottom: 15px;
     }
 
     .age-field {
       display: flex;
       flex: 0 0 auto;
       flex-direction: column;
-      gap: 6px;
+      gap: 4px;
     }
 
     .age-field label {
       color: var(--muted);
-      font-size: 11px;
+      font-size: 9px;
       font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
     .age-field input {
-      width: 96px;
-      min-height: 48px;
-      padding: 8px 12px;
+      width: 82px;
+      min-height: 44px;
+      padding: 7px 10px;
       border: 2px solid var(--blue-border);
-      border-radius: 10px;
+      border-radius: 9px;
       background: var(--white);
       color: var(--navy);
-      font: 800 20px/1 "DM Sans", sans-serif;
+      font: 800 18px/1 "DM Sans", sans-serif;
       text-align: center;
     }
 
@@ -401,10 +468,9 @@
     }
 
     .age-readout {
-      max-width: 490px;
       color: var(--muted);
-      font-size: 15px;
-      line-height: 1.55;
+      font-size: 12px;
+      line-height: 1.5;
     }
 
     .age-readout strong {
@@ -414,16 +480,15 @@
     .year-grid {
       display: grid;
       grid-template-columns: repeat(20, minmax(0, 1fr));
-      gap: 6px;
+      gap: 5px;
       max-width: 620px;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
 
     .year-dot {
       aspect-ratio: 1;
-      border-radius: 5px;
+      border-radius: 4px;
       background: #8fdca9;
-      transition: background 140ms ease, box-shadow 140ms ease, transform 140ms ease;
     }
 
     .year-dot--lived {
@@ -432,8 +497,8 @@
 
     .year-dot--current {
       background: var(--green-strong);
-      box-shadow: 0 0 0 4px rgba(0, 201, 122, 0.15);
-      transform: scale(1.08);
+      box-shadow: 0 0 0 3px rgba(0, 201, 122, 0.16);
+      transform: scale(1.07);
     }
 
     .year-dot--later {
@@ -444,22 +509,22 @@
     .year-legend {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px 18px;
-      margin-bottom: 28px;
+      gap: 7px 13px;
+      margin-bottom: 12px;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 9px;
     }
 
     .year-legend span {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 5px;
     }
 
     .legend-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 3px;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
       background: #8fdca9;
     }
 
@@ -477,69 +542,73 @@
     }
 
     .time-summary {
-      margin: 2px 0 22px;
-      padding: 13px 16px;
+      margin-bottom: 12px;
+      padding: 9px 11px;
       border: 1px solid rgba(0, 201, 122, 0.22);
-      border-radius: 10px;
+      border-radius: 9px;
       background: rgba(97, 227, 139, 0.1);
       color: var(--navy);
-      font-size: 14px;
+      font-size: 11px;
       font-weight: 700;
-      line-height: 1.5;
     }
 
-    .week-message {
-      max-width: 650px;
-      color: var(--navy);
-      font-family: "Playfair Display", serif;
-      font-size: clamp(1.35rem, 3vw, 1.85rem);
-      font-weight: 700;
-      line-height: 1.35;
-    }
-
-    .week-message span {
-      padding: 0 0.18em;
-      background: linear-gradient(transparent 58%, rgba(97, 227, 139, 0.55) 58%);
-    }
-
-    .life-excerpt {
-      margin-top: 28px;
-      padding: 23px 24px;
-      border-radius: 14px;
-      background: var(--navy);
-      color: rgba(255, 255, 255, 0.78);
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    .life-thirds {
+    .life-two {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
-      margin-bottom: 16px;
+      margin-bottom: 11px;
     }
 
-    .life-thirds span {
-      padding: 9px 10px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--white);
-      font-size: 12px;
-      font-weight: 700;
+    .life-two span {
+      padding: 10px;
+      border-radius: 9px;
+      background: var(--navy);
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 10px;
       text-align: center;
     }
 
-    .life-thirds .life-third-value {
+    .life-two b {
       display: block;
       margin-bottom: 2px;
       color: var(--green);
-      font-size: 18px;
-      line-height: 1.15;
+      font-size: 17px;
+      line-height: 1.1;
     }
 
-    .life-excerpt strong {
-      color: var(--green);
+    .life-explanation {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .signed-note {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-left: 4px solid var(--green-strong);
+      border-radius: 0 9px 9px 0;
+      background: var(--blue-light);
+      color: var(--navy);
+      font-family: "Playfair Display", serif;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .signed-note cite {
+      display: block;
+      margin-top: 5px;
+      color: var(--green-dark);
+      font-family: "DM Sans", sans-serif;
+      font-size: 9px;
+      font-style: normal;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .lifespan-content .inline-cta {
+      margin-top: 12px;
     }
 
     .final-section {
@@ -649,23 +718,36 @@
         padding-bottom: 42px;
       }
 
-      .personal-note-card,
-      .week-graphic {
+      .personal-note-card {
         padding: 21px;
+      }
+
+      .lifespan-section {
+        padding-top: 18px;
+        padding-bottom: 18px;
+      }
+
+      .lifespan-toggle {
+        min-height: 64px;
+        padding: 10px 12px;
+      }
+
+      .lifespan-toggle-title {
+        font-size: 17px;
+      }
+
+      .lifespan-toggle-subline {
+        font-size: 10px;
       }
 
       .age-control {
         align-items: flex-start;
         flex-direction: column;
-        gap: 12px;
+        gap: 8px;
       }
 
       .year-grid {
         gap: 4px;
-      }
-
-      .life-thirds {
-        grid-template-columns: 1fr;
       }
 
       .footer {
@@ -680,7 +762,8 @@
         scroll-behavior: auto;
       }
 
-      .cta-button {
+      .cta-button,
+      .lifespan-toggle::after {
         transition: none;
       }
     }
@@ -745,40 +828,48 @@
       </div>
     </section>
 
-    <section class="section weeks-section" aria-labelledby="weekTitle">
-      <div class="section-kicker">One week at a time</div>
-      <h2 id="weekTitle">Time feels abundant until you can see it.</h2>
-      <p class="section-copy">Enter your age to find the year you are living now. The 79 blocks below represent an average 79 year lifespan in America. Each block is one year.</p>
+    <section class="section lifespan-section" aria-label="Optional lifespan perspective">
+      <details class="lifespan-details" id="lifespanDetails">
+        <summary class="lifespan-toggle">
+          <span class="lifespan-toggle-copy">
+            <span class="lifespan-toggle-title">See where you actually are.</span>
+            <span class="lifespan-toggle-subline">Enter your age and I'll show you the one thing that made me send this. Takes 10 seconds.</span>
+          </span>
+        </summary>
 
-      <div class="week-graphic">
-        <div class="age-control">
-          <div class="age-field">
-            <label for="ageInput">Your age</label>
-            <input id="ageInput" type="number" min="18" max="78" inputmode="numeric" value="38">
+        <div class="lifespan-content">
+          <p class="lifespan-intro">The 79 blocks below represent an average 79 year lifespan in America. Each block is one year.</p>
+          <div class="age-control">
+            <div class="age-field">
+              <label for="ageInput">Your age</label>
+              <input id="ageInput" type="number" min="18" max="78" inputmode="numeric" value="38">
+            </div>
+            <p class="age-readout" id="ageReadout" aria-live="polite"></p>
           </div>
-          <p class="age-readout" id="ageReadout" aria-live="polite"></p>
-        </div>
 
-        <div class="year-grid" id="yearGrid" aria-label="79 squares representing an average 79 year life in America"></div>
-        <div class="year-legend" aria-hidden="true">
-          <span><i class="legend-dot legend-dot--lived"></i>Years lived</span>
-          <span><i class="legend-dot legend-dot--current"></i>Your current year</span>
-          <span><i class="legend-dot"></i>Years remaining before 70</span>
-          <span><i class="legend-dot legend-dot--later"></i>Later years</span>
-        </div>
-
-        <p class="time-summary" id="timeSummary" aria-live="polite"></p>
-        <p class="week-message">Years do not disappear all at once. They disappear one ordinary week at a time. Take <span>15 minutes</span> to revisit our conversation and see whether this new offer changes what the next year can look like.</p>
-
-        <div class="life-excerpt">
-          <div class="life-thirds" aria-label="A rough picture of how remaining life is spent">
-            <span><b class="life-third-value" id="workYears">0 years</b>working</span>
-            <span><b class="life-third-value" id="sleepYears">0 years</b>sleeping</span>
-            <span><b class="life-third-value" id="livingYears">0 years</b>time that is yours to live</span>
+          <div class="year-grid" id="yearGrid" aria-label="79 squares representing an average 79 year life in America"></div>
+          <div class="year-legend" aria-hidden="true">
+            <span><i class="legend-dot legend-dot--lived"></i>Years lived</span>
+            <span><i class="legend-dot legend-dot--current"></i>Your current year</span>
+            <span><i class="legend-dot"></i>Years remaining before 70</span>
+            <span><i class="legend-dot legend-dot--later"></i>Later years</span>
           </div>
-          <p>These are simple estimates using the idea that we spend roughly a third of our lives working, a third sleeping, and the rest trying to actually live. Later years still matter. The point is that your healthiest and highest energy years are not unlimited. I would love nothing more than to help you build a career that revolves around your life instead of forcing your life to revolve around your career. That is the same choice I made over the last three days. <strong>I chose my wife, and I made work fit around our life.</strong> Make this decision count. Stop waiting for tomorrow.</p>
+
+          <p class="time-summary" id="timeSummary" aria-live="polite"></p>
+          <div class="life-two" aria-label="A rough picture of remaining life">
+            <span><b id="sleepYears">0 years</b>sleeping</span>
+            <span><b id="awakeYears">0 years</b>awake, and yours to decide what to do with</span>
+          </div>
+          <p class="life-explanation">These are simple estimates. Sleeping uses one third of the remaining years. The other two thirds represent awake time, including work, family, relationships, and the life you still get to shape.</p>
+          <blockquote class="signed-note">
+            Over the last three days, I chose my wife and made work fit around our life. I want you to have a career that gives you the power to make that choice too.
+            <cite>CJ Clay</cite>
+          </blockquote>
+          <p class="inline-cta">
+            <a class="cta-button" href="https://meetings.hubspot.com/charles660" target="_blank" rel="noopener noreferrer">Book my 15 minutes</a>
+          </p>
         </div>
-      </div>
+      </details>
     </section>
 
     <section class="final-section" aria-labelledby="finalTitle">
@@ -801,9 +892,8 @@
     const ageInput = document.getElementById("ageInput");
     const ageReadout = document.getElementById("ageReadout");
     const timeSummary = document.getElementById("timeSummary");
-    const workYears = document.getElementById("workYears");
     const sleepYears = document.getElementById("sleepYears");
-    const livingYears = document.getElementById("livingYears");
+    const awakeYears = document.getElementById("awakeYears");
     const yearGrid = document.getElementById("yearGrid");
     const yearDots = [];
 
@@ -815,12 +905,18 @@
       yearDots.push(square);
     }
 
+    function formatYears(value) {
+      return Number.isInteger(value) ? String(value) : value.toFixed(1);
+    }
+
     function renderAge() {
       const enteredAge = Number.parseInt(ageInput.value, 10);
       const age = Number.isFinite(enteredAge)
         ? Math.min(78, Math.max(18, enteredAge))
         : 38;
       const currentYear = age + 1;
+      const yearsRemaining = LIFE_YEARS - age;
+      const yearsBefore70 = Math.max(0, 70 - age);
 
       yearDots.forEach((dot, index) => {
         dot.className = "year-dot";
@@ -829,18 +925,10 @@
         if (index > age && index >= 70) dot.classList.add("year-dot--later");
       });
 
-      const yearsRemaining = LIFE_YEARS - age;
-      const yearsBefore70 = Math.max(0, 70 - age);
-      const estimatedThird = yearsRemaining / 3;
-      const formattedThird = Number.isInteger(estimatedThird)
-        ? String(estimatedThird)
-        : estimatedThird.toFixed(1);
-
       ageReadout.innerHTML = `At age <strong>${age}</strong>, you are living year <strong>${currentYear}</strong> of an average 79 year life in America.`;
       timeSummary.innerHTML = `<strong>${yearsRemaining} years</strong> remain on this model. <strong>${yearsBefore70}</strong> of them come before age 70.`;
-      workYears.textContent = `${formattedThird} years`;
-      sleepYears.textContent = `${formattedThird} years`;
-      livingYears.textContent = `${formattedThird} years`;
+      sleepYears.textContent = `${formatYears(yearsRemaining / 3)} years`;
+      awakeYears.textContent = `${formatYears((yearsRemaining * 2) / 3)} years`;
       yearGrid.setAttribute(
         "aria-label",
         `At age ${age}, year ${currentYear} is highlighted among 79 years representing the average lifespan in America`
@@ -856,6 +944,15 @@
       renderAge();
     });
     renderAge();
+
+    // Keep the lifespan disclosure reliably operable with Enter and Space.
+    const lifespanSummary = document.querySelector(".lifespan-toggle");
+    lifespanSummary.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        lifespanSummary.parentElement.open = !lifespanSummary.parentElement.open;
+      }
+    });
   </script>
 </body>
 </html>
