@@ -396,8 +396,8 @@
 
     .year-grid {
       display: grid;
-      grid-template-columns: repeat(10, minmax(0, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(20, minmax(0, 1fr));
+      gap: 6px;
       max-width: 620px;
       margin-bottom: 14px;
     }
@@ -447,36 +447,6 @@
 
     .legend-dot--current {
       background: var(--green-strong);
-    }
-
-    .week-label {
-      margin-bottom: 11px;
-      color: var(--navy);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .week-grid {
-      display: grid;
-      grid-template-columns: repeat(13, 1fr);
-      gap: 9px;
-      max-width: 620px;
-      margin-bottom: 22px;
-    }
-
-    .week-dot {
-      aspect-ratio: 1;
-      border-radius: 4px;
-      background: rgba(97, 227, 139, 0.38);
-    }
-
-    .week-dot--past {
-      background: #c4ccd6;
-    }
-
-    .week-dot--current {
-      background: var(--green-strong);
-      box-shadow: 0 0 0 4px rgba(0, 201, 122, 0.15);
     }
 
     .week-message {
@@ -636,12 +606,7 @@
       }
 
       .year-grid {
-        gap: 6px;
-      }
-
-      .week-grid {
-        grid-template-columns: repeat(13, 1fr);
-        gap: 6px;
+        gap: 4px;
       }
 
       .life-thirds {
@@ -652,16 +617,6 @@
         flex-direction: column;
         align-items: flex-start;
         padding: 18px 22px;
-      }
-    }
-
-    @media (max-width: 400px) {
-      .week-grid {
-        gap: 5px;
-      }
-
-      .week-dot {
-        border-radius: 3px;
       }
     }
 
@@ -754,8 +709,6 @@
           <span><i class="legend-dot"></i>Years remaining</span>
         </div>
 
-        <p class="week-label" id="weekLabel">This year is only 52 weeks.</p>
-        <div class="week-grid" id="weekGrid" aria-label="52 squares representing the 52 weeks in one year"></div>
         <p class="week-message">Another week can pass without anything changing. Or you can take <span>15 minutes</span> to look at a different path.</p>
 
         <div class="life-excerpt">
@@ -828,25 +781,6 @@
       renderAge();
     });
     renderAge();
-
-    // Build 52 squares and highlight the current calendar week.
-    const weekGrid = document.getElementById("weekGrid");
-    const now = new Date();
-    const yearStart = new Date(now.getFullYear(), 0, 1);
-    const elapsedDays = Math.floor((now - yearStart) / 86400000);
-    const currentWeek = Math.min(52, Math.floor(elapsedDays / 7) + 1);
-
-    for (let week = 1; week <= 52; week += 1) {
-      const square = document.createElement("span");
-      square.className = "week-dot";
-      if (week < currentWeek) square.classList.add("week-dot--past");
-      if (week === currentWeek) square.classList.add("week-dot--current");
-      square.setAttribute("aria-hidden", "true");
-      weekGrid.appendChild(square);
-    }
-
-    document.getElementById("weekLabel").textContent =
-      `This year is only 52 weeks. You are in week ${currentWeek}.`;
   </script>
 </body>
 </html>
