@@ -316,31 +316,6 @@
       box-shadow: 0 12px 34px rgba(10, 22, 40, 0.06);
     }
 
-    .timeline-facts {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-
-    .timeline-fact {
-      padding: 13px 15px;
-      border: 1px solid var(--blue-border);
-      border-radius: 10px;
-      background: var(--blue-light);
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.35;
-      text-align: center;
-    }
-
-    .timeline-fact strong {
-      display: block;
-      margin-bottom: 2px;
-      color: var(--navy);
-      font-size: 18px;
-    }
-
     .age-control {
       display: flex;
       align-items: center;
@@ -631,10 +606,6 @@
         gap: 12px;
       }
 
-      .timeline-facts {
-        grid-template-columns: 1fr;
-      }
-
       .year-grid {
         gap: 4px;
       }
@@ -716,14 +687,9 @@
     <section class="section weeks-section" aria-labelledby="weekTitle">
       <div class="section-kicker">One week at a time</div>
       <h2 id="weekTitle">Time feels abundant until you can see it.</h2>
-      <p class="section-copy">Enter your age to find the year you are living now. Every square represents one year. It is a simple reminder that every year is made of weeks that never return.</p>
+      <p class="section-copy">Enter your age to find the year you are living now. The 79 blocks below represent an average 79 year lifespan in America. Each block is one year.</p>
 
       <div class="week-graphic">
-        <div class="timeline-facts" aria-label="Timeline scale">
-          <div class="timeline-fact"><strong>52 weeks</strong>make one year</div>
-          <div class="timeline-fact"><strong>79 years</strong>represent the average lifespan in America</div>
-        </div>
-
         <div class="age-control">
           <div class="age-field">
             <label for="ageInput">Your age</label>
@@ -741,7 +707,7 @@
         </div>
 
         <p class="time-summary" id="timeSummary" aria-live="polite"></p>
-        <p class="week-message">Another week can pass without anything changing. Or you can take <span>15 minutes</span> to revisit our conversation and see whether this new offer changes what is possible.</p>
+        <p class="week-message">Years do not disappear all at once. They disappear one ordinary week at a time. Take <span>15 minutes</span> to revisit our conversation and see whether this new offer changes what the next year can look like.</p>
 
         <div class="life-excerpt">
           <div class="life-thirds" aria-label="A rough picture of how remaining life is spent">
