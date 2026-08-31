@@ -554,7 +554,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     el("customUnit").textContent  = CUSTOM_OFFER.unit || "";
     PLANS.custom = { name:CUSTOM_OFFER.name, amt:CUSTOM_OFFER.amount, sub:CUSTOM_OFFER.note,
                      url:CUSTOM_OFFER.checkout, warn:CUSTOM_OFFER.warn || "" };
-    el("planPif").classList.remove("plan--best");
+    el("planPif") && el("planPif").classList.remove("plan--best");
     const b = el("pifBadge"); if (b) b.remove();
   }
 
