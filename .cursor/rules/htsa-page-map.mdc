@@ -56,10 +56,10 @@ Who: someone who has verbally agreed to a plan. CJ is on the phone with them.
 
 - Source: `templates/_TEMPLATE-close.html`
 - Output: `htsa-enrollment-<first>-<last>.html` at root
-- **On a live call, run this and nothing else:**
-  `python3 scripts/htsa-paste-close.py --ship` with his paste on stdin.
-  Wait for `READY`. Game plan is a separate already-live file:
-  `https://closewithcjclay.com/30-day-roadmap.html?n=<First>`
+- **CJ pastes in chat. You run the script. Never tell him to use Terminal.**
+  Name only → `htsa-send-pack.py`. Full block → `htsa-paste-close.py --ship`.
+  Wait for `READY`, then print TEXT + EMAIL (both links, black on white HTML).
+  Game plan is already live: `https://closewithcjclay.com/30-day-roadmap.html?n=<First>`
 - Full instructions: `.cursor/rules/htsa-close-page.mdc`
 
 ## 4. "pre call link" — pre-call resources page

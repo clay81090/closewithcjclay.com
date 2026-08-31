@@ -16,11 +16,18 @@ this one. Do not modify existing legacy pages when building a new close page.
 
 ## Trigger
 
-CJ says **"close page"**, **"enrollment link"**, **"enroll link"**, or **"close link"**
-and pastes name, email, phone, and which options to show.
+CJ pastes a name, or a name plus email, phone, and options, in **this chat**.
+He does **not** run Terminal. Never tell him to type `htsa-close`, open a
+tab, or press Ctrl-D. You run the command. He copies the text and email
+you print.
 
-**Do this first, before reading other client files.** In Terminal you can also
-type `htsa-close`, paste the block, then Ctrl-D (new tab if the command is unknown).
+**Name only** (page already exists):
+
+```bash
+python3 scripts/htsa-send-pack.py --full-name "<Full Name>"
+```
+
+**New person or new pricing** (full block):
 
 ```bash
 python3 scripts/htsa-paste-close.py --ship <<'EOF'
@@ -28,12 +35,14 @@ python3 scripts/htsa-paste-close.py --ship <<'EOF'
 EOF
 ```
 
-Wait for `READY` plus a URL. If he also wants a game plan, send
-`https://closewithcjclay.com/30-day-roadmap.html?n=<First>` immediately. That
-file already exists. Do not wait on the enroll page for the game plan.
+Do this first. Do not read other client files. Do not ask follow-up questions.
 
-Do not rebuild the template by hand. Do not open other invoices. Do not ask
-follow-up questions. Use the fallbacks below.
+Wait for `READY` plus a URL before you give him the enroll link. The game
+plan is already live. Print it in the same pack. Do not wait on Pages for it.
+
+After `READY` (or after send-pack), **always** print TEXT and EMAIL in chat
+as a black-on-white HTML block he can paste into Gmail and HubSpot. Both
+links. Clickable. No markdown. No code fences. Use the block in Step 8.
 
 ## What this page is for
 
@@ -163,27 +172,35 @@ git push
 
 Give CJ the live URL and tell him to load it once himself before the call.
 
-## Step 8 — output the send-it text
+## Step 8 — output TEXT + EMAIL every time
 
-Print this ready to copy. **Follow `no-dashes-in-client-copy.mdc`: no em dashes,
-no en dashes.** Never write a negative descriptive norm about other prospects.
+Always both links. Always this HTML wrapper so copy-paste into Gmail and
+HubSpot stays black on white. No markdown. No code fences. No em dashes.
+Never write a negative descriptive norm about other prospects.
 
-```
-[Message 1]
-Here you go, <First>. Everything we just went over is on this page.
+<div style="background:#ffffff;color:#000000;padding:20px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;">
+<p style="color:#000000;background:#ffffff;margin:0 0 8px 0;"><b>TEXT</b></p>
+<p style="color:#000000;background:#ffffff;margin:0 0 16px 0;">
+First, here is everything we just walked through. First link is your 30 day game plan. Second is your enrollment page.<br><br>
+<a href="GAME_URL" style="color:#000000;background:#ffffff;">GAME_URL</a><br><br>
+<a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a>
+</p>
+<p style="color:#000000;background:#ffffff;margin:24px 0 8px 0;"><b>EMAIL</b></p>
+<p style="color:#000000;background:#ffffff;margin:0;">Subject: Your 30 day game plan and enrollment page</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Hi First,</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Here is everything we just walked through.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Your 30 day game plan:</p>
+<p style="color:#000000;background:#ffffff;margin:8px 0 0 0;"><a href="GAME_URL" style="color:#000000;background:#ffffff;">GAME_URL</a></p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Your enrollment page:</p>
+<p style="color:#000000;background:#ffffff;margin:8px 0 0 0;"><a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a></p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">See you in there,</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">
+CJ Clay<br>
+HTSA, Career Transformation Coach<br>
+(616) 612-1735<br>
+<a href="mailto:cj@highticketsalesacademy.com" style="color:#000000;background:#ffffff;">cj@highticketsalesacademy.com</a>
+</p>
+</div>
 
-[Message 2]
-https://closewithcjclay.com/htsa-enrollment-<first>-<last>.html
-```
-
-Then remind CJ of the live close process:
-
-```
-1. Get the verbal on WHICH plan before sending anything.
-2. Say "I'm texting you a page right now, stay on with me, takes about 90 seconds."
-3. Send it while you are still talking. Never send and hang up.
-4. Narrate it: "Top green box says Paid in Full. Tap it."
-5. Terms sheet is one line: "That's the terms and the guarantee, check the box, hit continue."
-6. Stay on the line through Whop. Do not go quiet. Talk about their start date.
-7. They text "payment confirmed", you turn on access while still on the phone.
-```
+If he is mid-call, also remind him in one short line: stay on the phone,
+narrate the tap, do not go quiet at Whop.

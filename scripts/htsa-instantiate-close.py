@@ -24,6 +24,9 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from htsa_close_copy import game_url, print_send_pack  # noqa: E402
+
 TEMPLATE = ROOT / "templates/_TEMPLATE-close.html"
 LIVE_HOST = "https://closewithcjclay.com"
 POLL_INTERVAL = 5
@@ -169,12 +172,13 @@ def main() -> None:
         show=show,
         overwrite=args.overwrite,
     )
-    game = f"{LIVE_HOST}/30-day-roadmap.html?n={fn}"
+    game = game_url(fn)
     print(out.name, file=sys.stderr)
     print(f"GAME {game}")
 
     if not args.ship:
         print(url)
+        print_send_pack(fn, url, game)
         print("Local only. Rerun with --overwrite --ship to publish.", file=sys.stderr)
         return
 
@@ -187,15 +191,18 @@ def main() -> None:
 
     if args.no_wait_live:
         print(url)
+        print_send_pack(fn, url, game)
         return
 
     live = wait_for_stamp(url, f"close-build:{stamp}", POLL_TIMEOUT)
     if not live:
         print(f"Push OK but stamp not live within {POLL_TIMEOUT}s.", file=sys.stderr)
         print(url, file=sys.stderr)
+        print_send_pack(fn, url, game)
         raise SystemExit(2)
     print("READY")
     print(live)
+    print_send_pack(fn, live, game)
 
 
 if __name__ == "__main__":

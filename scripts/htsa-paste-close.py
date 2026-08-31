@@ -24,6 +24,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 INSTANTIATE = ROOT / "scripts/htsa-instantiate-close.py"
+SEND_PACK = ROOT / "scripts/htsa-send-pack.py"
 
 
 def to_e164(raw: str) -> str:
@@ -60,6 +61,9 @@ def parse(text: str) -> dict:
         break
     if not name:
         raise SystemExit("Could not find a name on the first real line.")
+    # Name only: reuse the page that is already live. Do not rebuild.
+    if not email_m and not phone_m:
+        return {"full_name": name, "send_only": True}
     if not email_m:
         raise SystemExit("Could not find Email:")
     if not phone_m:
@@ -109,6 +113,17 @@ def main() -> None:
     if args.dry_run:
         print(fields)
         return
+    if fields.get("send_only"):
+        raise SystemExit(
+            subprocess.call(
+                [sys.executable, str(SEND_PACK), "--full-name", fields["full_name"]],
+                cwd=ROOT,
+            )
+        )
+    if "email" not in fields:
+        raise SystemExit("Could not find Email:")
+    if "phone" not in fields:
+        raise SystemExit("Could not find Phone Number:")
     cmd = [
         sys.executable,
         str(INSTANTIATE),
