@@ -37,12 +37,13 @@ EOF
 
 Do this first. Do not read other client files. Do not ask follow-up questions.
 
-Wait for `READY` plus a URL before you give him the enroll link. The game
-plan is already live. Print it in the same pack. Do not wait on Pages for it.
+Wait for `READY` plus a URL before you give him the enroll link. The 30 day
+plan is already on that page at the bottom. Do not send a second roadmap URL
+unless he asks for it.
 
 After `READY` (or after send-pack), **always** print TEXT and EMAIL in chat
-as a black-on-white HTML block he can paste into Gmail and HubSpot. Both
-links. Clickable. No markdown. No code fences. Use the block in Step 8.
+as a black-on-white HTML block he can paste into Gmail and HubSpot. One
+enroll link. Clickable. No markdown. No code fences. Use the block in Step 8.
 
 ## What this page is for
 
@@ -174,25 +175,23 @@ Give CJ the live URL and tell him to load it once himself before the call.
 
 ## Step 8 — output TEXT + EMAIL every time
 
-Always both links. Always this HTML wrapper so copy-paste into Gmail and
-HubSpot stays black on white. No markdown. No code fences. No em dashes.
-Never write a negative descriptive norm about other prospects.
+One enroll link only. The 30 day plan is already at the bottom of that page.
+Always this HTML wrapper so copy-paste into Gmail and HubSpot stays black on
+white. No markdown. No code fences. No em dashes. Never write a negative
+descriptive norm about other prospects.
 
 <div style="background:#ffffff;color:#000000;padding:20px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;">
 <p style="color:#000000;background:#ffffff;margin:0 0 8px 0;"><b>TEXT</b></p>
 <p style="color:#000000;background:#ffffff;margin:0 0 16px 0;">
-First, here is everything we just walked through. First link is your 30 day game plan. Second is your enrollment page.<br><br>
-<a href="GAME_URL" style="color:#000000;background:#ffffff;">GAME_URL</a><br><br>
+First, here is everything we just walked through. This is your enrollment page. The 30 day action plan is at the bottom. That is how we get you to the goal. Our goal is that you are our next testimonial.<br><br>
 <a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a>
 </p>
 <p style="color:#000000;background:#ffffff;margin:24px 0 8px 0;"><b>EMAIL</b></p>
-<p style="color:#000000;background:#ffffff;margin:0;">Subject: Your 30 day game plan and enrollment page</p>
+<p style="color:#000000;background:#ffffff;margin:0;">Subject: Your enrollment page</p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Hi First,</p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Here is everything we just walked through.</p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Your 30 day game plan:</p>
-<p style="color:#000000;background:#ffffff;margin:8px 0 0 0;"><a href="GAME_URL" style="color:#000000;background:#ffffff;">GAME_URL</a></p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Your enrollment page:</p>
-<p style="color:#000000;background:#ffffff;margin:8px 0 0 0;"><a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a></p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">This is your enrollment page. The 30 day action plan is at the bottom. That is how we get you to the goal. Our goal is that you are our next testimonial.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;"><a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a></p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">See you in there,</p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">
 CJ Clay<br>

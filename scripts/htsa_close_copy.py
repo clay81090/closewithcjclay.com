@@ -34,29 +34,29 @@ def first_name_from_html(html: str) -> str:
     return m.group(1) if m else ""
 
 
-def print_send_pack(first: str, enroll: str, game: str) -> None:
-    """Plain text CJ can copy. Agent also turns this into the Gmail white box."""
+def print_send_pack(first: str, enroll: str) -> None:
+    """One enroll link. The 30 day plan lives at the bottom of that page."""
     print("=== TEXT ===")
     print(
         f"{first}, here is everything we just walked through. "
-        "First link is your 30 day game plan. Second is your enrollment page."
+        "This is your enrollment page. The 30 day action plan is at the bottom. "
+        "That is how we get you to the goal. Our goal is that you are our next testimonial."
     )
-    print()
-    print(game)
     print()
     print(enroll)
     print()
     print("=== EMAIL SUBJECT ===")
-    print("Your 30 day game plan and enrollment page")
+    print("Your enrollment page")
     print("=== EMAIL ===")
     print(f"Hi {first},")
     print()
     print("Here is everything we just walked through.")
     print()
-    print("Your 30 day game plan:")
-    print(game)
+    print(
+        "This is your enrollment page. The 30 day action plan is at the bottom. "
+        "That is how we get you to the goal. Our goal is that you are our next testimonial."
+    )
     print()
-    print("Your enrollment page:")
     print(enroll)
     print()
     print("See you in there,")

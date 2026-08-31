@@ -178,7 +178,7 @@ def main() -> None:
 
     if not args.ship:
         print(url)
-        print_send_pack(fn, url, game)
+        print_send_pack(fn, url)
         print("Local only. Rerun with --overwrite --ship to publish.", file=sys.stderr)
         return
 
@@ -191,18 +191,18 @@ def main() -> None:
 
     if args.no_wait_live:
         print(url)
-        print_send_pack(fn, url, game)
+        print_send_pack(fn, url)
         return
 
     live = wait_for_stamp(url, f"close-build:{stamp}", POLL_TIMEOUT)
     if not live:
         print(f"Push OK but stamp not live within {POLL_TIMEOUT}s.", file=sys.stderr)
         print(url, file=sys.stderr)
-        print_send_pack(fn, url, game)
+        print_send_pack(fn, url)
         raise SystemExit(2)
     print("READY")
     print(live)
-    print_send_pack(fn, live, game)
+    print_send_pack(fn, live)
 
 
 if __name__ == "__main__":
