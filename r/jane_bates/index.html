@@ -2377,7 +2377,7 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
-    margin: 8px 0 18px;
+    margin: 8px 0 12px;
   }
   .proof-square {
     display: flex;
@@ -2461,16 +2461,42 @@
     text-align: center;
     text-decoration: none;
   }
-  .precall-link-stack {
-    display: grid;
-    gap: 8px;
-    margin: 6px 36px 18px;
+  .precall-trust-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin: 0 0 10px;
+    padding: 16px 18px;
+    border: 2px solid var(--green);
+    border-radius: 12px;
+    background: linear-gradient(145deg, #0a1628, #163056);
+    color: #d7dee8;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 8px 22px rgba(10, 22, 40, 0.16);
+  }
+  .precall-trust-bar:hover {
+    color: #fff;
+    border-color: #61e38b;
+  }
+  .precall-trust-stars {
+    color: #f5c518;
+    font-size: 22px;
+    letter-spacing: 3px;
+    line-height: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 0 10px rgba(245, 197, 24, 0.35);
   }
   .precall-link-row {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+    margin: 0 0 8px;
     padding: 13px 16px;
     border: 2px solid rgba(0, 201, 122, 0.35);
     border-radius: 12px;
@@ -2486,7 +2512,34 @@
     border-color: var(--green);
     background: rgba(97, 227, 139, 0.16);
   }
-  .precall-trust-stars { color: #e2b227; letter-spacing: 2px; }
+  .precall-more {
+    margin: 0 0 8px;
+    border: 2px solid rgba(10, 22, 40, 0.12);
+    border-radius: 12px;
+    background: #f7f9fc;
+  }
+  .precall-more > summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 13px 16px;
+    color: var(--navy);
+    font-size: 15px;
+    font-weight: 800;
+    text-align: center;
+  }
+  .precall-more > summary::-webkit-details-marker { display: none; }
+  .precall-more > summary::after {
+    content: " ▾";
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .precall-more[open] > summary::after { content: " ▴"; }
+  .precall-more-list {
+    display: grid;
+    gap: 8px;
+    padding: 0 12px 12px;
+  }
+  .precall-more-list .precall-link-row { margin: 0; }
   .lifespan-section {
     --green-strong: #00c97a;
     --blue-light: #edf5ff;
@@ -2739,8 +2792,8 @@
   }
   @media (max-width: 700px) {
     .precall-slim-hero, .precall-slim-section, .precall-close, .lifespan-section { padding-left: 18px; padding-right: 18px; }
-    .precall-link-stack { margin-left: 18px; margin-right: 18px; }
     .proof-squares { grid-template-columns: 1fr; }
+    .precall-trust-bar { flex-wrap: wrap; font-size: 15px; }
     .age-control { align-items: flex-start; flex-direction: column; gap: 8px; }
     .year-grid { gap: 3px; }
     .lifespan-heading { padding: 10px 11px; }
@@ -2789,7 +2842,7 @@
     <p>I pulled the few things that actually matter before we talk. Watch the clip, then look at the three boxes under it.</p>
     <p>On the call we will cover where you are, what you want, and whether this is the right next move. Nothing here replaces that conversation.</p>
     <a class="book-tab" href="https://meetings.hubspot.com/charles660/cj" target="_blank" rel="noopener noreferrer">Book a time</a>
-    <p class="book-note">Choose a 45 minute time slot at the beginning of the hour. 2:00 or 3:00 works. 2:15 does not.</p>
+    <p class="book-note">Choose a 45 minute time slot at the beginning of the hour.</p>
   </section>
 
   <div class="billing-grid">
@@ -2864,19 +2917,33 @@
         <a class="proof-square-cta cj-resource-card" href="https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8" target="_blank" rel="noopener noreferrer"><span class="cj-resource-card-title" hidden>Brianna — Tony Robbins team</span>Watch on YouTube</a>
       </article>
     </div>
-  </section>
-
-  <div class="precall-link-stack">
-    <a class="precall-link-row cj-resource-card" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer" aria-label="Read HTSA reviews on Trustpilot, rated 4.9 stars out of 5">
+    <a class="precall-trust-bar cj-resource-card" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer" aria-label="Read HTSA reviews on Trustpilot, rated 4.9 stars out of 5">
       <span class="cj-resource-card-title" hidden>Trustpilot — 4.9 out of 5 stars</span>
       <span class="precall-trust-stars" aria-hidden="true">★★★★★</span>
-      <span>Trustpilot Reviews — 4.9 out of 5</span>
+      <span>Trustpilot Reviews, 4.9 out of 5</span>
     </a>
     <a class="precall-link-row cj-resource-card" href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" target="_blank" rel="noopener noreferrer">
       <span class="cj-resource-card-title" hidden>Top 20 Companies in High Ticket Sales</span>
       <span>Top 20 Companies in High Ticket Sales</span>
     </a>
-  </div>
+    <details class="precall-more">
+      <summary>Other resources</summary>
+      <div class="precall-more-list">
+        <a class="precall-link-row cj-resource-card" href="https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib" target="_blank" rel="noopener noreferrer">
+          <span class="cj-resource-card-title" hidden>Josh / Alex Hormozi background</span>
+          <span>Josh / Alex Hormozi background</span>
+        </a>
+        <a class="precall-link-row cj-resource-card" href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" target="_blank" rel="noopener noreferrer">
+          <span class="cj-resource-card-title" hidden>Dana, unsolicited personal review</span>
+          <span>Dana, unsolicited personal review</span>
+        </a>
+        <a class="precall-link-row cj-resource-card" href="https://drive.google.com/file/d/1Zo2ID5sdF8ZYP8rZD_fisNgj-eNpuQxM/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <span class="cj-resource-card-title" hidden>Taylor Decourcey, newer member perspective</span>
+          <span>Taylor Decourcey, newer member perspective</span>
+        </a>
+      </div>
+    </details>
+  </section>
 
   <section class="section lifespan-section" aria-labelledby="lifespanTitle">
     <div class="lifespan-heading">
@@ -2920,7 +2987,7 @@
   </section>
 
   <div class="precall-close">
-    <p>Book a time that works. Select 45 minutes, and start on the hour. 2:00 or 3:00 is right. 2:15 is not.</p>
+    <p>Book a time that works. Select 45 minutes, and start on the hour.</p>
     <a class="cta" href="https://meetings.hubspot.com/charles660/cj" target="_blank" rel="noopener noreferrer">Book a time</a>
     <p>Choose a 45 minute time slot at the beginning of the hour.</p>
   </div>
