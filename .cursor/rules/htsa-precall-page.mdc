@@ -125,7 +125,7 @@ GitHub Pages takes about a minute.
 
 ## Step 6 — output the ready to send messages
 
-After the page is built and pushed, ALWAYS print all three of the following,
+After the page is built and pushed, ALWAYS print the texts plus both email versions,
 ready for CJ to copy and paste. Do not summarize them. Do not ask if he wants them.
 
 **Follow `no-dashes-in-client-copy.mdc`. No em dashes, no en dashes, no hyphen
@@ -135,11 +135,12 @@ Substitute the real name, slug, day and time. Use CJ's voice: plain, warm, no hy
 
 ---
 
-### A. TEXT SEQUENCE (3 messages)
+### A. TEXT SEQUENCE (2 messages)
 
-Send as three separate messages. iMessage only renders the big link preview card
-when a message contains nothing but the URL, so the link must be alone in its own
-message.
+The live URL belongs at the **end of Message 1**. Never send the URL as its own
+message. Send as two separate iMessages.
+
+If they **did** reply:
 
 ```
 [Message 1]
@@ -148,23 +149,25 @@ Appreciate you getting back to me, <First>. Most people don't, so thank you.
 One more thing and then I'll leave you alone until <day>. I put everything on one
 page so you're not digging back through the email.
 
-[Message 2]
 https://closewithcjclay.com/r/<slug>/
 
-[Message 3]
+[Message 2]
 If you only open one thing, make it the 4 minute clip at the top. It's from our
 live call on the 18th. Four of our members talking about getting placed, and every
 one of them had more than one offer to choose from.
-
-Not homework. Totally optional. See you <day> at <time>.
 ```
 
-If they did **not** reply to the resources email, replace Message 1 with:
+If they did **not** reply, Message 1 is:
 
 ```
+[Message 1]
 Hey <First>, CJ here. Looking forward to <day> at <time>. Not sure the email
 landed, so here is everything on one page instead.
+
+https://closewithcjclay.com/r/<slug>/
 ```
+
+Message 2 stays the clip note.
 
 ---
 

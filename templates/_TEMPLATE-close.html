@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1628">
+<title>Enrollment | CJ Clay · HTSA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1628;--navy-soft:#152a46;--green:#61e38b;--green-strong:#00c97a;--green-dark:#087b50;
+  --grey-light:#f3f6f9;--grey:#dce3eb;--text:#17243b;--muted:#54637a;--white:#fff;--gold:#e3a008}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{min-width:320px;background:var(--grey-light);color:var(--text);
+  font-family:"DM Sans",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{width:min(720px,calc(100% - 20px));margin:16px auto;overflow:hidden;border-radius:20px;
+  background:var(--white);box-shadow:0 20px 56px rgba(10,22,40,.13)}
+
+.top{padding:22px 26px 20px;text-align:center;color:var(--white);
+  background:radial-gradient(circle at 86% 14%,rgba(97,227,139,.18),transparent 17rem),
+             linear-gradient(145deg,var(--navy),var(--navy-soft))}
+.top-photo{width:52px;height:52px;margin:0 auto 10px;display:block;border:2px solid var(--green-strong);
+  border-radius:50%;object-fit:cover}
+.top h1{font-family:"Playfair Display",serif;font-size:clamp(1.6rem,5vw,2.1rem);line-height:1.12}
+.top p{margin-top:7px;color:rgba(255,255,255,.78);font-size:14px}
+.included{margin:14px auto 0;padding:11px 14px;max-width:520px;border:1px solid rgba(255,255,255,.14);
+  border-radius:11px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.82);
+  font-size:12.5px;line-height:1.5;text-align:left}
+.included b{color:var(--green)}
+
+.plans{padding:20px 26px 8px}
+.plans-h{margin-bottom:4px;color:var(--navy);font-family:"Playfair Display",serif;font-size:22px}
+.plans-sub{margin-bottom:16px;color:var(--muted);font-size:14px}
+
+.plan{position:relative;margin-bottom:14px;padding:18px;border:2px solid var(--grey);border-radius:15px;
+  background:var(--white);transition:border-color 150ms ease,box-shadow 150ms ease}
+.plan--best{border-color:var(--green-strong);box-shadow:0 10px 30px rgba(0,201,122,.14)}
+.plan--custom{border-color:var(--gold);box-shadow:0 10px 30px rgba(227,160,8,.14)}
+.badge{position:absolute;top:-11px;left:16px;padding:3px 11px;border-radius:999px;
+  background:var(--green-strong);color:#04231a;font-size:11px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase}
+.plan--custom .badge{background:var(--gold);color:#2a1c00}
+.plan-name{color:var(--navy);font-size:19px;font-weight:800;line-height:1.2}
+.plan-note{margin-top:4px;color:var(--muted);font-size:13.5px;line-height:1.5}
+.plan-figs{display:flex;align-items:baseline;gap:10px;margin:12px 0 14px;flex-wrap:wrap}
+.plan-amt{color:var(--navy);font-size:34px;font-weight:800;line-height:1}
+.plan-unit{color:var(--muted);font-size:13.5px}
+.plan-strike{color:#93a1b3;font-size:15px;text-decoration:line-through}
+.choose{display:flex;width:100%;min-height:54px;align-items:center;justify-content:center;
+  padding:14px 20px;border:0;border-radius:12px;background:var(--navy);color:var(--white);
+  font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;
+  transition:transform 140ms ease,background 140ms ease}
+.plan--best .choose{background:var(--green-strong);color:#04231a}
+.plan--custom .choose{background:var(--gold);color:#2a1c00}
+.choose:hover,.choose:focus-visible{transform:translateY(-1px);outline:none;filter:brightness(1.06)}
+.choose:focus-visible{outline:3px solid rgba(0,201,122,.4);outline-offset:3px}
+
+.third{margin:2px 26px 18px;padding:14px 16px;border:1px dashed var(--grey);border-radius:13px;
+  background:#fbfcfe}
+.third-name{color:var(--navy);font-size:16px;font-weight:800}
+.third-note{margin-top:4px;color:var(--muted);font-size:13.5px;line-height:1.5}
+.third-cta{display:inline-flex;align-items:center;gap:7px;margin-top:9px;color:var(--green-dark);
+  font-size:14px;font-weight:700;text-decoration:none}
+
+.after{padding:0 26px 22px}
+.after-box{padding:15px 17px;border:1px solid rgba(0,201,122,.26);border-radius:13px;
+  background:rgba(97,227,139,.09)}
+.after-box b{color:var(--navy)}
+.after-box p{color:var(--text);font-size:14px;line-height:1.6}
+.after-box a{color:var(--green-dark);font-weight:700}
+
+.foot{padding:15px 26px 20px;background:#07111f;color:rgba(255,255,255,.6);font-size:12.5px;text-align:center}
+.foot a{color:rgba(255,255,255,.72);text-decoration:none}
+.foot-cj{margin-bottom:7px;color:var(--white);font-size:14px;font-weight:700}
+
+/* ---------- terms modal ---------- */
+.sheet{width:min(560px,calc(100% - 20px));max-width:none;padding:0;border:0;border-radius:18px;
+  background:var(--white);box-shadow:0 28px 80px rgba(4,12,24,.45)}
+.sheet::backdrop{background:rgba(4,12,24,.78);backdrop-filter:blur(4px)}
+.sheet-head{padding:18px 20px 14px;border-bottom:1px solid var(--grey)}
+.sheet-kicker{color:var(--green-dark);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.sheet-head h2{margin-top:4px;color:var(--navy);font-family:"Playfair Display",serif;font-size:22px;line-height:1.2}
+.sheet-body{padding:16px 20px 4px}
+.recap{margin-bottom:14px;padding:13px 15px;border-radius:12px;background:var(--grey-light)}
+.recap-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.recap-plan{color:var(--navy);font-size:16px;font-weight:800}
+.recap-amt{color:var(--navy);font-size:22px;font-weight:800}
+.recap-sub{margin-top:3px;color:var(--muted);font-size:13px}
+.terms-link{display:inline-flex;align-items:center;gap:7px;margin-bottom:12px;color:var(--green-dark);
+  font-size:14px;font-weight:700}
+.agree{display:flex;gap:12px;align-items:flex-start;padding:13px 15px;border:2px solid var(--grey);
+  border-radius:12px;cursor:pointer}
+.agree:has(input:checked){border-color:var(--green-strong);background:rgba(97,227,139,.08)}
+.agree input{width:24px;height:24px;flex:0 0 auto;margin-top:1px;accent-color:var(--green-strong)}
+.agree span{color:var(--text);font-size:14px;line-height:1.5}
+.sheet-foot{display:flex;gap:10px;padding:16px 20px 20px}
+.btn{display:flex;flex:1;min-height:52px;align-items:center;justify-content:center;padding:13px 18px;
+  border:0;border-radius:12px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer}
+.btn--go{background:var(--green-strong);color:#04231a}
+.btn--go[disabled]{background:#dfe6ee;color:#9aa8b8;cursor:not-allowed}
+.btn--back{flex:0 0 auto;border:1px solid var(--grey);background:var(--white);color:var(--muted);font-weight:700}
+.sheet-note{padding:0 20px 18px;color:var(--muted);font-size:12.5px;line-height:1.5;text-align:center}
+
+@media (max-width:680px){
+  .page{width:100%;margin:0;border-radius:0}
+  .top{padding:18px 16px 16px}
+  .plans{padding:16px 16px 6px}
+  .third{margin:2px 16px 16px}
+  .after{padding:0 16px 18px}
+  .foot{padding:14px 16px 18px}
+  .plan{padding:16px}
+}
+@media (prefers-reduced-motion:reduce){.choose{transition:none}}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <section class="top">
+    <img class="top-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
+    <h1 id="topTitle">Certified High Ticket Closer Program</h1>
+    <p id="topSub">Pick the option we talked about. I'm right here.</p>
+    <div class="included">
+      <b>Everything is included:</b> training platform, AI roleplay, live coaching with Chad,
+      certification, job placement, resume optimization, your 30 day action plan, 90 days of
+      post hire support, and lifetime community access.
+    </div>
+  </section>
+
+  <section class="plans">
+    <div class="plans-h">Your options</div>
+    <div class="plans-sub" id="plansSub">Access opens as soon as the payment clears.</div>
+
+    <!-- negotiated / one-off offer, only rendered when OFFER.custom is set -->
+    <div class="plan plan--custom" id="planCustom" hidden>
+      <span class="badge" id="customBadge">Your offer</span>
+      <div class="plan-name" id="customName"></div>
+      <div class="plan-note" id="customNote"></div>
+      <div class="plan-figs">
+        <span class="plan-amt" id="customAmt"></span>
+        <span class="plan-unit" id="customUnit"></span>
+      </div>
+      <button class="choose" type="button" data-plan="custom">Choose this</button>
+    </div>
+
+    <div class="plan plan--best" id="planPif">
+      <span class="badge">Best value</span>
+      <div class="plan-name">Paid in full</div>
+      <div class="plan-note">One payment. Saves you $1,000 against the payment plan.</div>
+      <div class="plan-figs">
+        <span class="plan-amt">$6,000</span>
+        <span class="plan-strike">$7,000</span>
+        <span class="plan-unit">one time</span>
+      </div>
+      <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
+    </div>
+
+    <div class="plan" id="plan4pay">
+      <div class="plan-name">4 payments</div>
+      <div class="plan-note">First payment today, then one a month for three months.</div>
+      <div class="plan-figs">
+        <span class="plan-amt">$1,750</span>
+        <span class="plan-unit">today · $7,000 total</span>
+      </div>
+      <button class="choose" type="button" data-plan="fourpay">Choose the 4 pay</button>
+    </div>
+  </section>
+
+  <div class="third">
+    <div class="third-name">Need longer than four months?</div>
+    <div class="third-note">ClarityPay runs about $600 a month. It takes a soft credit check and
+      needs a 620 or better. Tell me on the call and I'll start it with you.</div>
+    <a class="third-cta" href="sms:+16166121735" id="clarityCta">Text me about ClarityPay →</a>
+  </div>
+
+  <section class="after">
+    <div class="after-box">
+      <p><b>The second your payment clears,</b> text me at
+        <a href="sms:+16166121735">(616) 612-1735</a> and I'll turn your access on while we're
+        still on the phone.</p>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot-cj">CJ Clay · High Ticket Sales Academy</div>
+    <a href="tel:+16166121735">(616) 612-1735</a> · <a href="mailto:cj@highticketsalesacademy.com">cj@highticketsalesacademy.com</a>
+  </footer>
+</main>
+
+<dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
+  <div class="sheet-head">
+    <div class="sheet-kicker">One last step</div>
+    <h2 id="sheetTitle">Confirm and go to payment</h2>
+  </div>
+  <div class="sheet-body">
+    <div class="recap">
+      <div class="recap-row">
+        <span class="recap-plan" id="recapPlan"></span>
+        <span class="recap-amt" id="recapAmt"></span>
+      </div>
+      <div class="recap-sub" id="recapSub"></div>
+    </div>
+    <a class="terms-link" id="termsLink" target="_blank" rel="noopener noreferrer">
+      📄 Read the Terms of Service (PDF)</a>
+    <label class="agree">
+      <input type="checkbox" id="agreeBox">
+      <span id="agreeText">I've reviewed the Terms of Service and the placement guarantee, and I agree to them.</span>
+    </label>
+  </div>
+  <div class="sheet-foot">
+    <button class="btn btn--back" type="button" id="backBtn">Back</button>
+    <button class="btn btn--go" type="button" id="goBtn" disabled>Continue to payment</button>
+  </div>
+  <p class="sheet-note">Your agreement is timestamped and emailed to you with your receipt.</p>
+</dialog>
+
+<script>
+/* ============================================================
+   EDIT THIS BLOCK ONLY — one person per page.
+   ============================================================ */
+const BUYER = {
+  firstName: "[FIRST_NAME]",
+  fullName:  "[FULL_NAME]",
+  email:     "[EMAIL]",
+  phone:     "[PHONE_E164]",
+  slug:      "[SLUG]"                 // anna_bury — must match the folder/file name
+};
+
+const OFFER = {
+  // Set `custom` to null unless CJ negotiated a one-off price on the call.
+  custom: null,
+  // custom: {
+  //   name:    "3 payments of $1,750",
+  //   note:    "The end of month offer CJ set up for you. $5,250 total.",
+  //   amount:  "$1,750",
+  //   unit:    "today · $5,250 total",
+  //   badge:   "Your offer",
+  //   checkout:"https://whop.com/checkout/plan_XXXX?d2c=true"
+  // },
+  pif:     { checkout: "https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" },
+  fourpay: { checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" }
+};
+
+const TERMS_URL = "https://closewithcjclay.com/HTSA-Terms-of-Service.pdf";
+const TERMS_VERSION = "HTSA-TOS-PDF-closewithcjclay-2026-04";
+const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
+/* ==================== stop editing ==================== */
+
+(function () {
+  const el = id => document.getElementById(id);
+  const first = (BUYER.firstName || "").trim();
+
+  /* ---------- tracking, same contract as the other pages ---------- */
+  function canonicalUrl() {
+    try { const u = new URL(location.href); return u.origin + u.pathname; }
+    catch (e) { return location.href.split("#")[0]; }
+  }
+  function post(payload) {
+    try {
+      const f = new URLSearchParams();
+      f.set("payload", JSON.stringify(payload));
+      fetch(GAS_ENDPOINT, { method: "POST", mode: "no-cors", body: f, cache: "no-store" })
+        .catch(function () {});
+    } catch (e) {}
+  }
+  function event(name, extra) {
+    post(Object.assign({
+      action: "recordResourcePageEvent", event: name,
+      enrollmentPageUrl: canonicalUrl(), userAgent: navigator.userAgent || "",
+      timestamp: new Date().toISOString(),
+      fullName: BUYER.fullName, email: BUYER.email, phone: BUYER.phone,
+      clientSlug: (BUYER.slug || "").replace(/_/g, "-"),
+      resourceSlug: BUYER.slug, pageType: "enrollment"
+    }, extra || {}));
+  }
+  try {
+    const k = "htsa_enroll_open_" + (BUYER.slug || "x");
+    if (!sessionStorage.getItem(k)) { sessionStorage.setItem(k, "1"); event("page_open"); }
+  } catch (e) { event("page_open"); }
+
+  /* ---------- personalize ---------- */
+  if (first) {
+    el("topTitle").textContent = first + ", here's what we just went over.";
+    el("topSub").textContent = "Pick the option we talked about. I'm right here on the phone.";
+  }
+  el("clarityCta").href = "sms:+16166121735";
+
+  /* ---------- plans ---------- */
+  const PLANS = {
+    pif:     { name: "Paid in full",  amt: "$6,000", sub: "One payment. Full access as soon as it clears.", url: OFFER.pif.checkout },
+    fourpay: { name: "4 payments",    amt: "$1,750", sub: "$1,750 today, then one a month for three months. $7,000 total.", url: OFFER.fourpay.checkout }
+  };
+  if (OFFER.custom) {
+    el("planCustom").hidden = false;
+    el("customBadge").textContent = OFFER.custom.badge || "Your offer";
+    el("customName").textContent  = OFFER.custom.name || "";
+    el("customNote").textContent  = OFFER.custom.note || "";
+    el("customAmt").textContent   = OFFER.custom.amount || "";
+    el("customUnit").textContent  = OFFER.custom.unit || "";
+    PLANS.custom = { name: OFFER.custom.name, amt: OFFER.custom.amount,
+                     sub: OFFER.custom.note, url: OFFER.custom.checkout };
+    // a negotiated price outranks the standard best-value badge
+    el("planPif").classList.remove("plan--best");
+    const b = el("planPif").querySelector(".badge"); if (b) b.remove();
+  }
+
+  /* ---------- the two step flow: choose, then agree, then pay ---------- */
+  const sheet = el("sheet"), agree = el("agreeBox"), go = el("goBtn");
+  let chosen = null;
+
+  document.querySelectorAll(".choose").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const key = btn.dataset.plan, p = PLANS[key];
+      if (!p) return;
+      chosen = key;
+      el("recapPlan").textContent = p.name;
+      el("recapAmt").textContent  = p.amt;
+      el("recapSub").textContent  = p.sub;
+      el("termsLink").href = TERMS_URL;
+      agree.checked = false; go.disabled = true;
+      event("plan_selected", { linkLabel: p.name, linkUrl: p.url });
+      if (typeof sheet.showModal === "function") sheet.showModal();
+      else window.location.href = p.url;
+    });
+  });
+
+  agree.addEventListener("change", function () { go.disabled = !agree.checked; });
+  el("backBtn").addEventListener("click", function () {
+    event("terms_abandoned", { linkLabel: chosen || "" });
+    sheet.close();
+  });
+  sheet.addEventListener("click", function (e) { if (e.target === sheet) sheet.close(); });
+
+  el("termsLink").addEventListener("click", function () {
+    event("terms_opened", { linkLabel: TERMS_VERSION, linkUrl: TERMS_URL });
+  });
+
+  go.addEventListener("click", function () {
+    if (!agree.checked || !chosen) return;
+    const p = PLANS[chosen];
+    go.disabled = true; go.textContent = "Opening payment…";
+    // legal record first, same action name the enrollment sheet already expects
+    post({
+      action: "recordTermsAgreement",
+      fullName: BUYER.fullName, email: BUYER.email, phone: BUYER.phone,
+      enrollmentPageUrl: canonicalUrl(),
+      clientSlug: (BUYER.slug || "").replace(/_/g, "-"),
+      termsUrl: TERMS_URL, termsVersion: TERMS_VERSION,
+      selectedPlan: p.name, selectedAmount: p.amt,
+      userAgent: navigator.userAgent || "", timestamp: new Date().toISOString()
+    });
+    event("checkout_started", { linkLabel: p.name, linkUrl: p.url });
+    setTimeout(function () { window.location.href = p.url; }, 550);
+  });
+})();
+</script>
+</body>
+</html>
