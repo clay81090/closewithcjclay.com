@@ -106,7 +106,7 @@ a{color:inherit}
   font-size:14px;font-weight:700;text-decoration:none}
 
 /* ---------- doc links ---------- */
-.docs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 26px 18px}
+.docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 26px 18px}
 .doc{display:flex;min-height:52px;align-items:center;justify-content:center;gap:8px;padding:12px;
   border:1px solid var(--grey);border-radius:12px;background:var(--white);color:var(--navy);
   font-size:13.5px;font-weight:700;text-align:center;text-decoration:none}
@@ -380,6 +380,7 @@ a{color:inherit}
   <div class="docs">
     <a class="doc" href="#" id="currBtn">📘 What's in the program</a>
     <a class="doc" id="termsBtn" target="_blank" rel="noopener noreferrer">📄 Terms of Service</a>
+    <a class="doc" id="roadmapBtn" target="_blank" rel="noopener noreferrer">🗺 Your 30 day roadmap</a>
   </div>
 
   <footer class="foot">
@@ -654,6 +655,18 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
 
   /* ---------- docs ---------- */
   el("termsBtn").href = TERMS_URL; el("sheetTerms").href = TERMS_URL;
+  const road = el("roadmapBtn");
+  if (road) {
+    const roadName = (val(first) || "").replace(/[^A-Za-z' -]/g, "").slice(0, 24);
+    const roadFile = "htsa-enrollment-" + (BUYER.slug || "").replace(/_/g, "-") + ".html";
+    let roadHref = "/30-day-roadmap.html";
+    const qs = [];
+    if (roadName) qs.push("n=" + encodeURIComponent(roadName));
+    if (/^[A-Za-z0-9._-]+\.html$/.test(roadFile) && !ph(BUYER.slug)) qs.push("e=" + encodeURIComponent(roadFile));
+    if (qs.length) roadHref += "?" + qs.join("&");
+    road.href = roadHref;
+    road.addEventListener("click", function () { event("roadmap_opened"); });
+  }
   const currSheet = el("currSheet");
   function openCurr(e){ e.preventDefault(); event("curriculum_opened");
     if (typeof currSheet.showModal === "function") currSheet.showModal(); }

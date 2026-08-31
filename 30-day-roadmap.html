@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1628">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://closewithcjclay.com/30-day-roadmap.html">
+<meta property="og:title" content="Your 30 day roadmap — HTSA">
+<meta property="og:description" content="Exactly what the next 30 days look like, day by day.">
+<!-- TODO: 1200x630 roadmap link preview card. Until then no image renders. -->
+<meta name="twitter:card" content="summary_large_image">
+<title>Your 30 Day Roadmap | CJ Clay · HTSA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1628;--navy-soft:#152a46;--ink:#0f2237;--green:#61e38b;--green-strong:#00c97a;
+  --green-dark:#087b50;--grey-light:#f3f6f9;--grey:#dce3eb;--text:#17243b;--muted:#54637a;
+  --white:#fff;--gold:#e3a008}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{min-width:320px;background:var(--grey-light);color:var(--text);font-family:"DM Sans",sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{width:min(760px,calc(100% - 20px));margin:16px auto;overflow:hidden;border-radius:20px;
+  background:var(--white);box-shadow:0 20px 56px rgba(10,22,40,.13)}
+
+.top{padding:26px 28px 24px;text-align:center;color:var(--white);
+  background:radial-gradient(circle at 86% 14%,rgba(97,227,139,.18),transparent 18rem),
+             linear-gradient(145deg,var(--navy),var(--navy-soft))}
+.top-photo{display:block;width:54px;height:54px;margin:0 auto 11px;border:2px solid var(--green-strong);
+  border-radius:50%;object-fit:cover}
+.pill{display:inline-block;margin-bottom:12px;padding:6px 14px;border:1px solid rgba(97,227,139,.42);
+  border-radius:999px;background:rgba(97,227,139,.12);color:var(--green);font-size:12.5px;
+  font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.top h1{font-family:"Playfair Display",serif;font-size:clamp(1.8rem,5.4vw,2.6rem);line-height:1.1;
+  letter-spacing:-.02em}
+.top p{max-width:540px;margin:10px auto 0;color:rgba(255,255,255,.8);font-size:15px}
+
+.sec{padding:26px 28px;border-top:1px solid var(--grey)}
+.kicker{margin-bottom:6px;color:var(--green-dark);font-size:12px;font-weight:800;
+  letter-spacing:.15em;text-transform:uppercase}
+.sec h2{color:var(--navy);font-family:"Playfair Display",serif;font-size:clamp(1.5rem,3.6vw,2rem);
+  line-height:1.16;letter-spacing:-.02em}
+.lede{margin-top:9px;color:var(--muted);font-size:15px}
+
+/* value stack */
+.stack{display:grid;gap:10px;margin-top:16px}
+.stack-row{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start;
+  padding:14px 16px;border:1px solid var(--grey);border-radius:13px;background:var(--white)}
+.stack-row--hi{border-color:var(--green-strong);background:rgba(97,227,139,.07)}
+.stack-name{color:var(--navy);font-size:15.5px;font-weight:800;line-height:1.3}
+.stack-note{margin-top:3px;color:var(--muted);font-size:13.5px;line-height:1.5}
+.stack-val{color:var(--green-dark);font-size:13px;font-weight:800;white-space:nowrap;text-align:right}
+
+/* timeline */
+.phase{position:relative;margin-top:18px;padding:0 0 4px 26px;border-left:2px solid var(--grey)}
+.phase:last-child{border-left-color:transparent}
+.phase::before{position:absolute;top:3px;left:-9px;width:16px;height:16px;border:3px solid var(--white);
+  border-radius:50%;background:var(--green-strong);content:"";box-shadow:0 0 0 2px var(--green-strong)}
+.phase-days{color:var(--green-dark);font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.phase h3{margin-top:2px;color:var(--navy);font-size:18px;font-weight:800;line-height:1.25}
+.phase ul{margin-top:9px;display:grid;gap:7px;padding-bottom:8px}
+.phase li{display:flex;gap:9px;color:var(--text);font-size:14.5px;line-height:1.55;list-style:none}
+.phase li::before{flex:0 0 auto;margin-top:1px;color:var(--green-strong);font-weight:800;content:"▸"}
+.phase li b{color:var(--navy)}
+
+.after{padding:20px;border-radius:15px;background:var(--ink);color:rgba(255,255,255,.82)}
+.after h3{color:var(--white);font-family:"Playfair Display",serif;font-size:20px;line-height:1.25}
+.after p{margin-top:8px;font-size:14.5px;line-height:1.6}
+.after ul{margin-top:11px;display:grid;gap:8px}
+.after li{display:flex;gap:9px;font-size:14px;line-height:1.55;list-style:none}
+.after li::before{color:var(--green);font-weight:800;content:"→"}
+.after b{color:var(--green)}
+
+.guar{padding:18px 20px;border:2px solid var(--green-strong);border-radius:15px;
+  background:rgba(97,227,139,.08)}
+.guar h3{color:var(--navy);font-size:17px;font-weight:800;line-height:1.3}
+.guar p{margin-top:7px;color:var(--text);font-size:14px;line-height:1.6}
+.guar ul{margin-top:10px;display:grid;gap:6px}
+.guar li{display:flex;gap:9px;color:var(--muted);font-size:13.5px;line-height:1.5;list-style:none}
+.guar li::before{color:var(--green-strong);font-weight:800;content:"✓"}
+.fineprint{margin-top:11px;padding-top:11px;border-top:1px solid rgba(0,201,122,.25);
+  color:var(--muted);font-size:13px;line-height:1.55}
+
+.ask{display:grid;gap:9px;margin-top:14px}
+.ask-item{padding:13px 15px;border:1px solid var(--grey);border-left:4px solid var(--green-strong);
+  border-radius:11px;background:#fbfcfe}
+.ask-item b{color:var(--navy);font-size:15px}
+.ask-item p{margin-top:3px;color:var(--muted);font-size:13.5px;line-height:1.55}
+
+.cta{padding:28px;text-align:center;color:var(--white);
+  background:radial-gradient(circle at 15% 110%,rgba(97,227,139,.17),transparent 20rem),var(--navy)}
+.cta h2{margin-bottom:9px;color:var(--white);font-family:"Playfair Display",serif;
+  font-size:clamp(1.6rem,4.4vw,2.2rem);line-height:1.14}
+.cta p{max-width:520px;margin:0 auto 18px;color:rgba(255,255,255,.78);font-size:15px}
+.btn{display:inline-flex;min-height:52px;align-items:center;justify-content:center;padding:14px 28px;
+  border:2px solid var(--white);border-radius:12px;background:var(--green);color:var(--navy);
+  font-size:16px;font-weight:800;text-decoration:none}
+.btn:hover,.btn:focus-visible{background:#7aee9d;outline:none}
+.cta-sms{display:block;margin-top:14px;color:rgba(255,255,255,.72);font-size:13.5px;text-decoration:none}
+.cta-sms b{color:var(--green)}
+
+.foot{padding:16px 28px 20px;background:#07111f;color:rgba(255,255,255,.66);
+  font-size:13px;text-align:center}
+.foot b{color:var(--white)}
+.foot a{color:rgba(255,255,255,.72);text-decoration:none}
+
+@media (max-width:680px){
+  .page{width:100%;margin:0;border-radius:0}
+  .top{padding:22px 16px 20px}
+  .sec,.cta{padding:20px 16px}
+  .foot{padding:14px 16px 18px}
+  .stack-row{grid-template-columns:1fr;gap:6px}
+  .stack-val{text-align:left}
+}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <section class="top">
+    <img class="top-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
+    <div class="pill">Your 30 day roadmap</div>
+    <h1 id="title">Here is exactly what the next 30 days look like.</h1>
+    <p>No mystery, no "we'll figure it out as we go." This is the same path our
+      members run, laid out day by day, plus the three things you get for enrolling
+      on this offer that nobody else does.</p>
+  </section>
+
+  <section class="sec">
+    <div class="kicker">What's different about this offer</div>
+    <h2>Three things you get that a standard enrollment does not.</h2>
+    <p class="lede">Same program, same placement support, same guarantee. These are on top.</p>
+
+    <div class="stack">
+      <div class="stack-row stack-row--hi">
+        <div>
+          <div class="stack-name">A private 1-on-1 with Chad, once you land your offer</div>
+          <div class="stack-note">Separate from the group coaching calls. You sit down with the
+            founder after you're hired and build the plan for your first 90 days in the role.</div>
+        </div>
+        <div class="stack-val">Not sold separately</div>
+      </div>
+
+      <div class="stack-row stack-row--hi">
+        <div>
+          <div class="stack-name">90 days of weekly call reviews, direct from Chad</div>
+          <div class="stack-note">Every week for your first 90 days on the job, send Chad one call
+            you did not close. He reviews the recording and tells you exactly where it went sideways.
+            Twelve reviews. Most people never get one in a career.</div>
+        </div>
+        <div class="stack-val">12 reviews</div>
+      </div>
+
+      <div class="stack-row stack-row--hi">
+        <div>
+          <div class="stack-name">Legacy pricing, locked before the increase</div>
+          <div class="stack-note">Tuition goes up. Enrolling on this offer holds your rate where
+            it is today, on whichever payment option you pick.</div>
+        </div>
+        <div class="stack-val">Locked</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="kicker">The roadmap</div>
+    <h2>Thirty days, four phases.</h2>
+    <p class="lede">Members who put in focused daily blocks have finished this in 22 to 26 days.
+      Thirty is the honest planning number. How fast you move is mostly a function of how many
+      reps you run, not how much time passes.</p>
+
+    <div class="phase">
+      <div class="phase-days">Days 1 to 7</div>
+      <h3>Get set up and start the modules</h3>
+      <ul>
+        <li><b>Day 1.</b> Your access opens, you set your portal password, and you book your
+          15 minute kickoff Zoom with Mark, your Success Coach.</li>
+        <li><b>Day 1.</b> Request access to the private Facebook Mastermind. Every live coaching
+          replay lives there, and 680+ members are in it.</li>
+        <li><b>Days 2 to 7.</b> Work through the core certification modules. Twelve hours of
+          content. At 1.5x speed most people finish inside four days.</li>
+        <li><b>Tuesday, 12:00 PM EST.</b> Your first live group coaching call with Chad.</li>
+        <li><b>Wednesday, 5:00 PM EST.</b> Live session with Christian on pattern recognition
+          and tonality.</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-days">Days 8 to 15</div>
+      <h3>Run your reps in the AI sandbox</h3>
+      <ul>
+        <li>Unlimited AI roleplay, available whenever you are. The point is to get your first
+          thirty awkward calls out of the way before you ever speak to a real prospect.</li>
+        <li>The AI critiques your tonality, pacing, and how deep your discovery actually went.
+          Run them back to back.</li>
+        <li>Program the sandbox with the scripts and objections of the niche you're targeting,
+          so your practice matches the job you want.</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-days">Days 16 to 22</div>
+      <h3>Certify, then get your materials built</h3>
+      <ul>
+        <li><b>Live mock call with Mark</b>, who plays a defensive prospect. This is the
+          certification gate, scored against a rubric. It is meant to be hard.</li>
+        <li>Pass it and you are a Certified High Ticket Closer. That credential is what the
+          hiring companies in our network recognize.</li>
+        <li><b>1-on-1 with Nate, our Placement Director.</b> You set your target niches, the
+          schedule you want, and what you're willing to take.</li>
+        <li>Nate rewrites your LinkedIn and reformats your resume into the template our placed
+          members use.</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-days">Days 23 to 30</div>
+      <h3>Interviews and offers</h3>
+      <ul>
+        <li>Nate introduces you directly to hiring companies in our partner network. That is the
+          difference between applying and being introduced, and it is most of why our members
+          move faster than the open market.</li>
+        <li>Target is three to five interviews in a week. You'll run them using Nate's structured
+          interview prep, not improvising.</li>
+        <li>You also keep applying on your own. The guarantee is built around you doing both.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="after">
+      <h3>What happens after you're hired</h3>
+      <p>Day 30 is not the finish line, it's where the part that pays you starts. This is where
+        the two bonuses on this offer come in.</p>
+      <ul>
+        <li>You sit down with <b>Chad, 1-on-1</b>, and build your ramp plan for the new role.</li>
+        <li>Every week for <b>90 days</b>, you send him one call you did not close. He reviews it
+          and tells you what actually happened on it.</li>
+        <li>Once you're ramped and producing, we record a short testimonial together. That's the
+          trade for this pricing, and it's the only thing we ask for in exchange.</li>
+      </ul>
+      <p style="margin-top:12px;font-size:13.5px;color:rgba(255,255,255,.7);">
+        How fast you get to the income you're aiming for depends on the offer you land, the
+        commission structure, and how you ramp. We are not going to put a number on that for
+        you. What we will do is compress the timeline as hard as it can be compressed, and keep
+        coaching you after you're in the seat.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="kicker">Your protection</div>
+    <h2>The placement guarantee.</h2>
+    <div class="guar" style="margin-top:14px;">
+      <h3>Do your part, and if you're not placed, you qualify for a full refund.</h3>
+      <p>If you complete your certification, follow Nate's roadmap, and have not secured a
+        qualifying role within 6 months of certification or completed at least 50 interviews,
+        you qualify for a full refund of your tuition. Documentation required.</p>
+      <ul>
+        <li>Complete the course materials, roleplays, 1-on-1 training, and certification</li>
+        <li>Attend at least one group coaching call a week while you're in the program</li>
+        <li>Apply to at least 50 qualifying closer or setter roles, and keep proof</li>
+        <li>Participate in good faith. This is a partnership, not a passive purchase</li>
+      </ul>
+      <p class="fineprint">The full terms, including the refund policy in its entirety, are in the
+        HTSA Terms of Service. Read them before you enrol. If anything here and the Terms
+        disagree, the Terms are the contract.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="kicker">The trade</div>
+    <h2>What we're asking from you.</h2>
+    <p class="lede">This pricing exists because we are betting on you being a success story we
+      can point at. Here is the whole ask, in plain language.</p>
+
+    <div class="ask">
+      <div class="ask-item">
+        <b>Do the work</b>
+        <p>Roughly 15 focused hours a week through the first 30 days. That is what the timeline
+          above assumes. Less than that and it stretches out.</p>
+      </div>
+      <div class="ask-item">
+        <b>A testimonial once you're producing</b>
+        <p>Not on day one, and not if it doesn't work out. Once you're placed and ramped, we
+          record a short honest video about how it actually went. That is the trade for this rate.</p>
+      </div>
+      <div class="ask-item">
+        <b>Tell us the truth on the calls</b>
+        <p>Send the calls you lost, not the ones you won. Coaching only works on real material.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Ready when you are.</h2>
+    <p>If you want to go through the options again or you have a question about any of this,
+      call me. Otherwise your enrollment page has everything.</p>
+    <a class="btn" id="enrollBtn" href="#">Go to my enrollment page</a>
+    <a class="cta-sms" href="sms:+16166121735">Question first? Text me at <b>(616) 612-1735</b></a>
+  </section>
+
+  <footer class="foot">
+    <b>CJ Clay · High Ticket Sales Academy</b><br>
+    <a href="tel:+16166121735">(616) 612-1735</a> ·
+    <a href="mailto:cj@highticketsalesacademy.com">cj@highticketsalesacademy.com</a>
+  </footer>
+</main>
+
+<script>
+/* Optional personalization and enrollment link.
+   ?n=Anna            puts their name in the headline
+   ?e=<page>          points the button at their enrollment page  */
+(function () {
+  var q = new URLSearchParams(location.search);
+  var n = (q.get("n") || "").trim().replace(/[^A-Za-z' -]/g, "").slice(0, 24);
+  if (n) {
+    document.getElementById("title").textContent =
+      n + ", here is exactly what the next 30 days look like.";
+  }
+  var e = (q.get("e") || "").trim();
+  var btn = document.getElementById("enrollBtn");
+  if (/^[A-Za-z0-9._-]+\.html$/.test(e)) {
+    btn.href = "/" + e;
+  } else {
+    btn.textContent = "Text me and I'll send your enrollment page";
+    btn.href = "sms:+16166121735";
+  }
+})();
+</script>
+</body>
+</html>
