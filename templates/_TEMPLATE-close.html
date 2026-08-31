@@ -118,6 +118,24 @@ a{color:inherit}
 .after-box p{color:var(--text);font-size:14px;line-height:1.6}
 .after-box b{color:var(--navy)}
 .after-box a{color:var(--green-dark);font-weight:700}
+.next{margin-top:16px}
+.next .h2{margin-bottom:6px}
+.next-sub{margin-bottom:12px;color:var(--muted);font-size:14px;line-height:1.55}
+.next-step{display:flex;gap:12px;margin-bottom:10px;padding:14px 15px;border:1px solid var(--grey);
+  border-radius:13px;background:var(--white)}
+.next-num{flex:0 0 auto;width:26px;height:26px;margin-top:1px;border-radius:50%;
+  background:var(--green-strong);color:#04231a;font-size:13px;font-weight:800;
+  display:flex;align-items:center;justify-content:center}
+.next-body{min-width:0}
+.next-body h3{color:var(--navy);font-size:15px;font-weight:800;line-height:1.3}
+.next-body p{margin-top:4px;color:var(--muted);font-size:13.5px;line-height:1.55}
+.next-btn{display:inline-flex;min-height:44px;align-items:center;justify-content:center;
+  margin-top:10px;padding:10px 16px;border-radius:10px;background:var(--navy);color:var(--white);
+  font-size:14px;font-weight:800;text-decoration:none}
+.next-mail{margin-top:8px;padding:10px 12px;border:1px solid rgba(0,201,122,.22);border-radius:10px;
+  background:rgba(97,227,139,.1)}
+.next-mail b{display:block;color:var(--navy);font-size:13px}
+.next-mail span{display:block;margin-top:3px;color:var(--muted);font-size:13px;line-height:1.5}
 
 .foot{padding:24px 26px 0;background:#07111f;color:rgba(255,255,255,.62);font-size:13px}
 .foot-top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;max-width:760px;
@@ -299,9 +317,56 @@ a{color:inherit}
 
   <section class="after">
     <div class="after-box">
-      <p><b>The second your payment clears,</b> text me at
-        <a href="sms:+16166121735">(616) 612-1735</a> and I'll turn your access on while we're
-        still on the phone.</p>
+      <p><b>If we are still on the phone,</b> text me at
+        <a href="sms:+16166121735">(616) 612-1735</a> the second it clears and I will turn
+        your access on while we are talking.</p>
+    </div>
+    <div class="next">
+      <div class="h2">After you pay</div>
+      <p class="next-sub">If you are finishing this on your own, do these four things in order.</p>
+
+      <div class="next-step">
+        <div class="next-num">1</div>
+        <div class="next-body">
+          <h3>Text CJ, payment made</h3>
+          <p>Text <a href="sms:+16166121735">(616) 612-1735</a> the words <b>Payment made</b>. That is how I know to turn your access on if we are not on the phone together.</p>
+          <a class="next-btn" href="sms:+16166121735&body=Payment%20made">Text Payment made</a>
+        </div>
+      </div>
+
+      <div class="next-step">
+        <div class="next-num">2</div>
+        <div class="next-body">
+          <h3>Two emails will hit your inbox</h3>
+          <p>Both come right after payment. Star the first one. Use the second one to log in.</p>
+          <div class="next-mail">
+            <b>Email 1. Welcome</b>
+            <span>Module access, live group coaching Zoom links, community, and your next steps. Add the Zoom links to your calendar: Tuesday, 12:00 PM EST and Wednesday, 5:00 PM EST.</span>
+          </div>
+          <div class="next-mail">
+            <b>Email 2. Login</b>
+            <span>A temporary password that takes you to your dashboard. Use this email to create your own login. It only takes a moment.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="next-step">
+        <div class="next-num">3</div>
+        <div class="next-body">
+          <h3>Book your kickoff with Mark</h3>
+          <p>Mark is your Success Coach. This is a 15 minute Zoom to map your placement goals before you start the modules.</p>
+          <a class="next-btn" href="https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call" target="_blank" rel="noopener noreferrer">Book kickoff call</a>
+        </div>
+      </div>
+
+      <div class="next-step">
+        <div class="next-num">4</div>
+        <div class="next-body">
+          <h3>Join the Mastermind</h3>
+          <p>Request the private Facebook group. Live coaching replays live there, and 680+ members support each other.</p>
+          <a class="next-btn" href="https://www.facebook.com/groups/1039656943556821" target="_blank" rel="noopener noreferrer">Request access on Facebook</a>
+        </div>
+      </div>
     </div>
   </section>
 
