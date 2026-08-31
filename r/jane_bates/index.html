@@ -2367,10 +2367,35 @@
     background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
     box-shadow: 0 8px 20px rgba(10, 22, 40, 0.06);
   }
-  .proof-square--middle {
-    border-color: #1976D2;
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    box-shadow: 0 0 0 1.5px #e2b227, 0 8px 20px rgba(10, 22, 40, 0.06);
+  .proof-square-site {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #fff;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(97, 227, 139, 0.22), transparent 16rem),
+      linear-gradient(145deg, #0a1628, #152a46);
+  }
+  .proof-square-site-kicker {
+    color: #61e38b;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .proof-square-site-name {
+    font-family: "Playfair Display", serif;
+    font-size: 18px;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .proof-square-site-url {
+    color: rgba(255,255,255,0.72);
+    font-size: 12px;
+    font-weight: 700;
   }
   .proof-square-copy {
     padding: 12px 13px 10px;
@@ -2383,7 +2408,7 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
-  .proof-square--middle .proof-square-kicker { color: #1565C0; }
+  .proof-square--middle .proof-square-kicker { color: #b45309; }
   .proof-square h3 {
     margin: 0 0 6px;
     color: var(--navy);
@@ -2414,21 +2439,256 @@
     text-align: center;
     text-decoration: none;
   }
-  .proof-square--middle .proof-square-cta { background: #1565C0; }
-  .precall-trust {
+  .precall-link-stack {
+    display: grid;
+    gap: 8px;
+    margin: 6px 36px 18px;
+  }
+  .precall-link-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    margin: 6px 36px 8px;
-    padding: 12px 16px;
-    border: 1px solid var(--mid);
+    gap: 10px;
+    padding: 13px 16px;
+    border: 2px solid rgba(0, 201, 122, 0.35);
     border-radius: 12px;
-    text-decoration: none;
+    background: linear-gradient(135deg, rgba(97, 227, 139, 0.1), #edf5ff);
     color: var(--navy);
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 800;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 0 0 3px rgba(0, 201, 122, 0.08);
+  }
+  .precall-link-row:hover {
+    border-color: var(--green);
+    background: rgba(97, 227, 139, 0.16);
   }
   .precall-trust-stars { color: #e2b227; letter-spacing: 2px; }
+  .lifespan-section {
+    --green-strong: #00c97a;
+    --blue-light: #edf5ff;
+    --blue-border: #c7dbf4;
+    padding: 22px 36px 18px;
+    background: #fbfcfe;
+  }
+  .lifespan-heading {
+    margin-bottom: 4px;
+    padding: 12px 14px;
+    border: 1px solid var(--blue-border);
+    border-left: 4px solid var(--green-strong);
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(237, 245, 255, 0.98), rgba(97, 227, 139, 0.14));
+    box-shadow: 0 8px 20px rgba(10, 22, 40, 0.06);
+  }
+  .lifespan-heading .section-kicker {
+    margin-bottom: 5px;
+    color: var(--green-dark);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .lifespan-heading h2,
+  .lifespan-section h2 {
+    margin-bottom: 4px;
+    color: var(--navy);
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.55rem, 3.6vw, 2.2rem);
+    line-height: 1.12;
+  }
+  .lifespan-section-lede {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .lifespan-content { padding: 16px 2px 2px; }
+  .lifespan-intro {
+    margin-bottom: 13px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .age-control {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 15px;
+  }
+  .age-field {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .age-field label {
+    color: var(--green-dark);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .age-input-shell {
+    display: flex;
+    width: 118px;
+    min-height: 50px;
+    overflow: hidden;
+    border: 2px solid var(--green-strong);
+    border-radius: 11px;
+    background: linear-gradient(135deg, #ffffff, rgba(97, 227, 139, 0.12));
+    box-shadow: 0 0 0 4px rgba(0, 201, 122, 0.1), 0 8px 18px rgba(10, 22, 40, 0.08);
+  }
+  .age-input-shell:focus-within {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 4px rgba(97, 227, 139, 0.28), 0 10px 22px rgba(10, 22, 40, 0.12);
+  }
+  .age-field input {
+    width: 78px;
+    min-width: 0;
+    padding: 7px 8px;
+    border: 0;
+    background: transparent;
+    color: var(--navy);
+    font: 800 20px/1 "DM Sans", sans-serif;
+    text-align: center;
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
+  .age-field input::-webkit-inner-spin-button,
+  .age-field input::-webkit-outer-spin-button {
+    margin: 0;
+    appearance: none;
+  }
+  .age-field input:focus { outline: none; }
+  .age-step-buttons {
+    display: grid;
+    width: 38px;
+    border-left: 1px solid rgba(0, 201, 122, 0.3);
+  }
+  .age-step-button {
+    display: grid;
+    min-height: 23px;
+    place-items: center;
+    border: 0;
+    background: rgba(97, 227, 139, 0.16);
+    color: var(--navy);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .age-step-button + .age-step-button { border-top: 1px solid rgba(0, 201, 122, 0.3); }
+  .age-step-button:hover,
+  .age-step-button:focus-visible { background: var(--green); outline: none; }
+  .age-readout {
+    max-width: 470px;
+    padding: 9px 12px;
+    border: 1px solid var(--blue-border);
+    border-radius: 10px;
+    background: var(--blue-light);
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+  .age-readout strong {
+    display: inline-block;
+    margin: 0 1px;
+    padding: 0 5px;
+    border-radius: 5px;
+    font-size: 1.08em;
+    font-weight: 800;
+  }
+  .age-readout-age { background: var(--navy); color: var(--white); }
+  .age-readout-lived { background: #dce3eb; color: var(--navy); }
+  .age-readout-left { background: rgba(97, 227, 139, 0.3); color: #05663f; }
+  .year-grid {
+    display: grid;
+    grid-template-columns: repeat(20, minmax(0, 1fr));
+    gap: 5px;
+    max-width: 620px;
+    margin-bottom: 10px;
+  }
+  .year-dot {
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background: #8fdca9;
+  }
+  .year-dot--lived { background: #c4ccd6; }
+  .year-dot--current {
+    background: var(--green-strong);
+    box-shadow: 0 0 0 3px rgba(0, 201, 122, 0.16);
+    transform: scale(1.07);
+  }
+  .year-dot--later {
+    background: #e4ece7;
+    box-shadow: inset 0 0 0 1px #cad8cf;
+  }
+  .year-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px 13px;
+    margin-bottom: 12px;
+    color: var(--muted);
+    font-size: 9px;
+  }
+  .year-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: #8fdca9;
+  }
+  .legend-dot--lived { background: #c4ccd6; }
+  .legend-dot--current { background: var(--green-strong); }
+  .legend-dot--later {
+    background: #e4ece7;
+    box-shadow: inset 0 0 0 1px #cad8cf;
+  }
+  .time-summary {
+    margin-bottom: 12px;
+    padding: 9px 11px;
+    border: 1px solid rgba(0, 201, 122, 0.22);
+    border-radius: 9px;
+    background: rgba(97, 227, 139, 0.1);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .life-two {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 11px;
+  }
+  .life-two span {
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .life-two b {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--green);
+    font-size: 17px;
+    line-height: 1.1;
+  }
+  .life-excerpt {
+    margin-top: 12px;
+    padding: 18px;
+    border-radius: 14px;
+    background: var(--navy);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .life-excerpt p { margin: 0; }
+  .life-excerpt strong { color: var(--green); }
   .precall-close {
     padding: 8px 36px 28px;
     text-align: center;
@@ -2455,9 +2715,12 @@
     text-decoration: none;
   }
   @media (max-width: 700px) {
-    .precall-slim-hero, .precall-slim-section, .precall-close { padding-left: 18px; padding-right: 18px; }
-    .precall-trust { margin-left: 18px; margin-right: 18px; }
+    .precall-slim-hero, .precall-slim-section, .precall-close, .lifespan-section { padding-left: 18px; padding-right: 18px; }
+    .precall-link-stack { margin-left: 18px; margin-right: 18px; }
     .proof-squares { grid-template-columns: 1fr; }
+    .age-control { align-items: flex-start; flex-direction: column; gap: 8px; }
+    .year-grid { gap: 3px; }
+    .lifespan-heading { padding: 10px 11px; }
   }
 
 </style>
@@ -2540,8 +2803,8 @@
 
   <section class="precall-slim-section" aria-labelledby="proofTitle">
     <div class="cj-resources-kicker">If you only open three things</div>
-    <h2 id="proofTitle">Employer proof, the landscape, and a newer member.</h2>
-    <p class="lede">Taylor Conroy, the Top 20 companies overview, then Taylor Decourcey. That is enough context to walk in ready.</p>
+    <h2 id="proofTitle">Employer proof, the website, and Brianna from Tony Robbins.</h2>
+    <p class="lede">Taylor Conroy, the HTSA website, then Brianna. That is enough context to walk in ready.</p>
     <div class="proof-squares">
       <article class="proof-square">
         <div class="proof-square-copy">
@@ -2552,30 +2815,84 @@
         <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/bd65afldLmE" title="Taylor Conroy explains why he hires from HTSA" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         <a class="proof-square-cta cj-resource-card" href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" target="_blank" rel="noopener noreferrer"><span class="cj-resource-card-title" hidden>Taylor Conroy (TEDx Coach) — why he hires our members</span>Watch on YouTube</a>
       </article>
-      <article class="proof-square proof-square--middle">
+      <article class="proof-square">
         <div class="proof-square-copy">
-          <div class="proof-square-kicker">Industry landscape</div>
-          <h3>Top 20 companies</h3>
-          <p>Where HTSA sits in high ticket sales training. Open this so the conversation has a map.</p>
+          <div class="proof-square-kicker">More stories and outcomes</div>
+          <h3>HTSA Website</h3>
+          <p>The main site, with more member stories, screenshots, and how the program is presented.</p>
         </div>
-        <a class="proof-square-cta cj-resource-card" href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" target="_blank" rel="noopener noreferrer" style="margin-top:auto"><span class="cj-resource-card-title" hidden>Top 20 Companies in High Ticket Sales</span>Open the PDF</a>
+        <a class="proof-square-media proof-square-site cj-resource-card" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">
+          <span class="cj-resource-card-title" hidden>HTSA Website — more stories &amp; outcomes</span>
+          <span class="proof-square-site-kicker">Preview</span>
+          <span class="proof-square-site-name">High Ticket Sales Academy</span>
+          <span class="proof-square-site-url">highticketsalesacademy.com</span>
+        </a>
+        <a class="proof-square-cta cj-resource-card" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer"><span class="cj-resource-card-title" hidden>HTSA Website</span>Open the website</a>
       </article>
       <article class="proof-square">
         <div class="proof-square-copy">
-          <div class="proof-square-kicker">Newer member perspective</div>
-          <h3>Taylor Decourcey</h3>
-          <p>A fresher look at what the first months after certification actually felt like.</p>
+          <div class="proof-square-kicker">Member from a big-name team</div>
+          <h3>Brianna</h3>
+          <p>Tony Robbins team background. Hear her HTSA experience in her own words.</p>
         </div>
-        <iframe class="proof-square-media" src="https://drive.google.com/file/d/1Zo2ID5sdF8ZYP8rZD_fisNgj-eNpuQxM/preview" title="Taylor Decourcey newer member perspective" loading="lazy" allow="autoplay"></iframe>
-        <a class="proof-square-cta cj-resource-card" href="https://drive.google.com/file/d/1Zo2ID5sdF8ZYP8rZD_fisNgj-eNpuQxM/view?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="cj-resource-card-title" hidden>Taylor Decourcey — newer member perspective</span>Watch Taylor's story</a>
+        <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/TWacdj9x45o" title="Brianna from the Tony Robbins team on HTSA" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <a class="proof-square-cta cj-resource-card" href="https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8" target="_blank" rel="noopener noreferrer"><span class="cj-resource-card-title" hidden>Brianna — Tony Robbins team</span>Watch on YouTube</a>
       </article>
     </div>
   </section>
 
-  <a class="precall-trust" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer" aria-label="Read HTSA reviews on Trustpilot, rated 4.9 stars out of 5">
-    <span class="precall-trust-stars" aria-hidden="true">★★★★★</span>
-    <span>Trustpilot Reviews — 4.9 out of 5</span>
-  </a>
+  <div class="precall-link-stack">
+    <a class="precall-link-row cj-resource-card" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer" aria-label="Read HTSA reviews on Trustpilot, rated 4.9 stars out of 5">
+      <span class="cj-resource-card-title" hidden>Trustpilot — 4.9 out of 5 stars</span>
+      <span class="precall-trust-stars" aria-hidden="true">★★★★★</span>
+      <span>Trustpilot Reviews — 4.9 out of 5</span>
+    </a>
+    <a class="precall-link-row cj-resource-card" href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" target="_blank" rel="noopener noreferrer">
+      <span class="cj-resource-card-title" hidden>Top 20 Companies in High Ticket Sales</span>
+      <span>Top 20 Companies in High Ticket Sales</span>
+    </a>
+  </div>
+
+  <section class="section lifespan-section" aria-labelledby="lifespanTitle">
+    <div class="lifespan-heading">
+      <div class="section-kicker">One week at a time</div>
+      <h2 id="lifespanTitle">See where you actually are.</h2>
+      <p class="lifespan-section-lede">Enter your age and I'll show you the one thing that made me send this. Takes 10 seconds.</p>
+    </div>
+    <div class="lifespan-content">
+      <p class="lifespan-intro">The 79 blocks below represent an average 79 year lifespan in America. Each block is one year.</p>
+      <div class="age-control">
+        <div class="age-field">
+          <label for="ageInput">Your age</label>
+          <div class="age-input-shell">
+            <input id="ageInput" type="number" min="18" max="78" inputmode="numeric" value="38">
+            <div class="age-step-buttons" aria-label="Change your age">
+              <button class="age-step-button" type="button" data-age-step="1" aria-label="Increase age">▲</button>
+              <button class="age-step-button" type="button" data-age-step="-1" aria-label="Decrease age">▼</button>
+            </div>
+          </div>
+        </div>
+        <p class="age-readout" id="ageReadout" aria-live="polite"></p>
+      </div>
+
+      <div class="year-grid" id="yearGrid" aria-label="79 squares representing an average 79 year life in America"></div>
+      <div class="year-legend" aria-hidden="true">
+        <span><i class="legend-dot legend-dot--lived"></i>Years lived</span>
+        <span><i class="legend-dot legend-dot--current"></i>Your current year</span>
+        <span><i class="legend-dot"></i>Years remaining before 70</span>
+        <span><i class="legend-dot legend-dot--later"></i>Later years</span>
+      </div>
+
+      <p class="time-summary" id="timeSummary" aria-live="polite"></p>
+      <div class="life-excerpt">
+        <div class="life-two" aria-label="A rough picture of remaining life">
+          <span><b id="sleepYears">0 years</b>sleeping</span>
+          <span><b id="awakeYears">0 years</b>awake, and yours to decide what to do with</span>
+        </div>
+        <p>I would love nothing more than to help you build a career that revolves around your life instead of forcing your life to revolve around your career. That is the same choice I made over the last three days. <strong>I chose my wife, and I made work fit around our life.</strong> <strong>Make this decision count.</strong></p>
+      </div>
+    </div>
+  </section>
 
   <div class="precall-close">
     <p>If we have not locked a time yet, grab one here. If we already have a time, I will see you on the call.</p>
@@ -2637,6 +2954,69 @@
 </div>
 
 </div>
+<script>
+(function(){
+  const LIFE_YEARS = 79;
+  const ageInput = document.getElementById("ageInput");
+  const ageReadout = document.getElementById("ageReadout");
+  const timeSummary = document.getElementById("timeSummary");
+  const sleepYears = document.getElementById("sleepYears");
+  const awakeYears = document.getElementById("awakeYears");
+  const yearGrid = document.getElementById("yearGrid");
+  const yearDots = [];
+
+  for (let year = 1; year <= LIFE_YEARS; year += 1) {
+    const square = document.createElement("span");
+    square.className = "year-dot";
+    square.setAttribute("aria-hidden", "true");
+    yearGrid.appendChild(square);
+    yearDots.push(square);
+  }
+
+  function formatYears(value) {
+    return Number.isInteger(value) ? String(value) : value.toFixed(1);
+  }
+
+  function renderAge() {
+    const enteredAge = Number.parseInt(ageInput.value, 10);
+    const age = Number.isFinite(enteredAge) ? Math.min(78, Math.max(18, enteredAge)) : 38;
+    const yearsRemaining = LIFE_YEARS - age;
+    const yearsBefore70 = Math.max(0, 70 - age);
+    const livedPercent = Math.round((age / LIFE_YEARS) * 100);
+    const remainingPercent = 100 - livedPercent;
+
+    yearDots.forEach((dot, index) => {
+      dot.className = "year-dot";
+      if (index < age - 1) dot.classList.add("year-dot--lived");
+      if (index === age - 1) dot.classList.add("year-dot--current");
+      if (index >= age && index >= 70) dot.classList.add("year-dot--later");
+    });
+
+    ageReadout.innerHTML = `At age <strong class="age-readout-age">${age}</strong>, you have lived about <strong class="age-readout-lived">${livedPercent}%</strong> of this timeline, with <strong class="age-readout-left">${remainingPercent}%</strong> still ahead.`;
+    timeSummary.innerHTML = `<strong>${yearsRemaining} years</strong> remain on this model. <strong>${yearsBefore70}</strong> of them come before age 70.`;
+    sleepYears.textContent = `${formatYears(yearsRemaining / 3)} years`;
+    awakeYears.textContent = `${formatYears((yearsRemaining * 2) / 3)} years`;
+    yearGrid.setAttribute("aria-label", `Age ${age} is highlighted, with approximately ${livedPercent} percent lived and ${remainingPercent} percent remaining`);
+  }
+
+  ageInput.addEventListener("input", renderAge);
+  document.querySelectorAll("[data-age-step]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const currentAge = Number.parseInt(ageInput.value, 10);
+      const age = Number.isFinite(currentAge) ? currentAge : 38;
+      const step = Number.parseInt(button.dataset.ageStep, 10);
+      ageInput.value = Math.min(78, Math.max(18, age + step));
+      renderAge();
+    });
+  });
+  ageInput.addEventListener("change", () => {
+    const age = Number.parseInt(ageInput.value, 10);
+    ageInput.value = Number.isFinite(age) ? Math.min(78, Math.max(18, age)) : 38;
+    renderAge();
+  });
+  renderAge();
+})();
+</script>
 <script>
 (function(){
   var GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
