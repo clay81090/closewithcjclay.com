@@ -278,7 +278,7 @@ details[open] .chev{transform:rotate(180deg)}
     <div class="age-control">
       <div class="age-field">
         <label for="ageInput">Your age</label>
-        <input id="ageInput" type="number" min="18" max="78" inputmode="numeric" value="38">
+        <input id="ageInput" type="number" min="18" max="78" inputmode="numeric" value="30">
       </div>
       <p class="age-readout" id="ageReadout" aria-live="polite"></p>
     </div>
@@ -541,7 +541,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   const fmt = v => Number.isInteger(v) ? String(v) : v.toFixed(1);
   function render() {
     const raw = Number.parseInt(ageInput.value, 10);
-    const age = Number.isFinite(raw) ? Math.min(78, Math.max(18, raw)) : 38;
+    const age = Number.isFinite(raw) ? Math.min(78, Math.max(18, raw)) : 30;
     const remaining = LIFE - age, before70 = Math.max(0, 70 - age);
     dots.forEach(function (d, i) {
       d.className = "year-dot";
@@ -557,7 +557,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   ageInput.addEventListener("input", render);
   ageInput.addEventListener("change", function () {
     const v = Number.parseInt(ageInput.value, 10);
-    ageInput.value = Number.isFinite(v) ? Math.min(78, Math.max(18, v)) : 38;
+    ageInput.value = Number.isFinite(v) ? Math.min(78, Math.max(18, v)) : 30;
     render();
   });
   render();
