@@ -112,6 +112,16 @@ a{color:inherit}
   font-size:13.5px;font-weight:700;text-align:center;text-decoration:none}
 .doc:hover,.doc:focus-visible{border-color:var(--green-strong);outline:none}
 
+.next-wrap{margin:0 26px 16px;border:1px solid var(--grey);border-radius:13px;background:var(--white)}
+.next-wrap > summary{display:flex;min-height:52px;align-items:center;padding:12px 16px;
+  cursor:pointer;color:var(--navy);font-size:14.5px;font-weight:800;line-height:1.35;list-style:none}
+.next-wrap > summary::-webkit-details-marker{display:none}
+.next-wrap > summary::after{margin-left:auto;padding-left:12px;color:var(--muted);font-size:18px;
+  font-weight:400;content:"▾"}
+.next-wrap[open] > summary{border-bottom:1px solid var(--grey)}
+.next-wrap[open] > summary::after{content:"▴"}
+.next-wrap > summary:hover,.next-wrap > summary:focus-visible{outline:none;color:var(--green-dark)}
+
 .after{padding:0 26px 20px}
 .after-pay{padding:0 26px 20px}
 .after-box{padding:15px 17px;border:1px solid rgba(0,201,122,.26);border-radius:13px;
@@ -119,7 +129,7 @@ a{color:inherit}
 .after-box p{color:var(--text);font-size:14px;line-height:1.6}
 .after-box b{color:var(--navy)}
 .after-box a{color:var(--green-dark);font-weight:700}
-.next{margin-top:16px}
+.next{padding:4px 16px 16px}
 .next .h2{margin-bottom:6px}
 .next-sub{margin-bottom:12px;color:var(--muted);font-size:14px;line-height:1.55}
 .next-step{display:flex;gap:12px;margin-bottom:10px;padding:14px 15px;border:1px solid var(--grey);
@@ -205,7 +215,7 @@ a{color:inherit}
   .page{width:100%;margin:0;border-radius:0}
   .top{padding:18px 16px 16px}
   .inc,.plans{padding-right:16px;padding-left:16px}
-  .guar,.third,.docs{margin-right:16px;margin-left:16px}
+  .guar,.third,.docs,.next-wrap{margin-right:16px;margin-left:16px}
   .guar-strip{padding:10px 16px;flex-wrap:wrap}
   .guar-strip a{margin-left:0}
   .after,.after-pay{padding:0 16px 18px}
@@ -302,26 +312,9 @@ a{color:inherit}
     </div>
   </section>
 
-  <div class="guar" id="guarantee">
-    <span class="guar-tag" id="guarTag">Performance guarantee · confirmed</span>
-    <h3 id="guarTitle">Placed within 6 months, or your money back.</h3>
-    <p id="guarBody">Do your part and if you have not secured a qualifying role within 6 months of
-      certification, or completed at least 50 interviews, you qualify for a full refund.
-      Documentation required.</p>
-    <div class="guar-you">
-      <b>Your part:</b>
-      <ul id="guarSteps"></ul>
-    </div>
-  </div>
-
-  <section class="inc">
-    <div class="h2">What you're getting</div>
-    <ul class="inc-list" id="incList"></ul>
-  </section>
-
-  <section class="sec after-pay" id="afterPay" hidden>
+  <details class="next-wrap" id="afterPay">
+    <summary>Doing this on your own? Here's exactly what happens next</summary>
     <div class="next">
-      <div class="h2">After you pay</div>
       <p class="next-sub">If you are finishing this on your own, do these five things in order.</p>
 
       <div class="next-step">
@@ -375,6 +368,23 @@ a{color:inherit}
         </div>
       </div>
     </div>
+  </details>
+
+  <div class="guar" id="guarantee">
+    <span class="guar-tag" id="guarTag">Performance guarantee · confirmed</span>
+    <h3 id="guarTitle">Placed within 6 months, or your money back.</h3>
+    <p id="guarBody">Do your part and if you have not secured a qualifying role within 6 months of
+      certification, or completed at least 50 interviews, you qualify for a full refund.
+      Documentation required.</p>
+    <div class="guar-you">
+      <b>Your part:</b>
+      <ul id="guarSteps"></ul>
+    </div>
+  </div>
+
+  <section class="inc">
+    <div class="h2">What you're getting</div>
+    <ul class="inc-list" id="incList"></ul>
   </section>
 
   <div class="docs">
@@ -413,7 +423,6 @@ a{color:inherit}
       <a href="mailto:support@highticketsalesacademy.com">support@highticketsalesacademy.com</a>
     </div>
     <div class="foot-copy">© High Ticket Sales Academy · All Rights Reserved</div>
-    <a class="paid-link" href="#afterPay" id="showAfterPay">Already paid? Show me the next steps</a>
   </footer>
 </main>
 
@@ -468,9 +477,9 @@ const BUYER = {
   fullName:  "[FULL_NAME]",
   email:     "[EMAIL]",
   phone:     "[PHONE_E164]",
-  slug:      "[SLUG]",          // anna_bury — must match the file/folder name
+  slug:      "[SLUG]",          // test_person — must match the file/folder name
   track:     "closer",          // "closer" or "setter"  (program)
-  offer:     "standard",        // "standard" or "reactivation"  (price set)
+  offer:     "standard",        // "standard" or "reactivation"  (price set, internal key)
   show:      ["pif", "plan", "clarity"]   // which options appear, in this order.
                                           // Drop any CJ does not want offered.
 };
@@ -489,7 +498,7 @@ const TRACKS = {
   setter: { label: "Certified Appointment Setter", curriculumUrl: "[CURRICULUM_URL_SETTER]" }
 };
 
-/* Promotion / reactivation checkouts (saved). Use with offer: "reactivation".
+/* Promotion / special-offer checkouts (saved). Use with offer: "reactivation".
    $5,000 PIF:     https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true
    3 × $1,750:     https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true   ($5,250 total)
    $6k ClarityPay: https://whop.com/checkout/plan_VUSDju20gTBCg/           ($500/mo × 12)
@@ -509,14 +518,14 @@ const OFFERS = {
   },
   reactivation: {
     pif:  { amount: "$5,000", was: "$7,000",
-            note: "One payment. Your reactivation price.",
+            note: "One payment. Your special offer price.",
             checkout: "https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true" },
     plan: { name: "3 payments", amount: "$1,750", unit: "today · $5,250 total",
             note: "First payment today, then one a month for two more months.",
             warn: "",
             checkout: "https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true" },
     clarity: { amount: "$500", unit: "a month · $6,000 total",
-               note: "Monthly financing at your reactivation rate. Soft credit check, needs a 620 or better.",
+               note: "Monthly financing at your special offer rate. Soft credit check, needs a 620 or better.",
                checkout: "https://whop.com/checkout/plan_VUSDju20gTBCg/" }
   }
 };
@@ -576,26 +585,12 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   try{const k="htsa_enroll_open_"+(BUYER.slug||"x");
     if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");event("page_open");}}catch(e){event("page_open");}
 
-  const paidKey = "htsa_paid_intent_" + (BUYER.slug || "x");
-  const viewedKey = "htsa_next_steps_viewed_" + (BUYER.slug || "x");
-  function revealAfterPay(scroll) {
-    const box = el("afterPay");
-    if (!box) return;
-    box.hidden = false;
-    try {
-      if (!sessionStorage.getItem(viewedKey)) {
-        sessionStorage.setItem(viewedKey, "1");
-        event("next_steps_viewed");
-      }
-    } catch (e) { event("next_steps_viewed"); }
-    if (scroll) box.scrollIntoView({ behavior: "smooth", block: "start" });
+  const nextWrap = el("afterPay");
+  if (nextWrap) {
+    nextWrap.addEventListener("toggle", function () {
+      if (nextWrap.open) event("next_steps_opened");
+    }, { once: true });
   }
-  try { if (sessionStorage.getItem(paidKey)) revealAfterPay(true); } catch (e) {}
-  const showPaid = el("showAfterPay");
-  if (showPaid) showPaid.addEventListener("click", function (e) {
-    e.preventDefault();
-    revealAfterPay(true);
-  });
 
   /* ---------- header ---------- */
   if (val(first)) el("topTitle").textContent = first + ", here's what we just went over.";
@@ -713,7 +708,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       selectedPlan:p.name, selectedAmount:p.amt, planDisclosure:p.warn || "",
       userAgent:navigator.userAgent||"", timestamp:new Date().toISOString() });
     event("checkout_started", { linkLabel:p.name, linkUrl:p.url });
-    try { sessionStorage.setItem("htsa_paid_intent_" + BUYER.slug, "1"); } catch(e){}
     setTimeout(function(){ window.location.href = p.url; }, 550);
   });
 })();

@@ -1,0 +1,142 @@
+---
+description: MASTER INDEX. Which HTSA page CJ means, what triggers it, and what never mixes between them. Read this before any other htsa rule.
+alwaysApply: true
+---
+
+# HTSA page map — read this first
+
+CJ runs four different pages. They look similar and they are NOT interchangeable.
+Before building anything, identify which one he means from the trigger phrase.
+If the trigger is ambiguous, ask one short question and nothing else.
+
+## The four pages
+
+| CJ says | Page | File | Calendar |
+|---|---|---|---|
+| **"offer link"** | Special offer booking page | `<firstname>-and-cj.html` (root) | `/charles660/cj` |
+| **"game plan"** | 30 day game plan | `30-day-roadmap.html` (shared, params) | none |
+| **"enroll link"** | Enrollment / close page | `htsa-enrollment-<first>-<last>.html` | none |
+| **"pre call link"** | Pre-call resources page | `r/<first>_<last>/index.html` | only if not booked |
+
+There is a fifth, built once and shared: `meet-cj.html`, the referral landing.
+Never personalize it.
+
+---
+
+## 1. "offer link" — special offer booking page
+
+Who: someone from the outreach batch who has NOT booked yet. They got a text, a
+voice memo, and this link. Their job on this page is to pick a time.
+
+- File: `<firstname>-and-cj.html` at repo root. Example: `jared-and-cj.html`
+- Their first name goes in the page title
+- Calendar: `https://meetings.hubspot.com/charles660/cj`
+- Sixteen of these are already live. Match their structure exactly.
+
+**NEVER use the word "reactivation" in a filename, URL, page title, meta tag, or
+any visible copy.** That is internal language. To the person it is a special
+offer. The `reactivation/` folder is internal working files only and its URLs are
+never sent to anyone.
+
+## 2. "game plan" — the 30 day game plan
+
+Who: someone CJ is closing, shown live on a call or sent right after.
+
+- One shared file: `30-day-roadmap.html`. Do not make per-person copies.
+- `?n=Test` puts their name in the headline
+- `?n=Test&e=htsa-enrollment-test-person.html` also points its button at their
+  enrollment page
+- Only if CJ explicitly asks for a dedicated URL, copy to
+  `<first>-<last>-30day-roadmap.html` and hardcode the name in that copy only
+
+## 3. "enroll link" — enrollment / close page
+
+Who: someone who has verbally agreed to a plan. CJ is on the phone with them.
+
+- Source: `templates/_TEMPLATE-close.html`
+- Output: `htsa-enrollment-<first>-<last>.html` at root
+- Full instructions: `.cursor/rules/htsa-close-page.mdc`
+
+## 4. "pre call link" — pre-call resources page
+
+Who: someone who ALREADY HAS A CALL BOOKED. A setter or a marketing lead
+scheduled them. CJ sends this the day before so they show up warm.
+
+- Source: `r/_TEMPLATE-precall.html`
+- Output: `r/<first>_<last>/index.html`
+- Full instructions: `.cursor/rules/htsa-precall-page.mdc`
+
+### THE DEFAULT IS BOOKED. THIS IS THE RULE THAT BROKE.
+
+CJ usually pastes only **name, email, number**. That does NOT mean they need to
+book. It means he did not paste the time.
+
+```
+booked: true      <-- ALWAYS, unless CJ explicitly says they still need to book
+```
+
+- Time given: set `callLabel` and `confirmDay`, the date block shows.
+- **No time given: still `booked: true`.** Leave `callLabel` and `confirmDay`
+  empty. The date block hides itself and the page reads correctly. The confirm
+  button still works.
+- Only set `booked: false` if CJ says something like "they still need to book" or
+  "send them a booking link".
+
+A pre-call page must never say **"Let's find 45 minutes"** to someone who already
+had their call. That is the failure this rule exists to prevent.
+
+---
+
+## NEVER use a real person as test data
+
+This nearly caused a text to go to a real prospect.
+
+**Never** put a real prospect's name, phone number, or email into an example, a
+placeholder, a test page, a preview, a code comment, or a sample message. Not
+Amy, not Anna, not Julz, not JC, not anyone from CJ's list, not a name you saw in
+another file in this repo.
+
+When you need example data, use obviously fake values every time:
+
+```
+Name:   Test Person  /  Jane Doe  /  Sample Member
+Email:  test@example.com
+Phone:  +15555550100        (555 numbers are reserved and unroutable)
+Slug:   test_person
+```
+
+Rules that follow from this:
+
+- Any page you build for testing is named `test-*.html` or lives under `r/test_*/`
+  and is deleted before you report done.
+- Never pre-fill a form, an SMS body, or a referral card with a real name while
+  demonstrating that it works.
+- If CJ asks you to verify something works, verify it with `Test Person`, then
+  tell him it passed. Do not use the last real person he mentioned.
+- Real names appear in exactly one place: the config block of the page actually
+  being built for that person, when CJ gave you their details for that purpose.
+
+If you are unsure whether a name is real, assume it is real.
+
+## Never mix these
+
+1. **No "reactivation" in anything a prospect can see.** Filenames, URLs, titles,
+   meta tags, visible copy. Internal word only.
+2. **Two calendars, two lengths.** The offer pages and `meet-cj.html` book a call
+   on `/charles660/cj`. A pre-call page for someone already booked shows no
+   calendar at all. Do not copy call-length copy between page types.
+3. **Never overwrite a live page.** The sixteen `<name>-and-cj.html` files and
+   every `htsa-enrollment-*.html` are live and in front of real people.
+4. **Never edit a template while building someone's page.** Copy, then edit the
+   copy's config block only.
+5. **Templates are `templates/_TEMPLATE-close.html` and `r/_TEMPLATE-precall.html`.**
+   Their config blocks hold `[PLACEHOLDER]` values. Never put a real person's data
+   in a template.
+
+## When CJ's request is ambiguous
+
+Ask exactly one question, naming the two candidates. Example:
+
+> "Offer link (they still need to book) or pre call link (already booked)?"
+
+Do not ask more than one question. Do not restate the whole workflow back to him.

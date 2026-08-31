@@ -14,6 +14,15 @@ name, email, phone, day, date, time.
 Then do everything below without asking follow-up questions. If something is
 missing, use the fallbacks in the Missing info table and say what you assumed.
 
+**They already have a call booked.** That is what this page is for. Never render
+"Let's find 45 minutes" or any booking copy unless CJ explicitly says they still
+need to schedule.
+
+## Read `.cursor/rules/htsa-page-map.mdc` first
+
+That file disambiguates CJ's four page types. If he said anything other than
+"pre call link", you may be in the wrong rule.
+
 ## What this page is for
 
 The person has **already booked**. A setter or a marketing lead scheduled them and
@@ -30,8 +39,8 @@ SOURCE:  r/_TEMPLATE-precall.html
 OUTPUT:  r/<first>_<last>/index.html
 ```
 
-Folder name is lowercase, underscore separated: `r/brody_smith/index.html`
-Live URL becomes `https://closewithcjclay.com/r/brody_smith/`
+Folder name is lowercase, underscore separated: `r/test_person/index.html`
+Live URL becomes `https://closewithcjclay.com/r/test_person/`
 
 ## Step 1 — copy, then edit ONLY these two places
 
@@ -39,12 +48,12 @@ Live URL becomes `https://closewithcjclay.com/r/brody_smith/`
 
 ```js
 const GUEST = {
-  firstName:  "Brody",
-  fullName:   "Brody Smith",
-  email:      "brody@example.com",
-  phone:      "+18722026243",                     // E.164, keep the +1
-  slug:       "brody_smith",                      // MUST match the folder name
-  booked:     true,                               // false = they still need to schedule
+  firstName:  "Test",
+  fullName:   "Test Person",
+  email:      "test@example.com",
+  phone:      "+15555550100",                     // E.164, keep the +1
+  slug:       "test_person",                      // MUST match the folder name
+  booked:     true,                               // ALWAYS true unless CJ explicitly says they still need to book
   callLabel:  "Wednesday, Sept 2 · 10:00 AM EST", // exactly how it reads on the page
   confirmDay: "Wednesday",                        // one word, used on the confirm button
   bookingUrl: "https://meetings.hubspot.com/charles660/cj"
@@ -57,7 +66,7 @@ name, his analytics break silently. Check it.
 **B. One line in `<head>`:**
 
 ```html
-<meta property="og:url" content="https://closewithcjclay.com/r/brody_smith/">
+<meta property="og:url" content="https://closewithcjclay.com/r/test_person/">
 ```
 
 Change nothing else. Not the layout, not the CSS, not the copy, not the
@@ -67,10 +76,10 @@ Change nothing else. Not the layout, not the CSS, not the copy, not the
 
 | Missing | Do this |
 |---|---|
-| Last name | Use first name only for the slug: `r/brody/` |
+| Last name | Use first name only for the slug: `r/test/` |
 | Email or phone | Leave the empty string. Tracking still works, those columns are just blank. |
 | Time zone | Assume EST and write EST in `callLabel` |
-| Day/date/time entirely | Set `booked: false`. The page flips to booking mode on its own. |
+| Day/date/time entirely | **Still `booked: true`.** Leave `callLabel` and `confirmDay` empty. The date block hides itself. CJ pasting only name, email and number means he did not paste the time, NOT that they need to book. |
 
 ## Step 2 — assets (already exist, do not touch)
 
@@ -125,7 +134,7 @@ GitHub Pages takes about a minute.
 
 ## Step 6 — output the ready to send messages
 
-After the page is built and pushed, ALWAYS print the texts plus both email versions,
+After the page is built and pushed, ALWAYS print all three of the following,
 ready for CJ to copy and paste. Do not summarize them. Do not ask if he wants them.
 
 **Follow `no-dashes-in-client-copy.mdc`. No em dashes, no en dashes, no hyphen
@@ -133,41 +142,44 @@ dashes as punctuation anywhere in these. Commas and periods only.**
 
 Substitute the real name, slug, day and time. Use CJ's voice: plain, warm, no hype.
 
+**Never write a negative descriptive norm about other prospects.** Do not write
+"most people don't", "hardly anyone replies", "you'd be surprised how few show up",
+or anything similar. It normalizes flaking right before the behavior CJ needs, and
+it signals that people ignore him, which undercuts his authority. Thank the person
+plainly and move on.
+
 ---
 
-### A. TEXT SEQUENCE (2 messages)
+### A. TEXT SEQUENCE (3 messages)
 
-The live URL belongs at the **end of Message 1**. Never send the URL as its own
-message. Send as two separate iMessages.
-
-If they **did** reply:
+Send as three separate messages. iMessage only renders the big link preview card
+when a message contains nothing but the URL, so the link must be alone in its own
+message.
 
 ```
 [Message 1]
-Appreciate you getting back to me, <First>. Most people don't, so thank you.
+Appreciate the quick reply, <First>.
 
 One more thing and then I'll leave you alone until <day>. I put everything on one
 page so you're not digging back through the email.
 
+[Message 2]
 https://closewithcjclay.com/r/<slug>/
 
-[Message 2]
+[Message 3]
 If you only open one thing, make it the 4 minute clip at the top. It's from our
 live call on the 18th. Four of our members talking about getting placed, and every
 one of them had more than one offer to choose from.
+
+Not homework. Totally optional. See you <day> at <time>.
 ```
 
-If they did **not** reply, Message 1 is:
+If they did **not** reply to the resources email, replace Message 1 with:
 
 ```
-[Message 1]
 Hey <First>, CJ here. Looking forward to <day> at <time>. Not sure the email
 landed, so here is everything on one page instead.
-
-https://closewithcjclay.com/r/<slug>/
 ```
-
-Message 2 stays the clip note.
 
 ---
 

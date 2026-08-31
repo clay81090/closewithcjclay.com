@@ -45,11 +45,11 @@ guarantee wording, or tracking while making someone's page.
 
 ```js
 const BUYER = {
-  firstName: "Anna",
-  fullName:  "Anna Bury",
-  email:     "anna@example.com",
-  phone:     "+15709759465",              // E.164
-  slug:      "anna_bury",                 // must match the filename
+  firstName: "Test",
+  fullName:  "Test Person",
+  email:     "test@example.com",
+  phone:     "+15555550100",              // E.164
+  slug:      "test_person",               // must match the filename
   track:     "closer",                    // "closer" or "setter"
   offer:     "standard",                  // "standard" or "reactivation"
   show:      ["pif", "plan", "clarity"]   // which options appear, in this order
@@ -100,8 +100,12 @@ Keep that guard.
 
 ## Step 5 — do not move these
 
-- **Terms + curriculum links stay at the bottom**, below the after-payment box. CJ
+- **Terms + curriculum links stay at the bottom**, below the next-steps dropdown. CJ
   explicitly does not want them near the top.
+- **Next steps is a collapsed `<details>` directly under the payment buttons.**
+  Summary: "Doing this on your own? Here's exactly what happens next". Closed by
+  default, always openable, never gated on payment. First open fires
+  `next_steps_opened`. Do not hide this section until checkout.
 - **Terms acceptance happens after plan selection**, inside the confirm sheet. Never
   gate the payment buttons behind a terms checkbox again. That is what killed
   conversion on the legacy page.
@@ -123,6 +127,8 @@ Keep that guard.
 8. In reactivation mode: 3-pay goes to `plan_YrqGOXMxGbOVa` (true 3-pay, no
    fourth-payment warning). ClarityPay goes to `plan_VUSDju20gTBCg` ($6k), not
    the $7,200 closer plan.
+9. Next steps is a closed `<details>` under the payment buttons. Opening it
+   fires `next_steps_opened` once. It is never hidden behind checkout.
 
 ## Step 7 — ship it
 

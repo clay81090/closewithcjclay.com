@@ -418,15 +418,15 @@ details[open] .chev{transform:rotate(180deg)}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   Set booked:false for someone who still needs to schedule.
+   booked:true is the default. Only set false if CJ says they still need to schedule.
    ============================================================ */
 const GUEST = {
-  firstName:  "[FIRST_NAME]",              // Brody
-  fullName:   "[FULL_NAME]",               // Brody Smith
+  firstName:  "[FIRST_NAME]",              // Test
+  fullName:   "[FULL_NAME]",               // Test Person
   email:      "[EMAIL]",
-  phone:      "[PHONE_E164]",              // +18722026243
-  slug:       "[SLUG]",                    // brody_smith  (must match folder name)
-  booked:     true,                        // false = they still need to schedule
+  phone:      "[PHONE_E164]",              // +15555550100
+  slug:       "[SLUG]",                    // test_person  (must match folder name)
+  booked:     true,                        // ALWAYS true unless CJ explicitly says they still need to book
   callLabel:  "[DAY], [DATE] · [TIME] EST",// Wednesday, Sept 2 · 10:00 AM EST
   confirmDay: "[DAY]",                     // Wednesday
   bookingUrl: "https://meetings.hubspot.com/charles660/cj"
