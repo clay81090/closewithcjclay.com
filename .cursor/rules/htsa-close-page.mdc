@@ -16,10 +16,24 @@ this one. Do not modify existing legacy pages when building a new close page.
 
 ## Trigger
 
-CJ says **"close page"**, **"enrollment link"**, or **"close link"** and pastes some or all of:
-name, email, phone, track, offer, which payment options to show.
+CJ says **"close page"**, **"enrollment link"**, **"enroll link"**, or **"close link"**
+and pastes name, email, phone, and which options to show.
 
-Do everything below without follow-up questions. Use the fallbacks and say what you assumed.
+**Do this first, before reading other client files.** In Terminal you can also
+type `htsa-close`, paste the block, then Ctrl-D (new tab if the command is unknown).
+
+```bash
+python3 scripts/htsa-paste-close.py --ship <<'EOF'
+<paste his block>
+EOF
+```
+
+Wait for `READY` plus a URL. If he also wants a game plan, send
+`https://closewithcjclay.com/30-day-roadmap.html?n=<First>` immediately. That
+file already exists. Do not wait on the enroll page for the game plan.
+
+Do not rebuild the template by hand. Do not open other invoices. Do not ask
+follow-up questions. Use the fallbacks below.
 
 ## What this page is for
 
@@ -131,6 +145,14 @@ Keep that guard.
    fires `next_steps_opened` once. It is never hidden behind checkout.
 
 ## Step 7 — ship it
+
+Prefer `python3 scripts/htsa-paste-close.py --ship` so the BUYER swap, commit,
+push, and live check happen in one shot. The script does not treat a cached old
+invoice 200 as ready. It waits for this build's `close-build:` stamp. If the
+clean URL is still stale it prints the same URL with `?v=<stamp>` so you can
+send it immediately.
+
+If you are already in the file by hand:
 
 ```bash
 cd ~/Desktop/closewithcjclay.com/closewithcjclay.com

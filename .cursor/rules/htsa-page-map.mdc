@@ -43,9 +43,10 @@ never sent to anyone.
 Who: someone CJ is closing, shown live on a call or sent right after.
 
 - One shared file: `30-day-roadmap.html`. Do not make per-person copies.
-- `?n=Test` puts their name in the headline
-- `?n=Test&e=htsa-enrollment-test-person.html` also points its button at their
-  enrollment page
+- `?n=Test` puts their name in the headline. That is the default. Send it
+  immediately. The file is already live. Do not wait on anything else.
+- Never add `&e=` unless CJ asks. That only wires the button at the bottom
+  of the roadmap to an enroll page. He usually texts enroll separately.
 - Only if CJ explicitly asks for a dedicated URL, copy to
   `<first>-<last>-30day-roadmap.html` and hardcode the name in that copy only
 
@@ -55,6 +56,10 @@ Who: someone who has verbally agreed to a plan. CJ is on the phone with them.
 
 - Source: `templates/_TEMPLATE-close.html`
 - Output: `htsa-enrollment-<first>-<last>.html` at root
+- **On a live call, run this and nothing else:**
+  `python3 scripts/htsa-paste-close.py --ship` with his paste on stdin.
+  Wait for `READY`. Game plan is a separate already-live file:
+  `https://closewithcjclay.com/30-day-roadmap.html?n=<First>`
 - Full instructions: `.cursor/rules/htsa-close-page.mdc`
 
 ## 4. "pre call link" — pre-call resources page
