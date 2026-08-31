@@ -74,6 +74,9 @@ function routeEnrollmentAction_(payload) {
       appendEnrollmentRow_('resource_' + String(payload.event || 'unknown'), payload);
       sendResourcePageNotification_(payload);
       break;
+    case 'recordReferral':
+      appendReferralRow_(payload);
+      break;
     default:
       appendEnrollmentRow_('legacy_unknown', payload);
   }
@@ -90,6 +93,7 @@ function appendEnrollmentRow_(kind, payload) {
   var tabName = props.getProperty('SHEET_TAB_NAME') || 'EnrollmentLog';
   var ss = SpreadsheetApp.openById(sid);
   var sheet = ss.getSheetByName(tabName) || ss.getSheets()[0];
+  // Last column is referredBy. Additive. Empty on terms_agreement rows.
   sheet.appendRow([
     new Date(),
     kind,
@@ -99,7 +103,60 @@ function appendEnrollmentRow_(kind, payload) {
     payload.phone || '',
     payload.enrollmentPageUrl || '',
     payload.termsVersion || '',
-    JSON.stringify(payload)
+    JSON.stringify(payload),
+    payload.referredBy || ''
+  ]);
+}
+
+/**
+ * Referral SMS from the 30-day roadmap. Writes to a Referrals tab.
+ * Additive: creates the tab and header row if they do not exist.
+ * Does not change recordTermsAgreement.
+ */
+function appendReferralRow_(payload) {
+  var props = PropertiesService.getScriptProperties();
+  var sid = props.getProperty('ENROLLMENT_LOG_SHEET_ID');
+  if (!sid) {
+    Logger.log('ENROLLMENT_LOG_SHEET_ID not configured — skipping referral row. Payload stub: %s', JSON.stringify(payload));
+    return;
+  }
+
+  var ss = SpreadsheetApp.openById(sid);
+  var sheet = ss.getSheetByName('Referrals');
+  if (!sheet) {
+    sheet = ss.insertSheet('Referrals');
+    sheet.appendRow([
+      'loggedAt',
+      'referrerName',
+      'referrerSlug',
+      'referralName',
+      'referralPhone',
+      'enrollmentPageUrl',
+      'userAgent',
+      'timestamp'
+    ]);
+  } else if (sheet.getLastRow() === 0) {
+    sheet.appendRow([
+      'loggedAt',
+      'referrerName',
+      'referrerSlug',
+      'referralName',
+      'referralPhone',
+      'enrollmentPageUrl',
+      'userAgent',
+      'timestamp'
+    ]);
+  }
+
+  sheet.appendRow([
+    new Date(),
+    payload.referrerName || '',
+    payload.referrerSlug || '',
+    payload.referralName || '',
+    payload.referralPhone || '',
+    payload.enrollmentPageUrl || '',
+    payload.userAgent || '',
+    payload.timestamp || ''
   ]);
 }
 

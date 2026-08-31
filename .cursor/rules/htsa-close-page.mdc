@@ -76,25 +76,24 @@ Never edit prices inline. Set `offer` and the whole set swaps.
 
 If CJ says he agreed a custom number on the call, uncomment `CUSTOM_OFFER` and fill it.
 It renders as a navy card **above** every other option and removes the "best value"
-badge from PIF. The negotiated discount link is:
-`https://whop.com/checkout/plan_VUSDju20gTBCg/`
+badge from PIF.
 
 Never put a negotiated price in a paragraph without a working button. The legacy
 page did that and the best offer became the only one the person could not buy.
 
-## Step 4 — TWO KNOWN BLOCKERS, do not paper over them
+## Step 4 — promotion / reactivation checkouts (saved)
 
-1. **Reactivation 3-pay** uses the 4-pay Whop link, so Whop bills a 4th payment of
-   $1,750 that the buyer did not agree to. The template already renders a disclosure
-   on the card and in the confirm sheet, and writes it into the signed terms record
-   as `planDisclosure`. **Do not remove that disclosure.** When CJ has a real 3-pay
-   link from Christian, replace `OFFERS.reactivation.plan.checkout` and delete the `warn`.
+Canonical table: `templates/HTSA-SECONDARY-PAYMENT-OPTIONS.md` (Promotion / reactivation).
+Wired into `OFFERS.reactivation` in `templates/_TEMPLATE-close.html`.
 
-2. **Reactivation ClarityPay** is `[REACTIVATION_CLARITYPAY_500_CHECKOUT_URL]` on
-   purpose. The standard link bills $600/mo, which would overcharge $1,200 across the
-   term. While it is a placeholder the button shows an alert instead of charging.
-   **Never substitute the $600 link to make it "work".** Replace it only with a real
-   $500/mo link.
+| Offer | Total | Checkout |
+|---|---|---|
+| PIF | $5,000 | `https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true` |
+| 3-Pay $1,750 | $5,250 | `https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true` |
+| $6k ClarityPay | $6,000 ($500/mo × 12) | `https://whop.com/checkout/plan_VUSDju20gTBCg/` |
+
+Do **not** use the standard 4-pay (`plan_m6yk0QLbxWaak`) for the 3-pay promo.
+Do **not** use the standard Closer ClarityPay (`…/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/`, $600/mo · $7,200) for the $6k promo.
 
 Any `[PLACEHOLDER]` checkout is caught at click time and alerts instead of charging.
 Keep that guard.
@@ -121,8 +120,9 @@ Keep that guard.
 6. Footer business card renders with the headshot.
 7. Tapping a plan opens the confirm sheet. Continue stays disabled until the box is
    checked. On continue, `recordTermsAgreement` fires before the redirect.
-8. In reactivation mode: the 3-pay disclosure appears on the card AND in the sheet,
-   and ClarityPay alerts instead of redirecting.
+8. In reactivation mode: 3-pay goes to `plan_YrqGOXMxGbOVa` (true 3-pay, no
+   fourth-payment warning). ClarityPay goes to `plan_VUSDju20gTBCg` ($6k), not
+   the $7,200 closer plan.
 
 ## Step 7 — ship it
 

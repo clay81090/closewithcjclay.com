@@ -26,6 +26,20 @@ All links below are **direct-to-consumer** where applicable (`?d2c=true`). The $
 
 ---
 
+## Promotion / reactivation (Closer)
+
+These three are the **promotion set**. Use them together on a close page with `offer: "reactivation"`, or individually when CJ names one. They are **not** the default frozen-shell prices.
+
+| Offer (short name) | Total | Payment structure | Notes | Whop checkout URL |
+|--------------------|-------|-------------------|-------|-------------------|
+| **PIF (promo / reactivation)** | **$5,000** | Paid in full | Same plan as the experience / discount PIF above. | `https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true` |
+| **3-Pay $1,750** | **$5,250** | $1,750 today, then 2 more of $1,750 | **Real 3-pay.** Already used on Kristie Monaco and Joseph Cuciti Jr. Do **not** use the standard 4-pay (`plan_m6yk0QLbxWaak`) for this offer. | `https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true` |
+| **$6k ClarityPay** | **$6,000** | $500/mo × 12 | Soft credit check, 620 or better. **Never** swap in the standard Closer ClarityPay ($600/mo · $7,200). | `https://whop.com/checkout/plan_VUSDju20gTBCg/` |
+
+Close-page wiring: `templates/_TEMPLATE-close.html` → `OFFERS.reactivation`.
+
+---
+
 ## Setter — secondary Whop plan
 
 | Offer (short name) | Total | Payment structure | Notes | Whop checkout URL |

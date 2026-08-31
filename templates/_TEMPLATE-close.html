@@ -380,7 +380,7 @@ a{color:inherit}
   <div class="docs">
     <a class="doc" href="#" id="currBtn">📘 What's in the program</a>
     <a class="doc" id="termsBtn" target="_blank" rel="noopener noreferrer">📄 Terms of Service</a>
-    <a class="doc" id="roadmapBtn" target="_blank" rel="noopener noreferrer">🗺 Your 30 day roadmap</a>
+    <a class="doc" id="roadmapBtn" target="_blank" rel="noopener noreferrer">🗺 Your 30 day game plan</a>
   </div>
 
   <footer class="foot">
@@ -476,7 +476,7 @@ const BUYER = {
 };
 
 /* One-off negotiated price. Leave null unless CJ agreed one on the call.
-   The reactivation discount link lives here when CJ specifies it. */
+   The $6k ClarityPay promo checkout can also go here if CJ names a custom amount. */
 const CUSTOM_OFFER = null;
 // const CUSTOM_OFFER = {
 //   name: "Your negotiated price", note: "What CJ agreed with you on the call.",
@@ -489,6 +489,11 @@ const TRACKS = {
   setter: { label: "Certified Appointment Setter", curriculumUrl: "[CURRICULUM_URL_SETTER]" }
 };
 
+/* Promotion / reactivation checkouts (saved). Use with offer: "reactivation".
+   $5,000 PIF:     https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true
+   3 × $1,750:     https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true   ($5,250 total)
+   $6k ClarityPay: https://whop.com/checkout/plan_VUSDju20gTBCg/           ($500/mo × 12)
+   Canonical table: templates/HTSA-SECONDARY-PAYMENT-OPTIONS.md */
 const OFFERS = {
   standard: {
     pif:  { amount: "$6,000", was: "$7,000",
@@ -505,18 +510,14 @@ const OFFERS = {
   reactivation: {
     pif:  { amount: "$5,000", was: "$7,000",
             note: "One payment. Your reactivation price.",
-            checkout: "https://whop.com/checkout/plan_gdThsrGLXqaDF" },
+            checkout: "https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true" },
     plan: { name: "3 payments", amount: "$1,750", unit: "today · $5,250 total",
             note: "First payment today, then one a month for two more months.",
-            // Shown on the card and written into the signed terms record.
-            warn: "Heads up: the checkout page still says 4 payments. Yours is 3. CJ cancels the fourth, and that is written into the agreement you are signing.",
-            checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
-    // TODO CJ: this needs its OWN Whop link at $500/mo. The standard ClarityPay
-    // link bills $600/mo, which would overcharge $1,200 across the term.
-    // Until the link exists this option shows an alert instead of charging.
+            warn: "",
+            checkout: "https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true" },
     clarity: { amount: "$500", unit: "a month · $6,000 total",
                note: "Monthly financing at your reactivation rate. Soft credit check, needs a 620 or better.",
-               checkout: "[REACTIVATION_CLARITYPAY_500_CHECKOUT_URL]" }
+               checkout: "https://whop.com/checkout/plan_VUSDju20gTBCg/" }
   }
 };
 
