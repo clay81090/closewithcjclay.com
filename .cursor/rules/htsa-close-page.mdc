@@ -1,0 +1,161 @@
+---
+description: How to create a new HTSA close/enrollment page from the close template (copy, never hand-rebuild)
+globs: templates/_TEMPLATE-close.html,htsa-enrollment-*.html,htsa-close-*.html
+alwaysApply: true
+---
+
+# HTSA close pages — the short enrollment instrument
+
+## Relationship to the older rule
+
+`.cursor/rules/htsa-enrollment-invoice-workflow.mdc` covers the **legacy long
+enrollment page** (`htsa-enrollment-*.html`, ~10,000px, locked pay zone).
+**This rule takes priority for anything CJ asks for as a "close page".**
+Do not merge the two templates. Do not port sections from the legacy page into
+this one. Do not modify existing legacy pages when building a new close page.
+
+## Trigger
+
+CJ says **"close page"**, **"enrollment link"**, or **"close link"** and pastes some or all of:
+name, email, phone, track, offer, which payment options to show.
+
+Do everything below without follow-up questions. Use the fallbacks and say what you assumed.
+
+## What this page is for
+
+CJ is **on the phone or Zoom with them right now**. They have already verbally
+agreed to a plan. This page confirms a decision that was already made. It is not
+a brochure and it is not for reading alone. Every extra word on it costs money.
+
+Target: under 3,500px on a 390px viewport. If a change pushes it past that, cut something.
+
+## Never hand-rebuild
+
+```
+SOURCE:  templates/_TEMPLATE-close.html
+OUTPUT:  htsa-enrollment-<first>-<last>.html      (repo root, matches existing convention)
+```
+
+Live URL becomes `https://closewithcjclay.com/htsa-enrollment-<first>-<last>.html`
+
+Never write one from scratch. Never "improve" the template's layout, CSS, copy,
+guarantee wording, or tracking while making someone's page.
+
+## Step 1 — copy, then edit ONLY the BUYER block
+
+```js
+const BUYER = {
+  firstName: "Anna",
+  fullName:  "Anna Bury",
+  email:     "anna@example.com",
+  phone:     "+15709759465",              // E.164
+  slug:      "anna_bury",                 // must match the filename
+  track:     "closer",                    // "closer" or "setter"
+  offer:     "standard",                  // "standard" or "reactivation"
+  show:      ["pif", "plan", "clarity"]   // which options appear, in this order
+};
+```
+
+`slug` drives the rows in CJ's Google Sheet. If it does not match the filename his
+tracking breaks silently. Check it.
+
+`show` is how CJ controls what is offered. If he says "PIF and ClarityPay only",
+set `show: ["pif","clarity"]` and the 4-pay card is removed from the DOM entirely.
+
+## Step 2 — the offer modes
+
+Never edit prices inline. Set `offer` and the whole set swaps.
+
+| | standard | reactivation |
+|---|---|---|
+| PIF | $6,000 | $5,000 |
+| Plan | 4 × $1,750 = $7,000 | 3 × $1,750 = $5,250 |
+| ClarityPay | $600/mo · $7,200 total | $500/mo · $6,000 total |
+
+## Step 3 — a negotiated one-off price
+
+If CJ says he agreed a custom number on the call, uncomment `CUSTOM_OFFER` and fill it.
+It renders as a navy card **above** every other option and removes the "best value"
+badge from PIF. The negotiated discount link is:
+`https://whop.com/checkout/plan_VUSDju20gTBCg/`
+
+Never put a negotiated price in a paragraph without a working button. The legacy
+page did that and the best offer became the only one the person could not buy.
+
+## Step 4 — TWO KNOWN BLOCKERS, do not paper over them
+
+1. **Reactivation 3-pay** uses the 4-pay Whop link, so Whop bills a 4th payment of
+   $1,750 that the buyer did not agree to. The template already renders a disclosure
+   on the card and in the confirm sheet, and writes it into the signed terms record
+   as `planDisclosure`. **Do not remove that disclosure.** When CJ has a real 3-pay
+   link from Christian, replace `OFFERS.reactivation.plan.checkout` and delete the `warn`.
+
+2. **Reactivation ClarityPay** is `[REACTIVATION_CLARITYPAY_500_CHECKOUT_URL]` on
+   purpose. The standard link bills $600/mo, which would overcharge $1,200 across the
+   term. While it is a placeholder the button shows an alert instead of charging.
+   **Never substitute the $600 link to make it "work".** Replace it only with a real
+   $500/mo link.
+
+Any `[PLACEHOLDER]` checkout is caught at click time and alerts instead of charging.
+Keep that guard.
+
+## Step 5 — do not move these
+
+- **Terms + curriculum links stay at the bottom**, below the after-payment box. CJ
+  explicitly does not want them near the top.
+- **Terms acceptance happens after plan selection**, inside the confirm sheet. Never
+  gate the payment buttons behind a terms checkbox again. That is what killed
+  conversion on the legacy page.
+- **The guarantee stays navy and green.** No gold, no brown, no yellow.
+- **No curriculum content on the page itself.** Outcomes in the "What you're getting"
+  list, detail behind the modal. A visible module list invites evaluation at the
+  moment CJ needs a decision.
+
+## Step 6 — verify before reporting done
+
+1. Page height under 3,500px at 390px width.
+2. No horizontal scroll at 320px and 375px. No console errors.
+3. No rendered text under 12px.
+4. Header shows Prepared for (their name/email/phone) and Prepared by (CJ).
+5. Only the options in `show` are present, in that order.
+6. Footer business card renders with the headshot.
+7. Tapping a plan opens the confirm sheet. Continue stays disabled until the box is
+   checked. On continue, `recordTermsAgreement` fires before the redirect.
+8. In reactivation mode: the 3-pay disclosure appears on the card AND in the sheet,
+   and ClarityPay alerts instead of redirecting.
+
+## Step 7 — ship it
+
+```bash
+cd ~/Desktop/closewithcjclay.com/closewithcjclay.com
+git add htsa-enrollment-<first>-<last>.html
+git commit -m "Add close page for <Full Name>"
+git push
+```
+
+Give CJ the live URL and tell him to load it once himself before the call.
+
+## Step 8 — output the send-it text
+
+Print this ready to copy. **Follow `no-dashes-in-client-copy.mdc`: no em dashes,
+no en dashes.** Never write a negative descriptive norm about other prospects.
+
+```
+[Message 1]
+Here you go, <First>. Everything we just went over is on this page.
+
+[Message 2]
+https://closewithcjclay.com/htsa-enrollment-<first>-<last>.html
+```
+
+Then remind CJ of the live close process:
+
+```
+1. Get the verbal on WHICH plan before sending anything.
+2. Say "I'm texting you a page right now, stay on with me, takes about 90 seconds."
+3. Send it while you are still talking. Never send and hang up.
+4. Narrate it: "Top green box says Paid in Full. Tap it."
+5. Terms sheet is one line: "That's the terms and the guarantee, check the box, hit continue."
+6. Stay on the line through Whop. Do not go quiet. Talk about their start date.
+7. They text "payment confirmed", you turn on access while still on the phone.
+```
