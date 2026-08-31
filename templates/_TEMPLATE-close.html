@@ -113,6 +113,7 @@ a{color:inherit}
 .doc:hover,.doc:focus-visible{border-color:var(--green-strong);outline:none}
 
 .after{padding:0 26px 20px}
+.after-pay{padding:0 26px 20px}
 .after-box{padding:15px 17px;border:1px solid rgba(0,201,122,.26);border-radius:13px;
   background:rgba(97,227,139,.09)}
 .after-box p{color:var(--text);font-size:14px;line-height:1.6}
@@ -164,6 +165,9 @@ a{color:inherit}
 .foot-stars{color:var(--gold);font-size:16px;letter-spacing:2px}
 .foot-copy{padding:11px 0 14px;border-top:1px solid rgba(255,255,255,.07);
   color:rgba(255,255,255,.34);font-size:12px;text-align:center}
+.paid-link{display:block;margin:0 auto;padding:4px 16px 14px;color:rgba(255,255,255,.42);
+  font-size:13px;text-align:center;text-decoration:none}
+.paid-link:hover,.paid-link:focus-visible{color:var(--green)}
 
 /* ---------- sheets ---------- */
 .sheet{width:min(560px,calc(100% - 20px));max-width:none;max-height:88dvh;padding:0;border:0;
@@ -204,7 +208,7 @@ a{color:inherit}
   .guar,.third,.docs{margin-right:16px;margin-left:16px}
   .guar-strip{padding:10px 16px;flex-wrap:wrap}
   .guar-strip a{margin-left:0}
-  .after{padding:0 16px 18px}
+  .after,.after-pay{padding:0 16px 18px}
   .foot{padding:20px 16px 0}
   .foot-top{grid-template-columns:1fr;gap:18px;padding-bottom:18px}
   .bcard{gap:13px;padding:14px}
@@ -315,22 +319,17 @@ a{color:inherit}
     <ul class="inc-list" id="incList"></ul>
   </section>
 
-  <section class="after">
-    <div class="after-box">
-      <p><b>If we are still on the phone,</b> text me at
-        <a href="sms:+16166121735">(616) 612-1735</a> the second it clears and I will turn
-        your access on while we are talking.</p>
-    </div>
+  <section class="sec after-pay" id="afterPay" hidden>
     <div class="next">
       <div class="h2">After you pay</div>
-      <p class="next-sub">If you are finishing this on your own, do these four things in order.</p>
+      <p class="next-sub">If you are finishing this on your own, do these five things in order.</p>
 
       <div class="next-step">
         <div class="next-num">1</div>
         <div class="next-body">
           <h3>Text CJ, payment made</h3>
           <p>Text <a href="sms:+16166121735">(616) 612-1735</a> the words <b>Payment made</b>. That is how I know to turn your access on if we are not on the phone together.</p>
-          <a class="next-btn" href="sms:+16166121735&body=Payment%20made">Text Payment made</a>
+          <a class="next-btn" href="sms:+16166121735?body=Payment%20made">Text Payment made</a>
         </div>
       </div>
 
@@ -353,6 +352,14 @@ a{color:inherit}
       <div class="next-step">
         <div class="next-num">3</div>
         <div class="next-body">
+          <h3>Nothing in your inbox after 10 minutes?</h3>
+          <p>Check spam and promotions, then text me. Do not re-pay, and do not create a second account.</p>
+        </div>
+      </div>
+
+      <div class="next-step">
+        <div class="next-num">4</div>
+        <div class="next-body">
           <h3>Book your kickoff with Mark</h3>
           <p>Mark is your Success Coach. This is a 15 minute Zoom to map your placement goals before you start the modules.</p>
           <a class="next-btn" href="https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call" target="_blank" rel="noopener noreferrer">Book kickoff call</a>
@@ -360,7 +367,7 @@ a{color:inherit}
       </div>
 
       <div class="next-step">
-        <div class="next-num">4</div>
+        <div class="next-num">5</div>
         <div class="next-body">
           <h3>Join the Mastermind</h3>
           <p>Request the private Facebook group. Live coaching replays live there, and 680+ members support each other.</p>
@@ -405,6 +412,7 @@ a{color:inherit}
       <a href="mailto:support@highticketsalesacademy.com">support@highticketsalesacademy.com</a>
     </div>
     <div class="foot-copy">© High Ticket Sales Academy · All Rights Reserved</div>
+    <a class="paid-link" href="#afterPay" id="showAfterPay">Already paid? Show me the next steps</a>
   </footer>
 </main>
 
@@ -566,6 +574,27 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   try{const k="htsa_enroll_open_"+(BUYER.slug||"x");
     if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");event("page_open");}}catch(e){event("page_open");}
 
+  const paidKey = "htsa_paid_intent_" + (BUYER.slug || "x");
+  const viewedKey = "htsa_next_steps_viewed_" + (BUYER.slug || "x");
+  function revealAfterPay(scroll) {
+    const box = el("afterPay");
+    if (!box) return;
+    box.hidden = false;
+    try {
+      if (!sessionStorage.getItem(viewedKey)) {
+        sessionStorage.setItem(viewedKey, "1");
+        event("next_steps_viewed");
+      }
+    } catch (e) { event("next_steps_viewed"); }
+    if (scroll) box.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  try { if (sessionStorage.getItem(paidKey)) revealAfterPay(true); } catch (e) {}
+  const showPaid = el("showAfterPay");
+  if (showPaid) showPaid.addEventListener("click", function (e) {
+    e.preventDefault();
+    revealAfterPay(true);
+  });
+
   /* ---------- header ---------- */
   if (val(first)) el("topTitle").textContent = first + ", here's what we just went over.";
   el("trackPill").textContent = T.label;
@@ -670,6 +699,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       selectedPlan:p.name, selectedAmount:p.amt, planDisclosure:p.warn || "",
       userAgent:navigator.userAgent||"", timestamp:new Date().toISOString() });
     event("checkout_started", { linkLabel:p.name, linkUrl:p.url });
+    try { sessionStorage.setItem("htsa_paid_intent_" + BUYER.slug, "1"); } catch(e){}
     setTimeout(function(){ window.location.href = p.url; }, 550);
   });
 })();
