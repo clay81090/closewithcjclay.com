@@ -1,0 +1,233 @@
+---
+description: How to create a new HTSA pre-call resource page fast (copy template, never hand-rebuild)
+globs: r/**,r/_TEMPLATE-precall.html,media/**
+alwaysApply: true
+---
+
+# HTSA pre-call resource pages — NEW pages only
+
+## Trigger
+
+CJ says **"pre call link"** (or "precall page", "resource page") and pastes some or all of:
+name, email, phone, day, date, time.
+
+Then do everything below without asking follow-up questions. If something is
+missing, use the fallbacks in the Missing info table and say what you assumed.
+
+## What this page is for
+
+The person has **already booked**. A setter or a marketing lead scheduled them and
+they already have the calendar invite. This page is not for booking. Its job is
+show-up rate and arriving pre-framed. CJ texts the link the day before.
+
+## Never hand-rebuild
+
+Always copy the template. Never write a pre-call page from scratch, and never
+"improve" the template's layout, CSS, copy, or tracking while making someone's page.
+
+```
+SOURCE:  r/_TEMPLATE-precall.html
+OUTPUT:  r/<first>_<last>/index.html
+```
+
+Folder name is lowercase, underscore separated: `r/brody_smith/index.html`
+Live URL becomes `https://closewithcjclay.com/r/brody_smith/`
+
+## Step 1 — copy, then edit ONLY these two places
+
+**A. The GUEST block** near the bottom of the `<script>`:
+
+```js
+const GUEST = {
+  firstName:  "Brody",
+  fullName:   "Brody Smith",
+  email:      "brody@example.com",
+  phone:      "+18722026243",                     // E.164, keep the +1
+  slug:       "brody_smith",                      // MUST match the folder name
+  booked:     true,                               // false = they still need to schedule
+  callLabel:  "Wednesday, Sept 2 · 10:00 AM EST", // exactly how it reads on the page
+  confirmDay: "Wednesday",                        // one word, used on the confirm button
+  bookingUrl: "https://meetings.hubspot.com/charles660/cj"
+};
+```
+
+`slug` drives the tracking rows in CJ's sheet. If it does not match the folder
+name, his analytics break silently. Check it.
+
+**B. One line in `<head>`:**
+
+```html
+<meta property="og:url" content="https://closewithcjclay.com/r/brody_smith/">
+```
+
+Change nothing else. Not the layout, not the CSS, not the copy, not the
+`recordResourcePageEvent` tracking code.
+
+## Missing info fallbacks
+
+| Missing | Do this |
+|---|---|
+| Last name | Use first name only for the slug: `r/brody/` |
+| Email or phone | Leave the empty string. Tracking still works, those columns are just blank. |
+| Time zone | Assume EST and write EST in `callLabel` |
+| Day/date/time entirely | Set `booked: false`. The page flips to booking mode on its own. |
+
+## Step 2 — assets (already exist, do not touch)
+
+These are root absolute on purpose. The page sits one folder deep, so relative
+paths break it. Never re-path, rename, inline, or "optimize" them:
+
+```
+/cj-headshot-600.png                     header photo + footer business card
+/media/this-week-at-htsa-2026-08-18.mp4  the Aug 18 placement clip
+/media/htsa-clip-poster.jpg              its poster frame
+/r/og-precall.jpg                        link preview card
+```
+
+## Step 3 — video rules, do not break these
+
+1. The Aug 18 clip keeps `preload="metadata"` **and** the `poster` attribute.
+   `preload="none"` with no working poster gives the browser no dimensions, and the
+   element collapses to a black 300x150 box. This has already broken once.
+2. Keep `aspect-ratio: 16/9` on `.video-frame video` at every width. Never add an
+   `aspect-ratio: auto` override in the mobile media query.
+3. The two YouTube videos must play **inside the page**. They are click to load
+   `<button class="yt">` facades that swap in a youtube-nocookie iframe on tap.
+   Never convert them to `<a href>` links. Never add `target="_blank"`.
+   Keep the params exactly: `?autoplay=1&rel=0&modestbranding=1&playsinline=1`
+   `playsinline` is what stops iOS from hijacking to fullscreen or the YouTube app.
+4. Only the `.link-row` items (Trustpilot, Top 20 PDF, HTSA site) and the footer
+   links may open a new tab.
+
+## Step 4 — verify before reporting done
+
+1. Header photo and footer card photo both render.
+2. Aug 18 clip shows its poster immediately, 16:9, not black.
+3. Both YouTube thumbnails load. Tapping one plays in page without navigating away.
+4. `slug` matches the folder name, and `og:url` matches the real path.
+5. No console errors. No horizontal scroll at 375px.
+6. Confirm button reads "Confirm I'll be there" and becomes
+   "Confirmed, see you <confirmDay>" on click.
+
+## Step 5 — ship it
+
+New files are untracked. Always finish with:
+
+```bash
+cd ~/Desktop/closewithcjclay.com/closewithcjclay.com
+git add r/<first>_<last>/
+git commit -m "Add pre-call page for <Full Name>"
+git push
+```
+
+Then give CJ the live URL and tell him to load it once himself before texting it.
+GitHub Pages takes about a minute.
+
+## Step 6 — output the ready to send messages
+
+After the page is built and pushed, ALWAYS print all three of the following,
+ready for CJ to copy and paste. Do not summarize them. Do not ask if he wants them.
+
+**Follow `no-dashes-in-client-copy.mdc`. No em dashes, no en dashes, no hyphen
+dashes as punctuation anywhere in these. Commas and periods only.**
+
+Substitute the real name, slug, day and time. Use CJ's voice: plain, warm, no hype.
+
+---
+
+### A. TEXT SEQUENCE (3 messages)
+
+Send as three separate messages. iMessage only renders the big link preview card
+when a message contains nothing but the URL, so the link must be alone in its own
+message.
+
+```
+[Message 1]
+Appreciate you getting back to me, <First>. Most people don't, so thank you.
+
+One more thing and then I'll leave you alone until <day>. I put everything on one
+page so you're not digging back through the email.
+
+[Message 2]
+https://closewithcjclay.com/r/<slug>/
+
+[Message 3]
+If you only open one thing, make it the 4 minute clip at the top. It's from our
+live call on the 18th. Four of our members talking about getting placed, and every
+one of them had more than one offer to choose from.
+
+Not homework. Totally optional. See you <day> at <time>.
+```
+
+If they did **not** reply to the resources email, replace Message 1 with:
+
+```
+Hey <First>, CJ here. Looking forward to <day> at <time>. Not sure the email
+landed, so here is everything on one page instead.
+```
+
+---
+
+### B. EMAIL, PLAIN TEXT
+
+```
+Subject: Before our call <day>
+
+Hi <First>,
+
+Looking forward to <day> at <time>.
+
+I put everything in one place so you are not digging through attachments:
+https://closewithcjclay.com/r/<slug>/
+
+If you only open one thing, make it the 4 minute clip at the top. It is from our
+live call on the 18th. Four of our members talking about getting placed, and every
+one of them had more than one offer to choose from. That is usually the question
+people are actually asking.
+
+Not homework. Totally optional.
+
+See you <day>,
+
+CJ Clay
+HTSA, Career Transformation Coach
+(616) 612-1735
+cj@highticketsalesacademy.com
+```
+
+---
+
+### C. EMAIL, HTML VERSION
+
+For Gmail, HubSpot, or any rich text editor. Gives a real clickable button plus a
+visible fallback URL.
+
+```html
+<p>Hi <First>,</p>
+<p>Looking forward to <day> at <time>.</p>
+<p>I put everything in one place so you are not digging through attachments:</p>
+<p>
+  <a href="https://closewithcjclay.com/r/<slug>/"
+     style="display:inline-block;padding:13px 26px;border-radius:10px;
+            background:#61e38b;color:#0a1628;font-family:Arial,sans-serif;
+            font-size:16px;font-weight:bold;text-decoration:none;">
+    Open my pre call page
+  </a>
+</p>
+<p style="font-size:13px;color:#54637a;">
+  Or paste this into your browser:
+  <a href="https://closewithcjclay.com/r/<slug>/">https://closewithcjclay.com/r/<slug>/</a>
+</p>
+<p>If you only open one thing, make it the 4 minute clip at the top. It is from our
+live call on the 18th. Four of our members talking about getting placed, and every
+one of them had more than one offer to choose from. That is usually the question
+people are actually asking.</p>
+<p>Not homework. Totally optional.</p>
+<p>See you <day>,</p>
+<p>
+  <strong>CJ Clay</strong><br>
+  HTSA, Career Transformation Coach<br>
+  (616) 612-1735<br>
+  <a href="mailto:cj@highticketsalesacademy.com">cj@highticketsalesacademy.com</a>
+</p>
+```
