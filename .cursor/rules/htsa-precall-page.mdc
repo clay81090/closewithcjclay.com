@@ -154,13 +154,28 @@ iMessage, Gmail, and HubSpot. Clickable links. No markdown. No code fences.
 
 ### A. TEXT (exactly 2 messages)
 
+Default Message 1 (they have not texted back yet):
+
 ```
-[Message 1]
 Hey <First>, CJ here. Looking forward to <day> at <time>. Not sure the email
 landed, so here is everything on one page instead.
 
 https://closewithcjclay.com/r/<slug>/
+```
 
+If they already texted back, do **not** say the email might have missed them.
+Use this Message 1 instead:
+
+```
+Appreciate the reply, <First>. Looking forward to <day> at <time>. I put
+everything on one page so you are not digging back through the email.
+
+https://closewithcjclay.com/r/<slug>/
+```
+
+Then always this Text 2:
+
+```
 [Text 2]
 If you only open one thing, make it the 4 minute clip at the top. It's from our
 live call on the 18th. Four of our members talking about getting placed, and every
