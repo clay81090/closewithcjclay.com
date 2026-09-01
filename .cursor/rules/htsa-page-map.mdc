@@ -70,6 +70,8 @@ scheduled them. CJ sends this the day before so they show up warm.
 
 - Source: `r/_TEMPLATE-precall.html`
 - Output: `r/<first>_<last>/index.html`
+- Send pack is **2 texts, never 3.** URL goes in Message 1. Email copy is
+  locked in `.cursor/rules/htsa-precall-page.mdc` Step 6. Do not invent a third text.
 - Full instructions: `.cursor/rules/htsa-precall-page.mdc`
 
 ### THE DEFAULT IS BOOKED. THIS IS THE RULE THAT BROKE.
