@@ -82,6 +82,13 @@ a{color:inherit}
 .support-when{color:var(--green);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
 .support-name{margin-top:3px;color:var(--white);font-size:16px;font-weight:800;line-height:1.3}
 .support-note{margin-top:4px;color:rgba(255,255,255,.74);font-size:13.5px;line-height:1.55}
+.landing{margin-top:16px;padding:16px 17px;border:2px solid var(--green-strong);border-radius:14px;
+  background:linear-gradient(145deg,rgba(97,227,139,.16),rgba(255,255,255,.04));
+  box-shadow:0 0 0 4px rgba(97,227,139,.08)}
+.landing-kicker{margin-bottom:7px;color:var(--green);font-size:12px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase}
+.landing p{margin:0;color:var(--white);font-size:16.5px;font-weight:700;line-height:1.45}
+.landing b{color:var(--green)}
 
 /* ---------- guarantee ---------- */
 .guar{margin-top:16px;padding:19px 21px;border:2px solid var(--green-strong);border-radius:16px;
@@ -165,10 +172,37 @@ a{color:inherit}
 .foot b{color:var(--white)}
 .foot a{color:rgba(255,255,255,.74);text-decoration:none}
 
+
+/* ---------- accordion sections ---------- */
+.acc{border-top:1px solid var(--grey);background:var(--white)}
+.acc>summary{display:flex;align-items:center;gap:14px;padding:20px 30px;cursor:pointer;
+  list-style:none;user-select:none;-webkit-tap-highlight-color:transparent;
+  transition:background 140ms ease}
+.acc>summary::-webkit-details-marker{display:none}
+.acc>summary:hover,.acc>summary:focus-visible{background:rgba(97,227,139,.09);outline:none}
+.acc-copy{flex:1;min-width:0}
+.acc-copy .kicker{margin-bottom:5px}
+.acc-copy h2{margin:0;color:var(--navy);font-family:"Playfair Display",serif;
+  font-size:clamp(1.35rem,3.2vw,1.85rem);line-height:1.16;letter-spacing:-.02em}
+.acc-tap{display:inline-flex;align-items:center;gap:6px;margin-top:9px;padding:6px 12px;
+  border-radius:999px;background:var(--navy);color:var(--green);font-size:12px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase}
+.acc[open]>summary .acc-tap{display:none}
+.acc-chev{flex:0 0 auto;width:46px;height:46px;display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--green-strong);border-radius:12px;background:rgba(97,227,139,.16);
+  color:var(--green-dark);font-size:24px;font-weight:800;line-height:1;
+  box-shadow:0 6px 16px rgba(0,201,122,.16);transition:transform 160ms ease,background 160ms ease,color 160ms ease}
+.acc[open]>summary .acc-chev{transform:rotate(180deg);background:var(--green-strong);color:#04231a}
+.acc-body{padding:4px 30px 28px}
+.acc-body > .lede:first-child{margin-top:0}
+
 @media (max-width:680px){
   .page{width:100%;margin:0;border-radius:0}
   .top{padding:24px 16px 22px}
   .sec,.cta{padding:22px 16px}
+  .acc>summary{padding:18px 16px}
+  .acc-body{padding:4px 16px 22px}
+  .acc-chev{width:42px;height:42px}
   .foot{padding:15px 16px 19px}
   .phase{padding-left:22px}
   .ref-tiers,.ref-row{grid-template-columns:1fr}
@@ -188,10 +222,17 @@ a{color:inherit}
     <div class="top-rule"></div>
   </section>
 
-  <section class="sec">
-    <div class="kicker">The plan</div>
-    <h2>Thirty days. Four phases.</h2>
-    <p class="lede">This is how you do it in thirty days. It is a game plan, not an obligation.
+    <details class="acc" open>
+    <summary>
+      <div class="acc-copy">
+        <div class="kicker">The plan</div>
+        <h2>Thirty days. Four phases.</h2>
+        
+      </div>
+      <span class="acc-chev" aria-hidden="true">▾</span>
+    </summary>
+    <div class="acc-body">
+<p class="lede">This is how you do it in thirty days. It is a game plan, not an obligation.
       Members putting in focused daily blocks have finished in 22 to 26 days. Speed comes from
       reps, not from time passing.</p>
 
@@ -314,12 +355,20 @@ a{color:inherit}
       </div>
 
     </div>
-  </section>
+    </div>
+  </details>
 
-  <section class="sec">
-    <div class="kicker">After you're in the seat</div>
-    <h2>Placement is just the beginning.</h2>
-    <p class="lede">Once you're in an offer, we help you turn training into production.</p>
+  <details class="acc">
+    <summary>
+      <div class="acc-copy">
+        <div class="kicker">After you're in the seat</div>
+        <h2>Placement is just the beginning.</h2>
+        <span class="acc-tap">Tap to open ▾</span>
+      </div>
+      <span class="acc-chev" aria-hidden="true">▾</span>
+    </summary>
+    <div class="acc-body">
+<p class="lede">Once you're in an offer, we help you turn training into production.</p>
 
     <div class="dark" style="margin-top:16px;">
       <div class="support">
@@ -347,35 +396,27 @@ a{color:inherit}
             plan.</div>
         </div>
       </div>
-      <p style="margin-top:15px;">The goal isn't just to get you placed. It's to help you become
-        productive once you're there. Your first 90 days give you the plan, coaching, call reviews,
-        and feedback loop to shorten the learning curve and ramp faster.</p>
+      <div class="landing">
+        <div class="landing-kicker">The real outcome</div>
+        <p>The goal isn't just to get you placed. It's to help you become
+          <b>productive once you're there</b>. Your first 90 days give you the plan, coaching,
+          call reviews, and feedback loop to shorten the learning curve and ramp faster.</p>
+      </div>
     </div>
-  </section>
-
-  <section class="sec">
-    <div class="kicker">Your protection</div>
-    <h2>The placement guarantee.</h2>
-    <div class="guar">
-      <h3>Do your part and if you're not placed, you qualify for a full refund.</h3>
-      <p>Complete your certification, follow Nate's roadmap, and if you have not secured a
-        qualifying role within 6 months of certification or completed at least 50 interviews,
-        you qualify for a full refund of your tuition. Documentation required.</p>
-      <ul>
-        <li>Complete the course materials, roleplays, 1-on-1 training, and certification</li>
-        <li>Attend at least one group coaching call a week while you're in the program</li>
-        <li>Apply to at least 50 qualifying closer or setter roles, and keep proof</li>
-        <li>Participate in good faith. This is a partnership, not a passive purchase</li>
-      </ul>
-      <p class="fineprint">The full refund policy is in the HTSA Terms of Service. Read it before
-        you enrol. If anything here and the Terms disagree, the Terms are the contract.</p>
     </div>
-  </section>
+  </details>
 
-  <section class="sec">
-    <div class="kicker">Your side of it</div>
-    <h2>One hundred percent, for thirty days.</h2>
-    <p class="lede">Everything above assumes you show up for all of it. Not most of it.</p>
+  <details class="acc">
+    <summary>
+      <div class="acc-copy">
+        <div class="kicker">Your side of it</div>
+        <h2>One hundred percent, for thirty days.</h2>
+        <span class="acc-tap">Tap to open ▾</span>
+      </div>
+      <span class="acc-chev" aria-hidden="true">▾</span>
+    </summary>
+    <div class="acc-body">
+<p class="lede">Everything above assumes you show up for all of it. Not most of it.</p>
 
     <div class="ask">
       <div class="ask-item">
@@ -394,12 +435,20 @@ a{color:inherit}
           hundred percent. That is how we make sure you get to the goal.</p>
       </div>
     </div>
-  </section>
+    </div>
+  </details>
 
-  <section class="sec">
-    <div class="kicker">What we need from you</div>
-    <h2>Once you're ramped up and winning.</h2>
-    <p class="lede">None of this is due on day one. This is what we ask once you've hit your
+  <details class="acc">
+    <summary>
+      <div class="acc-copy">
+        <div class="kicker">What we need from you</div>
+        <h2>Once you're ramped up and winning.</h2>
+        <span class="acc-tap">Tap to open ▾</span>
+      </div>
+      <span class="acc-chev" aria-hidden="true">▾</span>
+    </summary>
+    <div class="acc-body">
+<p class="lede">None of this is due on day one. This is what we ask once you've hit your
       milestones and you're producing in your offer. Video, reviews, and 3 introductions all live
       in one place.</p>
 
@@ -459,7 +508,36 @@ a{color:inherit}
         the page. We record the name so CJ knows to expect them and your referral gets credited
         to you.</p>
     </div>
-  </section>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary>
+      <div class="acc-copy">
+        <div class="kicker">Your protection</div>
+        <h2>The placement guarantee.</h2>
+        <span class="acc-tap">Tap to open ▾</span>
+      </div>
+      <span class="acc-chev" aria-hidden="true">▾</span>
+    </summary>
+    <div class="acc-body">
+<div class="guar">
+      <h3>Do your part and if you're not placed, you qualify for a full refund.</h3>
+      <p>Complete your certification, follow Nate's roadmap, and if you have not secured a
+        qualifying role within 6 months of certification or completed at least 50 interviews,
+        you qualify for a full refund of your tuition. Documentation required.</p>
+      <ul>
+        <li>Complete the course materials, roleplays, 1-on-1 training, and certification</li>
+        <li>Attend at least one group coaching call a week while you're in the program</li>
+        <li>Apply to at least 50 qualifying closer or setter roles, and keep proof</li>
+        <li>Participate in good faith. This is a partnership, not a passive purchase</li>
+      </ul>
+      <p class="fineprint">The full refund policy is in the HTSA Terms of Service. Read it before
+        you enrol. If anything here and the Terms disagree, the Terms are the contract.</p>
+    </div>
+    </div>
+  </details>
+
 
   <section class="cta">
     <h2>Bet on yourself.</h2>
