@@ -655,12 +655,13 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   if (road) {
     const roadName = (val(first) || "").replace(/[^A-Za-z' -]/g, "").slice(0, 24);
     const roadFile = "htsa-enrollment-" + (BUYER.slug || "").replace(/_/g, "-") + ".html";
-    let roadHref = "/30-day-roadmap.html";
+    let roadHref = BUYER.track === "setter" ? "/24-day-roadmap.html" : "/30-day-roadmap.html";
     const qs = [];
     if (roadName) qs.push("n=" + encodeURIComponent(roadName));
     if (/^[A-Za-z0-9._-]+\.html$/.test(roadFile) && !ph(BUYER.slug)) qs.push("e=" + encodeURIComponent(roadFile));
     if (qs.length) roadHref += "?" + qs.join("&");
     road.href = roadHref;
+    if (BUYER.track === "setter") road.textContent = "🗺 Your 24 day setter game plan";
     road.addEventListener("click", function () { event("roadmap_opened"); });
   }
   const currSheet = el("currSheet");

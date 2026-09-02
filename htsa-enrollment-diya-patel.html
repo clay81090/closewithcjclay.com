@@ -535,7 +535,7 @@ const INCLUDED = [
   "Live group coaching with Chad, plus lifetime replay access",
   "1-on-1 coaching, scheduled within your first 3 months",
   "Resume optimization, interview prep, and our placement system",
-  "A personalized 30 day action plan built with our team",
+  "A personalized 24 day setter action plan built with our team",
   "90 days of call review and coaching after you're hired",
   "Unlimited AI roleplay and a 24/7 AI coach, live on your calls",
   "Lifetime access to the private Mastermind and job network"
@@ -546,7 +546,7 @@ const CURRICULUM = [
   ["Live coaching with Chad", "Weekly group calls, plus lifetime access to every replay in the Mastermind."],
   ["1-on-1 coaching", "Included. Scheduled within 3 months of your start unless HTSA approves an extension."],
   ["Placement support", "Resume optimization, interview preparation, and access to the placement system. Most setters are in a role within 30 to 60 days."],
-  ["Your 30 day action plan", "Built with our team, focused on getting you placed and transitioned in."],
+  ["Your 24 day action plan", "Built with our team, focused on getting you placed and transitioned in."],
   ["90 days of post-hire support", "Call review and performance feedback for your first 90 days on the job."],
   ["AI roleplay and 24/7 AI coach", "Unlimited practice before real prospects, plus live support during calls. Optional $35/month if you keep it after placement."],
   ["Community and job network", "Lifetime access to the private Facebook Mastermind, 680+ members."]
@@ -655,12 +655,13 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   if (road) {
     const roadName = (val(first) || "").replace(/[^A-Za-z' -]/g, "").slice(0, 24);
     const roadFile = "htsa-enrollment-" + (BUYER.slug || "").replace(/_/g, "-") + ".html";
-    let roadHref = "/30-day-roadmap.html";
+    let roadHref = BUYER.track === "setter" ? "/24-day-roadmap.html" : "/30-day-roadmap.html";
     const qs = [];
     if (roadName) qs.push("n=" + encodeURIComponent(roadName));
     if (/^[A-Za-z0-9._-]+\.html$/.test(roadFile) && !ph(BUYER.slug)) qs.push("e=" + encodeURIComponent(roadFile));
     if (qs.length) roadHref += "?" + qs.join("&");
     road.href = roadHref;
+    if (BUYER.track === "setter") road.textContent = "🗺 Your 24 day setter game plan";
     road.addEventListener("click", function () { event("roadmap_opened"); });
   }
   const currSheet = el("currSheet");
