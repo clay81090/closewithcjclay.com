@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1628">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://closewithcjclay.com/30-day-roadmap-v2.html">
+<meta property="og:title" content="Your 30 day game plan — HTSA">
+<meta property="og:description" content="Thirty days. Four phases. Exactly how this goes.">
+<!-- TODO: 1200x630 roadmap link preview card. Until then no image renders. -->
+<meta name="twitter:card" content="summary_large_image">
+<title>Your 30 Day Game Plan v2 | CJ Clay · HTSA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1628;--navy-soft:#152a46;--ink:#0f2237;--green:#61e38b;--green-strong:#00c97a;
+  --green-dark:#087b50;--grey-light:#f3f6f9;--grey:#dce3eb;--text:#17243b;--muted:#54637a;
+  --white:#fff;--gold:#e3a008}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{min-width:320px;background:var(--grey-light);color:var(--text);font-family:"DM Sans",sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{width:min(780px,calc(100% - 20px));margin:16px auto;overflow:hidden;border-radius:20px;
+  background:var(--white);box-shadow:0 20px 56px rgba(10,22,40,.13)}
+
+.top{padding:30px 30px 26px;text-align:center;color:var(--white);
+  background:radial-gradient(circle at 86% 14%,rgba(97,227,139,.18),transparent 18rem),
+             linear-gradient(145deg,var(--navy),var(--navy-soft))}
+.top-photo{display:block;width:54px;height:54px;margin:0 auto 12px;border:2px solid var(--green-strong);
+  border-radius:50%;object-fit:cover}
+.pill{display:inline-block;margin-bottom:13px;padding:6px 14px;border:1px solid rgba(97,227,139,.42);
+  border-radius:999px;background:rgba(97,227,139,.12);color:var(--green);font-size:12.5px;
+  font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.top h1{font-family:"Playfair Display",serif;font-size:clamp(1.85rem,5.4vw,2.7rem);line-height:1.08;
+  letter-spacing:-.025em}
+.top p{max-width:560px;margin:12px auto 0;color:rgba(255,255,255,.82);font-size:15.5px}
+.top-rule{width:56px;height:3px;margin:18px auto 0;border-radius:2px;background:var(--green-strong)}
+
+.sec{padding:28px 30px;border-top:1px solid var(--grey)}
+.kicker{margin-bottom:6px;color:var(--green-dark);font-size:12px;font-weight:800;
+  letter-spacing:.15em;text-transform:uppercase}
+.sec h2{color:var(--navy);font-family:"Playfair Display",serif;font-size:clamp(1.55rem,3.6vw,2.05rem);
+  line-height:1.16;letter-spacing:-.02em}
+.lede{margin-top:10px;color:var(--muted);font-size:15px}
+
+/* ---------- timeline ---------- */
+.timeline{margin-top:20px}
+.phase{position:relative;padding:0 0 22px 30px;border-left:2px solid var(--grey)}
+.phase:last-child{padding-bottom:0;border-left-color:transparent}
+.phase::before{position:absolute;top:4px;left:-8px;width:15px;height:15px;border:3px solid var(--white);
+  border-radius:50%;background:var(--green-strong);content:"";box-shadow:0 0 0 2px var(--green-strong)}
+.phase-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+.phase-chip{flex:0 0 auto;padding:4px 11px;border-radius:999px;background:rgba(97,227,139,.16);
+  color:var(--green-dark);font-size:12px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;white-space:nowrap}
+.phase-head h3{color:var(--navy);font-size:18.5px;font-weight:800;line-height:1.25}
+.daygroup{margin-top:15px}
+.daygroup:first-of-type{margin-top:13px}
+.day-label{display:inline-block;max-width:100%;padding:3px 10px;border-radius:7px;background:var(--navy);
+  color:var(--green);font-size:13px;font-weight:800;letter-spacing:.05em;white-space:normal;line-height:1.35}
+.phase ul{margin-top:9px;display:grid;gap:7px}
+.phase li{position:relative;padding-left:21px;color:var(--text);font-size:14.5px;
+  line-height:1.6;list-style:none}
+.phase li::before{position:absolute;top:0;left:2px;color:var(--green-strong);font-size:12px;
+  font-weight:800;line-height:1.9;content:"●"}
+.phase li b{color:var(--navy)}
+.phase-note{margin-top:13px;padding:12px 14px;border-left:4px solid var(--green-strong);
+  border-radius:10px;background:rgba(97,227,139,.1);color:var(--navy);font-size:14px;
+  font-weight:600;line-height:1.55}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.stack span{padding:7px 11px;border:1px solid rgba(0,201,122,.35);border-radius:999px;
+  background:rgba(97,227,139,.1);color:var(--navy);font-size:12.5px;font-weight:800;line-height:1.2}
+.stack i{color:var(--green-dark);font-style:normal;font-weight:800}
+.pull{margin-top:14px;padding:14px 16px;border:1px solid rgba(0,201,122,.28);border-radius:12px;
+  background:linear-gradient(135deg,rgba(97,227,139,.12),#f7fbf9);color:var(--navy);
+  font-size:15px;font-weight:700;line-height:1.5}
+.pull b{color:var(--green-dark)}
+
+/* ---------- dark cards ---------- */
+.dark{padding:22px;border-radius:16px;background:var(--ink);color:rgba(255,255,255,.82)}
+.dark h3{color:var(--white);font-family:"Playfair Display",serif;font-size:20px;line-height:1.25}
+.dark p{margin-top:9px;font-size:14.5px;line-height:1.65}
+.dark b{color:var(--green)}
+.support{display:grid;gap:11px;margin-top:15px}
+.support-item{padding:14px 16px;border:1px solid rgba(255,255,255,.12);border-radius:12px;
+  background:rgba(255,255,255,.05)}
+.support-when{color:var(--green);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.support-name{margin-top:3px;color:var(--white);font-size:16px;font-weight:800;line-height:1.3}
+.support-note{margin-top:4px;color:rgba(255,255,255,.74);font-size:13.5px;line-height:1.55}
+.landing{margin-top:16px;padding:16px 17px;border:2px solid var(--green-strong);border-radius:14px;
+  background:linear-gradient(145deg,rgba(97,227,139,.16),rgba(255,255,255,.04));
+  box-shadow:0 0 0 4px rgba(97,227,139,.08)}
+.landing-kicker{margin-bottom:7px;color:var(--green);font-size:12px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase}
+.landing p{margin:0;color:var(--white);font-size:16.5px;font-weight:700;line-height:1.45}
+.landing b{color:var(--green)}
+
+/* ---------- guarantee ---------- */
+.guar{margin-top:16px;padding:19px 21px;border:2px solid var(--green-strong);border-radius:16px;
+  background:rgba(97,227,139,.08)}
+.guar h3{color:var(--navy);font-size:17.5px;font-weight:800;line-height:1.3}
+.guar p{margin-top:8px;color:var(--text);font-size:14.5px;line-height:1.6}
+.guar ul{margin-top:11px;display:grid;gap:7px}
+.guar li{position:relative;padding-left:22px;color:var(--muted);font-size:14px;
+  line-height:1.55;list-style:none}
+.guar li::before{position:absolute;top:0;left:2px;color:var(--green-strong);font-weight:800;content:"✓"}
+.fineprint{margin-top:12px;padding-top:12px;border-top:1px solid rgba(0,201,122,.25);
+  color:var(--muted);font-size:13px;line-height:1.55}
+
+/* ---------- asks ---------- */
+.ask{display:grid;gap:10px;margin-top:16px}
+.ask-item{padding:14px 16px;border:1px solid var(--grey);border-left:4px solid var(--green-strong);
+  border-radius:12px;background:#fbfcfe}
+.ask-item b{color:var(--navy);font-size:15.5px}
+.ask-item p{margin-top:4px;color:var(--muted);font-size:14px;line-height:1.6}
+.need-box{margin-top:16px;padding:18px 18px 16px;border:1px solid var(--grey);border-left:4px solid var(--green-strong);
+  border-radius:12px;background:#fbfcfe}
+.need-box>b{display:block;color:var(--navy);font-size:17px;line-height:1.3}
+.need-box ul{margin-top:12px;display:grid;gap:10px}
+.need-box li{position:relative;padding-left:18px;color:var(--muted);font-size:14.5px;
+  line-height:1.6;list-style:none}
+.need-box li::before{position:absolute;top:0;left:0;color:var(--green-strong);font-size:11px;
+  line-height:1.8;content:"●"}
+.need-box li b{color:var(--navy)}
+.ask-item--hero{border-color:var(--green-strong);background:linear-gradient(135deg,rgba(97,227,139,.14),#fbfcfe);
+  box-shadow:0 8px 22px rgba(0,201,122,.1)}
+.ask-item--hero b{font-size:17px}
+.need-pay{margin-top:14px;padding:12px 13px;border-top:0;border-radius:10px;
+  background:rgba(97,227,139,.12);color:var(--navy);font-size:14.5px;font-weight:600;line-height:1.6}
+.need-pay b{color:var(--green-dark);font-size:16px}
+.send-one{display:inline-flex;min-width:1.15em;align-items:center;justify-content:center;
+  margin:0 4px;padding:2px 12px 5px;border-radius:10px;background:var(--green);color:var(--navy);
+  font-size:34px;line-height:1;font-weight:800;vertical-align:-4px}
+
+/* ---------- referral ---------- */
+.ref-tiers{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:16px}
+.tier{padding:15px 16px;border:1px solid var(--grey);border-radius:13px;background:var(--white);
+  text-align:center}
+.tier--hi{border-color:var(--green-strong);background:rgba(97,227,139,.07)}
+.tier-amt{color:var(--navy);font-size:29px;font-weight:800;line-height:1}
+.tier-lbl{margin-top:4px;color:var(--muted);font-size:13.5px;line-height:1.4}
+.ref-card{margin-top:16px;padding:19px 20px;border:2px solid var(--navy);border-radius:16px;
+  background:var(--white);box-shadow:0 12px 34px rgba(10,22,40,.1)}
+.ref-card h3{color:var(--navy);font-size:17.5px;font-weight:800}
+.ref-card > p{margin-top:5px;color:var(--muted);font-size:14px;line-height:1.55}
+.field{margin-top:12px}
+.field label{display:block;margin-bottom:5px;color:var(--muted);font-size:12.5px;font-weight:800;
+  letter-spacing:.09em;text-transform:uppercase}
+.field input{width:100%;min-height:50px;padding:12px 14px;border:2px solid var(--grey);
+  border-radius:11px;background:var(--white);color:var(--navy);
+  font:600 16px/1.2 "DM Sans",sans-serif}
+.field input:focus{border-color:var(--green-strong);box-shadow:0 0 0 4px rgba(0,201,122,.13);outline:none}
+.ref-row{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.ref-btn{display:flex;width:100%;min-height:54px;align-items:center;justify-content:center;
+  margin-top:14px;padding:14px 20px;border:0;border-radius:12px;background:var(--green-strong);
+  color:#04231a;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer}
+.ref-btn[disabled]{background:#dfe6ee;color:#9aa8b8;cursor:not-allowed}
+.ref-msg{margin-top:11px;padding:12px 14px;border-radius:11px;background:rgba(97,227,139,.13);
+  color:var(--navy);font-size:13.5px;font-weight:700;line-height:1.5}
+.ref-preview{margin-top:12px;padding:13px 15px;border:1px dashed var(--grey);border-radius:11px;
+  background:var(--grey-light);color:var(--muted);font-size:13.5px;line-height:1.6;white-space:pre-wrap}
+.ref-added{margin-top:12px;display:grid;gap:7px}
+.ref-added div{padding:10px 13px;border:1px solid rgba(0,201,122,.3);border-radius:10px;
+  background:rgba(97,227,139,.1);color:var(--navy);font-size:13.5px;font-weight:700}
+.ref-fine{margin-top:13px;color:var(--muted);font-size:13px;line-height:1.55}
+
+.cta{padding:32px 30px;text-align:center;color:var(--white);
+  background:radial-gradient(circle at 15% 110%,rgba(97,227,139,.17),transparent 20rem),var(--navy)}
+.cta h2{margin-bottom:10px;color:var(--white);font-family:"Playfair Display",serif;
+  font-size:clamp(1.7rem,4.4vw,2.3rem);line-height:1.12}
+.cta p{max-width:540px;margin:0 auto 20px;color:rgba(255,255,255,.8);font-size:15.5px}
+.btn{display:inline-flex;min-height:54px;align-items:center;justify-content:center;padding:15px 30px;
+  border:2px solid var(--white);border-radius:12px;background:var(--green);color:var(--navy);
+  font-size:16.5px;font-weight:800;text-decoration:none}
+.btn:hover,.btn:focus-visible{background:#7aee9d;outline:none}
+.cta-sms{display:block;margin-top:15px;color:rgba(255,255,255,.75);font-size:14px;text-decoration:none}
+.cta-sms b{color:var(--green)}
+
+.foot{padding:17px 30px 21px;background:#07111f;color:rgba(255,255,255,.66);
+  font-size:13px;text-align:center}
+.foot b{color:var(--white)}
+.foot a{color:rgba(255,255,255,.74);text-decoration:none}
+
+@media (max-width:680px){
+  .page{width:100%;margin:0;border-radius:0}
+  .top{padding:24px 16px 22px}
+  .sec,.cta{padding:22px 16px}
+  .foot{padding:15px 16px 19px}
+  .phase{padding-left:22px}
+  .ref-tiers,.ref-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <section class="top">
+    <img class="top-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
+    <div class="pill">Your 30 day game plan</div>
+    <h1 id="title">Thirty days all in. Then everything is different.</h1>
+    <p>This is not a course you poke at on weekends. It is thirty days of going one hundred
+      percent at something that changes what you earn and who owns your calendar. Here is exactly
+      how it goes, what you get, and what we ask back.</p>
+    <div class="top-rule"></div>
+  </section>
+
+  <section class="sec">
+    <div class="kicker">The plan</div>
+    <h2>Thirty days. Four phases.</h2>
+    <p class="lede">This is how you do it in thirty days. It is a game plan, not an obligation.
+      Members putting in focused daily blocks have finished in 22 to 26 days. Speed comes from
+      reps, not from time passing.</p>
+    <div class="pull">Training → Certification → Placement → 90-day ramp → KPI tracking →
+      success coaching → 12 real-call reviews → private Chad session.</div>
+    <div class="stack" aria-label="What you get end to end">
+      <span>Train</span><i>→</i>
+      <span>Certify</span><i>→</i>
+      <span>Get placed</span><i>→</i>
+      <span>90-day ramp</span><i>→</i>
+      <span>Produce</span>
+    </div>
+
+    <div class="timeline">
+
+      <div class="phase">
+        <div class="phase-head">
+          <span class="phase-chip">Days 1 to 5</span>
+          <h3>Get in and get through the modules</h3>
+        </div>
+
+        <div class="daygroup">
+          <div class="day-label">Day 1</div>
+          <ul>
+            <li>Access opens. Your welcome email arrives, <b>flag it as important</b>, and you set
+              your password.</li>
+            <li>You're live inside the certification platform. <b>55 modules</b> waiting for you.</li>
+            <li>Book your 15 minute kickoff with <b>Mark</b>, your Success Coach.</li>
+            <li>Join the Mastermind community, open 24/7. Every coaching replay lives there and
+              <b>680+ members</b> are in it. Post an introduction the day you get in.</li>
+            <li>Put the live calls in your calendar now: <b>Tuesdays 12:00 PM EST</b> and
+              <b>Wednesdays 5:00 PM EST</b>. Set a one hour reminder and a ten minute reminder on
+              both.</li>
+          </ul>
+        </div>
+
+        <div class="daygroup">
+          <div class="day-label">Days 1 to 5</div>
+          <ul>
+            <li>Work the 55 certification modules. Some people are through them in two days.</li>
+            <li>Target is finished by day 5. Day 7 at the outside.</li>
+            <li>Watch at 1.25x or 1.5x. Take notes on the objection sections, you'll use them in
+              the sandbox next week.</li>
+            <li>Show up for the Tuesday and Wednesday live calls from your first week. Do not wait
+              until you feel ready.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <span class="phase-chip">Days 5 to 12</span>
+          <h3>Run your reps in the AI sandbox</h3>
+        </div>
+
+        <div class="daygroup">
+          <div class="day-label">Master 5 TEDx Coaching Sales Calls in AI Roleplay</div>
+          <ul>
+            <li>Unlimited AI roleplay, any hour you want it. Plan on about a week here. This is
+              the part that actually makes you good.</li>
+            <li>Get your first thirty awkward calls out of the way before you ever talk to a real
+              prospect.</li>
+            <li>It critiques tonality, pacing, and how deep your discovery went. Run them back to
+              back, not one a day.</li>
+            <li>Load it with the scripts and objections of the niche you're targeting so your
+              practice matches the job you want.</li>
+            <li>Keep attending the live calls. Bring a question from your reps.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <span class="phase-chip">Days 12 to 16</span>
+          <h3>Certify, then get your materials built</h3>
+        </div>
+
+        <div class="daygroup">
+          <div class="day-label">Certification</div>
+          <ul>
+            <li>Live mock call with <b>Mark</b>, who plays a defensive prospect. Scored against a
+              rubric. It's meant to be hard.</li>
+            <li>Pass it and you're a Certified High Ticket Closer. That's the credential the
+              companies in our network recognize.</li>
+          </ul>
+        </div>
+
+        <div class="daygroup">
+          <div class="day-label">Your placement 1-on-1</div>
+          <ul>
+            <li>Sit down with <b>Nate</b>, our Placement Director. You set your target niches, the
+              schedule you want, and what you'll take.</li>
+            <li>Nate rewrites your LinkedIn and reformats your resume into the template our placed
+              members use.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <span class="phase-chip">Days 16 to 30</span>
+          <h3>Pick a few great fits and go get one</h3>
+        </div>
+
+        <div class="daygroup">
+          <div class="day-label">Introductions</div>
+          <ul>
+            <li>Nate introduces you directly to companies in our partner network. That's the
+              difference between applying and being introduced, and it's most of why our members
+              move faster than the open market.</li>
+          </ul>
+        </div>
+
+        <div class="daygroup">
+          <div class="day-label">Interviews</div>
+          <ul>
+            <li><b>Pick three to five companies that genuinely fit</b> and run those interviews
+              inside one week. This is not throwing applications at a wall. A small number of good
+              fits, done properly.</li>
+            <li>Placement usually lands somewhere between one and three weeks. Around ten days is
+              realistic if you're not dragging your feet.</li>
+            <li>Get in, get the reps, start earning. You can move to a better seat later with
+              experience behind you. The first offer is a starting line, not a life sentence.</li>
+          </ul>
+        </div>
+
+        <p class="phase-note">This is the front half compressed on purpose. Finish the modules and
+          your reps early and you leave yourself two full weeks for placement, which is the part
+          that pays you.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="kicker">After you're in the seat</div>
+    <h2>Placement is just the beginning.</h2>
+    <p class="lede">Once you're in an offer, we help you turn training into production.</p>
+
+    <div class="dark" style="margin-top:16px;">
+      <div class="support">
+        <div class="support-item">
+          <div class="support-when">Your first 90 days</div>
+          <div class="support-name">A 90-day ramp plan</div>
+          <div class="support-note">We help you build your action plan, track the KPIs that actually
+            matter, and identify exactly where you need to improve. You'll also have access to our
+            success coaches throughout your first 90 days for additional 1-on-1 support.</div>
+        </div>
+        <div class="support-item">
+          <div class="support-when">12 real call reviews</div>
+          <div class="support-name">Submit the calls you don't close</div>
+          <div class="support-note">Submit 1 real sales call per week for your first 90 days. Chad
+            and our coaching team review the calls and show you what happened, what you missed, and
+            what to change on the next one. <b>12 calls. Real prospects. Real feedback. Faster
+            improvement.</b></div>
+        </div>
+        <div class="support-item">
+          <div class="support-when">1-on-1 with the founder</div>
+          <div class="support-name">Your private coaching session with Chad</div>
+          <div class="support-note">Once you've been in your offer for about 3 weeks, you'll have
+            real calls, numbers, and challenges to work from. That's when your private session with
+            Chad becomes incredibly valuable. Bring the data. Bring the problems. Leave with a
+            plan.</div>
+        </div>
+      </div>
+      <div class="landing">
+        <div class="landing-kicker">The real outcome</div>
+        <p>The goal isn't just to get you placed. It's to help you become
+          <b>productive once you're there</b>. Your first 90 days give you the plan, coaching,
+          call reviews, and feedback loop to shorten the learning curve and ramp faster.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="kicker">Your protection</div>
+    <h2>The placement guarantee.</h2>
+    <div class="guar">
+      <h3>Do your part and if you're not placed, you qualify for a full refund.</h3>
+      <p>Complete your certification, follow Nate's roadmap, and if you have not secured a
+        qualifying role within 6 months of certification or completed at least 50 interviews,
+        you qualify for a full refund of your tuition. Documentation required.</p>
+      <ul>
+        <li>Complete the course materials, roleplays, 1-on-1 training, and certification</li>
+        <li>Attend at least one group coaching call a week while you're in the program</li>
+        <li>Apply to at least 50 qualifying closer or setter roles, and keep proof</li>
+        <li>Participate in good faith. This is a partnership, not a passive purchase</li>
+      </ul>
+      <p class="fineprint">The full refund policy is in the HTSA Terms of Service. Read it before
+        you enrol. If anything here and the Terms disagree, the Terms are the contract.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="kicker">Your side of it</div>
+    <h2>One hundred percent, for thirty days.</h2>
+    <p class="lede">Everything above assumes you show up for all of it. Not most of it.</p>
+
+    <div class="ask">
+      <div class="ask-item">
+        <b>At least 1 group coaching call a week</b>
+        <p>Come to at least one live group coaching call every week while you are ramping up in
+          your offer. You always have access for life.</p>
+      </div>
+      <div class="ask-item">
+        <b>3 one-on-one coaching calls</b>
+        <p>You get 3 one-on-one calls with our success coaches. One per month. Use them while you
+          are ramping up in your offer.</p>
+      </div>
+      <div class="ask-item ask-item--hero">
+        <b>Go all in, 100%</b>
+        <p>Every module, every roleplay, every interview, every coaching call. Do all of it at one
+          hundred percent. That is how we make sure you get to the goal.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="kicker">What we need from you</div>
+    <h2>Once you're ramped up and winning.</h2>
+    <p class="lede">None of this is due on day one. This is what we ask once you've hit your
+      milestones and you're producing in your offer. Video, reviews, and 3 introductions all live
+      in one place.</p>
+
+    <div class="need-box">
+      <b>Video testimonial, reviews, and 3 introductions</b>
+      <ul>
+        <li><b>A video testimonial.</b> Short and honest, recorded once you have real results to
+          talk about. This is the part that helps the next person decide.</li>
+        <li><b>A review on Trustpilot and Google.</b> In your own words, and only if you mean it.
+          We'd rather have twenty honest reviews than two hundred written to order.</li>
+        <li><b>3 introductions.</b> People in your circle who could use what you just did. Not
+          happy where they are, not enough income, no time, stuck. Don't overthink who qualifies.
+          Make the introduction and let CJ figure out whether it's a fit.</li>
+      </ul>
+      <p class="need-pay">Referrals pay cash with no cap. First 3 who enrol: <b>$250</b> each.
+        Everyone after that: <b>$500</b> each.</p>
+    </div>
+
+    <div class="ref-tiers">
+      <div class="tier tier--hi">
+        <div class="tier-amt">$250</div>
+        <div class="tier-lbl">each, for your first three who enrol</div>
+      </div>
+      <div class="tier tier--hi">
+        <div class="tier-amt">$500</div>
+        <div class="tier-lbl">each, for everyone after that</div>
+      </div>
+    </div>
+
+    <div class="ref-card">
+      <h3>Send <span class="send-one">1</span></h3>
+      <p>Fill this in and it does two things at once. It sends you a ready to go text for them,
+        and it lets CJ know to expect the name.</p>
+
+      <div class="field">
+        <label for="refYou">Your name</label>
+        <input id="refYou" type="text" autocomplete="name" placeholder="Your first and last name">
+      </div>
+      <div class="ref-row">
+        <div class="field">
+          <label for="refName">Their first name</label>
+          <input id="refName" type="text" placeholder="Their first name">
+        </div>
+        <div class="field">
+          <label for="refPhone">Their mobile</label>
+          <input id="refPhone" type="tel" inputmode="tel" placeholder="(555) 123-4567">
+        </div>
+      </div>
+
+      <div class="ref-preview" id="refPreview"></div>
+      <button class="ref-btn" type="button" id="refBtn" disabled>Send the intro text</button>
+      <p class="ref-msg" id="refMsg" hidden></p>
+      <div class="ref-added" id="refAdded"></div>
+
+      <p class="ref-fine">Your text app opens with the message ready. Nothing sends until you hit
+        send yourself. The link sits on its own line at the end so their phone shows a preview of
+        the page. We record the name so CJ knows to expect them and your referral gets credited
+        to you.</p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Bet on yourself.</h2>
+    <p>Thirty days of real work, a locked in rate before the increase, and a team whose job is
+      getting you into a seat. If you're in, everything you need is on your enrollment page.</p>
+    <a class="btn" id="enrollBtn" href="#">Go to my enrollment page</a>
+    <a class="cta-sms" href="sms:+16166121735">Question first? Text me at <b>(616) 612-1735</b></a>
+  </section>
+
+  <footer class="foot">
+    <b>CJ Clay · High Ticket Sales Academy</b><br>
+    <a href="tel:+16166121735">(616) 612-1735</a> ·
+    <a href="mailto:cj@highticketsalesacademy.com">cj@highticketsalesacademy.com</a>
+  </footer>
+</main>
+
+<script>
+const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
+/* Where a referred friend lands. Cursor: create this from the pre-call template
+   with booked:false so it opens in booking mode. */
+const REFERRAL_LANDING = "https://closewithcjclay.com/meet-cj.html";
+
+(function () {
+  var el = function (id) { return document.getElementById(id); };
+  var q = new URLSearchParams(location.search);
+
+  function post(payload) {
+    try {
+      var f = new URLSearchParams();
+      f.set("payload", JSON.stringify(payload));
+      fetch(GAS_ENDPOINT, { method: "POST", mode: "no-cors", body: f, cache: "no-store" })
+        .catch(function () {});
+    } catch (e) {}
+  }
+  function canonical() {
+    try { var u = new URL(location.href); return u.origin + u.pathname; }
+    catch (e) { return location.href.split("#")[0]; }
+  }
+
+  /* ---------- personalization ---------- */
+  var n = (q.get("n") || "").trim().replace(/[^A-Za-z' -]/g, "").slice(0, 24);
+  if (n) {
+    el("title").textContent = n + ", thirty days all in. Then everything is different.";
+    el("refYou").value = n;
+  }
+  var e = (q.get("e") || "").trim();
+  var btn = el("enrollBtn");
+  if (/^[A-Za-z0-9._-]+\.html$/.test(e)) {
+    btn.href = "/" + e;
+  } else {
+    btn.textContent = "Text me and I'll send your enrollment page";
+    btn.href = "sms:+16166121735";
+  }
+  post({ action: "recordResourcePageEvent", event: "page_open", pageType: "roadmap",
+         resourceSlug: n || "generic", enrollmentPageUrl: canonical(),
+         userAgent: navigator.userAgent || "", timestamp: new Date().toISOString() });
+
+  /* ---------- referral card ---------- */
+  var you = el("refYou"), who = el("refName"), tel = el("refPhone");
+  var send = el("refBtn"), prev = el("refPreview"), msg = el("refMsg"), added = el("refAdded");
+  var sent = 0;
+
+  function digits(v) { return (v || "").replace(/\D/g, ""); }
+  function message() {
+    var y = (you.value || "").trim() || "a friend";
+    var w = (who.value || "").trim() || "there";
+    var link = REFERRAL_LANDING + "?ref=" + encodeURIComponent(y);
+    return "Hey " + w + ", it's " + y + ". I just started with High Ticket Sales Academy, "
+      + "remote high ticket sales. Thought of you.\n\n"
+      + "CJ Clay is the coach who walked me through it. He'll tell you straight whether it's a "
+      + "fit for you, no pressure either way. I told him to expect your name.\n\n"
+      + "CJ Clay\nHTSA Career Coach\n(616) 612-1735\nhighticketsalesacademy.com\n\n"
+      + link;
+  }
+  function refresh() {
+    prev.textContent = message();
+    send.disabled = !((who.value || "").trim() && digits(tel.value).length >= 10);
+  }
+  [you, who, tel].forEach(function (i) { i.addEventListener("input", refresh); });
+  refresh();
+
+  send.addEventListener("click", function () {
+    var w = (who.value || "").trim(), p = digits(tel.value);
+    if (!w || p.length < 10) return;
+    post({ action: "recordReferral", pageType: "roadmap",
+           referrerName: (you.value || "").trim(), referrerSlug: n || "",
+           referralName: w, referralPhone: p,
+           enrollmentPageUrl: canonical(), userAgent: navigator.userAgent || "",
+           timestamp: new Date().toISOString() });
+    sent += 1;
+    var row = document.createElement("div");
+    row.textContent = "Sent to " + w + ". CJ has the name.";
+    added.appendChild(row);
+    msg.hidden = false;
+    msg.textContent = sent < 3
+      ? "That's " + sent + " of your first three. Each one who enrols is $250 to you."
+      : "That's three. Everyone after this is $500 each.";
+    window.location.href = "sms:" + (p.length === 10 ? "+1" + p : "+" + p)
+      + "?&body=" + encodeURIComponent(message());
+    who.value = ""; tel.value = ""; refresh();
+  });
+})();
+</script>
+</body>
+</html>
