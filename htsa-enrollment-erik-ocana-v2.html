@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1628">
+<title>Enrollment | CJ Clay · HTSA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1628;--navy-soft:#152a46;--green:#61e38b;--green-strong:#00c97a;--green-dark:#087b50;
+  --grey-light:#f3f6f9;--grey:#dce3eb;--text:#17243b;--muted:#54637a;--white:#fff;
+  --gold:#e3a008;--gold-soft:#fff8e8;--ink:#0f2237}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{min-width:320px;background:var(--grey-light);color:var(--text);
+  font-family:"DM Sans",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.page{width:min(720px,calc(100% - 20px));margin:16px auto;overflow:hidden;border-radius:20px;
+  background:var(--white);box-shadow:0 20px 56px rgba(10,22,40,.13)}
+
+/* ---------- top ---------- */
+.top{padding:22px 26px 20px;text-align:center;color:var(--white);
+  background:radial-gradient(circle at 86% 14%,rgba(97,227,139,.18),transparent 17rem),
+             linear-gradient(145deg,var(--navy),var(--navy-soft))}
+.top-photo{display:block;width:52px;height:52px;margin:0 auto 10px;border:2px solid var(--green-strong);
+  border-radius:50%;object-fit:cover}
+.top h1{font-family:"Playfair Display",serif;font-size:clamp(1.55rem,4.8vw,2.05rem);line-height:1.14}
+.top p{margin-top:7px;color:rgba(255,255,255,.8);font-size:14px}
+.track-pill{display:inline-block;margin-top:11px;padding:6px 15px;border:1px solid rgba(97,227,139,.42);
+  border-radius:999px;background:rgba(97,227,139,.12);color:var(--green);
+  font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.prep{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px auto 0;max-width:520px;text-align:left}
+.prep-card{padding:11px 13px;border:1px solid rgba(255,255,255,.13);border-radius:11px;
+  background:rgba(255,255,255,.05)}
+.prep-label{color:var(--green);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+.prep-name{margin-top:3px;color:var(--white);font-size:14.5px;font-weight:700;line-height:1.25}
+.prep-line{margin-top:3px;color:rgba(255,255,255,.68);font-size:12.5px;line-height:1.4;word-break:break-word}
+.prep-line a{color:rgba(255,255,255,.78);text-decoration:none}
+.prep-fix{margin:9px auto 0;max-width:520px;color:rgba(255,255,255,.55);font-size:12px;text-align:center}
+@media (max-width:680px){.prep{grid-template-columns:1fr}}
+
+/* ---------- included ---------- */
+.inc{padding:20px 26px 6px}
+.h2{margin-bottom:11px;color:var(--navy);font-family:"Playfair Display",serif;font-size:21px}
+.inc-list{display:grid;gap:8px;margin-bottom:4px}
+.inc-list li{display:flex;gap:10px;align-items:flex-start;color:var(--text);font-size:14.5px;
+  line-height:1.5;list-style:none}
+.inc-list li::before{flex:0 0 auto;margin-top:1px;color:var(--green-strong);font-size:15px;
+  font-weight:800;content:"✓"}
+
+/* ---------- guarantee ---------- */
+.guar-strip{display:flex;gap:10px;align-items:center;margin:0;padding:13px 26px;
+  background:linear-gradient(90deg,rgba(97,227,139,.2),rgba(97,227,139,.08));
+  border-bottom:2px solid rgba(0,201,122,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.guar-strip b{color:var(--navy);font-size:14.5px;font-weight:800}
+.guar-strip span{color:var(--muted);font-size:13px}
+.guar-strip a{margin-left:auto;flex:0 0 auto;color:var(--green-dark);font-size:12.5px;
+  font-weight:700;white-space:nowrap}
+.stack-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:0 26px 14px}
+.stack-row span{padding:6px 10px;border:1px solid rgba(0,201,122,.32);border-radius:999px;
+  background:rgba(97,227,139,.1);color:var(--navy);font-size:12px;font-weight:800}
+.stack-row i{color:var(--green-dark);font-style:normal;font-weight:800}
+.access-call{margin:0 26px 10px;padding:11px 14px;border-left:4px solid var(--green-strong);
+  border-radius:10px;background:rgba(97,227,139,.1);color:var(--navy);font-size:14px;
+  font-weight:700;line-height:1.45}
+.guar{margin:4px 26px 18px;padding:19px 20px;border-radius:15px;background:var(--ink);
+  box-shadow:0 12px 32px rgba(10,22,40,.18)}
+.guar-tag{display:inline-block;margin-bottom:8px;padding:4px 11px;border-radius:999px;
+  background:var(--green-strong);color:#04231a;font-size:12px;font-weight:800;letter-spacing:.07em;
+  text-transform:uppercase}
+.guar h3{color:var(--white);font-family:"Playfair Display",serif;font-size:20px;font-weight:700;line-height:1.25}
+.guar p{margin-top:7px;color:rgba(255,255,255,.8);font-size:14px;line-height:1.6}
+.guar-you{margin-top:13px;padding-top:13px;border-top:1px solid rgba(255,255,255,.13)}
+.guar-you b{color:var(--green);font-size:13px}
+.guar-you ul{margin-top:7px;display:grid;gap:5px}
+.guar-you li{display:flex;gap:8px;color:rgba(255,255,255,.78);font-size:13px;line-height:1.5;list-style:none}
+.guar-you li::before{color:var(--green);font-weight:800;content:"→"}
+
+/* ---------- plans ---------- */
+.plans{padding:18px 26px 6px}
+.plans-sub{margin-bottom:15px;color:var(--muted);font-size:14px}
+.plan{position:relative;margin-bottom:13px;padding:18px;border:2px solid var(--grey);border-radius:15px;
+  background:var(--white);transition:border-color 150ms ease,box-shadow 150ms ease}
+.plan--best{border-color:var(--green-strong);box-shadow:0 10px 30px rgba(0,201,122,.14)}
+.plan--custom{border-color:var(--navy);box-shadow:0 10px 30px rgba(10,22,40,.16)}
+.badge{position:absolute;top:-11px;left:16px;padding:3px 11px;border-radius:999px;
+  background:var(--green-strong);color:#04231a;font-size:12px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase}
+.plan--custom .badge{background:var(--navy);color:var(--green)}
+.plan-name{color:var(--navy);font-size:19px;font-weight:800;line-height:1.2}
+.plan-note{margin-top:4px;color:var(--muted);font-size:13.5px;line-height:1.5}
+.plan-figs{display:flex;align-items:baseline;gap:10px;margin:12px 0 14px;flex-wrap:wrap}
+.plan-amt{color:var(--navy);font-size:33px;font-weight:800;line-height:1}
+.plan-unit{color:var(--muted);font-size:13.5px}
+.plan-strike{color:#93a1b3;font-size:15px;text-decoration:line-through}
+.choose{display:flex;width:100%;min-height:54px;align-items:center;justify-content:center;
+  padding:14px 20px;border:0;border-radius:12px;background:var(--navy);color:var(--white);
+  font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;
+  transition:transform 140ms ease,filter 140ms ease}
+.plan--best .choose{background:var(--green-strong);color:#04231a}
+.plan--custom .choose{background:var(--navy);color:var(--green)}
+.choose:hover,.choose:focus-visible{transform:translateY(-1px);filter:brightness(1.06);outline:none}
+.choose:focus-visible{outline:3px solid rgba(0,201,122,.4);outline-offset:3px}
+
+.plan-warn{margin:-4px 0 12px;padding:9px 11px;border:1px solid rgba(0,201,122,.3);border-radius:9px;
+  background:rgba(97,227,139,.12);color:var(--navy);font-size:12.5px;font-weight:700;line-height:1.45}
+.third{margin:2px 26px 16px;padding:14px 16px;border:1px dashed var(--grey);border-radius:13px;background:#fbfcfe}
+.third-name{color:var(--navy);font-size:16px;font-weight:800}
+.third-note{margin-top:4px;color:var(--muted);font-size:13.5px;line-height:1.5}
+.third-cta{display:inline-flex;align-items:center;gap:7px;margin-top:9px;color:var(--green-dark);
+  font-size:14px;font-weight:700;text-decoration:none}
+
+/* ---------- doc links ---------- */
+.docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 26px 18px}
+.doc{display:flex;min-height:52px;align-items:center;justify-content:center;gap:8px;padding:12px;
+  border:1px solid var(--grey);border-radius:12px;background:var(--white);color:var(--navy);
+  font-size:13.5px;font-weight:700;text-align:center;text-decoration:none}
+.doc:hover,.doc:focus-visible{border-color:var(--green-strong);outline:none}
+
+.next-wrap{margin:0 26px 16px;border:1px solid var(--grey);border-radius:13px;background:var(--white)}
+.next-wrap > summary{display:flex;min-height:52px;align-items:center;padding:12px 16px;
+  cursor:pointer;color:var(--navy);font-size:14.5px;font-weight:800;line-height:1.35;list-style:none}
+.next-wrap > summary::-webkit-details-marker{display:none}
+.next-wrap > summary::after{margin-left:auto;padding-left:12px;color:var(--muted);font-size:18px;
+  font-weight:400;content:"▾"}
+.next-wrap[open] > summary{border-bottom:1px solid var(--grey)}
+.next-wrap[open] > summary::after{content:"▴"}
+.next-wrap > summary:hover,.next-wrap > summary:focus-visible{outline:none;color:var(--green-dark)}
+
+.after{padding:0 26px 20px}
+.after-pay{padding:0 26px 20px}
+.after-box{padding:15px 17px;border:1px solid rgba(0,201,122,.26);border-radius:13px;
+  background:rgba(97,227,139,.09)}
+.after-box p{color:var(--text);font-size:14px;line-height:1.6}
+.after-box b{color:var(--navy)}
+.after-box a{color:var(--green-dark);font-weight:700}
+.next{padding:4px 16px 16px}
+.next .h2{margin-bottom:6px}
+.next-sub{margin-bottom:12px;color:var(--muted);font-size:14px;line-height:1.55}
+.next-step{display:flex;gap:12px;margin-bottom:10px;padding:14px 15px;border:1px solid var(--grey);
+  border-radius:13px;background:var(--white)}
+.next-num{flex:0 0 auto;width:26px;height:26px;margin-top:1px;border-radius:50%;
+  background:var(--green-strong);color:#04231a;font-size:13px;font-weight:800;
+  display:flex;align-items:center;justify-content:center}
+.next-body{min-width:0}
+.next-body h3{color:var(--navy);font-size:15px;font-weight:800;line-height:1.3}
+.next-body p{margin-top:4px;color:var(--muted);font-size:13.5px;line-height:1.55}
+.next-btn{display:inline-flex;min-height:44px;align-items:center;justify-content:center;
+  margin-top:10px;padding:10px 16px;border-radius:10px;background:var(--navy);color:var(--white);
+  font-size:14px;font-weight:800;text-decoration:none}
+.next-mail{margin-top:8px;padding:10px 12px;border:1px solid rgba(0,201,122,.22);border-radius:10px;
+  background:rgba(97,227,139,.1)}
+.next-mail b{display:block;color:var(--navy);font-size:13px}
+.next-mail span{display:block;margin-top:3px;color:var(--muted);font-size:13px;line-height:1.5}
+
+.foot{padding:24px 26px 0;background:#07111f;color:rgba(255,255,255,.62);font-size:13px}
+.foot-top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;max-width:760px;
+  margin:0 auto;padding-bottom:20px}
+.foot-brand{color:var(--white);font-family:"Playfair Display",serif;font-size:20px;line-height:1.15}
+.foot-sub{margin-top:5px;color:var(--green);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.foot-links{display:grid;gap:7px;margin-top:13px}
+.foot-links a{display:inline-flex;align-items:center;gap:9px;color:rgba(255,255,255,.66);
+  font-size:13px;text-decoration:none}
+.foot-links a:hover{color:var(--green)}
+.bcard{display:flex;align-items:center;gap:15px;padding:16px 18px;border:1px solid rgba(255,255,255,.1);
+  border-radius:15px;background:rgba(255,255,255,.04)}
+.bcard-photo{width:82px;height:82px;flex:0 0 auto;border:3px solid var(--white);border-radius:50%;
+  object-fit:cover;background:var(--white)}
+.bcard-inf{color:var(--green);font-size:17px;line-height:1;text-align:right}
+.bcard-name{margin-top:2px;color:var(--white);font-size:19px;font-weight:800;line-height:1.2}
+.bcard-title{margin-bottom:8px;color:rgba(255,255,255,.66);font-size:12.5px}
+.bcard-line{display:flex;align-items:center;gap:8px;margin-top:4px;color:rgba(255,255,255,.8);
+  font-size:13px;text-decoration:none}
+.bcard-line:hover{color:var(--green)}
+.bcard-line--sms{color:var(--green);font-weight:700}
+.foot-rev{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;
+  max-width:760px;margin:0 auto;padding:14px 0;border-top:1px solid rgba(255,255,255,.09)}
+.foot-rev a{display:inline-flex;align-items:center;gap:9px;color:rgba(255,255,255,.78);
+  font-size:13px;text-decoration:none}
+.foot-stars{color:var(--gold);font-size:16px;letter-spacing:2px}
+.foot-copy{padding:11px 0 14px;border-top:1px solid rgba(255,255,255,.07);
+  color:rgba(255,255,255,.34);font-size:12px;text-align:center}
+.paid-link{display:block;margin:0 auto;padding:4px 16px 14px;color:rgba(255,255,255,.42);
+  font-size:13px;text-align:center;text-decoration:none}
+.paid-link:hover,.paid-link:focus-visible{color:var(--green)}
+
+/* ---------- sheets ---------- */
+.sheet{width:min(560px,calc(100% - 20px));max-width:none;max-height:88dvh;padding:0;border:0;
+  border-radius:18px;background:var(--white);box-shadow:0 28px 80px rgba(4,12,24,.45)}
+.sheet::backdrop{background:rgba(4,12,24,.78);backdrop-filter:blur(4px)}
+.sheet-head{padding:18px 20px 14px;border-bottom:1px solid var(--grey)}
+.sheet-kicker{color:var(--green-dark);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.sheet-head h2{margin-top:4px;color:var(--navy);font-family:"Playfair Display",serif;font-size:22px;line-height:1.2}
+.sheet-body{padding:16px 20px 4px;overflow:auto}
+.recap{margin-bottom:14px;padding:13px 15px;border-radius:12px;background:var(--grey-light)}
+.recap-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.recap-plan{color:var(--navy);font-size:16px;font-weight:800}
+.recap-amt{color:var(--navy);font-size:22px;font-weight:800}
+.recap-sub{margin-top:3px;color:var(--muted);font-size:13px}
+.sheet-links{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:13px}
+.sheet-links a{color:var(--green-dark);font-size:13.5px;font-weight:700}
+.agree{display:flex;gap:12px;align-items:flex-start;padding:13px 15px;border:2px solid var(--grey);
+  border-radius:12px;cursor:pointer}
+.agree:has(input:checked){border-color:var(--green-strong);background:rgba(97,227,139,.08)}
+.agree input{width:24px;height:24px;flex:0 0 auto;margin-top:1px;accent-color:var(--green-strong)}
+.agree span{color:var(--text);font-size:14px;line-height:1.5}
+.sheet-foot{display:flex;gap:10px;padding:16px 20px 18px}
+.btn{display:flex;flex:1;min-height:52px;align-items:center;justify-content:center;padding:13px 18px;
+  border:0;border-radius:12px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer}
+.btn--go{background:var(--green-strong);color:#04231a}
+.btn--go[disabled]{background:#dfe6ee;color:#9aa8b8;cursor:not-allowed}
+.btn--back{flex:0 0 auto;border:1px solid var(--grey);background:var(--white);color:var(--muted);font-weight:700}
+.sheet-note{padding:0 20px 18px;color:var(--muted);font-size:12.5px;line-height:1.5;text-align:center}
+.curr-list{display:grid;gap:11px}
+.curr-list li{list-style:none}
+.curr-list b{display:block;color:var(--navy);font-size:15px}
+.curr-list span{color:var(--muted);font-size:13.5px;line-height:1.5}
+
+@media (max-width:680px){
+  .page{width:100%;margin:0;border-radius:0}
+  .top{padding:18px 16px 16px}
+  .inc,.plans{padding-right:16px;padding-left:16px}
+  .guar,.third,.docs,.next-wrap{margin-right:16px;margin-left:16px}
+  .guar-strip{padding:10px 16px;flex-wrap:wrap}
+  .guar-strip a{margin-left:0}
+  .after,.after-pay{padding:0 16px 18px}
+  .foot{padding:20px 16px 0}
+  .foot-top{grid-template-columns:1fr;gap:18px;padding-bottom:18px}
+  .bcard{gap:13px;padding:14px}
+  .bcard-photo{width:70px;height:70px}
+  .foot-rev{justify-content:center;text-align:center}
+  .plan{padding:16px}
+  .docs{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.choose{transition:none}}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <section class="top">
+    <img class="top-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
+    <h1 id="topTitle">Here's what we just went over.</h1>
+    <p id="topSub">Pick the option we talked about. I'm right here on the phone.</p>
+    <div class="track-pill" id="trackPill">Certified High Ticket Closer</div>
+    <div class="prep" id="prepBox" hidden>
+      <div class="prep-card">
+        <div class="prep-label">Prepared for</div>
+        <div class="prep-name" id="prepName"></div>
+        <div class="prep-line" id="prepEmail"></div>
+        <div class="prep-line" id="prepPhone"></div>
+      </div>
+      <div class="prep-card">
+        <div class="prep-label">Prepared by</div>
+        <div class="prep-name">CJ Clay</div>
+        <div class="prep-line">HTSA · Career Transformation Coach</div>
+        <div class="prep-line"><a href="tel:+16166121735">(616) 612-1735</a></div>
+      </div>
+    </div>
+    <p class="prep-fix" id="prepFix" hidden>Anything wrong there? Tell me before you pay and I'll fix it.</p>
+  </section>
+
+
+
+  <div class="guar-strip">
+    <b>Placed in 6 months or refunded.</b>
+    <span>Performance guarantee, confirmed for you.</span>
+    <a href="#guarantee">See how it works ↓</a>
+  </div>
+
+  <div class="stack-row" aria-label="What happens after you enroll">
+    <span>Train</span><i>→</i>
+    <span>Certify</span><i>→</i>
+    <span>Get placed</span><i>→</i>
+    <span>90-day ramp</span><i>→</i>
+    <span>Produce</span>
+  </div>
+
+  <section class="plans">
+    <div class="h2">Your options</div>
+    <div class="access-call">Access opens the moment your payment clears. I'm right here while you pick.</div>
+    <div class="plans-sub">Same options we walked through on the call.</div>
+
+    <div class="plan plan--custom" id="planCustom" hidden>
+      <span class="badge" id="customBadge">Your offer</span>
+      <div class="plan-name" id="customName"></div>
+      <div class="plan-note" id="customNote"></div>
+      <div class="plan-figs">
+        <span class="plan-amt" id="customAmt"></span>
+        <span class="plan-unit" id="customUnit"></span>
+      </div>
+      <button class="choose" type="button" data-plan="custom">Choose this</button>
+    </div>
+
+    <div class="plan plan--best" id="planPif">
+      <span class="badge" id="pifBadge">Best value</span>
+      <div class="plan-name">Paid in full</div>
+      <div class="plan-note" id="pifNote"></div>
+      <div class="plan-figs">
+        <span class="plan-amt" id="pifAmt"></span>
+        <span class="plan-strike" id="pifStrike"></span>
+        <span class="plan-unit">one time</span>
+      </div>
+      <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
+    </div>
+
+    <div class="plan" id="planPlan">
+      <div class="plan-name" id="planName"></div>
+      <div class="plan-note" id="planNote"></div>
+      <div class="plan-figs">
+        <span class="plan-amt" id="planAmt"></span>
+        <span class="plan-unit" id="planUnit"></span>
+      </div>
+      <p class="plan-warn" id="planWarn" hidden></p>
+      <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
+    </div>
+
+    <div class="plan" id="planClarity" hidden>
+      <div class="plan-name">ClarityPay monthly</div>
+      <div class="plan-note" id="clarityNote"></div>
+      <div class="plan-figs">
+        <span class="plan-amt" id="clarityAmt"></span>
+        <span class="plan-unit" id="clarityUnit"></span>
+      </div>
+      <button class="choose" type="button" data-plan="clarity">Choose ClarityPay</button>
+    </div>
+  </section>
+
+  <details class="next-wrap" id="afterPay">
+    <summary>Doing this on your own? Here's exactly what happens next</summary>
+    <div class="next">
+      <p class="next-sub">If you are finishing this on your own, do these five things in order.</p>
+
+      <div class="next-step">
+        <div class="next-num">1</div>
+        <div class="next-body">
+          <h3>Text CJ, payment made</h3>
+          <p>Text <a href="sms:+16166121735">(616) 612-1735</a> the words <b>Payment made</b>. That is how I know to turn your access on if we are not on the phone together.</p>
+          <a class="next-btn" href="sms:+16166121735?body=Payment%20made">Text Payment made</a>
+        </div>
+      </div>
+
+      <div class="next-step">
+        <div class="next-num">2</div>
+        <div class="next-body">
+          <h3>Two emails will hit your inbox</h3>
+          <p>Both come right after payment. Star the first one. Use the second one to log in.</p>
+          <div class="next-mail">
+            <b>Email 1. Welcome</b>
+            <span>Module access, live group coaching Zoom links, community, and your next steps. Add the Zoom links to your calendar: Tuesday, 12:00 PM EST and Wednesday, 5:00 PM EST.</span>
+          </div>
+          <div class="next-mail">
+            <b>Email 2. Login</b>
+            <span>A temporary password that takes you to your dashboard. Use this email to create your own login. It only takes a moment.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="next-step">
+        <div class="next-num">3</div>
+        <div class="next-body">
+          <h3>Nothing in your inbox after 10 minutes?</h3>
+          <p>Check spam and promotions, then text me. Do not re-pay, and do not create a second account.</p>
+        </div>
+      </div>
+
+      <div class="next-step">
+        <div class="next-num">4</div>
+        <div class="next-body">
+          <h3>Book your kickoff with Mark</h3>
+          <p>Mark is your Success Coach. This is a 15 minute Zoom to map your placement goals before you start the modules.</p>
+          <a class="next-btn" href="https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call" target="_blank" rel="noopener noreferrer">Book kickoff call</a>
+        </div>
+      </div>
+
+      <div class="next-step">
+        <div class="next-num">5</div>
+        <div class="next-body">
+          <h3>Join the Mastermind</h3>
+          <p>Request the private Facebook group. Live coaching replays live there, and 680+ members support each other.</p>
+          <a class="next-btn" href="https://www.facebook.com/groups/1039656943556821" target="_blank" rel="noopener noreferrer">Request access on Facebook</a>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <div class="guar" id="guarantee">
+    <span class="guar-tag" id="guarTag">Performance guarantee · confirmed</span>
+    <h3 id="guarTitle">Placed within 6 months, or your money back.</h3>
+    <p id="guarBody">Do your part and if you have not secured a qualifying role within 6 months of
+      certification, or completed at least 50 interviews, you qualify for a full refund.
+      Documentation required.</p>
+    <div class="guar-you">
+      <b>Your part:</b>
+      <ul id="guarSteps"></ul>
+    </div>
+  </div>
+
+  <section class="inc">
+    <div class="h2">What you're getting</div>
+    <ul class="inc-list" id="incList"></ul>
+  </section>
+
+  <div class="docs">
+    <a class="doc" href="#" id="currBtn">📘 What's in the program</a>
+    <a class="doc" id="termsBtn" target="_blank" rel="noopener noreferrer">📄 Terms of Service</a>
+    <a class="doc" id="roadmapBtn" target="_blank" rel="noopener noreferrer">🗺 Your 30 day game plan</a>
+  </div>
+
+  <footer class="foot">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">High Ticket Sales Academy</div>
+        <div class="foot-sub">Certification · Coaching · Placement</div>
+        <div class="foot-links">
+          <a href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">🌐</span>highticketsalesacademy.com</a>
+          <a href="https://www.youtube.com/@highticketsalesacademy" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶️</span>youtube.com/@highticketsalesacademy</a>
+          <a href="https://www.instagram.com/highticketsalesacademy/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">📷</span>@highticketsalesacademy</a>
+          <a href="https://www.facebook.com/HTSAcadamy/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">👥</span>facebook.com/HTSAcadamy</a>
+        </div>
+      </div>
+      <div class="bcard">
+        <img class="bcard-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
+        <div>
+          <div class="bcard-inf" aria-hidden="true">∞</div>
+          <div class="bcard-name">CJ Clay</div>
+          <div class="bcard-title">HTSA · Career Transformation Coach</div>
+          <a class="bcard-line" href="tel:+16166121735"><span aria-hidden="true">📞</span>(616) 612-1735</a>
+          <a class="bcard-line" href="mailto:cj@highticketsalesacademy.com"><span aria-hidden="true">✉️</span>cj@highticketsalesacademy.com</a>
+          <a class="bcard-line bcard-line--sms" href="sms:+16166121735"><span aria-hidden="true">💬</span>Text me the second it clears</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-rev">
+      <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">
+        <span class="foot-stars" aria-hidden="true">★★★★★</span>Trustpilot — 4.9 out of 5</a>
+      <a href="mailto:support@highticketsalesacademy.com">support@highticketsalesacademy.com</a>
+    </div>
+    <div class="foot-copy">© High Ticket Sales Academy · All Rights Reserved</div>
+  </footer>
+</main>
+
+<!-- checkout confirm -->
+<dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
+  <div class="sheet-head">
+    <div class="sheet-kicker">One last step</div>
+    <h2 id="sheetTitle">Confirm and go to payment</h2>
+  </div>
+  <div class="sheet-body">
+    <div class="recap">
+      <div class="recap-row">
+        <span class="recap-plan" id="recapPlan"></span>
+        <span class="recap-amt" id="recapAmt"></span>
+      </div>
+      <div class="recap-sub" id="recapSub"></div>
+    </div>
+    <p class="plan-warn" id="sheetWarn" hidden></p>
+    <div class="sheet-links">
+      <a href="#" id="sheetCurr">📘 What's included</a>
+      <a id="sheetTerms" target="_blank" rel="noopener noreferrer">📄 Terms of Service (PDF)</a>
+    </div>
+    <label class="agree">
+      <input type="checkbox" id="agreeBox">
+      <span>I agree to the HTSA Terms of Service and refund policy, including no refund except
+        under the performance guarantee confirmed for my enrollment.</span>
+    </label>
+  </div>
+  <div class="sheet-foot">
+    <button class="btn btn--back" type="button" id="backBtn">Back</button>
+    <button class="btn btn--go" type="button" id="goBtn" disabled>Continue to payment</button>
+  </div>
+  <p class="sheet-note">Your agreement is timestamped and sent to you with your receipt.</p>
+</dialog>
+
+<!-- curriculum -->
+<dialog class="sheet" id="currSheet" aria-labelledby="currTitle">
+  <div class="sheet-head">
+    <div class="sheet-kicker">Inside the program</div>
+    <h2 id="currTitle">What's included</h2>
+  </div>
+  <div class="sheet-body"><ul class="curr-list" id="currList"></ul></div>
+  <div class="sheet-foot"><button class="btn btn--go" type="button" id="currClose">Got it</button></div>
+</dialog>
+
+<script>
+/* ============================================================
+   EDIT THIS BLOCK ONLY — one person per page.
+   close-build:v2-1788362654
+   ============================================================ */
+const BUYER = {
+  firstName: "Erik",
+  fullName:  "Erik Ocana",
+  email:     "erikocana00@icloud.com",
+  phone:     "+19799069053",
+  slug:      "erik_ocana_v2",
+  track:     "closer",
+  offer:     "standard",
+  show:      ["pif", "plan", "clarity"]
+};
+
+/* One-off negotiated price. Leave null unless CJ agreed one on the call.
+   The $6k ClarityPay promo checkout can also go here if CJ names a custom amount. */
+const CUSTOM_OFFER = null;
+// const CUSTOM_OFFER = {
+//   name: "Your negotiated price", note: "What CJ agreed with you on the call.",
+//   amount: "$X,XXX", unit: "one time", badge: "Your offer",
+//   checkout: "https://whop.com/checkout/plan_VUSDju20gTBCg/"
+// };
+
+const TRACKS = {
+  closer: { label: "Certified High Ticket Closer", curriculumUrl: "[CURRICULUM_URL_CLOSER]" },
+  setter: { label: "Certified Appointment Setter", curriculumUrl: "[CURRICULUM_URL_SETTER]" }
+};
+
+/* Promotion / special-offer checkouts (saved). Use with offer: "reactivation".
+   $5,000 PIF:     https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true
+   3 × $1,750:     https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true   ($5,250 total)
+   $6k ClarityPay: https://whop.com/checkout/plan_VUSDju20gTBCg/           ($500/mo × 12)
+   Canonical table: templates/HTSA-SECONDARY-PAYMENT-OPTIONS.md */
+const OFFERS = {
+  standard: {
+    pif:  { amount: "$6,000", was: "$7,000",
+            note: "One payment. Saves you $1,000 against the payment plan.",
+            checkout: "https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" },
+    plan: { name: "4 payments", amount: "$1,750", unit: "today · $7,000 total",
+            note: "First payment today, then one a month for three months.",
+            warn: "",
+            checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
+    clarity: { amount: "$600", unit: "a month · $7,200 total",
+               note: "Monthly financing. Soft credit check, needs a 620 or better.",
+               checkout: "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" }
+  },
+  reactivation: {
+    pif:  { amount: "$5,000", was: "$7,000",
+            note: "One payment. Your special offer price.",
+            checkout: "https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true" },
+    plan: { name: "3 payments", amount: "$1,750", unit: "today · $5,250 total",
+            note: "First payment today, then one a month for two more months.",
+            warn: "",
+            checkout: "https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true" },
+    clarity: { amount: "$500", unit: "a month · $6,000 total",
+               note: "Monthly financing at your special offer rate. Soft credit check, needs a 620 or better.",
+               checkout: "https://whop.com/checkout/plan_VUSDju20gTBCg/" }
+  }
+};
+
+const INCLUDED = [
+  "Certification as a Certified High Ticket Closer",
+  "Live group coaching with Chad, plus lifetime replay access",
+  "1-on-1 coaching, scheduled within your first 3 months",
+  "Resume optimization, interview prep, and our placement system",
+  "A personalized 30 day action plan built with our team",
+  "90 days of call review and coaching after you're hired",
+  "Unlimited AI roleplay and a 24/7 AI coach, live on your calls",
+  "Lifetime access to the private Mastermind and job network"
+];
+
+const CURRICULUM = [
+  ["Training platform and certification", "Full course, roleplays, and the certification that hiring companies recognize."],
+  ["Live coaching with Chad", "Weekly group calls, plus lifetime access to every replay in the Mastermind."],
+  ["1-on-1 coaching", "Included. Scheduled within 3 months of your start unless HTSA approves an extension."],
+  ["Placement support", "Resume optimization, interview preparation, and access to the placement system. Most closers are in a role within 30 to 60 days."],
+  ["Your 30 day action plan", "Built with our team, focused on getting you placed and transitioned in."],
+  ["90 days of post-hire support", "Call review and performance feedback for your first 90 days on the job."],
+  ["AI roleplay and 24/7 AI coach", "Unlimited practice before real prospects, plus live support during calls. Optional $35/month if you keep it after placement."],
+  ["Community and job network", "Lifetime access to the private Facebook Mastermind, 680+ members."]
+];
+
+const GUARANTEE_STEPS = [
+  "Complete the course materials, roleplays, 1-on-1 training, and certification",
+  "Attend at least one group coaching call a week while you're in the program",
+  "Apply to at least 50 qualifying closer or setter roles, and keep proof",
+  "Participate in good faith. This is a partnership, not a passive purchase"
+];
+
+const TERMS_URL = "https://closewithcjclay.com/HTSA-Terms-of-Service.pdf";
+const TERMS_VERSION = "HTSA-TOS-PDF-closewithcjclay-2026-04";
+const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
+/* ==================== stop editing ==================== */
+
+(function () {
+  const el = id => document.getElementById(id);
+  const T = TRACKS[BUYER.track] || TRACKS.closer;
+  const O = OFFERS[BUYER.offer] || OFFERS.standard;
+  const first = (BUYER.firstName || "").trim();
+  const ph = v => typeof v === "string" && /^\[.*\]$/.test(v.trim());
+  const val = v => (v && !ph(v)) ? v : "";
+
+  function canonicalUrl(){ try{const u=new URL(location.href);return u.origin+u.pathname;}catch(e){return location.href.split("#")[0];} }
+  function post(p){ try{const f=new URLSearchParams();f.set("payload",JSON.stringify(p));
+    fetch(GAS_ENDPOINT,{method:"POST",mode:"no-cors",body:f,cache:"no-store"}).catch(function(){});}catch(e){} }
+  function event(name, extra){
+    post(Object.assign({action:"recordResourcePageEvent",event:name,enrollmentPageUrl:canonicalUrl(),
+      userAgent:navigator.userAgent||"",timestamp:new Date().toISOString(),
+      fullName:BUYER.fullName,email:BUYER.email,phone:BUYER.phone,
+      clientSlug:(BUYER.slug||"").replace(/_/g,"-"),resourceSlug:BUYER.slug,
+      pageType:"enrollment",track:BUYER.track,offer:BUYER.offer}, extra||{}));
+  }
+  try{const k="htsa_enroll_open_"+(BUYER.slug||"x");
+    if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");event("page_open");}}catch(e){event("page_open");}
+
+  const nextWrap = el("afterPay");
+  if (nextWrap) {
+    nextWrap.addEventListener("toggle", function () {
+      if (nextWrap.open) event("next_steps_opened");
+    }, { once: true });
+  }
+
+  /* ---------- header ---------- */
+  if (val(first)) el("topTitle").textContent = first + ", here's what we just went over.";
+  el("trackPill").textContent = T.label;
+  if (val(BUYER.fullName)) {
+    el("prepBox").hidden = false; el("prepFix").hidden = false;
+    el("prepName").textContent  = BUYER.fullName;
+    el("prepEmail").textContent = val(BUYER.email);
+    el("prepPhone").textContent = val(BUYER.phone);
+  }
+
+  INCLUDED.forEach(function(t){const li=document.createElement("li");li.textContent=t;el("incList").appendChild(li);});
+  GUARANTEE_STEPS.forEach(function(t){const li=document.createElement("li");li.textContent=t;el("guarSteps").appendChild(li);});
+  CURRICULUM.forEach(function(r){const li=document.createElement("li");
+    const b=document.createElement("b");b.textContent=r[0];
+    const s=document.createElement("span");s.textContent=r[1];
+    li.appendChild(b);li.appendChild(s);el("currList").appendChild(li);});
+
+  /* ---------- plans ---------- */
+  el("pifAmt").textContent    = O.pif.amount;
+  el("pifStrike").textContent = O.pif.was || "";
+  el("pifNote").textContent   = O.pif.note;
+  el("planName").textContent  = O.plan.name;
+  el("planAmt").textContent   = O.plan.amount;
+  el("planUnit").textContent  = O.plan.unit;
+  el("planNote").textContent  = O.plan.note;
+  if (O.plan.warn) { el("planWarn").hidden = false; el("planWarn").textContent = O.plan.warn; }
+  el("clarityAmt").textContent  = O.clarity.amount;
+  el("clarityUnit").textContent = O.clarity.unit;
+  el("clarityNote").textContent = O.clarity.note;
+
+  const PLANS = {
+    pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
+    plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
+    clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" }
+  };
+
+  const show = Array.isArray(BUYER.show) && BUYER.show.length ? BUYER.show : ["pif","plan","clarity"];
+  const NODE = { pif: el("planPif"), plan: el("planPlan"), clarity: el("planClarity") };
+  const host = el("planPif").parentNode;
+  Object.keys(NODE).forEach(function(k){ if (show.indexOf(k) === -1) NODE[k].remove(); });
+  show.forEach(function(k){ if (NODE[k] && NODE[k].parentNode) host.appendChild(NODE[k]); });
+  if (NODE.clarity && NODE.clarity.parentNode) NODE.clarity.hidden = false;
+
+  if (CUSTOM_OFFER) {
+    const c = el("planCustom");
+    c.hidden = false; host.insertBefore(c, host.querySelector(".plan:not(#planCustom)"));
+    el("customBadge").textContent = CUSTOM_OFFER.badge || "Your offer";
+    el("customName").textContent  = CUSTOM_OFFER.name || "";
+    el("customNote").textContent  = CUSTOM_OFFER.note || "";
+    el("customAmt").textContent   = CUSTOM_OFFER.amount || "";
+    el("customUnit").textContent  = CUSTOM_OFFER.unit || "";
+    PLANS.custom = { name:CUSTOM_OFFER.name, amt:CUSTOM_OFFER.amount, sub:CUSTOM_OFFER.note,
+                     url:CUSTOM_OFFER.checkout, warn:CUSTOM_OFFER.warn || "" };
+    el("planPif") && el("planPif").classList.remove("plan--best");
+    const b = el("pifBadge"); if (b) b.remove();
+  }
+
+  /* ---------- docs ---------- */
+  el("termsBtn").href = TERMS_URL; el("sheetTerms").href = TERMS_URL;
+  const road = el("roadmapBtn");
+  if (road) {
+    const roadName = (val(first) || "").replace(/[^A-Za-z' -]/g, "").slice(0, 24);
+    const roadFile = "htsa-enrollment-" + (BUYER.slug || "").replace(/_/g, "-") + ".html";
+    let roadHref = BUYER.track === "setter" ? "/24-day-roadmap.html" : "/30-day-roadmap-v2.html";
+    const qs = [];
+    if (roadName) qs.push("n=" + encodeURIComponent(roadName));
+    if (/^[A-Za-z0-9._-]+\.html$/.test(roadFile) && !ph(BUYER.slug)) qs.push("e=" + encodeURIComponent(roadFile));
+    if (qs.length) roadHref += "?" + qs.join("&");
+    road.href = roadHref;
+    if (BUYER.track === "setter") road.textContent = "🗺 Your 24 day setter game plan";
+    road.addEventListener("click", function () { event("roadmap_opened"); });
+  }
+  const currSheet = el("currSheet");
+  function openCurr(e){ e.preventDefault(); event("curriculum_opened");
+    if (typeof currSheet.showModal === "function") currSheet.showModal(); }
+  el("currBtn").addEventListener("click", openCurr);
+  el("sheetCurr").addEventListener("click", openCurr);
+  el("currClose").addEventListener("click", function(){ currSheet.close(); });
+  currSheet.addEventListener("click", function(e){ if(e.target===currSheet) currSheet.close(); });
+  [el("termsBtn"), el("sheetTerms")].forEach(function(a){
+    a.addEventListener("click", function(){ event("terms_opened",{linkLabel:TERMS_VERSION,linkUrl:TERMS_URL}); });
+  });
+
+  /* ---------- choose, agree, pay ---------- */
+  const sheet = el("sheet"), agree = el("agreeBox"), go = el("goBtn");
+  let chosen = null;
+
+  document.querySelectorAll(".choose").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const p = PLANS[btn.dataset.plan]; if (!p) return;
+      if (!p.url || ph(p.url)) { alert("That checkout link is not set up yet. Tell CJ before paying."); return; }
+      chosen = btn.dataset.plan;
+      el("recapPlan").textContent = p.name;
+      el("recapAmt").textContent  = p.amt;
+      el("recapSub").textContent  = p.sub;
+      const w = el("sheetWarn");
+      if (p.warn) { w.hidden = false; w.textContent = p.warn; } else { w.hidden = true; w.textContent = ""; }
+      agree.checked = false; go.disabled = true; go.textContent = "Continue to payment";
+      event("plan_selected", { linkLabel: p.name, linkUrl: p.url });
+      if (typeof sheet.showModal === "function") sheet.showModal(); else window.location.href = p.url;
+    });
+  });
+
+  agree.addEventListener("change", function(){ go.disabled = !agree.checked; });
+  el("backBtn").addEventListener("click", function(){ event("terms_abandoned",{linkLabel:chosen||""}); sheet.close(); });
+  sheet.addEventListener("click", function(e){ if(e.target===sheet) sheet.close(); });
+
+  go.addEventListener("click", function () {
+    if (!agree.checked || !chosen) return;
+    const p = PLANS[chosen];
+    go.disabled = true; go.textContent = "Opening payment…";
+    post({ action:"recordTermsAgreement", fullName:BUYER.fullName, email:BUYER.email, phone:BUYER.phone,
+      enrollmentPageUrl:canonicalUrl(), clientSlug:(BUYER.slug||"").replace(/_/g,"-"),
+      termsUrl:TERMS_URL, termsVersion:TERMS_VERSION, track:BUYER.track, offer:BUYER.offer,
+      selectedPlan:p.name, selectedAmount:p.amt, planDisclosure:p.warn || "",
+      userAgent:navigator.userAgent||"", timestamp:new Date().toISOString() });
+    event("checkout_started", { linkLabel:p.name, linkUrl:p.url });
+    setTimeout(function(){ window.location.href = p.url; }, 550);
+  });
+})();
+</script>
+</body>
+</html>
