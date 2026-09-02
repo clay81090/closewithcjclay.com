@@ -219,6 +219,8 @@ a{color:inherit}
   .guar-strip{padding:10px 16px;flex-wrap:wrap}
   .guar-strip a{margin-left:0}
   .after,.after-pay{padding:0 16px 18px}
+  .member-vid{padding:14px 16px 6px}
+  .member-vid-frame{max-width:min(300px,100%)}
   .foot{padding:20px 16px 0}
   .foot-top{grid-template-columns:1fr;gap:18px;padding-bottom:18px}
   .bcard{gap:13px;padding:14px}
@@ -227,6 +229,14 @@ a{color:inherit}
   .plan{padding:16px}
   .docs{grid-template-columns:1fr}
 }
+.member-vid{padding:16px 26px 8px;text-align:center}
+.member-vid-kicker{color:var(--green-dark);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.member-vid h2{margin-top:6px;color:var(--navy);font-family:"Playfair Display",serif;font-size:18px;line-height:1.25}
+.member-vid p{margin:8px auto 12px;max-width:420px;color:var(--muted);font-size:13.5px;line-height:1.55}
+.member-vid-frame{max-width:320px;margin:0 auto;border-radius:12px;overflow:hidden;background:#0a1628;
+  box-shadow:0 8px 22px rgba(10,22,40,.14)}
+.member-vid-frame video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#0a1628}
+
 @media (prefers-reduced-motion:reduce){.choose{transition:none}}
 </style>
 </head>
@@ -255,7 +265,17 @@ a{color:inherit}
     <p class="prep-fix" id="prepFix" hidden>Anything wrong there? Tell me before you pay and I'll fix it.</p>
   </section>
 
-
+  <section class="member-vid" aria-label="Taylor DeCourcey member testimonial">
+    <div class="member-vid-kicker">Hear from a member</div>
+    <h2>Taylor DeCourcey on life after placement</h2>
+    <p>You asked about hidden fees or extra costs from other companies. Taylor talks about what actually happened once she landed her offer. Tap play right here.</p>
+    <div class="member-vid-frame">
+      <video controls playsinline preload="metadata" poster="/media/htsa-clip-poster.jpg"
+        title="Taylor DeCourcey testimonial, life after landing her HTSA placement">
+        <source src="/media/taylor-decoursey-testimonial.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
 
   <div class="guar-strip">
     <b>Placed in 6 months or refunded.</b>
@@ -471,7 +491,7 @@ a{color:inherit}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1788388592
+   close-build:1788391200
    ============================================================ */
 const BUYER = {
   firstName: "Anabel",
