@@ -105,6 +105,8 @@ a{color:inherit}
 .third-cta{display:inline-flex;align-items:center;gap:7px;margin-top:9px;padding:0;border:0;
   background:none;color:var(--green-dark);font-family:inherit;font-size:14px;font-weight:700;
   text-decoration:none;cursor:pointer}
+.third-tips{margin:10px 0 0;padding-left:18px;color:var(--text);font-size:13px;line-height:1.55}
+.third-tips li{margin:4px 0}
 
 /* ---------- doc links ---------- */
 .docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 26px 18px}
@@ -316,6 +318,11 @@ a{color:inherit}
   <div class="third" id="planFlexx">
     <div class="third-name">Flexxbuy</div>
     <div class="third-note">Soft pre-qualification if ClarityPay is not the fit. Apply here, then text CJ when you are done.</div>
+    <ul class="third-tips">
+      <li>Request <b>$6,500</b> on the application (even though the program total is $6,000). Always request $500 more.</li>
+      <li>Household income (you and spouse): use Gross (before taxes).</li>
+      <li>Purchase Type: choose <b>Large Purchase</b>.</li>
+    </ul>
     <button class="third-cta choose" type="button" data-plan="flexx">Pre-qualify with Flexxbuy →</button>
   </div>
 
@@ -478,7 +485,7 @@ a{color:inherit}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1788462300
+   close-build:1788471000
    ============================================================ */
 const BUYER = {
   firstName: "Astrid",
@@ -633,7 +640,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
     plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
     clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" },
-    flexx:   { name:"Flexxbuy",      amt:"Pre-qualify",    sub:"Soft pre-qualification. Apply with Flexxbuy, then text CJ.",
+    flexx:   { name:"Flexxbuy",      amt:"Pre-qualify",    sub:"Request $6,500. Household income Gross. Purchase Type: Large Purchase.",
                url:"https://app.flexxbuy.com/high-ticket-sales-academy-llc/apply/", warn:"" }
   };
 
