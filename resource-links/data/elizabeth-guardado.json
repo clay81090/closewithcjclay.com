@@ -1,0 +1,19 @@
+{
+  "page_type": "precall",
+  "prospect_id": "elizabeth-guardado",
+  "prospect_name": "Elizabeth Guardado",
+  "first_name": "Elizabeth",
+  "email": "lizz.marie92@gmail.com",
+  "phone_e164": "+12029103950",
+  "phone_display": "+12029103950",
+  "prepared_date": "Sep 3, 2026",
+  "slug": "elizabeth_guardado",
+  "call_day": "Thursday",
+  "call_date": "Sept 3",
+  "call_time": "10:00 AM",
+  "call_timezone": "EST",
+  "call_format": "Zoom",
+  "missed_meeting": false,
+  "booking_url": "https://meetings.hubspot.com/charles660/cj",
+  "show_member_contacts": false
+}
