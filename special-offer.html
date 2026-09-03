@@ -287,27 +287,109 @@ a{color:inherit}
 .intro p{margin-top:10px;color:var(--text);font-size:14.5px;line-height:1.65}
 .intro p + p{margin-top:10px}
 .intro b{color:var(--navy)}
-.start-card{margin:14px 26px 6px;padding:18px 20px;border:2px solid var(--green-strong);border-radius:15px;
+.this-page{margin:14px 26px 8px;padding:11px 14px;border:1px dashed var(--green-strong);border-radius:12px;
+  background:rgba(97,227,139,.08);color:var(--navy);font-size:13px;line-height:1.5;text-align:center}
+
+/* ---------- section headers ---------- */
+.section-head{margin:22px 26px 10px;padding:14px 16px;border-radius:12px;
+  background:linear-gradient(90deg,var(--navy),var(--navy-soft));color:#fff}
+.section-head .section-num{display:inline-block;padding:3px 9px;margin-right:8px;border-radius:999px;
+  background:var(--green-strong);color:#04231a;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.section-head h2{display:inline;color:#fff;font-family:"Playfair Display",serif;font-size:20px;line-height:1.2}
+.section-head p{margin-top:6px;color:rgba(255,255,255,.78);font-size:13.5px;line-height:1.5}
+
+/* ---------- inline plan ---------- */
+.plan-inline{padding:0 26px 6px}
+.phase-card{margin-bottom:12px;padding:16px 17px;border:1px solid var(--grey);border-radius:14px;background:#fbfcfe}
+.phase-card + .phase-card{margin-top:0}
+.phase-head-inline{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:8px}
+.phase-days{padding:4px 10px;border-radius:999px;background:var(--navy);color:var(--green);
+  font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.phase-title{color:var(--navy);font-family:"Playfair Display",serif;font-size:18px;line-height:1.25;font-weight:700}
+.phase-card ul{margin:0;padding-left:18px;color:var(--text);font-size:13.5px;line-height:1.55}
+.phase-card li{margin:5px 0}
+.phase-card b{color:var(--navy)}
+.plan-note{margin:0 26px 12px;padding:10px 14px;border-radius:10px;background:rgba(97,227,139,.1);
+  border:1px solid rgba(0,201,122,.25);color:var(--navy);font-size:13px;line-height:1.5}
+
+/* ---------- start card ---------- */
+.start-card{margin:14px 26px 12px;padding:18px 20px;border:2px solid var(--green-strong);border-radius:15px;
   background:#f2fbf6;box-shadow:0 10px 28px rgba(0,201,122,.16)}
 .start-card-kicker{color:var(--green-dark);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
 .start-card h2{margin-top:6px;color:var(--navy);font-family:"Playfair Display",serif;font-size:20px;line-height:1.22}
 .start-card p{margin-top:8px;color:var(--text);font-size:14px;line-height:1.6}
+.start-card ol{margin:10px 0 0 20px;color:var(--text);font-size:14px;line-height:1.6}
+.start-card li{margin:6px 0}
 .start-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
 .start-btn{display:flex;min-height:52px;align-items:center;justify-content:center;padding:12px 14px;
   border-radius:12px;background:var(--navy);color:#fff;font-size:15px;font-weight:800;text-decoration:none}
 .start-btn--go{background:var(--green-strong);color:#04231a}
 .start-btn:hover,.start-btn:focus-visible{filter:brightness(1.06);outline:none}
-.start-fine{margin-top:12px;padding-top:10px;border-top:1px solid rgba(0,201,122,.28);
-  color:var(--muted);font-size:12.5px;line-height:1.55}
-.start-fine b{color:var(--navy)}
-.this-page{margin:6px 26px 12px;padding:11px 14px;border:1px dashed var(--green-strong);border-radius:12px;
-  background:rgba(97,227,139,.08);color:var(--navy);font-size:13px;line-height:1.5;text-align:center}
+
+/* ---------- what we need ---------- */
+.need-clean{margin:0 26px 12px;padding:16px 18px;border:1px solid var(--grey);border-radius:14px;background:#fff}
+.need-clean p.lede{color:var(--muted);font-size:13.5px;line-height:1.55}
+.need-clean ul{margin:10px 0 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.need-clean li{position:relative;padding:11px 12px 11px 32px;border:1px solid var(--grey);border-radius:11px;
+  background:#fbfcfe;color:var(--text);font-size:13.5px;line-height:1.5}
+.need-clean li::before{position:absolute;top:11px;left:11px;color:var(--green-strong);font-weight:800;content:"→"}
+.need-clean b{color:var(--navy)}
+
+/* ---------- member voices ---------- */
+.voices{padding:0 26px 6px}
+.voices-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.voice{padding:14px 15px;border-radius:13px;border:1px solid var(--grey);background:#fff;
+  color:var(--text);font-size:13.5px;line-height:1.55}
+.voice--personal{border:1px solid rgba(25,118,210,.35);background:linear-gradient(180deg,#eaf3ff,#f6fbff);
+  box-shadow:0 0 0 2px rgba(227,160,8,.22)}
+.voice-meta{color:var(--green-dark);font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.voice--personal .voice-meta{color:#1976d2}
+.voice blockquote{margin:6px 0 8px;color:var(--text);font-size:13.5px;line-height:1.55}
+.voice blockquote b{color:var(--navy)}
+.voice-attr{color:var(--navy);font-size:12.5px;font-weight:700}
+@media (max-width:680px){.voices-grid{grid-template-columns:1fr}}
+
+/* ---------- terms card ---------- */
+.terms-card{margin:8px 26px 14px;padding:16px 18px;border:2px solid var(--gold);border-radius:14px;
+  background:var(--gold-soft);box-shadow:0 10px 24px rgba(227,160,8,.14)}
+.terms-card-kicker{color:#7a5300;font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.terms-card h3{margin-top:5px;color:var(--navy);font-family:"Playfair Display",serif;font-size:18px;line-height:1.22}
+.terms-card p{margin-top:8px;color:var(--text);font-size:13.5px;line-height:1.55}
+.terms-card .terms-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.terms-card a.terms-btn{display:flex;min-height:48px;align-items:center;justify-content:center;padding:10px 12px;
+  border-radius:11px;background:var(--navy);color:#fff;font-size:14px;font-weight:800;text-decoration:none}
+.terms-card a.terms-btn--secondary{background:#fff;color:var(--navy);border:1px solid var(--gold)}
+@media (max-width:680px){.terms-card .terms-actions{grid-template-columns:1fr}}
+
+/* ---------- mini referral ---------- */
+.refer-mini{margin:8px 26px 16px;padding:14px 16px;border:1px dashed var(--grey);border-radius:12px;background:#fbfcfe}
+.refer-mini h3{color:var(--navy);font-size:15px;font-weight:800}
+.refer-mini p{margin-top:5px;color:var(--muted);font-size:13px;line-height:1.5}
+.refer-mini a{color:var(--green-dark);font-weight:700}
+
+/* ---------- CJ footer quote + card ---------- */
+.cj-quote{margin:14px 26px 8px;padding:18px 20px;border-radius:15px;background:var(--ink);color:#fff}
+.cj-quote-kicker{color:var(--green);font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.cj-quote blockquote{margin-top:8px;color:#fff;font-family:"Playfair Display",serif;font-size:19px;line-height:1.35}
+.cj-quote-attr{margin-top:10px;color:rgba(255,255,255,.7);font-size:12.5px}
+.cj-card{margin:0 26px 18px;display:flex;gap:14px;align-items:center;padding:16px;border:1px solid var(--grey);
+  border-radius:15px;background:#fff}
+.cj-card-photo{width:76px;height:76px;flex:0 0 auto;border-radius:50%;object-fit:cover;
+  border:3px solid var(--green-strong)}
+.cj-card-body{min-width:0}
+.cj-card-name{color:var(--navy);font-family:"Playfair Display",serif;font-size:19px;line-height:1.15}
+.cj-card-title{margin-top:2px;color:var(--muted);font-size:12.5px}
+.cj-card-line{display:block;margin-top:4px;color:var(--text);font-size:13px;text-decoration:none}
+.cj-card-line b{color:var(--navy)}
 @media (max-width:680px){
   .deadline{padding:10px 14px;font-size:12.5px}
   .intro{padding:18px 16px 4px}
+  .this-page{margin:12px 16px 4px}
+  .section-head{margin:18px 16px 8px}
+  .plan-inline,.voices{padding-left:16px;padding-right:16px}
   .start-card{margin:12px 16px 4px;padding:16px}
   .start-actions{grid-template-columns:1fr}
-  .this-page{margin:4px 16px 12px}
+  .need-clean,.terms-card,.refer-mini,.cj-quote,.cj-card{margin-left:16px;margin-right:16px}
 }
 @media (prefers-reduced-motion:reduce){.choose{transition:none}}
 </style>
@@ -341,76 +423,166 @@ a{color:inherit}
   <section class="intro">
     <div class="intro-kicker">A quick note from CJ</div>
     <h2 id="introHi">Hey, CJ here.</h2>
-    <p>I built this page because I could not get everyone on the phone this week the way I wanted to. Instead of you waiting on my next opening, everything I would walk you through is on this page. The plan, the pricing, the guarantee, and exactly how to start.</p>
-    <p>Our standard pricing is going up. To make sure the people I have already talked with have a real shot at the discounted <b>special offer</b>, the deadline is <b>Thursday, Sept 4</b>. After that, it goes back to full price. This is not a push. It is your option to take, and there is no pressure if the timing is not right.</p>
-    <p>If you were on the fence about timing, cost, or when to start, this is the window. The world is going remote whether you move or not. This is your chance to be in the front of that shift, not chasing it later.</p>
+    <p>Every person I sent this to, I picked by hand. You are on this page because I talked with you, listened to what you are trying to change, and thought you deserved the discount before our pricing goes up. That is the whole reason this page exists.</p>
+    <p>Our standard pricing goes up right after <b>Thursday, Sept 4</b>. This special offer is the last window at the discounted number. No pressure if the timing is not right, and no bait. If this is the season for you, everything you need is on this page.</p>
+    <p>I could not get every single person back on the phone this week the way I wanted to. If you would rather talk it through, my number is at the bottom and I will make the time. If you would rather move now, keep reading. <b>This page is the enrollment page.</b> You do not need to wait on me to send you another one.</p>
   </section>
-
-  <div class="start-card" id="startCard">
-    <div class="start-card-kicker">How to start · 2 easy options</div>
-    <h2>Pick the one that fits, right now.</h2>
-    <p><b>Option A.</b> Call me for 10 minutes and I will walk you through the payment, the welcome email, and your first day, live.</p>
-    <p><b>Option B.</b> Pick your payment below and text me <b>"I'm starting"</b>. I will watch for the payment to clear and send your welcome and login emails the second it does, while you finish Steps 3 to 5 on this same page.</p>
-    <div class="start-actions">
-      <a class="start-btn" href="tel:+16166121735" id="startCall">📞 Call CJ · 10 min walk-through</a>
-      <a class="start-btn start-btn--go" href="sms:+16166121735?body=I'm%20starting" id="startSms">💬 Text "I'm starting"</a>
-    </div>
-    <p class="start-fine"><b>Everything happens on this page.</b> When the emails start coming, if it feels like a lot, come back here. This is the one link that has the plan, the pricing, and the next steps in one spot.</p>
-  </div>
 
   <div class="this-page">
-    Tip: bookmark this page. This is the page I keep referring to when I say "on your enrollment page".
+    Tip: bookmark this page. This is the page I keep referring to when I say "your enrollment page".
   </div>
 
-  <section class="walk" aria-label="30 day game plan">
-    <div class="walk-kicker">Step 2 · Walk this first</div>
-    <div class="h2">Your 30 day game plan</div>
-    <p class="walk-lede">This is the exact path from enrollment to placement. The 30 days is the goal, not an obligation. Everyone moves at their own pace, and you get lifetime access to the coaching so you never age out. Scroll inside this frame.</p>
-    <div class="roadmap-frame">
-      <iframe id="roadmapEmbed" title="Your 30 day game plan" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <div class="section-head" id="sh-plan">
+    <span class="section-num">Part 1</span><h2>Your 30 day game plan (the goal)</h2>
+    <p>This is the exact path from enrollment to placement. The 30 days is <b style="color:#61e38b">the goal, not an obligation</b>. Everyone moves at their own pace, and you get lifetime access so you never lose the coaching.</p>
+  </div>
+
+  <section class="plan-inline" aria-label="30 day game plan">
+    <div class="phase-card">
+      <div class="phase-head-inline">
+        <span class="phase-days">Days 1 to 5</span>
+        <div class="phase-title">Get in and get through the modules</div>
+      </div>
+      <ul>
+        <li>Access opens. Welcome email arrives. Set your password and get into the certification platform.</li>
+        <li><b>55 modules</b> waiting for you. Target is done by day 5, day 7 at the outside. Watch at 1.25x or 1.5x.</li>
+        <li>Book your 15 minute kickoff with <b>Mark</b>, your Success Coach.</li>
+        <li>Show up for the Tuesday 12 PM EST and Wednesday 5 PM EST live coaching calls from your first week.</li>
+      </ul>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-head-inline">
+        <span class="phase-days">Days 5 to 12</span>
+        <div class="phase-title">Run your reps in the AI sandbox</div>
+      </div>
+      <ul>
+        <li>Unlimited AI roleplay any hour you want. This is the part that actually makes you good.</li>
+        <li>Master 5 TEDx coaching sales calls in AI roleplay. Get your first 30 awkward calls out of the way here.</li>
+        <li>The AI critiques your tonality, pacing, and how deep your discovery went. Run them back to back.</li>
+        <li>Keep attending the live calls. Bring a question from your reps.</li>
+      </ul>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-head-inline">
+        <span class="phase-days">Days 12 to 16</span>
+        <div class="phase-title">Certify, then get your materials built</div>
+      </div>
+      <ul>
+        <li>Live mock call with <b>Mark</b>. Scored against a rubric. It is meant to be hard.</li>
+        <li>Pass it and you are a <b>Certified High Ticket Closer</b>. That is the credential our partner companies recognize.</li>
+        <li>Sit down with <b>Nate</b>, our Placement Director. You set your target niches, schedule, and pay range.</li>
+        <li>Nate rewrites your LinkedIn and reformats your resume into the template our placed members use.</li>
+      </ul>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-head-inline">
+        <span class="phase-days">Days 16 to 30</span>
+        <div class="phase-title">Pick a few great fits and go get one</div>
+      </div>
+      <ul>
+        <li>Nate introduces you directly to companies in our partner network. Introduced, not applied.</li>
+        <li>Run <b>3 to 5 interviews</b> that genuinely fit inside one week. Small number, done properly.</li>
+        <li>Placement usually lands between 1 and 3 weeks. Around 10 days is realistic if you are not dragging your feet.</li>
+        <li>Get in, get the reps, start earning. Your first offer is a starting line, not a life sentence.</li>
+      </ul>
     </div>
   </section>
 
-  <details class="need-drop" id="afterPay">
-    <summary><span class="need-pill">Step 3 · Open me</span> Your side of it, and what happens after payment</summary>
-    <div class="next">
-      <p class="next-sub">This is what we ask once you are in and ramping. None of it is due on day one. All of it is what gets you placed and paid.</p>
-      <ul class="need-list">
-        <li><b>Show up for the plan above.</b> Modules, AI roleplay, mock calls, and interviews on the same timeline you just walked.</li>
-        <li><b>Come to at least 1 group coaching call a week</b> while you ramp. Lifetime access stays open, so you never lose the coaching.</li>
-        <li><b>Use your 1-on-1 success coaching</b> (1 per month for your first 3 months) when you hit real calls and real numbers.</li>
-        <li><b>Extra coaching is included.</b> No upsell, no surprise fee. Just show up and use it.</li>
-        <li><b>Once you have real results:</b> a short video testimonial, an honest Trustpilot review, and 3 introductions to people this could help.</li>
-      </ul>
+  <p class="plan-note"><b>After you are in the seat:</b> your first 90 days come with a ramp plan, KPI tracking, 12 real call reviews with Chad and the coaching team, and a private 1 on 1 with Chad once you have real numbers to work from. Coaching stays open for life so you never age out.</p>
 
-      <div class="next-step">
-        <div class="next-num">3</div>
-        <div class="next-body">
-          <h3>Right after your payment clears</h3>
-          <p>Text me <a href="sms:+16166121735">(616) 612-1735</a> the words <b>Payment made</b> or <b>I'm starting</b>. I will send your welcome email and login email the moment I see it clear.</p>
-          <a class="next-btn" href="sms:+16166121735?body=Payment%20made">Text Payment made</a>
-        </div>
+  <div class="section-head" id="sh-need">
+    <span class="section-num">Part 2</span><h2>What we need from you</h2>
+    <p>None of this is due on day one. All of it is what gets you placed and paid.</p>
+  </div>
+
+  <div class="need-clean">
+    <p class="lede">Simple, honest expectations. You show up, we show up harder.</p>
+    <ul>
+      <li><b>Do the work on the plan above.</b> Modules, AI roleplay, mock calls, and interviews on the timeline you just read.</li>
+      <li><b>Come to at least 1 group coaching call a week</b> while you ramp. Tuesdays 12 PM EST and Wednesdays 5 PM EST.</li>
+      <li><b>Use your 1 on 1 success coaching</b> (1 per month for your first 3 months) once you hit real calls and real numbers.</li>
+      <li><b>Extra coaching is included.</b> No upsell, no surprise fees. Just show up and use it.</li>
+      <li><b>Once you get real results:</b> a short video testimonial, an honest Trustpilot review, and 3 introductions to people this could help. Introductions are optional but they are how our community keeps growing. Referral form is at the bottom of this page.</li>
+    </ul>
+  </div>
+
+  <div class="section-head" id="sh-voices">
+    <span class="section-num">Part 3</span><h2>Real people, real results</h2>
+    <p>Written straight to me or to HTSA after their first mock call, first placement, or first offer.</p>
+  </div>
+
+  <section class="voices" aria-label="Member voices">
+    <div class="voices-grid">
+      <div class="voice voice--personal">
+        <div class="voice-meta">To CJ</div>
+        <blockquote>Hey <b>CJ</b>, it's Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could've made for my life right now. I think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!</blockquote>
+        <p class="voice-attr">Janaye · shared with HTSA</p>
       </div>
-      <div class="next-step">
-        <div class="next-num">4</div>
-        <div class="next-body">
-          <h3>Two emails hit your inbox</h3>
-          <p>Both come right after payment. Star the first one. Use the second one to log in. If nothing shows up in 10 minutes, check spam and text me. Do not re-pay, and do not create a second account.</p>
-        </div>
+      <div class="voice voice--personal">
+        <div class="voice-meta">To CJ</div>
+        <blockquote>Just received this news from my first mock call and wanted to share... I'm SUPER grateful to you for helping me move forward with HTSA! Keep doing what you're doing!</blockquote>
+        <p class="voice-attr">Kate R. · shared with HTSA</p>
       </div>
-      <div class="next-step">
-        <div class="next-num">5</div>
-        <div class="next-body">
-          <h3>Book your kickoff with Mark</h3>
-          <p>15 minute Zoom with your Success Coach to map placement goals before you start the modules.</p>
-          <a class="next-btn" href="https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call" target="_blank" rel="noopener noreferrer">Book kickoff call</a>
-        </div>
+      <div class="voice voice--personal">
+        <div class="voice-meta">To CJ</div>
+        <blockquote>I'm really enjoying the program so far and getting a ton of value out of it! Thanks again for helping me cross the line. The work you're doing is legitimately important, I hope you know that.</blockquote>
+        <p class="voice-attr">Jessica C. · shared with HTSA</p>
+      </div>
+      <div class="voice voice--personal">
+        <div class="voice-meta">To CJ</div>
+        <blockquote>Hey <b>CJ</b>, just wanted to say thanks. You didn't let me slip away after I tried to bail on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support is why I'm all in now.</blockquote>
+        <p class="voice-attr">Nick S. · shared with HTSA</p>
+      </div>
+      <div class="voice">
+        <div class="voice-meta">Member voice</div>
+        <blockquote>HTSA has played a major role in helping me transition into a career in sales. The coaching, interview prep, and overall guidance gave me the confidence and skills to position myself competitively for real sales opportunities. They genuinely care about helping you succeed.</blockquote>
+        <p class="voice-attr">Austin G. · shared with HTSA</p>
+      </div>
+      <div class="voice">
+        <div class="voice-meta">Member voice</div>
+        <blockquote>I'm a career sales professional who spent a solid year researching high ticket programs before choosing HTSA, and I'm glad I followed my gut. The difference here is the depth of support. Training and coaching that keep you accountable, plus a team and community that genuinely want you to win.</blockquote>
+        <p class="voice-attr">Morgan M. · shared with HTSA</p>
       </div>
     </div>
-  </details>
+  </section>
 
-  <details class="price-drop" id="priceDrop" open>
-    <summary><span class="price-pill">Step 4 · Pick your option</span> Your enrollment options</summary>
+  <div class="section-head" id="sh-start">
+    <span class="section-num">Part 4</span><h2>How to start · two options</h2>
+    <p>Both options land you in the same place. Pick whichever feels easier right now.</p>
+  </div>
+
+  <div class="start-card" id="startCard">
+    <div class="start-card-kicker">Option A · call me</div>
+    <h2>Give me 10 minutes on the phone.</h2>
+    <p>I will walk you through the payment, answer the last question, and be with you when the welcome email hits your inbox.</p>
+    <div class="start-actions">
+      <a class="start-btn" href="tel:+16166121735" id="startCall">Call CJ · (616) 612-1735</a>
+      <a class="start-btn start-btn--go" href="sms:+16166121735?body=Can%20we%20jump%20on%20a%2010%20min%20call%20about%20enrollment%3F">Text me for a time</a>
+    </div>
+  </div>
+
+  <div class="start-card" id="startCardB">
+    <div class="start-card-kicker">Option B · start it yourself</div>
+    <h2>Pick your payment below, then let me know.</h2>
+    <ol>
+      <li>Pick your option in Part 5 and complete the checkout.</li>
+      <li>Text me the words <b>"I'm starting"</b> or <b>"Payment made"</b> so I know to watch for it clear.</li>
+      <li>Two emails hit your inbox. Star the first one, use the second to log in.</li>
+      <li>Book your 15 minute kickoff with Mark from the button below.</li>
+    </ol>
+    <div class="start-actions">
+      <a class="start-btn start-btn--go" href="sms:+16166121735?body=I'm%20starting" id="startSms">Text "I'm starting"</a>
+      <a class="start-btn" href="https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call" target="_blank" rel="noopener noreferrer">Book kickoff with Mark</a>
+    </div>
+  </div>
+
+  <div class="section-head" id="sh-price">
+    <span class="section-num">Part 5</span><h2>Your special offer pricing</h2>
+    <p>These prices close <b style="color:#61e38b">Thursday, Sept 4</b>. Access opens the moment your payment clears.</p>
+  </div>
 
   <div class="guar-strip">
     <b>Placed in 6 months or refunded.</b>
@@ -419,9 +591,6 @@ a{color:inherit}
   </div>
 
   <section class="plans">
-    <div class="h2">Your special offer pricing</div>
-    <div class="plans-sub">These prices close Thursday, Sept 4. Access opens the moment your payment clears.</div>
-
     <div class="plan plan--custom" id="planCustom" hidden>
       <span class="badge" id="customBadge">Your offer</span>
       <div class="plan-name" id="customName"></div>
@@ -479,16 +648,47 @@ a{color:inherit}
     </div>
   </div>
 
-  <section class="inc">
+  <div class="section-head" id="sh-terms">
+    <span class="section-num">Part 6</span><h2>Terms of Service · please read</h2>
+    <p>This is the fine print. Nothing hidden. You will confirm it in the checkout sheet before payment.</p>
+  </div>
+
+  <div class="terms-card">
+    <div class="terms-card-kicker">Required reading before checkout</div>
+    <h3>What you are agreeing to</h3>
+    <p>Program access, refund policy, guarantee mechanics, and how coaching, placement, and community access work. Written in plain English, not legalese. Open the PDF, read it, and text me any question you have.</p>
+    <div class="terms-actions">
+      <a class="terms-btn" id="termsBtn" target="_blank" rel="noopener noreferrer">Open Terms of Service PDF</a>
+      <a class="terms-btn terms-btn--secondary" href="#" id="currBtn">See what's in the program</a>
+    </div>
+  </div>
+
+  <section class="inc" style="margin-top:8px">
     <div class="h2">What you're getting</div>
     <ul class="inc-list" id="incList"></ul>
   </section>
 
-  <div class="docs">
-    <a class="doc" href="#" id="currBtn">📘 What's in the program</a>
-    <a class="doc" id="termsBtn" target="_blank" rel="noopener noreferrer">📄 Terms of Service</a>
+  <div class="refer-mini" id="referMini">
+    <h3>Know someone this could help?</h3>
+    <p>Text me their name and number at <a href="sms:+16166121735">(616) 612-1735</a> and I will reach out personally. Introductions from members are how our community keeps growing, and they always turn into the best fits.</p>
   </div>
-  </details>
+
+  <div class="cj-quote">
+    <div class="cj-quote-kicker">One honest thought from CJ</div>
+    <blockquote>If nothing has changed since we last talked, it likely will not change by 2027. Do not let weeks turn into months, and months turn into years. Start a remote sales career now, on your terms, from anywhere.</blockquote>
+    <div class="cj-quote-attr">CJ Clay · Career Transformation Coach</div>
+  </div>
+
+  <div class="cj-card">
+    <img class="cj-card-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
+    <div class="cj-card-body">
+      <div class="cj-card-name">CJ Clay</div>
+      <div class="cj-card-title">HTSA · Career Transformation Coach</div>
+      <a class="cj-card-line" href="tel:+16166121735"><b>📞 (616) 612-1735</b></a>
+      <a class="cj-card-line" href="sms:+16166121735">💬 Text me anytime</a>
+      <a class="cj-card-line" href="mailto:cj@highticketsalesacademy.com">✉️ cj@highticketsalesacademy.com</a>
+    </div>
+  </div>
 
   <footer class="foot">
     <div class="foot-top">
@@ -502,21 +702,10 @@ a{color:inherit}
           <a href="https://www.facebook.com/HTSAcadamy/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">👥</span>facebook.com/HTSAcadamy</a>
         </div>
       </div>
-      <div class="bcard">
-        <img class="bcard-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
-        <div>
-          <div class="bcard-inf" aria-hidden="true">∞</div>
-          <div class="bcard-name">CJ Clay</div>
-          <div class="bcard-title">HTSA · Career Transformation Coach</div>
-          <a class="bcard-line" href="tel:+16166121735"><span aria-hidden="true">📞</span>(616) 612-1735</a>
-          <a class="bcard-line" href="mailto:cj@highticketsalesacademy.com"><span aria-hidden="true">✉️</span>cj@highticketsalesacademy.com</a>
-          <a class="bcard-line bcard-line--sms" href="sms:+16166121735"><span aria-hidden="true">💬</span>Text me the second it clears</a>
-        </div>
-      </div>
     </div>
     <div class="foot-rev">
       <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">
-        <span class="foot-stars" aria-hidden="true">★★★★★</span>Trustpilot — 4.9 out of 5</a>
+        <span class="foot-stars" aria-hidden="true">★★★★★</span>Trustpilot · 4.9 out of 5</a>
       <a href="mailto:support@highticketsalesacademy.com">support@highticketsalesacademy.com</a>
     </div>
     <div class="foot-copy">© High Ticket Sales Academy · All Rights Reserved</div>
@@ -569,7 +758,7 @@ a{color:inherit}
 /* ============================================================
    Shared special-offer page. Optional ?n=FirstName personalizes
    the hello line. Do not put real prospect data in this block.
-   special-offer-build:1788478000
+   special-offer-build:1788479100
    ============================================================ */
 const BUYER = {
   firstName: "",
