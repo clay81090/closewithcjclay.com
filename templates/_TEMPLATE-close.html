@@ -227,6 +227,51 @@ a{color:inherit}
   .plan{padding:16px}
   .docs{grid-template-columns:1fr}
 }
+
+/* ---------- phone walk order ---------- */
+.walk{padding:18px 26px 8px}
+.walk-kicker{color:var(--green-dark);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.walk .h2{margin-top:6px;margin-bottom:8px}
+.walk-lede{margin-bottom:12px;color:var(--muted);font-size:14px;line-height:1.55}
+.roadmap-frame{width:100%;height:min(70vh,620px);border:1px solid var(--grey);border-radius:14px;
+  overflow:hidden;background:#f8fafc;box-shadow:0 10px 28px rgba(10,22,40,.08)}
+.roadmap-frame iframe{display:block;width:100%;height:100%;border:0}
+.need-drop{margin:10px 26px 16px;border:2px solid var(--green-strong);border-radius:15px;
+  background:rgba(97,227,139,.1);box-shadow:0 10px 28px rgba(0,201,122,.14)}
+.need-drop > summary{display:flex;min-height:58px;align-items:center;gap:10px;padding:14px 16px;
+  cursor:pointer;color:var(--navy);font-size:15.5px;font-weight:800;line-height:1.35;list-style:none}
+.need-drop > summary::-webkit-details-marker{display:none}
+.need-drop > summary .need-pill{flex:0 0 auto;padding:4px 10px;border-radius:999px;
+  background:var(--green-strong);color:#04231a;font-size:11.5px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase}
+.need-drop > summary::after{margin-left:auto;padding-left:12px;color:var(--green-dark);font-size:18px;
+  font-weight:400;content:"▾"}
+.need-drop[open] > summary{border-bottom:1px solid rgba(0,201,122,.28)}
+.need-drop[open] > summary::after{content:"▴"}
+.price-drop{margin:0 26px 16px;border:1px solid var(--grey);border-radius:15px;background:var(--white)}
+.price-drop > summary{display:flex;min-height:56px;align-items:center;gap:10px;padding:14px 16px;
+  cursor:pointer;color:var(--navy);font-size:15px;font-weight:800;line-height:1.35;list-style:none}
+.price-drop > summary::-webkit-details-marker{display:none}
+.price-drop > summary .price-pill{flex:0 0 auto;padding:4px 10px;border-radius:999px;
+  background:var(--navy);color:var(--green);font-size:11.5px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase}
+.price-drop > summary::after{margin-left:auto;padding-left:12px;color:var(--muted);font-size:18px;content:"▾"}
+.price-drop[open] > summary{border-bottom:1px solid var(--grey)}
+.price-drop[open] > summary::after{content:"▴"}
+.price-drop .plans{padding-top:8px}
+.price-drop .guar{margin-left:16px;margin-right:16px}
+.price-drop .inc{padding-left:16px;padding-right:16px}
+.price-drop .docs{margin-left:16px;margin-right:16px}
+.need-list{display:grid;gap:10px;padding:4px 16px 16px}
+.need-list li{display:flex;gap:10px;align-items:flex-start;padding:12px 13px;border:1px solid rgba(0,201,122,.22);
+  border-radius:12px;background:var(--white);color:var(--text);font-size:14px;line-height:1.5;list-style:none}
+.need-list li::before{flex:0 0 auto;margin-top:1px;color:var(--green-strong);font-weight:800;content:"→"}
+.need-list b{color:var(--navy)}
+@media (max-width:680px){
+  .walk{padding:14px 16px 6px}
+  .need-drop,.price-drop{margin-right:16px;margin-left:16px}
+  .roadmap-frame{height:min(65vh,560px)}
+}
 @media (prefers-reduced-motion:reduce){.choose{transition:none}}
 </style>
 </head>
@@ -236,7 +281,7 @@ a{color:inherit}
   <section class="top">
     <img class="top-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
     <h1 id="topTitle">Here's what we just went over.</h1>
-    <p id="topSub">Pick the option we talked about. I'm right here on the phone.</p>
+    <p id="topSub">We'll walk the 30 day plan first. Options are at the bottom when we get there.</p>
     <div class="track-pill" id="trackPill">Certified High Ticket Closer</div>
     <div class="prep" id="prepBox" hidden>
       <div class="prep-card">
@@ -256,6 +301,49 @@ a{color:inherit}
   </section>
 
 
+
+  <section class="walk" aria-label="30 day game plan">
+    <div class="walk-kicker">Step 1 · Walk this first</div>
+    <div class="h2">Your 30 day game plan</div>
+    <p class="walk-lede">This is the path from enrollment to placement. Scroll inside the plan with me before we look at payment.</p>
+    <div class="roadmap-frame">
+      <iframe id="roadmapEmbed" title="Your 30 day game plan" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <details class="need-drop" id="afterPay">
+    <summary><span class="need-pill">Next step</span> What we need from you</summary>
+    <div class="next">
+      <p class="next-sub">Once you are in and ramping, this is how we lock results and help the next person.</p>
+      <ul class="need-list">
+        <li><b>Show up for the plan.</b> Modules, AI roleplay, mock calls, and interviews on the timeline above.</li>
+        <li><b>Come to at least 1 group coaching call a week</b> while you ramp. Lifetime access stays open.</li>
+        <li><b>Use your 1-on-1 success coaching</b> (1 per month for your first 3 months) when you hit real calls and real numbers.</li>
+        <li><b>Video testimonial</b> once you have results. Short and honest.</li>
+        <li><b>Trustpilot and Google review</b> in your own words, only if you mean it.</li>
+        <li><b>3 introductions.</b> People who could use this. First 3 who enrol pay you $250 each. Everyone after that pays you $500 each.</li>
+      </ul>
+      <div class="next-step">
+        <div class="next-num">1</div>
+        <div class="next-body">
+          <h3>After payment: text CJ, payment made</h3>
+          <p>Text <a href="sms:+16166121735">(616) 612-1735</a> the words <b>Payment made</b> if we are not on the phone together.</p>
+          <a class="next-btn" href="sms:+16166121735?body=Payment%20made">Text Payment made</a>
+        </div>
+      </div>
+      <div class="next-step">
+        <div class="next-num">2</div>
+        <div class="next-body">
+          <h3>Book your kickoff with Mark</h3>
+          <p>15 minute Zoom to map placement goals before you start the modules.</p>
+          <a class="next-btn" href="https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call" target="_blank" rel="noopener noreferrer">Book kickoff call</a>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="price-drop" id="priceDrop">
+    <summary><span class="price-pill">Last</span> Your enrollment options</summary>
 
   <div class="guar-strip">
     <b>Placed in 6 months or refunded.</b>
@@ -312,64 +400,6 @@ a{color:inherit}
     </div>
   </section>
 
-  <details class="next-wrap" id="afterPay">
-    <summary>Doing this on your own? Here's exactly what happens next</summary>
-    <div class="next">
-      <p class="next-sub">If you are finishing this on your own, do these five things in order.</p>
-
-      <div class="next-step">
-        <div class="next-num">1</div>
-        <div class="next-body">
-          <h3>Text CJ, payment made</h3>
-          <p>Text <a href="sms:+16166121735">(616) 612-1735</a> the words <b>Payment made</b>. That is how I know to turn your access on if we are not on the phone together.</p>
-          <a class="next-btn" href="sms:+16166121735?body=Payment%20made">Text Payment made</a>
-        </div>
-      </div>
-
-      <div class="next-step">
-        <div class="next-num">2</div>
-        <div class="next-body">
-          <h3>Two emails will hit your inbox</h3>
-          <p>Both come right after payment. Star the first one. Use the second one to log in.</p>
-          <div class="next-mail">
-            <b>Email 1. Welcome</b>
-            <span>Module access, live group coaching Zoom links, community, and your next steps. Add the Zoom links to your calendar: Tuesday, 12:00 PM EST and Wednesday, 5:00 PM EST.</span>
-          </div>
-          <div class="next-mail">
-            <b>Email 2. Login</b>
-            <span>A temporary password that takes you to your dashboard. Use this email to create your own login. It only takes a moment.</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="next-step">
-        <div class="next-num">3</div>
-        <div class="next-body">
-          <h3>Nothing in your inbox after 10 minutes?</h3>
-          <p>Check spam and promotions, then text me. Do not re-pay, and do not create a second account.</p>
-        </div>
-      </div>
-
-      <div class="next-step">
-        <div class="next-num">4</div>
-        <div class="next-body">
-          <h3>Book your kickoff with Mark</h3>
-          <p>Mark is your Success Coach. This is a 15 minute Zoom to map your placement goals before you start the modules.</p>
-          <a class="next-btn" href="https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call" target="_blank" rel="noopener noreferrer">Book kickoff call</a>
-        </div>
-      </div>
-
-      <div class="next-step">
-        <div class="next-num">5</div>
-        <div class="next-body">
-          <h3>Join the Mastermind</h3>
-          <p>Request the private Facebook group. Live coaching replays live there, and 680+ members support each other.</p>
-          <a class="next-btn" href="https://www.facebook.com/groups/1039656943556821" target="_blank" rel="noopener noreferrer">Request access on Facebook</a>
-        </div>
-      </div>
-    </div>
-  </details>
-
   <div class="guar" id="guarantee">
     <span class="guar-tag" id="guarTag">Performance guarantee · confirmed</span>
     <h3 id="guarTitle">Placed within 6 months, or your money back.</h3>
@@ -390,8 +420,8 @@ a{color:inherit}
   <div class="docs">
     <a class="doc" href="#" id="currBtn">📘 What's in the program</a>
     <a class="doc" id="termsBtn" target="_blank" rel="noopener noreferrer">📄 Terms of Service</a>
-    <a class="doc" id="roadmapBtn" target="_blank" rel="noopener noreferrer">🗺 Your 30 day game plan</a>
   </div>
+  </details>
 
   <footer class="foot">
     <div class="foot-top">
@@ -651,8 +681,8 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
 
   /* ---------- docs ---------- */
   el("termsBtn").href = TERMS_URL; el("sheetTerms").href = TERMS_URL;
-  const road = el("roadmapBtn");
-  if (road) {
+  const roadEmbed = el("roadmapEmbed");
+  if (roadEmbed) {
     const roadName = (val(first) || "").replace(/[^A-Za-z' -]/g, "").slice(0, 24);
     const roadFile = "htsa-enrollment-" + (BUYER.slug || "").replace(/_/g, "-") + ".html";
     let roadHref = BUYER.track === "setter" ? "/24-day-roadmap.html" : "/30-day-roadmap.html";
@@ -660,9 +690,10 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     if (roadName) qs.push("n=" + encodeURIComponent(roadName));
     if (/^[A-Za-z0-9._-]+\.html$/.test(roadFile) && !ph(BUYER.slug)) qs.push("e=" + encodeURIComponent(roadFile));
     if (qs.length) roadHref += "?" + qs.join("&");
-    road.href = roadHref;
-    if (BUYER.track === "setter") road.textContent = "🗺 Your 24 day setter game plan";
-    road.addEventListener("click", function () { event("roadmap_opened"); });
+    roadEmbed.src = roadHref;
+    event("roadmap_opened");
+    const walkTitle = document.querySelector(".walk .h2");
+    if (walkTitle && BUYER.track === "setter") walkTitle.textContent = "Your 24 day setter game plan";
   }
   const currSheet = el("currSheet");
   function openCurr(e){ e.preventDefault(); event("curriculum_opened");
