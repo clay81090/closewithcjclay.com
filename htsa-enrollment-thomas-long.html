@@ -471,7 +471,7 @@ a{color:inherit}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1788459515
+   close-build:1788460200
    ============================================================ */
 const BUYER = {
   firstName: "Thomas",
@@ -486,12 +486,14 @@ const BUYER = {
 
 /* One-off negotiated price. Leave null unless CJ agreed one on the call.
    The $6k ClarityPay promo checkout can also go here if CJ names a custom amount. */
-const CUSTOM_OFFER = null;
-// const CUSTOM_OFFER = {
-//   name: "Your negotiated price", note: "What CJ agreed with you on the call.",
-//   amount: "$X,XXX", unit: "one time", badge: "Your offer",
-//   checkout: "https://whop.com/checkout/plan_VUSDju20gTBCg/"
-// };
+const CUSTOM_OFFER = {
+  name: "3 payments",
+  note: "First payment today, then one a month for two months.",
+  amount: "$2,200",
+  unit: "today · $6,600 total",
+  badge: "3 payments",
+  checkout: "https://whop.com/checkout/plan_YfsUaarlyP9e1?d2c=true"
+};
 
 const TRACKS = {
   closer: { label: "Certified High Ticket Closer", curriculumUrl: "[CURRICULUM_URL_CLOSER]" },
