@@ -1972,6 +1972,318 @@
     }
   }
 
+  /* Meet-cj style resources (3-up + Trustpilot + book + more) */
+  .cj-resources-wrap .proof-kicker {
+    margin: 0 0 10px;
+    color: var(--green-dark);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .cj-resources-wrap .proof-title {
+    margin: 0 0 6px;
+    color: var(--navy);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.25rem, 3.5vw, 1.65rem);
+    line-height: 1.2;
+  }
+  .cj-resources-wrap .proof-lede {
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .proof-squares {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 10px 0 12px;
+    align-items: stretch;
+  }
+  .proof-square {
+    display: grid;
+    grid-template-rows: minmax(108px, 1fr) auto auto;
+    height: 100%;
+    overflow: hidden;
+    border: 2px solid #f59e0b;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    box-shadow: 0 8px 20px rgba(10, 22, 40, .06);
+  }
+  .proof-square-copy { padding: 12px 13px 10px; }
+  .proof-square-kicker {
+    margin-bottom: 5px;
+    color: #b45309;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .proof-square h3 {
+    margin: 0 0 6px;
+    color: var(--navy);
+    font-size: 15px;
+    line-height: 1.25;
+  }
+  .proof-square p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .proof-square .yt,
+  .proof-square-site {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 0;
+    border-top: 1px solid rgba(180, 83, 9, .2);
+    border-radius: 0;
+    box-sizing: border-box;
+  }
+  .proof-square-site {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px;
+    text-decoration: none;
+    color: #fff;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(97, 227, 139, .22), transparent 16rem),
+      linear-gradient(145deg, #0a1628, #152a46);
+  }
+  .proof-square-site-kicker {
+    color: #61e38b;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .proof-square-site-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .proof-square-site-url {
+    color: rgba(255, 255, 255, .72);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .proof-square-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 10px 13px 13px;
+    padding: 10px 12px;
+    min-height: 40px;
+    border-radius: 9px;
+    background: var(--navy);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+    width: calc(100% - 26px);
+  }
+  .proof-square-cta:hover { filter: brightness(1.08); }
+  .precall-trust-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin: 0 0 14px;
+    padding: 16px 18px;
+    border: 2px solid var(--green);
+    border-radius: 12px;
+    background: linear-gradient(145deg, #0a1628, #163056);
+    color: #d7dee8;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 8px 22px rgba(10, 22, 40, .16);
+  }
+  .precall-trust-bar:hover { color: #fff; border-color: #61e38b; }
+  .precall-trust-stars {
+    color: #f5c518;
+    font-size: 22px;
+    letter-spacing: 3px;
+    line-height: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 0 10px rgba(245, 197, 24, .35);
+  }
+  .book-link {
+    display: block;
+    width: min(50%, 380px);
+    margin: 0 auto 14px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #d7dee8;
+    background: #0a1628;
+    box-shadow: 0 8px 18px rgba(10, 22, 40, .1);
+    text-decoration: none;
+  }
+  .book-link img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 120px;
+    object-fit: cover;
+    object-position: center;
+  }
+  .book-link:hover { outline: 2px solid rgba(97, 227, 139, .4); outline-offset: 2px; }
+  .book-link-cap {
+    padding: 8px 12px;
+    color: rgba(255, 255, 255, .85);
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    background: #0a1628;
+  }
+  .book-link-cap span { color: var(--green); }
+  .precall-more {
+    margin: 0;
+    border: 1px solid rgba(10, 22, 40, .14);
+    border-radius: 10px;
+    background: #fff;
+  }
+  .precall-more > summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 14px 16px;
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+    background: #fff;
+  }
+  .precall-more > summary::-webkit-details-marker { display: none; }
+  .precall-more > summary::after { content: none; }
+  .precall-more[open] > summary { border-bottom: 1px solid rgba(10, 22, 40, .08); }
+  .precall-more-list { display: grid; gap: 8px; padding: 12px; }
+  .precall-link-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin: 0;
+    padding: 12px 14px;
+    border: 1px solid rgba(10, 22, 40, .12);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    width: 100%;
+  }
+  .precall-link-row:hover { border-color: rgba(10, 22, 40, .28); background: #f7f9fc; }
+  .yt {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    background: var(--navy);
+    cursor: pointer;
+    display: block;
+    padding: 0;
+  }
+  .yt img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .yt::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 64px;
+    height: 44px;
+    transform: translate(-50%, -50%);
+    border-radius: 11px;
+    background: rgba(10, 22, 40, .82);
+    content: "";
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .35);
+  }
+  .yt-tri {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(-42%, -50%);
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-left: 15px solid #fff;
+    width: 0;
+    height: 0;
+  }
+  .yt-stage {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    background: rgba(4, 12, 24, .72);
+    backdrop-filter: blur(4px);
+  }
+  .yt-stage[hidden] { display: none !important; }
+  .yt-stage-card {
+    position: relative;
+    width: min(760px, 92vw);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 28px 80px rgba(0, 0, 0, .5);
+  }
+  .yt-stage-card iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    background: #000;
+  }
+  .yt-stage-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    min-width: 40px;
+    min-height: 40px;
+    border: 0;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .92);
+    color: var(--navy);
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .yt-stage-cap {
+    padding: 12px 16px;
+    background: #0a1628;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  @media (max-width: 600px) {
+    .proof-squares { grid-template-columns: 1fr; }
+    .proof-square { grid-template-rows: auto auto auto; }
+    .book-link { width: min(72%, 320px); }
+  }
+
   @media print {
     @page { margin: 0.5in; size: letter; }
     body { background: white; }
@@ -2507,69 +2819,87 @@
   </div>
 
   <div class="cj-resources-wrap">
-    <p class="cj-resources-lead"><strong>Lynda</strong> — if you watch one thing before we talk, make it the first one.</p>
-    <p class="cj-resources-kicker">⭐ Start here — CJ's top picks</p>
-    <div class="cj-resources-featured"><a href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
-  <div class="cj-resource-card-badge">⭐ CJ's #1 pick</div>
-  <div class="cj-resource-card-title">Dana — unsolicited personal review</div>
-  <p class="cj-resource-card-desc">She recorded this completely on her own — we had no idea until she posted it. Life coach with a community of about 17,000 followers.</p>
-  <span class="cj-resource-card-cta">Watch on YouTube</span>
-</a><a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
-  <div class="cj-resource-card-badge">⭐ If you only watch one</div>
-  <div class="cj-resource-card-title">Taylor Conroy (TEDx Coach) — why he hires our members</div>
-  <p class="cj-resource-card-desc">Taylor is a TEDx coach who actively hires HTSA-certified closers. Hear directly from a hiring manager why he trusts our members.</p>
-  <span class="cj-resource-card-cta">Watch on YouTube</span>
-</a><a href="https://drive.google.com/file/d/1Zo2ID5sdF8ZYP8rZD_fisNgj-eNpuQxM/view?usp=sharing" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
-  <div class="cj-resource-card-badge">⭐ Fresh placement story</div>
-  <div class="cj-resource-card-title">Taylor DeCourcey — newer member perspective</div>
-  <p class="cj-resource-card-desc">Newer placement with a fresher perspective. Hear what the first months actually looked like after certification.</p>
-  <span class="cj-resource-card-cta">Watch Taylor's story</span>
-</a><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
-  <div class="cj-resource-card-badge">⭐ Verified reviews</div>
-  <div class="cj-resource-card-title">Trustpilot — 4.9 out of 5 stars</div>
-  <p class="cj-resource-card-desc">Read what real members say about HTSA — unfiltered, third-party reviews from people who went through the program.</p>
-  <span class="cj-resource-card-cta">Read Trustpilot reviews</span>
-</a></div>
-    <p class="cj-resources-kicker">⭐ Placement — why our members get results</p>
-    <div class="cj-resources-featured"><a href="https://canva.link/qcl7l45n7behw3k" class="cj-resource-card cj-resource-card--placement" target="_blank" rel="noopener noreferrer">
-  <div class="cj-resource-card-badge">⭐ Placement proof</div>
-  <div class="cj-resource-card-title">Why Our Members Actually Get Placed</div>
-  <p class="cj-resource-card-desc">See how one-on-one placement works in practice — real interviews, real companies, and what the process looks like step by step.</p>
-  <span class="cj-resource-card-cta">View placement overview</span>
-</a><a href="https://canva.link/na9nxjm9a1e4vjz" class="cj-resource-card cj-resource-card--placement" target="_blank" rel="noopener noreferrer">
-  <div class="cj-resource-card-badge">⭐ Real timeline</div>
-  <div class="cj-resource-card-title">Christa's Journey — Posted Month by Month</div>
-  <p class="cj-resource-card-desc">Not a polished testimonial — her actual journey, posted step by step in our community as it happened.</p>
-  <span class="cj-resource-card-cta">View Christa's timeline</span>
-</a></div>
-    <p class="cj-resources-kicker">More success stories from our network</p>
-    <div class="cj-resources-grid cj-resources-grid--stories"><a href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
-  
-  <div class="cj-resource-card-title">Cassie — single mom success story</div>
-  <p class="cj-resource-card-desc">Relatable story — single mom who made the transition work around real life.</p>
-  <span class="cj-resource-card-cta">Watch on YouTube</span>
-</a><a href="https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
-  
-  <div class="cj-resource-card-title">Josh — Alex Hormozi background</div>
-  <p class="cj-resource-card-desc">High-profile sales background — hear how HTSA fit into his path.</p>
-  <span class="cj-resource-card-cta">Watch on YouTube</span>
-</a><a href="https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
-  
-  <div class="cj-resource-card-title">Brianna — Tony Robbins team</div>
-  <p class="cj-resource-card-desc">Credibility from a big-name organization — her HTSA experience.</p>
-  <span class="cj-resource-card-cta">Watch on YouTube</span>
-</a></div>
-    <div class="cj-resources-grid cj-resources-grid--blue"><a href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" class="cj-resource-card cj-resource-card--compact cj-resource-card--blue" target="_blank" rel="noopener noreferrer">
-  
-  <div class="cj-resource-card-title">Top 20 Companies in High Ticket Sales</div>
-  <p class="cj-resource-card-desc">Industry overview PDF — where HTSA fits in the landscape.</p>
-  <span class="cj-resource-card-cta">Open PDF</span>
-</a><a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact cj-resource-card--blue" target="_blank" rel="noopener noreferrer">
-  
-  <div class="cj-resource-card-title">HTSA Website — more stories &amp; outcomes</div>
-  <p class="cj-resource-card-desc">Many more member outcomes, screenshots, and program details on our main site.</p>
-  <span class="cj-resource-card-cta">Visit highticketsalesacademy.com</span>
-</a></div>
+    <p class="proof-kicker">If you want to check out more...</p>
+    <h3 class="proof-title">Meet Chad, the website, and why employers hire our members.</h3>
+    <p class="proof-lede">Three things worth seeing. Tap a video and it plays right here.</p>
+
+    <div class="proof-squares">
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">CEO &amp; Founder</div>
+          <h3>Meet Chad</h3>
+          <p>Chad Aleo, founder of HTSA. Who we are and what this career looks like.</p>
+        </div>
+        <button class="yt" type="button" data-yt="eLAWEwE7pl4" data-yt-title="Meet Chad — CEO &amp; Founder at HTSA" aria-label="Play Meet Chad video">
+          <img src="https://i.ytimg.com/vi/eLAWEwE7pl4/hqdefault.jpg" alt="" loading="lazy">
+          <span class="yt-tri" aria-hidden="true"></span>
+        </button>
+        <button class="proof-square-cta" type="button" data-yt="eLAWEwE7pl4" data-yt-title="Meet Chad — CEO &amp; Founder at HTSA">Watch Meet Chad</button>
+      </article>
+
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">More stories and outcomes</div>
+          <h3>HTSA Website</h3>
+          <p>The main site. More member stories, screenshots, and how the program works.</p>
+        </div>
+        <a class="proof-square-site" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">
+          <span class="proof-square-site-kicker">Preview</span>
+          <span class="proof-square-site-name">High Ticket Sales Academy</span>
+          <span class="proof-square-site-url">highticketsalesacademy.com</span>
+        </a>
+        <a class="proof-square-cta" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Open the website</a>
+      </article>
+
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">Employer-side proof</div>
+          <h3>Taylor Conroy</h3>
+          <p>A TEDx coach who hires HTSA members. Why he trusts this certification.</p>
+        </div>
+        <button class="yt" type="button" data-yt="bd65afldLmE" data-yt-title="Taylor Conroy (TEDx Coach) — Why He Hires Our Members" aria-label="Play Taylor Conroy video">
+          <img src="https://i.ytimg.com/vi/bd65afldLmE/hqdefault.jpg" alt="" loading="lazy">
+          <span class="yt-tri" aria-hidden="true"></span>
+        </button>
+        <button class="proof-square-cta" type="button" data-yt="bd65afldLmE" data-yt-title="Taylor Conroy (TEDx Coach) — Why He Hires Our Members">Watch Taylor Conroy</button>
+      </article>
+    </div>
+
+    <a class="precall-trust-bar" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer" aria-label="Read HTSA reviews on Trustpilot, rated 4.9 stars out of 5">
+      <span class="precall-trust-stars" aria-hidden="true">★★★★★</span>
+      <span>Trustpilot Reviews, 4.9 out of 5</span>
+    </a>
+
+    <a class="book-link" href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer" aria-label="Chad Aleo's book on Amazon, The Book on High Ticket Sales">
+      <img src="/media/chad-aleo-book-banner.png" alt="The Book on High Ticket Sales by Chad Aleo, available on Amazon" width="732" height="274" loading="lazy">
+      <div class="book-link-cap">Chad's book · <span>Available on Amazon →</span></div>
+    </a>
+
+    <details class="precall-more" id="moreDetails">
+      <summary>More resources · client success stories</summary>
+      <div class="precall-more-list">
+        <button class="precall-link-row" type="button" data-yt="WOVqPR-ufYM" data-yt-title="Cassie — Single Mom · Relatable success story">
+          Cassie · Single Mom · Relatable success story
+        </button>
+        <button class="precall-link-row" type="button" data-yt="FqlY37NaIsk" data-yt-title="Dana — Unsolicited HTSA Personal Review">
+          Dana · Unsolicited HTSA personal review
+        </button>
+        <button class="precall-link-row" type="button" data-yt="5pVlD6EKy1k" data-yt-title="Josh · Alex Hormozi background">
+          Josh · Alex Hormozi · High-profile background
+        </button>
+        <button class="precall-link-row" type="button" data-yt="TWacdj9x45o" data-yt-title="Brianna · Tony Robbins · Credibility from big name">
+          Brianna · Tony Robbins · Credibility from big name
+        </button>
+      </div>
+    </details>
+  </div>
+
+  <div class="yt-stage" id="ytStage" hidden>
+    <div class="yt-stage-card" role="dialog" aria-modal="true" aria-labelledby="ytStageCap">
+      <button class="yt-stage-close" type="button" id="ytStageClose" aria-label="Close video">×</button>
+      <div id="ytStageFrame"></div>
+      <div class="yt-stage-cap" id="ytStageCap"></div>
+    </div>
   </div>
 
   <!-- CJ personal reviews (Janaye visible; rest behind See more) -->
@@ -2589,7 +2919,7 @@
         <summary>
           <span class="cj-reviews-more-summary-text">
             See more reviews
-            <span class="cj-reviews-more-summary-sub">8 more messages from people who worked with CJ</span>
+            <span class="cj-reviews-more-summary-sub">9 more messages from people who worked with CJ</span>
           </span>
           <span class="cj-reviews-more-arrow" aria-hidden="true">▸</span>
         </summary>
@@ -2749,11 +3079,69 @@
     });
   }
 
-  document.querySelectorAll('a.cj-resource-card').forEach(function(a) {
+  document.querySelectorAll('a.precall-trust-bar, a.book-link, a.proof-square-site, a.proof-square-cta').forEach(function(a) {
     a.addEventListener('click', function() {
-      var title = (a.querySelector('.cj-resource-card-title') || {}).textContent || '';
-      postEvent('link_click', { linkLabel: title.trim(), linkUrl: a.href });
+      postEvent('link_click', {
+        linkLabel: (a.getAttribute('aria-label') || a.textContent || '').trim().slice(0, 80),
+        linkUrl: a.href
+      });
     });
+  });
+
+  var moreEl = document.getElementById('moreDetails');
+  if (moreEl) {
+    moreEl.addEventListener('toggle', function() {
+      if (moreEl.open) postEvent('link_click', { linkLabel: 'Opened more resources', linkUrl: '' });
+    }, { once: true });
+  }
+
+  var ytStage = document.getElementById('ytStage');
+  var ytFrame = document.getElementById('ytStageFrame');
+  var ytCap = document.getElementById('ytStageCap');
+  var ytClose = document.getElementById('ytStageClose');
+
+  function closeYtStage() {
+    if (!ytStage) return;
+    ytStage.hidden = true;
+    if (ytFrame) ytFrame.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  function openYtStage(id, title) {
+    if (!ytStage || !ytFrame || !id) return;
+    ytFrame.innerHTML = '';
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + id +
+      '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.allowFullscreen = true;
+    f.title = title || 'Video';
+    ytFrame.appendChild(f);
+    if (ytCap) ytCap.textContent = title || '';
+    ytStage.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  document.querySelectorAll('[data-yt]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var id = btn.getAttribute('data-yt');
+      var title = btn.getAttribute('data-yt-title') ||
+        btn.getAttribute('aria-label') ||
+        (btn.textContent || '').trim() ||
+        'Video';
+      postEvent('link_click', { linkLabel: title.slice(0, 80), linkUrl: 'yt:' + id });
+      openYtStage(id, title);
+    });
+  });
+
+  if (ytClose) ytClose.addEventListener('click', closeYtStage);
+  if (ytStage) {
+    ytStage.addEventListener('click', function(e) {
+      if (e.target === ytStage) closeYtStage();
+    });
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && ytStage && !ytStage.hidden) closeYtStage();
   });
 
   var reviewsMore = document.getElementById('cj-reviews-more');
