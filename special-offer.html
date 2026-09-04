@@ -23,8 +23,11 @@
 body{min-width:320px;background:var(--grey-light);color:var(--text);
   font-family:"DM Sans",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-.page{width:min(720px,calc(100% - 20px));margin:16px auto;overflow:hidden;border-radius:20px;
-  background:var(--white);box-shadow:0 20px 56px rgba(10,22,40,.13)}
+.page{display:flex;flex-direction:column;width:min(720px,calc(100% - 20px));margin:16px auto;
+  overflow:hidden;border-radius:20px;background:var(--white);box-shadow:0 20px 56px rgba(10,22,40,.13)}
+.top{order:1}.deadline{order:2}.intro{order:3}.this-page{order:4}
+#sh-plan{order:5}#sh-price{order:6}#sh-need{order:7}#sh-start{order:8}#sh-terms{order:9}
+.refer{order:10}.cj-quote{order:11}.foot{order:12}
 
 /* ---------- top ---------- */
 .top{padding:22px 26px 20px;text-align:center;color:var(--white);
@@ -293,6 +296,10 @@ a{color:inherit}
 .intro p{margin-top:10px;color:var(--text);font-size:14.5px;line-height:1.65}
 .intro p + p{margin-top:10px}
 .intro b{color:var(--navy)}
+.decision-note{margin:14px 26px 8px;padding:14px 16px;border-left:4px solid var(--green-strong);
+  border-radius:10px;background:var(--grey-light);color:var(--navy);font-size:14px;
+  font-weight:700;line-height:1.55;order:4}
+.decision-note b{color:var(--green-dark)}
 .this-page{margin:14px 26px 8px;padding:11px 14px;border:1px dashed var(--green-strong);border-radius:12px;
   background:rgba(97,227,139,.08);color:var(--navy);font-size:13px;line-height:1.5;text-align:center}
 
@@ -471,7 +478,7 @@ a{color:inherit}
   <section class="top">
     <img class="top-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
     <h1 id="topTitle">Your special offer, in one place.</h1>
-    <p id="topSub">The intro, the 30 day plan, the pricing, and exactly how to start. All on this page.</p>
+    <p id="topSub">The intro, the basic game plan, the pricing, and exactly how to start. All on this page.</p>
     <div class="track-pill" id="trackPill">Certified High Ticket Closer</div>
     <div class="prep" id="prepBox" hidden>
       <div class="prep-card">
@@ -488,16 +495,18 @@ a{color:inherit}
   </section>
 
   <div class="deadline">
-    Special offer pricing closes <b>Thursday, Sept 4</b>. New pricing takes effect after that.
+    This special offer ends <b>today, Sept 4</b>. Standard pricing increases later this month.
   </div>
 
   <section class="intro">
     <div class="intro-kicker">A quick note from CJ</div>
     <h2 id="introHi">Hey, CJ here.</h2>
     <p>Every person I sent this to, I picked by hand. You are on this page because I talked with you, listened to what you are trying to change, and thought you deserved the discount before our pricing goes up. That is the whole reason this page exists.</p>
-    <p>Our standard pricing goes up right after <b>Thursday, Sept 4</b>. This special offer is the last window at the discounted number. No pressure if the timing is not right, and no bait. If this is the season for you, everything you need is on this page.</p>
-    <p>I could not get every single person back on the phone this week the way I wanted to. If you would rather talk it through, my number is at the bottom and I will make the time. If you would rather move now, keep reading. <b>This page is the enrollment page.</b> You do not need to wait on me to send you another one.</p>
+    <p>Our standard pricing increases later this month. This special offer ends <b>today, Sept 4</b>. I am sending it as a courtesy because we already had the long conversation on our first call, and I do not want you to miss the current pricing or this offer.</p>
+    <p>If you still have a question, call me. If you are ready, keep reading. <b>This page is the enrollment page.</b> You do not need to wait on me to send another one.</p>
   </section>
+
+  <div class="decision-note"><b>Steve Jobs put it simply:</b> Under 40% information, you are guessing. Over 70%, you are not deciding, you are delaying. Where are you on that scale right now?</div>
 
   <div class="this-page">
     Tip: bookmark this page. This is the page I keep referring to when I say "your enrollment page".
@@ -507,90 +516,42 @@ a{color:inherit}
     <summary>
       <span class="section-num">Part 1</span>
       <div class="part-copy">
-        <h2>Your 30 day game plan (the goal)</h2>
-        <p>The exact path from enrollment to placement. The 30 days is the goal, not an obligation.</p>
-      </div>
-      <span class="part-tap">Tap to open</span>
-      <span class="part-chev" aria-hidden="true">▾</span>
-    </summary>
-    <div class="part-body">
-  <section class="plan-inline" aria-label="30 day game plan">
-    <details class="phase-card" open>
-      <summary>
-        <span class="phase-days">Days 1 to 5</span>
-        <span class="phase-title">Get in and get through the modules</span>
-      </summary>
-      <ul>
-        <li>Access opens. Welcome email arrives. Set your password and get into the certification platform.</li>
-        <li><b>55 modules</b> waiting for you. Target is done by day 5, day 7 at the outside. Watch at 1.25x or 1.5x.</li>
-        <li>Book your 15 minute kickoff with <b>Mark</b>, your Success Coach.</li>
-        <li>Show up for the Tuesday 12 PM EST and Wednesday 5 PM EST live coaching calls from your first week.</li>
-      </ul>
-    </details>
-
-    <details class="phase-card">
-      <summary>
-        <span class="phase-days">Days 5 to 12</span>
-        <span class="phase-title">Run your reps in the AI sandbox</span>
-      </summary>
-      <ul>
-        <li>Unlimited AI roleplay any hour you want. This is the part that actually makes you good.</li>
-        <li>Master 5 TEDx coaching sales calls in AI roleplay. Get your first 30 awkward calls out of the way here.</li>
-        <li>The AI critiques your tonality, pacing, and how deep your discovery went. Run them back to back.</li>
-        <li>Keep attending the live calls. Bring a question from your reps.</li>
-      </ul>
-    </details>
-
-    <details class="phase-card">
-      <summary>
-        <span class="phase-days">Days 12 to 16</span>
-        <span class="phase-title">Certify, then get your materials built</span>
-      </summary>
-      <ul>
-        <li>Live mock call with <b>Mark</b>. Scored against a rubric. It is meant to be hard.</li>
-        <li>Pass it and you are a <b>Certified High Ticket Closer</b>. That is the credential our partner companies recognize.</li>
-        <li>Sit down with <b>Nate</b>, our Placement Director. You set your target niches, schedule, and pay range.</li>
-        <li>Nate rewrites your LinkedIn and reformats your resume into the template our placed members use.</li>
-      </ul>
-    </details>
-
-    <details class="phase-card">
-      <summary>
-        <span class="phase-days">Days 16 to 30</span>
-        <span class="phase-title">Pick a few great fits and go get one</span>
-      </summary>
-      <ul>
-        <li>Nate introduces you directly to companies in our partner network. Introduced, not applied.</li>
-        <li>Run <b>3 to 5 interviews</b> that genuinely fit inside one week. Small number, done properly.</li>
-        <li>Placement usually lands between 1 and 3 weeks. Around 10 days is realistic if you are not dragging your feet.</li>
-        <li>Get in, get the reps, start earning. Your first offer is a starting line, not a life sentence.</li>
-      </ul>
-    </details>
-  </section>
-
-  <p class="plan-note"><b>After you are in the seat:</b> your first 90 days come with a ramp plan, KPI tracking, 12 real call reviews with Chad and the coaching team, and a private 1 on 1 with Chad once you have real numbers to work from. Coaching stays open for life so you never age out.</p>
-    </div>
-  </details>
-
-  <details class="part-drop" id="sh-need">
-    <summary>
-      <span class="section-num">Part 2</span>
-      <div class="part-copy">
-        <h2>What we need from you</h2>
-        <p>None of this is due on day one. All of it is what gets you placed and paid.</p>
+        <h2>Your basic game plan</h2>
+        <p>The offer in four steps, without overcomplicating it.</p>
       </div>
       <span class="part-tap">Tap to open</span>
       <span class="part-chev" aria-hidden="true">▾</span>
     </summary>
     <div class="part-body">
   <div class="need-clean">
-    <p class="lede">Simple, honest expectations. You show up, we show up harder.</p>
     <ul>
-      <li><b>Do the work on the plan above.</b> Modules, AI roleplay, mock calls, and interviews on the timeline you just read.</li>
-      <li><b>Come to at least 1 group coaching call a week</b> while you ramp. Tuesdays 12 PM EST and Wednesdays 5 PM EST.</li>
-      <li><b>Use your 1 on 1 success coaching</b> (1 per month for your first 3 months) once you hit real calls and real numbers.</li>
-      <li><b>Extra coaching is included.</b> No upsell, no surprise fees. Just show up and use it.</li>
-      <li><b>Once you get real results:</b> a short video testimonial, an honest Trustpilot review, and 3 introductions to people this could help. Introductions are optional but they are how our community keeps growing. Referral form is at the bottom of this page.</li>
+      <li><b>Train and practice.</b> Complete the certification, use unlimited AI roleplay, and attend live coaching.</li>
+      <li><b>Validate and certify.</b> Pass the live mock call so partner companies know you can perform.</li>
+      <li><b>Get hand placed.</b> Our placement team builds your materials and introduces you directly to offers that fit your experience, interests, and goals.</li>
+      <li><b>Keep our support for life.</b> Lifetime training and placement, plus hands-on support through your first 90 days in the seat.</li>
+    </ul>
+  </div>
+    </div>
+  </details>
+
+  <details class="part-drop" id="sh-need">
+    <summary>
+      <span class="section-num">Part 3</span>
+      <div class="part-copy">
+        <h2>What we need from you</h2>
+        <p>What we ask once you are in, working, and getting results.</p>
+      </div>
+      <span class="part-tap">Tap to open</span>
+      <span class="part-chev" aria-hidden="true">▾</span>
+    </summary>
+    <div class="part-body">
+  <div class="need-clean">
+    <p class="lede">Go all in for 90 days. Once you have results, help the next person make an informed decision.</p>
+    <ul>
+      <li><b>100% commitment for your first 90 days.</b> Do the training, reps, coaching, certification, and placement work.</li>
+      <li><b>Reviews across our platforms.</b> Honest and in your own words once you have experienced the program.</li>
+      <li><b>A video testimonial after 90 days.</b> Short and real, once you have results to talk about.</li>
+      <li><b>3 introductions.</b> People this could genuinely help. The referral form is at the bottom of this page.</li>
     </ul>
   </div>
 
@@ -606,7 +567,7 @@ a{color:inherit}
 
   <details class="part-drop" id="sh-start">
     <summary>
-      <span class="section-num">Part 3</span>
+      <span class="section-num">Part 4</span>
       <div class="part-copy">
         <h2>How to start · two options</h2>
         <p>Option A: we do it live. Option B: you enroll yourself with the steps below.</p>
@@ -628,7 +589,7 @@ a{color:inherit}
   <details class="next-wrap" id="afterPay">
     <summary>Option B · Doing this on your own? Here's exactly what happens next</summary>
     <div class="next">
-      <p class="next-sub">If you are finishing this on your own, pick your payment in Part 4, then do these five things in order.</p>
+      <p class="next-sub">If you are finishing this on your own, pick your payment in Part 2, then do these five things in order.</p>
 
       <div class="next-step">
         <div class="next-num">1</div>
@@ -687,10 +648,10 @@ a{color:inherit}
 
   <details class="part-drop" id="sh-price">
     <summary>
-      <span class="section-num">Part 4</span>
+      <span class="section-num">Part 2</span>
       <div class="part-copy">
         <h2>Your special offer pricing</h2>
-        <p>These prices close <b style="color:var(--green-dark)">Thursday, Sept 4</b>. Access opens the moment your payment clears.</p>
+        <p>This special offer ends <b style="color:var(--green-dark)">today, Sept 4</b>. Standard pricing increases later this month.</p>
       </div>
       <span class="part-tap">Tap to open</span>
       <span class="part-chev" aria-hidden="true">▾</span>
