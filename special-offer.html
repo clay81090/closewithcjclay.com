@@ -335,19 +335,16 @@ a{color:inherit}
 .need-clean li::before{position:absolute;top:11px;left:11px;color:var(--green-strong);font-weight:800;content:"→"}
 .need-clean b{color:var(--navy)}
 
-/* ---------- member voices ---------- */
-.voices{padding:0 26px 6px}
-.voices-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.voice{padding:14px 15px;border-radius:13px;border:1px solid var(--grey);background:#fff;
-  color:var(--text);font-size:13.5px;line-height:1.55}
-.voice--personal{border:1px solid rgba(25,118,210,.35);background:linear-gradient(180deg,#eaf3ff,#f6fbff);
+/* ---------- compact horizontal member voice ---------- */
+.voice-strip{padding:0 26px 8px}
+.voice-strip-card{padding:14px 16px;border-radius:13px;
+  border:1px solid rgba(25,118,210,.35);background:linear-gradient(180deg,#eaf3ff,#f6fbff);
   box-shadow:0 0 0 2px rgba(227,160,8,.22)}
-.voice-meta{color:var(--green-dark);font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
-.voice--personal .voice-meta{color:#1976d2}
-.voice blockquote{margin:6px 0 8px;color:var(--text);font-size:13.5px;line-height:1.55}
-.voice blockquote b{color:var(--navy)}
-.voice-attr{color:var(--navy);font-size:12.5px;font-weight:700}
-@media (max-width:680px){.voices-grid{grid-template-columns:1fr}}
+.voice-strip-meta{color:#1976d2;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.voice-strip blockquote{margin:6px 0 8px;color:var(--text);font-size:13.5px;line-height:1.55}
+.voice-strip blockquote b{color:var(--navy)}
+.voice-strip-attr{color:var(--navy);font-size:12.5px;font-weight:700}
+.voice-strip-attr a{color:var(--green-dark);font-weight:700;text-decoration:none}
 
 /* ---------- terms card ---------- */
 .terms-card{margin:8px 26px 14px;padding:16px 18px;border:2px solid var(--gold);border-radius:14px;
@@ -357,39 +354,69 @@ a{color:inherit}
 .terms-card p{margin-top:8px;color:var(--text);font-size:13.5px;line-height:1.55}
 .terms-card .terms-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .terms-card a.terms-btn{display:flex;min-height:48px;align-items:center;justify-content:center;padding:10px 12px;
-  border-radius:11px;background:var(--navy);color:#fff;font-size:14px;font-weight:800;text-decoration:none}
-.terms-card a.terms-btn--secondary{background:#fff;color:var(--navy);border:1px solid var(--gold)}
+  border-radius:11px;background:var(--green-strong);color:#04231a;font-size:14px;font-weight:800;text-decoration:none}
+.terms-card a.terms-btn:hover,.terms-card a.terms-btn:focus-visible{filter:brightness(1.06);outline:none}
+.terms-card a.terms-btn--secondary{background:var(--navy-soft);color:#fff;border:0}
 @media (max-width:680px){.terms-card .terms-actions{grid-template-columns:1fr}}
 
-/* ---------- mini referral ---------- */
-.refer-mini{margin:8px 26px 16px;padding:14px 16px;border:1px dashed var(--grey);border-radius:12px;background:#fbfcfe}
-.refer-mini h3{color:var(--navy);font-size:15px;font-weight:800}
-.refer-mini p{margin-top:5px;color:var(--muted);font-size:13px;line-height:1.5}
-.refer-mini a{color:var(--green-dark);font-weight:700}
+/* ---------- referral module (compact) ---------- */
+.refer{margin:14px 26px 12px;padding:18px 18px 16px;border:2px solid var(--green-strong);
+  border-radius:16px;background:#f2fbf6;box-shadow:0 12px 28px rgba(0,201,122,.14)}
+.refer-kicker{color:var(--green-dark);font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.refer h3{margin-top:4px;color:var(--navy);font-family:"Playfair Display",serif;font-size:19px;line-height:1.22}
+.refer > p{margin-top:6px;color:var(--text);font-size:13.5px;line-height:1.55}
+.refer > p b{color:var(--navy)}
+.ref-tiers{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.ref-tier{padding:11px 12px;border:1.5px solid var(--green-strong);border-radius:11px;background:#fff;text-align:center}
+.ref-tier-amt{color:var(--navy);font-size:22px;font-weight:800;line-height:1}
+.ref-tier-lbl{margin-top:3px;color:var(--muted);font-size:12px;line-height:1.35}
+.ref-form{margin-top:12px;padding:14px;border:1px solid rgba(0,201,122,.35);border-radius:12px;background:#fff}
+.ref-field{margin-top:9px}
+.ref-field:first-child{margin-top:0}
+.ref-field label{display:block;margin-bottom:4px;color:var(--muted);font-size:11.5px;font-weight:800;
+  letter-spacing:.09em;text-transform:uppercase}
+.ref-field input{width:100%;min-height:44px;padding:10px 12px;border:1.5px solid var(--grey);
+  border-radius:10px;background:#fff;color:var(--navy);
+  font:600 15px/1.2 "DM Sans",sans-serif}
+.ref-field input:focus{border-color:var(--green-strong);
+  box-shadow:0 0 0 3px rgba(0,201,122,.13);outline:none}
+.ref-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.ref-preview-thumb{display:flex;gap:10px;align-items:center;margin-top:12px;padding:10px 11px;
+  border:1px dashed var(--grey);border-radius:10px;background:var(--grey-light)}
+.ref-preview-thumb img{width:120px;height:63px;object-fit:cover;border-radius:6px;flex:0 0 auto;
+  border:1px solid var(--grey)}
+.ref-preview-thumb .rpt-cap{color:var(--muted);font-size:12px;line-height:1.4}
+.ref-preview-thumb .rpt-cap b{color:var(--navy)}
+.ref-preview{margin-top:11px;max-height:120px;overflow-y:auto;padding:10px 12px;border:1px dashed var(--grey);
+  border-radius:10px;background:var(--grey-light);color:var(--muted);font-size:12.5px;line-height:1.55;white-space:pre-wrap}
+.ref-btn{display:flex;width:100%;min-height:48px;align-items:center;justify-content:center;
+  margin-top:11px;padding:12px 16px;border:0;border-radius:11px;background:var(--green-strong);
+  color:#04231a;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer}
+.ref-btn[disabled]{background:#dfe6ee;color:#9aa8b8;cursor:not-allowed}
+.ref-msg{margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(97,227,139,.15);
+  color:var(--navy);font-size:13px;font-weight:700;line-height:1.45}
+.ref-added{margin-top:9px;display:grid;gap:6px}
+.ref-added div{padding:8px 11px;border:1px solid rgba(0,201,122,.3);border-radius:9px;
+  background:rgba(97,227,139,.1);color:var(--navy);font-size:12.5px;font-weight:700}
+.ref-fine{margin-top:10px;color:var(--muted);font-size:11.5px;line-height:1.5}
 
-/* ---------- CJ footer quote + card ---------- */
-.cj-quote{margin:14px 26px 8px;padding:18px 20px;border-radius:15px;background:var(--ink);color:#fff}
+/* ---------- CJ footer quote (above footer) ---------- */
+.cj-quote{margin:14px 26px 10px;padding:18px 20px;border-radius:15px;background:var(--ink);color:#fff}
 .cj-quote-kicker{color:var(--green);font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
 .cj-quote blockquote{margin-top:8px;color:#fff;font-family:"Playfair Display",serif;font-size:19px;line-height:1.35}
 .cj-quote-attr{margin-top:10px;color:rgba(255,255,255,.7);font-size:12.5px}
-.cj-card{margin:0 26px 18px;display:flex;gap:14px;align-items:center;padding:16px;border:1px solid var(--grey);
-  border-radius:15px;background:#fff}
-.cj-card-photo{width:76px;height:76px;flex:0 0 auto;border-radius:50%;object-fit:cover;
-  border:3px solid var(--green-strong)}
-.cj-card-body{min-width:0}
-.cj-card-name{color:var(--navy);font-family:"Playfair Display",serif;font-size:19px;line-height:1.15}
-.cj-card-title{margin-top:2px;color:var(--muted);font-size:12.5px}
-.cj-card-line{display:block;margin-top:4px;color:var(--text);font-size:13px;text-decoration:none}
-.cj-card-line b{color:var(--navy)}
+
 @media (max-width:680px){
   .deadline{padding:10px 14px;font-size:12.5px}
   .intro{padding:18px 16px 4px}
   .this-page{margin:12px 16px 4px}
   .section-head{margin:18px 16px 8px}
-  .plan-inline,.voices{padding-left:16px;padding-right:16px}
+  .plan-inline,.voice-strip{padding-left:16px;padding-right:16px}
   .start-card{margin:12px 16px 4px;padding:16px}
   .start-actions{grid-template-columns:1fr}
-  .need-clean,.terms-card,.refer-mini,.cj-quote,.cj-card{margin-left:16px;margin-right:16px}
+  .need-clean,.terms-card,.refer,.cj-quote{margin-left:16px;margin-right:16px}
+  .ref-tiers,.ref-row{grid-template-columns:1fr}
+  .ref-preview-thumb img{width:100px;height:53px}
 }
 @media (prefers-reduced-motion:reduce){.choose{transition:none}}
 </style>
@@ -509,48 +536,16 @@ a{color:inherit}
     </ul>
   </div>
 
-  <div class="section-head" id="sh-voices">
-    <span class="section-num">Part 3</span><h2>Real people, real results</h2>
-    <p>Written straight to me or to HTSA after their first mock call, first placement, or first offer.</p>
-  </div>
-
-  <section class="voices" aria-label="Member voices">
-    <div class="voices-grid">
-      <div class="voice voice--personal">
-        <div class="voice-meta">To CJ</div>
-        <blockquote>Hey <b>CJ</b>, it's Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could've made for my life right now. I think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!</blockquote>
-        <p class="voice-attr">Janaye · shared with HTSA</p>
-      </div>
-      <div class="voice voice--personal">
-        <div class="voice-meta">To CJ</div>
-        <blockquote>Just received this news from my first mock call and wanted to share... I'm SUPER grateful to you for helping me move forward with HTSA! Keep doing what you're doing!</blockquote>
-        <p class="voice-attr">Kate R. · shared with HTSA</p>
-      </div>
-      <div class="voice voice--personal">
-        <div class="voice-meta">To CJ</div>
-        <blockquote>I'm really enjoying the program so far and getting a ton of value out of it! Thanks again for helping me cross the line. The work you're doing is legitimately important, I hope you know that.</blockquote>
-        <p class="voice-attr">Jessica C. · shared with HTSA</p>
-      </div>
-      <div class="voice voice--personal">
-        <div class="voice-meta">To CJ</div>
-        <blockquote>Hey <b>CJ</b>, just wanted to say thanks. You didn't let me slip away after I tried to bail on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support is why I'm all in now.</blockquote>
-        <p class="voice-attr">Nick S. · shared with HTSA</p>
-      </div>
-      <div class="voice">
-        <div class="voice-meta">Member voice</div>
-        <blockquote>HTSA has played a major role in helping me transition into a career in sales. The coaching, interview prep, and overall guidance gave me the confidence and skills to position myself competitively for real sales opportunities. They genuinely care about helping you succeed.</blockquote>
-        <p class="voice-attr">Austin G. · shared with HTSA</p>
-      </div>
-      <div class="voice">
-        <div class="voice-meta">Member voice</div>
-        <blockquote>I'm a career sales professional who spent a solid year researching high ticket programs before choosing HTSA, and I'm glad I followed my gut. The difference here is the depth of support. Training and coaching that keep you accountable, plus a team and community that genuinely want you to win.</blockquote>
-        <p class="voice-attr">Morgan M. · shared with HTSA</p>
-      </div>
+  <section class="voice-strip" aria-label="Member voice">
+    <div class="voice-strip-card">
+      <div class="voice-strip-meta">To CJ · from a member</div>
+      <blockquote>Hey <b>CJ</b>, it's Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could've made for my life right now. I was channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. Thank you again.</blockquote>
+      <div class="voice-strip-attr">Janaye · Certified HTS Closer · <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">read more reviews on Trustpilot →</a></div>
     </div>
   </section>
 
   <div class="section-head" id="sh-start">
-    <span class="section-num">Part 4</span><h2>How to start · two options</h2>
+    <span class="section-num">Part 3</span><h2>How to start · two options</h2>
     <p>Both options land you in the same place. Pick whichever feels easier right now.</p>
   </div>
 
@@ -568,7 +563,7 @@ a{color:inherit}
     <div class="start-card-kicker">Option B · start it yourself</div>
     <h2>Pick your payment below, then let me know.</h2>
     <ol>
-      <li>Pick your option in Part 5 and complete the checkout.</li>
+      <li>Pick your option in Part 4 and complete the checkout.</li>
       <li>Text me the words <b>"I'm starting"</b> or <b>"Payment made"</b> so I know to watch for it clear.</li>
       <li>Two emails hit your inbox. Star the first one, use the second to log in.</li>
       <li>Book your 15 minute kickoff with Mark from the button below.</li>
@@ -580,7 +575,7 @@ a{color:inherit}
   </div>
 
   <div class="section-head" id="sh-price">
-    <span class="section-num">Part 5</span><h2>Your special offer pricing</h2>
+    <span class="section-num">Part 4</span><h2>Your special offer pricing</h2>
     <p>These prices close <b style="color:#61e38b">Thursday, Sept 4</b>. Access opens the moment your payment clears.</p>
   </div>
 
@@ -649,7 +644,7 @@ a{color:inherit}
   </div>
 
   <div class="section-head" id="sh-terms">
-    <span class="section-num">Part 6</span><h2>Terms of Service · please read</h2>
+    <span class="section-num">Part 5</span><h2>Terms of Service · please read</h2>
     <p>This is the fine print. Nothing hidden. You will confirm it in the checkout sheet before payment.</p>
   </div>
 
@@ -663,31 +658,55 @@ a{color:inherit}
     </div>
   </div>
 
-  <section class="inc" style="margin-top:8px">
-    <div class="h2">What you're getting</div>
-    <ul class="inc-list" id="incList"></ul>
-  </section>
+  <section class="refer" aria-label="Refer someone">
+    <div class="refer-kicker">Know someone this could help?</div>
+    <h3>Send them a preview card. Get paid when they enroll.</h3>
+    <p>Fill this in and it does two things at once. It sends them a ready to go text, and it lets me know to expect the name. <b>Referrals pay cash with no cap, per HTSA Career Change enrollment.</b></p>
 
-  <div class="refer-mini" id="referMini">
-    <h3>Know someone this could help?</h3>
-    <p>Text me their name and number at <a href="sms:+16166121735">(616) 612-1735</a> and I will reach out personally. Introductions from members are how our community keeps growing, and they always turn into the best fits.</p>
-  </div>
+    <div class="ref-tiers">
+      <div class="ref-tier">
+        <div class="ref-tier-amt">$250</div>
+        <div class="ref-tier-lbl">each · your first 3 enrollments</div>
+      </div>
+      <div class="ref-tier">
+        <div class="ref-tier-amt">$500</div>
+        <div class="ref-tier-lbl">each · everyone after that</div>
+      </div>
+    </div>
+
+    <div class="ref-form">
+      <div class="ref-field">
+        <label for="refYou">Your name</label>
+        <input id="refYou" type="text" autocomplete="name" placeholder="Your first and last name">
+      </div>
+      <div class="ref-row">
+        <div class="ref-field">
+          <label for="refName">Their first name</label>
+          <input id="refName" type="text" placeholder="Their first name">
+        </div>
+        <div class="ref-field">
+          <label for="refPhone">Their mobile</label>
+          <input id="refPhone" type="tel" inputmode="tel" placeholder="(555) 123-4567">
+        </div>
+      </div>
+
+      <div class="ref-preview-thumb">
+        <img src="/og-meet-cj.jpg" alt="Preview of the meet CJ card" onerror="this.style.display='none'">
+        <div class="rpt-cap"><b>This is what their phone shows.</b> A preview card lets them know you put their name forward. They tap it and land on my meet page.</div>
+      </div>
+
+      <div class="ref-preview" id="refPreview"></div>
+      <button class="ref-btn" type="button" id="refBtn" disabled>Send the intro text</button>
+      <p class="ref-msg" id="refMsg" hidden></p>
+      <div class="ref-added" id="refAdded"></div>
+      <p class="ref-fine">Your text app opens with the message ready. Nothing sends until you hit send yourself. I record the name so I know to expect them, and your referral gets credited to you.</p>
+    </div>
+  </section>
 
   <div class="cj-quote">
     <div class="cj-quote-kicker">One honest thought from CJ</div>
     <blockquote>If nothing has changed since we last talked, it likely will not change by 2027. Do not let weeks turn into months, and months turn into years. Start a remote sales career now, on your terms, from anywhere.</blockquote>
     <div class="cj-quote-attr">CJ Clay · Career Transformation Coach</div>
-  </div>
-
-  <div class="cj-card">
-    <img class="cj-card-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
-    <div class="cj-card-body">
-      <div class="cj-card-name">CJ Clay</div>
-      <div class="cj-card-title">HTSA · Career Transformation Coach</div>
-      <a class="cj-card-line" href="tel:+16166121735"><b>📞 (616) 612-1735</b></a>
-      <a class="cj-card-line" href="sms:+16166121735">💬 Text me anytime</a>
-      <a class="cj-card-line" href="mailto:cj@highticketsalesacademy.com">✉️ cj@highticketsalesacademy.com</a>
-    </div>
   </div>
 
   <footer class="foot">
@@ -700,6 +719,17 @@ a{color:inherit}
           <a href="https://www.youtube.com/@highticketsalesacademy" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶️</span>youtube.com/@highticketsalesacademy</a>
           <a href="https://www.instagram.com/highticketsalesacademy/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">📷</span>@highticketsalesacademy</a>
           <a href="https://www.facebook.com/HTSAcadamy/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">👥</span>facebook.com/HTSAcadamy</a>
+        </div>
+      </div>
+      <div class="bcard">
+        <img class="bcard-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
+        <div>
+          <div class="bcard-inf" aria-hidden="true">∞</div>
+          <div class="bcard-name">CJ Clay</div>
+          <div class="bcard-title">HTSA · Career Transformation Coach</div>
+          <a class="bcard-line" href="tel:+16166121735"><span aria-hidden="true">📞</span>(616) 612-1735</a>
+          <a class="bcard-line" href="mailto:cj@highticketsalesacademy.com"><span aria-hidden="true">✉️</span>cj@highticketsalesacademy.com</a>
+          <a class="bcard-line bcard-line--sms" href="sms:+16166121735"><span aria-hidden="true">💬</span>Text me anytime</a>
         </div>
       </div>
     </div>
@@ -748,7 +778,8 @@ a{color:inherit}
 <dialog class="sheet" id="currSheet" aria-labelledby="currTitle">
   <div class="sheet-head">
     <div class="sheet-kicker">Inside the program</div>
-    <h2 id="currTitle">What's included</h2>
+    <h2 id="currTitle">What is in your program</h2>
+    <p style="margin-top:6px;color:var(--muted);font-size:13.5px;line-height:1.5">Everything below is included. No upsells, no surprise fees.</p>
   </div>
   <div class="sheet-body"><ul class="curr-list" id="currList"></ul></div>
   <div class="sheet-foot"><button class="btn btn--go" type="button" id="currClose">Got it</button></div>
@@ -758,7 +789,7 @@ a{color:inherit}
 /* ============================================================
    Shared special-offer page. Optional ?n=FirstName personalizes
    the hello line. Do not put real prospect data in this block.
-   special-offer-build:1788479100
+   special-offer-build:1788480200
    ============================================================ */
 const BUYER = {
   firstName: "",
@@ -894,7 +925,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     BUYER.firstName = pname;
   }
 
-  INCLUDED.forEach(function(t){const li=document.createElement("li");li.textContent=t;el("incList").appendChild(li);});
+  if (el("incList")) INCLUDED.forEach(function(t){const li=document.createElement("li");li.textContent=t;el("incList").appendChild(li);});
   GUARANTEE_STEPS.forEach(function(t){const li=document.createElement("li");li.textContent=t;el("guarSteps").appendChild(li);});
   CURRICULUM.forEach(function(r){const li=document.createElement("li");
     const b=document.createElement("b");b.textContent=r[0];
@@ -1000,6 +1031,53 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     event("checkout_started", { linkLabel:p.name, linkUrl:p.url });
     setTimeout(function(){ window.location.href = p.url; }, 550);
   });
+
+  /* ---------- referral card ---------- */
+  const REFERRAL_LANDING = "https://closewithcjclay.com/meet-cj.html";
+  var you = el("refYou"), who = el("refName"), tel = el("refPhone");
+  var send = el("refBtn"), prev = el("refPreview"), msg = el("refMsg"), added = el("refAdded");
+  var sent = 0;
+  if (you && who && tel && send && prev && msg && added) {
+    if (pname && !you.value) you.value = pname;
+    function digits(v){ return (v || "").replace(/\D/g, ""); }
+    function message() {
+      var y = (you.value || "").trim() || "a friend";
+      var w = (who.value || "").trim() || "there";
+      var link = REFERRAL_LANDING + "?ref=" + encodeURIComponent(y);
+      return "Hey " + w + ", it's " + y + ". I just started with High Ticket Sales Academy, "
+        + "remote high ticket sales, and thought of you.\n\n"
+        + "CJ Clay is the coach who walked me through it. He will tell you straight whether it is a "
+        + "fit for you, no pressure either way. I told him to expect your name.\n\n"
+        + "CJ Clay\nHTSA Career Coach\n(616) 612-1735\nhighticketsalesacademy.com\n\n"
+        + link;
+    }
+    function refresh() {
+      prev.textContent = message();
+      send.disabled = !((who.value || "").trim() && digits(tel.value).length >= 10);
+    }
+    [you, who, tel].forEach(function(i){ i.addEventListener("input", refresh); });
+    refresh();
+    send.addEventListener("click", function() {
+      var w = (who.value || "").trim(), p = digits(tel.value);
+      if (!w || p.length < 10) return;
+      post({ action:"recordReferral", pageType:"special-offer",
+        referrerName:(you.value || "").trim(), referrerSlug:pname || "",
+        referralName:w, referralPhone:p,
+        enrollmentPageUrl:canonicalUrl(), userAgent:navigator.userAgent || "",
+        timestamp:new Date().toISOString() });
+      sent += 1;
+      var row = document.createElement("div");
+      row.textContent = "Sent to " + w + ". CJ has the name.";
+      added.appendChild(row);
+      msg.hidden = false;
+      msg.textContent = sent < 3
+        ? "That is " + sent + " of your first three. Each one who enrolls is $250 to you."
+        : "That is three. Everyone after this is $500 each.";
+      window.location.href = "sms:" + (p.length === 10 ? "+1" + p : "+" + p)
+        + "?&body=" + encodeURIComponent(message());
+      who.value = ""; tel.value = ""; refresh();
+    });
+  }
 })();
 </script>
 </body>
