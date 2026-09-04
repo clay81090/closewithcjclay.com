@@ -296,22 +296,61 @@ a{color:inherit}
 .this-page{margin:14px 26px 8px;padding:11px 14px;border:1px dashed var(--green-strong);border-radius:12px;
   background:rgba(97,227,139,.08);color:var(--navy);font-size:13px;line-height:1.5;text-align:center}
 
-/* ---------- section headers ---------- */
-.section-head{margin:26px 26px 10px;padding-top:16px;border-top:1px solid var(--grey)}
-.section-head .section-num{display:block;margin-bottom:4px;color:var(--green-dark);
-  font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-.section-head h2{display:block;color:var(--navy);font-family:"Playfair Display",serif;font-size:20px;line-height:1.2}
-.section-head p{margin-top:6px;color:var(--muted);font-size:13.5px;line-height:1.5}
+/* ---------- section headers / part accordion ---------- */
+.part-drop{margin:14px 26px;border:1.5px solid var(--grey);border-radius:14px;background:#fff;
+  box-shadow:0 6px 18px rgba(10,22,40,.05)}
+.part-drop > summary{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;
+  list-style:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.part-drop > summary::-webkit-details-marker{display:none}
+.part-drop > summary .section-num{display:inline-block;flex:0 0 auto;margin:2px 0 0;padding:4px 10px;
+  border-radius:999px;background:var(--navy);color:var(--green);font-size:11px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase}
+.part-drop > summary .part-copy{flex:1;min-width:0}
+.part-drop > summary h2{margin:0;color:var(--navy);font-family:"Playfair Display",serif;font-size:19px;line-height:1.2}
+.part-drop > summary p{margin-top:5px;color:var(--muted);font-size:13px;line-height:1.45}
+.part-drop > summary .part-tap{flex:0 0 auto;align-self:center;padding:6px 11px;border-radius:999px;
+  background:rgba(97,227,139,.18);color:var(--green-dark);font-size:11.5px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase}
+.part-drop > summary .part-chev{flex:0 0 auto;align-self:center;width:40px;height:40px;display:flex;
+  align-items:center;justify-content:center;border:2px solid var(--green-strong);border-radius:11px;
+  background:rgba(97,227,139,.14);color:var(--green-dark);font-size:20px;font-weight:800;line-height:1;
+  transition:transform 160ms ease,background 160ms ease,color 160ms ease}
+.part-drop[open] > summary{border-bottom:1px solid var(--grey)}
+.part-drop[open] > summary .part-tap{display:none}
+.part-drop[open] > summary .part-chev{transform:rotate(180deg);background:var(--green-strong);color:#04231a}
+.part-drop > summary:hover,.part-drop > summary:focus-visible{background:rgba(97,227,139,.07);outline:none}
+.part-body{padding:12px 14px 16px}
+.part-body > .plan-inline,
+.part-body > .need-clean,
+.part-body > .voice-strip,
+.part-body > .start-card,
+.part-body > .next-wrap,
+.part-body > .guar-strip,
+.part-body > .plans,
+.part-body > .guar,
+.part-body > .terms-card,
+.part-body > .plan-note{margin-left:0;margin-right:0}
+.part-body > .plan-inline{padding-left:0;padding-right:0}
+.part-body > .voice-strip{padding-left:0;padding-right:0}
+.part-body > .plans{padding-left:0;padding-right:0}
+.part-body > .guar{margin-left:0;margin-right:0}
+.part-body > .start-card{margin-top:0}
+.part-body > .next-wrap{margin-top:10px;margin-bottom:0}
 
-/* ---------- inline plan ---------- */
+/* ---------- inline plan (phase cards are also collapsible) ---------- */
 .plan-inline{padding:0 26px 6px}
-.phase-card{margin-bottom:12px;padding:16px 17px;border:1px solid var(--grey);border-radius:14px;background:#fbfcfe}
-.phase-card + .phase-card{margin-top:0}
-.phase-head-inline{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:8px}
+.phase-card{margin-bottom:10px;border:1px solid var(--grey);border-radius:14px;background:#fbfcfe}
+.phase-card > summary{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px 15px;
+  cursor:pointer;list-style:none}
+.phase-card > summary::-webkit-details-marker{display:none}
+.phase-card > summary::after{margin-left:auto;color:var(--muted);font-size:16px;content:"▾"}
+.phase-card[open] > summary{border-bottom:1px solid var(--grey)}
+.phase-card[open] > summary::after{content:"▴"}
+.phase-card > summary:hover{background:rgba(97,227,139,.08)}
 .phase-days{padding:4px 10px;border-radius:999px;background:var(--navy);color:var(--green);
   font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
-.phase-title{color:var(--navy);font-family:"Playfair Display",serif;font-size:18px;line-height:1.25;font-weight:700}
-.phase-card ul{margin:0;padding-left:18px;color:var(--text);font-size:13.5px;line-height:1.55}
+.phase-title{color:var(--navy);font-family:"Playfair Display",serif;font-size:17px;line-height:1.25;font-weight:700}
+.phase-card ul{margin:0;padding:10px 15px 14px 32px;color:var(--text);font-size:13.5px;line-height:1.55}
 .phase-card li{margin:5px 0}
 .phase-card b{color:var(--navy)}
 .plan-note{margin:0 26px 12px;padding:10px 14px;border-radius:10px;background:rgba(97,227,139,.1);
@@ -415,7 +454,7 @@ a{color:inherit}
   .deadline{padding:10px 14px;font-size:12.5px}
   .intro{padding:18px 16px 4px}
   .this-page{margin:12px 16px 4px}
-  .section-head{margin:18px 16px 8px}
+  .section-head,.part-drop{margin-left:16px;margin-right:16px}
   .plan-inline,.voice-strip{padding-left:16px;padding-right:16px}
   .start-card{margin:12px 16px 4px;padding:16px}
   .start-actions{grid-template-columns:1fr}
@@ -464,72 +503,86 @@ a{color:inherit}
     Tip: bookmark this page. This is the page I keep referring to when I say "your enrollment page".
   </div>
 
-  <div class="section-head" id="sh-plan">
-    <span class="section-num">Part 1</span><h2>Your 30 day game plan (the goal)</h2>
-    <p>This is the exact path from enrollment to placement. The 30 days is <b style="color:#61e38b">the goal, not an obligation</b>. Everyone moves at their own pace, and you get lifetime access so you never lose the coaching.</p>
-  </div>
-
-  <section class="plan-inline" aria-label="30 day game plan">
-    <div class="phase-card">
-      <div class="phase-head-inline">
-        <span class="phase-days">Days 1 to 5</span>
-        <div class="phase-title">Get in and get through the modules</div>
+  <details class="part-drop" id="sh-plan" open>
+    <summary>
+      <span class="section-num">Part 1</span>
+      <div class="part-copy">
+        <h2>Your 30 day game plan (the goal)</h2>
+        <p>The exact path from enrollment to placement. The 30 days is the goal, not an obligation.</p>
       </div>
+      <span class="part-tap">Tap to open</span>
+      <span class="part-chev" aria-hidden="true">▾</span>
+    </summary>
+    <div class="part-body">
+  <section class="plan-inline" aria-label="30 day game plan">
+    <details class="phase-card" open>
+      <summary>
+        <span class="phase-days">Days 1 to 5</span>
+        <span class="phase-title">Get in and get through the modules</span>
+      </summary>
       <ul>
         <li>Access opens. Welcome email arrives. Set your password and get into the certification platform.</li>
         <li><b>55 modules</b> waiting for you. Target is done by day 5, day 7 at the outside. Watch at 1.25x or 1.5x.</li>
         <li>Book your 15 minute kickoff with <b>Mark</b>, your Success Coach.</li>
         <li>Show up for the Tuesday 12 PM EST and Wednesday 5 PM EST live coaching calls from your first week.</li>
       </ul>
-    </div>
+    </details>
 
-    <div class="phase-card">
-      <div class="phase-head-inline">
+    <details class="phase-card">
+      <summary>
         <span class="phase-days">Days 5 to 12</span>
-        <div class="phase-title">Run your reps in the AI sandbox</div>
-      </div>
+        <span class="phase-title">Run your reps in the AI sandbox</span>
+      </summary>
       <ul>
         <li>Unlimited AI roleplay any hour you want. This is the part that actually makes you good.</li>
         <li>Master 5 TEDx coaching sales calls in AI roleplay. Get your first 30 awkward calls out of the way here.</li>
         <li>The AI critiques your tonality, pacing, and how deep your discovery went. Run them back to back.</li>
         <li>Keep attending the live calls. Bring a question from your reps.</li>
       </ul>
-    </div>
+    </details>
 
-    <div class="phase-card">
-      <div class="phase-head-inline">
+    <details class="phase-card">
+      <summary>
         <span class="phase-days">Days 12 to 16</span>
-        <div class="phase-title">Certify, then get your materials built</div>
-      </div>
+        <span class="phase-title">Certify, then get your materials built</span>
+      </summary>
       <ul>
         <li>Live mock call with <b>Mark</b>. Scored against a rubric. It is meant to be hard.</li>
         <li>Pass it and you are a <b>Certified High Ticket Closer</b>. That is the credential our partner companies recognize.</li>
         <li>Sit down with <b>Nate</b>, our Placement Director. You set your target niches, schedule, and pay range.</li>
         <li>Nate rewrites your LinkedIn and reformats your resume into the template our placed members use.</li>
       </ul>
-    </div>
+    </details>
 
-    <div class="phase-card">
-      <div class="phase-head-inline">
+    <details class="phase-card">
+      <summary>
         <span class="phase-days">Days 16 to 30</span>
-        <div class="phase-title">Pick a few great fits and go get one</div>
-      </div>
+        <span class="phase-title">Pick a few great fits and go get one</span>
+      </summary>
       <ul>
         <li>Nate introduces you directly to companies in our partner network. Introduced, not applied.</li>
         <li>Run <b>3 to 5 interviews</b> that genuinely fit inside one week. Small number, done properly.</li>
         <li>Placement usually lands between 1 and 3 weeks. Around 10 days is realistic if you are not dragging your feet.</li>
         <li>Get in, get the reps, start earning. Your first offer is a starting line, not a life sentence.</li>
       </ul>
-    </div>
+    </details>
   </section>
 
   <p class="plan-note"><b>After you are in the seat:</b> your first 90 days come with a ramp plan, KPI tracking, 12 real call reviews with Chad and the coaching team, and a private 1 on 1 with Chad once you have real numbers to work from. Coaching stays open for life so you never age out.</p>
+    </div>
+  </details>
 
-  <div class="section-head" id="sh-need">
-    <span class="section-num">Part 2</span><h2>What we need from you</h2>
-    <p>None of this is due on day one. All of it is what gets you placed and paid.</p>
-  </div>
-
+  <details class="part-drop" id="sh-need">
+    <summary>
+      <span class="section-num">Part 2</span>
+      <div class="part-copy">
+        <h2>What we need from you</h2>
+        <p>None of this is due on day one. All of it is what gets you placed and paid.</p>
+      </div>
+      <span class="part-tap">Tap to open</span>
+      <span class="part-chev" aria-hidden="true">▾</span>
+    </summary>
+    <div class="part-body">
   <div class="need-clean">
     <p class="lede">Simple, honest expectations. You show up, we show up harder.</p>
     <ul>
@@ -548,12 +601,20 @@ a{color:inherit}
       <div class="voice-strip-attr">Janaye · Certified HTS Closer · <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">read more reviews on Trustpilot →</a></div>
     </div>
   </section>
+    </div>
+  </details>
 
-  <div class="section-head" id="sh-start">
-    <span class="section-num">Part 3</span><h2>How to start · two options</h2>
-    <p>Option A: we do it live on the phone. Option B: you enroll yourself using the steps below (same flow that has worked for people who self-enrolled before).</p>
-  </div>
-
+  <details class="part-drop" id="sh-start">
+    <summary>
+      <span class="section-num">Part 3</span>
+      <div class="part-copy">
+        <h2>How to start · two options</h2>
+        <p>Option A: we do it live. Option B: you enroll yourself with the steps below.</p>
+      </div>
+      <span class="part-tap">Tap to open</span>
+      <span class="part-chev" aria-hidden="true">▾</span>
+    </summary>
+    <div class="part-body">
   <div class="start-card" id="startCard">
     <div class="start-card-kicker">Option A · do it live with me</div>
     <h2>Call or text me. We walk payment together.</h2>
@@ -621,12 +682,20 @@ a{color:inherit}
       </div>
     </div>
   </details>
+    </div>
+  </details>
 
-  <div class="section-head" id="sh-price">
-    <span class="section-num">Part 4</span><h2>Your special offer pricing</h2>
-    <p>These prices close <b style="color:#61e38b">Thursday, Sept 4</b>. Access opens the moment your payment clears.</p>
-  </div>
-
+  <details class="part-drop" id="sh-price">
+    <summary>
+      <span class="section-num">Part 4</span>
+      <div class="part-copy">
+        <h2>Your special offer pricing</h2>
+        <p>These prices close <b style="color:var(--green-dark)">Thursday, Sept 4</b>. Access opens the moment your payment clears.</p>
+      </div>
+      <span class="part-tap">Tap to open</span>
+      <span class="part-chev" aria-hidden="true">▾</span>
+    </summary>
+    <div class="part-body">
   <div class="guar-strip">
     <b>Placed in 6 months or refunded.</b>
     <span>Performance guarantee, confirmed for you.</span>
@@ -690,12 +759,20 @@ a{color:inherit}
       <ul id="guarSteps"></ul>
     </div>
   </div>
+    </div>
+  </details>
 
-  <div class="section-head" id="sh-terms">
-    <span class="section-num">Part 5</span><h2>Terms of Service · please read</h2>
-    <p>This is the fine print. Nothing hidden. You will confirm it in the checkout sheet before payment.</p>
-  </div>
-
+  <details class="part-drop" id="sh-terms">
+    <summary>
+      <span class="section-num">Part 5</span>
+      <div class="part-copy">
+        <h2>Terms of Service · please read</h2>
+        <p>Fine print, nothing hidden. You will confirm it again before payment.</p>
+      </div>
+      <span class="part-tap">Tap to open</span>
+      <span class="part-chev" aria-hidden="true">▾</span>
+    </summary>
+    <div class="part-body">
   <div class="terms-card">
     <div class="terms-card-kicker">Required reading before checkout</div>
     <h3>What you are agreeing to</h3>
@@ -705,6 +782,8 @@ a{color:inherit}
       <a class="terms-btn terms-btn--secondary" href="#" id="currBtn">See what's in the program</a>
     </div>
   </div>
+    </div>
+  </details>
 
   <section class="refer" aria-label="Refer someone">
     <div class="refer-kicker">Know someone this could help?</div>
@@ -852,13 +931,12 @@ a{color:inherit}
 
 <script>
 /* ============================================================
-   Shared self-enroll page (standard / new people pricing).
-   This file: https://closewithcjclay.com/enroll.html
-   Special offer: https://closewithcjclay.com/special-offer.html
-   Or same file with ?offer=reactivation
+   Shared self-enroll page.
+   Special offer (default):  https://closewithcjclay.com/special-offer.html
+   Standard / new people:    https://closewithcjclay.com/special-offer.html?offer=standard
    Optional: ?n=First  ?e=email@x.com  ?p=+15555550100
    Do not put real prospect data in the BUYER block below.
-   enroll-build:1788482800
+   enroll-build:1788483600
    ============================================================ */
 const BUYER = {
   firstName: "",
@@ -996,6 +1074,18 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       if (nextWrap.open) event("next_steps_opened");
     }, { once: true });
   }
+
+  /* One part open at a time so they walk the page step by step */
+  document.querySelectorAll("details.part-drop").forEach(function (d) {
+    d.addEventListener("toggle", function () {
+      if (!d.open) return;
+      document.querySelectorAll("details.part-drop").forEach(function (other) {
+        if (other !== d) other.open = false;
+      });
+      try { d.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (e) {}
+      event("part_opened", { linkLabel: d.id || "part" });
+    });
+  });
 
   /* ---------- header + mode copy ---------- */
   el("trackPill").textContent = T.label;
