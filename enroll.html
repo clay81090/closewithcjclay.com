@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://closewithcjclay.com/special-offer.html">
 <meta property="og:title" content="Your special offer · HTSA">
-<meta property="og:description" content="One page. The plan, the pricing, and exactly how to start. Deadline: Thursday, Sept 4.">
+<meta property="og:description" content="One page. The plan, the pricing, and exactly how to start.">
 <meta property="og:image" content="https://closewithcjclay.com/cj-headshot-600.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -852,24 +852,25 @@ a{color:inherit}
 
 <script>
 /* ============================================================
-   Shared self-enroll page.
-   Special offer (default):  https://closewithcjclay.com/special-offer.html
-   Standard / new people:    https://closewithcjclay.com/special-offer.html?offer=standard
+   Shared self-enroll page (standard / new people pricing).
+   This file: https://closewithcjclay.com/enroll.html
+   Special offer: https://closewithcjclay.com/special-offer.html
+   Or same file with ?offer=reactivation
    Optional: ?n=First  ?e=email@x.com  ?p=+15555550100
    Do not put real prospect data in the BUYER block below.
-   special-offer-build:1788482800
+   enroll-build:1788482800
    ============================================================ */
 const BUYER = {
   firstName: "",
   fullName:  "",
   email:     "",
   phone:     "",
-  slug:      "special-offer",
+  slug:      "enroll-standard",
   track:     "closer",
   /* "reactivation" = special offer ($5k / 3-pay / Clarity $500).
      "standard"     = regular closer ($6k / 4-pay / Clarity $600).
      URL ?offer=standard overrides this. */
-  offer:     "reactivation",
+  offer:     "standard",
   show:      ["pif", "plan", "clarity"]
 };
 
