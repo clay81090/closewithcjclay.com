@@ -1363,9 +1363,119 @@
     padding-top: 6px;
   }
 
-  /* CJ Reviews columns: stretch so bottoms line up toward the footer */
+  /* CJ Reviews: Janaye shown; rest behind See more */
   .ref-strip-inner--personal-reviews {
+    display: block;
     align-items: stretch;
+  }
+
+  .ref-strip-quote--janaye-tab {
+    width: 100%;
+    max-width: none;
+    padding: 14px 18px 12px;
+    margin: 0 0 12px;
+  }
+
+  .ref-strip-quote--janaye-tab .ref-strip-quote-meta {
+    margin: 0 0 6px;
+  }
+
+  .ref-strip-quote--janaye-tab .ref-strip-quote-body {
+    max-height: none;
+    overflow: visible;
+    font-size: 12.5px;
+    line-height: 1.55;
+    white-space: normal;
+  }
+
+  .ref-strip-quote--janaye-tab .ref-strip-quote-attr {
+    margin-top: 8px;
+    padding-top: 6px;
+  }
+
+  .cj-reviews-more {
+    margin: 0;
+    border: none;
+  }
+
+  .cj-reviews-more > summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 18px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 3px solid #93c5fd;
+    border-left: 5px solid #60a5fa;
+    box-shadow: 0 0 0 1.5px rgba(226, 178, 39, 0.45), 0 4px 14px rgba(10, 22, 40, 0.06);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    user-select: none;
+  }
+
+  .cj-reviews-more > summary::-webkit-details-marker { display: none; }
+
+  .cj-reviews-more-summary-text {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .cj-reviews-more-summary-sub {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .cj-reviews-more-arrow {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #1976D2;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.35);
+    transition: transform 0.2s ease;
+  }
+
+  .cj-reviews-more[open] > summary .cj-reviews-more-arrow {
+    transform: rotate(90deg);
+  }
+
+  .cj-reviews-more[open] > summary {
+    margin-bottom: 12px;
+  }
+
+  .cj-reviews-more-panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .cj-reviews-more-panel .ref-strip-quote {
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .cj-reviews-more-panel {
+      grid-template-columns: 1fr;
+    }
+    .cj-reviews-more > summary {
+      padding: 12px 14px;
+      font-size: 13px;
+    }
   }
 
   .ref-strip-inner--personal-reviews .ref-strip-mini-stack {
@@ -2462,14 +2572,28 @@
 </a></div>
   </div>
 
-  <!-- CJ personal reviews (precall: white cards only) -->
+  <!-- CJ personal reviews (Janaye visible; rest behind See more) -->
   <div class="ref-strip">
     <div class="ref-strip-banner">
       <div class="ref-strip-label">CJ Reviews</div>
       <p class="ref-strip-banner-desc">Real messages from people who worked directly with CJ.</p>
     </div>
     <div class="ref-strip-inner ref-strip-inner--personal-reviews">
-      <div class="ref-strip-mini-stack">
+      <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal-blue ref-strip-quote--janaye-tab">
+        <div class="ref-strip-quote-meta">To CJ</div>
+        <blockquote class="ref-strip-quote-body">Hey CJ, it&#x27;s Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could&#x27;ve made for my life right now.<br><br>I think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!</blockquote>
+        <p class="ref-strip-quote-attr">— Janaye · text message</p>
+      </div>
+
+      <details class="cj-reviews-more" id="cj-reviews-more">
+        <summary>
+          <span class="cj-reviews-more-summary-text">
+            See more reviews
+            <span class="cj-reviews-more-summary-sub">8 more messages from people who worked with CJ</span>
+          </span>
+          <span class="cj-reviews-more-arrow" aria-hidden="true">▸</span>
+        </summary>
+        <div class="cj-reviews-more-panel">
           <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you&#x27;re doing.</blockquote>
@@ -2495,13 +2619,6 @@
             <blockquote class="ref-strip-quote-body">CJ, thank you so much for taking the time to read through my answers before we ever got on a call. That meant a lot. Hearing that you actually read my stuff made me want to work with you specifically, not someone else. I appreciate the kind words more than you know, and I&#x27;m really excited to get started with you.</blockquote>
             <p class="ref-strip-quote-attr">— Brittany Levine · text message</p>
           </div>
-      </div>
-      <div class="ref-strip-mini-stack">
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal-blue">
-            <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">Hey CJ, it&#x27;s Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could&#x27;ve made for my life right now.<br><br>I think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!</blockquote>
-            <p class="ref-strip-quote-attr">— Janaye · text message</p>
-          </div>
           <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">Hey CJ, just wanted to say thanks, seriously. You and Mark didn&#x27;t let me slip away after I almost bailed on our call. You stayed patient, kept it real, and showed me why this team&#x27;s different. That kind of support? That&#x27;s why I&#x27;m all in now. Appreciate you both pulling me through. Means a lot.</blockquote>
@@ -2522,7 +2639,8 @@
             <blockquote class="ref-strip-quote-body">CJ, I&#x27;m SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you&#x27;re doing!</blockquote>
             <p class="ref-strip-quote-attr">— Kate Robinson · text message</p>
           </div>
-      </div>
+        </div>
+      </details>
     </div>
   </div>
 
@@ -2637,6 +2755,16 @@
       postEvent('link_click', { linkLabel: title.trim(), linkUrl: a.href });
     });
   });
+
+  var reviewsMore = document.getElementById('cj-reviews-more');
+  if (reviewsMore) {
+    reviewsMore.addEventListener('toggle', function() {
+      if (reviewsMore.open && !reviewsMore.getAttribute('data-tracked')) {
+        reviewsMore.setAttribute('data-tracked', '1');
+        postEvent('reviews_see_more_opened');
+      }
+    });
+  }
 })();
 </script>
 </body>
