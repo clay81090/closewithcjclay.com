@@ -539,14 +539,6 @@ a{color:inherit}
   </details>
 
 
-  <section class="cta">
-    <h2>Bet on yourself.</h2>
-    <p>Thirty days of real work, a locked in rate before the increase, and a team whose job is
-      getting you into a seat. If you're in, everything you need is on your enrollment page.</p>
-    <a class="btn" id="enrollBtn" href="#">Go to my enrollment page</a>
-    <a class="cta-sms" href="sms:+16166121735">Question first? Text me at <b>(616) 612-1735</b></a>
-  </section>
-
   <footer class="foot">
     <b>CJ Clay · High Ticket Sales Academy</b><br>
     <a href="tel:+16166121735">(616) 612-1735</a> ·
@@ -585,11 +577,13 @@ const REFERRAL_LANDING = "https://closewithcjclay.com/meet-cj.html";
   }
   var e = (q.get("e") || "").trim();
   var btn = el("enrollBtn");
-  if (/^[A-Za-z0-9._-]+\.html$/.test(e)) {
-    btn.href = "/" + e;
-  } else {
-    btn.textContent = "Text me and I'll send your enrollment page";
-    btn.href = "sms:+16166121735";
+  if (btn) {
+    if (/^[A-Za-z0-9._-]+\.html$/.test(e)) {
+      btn.href = "/" + e;
+    } else {
+      btn.textContent = "Text me and I'll send your enrollment page";
+      btn.href = "sms:+16166121735";
+    }
   }
   post({ action: "recordResourcePageEvent", event: "page_open", pageType: "roadmap",
          resourceSlug: n || "generic", enrollmentPageUrl: canonical(),
