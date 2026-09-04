@@ -50,6 +50,17 @@ a{color:inherit}
   line-height:1.5;list-style:none}
 .inc-list li::before{flex:0 0 auto;margin-top:1px;color:var(--green-strong);font-size:15px;
   font-weight:800;content:"✓"}
+.inc-list b{color:var(--navy)}
+.return-sec{margin:0 26px 16px;padding:18px 18px 16px;border:1px solid var(--grey);border-radius:14px;
+  background:#f7f9fc}
+.return-sec .h2{margin-bottom:6px}
+.return-sub{margin:0 0 12px;color:var(--muted);font-size:14px;line-height:1.5}
+.return-list{display:grid;gap:8px;margin:0;padding:0}
+.return-list li{display:flex;gap:10px;align-items:flex-start;padding:12px 13px;border:1px solid rgba(0,201,122,.22);
+  border-radius:12px;background:var(--white);color:var(--text);font-size:14.5px;line-height:1.5;list-style:none}
+.return-list li::before{flex:0 0 auto;margin-top:1px;color:var(--green-strong);font-size:15px;
+  font-weight:800;content:"✓"}
+.return-list b{color:var(--navy)}
 
 /* ---------- guarantee ---------- */
 .guar-strip{display:flex;gap:10px;align-items:center;margin:0;padding:12px 26px;
@@ -215,7 +226,7 @@ a{color:inherit}
   .page{width:100%;margin:0;border-radius:0}
   .top{padding:18px 16px 16px}
   .inc,.plans{padding-right:16px;padding-left:16px}
-  .guar,.third,.docs,.next-wrap{margin-right:16px;margin-left:16px}
+  .guar,.third,.docs,.next-wrap,.return-sec,.inc{margin-right:16px;margin-left:16px}
   .guar-strip{padding:10px 16px;flex-wrap:wrap}
   .guar-strip a{margin-left:0}
   .after,.after-pay{padding:0 16px 18px}
@@ -311,8 +322,23 @@ a{color:inherit}
     </div>
   </section>
 
+  <section class="inc">
+    <div class="h2">What you're getting</div>
+    <ul class="inc-list" id="incList"></ul>
+  </section>
+
+  <section class="return-sec" aria-label="What HTSA needs in return">
+    <div class="h2">What HTSA needs in return</div>
+    <p class="return-sub">Once you have results. Not on day one.</p>
+    <ul class="return-list">
+      <li><b>Reviews across all platforms</b> · Honest reviews in your own words.</li>
+      <li><b>Video testimonial after 90 days</b> · Short and real, once you have results to talk about.</li>
+      <li><b>3 introductions</b> · People who could use this. First 3 who enrol pay you $250 each. Everyone after that pays you $500 each.</li>
+    </ul>
+  </section>
+
   <details class="price-drop" id="priceDrop">
-    <summary><span class="price-pill">Last</span> Your enrollment options</summary>
+    <summary><span class="price-pill">Pricing</span> Your enrollment options</summary>
 
   <div class="guar-strip">
     <b>Placed in 6 months or refunded.</b>
@@ -369,10 +395,23 @@ a{color:inherit}
     </div>
   </section>
 
+  <div class="guar" id="guarantee">
+    <span class="guar-tag" id="guarTag">Performance guarantee · confirmed</span>
+    <h3 id="guarTitle">Placed within 6 months, or your money back.</h3>
+    <p id="guarBody">Do your part and if you have not secured a qualifying role within 6 months of
+      certification, or completed at least 50 interviews, you qualify for a full refund.
+      Documentation required.</p>
+    <div class="guar-you">
+      <b>Your part:</b>
+      <ul id="guarSteps"></ul>
+    </div>
+  </div>
+  </details>
+
   <details class="next-wrap" id="afterPay">
-    <summary>2 Ways to enrol: Option 1) Call me - 10 minutes, Option 2) Self-Enroll 'Follow these steps in order'</summary>
+    <summary>2 options · Call me now, or self-enroll and follow these steps</summary>
     <div class="next">
-      <p class="next-sub"><b>Option 1 · Call me · 10 minutes</b></p>
+      <p class="next-sub"><b>Option 1 · Call me now</b></p>
       <div class="next-step">
         <div class="next-num">1</div>
         <div class="next-body">
@@ -438,28 +477,10 @@ a{color:inherit}
     </div>
   </details>
 
-  <div class="guar" id="guarantee">
-    <span class="guar-tag" id="guarTag">Performance guarantee · confirmed</span>
-    <h3 id="guarTitle">Placed within 6 months, or your money back.</h3>
-    <p id="guarBody">Do your part and if you have not secured a qualifying role within 6 months of
-      certification, or completed at least 50 interviews, you qualify for a full refund.
-      Documentation required.</p>
-    <div class="guar-you">
-      <b>Your part:</b>
-      <ul id="guarSteps"></ul>
-    </div>
-  </div>
-
-  <section class="inc">
-    <div class="h2">What you're getting</div>
-    <ul class="inc-list" id="incList"></ul>
-  </section>
-
   <div class="docs">
     <a class="doc" href="#" id="currBtn">📘 What's in the program</a>
     <a class="doc" id="termsBtn" target="_blank" rel="noopener noreferrer">📄 Terms of Service</a>
   </div>
-  </details>
 
   <footer class="foot">
     <div class="foot-top">
@@ -539,7 +560,7 @@ a{color:inherit}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1788547517
+   close-build:1788548494
    ============================================================ */
 const BUYER = {
   firstName: "Ashley",
