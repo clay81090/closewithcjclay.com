@@ -128,38 +128,76 @@ a{color:inherit}
   color:rgba(255,255,255,.8);font-size:15px;line-height:1.65}
 .life-excerpt strong{color:var(--green)}
 
-/* ---------- "more" disclosure ---------- */
+/* ---------- visible resources (3 across + Trustpilot + book + more) ---------- */
 .more{background:var(--blue-light)}
-.more-summary{display:flex;min-height:64px;align-items:center;justify-content:space-between;gap:14px;
-  padding:14px 18px;border:1px solid var(--blue-border);border-radius:13px;background:var(--white);
-  cursor:pointer;list-style:none}
-.more-summary::-webkit-details-marker{display:none}
-.more-summary:hover,.more-summary:focus-visible{border-color:var(--green-strong);outline:none;
-  box-shadow:0 0 0 4px rgba(0,201,122,.12)}
-.more-summary-title{color:var(--navy);font-size:16px;font-weight:800}
-.more-summary-sub{margin-top:2px;color:var(--muted);font-size:13px;font-weight:500}
-.chev{flex:0 0 auto;color:var(--green-dark);font-size:20px;transition:transform 180ms ease}
-details[open] .chev{transform:rotate(180deg)}
-.more-grid{display:grid;gap:12px;margin-top:14px}
-.proof-card{overflow:hidden;border:1px solid var(--blue-border);border-radius:13px;background:var(--white)}
-.proof-head{padding:13px 15px 11px}
-.proof-tag{color:var(--green-dark);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
-.proof-name{margin-top:3px;color:var(--navy);font-size:17px;font-weight:800}
-.proof-desc{margin-top:3px;color:var(--muted);font-size:13px;line-height:1.5}
-.yt{position:relative;width:100%;aspect-ratio:16/9;border:0;border-top:1px solid var(--grey);
-  background:var(--navy);cursor:pointer;display:block;padding:0}
+.cj-resources-kicker{margin:0 0 10px;color:var(--green-dark);font-size:11px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase}
+.proof-squares{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:10px 0 12px}
+.proof-square{display:flex;flex-direction:column;min-height:100%;overflow:hidden;border:2px solid #f59e0b;
+  border-radius:14px;background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);
+  box-shadow:0 8px 20px rgba(10,22,40,.06)}
+.proof-square-copy{padding:12px 13px 10px}
+.proof-square-kicker{margin-bottom:5px;color:#b45309;font-size:10px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase}
+.proof-square h3{margin:0 0 6px;color:var(--navy);font-size:15px;line-height:1.3}
+.proof-square p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}
+.proof-square .yt{border-top:1px solid rgba(180,83,9,.2);border-radius:0;aspect-ratio:16/9}
+.proof-square-site{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  min-height:140px;padding:16px 12px;text-decoration:none;color:#fff;
+  background:radial-gradient(circle at 80% 20%,rgba(97,227,139,.22),transparent 16rem),
+  linear-gradient(145deg,#0a1628,#152a46)}
+.proof-square-site-kicker{color:#61e38b;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.proof-square-site-name{font-family:"Playfair Display",serif;font-size:17px;line-height:1.2;text-align:center}
+.proof-square-site-url{color:rgba(255,255,255,.72);font-size:12px;font-weight:700}
+.proof-square-cta{display:block;margin:0 13px 13px;padding:10px 12px;border-radius:9px;background:var(--navy);
+  color:#fff;font-size:12px;font-weight:700;text-align:center;text-decoration:none;border:0;cursor:pointer;
+  font-family:inherit;width:calc(100% - 26px)}
+.proof-square-cta:hover{filter:brightness(1.08)}
+.precall-trust-bar{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin:0 0 12px;
+  padding:16px 18px;border:2px solid var(--green);border-radius:12px;
+  background:linear-gradient(145deg,#0a1628,#163056);color:#d7dee8;font-size:16px;font-weight:700;
+  letter-spacing:.02em;text-align:center;text-decoration:none;box-shadow:0 8px 22px rgba(10,22,40,.16)}
+.precall-trust-bar:hover{color:#fff;border-color:#61e38b}
+.precall-trust-stars{color:#f5c518;font-size:22px;letter-spacing:3px;line-height:1;
+  text-shadow:0 1px 2px rgba(0,0,0,.35),0 0 10px rgba(245,197,24,.35)}
+.book-link{display:block;margin:0 0 12px;border-radius:14px;overflow:hidden;border:1px solid var(--blue-border);
+  background:#0a1628;box-shadow:0 10px 24px rgba(10,22,40,.12);text-decoration:none}
+.book-link img{display:block;width:100%;height:auto}
+.book-link:hover{outline:3px solid rgba(97,227,139,.35);outline-offset:2px}
+.book-link-cap{padding:10px 14px;color:rgba(255,255,255,.85);font-size:13px;font-weight:700;text-align:center;
+  background:linear-gradient(145deg,#0a1628,#152a46)}
+.book-link-cap span{color:var(--green)}
+.precall-more{margin:0;border:2px solid rgba(10,22,40,.12);border-radius:12px;background:#f7f9fc}
+.precall-more>summary{cursor:pointer;list-style:none;padding:13px 16px;color:var(--navy);font-size:15px;
+  font-weight:800;text-align:center}
+.precall-more>summary::-webkit-details-marker{display:none}
+.precall-more>summary::after{content:" ▾";color:var(--muted);font-weight:700}
+.precall-more[open]>summary::after{content:" ▴"}
+.precall-more-list{display:grid;gap:8px;padding:0 12px 12px}
+.precall-link-row{display:flex;align-items:center;justify-content:center;gap:10px;margin:0;padding:13px 16px;
+  border:2px solid rgba(0,201,122,.35);border-radius:12px;
+  background:linear-gradient(135deg,rgba(97,227,139,.1),#edf5ff);color:var(--navy);font-size:14px;font-weight:800;
+  text-align:center;text-decoration:none;box-shadow:0 0 0 3px rgba(0,201,122,.08);cursor:pointer;
+  font-family:inherit;width:100%}
+.precall-link-row:hover{border-color:var(--green);background:rgba(97,227,139,.16)}
+.yt{position:relative;width:100%;aspect-ratio:16/9;border:0;background:var(--navy);cursor:pointer;display:block;padding:0}
 .yt img{width:100%;height:100%;object-fit:cover;display:block}
 .yt::after{position:absolute;top:50%;left:50%;width:64px;height:44px;transform:translate(-50%,-50%);
   border-radius:11px;background:rgba(10,22,40,.82);content:"";box-shadow:0 4px 16px rgba(0,0,0,.35)}
 .yt-tri{position:absolute;top:50%;left:50%;z-index:2;transform:translate(-42%,-50%);
   border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:15px solid #fff;width:0;height:0}
-.yt iframe{width:100%;height:100%;border:0;display:block}
-.link-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 15px;
-  border:1px solid var(--blue-border);border-radius:12px;background:var(--white);
-  color:var(--navy);font-size:15px;font-weight:700;text-decoration:none}
-.link-row:hover,.link-row:focus-visible{border-color:var(--green-strong);outline:none}
-.link-row span{color:var(--muted);font-size:12px;font-weight:500}
-.link-row .chev{transform:rotate(-90deg)}
+
+/* In-page video player (large, not full screen) */
+.yt-stage{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;
+  padding:24px 16px;background:rgba(4,12,24,.72);backdrop-filter:blur(4px)}
+.yt-stage[hidden]{display:none!important}
+.yt-stage-card{position:relative;width:min(760px,92vw);border-radius:16px;overflow:hidden;
+  background:#000;box-shadow:0 28px 80px rgba(0,0,0,.5)}
+.yt-stage-card iframe{display:block;width:100%;aspect-ratio:16/9;border:0;background:#000}
+.yt-stage-close{position:absolute;top:10px;right:10px;z-index:2;min-width:40px;min-height:40px;
+  border:0;border-radius:10px;background:rgba(255,255,255,.92);color:var(--navy);font-size:20px;
+  font-weight:800;cursor:pointer}
+.yt-stage-cap{padding:12px 16px;background:#0a1628;color:#fff;font-size:14px;font-weight:700}
 
 /* ---------- close ---------- */
 .close-section{padding:32px 28px;text-align:center;color:var(--white);
@@ -212,7 +250,7 @@ details[open] .chev{transform:rotate(180deg)}
   .age-control{align-items:flex-start;flex-direction:column;gap:10px}
   .year-grid{gap:3px}
   .life-two{grid-template-columns:1fr}
-  .more-summary{padding:13px 14px}
+  .proof-squares{grid-template-columns:1fr}
   .footer{padding:20px 16px 0}
   .footer-top{grid-template-columns:1fr;gap:18px;padding-bottom:18px}
   .bcard{gap:13px;padding:14px}
@@ -307,64 +345,89 @@ details[open] .chev{transform:rotate(180deg)}
     </div>
   </section>
 
-  <section class="section more">
-    <details id="moreDetails">
-      <summary class="more-summary">
-        <span>
-          <span class="more-summary-title">More, if you want it</span>
-          <span class="more-summary-sub">An employer, a member, and our reviews. None of it required.</span>
-        </span>
-        <span class="chev" aria-hidden="true">⌄</span>
-      </summary>
+  <section class="section more" aria-labelledby="proofTitle">
+    <div class="cj-resources-kicker">If you want to check out more...</div>
+    <h2 id="proofTitle">Meet Chad, the website, and why employers hire our members.</h2>
+    <p class="section-lede">Three things worth seeing. Tap a video and it plays right here.</p>
 
-      <div class="more-grid">
-        <div class="proof-card">
-          <div class="proof-head">
-            <div class="proof-tag">Someone who hires our people</div>
-            <div class="proof-name">Taylor Conroy</div>
-            <p class="proof-desc">A TEDx coach who hires HTSA members. Why he trusts the certification.</p>
-          </div>
-          <button class="yt" type="button" data-yt="bd65afldLmE" aria-label="Play Taylor Conroy video">
-            <img src="https://i.ytimg.com/vi/bd65afldLmE/hqdefault.jpg" alt="" loading="lazy">
-            <span class="yt-tri" aria-hidden="true"></span>
-          </button>
+    <div class="proof-squares">
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">CEO &amp; Founder</div>
+          <h3>Meet Chad</h3>
+          <p>Chad Aleo, founder of HTSA. Who we are and what this career path actually looks like.</p>
         </div>
+        <button class="yt" type="button" data-yt="eLAWEwE7pl4" data-yt-title="Meet Chad — CEO &amp; Founder at HTSA" aria-label="Play Meet Chad video">
+          <img src="https://i.ytimg.com/vi/eLAWEwE7pl4/hqdefault.jpg" alt="" loading="lazy">
+          <span class="yt-tri" aria-hidden="true"></span>
+        </button>
+        <button class="proof-square-cta" type="button" data-yt="eLAWEwE7pl4" data-yt-title="Meet Chad — CEO &amp; Founder at HTSA">Watch Meet Chad</button>
+      </article>
 
-        <div class="proof-card">
-          <div class="proof-head">
-            <div class="proof-tag">A member, in her own words</div>
-            <div class="proof-name">Brianna</div>
-            <p class="proof-desc">Came from the Tony Robbins team. Her experience going through HTSA.</p>
-          </div>
-          <button class="yt" type="button" data-yt="TWacdj9x45o" aria-label="Play Brianna video">
-            <img src="https://i.ytimg.com/vi/TWacdj9x45o/hqdefault.jpg" alt="" loading="lazy">
-            <span class="yt-tri" aria-hidden="true"></span>
-          </button>
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">More stories and outcomes</div>
+          <h3>HTSA Website</h3>
+          <p>The main site, with more member stories, screenshots, and how the program is presented.</p>
         </div>
-
-        <a class="link-row" href="https://www.trustpilot.com/review/highticketsalesacademy.com"
-           target="_blank" rel="noopener noreferrer">
-          <span style="color:var(--navy);font-size:15px;font-weight:700">★★★★★ Trustpilot reviews
-            <span style="display:block">4.9 out of 5, written by members</span></span>
-          <span class="chev" aria-hidden="true">⌄</span>
+        <a class="proof-square-site" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">
+          <span class="proof-square-site-kicker">Preview</span>
+          <span class="proof-square-site-name">High Ticket Sales Academy</span>
+          <span class="proof-square-site-url">highticketsalesacademy.com</span>
         </a>
+        <a class="proof-square-cta" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">Open the website</a>
+      </article>
 
-        <a class="link-row" href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf"
-           target="_blank" rel="noopener noreferrer">
-          <span style="color:var(--navy);font-size:15px;font-weight:700">Top 20 companies in high ticket sales
-            <span style="display:block">Independent industry list (PDF)</span></span>
-          <span class="chev" aria-hidden="true">⌄</span>
-        </a>
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">Employer-side proof</div>
+          <h3>Taylor Conroy</h3>
+          <p>A TEDx coach who hires HTSA members. Why he trusts this certification.</p>
+        </div>
+        <button class="yt" type="button" data-yt="bd65afldLmE" data-yt-title="Taylor Conroy (TEDx Coach) — Why He Hires Our Members" aria-label="Play Taylor Conroy video">
+          <img src="https://i.ytimg.com/vi/bd65afldLmE/hqdefault.jpg" alt="" loading="lazy">
+          <span class="yt-tri" aria-hidden="true"></span>
+        </button>
+        <button class="proof-square-cta" type="button" data-yt="bd65afldLmE" data-yt-title="Taylor Conroy (TEDx Coach) — Why He Hires Our Members">Watch Taylor Conroy</button>
+      </article>
+    </div>
 
-        <a class="link-row" href="https://www.highticketsalesacademy.com"
-           target="_blank" rel="noopener noreferrer">
-          <span style="color:var(--navy);font-size:15px;font-weight:700">The HTSA website
-            <span style="display:block">Curriculum, members, and how placement works</span></span>
-          <span class="chev" aria-hidden="true">⌄</span>
-        </a>
+    <a class="precall-trust-bar" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer" aria-label="Read HTSA reviews on Trustpilot, rated 4.9 stars out of 5">
+      <span class="precall-trust-stars" aria-hidden="true">★★★★★</span>
+      <span>Trustpilot Reviews, 4.9 out of 5</span>
+    </a>
+
+    <a class="book-link" href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer" aria-label="Chad Aleo's book on Amazon, The Book on High Ticket Sales">
+      <img src="/media/chad-aleo-book-banner.png" alt="The Book on High Ticket Sales by Chad Aleo, available on Amazon" width="732" height="274" loading="lazy">
+      <div class="book-link-cap">Chad's book · <span>Available on Amazon →</span></div>
+    </a>
+
+    <details class="precall-more" id="moreDetails">
+      <summary>More resources · client success stories</summary>
+      <div class="precall-more-list">
+        <button class="precall-link-row" type="button" data-yt="WOVqPR-ufYM" data-yt-title="Cassie — Single Mom · Relatable success story">
+          Cassie · Single Mom · Relatable success story
+        </button>
+        <button class="precall-link-row" type="button" data-yt="FqlY37NaIsk" data-yt-title="Dana — Unsolicited HTSA Personal Review">
+          Dana · Unsolicited HTSA personal review
+        </button>
+        <button class="precall-link-row" type="button" data-yt="5pVlD6EKy1k" data-yt-title="Josh · Alex Hormozi background">
+          Josh · Alex Hormozi · High-profile background
+        </button>
+        <button class="precall-link-row" type="button" data-yt="TWacdj9x45o" data-yt-title="Brianna · Tony Robbins · Credibility from big name">
+          Brianna · Tony Robbins · Credibility from big name
+        </button>
       </div>
     </details>
   </section>
+
+  <div class="yt-stage" id="ytStage" hidden>
+    <div class="yt-stage-card" role="dialog" aria-modal="true" aria-labelledby="ytStageCap">
+      <button class="yt-stage-close" type="button" id="ytStageClose" aria-label="Close video">×</button>
+      <div id="ytStageFrame"></div>
+      <div class="yt-stage-cap" id="ytStageCap"></div>
+    </div>
+  </div>
 
   <section class="close-section">
     <h2 id="closeTitle">See you then.</h2>
@@ -598,27 +661,69 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   clip.addEventListener("error", function () { clip.closest("section").hidden = true; });
 
   /* ---------- resource links ---------- */
-  document.querySelectorAll("a.link-row").forEach(function (a) {
+  document.querySelectorAll("a.precall-trust-bar, a.book-link, a.proof-square-site, a.proof-square-cta").forEach(function (a) {
     a.addEventListener("click", function () {
-      postEvent("link_click", { linkLabel: (a.textContent || "").trim().split("\n")[0].slice(0, 80), linkUrl: a.href });
+      postEvent("link_click", {
+        linkLabel: (a.getAttribute("aria-label") || a.textContent || "").trim().slice(0, 80),
+        linkUrl: a.href
+      });
     });
   });
   const moreEl = el("moreDetails");
-  moreEl.addEventListener("toggle", function () {
-    if (moreEl.open) postEvent("link_click", { linkLabel: "Opened 'More if you want it'", linkUrl: "" });
-  }, { once: true });
-
-  /* ---------- click-to-load YouTube ---------- */
-  document.querySelectorAll(".yt").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      postEvent("link_click", { linkLabel: btn.getAttribute("aria-label") || "YouTube", linkUrl: "yt:" + btn.dataset.yt });
-      const f = document.createElement("iframe");
-      f.src = "https://www.youtube-nocookie.com/embed/" + btn.dataset.yt + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
-      f.allow = "accelerometer; autoplay; encrypted-media; picture-in-picture";
-      f.allowFullscreen = true;
-      f.title = btn.getAttribute("aria-label") || "Video";
-      btn.replaceWith(f);
+  if (moreEl) {
+    moreEl.addEventListener("toggle", function () {
+      if (moreEl.open) postEvent("link_click", { linkLabel: "Opened more resources", linkUrl: "" });
     }, { once: true });
+  }
+
+  /* ---------- in-page YouTube stage (large, not full page) ---------- */
+  const ytStage = el("ytStage");
+  const ytFrame = el("ytStageFrame");
+  const ytCap = el("ytStageCap");
+  const ytClose = el("ytStageClose");
+
+  function closeYtStage() {
+    if (!ytStage) return;
+    ytStage.hidden = true;
+    if (ytFrame) ytFrame.innerHTML = "";
+    document.body.style.overflow = "";
+  }
+
+  function openYtStage(id, title) {
+    if (!ytStage || !ytFrame || !id) return;
+    ytFrame.innerHTML = "";
+    const f = document.createElement("iframe");
+    f.src = "https://www.youtube-nocookie.com/embed/" + id +
+      "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+    f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    f.allowFullscreen = true;
+    f.title = title || "Video";
+    ytFrame.appendChild(f);
+    if (ytCap) ytCap.textContent = title || "";
+    ytStage.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  document.querySelectorAll("[data-yt]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const id = btn.getAttribute("data-yt");
+      const title = btn.getAttribute("data-yt-title") ||
+        btn.getAttribute("aria-label") ||
+        (btn.textContent || "").trim() ||
+        "Video";
+      postEvent("link_click", { linkLabel: title.slice(0, 80), linkUrl: "yt:" + id });
+      openYtStage(id, title);
+    });
+  });
+
+  if (ytClose) ytClose.addEventListener("click", closeYtStage);
+  if (ytStage) {
+    ytStage.addEventListener("click", function (e) {
+      if (e.target === ytStage) closeYtStage();
+    });
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && ytStage && !ytStage.hidden) closeYtStage();
   });
 })();
 </script>
