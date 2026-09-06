@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<!-- TEMPLATE TRACKER: August 25th Pre Call Resource Page (copied from Mark Haller layout). Do not put this label in the URL or visible page title. -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<title>ARCHIVE PRECALL V12-LYNDA-MARK · Lynda Perez FIRST ship: Aug 25 Mark layout (before meet-cj 3-up)</title>
+<title>ARCHIVE PRECALL TEMPLATE V07</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 
@@ -1804,29 +1803,6 @@
     margin-bottom: 8px;
   }
 
-  .cj-resources-grid--stories {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin-bottom: 12px;
-  }
-
-  .cj-resources-grid--blue {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-top: 4px;
-    margin-bottom: 8px;
-  }
-
-  .cj-resource-card--blue {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 3px solid #1976D2;
-    border-left: 5px solid #1565C0;
-    box-shadow: 0 0 0 1.5px #e2b227, 0 4px 14px rgba(10, 22, 40, 0.08);
-  }
-
-  .cj-resource-card--blue:hover {
-    border-color: #1565C0;
-    box-shadow: 0 0 0 1.5px #e2b227, 0 6px 18px rgba(25, 118, 210, 0.22);
-  }
-
   .cj-resource-card--compact {
     padding: 14px 16px;
   }
@@ -1847,9 +1823,7 @@
       padding-right: 20px;
     }
     .cj-resources-featured,
-    .cj-resources-grid,
-    .cj-resources-grid--stories,
-    .cj-resources-grid--blue {
+    .cj-resources-grid {
       grid-template-columns: 1fr;
     }
   }
@@ -2179,12 +2153,6 @@
     border-bottom: 1px solid rgba(0, 154, 94, 0.2);
     border-left: 4px solid var(--navy);
   }
-  .rl-call-card--missed {
-    background: linear-gradient(135deg, #fff5f5 0%, #fee2e2 100%);
-    border-top-color: rgba(220, 38, 38, 0.22);
-    border-bottom-color: rgba(220, 38, 38, 0.22);
-    border-left-color: #dc2626;
-  }
   .rl-call-card-kicker {
     font-size: 10px;
     font-weight: 700;
@@ -2192,12 +2160,6 @@
     text-transform: uppercase;
     color: var(--green-dark);
     margin: 0 0 8px;
-  }
-  .rl-call-card-kicker--missed {
-    color: #dc2626;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1.6px;
   }
   .rl-call-card-when {
     font-family: 'Playfair Display', serif;
@@ -2222,7 +2184,6 @@
     border: none;
     cursor: pointer;
     text-decoration: none;
-    display: inline-block;
   }
   .rl-call-card-actions .step-link {
     font-size: 12px;
@@ -2285,19 +2246,19 @@
 </style>
 <script>
 (function(){
-  var slug="lynda_perez";
+  var slug = "archive_template";
   fetch('/r/_manifest.json?v='+Date.now(),{cache:'no-store'})
     .then(function(r){return r.json();})
     .then(function(m){
       var link=m.links&&m.links[slug];
       var expired=!link||link.status!=='active'||(link.expires_at&&new Date(link.expires_at)<new Date());
-      if(expired){ window.location.replace('/r/_expired.html'); }
+      if(false && expired){ /* archive preview: expire disabled */ }
     }).catch(function(){});
 })();
 </script>
 </head>
 <body>
-<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE PREVIEW PRECALL V12-LYNDA-MARK · commit 9af6b39 · NOT the live send link · <a href="https://closewithcjclay.com/r/lynda_perez/" style="color:#fde68a">Live Lynda page</a><br><span style="font-weight:500;opacity:.95">Lynda Perez FIRST ship: Aug 25 Mark layout (before meet-cj 3-up)</span></div>
+<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE TEMPLATE V07 · 3 white story + 2 blue Top 20 / website cards · NOT a live send link · <a href="/archive/prospect-versions/precall-resources/" style="color:#fde68a">All precall templates</a><br><span style="font-weight:500;opacity:.95">Expire checks disabled. Person names may still appear in old HTML; treat as layout reference only.</span></div>
 <div class="page" id="main-content">
 
   <div class="header">
@@ -2314,35 +2275,35 @@
     <div class="invoice-meta">
       <div class="invoice-badge">Pre-Call Resources</div>
       <p><strong>Prepared by:</strong> CJ Clay</p>
-      <p><strong>Prepared for:</strong> Lynda Perez</p>
-      <p><strong>Date:</strong> Sept 4, 2026</p>
+      <p><strong>Prepared for:</strong> Tracy Nannery</p>
+      <p><strong>Date:</strong> Aug 20, 2026</p>
     </div>
   </div>
   <div class="accent-bar"></div>
 
   <div class="hero-band hero-band--letter">
-    <p><strong>Lynda</strong> — Chris said you two had a really direct conversation, and I appreciate that. I put everything here so we can pick up where he left off.</p>
-    <p>We had today at 12:00 PM on the calendar and I wasn't able to reach you. Totally fine. Something must have come up. Grab a fresh 45 minutes below whenever you're ready. If you're still speaking with other programs today, hold off on locking anything in until we talk. Forty-five minutes and you'll have a clear picture either way.</p>
-    <p>Have a look at whatever's useful. Looking forward to connecting.</p>
+    <p><strong>Tracy</strong> — everything you'd want before we talk is right here.</p>
+    <p>On the call we'll cover where you're at, what you're after, and whether this is the right move for your next chapter. High ticket sales is one of the few careers that travels — every company in every vertical needs someone who can close, and that's what makes a good closer invaluable in the marketplace. The world went remote, and the demand followed it.</p>
+    <p>Have a look at whatever's useful. Look forward to connecting.</p>
   </div>
 
-  <div class="rl-call-card rl-call-card--missed" id="rl-call-card" data-call-status="missed">
-    <p class="rl-call-card-kicker rl-call-card-kicker--missed">Let's reschedule</p>
-    <p class="rl-call-card-when">Friday, Sept 4 · 12:00 PM EST</p>
-    <p class="rl-call-card-meta">We didn't connect at this time · Choose a fresh 45 minutes</p>
-    <div class="rl-call-card-actions">
-      <a href="https://meetings.hubspot.com/charles660" class="invest-btn" target="_blank" rel="noopener noreferrer">Reschedule Appointment →</a>
+  <div style="padding:18px 36px 22px;border-bottom:1px solid var(--mid);">
+    <div class="rl-q-ours" id="rl-call-card" data-confirm-day="Friday">
+      <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--green-dark);">📅 Your call with CJ</p>
+      <p style="margin:0 0 4px;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);line-height:1.3;">Friday, Aug 21 · 1:00 PM EST</p>
+      <p style="margin:0 0 14px;font-size:13px;color:var(--muted);">45 minutes · Phone or Zoom</p>
+      <button type="button" id="rl-confirm-call" class="invest-btn">Confirm I'll be there</button>
     </div>
   </div>
 
   <div class="billing-grid">
     <div class="billing-cell">
       <div class="billing-label">Prepared For</div>
-      <div class="billing-name">Lynda Perez</div>
+      <div class="billing-name">Tracy Nannery</div>
       <div class="billing-detail">
-        <a href="mailto:perezlm210@gmail.com">perezlm210@gmail.com</a><br>
-        <a href="tel:+12109800588">+1 (210) 980-0588</a><br>
-        Missed · Friday at 12:00 PM EST
+        <a href="mailto:tbnannery@gmail.com">tbnannery@gmail.com</a><br>
+        <a href="tel:+17573482318">+1 (757) 348-2318</a><br>
+        Friday at 1:00 PM EST
       </div>
     </div>
     <div class="billing-cell">
@@ -2388,7 +2349,7 @@
   </div>
 
   <div class="cj-resources-wrap">
-    <p class="cj-resources-lead"><strong>Lynda</strong> — if you watch one thing before we talk, make it the first one.</p>
+    <p class="cj-resources-lead"><strong>Tracy</strong> — if you watch one thing before we talk, make it the first one.</p>
     <p class="cj-resources-kicker">⭐ Start here — CJ's top picks</p>
     <div class="cj-resources-featured"><a href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
   <div class="cj-resource-card-badge">⭐ CJ's #1 pick</div>
@@ -2424,7 +2385,7 @@
   <span class="cj-resource-card-cta">View Christa's timeline</span>
 </a></div>
     <p class="cj-resources-kicker">More success stories from our network</p>
-    <div class="cj-resources-grid cj-resources-grid--stories"><a href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+    <div class="cj-resources-grid"><a href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
   
   <div class="cj-resource-card-title">Cassie — single mom success story</div>
   <p class="cj-resource-card-desc">Relatable story — single mom who made the transition work around real life.</p>
@@ -2439,18 +2400,13 @@
   <div class="cj-resource-card-title">Brianna — Tony Robbins team</div>
   <p class="cj-resource-card-desc">Credibility from a big-name organization — her HTSA experience.</p>
   <span class="cj-resource-card-cta">Watch on YouTube</span>
-</a></div>
-    <div class="cj-resources-grid cj-resources-grid--blue"><a href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" class="cj-resource-card cj-resource-card--compact cj-resource-card--blue" target="_blank" rel="noopener noreferrer">
+</a><a href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
   
   <div class="cj-resource-card-title">Top 20 Companies in High Ticket Sales</div>
   <p class="cj-resource-card-desc">Industry overview PDF — where HTSA fits in the landscape.</p>
   <span class="cj-resource-card-cta">Open PDF</span>
-</a><a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact cj-resource-card--blue" target="_blank" rel="noopener noreferrer">
-  
-  <div class="cj-resource-card-title">HTSA Website — more stories &amp; outcomes</div>
-  <p class="cj-resource-card-desc">Many more member outcomes, screenshots, and program details on our main site.</p>
-  <span class="cj-resource-card-cta">Visit highticketsalesacademy.com</span>
 </a></div>
+    <div style="display:flex;justify-content:center;margin-top:12px;"><a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact" style="max-width:420px;width:100%;background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border:3px solid #1976D2;border-left:5px solid #1565C0;box-shadow:0 0 0 1.5px #e2b227,0 4px 14px rgba(10,22,40,0.08);" target="_blank" rel="noopener noreferrer"><div class="cj-resource-card-title">HTSA Website — more stories &amp; outcomes</div><p class="cj-resource-card-desc">Many more member outcomes, screenshots, and program details on our main site.</p><span class="cj-resource-card-cta">Visit highticketsalesacademy.com</span></a></div>
   </div>
 
   <!-- CJ personal reviews (precall: white cards only) -->
@@ -2575,13 +2531,13 @@
 <script>
 (function(){
   var GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
-  var slug = "lynda_perez";
-  var confirmDay = "";
+  var slug = "archive_template";
+  var confirmDay = "Friday";
   var meta = {
-    fullName: "Lynda Perez",
-    email: "perezlm210@gmail.com",
-    phone: "+12109800588",
-    clientSlug: "lynda-perez",
+    fullName: "Tracy Nannery",
+    email: "tbnannery@gmail.com",
+    phone: "+17573482318",
+    clientSlug: "tracy-nannery",
     resourceSlug: slug,
     pageType: "precall"
   };

@@ -5,8 +5,8 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<title>ARCHIVE PRECALL V09-JANE-SLIM · Jane Bates slim pre-call (shorter proof layout)</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>ARCHIVE PRECALL TEMPLATE V05</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 
   :root {
@@ -1324,31 +1324,41 @@
     max-width: 520px;
   }
 
+  .ref-strip-inner--personal-reviews {
+    align-items: stretch;
+  }
+
+  .ref-strip-inner--personal-reviews .ref-strip-mini-stack {
+    flex: 1 1 280px;
+    min-width: 0;
+    margin-top: 0;
+  }
+
   .ref-strip-quote--compact {
     padding: 10px 12px 12px;
   }
 
-  /* Centered section header (same idea as enrollment Member voices banner) */
-  .ref-strip-banner {
-    text-align: center;
-    margin: 0 0 18px;
+  /* Personal notes to CJ — same blue card as HTSA Website block */
+  .ref-strip-quote--personal {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 3px solid #1976D2;
+    border-left: 5px solid #1565C0;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1.5px #e2b227, 0 4px 14px rgba(10, 22, 40, 0.08);
   }
 
-  .ref-strip-banner .ref-strip-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2.6px;
-    text-transform: uppercase;
+  .ref-strip-quote--personal .ref-strip-quote-meta {
     color: var(--navy);
-    margin: 0 0 8px;
+    font-weight: 700;
   }
 
-  .ref-strip-banner-desc {
-    font-size: 12.5px;
-    line-height: 1.6;
+  .ref-strip-quote--personal .ref-strip-quote-body {
     color: var(--muted);
-    margin: 0 auto;
-    max-width: 520px;
+  }
+
+  .ref-strip-quote--personal .ref-strip-quote-attr {
+    color: var(--navy);
+    border-top-color: rgba(25, 118, 210, 0.22);
   }
 
   .ref-strip-quote--compact .ref-strip-quote-body {
@@ -1360,24 +1370,6 @@
   .ref-strip-quote--compact .ref-strip-quote-attr {
     margin-top: 8px;
     padding-top: 6px;
-  }
-
-  /* CJ Reviews columns: stretch so bottoms line up toward the footer */
-  .ref-strip-inner--personal-reviews {
-    align-items: stretch;
-  }
-
-  .ref-strip-inner--personal-reviews .ref-strip-mini-stack {
-    flex: 1 1 280px;
-    min-width: 0;
-    margin-top: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .ref-strip-inner--personal-reviews .ref-strip-mini-stack > .ref-strip-quote {
-    flex: 1 1 auto;
   }
 
   /* Trinity (right column): full text, card stretches with row so name lines up with Jessica C. */
@@ -1803,29 +1795,6 @@
     margin-bottom: 8px;
   }
 
-  .cj-resources-grid--stories {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin-bottom: 12px;
-  }
-
-  .cj-resources-grid--blue {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-top: 4px;
-    margin-bottom: 8px;
-  }
-
-  .cj-resource-card--blue {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 3px solid #1976D2;
-    border-left: 5px solid #1565C0;
-    box-shadow: 0 0 0 1.5px #e2b227, 0 4px 14px rgba(10, 22, 40, 0.08);
-  }
-
-  .cj-resource-card--blue:hover {
-    border-color: #1565C0;
-    box-shadow: 0 0 0 1.5px #e2b227, 0 6px 18px rgba(25, 118, 210, 0.22);
-  }
-
   .cj-resource-card--compact {
     padding: 14px 16px;
   }
@@ -1846,9 +1815,7 @@
       padding-right: 20px;
     }
     .cj-resources-featured,
-    .cj-resources-grid,
-    .cj-resources-grid--stories,
-    .cj-resources-grid--blue {
+    .cj-resources-grid {
       grid-template-columns: 1fr;
     }
   }
@@ -2178,12 +2145,6 @@
     border-bottom: 1px solid rgba(0, 154, 94, 0.2);
     border-left: 4px solid var(--navy);
   }
-  .rl-call-card--missed {
-    background: linear-gradient(135deg, #fff5f5 0%, #fee2e2 100%);
-    border-top-color: rgba(220, 38, 38, 0.22);
-    border-bottom-color: rgba(220, 38, 38, 0.22);
-    border-left-color: #dc2626;
-  }
   .rl-call-card-kicker {
     font-size: 10px;
     font-weight: 700;
@@ -2191,12 +2152,6 @@
     text-transform: uppercase;
     color: var(--green-dark);
     margin: 0 0 8px;
-  }
-  .rl-call-card-kicker--missed {
-    color: #dc2626;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1.6px;
   }
   .rl-call-card-when {
     font-family: 'Playfair Display', serif;
@@ -2221,7 +2176,6 @@
     border: none;
     cursor: pointer;
     text-decoration: none;
-    display: inline-block;
   }
   .rl-call-card-actions .step-link {
     font-size: 12px;
@@ -2281,464 +2235,22 @@
     .rl-faq-wrap { padding-left: 20px; padding-right: 20px; }
   }
 
-
-  .precall-slim-hero {
-    padding: 28px 36px 24px;
-    background: linear-gradient(145deg, #0a1628, #152a46);
-    color: #fff;
-    text-align: center;
-  }
-  .precall-slim-hero .kicker {
-    display: inline-block;
-    margin-bottom: 10px;
-    padding: 6px 11px;
-    border: 1px solid rgba(97, 227, 139, 0.42);
-    border-radius: 999px;
-    background: rgba(97, 227, 139, 0.1);
-    color: #61e38b;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .precall-slim-hero h1 {
-    max-width: 720px;
-    margin: 0 auto 10px;
-    font-family: "Playfair Display", serif;
-    font-size: clamp(1.7rem, 4.6vw, 2.5rem);
-    line-height: 1.12;
-    letter-spacing: -0.03em;
-  }
-  .precall-slim-hero p {
-    max-width: 620px;
-    margin: 0 auto;
-    color: rgba(255,255,255,0.8);
-    font-size: 15px;
-    line-height: 1.55;
-  }
-  .precall-slim-hero p + p { margin-top: 10px; }
-  .precall-slim-section {
-    padding: 22px 36px 8px;
-  }
-  .precall-slim-section h2 {
-    font-family: "Playfair Display", serif;
-    font-size: 26px;
-    color: var(--navy);
-    margin: 0 0 8px;
-  }
-  .precall-slim-section .lede {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.55;
-    margin: 0 0 16px;
-    max-width: 640px;
-  }
-  .precall-video-frame {
-    padding: 8px;
-    border: 1px solid var(--mid);
-    border-radius: 14px;
-    background: #f7f9fc;
-  }
-  .precall-video-frame video {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 10px;
-    background: #0a1628;
-  }
-  .precall-video-caption {
-    margin: 8px 2px 0;
-    color: var(--muted);
-    font-size: 13px;
-  }
-  .proof-squares {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    margin: 8px 0 18px;
-  }
-  .proof-square {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-    overflow: hidden;
-    border: 2px solid #f59e0b;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-    box-shadow: 0 8px 20px rgba(10, 22, 40, 0.06);
-  }
-  .proof-square-site {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    text-decoration: none;
-    color: #fff;
-    background:
-      radial-gradient(circle at 80% 20%, rgba(97, 227, 139, 0.22), transparent 16rem),
-      linear-gradient(145deg, #0a1628, #152a46);
-  }
-  .proof-square-site-kicker {
-    color: #61e38b;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .proof-square-site-name {
-    font-family: "Playfair Display", serif;
-    font-size: 18px;
-    line-height: 1.2;
-    text-align: center;
-  }
-  .proof-square-site-url {
-    color: rgba(255,255,255,0.72);
-    font-size: 12px;
-    font-weight: 700;
-  }
-  .proof-square-copy {
-    padding: 12px 13px 10px;
-  }
-  .proof-square-kicker {
-    margin-bottom: 5px;
-    color: #b45309;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .proof-square--middle .proof-square-kicker { color: #b45309; }
-  .proof-square h3 {
-    margin: 0 0 6px;
-    color: var(--navy);
-    font-size: 15px;
-    line-height: 1.3;
-  }
-  .proof-square p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.45;
-  }
-  .proof-square-media {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border: 0;
-    background: #0a1628;
-  }
-  .proof-square-cta {
-    display: block;
-    margin: 0 13px 13px;
-    padding: 10px 12px;
-    border-radius: 9px;
-    background: var(--navy);
-    color: #fff;
-    font-size: 12px;
-    font-weight: 700;
-    text-align: center;
-    text-decoration: none;
-  }
-  .precall-link-stack {
-    display: grid;
-    gap: 8px;
-    margin: 6px 36px 18px;
-  }
-  .precall-link-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 13px 16px;
-    border: 2px solid rgba(0, 201, 122, 0.35);
-    border-radius: 12px;
-    background: linear-gradient(135deg, rgba(97, 227, 139, 0.1), #edf5ff);
-    color: var(--navy);
-    font-size: 15px;
-    font-weight: 800;
-    text-align: center;
-    text-decoration: none;
-    box-shadow: 0 0 0 3px rgba(0, 201, 122, 0.08);
-  }
-  .precall-link-row:hover {
-    border-color: var(--green);
-    background: rgba(97, 227, 139, 0.16);
-  }
-  .precall-trust-stars { color: #e2b227; letter-spacing: 2px; }
-  .lifespan-section {
-    --green-strong: #00c97a;
-    --blue-light: #edf5ff;
-    --blue-border: #c7dbf4;
-    padding: 22px 36px 18px;
-    background: #fbfcfe;
-  }
-  .lifespan-heading {
-    margin-bottom: 4px;
-    padding: 12px 14px;
-    border: 1px solid var(--blue-border);
-    border-left: 4px solid var(--green-strong);
-    border-radius: 12px;
-    background: linear-gradient(135deg, rgba(237, 245, 255, 0.98), rgba(97, 227, 139, 0.14));
-    box-shadow: 0 8px 20px rgba(10, 22, 40, 0.06);
-  }
-  .lifespan-heading .section-kicker {
-    margin-bottom: 5px;
-    color: var(--green-dark);
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-  .lifespan-heading h2,
-  .lifespan-section h2 {
-    margin-bottom: 4px;
-    color: var(--navy);
-    font-family: "Playfair Display", serif;
-    font-size: clamp(1.55rem, 3.6vw, 2.2rem);
-    line-height: 1.12;
-  }
-  .lifespan-section-lede {
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.5;
-  }
-  .lifespan-content { padding: 16px 2px 2px; }
-  .lifespan-intro {
-    margin-bottom: 13px;
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.55;
-  }
-  .age-control {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 15px;
-  }
-  .age-field {
-    display: flex;
-    flex: 0 0 auto;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .age-field label {
-    color: var(--green-dark);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .age-input-shell {
-    display: flex;
-    width: 118px;
-    min-height: 50px;
-    overflow: hidden;
-    border: 2px solid var(--green-strong);
-    border-radius: 11px;
-    background: linear-gradient(135deg, #ffffff, rgba(97, 227, 139, 0.12));
-    box-shadow: 0 0 0 4px rgba(0, 201, 122, 0.1), 0 8px 18px rgba(10, 22, 40, 0.08);
-  }
-  .age-input-shell:focus-within {
-    border-color: var(--navy);
-    box-shadow: 0 0 0 4px rgba(97, 227, 139, 0.28), 0 10px 22px rgba(10, 22, 40, 0.12);
-  }
-  .age-field input {
-    width: 78px;
-    min-width: 0;
-    padding: 7px 8px;
-    border: 0;
-    background: transparent;
-    color: var(--navy);
-    font: 800 20px/1 "DM Sans", sans-serif;
-    text-align: center;
-    appearance: textfield;
-    -moz-appearance: textfield;
-  }
-  .age-field input::-webkit-inner-spin-button,
-  .age-field input::-webkit-outer-spin-button {
-    margin: 0;
-    appearance: none;
-  }
-  .age-field input:focus { outline: none; }
-  .age-step-buttons {
-    display: grid;
-    width: 38px;
-    border-left: 1px solid rgba(0, 201, 122, 0.3);
-  }
-  .age-step-button {
-    display: grid;
-    min-height: 23px;
-    place-items: center;
-    border: 0;
-    background: rgba(97, 227, 139, 0.16);
-    color: var(--navy);
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 800;
-    line-height: 1;
-  }
-  .age-step-button + .age-step-button { border-top: 1px solid rgba(0, 201, 122, 0.3); }
-  .age-step-button:hover,
-  .age-step-button:focus-visible { background: var(--green); outline: none; }
-  .age-readout {
-    max-width: 470px;
-    padding: 9px 12px;
-    border: 1px solid var(--blue-border);
-    border-radius: 10px;
-    background: var(--blue-light);
-    color: var(--navy);
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1.55;
-  }
-  .age-readout strong {
-    display: inline-block;
-    margin: 0 1px;
-    padding: 0 5px;
-    border-radius: 5px;
-    font-size: 1.08em;
-    font-weight: 800;
-  }
-  .age-readout-age { background: var(--navy); color: var(--white); }
-  .age-readout-lived { background: #dce3eb; color: var(--navy); }
-  .age-readout-left { background: rgba(97, 227, 139, 0.3); color: #05663f; }
-  .year-grid {
-    display: grid;
-    grid-template-columns: repeat(20, minmax(0, 1fr));
-    gap: 5px;
-    max-width: 620px;
-    margin-bottom: 10px;
-  }
-  .year-dot {
-    aspect-ratio: 1;
-    border-radius: 4px;
-    background: #8fdca9;
-  }
-  .year-dot--lived { background: #c4ccd6; }
-  .year-dot--current {
-    background: var(--green-strong);
-    box-shadow: 0 0 0 3px rgba(0, 201, 122, 0.16);
-    transform: scale(1.07);
-  }
-  .year-dot--later {
-    background: #e4ece7;
-    box-shadow: inset 0 0 0 1px #cad8cf;
-  }
-  .year-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px 13px;
-    margin-bottom: 12px;
-    color: var(--muted);
-    font-size: 9px;
-  }
-  .year-legend span { display: inline-flex; align-items: center; gap: 5px; }
-  .legend-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 2px;
-    background: #8fdca9;
-  }
-  .legend-dot--lived { background: #c4ccd6; }
-  .legend-dot--current { background: var(--green-strong); }
-  .legend-dot--later {
-    background: #e4ece7;
-    box-shadow: inset 0 0 0 1px #cad8cf;
-  }
-  .time-summary {
-    margin-bottom: 12px;
-    padding: 9px 11px;
-    border: 1px solid rgba(0, 201, 122, 0.22);
-    border-radius: 9px;
-    background: rgba(97, 227, 139, 0.1);
-    color: var(--navy);
-    font-size: 11px;
-    font-weight: 700;
-  }
-  .life-two {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-    margin-bottom: 11px;
-  }
-  .life-two span {
-    padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 9px;
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--white);
-    font-size: 11px;
-    font-weight: 700;
-    text-align: center;
-  }
-  .life-two b {
-    display: block;
-    margin-bottom: 2px;
-    color: var(--green);
-    font-size: 17px;
-    line-height: 1.1;
-  }
-  .life-excerpt {
-    margin-top: 12px;
-    padding: 18px;
-    border-radius: 14px;
-    background: var(--navy);
-    color: rgba(255, 255, 255, 0.78);
-    font-size: 14px;
-    line-height: 1.65;
-  }
-  .life-excerpt p { margin: 0; }
-  .life-excerpt strong { color: var(--green); }
-  .precall-close {
-    padding: 8px 36px 28px;
-    text-align: center;
-  }
-  .precall-close p {
-    max-width: 560px;
-    margin: 0 auto 14px;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.55;
-  }
-  .precall-close .cta {
-    display: inline-flex;
-    min-height: 46px;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 22px;
-    border: 2px solid #fff;
-    border-radius: 999px;
-    background: #61e38b;
-    color: #0a1628;
-    font-size: 15px;
-    font-weight: 800;
-    text-decoration: none;
-  }
-  @media (max-width: 700px) {
-    .precall-slim-hero, .precall-slim-section, .precall-close, .lifespan-section { padding-left: 18px; padding-right: 18px; }
-    .precall-link-stack { margin-left: 18px; margin-right: 18px; }
-    .proof-squares { grid-template-columns: 1fr; }
-    .age-control { align-items: flex-start; flex-direction: column; gap: 8px; }
-    .year-grid { gap: 3px; }
-    .lifespan-heading { padding: 10px 11px; }
-  }
-
 </style>
 <script>
 (function(){
-  var slug="jane_bates";
+  var slug = "archive_template";
   fetch('/r/_manifest.json?v='+Date.now(),{cache:'no-store'})
     .then(function(r){return r.json();})
     .then(function(m){
       var link=m.links&&m.links[slug];
       var expired=!link||link.status!=='active'||(link.expires_at&&new Date(link.expires_at)<new Date());
-      if(expired){ window.location.replace('/r/_expired.html'); }
+      if(false && expired){ /* archive preview: expire disabled */ }
     }).catch(function(){});
 })();
 </script>
 </head>
 <body>
-<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE PREVIEW PRECALL V09-JANE-SLIM · commit f223105 · NOT the live send link · <a href="https://closewithcjclay.com/r/jane_bates/" style="color:#fde68a">Live Jane page</a><br><span style="font-weight:500;opacity:.95">Jane Bates slim pre-call (shorter proof layout)</span></div>
+<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE TEMPLATE V05 · Blue personal review cards · NOT a live send link · <a href="/archive/prospect-versions/precall-resources/" style="color:#fde68a">All precall templates</a><br><span style="font-weight:500;opacity:.95">Expire checks disabled. Person names may still appear in old HTML; treat as layout reference only.</span></div>
 <div class="page" id="main-content">
 
   <div class="header">
@@ -2755,27 +2267,35 @@
     <div class="invoice-meta">
       <div class="invoice-badge">Pre-Call Resources</div>
       <p><strong>Prepared by:</strong> CJ Clay</p>
-      <p><strong>Prepared for:</strong> Jane Bates</p>
-      <p><strong>Date:</strong> Aug 31, 2026</p>
+      <p><strong>Prepared for:</strong> Tracy Nannery</p>
+      <p><strong>Date:</strong> Aug 20, 2026</p>
     </div>
   </div>
   <div class="accent-bar"></div>
 
-  <section class="precall-slim-hero" aria-labelledby="heroTitle">
-    <div class="kicker">Before our call</div>
-    <h1 id="heroTitle">Jane, come to the call already clear.</h1>
-    <p>I pulled the few things that actually matter before we talk. Watch the clip, then look at the three boxes under it.</p>
-    <p>On the call we will cover where you are, what you want, and whether this is the right next move. Nothing here replaces that conversation.</p>
-  </section>
+  <div class="hero-band hero-band--letter">
+    <p><strong>Tracy</strong> — everything you'd want before we talk is right here.</p>
+    <p>On the call we'll cover where you're at, what you're after, and whether this is the right move for your next chapter. High ticket sales is one of the few careers that travels — every company in every vertical needs someone who can close, and that's what makes a good closer invaluable in the marketplace. The world went remote, and the demand followed it.</p>
+    <p>Have a look at whatever's useful. Look forward to connecting.</p>
+  </div>
+
+  <div style="padding:18px 36px 22px;border-bottom:1px solid var(--mid);">
+    <div class="rl-q-ours" id="rl-call-card" data-confirm-day="Friday">
+      <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--green-dark);">📅 Your call with CJ</p>
+      <p style="margin:0 0 4px;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);line-height:1.3;">Friday, Aug 21 · 1:00 PM EST</p>
+      <p style="margin:0 0 14px;font-size:13px;color:var(--muted);">45 minutes · Phone or Zoom</p>
+      <button type="button" id="rl-confirm-call" class="invest-btn">Confirm I'll be there</button>
+    </div>
+  </div>
 
   <div class="billing-grid">
     <div class="billing-cell">
       <div class="billing-label">Prepared For</div>
-      <div class="billing-name">Jane Bates</div>
+      <div class="billing-name">Tracy Nannery</div>
       <div class="billing-detail">
-        <a href="mailto:janebates70@icloud.com">janebates70@icloud.com</a><br>
-        <a href="tel:+15709759465">+1 (570) 975-9465</a><br>
-        Resources for your HTSA conversation
+        <a href="mailto:tbnannery@gmail.com">tbnannery@gmail.com</a><br>
+        <a href="tel:+17573482318">+1 (757) 348-2318</a><br>
+        Friday at 1:00 PM EST
       </div>
     </div>
     <div class="billing-cell">
@@ -2789,115 +2309,153 @@
     </div>
   </div>
 
-  <section class="precall-slim-section" aria-labelledby="videoTitle">
-    <div class="cj-resources-kicker">See what is happening inside HTSA</div>
-    <h2 id="videoTitle">A clip from the August 18th live call with Chad</h2>
-    <p class="lede">Four minutes. Members talking about getting placed. This is the level of coaching and opportunity we will talk about on the call.</p>
-    <div class="precall-video-frame">
-      <video controls playsinline preload="none" poster="/media/htsa-clip-poster.jpg" controlslist="nodownload" title="A clip from the August 18th live HTSA coaching call with Chad">
+  <div class="sec-head">
+    <div class="sec-num">1</div>
+    <h3>Who Mentors You</h3>
+  </div>
+  <div class="rl-q-wrap">
+    <div class="rl-q-item">
+      <div class="rl-q-ours">
+    <div class="htsa-proof-embed">
+      <div class="htsa-proof-embed-kicker">Recorded this week · Aug 18 · 4:07</div>
+      <div class="htsa-proof-embed-must-watch">MUST WATCH!!!</div>
+      <div class="htsa-proof-embed-title">HTSA · Placement This Week (Aug 18, 2026)</div>
+      <p class="htsa-proof-embed-desc">Watch this before the testimonials below. Four people on our live group coaching call talking about getting placed with us. This is the level we operate at on placement, which is usually the biggest question people have. Play it right here. Pause anytime. Use the fullscreen control if you want it larger.</p>
+      <video controls playsinline preload="metadata" controlslist="nodownload" title="HTSA Placement This Week, August 18, 2026. Members on live group coaching talking about placement.">
         <source src="/media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
-        Your browser cannot play this video here. <a href="/media/this-week-at-htsa-2026-08-18.mp4">Open the video instead.</a>
+        Your browser does not play this video here. Open <a href="/media/this-week-at-htsa-2026-08-18.mp4">this file</a> instead.
       </video>
     </div>
-    <p class="precall-video-caption"><strong>4:07</strong> · clip from the August 18th live coaching call with Chad.</p>
-  </section>
 
-  <section class="precall-slim-section" aria-labelledby="proofTitle">
-    <div class="cj-resources-kicker">If you only open three things</div>
-    <h2 id="proofTitle">Employer proof, the website, and Brianna from Tony Robbins.</h2>
-    <p class="lede">Taylor Conroy, the HTSA website, then Brianna. That is enough context to walk in ready.</p>
-    <div class="proof-squares">
-      <article class="proof-square">
-        <div class="proof-square-copy">
-          <div class="proof-square-kicker">Employer-side proof</div>
-          <h3>Taylor Conroy</h3>
-          <p>A TEDx coach who hires HTSA members. Hear why he trusts this certification.</p>
-        </div>
-        <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/bd65afldLmE" title="Taylor Conroy explains why he hires from HTSA" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        <a class="proof-square-cta cj-resource-card" href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" target="_blank" rel="noopener noreferrer"><span class="cj-resource-card-title" hidden>Taylor Conroy (TEDx Coach) — why he hires our members</span>Watch on YouTube</a>
-      </article>
-      <article class="proof-square">
-        <div class="proof-square-copy">
-          <div class="proof-square-kicker">More stories and outcomes</div>
-          <h3>HTSA Website</h3>
-          <p>The main site, with more member stories, screenshots, and how the program is presented.</p>
-        </div>
-        <a class="proof-square-media proof-square-site cj-resource-card" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">
-          <span class="cj-resource-card-title" hidden>HTSA Website — more stories &amp; outcomes</span>
-          <span class="proof-square-site-kicker">Preview</span>
-          <span class="proof-square-site-name">High Ticket Sales Academy</span>
-          <span class="proof-square-site-url">highticketsalesacademy.com</span>
-        </a>
-        <a class="proof-square-cta cj-resource-card" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer"><span class="cj-resource-card-title" hidden>HTSA Website</span>Open the website</a>
-      </article>
-      <article class="proof-square">
-        <div class="proof-square-copy">
-          <div class="proof-square-kicker">Member from a big-name team</div>
-          <h3>Brianna</h3>
-          <p>Tony Robbins team background. Hear her HTSA experience in her own words.</p>
-        </div>
-        <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/TWacdj9x45o" title="Brianna from the Tony Robbins team on HTSA" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        <a class="proof-square-cta cj-resource-card" href="https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8" target="_blank" rel="noopener noreferrer"><span class="cj-resource-card-title" hidden>Brianna — Tony Robbins team</span>Watch on YouTube</a>
-      </article>
+        <p>You're validated and placed directly by Chad Aleo himself — not a random coach.</p>
+        <p style="margin-top:12px;"><a href="https://youtu.be/eLAWEwE7pl4?si=VfiqAxeOKFnoJ_Mm" class="step-link" target="_blank" rel="noopener noreferrer">⭐ Meet Chad — CEO &amp; Founder at HTSA</a></p>
+        <p style="margin-top:14px;"><a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><img class="rl-proof-img" src="https://closewithcjclay.com/resource-links/assets/chad-aleo-book-banner.png" alt="Chad Aleo, best-selling author of The Book on High Ticket Sales"></a></p>
+        <div class="rl-proof-caption">Chad Aleo · <em>The Book on High Ticket Sales</em> — view on Amazon</div>
+        <p style="margin-top:14px;"><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="rl-trustpilot-link" target="_blank" rel="noopener noreferrer"><span class="rl-trustpilot-stars" aria-hidden="true">★★★★★</span><span class="rl-trustpilot-text">Trustpilot Reviews — 4.9 stars out of 5</span></a></p>
+      </div>
     </div>
-  </section>
-
-  <div class="precall-link-stack">
-    <a class="precall-link-row cj-resource-card" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer" aria-label="Read HTSA reviews on Trustpilot, rated 4.9 stars out of 5">
-      <span class="cj-resource-card-title" hidden>Trustpilot — 4.9 out of 5 stars</span>
-      <span class="precall-trust-stars" aria-hidden="true">★★★★★</span>
-      <span>Trustpilot Reviews — 4.9 out of 5</span>
-    </a>
-    <a class="precall-link-row cj-resource-card" href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" target="_blank" rel="noopener noreferrer">
-      <span class="cj-resource-card-title" hidden>Top 20 Companies in High Ticket Sales</span>
-      <span>Top 20 Companies in High Ticket Sales</span>
-    </a>
+  </div>
+  <div class="sec-head">
+    <div class="sec-num">2</div>
+    <h3>Videos, Proof &amp; Member Stories</h3>
   </div>
 
-  <section class="section lifespan-section" aria-labelledby="lifespanTitle">
-    <div class="lifespan-heading">
-      <div class="section-kicker">One week at a time</div>
-      <h2 id="lifespanTitle">See where you actually are.</h2>
-      <p class="lifespan-section-lede">Enter your age and I'll show you the one thing that made me send this. Takes 10 seconds.</p>
-    </div>
-    <div class="lifespan-content">
-      <p class="lifespan-intro">The 79 blocks below represent an average 79 year lifespan in America. Each block is one year.</p>
-      <div class="age-control">
-        <div class="age-field">
-          <label for="ageInput">Your age</label>
-          <div class="age-input-shell">
-            <input id="ageInput" type="number" min="18" max="78" inputmode="numeric" value="38">
-            <div class="age-step-buttons" aria-label="Change your age">
-              <button class="age-step-button" type="button" data-age-step="1" aria-label="Increase age">▲</button>
-              <button class="age-step-button" type="button" data-age-step="-1" aria-label="Decrease age">▼</button>
-            </div>
+  <div class="cj-resources-wrap">
+    <p class="cj-resources-lead"><strong>Tracy</strong> — if you watch one thing before we talk, make it the first one.</p>
+    <p class="cj-resources-kicker">⭐ Start here — CJ's top picks</p>
+    <div class="cj-resources-featured"><a href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
+  <div class="cj-resource-card-badge">⭐ CJ's #1 pick</div>
+  <div class="cj-resource-card-title">Dana — unsolicited personal review</div>
+  <p class="cj-resource-card-desc">She recorded this completely on her own — we had no idea until she posted it. Life coach with a community of about 17,000 followers.</p>
+  <span class="cj-resource-card-cta">Watch on YouTube</span>
+</a><a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
+  <div class="cj-resource-card-badge">⭐ If you only watch one</div>
+  <div class="cj-resource-card-title">Taylor Conroy (TEDx Coach) — why he hires our members</div>
+  <p class="cj-resource-card-desc">Taylor is a TEDx coach who actively hires HTSA-certified closers. Hear directly from a hiring manager why he trusts our members.</p>
+  <span class="cj-resource-card-cta">Watch on YouTube</span>
+</a><a href="https://drive.google.com/file/d/1Zo2ID5sdF8ZYP8rZD_fisNgj-eNpuQxM/view?usp=sharing" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
+  <div class="cj-resource-card-badge">⭐ Fresh placement story</div>
+  <div class="cj-resource-card-title">Taylor DeCourcey — newer member perspective</div>
+  <p class="cj-resource-card-desc">Newer placement with a fresher perspective. Hear what the first months actually looked like after certification.</p>
+  <span class="cj-resource-card-cta">Watch Taylor's story</span>
+</a><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
+  <div class="cj-resource-card-badge">⭐ Verified reviews</div>
+  <div class="cj-resource-card-title">Trustpilot — 4.9 out of 5 stars</div>
+  <p class="cj-resource-card-desc">Read what real members say about HTSA — unfiltered, third-party reviews from people who went through the program.</p>
+  <span class="cj-resource-card-cta">Read Trustpilot reviews</span>
+</a></div>
+    <p class="cj-resources-kicker">⭐ Placement — why our members get results</p>
+    <div class="cj-resources-featured"><a href="https://canva.link/qcl7l45n7behw3k" class="cj-resource-card cj-resource-card--placement" target="_blank" rel="noopener noreferrer">
+  <div class="cj-resource-card-badge">⭐ Placement proof</div>
+  <div class="cj-resource-card-title">Why Our Members Actually Get Placed</div>
+  <p class="cj-resource-card-desc">See how one-on-one placement works in practice — real interviews, real companies, and what the process looks like step by step.</p>
+  <span class="cj-resource-card-cta">View placement overview</span>
+</a><a href="https://canva.link/na9nxjm9a1e4vjz" class="cj-resource-card cj-resource-card--placement" target="_blank" rel="noopener noreferrer">
+  <div class="cj-resource-card-badge">⭐ Real timeline</div>
+  <div class="cj-resource-card-title">Christa's Journey — Posted Month by Month</div>
+  <p class="cj-resource-card-desc">Not a polished testimonial — her actual journey, posted step by step in our community as it happened.</p>
+  <span class="cj-resource-card-cta">View Christa's timeline</span>
+</a></div>
+    <p class="cj-resources-kicker">More success stories from our network</p>
+    <div class="cj-resources-grid"><a href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+  
+  <div class="cj-resource-card-title">Cassie — single mom success story</div>
+  <p class="cj-resource-card-desc">Relatable story — single mom who made the transition work around real life.</p>
+  <span class="cj-resource-card-cta">Watch on YouTube</span>
+</a><a href="https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+  
+  <div class="cj-resource-card-title">Josh — Alex Hormozi background</div>
+  <p class="cj-resource-card-desc">High-profile sales background — hear how HTSA fit into his path.</p>
+  <span class="cj-resource-card-cta">Watch on YouTube</span>
+</a><a href="https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+  
+  <div class="cj-resource-card-title">Brianna — Tony Robbins team</div>
+  <p class="cj-resource-card-desc">Credibility from a big-name organization — her HTSA experience.</p>
+  <span class="cj-resource-card-cta">Watch on YouTube</span>
+</a><a href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+  
+  <div class="cj-resource-card-title">Top 20 Companies in High Ticket Sales</div>
+  <p class="cj-resource-card-desc">Industry overview PDF — where HTSA fits in the landscape.</p>
+  <span class="cj-resource-card-cta">Open PDF</span>
+</a></div>
+    <div style="display:flex;justify-content:center;margin-top:12px;"><a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact" style="max-width:420px;width:100%;background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border:3px solid #1976D2;border-left:5px solid #1565C0;box-shadow:0 0 0 1.5px #e2b227,0 4px 14px rgba(10,22,40,0.08);" target="_blank" rel="noopener noreferrer"><div class="cj-resource-card-title">HTSA Website — more stories &amp; outcomes</div><p class="cj-resource-card-desc">Many more member outcomes, screenshots, and program details on our main site.</p><span class="cj-resource-card-cta">Visit highticketsalesacademy.com</span></a></div>
+  </div>
+
+  <!-- CJ personal reviews -->
+  <div class="ref-strip">
+    <div class="ref-strip-label">A few of CJ&#x27;s Personal Reviews</div>
+    <p class="ref-strip-personal-intro">Real messages and posts from people who worked directly with CJ, not copied from Trustpilot.</p>
+    <div class="ref-strip-inner ref-strip-inner--personal-reviews">
+      <div class="ref-strip-mini-stack">
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you're doing.</blockquote>
+            <p class="ref-strip-quote-attr">— Zach Scanlon · text message</p>
           </div>
-        </div>
-        <p class="age-readout" id="ageReadout" aria-live="polite"></p>
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, I just wanted to thank you for closing me on the program. I can already tell I'll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process.</blockquote>
+            <p class="ref-strip-quote-attr">— Riley Colston · text message</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, the program has been great so far and I've made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you.</blockquote>
+            <p class="ref-strip-quote-attr">— Amy Colombo · text message</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I'm so grateful. I landed my dream role 65 days in, and you played a real part in that.</blockquote>
+            <p class="ref-strip-quote-attr">— Zachary Allen · mastermind community</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, thank you so much for taking the time to read through my answers before we ever got on a call. That meant a lot. Hearing that you actually read my stuff made me want to work with you specifically, not someone else. I appreciate the kind words more than you know, and I'm really excited to get started with you.</blockquote>
+            <p class="ref-strip-quote-attr">— Brittany Levine · text message</p>
+          </div>
       </div>
-
-      <div class="year-grid" id="yearGrid" aria-label="79 squares representing an average 79 year life in America"></div>
-      <div class="year-legend" aria-hidden="true">
-        <span><i class="legend-dot legend-dot--lived"></i>Years lived</span>
-        <span><i class="legend-dot legend-dot--current"></i>Your current year</span>
-        <span><i class="legend-dot"></i>Years remaining before 70</span>
-        <span><i class="legend-dot legend-dot--later"></i>Later years</span>
-      </div>
-
-      <p class="time-summary" id="timeSummary" aria-live="polite"></p>
-      <div class="life-excerpt">
-        <div class="life-two" aria-label="A rough picture of remaining life">
-          <span><b id="sleepYears">0 years</b>sleeping</span>
-          <span><b id="awakeYears">0 years</b>awake, and yours to decide what to do with</span>
-        </div>
-        <p>I would love nothing more than to help you build a career that revolves around your life instead of forcing your life to revolve around your career. That is the same choice I made over the last three days. <strong>I chose my wife, and I made work fit around our life.</strong> <strong>Make this decision count.</strong></p>
+      <div class="ref-strip-mini-stack">
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">Hey CJ, just wanted to say thanks, seriously. You and Mark didn't let me slip away after I almost bailed on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support? That's why I'm all in now. Appreciate you both pulling me through. Means a lot.</blockquote>
+            <p class="ref-strip-quote-attr">— Nick Sotirianos · text message</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, you're the most genuine and caring person I've ever met on the phone. You lifted me up when I was in a low place. You gave me hope, kept me motivated, and kept me positive the whole way. You're a big part of my testimony. I wouldn't be here right now if it wasn't for you.</blockquote>
+            <p class="ref-strip-quote-attr">— Trinity Isabel · Facebook post</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, thank you for getting me signed up and for sticking with me while we built a plan to join. We worked on it for three months before I came in, and you never made me feel rushed. You showed me from the start that these are really great people, every single one of them.</blockquote>
+            <p class="ref-strip-quote-attr">— HTSA Member · unprompted review</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, I'm SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you're doing!</blockquote>
+            <p class="ref-strip-quote-attr">— Kate Robinson · text message</p>
+          </div>
       </div>
     </div>
-  </section>
-
-  <div class="precall-close">
-    <p>If we have not locked a time yet, grab one here. If we already have a time, I will see you on the call.</p>
-    <a class="cta" href="https://meetings.hubspot.com/charles660/cj" target="_blank" rel="noopener noreferrer">Book or confirm a time with CJ</a>
   </div>
 
   <!-- FOOTER -->
@@ -2957,77 +2515,14 @@
 </div>
 <script>
 (function(){
-  const LIFE_YEARS = 79;
-  const ageInput = document.getElementById("ageInput");
-  const ageReadout = document.getElementById("ageReadout");
-  const timeSummary = document.getElementById("timeSummary");
-  const sleepYears = document.getElementById("sleepYears");
-  const awakeYears = document.getElementById("awakeYears");
-  const yearGrid = document.getElementById("yearGrid");
-  const yearDots = [];
-
-  for (let year = 1; year <= LIFE_YEARS; year += 1) {
-    const square = document.createElement("span");
-    square.className = "year-dot";
-    square.setAttribute("aria-hidden", "true");
-    yearGrid.appendChild(square);
-    yearDots.push(square);
-  }
-
-  function formatYears(value) {
-    return Number.isInteger(value) ? String(value) : value.toFixed(1);
-  }
-
-  function renderAge() {
-    const enteredAge = Number.parseInt(ageInput.value, 10);
-    const age = Number.isFinite(enteredAge) ? Math.min(78, Math.max(18, enteredAge)) : 38;
-    const yearsRemaining = LIFE_YEARS - age;
-    const yearsBefore70 = Math.max(0, 70 - age);
-    const livedPercent = Math.round((age / LIFE_YEARS) * 100);
-    const remainingPercent = 100 - livedPercent;
-
-    yearDots.forEach((dot, index) => {
-      dot.className = "year-dot";
-      if (index < age - 1) dot.classList.add("year-dot--lived");
-      if (index === age - 1) dot.classList.add("year-dot--current");
-      if (index >= age && index >= 70) dot.classList.add("year-dot--later");
-    });
-
-    ageReadout.innerHTML = `At age <strong class="age-readout-age">${age}</strong>, you have lived about <strong class="age-readout-lived">${livedPercent}%</strong> of this timeline, with <strong class="age-readout-left">${remainingPercent}%</strong> still ahead.`;
-    timeSummary.innerHTML = `<strong>${yearsRemaining} years</strong> remain on this model. <strong>${yearsBefore70}</strong> of them come before age 70.`;
-    sleepYears.textContent = `${formatYears(yearsRemaining / 3)} years`;
-    awakeYears.textContent = `${formatYears((yearsRemaining * 2) / 3)} years`;
-    yearGrid.setAttribute("aria-label", `Age ${age} is highlighted, with approximately ${livedPercent} percent lived and ${remainingPercent} percent remaining`);
-  }
-
-  ageInput.addEventListener("input", renderAge);
-  document.querySelectorAll("[data-age-step]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const currentAge = Number.parseInt(ageInput.value, 10);
-      const age = Number.isFinite(currentAge) ? currentAge : 38;
-      const step = Number.parseInt(button.dataset.ageStep, 10);
-      ageInput.value = Math.min(78, Math.max(18, age + step));
-      renderAge();
-    });
-  });
-  ageInput.addEventListener("change", () => {
-    const age = Number.parseInt(ageInput.value, 10);
-    ageInput.value = Number.isFinite(age) ? Math.min(78, Math.max(18, age)) : 38;
-    renderAge();
-  });
-  renderAge();
-})();
-</script>
-<script>
-(function(){
   var GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
-  var slug = "jane_bates";
-  var confirmDay = "soon";
+  var slug = "archive_template";
+  var confirmDay = "Friday";
   var meta = {
-    fullName: "Jane Bates",
-    email: "janebates70@icloud.com",
-    phone: "+15709759465",
-    clientSlug: "jane-bates",
+    fullName: "Tracy Nannery",
+    email: "tbnannery@gmail.com",
+    phone: "+17573482318",
+    clientSlug: "tracy-nannery",
     resourceSlug: slug,
     pageType: "precall"
   };

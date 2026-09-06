@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<title>ARCHIVE PRECALL V08-MARK-LAYOUT · Aug 25 Mark-style long precall (Anna Riach / Mark layout era)</title>
+<title>ARCHIVE PRECALL TEMPLATE V03</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 
@@ -1324,31 +1324,18 @@
     max-width: 520px;
   }
 
+  .ref-strip-inner--personal-reviews {
+    align-items: stretch;
+  }
+
+  .ref-strip-inner--personal-reviews .ref-strip-mini-stack {
+    flex: 1 1 280px;
+    min-width: 0;
+    margin-top: 0;
+  }
+
   .ref-strip-quote--compact {
     padding: 10px 12px 12px;
-  }
-
-  /* Centered section header (same idea as enrollment Member voices banner) */
-  .ref-strip-banner {
-    text-align: center;
-    margin: 0 0 18px;
-  }
-
-  .ref-strip-banner .ref-strip-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2.6px;
-    text-transform: uppercase;
-    color: var(--navy);
-    margin: 0 0 8px;
-  }
-
-  .ref-strip-banner-desc {
-    font-size: 12.5px;
-    line-height: 1.6;
-    color: var(--muted);
-    margin: 0 auto;
-    max-width: 520px;
   }
 
   .ref-strip-quote--compact .ref-strip-quote-body {
@@ -1360,24 +1347,6 @@
   .ref-strip-quote--compact .ref-strip-quote-attr {
     margin-top: 8px;
     padding-top: 6px;
-  }
-
-  /* CJ Reviews columns: stretch so bottoms line up toward the footer */
-  .ref-strip-inner--personal-reviews {
-    align-items: stretch;
-  }
-
-  .ref-strip-inner--personal-reviews .ref-strip-mini-stack {
-    flex: 1 1 280px;
-    min-width: 0;
-    margin-top: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .ref-strip-inner--personal-reviews .ref-strip-mini-stack > .ref-strip-quote {
-    flex: 1 1 auto;
   }
 
   /* Trinity (right column): full text, card stretches with row so name lines up with Jessica C. */
@@ -1667,63 +1636,6 @@
     margin: 0 0 12px;
   }
 
-  /* In-page This Week at HTSA clip (precall). Stays on the page. */
-  .htsa-proof-embed {
-    margin: 0 0 18px;
-    padding: 16px 16px 14px;
-    background: #f7f9fc;
-    border: 1px solid var(--mid);
-    border-radius: 12px;
-    max-width: 640px;
-  }
-
-  .htsa-proof-embed-kicker {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--green-dark);
-    margin: 0 0 6px;
-  }
-
-  .htsa-proof-embed-must-watch {
-    display: inline-block;
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #ffffff;
-    background: linear-gradient(135deg, #ff6b00 0%, #ea580c 55%, #dc2626 100%);
-    padding: 8px 16px;
-    border-radius: 8px;
-    margin: 0 0 10px;
-    box-shadow: 0 4px 16px rgba(234, 88, 12, 0.45);
-  }
-
-  .htsa-proof-embed-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--navy);
-    margin: 0 0 6px;
-  }
-
-  .htsa-proof-embed-desc {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.6;
-    margin: 0 0 12px;
-  }
-
-  .htsa-proof-embed video {
-    width: 100%;
-    max-width: 640px;
-    height: auto;
-    display: block;
-    border-radius: 12px;
-    background: #0a1628;
-    border: 1px solid var(--mid);
-  }
-
   .cj-resources-featured {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1803,29 +1715,6 @@
     margin-bottom: 8px;
   }
 
-  .cj-resources-grid--stories {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin-bottom: 12px;
-  }
-
-  .cj-resources-grid--blue {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-top: 4px;
-    margin-bottom: 8px;
-  }
-
-  .cj-resource-card--blue {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 3px solid #1976D2;
-    border-left: 5px solid #1565C0;
-    box-shadow: 0 0 0 1.5px #e2b227, 0 4px 14px rgba(10, 22, 40, 0.08);
-  }
-
-  .cj-resource-card--blue:hover {
-    border-color: #1565C0;
-    box-shadow: 0 0 0 1.5px #e2b227, 0 6px 18px rgba(25, 118, 210, 0.22);
-  }
-
   .cj-resource-card--compact {
     padding: 14px 16px;
   }
@@ -1846,9 +1735,7 @@
       padding-right: 20px;
     }
     .cj-resources-featured,
-    .cj-resources-grid,
-    .cj-resources-grid--stories,
-    .cj-resources-grid--blue {
+    .cj-resources-grid {
       grid-template-columns: 1fr;
     }
   }
@@ -2169,140 +2056,41 @@
     .rl-q-item, .rl-ask-wrap { padding-left: 20px; padding-right: 20px; }
   }
 
-  /* Pre-call resource page — new classes only */
-  .rl-call-card {
-    margin: 0;
-    padding: 22px 36px;
-    background: linear-gradient(135deg, #f0fdf7 0%, #e8f9f1 100%);
-    border-top: 1px solid rgba(0, 154, 94, 0.2);
-    border-bottom: 1px solid rgba(0, 154, 94, 0.2);
-    border-left: 4px solid var(--navy);
-  }
-  .rl-call-card--missed {
-    background: linear-gradient(135deg, #fff5f5 0%, #fee2e2 100%);
-    border-top-color: rgba(220, 38, 38, 0.22);
-    border-bottom-color: rgba(220, 38, 38, 0.22);
-    border-left-color: #dc2626;
-  }
-  .rl-call-card-kicker {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    color: var(--green-dark);
-    margin: 0 0 8px;
-  }
-  .rl-call-card-kicker--missed {
-    color: #dc2626;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1.6px;
-  }
-  .rl-call-card-when {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1.3;
-    margin: 0 0 6px;
-  }
-  .rl-call-card-meta {
-    font-size: 13px;
-    color: var(--muted);
-    margin: 0 0 16px;
-  }
-  .rl-call-card-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px 14px;
-  }
-  .rl-call-card-actions .invest-btn {
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-  }
-  .rl-call-card-actions .step-link {
-    font-size: 12px;
-    margin-left: 2px;
-  }
-  .rl-faq-wrap {
-    padding: 8px 36px 28px;
-    border-bottom: 1px solid var(--mid);
-  }
-  .rl-faq-item {
-    background: var(--white);
-    border: 1px solid var(--mid);
-    border-radius: 8px;
-    margin-bottom: 10px;
-    overflow: hidden;
-  }
-  .rl-faq-item:last-child { margin-bottom: 0; }
-  .rl-faq-item summary {
-    list-style: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--navy);
-    line-height: 1.4;
-  }
-  .rl-faq-item summary::-webkit-details-marker { display: none; }
-  .rl-faq-item summary::before {
-    content: "▸";
-    display: inline-block;
-    margin-right: 8px;
-    color: var(--green-dark);
-    transition: transform 0.15s ease;
-  }
-  .rl-faq-item[open] summary::before { transform: rotate(90deg); }
-  .rl-faq-item .rl-faq-body {
-    padding: 0 16px 14px 34px;
-    font-size: 13px;
-    color: var(--text);
-    line-height: 1.65;
-  }
-  .rl-expect-list {
-    margin: 0;
-    padding-left: 18px;
-    font-size: 13px;
-    color: var(--text);
-    line-height: 1.7;
-  }
-  .rl-expect-list li { margin-bottom: 8px; }
-  .rl-expect-list li:last-child { margin-bottom: 0; }
-  @media (max-width: 600px) {
-    .rl-call-card { padding: 18px 20px; }
-    .rl-call-card-when { font-size: 17px; }
-    .rl-call-card-actions { flex-direction: column; align-items: stretch; }
-    .rl-call-card-actions .invest-btn { width: 100%; text-align: center; }
-    .rl-call-card-actions .step-link { text-align: center; }
-    .rl-faq-wrap { padding-left: 20px; padding-right: 20px; }
-  }
-
 </style>
 <script>
 (function(){
-  var slug="anna_riach";
+  var slug = "archive_template";
   fetch('/r/_manifest.json?v='+Date.now(),{cache:'no-store'})
     .then(function(r){return r.json();})
     .then(function(m){
       var link=m.links&&m.links[slug];
       var expired=!link||link.status!=='active'||(link.expires_at&&new Date(link.expires_at)<new Date());
-      if(expired){ window.location.replace('/r/_expired.html'); }
+      if(false && expired){ /* archive preview: expire disabled */ }
     }).catch(function(){});
 })();
 </script>
 </head>
 <body>
-<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE PREVIEW PRECALL V08-MARK-LAYOUT · commit 7c10ecf · NOT the live send link · <a href="https://closewithcjclay.com/r/anna_riach/" style="color:#fde68a">Live Anna page</a><br><span style="font-weight:500;opacity:.95">Aug 25 Mark-style long precall (Anna Riach / Mark layout era)</span></div>
-<div class="page" id="main-content">
+<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE TEMPLATE V03 · End of first-day resource rebuilds · NOT a live send link · <a href="/archive/prospect-versions/precall-resources/" style="color:#fde68a">All precall templates</a><br><span style="font-weight:500;opacity:.95">Expire checks disabled. Person names may still appear in old HTML; treat as layout reference only.</span></div>
+<div id="email-gate" class="email-gate">
+  <div class="email-gate-card">
+    <div class="email-gate-badge">Private Page</div>
+    <p class="email-gate-lead">Prepared for Tammy</p>
+    <p class="email-gate-sub">This link is personal. Enter the email address it was sent to and only that address will open it.</p>
+    <label for="email-gate-input">Your email</label>
+    <input id="email-gate-input" type="email" autocomplete="email" inputmode="email" placeholder="you@email.com" />
+    <button type="button" id="email-gate-btn" class="invest-btn">Open my page</button>
+    <p id="email-gate-err" class="email-gate-err" hidden>This page is not available for that email. If someone forwarded this link, it will not work without the original recipient email.</p>
+    <p class="email-gate-foot">Do not share this link. It is intended for Tammy only.</p>
+  </div>
+</div>
+<div class="page" id="main-content" hidden>
 
+  <!-- HEADER -->
   <div class="header">
     <div>
       <div class="logo-wrap">
-        <img class="logo-icon" src="data:image/jpeg;base64,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" alt="Chad Aleo">
+        <img class="logo-icon" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxANEAgIEBAJCAgKDRYNDQkJDRsIEAgWIB0iIiAdHx8kKDQsJCYxJx8fLTstMT1AMENDIys/TT8uQTQ5MDcBCgoKDg0OFg8PETcZFiU3Ky4rLTcrLSsxKysuNzctNysrLS0rNzcuNzg3KysrLTUvKysrKysrKysrKysrKysrK//AABEIAMgAyAMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAAAAQIFAwQGBwj/xAA5EAABAwIEBAMGBAUFAQAAAAABAAIDBBEFEiExBhNBUSJhcTJCgZGx8CNSocEHFEPR8TNTYnPhNP/EABkBAQADAQEAAAAAAAAAAAAAAAABAgMEBf/EACQRAAICAgMAAQUBAQAAAAAAAAABAhEDIQQSMUETMlFhcZEF/9oADAMBAAIRAxEAPwDyhJNC2MRJJoQEUJoQEUJpISJJSSQCSTQgEkmhAJJMoQkSSaEAkk0IBJJoQCSTQgEhCEJN5JSSQoJJNCASSaEBFCaSASE0vL7CEiSJCxSvN7Dp8LqDST5/qq9iaMwJOgDneiyRR5jlu1h7P8K28OgvdxAsNr6XWergu0EsksfeHjyqLLqJpvoXgZgMw/46rVKsaWR0djG4VMfv079CPvyUalgkJkF2nqx3tNU9g4fg0ElIi2iSsUEkmhAJJNCASSaEAkk0IDeQmkhUSSkkgEkmkgEhNJxtqgIPfZYM9zvp9VGY3Siab6X+CpJlkZMpOgBv2WWKmc7SxHoNlecP8OvqbP8AYb3Otl22G8LQs9u8h89FzyyfB2YuO5Kzz6mwx3acebHKypcDlP8ApyTxm+zm5gSvUqPDIWWAjZ8lc0tNHYeBl/RZqcjpWCC9PJqfhaaoIkcAJh/VjGS/qFjxfhepgGYs5waNHsGpXtTIG9GtHoLKUsAIykAjsRdWuQeOD1R81VUf9SxaQbOB0stVexcb8GtmiqKinYGVQGfIP6tv3Xj7mkEtIIcDYg6WXTilaODNjcJfoikmhaGIkk0ICKE0IBJJoQG8hNJCoklJJAJJNCAioSdAsixOFzZGCUcGZWVDQAuAI0vYeax0sB0P2Fc0cdiy2vks5LRbG7Z1eDRCNga3QdgryF+w6qiwwXyd2j5K4YQNfsLglpntQdrRaQOGgVlEbZVzn862PVxDQNy45bKLeKoS5zAXuYzeRo8JUxZZo7COYW81kbKDoqjCsRhn9mRjifdJylW4hB1BAP1WitmbSITNHwXiP8UMIFNVipYMsNa3PpoA8e1+x+K9xdGSMq8+/izhuakFTa7qWUOvvYHQ/UfJXxtqRhnipY3+jx5JNC6zzhJJoQCSTSQCQmhAbyE0kKCQmkhIklJJAJRibmkDVJdRw9w/EWx1c/NPOty4o9CR3VJzUVbL48Usr6xK+FoFh+i2Yp7E9+2yseIeFLB1bSySScvV9HJq9nouXgqiS1puJAdu4VeykrRd4ZYpVI9Bwd/hY7vot6aTKM25+qreHozymZtHX16roIaQPIHRcEvT1cafVHPQ0bpnmec3jPsxDQNXSUtNSlhgyxsuLEb2RXYOXANZc6e7oq2HhZvLkjldOXOdfM8E5fSyvB29lqqOtso8WwN0Mjmw1HhPiaGuuY11PCWJT2ZBKeaRoHe1dVlNwa1ro5GTOJYSXyPBYX6D7+KtsPbyXtNr5TZ3Y+YVJtqWno0hFOO1TOrfWhgudB3Oi5TiTiKjmiq8Ne7M6aMsOUZ8vY/urDitsk0URhbncTZzQ7IuEwOqw8SFk0IbUtP+rKeawHX5bFaJy9+DCfWq+WefTxGNz4j7TDY+axrbxWoE09XUNAZHLK5zGAZcovoPktVegjx37oSSaEIEkmhCSKE0IDeQmkhQSE0kAkJpISAGy9rwukZzaeOzOTS07SenSwXii9M4FxDnsfG8+OSFsIedMxaTp8rLDOtI7uDNRk1+TaxOSOGomewuk50biW2sGkLgMbpeVNHJYMe8ZiALWO677iBrInw1eR7mRSBjsrbNaP8ANlyPFLs0zLe6OnXsufFfZnRzEuqZd4HJaOPXT6rpKSoAyrjcHnAZy/Yy+zfqrmkmuRqs5LZfHPSO4pJBot5pPQa991Q4fNe33ZdBSvuArQ2XnrZjkgJBJ1PQdlztU4MLydDf0XS18xayUtF3Bpt5lcBVYuI2ve6Goq5b+KOJt3N87FVyVaRrium2dThzy9mU6328lxn8QsNaylqKsxsjqWva3mxeASAmxuFecNcTRSEsymFzAC6KYctzFZ41Rx4pT11ICGNkGXO3xctw1B+BAV8bSrZlmXaLSR8+pKyxjB5KRz2kxVELXmP+Yp3cxmYbg9QfIquXoHitURQmkhAJJoQCQhCEm+kmhChFCaSASE0kAlc8OY46jeG+3BLo5u+U6aqnTYdiRe2tt7qGrVMns47j6ev02KRujETiIy/Ul+oddcPxNGGzucHfhgjXcOW9QTc6ngl3NrLTxhmYRv8Ayi1trKiwpO0UX/RllXScd2YqV/hJF8g0udM3orCiqbOBJDR9FQQzOaQNHMOoB1yqya/QP8LXkXs42uuacaZ6WKdo7jDKsOy2Ovbqr9mIiMAe047Bec4ZVOaQ8G22jdSV1WTMxkmpebWAN8yw8O+NSRaTYsTdpG56a5Qquta95vYPB2IFihmESTZpBNLFrsxo1+ayswh9iwTTNf0lzAkfAhTTZvGkVDcOALp8sglz5XX2XW4RUNMLAAIy3dg0VMKStiuDLBVxA3/EYWuI/VYqbEG2c4h8UkYJcx3gLU6tMrk8Z5zNUxivximlNqCtqpY5SP6XjOV48wdfS46qkr6R9PLPSPFpYXFrrag+Y8ioTyF7pJTq6RxcfMkr2Xh/CqHEKWmjmigqJGwtZz3C0osPzbrulPpR4kYfUujxVJWnEuFfyNXXYeCZGQPsx53c0i4/QhVi19MXrQkk0kIBCEISb6SkkhQSSaEBFCaSASE0kB1HDE14pourXXstmuZmaW726d1UcLyWkmj6PZf5H/1XVS02zgabFS5UtnCsTeaSX9KCUZTcHbe49lZY6g6XLnEaXGtvmsdTcFzwOuo7LWhqLEkW8wfFdYzimejhk0dJBHo03s0N2Atl9StqLHQ0tiGd/TwHL8lRCtOQtBuXb+H21oU1VlfIXAaajXUHouT6dvZ6Kz9ao9TwXEHHKx9wQAQ0nYK7rIwW8y+VzerTe688wzEQW6HxD3na5l2dBVZgy5ZYt9jq5VprR2wkpK0SoWzHXNmt36qi41rmQxznQTyRFmnW+i6d0jcpLXBttbLyvjmudK+xPvbA6FXxxuSsx5M+sG0cmrbCOIJ6SwY45R0uqpJdzin6eOpNbRsYnXPqpZqyTWWU3PlpYLVTQpIIoTSQCTQhAb6E0kKCSUkkJEkmhARQmkgLbhkfiyHtGfqF19K0HO0i4K5jheP/AOiX0aPPv+y6nD9SVnm+wrw98p/wpsawsxnmNDi0nYdFQzQG5dYh1rXtay9KqKbMB73dvdUWJYMPbb7w9neywjkdUz1MnH3cTiJGyN7FvruFqPN7kf3uuolor+AggtG5WjNhQ1P6t6qeyMPpsrKKvMRabk22F9l0WH8SmLxl133J72VEaEtIBAfby2TloyxgnLbRXDe2YqeqkSsksZ1VXxWHNaBo8N1O1yuQxCrMzs51t+qwOdf07KK1hjUfDLJnlk9EkpJLQxEkmhCRJJoQEU0IQG+hNJCgklJJAJJNCEkUW+f1WaKnc+xAs0+8dArCkgDDGN33vnI3UeFeyul6WmFw8mNkZ0efE71V9hPfzVbDSOIG+quMKgLVz5cqkqR18Piyxzcn8l3Ez77LFVUmex0Bb+q2qeMmwW/HRZvRZJHq/wBORqKIeIFoN9dlpGgvlsCQdbDW67w4YNjqOx6LWqMKAsW+AjvrZGitI5mPA2gB5a0eZ1sqnjKgEVGHAac1p7d13UWHuNsxzgbAaAKh/iTDloXm20rFOP7kY8iK6NnkiE0l2nlCSUkkAklJJAJJNCEiSTQgN9CaVug1PzuhQSFYU+EyPs5w5Efd+5+C2m0DWagcw/nk1t8EM3lj4iphpnv2Hh/MfCAtyKiaNSeY4dNmhb7IHO75R8LKYp/khRybNaPfXVo0B7LZdAHgkbjt0TbSk3I1sslPHl0OrvopoLRdcO1rX2pJbNmGjHnTmeS6iOhy2svP5Is3/F47aWV9gnFBhywVAdJGNBKNXM/uueeHdo9Xj8ql1n/p10MZarSlNwtWgminaJY3smjPVhvb1W3G2x7KijR29k/DM5qxlndZyFC6miqItjA+9lzvHOGmqpKqnbfmCz221uQbrpmjcrVqQLOedGgXJ2sFHnhEl2VM+c6iB0bjG4Fjx36+axL0DFMOjqY4g4ZXM0a9ujgCuUxHAZobuA/mIukkYuR6hdSTas8mWm0VKEyEkAklJJAJJNCASSaEJLuCivlL3CJp6WuVYxUzWWLB4h751ct91nAsIBB3vrdYqNvLLoL5r+JrjqbdlNHF2lL0ywdyLu7lZZGA2JsP3UZGlPKSpJSohlDiLkhg91vVE1ja2o7dlLlqOVCyMeY+nlsl5rI4KKFiJd1ukXBw1F1LL8kg3f7upFihklhIlgkfC8fkOVdNhPGc7Q1tQxs4GnMZ+G4rnAFkaweihwTNYZpQ8Z6XQ8VUkwDS/wDl3/lmGT9dlYMr6c6ianI/7R/deTmDqNfRINI0s76rN4jqjy2vUepVeO0sQN5oifyxnmk/JctjHEgmaaeMOZC7R8jtDJ5LlwOtj8VIMcbHYIsS+SJcqTVLRtOkBFhue3RSkub/AOVGGO2uh/ZTcALrZI5W7Kyrw6Ga+djQ/wD3G+An4hVFbw4BrG5zfKTxj5hdK5vVRcy4P3dW18oVXhw1ThcsdyW52D3o/HZaS9CLBYf4uqquwSOa72nkTdwPC/1Cq4fgnt+Tkklv1eEzRalhez/cj8YK0VSqLJ2JCEKAdu12ihMCA2Qe3Gcw8+6aFY40b0bg5ocNevqEEW+9kIQsK333UShCFiBUHDshCkkiPkpW+KEKQCmwoQpJM8bvgshN/VCFBKIh1vigu2QhSgTa7p0CyBw+KEKSSBKQKEISDmhYrIQoJMkbBq3fTZcXj1AYJHED8KUlw8j1CEJLwJbKxCELIsf/2Q==" alt="Val Tappan">
         <div>
           <div class="logo-text">High Ticket<br>Sales Academy</div>
           <div class="logo-sub">Where Sales Reps Meet Their Forever Career</div>
@@ -2311,37 +2099,31 @@
       <div class="header-tagline" style="margin-top:12px;">Certification &nbsp;·&nbsp; Coaching &nbsp;·&nbsp; Placement</div>
     </div>
     <div class="invoice-meta">
-      <div class="invoice-badge">Pre-Call Resources</div>
+      <div class="invoice-badge">Private Resource Page</div>
       <p><strong>Prepared by:</strong> CJ Clay</p>
-      <p><strong>Prepared for:</strong> Anna Riach</p>
-      <p><strong>Date:</strong> Aug 25, 2026</p>
+      <p><strong>Prepared for:</strong> Tammy Berry</p>
+      <p><strong>Date:</strong> Aug 7, 2026</p>
     </div>
   </div>
   <div class="accent-bar"></div>
 
+  <!-- EMAIL INTRO -->
   <div class="hero-band hero-band--letter">
-    <p><strong>Anna</strong> — everything you'd want before we talk is right here.</p>
-    <p>On the call we'll cover where you're at, what you're after, and whether this is the right move for your next chapter. High ticket sales is one of the few careers that travels — every company in every vertical needs someone who can close, and that's what makes a good closer invaluable in the marketplace. The world went remote, and the demand followed it.</p>
-    <p>Have a look at whatever's useful. Look forward to connecting.</p>
+    <p>You made a decision and I'm not going to fight you on it. Deciding is the hard part — most people in your seat stall for six months and do nothing.</p>
+    <p>But there's a reason I'm writing anyway, and it isn't the sale. On your call with Richard, you told him what actually worried you: <strong>getting scammed, or not getting what you were promised.</strong> And he told you straight — <em>"there are bad apples out there, if you're investing any money, be wary of that."</em> He was right. And right now you're about to hand money to a company you found through an ad, without asking the questions that separate the real ones from the rest. That's the part I can't sit on.</p>
+    <p>You also said something else that stuck with me. You'd sat through <strong>three webinars</strong> and they <em>"basically talk about the same things."</em> You're right, and that's exactly the problem. Everyone's pitch is identical. Training, community, coaching, income. It sounds the same because it <strong>is</strong> the same — until the money's gone and you find out what you actually bought.</p>
+    <p>So here are the questions that tell them apart. Ask whoever you chose. If they answer these well, you picked a good one and I'll genuinely be happy for you.</p>
   </div>
 
-  <div class="rl-call-card" id="rl-call-card" data-confirm-day="Wednesday">
-    <p class="rl-call-card-kicker">📅 Your call with CJ</p>
-    <p class="rl-call-card-when">Wednesday, Aug 26 · 1:00 PM EST</p>
-    <p class="rl-call-card-meta">45 minutes · Zoom</p>
-    <div class="rl-call-card-actions">
-      <button type="button" id="rl-confirm-call" class="invest-btn">Confirm I'll be there</button>
-    </div>
-  </div>
-
+  <!-- BILLING -->
   <div class="billing-grid">
     <div class="billing-cell">
       <div class="billing-label">Prepared For</div>
-      <div class="billing-name">Anna Riach</div>
+      <div class="billing-name">Tammy Berry</div>
       <div class="billing-detail">
-        <a href="mailto:ajriach1@yahoo.com">ajriach1@yahoo.com</a><br>
-        <a href="tel:+18177812506">+1 (817) 781-2506</a><br>
-        Wednesday at 1:00 PM EST
+        <a href="mailto:tammyberry100@yahoo.com">tammyberry100@yahoo.com</a><br>
+        <a href="tel:+17573242539">+1 (757) 324-2539</a><br>
+        Private resource page — for Tammy only
       </div>
     </div>
     <div class="billing-cell">
@@ -2350,61 +2132,133 @@
       <div class="billing-detail">
         HTSA Career Coach<br>
         (616) 612-1735<br>
-        <a href="mailto:cj@highticketsalesacademy.com">cj@highticketsalesacademy.com</a>
+        <a href="mailto:cj@highticketsalesacademy.com">cj@highticketsalesacademy.com</a><br>
+        Call scheduled: 2pm EST
       </div>
     </div>
   </div>
 
+  <!-- QUESTIONS -->
   <div class="sec-head">
     <div class="sec-num">1</div>
-    <h3>Who Mentors You</h3>
+    <h3>Questions That Tell Them Apart</h3>
   </div>
   <div class="rl-q-wrap">
-    <div class="rl-q-item">
-      <div class="rl-q-ours">
-    <div class="htsa-proof-embed">
-      <div class="htsa-proof-embed-kicker">Recorded this week · Aug 18 · 4:07</div>
-      <div class="htsa-proof-embed-must-watch">MUST WATCH!!!</div>
-      <div class="htsa-proof-embed-title">HTSA · Placement This Week (Aug 18, 2026)</div>
-      <p class="htsa-proof-embed-desc">Watch this before the testimonials below. Four people on our live group coaching call talking about getting placed with us. This is the level we operate at on placement, which is usually the biggest question people have. Play it right here. Pause anytime. Use the fullscreen control if you want it larger.</p>
-      <video controls playsinline preload="metadata" controlslist="nodownload" title="HTSA Placement This Week, August 18, 2026. Members on live group coaching talking about placement.">
-        <source src="/media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
-        Your browser does not play this video here. Open <a href="/media/this-week-at-htsa-2026-08-18.mp4">this file</a> instead.
-      </video>
-    </div>
-
-        <p>You're validated and placed directly by Chad Aleo himself — not a random coach.</p>
-        <p style="margin-top:12px;"><a href="https://youtu.be/eLAWEwE7pl4?si=VfiqAxeOKFnoJ_Mm" class="step-link" target="_blank" rel="noopener noreferrer">⭐ Meet Chad — CEO &amp; Founder at HTSA</a></p>
-        <p style="margin-top:14px;"><a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><img class="rl-proof-img" src="https://closewithcjclay.com/resource-links/assets/chad-aleo-book-banner.png" alt="Chad Aleo, best-selling author of The Book on High Ticket Sales"></a></p>
-        <div class="rl-proof-caption">Chad Aleo · <em>The Book on High Ticket Sales</em> — view on Amazon</div>
-        <p style="margin-top:14px;"><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="rl-trustpilot-link" target="_blank" rel="noopener noreferrer"><span class="rl-trustpilot-stars" aria-hidden="true">★★★★★</span><span class="rl-trustpilot-text">Trustpilot Reviews — 4.9 stars out of 5</span></a></p>
-      </div>
-    </div>
+<div class="rl-q-item">
+  <h4>1. Who is actually training you — and what have they done?</h4>
+  <p class="rl-q-sub">Not who ran the ad. <strong>Who trains you.</strong></p>
+  <ul><li>How long have they personally sold in this industry — not taught it, <em>done</em> it?</li><li>How much revenue have they actually closed?</li><li>Do they train you directly, or does that cost more?</li><li>Are they an operator, or an influencer with a media budget?</li></ul>
+  <div class="rl-q-ours"><strong>Ours:</strong> Chad. Roughly <strong>$28 million</strong> in revenue closed, mentored by Tony Robbins, best-selling author on Amazon. He trains <strong>twice a week, personally</strong>, and he's the one who grades your final call and certifies you. Not a coach who's six months ahead of you.<br><br><a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><img class="rl-proof-img" src="https://closewithcjclay.com/resource-links/assets/chad-aleo-book-banner.png" alt="Chad Aleo, best-selling author of The Book on High Ticket Sales"></a><div class="rl-proof-caption">Chad Aleo · Best-Selling Author · <em>The Book on High Ticket Sales</em></div></div>
+</div>
+<div class="rl-q-item">
+  <h4>2. How do you actually get placed?</h4>
+  <p class="rl-q-sub">This is the question. Ask them to walk it step by step.</p>
+  <ul><li>Is it <strong>one-on-one placement</strong>, or a <strong>job board</strong>?</li><li>If it's a board — how many of those companies could you find free on Indeed, LinkedIn, or a Facebook group?</li><li>Do you know which ones are actually hiring? Which are legitimate? Which want a closer versus a cold caller?</li><li>Do you pay a <strong>monthly fee</strong> to keep access to the board?</li><li>How long does it typically take — and do they have an average, or just a story?</li></ul>
+  <div class="rl-q-ours"><strong>Ours:</strong> we place you one-on-one with companies in our network of <strong>300+</strong>, as many as you want. I don't know of another company in this space that does one-on-one placement — if you find one, that's genuinely worth knowing and I'd want to hear about it.<br><br>What that looks like in practice: one of my members did <strong>17 interviews</strong> — not applications, interviews. Another had <strong>12 offers of interviews inside 3 days</strong> and finished 6 first rounds, all in the exact field he asked for.<br><br><img class="rl-proof-img" src="https://closewithcjclay.com/resource-links/assets/tammy-17-job-offers-review.png" alt="Trustpilot review: member received over 17 job offers after HTSA"><br><br><strong>Average time to land: 38 days for closers. 23 days for setters.</strong></div>
+</div>
+<div class="rl-q-item">
+  <h4>3. Is placement guaranteed — in writing?</h4>
+  <p class="rl-q-sub">Not <em>"we'll work with you until you land it."</em> That's a feeling. Ask for the <strong>actual written language.</strong></p>
+  <ul><li>What happens if you're not placed?</li><li>What if you get placed and it doesn't work out — do they replace you free, or do you pay again?</li><li>Is coaching and placement support <strong>lifetime</strong>, or is there a monthly charge to stay in?</li></ul>
+  <div class="rl-q-ours"><strong>Ours:</strong> If you complete <strong>your part</strong> and do not secure a qualifying role within <strong>6 months</strong> of certification (or at least <strong>50 interviews completed</strong>), you may qualify for a <strong>full refund</strong> (documentation required). Lifetime placement, no recurring fee. If a placement doesn't work out, we replace you at no cost.<br><br><img class="rl-proof-img" src="https://closewithcjclay.com/resource-links/assets/tammy-performance-guarantee.png" alt="Performance guarantee confirmed for this enrollment"></div>
+</div>
+<div class="rl-q-item">
+  <h4>4. What does training actually look like?</h4>
+  
+  <ul><li>Self-paced, or are you locked into 12 weeks?</li><li>Who do you practice with — <strong>other brand-new people</strong>, or something real?</li><li>How do you know when you're actually ready?</li></ul>
+  <div class="rl-q-ours"><strong>Ours:</strong> you practice on a <strong>real $12,500 offer</strong>, running full calls as if you were already their closer — graded on every call, every category. Five levels of AI roleplay get progressively harder, so you've met the difficult buyers before you meet a real one. The point: you <strong>produce in week one</strong>, not after a month of finding your feet.<div class="rl-curriculum-grid"><div class="rl-cur-item">
+  <div class="rl-cur-icon">📡</div>
+  <div class="rl-cur-body"><h5>Live Group Coaching</h5><p>Lifetime access. Tues 12 PM EST & Wed 5 PM EST with Chad, Christian, and guest experts.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">🎓</div>
+  <div class="rl-cur-body"><h5>Online Training Platform</h5><p>Self-paced, lifetime access. 50 in-depth modules plus five levels of AI roleplay.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">🏆</div>
+  <div class="rl-cur-body"><h5>Certification & Assessment</h5><p>One-on-one assessment with Chad. Graduate as a Certified High Ticket Closer.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">🤝</div>
+  <div class="rl-cur-body"><h5>Interview Prep & Placement</h5><p>Resume optimization, interview prep, and one-on-one placement support.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">🌐</div>
+  <div class="rl-cur-body"><h5>Community & Job Network</h5><p>Lifetime private community with hiring companies and peer support.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">🛠</div>
+  <div class="rl-cur-body"><h5>Execution & Performance Tools</h5><p>Frameworks for goal setting, KPI tracking, and daily execution.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">📄</div>
+  <div class="rl-cur-body"><h5>Resume & LinkedIn Optimization</h5><p>Templates and profile optimization built for high-ticket sales roles.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">📅</div>
+  <div class="rl-cur-body"><h5>30-Day Action Plan</h5><p>Personalized plan with our team focused on getting you placed.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">📈</div>
+  <div class="rl-cur-body"><h5>Post-Hire Support</h5><p>Call review and performance feedback for your first 90 days on the job.</p></div>
+</div><div class="rl-cur-item">
+  <div class="rl-cur-icon">🤖</div>
+  <div class="rl-cur-body"><h5>AI Roleplay & 24/7 Coach</h5><p>Unlimited AI practice plus real-time coaching support, even on live calls.</p></div>
+</div></div></div>
+</div>
+<div class="rl-q-item">
+  <h4>5. Can you see real proof — and talk to real people?</h4>
+  
+  <ul><li>Video testimonials, or just names on a page?</li><li>Are the companies <strong>verifiable</strong> and are they top-tier?</li><li>If you ask to speak to someone they placed, do they say yes — or do they get defensive and ask why you'd need that?</li></ul>
+  <div class="rl-q-ours"><strong>Ours:</strong> our people are at Tony Robbins, Alex Hormozi, Grant Cardone, John Maxwell, Taylor Conroy, Samantha Skelly. And <strong>if you want to talk to someone we placed, just say the word.</strong> I'll send you as many as you want. That question should never make anyone uncomfortable.<br><br><p class="rl-member-intro">I already reached out to both of them and let them know you may text. Matt is one of our earliest members — HTSA has placed him <strong>twice</strong> in the last two and a half years, both times into upgraded offers. Taylor was placed less than five months ago and is already crushing it. <strong>Please watch her video testimonial in the picks below first</strong> — then feel free to reach out to either of them directly.</p><div class="rl-member-contacts"><a href="sms:+18596089706" class="rl-member-card"><div class="rl-member-name">Matt Seitz<span class="rl-member-tag">Veteran HTSA Member</span></div><div class="rl-member-detail">HTSA placed him 2 times over the last 2½ years (upgraded offers)</div><div class="rl-member-offer">Real Estate Investing Offer</div><div class="rl-member-phone">(859) 608-9706</div><span class="rl-member-cta">Text Matt</span></a><a href="sms:+15053224489" class="rl-member-card"><div class="rl-member-name">Taylor DeCourcey<span class="rl-member-tag">Newer HTSA Member</span></div><div class="rl-member-detail">Landed her offer in 32 days and signed <strong>$97k revenue</strong> her first month</div><div class="rl-member-offer">Contractor Growth Agency Offer</div><div class="rl-member-phone">(505) 322-4489</div><span class="rl-member-cta">Text Taylor</span></a></div></div>
+</div>
+<div class="rl-q-item">
+  <h4>6. What do the bad reviews say?</h4>
+  <p class="rl-q-sub">Not "are they good." <strong>What do the bad ones say.</strong></p>
+  
+  <div class="rl-q-ours"><strong>Ours:</strong> Trustpilot, public and unedited — I can't remove one of them. Our lowest review is a 3-star, and what it says is that <strong>it took more effort than he expected.</strong> Which, honestly, it should — if the plan is six figures.<br><br><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="rl-trustpilot-link" target="_blank" rel="noopener noreferrer"><span class="rl-trustpilot-stars" aria-hidden="true">★★★★★</span><span class="rl-trustpilot-text">Trustpilot Reviews — 4.9 stars out of 5</span></a></div>
+</div>
+<div class="rl-q-item">
+  <h4>7. What does their refund policy actually say?</h4>
+  
+  <ul><li>Read it before you sign, not after.</li></ul>
+  <div class="rl-q-ours"><strong>And know this regardless:</strong> federal law gives you 3 days — 72 hours — to cancel, no matter what the contract says. That protection exists whether they mention it or not. Most won't mention it.</div>
+</div>
   </div>
+
+  <!-- ASK -->
   <div class="sec-head">
     <div class="sec-num">2</div>
+    <h3>What I&#x27;m actually asking for</h3>
+  </div>
+  <div class="rl-ask-wrap">
+    <p>We're already booked for <strong>2pm EST</strong> — thirty minutes. If you can make it, tap confirm below so I know you saw this page.</p><p>Here's the honest math on that call, and there's no version where it costs you:</p><p><strong>If you chose well</strong> — thirty minutes confirms it. You start with more confidence than you have right now, you know exactly what to hold them to, and you know who to call if it ever stops matching what you were promised.</p><p><strong>If you didn't</strong> — you're still inside your 72 hours. You'd have saved yourself thousands of dollars and six months of your life.</p><p><strong>Thirty minutes can't cost you more than it saves you.</strong> That's the whole pitch.</p><p>And one more thing that's on me, not you: your call with Richard was Tuesday. Mine wasn't until Friday. That's three days where you had the pitch and none of the answers. If we'd talked Tuesday you'd have had all of this before you had to decide anything. That gap is our fault.</p><p>Whatever you decide — please ask them those seven. That's the part I actually care about.</p>
+    <p style="margin-top:16px;">
+      <button type="button" id="rl-confirm-call" class="invest-btn">Confirm 2pm Call (30 minutes)</button>
+    </p>
+    <p id="rl-confirm-note" class="rl-confirm-note">One tap — no forms. Just lets me know you saw this.</p>
+  </div>
+
+  <!-- RESOURCES -->
+  <div class="sec-head">
+    <div class="sec-num">3</div>
     <h3>Videos, Proof &amp; Member Stories</h3>
   </div>
 
   <div class="cj-resources-wrap">
-    <p class="cj-resources-lead"><strong>Anna</strong> — if you watch one thing before we talk, make it the first one.</p>
+    <p class="cj-resources-lead"><strong>Tammy</strong> — start with the ⭐ picks below. These are the videos and links I most want you to review.</p>
     <p class="cj-resources-kicker">⭐ Start here — CJ's top picks</p>
-    <div class="cj-resources-featured"><a href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
-  <div class="cj-resource-card-badge">⭐ CJ's #1 pick</div>
-  <div class="cj-resource-card-title">Dana — unsolicited personal review</div>
-  <p class="cj-resource-card-desc">She recorded this completely on her own — we had no idea until she posted it. Life coach with a community of about 17,000 followers.</p>
-  <span class="cj-resource-card-cta">Watch on YouTube</span>
-</a><a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
+    <div class="cj-resources-featured"><a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
   <div class="cj-resource-card-badge">⭐ If you only watch one</div>
   <div class="cj-resource-card-title">Taylor Conroy (TEDx Coach) — why he hires our members</div>
   <p class="cj-resource-card-desc">Taylor is a TEDx coach who actively hires HTSA-certified closers. Hear directly from a hiring manager why he trusts our members.</p>
   <span class="cj-resource-card-cta">Watch on YouTube</span>
-</a><a href="https://drive.google.com/file/d/1Zo2ID5sdF8ZYP8rZD_fisNgj-eNpuQxM/view?usp=sharing" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
+</a>
+<a href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
+  <div class="cj-resource-card-badge">⭐ CJ's #1 pick</div>
+  <div class="cj-resource-card-title">Dana — unsolicited personal review</div>
+  <p class="cj-resource-card-desc">She recorded this completely on her own — we had no idea until she posted it. Life coach with a community of about 17,000 followers.</p>
+  <span class="cj-resource-card-cta">Watch on YouTube</span>
+</a>
+<a href="https://drive.google.com/file/d/1Zo2ID5sdF8ZYP8rZD_fisNgj-eNpuQxM/view?usp=sharing" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
   <div class="cj-resource-card-badge">⭐ Fresh placement story</div>
   <div class="cj-resource-card-title">Taylor DeCourcey — newer member perspective</div>
   <p class="cj-resource-card-desc">Newer placement with a fresher perspective. Hear what the first months actually looked like after certification.</p>
   <span class="cj-resource-card-cta">Watch Taylor's story</span>
-</a><a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
+</a>
+<a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
   <div class="cj-resource-card-badge">⭐ Verified reviews</div>
   <div class="cj-resource-card-title">Trustpilot — 4.9 out of 5 stars</div>
   <p class="cj-resource-card-desc">Read what real members say about HTSA — unfiltered, third-party reviews from people who went through the program.</p>
@@ -2416,90 +2270,99 @@
   <div class="cj-resource-card-title">Why Our Members Actually Get Placed</div>
   <p class="cj-resource-card-desc">See how one-on-one placement works in practice — real interviews, real companies, and what the process looks like step by step.</p>
   <span class="cj-resource-card-cta">View placement overview</span>
-</a><a href="https://canva.link/na9nxjm9a1e4vjz" class="cj-resource-card cj-resource-card--placement" target="_blank" rel="noopener noreferrer">
+</a>
+<a href="https://canva.link/na9nxjm9a1e4vjz" class="cj-resource-card cj-resource-card--placement" target="_blank" rel="noopener noreferrer">
   <div class="cj-resource-card-badge">⭐ Real timeline</div>
   <div class="cj-resource-card-title">Christa's Journey — Posted Month by Month</div>
   <p class="cj-resource-card-desc">Not a polished testimonial — her actual journey, posted step by step in our community as it happened.</p>
   <span class="cj-resource-card-cta">View Christa's timeline</span>
 </a></div>
     <p class="cj-resources-kicker">More success stories from our network</p>
-    <div class="cj-resources-grid cj-resources-grid--stories"><a href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+    <div class="cj-resources-grid"><a href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
   
   <div class="cj-resource-card-title">Cassie — single mom success story</div>
   <p class="cj-resource-card-desc">Relatable story — single mom who made the transition work around real life.</p>
   <span class="cj-resource-card-cta">Watch on YouTube</span>
-</a><a href="https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+</a>
+<a href="https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
   
   <div class="cj-resource-card-title">Josh — Alex Hormozi background</div>
   <p class="cj-resource-card-desc">High-profile sales background — hear how HTSA fit into his path.</p>
   <span class="cj-resource-card-cta">Watch on YouTube</span>
-</a><a href="https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+</a>
+<a href="https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
   
   <div class="cj-resource-card-title">Brianna — Tony Robbins team</div>
   <p class="cj-resource-card-desc">Credibility from a big-name organization — her HTSA experience.</p>
   <span class="cj-resource-card-cta">Watch on YouTube</span>
-</a></div>
-    <div class="cj-resources-grid cj-resources-grid--blue"><a href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" class="cj-resource-card cj-resource-card--compact cj-resource-card--blue" target="_blank" rel="noopener noreferrer">
+</a>
+<a href="https://youtu.be/eLAWEwE7pl4?si=VfiqAxeOKFnoJ_Mm" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
   
-  <div class="cj-resource-card-title">Top 20 Companies in High Ticket Sales</div>
-  <p class="cj-resource-card-desc">Industry overview PDF — where HTSA fits in the landscape.</p>
-  <span class="cj-resource-card-cta">Open PDF</span>
-</a><a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact cj-resource-card--blue" target="_blank" rel="noopener noreferrer">
+  <div class="cj-resource-card-title">Chad — in his own words</div>
+  <p class="cj-resource-card-desc">Who actually trains you and why that matters.</p>
+  <span class="cj-resource-card-cta">Watch on YouTube</span>
+</a>
+<a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
   
   <div class="cj-resource-card-title">HTSA Website — more stories &amp; outcomes</div>
   <p class="cj-resource-card-desc">Many more member outcomes, screenshots, and program details on our main site.</p>
   <span class="cj-resource-card-cta">Visit highticketsalesacademy.com</span>
+</a>
+<a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+  
+  <div class="cj-resource-card-title">Chad's Book — <em>The Book on High Ticket Sales</em></div>
+  <p class="cj-resource-card-desc">The ultimate guide by HTSA founder Chad Aleo — available on Amazon.</p>
+  <span class="cj-resource-card-cta">View on Amazon</span>
+</a>
+<a href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+  
+  <div class="cj-resource-card-title">Top 20 Companies in High Ticket Sales</div>
+  <p class="cj-resource-card-desc">Industry overview PDF — where HTSA fits in the landscape.</p>
+  <span class="cj-resource-card-cta">Open PDF</span>
 </a></div>
   </div>
 
-  <!-- CJ personal reviews (precall: white cards only) -->
+  <!-- CJ personal reviews (prospect-specific) -->
   <div class="ref-strip">
-    <div class="ref-strip-banner">
-      <div class="ref-strip-label">CJ Reviews</div>
-      <p class="ref-strip-banner-desc">Real messages from people who worked directly with CJ.</p>
-    </div>
+    <div class="ref-strip-label">A few of CJ's Personal Reviews</div>
+    <p class="ref-strip-personal-intro">Real messages and posts from people who worked directly with CJ, not copied from Trustpilot.</p>
     <div class="ref-strip-inner ref-strip-inner--personal-reviews">
       <div class="ref-strip-mini-stack">
           <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you&#x27;re doing.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you're doing.</blockquote>
             <p class="ref-strip-quote-attr">— Zach Scanlon · text message</p>
           </div>
           <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, I just wanted to thank you for closing me on the program. I can already tell I&#x27;ll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, I just wanted to thank you for closing me on the program. I can already tell I'll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process.</blockquote>
             <p class="ref-strip-quote-attr">— Riley Colston · text message</p>
           </div>
           <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, the program has been great so far and I&#x27;ve made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, the program has been great so far and I've made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you.</blockquote>
             <p class="ref-strip-quote-attr">— Amy Colombo · text message</p>
           </div>
           <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I&#x27;m so grateful. I landed my dream role 65 days in, and you played a real part in that.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I'm so grateful. I landed my dream role 65 days in, and you played a real part in that.</blockquote>
             <p class="ref-strip-quote-attr">— Zachary Allen · mastermind community</p>
           </div>
           <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, thank you so much for taking the time to read through my answers before we ever got on a call. That meant a lot. Hearing that you actually read my stuff made me want to work with you specifically, not someone else. I appreciate the kind words more than you know, and I&#x27;m really excited to get started with you.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, thank you so much for taking the time to read through my answers before we ever got on a call. That meant a lot. Hearing that you actually read my stuff made me want to work with you specifically, not someone else. I appreciate the kind words more than you know, and I'm really excited to get started with you.</blockquote>
             <p class="ref-strip-quote-attr">— Brittany Levine · text message</p>
           </div>
       </div>
       <div class="ref-strip-mini-stack">
           <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">Hey CJ, it&#x27;s Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could&#x27;ve made for my life right now.<br><br>I think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!</blockquote>
-            <p class="ref-strip-quote-attr">— Janaye · text message</p>
-          </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">Hey CJ, just wanted to say thanks, seriously. You and Mark didn&#x27;t let me slip away after I almost bailed on our call. You stayed patient, kept it real, and showed me why this team&#x27;s different. That kind of support? That&#x27;s why I&#x27;m all in now. Appreciate you both pulling me through. Means a lot.</blockquote>
+            <blockquote class="ref-strip-quote-body">Hey CJ, just wanted to say thanks, seriously. You and Mark didn't let me slip away after I almost bailed on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support? That's why I'm all in now. Appreciate you both pulling me through. Means a lot.</blockquote>
             <p class="ref-strip-quote-attr">— Nick Sotirianos · text message</p>
           </div>
           <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, you&#x27;re the most genuine and caring person I&#x27;ve ever met on the phone. You lifted me up when I was in a low place. You gave me hope, kept me motivated, and kept me positive the whole way. You&#x27;re a big part of my testimony. I wouldn&#x27;t be here right now if it wasn&#x27;t for you.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, you're the most genuine and caring person I've ever met on the phone. You lifted me up when I was in a low place. You gave me hope, kept me motivated, and kept me positive the whole way. You're a big part of my testimony. I wouldn't be here right now if it wasn't for you.</blockquote>
             <p class="ref-strip-quote-attr">— Trinity Isabel · Facebook post</p>
           </div>
           <div class="ref-strip-quote ref-strip-quote--compact">
@@ -2509,7 +2372,7 @@
           </div>
           <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, I&#x27;m SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you&#x27;re doing!</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, I'm SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you're doing!</blockquote>
             <p class="ref-strip-quote-attr">— Kate Robinson · text message</p>
           </div>
       </div>
@@ -2570,19 +2433,192 @@
 
 </div>
 
+<script>
+(function () {
+  var STORAGE_KEY = 'hts_terms_gate_chad_beldon_v1';
+  var GAS_TERMS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec';
+  var TERMS_DOC_URL_FOR_GATE = 'https://closewithcjclay.com/HTSA-Terms-of-Service.pdf';
+  // Fixed label for spreadsheets / logs when the hosted PDF stays the same URL
+  var TERMS_VERSION_ID = 'HTSA-TOS-PDF-closewithcjclay-2026-04';
+
+  function canonicalEnrollmentUrl() {
+    try {
+      var u = new URL(window.location.href);
+      return u.origin + u.pathname + (u.search || '');
+    } catch (err) {
+      return window.location.href.split('#')[0];
+    }
+  }
+
+  /** Google Apps Script friendly: no JSON preflight; body is payload=<json> */
+  function postPayloadToEnrollmentScript(endpoint, payloadObj) {
+    var formBody = new URLSearchParams();
+    formBody.set('payload', JSON.stringify(payloadObj));
+    return fetch(endpoint, {
+      method: 'POST',
+      mode: 'no-cors',
+      credentials: 'omit',
+      body: formBody,
+      redirect: 'follow',
+      cache: 'no-store'
+    });
+  }
+
+  function termsSuccessMessage() {
+    return 'Agreement submitted. Check your email or spreadsheet for confirmation.';
+  }
+
+  function setPayZoneLocked(locked) {
+    var zone = document.getElementById('invest-pay-zone');
+    var hint = document.getElementById('invest-pay-zone-hint');
+    if (!zone) return;
+    if (locked) {
+      zone.classList.add('invest-pay-zone--locked');
+      zone.querySelectorAll('a.invest-btn').forEach(function (a) {
+        a.setAttribute('tabindex', '-1');
+      });
+      if (hint) hint.classList.remove('invest-pay-zone-hint--off');
+    } else {
+      zone.classList.remove('invest-pay-zone--locked');
+      zone.querySelectorAll('a.invest-btn').forEach(function (a) {
+        a.removeAttribute('tabindex');
+      });
+      if (hint) hint.classList.add('invest-pay-zone-hint--off');
+    }
+  }
+
+  function markAgreementRecorded() {
+    var panel = document.getElementById('hts-terms-agreement-panel');
+    if (panel) panel.classList.add('hts-terms-agreement-card--complete');
+  }
+
+  function postAgreement(panel, btnEl) {
+    var msgEl = document.getElementById('hts-terms-agreement-msg');
+
+    var bodyObj = {
+      action: 'recordTermsAgreement',
+      fullName: (panel.getAttribute('data-full-name') || '').trim(),
+      email: (panel.getAttribute('data-email') || '').trim(),
+      phone: (panel.getAttribute('data-phone') || '').trim(),
+      enrollmentPageUrl: canonicalEnrollmentUrl(),
+      clientSlug: (panel.getAttribute('data-client-slug') || 'chad-beldon').trim(),
+      termsUrl: TERMS_DOC_URL_FOR_GATE,
+      termsVersion: TERMS_VERSION_ID,
+      userAgent: navigator.userAgent || ''
+    };
+
+    postPayloadToEnrollmentScript(GAS_TERMS_ENDPOINT, bodyObj).then(function () {
+      try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e3) {}
+      markAgreementRecorded();
+      if (msgEl) {
+        msgEl.textContent = termsSuccessMessage();
+        msgEl.classList.add('hts-terms-agreement-msg--ok');
+      }
+      setPayZoneLocked(false);
+    }).catch(function () {
+      if (btnEl) btnEl.disabled = false;
+      var cb = document.getElementById('hts-terms-checkbox');
+      if (cb) cb.checked = false;
+      if (btnEl && cb) btnEl.disabled = !cb.checked;
+      if (msgEl) {
+        msgEl.textContent = 'Network error — could not reach enrollment script. Retry when online.';
+        msgEl.classList.remove('hts-terms-agreement-msg--ok');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+        markAgreementRecorded();
+        setPayZoneLocked(false);
+        return;
+      }
+    } catch (e0) {}
+
+    var zone = document.getElementById('invest-pay-zone');
+    if (!zone) return;
+
+    setPayZoneLocked(true);
+
+    zone.addEventListener('click', function (ev) {
+      if (!zone.classList.contains('invest-pay-zone--locked')) return;
+      var link = ev.target.closest && ev.target.closest('a.invest-btn');
+      if (link) {
+        ev.preventDefault();
+        ev.stopPropagation();
+      }
+    }, true);
+
+    var chk = document.getElementById('hts-terms-checkbox');
+    var btn = document.getElementById('hts-terms-confirm-btn');
+
+    function syncDisabled() {
+      if (!chk || !btn) return;
+      btn.disabled = !chk.checked;
+    }
+
+    if (chk) chk.addEventListener('change', syncDisabled);
+    if (btn) {
+      btn.addEventListener('click', function () {
+        if (!chk || !chk.checked) return;
+        var panel = document.getElementById('hts-terms-agreement-panel');
+        if (!panel) return;
+        btn.disabled = true;
+        var msgEl = document.getElementById('hts-terms-agreement-msg');
+        if (msgEl) msgEl.textContent = 'Recording agreement…';
+
+        postAgreement(panel, btn);
+      });
+    }
+    syncDisabled();
+  });
+})();
+</script>
+
 </div>
 <script>
 (function(){
+  var allowed=["tammyberry100@yahoo.com", "cj@highticketsalesacademy.com"];
+  var storageKey="htsa_rl_email_tammy_berry";
+  var gate=document.getElementById('email-gate');
+  var main=document.getElementById('main-content');
+  if(!gate||!main) return;
+
+  function normEmail(v){ return (v||'').trim().toLowerCase(); }
+  function isAllowed(v){ return allowed.indexOf(normEmail(v))!==-1; }
+
+  function unlock(){
+    gate.remove();
+    main.hidden=false;
+    if(window.__htsaRlUnlock) window.__htsaRlUnlock();
+  }
+
+  if(sessionStorage.getItem(storageKey)==='1'){ unlock(); return; }
+
+  main.hidden=true;
+  document.getElementById('email-gate-btn').addEventListener('click',function(){
+    var v=normEmail(document.getElementById('email-gate-input').value);
+    if(isAllowed(v)){ sessionStorage.setItem(storageKey,'1'); unlock(); }
+    else document.getElementById('email-gate-err').hidden=false;
+  });
+  document.getElementById('email-gate-input').addEventListener('keydown',function(e){
+    if(e.key==='Enter') document.getElementById('email-gate-btn').click();
+  });
+})();
+</script>
+<script>
+(function(){
   var GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
-  var slug = "anna_riach";
-  var confirmDay = "Wednesday";
+  var slug = "archive_template";
+  var confirmLabel = "Confirm 2pm Call (30 minutes)";
+  var scheduledNote = "We're already on the calendar for 2pm EST today.";
   var meta = {
-    fullName: "Anna Riach",
-    email: "ajriach1@yahoo.com",
-    phone: "+18177812506",
-    clientSlug: "anna-riach",
-    resourceSlug: slug,
-    pageType: "precall"
+    fullName: "Tammy Berry",
+    email: "tammyberry100@yahoo.com",
+    phone: "+17573242539",
+    clientSlug: "tammy-berry",
+    resourceSlug: slug
   };
 
   function canonicalUrl() {
@@ -2605,26 +2641,47 @@
     fetch(GAS_ENDPOINT, { method: 'POST', mode: 'no-cors', body: form, cache: 'no-store' }).catch(function(){});
   }
 
-  if (!sessionStorage.getItem('htsa_precall_open_'+slug)) {
-    sessionStorage.setItem('htsa_precall_open_'+slug, '1');
-    postEvent('page_open');
+  if (!sessionStorage.getItem('htsa_rl_open_'+slug)) {
+    sessionStorage.setItem('htsa_rl_open_'+slug, '1');
+    if(!document.getElementById('email-gate')) postEvent('page_open');
   }
+
+  window.__htsaRlUnlock=function(){
+    if(sessionStorage.getItem('htsa_rl_open_'+slug)) return;
+    sessionStorage.setItem('htsa_rl_open_'+slug, '1');
+    postEvent('page_open');
+  };
 
   var confirmBtn = document.getElementById('rl-confirm-call');
   if (confirmBtn) {
     confirmBtn.addEventListener('click', function() {
       if (confirmBtn.getAttribute('data-confirmed') === '1') return;
       confirmBtn.setAttribute('data-confirmed', '1');
-      confirmBtn.textContent = 'Confirmed — see you ' + confirmDay + ' ✓';
+      confirmBtn.textContent = 'Confirmed — see you at 2pm EST ✓';
       confirmBtn.classList.add('invest-btn--confirmed');
-      postEvent('call_confirm');
+      var note = document.getElementById('rl-confirm-note');
+      if (note) note.textContent = 'Thank you, Tammy. I got it — see you soon.';
+      postEvent('call_confirm', { scheduledCall: scheduledNote });
     });
   }
 
-  document.querySelectorAll('a.cj-resource-card').forEach(function(a) {
-    a.addEventListener('click', function() {
-      var title = (a.querySelector('.cj-resource-card-title') || {}).textContent || '';
-      postEvent('link_click', { linkLabel: title.trim(), linkUrl: a.href });
+  document.querySelectorAll('.cj-resource-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var titleEl = card.querySelector('.cj-resource-card-title');
+      postEvent('link_click', {
+        linkLabel: titleEl ? titleEl.textContent.trim() : '',
+        linkUrl: card.getAttribute('href') || ''
+      });
+    });
+  });
+
+  document.querySelectorAll('.rl-member-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var nameEl = card.querySelector('.rl-member-name');
+      postEvent('member_text_click', {
+        linkLabel: nameEl ? nameEl.textContent.trim() : '',
+        linkUrl: card.getAttribute('href') || ''
+      });
     });
   });
 })();

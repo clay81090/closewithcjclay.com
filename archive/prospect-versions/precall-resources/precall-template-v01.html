@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>ARCHIVE PRECALL V01-TAMMY-FIRST · First resource-link page ever (Tammy Berry, opaque slug)</title>
+<title>ARCHIVE PRECALL TEMPLATE V01</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -312,19 +312,19 @@
 </style>
 <script>
 (function(){
-  var slug="Tf8lcoiY3Ad9tCouxMZsBx1X";
+  var slug = "archive_template";
   fetch('/r/_manifest.json?v='+Date.now(),{cache:'no-store'})
     .then(function(r){return r.json();})
     .then(function(m){
       var link=m.links&&m.links[slug];
       var expired=!link||link.status!=='active'||(link.expires_at&&new Date(link.expires_at)<new Date());
-      if(expired){ window.location.replace('/r/_expired.html'); }
+      if(false && expired){ /* archive preview: expire disabled */ }
     }).catch(function(){});
 })();
 </script>
 </head>
 <body>
-<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE PREVIEW PRECALL V01-TAMMY-FIRST · commit 71bc82c · NOT the live send link · <a href="https://closewithcjclay.com/r/tammy_berry/" style="color:#fde68a">Live Tammy page</a><br><span style="font-weight:500;opacity:.95">First resource-link page ever (Tammy Berry, opaque slug)</span></div>
+<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE TEMPLATE V01 · First resource-link layout (opaque slug era) · NOT a live send link · <a href="/archive/prospect-versions/precall-resources/" style="color:#fde68a">All precall templates</a><br><span style="font-weight:500;opacity:.95">Expire checks disabled. Person names may still appear in old HTML; treat as layout reference only.</span></div>
 <div id="name-gate" class="name-gate">
   <div class="name-gate-card">
     <p class="name-gate-lead">This page was prepared for <strong>Tammy</strong>.</p>
@@ -489,7 +489,7 @@
 </div>
 <script>
 (function(){
-  var slug="Tf8lcoiY3Ad9tCouxMZsBx1X";
+  var slug = "archive_template";
   if(sessionStorage.getItem('htsa_rv_'+slug)) return;
   sessionStorage.setItem('htsa_rv_'+slug,'1');
   fetch('/r/_manifest.json?v='+Date.now()).then(function(r){return r.json();}).then(function(m){

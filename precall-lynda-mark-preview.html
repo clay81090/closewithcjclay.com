@@ -2285,13 +2285,13 @@
 </style>
 <script>
 (function(){
-  var slug="lynda_perez";
+  var slug = "archive_template";
   fetch('/r/_manifest.json?v='+Date.now(),{cache:'no-store'})
     .then(function(r){return r.json();})
     .then(function(m){
       var link=m.links&&m.links[slug];
       var expired=!link||link.status!=='active'||(link.expires_at&&new Date(link.expires_at)<new Date());
-      if(expired){ window.location.replace('/r/_expired.html'); }
+      if(expired){ /* archive: expire disabled */; }
     }).catch(function(){});
 })();
 </script>
@@ -2575,7 +2575,7 @@
 <script>
 (function(){
   var GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
-  var slug = "lynda_perez";
+  var slug = "archive_template";
   var confirmDay = "";
   var meta = {
     fullName: "Lynda Perez",

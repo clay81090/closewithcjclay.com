@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<!-- TEMPLATE TRACKER: August 25th Pre Call Resource Page (copied from Mark Haller layout). Do not put this label in the URL or visible page title. -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<title>ARCHIVE PRECALL V05-BLUE-REVIEWS · Blue personal review cards restored across precall pages</title>
+<title>ARCHIVE PRECALL TEMPLATE V12</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 
@@ -1324,41 +1325,31 @@
     max-width: 520px;
   }
 
-  .ref-strip-inner--personal-reviews {
-    align-items: stretch;
-  }
-
-  .ref-strip-inner--personal-reviews .ref-strip-mini-stack {
-    flex: 1 1 280px;
-    min-width: 0;
-    margin-top: 0;
-  }
-
   .ref-strip-quote--compact {
     padding: 10px 12px 12px;
   }
 
-  /* Personal notes to CJ — same blue card as HTSA Website block */
-  .ref-strip-quote--personal {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 3px solid #1976D2;
-    border-left: 5px solid #1565C0;
-    border-radius: 10px;
-    box-shadow: 0 0 0 1.5px #e2b227, 0 4px 14px rgba(10, 22, 40, 0.08);
+  /* Centered section header (same idea as enrollment Member voices banner) */
+  .ref-strip-banner {
+    text-align: center;
+    margin: 0 0 18px;
   }
 
-  .ref-strip-quote--personal .ref-strip-quote-meta {
-    color: var(--navy);
+  .ref-strip-banner .ref-strip-label {
+    font-size: 12px;
     font-weight: 700;
-  }
-
-  .ref-strip-quote--personal .ref-strip-quote-body {
-    color: var(--muted);
-  }
-
-  .ref-strip-quote--personal .ref-strip-quote-attr {
+    letter-spacing: 2.6px;
+    text-transform: uppercase;
     color: var(--navy);
-    border-top-color: rgba(25, 118, 210, 0.22);
+    margin: 0 0 8px;
+  }
+
+  .ref-strip-banner-desc {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0 auto;
+    max-width: 520px;
   }
 
   .ref-strip-quote--compact .ref-strip-quote-body {
@@ -1370,6 +1361,24 @@
   .ref-strip-quote--compact .ref-strip-quote-attr {
     margin-top: 8px;
     padding-top: 6px;
+  }
+
+  /* CJ Reviews columns: stretch so bottoms line up toward the footer */
+  .ref-strip-inner--personal-reviews {
+    align-items: stretch;
+  }
+
+  .ref-strip-inner--personal-reviews .ref-strip-mini-stack {
+    flex: 1 1 280px;
+    min-width: 0;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ref-strip-inner--personal-reviews .ref-strip-mini-stack > .ref-strip-quote {
+    flex: 1 1 auto;
   }
 
   /* Trinity (right column): full text, card stretches with row so name lines up with Jessica C. */
@@ -1795,6 +1804,29 @@
     margin-bottom: 8px;
   }
 
+  .cj-resources-grid--stories {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 12px;
+  }
+
+  .cj-resources-grid--blue {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 4px;
+    margin-bottom: 8px;
+  }
+
+  .cj-resource-card--blue {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 3px solid #1976D2;
+    border-left: 5px solid #1565C0;
+    box-shadow: 0 0 0 1.5px #e2b227, 0 4px 14px rgba(10, 22, 40, 0.08);
+  }
+
+  .cj-resource-card--blue:hover {
+    border-color: #1565C0;
+    box-shadow: 0 0 0 1.5px #e2b227, 0 6px 18px rgba(25, 118, 210, 0.22);
+  }
+
   .cj-resource-card--compact {
     padding: 14px 16px;
   }
@@ -1815,7 +1847,9 @@
       padding-right: 20px;
     }
     .cj-resources-featured,
-    .cj-resources-grid {
+    .cj-resources-grid,
+    .cj-resources-grid--stories,
+    .cj-resources-grid--blue {
       grid-template-columns: 1fr;
     }
   }
@@ -2145,6 +2179,12 @@
     border-bottom: 1px solid rgba(0, 154, 94, 0.2);
     border-left: 4px solid var(--navy);
   }
+  .rl-call-card--missed {
+    background: linear-gradient(135deg, #fff5f5 0%, #fee2e2 100%);
+    border-top-color: rgba(220, 38, 38, 0.22);
+    border-bottom-color: rgba(220, 38, 38, 0.22);
+    border-left-color: #dc2626;
+  }
   .rl-call-card-kicker {
     font-size: 10px;
     font-weight: 700;
@@ -2152,6 +2192,12 @@
     text-transform: uppercase;
     color: var(--green-dark);
     margin: 0 0 8px;
+  }
+  .rl-call-card-kicker--missed {
+    color: #dc2626;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
   }
   .rl-call-card-when {
     font-family: 'Playfair Display', serif;
@@ -2176,6 +2222,7 @@
     border: none;
     cursor: pointer;
     text-decoration: none;
+    display: inline-block;
   }
   .rl-call-card-actions .step-link {
     font-size: 12px;
@@ -2238,19 +2285,19 @@
 </style>
 <script>
 (function(){
-  var slug="tracy_nannery";
+  var slug = "archive_template";
   fetch('/r/_manifest.json?v='+Date.now(),{cache:'no-store'})
     .then(function(r){return r.json();})
     .then(function(m){
       var link=m.links&&m.links[slug];
       var expired=!link||link.status!=='active'||(link.expires_at&&new Date(link.expires_at)<new Date());
-      if(expired){ window.location.replace('/r/_expired.html'); }
+      if(false && expired){ /* archive preview: expire disabled */ }
     }).catch(function(){});
 })();
 </script>
 </head>
 <body>
-<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE PREVIEW PRECALL V05-BLUE-REVIEWS · commit 2883153 · NOT the live send link · <a href="https://closewithcjclay.com/r/tracy_nannery/" style="color:#fde68a">Live Tracy page</a><br><span style="font-weight:500;opacity:.95">Blue personal review cards restored across precall pages</span></div>
+<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE TEMPLATE V12 · Mark layout on a named page (Lynda first ship shape) · NOT a live send link · <a href="/archive/prospect-versions/precall-resources/" style="color:#fde68a">All precall templates</a><br><span style="font-weight:500;opacity:.95">Expire checks disabled. Person names may still appear in old HTML; treat as layout reference only.</span></div>
 <div class="page" id="main-content">
 
   <div class="header">
@@ -2267,35 +2314,35 @@
     <div class="invoice-meta">
       <div class="invoice-badge">Pre-Call Resources</div>
       <p><strong>Prepared by:</strong> CJ Clay</p>
-      <p><strong>Prepared for:</strong> Tracy Nannery</p>
-      <p><strong>Date:</strong> Aug 20, 2026</p>
+      <p><strong>Prepared for:</strong> Lynda Perez</p>
+      <p><strong>Date:</strong> Sept 4, 2026</p>
     </div>
   </div>
   <div class="accent-bar"></div>
 
   <div class="hero-band hero-band--letter">
-    <p><strong>Tracy</strong> — everything you'd want before we talk is right here.</p>
-    <p>On the call we'll cover where you're at, what you're after, and whether this is the right move for your next chapter. High ticket sales is one of the few careers that travels — every company in every vertical needs someone who can close, and that's what makes a good closer invaluable in the marketplace. The world went remote, and the demand followed it.</p>
-    <p>Have a look at whatever's useful. Look forward to connecting.</p>
+    <p><strong>Lynda</strong> — Chris said you two had a really direct conversation, and I appreciate that. I put everything here so we can pick up where he left off.</p>
+    <p>We had today at 12:00 PM on the calendar and I wasn't able to reach you. Totally fine. Something must have come up. Grab a fresh 45 minutes below whenever you're ready. If you're still speaking with other programs today, hold off on locking anything in until we talk. Forty-five minutes and you'll have a clear picture either way.</p>
+    <p>Have a look at whatever's useful. Looking forward to connecting.</p>
   </div>
 
-  <div style="padding:18px 36px 22px;border-bottom:1px solid var(--mid);">
-    <div class="rl-q-ours" id="rl-call-card" data-confirm-day="Friday">
-      <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--green-dark);">📅 Your call with CJ</p>
-      <p style="margin:0 0 4px;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);line-height:1.3;">Friday, Aug 21 · 1:00 PM EST</p>
-      <p style="margin:0 0 14px;font-size:13px;color:var(--muted);">45 minutes · Phone or Zoom</p>
-      <button type="button" id="rl-confirm-call" class="invest-btn">Confirm I'll be there</button>
+  <div class="rl-call-card rl-call-card--missed" id="rl-call-card" data-call-status="missed">
+    <p class="rl-call-card-kicker rl-call-card-kicker--missed">Let's reschedule</p>
+    <p class="rl-call-card-when">Friday, Sept 4 · 12:00 PM EST</p>
+    <p class="rl-call-card-meta">We didn't connect at this time · Choose a fresh 45 minutes</p>
+    <div class="rl-call-card-actions">
+      <a href="https://meetings.hubspot.com/charles660" class="invest-btn" target="_blank" rel="noopener noreferrer">Reschedule Appointment →</a>
     </div>
   </div>
 
   <div class="billing-grid">
     <div class="billing-cell">
       <div class="billing-label">Prepared For</div>
-      <div class="billing-name">Tracy Nannery</div>
+      <div class="billing-name">Lynda Perez</div>
       <div class="billing-detail">
-        <a href="mailto:tbnannery@gmail.com">tbnannery@gmail.com</a><br>
-        <a href="tel:+17573482318">+1 (757) 348-2318</a><br>
-        Friday at 1:00 PM EST
+        <a href="mailto:perezlm210@gmail.com">perezlm210@gmail.com</a><br>
+        <a href="tel:+12109800588">+1 (210) 980-0588</a><br>
+        Missed · Friday at 12:00 PM EST
       </div>
     </div>
     <div class="billing-cell">
@@ -2341,7 +2388,7 @@
   </div>
 
   <div class="cj-resources-wrap">
-    <p class="cj-resources-lead"><strong>Tracy</strong> — if you watch one thing before we talk, make it the first one.</p>
+    <p class="cj-resources-lead"><strong>Lynda</strong> — if you watch one thing before we talk, make it the first one.</p>
     <p class="cj-resources-kicker">⭐ Start here — CJ's top picks</p>
     <div class="cj-resources-featured"><a href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
   <div class="cj-resource-card-badge">⭐ CJ's #1 pick</div>
@@ -2377,7 +2424,7 @@
   <span class="cj-resource-card-cta">View Christa's timeline</span>
 </a></div>
     <p class="cj-resources-kicker">More success stories from our network</p>
-    <div class="cj-resources-grid"><a href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+    <div class="cj-resources-grid cj-resources-grid--stories"><a href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
   
   <div class="cj-resource-card-title">Cassie — single mom success story</div>
   <p class="cj-resource-card-desc">Relatable story — single mom who made the transition work around real life.</p>
@@ -2392,66 +2439,78 @@
   <div class="cj-resource-card-title">Brianna — Tony Robbins team</div>
   <p class="cj-resource-card-desc">Credibility from a big-name organization — her HTSA experience.</p>
   <span class="cj-resource-card-cta">Watch on YouTube</span>
-</a><a href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
+</a></div>
+    <div class="cj-resources-grid cj-resources-grid--blue"><a href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" class="cj-resource-card cj-resource-card--compact cj-resource-card--blue" target="_blank" rel="noopener noreferrer">
   
   <div class="cj-resource-card-title">Top 20 Companies in High Ticket Sales</div>
   <p class="cj-resource-card-desc">Industry overview PDF — where HTSA fits in the landscape.</p>
   <span class="cj-resource-card-cta">Open PDF</span>
+</a><a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact cj-resource-card--blue" target="_blank" rel="noopener noreferrer">
+  
+  <div class="cj-resource-card-title">HTSA Website — more stories &amp; outcomes</div>
+  <p class="cj-resource-card-desc">Many more member outcomes, screenshots, and program details on our main site.</p>
+  <span class="cj-resource-card-cta">Visit highticketsalesacademy.com</span>
 </a></div>
-    <div style="display:flex;justify-content:center;margin-top:12px;"><a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact" style="max-width:420px;width:100%;background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border:3px solid #1976D2;border-left:5px solid #1565C0;box-shadow:0 0 0 1.5px #e2b227,0 4px 14px rgba(10,22,40,0.08);" target="_blank" rel="noopener noreferrer"><div class="cj-resource-card-title">HTSA Website — more stories &amp; outcomes</div><p class="cj-resource-card-desc">Many more member outcomes, screenshots, and program details on our main site.</p><span class="cj-resource-card-cta">Visit highticketsalesacademy.com</span></a></div>
   </div>
 
-  <!-- CJ personal reviews -->
+  <!-- CJ personal reviews (precall: white cards only) -->
   <div class="ref-strip">
-    <div class="ref-strip-label">A few of CJ&#x27;s Personal Reviews</div>
-    <p class="ref-strip-personal-intro">Real messages and posts from people who worked directly with CJ, not copied from Trustpilot.</p>
+    <div class="ref-strip-banner">
+      <div class="ref-strip-label">CJ Reviews</div>
+      <p class="ref-strip-banner-desc">Real messages from people who worked directly with CJ.</p>
+    </div>
     <div class="ref-strip-inner ref-strip-inner--personal-reviews">
       <div class="ref-strip-mini-stack">
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you're doing.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you&#x27;re doing.</blockquote>
             <p class="ref-strip-quote-attr">— Zach Scanlon · text message</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, I just wanted to thank you for closing me on the program. I can already tell I'll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, I just wanted to thank you for closing me on the program. I can already tell I&#x27;ll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process.</blockquote>
             <p class="ref-strip-quote-attr">— Riley Colston · text message</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, the program has been great so far and I've made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, the program has been great so far and I&#x27;ve made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you.</blockquote>
             <p class="ref-strip-quote-attr">— Amy Colombo · text message</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I'm so grateful. I landed my dream role 65 days in, and you played a real part in that.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I&#x27;m so grateful. I landed my dream role 65 days in, and you played a real part in that.</blockquote>
             <p class="ref-strip-quote-attr">— Zachary Allen · mastermind community</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, thank you so much for taking the time to read through my answers before we ever got on a call. That meant a lot. Hearing that you actually read my stuff made me want to work with you specifically, not someone else. I appreciate the kind words more than you know, and I'm really excited to get started with you.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, thank you so much for taking the time to read through my answers before we ever got on a call. That meant a lot. Hearing that you actually read my stuff made me want to work with you specifically, not someone else. I appreciate the kind words more than you know, and I&#x27;m really excited to get started with you.</blockquote>
             <p class="ref-strip-quote-attr">— Brittany Levine · text message</p>
           </div>
       </div>
       <div class="ref-strip-mini-stack">
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">Hey CJ, just wanted to say thanks, seriously. You and Mark didn't let me slip away after I almost bailed on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support? That's why I'm all in now. Appreciate you both pulling me through. Means a lot.</blockquote>
+            <blockquote class="ref-strip-quote-body">Hey CJ, it&#x27;s Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could&#x27;ve made for my life right now.<br><br>I think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!</blockquote>
+            <p class="ref-strip-quote-attr">— Janaye · text message</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">Hey CJ, just wanted to say thanks, seriously. You and Mark didn&#x27;t let me slip away after I almost bailed on our call. You stayed patient, kept it real, and showed me why this team&#x27;s different. That kind of support? That&#x27;s why I&#x27;m all in now. Appreciate you both pulling me through. Means a lot.</blockquote>
             <p class="ref-strip-quote-attr">— Nick Sotirianos · text message</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, you're the most genuine and caring person I've ever met on the phone. You lifted me up when I was in a low place. You gave me hope, kept me motivated, and kept me positive the whole way. You're a big part of my testimony. I wouldn't be here right now if it wasn't for you.</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, you&#x27;re the most genuine and caring person I&#x27;ve ever met on the phone. You lifted me up when I was in a low place. You gave me hope, kept me motivated, and kept me positive the whole way. You&#x27;re a big part of my testimony. I wouldn&#x27;t be here right now if it wasn&#x27;t for you.</blockquote>
             <p class="ref-strip-quote-attr">— Trinity Isabel · Facebook post</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
             <blockquote class="ref-strip-quote-body">CJ, thank you for getting me signed up and for sticking with me while we built a plan to join. We worked on it for three months before I came in, and you never made me feel rushed. You showed me from the start that these are really great people, every single one of them.</blockquote>
             <p class="ref-strip-quote-attr">— HTSA Member · unprompted review</p>
           </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal">
+          <div class="ref-strip-quote ref-strip-quote--compact">
             <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, I'm SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you're doing!</blockquote>
+            <blockquote class="ref-strip-quote-body">CJ, I&#x27;m SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you&#x27;re doing!</blockquote>
             <p class="ref-strip-quote-attr">— Kate Robinson · text message</p>
           </div>
       </div>
@@ -2516,13 +2575,13 @@
 <script>
 (function(){
   var GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
-  var slug = "tracy_nannery";
-  var confirmDay = "Friday";
+  var slug = "archive_template";
+  var confirmDay = "";
   var meta = {
-    fullName: "Tracy Nannery",
-    email: "tbnannery@gmail.com",
-    phone: "+17573482318",
-    clientSlug: "tracy-nannery",
+    fullName: "Lynda Perez",
+    email: "perezlm210@gmail.com",
+    phone: "+12109800588",
+    clientSlug: "lynda-perez",
     resourceSlug: slug,
     pageType: "precall"
   };
