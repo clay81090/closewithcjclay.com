@@ -131,7 +131,7 @@ Open: https://closewithcjclay.com/archive/prospect-versions/close-page/close-pag
 
 ---
 
-## 4. 30 day action plan / game plan
+## 5. 30 day action plan / game plan
 
 **Live:** https://closewithcjclay.com/30-day-roadmap.html  
 **Also on disk:** `30-day-roadmap-v2.html` (older sibling file)  
@@ -149,7 +149,7 @@ Setter twin: https://closewithcjclay.com/24-day-roadmap.html
 
 ---
 
-## 5. Referral / meet-CJ preview card
+## 6. Referral / meet-CJ preview card
 
 **Live:** https://closewithcjclay.com/meet-cj.html  
 **Archives:** `/archive/prospect-versions/meet-cj/`
@@ -162,7 +162,7 @@ Setter twin: https://closewithcjclay.com/24-day-roadmap.html
 
 ---
 
-## 6. Pre-call / resource pages (full lineage, including before Lynda)
+## 7. Pre-call / resource pages (full lineage, including before Lynda)
 
 **History hub:** https://closewithcjclay.com/precall-version-history.html  
 **Live Lynda (current):** https://closewithcjclay.com/r/lynda_perez/  
@@ -191,7 +191,7 @@ Named live pages still under `/r/<slug>/` (Tammy, Sarah, Anna, Jane, Lynda, Grac
 
 ---
 
-## 7. Offer booking pages (pre-call, still need a slot)
+## 8. Offer booking pages (pre-call, still need a slot)
 
 **Live shared:** https://closewithcjclay.com/special-offer-book-with-cj.html  
 **Named:** `*-and-cj.html`  
@@ -207,7 +207,7 @@ Named live pages still under `/r/<slug>/` (Tammy, Sarah, Anna, Jane, Lynda, Grac
 
 ---
 
-## 8. Also in this repo (ops / internal, not prospect send)
+## 9. Also in this repo (ops / internal, not prospect send)
 
 | Item | Path | Notes |
 |---|---|---|
