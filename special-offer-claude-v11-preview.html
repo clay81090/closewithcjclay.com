@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a1628">
-<title>ARCHIVE CLAUDE SPECIAL-OFFER V7</title>
+<title>ARCHIVE CLAUDE SPECIAL-OFFER V11</title>
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://closewithcjclay.com/special-offer.html">
 <meta property="og:title" content="Your special offer · HTSA">
@@ -94,11 +94,11 @@ a{color:inherit}
 .plan-unit{color:var(--muted);font-size:13.5px}
 .plan-strike{color:#93a1b3;font-size:15px;text-decoration:line-through}
 .choose{display:flex;width:100%;min-height:54px;align-items:center;justify-content:center;
-  padding:14px 20px;border:0;border-radius:12px;background:var(--navy);color:var(--white);
+  padding:14px 20px;border:0;border-radius:12px;background:var(--ink);color:var(--white);
   font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;
   transition:transform 140ms ease,filter 140ms ease}
 .plan--best .choose{background:var(--green-strong);color:#04231a}
-.plan--custom .choose{background:var(--navy);color:var(--green)}
+.plan--custom .choose{background:var(--ink);color:var(--green)}
 .choose:hover,.choose:focus-visible{transform:translateY(-1px);filter:brightness(1.06);outline:none}
 .choose:focus-visible{outline:3px solid rgba(0,201,122,.4);outline-offset:3px}
 
@@ -146,14 +146,14 @@ a{color:inherit}
 .next-body h3{color:var(--navy);font-size:15px;font-weight:800;line-height:1.3}
 .next-body p{margin-top:4px;color:var(--muted);font-size:13.5px;line-height:1.55}
 .next-btn{display:inline-flex;min-height:44px;align-items:center;justify-content:center;
-  margin-top:10px;padding:10px 16px;border-radius:10px;background:var(--navy);color:var(--white);
+  margin-top:10px;padding:10px 16px;border-radius:10px;background:var(--ink);color:var(--white);
   font-size:14px;font-weight:800;text-decoration:none}
 .next-mail{margin-top:8px;padding:10px 12px;border:1px solid rgba(0,201,122,.22);border-radius:10px;
   background:rgba(97,227,139,.1)}
 .next-mail b{display:block;color:var(--navy);font-size:13px}
 .next-mail span{display:block;margin-top:3px;color:var(--muted);font-size:13px;line-height:1.5}
 
-.foot{padding:24px 26px 0;background:#07111f;color:rgba(255,255,255,.62);font-size:13px}
+.foot{padding:24px 26px 0;background:var(--ink);color:rgba(255,255,255,.62);font-size:13px}
 .foot-top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;max-width:760px;
   margin:0 auto;padding-bottom:20px}
 .foot-brand{color:var(--white);font-family:"Playfair Display",serif;font-size:20px;line-height:1.15}
@@ -297,28 +297,30 @@ a{color:inherit}
   background:rgba(97,227,139,.08);color:var(--navy);font-size:13px;line-height:1.5;text-align:center}
 
 /* ---------- section headers / part accordion ---------- */
-.part-drop{margin:14px 26px;border:1.5px solid var(--grey);border-radius:14px;background:#fff;
-  box-shadow:0 6px 18px rgba(10,22,40,.05)}
-.part-drop > summary{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;
-  list-style:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.part-drop{margin:14px 26px;border:1px solid var(--grey);border-radius:14px;background:#fff;
+  overflow:hidden;box-shadow:0 6px 18px rgba(10,22,40,.06)}
+.part-drop > summary{display:flex;align-items:flex-start;gap:12px;padding:15px 16px;cursor:pointer;
+  list-style:none;user-select:none;-webkit-tap-highlight-color:transparent;
+  background:linear-gradient(90deg,var(--navy),var(--navy-soft));
+  transition:filter 160ms ease}
 .part-drop > summary::-webkit-details-marker{display:none}
-.part-drop > summary .section-num{display:inline-block;flex:0 0 auto;margin:2px 0 0;padding:4px 10px;
-  border-radius:999px;background:var(--navy);color:var(--green);font-size:11px;font-weight:800;
+.part-drop > summary .section-num{display:inline-block;flex:0 0 auto;margin:3px 0 0;padding:4px 10px;
+  border-radius:999px;background:var(--green-strong);color:#04231a;font-size:11px;font-weight:800;
   letter-spacing:.08em;text-transform:uppercase}
 .part-drop > summary .part-copy{flex:1;min-width:0}
-.part-drop > summary h2{margin:0;color:var(--navy);font-family:"Playfair Display",serif;font-size:19px;line-height:1.2}
-.part-drop > summary p{margin-top:5px;color:var(--muted);font-size:13px;line-height:1.45}
+.part-drop > summary h2{margin:0;color:#fff;font-family:"Playfair Display",serif;font-size:19px;line-height:1.2}
+.part-drop > summary p{margin-top:5px;color:rgba(255,255,255,.78);font-size:13px;line-height:1.45}
 .part-drop > summary .part-tap{flex:0 0 auto;align-self:center;padding:6px 11px;border-radius:999px;
-  background:rgba(97,227,139,.18);color:var(--green-dark);font-size:11.5px;font-weight:800;
+  background:var(--green-strong);color:#04231a;font-size:11.5px;font-weight:800;
   letter-spacing:.06em;text-transform:uppercase}
 .part-drop > summary .part-chev{flex:0 0 auto;align-self:center;width:40px;height:40px;display:flex;
-  align-items:center;justify-content:center;border:2px solid var(--green-strong);border-radius:11px;
-  background:rgba(97,227,139,.14);color:var(--green-dark);font-size:20px;font-weight:800;line-height:1;
+  align-items:center;justify-content:center;border:2px solid rgba(97,227,139,.55);border-radius:11px;
+  background:rgba(255,255,255,.1);color:var(--green);font-size:20px;font-weight:800;line-height:1;
   transition:transform 160ms ease,background 160ms ease,color 160ms ease}
-.part-drop[open] > summary{border-bottom:1px solid var(--grey)}
+.part-drop[open] > summary{border-bottom:3px solid var(--green-strong)}
 .part-drop[open] > summary .part-tap{display:none}
-.part-drop[open] > summary .part-chev{transform:rotate(180deg);background:var(--green-strong);color:#04231a}
-.part-drop > summary:hover,.part-drop > summary:focus-visible{background:rgba(97,227,139,.07);outline:none}
+.part-drop[open] > summary .part-chev{transform:rotate(180deg);background:var(--green-strong);color:#04231a;border-color:var(--green-strong)}
+.part-drop > summary:hover,.part-drop > summary:focus-visible{filter:brightness(1.12);outline:none}
 .part-body{padding:12px 14px 16px}
 .part-body > .plan-inline,
 .part-body > .need-clean,
@@ -327,7 +329,6 @@ a{color:inherit}
 .part-body > .guar-strip,
 .part-body > .plans,
 .part-body > .guar,
-.part-body > .terms-card,
 .part-body > .plan-note{margin-left:0;margin-right:0}
 .part-body > .plan-inline{padding-left:0;padding-right:0}
 .part-body > .plans{padding-left:0;padding-right:0}
@@ -364,7 +365,7 @@ a{color:inherit}
 .start-card li{margin:6px 0}
 .start-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
 .start-btn{display:flex;min-height:52px;align-items:center;justify-content:center;padding:12px 14px;
-  border-radius:12px;background:var(--navy);color:#fff;font-size:15px;font-weight:800;text-decoration:none}
+  border-radius:12px;background:var(--ink);color:#fff;font-size:15px;font-weight:800;text-decoration:none}
 .start-btn--go{background:var(--green-strong);color:#04231a}
 .start-btn:hover,.start-btn:focus-visible{filter:brightness(1.06);outline:none}
 
@@ -409,18 +410,10 @@ a{color:inherit}
 .next-note{margin-top:6px;padding:11px 13px;border-radius:11px;background:var(--grey-light);
   border:1px dashed var(--grey);color:var(--muted);font-size:12.5px;line-height:1.55}
 
-/* ---------- terms card ---------- */
-.terms-card{margin:8px 26px 14px;padding:16px 18px;border:2px solid var(--gold);border-radius:14px;
-  background:var(--gold-soft);box-shadow:0 10px 24px rgba(227,160,8,.14)}
-.terms-card-kicker{color:#7a5300;font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
-.terms-card h3{margin-top:5px;color:var(--navy);font-family:"Playfair Display",serif;font-size:18px;line-height:1.22}
-.terms-card p{margin-top:8px;color:var(--text);font-size:13.5px;line-height:1.55}
-.terms-card .terms-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.terms-card a.terms-btn{display:flex;min-height:48px;align-items:center;justify-content:center;padding:10px 12px;
-  border-radius:11px;background:var(--green-strong);color:#04231a;font-size:14px;font-weight:800;text-decoration:none}
-.terms-card a.terms-btn:hover,.terms-card a.terms-btn:focus-visible{filter:brightness(1.06);outline:none}
-.terms-card a.terms-btn--secondary{background:var(--navy-soft);color:#fff;border:0}
-@media (max-width:680px){.terms-card .terms-actions{grid-template-columns:1fr}}
+/* ---------- terms modal (scrollable, in place) ---------- */
+.sheet--terms{width:min(680px,calc(100% - 20px))}
+.terms-frame{display:block;width:100%;height:min(62vh,560px);border:1px solid var(--grey);
+  border-radius:10px;background:#fff}
 
 /* ---------- referral module (compact) ---------- */
 .refer{margin:14px 26px 12px;padding:18px 18px 16px;border:2px solid var(--green-strong);
@@ -466,8 +459,11 @@ a{color:inherit}
 /* ---------- CJ footer quote (above footer) ---------- */
 .cj-quote{margin:14px 26px 10px;padding:18px 20px;border-radius:15px;background:var(--ink);color:#fff}
 .cj-quote-kicker{color:var(--green);font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
-.cj-quote blockquote{margin-top:8px;color:#fff;font-family:"Playfair Display",serif;font-size:19px;line-height:1.35}
-.cj-quote-attr{margin-top:10px;color:rgba(255,255,255,.7);font-size:12.5px}
+.cj-quote blockquote{margin-top:8px;color:#fff;font-family:"Playfair Display",serif;font-size:17px;line-height:1.42}
+.cj-quote blockquote p{margin:0}
+.cj-quote blockquote p + p{margin-top:11px}
+.cj-quote blockquote .lede{color:var(--green);font-weight:700}
+.cj-quote-attr{margin-top:12px;color:rgba(255,255,255,.7);font-size:12.5px}
 
 @media (max-width:680px){
   .deadline{padding:10px 14px;font-size:12.5px}
@@ -477,7 +473,7 @@ a{color:inherit}
   .plan-inline{padding-left:16px;padding-right:16px}
   .start-card{margin:12px 16px 4px;padding:16px}
   .start-actions{grid-template-columns:1fr}
-  .need-clean,.terms-card,.refer,.cj-quote{margin-left:16px;margin-right:16px}
+  .need-clean,.refer,.cj-quote{margin-left:16px;margin-right:16px}
   .ref-tiers,.ref-row{grid-template-columns:1fr}
   .ref-preview-thumb img{width:100px;height:53px}
 }
@@ -485,7 +481,7 @@ a{color:inherit}
 </style>
 </head>
 <body>
-<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE CLAUDE SPECIAL-OFFER V7 · Claude sandbox · NOT the live send link · <a href="/special-offer-history.html" style="color:#fde68a">All special-offer versions</a><br><span style="font-weight:500;opacity:.95">Deleted Janaye. Part 2 90-day value stack + Part 3 return. Pricing before start. Option B rewrite. Date → Sept 6.</span></div>
+<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE CLAUDE SPECIAL-OFFER V11 · Claude sandbox · NOT the live send link · <a href="/special-offer-history.html" style="color:#fde68a">All special-offer versions</a><br><span style="font-weight:500;opacity:.95">Terms = in-place scrollable modal. Removed standalone Terms Part. Ends on Part 5 + referral.</span></div>
 <main class="page">
 
   <section class="top">
@@ -592,7 +588,7 @@ a{color:inherit}
     </div>
   </details>
 
-  <details class="part-drop" id="sh-ramp" open>
+  <details class="part-drop" id="sh-ramp">
     <summary>
       <span class="section-num">Part 2</span>
       <div class="part-copy">
@@ -661,7 +657,7 @@ a{color:inherit}
     </div>
   </details>
 
-  <details class="part-drop" id="sh-price" open>
+  <details class="part-drop" id="sh-price">
     <summary>
       <span class="section-num">Part 4</span>
       <div class="part-copy">
@@ -738,7 +734,7 @@ a{color:inherit}
     </div>
   </details>
 
-  <details class="part-drop" id="sh-start" open>
+  <details class="part-drop" id="sh-start">
     <summary>
       <span class="section-num">Part 5</span>
       <div class="part-copy">
@@ -821,28 +817,6 @@ a{color:inherit}
     </div>
   </details>
 
-  <details class="part-drop" id="sh-terms">
-    <summary>
-      <span class="section-num">Part 6</span>
-      <div class="part-copy">
-        <h2>Terms of Service · please read</h2>
-        <p>Fine print, nothing hidden. You will confirm it again before payment.</p>
-      </div>
-      <span class="part-tap">Tap to open</span>
-      <span class="part-chev" aria-hidden="true">▾</span>
-    </summary>
-    <div class="part-body">
-  <div class="terms-card">
-    <div class="terms-card-kicker">Required reading before checkout</div>
-    <h3>What you are agreeing to</h3>
-    <p>Program access, refund policy, guarantee mechanics, and how coaching, placement, and community access work. Written in plain English, not legalese. Open the PDF, read it, and text me any question you have.</p>
-    <div class="terms-actions">
-      <a class="terms-btn" id="termsBtn" target="_blank" rel="noopener noreferrer">Open Terms of Service PDF</a>
-      <a class="terms-btn terms-btn--secondary" href="#" id="currBtn">See what's in the program</a>
-    </div>
-  </div>
-    </div>
-  </details>
 
   <section class="refer" aria-label="Refer someone">
     <div class="refer-kicker">Know someone this could help?</div>
@@ -891,7 +865,12 @@ a{color:inherit}
 
   <div class="cj-quote">
     <div class="cj-quote-kicker">One honest thought from CJ</div>
-    <blockquote>If nothing has changed since we last talked, it likely will not change by 2027. Do not let weeks turn into months, and months turn into years. Start a remote sales career now, on your terms, from anywhere.</blockquote>
+    <blockquote>
+      <p class="lede">If a pipe burst in your living room, you would not wait six months to call a plumber.</p>
+      <p>Waiting never makes a leak cheaper. It only makes it more expensive. Your income works the same way, and every day you leave it unfixed, it keeps costing you.</p>
+      <p>Under 40 percent information, you are guessing. Over 70 percent, you are not deciding, you are delaying. You do not need certainty. You need to move.</p>
+      <p>Six months from now, you will either be glad you started today, or wishing you had.</p>
+    </blockquote>
     <div class="cj-quote-attr">CJ Clay · Career Transformation Coach</div>
   </div>
 
@@ -945,7 +924,7 @@ a{color:inherit}
     <p class="plan-warn" id="sheetWarn" hidden></p>
     <div class="sheet-links">
       <a href="#" id="sheetCurr">📘 What's included</a>
-      <a id="sheetTerms" target="_blank" rel="noopener noreferrer">📄 Terms of Service (PDF)</a>
+      <a href="#" id="sheetTerms">📄 Read the Terms of Service</a>
     </div>
     <div class="sheet-who" id="sheetWho">
       <div class="sheet-who-kicker">So I can turn on your access</div>
@@ -988,6 +967,19 @@ a{color:inherit}
   <div class="sheet-foot"><button class="btn btn--go" type="button" id="currClose">Got it</button></div>
 </dialog>
 
+<!-- terms of service (opens in place, scrollable) -->
+<dialog class="sheet sheet--terms" id="termsSheet" aria-labelledby="termsTitle">
+  <div class="sheet-head">
+    <div class="sheet-kicker">Please read before you agree</div>
+    <h2 id="termsTitle">Terms of Service</h2>
+    <p style="margin-top:6px;color:var(--muted);font-size:13.5px;line-height:1.5">Program access, refund policy, and how the performance guarantee works. Scroll to read it all, then close this and check the box to continue.</p>
+  </div>
+  <div class="sheet-body">
+    <iframe class="terms-frame" id="termsFrame" title="HTSA Terms of Service" src="about:blank"></iframe>
+  </div>
+  <div class="sheet-foot"><button class="btn btn--go" type="button" id="termsClose">Done reading</button></div>
+</dialog>
+
 <script>
 /* ============================================================
    Shared self-enroll page.
@@ -995,7 +987,7 @@ a{color:inherit}
    Standard / new people:    https://closewithcjclay.com/special-offer.html?offer=standard
    Optional: ?n=First  ?e=email@x.com  ?p=+15555550100
    Do not put real prospect data in the BUYER block below.
-   special-offer-build:1788556800  (v7: Janaye removed; 90-day value stack + return box; pricing before start; Sept 6)
+   special-offer-build:1788661600  (v11: Terms opens in-place scrollable modal, not a new tab; Part 6 removed, ends on Part 5 + referral; ToS only at checkout)
    ============================================================ */
 const BUYER = {
   firstName: "",
@@ -1221,7 +1213,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   }
 
   /* ---------- docs ---------- */
-  el("termsBtn").href = TERMS_URL; el("sheetTerms").href = TERMS_URL;
   const roadEmbed = el("roadmapEmbed");
   if (roadEmbed) {
     const roadName = (pname || "").replace(/[^A-Za-z' -]/g, "").slice(0, 24);
@@ -1233,15 +1224,25 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     if (walkTitle && BUYER.track === "setter") walkTitle.textContent = "Your 24 day setter game plan";
   }
   const currSheet = el("currSheet");
-  function openCurr(e){ e.preventDefault(); event("curriculum_opened");
+  function openCurr(e){ if(e) e.preventDefault(); event("curriculum_opened");
     if (typeof currSheet.showModal === "function") currSheet.showModal(); }
-  el("currBtn").addEventListener("click", openCurr);
+  var currBtnEl = el("currBtn"); if (currBtnEl) currBtnEl.addEventListener("click", openCurr);
   el("sheetCurr").addEventListener("click", openCurr);
   el("currClose").addEventListener("click", function(){ currSheet.close(); });
   currSheet.addEventListener("click", function(e){ if(e.target===currSheet) currSheet.close(); });
-  [el("termsBtn"), el("sheetTerms")].forEach(function(a){
-    a.addEventListener("click", function(){ event("terms_opened",{linkLabel:TERMS_VERSION,linkUrl:TERMS_URL}); });
-  });
+
+  /* terms of service opens in place, scrollable. PDF loads only when first opened. */
+  const termsSheet = el("termsSheet"), termsFrame = el("termsFrame");
+  function openTerms(e){ if(e) e.preventDefault();
+    if (termsFrame && termsFrame.getAttribute("src") !== TERMS_URL) termsFrame.setAttribute("src", TERMS_URL);
+    event("terms_opened", { linkLabel: TERMS_VERSION, linkUrl: TERMS_URL });
+    if (termsSheet && typeof termsSheet.showModal === "function") termsSheet.showModal();
+    else window.open(TERMS_URL, "_blank"); }
+  var sheetTermsEl = el("sheetTerms"); if (sheetTermsEl) sheetTermsEl.addEventListener("click", openTerms);
+  if (termsSheet) {
+    el("termsClose").addEventListener("click", function(){ termsSheet.close(); });
+    termsSheet.addEventListener("click", function(e){ if(e.target===termsSheet) termsSheet.close(); });
+  }
 
   var startCall = el("startCall"), startSms = el("startSms");
   if (startCall) startCall.addEventListener("click", function(){ event("start_call_clicked"); });
