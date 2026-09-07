@@ -117,13 +117,28 @@ a{color:inherit}
 .legend-dot--later{background:#e4ece7;box-shadow:inset 0 0 0 1px #cad8cf}
 .time-summary{margin-bottom:14px;padding:11px 14px;border:1px solid rgba(0,201,122,.22);border-radius:10px;
   background:rgba(97,227,139,.1);color:var(--navy);font-size:14px;font-weight:700}
-.life-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:13px}
-.life-two span{padding:12px 10px;border:1px solid rgba(255,255,255,.12);border-radius:10px;
-  background:rgba(255,255,255,.06);color:var(--white);font-size:12px;font-weight:700;text-align:center}
-.life-two b{display:block;margin-bottom:3px;color:var(--green);font-size:19px;line-height:1.15}
+.life-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:13px}
+.life-three span{padding:12px 8px;border:1px solid rgba(255,255,255,.12);border-radius:10px;
+  background:rgba(255,255,255,.06);color:var(--white);font-size:11px;font-weight:700;text-align:center;line-height:1.35}
+.life-three b{display:block;margin-bottom:3px;color:var(--green);font-size:18px;line-height:1.15}
 .life-excerpt{margin-top:14px;padding:20px;border-radius:15px;background:var(--navy);
   color:rgba(255,255,255,.8);font-size:15px;line-height:1.65}
 .life-excerpt strong{color:var(--green)}
+.cj-quote{position:relative;margin-top:14px;padding:32px 22px 26px;border-radius:15px;
+  background:#fff;border:1px solid rgba(227,160,8,.55);box-shadow:0 12px 32px rgba(10,22,40,.08);text-align:center}
+.cj-quote::before{content:"\201C";position:absolute;top:4px;left:50%;transform:translateX(-50%);
+  font-family:"Playfair Display",serif;font-size:56px;line-height:1;color:var(--gold);opacity:.42}
+.cj-quote-kicker{display:block;margin-top:24px;color:var(--gold);font-size:11px;font-weight:800;
+  letter-spacing:.2em;text-transform:uppercase}
+.cj-quote blockquote{margin:12px auto 0;max-width:34rem;color:var(--navy);
+  font-family:"Playfair Display",serif;font-size:16.5px;line-height:1.55}
+.cj-quote blockquote p{margin:0}
+.cj-quote blockquote p + p{margin-top:12px}
+.cj-quote blockquote .lede{font-size:21px;line-height:1.3;font-weight:700}
+.cj-quote-attr{margin-top:18px;color:var(--muted);font-size:12px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase}
+.cj-quote-attr::before{content:"";display:block;width:40px;height:2px;margin:0 auto 12px;
+  border-radius:2px;background:var(--green-strong)}
 
 /* ---------- "more" disclosure ---------- */
 .more{background:var(--blue-light)}
@@ -257,7 +272,9 @@ details[open] .chev{transform:rotate(180deg)}
   .hero-actions .cta-button{width:100%;max-width:400px}
   .age-control{align-items:flex-start;flex-direction:column;gap:10px}
   .year-grid{gap:3px}
-  .life-two{grid-template-columns:1fr}
+  .life-three{grid-template-columns:1fr}
+  .cj-quote{padding:28px 16px 22px}
+  .cj-quote blockquote .lede{font-size:18px}
   .more-summary{padding:13px 14px}
   .proof-squares{grid-template-columns:1fr}
   .footer{padding:20px 16px 0}
@@ -400,7 +417,7 @@ details[open] .chev{transform:rotate(180deg)}
     <div class="kicker">The math nobody does</div>
     <h2 id="lifeTitle">Nobody wastes a year on purpose.</h2>
     <p class="section-lede">They just postpone for a month, twelve times. Put your age in and find the block
-      you're standing on — takes 10 seconds.</p>
+      you're standing on. Takes 10 seconds.</p>
 
     <div class="age-control">
       <div class="age-field">
@@ -421,12 +438,21 @@ details[open] .chev{transform:rotate(180deg)}
     <p class="time-summary" id="timeSummary" aria-live="polite"></p>
 
     <div class="life-excerpt">
-      <div class="life-two">
-        <span><b id="sleepYears">0 years</b>asleep</span>
-        <span><b id="awakeYears">0 years</b>awake, and yours to spend</span>
+      <div class="life-three">
+        <span><b id="sleepYears">0 years</b>~1/3 asleep</span>
+        <span><b id="workYears">0 years</b>~1/3 working</span>
+        <span><b id="liveYears">0 years</b>~1/3 yours to live</span>
       </div>
-      <p>Most people don't need a new plan. They need the next twelve months to look different from the last
-        twelve. <strong>That's the whole conversation we're having.</strong></p>
+      <p>You need a new plan, because the current plan got you where you are. Of what's left, about a third is sleep, a third is work, and a third is yours to live. The point is to make your job revolve around your life, not the other way around, which is likely how it has been up until now.</p>
+    </div>
+
+    <div class="cj-quote">
+      <div class="cj-quote-kicker">One honest thought</div>
+      <blockquote>
+        <p class="lede">If a pipe burst in your living room, you would not wait six months to call a plumber.</p>
+        <p>Waiting never makes a leak cheaper, it only makes it more expensive, and your income works exactly the same way. Every day you leave it unfixed, it quietly keeps costing you. Under 40 percent you are guessing, but past 70 percent you are no longer deciding, you are delaying. You do not need certainty. You only need to move.</p>
+      </blockquote>
+      <div class="cj-quote-attr">CJ Clay · Career Transformation Coach</div>
     </div>
   </section>
 
@@ -619,8 +645,10 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     });
     el("ageReadout").innerHTML = "At <strong>" + age + "</strong>, you're standing on block <strong>" + (age + 1) + "</strong>.";
     el("timeSummary").innerHTML = "<strong>" + remaining + " blocks</strong> left on this model. <strong>" + before70 + "</strong> of them come before 70.";
-    el("sleepYears").textContent = fmt(remaining / 3) + " years";
-    el("awakeYears").textContent = fmt(remaining * 2 / 3) + " years";
+    var third = remaining / 3;
+    el("sleepYears").textContent = fmt(third) + " years";
+    el("workYears").textContent = fmt(third) + " years";
+    el("liveYears").textContent = fmt(third) + " years";
   }
   ageInput.addEventListener("input", render);
   ageInput.addEventListener("change", function () {
