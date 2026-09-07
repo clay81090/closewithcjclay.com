@@ -153,9 +153,10 @@ Example live page: https://closewithcjclay.com/htsa-enrollment-cj-clay.html
 | V11 | `98798de` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v11.html) | Visible Taylor/Brianna + resources dropdown |
 | V12 | `9af6b39` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v12.html) | Mark layout shape (first Lynda-ship era) |
 | V13 | `7c67483` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v13.html) | Meet-CJ 3-up resources layout |
-| V14 | `62143be` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v14.html) | DIY-groups framing + Book Appointment |
+| V14 | `62143be` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v14.html) | DIY-groups framing + Book Appointment (Gracie-era) |
+| **V15 preferred** | Liliana layout | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v15.html) | Resources under Aug 18 video, Chad book after Other resources, lifespan at bottom |
 
-**Live template for new people going forward:** `r/_TEMPLATE-precall.html`  
+**Live template for new people going forward:** `r/_TEMPLATE-precall.html` (= V15)  
 Do not edit old `/r/<person>/` pages to “test” a layout. Copy the template era you like into a new page.
 
 Related tools:
