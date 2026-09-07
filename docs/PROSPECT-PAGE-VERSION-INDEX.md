@@ -170,8 +170,13 @@ Related tools:
 
 ## 6. Special offer self-enroll
 
-**Live send:** https://closewithcjclay.com/special-offer.html  
-**Hub:** https://closewithcjclay.com/special-offer-history.html
+**Live send (still Cursor V6B until you ship):** https://closewithcjclay.com/special-offer.html  
+**Hub:** https://closewithcjclay.com/special-offer-history.html  
+**Claude-only companion page:** `docs/SPECIAL-OFFER-CLAUDE-V7-V19.md`
+
+Regular twin (standard prices): https://closewithcjclay.com/enroll.html
+
+### A. Cursor / git (on the live path)
 
 | Ver | Commit | Preview | What changed |
 |---|---|---|---|
@@ -181,12 +186,40 @@ Related tools:
 | V4 | `002a745` | [Open](https://closewithcjclay.com/special-offer-v4-preview.html) | Option B = proven 5-step self-enroll |
 | V5 | `f1afb52` | [Open](https://closewithcjclay.com/special-offer-v5-preview.html) | Dual pricing + Sheet tracking |
 | V6 | `fc9cc72` | [Open](https://closewithcjclay.com/special-offer-v6-preview.html) | Collapsible Parts |
-| **V6B live** | `62143be` | [Open](https://closewithcjclay.com/special-offer-v6b-preview.html) | Current live Cursor simplify |
-| Claude V7 | sandbox | [Open](https://closewithcjclay.com/special-offer-claude-v7-preview.html) | Liked direction. 90-day stack + return box. Not live. |
-| Claude V8 | sandbox | [Open](https://closewithcjclay.com/special-offer-claude-v8-preview.html) | Pipe/plumber footer quote. Not live. |
-| Claude V9 | sandbox | [Open](https://closewithcjclay.com/special-offer-claude-v9-preview.html) | Ink-blue buttons/footer. **Do not like. Not live.** |
+| **V6B live** | `62143be` | [Open](https://closewithcjclay.com/special-offer-v6b-preview.html) | **Current live.** Basic game plan, courtesy intro, pricing earlier |
 
-Regular twin (standard prices): https://closewithcjclay.com/enroll.html
+### B. Claude sandbox build (v7 → v19)
+
+**Sandbox root:** `/Users/charlesclay/Documents/SPECIAL-OFFER-CLAUDE-SANDBOX/WORK/`  
+**Baseline:** live Cursor collapsible-Parts build (`1788483600` / V6 era).  
+**Rule:** each request = its own new file; prior never overwritten. **Not live** until you copy into the repo. **Preferred: V19.**
+
+| Ver | File (sandbox WORK/) | Preview | What changed |
+|---|---|---|---|
+| V7 | `special-offer-v7.html` | [Open](https://closewithcjclay.com/special-offer-claude-v7-preview.html) | Deleted Janaye. Part 2 “Your first 90 days” value stack + Part 3 “What I ask in return.” Pricing before how-to-start. Option B email/FB rewrite. Date Sept 4 → Sept 6. |
+| V8 | `special-offer-v8.html` | [Open](https://closewithcjclay.com/special-offer-claude-v8-preview.html) | Footer quote = pipe/plumber + 40/70 message. |
+| V9 | `special-offer-v9.html` | [Open](https://closewithcjclay.com/special-offer-claude-v9-preview.html) | Black buttons (3-pay, ClarityPay, Call CJ, steps) + footer → guarantee-box blue. Accordion: one Part open at a time. |
+| V10 | `special-offer-v10.html` | [Open](https://closewithcjclay.com/special-offer-claude-v10-preview.html) | Each of 6 Part headers = blue band with white content beneath. |
+| V11 | `special-offer-v11.html` | [Open](https://closewithcjclay.com/special-offer-claude-v11-preview.html) | Terms = in-place scrollable modal. Removed standalone Terms Part. Ends on Part 5 + referral. |
+| V12 | `special-offer-v12.html` | [Open](https://closewithcjclay.com/special-offer-claude-v12-preview.html) | Part 5 = two green tabs (10-min call with CJ vs self-enroll). Self-enroll trimmed to 4 steps, Amy Grochala style. |
+| V13 | `special-offer-v13.html` | [Open](https://closewithcjclay.com/special-offer-claude-v13-preview.html) | Frictionless checkout: plan click → Whop, no gate. Guarantee/terms = one plain-English popup (Myli wording). Empty PDF iframe removed. |
+| V14 | `special-offer-v14.html` | [Open](https://closewithcjclay.com/special-offer-claude-v14-preview.html) | Compact referral: your name + 3 name rows, each with Send. Removed big message preview and thumbnail. |
+| V15 | `special-offer-v15.html` | [Open](https://closewithcjclay.com/special-offer-claude-v15-preview.html) | Referral = blue Part 6 (“Know someone… · $250–$500/ea”). CJ quote flipped to green. |
+| V16 | `special-offer-v16.html` | [Open](https://closewithcjclay.com/special-offer-claude-v16-preview.html) | Closing quote = white editorial card, gold hairline + quotation mark, navy serif, centered. |
+| V17 | `special-offer-v17.html` | [Open](https://closewithcjclay.com/special-offer-claude-v17-preview.html) | Closing kicker shortened to “One honest thought.” |
+| V18 | `special-offer-v18.html` | [Open](https://closewithcjclay.com/special-offer-claude-v18-preview.html) | Red 48-hour per-browser countdown. On expiry discounted links swap to standard pricing. Sept 6 copy → timer. |
+| **V19 preferred** | `special-offer-v19.html` | [Open](https://closewithcjclay.com/special-offer-claude-v19-preview.html) | Intro: “…my number is at the bottom, please just text or call me immediately and I will make the time.” **Use this one when you ship.** |
+
+**Ship V19 (only when you ask):**
+
+```bash
+cp "/Users/charlesclay/Documents/SPECIAL-OFFER-CLAUDE-SANDBOX/WORK/special-offer-v19.html" \
+   "/Users/charlesclay/Desktop/closewithcjclay.com/closewithcjclay.com/special-offer.html"
+```
+
+Then commit + push `special-offer.html`. Claude does not push live.
+
+**Notes:** Reactivation pricing in these builds ($5k PIF · 3×$1,750 · Clarity $500/mo). Countdown expiry swaps to standard. Test expired: `localStorage.setItem('htsa_special_deadline_v1', Date.now()-1000)` then refresh, or `?offer=standard`.
 
 ---
 
