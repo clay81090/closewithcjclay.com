@@ -1344,6 +1344,241 @@
 
   /* Enrollment-specific performance guarantee callout (orange) — optional; include HTML block only when needed */
 
+  /* Centered section header (same idea as enrollment Member voices banner) */
+  .ref-strip-banner {
+    text-align: center;
+    margin: 0 0 18px;
+  }
+
+  .ref-strip-banner .ref-strip-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.6px;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin: 0 0 8px;
+  }
+
+  .ref-strip-banner-desc {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0 auto;
+    max-width: 520px;
+  }
+
+  .ref-strip-quote--compact .ref-strip-quote-body {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .ref-strip-quote--compact .ref-strip-quote-attr {
+    margin-top: 8px;
+    padding-top: 6px;
+  }
+
+  /* CJ Reviews: Janaye shown; rest behind See more */
+  .ref-strip-inner--personal-reviews {
+    display: block;
+    align-items: stretch;
+  }
+
+  .ref-strip-quote--janaye-tab {
+    width: 100%;
+    max-width: none;
+    padding: 14px 18px 12px;
+    margin: 0 0 12px;
+  }
+
+  .ref-strip-quote--janaye-tab .ref-strip-quote-meta {
+    margin: 0 0 6px;
+  }
+
+  .ref-strip-quote--janaye-tab .ref-strip-quote-body {
+    max-height: none;
+    overflow: visible;
+    font-size: 12.5px;
+    line-height: 1.55;
+    white-space: normal;
+  }
+
+  .ref-strip-quote--janaye-tab .ref-strip-quote-attr {
+    margin-top: 8px;
+    padding-top: 6px;
+  }
+
+  .cj-reviews-more {
+    margin: 0;
+    border: none;
+  }
+
+  .cj-reviews-more > summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 18px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 3px solid #93c5fd;
+    border-left: 5px solid #60a5fa;
+    box-shadow: 0 0 0 1.5px rgba(226, 178, 39, 0.45), 0 4px 14px rgba(10, 22, 40, 0.06);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    user-select: none;
+  }
+
+  .cj-reviews-more > summary::-webkit-details-marker { display: none; }
+
+  .cj-reviews-more-summary-text {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .cj-reviews-more-summary-sub {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .cj-reviews-more-arrow {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #1976D2;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.35);
+    transition: transform 0.2s ease;
+  }
+
+  .cj-reviews-more[open] > summary .cj-reviews-more-arrow {
+    transform: rotate(90deg);
+  }
+
+  .cj-reviews-more[open] > summary {
+    margin-bottom: 12px;
+  }
+
+  .cj-reviews-more-panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .cj-reviews-more-panel .ref-strip-quote {
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .cj-reviews-more-panel {
+      grid-template-columns: 1fr;
+    }
+    .cj-reviews-more > summary {
+      padding: 12px 14px;
+      font-size: 13px;
+    }
+  }
+
+  .ref-strip-inner--personal-reviews .ref-strip-mini-stack {
+    flex: 1 1 280px;
+    min-width: 0;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ref-strip-inner--personal-reviews .ref-strip-mini-stack > .ref-strip-quote {
+    flex: 1 1 auto;
+  }
+
+  /* Highlight Janaye + Brittany — blue outline only (same family as resource boxes above) */
+  .ref-strip-quote--personal-blue {
+    background: #ffffff;
+    border: 3px solid #93c5fd;
+    border-left: 5px solid #60a5fa;
+    box-shadow: 0 0 0 1.5px rgba(226, 178, 39, 0.55), 0 4px 14px rgba(10, 22, 40, 0.06);
+  }
+
+  .gr-referral {
+    margin: 0;
+    padding: 24px 36px 28px;
+    border-top: 1px solid var(--mid);
+    background: linear-gradient(135deg, #f0fdf7 0%, #e8f9f1 100%);
+  }
+  .gr-referral-kicker {
+    color: var(--green-dark);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .gr-referral h3 {
+    margin: 6px 0 7px;
+    color: var(--navy);
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+  }
+  .gr-referral p {
+    margin: 0 0 14px;
+    color: var(--muted);
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .gr-referral-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .gr-referral label {
+    display: block;
+    color: var(--navy);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .gr-referral input {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 5px;
+    padding: 11px 12px;
+    border: 1px solid var(--mid);
+    border-radius: 9px;
+    background: #fff;
+    color: var(--text);
+    font: inherit;
+  }
+  .gr-referral button {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 11px;
+    border: 0;
+    border-radius: 9px;
+    background: var(--navy);
+    color: #fff;
+    font: 700 14px 'DM Sans', sans-serif;
+    cursor: pointer;
+  }
+  .gr-referral button:disabled { cursor: not-allowed; opacity: .45; }
+  .gr-referral-note { margin-top: 9px !important; font-size: 12px !important; }
+  @media (max-width: 600px) {
+    .gr-referral { padding: 20px; }
+    .gr-referral-fields { grid-template-columns: 1fr; }
+  }
+
   .tos-full-tab-wrap {
     display: flex;
     justify-content: center;
@@ -1589,6 +1824,133 @@
     <button type="button" class="tos-full-tab" id="tosMoreBtn" aria-haspopup="dialog" aria-controls="tosSheet">Full Terms of Service</button>
   </div>
 
+  <!-- CJ personal reviews (Janaye visible; rest behind See more) -->
+  <div class="ref-strip">
+    <div class="ref-strip-banner">
+      <div class="ref-strip-label">CJ Reviews</div>
+      <p class="ref-strip-banner-desc">Real messages from people who worked directly with CJ.</p>
+    </div>
+    <div class="ref-strip-inner ref-strip-inner--personal-reviews">
+      <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal-blue ref-strip-quote--janaye-tab">
+        <div class="ref-strip-quote-meta">To CJ</div>
+        <blockquote class="ref-strip-quote-body">Hey CJ, it&#x27;s Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could&#x27;ve made for my life right now.<br><br>I think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!</blockquote>
+        <p class="ref-strip-quote-attr">— Janaye · text message</p>
+      </div>
+
+      <details class="cj-reviews-more" id="cj-reviews-more">
+        <summary>
+          <span class="cj-reviews-more-summary-text">
+            See more reviews
+            <span class="cj-reviews-more-summary-sub">9 more messages from people who worked with CJ</span>
+          </span>
+          <span class="cj-reviews-more-arrow" aria-hidden="true">▸</span>
+        </summary>
+        <div class="cj-reviews-more-panel">
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you&#x27;re doing.</blockquote>
+            <p class="ref-strip-quote-attr">— Zach Scanlon · text message</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, I just wanted to thank you for closing me on the program. I can already tell I&#x27;ll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process.</blockquote>
+            <p class="ref-strip-quote-attr">— Riley Colston · text message</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, the program has been great so far and I&#x27;ve made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you.</blockquote>
+            <p class="ref-strip-quote-attr">— Amy Colombo · text message</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I&#x27;m so grateful. I landed my dream role 65 days in, and you played a real part in that.</blockquote>
+            <p class="ref-strip-quote-attr">— Zachary Allen · mastermind community</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal-blue">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, thank you so much for taking the time to read through my answers before we ever got on a call. That meant a lot. Hearing that you actually read my stuff made me want to work with you specifically, not someone else. I appreciate the kind words more than you know, and I&#x27;m really excited to get started with you.</blockquote>
+            <p class="ref-strip-quote-attr">— Brittany Levine · text message</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">Hey CJ, just wanted to say thanks, seriously. You and Mark didn&#x27;t let me slip away after I almost bailed on our call. You stayed patient, kept it real, and showed me why this team&#x27;s different. That kind of support? That&#x27;s why I&#x27;m all in now. Appreciate you both pulling me through. Means a lot.</blockquote>
+            <p class="ref-strip-quote-attr">— Nick Sotirianos · text message</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, you&#x27;re the most genuine and caring person I&#x27;ve ever met on the phone. You lifted me up when I was in a low place. You gave me hope, kept me motivated, and kept me positive the whole way. You&#x27;re a big part of my testimony. I wouldn&#x27;t be here right now if it wasn&#x27;t for you.</blockquote>
+            <p class="ref-strip-quote-attr">— Trinity Isabel · Facebook post</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, thank you for getting me signed up and for sticking with me while we built a plan to join. We worked on it for three months before I came in, and you never made me feel rushed. You showed me from the start that these are really great people, every single one of them.</blockquote>
+            <p class="ref-strip-quote-attr">— HTSA Member · unprompted review</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">To CJ</div>
+            <blockquote class="ref-strip-quote-body">CJ, I&#x27;m SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you&#x27;re doing!</blockquote>
+            <p class="ref-strip-quote-attr">— Kate Robinson · text message</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <section class="gr-referral" aria-labelledby="grReferralTitle">
+    <div class="gr-referral-kicker">Referral bonus · $250 each</div>
+    <h3 id="grReferralTitle">Know someone else looking for a legitimate closing opportunity?</h3>
+    <p>Enter their first name and mobile number. Your text app opens with an introduction ready. Nothing sends until you press send.</p>
+    <div class="gr-referral-fields">
+      <label>First name
+        <input id="grRefName" type="text" autocomplete="off" placeholder="Their first name">
+      </label>
+      <label>Mobile number
+        <input id="grRefPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 123-4567">
+      </label>
+    </div>
+    <button id="grRefButton" type="button" disabled>Open the introduction text</button>
+    <p class="gr-referral-note" id="grRefNote">You receive $250 for each referral who enrolls.</p>
+  </section>
+
+
+<script>
+(function () {
+  var grRefName = document.getElementById("grRefName");
+  var grRefPhone = document.getElementById("grRefPhone");
+  var grRefButton = document.getElementById("grRefButton");
+  function referralDigits(value) {
+    return (value || "").replace(/\D/g, "");
+  }
+  function updateReferralButton() {
+    if (!grRefButton) return;
+    grRefButton.disabled = !(
+      grRefName &&
+      grRefName.value.trim() &&
+      grRefPhone &&
+      referralDigits(grRefPhone.value).length >= 10
+    );
+  }
+  if (grRefName) grRefName.addEventListener("input", updateReferralButton);
+  if (grRefPhone) grRefPhone.addEventListener("input", updateReferralButton);
+  if (grRefButton) {
+    grRefButton.addEventListener("click", function () {
+      var name = grRefName.value.trim();
+      var phone = referralDigits(grRefPhone.value);
+      if (!name || phone.length < 10) return;
+      var link = "https://closewithcjclay.com/meet-cj.html?ref=" + encodeURIComponent("Shay Wedeking");
+      var message =
+        "Hey " +
+        name +
+        ", I found a legitimate remote closing program that trains, certifies, and helps hand place closers into offers. I thought of you. Here is the page CJ sent me:\n\n" +
+        link;
+      var smsPhone = phone.length === 11 && phone.charAt(0) === "1" ? phone.slice(1) : phone;
+      window.location.href = "sms:+1" + smsPhone + "?&body=" + encodeURIComponent(message);
+    });
+  }
+})();
+</script>
+
+
   <!-- INVESTMENT -->
   <div class="sec-head">
     <div class="sec-num">2</div>
@@ -1739,55 +2101,7 @@
     <p>You're not just enrolling in a program — you're joining a community of people who show up, do the work, and build something real. We can't wait to see where this takes you.</p>
   </div>
 
-  <!-- Member stories & book (subtle; site / Trustpilot / YouTube in footer) -->
-  <div class="ref-strip">
-    <div class="ref-strip-inner">
-      <div class="ref-strip-links-col">
-        <div class="ref-strip-label">Member stories · optional</div>
-        <ul class="ref-strip-list">
-          <li><a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" target="_blank" rel="noopener noreferrer">Taylor Conroy (TEDx coach) — why he hires our members</a></li>
-          <li><a href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" target="_blank" rel="noopener noreferrer">Cassie — single mom, relatable success story</a></li>
-          <li><a href="https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8" target="_blank" rel="noopener noreferrer">Brianna — Tony Robbins team</a></li>
-          <li><a href="https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib" target="_blank" rel="noopener noreferrer">Josh — Alex Hormozi background</a></li>
-          <li><a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><em>The Book on High Ticket Sales</em> — Chad Aleo (Amazon)</a></li>
-        </ul>
-        <div class="ref-strip-mini-stack">
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">Member voice</div>
-            <blockquote class="ref-strip-quote-body">Just received this news from my first mock call and wanted to share... I'm SUPER grateful to you for helping me move forward with HTSA! Keep doing what you're doing!</blockquote>
-            <p class="ref-strip-quote-attr">— Kate R. · shared with HTSA</p>
-          </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">Member voice</div>
-            <blockquote class="ref-strip-quote-body">I'm really enjoying the program so far and getting a ton of value out of it! Thanks again for helping me cross the line. The work you're doing is legitimately important I hope you know that!!!!</blockquote>
-            <p class="ref-strip-quote-attr">— Jessica C. · shared with HTSA</p>
-          </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">Member voice</div>
-            <blockquote class="ref-strip-quote-body">Hey CJ, Just wanted to say thanks, seriously. You didn't let me slip away after I tried to bail on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support? That's why I'm all in now. Appreciate you!</blockquote>
-            <p class="ref-strip-quote-attr">— Nick S. · shared with HTSA</p>
-          </div>
-        </div>
-      </div>
-      <div class="ref-strip-quote-wrap">
-        <div class="ref-strip-quote ref-strip-quote--trinity">
-          <div class="ref-strip-quote-meta">Member voice</div>
-          <blockquote class="ref-strip-quote-body">Hello, my name is Trinity.
-
-I'm a single mother of two beautiful children; I've just started my journey with high ticket sales. I'm extremely grateful that I found my path with this company. I was in a low space in my life and I was almost at the verge of giving up — holding on, knowing my children need me to keep going, kept me alive that much to hold on. I prayed for help morning and night with nobody to talk to about what I'm dealing with. But I kept looking for a way out. I can write paragraphs about my life, but I know I was meant to be online to come across Chad's advertisement on the High Ticket Sales Academy. I listened and jumped into the opportunity by signing up.
-
-Then I got a call from CJ — the most genuine and caring person I ever met. On the phone he lifted me up, and only if you heard the call you would feel it immediately… He gave me hope and assurance that it will be okay, kept me motivated and kept me positive. He is a big part of my testimony on leaping into faith with the amazing opportunity; he kept me lifted the whole way and I appreciate it completely. I wouldn't be here right now typing this if it wasn't for him.
-
-I believe everything happens for a reason. I believe I have a place in life, and I strongly believe it's with High Ticket Sales Academy. I'm so ready to be able to move my children out of the area where we are so we can feel safe, knowing my children will be okay. As a mother, the biggest thing I can want is my children safely protected, living in an area where they aren't at risk, getting the best education, and being able to walk around experiencing life. With me finding my place here I'll be able to finally show my children: mommy won't be struggling for long.
-
-Thank God and CJ Clay for that 🙏</blockquote>
-          <p class="ref-strip-quote-attr">— Trinity I. · shared with HTSA</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
+<!-- FOOTER -->
   <div style="background:var(--navy);border-top:3px solid var(--green);padding:28px 36px;page-break-inside:avoid;break-inside:avoid;">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:28px;">
 
