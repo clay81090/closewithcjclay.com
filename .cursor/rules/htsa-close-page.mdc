@@ -131,9 +131,11 @@ Keep that guard.
   default, always openable, never gated on payment. First open fires
   `next_steps_opened`. Do not hide this section until checkout.
 - **All HTSA Resources is the navy/green collapsed tab above CJ Reviews.** Default on
-  every close page (baked into `templates/_TEMPLATE-close.html`). Videos play in-page.
-  Trustpilot + Canva use scrollable snapshot images in `/media/resources/` (those sites
-  block iframes). Do not strip this when building someone's page.
+  every close page (baked into `templates/_TEMPLATE-close.html`). Videos play in-page
+  (YouTube embeds + local clips like Taylor Decourcey and Aug 18). Trustpilot + Canva
+  use scrollable snapshot images in `/media/resources/`. Top 20 PDF opens in the same
+  in-page viewer next to the website row under **More resources**. Do not strip this
+  when building someone's page.
 - **Terms acceptance happens after plan selection**, inside the confirm sheet. Never
   gate the payment buttons behind a terms checkbox again. That is what killed
   conversion on the legacy page.

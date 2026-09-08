@@ -390,7 +390,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1788838315 -->
+<!-- close-build:1788900010 -->
 </head>
 <body>
 <main class="page">
@@ -575,19 +575,22 @@ a{color:inherit}
           <button type="button" class="res-btn" data-media="yt" data-id="bd65afldLmE" data-title="Taylor Conroy (TEDx Coach) Why He Hires Our Members"><span>Taylor Conroy (TEDx Coach)<small>Why he hires our members · plays here</small></span><span class="chev">▸</span></button>
         </div>
         <div class="res-group">
-          <div class="res-group-label">Client success stories</div>
+          <div class="res-group-label">Member testimonials</div>
           <button type="button" class="res-btn" data-media="yt" data-id="WOVqPR-ufYM" data-title="Cassie — Single Mom success story"><span>Cassie — Single Mom<small>Relatable success story · plays here</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="yt" data-id="FqlY37NaIsk" data-title="Dana — Unsolicited HTSA Personal Review"><span>Dana — Personal Review<small>Unsolicited HTSA review · plays here</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="yt" data-id="5pVlD6EKy1k" data-title="Josh — Alex Hormozi background"><span>Josh — Alex Hormozi background<small>High-profile background · plays here</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="yt" data-id="TWacdj9x45o" data-title="Brianna — Tony Robbins team"><span>Brianna — Tony Robbins team<small>Credibility from a big name · plays here</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="video" data-src="/media/taylor-decoursey-testimonial.mp4" data-title="Taylor Decourcey — newer member perspective"><span>Taylor Decourcey<small>Newer member perspective · plays here</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="video" data-src="/media/this-week-at-htsa-2026-08-18.mp4" data-title="This Week at HTSA — Aug 18 placements"><span>This Week at HTSA — Aug 18<small>Live call placements · plays here</small></span><span class="chev">▸</span></button>
         </div>
         <div class="res-group">
-          <div class="res-group-label">Key resources</div>
+          <div class="res-group-label">More resources</div>
           <button type="button" class="res-btn" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5"><span>Trustpilot Reviews<small>4.9 out of 5 · scrollable snapshot on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="img" data-src="/media/chad-aleo-book-banner.png" data-title="Chad’s Book — The Book on High Ticket Sales"><span>Chad’s Book<small>The Book on High Ticket Sales · on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-why-placement.jpg" data-title="Why Everyone Raves About Our Placement"><span>Why Everyone Raves About Our Placement<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-christa-22k.jpg" data-title="Christa Kieffer — Placement to 22k (4 months)"><span>Christa Kieffer — Placement to 22k<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="site" data-url="https://www.highticketsalesacademy.com" data-title="HTSA Website"><span>HTSA Website<small>Opens here · live site blocks embeds</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="doc" data-url="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" data-title="Top 20 Companies in High Ticket Sales"><span>Top 20 Companies in High Ticket Sales<small>PDF · scrollable on this page</small></span><span class="chev">▸</span></button>
         </div>
       </div>
     </details>
@@ -1147,7 +1150,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   function openMedia(kind, payload, title){
     clearMedia();
     mediaTitle.textContent = title || "Resource";
-    mediaSheet.classList.toggle("media-sheet--wide", kind === "img");
+    mediaSheet.classList.toggle("media-sheet--wide", kind === "img" || kind === "doc");
     if (kind === "yt") {
       const f = document.createElement("iframe");
       f.className = "media-frame";
@@ -1165,6 +1168,19 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       img.alt = title || "Resource";
       img.loading = "eager";
       wrap.appendChild(img);
+      mediaBody.appendChild(wrap);
+    } else if (kind === "video") {
+      const wrap = document.createElement("div");
+      wrap.className = "media-scroll";
+      wrap.style.background = "#000";
+      const v = document.createElement("video");
+      v.className = "media-frame";
+      v.controls = true;
+      v.setAttribute("playsinline", "");
+      v.setAttribute("preload", "metadata");
+      v.src = payload;
+      v.autoplay = true;
+      wrap.appendChild(v);
       mediaBody.appendChild(wrap);
     } else if (kind === "site") {
       const wrap = document.createElement("div");
@@ -1186,6 +1202,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       const kind = btn.dataset.media;
       if (kind === "yt") openMedia("yt", btn.dataset.id, btn.dataset.title);
       else if (kind === "img") openMedia("img", btn.dataset.src, btn.dataset.title);
+      else if (kind === "video") openMedia("video", btn.dataset.src, btn.dataset.title);
       else if (kind === "site") openMedia("site", btn.dataset.url, btn.dataset.title);
       else openMedia("doc", btn.dataset.url, btn.dataset.title);
     });
