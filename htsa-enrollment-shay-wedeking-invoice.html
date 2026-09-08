@@ -942,29 +942,39 @@
   }
 
   .welcome-band {
-    background: var(--navy);
-    padding: 28px 36px;
+    background: linear-gradient(160deg, #071222 0%, #0a1628 55%, #0d1f33 100%);
+    margin: 18px 24px 22px;
+    padding: 30px 36px;
     text-align: center;
-    border-bottom: 1px solid rgba(0,201,122,0.2);
+    border: 3px solid var(--green);
+    border-radius: 14px;
+    box-shadow:
+      0 0 0 4px rgba(0, 201, 122, 0.18),
+      0 12px 32px rgba(0, 201, 122, 0.22),
+      0 4px 18px rgba(0, 0, 0, 0.28);
     page-break-inside: avoid;
     break-inside: avoid;
   }
 
   .welcome-band h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 20px;
+    font-size: 22px;
     color: var(--white);
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    line-height: 1.3;
   }
 
-  .welcome-band h3 span { color: var(--green); }
+  .welcome-band h3 span {
+    color: var(--green);
+    text-shadow: 0 0 18px rgba(0, 201, 122, 0.35);
+  }
 
   .welcome-band p {
-    font-size: 12.5px;
-    color: rgba(255,255,255,0.45);
+    font-size: 13px;
+    color: rgba(255,255,255,0.62);
     line-height: 1.7;
-    max-width: 500px;
+    max-width: 520px;
     margin: 0 auto;
   }
 
@@ -1648,7 +1658,7 @@
 </style>
 </head>
 <body>
-<!-- invoice-build:1788831184 -->
+<!-- invoice-build:1788831226 -->
 
 <div class="page">
 
