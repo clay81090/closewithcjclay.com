@@ -57,7 +57,10 @@ a{color:inherit}
 .prep-name{margin-top:3px;color:var(--white);font-size:14.5px;font-weight:700;line-height:1.25}
 .prep-line{margin-top:3px;color:rgba(255,255,255,.68);font-size:12.5px;line-height:1.4;word-break:break-word}
 .prep-line a{color:rgba(255,255,255,.78);text-decoration:none}
-.prep-fix{margin:9px auto 0;max-width:520px;color:rgba(255,255,255,.55);font-size:12px;text-align:center}
+.prep-fix{display:none}
+.prep-intro{margin:14px auto 0;max-width:560px;padding:0 4px;color:rgba(255,255,255,.88);font-size:14.5px;line-height:1.6;text-align:left}
+.prep-intro p{margin:0 0 10px}
+.prep-intro p:last-child{margin-bottom:0}
 @media (max-width:680px){.prep{grid-template-columns:1fr}}
 
 /* ---------- welcome band (green outline, high emotional beat) ---------- */
@@ -390,7 +393,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1788900010 -->
+<!-- close-build:1788906425 -->
 </head>
 <body>
 <main class="page">
@@ -414,7 +417,7 @@ a{color:inherit}
         <div class="prep-line"><a href="tel:+16166121735">(616) 612-1735</a></div>
       </div>
     </div>
-    <p class="prep-fix" id="prepFix" hidden>Anything wrong there? Tell me before you pay and I'll fix it.</p>
+    <div class="prep-intro" id="prepIntro" hidden></div>
   </section>
 
   <section class="welcome" id="welcomeBand">
@@ -942,7 +945,8 @@ const BUYER = {
   slug:      "tariq_hill",
   track:     "closer",
   offer:     "standard",
-  show:      ["pif", "plan", "clarity"]
+  show:      ["pif", "plan", "clarity"],
+  intro:     'Tariq, I really enjoyed our call. You have real sales horsepower, construction ownership plus nearly twenty years of corporate and high ticket B2B, and that is exactly the background companies in this space want. Placement is what matters most to you, and that is our focus too. We will get you certified, put you in front of the right offers (including fitness if that is where you want to go), and stay with you through the interviews.\n\nChad will review one of your live calls each week for the first 90 days to help you ramp and track KPIs. After that, you get us for life. No extra costs, no fees, no surprises. Lifetime training, community, support, and placement. Our success is tied to yours. We are excited to have you in the HTSA family.'
 };
 
 const CUSTOM_OFFER = null;
@@ -1031,10 +1035,221 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   }
   el("trackPill").textContent = T.label;
   if (val(BUYER.fullName)) {
-    el("prepBox").hidden = false; el("prepFix").hidden = false;
+    el("prepBox").hidden = false;
+    const introEl = el("prepIntro");
+    if (introEl) {
+      const raw = (typeof BUYER.intro === "string" && BUYER.intro.trim())
+        ? BUYER.intro.trim()
+        : (first
+            ? first + ", I really enjoyed speaking with you. It was clear you take your future seriously, and that is exactly who we love working with at HTSA. This page locks in what we covered so you can move with confidence.\n\nWhen you are ready, choose the payment option that fits. Access opens as soon as payment clears, and we will be with you through training, interview prep, and placement. Our success is tied to yours."
+            : "");
+      if (raw) {
+        introEl.hidden = false;
+        introEl.innerHTML = raw.split(/\n\n+/).map(function(p){
+          const d = document.createElement("p");
+          d.textContent = p.replace(/\s+/g, " ").trim();
+          return d.outerHTML;
+        }).join("");
+      }
+    }
     el("prepName").textContent  = BUYER.fullName;
     el("prepEmail").textContent = val(BUYER.email);
     el("prepPhone").textContent = val(BUYER.phone);
+  }
+
+  INCLUDED.forEach(function(t){const li=document.createElement("li");li.textContent=t;el("incList").appendChild(li);});
+  GUARANTEE_STEPS.forEach(function(t){const li=document.createElement("li");li.textContent=t;el("guarSteps").appendChild(li);});
+  CURRICULUM.forEach(function(r){const li=document.createElement("li");
+    const b=document.createElement("b");b.textContent=r[0];
+    const s=document.createElement("span");s.textContent=r[1];
+    li.appendChild(b);li.appendChild(s);el("currList").appendChild(li);});
+
+  /* ---------- plans ---------- */
+  el("pifAmt").textContent    = O.pif.amount;
+  el("pifStrike").textContent = O.pif.was || "";
+  el("pifNote").textContent   = O.pif.note;
+  el("planName").textContent  = O.plan.name;
+  el("planAmt").textContent   = O.plan.amount;
+  el("planUnit").textContent  = O.plan.unit;
+  el("planNote").textContent  = O.plan.note;
+  if (O.plan.warn) { el("planWarn").hidden = false; el("planWarn").textContent = O.plan.warn; }
+  el("clarityAmt").textContent  = O.clarity.amount;
+  el("clarityUnit").textContent = O.clarity.unit;
+  el("clarityNote").textContent = O.clarity.note;
+  el("stickySub").textContent = "Paid in full · " + O.pif.amount;
+
+  const PLANS = {
+    pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
+    plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
+    clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" }
+  };
+
+  const show = Array.isArray(BUYER.show) && BUYER.show.length ? BUYER.show : ["pif","plan","clarity"];
+  const NODE = { pif: el("planPif"), plan: el("planPlan"), clarity: el("planClarity") };
+  const host = el("planPif").parentNode;
+  Object.keys(NODE).forEach(function(k){ if (show.indexOf(k) === -1) NODE[k].remove(); });
+  show.forEach(function(k){ if (NODE[k] && NODE[k].parentNode) host.appendChild(NODE[k]); });
+  if (NODE.clarity && NODE.clarity.parentNode) NODE.clarity.hidden = false;
+
+  if (CUSTOM_OFFER) {
+    const c = el("planCustom");
+    c.hidden = false; host.insertBefore(c, host.querySelector(".plan:not(#planCustom)"));
+    el("customBadge").textContent = CUSTOM_OFFER.badge || "Your offer";
+    el("customName").textContent  = CUSTOM_OFFER.name || "";
+    el("customNote").textContent  = CUSTOM_OFFER.note || "";
+    el("customAmt").textContent   = CUSTOM_OFFER.amount || "";
+    el("customUnit").textContent  = CUSTOM_OFFER.unit || "";
+    PLANS.custom = { name:CUSTOM_OFFER.name, amt:CUSTOM_OFFER.amount, sub:CUSTOM_OFFER.note,
+                     url:CUSTOM_OFFER.checkout, warn:CUSTOM_OFFER.warn || "" };
+    el("planPif") && el("planPif").classList.remove("plan--best");
+    const b = el("pifBadge"); if (b) b.remove();
+  }
+
+  /* ---------- docs ---------- */
+  function openSheet(d){ if (typeof d.showModal === "function") d.showModal(); else d.setAttribute("open",""); }
+  function closeSheet(d){ if (typeof d.close === "function") d.close(); else d.removeAttribute("open"); }
+
+  const currSheet = el("currSheet");
+  el("currBtn").addEventListener("click", function(e){ e.preventDefault(); event("curriculum_opened"); openSheet(currSheet); });
+  el("currClose").addEventListener("click", function(){ closeSheet(currSheet); });
+  currSheet.addEventListener("click", function(e){ if(e.target===currSheet) closeSheet(currSheet); });
+
+  const roadSheet = el("roadmapSheet");
+  el("roadmapBtn").addEventListener("click", function(e){ e.preventDefault(); event("roadmap_opened"); openSheet(roadSheet); });
+  el("roadmapClose").addEventListener("click", function(){ closeSheet(roadSheet); });
+  roadSheet.addEventListener("click", function(e){ if(e.target===roadSheet) closeSheet(roadSheet); });
+
+  const tosSheet = el("tosSheet");
+  function openTos(){ event("terms_opened",{linkLabel:TERMS_VERSION,linkUrl:TERMS_URL}); openSheet(tosSheet); }
+  el("tosBtn").addEventListener("click", openTos);
+  el("sheetTerms").addEventListener("click", function(e){ e.preventDefault(); openTos(); });
+  el("tosClose").addEventListener("click", function(){ closeSheet(tosSheet); });
+  tosSheet.addEventListener("click", function(e){ if(e.target===tosSheet) closeSheet(tosSheet); });
+
+  const splitit = el("splititSheet");
+  el("splititMoreBtn").addEventListener("click", function(e){ e.preventDefault(); event("splitit_detail_opened"); openSheet(splitit); });
+  el("splititClose").addEventListener("click", function(){ closeSheet(splitit); });
+  splitit.addEventListener("click", function(e){ if(e.target===splitit) closeSheet(splitit); });
+
+  /* ---------- reviews ---------- */
+  const rm = el("reviewsMore");
+  if (rm) {
+    rm.addEventListener("toggle", function(){
+      if (rm.open) event("reviews_expanded");
+    });
+  }
+
+  /* ---------- sticky cta hide near footer ---------- */
+  const cta = el("stickyCta");
+  const foot = document.querySelector(".foot");
+  function updateCta(){
+    if (!foot || !cta) return;
+    const r = foot.getBoundingClientRect();
+    const viewportH = window.innerHeight || document.documentElement.clientHeight;
+    cta.style.opacity = (r.top < viewportH - 60) ? "0" : "1";
+    cta.style.pointerEvents = (r.top < viewportH - 60) ? "none" : "auto";
+  }
+  updateCta();
+  window.addEventListener("scroll", updateCta, { passive:true });
+  window.addEventListener("resize", updateCta);
+
+
+  /* ---------- resources (stay on page) ---------- */
+  const mediaSheet = el("mediaSheet");
+  const mediaBody = el("mediaBody");
+  const mediaTitle = el("mediaTitle");
+  let mediaExpanded = false;
+  function clearMedia(){
+    mediaBody.innerHTML = "";
+    mediaExpanded = false;
+    mediaSheet.style.width = "";
+    mediaSheet.style.maxWidth = "";
+    mediaSheet.style.height = "";
+    mediaSheet.style.maxHeight = "";
+  }
+  function openMedia(kind, payload, title){
+    clearMedia();
+    mediaTitle.textContent = title || "Resource";
+    mediaSheet.classList.toggle("media-sheet--wide", kind === "img" || kind === "doc");
+    if (kind === "yt") {
+      const f = document.createElement("iframe");
+      f.className = "media-frame";
+      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      f.setAttribute("allowfullscreen", "");
+      f.setAttribute("playsinline", "");
+      f.src = "https://www.youtube-nocookie.com/embed/" + payload + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+      mediaBody.appendChild(f);
+    } else if (kind === "img") {
+      const wrap = document.createElement("div");
+      wrap.className = "media-scroll";
+      wrap.id = "mediaScroll";
+      const img = document.createElement("img");
+      img.src = payload;
+      img.alt = title || "Resource";
+      img.loading = "eager";
+      wrap.appendChild(img);
+      mediaBody.appendChild(wrap);
+    } else if (kind === "video") {
+      const wrap = document.createElement("div");
+      wrap.className = "media-scroll";
+      wrap.style.background = "#000";
+      const v = document.createElement("video");
+      v.className = "media-frame";
+      v.controls = true;
+      v.setAttribute("playsinline", "");
+      v.setAttribute("preload", "metadata");
+      v.src = payload;
+      v.autoplay = true;
+      wrap.appendChild(v);
+      mediaBody.appendChild(wrap);
+    } else if (kind === "site") {
+      const wrap = document.createElement("div");
+      wrap.style.cssText = "padding:22px 20px;background:#fff;color:#17243b;font-size:15px;line-height:1.55";
+      wrap.innerHTML = "<p style=\"margin:0 0 12px;font-weight:800;color:#0a1628\">High Ticket Sales Academy</p><p style=\"margin:0 0 14px;color:#54637a\">That site blocks in-page embeds (same as Trustpilot). The videos and scrollable snapshots above cover the proof you need without leaving this page.</p><p style=\"margin:0;padding:12px 14px;border-radius:10px;background:#f3f6f9;font-weight:700;word-break:break-all\">" + payload + "</p>";
+      mediaBody.appendChild(wrap);
+    } else {
+      const f = document.createElement("iframe");
+      f.className = "media-frame media-frame--doc";
+      f.title = title || "Resource";
+      f.src = payload;
+      mediaBody.appendChild(f);
+    }
+    event("resource_opened", { linkLabel: title || kind, linkUrl: payload });
+    openSheet(mediaSheet);
+  }
+  document.querySelectorAll(".res-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      const kind = btn.dataset.media;
+      if (kind === "yt") openMedia("yt", btn.dataset.id, btn.dataset.title);
+      else if (kind === "img") openMedia("img", btn.dataset.src, btn.dataset.title);
+      else if (kind === "video") openMedia("video", btn.dataset.src, btn.dataset.title);
+      else if (kind === "site") openMedia("site", btn.dataset.url, btn.dataset.title);
+      else openMedia("doc", btn.dataset.url, btn.dataset.title);
+    });
+  });
+  const resTab = el("resTab");
+  if (resTab) resTab.addEventListener("toggle", function(){ if (resTab.open) event("resources_expanded"); });
+  el("mediaClose").addEventListener("click", function(){ clearMedia(); closeSheet(mediaSheet); });
+  mediaSheet.addEventListener("click", function(e){ if(e.target===mediaSheet){ clearMedia(); closeSheet(mediaSheet); } });
+  el("mediaExpand").addEventListener("click", function(){
+    mediaExpanded = !mediaExpanded;
+    const sc = mediaBody.querySelector(".media-scroll");
+    const fr = mediaBody.querySelector("iframe");
+    if (mediaExpanded) {
+      mediaSheet.style.width = "min(96vw, 1100px)";
+      mediaSheet.style.maxHeight = "96dvh";
+      mediaSheet.style.height = "96dvh";
+      if (fr) { fr.style.minHeight = "80dvh"; fr.style.height = "80dvh"; }
+      if (sc) { sc.style.maxHeight = "80dvh"; }
+      el("mediaExpand").textContent = "Smaller";
+    } else {
+      mediaSheet.style.width = "";
+      mediaSheet.style.maxHeight = "";
+      mediaSheet.style.height = "";
+      if (fr) { fr.style.minHeight = ""; fr.style.height = ""; }
+      if (sc) { sc.style.maxHeight = ""; }
+      el("mediaExpand").textContent = "Larger";
+    }
   }
 
   INCLUDED.forEach(function(t){const li=document.createElement("li");li.textContent=t;el("incList").appendChild(li);});
