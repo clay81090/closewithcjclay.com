@@ -14,7 +14,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://closewithcjclay.com/r/og-precall.jpg">
-<title>Before Our Call | CJ Clay · HTSA</title>
+<title>Before Our Call — Nicolette | CJ Clay · HTSA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -117,13 +117,31 @@ a{color:inherit}
 .legend-dot--later{background:#e4ece7;box-shadow:inset 0 0 0 1px #cad8cf}
 .time-summary{margin-bottom:14px;padding:11px 14px;border:1px solid rgba(0,201,122,.22);border-radius:10px;
   background:rgba(97,227,139,.1);color:var(--navy);font-size:14px;font-weight:700}
-.life-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:13px}
-.life-two span{padding:12px 10px;border:1px solid rgba(255,255,255,.12);border-radius:10px;
-  background:rgba(255,255,255,.06);color:var(--white);font-size:12px;font-weight:700;text-align:center}
-.life-two b{display:block;margin-bottom:3px;color:var(--green);font-size:19px;line-height:1.15}
+.life-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:13px}
+.life-three span{padding:12px 8px;border:1px solid rgba(255,255,255,.12);border-radius:10px;
+  background:rgba(255,255,255,.06);color:var(--white);font-size:11px;font-weight:700;text-align:center;line-height:1.35}
+.life-three b{display:block;margin-bottom:3px;color:var(--green);font-size:18px;line-height:1.15}
 .life-excerpt{margin-top:14px;padding:20px;border-radius:15px;background:var(--navy);
   color:rgba(255,255,255,.8);font-size:15px;line-height:1.65}
 .life-excerpt strong{color:var(--green)}
+.cj-quote{position:relative;margin-top:14px;padding:32px 22px 26px;border-radius:15px;
+  background:#fff;border:1px solid rgba(227,160,8,.55);box-shadow:0 12px 32px rgba(10,22,40,.08);text-align:center}
+.cj-quote::before{content:"\201C";position:absolute;top:4px;left:50%;transform:translateX(-50%);
+  font-family:"Playfair Display",serif;font-size:56px;line-height:1;color:var(--gold);opacity:.42}
+.cj-quote-kicker{display:block;margin-top:24px;color:var(--gold);font-size:11px;font-weight:800;
+  letter-spacing:.2em;text-transform:uppercase}
+.cj-quote blockquote{margin:12px auto 0;max-width:34rem;color:var(--navy);
+  font-family:"Playfair Display",serif;font-size:16.5px;line-height:1.55;text-align:center}
+.cj-quote blockquote{text-align:center}
+.cj-quote blockquote p{margin:0;text-align:center}
+.cj-quote blockquote p + p{margin-top:12px}
+.cj-quote blockquote .lede{font-size:21px;line-height:1.3;font-weight:700}
+.cj-quote blockquote .quote-beat{max-width:32rem;margin-left:auto;margin-right:auto;line-height:1.55}
+.cj-quote blockquote .quote-beat + .quote-beat{margin-top:1.5em}
+.cj-quote-attr{margin-top:18px;color:var(--muted);font-size:12px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase}
+.cj-quote-attr::before{content:"";display:block;width:40px;height:2px;margin:0 auto 12px;
+  border-radius:2px;background:var(--green-strong)}
 
 /* ---------- "more" disclosure ---------- */
 .more{background:var(--blue-light)}
@@ -197,6 +215,55 @@ details[open] .chev{transform:rotate(180deg)}
 .footer-copy{padding:11px 0 13px;border-top:1px solid rgba(255,255,255,.07);
   color:rgba(255,255,255,.28);font-size:11px;text-align:center}
 
+.cj-resources-kicker{margin:0 0 12px;color:var(--green);font-size:10.5px;font-weight:700;
+  letter-spacing:1.4px;text-transform:uppercase}
+.proof-squares{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 12px}
+.proof-square{display:flex;flex-direction:column;min-height:100%;overflow:hidden;border:2px solid #f59e0b;
+  border-radius:14px;background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);
+  box-shadow:0 8px 20px rgba(10,22,40,.06)}
+.proof-square-site{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  text-decoration:none;color:#fff;background:radial-gradient(circle at 80% 20%,rgba(97,227,139,.22),transparent 16rem),
+  linear-gradient(145deg,#0a1628,#152a46)}
+.proof-square-site-kicker{color:#61e38b;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.proof-square-site-name{font-family:"Playfair Display",serif;font-size:18px;line-height:1.2;text-align:center}
+.proof-square-site-url{color:rgba(255,255,255,.72);font-size:12px;font-weight:700}
+.proof-square-copy{padding:12px 13px 10px}
+.proof-square-kicker{margin-bottom:5px;color:#b45309;font-size:10px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase}
+.proof-square h3{margin:0 0 6px;color:var(--navy);font-size:15px;line-height:1.3}
+.proof-square p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}
+.proof-square-media{width:100%;aspect-ratio:16/9;border:0;background:#0a1628}
+.proof-square-cta{display:block;margin:0 13px 13px;padding:10px 12px;border-radius:9px;background:var(--navy);
+  color:#fff;font-size:12px;font-weight:700;text-align:center;text-decoration:none}
+.precall-trust-bar{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin:0 0 10px;
+  padding:16px 18px;border:2px solid var(--green);border-radius:12px;
+  background:linear-gradient(145deg,#0a1628,#163056);color:#d7dee8;font-size:16px;font-weight:700;
+  letter-spacing:.02em;text-align:center;text-decoration:none;box-shadow:0 8px 22px rgba(10,22,40,.16)}
+.precall-trust-bar:hover{color:#fff;border-color:#61e38b}
+.precall-trust-stars{color:#f5c518;font-size:22px;letter-spacing:3px;line-height:1;
+  text-shadow:0 1px 2px rgba(0,0,0,.35),0 0 10px rgba(245,197,24,.35)}
+.precall-link-row{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 8px;padding:13px 16px;
+  border:2px solid rgba(0,201,122,.35);border-radius:12px;
+  background:linear-gradient(135deg,rgba(97,227,139,.1),#edf5ff);color:var(--navy);font-size:15px;font-weight:800;
+  text-align:center;text-decoration:none;box-shadow:0 0 0 3px rgba(0,201,122,.08)}
+.precall-link-row:hover{border-color:var(--green);background:rgba(97,227,139,.16)}
+.precall-more{margin:0 0 8px;border:2px solid rgba(10,22,40,.12);border-radius:12px;background:#f7f9fc}
+.precall-more>summary{cursor:pointer;list-style:none;padding:13px 16px;color:var(--navy);font-size:15px;
+  font-weight:800;text-align:center}
+.precall-more>summary::-webkit-details-marker{display:none}
+.precall-more>summary::after{content:" ▾";color:var(--muted);font-weight:700}
+.precall-more[open]>summary::after{content:" ▴"}
+.precall-more-list{display:grid;gap:8px;padding:0 12px 12px}
+.precall-more-list .precall-link-row{margin:0}
+.cj-resource-card-title[hidden]{display:none}
+.book-link{display:block;width:min(50%,380px);margin:12px auto 0;overflow:hidden;border:1px solid #d7dee8;
+  border-radius:12px;background:#0a1628;box-shadow:0 8px 18px rgba(10,22,40,.1);text-decoration:none}
+.book-link img{display:block;width:100%;height:auto;max-height:120px;object-fit:cover;object-position:center}
+.book-link:hover{outline:2px solid rgba(97,227,139,.4);outline-offset:2px}
+.book-link-cap{padding:8px 12px;background:#0a1628;color:rgba(255,255,255,.85);font-size:12px;
+  font-weight:700;text-align:center}
+.book-link-cap span{color:var(--green)}
+
 @media (max-width:680px){
   .page{width:100%;margin:0;border:0;border-radius:0}
   .brand-bar{padding:9px 14px;gap:10px}
@@ -208,13 +275,17 @@ details[open] .chev{transform:rotate(180deg)}
   .hero-actions .cta-button{width:100%;max-width:400px}
   .age-control{align-items:flex-start;flex-direction:column;gap:10px}
   .year-grid{gap:3px}
-  .life-two{grid-template-columns:1fr}
+  .life-three{grid-template-columns:1fr}
+  .cj-quote{padding:28px 16px 22px}
+  .cj-quote blockquote .lede{font-size:18px}
   .more-summary{padding:13px 14px}
+  .proof-squares{grid-template-columns:1fr}
   .footer{padding:20px 16px 0}
   .footer-top{grid-template-columns:1fr;gap:18px;padding-bottom:18px}
   .bcard{gap:13px;padding:14px}
   .bcard-photo{width:70px;height:70px}
   .footer-reviews{justify-content:center;text-align:center}
+  .book-link{width:min(72%,320px)}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cta-button,.chev{transition:none}}
 </style>
@@ -270,11 +341,86 @@ details[open] .chev{transform:rotate(180deg)}
     </div>
   </section>
 
+  <section class="section more" aria-labelledby="proofTitle">
+    <div class="cj-resources-kicker">If you want to check out more...</div>
+    <h2 id="proofTitle">Employer proof, the website, and Brianna from Tony Robbins.</h2>
+    <p class="section-lede">Taylor Conroy, the HTSA website, then Brianna. That is enough context to walk in ready.</p>
+    <div class="proof-squares">
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">Employer-side proof</div>
+          <h3>Taylor Conroy</h3>
+          <p>A TEDx coach who hires HTSA members. Hear why he trusts this certification.</p>
+        </div>
+        <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/bd65afldLmE" title="Taylor Conroy explains why he hires from HTSA" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <a class="proof-square-cta cj-resource-card" href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" target="_blank" rel="noopener noreferrer"><span class="cj-resource-card-title" hidden>Taylor Conroy (TEDx Coach)</span>Watch on YouTube</a>
+      </article>
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">More stories and outcomes</div>
+          <h3>HTSA Website</h3>
+          <p>The main site, with more member stories, screenshots, and how the program is presented.</p>
+        </div>
+        <a class="proof-square-media proof-square-site cj-resource-card" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">
+          <span class="cj-resource-card-title" hidden>HTSA Website</span>
+          <span class="proof-square-site-kicker">Preview</span>
+          <span class="proof-square-site-name">High Ticket Sales Academy</span>
+          <span class="proof-square-site-url">highticketsalesacademy.com</span>
+        </a>
+        <a class="proof-square-cta cj-resource-card" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer"><span class="cj-resource-card-title" hidden>HTSA Website</span>Open the website</a>
+      </article>
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">Member from a big-name team</div>
+          <h3>Brianna</h3>
+          <p>Tony Robbins team background. Hear her HTSA experience in her own words.</p>
+        </div>
+        <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/TWacdj9x45o" title="Brianna from the Tony Robbins team on HTSA" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <a class="proof-square-cta cj-resource-card" href="https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8" target="_blank" rel="noopener noreferrer"><span class="cj-resource-card-title" hidden>Brianna</span>Watch on YouTube</a>
+      </article>
+    </div>
+    <a class="precall-trust-bar cj-resource-card" href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer" aria-label="Read HTSA reviews on Trustpilot, rated 4.9 stars out of 5">
+      <span class="cj-resource-card-title" hidden>Trustpilot</span>
+      <span class="precall-trust-stars" aria-hidden="true">★★★★★</span>
+      <span>Trustpilot Reviews, 4.9 out of 5</span>
+    </a>
+    <details class="precall-more">
+      <summary>Other resources</summary>
+      <div class="precall-more-list">
+        <a class="precall-link-row cj-resource-card" href="https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib" target="_blank" rel="noopener noreferrer">
+          <span class="cj-resource-card-title" hidden>Josh / Alex Hormozi background</span>
+          <span>Josh / Alex Hormozi background</span>
+        </a>
+        <a class="precall-link-row cj-resource-card" href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" target="_blank" rel="noopener noreferrer">
+          <span class="cj-resource-card-title" hidden>Cassie, single mom success story</span>
+          <span>Cassie, single mom success story</span>
+        </a>
+        <a class="precall-link-row cj-resource-card" href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" target="_blank" rel="noopener noreferrer">
+          <span class="cj-resource-card-title" hidden>Top 20 Companies in High Ticket Sales</span>
+          <span>Top 20 Companies in High Ticket Sales</span>
+        </a>
+        <a class="precall-link-row cj-resource-card" href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" target="_blank" rel="noopener noreferrer">
+          <span class="cj-resource-card-title" hidden>Dana, unsolicited personal review</span>
+          <span>Dana, unsolicited personal review</span>
+        </a>
+        <a class="precall-link-row cj-resource-card" href="https://drive.google.com/file/d/1Zo2ID5sdF8ZYP8rZD_fisNgj-eNpuQxM/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <span class="cj-resource-card-title" hidden>Taylor Decourcey, newer member perspective</span>
+          <span>Taylor Decourcey, newer member perspective</span>
+        </a>
+      </div>
+    </details>
+    <a class="book-link cj-resource-card" href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer" aria-label="Chad Aleo's book on Amazon, The Book on High Ticket Sales">
+      <span class="cj-resource-card-title" hidden>Chad Aleo book on Amazon</span>
+      <img src="/media/chad-aleo-book-banner.png" alt="The Book on High Ticket Sales by Chad Aleo, available on Amazon" width="732" height="274" loading="lazy">
+      <div class="book-link-cap">Chad's book · <span>Available on Amazon →</span></div>
+    </a>
+  </section>
+
   <section class="section lifespan">
     <div class="kicker">The math nobody does</div>
     <h2 id="lifeTitle">Nobody wastes a year on purpose.</h2>
     <p class="section-lede">They just postpone for a month, twelve times. Put your age in and find the block
-      you're standing on — takes 10 seconds.</p>
+      you're standing on. Takes 10 seconds.</p>
 
     <div class="age-control">
       <div class="age-field">
@@ -295,72 +441,23 @@ details[open] .chev{transform:rotate(180deg)}
     <p class="time-summary" id="timeSummary" aria-live="polite"></p>
 
     <div class="life-excerpt">
-      <div class="life-two">
-        <span><b id="sleepYears">0 years</b>asleep</span>
-        <span><b id="awakeYears">0 years</b>awake, and yours to spend</span>
+      <div class="life-three">
+        <span><b id="sleepYears">0 years</b>~1/3 asleep</span>
+        <span><b id="workYears">0 years</b>~1/3 working</span>
+        <span><b id="liveYears">0 years</b>~1/3 yours to live</span>
       </div>
-      <p>Most people don't need a new plan. They need the next twelve months to look different from the last
-        twelve. <strong>That's the whole conversation we're having.</strong></p>
+      <p>That's the split. A third asleep, a third at work, a third that's actually yours. The current plan got you exactly here. Time to build the job around your life, not the other way around.</p>
     </div>
-  </section>
 
-  <section class="section more">
-    <details id="moreDetails">
-      <summary class="more-summary">
-        <span>
-          <span class="more-summary-title">More, if you want it</span>
-          <span class="more-summary-sub">An employer, a member, and our reviews. None of it required.</span>
-        </span>
-        <span class="chev" aria-hidden="true">⌄</span>
-      </summary>
-
-      <div class="more-grid">
-        <div class="proof-card">
-          <div class="proof-head">
-            <div class="proof-tag">Someone who hires our people</div>
-            <div class="proof-name">Taylor Conroy</div>
-            <p class="proof-desc">A TEDx coach who hires HTSA members. Why he trusts the certification.</p>
-          </div>
-          <button class="yt" type="button" data-yt="bd65afldLmE" aria-label="Play Taylor Conroy video">
-            <img src="https://i.ytimg.com/vi/bd65afldLmE/hqdefault.jpg" alt="" loading="lazy">
-            <span class="yt-tri" aria-hidden="true"></span>
-          </button>
-        </div>
-
-        <div class="proof-card">
-          <div class="proof-head">
-            <div class="proof-tag">A member, in her own words</div>
-            <div class="proof-name">Brianna</div>
-            <p class="proof-desc">Came from the Tony Robbins team. Her experience going through HTSA.</p>
-          </div>
-          <button class="yt" type="button" data-yt="TWacdj9x45o" aria-label="Play Brianna video">
-            <img src="https://i.ytimg.com/vi/TWacdj9x45o/hqdefault.jpg" alt="" loading="lazy">
-            <span class="yt-tri" aria-hidden="true"></span>
-          </button>
-        </div>
-
-        <a class="link-row" href="https://www.trustpilot.com/review/highticketsalesacademy.com"
-           target="_blank" rel="noopener noreferrer">
-          <span style="color:var(--navy);font-size:15px;font-weight:700">★★★★★ Trustpilot reviews
-            <span style="display:block">4.9 out of 5, written by members</span></span>
-          <span class="chev" aria-hidden="true">⌄</span>
-        </a>
-
-        <a class="link-row" href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf"
-           target="_blank" rel="noopener noreferrer">
-          <span style="color:var(--navy);font-size:15px;font-weight:700">Top 20 companies in high ticket sales
-            <span style="display:block">Independent industry list (PDF)</span></span>
-          <span class="chev" aria-hidden="true">⌄</span>
-        </a>
-
-        <a class="link-row" href="https://www.highticketsalesacademy.com"
-           target="_blank" rel="noopener noreferrer">
-          <span style="color:var(--navy);font-size:15px;font-weight:700">The HTSA website
-            <span style="display:block">Curriculum, members, and how placement works</span></span>
-          <span class="chev" aria-hidden="true">⌄</span>
-        </a>
-      </div>
-    </details>
+    <div class="cj-quote">
+      <div class="cj-quote-kicker">One honest thought</div>
+      <blockquote>
+        <p class="lede">If a pipe burst in your living room, you would not wait six months to call a plumber.</p>
+        <p class="quote-beat">Waiting never makes a leak cheaper, it only makes it more expensive, and your income works exactly the same way. Every day you leave it unfixed, it quietly keeps costing you.</p>
+        <p class="quote-beat">Under 40 percent you are guessing, but past 70 percent you are no longer deciding, you are delaying. You do not need certainty. You only need to move.</p>
+      </blockquote>
+      <div class="cj-quote-attr">CJ Clay · Career Transformation Coach</div>
+    </div>
   </section>
 
   <section class="close-section">
@@ -419,7 +516,7 @@ details[open] .chev{transform:rotate(180deg)}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   Set booked:false for someone who still needs to schedule.
+   booked:true is the default. Only set false if CJ says they still need to schedule.
    ============================================================ */
 const GUEST = {
   firstName:  "Nicolette",
@@ -428,8 +525,8 @@ const GUEST = {
   phone:      "+19293002515",
   slug:       "nicolette_georgi",
   booked:     true,
-  callLabel:  "Monday, Aug 31 · 12:00 PM EST",
-  confirmDay: "Monday",
+  callLabel:  "Tuesday, Sept 8 · 6:00 PM ET",
+  confirmDay: "Tuesday",
   bookingUrl: "https://meetings.hubspot.com/charles660/cj"
 };
 const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
@@ -552,8 +649,10 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     });
     el("ageReadout").innerHTML = "At <strong>" + age + "</strong>, you're standing on block <strong>" + (age + 1) + "</strong>.";
     el("timeSummary").innerHTML = "<strong>" + remaining + " blocks</strong> left on this model. <strong>" + before70 + "</strong> of them come before 70.";
-    el("sleepYears").textContent = fmt(remaining / 3) + " years";
-    el("awakeYears").textContent = fmt(remaining * 2 / 3) + " years";
+    var third = remaining / 3;
+    el("sleepYears").textContent = fmt(third) + " years";
+    el("workYears").textContent = fmt(third) + " years";
+    el("liveYears").textContent = fmt(third) + " years";
   }
   ageInput.addEventListener("input", render);
   ageInput.addEventListener("change", function () {
@@ -591,8 +690,18 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     });
   });
   const moreEl = el("moreDetails");
-  moreEl.addEventListener("toggle", function () {
+  if (moreEl) moreEl.addEventListener("toggle", function () {
     if (moreEl.open) postEvent("link_click", { linkLabel: "Opened 'More if you want it'", linkUrl: "" });
+  }, { once: true });
+  document.querySelectorAll("a.cj-resource-card").forEach(function (a) {
+    a.addEventListener("click", function () {
+      var title = (a.querySelector(".cj-resource-card-title") || {}).textContent || (a.textContent || "").trim();
+      postEvent("link_click", { linkLabel: title.slice(0, 80), linkUrl: a.href });
+    });
+  });
+  const extra = document.querySelector(".precall-more");
+  if (extra) extra.addEventListener("toggle", function () {
+    if (extra.open) postEvent("link_click", { linkLabel: "Opened Other resources", linkUrl: "" });
   }, { once: true });
 
   /* ---------- click-to-load YouTube ---------- */
