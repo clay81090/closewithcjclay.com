@@ -10,13 +10,35 @@ Rule: major layout / structure changes only. Tiny wording tweaks skipped.
 
 ---
 
+## For new members (current defaults)
+
+Use these two links for every regular prospect. Do not mix in special-offer pages.
+
+| When | What | Live template | Example |
+|---|---|---|---|
+| **⭐ Before the call** | Pre-call resource page | `r/_TEMPLATE-precall.html` (= **V16**) | https://closewithcjclay.com/r/sean_bowers/ |
+| **⭐ After the call / on the close** | Enrollment page | `templates/_TEMPLATE-close.html` (= **V8 ultimate**) | https://closewithcjclay.com/htsa-enrollment-sean-bowers.html · https://closewithcjclay.com/htsa-enrollment-shay-wedeking.html |
+
+**Copy pattern for CJ notes:**
+
+```
+For new members:
+Pre-Call Link:
+https://closewithcjclay.com/r/<first_last>/
+
+Post-Call Enrollment Link:
+https://closewithcjclay.com/htsa-enrollment-<first>-<last>.html
+```
+
+---
+
 ## Priority order (most important first)
 
 1. Live Call Console (on-call HTML)
 2. God Script
 3. Long enrollment (regular invoice style)
-4. Short close pages
-5. Pre-call resource TEMPLATES
+4. Short close pages (**⭐ V8 ultimate**)
+5. Pre-call resource TEMPLATES (**⭐ V16**)
 6. Special offer / self-enroll
 7. 30 day game plan
 8. Meet-CJ + offer booking
@@ -127,10 +149,10 @@ Different product from long invoices. Built from `templates/_TEMPLATE-close.html
 | V5 | `b583eba` | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v5.html) | Game plan first, pricing last in dropdown |
 | V6 | `c4d7b6c` | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v6.html) | Amy-style 2-way enroll steps; remove need-from-you |
 | V7 | `558c1dc` | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v7.html) | Reorder getting → HTSA needs → pricing → next steps (overreach) |
-| **⭐ V8 ultimate** | Sept 7, 2026 · Shay build | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8-ultimate.html) | Continuous single page. Value → guarantee → price. Green outlined welcome + green outlined guarantee (personalized "Confirmed for X's enrollment"). Sticky bottom CTA follows scroll. Terms of Service, 30 day plan, curriculum, and Splitit "how it works" all open as **in-page popups** (no navigation away). Terms popup has lifetime/coaching-times/AI-$39/refund parts **bolded**. Payment confirm sheet holds the agreement checkbox and records to the sheet at moment of consent. CJ Reviews (Janaye + See more) before footer. No "if we are still on the phone" contradiction box. AI price $35 → $39/month. |
+| **⭐ V8 ultimate** | Sept 7–8, 2026 · Shay + Sean | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8-ultimate.html) | **Current default for all regular enrollments.** Continuous single page. Value → guarantee → price. Green outlined welcome + green outlined guarantee. Sticky bottom CTA. Terms / 30 day plan / curriculum / Splitit all open as **in-page popups**. Terms popup has lifetime / coaching times / AI $39 / refund parts **bolded**. Payment confirm sheet records agreement to the Google sheet. CJ Reviews before footer. Splitit lives under PIF as a collapsed "More payment options" down-arrow. ClarityPay card shows **0% interest · 0% APR**. `show` list controls which options appear (Shay = PIF + 4-pay; Sean = PIF + 4-pay + ClarityPay). |
 
 Live template source (editable for future): `templates/_TEMPLATE-close.html`  
-Example live page: https://closewithcjclay.com/htsa-enrollment-shay-wedeking.html
+**⭐ Live examples:** https://closewithcjclay.com/htsa-enrollment-shay-wedeking.html · https://closewithcjclay.com/htsa-enrollment-sean-bowers.html
 
 ---
 
@@ -157,10 +179,12 @@ Example live page: https://closewithcjclay.com/htsa-enrollment-shay-wedeking.htm
 | V12 | `9af6b39` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v12.html) | Mark layout shape (first Lynda-ship era) |
 | V13 | `7c67483` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v13.html) | Meet-CJ 3-up resources layout |
 | V14 | `62143be` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v14.html) | DIY-groups framing + Book Appointment (Gracie-era) |
-| **⭐ V15** | Liliana layout | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v15.html) | Resources under Aug 18 video, Chad book after Other resources, lifespan at bottom |
+| V15 | Liliana layout | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v15.html) | Resources under Aug 18 video, Chad book after Other resources, lifespan at bottom |
+| **⭐ V16** | Sept 8, 2026 · Sean Bowers confirmed | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v16.html) | **Current default for all pre-call links.** Same layout CJ confirmed on Sean's live page. Aug 18 placement clip, resources, CJ Reviews, Chad book, Trustpilot, confirm button. |
 
-**Live template for new people going forward:** `r/_TEMPLATE-precall.html` (= V15)  
-Do not edit old `/r/<person>/` pages to “test” a layout. Copy the template era you like into a new page.
+**Live template for new people going forward:** `r/_TEMPLATE-precall.html` (= **⭐ V16**)  
+**⭐ Live example:** https://closewithcjclay.com/r/sean_bowers/  
+Do not edit old `/r/<person>/` pages to “test” a layout. Copy the template, then edit only the `GUEST` block.
 
 Related tools:
 
