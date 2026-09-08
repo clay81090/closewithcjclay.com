@@ -1514,70 +1514,6 @@
     box-shadow: 0 0 0 1.5px rgba(226, 178, 39, 0.55), 0 4px 14px rgba(10, 22, 40, 0.06);
   }
 
-  .gr-referral {
-    margin: 0;
-    padding: 24px 36px 28px;
-    border-top: 1px solid var(--mid);
-    background: linear-gradient(135deg, #f0fdf7 0%, #e8f9f1 100%);
-  }
-  .gr-referral-kicker {
-    color: var(--green-dark);
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-  }
-  .gr-referral h3 {
-    margin: 6px 0 7px;
-    color: var(--navy);
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-  }
-  .gr-referral p {
-    margin: 0 0 14px;
-    color: var(--muted);
-    font-size: 13.5px;
-    line-height: 1.55;
-  }
-  .gr-referral-fields {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .gr-referral label {
-    display: block;
-    color: var(--navy);
-    font-size: 12px;
-    font-weight: 700;
-  }
-  .gr-referral input {
-    width: 100%;
-    min-height: 48px;
-    margin-top: 5px;
-    padding: 11px 12px;
-    border: 1px solid var(--mid);
-    border-radius: 9px;
-    background: #fff;
-    color: var(--text);
-    font: inherit;
-  }
-  .gr-referral button {
-    width: 100%;
-    min-height: 50px;
-    margin-top: 11px;
-    border: 0;
-    border-radius: 9px;
-    background: var(--navy);
-    color: #fff;
-    font: 700 14px 'DM Sans', sans-serif;
-    cursor: pointer;
-  }
-  .gr-referral button:disabled { cursor: not-allowed; opacity: .45; }
-  .gr-referral-note { margin-top: 9px !important; font-size: 12px !important; }
-  @media (max-width: 600px) {
-    .gr-referral { padding: 20px; }
-    .gr-referral-fields { grid-template-columns: 1fr; }
-  }
 
   .tos-full-tab-wrap {
     display: flex;
@@ -2045,62 +1981,6 @@
       </details>
     </div>
   </div>
-
-  <section class="gr-referral" aria-labelledby="grReferralTitle">
-    <div class="gr-referral-kicker">Referral bonus · $250 each</div>
-    <h3 id="grReferralTitle">Know someone else looking for a legitimate closing opportunity?</h3>
-    <p>Enter their first name and mobile number. Your text app opens with an introduction ready. Nothing sends until you press send.</p>
-    <div class="gr-referral-fields">
-      <label>First name
-        <input id="grRefName" type="text" autocomplete="off" placeholder="Their first name">
-      </label>
-      <label>Mobile number
-        <input id="grRefPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 123-4567">
-      </label>
-    </div>
-    <button id="grRefButton" type="button" disabled>Open the introduction text</button>
-    <p class="gr-referral-note" id="grRefNote">You receive $250 for each referral who enrolls.</p>
-  </section>
-
-
-<script>
-(function () {
-  var grRefName = document.getElementById("grRefName");
-  var grRefPhone = document.getElementById("grRefPhone");
-  var grRefButton = document.getElementById("grRefButton");
-  function referralDigits(value) {
-    return (value || "").replace(/\D/g, "");
-  }
-  function updateReferralButton() {
-    if (!grRefButton) return;
-    grRefButton.disabled = !(
-      grRefName &&
-      grRefName.value.trim() &&
-      grRefPhone &&
-      referralDigits(grRefPhone.value).length >= 10
-    );
-  }
-  if (grRefName) grRefName.addEventListener("input", updateReferralButton);
-  if (grRefPhone) grRefPhone.addEventListener("input", updateReferralButton);
-  if (grRefButton) {
-    grRefButton.addEventListener("click", function () {
-      var name = grRefName.value.trim();
-      var phone = referralDigits(grRefPhone.value);
-      if (!name || phone.length < 10) return;
-      var link = "https://closewithcjclay.com/meet-cj.html?ref=" + encodeURIComponent("Shay Wedeking");
-      var message =
-        "Hey " +
-        name +
-        ", I found a legitimate remote closing program that trains, certifies, and helps hand place closers into offers. I thought of you. Here is the page CJ sent me:\n\n" +
-        link;
-      var smsPhone = phone.length === 11 && phone.charAt(0) === "1" ? phone.slice(1) : phone;
-      window.location.href = "sms:+1" + smsPhone + "?&body=" + encodeURIComponent(message);
-    });
-  }
-})();
-</script>
-
-
 
 <!-- FOOTER -->
   <div style="background:var(--navy);border-top:3px solid var(--green);padding:28px 36px;page-break-inside:avoid;break-inside:avoid;">
