@@ -117,6 +117,24 @@ Full Amy-style invoices. All previews use **CJ Clay** placeholder info (your nam
 | V12 | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v12.html) | Blue Member Voices layout |
 | **⭐ V13** | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v13.html) | **Current long-invoice default.** Orange Performance Guarantee + blue Full Terms tab (in-page popup, Ok/Agree → Sheet), Splitit detail popup, green Welcome band, Step 1 = select from above, CJ Reviews after Next Steps (no referral). |
 
+### BLANK — come back later (do not build yet)
+
+**Status:** parked. Do **not** edit V13 / long enrollment pages for this until CJ describes the exact pass.
+
+**Goal (when ready):** keep **everything** on the old full enrollment page. Only change the **resources** section.
+
+**Look (layout reference):** [Liliana Colman pre-call](https://closewithcjclay.com/r/liliana_colman/)  
+Employer proof / website / Brianna 3-up, Trustpilot bar, then an **Other resources** dropdown list.
+
+**Behavior (interaction reference):** Michele + Sean short close pages (`All HTSA Resources`)  
+Dropdown / list items open **on this page** in a **scrollable window**. Videos and proof stay in-page. Do **not** send people off-page.
+
+**CJ notes when you return (fill in):**
+
+-
+-
+-
+
 ---
 
 ## 4. Short close pages (Aug 31+)
@@ -134,7 +152,7 @@ Different product from long invoices. Built from `templates/_TEMPLATE-close.html
 | V5 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v5.html) | Game plan first, pricing last in dropdown |
 | V6 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v6.html) | Amy-style 2-way enroll steps; remove need-from-you |
 | V7 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v7.html) | Reorder getting → HTSA needs → pricing → next steps (overreach) |
-| **⭐ V8** | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8.html) | **Current default for regular closes.** Continuous page, sticky CTA, in-page Terms / 30-day / curriculum popups, **All HTSA Resources** tab (in-page YouTube + Trustpilot/Canva scrollable snapshots), CJ Reviews, ClarityPay 0% badge. Splitit only when CJ asks (not default). |
+| **⭐ V8** | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8.html) | **Current default for regular closes.** Continuous page, sticky CTA, in-page Terms / 30-day / curriculum popups, **All HTSA Resources** tab (YouTube + Taylor Decourcey + Aug 18 clips, Trustpilot/Canva snapshots, Top 20 PDF, website), Member testimonials + More resources, CJ Reviews, ClarityPay 0% badge. Splitit only when CJ asks (not default). |
 
 Live template source: `templates/_TEMPLATE-close.html`
 
