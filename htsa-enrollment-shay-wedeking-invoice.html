@@ -679,6 +679,36 @@
   }
   .splitit-sheet-body .tos-ol li { margin-bottom: 8px; }
 
+
+  .tos-agree-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 0 12px;
+    padding: 12px 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(0,201,122,0.35);
+    cursor: pointer;
+  }
+  .tos-agree-row input {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    accent-color: #00c97a;
+  }
+  .tos-agree-row span {
+    font-size: 13px;
+    line-height: 1.45;
+    color: rgba(255,255,255,0.9);
+    font-weight: 600;
+  }
+  .splitit-sheet-gotit:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
   .splitit-sheet-gotit {
     width: 100%;
     border: none;
@@ -1618,7 +1648,7 @@
 </style>
 </head>
 <body>
-<!-- invoice-build:1788830556 -->
+<!-- invoice-build:1788830977 -->
 
 <div class="page">
 
@@ -2100,7 +2130,11 @@
       <p>Members will have lifetime access to the course content for their core product. The Member also receives free access to the Mastermind Community on Facebook, Live Group Coaching Calls via Zoom. 1-on-1 Coaching calls must be used within three months of the program start date unless otherwise approved by HTSA.</p>
     </div>
     <div class="splitit-sheet-foot">
-      <button type="button" class="splitit-sheet-gotit" id="tosSheetGotIt">Ok / Agree</button>
+      <label class="tos-agree-row" for="tosAgreeBox">
+        <input type="checkbox" id="tosAgreeBox">
+        <span>I agree to the Terms of Service from HTSA, and that I must meet the minimum requirements for my guarantee to remain in effect.</span>
+      </label>
+      <button type="button" class="splitit-sheet-gotit" id="tosSheetGotIt" disabled>Ok / Agree</button>
     </div>
   </div>
 </dialog>
@@ -2121,6 +2155,7 @@
   var sheet = document.getElementById("tosSheet");
   var openBtn = document.getElementById("tosMoreBtn");
   var agreeBtn = document.getElementById("tosSheetGotIt");
+  var agreeBox = document.getElementById("tosAgreeBox");
   if (!sheet || !openBtn) return;
 
   function canonicalUrl() {
@@ -2140,9 +2175,16 @@
     } catch (e) {}
   }
 
+  function syncAgreeButton() {
+    if (!agreeBtn || !agreeBox) return;
+    agreeBtn.disabled = !agreeBox.checked;
+    if (!agreeBox.checked) agreeBtn.textContent = "Ok / Agree";
+  }
+
   function openSheet() {
+    if (agreeBox) agreeBox.checked = false;
     if (agreeBtn) {
-      agreeBtn.disabled = false;
+      agreeBtn.disabled = true;
       agreeBtn.textContent = "Ok / Agree";
     }
     if (typeof sheet.showModal === "function") sheet.showModal();
@@ -2161,9 +2203,11 @@
 
   var closeBtn = document.getElementById("tosSheetClose");
   if (closeBtn) closeBtn.addEventListener("click", closeSheet);
+  if (agreeBox) agreeBox.addEventListener("change", syncAgreeButton);
 
   if (agreeBtn) {
     agreeBtn.addEventListener("click", function () {
+      if (!agreeBox || !agreeBox.checked) return;
       agreeBtn.disabled = true;
       agreeBtn.textContent = "Recording…";
       post({
@@ -2177,6 +2221,8 @@
         termsVersion: TERMS_VERSION,
         track: BUYER.track,
         offer: BUYER.offer,
+        agreedCheckbox: true,
+        agreementText: "I agree to the Terms of Service from HTSA, and that I must meet the minimum requirements for my guarantee to remain in effect.",
         userAgent: navigator.userAgent || "",
         timestamp: new Date().toISOString()
       });
