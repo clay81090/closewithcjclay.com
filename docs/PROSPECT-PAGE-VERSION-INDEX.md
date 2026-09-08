@@ -6,6 +6,8 @@ Every **Preview** link is a working archive on closewithcjclay.com. Archives are
 
 Rule: major layout / structure changes only. Tiny wording tweaks skipped.
 
+**⭐ = current default** (the one being sent right now). Any row with a ⭐ is the version being used live — everything else is history.
+
 ---
 
 ## Priority order (most important first)
@@ -36,7 +38,7 @@ Internal only. Not a prospect send link.
 | V1 | local original | [Open](https://closewithcjclay.com/archive/prospect-versions/on-call/console-v1-original.html) | Claude/Codex export backup (`htsa-live-call-console.original.html`) |
 | V2 | `aac5c1a` | [Open](https://closewithcjclay.com/archive/prospect-versions/on-call/console-v2-v4.html) | Dark UI / Career Launcher spine (file named v4) |
 | V3 | `e8f8fdd` / `45a2840` | [Open](https://closewithcjclay.com/archive/prospect-versions/on-call/console-v3-v5.html) | Codex merge: paper stage, sidebar intel, routes, objection loop, close sequence |
-| **V4 preferred** | Sep 4 track-lock | [Open](https://closewithcjclay.com/archive/prospect-versions/on-call/console-v4-v6.html) | Claude rebuild / simpler dark UI (file named v6). **Use this one.** |
+| **⭐ V4** | Sep 4 track-lock | [Open](https://closewithcjclay.com/archive/prospect-versions/on-call/console-v4-v6.html) | Claude rebuild / simpler dark UI (file named v6). **Use this one.** |
 
 Local file:// if needed:
 
@@ -61,7 +63,7 @@ Internal only.
 | V2 | Lab `_VERSIONS` | [Open](https://closewithcjclay.com/archive/prospect-versions/on-call/god-script-v2.html) | Evolution folder v2 |
 | V3 | Lab `_VERSIONS` | [Open](https://closewithcjclay.com/archive/prospect-versions/on-call/god-script-v3.html) | Evolution folder v3 |
 | V5a | Lab `_VERSIONS` | [Open](https://closewithcjclay.com/archive/prospect-versions/on-call/god-script-v5-lab.html) | Evolution folder v5 |
-| **V5b preferred** | Aug 11, 2026 | [Open](https://closewithcjclay.com/archive/prospect-versions/on-call/god-script-v5-canonical.html) | Product brain canonical (`CJ_AI_OS/.../brain/HTSA_GOD_SCRIPT_V5.html`) |
+| **⭐ V5b** | Aug 11, 2026 | [Open](https://closewithcjclay.com/archive/prospect-versions/on-call/god-script-v5-canonical.html) | Product brain canonical (`CJ_AI_OS/.../brain/HTSA_GOD_SCRIPT_V5.html`) |
 | V5c | site private | [Open](https://closewithcjclay.com/archive/prospect-versions/on-call/god-script-v5-site-private.html) | Sibling copy in site `private/` (diff before assuming identical to V5b) |
 
 No complete God Script **v6 HTML** found (build instructions only in CJ_AI_OS).
@@ -125,9 +127,10 @@ Different product from long invoices. Built from `templates/_TEMPLATE-close.html
 | V5 | `b583eba` | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v5.html) | Game plan first, pricing last in dropdown |
 | V6 | `c4d7b6c` | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v6.html) | Amy-style 2-way enroll steps; remove need-from-you |
 | V7 | `558c1dc` | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v7.html) | Reorder getting → HTSA needs → pricing → next steps (overreach) |
+| **⭐ V8 ultimate** | Sept 7, 2026 · Shay build | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8-ultimate.html) | Continuous single page. Value → guarantee → price. Green outlined welcome + green outlined guarantee (personalized "Confirmed for X's enrollment"). Sticky bottom CTA follows scroll. Terms of Service, 30 day plan, curriculum, and Splitit "how it works" all open as **in-page popups** (no navigation away). Terms popup has lifetime/coaching-times/AI-$39/refund parts **bolded**. Payment confirm sheet holds the agreement checkbox and records to the sheet at moment of consent. CJ Reviews (Janaye + See more) before footer. No "if we are still on the phone" contradiction box. AI price $35 → $39/month. |
 
 Live template source (editable for future): `templates/_TEMPLATE-close.html`  
-Example live page: https://closewithcjclay.com/htsa-enrollment-cj-clay.html
+Example live page: https://closewithcjclay.com/htsa-enrollment-shay-wedeking.html
 
 ---
 
@@ -154,7 +157,7 @@ Example live page: https://closewithcjclay.com/htsa-enrollment-cj-clay.html
 | V12 | `9af6b39` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v12.html) | Mark layout shape (first Lynda-ship era) |
 | V13 | `7c67483` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v13.html) | Meet-CJ 3-up resources layout |
 | V14 | `62143be` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v14.html) | DIY-groups framing + Book Appointment (Gracie-era) |
-| **V15 preferred** | Liliana layout | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v15.html) | Resources under Aug 18 video, Chad book after Other resources, lifespan at bottom |
+| **⭐ V15** | Liliana layout | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v15.html) | Resources under Aug 18 video, Chad book after Other resources, lifespan at bottom |
 
 **Live template for new people going forward:** `r/_TEMPLATE-precall.html` (= V15)  
 Do not edit old `/r/<person>/` pages to “test” a layout. Copy the template era you like into a new page.

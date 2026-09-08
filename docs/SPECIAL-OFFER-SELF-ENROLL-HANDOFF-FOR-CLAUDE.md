@@ -1,3 +1,15 @@
+# UPDATE FOR CLAUDE CODE (Sept 3 night)
+
+**Do not work inside the live Cursor repo.** Use the sealed sandbox:
+
+`/Users/charlesclay/Documents/SPECIAL-OFFER-CLAUDE-SANDBOX/`
+
+Read `CLAUDE_CODE_HARD_FENCE.md` there first. Edit only `WORK/special-offer.html`.
+Never touch `HTSA_LIVE_CALL_LAB`, `CJ_AI_OS`, or this live site from Claude Code.
+If a commit UI shows +100k lines, discard it.
+
+---
+
 # HANDOFF FOR CLAUDE (Copilot / Claude v3) — Special offer self-enroll page
 
 **Date written:** Sept 3, 2026  
