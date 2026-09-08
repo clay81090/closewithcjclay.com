@@ -17,7 +17,8 @@ Use these two links for every regular prospect. Do not mix in special-offer page
 | When | What | Live template | Example |
 |---|---|---|---|
 | **⭐ Before the call** | Pre-call resource page | `r/_TEMPLATE-precall.html` (= **V16**) | https://closewithcjclay.com/r/sean_bowers/ |
-| **⭐ After the call / on the close** | Enrollment page | `templates/_TEMPLATE-close.html` (= **V8 ultimate**) | https://closewithcjclay.com/htsa-enrollment-sean-bowers.html · https://closewithcjclay.com/htsa-enrollment-shay-wedeking.html |
+| **⭐ After the call / on the close (default)** | Short enrollment page | `templates/_TEMPLATE-close.html` (= **V8 ultimate**) | https://closewithcjclay.com/htsa-enrollment-sean-bowers.html · https://closewithcjclay.com/htsa-enrollment-shay-wedeking.html |
+| **⭐ Long invoice (when you want the full page)** | Long enrollment invoice | Shay finalized long (= **V13**) | https://closewithcjclay.com/htsa-enrollment-shay-wedeking-invoice.html |
 
 **Copy pattern for CJ notes:**
 
@@ -36,7 +37,7 @@ https://closewithcjclay.com/htsa-enrollment-<first>-<last>.html
 
 1. Live Call Console (on-call HTML)
 2. God Script
-3. Long enrollment (regular invoice style)
+3. Long enrollment (regular invoice style) (**⭐ V13**)
 4. Short close pages (**⭐ V8 ultimate**)
 5. Pre-call resource TEMPLATES (**⭐ V16**)
 6. Special offer / self-enroll
@@ -94,7 +95,7 @@ No complete God Script **v6 HTML** found (build instructions only in CJ_AI_OS).
 
 ## 3. Long enrollment (regular invoice style)
 
-These are the **full invoices** you sent before the short close page. Use the hand-picked timeline as working examples. For layout eras, use archive previews (not tied to changing someone’s live page for “future template” work).
+These are the **full invoices** (Amy-style). Separate from the short V8 close page. Use when you want the longer brochure-style enrollment.
 
 ### Hand-picked timeline (live examples you named)
 
@@ -110,6 +111,7 @@ These are the **full invoices** you sent before the short close page. Use the ha
 | Jun 13, 2026 | Trisha Ziemba (calculator) | [Open](https://closewithcjclay.com/pre-call/HTSA-earnings-calculator.html) | Earnings calculator sent |
 | Aug 4, 2026 | Cal Halliburton | [Enrollment](https://closewithcjclay.com/htsa-enrollment-cal-halliburton.html) · [Calculator](https://closewithcjclay.com/pre-call/HTSA-earnings-calculator.html) | Both |
 | Aug 11, 2026 | Charity Diaz | [Open](https://closewithcjclay.com/htsa-enrollment-charity-diaz.html) | Late long-invoice era |
+| **⭐ Sept 7, 2026** | **Shay Wedeking (long)** | [Open](https://closewithcjclay.com/htsa-enrollment-shay-wedeking-invoice.html) | **Current long-invoice default.** Finalized before short V8. |
 
 ### Layout eras (archive snapshots you can compare)
 
@@ -129,8 +131,11 @@ These are the **full invoices** you sent before the short close page. Use the ha
 | V10 | `2f00abd` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v10-placement-shells.html) | Frozen placement shells 01–06 |
 | V11 | `0cb70d9` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v11-james-2026-footer.html) | 2026 footer reference |
 | V12 | `b54207e` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v12-joseph-member-voices.html) | Blue Member Voices layout |
+| **⭐ V13** | Sept 7, 2026 · Shay finalized | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v13-shay-finalized.html) | **Current long-invoice default.** Amy-lineage rebuild: orange Performance Guarantee + blue Full Terms of Service tab (in-page popup with Ok/Agree → Google Sheet), Splitit "For more detail" in-page popup, green outlined Welcome to HTSA, Step 1 = select from above (no duplicate pay tabs), CJ Reviews after Next Steps (no referral), curriculum then guarantee/terms then pricing. Live: `htsa-enrollment-shay-wedeking-invoice.html`. |
 
 Also: [Amy first-ship root preview](https://closewithcjclay.com/enrollment-amy-grochala-first-preview.html)
+
+**⭐ Live example:** https://closewithcjclay.com/htsa-enrollment-shay-wedeking-invoice.html
 
 ---
 
