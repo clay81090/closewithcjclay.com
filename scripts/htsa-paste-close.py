@@ -73,9 +73,9 @@ def parse(text: str) -> dict:
     show: list[str] = []
     if re.search(r"\bpif\b|paid in full|\$5,?000|5k pif", blob):
         show.append("pif")
-    if re.search(r"3\s*-?\s*pay|\$5,?250|\$1,?750", blob):
+    if re.search(r"(?:3|4)\s*-?\s*pay|\$5,?250|\$1,?750|payment plan", blob):
         show.append("plan")
-    if re.search(r"clarity|\$500\s*/?\s*mo", blob):
+    if re.search(r"clarity|\$500\s*/?\s*mo|\$600\s*/?\s*mo", blob):
         show.append("clarity")
     # $6000 alone without "clarity" is the PIF total on promo, already handled.
 
