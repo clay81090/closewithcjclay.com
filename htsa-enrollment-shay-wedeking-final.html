@@ -277,6 +277,30 @@ a{color:inherit}
 .curr-list b{display:block;color:var(--navy);font-size:15px}
 .curr-list span{color:var(--muted);font-size:13.5px;line-height:1.5}
 
+/* ---------- roadmap popup (30 day plan only) ---------- */
+#roadmapSheet .lede{margin:0 0 14px;color:var(--muted);font-size:14.5px;line-height:1.6}
+#roadmapSheet .timeline{margin:0}
+#roadmapSheet .phase{position:relative;padding:0 0 22px 26px;border-left:2px solid var(--grey);margin:0}
+#roadmapSheet .phase:last-child{padding-bottom:0;border-left-color:transparent}
+#roadmapSheet .phase::before{position:absolute;top:4px;left:-8px;width:14px;height:14px;border:3px solid var(--white);
+  border-radius:50%;background:var(--green-strong);content:"";box-shadow:0 0 0 2px var(--green-strong)}
+#roadmapSheet .phase-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin:0}
+#roadmapSheet .phase-chip{flex:0 0 auto;padding:3px 10px;border-radius:999px;background:rgba(97,227,139,.16);
+  color:var(--green-dark);font-size:11.5px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;white-space:nowrap}
+#roadmapSheet .phase-head h3{color:var(--navy);font-family:"DM Sans",sans-serif;font-size:17px;font-weight:800;line-height:1.25;margin:0;text-transform:none;letter-spacing:0}
+#roadmapSheet .daygroup{margin-top:13px}
+#roadmapSheet .day-label{display:inline-block;max-width:100%;padding:3px 10px;border-radius:7px;background:var(--navy);
+  color:var(--green);font-size:12.5px;font-weight:800;letter-spacing:.05em;line-height:1.35}
+#roadmapSheet .phase ul{margin:8px 0 0;padding:0;display:grid;gap:6px}
+#roadmapSheet .phase li{position:relative;padding-left:19px;color:var(--text);font-size:14px;
+  line-height:1.55;list-style:none;margin:0}
+#roadmapSheet .phase li::before{position:absolute;top:0;left:2px;color:var(--green-strong);font-size:11px;
+  font-weight:800;line-height:1.9;content:"●"}
+#roadmapSheet .phase li b{color:var(--navy)}
+#roadmapSheet .phase-note{margin-top:12px;padding:11px 13px;border-radius:10px;background:var(--grey-light);
+  color:var(--muted);font-size:13.5px;line-height:1.55}
+
 @media (max-width:680px){
   .page{width:100%;margin:0;border-radius:0}
   .top{padding:18px 16px 16px}
@@ -296,7 +320,7 @@ a{color:inherit}
 }
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow{transition:none}}
 </style>
-<!-- close-build:1788832959 -->
+<!-- close-build:1788833441 -->
 </head>
 <body>
 <main class="page">
@@ -408,7 +432,7 @@ a{color:inherit}
 
   <div class="docs">
     <button class="doc" type="button" id="currBtn">📘 What's in the program</button>
-    <a class="doc" id="roadmapBtn" target="_blank" rel="noopener noreferrer">🗺 Your 30 day game plan</a>
+    <button class="doc" type="button" id="roadmapBtn">🗺 Your 30 day game plan</button>
     <button class="doc doc--terms" type="button" id="tosBtn">📄 Full Terms of Service</button>
   </div>
 
@@ -602,6 +626,102 @@ a{color:inherit}
   </div>
   <div class="sheet-body"><ul class="curr-list" id="currList"></ul></div>
   <div class="sheet-foot"><button class="btn btn--go" type="button" id="currClose">Got it</button></div>
+</dialog>
+
+<!-- 30 day game plan popup (in-page, plan only) -->
+<dialog class="sheet" id="roadmapSheet" aria-labelledby="roadmapTitle">
+  <div class="sheet-head">
+    <div class="sheet-kicker">The plan</div>
+    <h2 id="roadmapTitle">Your 30 day game plan</h2>
+  </div>
+  <div class="sheet-body">
+    <p class="lede">This is how you do it in thirty days. It is a game plan, not an obligation. Members putting in focused daily blocks have finished in 22 to 26 days. Speed comes from reps, not from time passing.</p>
+    <div class="timeline">
+      <div class="phase">
+        <div class="phase-head">
+          <span class="phase-chip">Days 1 to 5</span>
+          <h3>Get in and get through the modules</h3>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Day 1</div>
+          <ul>
+            <li>Access opens. Your welcome email arrives, <b>flag it as important</b>, and you set your password.</li>
+            <li>You're live inside the certification platform. <b>55 modules</b> waiting for you.</li>
+            <li>Book your 15 minute kickoff with <b>Mark</b>, your Success Coach.</li>
+            <li>Join the Mastermind community, open 24/7. Every coaching replay lives there and <b>750+ members</b> are in it. Post an introduction the day you get in.</li>
+            <li>Put the live calls in your calendar now: <b>Tuesdays 12:00 PM EST</b> and <b>Wednesdays 5:00 PM EST</b>. Set a one hour reminder and a ten minute reminder on both.</li>
+          </ul>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Days 1 to 5</div>
+          <ul>
+            <li>Work the 55 certification modules. Some people are through them in two days.</li>
+            <li>Target is finished by day 5. Day 7 at the outside.</li>
+            <li>Watch at 1.25x or 1.5x. Take notes on the objection sections, you'll use them in the sandbox next week.</li>
+            <li>Show up for the Tuesday and Wednesday live calls from your first week. Do not wait until you feel ready.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-head">
+          <span class="phase-chip">Days 5 to 12</span>
+          <h3>Run your reps in the AI sandbox</h3>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Master 5 TEDx Coaching Sales Calls in AI Roleplay</div>
+          <ul>
+            <li>Unlimited AI roleplay, any hour you want it. Plan on about a week here. This is the part that actually makes you good.</li>
+            <li>Get your first thirty awkward calls out of the way before you ever talk to a real prospect.</li>
+            <li>It critiques tonality, pacing, and how deep your discovery went. Run them back to back, not one a day.</li>
+            <li>Load it with the scripts and objections of the niche you're targeting so your practice matches the job you want.</li>
+            <li>Keep attending the live calls. Bring a question from your reps.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-head">
+          <span class="phase-chip">Days 12 to 16</span>
+          <h3>Certify, then get your materials built</h3>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Certification</div>
+          <ul>
+            <li>Live mock call with <b>Mark</b>, who plays a defensive prospect. Scored against a rubric. It's meant to be hard.</li>
+            <li>Pass it and you're a Certified High Ticket Closer. That's the credential the companies in our network recognize.</li>
+          </ul>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Your placement 1-on-1</div>
+          <ul>
+            <li>Sit down with <b>Nate</b>, our Placement Director. You set your target niches, the schedule you want, and what you'll take.</li>
+            <li>Nate rewrites your LinkedIn and reformats your resume into the template our placed members use.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-head">
+          <span class="phase-chip">Days 16 to 30</span>
+          <h3>Pick a few great fits and go get one</h3>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Introductions</div>
+          <ul>
+            <li>Nate introduces you directly to companies in our partner network. That's the difference between applying and being introduced, and it's most of why our members move faster than the open market.</li>
+          </ul>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Interviews</div>
+          <ul>
+            <li><b>Pick three to five companies that genuinely fit</b> and run those interviews inside one week. This is not throwing applications at a wall. A small number of good fits, done properly.</li>
+            <li>Placement usually lands somewhere between one and three weeks. Around ten days is realistic if you're not dragging your feet.</li>
+            <li>Get in, get the reps, start earning. You can move to a better seat later with experience behind you. The first offer is a starting line, not a life sentence.</li>
+          </ul>
+        </div>
+        <p class="phase-note">This is the front half compressed on purpose. Finish the modules and your reps early and you leave yourself two full weeks for placement, which is the part that pays you.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sheet-foot"><button class="btn btn--go" type="button" id="roadmapClose">Got it</button></div>
 </dialog>
 
 <!-- Terms of Service popup (in-page) -->
@@ -828,19 +948,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   }
 
   /* ---------- docs ---------- */
-  const road = el("roadmapBtn");
-  if (road) {
-    const roadName = (val(first) || "").replace(/[^A-Za-z' -]/g, "").slice(0, 24);
-    const roadFile = "htsa-enrollment-" + (BUYER.slug || "").replace(/_/g, "-") + "-final.html";
-    let roadHref = "/30-day-roadmap.html";
-    const qs = [];
-    if (roadName && !ph(BUYER.firstName)) qs.push("n=" + encodeURIComponent(roadName));
-    qs.push("e=" + encodeURIComponent(roadFile));
-    if (qs.length) roadHref += "?" + qs.join("&");
-    road.href = roadHref;
-    road.addEventListener("click", function () { event("roadmap_opened"); });
-  }
-
   function openSheet(d){ if (typeof d.showModal === "function") d.showModal(); else d.setAttribute("open",""); }
   function closeSheet(d){ if (typeof d.close === "function") d.close(); else d.removeAttribute("open"); }
 
@@ -848,6 +955,11 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("currBtn").addEventListener("click", function(e){ e.preventDefault(); event("curriculum_opened"); openSheet(currSheet); });
   el("currClose").addEventListener("click", function(){ closeSheet(currSheet); });
   currSheet.addEventListener("click", function(e){ if(e.target===currSheet) closeSheet(currSheet); });
+
+  const roadSheet = el("roadmapSheet");
+  el("roadmapBtn").addEventListener("click", function(e){ e.preventDefault(); event("roadmap_opened"); openSheet(roadSheet); });
+  el("roadmapClose").addEventListener("click", function(){ closeSheet(roadSheet); });
+  roadSheet.addEventListener("click", function(e){ if(e.target===roadSheet) closeSheet(roadSheet); });
 
   const tosSheet = el("tosSheet");
   function openTos(){ event("terms_opened",{linkLabel:TERMS_VERSION,linkUrl:TERMS_URL}); openSheet(tosSheet); }
