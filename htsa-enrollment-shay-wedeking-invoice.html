@@ -665,6 +665,20 @@
     border-top: 1px solid rgba(255,255,255,0.08);
     flex-shrink: 0;
   }
+
+  .splitit-sheet--tos {
+    width: min(640px, calc(100vw - 28px));
+    max-height: min(92vh, 820px);
+  }
+  .splitit-sheet--tos .splitit-sheet-inner {
+    max-height: min(92vh, 820px);
+  }
+  .splitit-sheet-body .tos-ol {
+    margin: 0 0 12px;
+    padding-left: 22px;
+  }
+  .splitit-sheet-body .tos-ol li { margin-bottom: 8px; }
+
   .splitit-sheet-gotit {
     width: 100%;
     border: none;
@@ -1694,7 +1708,7 @@
     <div style="max-width:720px;margin:0 auto;">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
         <div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--navy);">Terms &amp; Enrollment Agreement</div>
-        <a href="HTSA-Terms-of-Service.pdf" target="_blank" style="font-size:11.5px;color:var(--green);font-weight:600;text-decoration:none;white-space:nowrap;">View Full Terms of Service →</a>
+        <button type="button" class="invest-splitit-more" id="tosMoreBtn" aria-haspopup="dialog" aria-controls="tosSheet" style="border-color:rgba(0,201,122,0.55);background:rgba(0,201,122,0.12);color:#b8f5d6;">View Full Terms of Service →</button>
       </div>
       <div style="font-size:11.5px;color:#555;line-height:1.75;">
         <div class="terms-clarify">
@@ -1807,6 +1821,96 @@ Thank God and CJ Clay for that 🙏</blockquote>
   </div>
 
 </div>
+
+
+<!-- Full Terms of Service popup (stays on this page) -->
+<dialog class="splitit-sheet splitit-sheet--tos" id="tosSheet" aria-labelledby="tosSheetTitle">
+  <div class="splitit-sheet-inner" style="position:relative;">
+    <button type="button" class="splitit-sheet-close" id="tosSheetClose" aria-label="Close">&times;</button>
+    <div class="splitit-sheet-head">
+      <div class="splitit-sheet-kicker">Enrollment agreement</div>
+      <h2 id="tosSheetTitle">Terms of Service</h2>
+    </div>
+    <div class="splitit-sheet-body">
+      <h3>Certified High Ticket Closer Program Terms of Service</h3>
+
+      <h3>Payment</h3>
+      <p>The Member agrees to pay HTSA in full for the purchased product(s) in United States Dollars (USD).</p>
+      <p>The Member may lose access to the program and/or coaching if payments are missed or not completed by the due date. Payments delinquent over 14 days will be sent to collections, and HTSA reserves the right to terminate the agreement. Finance charges will apply to all payment plans.</p>
+
+      <h3>Refund policy</h3>
+      <p>Due to the nature of HTSA’s programs, refunds for purchased products or down payments will not be granted outside of our success guarantee (see the “Limited Guarantee” section). By investing in this program, the Member commits to making significant progress through dedicated participation.</p>
+      <p>Because of the intimate nature of the group and the limited availability of spaces, no refunds will be granted after purchase, except as outlined below.</p>
+
+      <h3>Notice to buyers</h3>
+      <p>You must be 18 years of age or older to sign this Agreement. Please read, understand, and approve this Agreement before signing. If you are under 18, a legal guardian must sign on your behalf.</p>
+
+      <h3>Member expectations</h3>
+      <p>I am excited to fully commit to myself, my dreams, my career, and the High Ticket Sales Academy program. I am an action taker, and as such, I am committed to giving this program my very best effort. I am ready to get started and understand that results require consistent effort. Once I begin my program, I will sign a contract with myself to hold myself accountable to achieving certain outcomes. This contract, along with the terms that follow, signifies the formal agreement between me and the company.</p>
+
+      <h3>Member enrollment agreement and terms of sale</h3>
+      <p>This Agreement is a legal contract between you (hereinafter referred to as "Member") and High Ticket Sales Academy, LLC (hereinafter referred to as "HTSA"). By purchasing an HTSA product, the Member certifies that they have read, understood, and agree to this Agreement and the Refund Policy. All sales are final. The Member also understands that this Enrollment Agreement is legally binding upon signing by the Member enrolling in the HTSA Certified High Ticket Closer program and acceptance by HTSA.</p>
+
+      <h3>Limited guarantee</h3>
+      <p>HTSA offers a limited guarantee to members who meet the following conditions:</p>
+      <ol class="tos-ol">
+        <li>The Member must have 2 years of prior sales experience (in a non-retail sales role).</li>
+        <li>The Member must complete all course materials, roleplays, attend all 1-on-1 training, and finish their certification before interview opportunities will be offered.</li>
+        <li>The Member must attend at least one group coaching call per week throughout the program.</li>
+        <li>The Member must apply to a minimum of 50 high-ticket sales or SDR (Sales Development Representative) positions and provide proof of application, such as screenshots or email confirmations.</li>
+      </ol>
+      <p>If the Member completes all these requirements and does not secure a high-ticket closer or SDR/Setter role within 6 months of completing the certification program, they will be granted a full refund of the program's fees. The Member must provide evidence of compliance with all the above conditions to be eligible for this guarantee.</p>
+      <p class="splitit-sheet-fine">Note for this enrollment: the orange Performance Guarantee — Confirmed banner on this page means HTSA has confirmed your guarantee for this enrollment. Where that confirmation waives prior sales experience for you, your guarantee follows that confirmation and the commitment steps on this page.</p>
+
+      <h3>Use of recordings</h3>
+      <p>Live group calls, webinars, testimonials, Facebook posts, or other audio/visual services may be recorded and used by HTSA for business purposes unless the Member specifically requests otherwise.</p>
+
+      <h3>Hours of operation</h3>
+      <p>HTSA's office is open Monday-Friday, 9 AM - 5 PM EST. These terms apply to all HTSA products sold on this site or any other site linking to these terms.</p>
+
+      <h3>Intellectual property</h3>
+      <p>By accepting this Agreement, the Member acknowledges that all content within HTSA’s program is protected by intellectual property rights and agrees to use it only for personal purposes. Unauthorized reproduction or distribution of HTSA content may result in civil or criminal penalties.</p>
+
+      <h3>Customer service / Member Success</h3>
+      <p>For questions or comments regarding HTSA products, please contact us at support@highticketsalesacademy.com or call 616-344-6220.</p>
+
+      <h3>No guarantee of results (outside of the Limited Guarantee)</h3>
+      <p>Members expressly agree that participation in the program does not guarantee results beyond the terms outlined in the Limited Guarantee. HTSA offers no additional representations or warranties regarding results.</p>
+
+      <h3>Access to course content, Mastermind community, and coaching program</h3>
+      <p>Members will have lifetime access to the course content for their core product. The Member also receives free access to the Mastermind Community on Facebook, Live Group Coaching Calls via Zoom. 1-on-1 Coaching calls must be used within three months of the program start date unless otherwise approved by HTSA.</p>
+    </div>
+    <div class="splitit-sheet-foot">
+      <button type="button" class="splitit-sheet-gotit" id="tosSheetGotIt">Got it</button>
+    </div>
+  </div>
+</dialog>
+<script>
+(function () {
+  var sheet = document.getElementById("tosSheet");
+  var openBtn = document.getElementById("tosMoreBtn");
+  if (!sheet || !openBtn) return;
+  function openSheet() {
+    if (typeof sheet.showModal === "function") sheet.showModal();
+    else sheet.setAttribute("open", "");
+  }
+  function closeSheet() {
+    if (typeof sheet.close === "function") sheet.close();
+    else sheet.removeAttribute("open");
+  }
+  openBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    openSheet();
+  });
+  var closeBtn = document.getElementById("tosSheetClose");
+  var gotIt = document.getElementById("tosSheetGotIt");
+  if (closeBtn) closeBtn.addEventListener("click", closeSheet);
+  if (gotIt) gotIt.addEventListener("click", closeSheet);
+  sheet.addEventListener("click", function (e) {
+    if (e.target === sheet) closeSheet();
+  });
+})();
+</script>
 
 <!-- Splitit how-it-works popup (stays on this page) -->
 <dialog class="splitit-sheet" id="splititSheet" aria-labelledby="splititSheetTitle">
