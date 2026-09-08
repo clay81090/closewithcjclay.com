@@ -134,7 +134,7 @@ Different product from long invoices. Built from `templates/_TEMPLATE-close.html
 | V5 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v5.html) | Game plan first, pricing last in dropdown |
 | V6 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v6.html) | Amy-style 2-way enroll steps; remove need-from-you |
 | V7 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v7.html) | Reorder getting → HTSA needs → pricing → next steps (overreach) |
-| **⭐ V8** | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8.html) | **Current default for regular closes.** Continuous page, sticky CTA, in-page Terms / 30-day / curriculum / Splitit popups, CJ Reviews, Splitit under PIF down-arrow, ClarityPay 0% badge. |
+| **⭐ V8** | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8.html) | **Current default for regular closes.** Continuous page, sticky CTA, in-page Terms / 30-day / curriculum popups, **All HTSA Resources** tab (in-page YouTube + Trustpilot/Canva scrollable snapshots), CJ Reviews, ClarityPay 0% badge. Splitit only when CJ asks (not default). |
 
 Live template source: `templates/_TEMPLATE-close.html`
 

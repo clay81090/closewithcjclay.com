@@ -331,7 +331,46 @@ a{color:inherit}
   .plan{padding:16px}
   .docs{grid-template-columns:1fr}
 }
-@media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow{transition:none}}
+/* ---------- ALL HTSA Resources tab ---------- */
+.res-wrap{margin:0 26px 14px}
+.res-tab{margin:0;border:0;padding:0}
+.res-tab>summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;padding:15px 18px;border-radius:12px;
+  background:linear-gradient(135deg,#0a1628 0%,#152a46 100%);border:2px solid var(--green-strong);
+  box-shadow:0 8px 22px rgba(10,22,40,.18);color:var(--white)}
+.res-tab>summary::-webkit-details-marker{display:none}
+.res-tab-title{font-size:15px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--green)}
+.res-tab-sub{display:block;margin-top:3px;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.72);
+  letter-spacing:0;text-transform:none}
+.res-tab-arrow{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--green-strong);
+  color:#04231a;display:inline-flex;align-items:center;justify-content:center;font-size:18px;
+  line-height:1;font-weight:900;transition:transform .2s ease}
+.res-tab[open]>summary .res-tab-arrow{transform:rotate(90deg)}
+.res-tab[open]>summary{margin-bottom:12px}
+.res-panel{display:grid;gap:10px}
+.res-group{padding:12px 14px;border:1px solid var(--grey);border-radius:12px;background:#fbfcfe}
+.res-group-label{margin:0 0 8px;color:var(--green-dark);font-size:11.5px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase}
+.res-btn{display:flex;width:100%;align-items:flex-start;justify-content:space-between;gap:10px;
+  padding:12px 13px;border:1px solid var(--grey);border-radius:10px;background:var(--white);
+  color:var(--navy);font-family:inherit;font-size:14px;font-weight:700;text-align:left;cursor:pointer;
+  line-height:1.35}
+.res-btn:hover,.res-btn:focus-visible{border-color:var(--green-strong);outline:none;
+  background:rgba(97,227,139,.08)}
+.res-btn small{display:block;margin-top:3px;color:var(--muted);font-size:12px;font-weight:500}
+.res-btn .chev{flex:0 0 auto;color:var(--green-dark);font-weight:900}
+.media-sheet{width:min(720px,calc(100% - 16px));max-height:90dvh}
+.media-sheet .sheet-body{padding:0;max-height:min(70dvh,560px);overflow:auto;background:#0a1628}
+.media-frame{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
+.media-frame--doc{aspect-ratio:auto;min-height:min(70dvh,560px);height:min(70dvh,560px);background:#fff}
+.media-scroll{width:100%;max-height:min(70dvh,560px);overflow:auto;-webkit-overflow-scrolling:touch;background:#111;padding:0}
+.media-scroll img{display:block;width:100%;height:auto;margin:0}
+.media-sheet--wide{width:min(920px,calc(100% - 12px))}
+.media-sheet .sheet-foot{background:var(--white)}
+@media (max-width:680px){.res-wrap{margin-left:16px;margin-right:16px}}
+
+@media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
 <!-- close-build:1788838315 -->
 </head>
@@ -502,6 +541,38 @@ a{color:inherit}
       </div>
     </div>
   </section>
+
+  <!-- ALL HTSA Resources (default on every close page) -->
+  <div class="res-wrap">
+    <details class="res-tab" id="resTab">
+      <summary>
+        <span><span class="res-tab-title">All HTSA Resources</span><span class="res-tab-sub">Videos, reviews, book, placement proof. Opens on this page.</span></span>
+        <span class="res-tab-arrow" aria-hidden="true">▸</span>
+      </summary>
+      <div class="res-panel">
+        <div class="res-group">
+          <div class="res-group-label">Hear directly from our network</div>
+          <button type="button" class="res-btn" data-media="yt" data-id="eLAWEwE7pl4" data-title="Meet Chad — CEO &amp; Founder at HTSA"><span>Meet Chad — CEO &amp; Founder at HTSA<small>YouTube · plays here</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="yt" data-id="bd65afldLmE" data-title="Taylor Conroy (TEDx Coach) Why He Hires Our Members"><span>Taylor Conroy (TEDx Coach)<small>Why he hires our members · plays here</small></span><span class="chev">▸</span></button>
+        </div>
+        <div class="res-group">
+          <div class="res-group-label">Client success stories</div>
+          <button type="button" class="res-btn" data-media="yt" data-id="WOVqPR-ufYM" data-title="Cassie — Single Mom success story"><span>Cassie — Single Mom<small>Relatable success story · plays here</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="yt" data-id="FqlY37NaIsk" data-title="Dana — Unsolicited HTSA Personal Review"><span>Dana — Personal Review<small>Unsolicited HTSA review · plays here</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="yt" data-id="5pVlD6EKy1k" data-title="Josh — Alex Hormozi background"><span>Josh — Alex Hormozi background<small>High-profile background · plays here</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="yt" data-id="TWacdj9x45o" data-title="Brianna — Tony Robbins team"><span>Brianna — Tony Robbins team<small>Credibility from a big name · plays here</small></span><span class="chev">▸</span></button>
+        </div>
+        <div class="res-group">
+          <div class="res-group-label">Key resources</div>
+          <button type="button" class="res-btn" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5"><span>Trustpilot Reviews<small>4.9 out of 5 · scrollable snapshot on this page</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="img" data-src="/media/chad-aleo-book-banner.png" data-title="Chad’s Book — The Book on High Ticket Sales"><span>Chad’s Book<small>The Book on High Ticket Sales · on this page</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-why-placement.jpg" data-title="Why Everyone Raves About Our Placement"><span>Why Everyone Raves About Our Placement<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-christa-22k.jpg" data-title="Christa Kieffer — Placement to 22k (4 months)"><span>Christa Kieffer — Placement to 22k<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="site" data-url="https://www.highticketsalesacademy.com" data-title="HTSA Website"><span>HTSA Website<small>Opens here · live site blocks embeds</small></span><span class="chev">▸</span></button>
+        </div>
+      </div>
+    </details>
+  </div>
 
   <!-- CJ REVIEWS (last content, before footer) -->
   <section class="reviews">
@@ -821,6 +892,19 @@ a{color:inherit}
   <div class="sheet-foot"><button class="btn btn--go" type="button" id="splititClose">Got it</button></div>
 </dialog>
 
+<!-- in-page media / resource viewer -->
+<dialog class="sheet media-sheet" id="mediaSheet" aria-labelledby="mediaTitle">
+  <div class="sheet-head">
+    <div class="sheet-kicker">Resource</div>
+    <h2 id="mediaTitle">Resource</h2>
+  </div>
+  <div class="sheet-body" id="mediaBody"></div>
+  <div class="sheet-foot">
+    <button class="btn btn--back" type="button" id="mediaExpand">Larger</button>
+    <button class="btn btn--go" type="button" id="mediaClose">Got it</button>
+  </div>
+</dialog>
+
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
@@ -1023,6 +1107,90 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   updateCta();
   window.addEventListener("scroll", updateCta, { passive:true });
   window.addEventListener("resize", updateCta);
+
+  /* ---------- resources (stay on page) ---------- */
+  const mediaSheet = el("mediaSheet");
+  const mediaBody = el("mediaBody");
+  const mediaTitle = el("mediaTitle");
+  let mediaExpanded = false;
+  function clearMedia(){
+    mediaBody.innerHTML = "";
+    mediaExpanded = false;
+    mediaSheet.style.width = "";
+    mediaSheet.style.maxWidth = "";
+    mediaSheet.style.height = "";
+    mediaSheet.style.maxHeight = "";
+  }
+  function openMedia(kind, payload, title){
+    clearMedia();
+    mediaTitle.textContent = title || "Resource";
+    mediaSheet.classList.toggle("media-sheet--wide", kind === "img");
+    if (kind === "yt") {
+      const f = document.createElement("iframe");
+      f.className = "media-frame";
+      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      f.setAttribute("allowfullscreen", "");
+      f.setAttribute("playsinline", "");
+      f.src = "https://www.youtube-nocookie.com/embed/" + payload + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+      mediaBody.appendChild(f);
+    } else if (kind === "img") {
+      const wrap = document.createElement("div");
+      wrap.className = "media-scroll";
+      wrap.id = "mediaScroll";
+      const img = document.createElement("img");
+      img.src = payload;
+      img.alt = title || "Resource";
+      img.loading = "eager";
+      wrap.appendChild(img);
+      mediaBody.appendChild(wrap);
+    } else if (kind === "site") {
+      const wrap = document.createElement("div");
+      wrap.style.cssText = "padding:22px 20px;background:#fff;color:#17243b;font-size:15px;line-height:1.55";
+      wrap.innerHTML = "<p style=\"margin:0 0 12px;font-weight:800;color:#0a1628\">High Ticket Sales Academy</p><p style=\"margin:0 0 14px;color:#54637a\">That site blocks in-page embeds (same as Trustpilot). The videos and scrollable snapshots above cover the proof you need without leaving this page.</p><p style=\"margin:0;padding:12px 14px;border-radius:10px;background:#f3f6f9;font-weight:700;word-break:break-all\">" + payload + "</p>";
+      mediaBody.appendChild(wrap);
+    } else {
+      const f = document.createElement("iframe");
+      f.className = "media-frame media-frame--doc";
+      f.title = title || "Resource";
+      f.src = payload;
+      mediaBody.appendChild(f);
+    }
+    event("resource_opened", { linkLabel: title || kind, linkUrl: payload });
+    openSheet(mediaSheet);
+  }
+  document.querySelectorAll(".res-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      const kind = btn.dataset.media;
+      if (kind === "yt") openMedia("yt", btn.dataset.id, btn.dataset.title);
+      else if (kind === "img") openMedia("img", btn.dataset.src, btn.dataset.title);
+      else if (kind === "site") openMedia("site", btn.dataset.url, btn.dataset.title);
+      else openMedia("doc", btn.dataset.url, btn.dataset.title);
+    });
+  });
+  const resTab = el("resTab");
+  if (resTab) resTab.addEventListener("toggle", function(){ if (resTab.open) event("resources_expanded"); });
+  el("mediaClose").addEventListener("click", function(){ clearMedia(); closeSheet(mediaSheet); });
+  mediaSheet.addEventListener("click", function(e){ if(e.target===mediaSheet){ clearMedia(); closeSheet(mediaSheet); } });
+  el("mediaExpand").addEventListener("click", function(){
+    mediaExpanded = !mediaExpanded;
+    const sc = mediaBody.querySelector(".media-scroll");
+    const fr = mediaBody.querySelector("iframe");
+    if (mediaExpanded) {
+      mediaSheet.style.width = "min(96vw, 1100px)";
+      mediaSheet.style.maxHeight = "96dvh";
+      mediaSheet.style.height = "96dvh";
+      if (fr) { fr.style.minHeight = "80dvh"; fr.style.height = "80dvh"; }
+      if (sc) { sc.style.maxHeight = "80dvh"; }
+      el("mediaExpand").textContent = "Smaller";
+    } else {
+      mediaSheet.style.width = "";
+      mediaSheet.style.maxHeight = "";
+      mediaSheet.style.height = "";
+      if (fr) { fr.style.minHeight = ""; fr.style.height = ""; }
+      if (sc) { sc.style.maxHeight = ""; }
+      el("mediaExpand").textContent = "Larger";
+    }
+  });
 
   /* ---------- choose, agree, pay ---------- */
   const sheet = el("sheet"), agree = el("agreeBox"), go = el("goBtn");
