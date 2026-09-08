@@ -799,6 +799,20 @@
     padding-bottom: 1px;
   }
 
+
+  .step-select-above {
+    display: inline-block;
+    margin: 12px 0 0;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: rgba(10, 22, 40, 0.06);
+    border: 1.5px solid rgba(10, 22, 40, 0.14);
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+  }
+
   .step-pay-pick {
     display: flex;
     flex-wrap: wrap;
@@ -1820,7 +1834,7 @@
 
       </div>
 
-      <div class="invest-note" style="margin-top:18px;color:rgba(255,255,255,0.5);"><strong style="color:#ff9c7a;">Next:</strong> After you pay, jump to <strong style="color:var(--white);">Step 1</strong> below — text CJ so we can grant access right away.</div>
+      <div class="invest-note" style="margin-top:18px;color:rgba(255,255,255,0.5);"><strong style="color:#ff9c7a;">Next:</strong> After you pay, jump to <strong style="color:var(--white);">Step 2</strong> below — text CJ so we can grant access right away.</div>
     </div>
   </div>
 
@@ -1836,11 +1850,8 @@
       <div class="step-num">1</div>
       <div class="step-content">
         <h4>Step 1 — Choose How You Want to Pay</h4>
-        <p>Shay, pick <strong>$6,000 paid in full</strong> (or <strong>Splitit</strong> inside that checkout) or the <strong>$1,750 today (4-pay)</strong> plan — same links as in Program Investment above. Tap a button below, complete checkout, then continue to Step 2.</p>
-        <div class="step-pay-pick">
-          <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="step-pay-tab step-pay-tab--pif" target="_blank" rel="noopener noreferrer">$6,000 PIF</a>
-          <a href="https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" class="step-pay-tab step-pay-tab--4pay" target="_blank" rel="noopener noreferrer">$1,750 (4-Pay)</a>
-        </div>
+        <p>Shay, select your payment option from <strong>Program Investment</strong> above ($6,000 paid in full, Splitit inside that checkout, or $1,750 today on the 4-pay). Once checkout is done, continue to Step 2.</p>
+        <p class="step-select-above">↑ Select from above</p>
       </div>
     </div>
 
@@ -2087,31 +2098,94 @@
       <p>Members will have lifetime access to the course content for their core product. The Member also receives free access to the Mastermind Community on Facebook, Live Group Coaching Calls via Zoom. 1-on-1 Coaching calls must be used within three months of the program start date unless otherwise approved by HTSA.</p>
     </div>
     <div class="splitit-sheet-foot">
-      <button type="button" class="splitit-sheet-gotit" id="tosSheetGotIt">Got it</button>
+      <button type="button" class="splitit-sheet-gotit" id="tosSheetGotIt">Ok / Agree</button>
     </div>
   </div>
 </dialog>
 <script>
 (function () {
+  var GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
+  var TERMS_URL = "https://closewithcjclay.com/HTSA-Terms-of-Service.pdf";
+  var TERMS_VERSION = "HTSA-TOS-PDF-closewithcjclay-2026-04";
+  var BUYER = {
+    fullName: "Shay Wedeking",
+    email: "shay.s.wedeking@gmail.com",
+    phone: "+17208408829",
+    slug: "shay-wedeking",
+    track: "closer",
+    offer: "standard"
+  };
+
   var sheet = document.getElementById("tosSheet");
   var openBtn = document.getElementById("tosMoreBtn");
+  var agreeBtn = document.getElementById("tosSheetGotIt");
   if (!sheet || !openBtn) return;
+
+  function canonicalUrl() {
+    try {
+      var u = new URL(location.href);
+      return u.origin + u.pathname;
+    } catch (e) {
+      return location.href.split("#")[0];
+    }
+  }
+
+  function post(payload) {
+    try {
+      var f = new URLSearchParams();
+      f.set("payload", JSON.stringify(payload));
+      fetch(GAS_ENDPOINT, { method: "POST", mode: "no-cors", body: f, cache: "no-store" }).catch(function () {});
+    } catch (e) {}
+  }
+
   function openSheet() {
+    if (agreeBtn) {
+      agreeBtn.disabled = false;
+      agreeBtn.textContent = "Ok / Agree";
+    }
     if (typeof sheet.showModal === "function") sheet.showModal();
     else sheet.setAttribute("open", "");
   }
+
   function closeSheet() {
     if (typeof sheet.close === "function") sheet.close();
     else sheet.removeAttribute("open");
   }
+
   openBtn.addEventListener("click", function (e) {
     e.preventDefault();
     openSheet();
   });
+
   var closeBtn = document.getElementById("tosSheetClose");
-  var gotIt = document.getElementById("tosSheetGotIt");
   if (closeBtn) closeBtn.addEventListener("click", closeSheet);
-  if (gotIt) gotIt.addEventListener("click", closeSheet);
+
+  if (agreeBtn) {
+    agreeBtn.addEventListener("click", function () {
+      agreeBtn.disabled = true;
+      agreeBtn.textContent = "Recording…";
+      post({
+        action: "recordTermsAgreement",
+        fullName: BUYER.fullName,
+        email: BUYER.email,
+        phone: BUYER.phone,
+        enrollmentPageUrl: canonicalUrl(),
+        clientSlug: BUYER.slug,
+        termsUrl: TERMS_URL,
+        termsVersion: TERMS_VERSION,
+        track: BUYER.track,
+        offer: BUYER.offer,
+        userAgent: navigator.userAgent || "",
+        timestamp: new Date().toISOString()
+      });
+      try {
+        sessionStorage.setItem("hts_terms_gate_shay_wedeking_v1", "1");
+      } catch (e) {}
+      agreeBtn.textContent = "Agreement recorded";
+      setTimeout(closeSheet, 450);
+    });
+  }
+
   sheet.addEventListener("click", function (e) {
     if (e.target === sheet) closeSheet();
   });
