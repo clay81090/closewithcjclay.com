@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a1628">
-<title>Enrollment | CJ Clay · HTSA</title>
+<title>HTSA Enrollment — Sean Bowers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -16,7 +16,8 @@
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none!important}
 body{min-width:320px;background:var(--grey-light);color:var(--text);
-  font-family:"DM Sans",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  font-family:"DM Sans",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;
+  padding-bottom:86px} /* room for sticky bar */
 a{color:inherit}
 .page{width:min(720px,calc(100% - 20px));margin:16px auto;overflow:hidden;border-radius:20px;
   background:var(--white);box-shadow:0 20px 56px rgba(10,22,40,.13)}
@@ -42,48 +43,53 @@ a{color:inherit}
 .prep-fix{margin:9px auto 0;max-width:520px;color:rgba(255,255,255,.55);font-size:12px;text-align:center}
 @media (max-width:680px){.prep{grid-template-columns:1fr}}
 
+/* ---------- welcome band (green outline, high emotional beat) ---------- */
+.welcome{margin:18px 22px 0;padding:22px 24px;border-radius:16px;
+  background:linear-gradient(160deg,#f7fffb 0%,#ecfff5 100%);
+  border:3px solid var(--green-strong);
+  box-shadow:0 0 0 4px rgba(0,201,122,.16),0 12px 28px rgba(0,201,122,.14);
+  text-align:center}
+.welcome h2{font-family:"Playfair Display",serif;font-size:22px;line-height:1.25;color:var(--navy)}
+.welcome h2 span{color:var(--green-dark);text-shadow:0 0 12px rgba(0,201,122,.14)}
+.welcome p{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6;max-width:520px;
+  margin-left:auto;margin-right:auto}
+.welcome-cta{display:inline-flex;margin-top:14px;padding:10px 18px;border-radius:999px;
+  background:var(--navy);color:var(--white);font-size:13px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
+
 /* ---------- included ---------- */
-.inc{padding:20px 26px 6px}
+.inc{padding:22px 26px 6px}
 .h2{margin-bottom:11px;color:var(--navy);font-family:"Playfair Display",serif;font-size:21px}
 .inc-list{display:grid;gap:8px;margin-bottom:4px}
 .inc-list li{display:flex;gap:10px;align-items:flex-start;color:var(--text);font-size:14.5px;
   line-height:1.5;list-style:none}
 .inc-list li::before{flex:0 0 auto;margin-top:1px;color:var(--green-strong);font-size:15px;
   font-weight:800;content:"✓"}
-.inc-list b{color:var(--navy)}
-.return-sec{margin:0 26px 16px;padding:18px 18px 16px;border:1px solid var(--grey);border-radius:14px;
-  background:#f7f9fc}
-.return-sec .h2{margin-bottom:6px}
-.return-sub{margin:0 0 12px;color:var(--muted);font-size:14px;line-height:1.5}
-.return-list{display:grid;gap:8px;margin:0;padding:0}
-.return-list li{display:flex;gap:10px;align-items:flex-start;padding:12px 13px;border:1px solid rgba(0,201,122,.22);
-  border-radius:12px;background:var(--white);color:var(--text);font-size:14.5px;line-height:1.5;list-style:none}
-.return-list li::before{flex:0 0 auto;margin-top:1px;color:var(--green-strong);font-size:15px;
-  font-weight:800;content:"✓"}
-.return-list b{color:var(--navy)}
 
 /* ---------- guarantee ---------- */
-.guar-strip{display:flex;gap:10px;align-items:center;margin:0;padding:12px 26px;
-  background:rgba(97,227,139,.13);border-bottom:1px solid rgba(0,201,122,.28)}
+.guar-strip{display:flex;gap:10px;align-items:center;margin:14px 0 0;padding:12px 26px;
+  background:rgba(97,227,139,.13);border-top:1px solid rgba(0,201,122,.28);
+  border-bottom:1px solid rgba(0,201,122,.28)}
 .guar-strip b{color:var(--navy);font-size:13.5px;font-weight:800}
 .guar-strip span{color:var(--muted);font-size:13px}
 .guar-strip a{margin-left:auto;flex:0 0 auto;color:var(--green-dark);font-size:12.5px;
   font-weight:700;white-space:nowrap}
-.guar{margin:4px 26px 18px;padding:19px 20px;border-radius:15px;background:var(--ink);
-  box-shadow:0 12px 32px rgba(10,22,40,.18)}
+.guar{margin:18px 26px 6px;padding:20px 22px;border-radius:16px;background:var(--ink);
+  border:3px solid var(--green-strong);
+  box-shadow:0 0 0 4px rgba(0,201,122,.14),0 12px 30px rgba(10,22,40,.2)}
 .guar-tag{display:inline-block;margin-bottom:8px;padding:4px 11px;border-radius:999px;
   background:var(--green-strong);color:#04231a;font-size:12px;font-weight:800;letter-spacing:.07em;
   text-transform:uppercase}
 .guar h3{color:var(--white);font-family:"Playfair Display",serif;font-size:20px;font-weight:700;line-height:1.25}
-.guar p{margin-top:7px;color:rgba(255,255,255,.8);font-size:14px;line-height:1.6}
-.guar-you{margin-top:13px;padding-top:13px;border-top:1px solid rgba(255,255,255,.13)}
+.guar p{margin-top:7px;color:rgba(255,255,255,.82);font-size:14px;line-height:1.6}
+.guar-you{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.16)}
 .guar-you b{color:var(--green);font-size:13px}
-.guar-you ul{margin-top:7px;display:grid;gap:5px}
-.guar-you li{display:flex;gap:8px;color:rgba(255,255,255,.78);font-size:13px;line-height:1.5;list-style:none}
+.guar-you ul{margin-top:8px;display:grid;gap:6px}
+.guar-you li{display:flex;gap:8px;color:rgba(255,255,255,.85);font-size:13px;line-height:1.5;list-style:none}
 .guar-you li::before{color:var(--green);font-weight:800;content:"→"}
 
 /* ---------- plans ---------- */
-.plans{padding:18px 26px 6px}
+.plans{padding:22px 26px 6px}
 .plans-sub{margin-bottom:15px;color:var(--muted);font-size:14px}
 .plan{position:relative;margin-bottom:13px;padding:18px;border:2px solid var(--grey);border-radius:15px;
   background:var(--white);transition:border-color 150ms ease,box-shadow 150ms ease}
@@ -107,40 +113,48 @@ a{color:inherit}
 .plan--custom .choose{background:var(--navy);color:var(--green)}
 .choose:hover,.choose:focus-visible{transform:translateY(-1px);filter:brightness(1.06);outline:none}
 .choose:focus-visible{outline:3px solid rgba(0,201,122,.4);outline-offset:3px}
+.plan-sub{margin-top:10px}
+.plan-sub>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+  gap:8px;padding:9px 12px;border-radius:9px;background:rgba(97,227,139,.1);
+  border:1px dashed rgba(0,201,122,.35);color:var(--navy);font-size:13px;font-weight:800}
+.plan-sub>summary::-webkit-details-marker{display:none}
+.plan-sub-chev{color:var(--green-dark);font-weight:800;transition:transform .18s ease}
+.plan-sub[open]>summary .plan-sub-chev{transform:rotate(180deg)}
+.plan-sub[open]>summary{border-radius:9px 9px 0 0;border-bottom:0}
+.plan-sub .plan-splitit{margin-top:0;border-radius:0 0 10px 10px;border:1px dashed rgba(0,201,122,.35);border-top:0}
+.plan-splitit{margin-top:10px;padding:11px 13px;border:1px dashed rgba(0,201,122,.4);
+  border-radius:10px;background:rgba(97,227,139,.08)}
+.plan-splitit-title{color:var(--navy);font-size:13.5px;font-weight:800}
+.plan-splitit-copy{margin-top:4px;color:var(--muted);font-size:12.5px;line-height:1.55}
+.plan-splitit-copy b{color:var(--navy)}
+.plan-splitit-link{display:inline-block;margin-top:7px;color:var(--green-dark);font-size:12.5px;
+  font-weight:700;text-decoration:none;cursor:pointer;background:none;border:0;padding:0;font-family:inherit}
+.plan-clarity-badge{display:inline-flex;align-items:center;gap:5px;margin:0 0 6px;padding:3px 10px;
+  border-radius:999px;background:rgba(0,201,122,.15);color:var(--green-dark);
+  font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 
 .plan-warn{margin:-4px 0 12px;padding:9px 11px;border:1px solid rgba(0,201,122,.3);border-radius:9px;
   background:rgba(97,227,139,.12);color:var(--navy);font-size:12.5px;font-weight:700;line-height:1.45}
-.third{margin:2px 26px 16px;padding:14px 16px;border:1px dashed var(--grey);border-radius:13px;background:#fbfcfe}
-.third-name{color:var(--navy);font-size:16px;font-weight:800}
-.third-note{margin-top:4px;color:var(--muted);font-size:13.5px;line-height:1.5}
-.third-cta{display:inline-flex;align-items:center;gap:7px;margin-top:9px;color:var(--green-dark);
-  font-size:14px;font-weight:700;text-decoration:none}
 
-/* ---------- doc links ---------- */
-.docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 26px 18px}
+/* ---------- doc buttons ---------- */
+.docs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 26px 18px}
 .doc{display:flex;min-height:52px;align-items:center;justify-content:center;gap:8px;padding:12px;
   border:1px solid var(--grey);border-radius:12px;background:var(--white);color:var(--navy);
-  font-size:13.5px;font-weight:700;text-align:center;text-decoration:none}
+  font-size:13.5px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;
+  font-family:inherit}
 .doc:hover,.doc:focus-visible{border-color:var(--green-strong);outline:none}
+.doc--terms{grid-column:1/-1;background:var(--navy);color:var(--green);border-color:var(--green-strong);
+  font-size:15px;font-weight:800;letter-spacing:.02em}
+.doc--terms:hover{background:#12233d;color:#3dffb0}
 
-.next-wrap{margin:0 26px 16px;border:1px solid var(--grey);border-radius:13px;background:var(--white)}
-.next-wrap > summary{display:flex;min-height:52px;align-items:center;padding:12px 16px;
-  cursor:pointer;color:var(--navy);font-size:14.5px;font-weight:800;line-height:1.35;list-style:none}
-.next-wrap > summary::-webkit-details-marker{display:none}
-.next-wrap > summary::after{margin-left:auto;padding-left:12px;color:var(--muted);font-size:18px;
-  font-weight:400;content:"▾"}
-.next-wrap[open] > summary{border-bottom:1px solid var(--grey)}
-.next-wrap[open] > summary::after{content:"▴"}
-.next-wrap > summary:hover,.next-wrap > summary:focus-visible{outline:none;color:var(--green-dark)}
-
+/* ---------- after ---------- */
 .after{padding:0 26px 20px}
-.after-pay{padding:0 26px 20px}
 .after-box{padding:15px 17px;border:1px solid rgba(0,201,122,.26);border-radius:13px;
   background:rgba(97,227,139,.09)}
 .after-box p{color:var(--text);font-size:14px;line-height:1.6}
 .after-box b{color:var(--navy)}
 .after-box a{color:var(--green-dark);font-weight:700}
-.next{padding:4px 16px 16px}
+.next{margin-top:16px}
 .next .h2{margin-bottom:6px}
 .next-sub{margin-bottom:12px;color:var(--muted);font-size:14px;line-height:1.55}
 .next-step{display:flex;gap:12px;margin-bottom:10px;padding:14px 15px;border:1px solid var(--grey);
@@ -159,6 +173,39 @@ a{color:inherit}
 .next-mail b{display:block;color:var(--navy);font-size:13px}
 .next-mail span{display:block;margin-top:3px;color:var(--muted);font-size:13px;line-height:1.5}
 
+/* ---------- CJ reviews ---------- */
+.reviews{padding:20px 26px 6px}
+.reviews-banner{text-align:center;margin-bottom:14px}
+.reviews-label{font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--navy);margin-bottom:6px}
+.reviews-desc{font-size:13px;line-height:1.6;color:var(--muted);max-width:480px;
+  margin:0 auto}
+.review-card{padding:14px 16px;border:3px solid #93c5fd;border-left:5px solid #60a5fa;
+  border-radius:12px;background:#ffffff;box-shadow:0 0 0 1.5px rgba(226,178,39,.5),0 4px 14px rgba(10,22,40,.06);
+  margin-bottom:12px}
+.review-meta{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--navy);margin-bottom:8px}
+.review-body{font-size:13.5px;line-height:1.6;color:var(--text)}
+.review-attr{margin-top:10px;padding-top:8px;border-top:1px solid rgba(10,22,40,.08);
+  color:var(--muted);font-size:12.5px;font-weight:600}
+.reviews-more{margin:0;border:0;padding:0}
+.reviews-more>summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;padding:14px 18px;border-radius:12px;
+  background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border:3px solid #93c5fd;
+  border-left:5px solid #60a5fa;box-shadow:0 0 0 1.5px rgba(226,178,39,.45),0 4px 14px rgba(10,22,40,.06);
+  color:var(--navy);font-size:14px;font-weight:800}
+.reviews-more>summary::-webkit-details-marker{display:none}
+.reviews-more-sub{display:block;margin-top:2px;font-size:12px;font-weight:500;color:var(--muted)}
+.reviews-more-arrow{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:#1976d2;
+  color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:18px;
+  line-height:1;box-shadow:0 2px 8px rgba(25,118,210,.35);transition:transform .2s ease}
+.reviews-more[open]>summary .reviews-more-arrow{transform:rotate(90deg)}
+.reviews-more[open]>summary{margin-bottom:12px}
+.reviews-more-panel{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.reviews-more-panel .review-card{margin:0}
+@media (max-width:680px){.reviews-more-panel{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
 .foot{padding:24px 26px 0;background:#07111f;color:rgba(255,255,255,.62);font-size:13px}
 .foot-top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;max-width:760px;
   margin:0 auto;padding-bottom:20px}
@@ -186,9 +233,23 @@ a{color:inherit}
 .foot-stars{color:var(--gold);font-size:16px;letter-spacing:2px}
 .foot-copy{padding:11px 0 14px;border-top:1px solid rgba(255,255,255,.07);
   color:rgba(255,255,255,.34);font-size:12px;text-align:center}
-.paid-link{display:block;margin:0 auto;padding:4px 16px 14px;color:rgba(255,255,255,.42);
-  font-size:13px;text-align:center;text-decoration:none}
-.paid-link:hover,.paid-link:focus-visible{color:var(--green)}
+
+/* ---------- sticky bottom CTA (the "stays with them" magnet) ---------- */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:linear-gradient(180deg,rgba(10,22,40,0) 0%,rgba(10,22,40,0.96) 32%,rgba(10,22,40,1) 100%);
+  padding:14px 16px 18px}
+.sticky-cta-inner{display:flex;align-items:center;gap:12px;max-width:720px;margin:0 auto;
+  padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(0,201,122,.35);backdrop-filter:blur(6px)}
+.sticky-cta-name{min-width:0;flex:1 1 auto;color:var(--white);font-size:13.5px;line-height:1.35}
+.sticky-cta-name b{display:block;color:var(--green);font-size:11.5px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;margin-bottom:2px}
+.sticky-cta-btn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  padding:12px 18px;border:0;border-radius:10px;background:var(--green-strong);color:#04231a;
+  font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;text-decoration:none;
+  min-height:46px}
+.sticky-cta-btn:hover{filter:brightness(1.06)}
+@media (max-width:680px){.sticky-cta{padding:10px 10px 14px}.sticky-cta-inner{padding:10px 12px}}
 
 /* ---------- sheets ---------- */
 .sheet{width:min(560px,calc(100% - 20px));max-width:none;max-height:88dvh;padding:0;border:0;
@@ -197,14 +258,21 @@ a{color:inherit}
 .sheet-head{padding:18px 20px 14px;border-bottom:1px solid var(--grey)}
 .sheet-kicker{color:var(--green-dark);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
 .sheet-head h2{margin-top:4px;color:var(--navy);font-family:"Playfair Display",serif;font-size:22px;line-height:1.2}
-.sheet-body{padding:16px 20px 4px;overflow:auto}
+.sheet-body{padding:16px 20px 4px;overflow:auto;font-size:14px;line-height:1.6;color:var(--text)}
+.sheet-body h3{margin:14px 0 6px;color:var(--green-dark);font-size:12.5px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase}
+.sheet-body h3:first-child{margin-top:0}
+.sheet-body p{margin-bottom:10px}
+.sheet-body ul{margin:0 0 12px;padding-left:20px}
+.sheet-body li{margin-bottom:6px}
+.sheet-body ol{margin:0 0 12px;padding-left:22px}
 .recap{margin-bottom:14px;padding:13px 15px;border-radius:12px;background:var(--grey-light)}
 .recap-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .recap-plan{color:var(--navy);font-size:16px;font-weight:800}
 .recap-amt{color:var(--navy);font-size:22px;font-weight:800}
 .recap-sub{margin-top:3px;color:var(--muted);font-size:13px}
 .sheet-links{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:13px}
-.sheet-links a{color:var(--green-dark);font-size:13.5px;font-weight:700}
+.sheet-links a{color:var(--green-dark);font-size:13.5px;font-weight:700;cursor:pointer}
 .agree{display:flex;gap:12px;align-items:flex-start;padding:13px 15px;border:2px solid var(--grey);
   border-radius:12px;cursor:pointer}
 .agree:has(input:checked){border-color:var(--green-strong);background:rgba(97,227,139,.08)}
@@ -217,19 +285,44 @@ a{color:inherit}
 .btn--go[disabled]{background:#dfe6ee;color:#9aa8b8;cursor:not-allowed}
 .btn--back{flex:0 0 auto;border:1px solid var(--grey);background:var(--white);color:var(--muted);font-weight:700}
 .sheet-note{padding:0 20px 18px;color:var(--muted);font-size:12.5px;line-height:1.5;text-align:center}
-.curr-list{display:grid;gap:11px}
-.curr-list li{list-style:none}
+.curr-list{display:grid;gap:11px;padding:0;margin:0}
+.curr-list li{list-style:none;margin:0}
 .curr-list b{display:block;color:var(--navy);font-size:15px}
 .curr-list span{color:var(--muted);font-size:13.5px;line-height:1.5}
+
+/* ---------- roadmap popup (30 day plan only) ---------- */
+#roadmapSheet .lede{margin:0 0 14px;color:var(--muted);font-size:14.5px;line-height:1.6}
+#roadmapSheet .timeline{margin:0}
+#roadmapSheet .phase{position:relative;padding:0 0 22px 26px;border-left:2px solid var(--grey);margin:0}
+#roadmapSheet .phase:last-child{padding-bottom:0;border-left-color:transparent}
+#roadmapSheet .phase::before{position:absolute;top:4px;left:-8px;width:14px;height:14px;border:3px solid var(--white);
+  border-radius:50%;background:var(--green-strong);content:"";box-shadow:0 0 0 2px var(--green-strong)}
+#roadmapSheet .phase-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin:0}
+#roadmapSheet .phase-chip{flex:0 0 auto;padding:3px 10px;border-radius:999px;background:rgba(97,227,139,.16);
+  color:var(--green-dark);font-size:11.5px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;white-space:nowrap}
+#roadmapSheet .phase-head h3{color:var(--navy);font-family:"DM Sans",sans-serif;font-size:17px;font-weight:800;line-height:1.25;margin:0;text-transform:none;letter-spacing:0}
+#roadmapSheet .daygroup{margin-top:13px}
+#roadmapSheet .day-label{display:inline-block;max-width:100%;padding:3px 10px;border-radius:7px;background:var(--navy);
+  color:var(--green);font-size:12.5px;font-weight:800;letter-spacing:.05em;line-height:1.35}
+#roadmapSheet .phase ul{margin:8px 0 0;padding:0;display:grid;gap:6px}
+#roadmapSheet .phase li{position:relative;padding-left:19px;color:var(--text);font-size:14px;
+  line-height:1.55;list-style:none;margin:0}
+#roadmapSheet .phase li::before{position:absolute;top:0;left:2px;color:var(--green-strong);font-size:11px;
+  font-weight:800;line-height:1.9;content:"●"}
+#roadmapSheet .phase li b{color:var(--navy)}
+#roadmapSheet .phase-note{margin-top:12px;padding:11px 13px;border-radius:10px;background:var(--grey-light);
+  color:var(--muted);font-size:13.5px;line-height:1.55}
 
 @media (max-width:680px){
   .page{width:100%;margin:0;border-radius:0}
   .top{padding:18px 16px 16px}
-  .inc,.plans{padding-right:16px;padding-left:16px}
-  .guar,.third,.docs,.next-wrap,.return-sec,.inc{margin-right:16px;margin-left:16px}
+  .welcome{margin:16px 16px 0;padding:20px}
+  .inc,.plans,.reviews{padding-right:16px;padding-left:16px}
+  .guar,.docs{margin-right:16px;margin-left:16px}
   .guar-strip{padding:10px 16px;flex-wrap:wrap}
   .guar-strip a{margin-left:0}
-  .after,.after-pay{padding:0 16px 18px}
+  .after{padding:0 16px 18px}
   .foot{padding:20px 16px 0}
   .foot-top{grid-template-columns:1fr;gap:18px;padding-bottom:18px}
   .bcard{gap:13px;padding:14px}
@@ -238,53 +331,9 @@ a{color:inherit}
   .plan{padding:16px}
   .docs{grid-template-columns:1fr}
 }
-
-/* ---------- phone walk order ---------- */
-.walk{padding:18px 26px 8px}
-.walk-kicker{color:var(--green-dark);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-.walk .h2{margin-top:6px;margin-bottom:8px}
-.walk-lede{margin-bottom:12px;color:var(--muted);font-size:14px;line-height:1.55}
-.roadmap-frame{width:100%;height:min(70vh,620px);border:1px solid var(--grey);border-radius:14px;
-  overflow:hidden;background:#f8fafc;box-shadow:0 10px 28px rgba(10,22,40,.08)}
-.roadmap-frame iframe{display:block;width:100%;height:100%;border:0}
-.need-drop{margin:10px 26px 16px;border:2px solid var(--green-strong);border-radius:15px;
-  background:rgba(97,227,139,.1);box-shadow:0 10px 28px rgba(0,201,122,.14)}
-.need-drop > summary{display:flex;min-height:58px;align-items:center;gap:10px;padding:14px 16px;
-  cursor:pointer;color:var(--navy);font-size:15.5px;font-weight:800;line-height:1.35;list-style:none}
-.need-drop > summary::-webkit-details-marker{display:none}
-.need-drop > summary .need-pill{flex:0 0 auto;padding:4px 10px;border-radius:999px;
-  background:var(--green-strong);color:#04231a;font-size:11.5px;font-weight:800;letter-spacing:.06em;
-  text-transform:uppercase}
-.need-drop > summary::after{margin-left:auto;padding-left:12px;color:var(--green-dark);font-size:18px;
-  font-weight:400;content:"▾"}
-.need-drop[open] > summary{border-bottom:1px solid rgba(0,201,122,.28)}
-.need-drop[open] > summary::after{content:"▴"}
-.price-drop{margin:0 26px 16px;border:1px solid var(--grey);border-radius:15px;background:var(--white)}
-.price-drop > summary{display:flex;min-height:56px;align-items:center;gap:10px;padding:14px 16px;
-  cursor:pointer;color:var(--navy);font-size:15px;font-weight:800;line-height:1.35;list-style:none}
-.price-drop > summary::-webkit-details-marker{display:none}
-.price-drop > summary .price-pill{flex:0 0 auto;padding:4px 10px;border-radius:999px;
-  background:var(--navy);color:var(--green);font-size:11.5px;font-weight:800;letter-spacing:.06em;
-  text-transform:uppercase}
-.price-drop > summary::after{margin-left:auto;padding-left:12px;color:var(--muted);font-size:18px;content:"▾"}
-.price-drop[open] > summary{border-bottom:1px solid var(--grey)}
-.price-drop[open] > summary::after{content:"▴"}
-.price-drop .plans{padding-top:8px}
-.price-drop .guar{margin-left:16px;margin-right:16px}
-.price-drop .inc{padding-left:16px;padding-right:16px}
-.price-drop .docs{margin-left:16px;margin-right:16px}
-.need-list{display:grid;gap:10px;padding:4px 16px 16px}
-.need-list li{display:flex;gap:10px;align-items:flex-start;padding:12px 13px;border:1px solid rgba(0,201,122,.22);
-  border-radius:12px;background:var(--white);color:var(--text);font-size:14px;line-height:1.5;list-style:none}
-.need-list li::before{flex:0 0 auto;margin-top:1px;color:var(--green-strong);font-weight:800;content:"→"}
-.need-list b{color:var(--navy)}
-@media (max-width:680px){
-  .walk{padding:14px 16px 6px}
-  .need-drop,.price-drop{margin-right:16px;margin-left:16px}
-  .roadmap-frame{height:min(65vh,560px)}
-}
-@media (prefers-reduced-motion:reduce){.choose{transition:none}}
+@media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow{transition:none}}
 </style>
+<!-- close-build:1788839936 -->
 </head>
 <body>
 <main class="page">
@@ -292,7 +341,7 @@ a{color:inherit}
   <section class="top">
     <img class="top-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
     <h1 id="topTitle">Here's what we just went over.</h1>
-    <p id="topSub">We'll walk the 30 day plan first. Options are at the bottom when we get there.</p>
+    <p id="topSub">Everything's here. Take your time. Pay when you're ready.</p>
     <div class="track-pill" id="trackPill">Certified High Ticket Closer</div>
     <div class="prep" id="prepBox" hidden>
       <div class="prep-card">
@@ -311,34 +360,11 @@ a{color:inherit}
     <p class="prep-fix" id="prepFix" hidden>Anything wrong there? Tell me before you pay and I'll fix it.</p>
   </section>
 
-
-
-  <section class="walk" aria-label="30 day game plan">
-    <div class="walk-kicker">Step 1 · Walk this first</div>
-    <div class="h2">Your 30 day game plan</div>
-    <p class="walk-lede">This is the path from enrollment to placement. Scroll inside the plan with me before we look at payment.</p>
-    <div class="roadmap-frame">
-      <iframe id="roadmapEmbed" title="Your 30 day game plan" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
+  <section class="welcome" id="welcomeBand">
+    <h2 id="welcomeTitle">Welcome to the <span>HTSA family</span>.</h2>
+    <p id="welcomeCopy">You're not just enrolling in a program. You're joining people who show up, do the work, and build something real. This page is yours to come back to. When you're ready, choose the payment option that fits.</p>
+    <a class="welcome-cta" href="#plans">Jump to payment ↓</a>
   </section>
-
-  <section class="inc">
-    <div class="h2">What you're getting</div>
-    <ul class="inc-list" id="incList"></ul>
-  </section>
-
-  <section class="return-sec" aria-label="What HTSA needs in return">
-    <div class="h2">What HTSA needs in return</div>
-    <p class="return-sub">Once you have results. Not on day one.</p>
-    <ul class="return-list">
-      <li><b>Reviews across all platforms</b> · Honest reviews in your own words.</li>
-      <li><b>Video testimonial after 90 days</b> · Short and real, once you have results to talk about.</li>
-      <li><b>3 introductions</b> · People who could use this. First 3 who enrol pay you $250 each. Everyone after that pays you $500 each.</li>
-    </ul>
-  </section>
-
-  <details class="price-drop" id="priceDrop">
-    <summary><span class="price-pill">Pricing</span> Your enrollment options</summary>
 
   <div class="guar-strip">
     <b>Placed in 6 months or refunded.</b>
@@ -346,8 +372,25 @@ a{color:inherit}
     <a href="#guarantee">See how it works ↓</a>
   </div>
 
-  <section class="plans">
-    <div class="h2">Your options</div>
+  <section class="inc">
+    <div class="h2">What you're getting</div>
+    <ul class="inc-list" id="incList"></ul>
+  </section>
+
+  <div class="guar" id="guarantee">
+    <span class="guar-tag" id="guarTag">Confirmed for your enrollment</span>
+    <h3 id="guarTitle">Placed within 6 months, or your money back.</h3>
+    <p id="guarBody">Do your part, and if you have not secured a qualifying role within 6 months of
+      certification, or after 50 interviews, whichever comes first, you qualify for a full refund
+      of the program fees. Documentation required.</p>
+    <div class="guar-you">
+      <b>Your part:</b>
+      <ul id="guarSteps"></ul>
+    </div>
+  </div>
+
+  <section class="plans" id="plans">
+    <div class="h2">Your payment options</div>
     <div class="plans-sub">Access opens the moment your payment clears.</div>
 
     <div class="plan plan--custom" id="planCustom" hidden>
@@ -371,6 +414,14 @@ a{color:inherit}
         <span class="plan-unit">one time</span>
       </div>
       <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
+      <details class="plan-sub">
+        <summary><span>More payment options</span><span class="plan-sub-chev" aria-hidden="true">▾</span></summary>
+        <div class="plan-splitit">
+          <div class="plan-splitit-title">Splitit — $500/month × 12 months</div>
+          <div class="plan-splitit-copy"><b>0% interest.</b> No credit pull. Uses the credit you already have on a Visa or Mastercard. Same $6,000 total, spread over 12 monthly charges of $500.</div>
+          <button type="button" class="plan-splitit-link" id="splititMoreBtn">How Splitit works →</button>
+        </div>
+      </details>
     </div>
 
     <div class="plan" id="planPlan">
@@ -386,6 +437,7 @@ a{color:inherit}
 
     <div class="plan" id="planClarity" hidden>
       <div class="plan-name">ClarityPay monthly</div>
+      <span class="plan-clarity-badge">0% interest · 0% APR</span>
       <div class="plan-note" id="clarityNote"></div>
       <div class="plan-figs">
         <span class="plan-amt" id="clarityAmt"></span>
@@ -395,41 +447,23 @@ a{color:inherit}
     </div>
   </section>
 
-  <div class="guar" id="guarantee">
-    <span class="guar-tag" id="guarTag">Performance guarantee · confirmed</span>
-    <h3 id="guarTitle">Placed within 6 months, or your money back.</h3>
-    <p id="guarBody">Do your part and if you have not secured a qualifying role within 6 months of
-      certification, or completed at least 50 interviews, you qualify for a full refund.
-      Documentation required.</p>
-    <div class="guar-you">
-      <b>Your part:</b>
-      <ul id="guarSteps"></ul>
-    </div>
+  <div class="docs">
+    <button class="doc" type="button" id="currBtn">📘 What's in the program</button>
+    <button class="doc" type="button" id="roadmapBtn">🗺 Your 30 day game plan</button>
+    <button class="doc doc--terms" type="button" id="tosBtn">📄 Full Terms of Service</button>
   </div>
-  </details>
 
-  <details class="next-wrap" id="afterPay">
-    <summary>2 options · Call me now, or self-enroll and follow these steps</summary>
+  <section class="after">
     <div class="next">
-      <p class="next-sub"><b>Option 1 · Call me now</b></p>
-      <div class="next-step">
-        <div class="next-num">1</div>
-        <div class="next-body">
-          <h3>Call or text me. We walk payment together.</h3>
-          <p>I stay on the line, you tap, I watch for the payment to clear, and I send your welcome and login emails while we are still talking.</p>
-          <a class="next-btn" href="tel:+16166121735">Call CJ · (616) 612-1735</a>
-          <a class="next-btn" href="sms:+16166121735?body=Can%20we%20jump%20on%20a%20quick%20call%20to%20enroll%3F" style="margin-top:8px">Text me for a time</a>
-        </div>
-      </div>
-
-      <p class="next-sub"><b>Option 2 · Self-enroll</b> Follow these steps in order.</p>
+      <div class="h2">After you pay</div>
+      <p class="next-sub">If you are finishing this on your own, do these four things in order.</p>
 
       <div class="next-step">
         <div class="next-num">1</div>
         <div class="next-body">
           <h3>Text CJ, payment made</h3>
           <p>Text <a href="sms:+16166121735">(616) 612-1735</a> the words <b>Payment made</b>. That is how I know to turn your access on if we are not on the phone together.</p>
-          <a class="next-btn" href="sms:+16166121735?body=Payment%20made">Text Payment made</a>
+          <a class="next-btn" href="sms:+16166121735&body=Payment%20made">Text Payment made</a>
         </div>
       </div>
 
@@ -452,14 +486,6 @@ a{color:inherit}
       <div class="next-step">
         <div class="next-num">3</div>
         <div class="next-body">
-          <h3>Nothing in your inbox after 10 minutes?</h3>
-          <p>Check spam and promotions, then text me. Do not re-pay, and do not create a second account.</p>
-        </div>
-      </div>
-
-      <div class="next-step">
-        <div class="next-num">4</div>
-        <div class="next-body">
           <h3>Book your kickoff with Mark</h3>
           <p>Mark is your Success Coach. This is a 15 minute Zoom to map your placement goals before you start the modules.</p>
           <a class="next-btn" href="https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call" target="_blank" rel="noopener noreferrer">Book kickoff call</a>
@@ -467,20 +493,68 @@ a{color:inherit}
       </div>
 
       <div class="next-step">
-        <div class="next-num">5</div>
+        <div class="next-num">4</div>
         <div class="next-body">
           <h3>Join the Mastermind</h3>
-          <p>Request the private Facebook group. Live coaching replays live there, and 680+ members support each other.</p>
+          <p>Request the private Facebook group. Live coaching replays live there, and 750+ members support each other.</p>
           <a class="next-btn" href="https://www.facebook.com/groups/1039656943556821" target="_blank" rel="noopener noreferrer">Request access on Facebook</a>
         </div>
       </div>
     </div>
-  </details>
+  </section>
 
-  <div class="docs">
-    <a class="doc" href="#" id="currBtn">📘 What's in the program</a>
-    <a class="doc" id="termsBtn" target="_blank" rel="noopener noreferrer">📄 Terms of Service</a>
-  </div>
+  <!-- CJ REVIEWS (last content, before footer) -->
+  <section class="reviews">
+    <div class="reviews-banner">
+      <div class="reviews-label">CJ Reviews</div>
+      <p class="reviews-desc">Real messages from people who worked directly with CJ.</p>
+    </div>
+
+    <div class="review-card">
+      <div class="review-meta">To CJ</div>
+      <div class="review-body">Hey CJ, it's Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could've made for my life right now.<br><br>I think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!</div>
+      <div class="review-attr">— Janaye · text message</div>
+    </div>
+
+    <details class="reviews-more" id="reviewsMore">
+      <summary>
+        <span>See more reviews<span class="reviews-more-sub">9 more messages from people who worked with CJ</span></span>
+        <span class="reviews-more-arrow" aria-hidden="true">▸</span>
+      </summary>
+      <div class="reviews-more-panel">
+        <div class="review-card">
+          <div class="review-meta">To CJ</div>
+          <div class="review-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you're doing.</div>
+          <div class="review-attr">— Zach Scanlon · text message</div>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">To CJ</div>
+          <div class="review-body">CJ, I just wanted to thank you for closing me on the program. I can already tell I'll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process.</div>
+          <div class="review-attr">— Riley Colston · text message</div>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">To CJ</div>
+          <div class="review-body">CJ, the program has been great so far and I've made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you.</div>
+          <div class="review-attr">— Amy Colombo · text message</div>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">To CJ</div>
+          <div class="review-body">CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I'm so grateful. I landed my dream role 65 days in, and you played a real part in that.</div>
+          <div class="review-attr">— Kate R. · text message</div>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">To CJ</div>
+          <div class="review-body">Just received this news from my first mock call and wanted to share. I'm super grateful to you for helping me move forward with HTSA. Keep doing what you're doing.</div>
+          <div class="review-attr">— Jessica C. · text message</div>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">To CJ</div>
+          <div class="review-body">Hey CJ, just wanted to say thanks, seriously. You didn't let me slip away after I tried to bail on our call. You stayed patient, kept it real, and showed me why this team's different. That's why I'm all in now. Appreciate you.</div>
+          <div class="review-attr">— Nick S. · text message</div>
+        </div>
+      </div>
+    </details>
+  </section>
 
   <footer class="foot">
     <div class="foot-top">
@@ -515,6 +589,17 @@ a{color:inherit}
   </footer>
 </main>
 
+<!-- Sticky bottom CTA - the "stays with them" magnet -->
+<div class="sticky-cta" id="stickyCta">
+  <div class="sticky-cta-inner">
+    <div class="sticky-cta-name">
+      <b id="stickyLabel">Sean's enrollment</b>
+      <span id="stickySub">Paid in full · $6,000</span>
+    </div>
+    <a class="sticky-cta-btn" href="#plans">Choose payment ↓</a>
+  </div>
+</div>
+
 <!-- checkout confirm -->
 <dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
   <div class="sheet-head">
@@ -531,23 +616,21 @@ a{color:inherit}
     </div>
     <p class="plan-warn" id="sheetWarn" hidden></p>
     <div class="sheet-links">
-      <a href="#" id="sheetCurr">📘 What's included</a>
-      <a id="sheetTerms" target="_blank" rel="noopener noreferrer">📄 Terms of Service (PDF)</a>
+      <a id="sheetTerms">📄 Read full Terms of Service</a>
     </div>
     <label class="agree">
       <input type="checkbox" id="agreeBox">
-      <span>I agree to the HTSA Terms of Service and refund policy, including no refund except
-        under the performance guarantee confirmed for my enrollment.</span>
+      <span>I agree to the HTSA Terms of Service and refund policy, and I understand I must meet the minimum requirements for my performance guarantee to remain in effect.</span>
     </label>
   </div>
   <div class="sheet-foot">
     <button class="btn btn--back" type="button" id="backBtn">Back</button>
     <button class="btn btn--go" type="button" id="goBtn" disabled>Continue to payment</button>
   </div>
-  <p class="sheet-note">Your agreement is timestamped and sent to you with your receipt.</p>
+  <p class="sheet-note">Your agreement is timestamped and recorded to CJ's enrollment sheet with your receipt.</p>
 </dialog>
 
-<!-- curriculum -->
+<!-- curriculum popup -->
 <dialog class="sheet" id="currSheet" aria-labelledby="currTitle">
   <div class="sheet-head">
     <div class="sheet-kicker">Inside the program</div>
@@ -557,10 +640,190 @@ a{color:inherit}
   <div class="sheet-foot"><button class="btn btn--go" type="button" id="currClose">Got it</button></div>
 </dialog>
 
+<!-- 30 day game plan popup (in-page, plan only) -->
+<dialog class="sheet" id="roadmapSheet" aria-labelledby="roadmapTitle">
+  <div class="sheet-head">
+    <div class="sheet-kicker">The plan</div>
+    <h2 id="roadmapTitle">Your 30 day game plan</h2>
+  </div>
+  <div class="sheet-body">
+    <p class="lede">This is how you do it in thirty days. It is a game plan, not an obligation. Members putting in focused daily blocks have finished in 22 to 26 days. Speed comes from reps, not from time passing.</p>
+    <div class="timeline">
+      <div class="phase">
+        <div class="phase-head">
+          <span class="phase-chip">Days 1 to 5</span>
+          <h3>Get in and get through the modules</h3>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Day 1</div>
+          <ul>
+            <li>Access opens. Your welcome email arrives, <b>flag it as important</b>, and you set your password.</li>
+            <li>You're live inside the certification platform. <b>55 modules</b> waiting for you.</li>
+            <li>Book your 15 minute kickoff with <b>Mark</b>, your Success Coach.</li>
+            <li>Join the Mastermind community, open 24/7. Every coaching replay lives there and <b>750+ members</b> are in it. Post an introduction the day you get in.</li>
+            <li>Put the live calls in your calendar now: <b>Tuesdays 12:00 PM EST</b> and <b>Wednesdays 5:00 PM EST</b>. Set a one hour reminder and a ten minute reminder on both.</li>
+          </ul>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Days 1 to 5</div>
+          <ul>
+            <li>Work the 55 certification modules. Some people are through them in two days.</li>
+            <li>Target is finished by day 5. Day 7 at the outside.</li>
+            <li>Watch at 1.25x or 1.5x. Take notes on the objection sections, you'll use them in the sandbox next week.</li>
+            <li>Show up for the Tuesday and Wednesday live calls from your first week. Do not wait until you feel ready.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-head">
+          <span class="phase-chip">Days 5 to 12</span>
+          <h3>Run your reps in the AI sandbox</h3>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Master 5 TEDx Coaching Sales Calls in AI Roleplay</div>
+          <ul>
+            <li>Unlimited AI roleplay, any hour you want it. Plan on about a week here. This is the part that actually makes you good.</li>
+            <li>Get your first thirty awkward calls out of the way before you ever talk to a real prospect.</li>
+            <li>It critiques tonality, pacing, and how deep your discovery went. Run them back to back, not one a day.</li>
+            <li>Load it with the scripts and objections of the niche you're targeting so your practice matches the job you want.</li>
+            <li>Keep attending the live calls. Bring a question from your reps.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-head">
+          <span class="phase-chip">Days 12 to 16</span>
+          <h3>Certify, then get your materials built</h3>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Certification</div>
+          <ul>
+            <li>Live mock call with <b>Mark</b>, who plays a defensive prospect. Scored against a rubric. It's meant to be hard.</li>
+            <li>Pass it and you're a Certified High Ticket Closer. That's the credential the companies in our network recognize.</li>
+          </ul>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Your placement 1-on-1</div>
+          <ul>
+            <li>Sit down with <b>Nate</b>, our Placement Director. You set your target niches, the schedule you want, and what you'll take.</li>
+            <li>Nate rewrites your LinkedIn and reformats your resume into the template our placed members use.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-head">
+          <span class="phase-chip">Days 16 to 30</span>
+          <h3>Pick a few great fits and go get one</h3>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Introductions</div>
+          <ul>
+            <li>Nate introduces you directly to companies in our partner network. That's the difference between applying and being introduced, and it's most of why our members move faster than the open market.</li>
+          </ul>
+        </div>
+        <div class="daygroup">
+          <div class="day-label">Interviews</div>
+          <ul>
+            <li><b>Pick three to five companies that genuinely fit</b> and run those interviews inside one week. This is not throwing applications at a wall. A small number of good fits, done properly.</li>
+            <li>Placement usually lands somewhere between one and three weeks. Around ten days is realistic if you're not dragging your feet.</li>
+            <li>Get in, get the reps, start earning. You can move to a better seat later with experience behind you. The first offer is a starting line, not a life sentence.</li>
+          </ul>
+        </div>
+        <p class="phase-note">This is the front half compressed on purpose. Finish the modules and your reps early and you leave yourself two full weeks for placement, which is the part that pays you.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sheet-foot"><button class="btn btn--go" type="button" id="roadmapClose">Got it</button></div>
+</dialog>
+
+<!-- Terms of Service popup (in-page) -->
+<dialog class="sheet" id="tosSheet" aria-labelledby="tosTitle">
+  <div class="sheet-head">
+    <div class="sheet-kicker">Enrollment agreement</div>
+    <h2 id="tosTitle">Terms of Service</h2>
+  </div>
+  <div class="sheet-body">
+    <h3>Certified High Ticket Closer Program</h3>
+
+    <h3>Access to course content, Mastermind, and coaching</h3>
+    <p>Members receive <b>lifetime access to the course content</b> for their core product, <b>lifetime access to the private Facebook Mastermind community</b> (750+ members), and <b>lifetime access to Live Group Coaching Calls via Zoom, held Tuesdays at 12:00 PM EST and Wednesdays at 5:00 PM EST</b> with Chad. <b>1-on-1 coaching is included</b> and must be scheduled within three months of the program start date unless HTSA approves an extension.</p>
+
+    <h3>AI roleplay platform</h3>
+    <p><b>AI roleplay and the 24/7 AI coach are included at no cost while you are actively completing the program.</b> If you choose to keep the AI platform after placement, it is available at <b>$39/month</b> as an optional add-on.</p>
+
+    <h3>Post-hire support</h3>
+    <p>After you are placed, <b>HTSA provides 90 days of post-hire call review and performance feedback</b> to help you hit your KPIs and ramp into your new role.</p>
+
+    <h3>Limited placement guarantee</h3>
+    <p>HTSA offers a limited guarantee to members who meet the following conditions:</p>
+    <ol>
+      <li>Complete all course materials, roleplays, attend all 1-on-1 training, and finish certification before interview opportunities will be offered.</li>
+      <li>Attend at least one group coaching call per week throughout the program.</li>
+      <li>Apply to a minimum of 50 high-ticket closer or SDR/Setter positions and provide proof of application, such as screenshots or email confirmations.</li>
+    </ol>
+    <p><b>If the Member completes all these requirements and does not secure a qualifying role within 6 months of completing the certification program, or after completing at least 50 interviews (whichever comes first), they will be granted a full refund of the program's fees.</b></p>
+
+    <h3>Payment</h3>
+    <p>The Member agrees to pay HTSA in full for the purchased product(s) in United States Dollars (USD). Payments delinquent over 14 days may be sent to collections, and HTSA reserves the right to terminate the agreement. Finance charges will apply to all payment plans.</p>
+
+    <h3>Refund policy</h3>
+    <p>Refunds for purchased products or down payments will not be granted outside of the Limited Guarantee above. All sales are final except as outlined above.</p>
+
+    <h3>Notice to buyers</h3>
+    <p>You must be 18 years of age or older to sign this Agreement. If you are under 18, a legal guardian must sign on your behalf.</p>
+
+    <h3>Member expectations</h3>
+    <p>I am excited to fully commit to myself, my dreams, my career, and the High Ticket Sales Academy program. I understand that results require consistent effort.</p>
+
+    <h3>Enrollment agreement</h3>
+    <p>This Agreement is a legal contract between you (Member) and High Ticket Sales Academy, LLC (HTSA). By purchasing an HTSA product, the Member certifies that they have read, understood, and agree to this Agreement and the Refund Policy.</p>
+
+    <h3>Use of recordings</h3>
+    <p>Live group calls, webinars, testimonials, Facebook posts, or other audio/visual services may be recorded and used by HTSA for business purposes unless the Member specifically requests otherwise.</p>
+
+    <h3>Hours of operation</h3>
+    <p>HTSA's office is open Monday to Friday, 9 AM to 5 PM EST.</p>
+
+    <h3>Intellectual property</h3>
+    <p>All content within HTSA's program is protected by intellectual property rights and the Member agrees to use it only for personal purposes. Unauthorized reproduction or distribution may result in civil or criminal penalties.</p>
+
+    <h3>Customer service</h3>
+    <p>For questions or comments regarding HTSA products, please contact support@highticketsalesacademy.com or call 616-344-6220.</p>
+  </div>
+  <div class="sheet-foot"><button class="btn btn--go" type="button" id="tosClose">Got it</button></div>
+</dialog>
+
+<!-- Splitit popup (in-page) -->
+<dialog class="sheet" id="splititSheet" aria-labelledby="splititTitle">
+  <div class="sheet-head">
+    <div class="sheet-kicker">Payment option</div>
+    <h2 id="splititTitle">How Splitit works</h2>
+  </div>
+  <div class="sheet-body">
+    <h3>The simple version</h3>
+    <ul>
+      <li>$500 per month for 12 months ($6,000 total).</li>
+      <li>0% interest added by Splitit.</li>
+      <li>No credit pull, no new loan, no new credit account.</li>
+      <li>You use a Visa or Mastercard you already have.</li>
+      <li>That card must have the full $6,000 available at checkout.</li>
+      <li>Your statement charge each month is $500. The rest is a temporary hold, not a charge.</li>
+    </ul>
+    <h3>What actually happens</h3>
+    <ol>
+      <li><b>Today at checkout:</b> choose Splitit under the $6,000 Paid in Full button. Splitit charges $500 and places a temporary pre-authorization hold for the remaining balance.</li>
+      <li><b>Your statement shows:</b> only that first $500. The hold is not a $6,000 purchase on your bill.</li>
+      <li><b>Each month after that:</b> another $500 posts. As each payment clears, the same amount of hold is released back into your available credit.</li>
+      <li><b>By month 12:</b> you have paid $6,000 in twelve steps. Cash flow stays predictable instead of one large posted balance on day one.</li>
+    </ol>
+    <p><b>Bottom line:</b> if you have strong credit and want to preserve cash flow, Splitit spreads the same $6,000 across a year at 0% interest without a credit application.</p>
+  </div>
+  <div class="sheet-foot"><button class="btn btn--go" type="button" id="splititClose">Got it</button></div>
+</dialog>
+
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1788812196
    ============================================================ */
 const BUYER = {
   firstName: "Sean",
@@ -573,25 +836,13 @@ const BUYER = {
   show:      ["pif", "plan", "clarity"]
 };
 
-/* One-off negotiated price. Leave null unless CJ agreed one on the call.
-   The $6k ClarityPay promo checkout can also go here if CJ names a custom amount. */
 const CUSTOM_OFFER = null;
-// const CUSTOM_OFFER = {
-//   name: "Your negotiated price", note: "What CJ agreed with you on the call.",
-//   amount: "$X,XXX", unit: "one time", badge: "Your offer",
-//   checkout: "https://whop.com/checkout/plan_VUSDju20gTBCg/"
-// };
 
 const TRACKS = {
-  closer: { label: "Certified High Ticket Closer", curriculumUrl: "[CURRICULUM_URL_CLOSER]" },
-  setter: { label: "Certified Appointment Setter", curriculumUrl: "[CURRICULUM_URL_SETTER]" }
+  closer: { label: "Certified High Ticket Closer" },
+  setter: { label: "Certified Appointment Setter" }
 };
 
-/* Promotion / special-offer checkouts (saved). Use with offer: "reactivation".
-   $5,000 PIF:     https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true
-   3 × $1,750:     https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true   ($5,250 total)
-   $6k ClarityPay: https://whop.com/checkout/plan_VUSDju20gTBCg/           ($500/mo × 12)
-   Canonical table: templates/HTSA-SECONDARY-PAYMENT-OPTIONS.md */
 const OFFERS = {
   standard: {
     pif:  { amount: "$6,000", was: "$7,000",
@@ -601,21 +852,9 @@ const OFFERS = {
             note: "First payment today, then one a month for three months.",
             warn: "",
             checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
-    clarity: { amount: "$600", unit: "a month · $7,200 total",
-               note: "Monthly financing. Soft credit check, needs a 620 or better.",
+    clarity: { amount: "$600", unit: "a month · 0% interest · $7,200 total",
+               note: "Monthly financing with 0% interest APR. Soft credit check, 620 or better credit score to qualify.",
                checkout: "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" }
-  },
-  reactivation: {
-    pif:  { amount: "$5,000", was: "$7,000",
-            note: "One payment. Your special offer price.",
-            checkout: "https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true" },
-    plan: { name: "3 payments", amount: "$1,750", unit: "today · $5,250 total",
-            note: "First payment today, then one a month for two more months.",
-            warn: "",
-            checkout: "https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true" },
-    clarity: { amount: "$500", unit: "a month · $6,000 total",
-               note: "Monthly financing at your special offer rate. Soft credit check, needs a 620 or better.",
-               checkout: "https://whop.com/checkout/plan_VUSDju20gTBCg/" }
   }
 };
 
@@ -627,7 +866,7 @@ const INCLUDED = [
   "A personalized 30 day action plan built with our team",
   "90 days of call review and coaching after you're hired",
   "Unlimited AI roleplay and a 24/7 AI coach, live on your calls",
-  "Lifetime access to the private Mastermind and job network"
+  "Lifetime access to the private Mastermind, 750+ members"
 ];
 
 const CURRICULUM = [
@@ -637,8 +876,8 @@ const CURRICULUM = [
   ["Placement support", "Resume optimization, interview preparation, and access to the placement system. Most closers are in a role within 30 to 60 days."],
   ["Your 30 day action plan", "Built with our team, focused on getting you placed and transitioned in."],
   ["90 days of post-hire support", "Call review and performance feedback for your first 90 days on the job."],
-  ["AI roleplay and 24/7 AI coach", "Unlimited practice before real prospects, plus live support during calls. Optional $35/month if you keep it after placement."],
-  ["Community and job network", "Lifetime access to the private Facebook Mastermind, 680+ members."]
+  ["AI roleplay and 24/7 AI coach", "Unlimited practice before real prospects, plus live support during calls. Free while you're in the program. Optional $39/month if you keep it after placement."],
+  ["Community and job network", "Lifetime access to the private Facebook Mastermind, 750+ members."]
 ];
 
 const GUARANTEE_STEPS = [
@@ -674,15 +913,13 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   try{const k="htsa_enroll_open_"+(BUYER.slug||"x");
     if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");event("page_open");}}catch(e){event("page_open");}
 
-  const nextWrap = el("afterPay");
-  if (nextWrap) {
-    nextWrap.addEventListener("toggle", function () {
-      if (nextWrap.open) event("next_steps_opened");
-    }, { once: true });
-  }
-
   /* ---------- header ---------- */
-  if (val(first)) el("topTitle").textContent = first + ", here's what we just went over.";
+  if (val(first)) {
+    el("topTitle").textContent = first + ", here's what we just went over.";
+    el("welcomeTitle").innerHTML = "Welcome to the <span>HTSA family</span>, " + first + ".";
+    el("stickyLabel").textContent = first + "'s enrollment";
+    el("guarTag").textContent = "Confirmed for " + first + "'s enrollment";
+  }
   el("trackPill").textContent = T.label;
   if (val(BUYER.fullName)) {
     el("prepBox").hidden = false; el("prepFix").hidden = false;
@@ -710,6 +947,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("clarityAmt").textContent  = O.clarity.amount;
   el("clarityUnit").textContent = O.clarity.unit;
   el("clarityNote").textContent = O.clarity.note;
+  el("stickySub").textContent = "Paid in full · " + O.pif.amount;
 
   const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
@@ -739,31 +977,52 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   }
 
   /* ---------- docs ---------- */
-  el("termsBtn").href = TERMS_URL; el("sheetTerms").href = TERMS_URL;
-  const roadEmbed = el("roadmapEmbed");
-  if (roadEmbed) {
-    const roadName = (val(first) || "").replace(/[^A-Za-z' -]/g, "").slice(0, 24);
-    const roadFile = "htsa-enrollment-" + (BUYER.slug || "").replace(/_/g, "-") + ".html";
-    let roadHref = BUYER.track === "setter" ? "/24-day-roadmap.html" : "/30-day-roadmap.html";
-    const qs = [];
-    if (roadName) qs.push("n=" + encodeURIComponent(roadName));
-    if (/^[A-Za-z0-9._-]+\.html$/.test(roadFile) && !ph(BUYER.slug)) qs.push("e=" + encodeURIComponent(roadFile));
-    if (qs.length) roadHref += "?" + qs.join("&");
-    roadEmbed.src = roadHref;
-    event("roadmap_opened");
-    const walkTitle = document.querySelector(".walk .h2");
-    if (walkTitle && BUYER.track === "setter") walkTitle.textContent = "Your 24 day setter game plan";
-  }
+  function openSheet(d){ if (typeof d.showModal === "function") d.showModal(); else d.setAttribute("open",""); }
+  function closeSheet(d){ if (typeof d.close === "function") d.close(); else d.removeAttribute("open"); }
+
   const currSheet = el("currSheet");
-  function openCurr(e){ e.preventDefault(); event("curriculum_opened");
-    if (typeof currSheet.showModal === "function") currSheet.showModal(); }
-  el("currBtn").addEventListener("click", openCurr);
-  el("sheetCurr").addEventListener("click", openCurr);
-  el("currClose").addEventListener("click", function(){ currSheet.close(); });
-  currSheet.addEventListener("click", function(e){ if(e.target===currSheet) currSheet.close(); });
-  [el("termsBtn"), el("sheetTerms")].forEach(function(a){
-    a.addEventListener("click", function(){ event("terms_opened",{linkLabel:TERMS_VERSION,linkUrl:TERMS_URL}); });
-  });
+  el("currBtn").addEventListener("click", function(e){ e.preventDefault(); event("curriculum_opened"); openSheet(currSheet); });
+  el("currClose").addEventListener("click", function(){ closeSheet(currSheet); });
+  currSheet.addEventListener("click", function(e){ if(e.target===currSheet) closeSheet(currSheet); });
+
+  const roadSheet = el("roadmapSheet");
+  el("roadmapBtn").addEventListener("click", function(e){ e.preventDefault(); event("roadmap_opened"); openSheet(roadSheet); });
+  el("roadmapClose").addEventListener("click", function(){ closeSheet(roadSheet); });
+  roadSheet.addEventListener("click", function(e){ if(e.target===roadSheet) closeSheet(roadSheet); });
+
+  const tosSheet = el("tosSheet");
+  function openTos(){ event("terms_opened",{linkLabel:TERMS_VERSION,linkUrl:TERMS_URL}); openSheet(tosSheet); }
+  el("tosBtn").addEventListener("click", openTos);
+  el("sheetTerms").addEventListener("click", function(e){ e.preventDefault(); openTos(); });
+  el("tosClose").addEventListener("click", function(){ closeSheet(tosSheet); });
+  tosSheet.addEventListener("click", function(e){ if(e.target===tosSheet) closeSheet(tosSheet); });
+
+  const splitit = el("splititSheet");
+  el("splititMoreBtn").addEventListener("click", function(e){ e.preventDefault(); event("splitit_detail_opened"); openSheet(splitit); });
+  el("splititClose").addEventListener("click", function(){ closeSheet(splitit); });
+  splitit.addEventListener("click", function(e){ if(e.target===splitit) closeSheet(splitit); });
+
+  /* ---------- reviews ---------- */
+  const rm = el("reviewsMore");
+  if (rm) {
+    rm.addEventListener("toggle", function(){
+      if (rm.open) event("reviews_expanded");
+    });
+  }
+
+  /* ---------- sticky cta hide near footer ---------- */
+  const cta = el("stickyCta");
+  const foot = document.querySelector(".foot");
+  function updateCta(){
+    if (!foot || !cta) return;
+    const r = foot.getBoundingClientRect();
+    const viewportH = window.innerHeight || document.documentElement.clientHeight;
+    cta.style.opacity = (r.top < viewportH - 60) ? "0" : "1";
+    cta.style.pointerEvents = (r.top < viewportH - 60) ? "none" : "auto";
+  }
+  updateCta();
+  window.addEventListener("scroll", updateCta, { passive:true });
+  window.addEventListener("resize", updateCta);
 
   /* ---------- choose, agree, pay ---------- */
   const sheet = el("sheet"), agree = el("agreeBox"), go = el("goBtn");
@@ -781,13 +1040,13 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       if (p.warn) { w.hidden = false; w.textContent = p.warn; } else { w.hidden = true; w.textContent = ""; }
       agree.checked = false; go.disabled = true; go.textContent = "Continue to payment";
       event("plan_selected", { linkLabel: p.name, linkUrl: p.url });
-      if (typeof sheet.showModal === "function") sheet.showModal(); else window.location.href = p.url;
+      openSheet(sheet);
     });
   });
 
   agree.addEventListener("change", function(){ go.disabled = !agree.checked; });
-  el("backBtn").addEventListener("click", function(){ event("terms_abandoned",{linkLabel:chosen||""}); sheet.close(); });
-  sheet.addEventListener("click", function(e){ if(e.target===sheet) sheet.close(); });
+  el("backBtn").addEventListener("click", function(){ event("terms_abandoned",{linkLabel:chosen||""}); closeSheet(sheet); });
+  sheet.addEventListener("click", function(e){ if(e.target===sheet) closeSheet(sheet); });
 
   go.addEventListener("click", function () {
     if (!agree.checked || !chosen) return;
@@ -797,6 +1056,8 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       enrollmentPageUrl:canonicalUrl(), clientSlug:(BUYER.slug||"").replace(/_/g,"-"),
       termsUrl:TERMS_URL, termsVersion:TERMS_VERSION, track:BUYER.track, offer:BUYER.offer,
       selectedPlan:p.name, selectedAmount:p.amt, planDisclosure:p.warn || "",
+      agreedCheckbox:true,
+      agreementText:"I agree to the HTSA Terms of Service and refund policy, and I understand I must meet the minimum requirements for my performance guarantee to remain in effect.",
       userAgent:navigator.userAgent||"", timestamp:new Date().toISOString() });
     event("checkout_started", { linkLabel:p.name, linkUrl:p.url });
     setTimeout(function(){ window.location.href = p.url; }, 550);
