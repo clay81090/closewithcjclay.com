@@ -57,7 +57,10 @@ a{color:inherit}
 .prep-name{margin-top:3px;color:var(--white);font-size:14.5px;font-weight:700;line-height:1.25}
 .prep-line{margin-top:3px;color:rgba(255,255,255,.68);font-size:12.5px;line-height:1.4;word-break:break-word}
 .prep-line a{color:rgba(255,255,255,.78);text-decoration:none}
-.prep-fix{margin:9px auto 0;max-width:520px;color:rgba(255,255,255,.55);font-size:12px;text-align:center}
+.prep-fix{display:none}
+.prep-intro{margin:14px auto 0;max-width:560px;padding:0 4px;color:rgba(255,255,255,.88);font-size:14.5px;line-height:1.6;text-align:left}
+.prep-intro p{margin:0 0 10px}
+.prep-intro p:last-child{margin-bottom:0}
 @media (max-width:680px){.prep{grid-template-columns:1fr}}
 
 /* ---------- welcome band (green outline, high emotional beat) ---------- */
@@ -390,7 +393,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1788838315 -->
+<!-- close-build:1788902250 -->
 </head>
 <body>
 <main class="page">
@@ -414,7 +417,7 @@ a{color:inherit}
         <div class="prep-line"><a href="tel:+16166121735">(616) 612-1735</a></div>
       </div>
     </div>
-    <p class="prep-fix" id="prepFix" hidden>Anything wrong there? Tell me before you pay and I'll fix it.</p>
+    <div class="prep-intro" id="prepIntro" hidden></div>
   </section>
 
   <section class="welcome" id="welcomeBand">
@@ -942,7 +945,8 @@ const BUYER = {
   slug:      "norah_jewell",
   track:     "closer",
   offer:     "standard",
-  show:      ["pif", "plan", "clarity"]
+  show:      ["pif", "plan", "clarity"],
+  intro:     'Norah, I really enjoyed our call. You are bright, you already know this process better than most people starting out, and I think you would make a great closer. This is the start of a real career. You can still take a setting role if you prefer, but with support from us and your parents around the clock, I do not see a need to keep you on setter only.\n\nFrom here it is about the right offer, showing up prepared in the interview, and having Chad, Nate, our coaches, and your parents training with you. Chad will even review one of your live calls each week for the first 90 days to help you ramp. Our success is tied to yours. We are excited to have you in the HTSA family.'
 };
 
 const CUSTOM_OFFER = null;
@@ -1031,7 +1035,23 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   }
   el("trackPill").textContent = T.label;
   if (val(BUYER.fullName)) {
-    el("prepBox").hidden = false; el("prepFix").hidden = false;
+    el("prepBox").hidden = false;
+    const introEl = el("prepIntro");
+    if (introEl) {
+      const raw = (typeof BUYER.intro === "string" && BUYER.intro.trim())
+        ? BUYER.intro.trim()
+        : (first
+            ? first + ", I really enjoyed speaking with you. It was clear you take your future seriously, and that is exactly who we love working with at HTSA. This page locks in what we covered so you can move with confidence.\n\nWhen you are ready, choose the payment option that fits. Access opens as soon as payment clears, and we will be with you through training, interview prep, and placement. Our success is tied to yours."
+            : "");
+      if (raw) {
+        introEl.hidden = false;
+        introEl.innerHTML = raw.split(/\n\n+/).map(function(p){
+          const d = document.createElement("p");
+          d.textContent = p.replace(/\s+/g, " ").trim();
+          return d.outerHTML;
+        }).join("");
+      }
+    }
     el("prepName").textContent  = BUYER.fullName;
     el("prepEmail").textContent = val(BUYER.email);
     el("prepPhone").textContent = val(BUYER.phone);

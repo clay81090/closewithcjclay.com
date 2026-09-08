@@ -120,7 +120,8 @@ def write_page(
         f'  slug:      "{bslug}",\n'
         f'  track:     "{track}",\n'
         f'  offer:     "{offer}",\n'
-        f'  show:      [{show_js}]\n'
+        f'  show:      [{show_js}],\n'
+        f'  intro:     ""\n'
         f"}};"
     )
     # Stamp lives in the JS comment so the live poll can tell new html from a cached old invoice.
