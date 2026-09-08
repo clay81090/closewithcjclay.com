@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARCHIVE LONG ENROLL V04-KARISSA-SETTER · Karissa Rodriguez setter invoice (early self-enroll lineage)</title>
+<title>HTSA Enrollment — CJ Clay</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -382,11 +382,11 @@
     margin-bottom: 12px;
   }
 
-  /* Option labels — subtle neutral (no orange guarantee styling) */
+  /* Option 1 / 2 labels — orange accent (same family as invest-note), not green like pay buttons */
   .invest-badge--option {
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.72);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 156, 122, 0.12);
+    color: #ff9c7a;
+    border: 1px solid rgba(255, 156, 122, 0.35);
     letter-spacing: 1.4px;
   }
 
@@ -410,6 +410,94 @@
 
   .invest-option-actions--pay {
     margin-top: 14px;
+  }
+
+  /* Bonus — Chad 1:1 sessions (stands out on invest card) */
+  .invest-bonus-chad {
+    margin: 20px 0 18px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(0, 201, 122, 0.16) 0%, rgba(10, 22, 40, 0.55) 100%);
+    border: 2px solid var(--green);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 8px 28px rgba(0, 201, 122, 0.14);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .invest-bonus-chad-kicker {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+
+  .invest-bonus-chad-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+
+  .invest-bonus-chad-body {
+    font-size: 12px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.76);
+    margin: 0;
+  }
+
+  .invest-bonus-chad-body strong {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  /* Splitit note + detail (under $6k PIF) */
+  .invest-splitit-wrap {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .invest-splitit-intro {
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0 0 12px;
+  }
+
+  .invest-splitit-intro strong {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .invest-splitit-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 156, 122, 0.4);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .invest-splitit-head {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff9c7a;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .invest-splitit-apply {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0 0 10px;
+    line-height: 1.55;
+  }
+
+  .invest-splitit-fine {
+    font-size: 10.5px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.48);
+    margin: 0;
   }
 
   .invest-badge.financing {
@@ -516,6 +604,56 @@
     text-decoration: none;
     border-bottom: 1px solid rgba(0,154,94,0.4);
     padding-bottom: 1px;
+  }
+
+  .step-pay-pick {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 10px;
+    margin: 14px 0 4px;
+  }
+
+  .step-pay-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.25;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    border: 2px solid transparent;
+    flex: 1 1 160px;
+    min-width: 140px;
+  }
+
+  .step-pay-tab:hover {
+    transform: translateY(-1px);
+  }
+
+  .step-pay-tab--pif {
+    background: var(--navy);
+    color: var(--white);
+    border-color: rgba(10, 22, 40, 0.5);
+  }
+
+  .step-pay-tab--pif:hover {
+    border-color: var(--green);
+    box-shadow: 0 6px 18px rgba(10, 22, 40, 0.2);
+  }
+
+  .step-pay-tab--4pay {
+    background: var(--green);
+    color: var(--navy);
+    box-shadow: 0 10px 22px rgba(0, 201, 122, 0.2);
+  }
+
+  .step-pay-tab--4pay:hover {
+    box-shadow: 0 12px 26px rgba(0, 201, 122, 0.28);
   }
 
   .phone-option {
@@ -739,6 +877,8 @@
     .invest-option-actions { width: 100%; }
     .invest-btn { display: block; width: 100%; text-align: center; }
     .step-item { padding: 16px 20px; gap: 14px; }
+    .step-pay-pick { flex-direction: column; }
+    .step-pay-tab { flex: 1 1 auto; width: 100%; min-width: 0; }
     .pay-pill-btn { display: block; text-align: center; margin-right: 0; }
     .phone-option { padding: 14px 20px; }
     .closing-band { padding: 18px 20px; }
@@ -1008,33 +1148,6 @@
     }
   }
 
-
-  .curriculum-sonya-note {
-    padding: 14px 36px;
-    background: linear-gradient(135deg, #f0fdf7 0%, #f7f9fc 100%);
-    border-bottom: 1px solid var(--mid);
-    font-size: 11.5px;
-    line-height: 1.65;
-    color: var(--muted);
-  }
-  .curriculum-sonya-note strong {
-    color: var(--navy);
-  }
-  .curriculum-part-head {
-    padding: 14px 36px 12px;
-    border-top: 2px solid var(--mid);
-    background: linear-gradient(180deg, #eef2f7 0%, #f7f9fc 100%);
-    font-family: 'Playfair Display', serif;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--navy);
-    border-bottom: 1px solid var(--mid);
-  }
-  @media (max-width: 600px) {
-    .curriculum-sonya-note,
-    .curriculum-part-head { padding-left: 20px; padding-right: 20px; }
-  }
-
   @media print {
     @page { margin: 0.5in; size: letter; }
     body { background: white; }
@@ -1047,7 +1160,7 @@
 </style>
 </head>
 <body>
-<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE PREVIEW LONG ENROLL V04-KARISSA-SETTER · commit 37fa248 · NOT the live send link · <a href="https://closewithcjclay.com/htsa-enrollment-karissa-rodriguez.html" style="color:#fde68a">Live exemplar (may have drifted)</a><br><span style="font-weight:500;opacity:.95">Karissa Rodriguez setter invoice (early self-enroll lineage)</span></div>
+<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE PREVIEW LONG ENROLL V03-AMY-GROCHALA-FIRST · commit b7cc95f · NOT the live send link · <a href="https://closewithcjclay.com/htsa-enrollment-cj-clay.html" style="color:#fde68a">Live exemplar (may have drifted)</a><br><span style="font-weight:500;opacity:.95">CJ Clay first ship — proven solo/self-enroll long invoice</span></div>
 <div class="page">
 
   <!-- HEADER -->
@@ -1063,39 +1176,38 @@
       <div class="header-tagline" style="margin-top:12px;">Certification &nbsp;·&nbsp; Coaching &nbsp;·&nbsp; Placement</div>
     </div>
     <div class="invoice-meta">
-      <div class="invoice-badge">Setter Program Overview</div>
+      <div class="invoice-badge">Closer Program Overview</div>
       <p><strong>Prepared by:</strong> CJ Clay</p>
-      <p><strong>Program:</strong> Certified HTS Setter</p>
-      <p><strong>Payment:</strong> USD — select option below</p>
+      <p><strong>Program:</strong> Certified HTS Closer</p>
+      <p><strong>Payment:</strong> Select payment option below</p>
     </div>
   </div>
   <div class="accent-bar"></div>
 
   <!-- HERO BAND -->
   <div class="hero-band">
-    <h2>Certified High Ticket Setter Program</h2>
-    <p>Karissa, I really enjoyed speaking with you earlier. It was clear from our conversation that you're someone who takes their future seriously and is ready to make a real change — and that's exactly the kind of person we love working with here at High Ticket Sales Academy.</p>
-    <p style="margin-top:10px;">Everything you need to review and get started is right here. The biggest difference at HTSA is that you are not just another number — we are true experts in high ticket sales, with <strong>around-the-clock support</strong> and placement into roles from a network of 300+ partner companies. Take your time reviewing and reach out to CJ with any questions or assistance with enrollment.</p>
+    <h2>Certified High Ticket Closer Program</h2>
+    <p>CJ, I really enjoyed speaking with you earlier. It was clear from our conversation that you're someone who takes their future seriously and is ready to make a real change — and that's exactly the kind of person we love working with here at High Ticket Sales Academy.</p>
+    <p style="margin-top:10px;">Everything you need to review and get started is right here. The biggest difference at HTSA is that you are not just another number — we are not influencers, but true experts in the field of high ticket sales. <strong>Chad Aleo trains you personally.</strong> You have around-the-clock support, and once certified, our team walks you directly into roles from a network of 300+ partner companies. Take your time reviewing and reach out to CJ with any questions or assistance with enrollment.</p>
   </div>
 
   <!-- BILLING -->
   <div class="billing-grid">
     <div class="billing-cell">
       <div class="billing-label">Prepared For</div>
-      <div class="billing-name">Karissa Rodriguez</div>
+      <div class="billing-name">CJ Clay</div>
       <div class="billing-detail">
-        <a href="mailto:karissardz3@icloud.com">karissardz3@icloud.com</a><br>
-        <a href="tel:+19568625572">(956) 862-5572</a><br>
-        Program: Certified HTS Setter<br>
-        Pricing: <strong>U.S. dollars (USD)</strong><br>
-        Payment: Select option below (charged in USD)
+        <a href="mailto:amygrochala@gmail.com">amygrochala@gmail.com</a><br>
+        <a href="tel:+16093062879">(609) 306-2879</a><br>
+        Program: Certified HTS Closer<br>
+        Payment: Select payment option below
       </div>
     </div>
     <div class="billing-cell">
       <div class="billing-label">Prepared By</div>
       <div class="billing-name">CJ Clay</div>
       <div class="billing-detail">
-        HTSA Setter &amp; Enrollment Advisor<br>
+        HTSA Closer &amp; Enrollment Advisor<br>
         (616) 612-1735<br>
         <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="67040d270f0e000f130e040c021314060b021406040603020a1e4904080a">[email&#160;protected]</a><br>
         highticketsalesacademy.com
@@ -1124,7 +1236,7 @@
       <div class="cur-icon">🎓</div>
       <div class="cur-content">
         <h4>Structured Online Training Platform</h4>
-        <p>Self-paced platform with lifetime access. The Setter Certification includes 30 core modules and three levels of AI-based roleplay — all designed to ensure you're ready before your first interview.</p>
+        <p>Self-paced platform with lifetime access. The Closer Certification includes 50 in-depth modules and five levels of advanced AI roleplay — all designed to ensure you're ready before your first interview.</p>
       </div>
     </div>
 
@@ -1132,7 +1244,7 @@
       <div class="cur-icon">🏆</div>
       <div class="cur-content">
         <h4>Certification and One-on-One Assessment</h4>
-        <p>Upon completion of coursework and a one-on-one assessment, you graduate as a Certified High Ticket Setter. This credential signals to hiring companies that you are trained, prepared, and ready to perform.</p>
+        <p>Upon completion of coursework and a one-on-one assessment, you graduate as a Certified High Ticket Closer. This credential signals to hiring companies that you are trained, prepared, and ready to perform.</p>
       </div>
     </div>
 
@@ -1140,7 +1252,7 @@
       <div class="cur-icon">🤝</div>
       <div class="cur-content">
         <h4>Interview Preparation and Job Placement Support</h4>
-        <p>Includes resume optimization, interview preparation, and access to our placement system. Setter roles are the fastest to place — most students are in a remote role within 2 to 3 weeks of certification.</p>
+        <p>Includes resume optimization, interview preparation, and access to our placement system. Most closers are in a role within 30 to 60 days of starting the program.</p>
       </div>
     </div>
 
@@ -1194,7 +1306,7 @@
 
   </div>
 
-  <!-- PROGRAM INVESTMENT -->
+  <!-- INVESTMENT -->
   <div class="sec-head">
     <div class="sec-num">2</div>
     <h3>Program Investment</h3>
@@ -1202,12 +1314,17 @@
 
   <div class="invest-wrap">
     <div class="invest-box">
-      <div class="invest-program-label">Certified High Ticket Setter Program</div>
-      <div class="invest-program-desc">All services described in the Setter curriculum — training platform, AI roleplay, certification, placement support, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
+      <div class="invest-program-label">Certified High Ticket Closer Program</div>
+      <div class="invest-program-desc">All services described above — training platform, AI roleplay, live coaching with Chad, certification, job placement, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
 
-      <div class="invest-section-kicker">Payment Options (USD)</div>
-      <div class="invest-note" style="margin:0 0 12px;font-size:11px;color:rgba(255,234,200,0.96);line-height:1.6;border-left:3px solid rgba(0,201,122,0.55);padding:10px 12px;background:rgba(0,0,0,0.12);border-radius:6px;"><strong>Currency:</strong> All amounts below are in <strong>U.S. dollars (USD)</strong> and will be charged in USD at checkout.</div>
-      <p class="invest-access-hint">Choose <strong>one</strong> of the three options below. Each includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your first payment clears.</p>
+      <div class="invest-bonus-chad">
+        <div class="invest-bonus-chad-kicker">Bonus included for you</div>
+        <div class="invest-bonus-chad-title">3 one-on-one sessions with Chad Aleo</div>
+        <p class="invest-bonus-chad-body">Personal time with Chad beyond group coaching — use them strategically. <strong>Recommendation:</strong> save at least <strong>one session for after you land your offer</strong> and you’re in your role, so you can tighten execution where it counts.</p>
+      </div>
+
+      <div class="invest-section-kicker">HTSA In-House Payment Options</div>
+      <p class="invest-access-hint">Either option includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
       <div class="invest-grid">
 
         <div class="invest-option-block">
@@ -1215,55 +1332,46 @@
           <div class="invest-option-head invest-option-head--pay">
             <div>
               <div class="invest-option-title">Paid in Full</div>
-              <div class="invest-option-sub">One payment in USD — best value (save $150 USD vs. the 3-pay plan).</div>
+              <div class="invest-option-sub">Best value — pay the remainder by day 30 and your total is only $6,000.</div>
             </div>
             <div class="invest-price-stack">
-              <div class="invest-price-big">$3,000 USD</div>
+              <div class="invest-price-big">$6,000</div>
               <div class="invest-price-mini">One payment</div>
             </div>
           </div>
           <div class="invest-option-actions invest-option-actions--pay">
-            <a href="https://whop.com/checkout/plan_qzvfCCb1rIO0L?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $3,000 USD →</a>
+            <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose PIF — Pay $6,000 →</a>
+          </div>
+          <div class="invest-splitit-wrap">
+            <p class="invest-splitit-intro">On the Whop checkout page, scroll to the <strong>bottom of the payment options</strong> — you’ll see <strong>Splitit</strong> (monthly payments on your card). That’s where you can set up the plan below.</p>
+            <div class="invest-splitit-card">
+              <div class="invest-splitit-head">Splitit — $500/month × 12 months</div>
+              <p class="invest-splitit-apply"><strong>Apply here:</strong> use the same <strong>green “Choose PIF — Pay $6,000” button</strong> above, then select <strong>Splitit</strong> at the bottom of Whop’s payment methods to complete setup.</p>
+              <p class="invest-splitit-fine">No credit check — uses the existing limit on your Visa or Mastercard. A hold is placed on your card for the total amount. As you make each $500 monthly payment, that same amount is released back to your available credit.</p>
+            </div>
           </div>
         </div>
 
         <div class="invest-option-block">
-          <div class="invest-badge invest-badge--option">Option 2 · Action Taker Discount</div>
+          <div class="invest-badge invest-badge--option">Option 2</div>
           <div class="invest-option-head invest-option-head--pay">
             <div>
-              <div class="invest-option-title">2 Payments — $1,500 USD × 2</div>
-              <div class="invest-option-sub">Extended offer for action takers — first payment due <strong>today</strong>, second payment in 30 days (<strong>$3,000 USD</strong> total).</div>
+              <div class="invest-option-title">4 Monthly Payments</div>
+              <div class="invest-option-sub">4 payments of $1,750 — First Payment Due Today.</div>
             </div>
             <div class="invest-price-stack">
-              <div class="invest-price-big">$1,500 USD</div>
-              <div class="invest-price-mini">$3,000 USD total · 2 installments</div>
+              <div class="invest-price-big">$1,750</div>
+              <div class="invest-price-mini">$7,000 total · 4 installments</div>
             </div>
           </div>
           <div class="invest-option-actions invest-option-actions--pay">
-            <a href="https://whop.com/checkout/plan_nNnBopJ5NlBHU?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose 2-Pay — Pay $1,500 USD Today →</a>
-          </div>
-        </div>
-
-        <div class="invest-option-block">
-          <div class="invest-badge invest-badge--option">Option 3</div>
-          <div class="invest-option-head invest-option-head--pay">
-            <div>
-              <div class="invest-option-title">3 Monthly Payments</div>
-              <div class="invest-option-sub">3 payments of <strong>$1,050 USD</strong> — first payment due today.</div>
-            </div>
-            <div class="invest-price-stack">
-              <div class="invest-price-big">$1,050 USD</div>
-              <div class="invest-price-mini">$3,150 USD total · 3 installments</div>
-            </div>
-          </div>
-          <div class="invest-option-actions invest-option-actions--pay">
-            <a href="https://whop.com/checkout/plan_oK3AajTKp0mXK?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose 3-Pay — Pay $1,050 USD Today →</a>
+            <a href="https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" class="invest-btn" target="_blank">Choose 4-Pay — Pay $1,750 Today →</a>
           </div>
         </div>
 
       </div>
 
-      <div class="invest-note" style="color:rgba(0,201,122,0.95);margin-top:4px;"><strong>★</strong> After your payment processes, text CJ at <strong>(616) 612-1735</strong> so your Setter access can be turned on.</div>
+      <div class="invest-note" style="margin-top:18px;color:rgba(255,255,255,0.5);"><strong style="color:#ff9c7a;">Next:</strong> After you pay, jump to <strong style="color:var(--white);">Step 1</strong> below — text CJ so we can grant access right away.</div>
     </div>
   </div>
 
@@ -1278,8 +1386,12 @@
     <div class="step-item">
       <div class="step-num">1</div>
       <div class="step-content">
-        <h4>Step 1 — Choose Your Payment Option</h4>
-        <p>Karissa, pick <strong>one</strong> of the three Setter payment options in Program Investment above — all in <strong>USD</strong>: pay in full, the <strong>Action Taker Discount</strong> (2-pay), or the 3-pay plan. Complete your checkout, then move to Step 2 below.</p>
+        <h4>Step 1 — Choose How You Want to Pay</h4>
+        <p>CJ, pick <strong>$6,000 paid in full</strong> (or <strong>Splitit</strong> inside that checkout) or the <strong>$1,750 today (4-pay)</strong> plan — same links as in Program Investment above. Tap a button below, complete checkout, then continue to Step 2.</p>
+        <div class="step-pay-pick">
+          <a href="https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" class="step-pay-tab step-pay-tab--pif" target="_blank" rel="noopener noreferrer">$6,000 PIF</a>
+          <a href="https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" class="step-pay-tab step-pay-tab--4pay" target="_blank" rel="noopener noreferrer">$1,750 (4-Pay)</a>
+        </div>
       </div>
     </div>
 
@@ -1339,13 +1451,13 @@
   </div>
 
   <div class="closing-band">
-    <blockquote>"The path to your dream life doesn't begin when everything is perfect — it begins the moment you decide to stop waiting and start moving. Every great setter, every top earner, every person who built the life they wanted started exactly where you are right now. The only difference between where you are and where you want to be is a decision."</blockquote>
+    <blockquote>"The path to your dream life doesn't begin when everything is perfect — it begins the moment you decide to stop waiting and start moving. Every great closer, every top earner, every person who built the life they wanted started exactly where you are right now. The only difference between where you are and where you want to be is a decision."</blockquote>
     <div class="quote-attr">— The decision is yours. We'll handle everything else.</div>
   </div>
 
   <!-- WELCOME -->
   <div class="welcome-band">
-    <h3>Welcome to the <span>HTSA Family,</span> Karissa. 🎉</h3>
+    <h3>Welcome to the <span>HTSA Family,</span> CJ. 🎉</h3>
     <p>You're not just enrolling in a program — you're joining a community of people who show up, do the work, and build something real. We can't wait to see where this takes you.</p>
   </div>
 
@@ -1363,7 +1475,7 @@
           <ul class="terms-clarify-list">
             <li>Lifetime access to the course modules</li>
             <li>Lifetime access to live group coaching calls with Chad</li>
-            <li>Lifetime access to the setters mastermind community</li>
+            <li>Lifetime access to the closers mastermind community</li>
             <li><strong style="color:var(--navy);">1-on-1 coaching calls</strong> — included at <strong style="color:var(--navy);">no additional fee</strong>. Calls must be used within three months of your program start date unless otherwise approved by HTSA.</li>
             <li><strong style="color:var(--navy);">AI role-play platform</strong> — included while you are in the academy. After you complete the program and land your offer, you may keep the platform for <strong style="color:var(--navy);">$35/month</strong> if you choose. It is not mandatory; it is an optional tool if it helps your close rate.</li>
           </ul>
@@ -1449,7 +1561,7 @@ Thank God and CJ Clay for that 🙏</blockquote>
               <span class="footer-bc-infinity-sym" aria-hidden="true">∞</span>
             </div>
             <div class="footer-bc-name">CJ Clay</div>
-            <div class="footer-bc-title">HTSA Setter</div>
+            <div class="footer-bc-title">HTSA Closer</div>
             <div class="footer-bc-lines">
               <a href="tel:+16166121735" class="footer-bc-line">📞 &nbsp;(616) 612-1735</a>
               <a href="mailto:cj@highticketsalesacademy.com" class="footer-bc-line">✉️ &nbsp;cj@highticketsalesacademy.com</a>

@@ -2,25 +2,27 @@
 
 **Paste this whole page into Notion.**
 
-Every **Preview** link is a working archive on closewithcjclay.com. Archives are **template / layout references**. They do not change live person pages. Expire checks are disabled on precall archives.
+Every **Preview** link is a working archive on closewithcjclay.com filled with **CJ Clay** placeholder info (your name, email, phone). Archives are layout references only. They do not change live person pages. Expire checks are disabled on precall archives.
 
 Rule: major layout / structure changes only. Tiny wording tweaks skipped.
 
 **⭐ = current default** (the one being sent right now). Any row with a ⭐ is the version being used live — everything else is history.
 
+**Naming:** each type is numbered V1 / V2 / V3… Preview always shows as CJ Clay. Real prospect pages stay separate at `/r/<person>/` and `htsa-enrollment-<person>.html`.
+
 ---
 
 ## For new members (current defaults)
 
-Use these two links for every regular prospect. Do not mix in special-offer pages.
+Use these URL patterns for every regular prospect. Preview the layout on the CJ Clay archive first.
 
-| When | What | Live template | Example |
+| When | What | Build from | ⭐ Preview (CJ Clay template) |
 |---|---|---|---|
-| **⭐ Before the call** | Pre-call resource page | `r/_TEMPLATE-precall.html` (= **V16**) | https://closewithcjclay.com/r/sean_bowers/ |
-| **⭐ After the call / on the close (default)** | Short enrollment page | `templates/_TEMPLATE-close.html` (= **V8 ultimate**) | https://closewithcjclay.com/htsa-enrollment-sean-bowers.html · https://closewithcjclay.com/htsa-enrollment-shay-wedeking.html |
-| **⭐ Long invoice (when you want the full page)** | Long enrollment invoice | Shay finalized long (= **V13**) | https://closewithcjclay.com/htsa-enrollment-shay-wedeking-invoice.html |
+| **⭐ Before the call** | Pre-call resource page | `r/_TEMPLATE-precall.html` (= **V16**) | [Open V16](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v16.html) |
+| **⭐ After the call / on the close (default)** | Short enrollment page | `templates/_TEMPLATE-close.html` (= **V8**) | [Open V8](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8.html) |
+| **⭐ Long invoice (when you want the full page)** | Long enrollment invoice | copy from **V13** archive | [Open V13](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v13.html) |
 
-**Copy pattern for CJ notes:**
+**Copy pattern for CJ notes (swap in their name):**
 
 ```
 For new members:
@@ -38,7 +40,7 @@ https://closewithcjclay.com/htsa-enrollment-<first>-<last>.html
 1. Live Call Console (on-call HTML)
 2. God Script
 3. Long enrollment (regular invoice style) (**⭐ V13**)
-4. Short close pages (**⭐ V8 ultimate**)
+4. Short close pages (**⭐ V8**)
 5. Pre-call resource TEMPLATES (**⭐ V16**)
 6. Special offer / self-enroll
 7. 30 day game plan
@@ -95,101 +97,77 @@ No complete God Script **v6 HTML** found (build instructions only in CJ_AI_OS).
 
 ## 3. Long enrollment (regular invoice style)
 
-These are the **full invoices** (Amy-style). Separate from the short V8 close page. Use when you want the longer brochure-style enrollment.
-
-### Hand-picked timeline (live examples you named)
-
-| When | Person | Preview (live page) | Notes |
-|---|---|---|---|
-| Apr 3, 2026 | Bianca Zirwes | [Open](https://closewithcjclay.com/htsa-enrollment-bianca-zirwes.html) | Early closer invoice |
-| Apr 21, 2026 | Amy Grochala | [Open](https://closewithcjclay.com/htsa-enrollment-amy-grochala.html) | Proven solo / self-enroll long page |
-| May 14, 2026 | Nicole Sultana | [Open](https://closewithcjclay.com/htsa-enrollment-nichole-sultana.html) | Filename `nichole-sultana` |
-| May 22, 2026 | Christina Nichols | [Open](https://closewithcjclay.com/htsa-enrollment-christina-nichols.html) | |
-| May 26, 2026 | Rebecca Hemion | [Open](https://htsa-closer-enrollment-rebecca-hemion.netlify.app/) | Netlify (outside this site) |
-| Jun 1, 2026 | Myli Campbell | [Open](https://closewithcjclay.com/htsa-enrollment-myli-campbell.html) | |
-| Jun 2, 2026 | Miranda Mestas | [Open](https://closewithcjclay.com/htsa-enrollment-miranda-mestas.html) | |
-| Jun 13, 2026 | Trisha Ziemba (calculator) | [Open](https://closewithcjclay.com/pre-call/HTSA-earnings-calculator.html) | Earnings calculator sent |
-| Aug 4, 2026 | Cal Halliburton | [Enrollment](https://closewithcjclay.com/htsa-enrollment-cal-halliburton.html) · [Calculator](https://closewithcjclay.com/pre-call/HTSA-earnings-calculator.html) | Both |
-| Aug 11, 2026 | Charity Diaz | [Open](https://closewithcjclay.com/htsa-enrollment-charity-diaz.html) | Late long-invoice era |
-| **⭐ Sept 7, 2026** | **Shay Wedeking (long)** | [Open](https://closewithcjclay.com/htsa-enrollment-shay-wedeking-invoice.html) | **Current long-invoice default.** Finalized before short V8. |
-
-### Layout eras (archive snapshots you can compare)
+Full Amy-style invoices. All previews use **CJ Clay** placeholder info (your name / email / phone).
 
 **Folder:** https://closewithcjclay.com/archive/prospect-versions/long-enrollment/
 
-| Ver | Commit | Preview | What changed |
-|---|---|---|---|
-| V01 | `4558738` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v01-marie-first.html) | First enrollment page in repo (Mar 28) |
-| V02 | `271b377` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v02-jocelyn-dual.html) | Early dual / combined layout |
-| V03 | `b7cc95f` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v03-amy-grochala-first.html) | Amy Grochala first ship shape |
-| V04 | `37fa248` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v04-karissa-setter.html) | Early setter invoice shape |
-| V05 | `a80078f` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v05-amy-template-wave.html) | All pages aligned to Amy template |
-| V06 | `247ec26` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v06-amy-orange-guarantee.html) | Orange guarantee on Amy lineage |
-| V07 | `8693a3f` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v07-david-fielder.html) | David Fielder solo-enroll shape |
-| V08 | `5b30f2e` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v08-margarita-terms.html) | Early Terms-gate production |
-| V09 | `7967dfa` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v09-val-terms.html) | Terms + Splitit + guarantee era |
-| V10 | `2f00abd` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v10-placement-shells.html) | Frozen placement shells 01–06 |
-| V11 | `0cb70d9` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v11-james-2026-footer.html) | 2026 footer reference |
-| V12 | `b54207e` | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v12-joseph-member-voices.html) | Blue Member Voices layout |
-| **⭐ V13** | Sept 7, 2026 · Shay finalized | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v13-shay-finalized.html) | **Current long-invoice default.** Amy-lineage rebuild: orange Performance Guarantee + blue Full Terms of Service tab (in-page popup with Ok/Agree → Google Sheet), Splitit "For more detail" in-page popup, green outlined Welcome to HTSA, Step 1 = select from above (no duplicate pay tabs), CJ Reviews after Next Steps (no referral), curriculum then guarantee/terms then pricing. Live: `htsa-enrollment-shay-wedeking-invoice.html`. |
-
-Also: [Amy first-ship root preview](https://closewithcjclay.com/enrollment-amy-grochala-first-preview.html)
-
-**⭐ Live example:** https://closewithcjclay.com/htsa-enrollment-shay-wedeking-invoice.html
+| Ver | Preview (CJ Clay) | What changed |
+|---|---|---|
+| V01 | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v01.html) | First enrollment page in repo (Mar 28) |
+| V02 | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v02.html) | Early dual / combined layout |
+| V03 | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v03.html) | Amy-era first ship shape |
+| V04 | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v04.html) | Early setter invoice shape |
+| V05 | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v05.html) | Pages aligned to Amy template wave |
+| V06 | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v06.html) | Orange guarantee on Amy lineage |
+| V07 | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v07.html) | Solo-enroll shape |
+| V08 | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v08.html) | Early Terms-gate production |
+| V09 | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v09.html) | Terms + Splitit + guarantee era |
+| V10 | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v10.html) | Frozen placement shells 01–06 |
+| V11 | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v11.html) | 2026 footer reference |
+| V12 | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v12.html) | Blue Member Voices layout |
+| **⭐ V13** | [Open](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v13.html) | **Current long-invoice default.** Orange Performance Guarantee + blue Full Terms tab (in-page popup, Ok/Agree → Sheet), Splitit detail popup, green Welcome band, Step 1 = select from above, CJ Reviews after Next Steps (no referral). |
 
 ---
 
 ## 4. Short close pages (Aug 31+)
 
-Different product from long invoices. Built from `templates/_TEMPLATE-close.html`.
+Different product from long invoices. Built from `templates/_TEMPLATE-close.html`. All previews use **CJ Clay** placeholder info.
 
 **Folder:** https://closewithcjclay.com/archive/prospect-versions/close-page/
 
-| Ver | Commit | Preview | What changed |
-|---|---|---|---|
-| V1 | `6609d07` | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v1.html) | First close template |
-| V2 | `ae94391` | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v2.html) | Guarantee-ready + close-page rule |
-| V3 | `e781d3d` | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v3.html) | After-pay next steps for solo closes |
-| V4 | `439e165` | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v4.html) | Hide next steps until checkout |
-| V5 | `b583eba` | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v5.html) | Game plan first, pricing last in dropdown |
-| V6 | `c4d7b6c` | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v6.html) | Amy-style 2-way enroll steps; remove need-from-you |
-| V7 | `558c1dc` | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v7.html) | Reorder getting → HTSA needs → pricing → next steps (overreach) |
-| **⭐ V8 ultimate** | Sept 7–8, 2026 · Shay + Sean | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8-ultimate.html) | **Current default for all regular enrollments.** Continuous single page. Value → guarantee → price. Green outlined welcome + green outlined guarantee. Sticky bottom CTA. Terms / 30 day plan / curriculum / Splitit all open as **in-page popups**. Terms popup has lifetime / coaching times / AI $39 / refund parts **bolded**. Payment confirm sheet records agreement to the Google sheet. CJ Reviews before footer. Splitit lives under PIF as a collapsed "More payment options" down-arrow. ClarityPay card shows **0% interest · 0% APR**. `show` list controls which options appear (Shay = PIF + 4-pay; Sean = PIF + 4-pay + ClarityPay). |
+| Ver | Preview (CJ Clay) | What changed |
+|---|---|---|
+| V1 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v1.html) | First close template |
+| V2 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v2.html) | Guarantee-ready + close-page rule |
+| V3 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v3.html) | After-pay next steps for solo closes |
+| V4 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v4.html) | Hide next steps until checkout |
+| V5 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v5.html) | Game plan first, pricing last in dropdown |
+| V6 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v6.html) | Amy-style 2-way enroll steps; remove need-from-you |
+| V7 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v7.html) | Reorder getting → HTSA needs → pricing → next steps (overreach) |
+| **⭐ V8** | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8.html) | **Current default for regular closes.** Continuous page, sticky CTA, in-page Terms / 30-day / curriculum / Splitit popups, CJ Reviews, Splitit under PIF down-arrow, ClarityPay 0% badge. |
 
-Live template source (editable for future): `templates/_TEMPLATE-close.html`  
-**⭐ Live examples:** https://closewithcjclay.com/htsa-enrollment-shay-wedeking.html · https://closewithcjclay.com/htsa-enrollment-sean-bowers.html
+Live template source: `templates/_TEMPLATE-close.html`
 
 ---
 
 ## 5. Pre-call resource TEMPLATES
 
-**This is the format you liked.** Click Preview for every era. These are **templates**, not live Tammy/Lynda/etc. send links. (That’s why Tammy “expired” before — Notion was hitting a live `/r/` page.)
+All previews use **CJ Clay** placeholder info. These are templates, not live person send links.
 
 **Hub:** https://closewithcjclay.com/precall-version-history.html  
 **Folder:** https://closewithcjclay.com/archive/prospect-versions/precall-resources/
 
-| Ver | Commit | Preview | What changed |
-|---|---|---|---|
-| V01 | `71bc82c` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v01.html) | First resource-link layout (opaque slug era) |
-| V02 | `507f2f4` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v02.html) | CJ personal reviews on resource pages |
-| V03 | `83f001f` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v03.html) | End of first-day resource rebuilds |
-| V04 | `3767665` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v04.html) | Mid-Aug precall rebuild era |
-| V05 | `2883153` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v05.html) | Blue personal review cards |
-| V06 | `d22f8a6` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v06.html) | White CJ Reviews + centered banner |
-| V07 | `f9cb1f1` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v07.html) | 3 white story + 2 blue Top 20 / website cards |
-| V08 | `7c10ecf` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v08.html) | Aug 25 Mark-style long precall |
-| V09 | `f223105` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v09.html) | Slim pre-call proof layout |
-| V10 | `4620d30` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v10.html) | Reusable `_TEMPLATE-precall.html` |
-| V11 | `98798de` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v11.html) | Visible Taylor/Brianna + resources dropdown |
-| V12 | `9af6b39` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v12.html) | Mark layout shape (first Lynda-ship era) |
-| V13 | `7c67483` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v13.html) | Meet-CJ 3-up resources layout |
-| V14 | `62143be` | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v14.html) | DIY-groups framing + Book Appointment (Gracie-era) |
-| V15 | Liliana layout | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v15.html) | Resources under Aug 18 video, Chad book after Other resources, lifespan at bottom |
-| **⭐ V16** | Sept 8, 2026 · Sean Bowers confirmed | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v16.html) | **Current default for all pre-call links.** Same layout CJ confirmed on Sean's live page. Aug 18 placement clip, resources, CJ Reviews, Chad book, Trustpilot, confirm button. |
+| Ver | Preview (CJ Clay) | What changed |
+|---|---|---|
+| V01 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v01.html) | First resource-link layout |
+| V02 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v02.html) | CJ personal reviews on resource pages |
+| V03 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v03.html) | End of first-day resource rebuilds |
+| V04 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v04.html) | Mid-Aug precall rebuild era |
+| V05 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v05.html) | Blue personal review cards |
+| V06 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v06.html) | White CJ Reviews + centered banner |
+| V07 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v07.html) | 3 white story + 2 blue Top 20 / website cards |
+| V08 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v08.html) | Aug 25 Mark-style long precall |
+| V09 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v09.html) | Slim pre-call proof layout |
+| V10 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v10.html) | Reusable `_TEMPLATE-precall.html` |
+| V11 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v11.html) | Visible Taylor/Brianna + resources dropdown |
+| V12 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v12.html) | Mark layout shape |
+| V13 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v13.html) | Meet-CJ 3-up resources layout |
+| V14 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v14.html) | DIY-groups framing + Book Appointment |
+| V15 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v15.html) | Resources under Aug 18 video, Chad book after Other resources |
+| **⭐ V16** | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v16.html) | **Current default for all pre-call links.** Aug 18 clip, resources, CJ Reviews, Chad book, Trustpilot, confirm button. |
 
-**Live template for new people going forward:** `r/_TEMPLATE-precall.html` (= **⭐ V16**)  
-**⭐ Live example:** https://closewithcjclay.com/r/sean_bowers/  
-Do not edit old `/r/<person>/` pages to “test” a layout. Copy the template, then edit only the `GUEST` block.
+**Live template for new people:** `r/_TEMPLATE-precall.html` (= **⭐ V16**)  
+Copy the template, then edit only the `GUEST` block. Do not edit old `/r/<person>/` pages to test a layout.
 
 Related tools:
 

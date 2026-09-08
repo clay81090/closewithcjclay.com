@@ -1,15 +1,12 @@
-<!--
-  HTSA LONG ENROLLMENT  ⭐ current long-invoice default
-  Version: V13  ·  Sept 7, 2026
-  Confirmed on Shay Wedeking long invoice (htsa-enrollment-shay-wedeking-invoice.html).
-  Use when CJ wants the full Amy-style invoice instead of short V8 close page.
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HTSA Invoice — Shay Wedeking</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<title>HTSA Enrollment — CJ Clay</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -296,6 +293,7 @@
     margin: 4px 0 14px;
   }
 
+  /* Clearly separate cash / in-house from third-party financing */
   .invest-section-kicker--accent {
     color: #ff9c7a;
     margin-bottom: 10px;
@@ -521,229 +519,6 @@
     margin: 0;
   }
 
-  .invest-splitit-more {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 12px;
-    padding: 8px 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 156, 122, 0.55);
-    background: rgba(255, 156, 122, 0.12);
-    color: #ffd0bc;
-    font-size: 11.5px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .invest-splitit-more:hover {
-    background: rgba(255, 156, 122, 0.22);
-    color: #fff;
-  }
-
-  .splitit-sheet {
-    border: none;
-    border-radius: 16px;
-    padding: 0;
-    width: min(560px, calc(100vw - 28px));
-    max-height: min(88vh, 720px);
-    background: #0a1628;
-    color: #fff;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
-  }
-  .splitit-sheet::backdrop {
-    background: rgba(6, 15, 30, 0.72);
-    backdrop-filter: blur(3px);
-  }
-  .splitit-sheet-inner {
-    display: flex;
-    flex-direction: column;
-    max-height: min(88vh, 720px);
-  }
-  .splitit-sheet-head {
-    padding: 18px 20px 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    flex-shrink: 0;
-  }
-  .splitit-sheet-kicker {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #ff9c7a;
-    margin-bottom: 6px;
-  }
-  .splitit-sheet-head h2 {
-    margin: 0;
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    line-height: 1.25;
-    color: #fff;
-  }
-  .splitit-sheet-close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 36px;
-    height: 36px;
-    border: none;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.08);
-    color: #fff;
-    font-size: 22px;
-    line-height: 1;
-    cursor: pointer;
-  }
-  .splitit-sheet-body {
-    padding: 16px 20px 8px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    font-size: 13.5px;
-    line-height: 1.55;
-    color: rgba(255,255,255,0.82);
-  }
-  .splitit-sheet-body h3 {
-    margin: 18px 0 8px;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #00c97a;
-  }
-  .splitit-sheet-body h3:first-child { margin-top: 0; }
-  .splitit-sheet-body p { margin: 0 0 10px; }
-  .splitit-sheet-body ul {
-    margin: 0 0 12px;
-    padding-left: 18px;
-  }
-  .splitit-sheet-body li { margin-bottom: 6px; }
-  .splitit-ex {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,156,122,0.35);
-    border-radius: 12px;
-    padding: 14px 14px 10px;
-    margin: 10px 0 14px;
-  }
-  .splitit-ex-title {
-    font-weight: 700;
-    color: #ff9c7a;
-    margin-bottom: 8px;
-    font-size: 13px;
-  }
-  .splitit-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .splitit-step {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  .splitit-step-num {
-    flex-shrink: 0;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #00c97a;
-    color: #0a1628;
-    font-size: 12px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1px;
-  }
-  .splitit-step p { margin: 0; font-size: 13px; }
-  .splitit-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-    margin: 8px 0 14px;
-  }
-  .splitit-table th,
-  .splitit-table td {
-    border: 1px solid rgba(255,255,255,0.12);
-    padding: 8px 9px;
-    text-align: left;
-    vertical-align: top;
-  }
-  .splitit-table th {
-    background: rgba(255,255,255,0.06);
-    color: #fff;
-    font-weight: 700;
-  }
-  .splitit-table td { color: rgba(255,255,255,0.78); }
-  .splitit-sheet-fine {
-    font-size: 11px;
-    line-height: 1.55;
-    color: rgba(255,255,255,0.45);
-    margin-top: 8px;
-  }
-  .splitit-sheet-foot {
-    padding: 12px 20px 16px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    flex-shrink: 0;
-  }
-
-  .splitit-sheet--tos {
-    width: min(640px, calc(100vw - 28px));
-    max-height: min(92vh, 820px);
-  }
-  .splitit-sheet--tos .splitit-sheet-inner {
-    max-height: min(92vh, 820px);
-  }
-  .splitit-sheet-body .tos-ol {
-    margin: 0 0 12px;
-    padding-left: 22px;
-  }
-  .splitit-sheet-body .tos-ol li { margin-bottom: 8px; }
-
-
-  .tos-agree-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin: 0 0 12px;
-    padding: 12px 12px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(0,201,122,0.35);
-    cursor: pointer;
-  }
-  .tos-agree-row input {
-    margin-top: 3px;
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    accent-color: #00c97a;
-  }
-  .tos-agree-row span {
-    font-size: 13px;
-    line-height: 1.45;
-    color: rgba(255,255,255,0.9);
-    font-weight: 600;
-  }
-  .splitit-sheet-gotit:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-  }
-
-  .splitit-sheet-gotit {
-    width: 100%;
-    border: none;
-    border-radius: 10px;
-    padding: 13px 16px;
-    background: #00c97a;
-    color: #0a1628;
-    font-weight: 800;
-    font-size: 14px;
-    cursor: pointer;
-    font-family: inherit;
-  }
-
-
   .invest-badge.financing {
     background: rgba(0,201,122,0.18);
     color: var(--green);
@@ -850,20 +625,6 @@
     padding-bottom: 1px;
   }
 
-
-  .step-select-above {
-    display: inline-block;
-    margin: 12px 0 0;
-    padding: 12px 18px;
-    border-radius: 10px;
-    background: rgba(10, 22, 40, 0.06);
-    border: 1.5px solid rgba(10, 22, 40, 0.14);
-    color: var(--navy);
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: 0.01em;
-  }
-
   .step-pay-pick {
     display: flex;
     flex-wrap: wrap;
@@ -963,39 +724,29 @@
   }
 
   .welcome-band {
-    background: linear-gradient(160deg, #071222 0%, #0a1628 55%, #0d1f33 100%);
-    margin: 18px 24px 22px;
-    padding: 30px 36px;
+    background: var(--navy);
+    padding: 28px 36px;
     text-align: center;
-    border: 3px solid var(--green);
-    border-radius: 14px;
-    box-shadow:
-      0 0 0 4px rgba(0, 201, 122, 0.18),
-      0 12px 32px rgba(0, 201, 122, 0.22),
-      0 4px 18px rgba(0, 0, 0, 0.28);
+    border-bottom: 1px solid rgba(0,201,122,0.2);
     page-break-inside: avoid;
     break-inside: avoid;
   }
 
   .welcome-band h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 22px;
+    font-size: 20px;
     color: var(--white);
     font-weight: 700;
-    margin-bottom: 10px;
-    line-height: 1.3;
+    margin-bottom: 8px;
   }
 
-  .welcome-band h3 span {
-    color: var(--green);
-    text-shadow: 0 0 18px rgba(0, 201, 122, 0.35);
-  }
+  .welcome-band h3 span { color: var(--green); }
 
   .welcome-band p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.62);
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.45);
     line-height: 1.7;
-    max-width: 520px;
+    max-width: 500px;
     margin: 0 auto;
   }
 
@@ -1418,208 +1169,6 @@
 
 
   /* Enrollment-specific performance guarantee callout (orange) — optional; include HTML block only when needed */
-
-  /* Centered section header (same idea as enrollment Member voices banner) */
-  .ref-strip-banner {
-    text-align: center;
-    margin: 0 0 18px;
-  }
-
-  .ref-strip-banner .ref-strip-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2.6px;
-    text-transform: uppercase;
-    color: var(--navy);
-    margin: 0 0 8px;
-  }
-
-  .ref-strip-banner-desc {
-    font-size: 12.5px;
-    line-height: 1.6;
-    color: var(--muted);
-    margin: 0 auto;
-    max-width: 520px;
-  }
-
-  .ref-strip-quote--compact .ref-strip-quote-body {
-    max-height: none;
-    overflow: visible;
-    padding-right: 0;
-  }
-
-  .ref-strip-quote--compact .ref-strip-quote-attr {
-    margin-top: 8px;
-    padding-top: 6px;
-  }
-
-  /* CJ Reviews: Janaye shown; rest behind See more */
-  .ref-strip-inner--personal-reviews {
-    display: block;
-    align-items: stretch;
-  }
-
-  .ref-strip-quote--janaye-tab {
-    width: 100%;
-    max-width: none;
-    padding: 14px 18px 12px;
-    margin: 0 0 12px;
-  }
-
-  .ref-strip-quote--janaye-tab .ref-strip-quote-meta {
-    margin: 0 0 6px;
-  }
-
-  .ref-strip-quote--janaye-tab .ref-strip-quote-body {
-    max-height: none;
-    overflow: visible;
-    font-size: 12.5px;
-    line-height: 1.55;
-    white-space: normal;
-  }
-
-  .ref-strip-quote--janaye-tab .ref-strip-quote-attr {
-    margin-top: 8px;
-    padding-top: 6px;
-  }
-
-  .cj-reviews-more {
-    margin: 0;
-    border: none;
-  }
-
-  .cj-reviews-more > summary {
-    list-style: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 14px 18px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 3px solid #93c5fd;
-    border-left: 5px solid #60a5fa;
-    box-shadow: 0 0 0 1.5px rgba(226, 178, 39, 0.45), 0 4px 14px rgba(10, 22, 40, 0.06);
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--navy);
-    user-select: none;
-  }
-
-  .cj-reviews-more > summary::-webkit-details-marker { display: none; }
-
-  .cj-reviews-more-summary-text {
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-
-  .cj-reviews-more-summary-sub {
-    display: block;
-    margin-top: 2px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--muted);
-  }
-
-  .cj-reviews-more-arrow {
-    flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #1976D2;
-    color: #fff;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    line-height: 1;
-    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.35);
-    transition: transform 0.2s ease;
-  }
-
-  .cj-reviews-more[open] > summary .cj-reviews-more-arrow {
-    transform: rotate(90deg);
-  }
-
-  .cj-reviews-more[open] > summary {
-    margin-bottom: 12px;
-  }
-
-  .cj-reviews-more-panel {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-
-  .cj-reviews-more-panel .ref-strip-quote {
-    margin: 0;
-  }
-
-  @media (max-width: 600px) {
-    .cj-reviews-more-panel {
-      grid-template-columns: 1fr;
-    }
-    .cj-reviews-more > summary {
-      padding: 12px 14px;
-      font-size: 13px;
-    }
-  }
-
-  .ref-strip-inner--personal-reviews .ref-strip-mini-stack {
-    flex: 1 1 280px;
-    min-width: 0;
-    margin-top: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .ref-strip-inner--personal-reviews .ref-strip-mini-stack > .ref-strip-quote {
-    flex: 1 1 auto;
-  }
-
-  /* Highlight Janaye + Brittany — blue outline only (same family as resource boxes above) */
-  .ref-strip-quote--personal-blue {
-    background: #ffffff;
-    border: 3px solid #93c5fd;
-    border-left: 5px solid #60a5fa;
-    box-shadow: 0 0 0 1.5px rgba(226, 178, 39, 0.55), 0 4px 14px rgba(10, 22, 40, 0.06);
-  }
-
-
-  .tos-full-tab-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 36px 28px;
-    padding: 4px 0 8px;
-  }
-  .tos-full-tab {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: min(420px, 100%);
-    padding: 16px 28px;
-    border-radius: 14px;
-    border: 2px solid rgba(0, 201, 122, 0.55);
-    background: #0a1628;
-    color: #00c97a;
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: 800;
-    letter-spacing: 0.02em;
-    cursor: pointer;
-    box-shadow: 0 10px 28px rgba(10, 22, 40, 0.18);
-  }
-  .tos-full-tab:hover {
-    background: #12233d;
-    color: #3dffb0;
-    border-color: #00c97a;
-  }
-
   .enrollment-guarantee-banner {
     margin: 0 36px 22px;
     padding: 16px 20px;
@@ -1679,8 +1228,7 @@
 </style>
 </head>
 <body>
-<!-- invoice-build:1788832384 -->
-
+<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE PREVIEW LONG ENROLL V08-MARGARITA-TERMS · commit 5b30f2e · NOT the live send link · <a href="https://closewithcjclay.com/htsa-enrollment-cj-clay.html" style="color:#fde68a">Live exemplar (may have drifted)</a><br><span style="font-weight:500;opacity:.95">Margarita — early Terms-gate production invoice</span></div>
 <div class="page">
 
   <!-- HEADER -->
@@ -1707,7 +1255,7 @@
   <!-- HERO BAND -->
   <div class="hero-band">
     <h2>Certified High Ticket Closer Program</h2>
-    <p>Shay, I really enjoyed speaking with you earlier. It was clear from our conversation that you're someone who takes their future seriously and is ready to make a real change — and that's exactly the kind of person we love working with here at High Ticket Sales Academy.</p>
+    <p>Margarita, I really enjoyed speaking with you earlier. It was clear from our conversation that you're someone who takes their future seriously and is ready to make a real change — and that's exactly the kind of person we love working with here at High Ticket Sales Academy.</p>
     <p style="margin-top:10px;">Everything you need to review and get started is right here. The biggest difference at HTSA is that you are not just another number — we are not influencers, but true experts in the field of high ticket sales. <strong>Chad Aleo trains you personally.</strong> You have around-the-clock support, and once certified, our team walks you directly into roles from a network of 300+ partner companies. Take your time reviewing and reach out to CJ with any questions or assistance with enrollment.</p>
   </div>
 
@@ -1715,10 +1263,10 @@
   <div class="billing-grid">
     <div class="billing-cell">
       <div class="billing-label">Prepared For</div>
-      <div class="billing-name">Shay Wedeking</div>
+      <div class="billing-name">Margarita De La Rosa</div>
       <div class="billing-detail">
-        <a href="mailto:shay.s.wedeking@gmail.com">shay.s.wedeking@gmail.com</a><br>
-        <a href="tel:+17208408829">(720) 840-8829</a><br>
+        <a href="mailto:md.margge@gmail.com">md.margge@gmail.com</a><br>
+        <a href="tel:+14157403110">+1 (415) 740-3110</a><br>
         Program: Certified HTS Closer<br>
         Payment: Select payment option below
       </div>
@@ -1826,18 +1374,7 @@
 
   </div>
 
-  <!-- Performance guarantee — confirmed for this enrollment (before formal terms) -->
-  <div class="enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms">
-    <div class="enrollment-guarantee-banner-title">Performance Guarantee — Confirmed for This Enrollment</div>
-    <p><strong>This performance guarantee applies to you.</strong> HTSA is <strong>confirming the program’s performance guarantee</strong> for your enrollment, provided you complete <strong>all</strong> required steps, milestones, and obligations exactly as described on this page and in your enrollment materials.</p>
-  </div>
-
-  <!-- Full Terms of Service — centered tab under guarantee -->
-  <div class="tos-full-tab-wrap">
-    <button type="button" class="tos-full-tab" id="tosMoreBtn" aria-haspopup="dialog" aria-controls="tosSheet">Full Terms of Service</button>
-  </div>
-
-<!-- INVESTMENT -->
+  <!-- INVESTMENT -->
   <div class="sec-head">
     <div class="sec-num">2</div>
     <h3>Program Investment</h3>
@@ -1848,7 +1385,7 @@
       <div class="invest-program-label">Certified High Ticket Closer Program</div>
       <div class="invest-program-desc">All services described above — training platform, AI roleplay, live coaching with Chad, certification, job placement, resume optimization, 30-day action plan, 90-day post-hire support, and lifetime community access.</div>
 
-      <div class="invest-section-kicker">HTSA In-House Payment Options</div>
+      <div class="invest-section-kicker invest-section-kicker--accent">In-House Cash Payment Options</div>
       <p class="invest-access-hint">Either option includes <strong style="color:rgba(255,255,255,0.75);">immediate access</strong> once your payment clears.</p>
       <div class="invest-grid">
 
@@ -1873,7 +1410,6 @@
               <div class="invest-splitit-head">Splitit — $500/month × 12 months</div>
               <p class="invest-splitit-apply"><strong>Apply here:</strong> use the same <strong>green “Choose PIF — Pay $6,000” button</strong> above, then select <strong>Splitit</strong> at the bottom of Whop’s payment methods to complete setup.</p>
               <p class="invest-splitit-fine">No credit check — uses the existing limit on your Visa or Mastercard. A hold is placed on your card for the total amount. As you make each $500 monthly payment, that same amount is released back to your available credit.</p>
-              <button type="button" class="invest-splitit-more" id="splititMoreBtn" aria-haspopup="dialog" aria-controls="splititSheet">For more detail →</button>
             </div>
           </div>
         </div>
@@ -1891,7 +1427,7 @@
             </div>
           </div>
           <div class="invest-option-actions invest-option-actions--pay">
-            <a href="https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" class="invest-btn" target="_blank">Choose 4-Pay — Pay $1,750 Today →</a>
+            <a href="https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" class="invest-btn" target="_blank" rel="noopener noreferrer">Choose 4-Pay — Pay $1,750 Today →</a>
           </div>
         </div>
 
@@ -1899,45 +1435,72 @@
 
       <hr class="invest-zone-rule" aria-hidden="true">
 
-      <div class="invest-section-kicker invest-section-kicker--accent">Third-Party Financing</div>
-      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">The options above are HTSA in-house payment options. The option below is third-party financing through ClarityPay for pre-qualification.</div>
+      <div class="invest-section-kicker invest-section-kicker--accent">Third-Party Financing Options</div>
+      <div class="invest-note" style="margin-top:0;margin-bottom:14px;">The two options above are HTSA in-house payment options. The two options below are third-party financing options for pre-qualification.</div>
 
       <div class="invest-grid">
 
         <div class="invest-option-block financing">
-          <div class="invest-badge financing">ClarityPay</div>
+          <div class="invest-badge financing">Financing Option 1</div>
           <div class="invest-option-head">
             <div>
-              <div class="invest-option-title">ClarityPay — 12 months at 0% APR</div>
-              <div class="invest-option-sub">$600/month × 12 months — $7,200 total program investment. Need <strong>620+ credit score</strong> to qualify.</div>
+              <div class="invest-option-title">ClarityPay</div>
+              <div class="invest-option-sub">Best for someone who wants a fast decision and monthly payments with no early payoff penalty.</div>
             </div>
             <div class="invest-price-stack">
-              <div class="invest-price-big">$600/month</div>
-              <div class="invest-price-mini">$7,200 total · 12 months · 0% APR</div>
+              <div class="invest-price-big" style="font-size:22px;">Instant</div>
+              <div class="invest-price-mini">soft pre-qualify</div>
             </div>
           </div>
           <div class="invest-row">
-            <span class="invest-label">Credit Requirement</span>
-            <span class="invest-value">620+ credit score to qualify</span>
-          </div>
-          <div class="invest-row">
-            <span class="invest-label">Interest Rate</span>
-            <span class="invest-value">0% APR · no early payoff penalty</span>
+            <span class="invest-label">Typical Credit Profile</span>
+            <span class="invest-value">Around 580+ credit</span>
           </div>
           <div class="invest-row">
             <span class="invest-label">Enrollment Timing</span>
             <span class="invest-value">Enroll same day if approved</span>
           </div>
+          <div class="invest-row">
+            <span class="invest-label">Payment Structure</span>
+            <span class="invest-value">Monthly payments • no early payoff penalty</span>
+          </div>
           <div class="invest-option-actions">
-            <a href="https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" class="invest-btn secondary" target="_blank" rel="noopener noreferrer">Pre-Qualify with ClarityPay →</a>
+            <a href="https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" class="invest-btn secondary" target="_blank">Pre-Qualify with ClarityPay →</a>
+          </div>
+        </div>
+
+        <div class="invest-option-block financing">
+          <div class="invest-badge financing">Financing Option 2</div>
+          <div class="invest-option-head">
+            <div>
+              <div class="invest-option-title">Flexxbuy</div>
+              <div class="invest-option-sub">Apply once and see lender options. Best when someone wants broader approval chances across multiple lenders.</div>
+            </div>
+            <div class="invest-price-stack">
+              <div class="invest-price-big" style="font-size:22px;">2–5 Days</div>
+              <div class="invest-price-mini">after approval</div>
+            </div>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Typical Credit Profile</span>
+            <span class="invest-value">Broader credit range</span>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Enrollment Timing</span>
+            <span class="invest-value">Funds in 2–5 business days</span>
+          </div>
+          <div class="invest-row">
+            <span class="invest-label">Payment Structure</span>
+            <span class="invest-value">Funds to your bank, then pay HTSA</span>
+          </div>
+          <div class="invest-option-actions">
+            <a href="https://app.flexxbuy.com/high-ticket-sales-academy-llc/apply/" class="invest-btn secondary" target="_blank">Pre-Qualify with Flexxbuy →</a>
           </div>
         </div>
 
       </div>
 
-      <div class="invest-note" style="color:#ff9c7a;"><strong>★ Soft pre-qualification only.</strong> Once you complete one of the in-house payment options above or get approved through ClarityPay, text CJ right away so access can be granted.</div>
-
-      <div class="invest-note" style="margin-top:18px;color:rgba(255,255,255,0.5);"><strong style="color:#ff9c7a;">Next:</strong> After you pay, jump to <strong style="color:var(--white);">Step 2</strong> below — text CJ so we can grant access right away.</div>
+      <div class="invest-note" style="color:#ff9c7a;"><strong>★ Soft pre-qualification only.</strong> Once you complete one of the in-house payment options above or get approved through one of the financing options, text CJ right away so access can be granted.</div>
     </div>
   </div>
 
@@ -1952,9 +1515,8 @@
     <div class="step-item">
       <div class="step-num">1</div>
       <div class="step-content">
-        <h4>Step 1 — Choose How You Want to Pay</h4>
-        <p>Shay, select your payment option from <strong>Program Investment</strong> above — <strong>$6,000</strong> paid in full (Splitit inside that same checkout), the <strong>$1,750 × 4-pay</strong> plan ($7,000 total), or a soft pre-qualification with <strong>ClarityPay</strong> at $600/month (0% APR, $7,200 total — 620+ credit score to qualify). Once your payment clears or your financing is approved, continue to Step 2.</p>
-        <p class="step-select-above">↑ Select from above</p>
+        <h4>Step 1 — Choose Your Payment or Check Pre-Qualification</h4>
+        <p>Margarita, review the payment and financing options in Program Investment above, then select what you want — <strong>$6,000</strong> paid in full (with <strong>Splitit</strong> available inside that checkout), the <strong>$1,750 × 4-pay</strong> plan ($7,000 total), or a soft pre-qualification link for <strong>ClarityPay</strong> or <strong>Flexxbuy</strong>. Once your payment clears or your financing is approved, move to Step 2 below.</p>
       </div>
     </div>
 
@@ -1971,7 +1533,7 @@
             <div style="background:var(--green);color:var(--navy);font-weight:700;font-size:11px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</div>
             <div>
               <div style="font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:3px;">Welcome Email</div>
-              <div style="font-size:11.5px;color:var(--muted);line-height:1.6;">Contains everything — module access, coaching call links, community access, and your next steps. <strong style="color:var(--text);">Mark it as important</strong> so you can find it easily and return to it anytime.</div>
+              <div style="font-size:11.5px;color:var(--muted);line-height:1.6;">Contains everything — module access, <strong style="color:var(--text);">live group coaching</strong> Zoom links, community access, and your next steps. <strong style="color:var(--text);">Star this as important in your inbox</strong> — all links are in this email. <strong style="color:var(--text);">Suggestion:</strong> add the live group coaching Zoom link from that email to your calendar for <strong style="color:var(--text);">Tuesday — 12:00 PM EST</strong> and <strong style="color:var(--text);">Wednesday — 5:00 PM EST</strong>.</div>
             </div>
           </div>
 
@@ -2000,14 +1562,14 @@
       <div class="step-num">4</div>
       <div class="step-content">
         <h4>Join the HTSA Mastermind Community</h4>
-        <p>Request access to the private Facebook Mastermind — where all live coaching call replays are posted and 750+ members support each other 24/7.</p>
+        <p>Request access to the private Facebook Mastermind — where all live coaching call replays are posted and 490+ members support each other 24/7.</p>
         <a href="https://www.facebook.com/groups/1039656943556821" class="step-link" target="_blank">Request Access on Facebook →</a>
       </div>
     </div>
 
   </div>
 
-<!-- PHONE OPTION -->
+  <!-- PHONE OPTION -->
   <div class="phone-option">
     <div style="font-size:20px; flex-shrink:0;">📞</div>
     <p><strong>Prefer to do this over the phone?</strong> Call or text CJ and he'll walk you through enrollment in about 5 minutes — whichever is easiest for you. <a href="tel:6166121735">(616) 612-1735</a></p>
@@ -2020,83 +1582,84 @@
 
   <!-- WELCOME -->
   <div class="welcome-band">
-    <h3>Welcome to the <span>HTSA Family,</span> Shay. 🎉</h3>
+    <h3>Welcome to the <span>HTSA Family,</span> Margarita. 🎉</h3>
     <p>You're not just enrolling in a program — you're joining a community of people who show up, do the work, and build something real. We can't wait to see where this takes you.</p>
   </div>
 
-<!-- CJ personal reviews (Janaye visible; rest behind See more) -->
-  <div class="ref-strip">
-    <div class="ref-strip-banner">
-      <div class="ref-strip-label">CJ Reviews</div>
-      <p class="ref-strip-banner-desc">Real messages from people who worked directly with CJ.</p>
-    </div>
-    <div class="ref-strip-inner ref-strip-inner--personal-reviews">
-      <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal-blue ref-strip-quote--janaye-tab">
-        <div class="ref-strip-quote-meta">To CJ</div>
-        <blockquote class="ref-strip-quote-body">Hey CJ, it&#x27;s Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could&#x27;ve made for my life right now.<br><br>I think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!</blockquote>
-        <p class="ref-strip-quote-attr">— Janaye · text message</p>
+  <!-- TERMS OF SERVICE -->
+  <div style="background:#f7f9fc;border-top:1px solid rgba(0,0,0,0.07);padding:28px 36px;">
+    <div style="max-width:720px;margin:0 auto;">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+        <div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--navy);">Terms &amp; Enrollment Agreement</div>
+        <a href="https://closewithcjclay.com/HTSA-Terms-of-Service.pdf" target="_blank" rel="noopener noreferrer" style="font-size:11.5px;color:var(--green);font-weight:600;text-decoration:none;white-space:nowrap;">View Full Terms of Service →</a>
       </div>
-
-      <details class="cj-reviews-more" id="cj-reviews-more">
-        <summary>
-          <span class="cj-reviews-more-summary-text">
-            See more reviews
-            <span class="cj-reviews-more-summary-sub">9 more messages from people who worked with CJ</span>
-          </span>
-          <span class="cj-reviews-more-arrow" aria-hidden="true">▸</span>
-        </summary>
-        <div class="cj-reviews-more-panel">
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you&#x27;re doing.</blockquote>
-            <p class="ref-strip-quote-attr">— Zach Scanlon · text message</p>
-          </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, I just wanted to thank you for closing me on the program. I can already tell I&#x27;ll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process.</blockquote>
-            <p class="ref-strip-quote-attr">— Riley Colston · text message</p>
-          </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, the program has been great so far and I&#x27;ve made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you.</blockquote>
-            <p class="ref-strip-quote-attr">— Amy Colombo · text message</p>
-          </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I&#x27;m so grateful. I landed my dream role 65 days in, and you played a real part in that.</blockquote>
-            <p class="ref-strip-quote-attr">— Zachary Allen · mastermind community</p>
-          </div>
-          <div class="ref-strip-quote ref-strip-quote--compact ref-strip-quote--personal-blue">
-            <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, thank you so much for taking the time to read through my answers before we ever got on a call. That meant a lot. Hearing that you actually read my stuff made me want to work with you specifically, not someone else. I appreciate the kind words more than you know, and I&#x27;m really excited to get started with you.</blockquote>
-            <p class="ref-strip-quote-attr">— Brittany Levine · text message</p>
-          </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">Hey CJ, just wanted to say thanks, seriously. You and Mark didn&#x27;t let me slip away after I almost bailed on our call. You stayed patient, kept it real, and showed me why this team&#x27;s different. That kind of support? That&#x27;s why I&#x27;m all in now. Appreciate you both pulling me through. Means a lot.</blockquote>
-            <p class="ref-strip-quote-attr">— Nick Sotirianos · text message</p>
-          </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, you&#x27;re the most genuine and caring person I&#x27;ve ever met on the phone. You lifted me up when I was in a low place. You gave me hope, kept me motivated, and kept me positive the whole way. You&#x27;re a big part of my testimony. I wouldn&#x27;t be here right now if it wasn&#x27;t for you.</blockquote>
-            <p class="ref-strip-quote-attr">— Trinity Isabel · Facebook post</p>
-          </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, thank you for getting me signed up and for sticking with me while we built a plan to join. We worked on it for three months before I came in, and you never made me feel rushed. You showed me from the start that these are really great people, every single one of them.</blockquote>
-            <p class="ref-strip-quote-attr">— HTSA Member · unprompted review</p>
-          </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">To CJ</div>
-            <blockquote class="ref-strip-quote-body">CJ, I&#x27;m SUPER grateful to you for helping me move forward with HTSA! I just passed my certification and wanted you to know. Keep doing what you&#x27;re doing!</blockquote>
-            <p class="ref-strip-quote-attr">— Kate Robinson · text message</p>
-          </div>
+      <div style="font-size:11.5px;color:#555;line-height:1.75;">
+        <div class="terms-clarify">
+          <div class="terms-clarify-title">Lifetime Access Clarification</div>
+          <p style="margin:0 0 8px;color:var(--navy);font-weight:600;">You receive:</p>
+          <ul class="terms-clarify-list">
+            <li>Lifetime access to the course modules</li>
+            <li>Lifetime access to live group coaching calls with Chad</li>
+            <li>Lifetime access to the closers mastermind community</li>
+            <li><strong style="color:var(--navy);">1-on-1 coaching calls</strong> — included at <strong style="color:var(--navy);">no additional fee</strong>. Calls must be used within three months of your program start date unless otherwise approved by HTSA.</li>
+            <li><strong style="color:var(--navy);">AI role-play platform</strong> — included while you are in the academy. After you complete the program and land your offer, you may keep the platform for <strong style="color:var(--navy);">$35/month</strong> if you choose. It is not mandatory; it is an optional tool if it helps your close rate.</li>
+          </ul>
         </div>
-      </details>
+
+        <p style="margin:0;"><strong style="color:var(--navy);">Performance Guarantee.</strong> HTSA stands behind its program. If you complete all modules, attend your kickoff call, engage with the community, and apply for placements without success within the program timeframe, contact our support team — we'll work with you directly to make it right.</p>
+      </div>
     </div>
   </div>
 
-<!-- FOOTER -->
+  <!-- Member stories & book (subtle; site / Trustpilot / YouTube in footer) -->
+  <div class="ref-strip">
+    <div class="ref-strip-inner">
+      <div class="ref-strip-links-col">
+        <div class="ref-strip-label">Member stories · optional</div>
+        <ul class="ref-strip-list">
+          <li><a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" target="_blank" rel="noopener noreferrer">Taylor Conroy (TEDx coach) — why he hires our members</a></li>
+          <li><a href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" target="_blank" rel="noopener noreferrer">Cassie — single mom, relatable success story</a></li>
+          <li><a href="https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8" target="_blank" rel="noopener noreferrer">Brianna — Tony Robbins team</a></li>
+          <li><a href="https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib" target="_blank" rel="noopener noreferrer">Josh — Alex Hormozi background</a></li>
+          <li><a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer"><em>The Book on High Ticket Sales</em> — Chad Aleo (Amazon)</a></li>
+        </ul>
+        <div class="ref-strip-mini-stack">
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">Member voice</div>
+            <blockquote class="ref-strip-quote-body">Just received this news from my first mock call and wanted to share... I'm SUPER grateful to you for helping me move forward with HTSA! Keep doing what you're doing!</blockquote>
+            <p class="ref-strip-quote-attr">— Kate R. · shared with HTSA</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">Member voice</div>
+            <blockquote class="ref-strip-quote-body">I'm really enjoying the program so far and getting a ton of value out of it! Thanks again for helping me cross the line. The work you're doing is legitimately important I hope you know that!!!!</blockquote>
+            <p class="ref-strip-quote-attr">— Jessica C. · shared with HTSA</p>
+          </div>
+          <div class="ref-strip-quote ref-strip-quote--compact">
+            <div class="ref-strip-quote-meta">Member voice</div>
+            <blockquote class="ref-strip-quote-body">Hey CJ, Just wanted to say thanks, seriously. You didn't let me slip away after I tried to bail on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support? That's why I'm all in now. Appreciate you!</blockquote>
+            <p class="ref-strip-quote-attr">— Nick S. · shared with HTSA</p>
+          </div>
+        </div>
+      </div>
+      <div class="ref-strip-quote-wrap">
+        <div class="ref-strip-quote ref-strip-quote--trinity">
+          <div class="ref-strip-quote-meta">Member voice</div>
+          <blockquote class="ref-strip-quote-body">Hello, my name is Trinity.
+
+I'm a single mother of two beautiful children; I've just started my journey with high ticket sales. I'm extremely grateful that I found my path with this company. I was in a low space in my life and I was almost at the verge of giving up — holding on, knowing my children need me to keep going, kept me alive that much to hold on. I prayed for help morning and night with nobody to talk to about what I'm dealing with. But I kept looking for a way out. I can write paragraphs about my life, but I know I was meant to be online to come across Chad's advertisement on the High Ticket Sales Academy. I listened and jumped into the opportunity by signing up.
+
+Then I got a call from CJ — the most genuine and caring person I ever met. On the phone he lifted me up, and only if you heard the call you would feel it immediately… He gave me hope and assurance that it will be okay, kept me motivated and kept me positive. He is a big part of my testimony on leaping into faith with the amazing opportunity; he kept me lifted the whole way and I appreciate it completely. I wouldn't be here right now typing this if it wasn't for him.
+
+I believe everything happens for a reason. I believe I have a place in life, and I strongly believe it's with High Ticket Sales Academy. I'm so ready to be able to move my children out of the area where we are so we can feel safe, knowing my children will be okay. As a mother, the biggest thing I can want is my children safely protected, living in an area where they aren't at risk, getting the best education, and being able to walk around experiencing life. With me finding my place here I'll be able to finally show my children: mommy won't be struggling for long.
+
+Thank God and CJ Clay for that 🙏</blockquote>
+          <p class="ref-strip-quote-attr">— Trinity I. · shared with HTSA</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <div style="background:var(--navy);border-top:3px solid var(--green);padding:28px 36px;page-break-inside:avoid;break-inside:avoid;">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:28px;">
 
@@ -2141,326 +1704,5 @@
   </div>
 
 </div>
-
-
-<!-- Full Terms of Service popup (stays on this page) -->
-<dialog class="splitit-sheet splitit-sheet--tos" id="tosSheet" aria-labelledby="tosSheetTitle">
-  <div class="splitit-sheet-inner" style="position:relative;">
-    <button type="button" class="splitit-sheet-close" id="tosSheetClose" aria-label="Close">&times;</button>
-    <div class="splitit-sheet-head">
-      <div class="splitit-sheet-kicker">Enrollment agreement</div>
-      <h2 id="tosSheetTitle">Terms of Service</h2>
-    </div>
-    <div class="splitit-sheet-body">
-      <h3>Certified High Ticket Closer Program Terms of Service</h3>
-
-      <h3>Payment</h3>
-      <p>The Member agrees to pay HTSA in full for the purchased product(s) in United States Dollars (USD).</p>
-      <p>The Member may lose access to the program and/or coaching if payments are missed or not completed by the due date. Payments delinquent over 14 days will be sent to collections, and HTSA reserves the right to terminate the agreement. Finance charges will apply to all payment plans.</p>
-
-      <h3>Refund policy</h3>
-      <p>Due to the nature of HTSA’s programs, refunds for purchased products or down payments will not be granted outside of our success guarantee (see the “Limited Guarantee” section). By investing in this program, the Member commits to making significant progress through dedicated participation.</p>
-      <p>Because of the intimate nature of the group and the limited availability of spaces, no refunds will be granted after purchase, except as outlined below.</p>
-
-      <h3>Notice to buyers</h3>
-      <p>You must be 18 years of age or older to sign this Agreement. Please read, understand, and approve this Agreement before signing. If you are under 18, a legal guardian must sign on your behalf.</p>
-
-      <h3>Member expectations</h3>
-      <p>I am excited to fully commit to myself, my dreams, my career, and the High Ticket Sales Academy program. I am an action taker, and as such, I am committed to giving this program my very best effort. I am ready to get started and understand that results require consistent effort. Once I begin my program, I will sign a contract with myself to hold myself accountable to achieving certain outcomes. This contract, along with the terms that follow, signifies the formal agreement between me and the company.</p>
-
-      <h3>Member enrollment agreement and terms of sale</h3>
-      <p>This Agreement is a legal contract between you (hereinafter referred to as "Member") and High Ticket Sales Academy, LLC (hereinafter referred to as "HTSA"). By purchasing an HTSA product, the Member certifies that they have read, understood, and agree to this Agreement and the Refund Policy. All sales are final. The Member also understands that this Enrollment Agreement is legally binding upon signing by the Member enrolling in the HTSA Certified High Ticket Closer program and acceptance by HTSA.</p>
-
-      <h3>Limited guarantee</h3>
-      <p>HTSA offers a limited guarantee to members who meet the following conditions:</p>
-      <ol class="tos-ol">
-        <li>The Member must have 2 years of prior sales experience (in a non-retail sales role).</li>
-        <li>The Member must complete all course materials, roleplays, attend all 1-on-1 training, and finish their certification before interview opportunities will be offered.</li>
-        <li>The Member must attend at least one group coaching call per week throughout the program.</li>
-        <li>The Member must apply to a minimum of 50 high-ticket sales or SDR (Sales Development Representative) positions and provide proof of application, such as screenshots or email confirmations.</li>
-      </ol>
-      <p>If the Member completes all these requirements and does not secure a high-ticket closer or SDR/Setter role within 6 months of completing the certification program, they will be granted a full refund of the program's fees. The Member must provide evidence of compliance with all the above conditions to be eligible for this guarantee.</p>
-      <p class="splitit-sheet-fine">Note for this enrollment: the orange Performance Guarantee — Confirmed banner on this page means HTSA has confirmed your guarantee for this enrollment. Where that confirmation waives prior sales experience for you, your guarantee follows that confirmation and the commitment steps on this page.</p>
-
-      <h3>Use of recordings</h3>
-      <p>Live group calls, webinars, testimonials, Facebook posts, or other audio/visual services may be recorded and used by HTSA for business purposes unless the Member specifically requests otherwise.</p>
-
-      <h3>Hours of operation</h3>
-      <p>HTSA's office is open Monday-Friday, 9 AM - 5 PM EST. These terms apply to all HTSA products sold on this site or any other site linking to these terms.</p>
-
-      <h3>Intellectual property</h3>
-      <p>By accepting this Agreement, the Member acknowledges that all content within HTSA’s program is protected by intellectual property rights and agrees to use it only for personal purposes. Unauthorized reproduction or distribution of HTSA content may result in civil or criminal penalties.</p>
-
-      <h3>Customer service / Member Success</h3>
-      <p>For questions or comments regarding HTSA products, please contact us at support@highticketsalesacademy.com or call 616-344-6220.</p>
-
-      <h3>No guarantee of results (outside of the Limited Guarantee)</h3>
-      <p>Members expressly agree that participation in the program does not guarantee results beyond the terms outlined in the Limited Guarantee. HTSA offers no additional representations or warranties regarding results.</p>
-
-      <h3>Access to course content, Mastermind community, and coaching program</h3>
-      <p>Members will have lifetime access to the course content for their core product. The Member also receives free access to the Mastermind Community on Facebook, Live Group Coaching Calls via Zoom. 1-on-1 Coaching calls must be used within three months of the program start date unless otherwise approved by HTSA.</p>
-    </div>
-    <div class="splitit-sheet-foot">
-      <label class="tos-agree-row" for="tosAgreeBox">
-        <input type="checkbox" id="tosAgreeBox">
-        <span>I agree to the Terms of Service from HTSA, and that I must meet the minimum requirements for my guarantee to remain in effect.</span>
-      </label>
-      <button type="button" class="splitit-sheet-gotit" id="tosSheetGotIt" disabled>Ok / Agree</button>
-    </div>
-  </div>
-</dialog>
-<script>
-(function () {
-  var GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
-  var TERMS_URL = "https://closewithcjclay.com/HTSA-Terms-of-Service.pdf";
-  var TERMS_VERSION = "HTSA-TOS-PDF-closewithcjclay-2026-04";
-  var BUYER = {
-    fullName: "Shay Wedeking",
-    email: "shay.s.wedeking@gmail.com",
-    phone: "+17208408829",
-    slug: "shay-wedeking",
-    track: "closer",
-    offer: "standard"
-  };
-
-  var sheet = document.getElementById("tosSheet");
-  var openBtn = document.getElementById("tosMoreBtn");
-  var agreeBtn = document.getElementById("tosSheetGotIt");
-  var agreeBox = document.getElementById("tosAgreeBox");
-  if (!sheet || !openBtn) return;
-
-  function canonicalUrl() {
-    try {
-      var u = new URL(location.href);
-      return u.origin + u.pathname;
-    } catch (e) {
-      return location.href.split("#")[0];
-    }
-  }
-
-  function post(payload) {
-    try {
-      var f = new URLSearchParams();
-      f.set("payload", JSON.stringify(payload));
-      fetch(GAS_ENDPOINT, { method: "POST", mode: "no-cors", body: f, cache: "no-store" }).catch(function () {});
-    } catch (e) {}
-  }
-
-  function syncAgreeButton() {
-    if (!agreeBtn || !agreeBox) return;
-    agreeBtn.disabled = !agreeBox.checked;
-    if (!agreeBox.checked) agreeBtn.textContent = "Ok / Agree";
-  }
-
-  function openSheet() {
-    if (agreeBox) agreeBox.checked = false;
-    if (agreeBtn) {
-      agreeBtn.disabled = true;
-      agreeBtn.textContent = "Ok / Agree";
-    }
-    if (typeof sheet.showModal === "function") sheet.showModal();
-    else sheet.setAttribute("open", "");
-  }
-
-  function closeSheet() {
-    if (typeof sheet.close === "function") sheet.close();
-    else sheet.removeAttribute("open");
-  }
-
-  openBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-    openSheet();
-  });
-
-  var closeBtn = document.getElementById("tosSheetClose");
-  if (closeBtn) closeBtn.addEventListener("click", closeSheet);
-  if (agreeBox) agreeBox.addEventListener("change", syncAgreeButton);
-
-  if (agreeBtn) {
-    agreeBtn.addEventListener("click", function () {
-      if (!agreeBox || !agreeBox.checked) return;
-      agreeBtn.disabled = true;
-      agreeBtn.textContent = "Recording…";
-      post({
-        action: "recordTermsAgreement",
-        fullName: BUYER.fullName,
-        email: BUYER.email,
-        phone: BUYER.phone,
-        enrollmentPageUrl: canonicalUrl(),
-        clientSlug: BUYER.slug,
-        termsUrl: TERMS_URL,
-        termsVersion: TERMS_VERSION,
-        track: BUYER.track,
-        offer: BUYER.offer,
-        agreedCheckbox: true,
-        agreementText: "I agree to the Terms of Service from HTSA, and that I must meet the minimum requirements for my guarantee to remain in effect.",
-        userAgent: navigator.userAgent || "",
-        timestamp: new Date().toISOString()
-      });
-      try {
-        sessionStorage.setItem("hts_terms_gate_shay_wedeking_v1", "1");
-      } catch (e) {}
-      agreeBtn.textContent = "Agreement recorded";
-      setTimeout(closeSheet, 450);
-    });
-  }
-
-  sheet.addEventListener("click", function (e) {
-    if (e.target === sheet) closeSheet();
-  });
-})();
-</script>
-
-<!-- Splitit how-it-works popup (stays on this page) -->
-<dialog class="splitit-sheet" id="splititSheet" aria-labelledby="splititSheetTitle">
-  <div class="splitit-sheet-inner" style="position:relative;">
-    <button type="button" class="splitit-sheet-close" id="splititSheetClose" aria-label="Close">&times;</button>
-    <div class="splitit-sheet-head">
-      <div class="splitit-sheet-kicker">Payment option</div>
-      <h2 id="splititSheetTitle">How Splitit works</h2>
-    </div>
-    <div class="splitit-sheet-body">
-      <h3>The simple version</h3>
-      <ul>
-        <li>$500 per month for 12 months ($6,000 total).</li>
-        <li>0% interest added by Splitit.</li>
-        <li>No credit pull. No new loan. No new credit account.</li>
-        <li>You use a Visa or Mastercard you already have.</li>
-        <li>That card must have the full $6,000 available at checkout.</li>
-        <li>Your statement charge each month is $500. The rest is a temporary hold, not a charge.</li>
-      </ul>
-
-      <h3>Walk through the example</h3>
-      <div class="splitit-ex">
-        <div class="splitit-ex-title">Example: $6,000 program · $500 × 12</div>
-        <div class="splitit-steps">
-          <div class="splitit-step">
-            <div class="splitit-step-num">1</div>
-            <p><strong>Today at checkout:</strong> you choose Splitit under the $6,000 PIF button. Splitit charges <strong>$500</strong> and places a temporary pre-authorization hold for the remaining balance so it knows the credit is there.</p>
-          </div>
-          <div class="splitit-step">
-            <div class="splitit-step-num">2</div>
-            <p><strong>What hits your statement:</strong> only that first <strong>$500</strong>. The hold is not a $6,000 purchase sitting on your bill.</p>
-          </div>
-          <div class="splitit-step">
-            <div class="splitit-step-num">3</div>
-            <p><strong>Each month after that:</strong> another <strong>$500</strong> posts. As each payment clears, the same amount of hold is released back into your available credit.</p>
-          </div>
-          <div class="splitit-step">
-            <div class="splitit-step-num">4</div>
-            <p><strong>By month 12:</strong> you have paid $6,000 in twelve $500 steps. Cash flow stays predictable instead of one large posted balance on day one.</p>
-          </div>
-        </div>
-      </div>
-
-      <h3>Vs charging $6,000 to the card normally</h3>
-      <table class="splitit-table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Charge $6,000 normally</th>
-            <th>Splitit $500/mo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Posted to your card today</td>
-            <td>$6,000</td>
-            <td>$500</td>
-          </tr>
-          <tr>
-            <td>What you owe as a real purchase</td>
-            <td>$6,000 immediately</td>
-            <td>$500 at a time</td>
-          </tr>
-          <tr>
-            <td>Remaining amount</td>
-            <td>Already charged</td>
-            <td>Temporary hold (not a charge)</td>
-          </tr>
-          <tr>
-            <td>Splitit interest</td>
-            <td>N/A</td>
-            <td>0%</td>
-          </tr>
-          <tr>
-            <td>New loan / credit pull</td>
-            <td>No</td>
-            <td>None</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>Vs the $1,750 × 4 plan on this page</h3>
-      <table class="splitit-table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>$1,750 × 4</th>
-            <th>Splitit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Payment size</td>
-            <td>$1,750</td>
-            <td>$500</td>
-          </tr>
-          <tr>
-            <td>Number of payments</td>
-            <td>4</td>
-            <td>12</td>
-          </tr>
-          <tr>
-            <td>Total</td>
-            <td>$7,000</td>
-            <td>$6,000</td>
-          </tr>
-          <tr>
-            <td>Best fit when…</td>
-            <td>You want it paid off faster from cash or card</td>
-            <td>You want to preserve cash flow and spread payments</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>What the hold actually means</h3>
-      <p>Splitit confirms you have enough available credit for the full purchase by placing a temporary pre-authorization hold for the remaining balance. That hold is <strong>not</strong> a $6,000 charge. It does not mean you suddenly owe $6,000 on your statement. Your actual charge is the scheduled $500 installment.</p>
-      <p>The hold temporarily uses part of your available credit while it is active. As the plan progresses, the amount still needed to secure the remaining payments decreases.</p>
-
-      <p class="splitit-sheet-fine">Important: Splitit requires an eligible credit card with the full purchase amount available at checkout. The remaining balance is secured by a temporary pre-authorization hold, which can reduce available credit while active, but the hold is not a charge. Splitit adds no interest to qualifying retail installment plans. Your normal credit-card terms still apply to each $500 installment after it posts.</p>
-    </div>
-    <div class="splitit-sheet-foot">
-      <button type="button" class="splitit-sheet-gotit" id="splititSheetGotIt">Got it</button>
-    </div>
-  </div>
-</dialog>
-<script>
-(function () {
-  var sheet = document.getElementById("splititSheet");
-  var openBtn = document.getElementById("splititMoreBtn");
-  if (!sheet || !openBtn) return;
-  function openSheet() {
-    if (typeof sheet.showModal === "function") sheet.showModal();
-    else sheet.setAttribute("open", "");
-  }
-  function closeSheet() {
-    if (typeof sheet.close === "function") sheet.close();
-    else sheet.removeAttribute("open");
-  }
-  openBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-    openSheet();
-  });
-  var closeBtn = document.getElementById("splititSheetClose");
-  var gotIt = document.getElementById("splititSheetGotIt");
-  if (closeBtn) closeBtn.addEventListener("click", closeSheet);
-  if (gotIt) gotIt.addEventListener("click", closeSheet);
-  sheet.addEventListener("click", function (e) {
-    if (e.target === sheet) closeSheet();
-  });
-})();
-</script>
-
 </body>
 </html>
