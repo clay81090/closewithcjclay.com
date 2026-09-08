@@ -365,12 +365,17 @@ a{color:inherit}
 .media-sheet .sheet-body{padding:0;max-height:min(70dvh,560px);overflow:auto;background:#0a1628}
 .media-frame{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
 .media-frame--doc{aspect-ratio:auto;min-height:min(70dvh,560px);height:min(70dvh,560px);background:#fff}
+
+.media-scroll{width:100%;max-height:min(70dvh,560px);overflow:auto;-webkit-overflow-scrolling:touch;background:#111;padding:0}
+.media-scroll img{display:block;width:100%;height:auto;margin:0}
+.media-sheet--wide{width:min(920px,calc(100% - 12px))}
+
 .media-sheet .sheet-foot{background:var(--white)}
 @media (max-width:680px){.res-wrap{margin-left:16px;margin-right:16px}}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1788845858 -->
+<!-- close-build:1788846475 -->
 </head>
 <body>
 <main class="page">
@@ -555,11 +560,11 @@ a{color:inherit}
         </div>
         <div class="res-group">
           <div class="res-group-label">Key resources</div>
-          <button type="button" class="res-btn" data-media="doc" data-url="https://www.trustpilot.com/review/highticketsalesacademy.com" data-title="Trustpilot Reviews — 4.9 out of 5"><span>Trustpilot Reviews<small>4.9 out of 5 · opens here</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="doc" data-url="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" data-title="Chad’s Book — The Book on High Ticket Sales"><span>Chad’s Book<small>The Book on High Ticket Sales · opens here</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="doc" data-url="https://www.highticketsalesacademy.com" data-title="HTSA Website"><span>HTSA Website<small>highticketsalesacademy.com · opens here</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="doc" data-url="https://canva.link/qcl7l45n7behw3k" data-title="Why Everyone Raves About Our Placement"><span>Why Everyone Raves About Our Placement<small>Scrollable · stays on this page</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="doc" data-url="https://canva.link/na9nxjm9a1e4vjz" data-title="Christa Kieffer — Placement to 22k (4 months)"><span>Christa Kieffer — Placement to 22k<small>4 months · scrollable on this page</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5"><span>Trustpilot Reviews<small>4.9 out of 5 · scrollable snapshot on this page</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="img" data-src="/media/chad-aleo-book-banner.png" data-title="Chad’s Book — The Book on High Ticket Sales"><span>Chad’s Book<small>The Book on High Ticket Sales · on this page</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-why-placement.jpg" data-title="Why Everyone Raves About Our Placement"><span>Why Everyone Raves About Our Placement<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-christa-22k.jpg" data-title="Christa Kieffer — Placement to 22k (4 months)"><span>Christa Kieffer — Placement to 22k<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="site" data-url="https://www.highticketsalesacademy.com" data-title="HTSA Website"><span>HTSA Website<small>Opens here · live site blocks embeds</small></span><span class="chev">▸</span></button>
         </div>
       </div>
     </details>
@@ -1088,6 +1093,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   function openMedia(kind, payload, title){
     clearMedia();
     mediaTitle.textContent = title || "Resource";
+    mediaSheet.classList.toggle("media-sheet--wide", kind === "img");
     if (kind === "yt") {
       const f = document.createElement("iframe");
       f.className = "media-frame";
@@ -1096,6 +1102,21 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       f.setAttribute("playsinline", "");
       f.src = "https://www.youtube-nocookie.com/embed/" + payload + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
       mediaBody.appendChild(f);
+    } else if (kind === "img") {
+      const wrap = document.createElement("div");
+      wrap.className = "media-scroll";
+      wrap.id = "mediaScroll";
+      const img = document.createElement("img");
+      img.src = payload;
+      img.alt = title || "Resource";
+      img.loading = "eager";
+      wrap.appendChild(img);
+      mediaBody.appendChild(wrap);
+    } else if (kind === "site") {
+      const wrap = document.createElement("div");
+      wrap.style.cssText = "padding:22px 20px;background:#fff;color:#17243b;font-size:15px;line-height:1.55";
+      wrap.innerHTML = "<p style=\"margin:0 0 12px;font-weight:800;color:#0a1628\">High Ticket Sales Academy</p><p style=\"margin:0 0 14px;color:#54637a\">That site blocks in-page embeds (same as Trustpilot). The videos and scrollable snapshots above cover the proof you need without leaving this page.</p><p style=\"margin:0;padding:12px 14px;border-radius:10px;background:#f3f6f9;font-weight:700;word-break:break-all\">" + payload + "</p>";
+      mediaBody.appendChild(wrap);
     } else {
       const f = document.createElement("iframe");
       f.className = "media-frame media-frame--doc";
@@ -1110,6 +1131,8 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     btn.addEventListener("click", function(){
       const kind = btn.dataset.media;
       if (kind === "yt") openMedia("yt", btn.dataset.id, btn.dataset.title);
+      else if (kind === "img") openMedia("img", btn.dataset.src, btn.dataset.title);
+      else if (kind === "site") openMedia("site", btn.dataset.url, btn.dataset.title);
       else openMedia("doc", btn.dataset.url, btn.dataset.title);
     });
   });
@@ -1119,19 +1142,21 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   mediaSheet.addEventListener("click", function(e){ if(e.target===mediaSheet){ clearMedia(); closeSheet(mediaSheet); } });
   el("mediaExpand").addEventListener("click", function(){
     mediaExpanded = !mediaExpanded;
+    const sc = mediaBody.querySelector(".media-scroll");
+    const fr = mediaBody.querySelector("iframe");
     if (mediaExpanded) {
       mediaSheet.style.width = "min(96vw, 1100px)";
       mediaSheet.style.maxHeight = "96dvh";
       mediaSheet.style.height = "96dvh";
-      const fr = mediaBody.querySelector("iframe");
       if (fr) { fr.style.minHeight = "80dvh"; fr.style.height = "80dvh"; }
+      if (sc) { sc.style.maxHeight = "80dvh"; }
       el("mediaExpand").textContent = "Smaller";
     } else {
       mediaSheet.style.width = "";
       mediaSheet.style.maxHeight = "";
       mediaSheet.style.height = "";
-      const fr = mediaBody.querySelector("iframe");
       if (fr) { fr.style.minHeight = ""; fr.style.height = ""; }
+      if (sc) { sc.style.maxHeight = ""; }
       el("mediaExpand").textContent = "Larger";
     }
   });
