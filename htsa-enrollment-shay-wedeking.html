@@ -113,12 +113,25 @@ a{color:inherit}
 .plan--custom .choose{background:var(--navy);color:var(--green)}
 .choose:hover,.choose:focus-visible{transform:translateY(-1px);filter:brightness(1.06);outline:none}
 .choose:focus-visible{outline:3px solid rgba(0,201,122,.4);outline-offset:3px}
-.plan-splitit{margin-top:10px;padding:10px 12px;border:1px dashed rgba(0,201,122,.4);
+.plan-sub{margin-top:10px}
+.plan-sub>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+  gap:8px;padding:9px 12px;border-radius:9px;background:rgba(97,227,139,.1);
+  border:1px dashed rgba(0,201,122,.35);color:var(--navy);font-size:13px;font-weight:800}
+.plan-sub>summary::-webkit-details-marker{display:none}
+.plan-sub-chev{color:var(--green-dark);font-weight:800;transition:transform .18s ease}
+.plan-sub[open]>summary .plan-sub-chev{transform:rotate(180deg)}
+.plan-sub[open]>summary{border-radius:9px 9px 0 0;border-bottom:0}
+.plan-sub .plan-splitit{margin-top:0;border-radius:0 0 10px 10px;border:1px dashed rgba(0,201,122,.35);border-top:0}
+.plan-splitit{margin-top:10px;padding:11px 13px;border:1px dashed rgba(0,201,122,.4);
   border-radius:10px;background:rgba(97,227,139,.08)}
-.plan-splitit-title{color:var(--navy);font-size:13px;font-weight:800}
-.plan-splitit-copy{margin-top:3px;color:var(--muted);font-size:12.5px;line-height:1.5}
-.plan-splitit-link{display:inline-block;margin-top:6px;color:var(--green-dark);font-size:12.5px;
+.plan-splitit-title{color:var(--navy);font-size:13.5px;font-weight:800}
+.plan-splitit-copy{margin-top:4px;color:var(--muted);font-size:12.5px;line-height:1.55}
+.plan-splitit-copy b{color:var(--navy)}
+.plan-splitit-link{display:inline-block;margin-top:7px;color:var(--green-dark);font-size:12.5px;
   font-weight:700;text-decoration:none;cursor:pointer;background:none;border:0;padding:0;font-family:inherit}
+.plan-clarity-badge{display:inline-flex;align-items:center;gap:5px;margin:0 0 6px;padding:3px 10px;
+  border-radius:999px;background:rgba(0,201,122,.15);color:var(--green-dark);
+  font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 
 .plan-warn{margin:-4px 0 12px;padding:9px 11px;border:1px solid rgba(0,201,122,.3);border-radius:9px;
   background:rgba(97,227,139,.12);color:var(--navy);font-size:12.5px;font-weight:700;line-height:1.45}
@@ -320,7 +333,7 @@ a{color:inherit}
 }
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow{transition:none}}
 </style>
-<!-- close-build:1788835905 -->
+<!-- close-build:1788838315 -->
 </head>
 <body>
 <main class="page">
@@ -401,11 +414,14 @@ a{color:inherit}
         <span class="plan-unit">one time</span>
       </div>
       <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
-      <div class="plan-splitit">
-        <div class="plan-splitit-title">Prefer $500/month on your credit card? Ask about Splitit.</div>
-        <div class="plan-splitit-copy">$500/month × 12 months, 0% interest, no credit pull. Uses the credit you already have.</div>
-        <button type="button" class="plan-splitit-link" id="splititMoreBtn">How Splitit works →</button>
-      </div>
+      <details class="plan-sub">
+        <summary><span>More payment options</span><span class="plan-sub-chev" aria-hidden="true">▾</span></summary>
+        <div class="plan-splitit">
+          <div class="plan-splitit-title">Splitit — $500/month × 12 months</div>
+          <div class="plan-splitit-copy"><b>0% interest.</b> No credit pull. Uses the credit you already have on a Visa or Mastercard. Same $6,000 total, spread over 12 monthly charges of $500.</div>
+          <button type="button" class="plan-splitit-link" id="splititMoreBtn">How Splitit works →</button>
+        </div>
+      </details>
     </div>
 
     <div class="plan" id="planPlan">
@@ -421,6 +437,7 @@ a{color:inherit}
 
     <div class="plan" id="planClarity" hidden>
       <div class="plan-name">ClarityPay monthly</div>
+      <span class="plan-clarity-badge">0% interest · 0% APR</span>
       <div class="plan-note" id="clarityNote"></div>
       <div class="plan-figs">
         <span class="plan-amt" id="clarityAmt"></span>
@@ -816,7 +833,7 @@ const BUYER = {
   slug:      "shay_wedeking",
   track:     "closer",
   offer:     "standard",
-  show:      ["pif", "plan", "clarity"]
+  show:      ["pif", "plan"]
 };
 
 const CUSTOM_OFFER = null;
@@ -835,8 +852,8 @@ const OFFERS = {
             note: "First payment today, then one a month for three months.",
             warn: "",
             checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
-    clarity: { amount: "$600", unit: "a month · $7,200 total",
-               note: "Monthly financing. Soft credit check, needs a 620 or better.",
+    clarity: { amount: "$600", unit: "a month · 0% interest · $7,200 total",
+               note: "Monthly financing with 0% interest APR. Soft credit check, 620 or better credit score to qualify.",
                checkout: "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" }
   }
 };
