@@ -500,6 +500,185 @@
     margin: 0;
   }
 
+  .invest-splitit-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 156, 122, 0.55);
+    background: rgba(255, 156, 122, 0.12);
+    color: #ffd0bc;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .invest-splitit-more:hover {
+    background: rgba(255, 156, 122, 0.22);
+    color: #fff;
+  }
+
+  .splitit-sheet {
+    border: none;
+    border-radius: 16px;
+    padding: 0;
+    width: min(560px, calc(100vw - 28px));
+    max-height: min(88vh, 720px);
+    background: #0a1628;
+    color: #fff;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  }
+  .splitit-sheet::backdrop {
+    background: rgba(6, 15, 30, 0.72);
+    backdrop-filter: blur(3px);
+  }
+  .splitit-sheet-inner {
+    display: flex;
+    flex-direction: column;
+    max-height: min(88vh, 720px);
+  }
+  .splitit-sheet-head {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
+  }
+  .splitit-sheet-kicker {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ff9c7a;
+    margin-bottom: 6px;
+  }
+  .splitit-sheet-head h2 {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    line-height: 1.25;
+    color: #fff;
+  }
+  .splitit-sheet-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .splitit-sheet-body {
+    padding: 16px 20px 8px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.82);
+  }
+  .splitit-sheet-body h3 {
+    margin: 18px 0 8px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #00c97a;
+  }
+  .splitit-sheet-body h3:first-child { margin-top: 0; }
+  .splitit-sheet-body p { margin: 0 0 10px; }
+  .splitit-sheet-body ul {
+    margin: 0 0 12px;
+    padding-left: 18px;
+  }
+  .splitit-sheet-body li { margin-bottom: 6px; }
+  .splitit-ex {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,156,122,0.35);
+    border-radius: 12px;
+    padding: 14px 14px 10px;
+    margin: 10px 0 14px;
+  }
+  .splitit-ex-title {
+    font-weight: 700;
+    color: #ff9c7a;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  .splitit-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .splitit-step {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .splitit-step-num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #00c97a;
+    color: #0a1628;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .splitit-step p { margin: 0; font-size: 13px; }
+  .splitit-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin: 8px 0 14px;
+  }
+  .splitit-table th,
+  .splitit-table td {
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 8px 9px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .splitit-table th {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    font-weight: 700;
+  }
+  .splitit-table td { color: rgba(255,255,255,0.78); }
+  .splitit-sheet-fine {
+    font-size: 11px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.45);
+    margin-top: 8px;
+  }
+  .splitit-sheet-foot {
+    padding: 12px 20px 16px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
+  }
+  .splitit-sheet-gotit {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 16px;
+    background: #00c97a;
+    color: #0a1628;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+
   .invest-badge.financing {
     background: rgba(0,201,122,0.18);
     color: var(--green);
@@ -1390,6 +1569,7 @@
               <div class="invest-splitit-head">Splitit — $500/month × 12 months</div>
               <p class="invest-splitit-apply"><strong>Apply here:</strong> use the same <strong>green “Choose PIF — Pay $6,000” button</strong> above, then select <strong>Splitit</strong> at the bottom of Whop’s payment methods to complete setup.</p>
               <p class="invest-splitit-fine">No credit check — uses the existing limit on your Visa or Mastercard. A hold is placed on your card for the total amount. As you make each $500 monthly payment, that same amount is released back to your available credit.</p>
+              <button type="button" class="invest-splitit-more" id="splititMoreBtn" aria-haspopup="dialog" aria-controls="splititSheet">For more detail →</button>
             </div>
           </div>
         </div>
@@ -1627,5 +1807,157 @@ Thank God and CJ Clay for that 🙏</blockquote>
   </div>
 
 </div>
+
+<!-- Splitit how-it-works popup (stays on this page) -->
+<dialog class="splitit-sheet" id="splititSheet" aria-labelledby="splititSheetTitle">
+  <div class="splitit-sheet-inner" style="position:relative;">
+    <button type="button" class="splitit-sheet-close" id="splititSheetClose" aria-label="Close">&times;</button>
+    <div class="splitit-sheet-head">
+      <div class="splitit-sheet-kicker">Payment option</div>
+      <h2 id="splititSheetTitle">How Splitit works</h2>
+    </div>
+    <div class="splitit-sheet-body">
+      <h3>The simple version</h3>
+      <ul>
+        <li>$500 per month for 12 months ($6,000 total).</li>
+        <li>0% interest added by Splitit.</li>
+        <li>No credit pull. No new loan. No new credit account.</li>
+        <li>You use a Visa or Mastercard you already have.</li>
+        <li>That card must have the full $6,000 available at checkout.</li>
+        <li>Your statement charge each month is $500. The rest is a temporary hold, not a charge.</li>
+      </ul>
+
+      <h3>Walk through the example</h3>
+      <div class="splitit-ex">
+        <div class="splitit-ex-title">Example: $6,000 program · $500 × 12</div>
+        <div class="splitit-steps">
+          <div class="splitit-step">
+            <div class="splitit-step-num">1</div>
+            <p><strong>Today at checkout:</strong> you choose Splitit under the $6,000 PIF button. Splitit charges <strong>$500</strong> and places a temporary pre-authorization hold for the remaining balance so it knows the credit is there.</p>
+          </div>
+          <div class="splitit-step">
+            <div class="splitit-step-num">2</div>
+            <p><strong>What hits your statement:</strong> only that first <strong>$500</strong>. The hold is not a $6,000 purchase sitting on your bill.</p>
+          </div>
+          <div class="splitit-step">
+            <div class="splitit-step-num">3</div>
+            <p><strong>Each month after that:</strong> another <strong>$500</strong> posts. As each payment clears, the same amount of hold is released back into your available credit.</p>
+          </div>
+          <div class="splitit-step">
+            <div class="splitit-step-num">4</div>
+            <p><strong>By month 12:</strong> you have paid $6,000 in twelve $500 steps. Cash flow stays predictable instead of one large posted balance on day one.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Vs charging $6,000 to the card normally</h3>
+      <table class="splitit-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Charge $6,000 normally</th>
+            <th>Splitit $500/mo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Posted to your card today</td>
+            <td>$6,000</td>
+            <td>$500</td>
+          </tr>
+          <tr>
+            <td>What you owe as a real purchase</td>
+            <td>$6,000 immediately</td>
+            <td>$500 at a time</td>
+          </tr>
+          <tr>
+            <td>Remaining amount</td>
+            <td>Already charged</td>
+            <td>Temporary hold (not a charge)</td>
+          </tr>
+          <tr>
+            <td>Splitit interest</td>
+            <td>N/A</td>
+            <td>0%</td>
+          </tr>
+          <tr>
+            <td>New loan / credit pull</td>
+            <td>No</td>
+            <td>None</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Vs the $1,750 × 4 plan on this page</h3>
+      <table class="splitit-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>$1,750 × 4</th>
+            <th>Splitit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Payment size</td>
+            <td>$1,750</td>
+            <td>$500</td>
+          </tr>
+          <tr>
+            <td>Number of payments</td>
+            <td>4</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td>$7,000</td>
+            <td>$6,000</td>
+          </tr>
+          <tr>
+            <td>Best fit when…</td>
+            <td>You want it paid off faster from cash or card</td>
+            <td>You want to preserve cash flow and spread payments</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>What the hold actually means</h3>
+      <p>Splitit confirms you have enough available credit for the full purchase by placing a temporary pre-authorization hold for the remaining balance. That hold is <strong>not</strong> a $6,000 charge. It does not mean you suddenly owe $6,000 on your statement. Your actual charge is the scheduled $500 installment.</p>
+      <p>The hold temporarily uses part of your available credit while it is active. As the plan progresses, the amount still needed to secure the remaining payments decreases.</p>
+
+      <p class="splitit-sheet-fine">Important: Splitit requires an eligible credit card with the full purchase amount available at checkout. The remaining balance is secured by a temporary pre-authorization hold, which can reduce available credit while active, but the hold is not a charge. Splitit adds no interest to qualifying retail installment plans. Your normal credit-card terms still apply to each $500 installment after it posts.</p>
+    </div>
+    <div class="splitit-sheet-foot">
+      <button type="button" class="splitit-sheet-gotit" id="splititSheetGotIt">Got it</button>
+    </div>
+  </div>
+</dialog>
+<script>
+(function () {
+  var sheet = document.getElementById("splititSheet");
+  var openBtn = document.getElementById("splititMoreBtn");
+  if (!sheet || !openBtn) return;
+  function openSheet() {
+    if (typeof sheet.showModal === "function") sheet.showModal();
+    else sheet.setAttribute("open", "");
+  }
+  function closeSheet() {
+    if (typeof sheet.close === "function") sheet.close();
+    else sheet.removeAttribute("open");
+  }
+  openBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    openSheet();
+  });
+  var closeBtn = document.getElementById("splititSheetClose");
+  var gotIt = document.getElementById("splititSheetGotIt");
+  if (closeBtn) closeBtn.addEventListener("click", closeSheet);
+  if (gotIt) gotIt.addEventListener("click", closeSheet);
+  sheet.addEventListener("click", function (e) {
+    if (e.target === sheet) closeSheet();
+  });
+})();
+</script>
+
 </body>
 </html>
