@@ -284,6 +284,33 @@ a{color:inherit}
   .roadmap-frame{height:min(65vh,560px)}
 }
 @media (prefers-reduced-motion:reduce){.choose{transition:none}}
+
+/* ---------- special offer bands ---------- */
+.deadline{margin:0;padding:11px 26px;text-align:center;
+  display:flex;flex-wrap:wrap;gap:5px 10px;align-items:baseline;justify-content:center;
+  background:linear-gradient(90deg,#b3140c,#e0261b);color:#fff;line-height:1.35;letter-spacing:.02em}
+.deadline b{color:#fff;font-weight:800}
+.cd-label{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.cd-time{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.06em;
+  color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.18)}
+.cd-note{width:100%;font-size:11.5px;opacity:.92}
+.deadline.ended{background:linear-gradient(90deg,#0a1628,#152a46)}
+.deadline.ended .cd-label{color:var(--green)}
+.intro{padding:22px 26px 6px}
+.intro-kicker{color:var(--green-dark);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.intro h2{margin-top:6px;color:var(--navy);font-family:"Playfair Display",serif;font-size:22px;line-height:1.2}
+.intro p{margin-top:10px;color:var(--text);font-size:14.5px;line-height:1.65}
+.intro p + p{margin-top:10px}
+.intro b{color:var(--navy)}
+.setter-block{margin:8px 26px 18px;padding:18px 18px 8px;border:1px dashed var(--grey);
+  border-radius:15px;background:#fbfcfe}
+.setter-block .h2{margin-bottom:6px;font-size:19px}
+.setter-note{margin:0 0 14px;color:var(--muted);font-size:13.5px;line-height:1.55}
+.setter-block .plans{padding:0}
+.setter-block .plan{background:#fff}
+.clarity-badge{display:inline-block;margin-left:8px;padding:3px 9px;border-radius:999px;
+  background:rgba(0,201,122,.14);color:var(--green-dark);font-size:11px;font-weight:800;
+  letter-spacing:.04em;text-transform:uppercase;vertical-align:middle}
 </style>
 </head>
 <body>
@@ -291,8 +318,8 @@ a{color:inherit}
 
   <section class="top">
     <img class="top-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
-    <h1 id="topTitle">Here's what we just went over.</h1>
-    <p id="topSub">We'll walk the 30 day plan first. Options are at the bottom when we get there.</p>
+    <h1 id="topTitle">Your special offer, in one place.</h1>
+    <p id="topSub">48-hour special pricing · then standard · HTSA raises prices Oct 1.</p>
     <div class="track-pill" id="trackPill">Certified High Ticket Closer</div>
     <div class="prep" id="prepBox" hidden>
       <div class="prep-card">
@@ -309,6 +336,19 @@ a{color:inherit}
       </div>
     </div>
     <p class="prep-fix" id="prepFix" hidden>Anything wrong there? Tell me before you pay and I'll fix it.</p>
+  </section>
+
+  <div class="deadline" id="deadlineBar">
+    <span class="cd-label">Your special offer ends in</span>
+    <span class="cd-time" id="cdTime">48:00:00</span>
+    <span class="cd-note">then these Closer links become standard pricing · HTSA pricing goes up Oct 1</span>
+  </div>
+
+  <section class="intro">
+    <div class="intro-kicker">A quick note from CJ</div>
+    <h2>Hey Ashley — CJ here.</h2>
+    <p>I was trying to be nice and get you into this promotion before it closes. Standard HTSA pricing goes up <b>October 1st</b>. The red timer above is a <b>48-hour window</b> on your discounted Closer links — when it hits zero, those links flip to regular pricing.</p>
+    <p>Walk the 30 day plan with me first. Pricing (Closer special + Setter Academy at regular) is below when you're ready. If you'd rather talk it through, text or call me — my number is on this page.</p>
   </section>
 
 
@@ -337,8 +377,8 @@ a{color:inherit}
     </ul>
   </section>
 
-  <details class="price-drop" id="priceDrop">
-    <summary><span class="price-pill">Pricing</span> Your enrollment options</summary>
+  <details class="price-drop" id="priceDrop" open>
+    <summary><span class="price-pill">Pricing</span> Special Closer offer + Setter Academy</summary>
 
   <div class="guar-strip">
     <b>Placed in 6 months or refunded.</b>
@@ -347,8 +387,8 @@ a{color:inherit}
   </div>
 
   <section class="plans">
-    <div class="h2">Your options</div>
-    <div class="plans-sub">Access opens the moment your payment clears.</div>
+    <div class="h2">Closer Academy · special pricing</div>
+    <div class="plans-sub" id="closerPlansSub">Green prices are your promo. Struck-through numbers are regular/main pricing. After the 48-hour timer (or Oct 1), special links flip to standard. Access opens when payment clears.</div>
 
     <div class="plan plan--custom" id="planCustom" hidden>
       <span class="badge" id="customBadge">Your offer</span>
@@ -378,6 +418,7 @@ a{color:inherit}
       <div class="plan-note" id="planNote"></div>
       <div class="plan-figs">
         <span class="plan-amt" id="planAmt"></span>
+        <span class="plan-strike" id="planStrike"></span>
         <span class="plan-unit" id="planUnit"></span>
       </div>
       <p class="plan-warn" id="planWarn" hidden></p>
@@ -385,13 +426,48 @@ a{color:inherit}
     </div>
 
     <div class="plan" id="planClarity" hidden>
-      <div class="plan-name">ClarityPay monthly</div>
+      <div class="plan-name">ClarityPay monthly <span class="clarity-badge">0% interest</span></div>
       <div class="plan-note" id="clarityNote"></div>
       <div class="plan-figs">
         <span class="plan-amt" id="clarityAmt"></span>
+        <span class="plan-strike" id="clarityStrike"></span>
         <span class="plan-unit" id="clarityUnit"></span>
       </div>
       <button class="choose" type="button" data-plan="clarity">Choose ClarityPay</button>
+    </div>
+  </section>
+
+  <section class="setter-block" id="setterBlock" aria-label="Setter Academy pricing">
+    <div class="h2">Setter Academy · regular pricing (no promo)</div>
+    <p class="setter-note">Setter Academy is already severely underpriced — <b>no promotion</b> on this track. Same numbers as always: <b>$3,000</b> PIF · <b>$1,050</b> × 3 · <b>$300/mo</b> × 12 on ClarityPay at <b>0% interest</b>. Fastest path to income if cash is tighter; upgrade to Closer later.</p>
+    <div class="plans">
+      <div class="plan">
+        <div class="plan-name">Paid in full</div>
+        <div class="plan-note">One payment. Full Setter access when it clears.</div>
+        <div class="plan-figs">
+          <span class="plan-amt">$3,000</span>
+          <span class="plan-unit">one time</span>
+        </div>
+        <a class="choose" href="https://whop.com/checkout/plan_qzvfCCb1rIO0L?d2c=true" target="_blank" rel="noopener noreferrer">Choose Setter PIF</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">3 payments</div>
+        <div class="plan-note">First payment today, then one a month for two more months.</div>
+        <div class="plan-figs">
+          <span class="plan-amt">$1,050</span>
+          <span class="plan-unit">today · $3,150 total</span>
+        </div>
+        <a class="choose" href="https://whop.com/checkout/plan_oK3AajTKp0mXK?d2c=true" target="_blank" rel="noopener noreferrer">Choose Setter 3-pay</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">ClarityPay monthly <span class="clarity-badge">0% interest</span></div>
+        <div class="plan-note">12 months at 0% interest. Soft credit check, needs a 620 or better.</div>
+        <div class="plan-figs">
+          <span class="plan-amt">$300</span>
+          <span class="plan-unit">a month · 0% interest · $3,600 total</span>
+        </div>
+        <a class="choose" href="https://whop.com/checkout/plan_z5iuUhSgm9seH" target="_blank" rel="noopener noreferrer">Choose Setter ClarityPay</a>
+      </div>
     </div>
   </section>
 
@@ -564,7 +640,7 @@ a{color:inherit}
    ============================================================ */
 const BUYER = {
   firstName: "Ashley",
-  fullName:  "Ashley Cade",
+  fullName:  "Ashley Thompson",
   email:     "ashleycade775@gmail.com",
   phone:     "+18282260008",
   slug:      "ashley_cade",
@@ -597,24 +673,24 @@ const OFFERS = {
     pif:  { amount: "$6,000", was: "$7,000",
             note: "One payment. Saves you $1,000 against the payment plan.",
             checkout: "https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" },
-    plan: { name: "4 payments", amount: "$1,750", unit: "today · $7,000 total",
+    plan: { name: "4 payments", amount: "$1,750", unit: "today · $7,000 total", was: "",
             note: "First payment today, then one a month for three months.",
             warn: "",
             checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
-    clarity: { amount: "$600", unit: "a month · $7,200 total",
-               note: "Monthly financing. Soft credit check, needs a 620 or better.",
+    clarity: { amount: "$600", unit: "a month · 0% interest · $7,200 total", was: "",
+               note: "Monthly financing at 0% interest. Soft credit check, needs a 620 or better.",
                checkout: "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" }
   },
   reactivation: {
-    pif:  { amount: "$5,000", was: "$7,000",
-            note: "One payment. Your special offer price.",
+    pif:  { amount: "$5,000", was: "$6,000",
+            note: "One payment. Your special offer price (regular PIF is $6,000).",
             checkout: "https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true" },
-    plan: { name: "3 payments", amount: "$1,750", unit: "today · $5,250 total",
-            note: "First payment today, then one a month for two more months.",
+    plan: { name: "3 payments", amount: "$1,750", unit: "today · $5,250 total", was: "$7,000",
+            note: "First payment today, then one a month for two more months. Regular plan is 4 × $1,750 ($7,000).",
             warn: "",
             checkout: "https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true" },
-    clarity: { amount: "$500", unit: "a month · $6,000 total",
-               note: "Monthly financing at your special offer rate. Soft credit check, needs a 620 or better.",
+    clarity: { amount: "$500", unit: "a month · 0% interest · $6,000 total", was: "$600",
+               note: "Monthly financing at 0% interest on your special offer rate. Soft credit check, needs a 620 or better. Regular ClarityPay is $600/mo.",
                checkout: "https://whop.com/checkout/plan_VUSDju20gTBCg/" }
   }
 };
@@ -656,6 +732,27 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
 (function () {
   const el = id => document.getElementById(id);
   const T = TRACKS[BUYER.track] || TRACKS.closer;
+
+  /* offer override via ?offer=standard|special */
+  try {
+    var offerQ = (new URLSearchParams(location.search).get("offer") || "").trim().toLowerCase();
+    if (offerQ === "standard" || offerQ === "regular" || offerQ === "main") BUYER.offer = "standard";
+    if (offerQ === "special" || offerQ === "reactivation" || offerQ === "promo") BUYER.offer = "reactivation";
+  } catch (e) {}
+
+  /* 48-hour countdown, per browser, from first open (Ashley-specific key) */
+  var CD_HOURS = 48;
+  var CD_KEY = "htsa_special_deadline_ashley_cade_v1";
+  var cdDeadline = 0;
+  if (BUYER.offer === "reactivation") {
+    try {
+      var storedCd = parseInt(localStorage.getItem(CD_KEY) || "", 10);
+      if (!isNaN(storedCd) && storedCd > 0) cdDeadline = storedCd;
+      else { cdDeadline = Date.now() + CD_HOURS * 3600 * 1000; localStorage.setItem(CD_KEY, String(cdDeadline)); }
+    } catch (e) { cdDeadline = Date.now() + CD_HOURS * 3600 * 1000; }
+    if (Date.now() >= cdDeadline) { BUYER.offer = "standard"; cdDeadline = 0; }
+  }
+
   const O = OFFERS[BUYER.offer] || OFFERS.standard;
   const first = (BUYER.firstName || "").trim();
   const ph = v => typeof v === "string" && /^\[.*\]$/.test(v.trim());
@@ -699,19 +796,25 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     li.appendChild(b);li.appendChild(s);el("currList").appendChild(li);});
 
   /* ---------- plans ---------- */
-  el("pifAmt").textContent    = O.pif.amount;
-  el("pifStrike").textContent = O.pif.was || "";
-  el("pifNote").textContent   = O.pif.note;
-  el("planName").textContent  = O.plan.name;
-  el("planAmt").textContent   = O.plan.amount;
-  el("planUnit").textContent  = O.plan.unit;
-  el("planNote").textContent  = O.plan.note;
-  if (O.plan.warn) { el("planWarn").hidden = false; el("planWarn").textContent = O.plan.warn; }
-  el("clarityAmt").textContent  = O.clarity.amount;
-  el("clarityUnit").textContent = O.clarity.unit;
-  el("clarityNote").textContent = O.clarity.note;
+  function paintPlans(O){
+    el("pifAmt").textContent    = O.pif.amount;
+    el("pifStrike").textContent = O.pif.was || "";
+    el("pifNote").textContent   = O.pif.note;
+    el("planName").textContent  = O.plan.name;
+    el("planAmt").textContent   = O.plan.amount;
+    var ps = el("planStrike"); if (ps) ps.textContent = O.plan.was || "";
+    el("planUnit").textContent  = O.plan.unit;
+    el("planNote").textContent  = O.plan.note;
+    if (O.plan.warn) { el("planWarn").hidden = false; el("planWarn").textContent = O.plan.warn; }
+    else { el("planWarn").hidden = true; el("planWarn").textContent = ""; }
+    el("clarityAmt").textContent  = O.clarity.amount;
+    var cs = el("clarityStrike"); if (cs) cs.textContent = O.clarity.was || "";
+    el("clarityUnit").textContent = O.clarity.unit;
+    el("clarityNote").textContent = O.clarity.note;
+  }
+  paintPlans(O);
 
-  const PLANS = {
+    const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
     plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
     clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" }
@@ -736,6 +839,46 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
                      url:CUSTOM_OFFER.checkout, warn:CUSTOM_OFFER.warn || "" };
     el("planPif") && el("planPif").classList.remove("plan--best");
     const b = el("pifBadge"); if (b) b.remove();
+  }
+
+
+  /* ---------- live countdown + expiry swap to standard ---------- */
+  if (BUYER.offer === "reactivation" && cdDeadline) {
+    var cdBar = el("deadlineBar"), cdTimeEl = el("cdTime");
+    var cdSwapped = false;
+    function two(n){ return (n < 10 ? "0" : "") + n; }
+    function swapToStandard(){
+      if (cdSwapped) return; cdSwapped = true;
+      var S = OFFERS.standard;
+      paintPlans(S);
+      PLANS.pif = { name:"Paid in full", amt:S.pif.amount, sub:"One payment. Full access as soon as it clears.", url:S.pif.checkout, warn:"" };
+      PLANS.plan = { name:S.plan.name, amt:S.plan.amount, sub:S.plan.note, url:S.plan.checkout, warn:S.plan.warn || "" };
+      PLANS.clarity = { name:"ClarityPay", amt:S.clarity.amount, sub:S.clarity.note, url:S.clarity.checkout, warn:"" };
+      BUYER.offer = "standard";
+      var sub = el("closerPlansSub");
+      if (sub) sub.textContent = "Special window ended — standard Closer pricing below. Access opens when payment clears.";
+      if (cdBar) { cdBar.classList.add("ended");
+        cdBar.innerHTML = '<span class="cd-label">The special offer window has ended</span>'
+          + '<span class="cd-note">Standard Closer pricing now applies · HTSA pricing still goes up Oct 1</span>'; }
+      event("special_offer_expired");
+    }
+    function cdTick(){
+      var ms = cdDeadline - Date.now();
+      if (ms <= 0){ swapToStandard(); return; }
+      var s = Math.floor(ms / 1000);
+      var h = Math.floor(s / 3600); s -= h * 3600;
+      var m = Math.floor(s / 60); s -= m * 60;
+      if (cdTimeEl) cdTimeEl.textContent = two(h) + ":" + two(m) + ":" + two(s);
+    }
+    cdTick();
+    var cdIv = setInterval(function(){ cdTick(); if (cdSwapped) clearInterval(cdIv); }, 1000);
+  } else if (BUYER.offer === "standard") {
+    var cdBar0 = el("deadlineBar");
+    if (cdBar0) { cdBar0.classList.add("ended");
+      cdBar0.innerHTML = '<span class="cd-label">Standard pricing</span>'
+        + '<span class="cd-note">HTSA pricing goes up October 1</span>'; }
+    var sub0 = el("closerPlansSub");
+    if (sub0) sub0.textContent = "Standard Closer pricing. Access opens when payment clears.";
   }
 
   /* ---------- docs ---------- */
