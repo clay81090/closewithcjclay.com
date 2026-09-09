@@ -35,12 +35,14 @@ Always copy the template. Never write a pre-call page from scratch, and never
 "improve" the template's layout, CSS, copy, or tracking while making someone's page.
 
 ```
-SOURCE:  r/_TEMPLATE-precall.html
+SOURCE:  r/_TEMPLATE-precall.html   (= ⭐ V17)
 OUTPUT:  r/<first>_<last>/index.html
 ```
 
 Folder name is lowercase, underscore separated: `r/test_person/index.html`
 Live URL becomes `https://closewithcjclay.com/r/test_person/`
+
+**All HTSA Resources tab** is baked into the precall template (same navy/green tab as the close page). Videos, Trustpilot, Canva, and Top 20 open **on this page** in a scrollable window. Do not revert to off-page "Other resources" links.
 
 ## Step 1 — copy, then edit ONLY these two places
 

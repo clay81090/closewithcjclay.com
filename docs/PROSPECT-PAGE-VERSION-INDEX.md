@@ -18,7 +18,7 @@ Use these URL patterns for every regular prospect. Preview the layout on the CJ 
 
 | When | What | Build from | ⭐ Preview (CJ Clay template) |
 |---|---|---|---|
-| **⭐ Before the call** | Pre-call resource page | `r/_TEMPLATE-precall.html` (= **V16**) | [Open V16](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v16.html) |
+| **⭐ Before the call** | Pre-call resource page | `r/_TEMPLATE-precall.html` (= **V17**) | [Open V17](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v17.html) |
 | **⭐ After the call / on the close (default)** | Short enrollment page | `templates/_TEMPLATE-close.html` (= **V8**) | [Open V8](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8.html) |
 | **⭐ Long invoice (when you want the full page)** | Long enrollment invoice | copy from **V13** archive | [Open V13](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v13.html) |
 
@@ -41,7 +41,7 @@ https://closewithcjclay.com/htsa-enrollment-<first>-<last>.html
 2. God Script
 3. Long enrollment (regular invoice style) (**⭐ V13**)
 4. Short close pages (**⭐ V8**)
-5. Pre-call resource TEMPLATES (**⭐ V16**)
+5. Pre-call resource TEMPLATES (**⭐ V17**)
 6. Special offer / self-enroll
 7. 30 day game plan
 8. Meet-CJ + offer booking
@@ -182,7 +182,8 @@ All previews use **CJ Clay** placeholder info. These are templates, not live per
 | V13 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v13.html) | Meet-CJ 3-up resources layout |
 | V14 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v14.html) | DIY-groups framing + Book Appointment |
 | V15 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v15.html) | Resources under Aug 18 video, Chad book after Other resources |
-| **⭐ V16** | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v16.html) | **Current default for all pre-call links.** Aug 18 clip, resources, CJ Reviews, Chad book, Trustpilot, confirm button. |
+| V16 | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v16.html) | Aug 18 clip, resources, CJ Reviews, Chad book, Trustpilot, confirm button. |
+| **⭐ V17** | [Open](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v17.html) | **Current default for all pre-call links.** Same as V16, plus **All HTSA Resources** tab matching the close page (in-page YouTube/video/Trustpilot/Canva/Top 20, mobile-ready scrollable windows). |
 
 **Live template for new people:** `r/_TEMPLATE-precall.html` (= **⭐ V16**)  
 Copy the template, then edit only the `GUEST` block. Do not edit old `/r/<person>/` pages to test a layout.
