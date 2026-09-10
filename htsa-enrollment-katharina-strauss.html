@@ -147,6 +147,7 @@ a{color:inherit}
 .plan-splitit-title{color:var(--navy);font-size:13.5px;font-weight:800}
 .plan-splitit-copy{margin-top:4px;color:var(--muted);font-size:12.5px;line-height:1.55}
 .plan-splitit-copy b{color:var(--navy)}
+.plan-action .choose{margin-top:10px;min-height:48px;font-size:14px}
 .plan-splitit-link{display:inline-block;margin-top:7px;color:var(--green-dark);font-size:12.5px;
   font-weight:700;text-decoration:none;cursor:pointer;background:none;border:0;padding:0;font-family:inherit}
 .plan-clarity-badge{display:inline-flex;align-items:center;gap:5px;margin:0 0 6px;padding:3px 10px;
@@ -474,6 +475,11 @@ a{color:inherit}
         <span class="plan-unit">one time</span>
       </div>
       <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
+      <div class="plan-splitit plan-action">
+        <div class="plan-splitit-title">Action Taker Discount · 2 payments</div>
+        <div class="plan-splitit-copy"><b>$3,000 today</b> and one final $3,000 payment due in 30 days. $6,000 total.</div>
+        <button class="choose" type="button" data-plan="action">Choose the $3,000 2-pay</button>
+      </div>
       <details class="plan-sub">
         <summary><span>More payment options</span><span class="plan-sub-chev" aria-hidden="true">▾</span></summary>
         <div class="plan-splitit">
@@ -1080,6 +1086,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
 
   const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
+    action:  { name:"Action Taker Discount · 2 payments", amt:"$3,000 today", sub:"One final $3,000 payment is due in 30 days. $6,000 total.", url:"https://whop.com/checkout/plan_oMi6XYvybZY4F?d2c=true", warn:"" },
     plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
     clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" }
   };
