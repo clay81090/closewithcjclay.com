@@ -435,12 +435,6 @@ a{color:inherit}
     <a class="welcome-cta" href="#plans">Jump to payment ↓</a>
   </section>
 
-  <div class="guar-strip">
-    <b>Placed in 6 months or refunded.</b>
-    <span>Performance guarantee, confirmed for you.</span>
-    <a href="#guarantee">See how it works ↓</a>
-  </div>
-
   <section class="inc">
     <div class="h2">What you're getting</div>
     <ul class="inc-list" id="incList"></ul>
@@ -601,7 +595,7 @@ a{color:inherit}
           <button type="button" class="res-btn" data-media="book" data-url="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" data-title="Chad’s Book — The Book on High Ticket Sales"><span>Chad’s Book<small>Full book details · opens on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-why-placement.jpg" data-title="Why Everyone Raves About Our Placement"><span>Why Everyone Raves About Our Placement<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-christa-22k.jpg" data-title="Christa Kieffer — Placement to 22k (4 months)"><span>Christa Kieffer — Placement to 22k<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="site" data-url="https://www.highticketsalesacademy.com" data-title="HTSA Website"><span>HTSA Website<small>Opens here · live site blocks embeds</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="img" data-src="https://image.thum.io/get/width/1200/fullpage/https://highticketsalesacademy.com/" data-title="HTSA Website"><span>HTSA Website<small>Full website snapshot · scrollable on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="doc" data-url="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" data-title="Top 20 Companies in High Ticket Sales"><span>Top 20 Companies in High Ticket Sales<small>PDF · scrollable on this page</small></span><span class="chev">▸</span></button>
         </div>
       </div>
@@ -1238,11 +1232,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       link.textContent = "View full listing on Amazon ↗";
       wrap.appendChild(link);
       mediaBody.appendChild(wrap);
-    } else if (kind === "site") {
-      const wrap = document.createElement("div");
-      wrap.style.cssText = "padding:22px 20px;background:#fff;color:#17243b;font-size:15px;line-height:1.55";
-      wrap.innerHTML = "<p style=\"margin:0 0 12px;font-weight:800;color:#0a1628\">High Ticket Sales Academy</p><p style=\"margin:0 0 14px;color:#54637a\">That site blocks in-page embeds (same as Trustpilot). The videos and scrollable snapshots above cover the proof you need without leaving this page.</p><p style=\"margin:0;padding:12px 14px;border-radius:10px;background:#f3f6f9;font-weight:700;word-break:break-all\">" + payload + "</p>";
-      mediaBody.appendChild(wrap);
     } else {
       const f = document.createElement("iframe");
       f.className = "media-frame media-frame--doc";
@@ -1260,7 +1249,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       else if (kind === "img") openMedia("img", btn.dataset.src, btn.dataset.title);
       else if (kind === "video") openMedia("video", btn.dataset.src, btn.dataset.title);
       else if (kind === "book") openMedia("book", btn.dataset.url, btn.dataset.title);
-      else if (kind === "site") openMedia("site", btn.dataset.url, btn.dataset.title);
       else openMedia("doc", btn.dataset.url, btn.dataset.title);
     });
   });
