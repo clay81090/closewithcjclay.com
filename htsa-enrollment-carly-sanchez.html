@@ -109,9 +109,13 @@ a{color:inherit}
   background:var(--white);transition:border-color 150ms ease,box-shadow 150ms ease}
 .plan--best{border-color:var(--green-strong);box-shadow:0 10px 30px rgba(0,201,122,.14)}
 .plan--custom{border-color:var(--navy);box-shadow:0 10px 30px rgba(10,22,40,.16)}
+.plan--pif-sub{margin:20px 0 0;padding:16px 14px 14px;border-color:var(--green-strong);
+  background:linear-gradient(160deg,#f7fffb 0%,#ecfff5 100%);box-shadow:0 8px 24px rgba(0,201,122,.16)}
+.plan--pif-sub .choose{background:var(--green-strong);color:#04231a}
 .badge{position:absolute;top:-11px;left:16px;padding:3px 11px;border-radius:999px;
   background:var(--green-strong);color:#04231a;font-size:12px;font-weight:800;letter-spacing:.06em;
   text-transform:uppercase}
+.badge--neutral{background:#e9eef4;color:var(--navy)}
 .plan--custom .badge{background:var(--navy);color:var(--green)}
 .plan-name{color:var(--navy);font-size:19px;font-weight:800;line-height:1.2}
 .plan-note{margin-top:4px;color:var(--muted);font-size:13.5px;line-height:1.5}
@@ -459,8 +463,8 @@ a{color:inherit}
       <button class="choose" type="button" data-plan="custom">Choose this</button>
     </div>
 
-    <div class="plan plan--best" id="planPif">
-      <span class="badge" id="pifBadge">Best value</span>
+    <div class="plan" id="planPif">
+      <span class="badge badge--neutral" id="pifBadge">Option 1 · $6,000 total</span>
       <div class="plan-name">Paid in full</div>
       <div class="plan-note" id="pifNote"></div>
       <div class="plan-figs">
@@ -479,7 +483,8 @@ a{color:inherit}
       </details>
     </div>
 
-    <div class="plan" id="planPlan">
+    <div class="plan plan--pif-sub" id="planPlan">
+      <span class="badge">Same day</span>
       <div class="plan-name" id="planName"></div>
       <div class="plan-note" id="planNote"></div>
       <div class="plan-figs">
@@ -1088,6 +1093,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   Object.keys(NODE).forEach(function(k){ if (show.indexOf(k) === -1) NODE[k].remove(); });
   show.forEach(function(k){ if (NODE[k] && NODE[k].parentNode) host.appendChild(NODE[k]); });
   if (NODE.clarity && NODE.clarity.parentNode) NODE.clarity.hidden = false;
+  if (NODE.pif && NODE.pif.parentNode && NODE.plan && NODE.plan.parentNode) NODE.pif.appendChild(NODE.plan);
 
   if (CUSTOM_OFFER) {
     const c = el("planCustom");
