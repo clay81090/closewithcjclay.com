@@ -940,7 +940,7 @@ const BUYER = {
   track:     "closer",
   offer:     "standard",
   show:      ["clarity"],
-  intro:     ""
+  intro:     "Carly, I really enjoyed speaking with you. You bring valuable experience as a real estate professional and the motivation to turn this opportunity into something meaningful. You are clear that ClarityPay is the right path, and I am excited for you. With your drive and the right support behind you, I know you are going to do very well in high ticket sales."
 };
 
 const CUSTOM_OFFER = null;
@@ -1131,7 +1131,8 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   tosSheet.addEventListener("click", function(e){ if(e.target===tosSheet) closeSheet(tosSheet); });
 
   const splitit = el("splititSheet");
-  el("splititMoreBtn").addEventListener("click", function(e){ e.preventDefault(); event("splitit_detail_opened"); openSheet(splitit); });
+  const splititMoreBtn = el("splititMoreBtn");
+  if (splititMoreBtn) splititMoreBtn.addEventListener("click", function(e){ e.preventDefault(); event("splitit_detail_opened"); openSheet(splitit); });
   el("splititClose").addEventListener("click", function(){ closeSheet(splitit); });
   splitit.addEventListener("click", function(e){ if(e.target===splitit) closeSheet(splitit); });
 
