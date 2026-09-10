@@ -108,12 +108,16 @@ a{color:inherit}
 .guar-you ul{margin-top:8px;display:grid;gap:6px}
 .guar-you li{display:flex;gap:8px;color:rgba(255,255,255,.85);font-size:13px;line-height:1.5;list-style:none}
 .guar-you li::before{color:var(--green);font-weight:800;content:"→"}
-.accelerated-guarantee{margin:16px 0 14px;padding:15px 16px;border:2px solid var(--green-strong);
+#tosSheet[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;height:min(88dvh,900px);overflow:hidden}
+#tosSheet .sheet-body{min-height:0;padding:0;background:#e9edf2;overflow:auto}
+.tos-document{padding:12px}
+.tos-page{display:block;width:100%;height:auto;margin:0 0 12px;border-radius:8px;background:var(--white);
+  box-shadow:0 3px 14px rgba(10,22,40,.12)}
+.accelerated-guarantee{margin:0;padding:16px;border:2px solid var(--green-strong);
   border-radius:12px;background:linear-gradient(160deg,#f7fffb 0%,#ecfff5 100%);
-  box-shadow:0 0 0 3px rgba(0,201,122,.1)}
-.sheet-body .accelerated-guarantee h3{margin:0 0 10px;color:var(--navy);font-size:14px;line-height:1.4}
-.accelerated-guarantee p{margin-bottom:10px}
-.accelerated-guarantee p:last-child{margin-bottom:0}
+  box-shadow:0 0 0 3px rgba(0,201,122,.1);color:var(--text);font-size:13.5px;line-height:1.6}
+.accelerated-guarantee p{margin:0}
+.tos-download{text-decoration:none}
 
 /* ---------- plans ---------- */
 .plans{padding:22px 26px 6px}
@@ -752,7 +756,7 @@ a{color:inherit}
     </div>
     <label class="agree">
       <input type="checkbox" id="agreeBox">
-      <span>I agree to the HTSA Terms of Service and refund policy, and I understand I must meet the minimum requirements for my performance guarantee to remain in effect.</span>
+      <span>I agree to the Tariq Hill HTSA Terms of Service and refund policy, including the accelerated 3-month placement guarantee, and I understand I must meet all Limited Guarantee requirements.</span>
     </label>
   </div>
   <div class="sheet-foot">
@@ -872,68 +876,21 @@ a{color:inherit}
 <dialog class="sheet" id="tosSheet" aria-labelledby="tosTitle">
   <div class="sheet-head">
     <div class="sheet-kicker">Enrollment agreement</div>
-    <h2 id="tosTitle" tabindex="-1">Terms of Service</h2>
+    <h2 id="tosTitle" tabindex="-1">Tariq Hill Terms of Service</h2>
   </div>
   <div class="sheet-body">
-    <h3>Certified High Ticket Closer Program</h3>
-
-    <h3>Access to course content, Mastermind, and coaching</h3>
-    <p>Members receive <b>lifetime access to the course content</b> for their core product, <b>lifetime access to the private Facebook Mastermind community</b> (750+ members), and <b>lifetime access to Live Group Coaching Calls via Zoom, held Tuesdays at 12:00 PM EST and Wednesdays at 5:00 PM EST</b> with Chad. <b>1-on-1 coaching is included</b> and must be scheduled within three months of the program start date unless HTSA approves an extension.</p>
-
-    <h3>AI roleplay platform</h3>
-    <p><b>AI roleplay and the 24/7 AI coach are included at no cost while you are actively completing the program.</b> If you choose to keep the AI platform after placement, it is available at <b>$39/month</b> as an optional add-on.</p>
-
-    <h3>Post-hire support</h3>
-    <p>After you are placed, <b>HTSA provides 90 days of post-hire call review and performance feedback</b> to help you hit your KPIs and ramp into your new role.</p>
-
-    <h3>Limited placement guarantee</h3>
-    <p>HTSA offers a limited guarantee to members who meet the following conditions:</p>
-    <ol>
-      <li>The Member must have 2 years of prior sales experience in a non-retail sales role.</li>
-      <li>The Member must complete all course materials, roleplays, attend all 1-on-1 training, and finish certification before interview opportunities will be offered.</li>
-      <li>The Member must attend at least one group coaching call per week throughout the program.</li>
-      <li>The Member must apply to a minimum of 50 high-ticket sales or SDR positions and provide proof of application, such as screenshots or email confirmations.</li>
-    </ol>
-    <p><b>If the Member completes all these requirements and does not secure a high-ticket closer or SDR/Setter role within 3 months of completing the certification program, they will be granted a full refund of the program's fees. The Member must provide evidence of compliance with all the above conditions to be eligible for this guarantee.</b></p>
-
-    <div class="accelerated-guarantee">
-      <h3>ACCELERATED 3-MONTH PLACEMENT GUARANTEE — TARIQ HILL</h3>
-      <p>HTSA has approved an accelerated placement guarantee specifically for Tariq Hill, reducing the standard placement guarantee period from six months to three months following successful completion of certification.</p>
-      <p>HTSA is willing to make this commitment because we believe in our training, certification, placement process, hiring network, and Tariq's ability to execute.</p>
-      <p>All other requirements of the Limited Guarantee remain unchanged and must be completed in full.</p>
-      <p>To remain eligible for the 3-month guarantee, Tariq must fulfill all requirements outlined in the Limited Guarantee above, including completing the required training and roleplays, successfully completing certification, attending the required weekly group coaching calls, completing the required applications, providing proof when required, and fulfilling the placement requirements and action items provided by HTSA.</p>
-      <p>The accelerated guarantee does not remove, reduce, or replace any Member responsibility contained in the Terms of Service. It changes only the placement guarantee period from six months to three months.</p>
-      <p>If all requirements of the Limited Guarantee are completed and Tariq does not secure a qualifying high-ticket closer or SDR/Setter role within three months of completing certification, the refund provision stated in the Limited Guarantee will apply.</p>
+    <div class="tos-document">
+      <img class="tos-page" src="/media/resources/tariq-terms-page-1.png" alt="Tariq Hill Terms of Service, page 1">
+      <img class="tos-page" src="/media/resources/tariq-terms-page-2.png" alt="Tariq Hill Terms of Service, page 2">
+      <div class="accelerated-guarantee">
+        <p><b>For Tariq Hill, HTSA has approved an accelerated 3-month placement guarantee following completion of certification.</b> All other requirements of the Limited Guarantee remain unchanged and must be satisfied in full, including completion of all required training, roleplays, coaching, certification, weekly group coaching attendance, applications, and required proof of completion. Eligibility for the 3-month guarantee is contingent upon Tariq fulfilling all Member responsibilities outlined in the Terms of Service.</p>
+      </div>
     </div>
-
-    <h3>Payment</h3>
-    <p>The Member agrees to pay HTSA in full for the purchased product(s) in United States Dollars (USD). Payments delinquent over 14 days may be sent to collections, and HTSA reserves the right to terminate the agreement. Finance charges will apply to all payment plans.</p>
-
-    <h3>Refund policy</h3>
-    <p>Refunds for purchased products or down payments will not be granted outside of the Limited Guarantee above. All sales are final except as outlined above.</p>
-
-    <h3>Notice to buyers</h3>
-    <p>You must be 18 years of age or older to sign this Agreement. If you are under 18, a legal guardian must sign on your behalf.</p>
-
-    <h3>Member expectations</h3>
-    <p>I am excited to fully commit to myself, my dreams, my career, and the High Ticket Sales Academy program. I understand that results require consistent effort.</p>
-
-    <h3>Enrollment agreement</h3>
-    <p>This Agreement is a legal contract between you (Member) and High Ticket Sales Academy, LLC (HTSA). By purchasing an HTSA product, the Member certifies that they have read, understood, and agree to this Agreement and the Refund Policy.</p>
-
-    <h3>Use of recordings</h3>
-    <p>Live group calls, webinars, testimonials, Facebook posts, or other audio/visual services may be recorded and used by HTSA for business purposes unless the Member specifically requests otherwise.</p>
-
-    <h3>Hours of operation</h3>
-    <p>HTSA's office is open Monday to Friday, 9 AM to 5 PM EST.</p>
-
-    <h3>Intellectual property</h3>
-    <p>All content within HTSA's program is protected by intellectual property rights and the Member agrees to use it only for personal purposes. Unauthorized reproduction or distribution may result in civil or criminal penalties.</p>
-
-    <h3>Customer service</h3>
-    <p>For questions or comments regarding HTSA products, please contact support@highticketsalesacademy.com or call 616-344-6220.</p>
   </div>
-  <div class="sheet-foot"><button class="btn btn--go" type="button" id="tosClose">Got it</button></div>
+  <div class="sheet-foot">
+    <a class="btn btn--back tos-download" href="/HTSA-Tariq-Hill-Terms-of-Service.pdf" download>Download PDF</a>
+    <button class="btn btn--go" type="button" id="tosClose">Got it</button>
+  </div>
 </dialog>
 
 <!-- Splitit popup (in-page) -->
@@ -1048,8 +1005,8 @@ const GUARANTEE_STEPS = [
   "Participate in good faith. This is a partnership, not a passive purchase"
 ];
 
-const TERMS_URL = "https://closewithcjclay.com/HTSA-Terms-of-Service.pdf";
-const TERMS_VERSION = "HTSA-TOS-PDF-closewithcjclay-2026-04";
+const TERMS_URL = "https://closewithcjclay.com/HTSA-Tariq-Hill-Terms-of-Service.pdf";
+const TERMS_VERSION = "HTSA-TOS-PDF-Tariq-Hill-2026-09-10-3M";
 const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
 /* ==================== stop editing ==================== */
 
@@ -1355,7 +1312,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       termsUrl:TERMS_URL, termsVersion:TERMS_VERSION, track:BUYER.track, offer:BUYER.offer,
       selectedPlan:p.name, selectedAmount:p.amt, planDisclosure:p.warn || "",
       agreedCheckbox:true,
-      agreementText:"I agree to the HTSA Terms of Service and refund policy, and I understand I must meet the minimum requirements for my performance guarantee to remain in effect.",
+      agreementText:"I agree to the Tariq Hill HTSA Terms of Service and refund policy, including the accelerated 3-month placement guarantee, and I understand I must meet all Limited Guarantee requirements.",
       userAgent:navigator.userAgent||"", timestamp:new Date().toISOString() });
     event("checkout_started", { linkLabel:p.name, linkUrl:p.url });
     setTimeout(function(){ window.location.href = p.url; }, 550);
