@@ -386,6 +386,14 @@ a{color:inherit}
 .media-sheet .sheet-body{padding:0;max-height:min(70dvh,560px);overflow:auto;background:#0a1628}
 .media-frame{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
 .media-frame--doc{aspect-ratio:auto;min-height:min(70dvh,560px);height:min(70dvh,560px);background:#fff}
+.book-viewer{padding:20px;background:#fff;color:var(--text)}
+.book-viewer img{display:block;width:100%;border-radius:10px}
+.book-viewer h3{margin:18px 0 4px;color:var(--navy);font-size:20px;line-height:1.25;text-transform:none;letter-spacing:0}
+.book-viewer p{margin:8px 0;color:var(--muted)}
+.book-meta{margin:12px 0;padding:12px;border-radius:10px;background:var(--grey-light);color:var(--navy);font-weight:700}
+.book-viewer ul{margin:12px 0;padding-left:20px}
+.book-amazon{display:flex;min-height:48px;align-items:center;justify-content:center;margin-top:16px;padding:12px 16px;
+  border-radius:10px;background:#ffca28;color:#111820;font-weight:800;text-decoration:none}
 .media-scroll{width:100%;max-height:min(70dvh,560px);overflow:auto;-webkit-overflow-scrolling:touch;background:#111;padding:0}
 .media-scroll img{display:block;width:100%;height:auto;margin:0}
 .media-sheet--wide{width:min(920px,calc(100% - 12px))}
@@ -590,7 +598,7 @@ a{color:inherit}
         <div class="res-group">
           <div class="res-group-label">More resources</div>
           <button type="button" class="res-btn" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5"><span>Trustpilot Reviews<small>4.9 out of 5 · scrollable snapshot on this page</small></span><span class="chev">▸</span></button>
-          <a class="res-btn res-link" href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer" data-title="Chad’s Book — The Book on High Ticket Sales"><span>Chad’s Book<small>View The Book on High Ticket Sales on Amazon</small></span><span class="chev">↗</span></a>
+          <button type="button" class="res-btn" data-media="book" data-url="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" data-title="Chad’s Book — The Book on High Ticket Sales"><span>Chad’s Book<small>Full book details · opens on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-why-placement.jpg" data-title="Why Everyone Raves About Our Placement"><span>Why Everyone Raves About Our Placement<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-christa-22k.jpg" data-title="Christa Kieffer — Placement to 22k (4 months)"><span>Christa Kieffer — Placement to 22k<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="site" data-url="https://www.highticketsalesacademy.com" data-title="HTSA Website"><span>HTSA Website<small>Opens here · live site blocks embeds</small></span><span class="chev">▸</span></button>
@@ -1213,6 +1221,23 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       v.autoplay = true;
       wrap.appendChild(v);
       mediaBody.appendChild(wrap);
+    } else if (kind === "book") {
+      const wrap = document.createElement("div");
+      wrap.className = "book-viewer";
+      wrap.innerHTML = '<img src="/media/chad-aleo-book-banner.png" alt="The Book on High Ticket Sales by Chad Aleo">' +
+        '<h3>The Book on High Ticket Sales</h3>' +
+        '<p><b>Chad Aleo</b> · The Ultimate Guide to Making Millions Through Remote Selling</p>' +
+        '<div class="book-meta">4.8 out of 5 stars · 363 ratings · Paperback · 161 pages · $12.99</div>' +
+        '<p>A practical guide to building a career in remote high ticket sales from the founder of High Ticket Sales Academy.</p>' +
+        '<ul><li>Sell the way people want to buy</li><li>Master objections before they come up</li><li>Find and land legitimate high ticket sales roles</li><li>Build consistency in a one call close environment</li></ul>';
+      const link = document.createElement("a");
+      link.className = "book-amazon";
+      link.href = payload;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "View full listing on Amazon ↗";
+      wrap.appendChild(link);
+      mediaBody.appendChild(wrap);
     } else if (kind === "site") {
       const wrap = document.createElement("div");
       wrap.style.cssText = "padding:22px 20px;background:#fff;color:#17243b;font-size:15px;line-height:1.55";
@@ -1234,13 +1259,9 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       if (kind === "yt") openMedia("yt", btn.dataset.id, btn.dataset.title);
       else if (kind === "img") openMedia("img", btn.dataset.src, btn.dataset.title);
       else if (kind === "video") openMedia("video", btn.dataset.src, btn.dataset.title);
+      else if (kind === "book") openMedia("book", btn.dataset.url, btn.dataset.title);
       else if (kind === "site") openMedia("site", btn.dataset.url, btn.dataset.title);
       else openMedia("doc", btn.dataset.url, btn.dataset.title);
-    });
-  });
-  document.querySelectorAll(".res-link").forEach(function(link){
-    link.addEventListener("click", function(){
-      event("resource_opened", { linkLabel: link.dataset.title || link.textContent.trim(), linkUrl: link.href });
     });
   });
   const resTab = el("resTab");
