@@ -487,7 +487,7 @@ a{color:inherit}
         <span class="plan-unit" id="planUnit"></span>
       </div>
       <p class="plan-warn" id="planWarn" hidden></p>
-      <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
+      <button class="choose" type="button" data-plan="plan">Make first payment, $1,750</button>
     </div>
 
     <div class="plan" id="planClarity" hidden>
@@ -943,7 +943,7 @@ const BUYER = {
   slug:      "carly_sanchez",
   track:     "closer",
   offer:     "standard",
-  show:      ["pif", "clarity"],
+  show:      ["pif", "plan", "clarity"],
   intro:     "Carly, I really enjoyed speaking with you. You bring valuable experience as a real estate professional and the motivation to turn this opportunity into something meaningful. You are clear that ClarityPay is the right path, and I am excited for you. With your drive and the right support behind you, I know you are going to do very well in high ticket sales."
 };
 
@@ -957,11 +957,11 @@ const TRACKS = {
 const OFFERS = {
   standard: {
     pif:  { amount: "$6,000", was: "$7,000",
-            note: "One payment. Saves you $1,000 against the payment plan.",
+            note: "One payment. Full access as soon as it clears.",
             checkout: "https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" },
-    plan: { name: "4 payments", amount: "$1,750", unit: "today · $7,000 total",
-            note: "First payment today, then one a month for three months.",
-            warn: "",
+    plan: { name: "Paid in Full Path, 2 payments", amount: "$1,750", unit: "today · $4,250 due by day 30 · $6,000 total",
+            note: "Make the first payment now. CJ will send the secure $4,250 balance link before day 30.",
+            warn: "Pay the remaining $4,250 by day 30 to keep your total at $6,000. Once the balance clears, HTSA closes the remaining scheduled installments. If the balance is not paid by day 30, the standard $1,750 installment plan continues at $7,000 total.",
             checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
     clarity: { amount: "$600", unit: "a month · 0% interest · $7,200 total",
                note: "Monthly financing with 0% interest APR. Soft credit check, 620 or better credit score to qualify.",
