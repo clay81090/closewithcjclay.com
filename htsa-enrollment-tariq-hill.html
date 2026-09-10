@@ -108,6 +108,12 @@ a{color:inherit}
 .guar-you ul{margin-top:8px;display:grid;gap:6px}
 .guar-you li{display:flex;gap:8px;color:rgba(255,255,255,.85);font-size:13px;line-height:1.5;list-style:none}
 .guar-you li::before{color:var(--green);font-weight:800;content:"→"}
+.accelerated-guarantee{margin:16px 0 14px;padding:15px 16px;border:2px solid var(--green-strong);
+  border-radius:12px;background:linear-gradient(160deg,#f7fffb 0%,#ecfff5 100%);
+  box-shadow:0 0 0 3px rgba(0,201,122,.1)}
+.sheet-body .accelerated-guarantee h3{margin:0 0 10px;color:var(--navy);font-size:14px;line-height:1.4}
+.accelerated-guarantee p{margin-bottom:10px}
+.accelerated-guarantee p:last-child{margin-bottom:0}
 
 /* ---------- plans ---------- */
 .plans{padding:22px 26px 6px}
@@ -225,6 +231,21 @@ a{color:inherit}
 .reviews-more-panel{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .reviews-more-panel .review-card{margin:0}
 @media (max-width:680px){.reviews-more-panel{grid-template-columns:1fr}}
+
+/* ---------- optional introductions ---------- */
+.referral{margin:18px 26px 16px;padding:20px 22px;border:2px solid var(--green-strong);
+  border-radius:16px;background:#f2fbf6;box-shadow:0 12px 28px rgba(0,201,122,.12)}
+.referral h2{color:var(--navy);font-family:"Playfair Display",serif;font-size:20px;line-height:1.25}
+.referral p{margin-top:9px;color:var(--text);font-size:13.5px;line-height:1.6}
+.referral-list{margin-top:16px;padding:14px 16px;border:1px solid rgba(0,201,122,.35);
+  border-radius:12px;background:var(--white)}
+.referral-list-title{color:var(--navy);font-size:13.5px;font-weight:800}
+.referral-line{display:flex;align-items:center;gap:10px;margin-top:12px;color:var(--navy);font-weight:800}
+.referral-line input{width:100%;min-width:0;padding:8px 2px;border:0;border-bottom:1.5px solid var(--muted);
+  border-radius:0;background:transparent;color:var(--navy);font:600 15px/1.2 "DM Sans",sans-serif}
+.referral-line input:focus{border-bottom-color:var(--green-dark);outline:none}
+.referral-fine{color:var(--muted)!important;font-size:12px!important;line-height:1.5!important}
+@media (max-width:680px){.referral{margin:16px;padding:18px 16px}}
 
 /* ---------- footer ---------- */
 .foot{padding:24px 26px 0;background:#07111f;color:rgba(255,255,255,.62);font-size:13px}
@@ -442,10 +463,9 @@ a{color:inherit}
 
   <div class="guar" id="guarantee">
     <span class="guar-tag" id="guarTag">Confirmed for your enrollment</span>
-    <h3 id="guarTitle">Placed within 6 months, or your money back.</h3>
-    <p id="guarBody">Do your part, and if you have not secured a qualifying role within 6 months of
-      certification, or after 50 interviews, whichever comes first, you qualify for a full refund
-      of the program fees. Documentation required.</p>
+    <h3 id="guarTitle">Placed within 3 months, or your money back.</h3>
+    <p id="guarBody">Do your part, and if you have not secured a qualifying role within 3 months of
+      completing certification, you qualify for a full refund of the program fees. Documentation required.</p>
     <div class="guar-you">
       <b>Your part:</b>
       <ul id="guarSteps"></ul>
@@ -655,6 +675,19 @@ a{color:inherit}
     </details>
   </section>
 
+  <section class="referral" aria-labelledby="referralTitle">
+    <h2 id="referralTitle">WHEN WE GET YOU TO THE OTHER SIDE</h2>
+    <p>Tariq, you already told me that when we execute and get you where you want to be, you'd be happy to share your experience. My goal is to earn that video testimonial and those reviews by delivering an experience worth talking about.</p>
+    <p>And when we do, I'd appreciate one more thing: think of 2 or 3 people you know who are capable of more, aren't happy with where they are, and want something better for themselves and their family. You don't need to sell them anything. Just make the introduction and let me take it from there.</p>
+    <div class="referral-list">
+      <div class="referral-list-title">People I'd Like to Introduce</div>
+      <label class="referral-line"><span>1.</span><input type="text" aria-label="First optional introduction"></label>
+      <label class="referral-line"><span>2.</span><input type="text" aria-label="Second optional introduction"></label>
+      <label class="referral-line"><span>3.</span><input type="text" aria-label="Third optional introduction"></label>
+    </div>
+    <p class="referral-fine">Completely optional and not a condition of enrollment, placement, the Limited Guarantee, or any other HTSA benefit.</p>
+  </section>
+
   <footer class="foot">
     <div class="foot-top">
       <div>
@@ -856,11 +889,22 @@ a{color:inherit}
     <h3>Limited placement guarantee</h3>
     <p>HTSA offers a limited guarantee to members who meet the following conditions:</p>
     <ol>
-      <li>Complete all course materials, roleplays, attend all 1-on-1 training, and finish certification before interview opportunities will be offered.</li>
-      <li>Attend at least one group coaching call per week throughout the program.</li>
-      <li>Apply to a minimum of 50 high-ticket closer or SDR/Setter positions and provide proof of application, such as screenshots or email confirmations.</li>
+      <li>The Member must have 2 years of prior sales experience in a non-retail sales role.</li>
+      <li>The Member must complete all course materials, roleplays, attend all 1-on-1 training, and finish certification before interview opportunities will be offered.</li>
+      <li>The Member must attend at least one group coaching call per week throughout the program.</li>
+      <li>The Member must apply to a minimum of 50 high-ticket sales or SDR positions and provide proof of application, such as screenshots or email confirmations.</li>
     </ol>
-    <p><b>If the Member completes all these requirements and does not secure a qualifying role within 6 months of completing the certification program, or after completing at least 50 interviews (whichever comes first), they will be granted a full refund of the program's fees.</b></p>
+    <p><b>If the Member completes all these requirements and does not secure a high-ticket closer or SDR/Setter role within 3 months of completing the certification program, they will be granted a full refund of the program's fees. The Member must provide evidence of compliance with all the above conditions to be eligible for this guarantee.</b></p>
+
+    <div class="accelerated-guarantee">
+      <h3>ACCELERATED 3-MONTH PLACEMENT GUARANTEE — TARIQ HILL</h3>
+      <p>HTSA has approved an accelerated placement guarantee specifically for Tariq Hill, reducing the standard placement guarantee period from six months to three months following successful completion of certification.</p>
+      <p>HTSA is willing to make this commitment because we believe in our training, certification, placement process, hiring network, and Tariq's ability to execute.</p>
+      <p>All other requirements of the Limited Guarantee remain unchanged and must be completed in full.</p>
+      <p>To remain eligible for the 3-month guarantee, Tariq must fulfill all requirements outlined in the Limited Guarantee above, including completing the required training and roleplays, successfully completing certification, attending the required weekly group coaching calls, completing the required applications, providing proof when required, and fulfilling the placement requirements and action items provided by HTSA.</p>
+      <p>The accelerated guarantee does not remove, reduce, or replace any Member responsibility contained in the Terms of Service. It changes only the placement guarantee period from six months to three months.</p>
+      <p>If all requirements of the Limited Guarantee are completed and Tariq does not secure a qualifying high-ticket closer or SDR/Setter role within three months of completing certification, the refund provision stated in the Limited Guarantee will apply.</p>
+    </div>
 
     <h3>Payment</h3>
     <p>The Member agrees to pay HTSA in full for the purchased product(s) in United States Dollars (USD). Payments delinquent over 14 days may be sent to collections, and HTSA reserves the right to terminate the agreement. Finance charges will apply to all payment plans.</p>
@@ -997,6 +1041,7 @@ const CURRICULUM = [
 ];
 
 const GUARANTEE_STEPS = [
+  "Have 2 years of prior sales experience in a non-retail sales role",
   "Complete the course materials, roleplays, 1-on-1 training, and certification",
   "Attend at least one group coaching call a week while you're in the program",
   "Apply to at least 50 qualifying closer or setter roles, and keep proof",
