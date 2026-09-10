@@ -837,7 +837,7 @@ a{color:inherit}
 <dialog class="sheet" id="tosSheet" aria-labelledby="tosTitle">
   <div class="sheet-head">
     <div class="sheet-kicker">Enrollment agreement</div>
-    <h2 id="tosTitle">Terms of Service</h2>
+    <h2 id="tosTitle" tabindex="-1">Terms of Service</h2>
   </div>
   <div class="sheet-body">
     <h3>Certified High Ticket Closer Program</h3>
@@ -1121,7 +1121,17 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   roadSheet.addEventListener("click", function(e){ if(e.target===roadSheet) closeSheet(roadSheet); });
 
   const tosSheet = el("tosSheet");
-  function openTos(){ event("terms_opened",{linkLabel:TERMS_VERSION,linkUrl:TERMS_URL}); openSheet(tosSheet); }
+  function openTos(){
+    event("terms_opened",{linkLabel:TERMS_VERSION,linkUrl:TERMS_URL});
+    openSheet(tosSheet);
+    el("tosTitle").focus({preventScroll:true});
+    tosSheet.scrollTop = 0;
+    tosSheet.querySelector(".sheet-body").scrollTop = 0;
+    requestAnimationFrame(function(){
+      tosSheet.scrollTop = 0;
+      tosSheet.querySelector(".sheet-body").scrollTop = 0;
+    });
+  }
   el("tosBtn").addEventListener("click", openTos);
   el("sheetTerms").addEventListener("click", function(e){ e.preventDefault(); openTos(); });
   el("tosClose").addEventListener("click", function(){ closeSheet(tosSheet); });
