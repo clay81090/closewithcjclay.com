@@ -298,6 +298,7 @@ a{color:inherit}
 .btn--go{background:var(--green-strong);color:#04231a}
 .btn--go[disabled]{background:#dfe6ee;color:#9aa8b8;cursor:not-allowed}
 .btn--back{flex:0 0 auto;border:1px solid var(--grey);background:var(--white);color:var(--muted);font-weight:700}
+.tos-download{text-decoration:none}
 .sheet-note{padding:0 20px 18px;color:var(--muted);font-size:12.5px;line-height:1.5;text-align:center}
 .curr-list{display:grid;gap:11px;padding:0;margin:0}
 .curr-list li{list-style:none;margin:0}
@@ -880,7 +881,10 @@ a{color:inherit}
     <h3>Customer service</h3>
     <p>For questions or comments regarding HTSA products, please contact support@highticketsalesacademy.com or call 616-344-6220.</p>
   </div>
-  <div class="sheet-foot"><button class="btn btn--go" type="button" id="tosClose">Got it</button></div>
+  <div class="sheet-foot">
+    <a class="btn btn--back tos-download" href="/HTSA-Terms-of-Service.pdf" download>Download PDF</a>
+    <button class="btn btn--go" type="button" id="tosClose">Got it</button>
+  </div>
 </dialog>
 
 <!-- Splitit popup (in-page) -->
