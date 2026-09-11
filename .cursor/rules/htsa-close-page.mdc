@@ -179,31 +179,47 @@ git push
 
 Give CJ the live URL and tell him to load it once himself before the call.
 
-## Step 8 — output TEXT + EMAIL every time
+## Step 8 — output EMAIL + TEXT every time
 
-One enroll link only. The 30 day plan is already at the bottom of that page.
-Always this HTML wrapper so copy-paste into Gmail and HubSpot stays black on
-white. No markdown. No code fences. No em dashes. Never write a negative
-descriptive norm about other prospects.
+**Order is EMAIL first, then TEXT.** The text explicitly says
+"just emailed you everything", so send order matches the words.
+One enroll link only. The 30 day action plan is already at the bottom of
+that page. Never write a negative descriptive norm about other prospects.
+
+Always wrap the output in this HTML block so copy-paste into Gmail, HubSpot,
+and iMessage stays black on white. No markdown. No code fences. Voice rule
+in `no-dashes-in-client-copy.mdc`: commas and periods by default, one em
+dash per paragraph max when it earns its place. The exact default copy
+lives in `scripts/htsa_close_copy.py` (`print_send_pack`). Reproduce it
+verbatim, only substituting `First` and `ENROLL_URL`:
 
 <div style="background:#ffffff;color:#000000;padding:20px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;">
-<p style="color:#000000;background:#ffffff;margin:0 0 8px 0;"><b>TEXT</b></p>
-<p style="color:#000000;background:#ffffff;margin:0 0 16px 0;">
-First, here is everything we just walked through. This is your enrollment page. The 30 day action plan is at the bottom. That is how we get you to the goal. Our goal is that you are our next testimonial.<br><br>
-<a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a>
-</p>
-<p style="color:#000000;background:#ffffff;margin:24px 0 8px 0;"><b>EMAIL</b></p>
+<p style="color:#000000;background:#ffffff;margin:0 0 8px 0;"><b>EMAIL</b></p>
 <p style="color:#000000;background:#ffffff;margin:0;">Subject: Your enrollment page</p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Hi First,</p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Here is everything we just walked through.</p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">This is your enrollment page. The 30 day action plan is at the bottom. That is how we get you to the goal. Our goal is that you are our next testimonial.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Good conversation today. You asked good questions, which is the reason I'm sending this instead of just a link.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">You've made enough decisions with real money behind them to know the difference between a program that sounds right and one that holds up when you check it. So here's your page, and here's how to check it.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Your enrollment page:</p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;"><a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a></p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">See you in there,</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Two things to look at while you're in there. The 30-day action plan at the bottom is the part most people skip and it's the part that matters. It's the actual sequence from day one to placed, with dates attached, not a promise. And the proof section is there so you don't have to take my word for anything I said on our call: video testimonials from members, testimonials from the companies that hire out of our network, Chad's book, our reviews. I'd rather you validate it yourself than believe me.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">The three things worth verifying before you commit to anything:</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Placement is a person's job here, not a job board. Nate's entire role is getting you in front of companies already looking. Ask anyone in the reviews about that specifically.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">It's backed in writing. If we don't place you inside 50 interviews or six months, you get refunded. The longest it's ever taken us is 15 interviews.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">There's nothing recurring. No monthly to stay in, no fees after placement, lifetime access to the training and coaching, and lifetime placement. We'll move you to a better offer in a year if you've earned it.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">If anything on that page raises a question, call or text me directly. I'd rather answer it now than have you sit on it.</p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">
 CJ Clay<br>
 HTSA, Career Transformation Coach<br>
 (616) 612-1735<br>
 <a href="mailto:cj@highticketsalesacademy.com" style="color:#000000;background:#ffffff;">cj@highticketsalesacademy.com</a>
+</p>
+<p style="color:#000000;background:#ffffff;margin:24px 0 8px 0;"><b>TEXT (send right after the email)</b></p>
+<p style="color:#000000;background:#ffffff;margin:0;">
+First, just emailed you everything we walked through. Link's in there, or here if it's easier: <a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a>
+<br><br>
+Worth pulling up on a computer rather than your phone. The 30-day plan and the proof section are both at the bottom and they read a lot better on a real screen. Any questions, call or text me directly.
+<br><br>
+CJ
 </p>
 </div>
 

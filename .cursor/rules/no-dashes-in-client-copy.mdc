@@ -1,13 +1,28 @@
 ---
-description: No dashes in CJ enrollment emails and texts
+description: Dash usage in CJ enrollment emails and texts
 alwaysApply: true
 ---
 
-# No dashes in client email/text copy
+# Dashes in client email/text copy
 
-When writing enrollment emails, texts, or similar client-facing messages for CJ:
+Default voice for CJ's enrollment emails and texts is warm and human. That
+means **commas and periods most of the time.** Dashes are not banned, they are
+just rationed.
 
-- Do **not** use em dashes (—), en dashes (–), or hyphen dashes as punctuation between clauses.
-- Prefer commas, periods, or short separate sentences instead.
-- Do **not** use dash bullet lists in emails/texts. Use plain line breaks or numbered lists (1. 2. 3.) if a list is needed.
-- Payment options can still use amounts like `$6,000` and `×` for multipliers. Avoid stylistic dashes in prose.
+## Use a dash only when it is genuinely the clearest choice
+
+- **Hyphens are fine** in compound adjectives ("30-day plan", "high-ticket sales").
+- **Em dashes (—)** are allowed for a single beat inside a long sentence, at
+  most one per paragraph, when a comma would be ambiguous.
+- **En dashes (–)** are not used at all.
+- **Never use dashes for stylistic filler** or to string clauses together
+  when a period or comma would read cleaner.
+- **Do not use dash bullet lists** in emails or texts. Use plain line breaks,
+  or numbered lists (1. 2. 3.) if a list is truly needed.
+- Payment options can still use amounts like `$6,000` and `×` for multipliers.
+
+## What "seems human" means here
+
+CJ's default send pack (see `scripts/htsa_close_copy.py`) is the canonical
+example. Reproduce that voice: short sentences, occasional em dash only where
+it earns its place, no dash-splattered prose.
