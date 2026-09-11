@@ -305,6 +305,7 @@ a{color:inherit}
 .btn--go{background:var(--green-strong);color:#04231a}
 .btn--go[disabled]{background:#dfe6ee;color:#9aa8b8;cursor:not-allowed}
 .btn--back{flex:0 0 auto;border:1px solid var(--grey);background:var(--white);color:var(--muted);font-weight:700}
+.tos-download{text-decoration:none}
 .sheet-note{padding:0 20px 18px;color:var(--muted);font-size:12.5px;line-height:1.5;text-align:center}
 .curr-list{display:grid;gap:11px;padding:0;margin:0}
 .curr-list li{list-style:none;margin:0}
@@ -386,6 +387,14 @@ a{color:inherit}
 .media-sheet .sheet-body{padding:0;max-height:min(70dvh,560px);overflow:auto;background:#0a1628}
 .media-frame{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
 .media-frame--doc{aspect-ratio:auto;min-height:min(70dvh,560px);height:min(70dvh,560px);background:#fff}
+.book-viewer{padding:20px;background:#fff;color:var(--text)}
+.book-viewer img{display:block;width:100%;border-radius:10px}
+.book-viewer h3{margin:18px 0 4px;color:var(--navy);font-size:20px;line-height:1.25;text-transform:none;letter-spacing:0}
+.book-viewer p{margin:8px 0;color:var(--muted)}
+.book-meta{margin:12px 0;padding:12px;border-radius:10px;background:var(--grey-light);color:var(--navy);font-weight:700}
+.book-viewer ul{margin:12px 0;padding-left:20px}
+.book-amazon{display:flex;min-height:48px;align-items:center;justify-content:center;margin-top:16px;padding:12px 16px;
+  border-radius:10px;background:#ffca28;color:#111820;font-weight:800;text-decoration:none}
 .media-scroll{width:100%;max-height:min(70dvh,560px);overflow:auto;-webkit-overflow-scrolling:touch;background:#111;padding:0}
 .media-scroll img{display:block;width:100%;height:auto;margin:0}
 .media-sheet--wide{width:min(920px,calc(100% - 12px))}
@@ -595,10 +604,10 @@ a{color:inherit}
         <div class="res-group">
           <div class="res-group-label">More resources</div>
           <button type="button" class="res-btn" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5"><span>Trustpilot Reviews<small>4.9 out of 5 · scrollable snapshot on this page</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="img" data-src="/media/chad-aleo-book-banner.png" data-title="Chad’s Book — The Book on High Ticket Sales"><span>Chad’s Book<small>The Book on High Ticket Sales · on this page</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="book" data-url="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" data-title="Chad’s Book — The Book on High Ticket Sales"><span>Chad’s Book<small>Full book details · opens on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-why-placement.jpg" data-title="Why Everyone Raves About Our Placement"><span>Why Everyone Raves About Our Placement<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-christa-22k.jpg" data-title="Christa Kieffer — Placement to 22k (4 months)"><span>Christa Kieffer — Placement to 22k<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="site" data-url="https://www.highticketsalesacademy.com" data-title="HTSA Website"><span>HTSA Website<small>Opens here · live site blocks embeds</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="img" data-src="https://image.thum.io/get/width/1200/fullpage/https://highticketsalesacademy.com/" data-title="HTSA Website"><span>HTSA Website<small>Full website snapshot · scrollable on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="doc" data-url="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" data-title="Top 20 Companies in High Ticket Sales"><span>Top 20 Companies in High Ticket Sales<small>PDF · scrollable on this page</small></span><span class="chev">▸</span></button>
         </div>
       </div>
@@ -842,7 +851,7 @@ a{color:inherit}
 <dialog class="sheet" id="tosSheet" aria-labelledby="tosTitle">
   <div class="sheet-head">
     <div class="sheet-kicker">Enrollment agreement</div>
-    <h2 id="tosTitle">Terms of Service</h2>
+    <h2 id="tosTitle" tabindex="-1">Terms of Service</h2>
   </div>
   <div class="sheet-body">
     <h3>Certified High Ticket Closer Program</h3>
@@ -892,7 +901,10 @@ a{color:inherit}
     <h3>Customer service</h3>
     <p>For questions or comments regarding HTSA products, please contact support@highticketsalesacademy.com or call 616-344-6220.</p>
   </div>
-  <div class="sheet-foot"><button class="btn btn--go" type="button" id="tosClose">Got it</button></div>
+  <div class="sheet-foot">
+    <a class="btn btn--back tos-download" href="/HTSA-Terms-of-Service.pdf" download>Download PDF</a>
+    <button class="btn btn--go" type="button" id="tosClose">Got it</button>
+  </div>
 </dialog>
 
 <!-- Splitit popup (in-page) -->
@@ -1127,7 +1139,17 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   roadSheet.addEventListener("click", function(e){ if(e.target===roadSheet) closeSheet(roadSheet); });
 
   const tosSheet = el("tosSheet");
-  function openTos(){ event("terms_opened",{linkLabel:TERMS_VERSION,linkUrl:TERMS_URL}); openSheet(tosSheet); }
+  function openTos(){
+    event("terms_opened",{linkLabel:TERMS_VERSION,linkUrl:TERMS_URL});
+    openSheet(tosSheet);
+    el("tosTitle").focus({preventScroll:true});
+    tosSheet.scrollTop = 0;
+    tosSheet.querySelector(".sheet-body").scrollTop = 0;
+    requestAnimationFrame(function(){
+      tosSheet.scrollTop = 0;
+      tosSheet.querySelector(".sheet-body").scrollTop = 0;
+    });
+  }
   el("tosBtn").addEventListener("click", openTos);
   el("sheetTerms").addEventListener("click", function(e){ e.preventDefault(); openTos(); });
   el("tosClose").addEventListener("click", function(){ closeSheet(tosSheet); });
@@ -1209,10 +1231,22 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       v.autoplay = true;
       wrap.appendChild(v);
       mediaBody.appendChild(wrap);
-    } else if (kind === "site") {
+    } else if (kind === "book") {
       const wrap = document.createElement("div");
-      wrap.style.cssText = "padding:22px 20px;background:#fff;color:#17243b;font-size:15px;line-height:1.55";
-      wrap.innerHTML = "<p style=\"margin:0 0 12px;font-weight:800;color:#0a1628\">High Ticket Sales Academy</p><p style=\"margin:0 0 14px;color:#54637a\">That site blocks in-page embeds (same as Trustpilot). The videos and scrollable snapshots above cover the proof you need without leaving this page.</p><p style=\"margin:0;padding:12px 14px;border-radius:10px;background:#f3f6f9;font-weight:700;word-break:break-all\">" + payload + "</p>";
+      wrap.className = "book-viewer";
+      wrap.innerHTML = '<img src="/media/chad-aleo-book-banner.png" alt="The Book on High Ticket Sales by Chad Aleo">' +
+        '<h3>The Book on High Ticket Sales</h3>' +
+        '<p><b>Chad Aleo</b> · The Ultimate Guide to Making Millions Through Remote Selling</p>' +
+        '<div class="book-meta">4.8 out of 5 stars · 363 ratings · Paperback · 161 pages · $12.99</div>' +
+        '<p>A practical guide to building a career in remote high ticket sales from the founder of High Ticket Sales Academy.</p>' +
+        '<ul><li>Sell the way people want to buy</li><li>Master objections before they come up</li><li>Find and land legitimate high ticket sales roles</li><li>Build consistency in a one call close environment</li></ul>';
+      const link = document.createElement("a");
+      link.className = "book-amazon";
+      link.href = payload;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "View the book on Amazon";
+      wrap.appendChild(link);
       mediaBody.appendChild(wrap);
     } else {
       const f = document.createElement("iframe");
@@ -1230,7 +1264,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       if (kind === "yt") openMedia("yt", btn.dataset.id, btn.dataset.title);
       else if (kind === "img") openMedia("img", btn.dataset.src, btn.dataset.title);
       else if (kind === "video") openMedia("video", btn.dataset.src, btn.dataset.title);
-      else if (kind === "site") openMedia("site", btn.dataset.url, btn.dataset.title);
+      else if (kind === "book") openMedia("book", btn.dataset.url, btn.dataset.title);
       else openMedia("doc", btn.dataset.url, btn.dataset.title);
     });
   });
