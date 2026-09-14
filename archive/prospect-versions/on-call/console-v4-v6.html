@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARCHIVE LIVE CONSOLE V4 (v6 file)</title>
+<style>
+/* ══════════════════════════════════════════════════════════
+   COLOR SYSTEM — only five meanings. Never add a sixth.
+   1. YOU SAY      blue bar + white text
+   2. THEY SAY     gray, italic, indented
+   3. MUST SAY     amber text inside a say-block
+   4. COACHING     small muted italic
+   5. TAB          green, one shade, open or closed
+   ══════════════════════════════════════════════════════════ */
+:root{
+  --bg:#0d1014; --panel:#151a21; --panel2:#1c232c; --line:#2b333d;
+  --ink:#e9eef5; --dim:#8fa0b4; --faint:#64748b;
+  --you:#4a8fff; --youBg:#141d2b;
+  --them:#94a3b8;
+  --must:#f5c542;
+  --tab:#3fa96a; --tabBg:#132119;
+  --stop:#e05252;
+  --ok:#3fa96a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font:inherit}
+
+#top{position:sticky;top:0;z-index:120;background:var(--panel);border-bottom:1px solid var(--line);
+  padding:8px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.brand{font-weight:800;font-size:13px;color:var(--you);white-space:nowrap}
+#nowPhase{font-size:13px;color:var(--dim);font-weight:600}
+#nowPhase b{color:var(--ink)}
+.tbtn{padding:5px 11px;border-radius:6px;background:var(--panel2);border:1px solid var(--line);
+  font-size:11.5px;font-weight:700;color:var(--dim)}
+.tbtn:hover{border-color:var(--you);color:var(--ink)}
+.tbtn.on{background:var(--you);border-color:var(--you);color:#fff}
+#timer{font-variant-numeric:tabular-nums;font-weight:700;font-size:13px;color:var(--dim);min-width:42px}
+#asks{display:flex;gap:5px;align-items:center;margin-left:auto}
+#asks .lb{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.dot{width:15px;height:15px;border-radius:50%;border:1.5px solid var(--line);background:transparent}
+.dot.on{background:var(--must);border-color:var(--must)}
+
+#wrap{display:flex;min-height:calc(100vh - 45px)}
+#rail{width:186px;flex-shrink:0;background:var(--panel);border-right:1px solid var(--line);
+  padding:10px 7px;position:sticky;top:45px;height:calc(100vh - 45px);overflow-y:auto}
+.rl{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:6px;font-size:12.5px;
+  color:var(--dim);width:100%;text-align:left;margin-bottom:2px}
+.rl:hover{background:var(--panel2);color:var(--ink)}
+.rl.on{background:var(--you);color:#fff;font-weight:700}
+.rl.done{color:#4a5666}
+.rl.done .n{background:var(--ok);border-color:var(--ok);color:#06180e}
+.n{width:19px;height:19px;flex-shrink:0;border-radius:4px;border:1px solid var(--line);
+  display:grid;place-items:center;font-size:9.5px;font-weight:800;background:var(--panel2)}
+.rl.on .n{background:rgba(255,255,255,.22);border-color:transparent;color:#fff}
+.rhd{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--faint);padding:11px 9px 4px}
+
+#main{flex:1;padding:20px 26px 84px;min-width:0;max-width:900px}
+#side{width:296px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--line);
+  position:sticky;top:45px;height:calc(100vh - 45px);display:flex;flex-direction:column}
+#side.hid{display:none}
+#sideTabs{display:flex;border-bottom:1px solid var(--line)}
+#sideTabs button{flex:1;padding:9px 4px;font-size:11px;font-weight:700;color:var(--faint);
+  border-bottom:2px solid transparent}
+#sideTabs button.on{color:var(--ink);border-bottom-color:var(--you)}
+.spane{display:none;padding:12px 13px;overflow-y:auto;flex:1}
+.spane.on{display:block}
+.slbl{font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin:12px 0 5px}
+.slbl:first-child{margin-top:0}
+#side input,#side textarea{width:100%;background:var(--panel2);border:1px solid var(--line);
+  border-radius:6px;color:var(--ink);padding:7px 9px;outline:none;font-size:13.5px}
+#side input:focus,#side textarea:focus{border-color:var(--you)}
+#side textarea{min-height:150px;resize:vertical;line-height:1.5}
+.chips{display:flex;gap:5px;flex-wrap:wrap}
+.chip{padding:5px 10px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);
+  font-size:11.5px;font-weight:600;color:var(--dim)}
+.chip.on{background:var(--you);border-color:var(--you);color:#fff}
+.calc{background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:9px 11px;margin-top:9px}
+.calc div{display:flex;justify-content:space-between;font-size:12.5px;padding:2px 0}
+.calc b{font-variant-numeric:tabular-nums}
+#snapOut{font-size:13px;line-height:1.6;list-style:none;margin-left:0}
+#snapOut li{margin-bottom:5px;color:var(--dim)}
+#snapOut li b{color:var(--ink)}
+
+.phase{display:none} .phase.on{display:block}
+h1.ph{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:2px}
+.sub{font-size:12px;color:var(--faint);margin-bottom:16px}
+h2{font-size:11.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);
+  margin:24px 0 9px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h2:first-of-type{margin-top:0}
+
+.say{background:var(--youBg);border-left:3px solid var(--you);border-radius:0 8px 8px 0;
+  padding:14px 17px;margin:10px 0;font-size:16.5px;line-height:1.6;color:#fff}
+.say b{color:var(--must);font-weight:650}
+.them{color:var(--them);font-style:italic;font-size:14px;margin:6px 0 6px 18px}
+.them::before{content:"› ";opacity:.6}
+.co{font-size:13px;color:var(--dim);font-style:italic;margin:7px 0 11px;padding-left:11px;
+  border-left:2px solid var(--line)}
+.co b{color:var(--ink);font-style:normal}
+.stop{border:1px solid var(--stop);border-radius:7px;padding:10px 14px;margin:12px 0;
+  font-weight:700;color:var(--stop);font-size:14px;background:rgba(224,82,82,.07)}
+.stop b{color:var(--stop)}
+
+.tabs{margin:10px 0}
+.tb{border:1px solid var(--tab);border-radius:7px;margin-bottom:6px;background:var(--tabBg);overflow:hidden}
+.tb>button{width:100%;text-align:left;padding:10px 14px;font-weight:700;font-size:13.5px;
+  color:var(--tab);display:flex;align-items:center;gap:8px}
+.tb>button:hover{background:rgba(63,169,106,.09)}
+.tb>button .ar{margin-left:auto;font-size:10px;opacity:.7}
+.tb>.body{display:none;padding:4px 14px 14px;border-top:1px solid rgba(63,169,106,.28)}
+.tb.open>.body{display:block}
+.tb .tb{border-color:rgba(63,169,106,.45);background:rgba(63,169,106,.05)}
+.tb .tb>button{font-size:12.5px;padding:8px 12px}
+
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+th{text-align:left;font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);
+  padding:7px 10px;border-bottom:1px solid var(--line)}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--dim)}
+td b{color:var(--ink)}
+ul{margin:6px 0 10px 18px} li{margin-bottom:5px;color:var(--dim)} li b{color:var(--ink)}
+
+#dock{position:fixed;bottom:0;left:186px;right:296px;background:var(--panel);
+  border-top:1px solid var(--line);padding:8px 14px;display:flex;gap:6px;flex-wrap:wrap;
+  align-items:center;z-index:110}
+#dock.wide{right:0}
+#dock .lb{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-right:2px}
+.ob{padding:5px 10px;border-radius:6px;background:var(--panel2);border:1px solid var(--line);
+  font-size:11px;font-weight:700;color:var(--dim)}
+.ob:hover{border-color:var(--must);color:var(--must)}
+
+#ovl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:200;padding:30px 14px;overflow-y:auto}
+#ovl.on{display:block}
+#ovlin{max-width:820px;margin:0 auto;background:var(--panel);border:1px solid var(--line);
+  border-radius:11px;padding:22px 26px}
+#ovlx{float:right;font-size:20px;color:var(--faint)}
+
+#pal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;padding-top:80px}
+#pal.on{display:block}
+#palin{max-width:600px;margin:0 auto;background:var(--panel);border:1px solid var(--line);border-radius:11px;overflow:hidden}
+#palq{width:100%;background:none;border:none;border-bottom:1px solid var(--line);
+  padding:15px 18px;font-size:17px;color:var(--ink);outline:none}
+#palr{max-height:380px;overflow-y:auto}
+#palr button{width:100%;text-align:left;padding:10px 18px;font-size:13.5px;color:var(--dim);
+  border-bottom:1px solid var(--line)}
+#palr button:hover{background:var(--panel2);color:var(--ink)}
+#palr small{display:block;color:var(--faint);font-size:11px;margin-top:1px}
+
+.trk{display:none} .trk.on{display:block}
+@media(max-width:1200px){#side{display:none}#dock{right:0}}
+@media(max-width:820px){#rail{display:none}#dock{left:0}#main{padding:14px}}
+</style>
+</head>
+<body>
+<div style="position:sticky;top:0;z-index:9999;padding:10px 14px;background:#7f1d1d;color:#fff;font:700 13px/1.35 Arial,sans-serif;text-align:center">ARCHIVE LIVE CONSOLE V4 (v6 file) · ref Sep 4 track-lock · INTERNAL ONLY · <a href="/archive/prospect-versions/on-call/" style="color:#fde68a">All on-call archives</a><br><span style="font-weight:500;opacity:.95">Claude rebuild / simpler dark UI (preferred)</span></div>
+
+<div id="top">
+  <span class="brand">HTSA v6</span>
+  <button class="tbtn" id="btnTimer" onclick="tgTimer()">Start</button>
+  <span id="timer">0:00</span>
+  <span id="nowPhase">Phase <b>&mdash;</b></span>
+  <button class="tbtn" onclick="openPal()">Search</button>
+  <button class="tbtn" onclick="tgSide()">Panel</button>
+  <button class="tbtn" onclick="resetAll()">Reset</button>
+  <div id="asks">
+    <span class="lb">Asks</span>
+    <button class="dot" id="d1" onclick="ask(1)"></button>
+    <button class="dot" id="d2" onclick="ask(2)"></button>
+    <button class="dot" id="d3" onclick="ask(3)"></button>
+    <span class="lb" id="askNote"></span>
+  </div>
+</div>
+
+<div id="wrap">
+<nav id="rail">
+  <div class="rhd">Before</div>
+  <button class="rl" data-p="p"><span class="n">&#9670;</span>Pre-Call</button>
+  <div class="rhd">Call</div>
+  <button class="rl on" data-p="1"><span class="n">1</span>Rapport</button>
+  <button class="rl" data-p="2"><span class="n">2</span>Frame</button>
+  <button class="rl" data-p="3"><span class="n">3</span>Gates</button>
+  <button class="rl" data-p="4"><span class="n">4</span>Discovery</button>
+  <button class="rl" data-p="5"><span class="n">5</span>Bridge</button>
+  <button class="rl" data-p="6"><span class="n">6</span>Demo</button>
+  <button class="rl" data-p="7"><span class="n">7</span>Tie-Down</button>
+  <button class="rl" data-p="8"><span class="n">8</span>Price</button>
+  <button class="rl" data-p="9"><span class="n">$</span>Take Card</button>
+  <button class="rl" data-p="10"><span class="n">&#10003;</span>Enrolled</button>
+  <div class="rhd">Bank</div>
+  <button class="rl" data-p="k"><span class="n">K</span>Knowledge</button>
+  <button class="rl" data-p="x"><span class="n">!</span>Never Say</button>
+</nav>
+
+<main id="main">
+
+<!-- PRE-CALL -->
+<section class="phase" data-p="p">
+  <h1 class="ph">Pre-Call</h1>
+  <div class="sub">Fill what you have. Everything here is optional &mdash; you can start a call knowing nothing.</div>
+
+  <h2>Who is this</h2>
+  <div class="tabs">
+    <div class="tb"><button onclick="tb(this)">Track &mdash; pick one, or leave it and decide live<span class="ar">&#9660;</span></button>
+    <div class="body">
+      <div class="chips" id="trChips" style="margin:8px 0">
+        <button class="chip on" data-tr="launcher" onclick="setTrack('launcher',true)">Career Launcher</button>
+        <button class="chip" data-tr="changer" onclick="setTrack('changer',true)">W2 Changer</button>
+        <button class="chip" data-tr="rep" onclick="setTrack('rep',true)">Experienced Rep</button>
+        <button class="chip" data-tr="owner" onclick="setTrack('owner',true)">Owner / High Earner</button>
+      </div>
+      <table>
+        <tr><td><b>Career Launcher</b></td><td>Little or no sales. Service, retail, care work, returning to work. <b>Default.</b></td></tr>
+        <tr><td><b>W2 Changer</b></td><td>Salaried, capped, transferable skill.</td></tr>
+        <tr><td><b>Experienced Rep</b></td><td>Already sells. <b>Never offer to teach them selling.</b></td></tr>
+        <tr><td><b>Owner / High Earner</b></td><td>$100k+, no leverage, no life. It is about <b>how</b> they earn.</td></tr>
+      </table>
+      <div class="co"><b>Your click locks the track.</b> Uploaded calls can only suggest — they cannot flip these chips.</div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Setter notes / transcript &mdash; paste, or skip<span class="ar">&#9660;</span></button>
+    <div class="body">
+      <textarea id="rawin" style="width:100%;min-height:130px;background:var(--panel2);border:1px solid var(--line);border-radius:7px;color:var(--ink);padding:11px;outline:none;font:14px/1.5 inherit;resize:vertical" placeholder="Paste the setter call, notes, or the HubSpot application answers. Or skip this entirely and go straight to Rapport."></textarea>
+      <div style="display:flex;gap:7px;margin-top:9px;flex-wrap:wrap">
+        <button class="tbtn on" onclick="runRead()">Read it</button>
+        <button class="tbtn" onclick="go('1')">Skip &mdash; no notes, start the call</button>
+        <input type="file" id="fpick" accept=".txt,.md,.vtt,.csv" style="display:none">
+        <button class="tbtn" onclick="document.getElementById('fpick').click()">Load a file</button>
+      </div>
+      <div id="res" style="margin-top:12px"></div>
+    </div></div>
+  </div>
+
+  <h2>Their state &mdash; set it now, or the first time they tell you</h2>
+  <div class="chips">
+    <button class="chip on" id="jA" onclick="setJolt('fight')">Still defending where they are</button>
+    <button class="chip" id="jB" onclick="setJolt('derisk')">Already wants out</button>
+  </div>
+  <div class="co" id="joltNote">Pain audit and gap math stay visible. <b>Flip this the moment they admit they want change</b> &mdash; after that, more pain works against you.</div>
+
+  <h2>Before you dial</h2>
+  <ul>
+    <li><b>Card ready.</b> You take payment on this call, by phone. No link.</li>
+    <li><b>Pen and paper</b> &mdash; you will ask them for theirs in Frame.</li>
+    <li><b>Panel open on the right</b> &mdash; type income and notes there without leaving the script.</li>
+    <li><b>Hit Start</b> so the timer runs.</li>
+  </ul>
+</section>
+
+<!-- 1 RAPPORT -->
+<section class="phase on" data-p="1">
+  <h1 class="ph">Rapport</h1>
+  <div class="sub">0:00&ndash;3:00 &middot; Calm, slow, low. Three exchanges then move.</div>
+
+  <div class="say">Hey &mdash; is that <b>[NAME]</b>?</div>
+  <div class="them">Yeah, this is them.</div>
+  <div class="say">Hey <b>[NAME]</b>, CJ here from High Ticket Sales Academy. Can you hear me alright?</div>
+  <div class="say">I saw the area code &mdash; you are out in <b>[CITY]</b>? How is it over there today?</div>
+  <div class="co">One real detail from your side. Under 30 seconds.</div>
+
+  <h2>The initiative reframe &mdash; do not skip</h2>
+  <div class="say">So I was looking over your application right before I hopped on.
+  Most people do not take the initiative to fill one of those out unless they are <b>genuinely feeling stuck or ready for a shift.</b> The fact that you did says something.
+  How did you first stumble across us at HTSA?</div>
+  <div class="say">And what stood out to you most out of what you saw?</div>
+  <div class="co">Let them talk. This is the last easy question &mdash; after this you own the structure.</div>
+
+  <div class="tabs">
+    <div class="tb"><button onclick="tb(this)">Roadblocks &mdash; only if one of these happens<span class="ar">&#9660;</span></button>
+    <div class="body">
+      <div class="tb"><button onclick="tb(this)">"I am not buying anything today"<span class="ar">&#9660;</span></button><div class="body">
+        <div class="say">Oh, I would be worried if you were.
+        Honestly &mdash; you do not even know if this is a fit yet, and I do not know if you are someone we can realistically place. If I tried to get you to make a career decision right now we would both just be guessing.
+        So let us take that off the table completely. Let us just figure out whether this is even the right vehicle for you. If it is not, I will tell you straight and point you somewhere else. <b>Fair enough?</b></div>
+      </div></div>
+      <div class="tb"><button onclick="tb(this)">"Just tell me the price"<span class="ar">&#9660;</span></button><div class="body">
+        <div class="say">I respect that, and you are smart to be direct. There is a ton of noise out there and I would be skeptical too.
+        <b>And I promise I will walk you through the numbers clean by the end of this call</b> &mdash; I have got nothing to hide.
+        But price without context is like asking what a steak costs before you know if it is grocery store or Gordon Ramsay on Valentine's Day. If I throw a number at you without knowing what you need, we are both guessing.
+        Give me a few minutes to understand where you are at. If we are not a fit I will tell you. If we are, I will lay out the numbers. <b>Deal?</b></div>
+      </div></div>
+      <div class="tb"><button onclick="tb(this)">They will not stop talking<span class="ar">&#9660;</span></button><div class="body">
+        <div class="co">Laugh first, then cooperative overlap. Never cut cold.</div>
+        <div class="say">Oh man, that is hilarious &mdash; you have got great energy, I could swap stories with you all night.
+        But I want to respect your time here. Let us do this &mdash; before we go down that road, <b>let us get our bearings on paper</b> so I can make this call actually worth your evening. Sound good?</div>
+      </div></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 2 FRAME -->
+<section class="phase" data-p="2">
+  <h1 class="ph">Frame</h1>
+  <div class="sub">3:00&ndash;5:00 &middot; Flat and unhurried. The close happens here, not at minute 45.</div>
+
+  <div class="say">So <b>[NAME]</b>, before we roll up our sleeves &mdash; are you still good on time for about 45 minutes, or are we working with a tighter window?</div>
+  <div class="say">Perfect. Then let us get our bearings on paper first so we do not run circles around each other. <b>Grab a pen and something to write on</b> &mdash; tell me when you have got it.</div>
+  <div class="stop">Wait for it. A prospect holding a pen is a participant. Empty hands is an audience.</div>
+
+  <h2>The frame</h2>
+  <div class="trk on" data-t="launcher">
+  <div class="say">The purpose of this call is really direct.
+  We are going to look at where you are at now, what you actually want to be making, and figure out whether remote high ticket sales is the right vehicle to get you there.
+  I am going to ask some specific questions about your schedule, your background, your situation.
+  <b>And if at any point I do not think this is a fit &mdash; or I do not think we could place you &mdash; I am going to tell you straight and point you somewhere else.</b> I would rather save us both the time.
+  But if we get to the end and we both see a clear path out of where you are and into an actual remote seat &mdash; then my expectation is <b>we make a decision today</b> and get you started, rather than you sitting on it all week.
+  <b>Does that sound fair?</b></div>
+  </div>
+  <div class="trk" data-t="changer">
+  <div class="say">The purpose here is straightforward.
+  We audit the setup you are in now, look at the actual income gap you are trying to close, and figure out if this is the right vehicle for it.
+  <b>If I do not think it fits, or I do not think we could place you well, I will say so.</b>
+  But if we both see a clean path out of the ceiling you are under &mdash; my expectation is we make a decision today instead of leaving you in maybe-land overthinking something that is already clear. <b>Fair?</b></div>
+  </div>
+  <div class="trk" data-t="rep">
+  <div class="say">For someone at your level this is not a learn-to-sell pitch. <b>You already know how to close.</b>
+  What this is actually about is whether our offers and our placement channel fit what you want to build next.
+  We will look at the actual offers, run the economics, and if there is a match we will talk about moving you over. If there is not, we part as friends and you keep running what you are running. <b>Sound like a plan?</b></div>
+  </div>
+  <div class="trk" data-t="owner">
+  <div class="say">Let me be straight about what this is, because I do not think you need a pitch.
+  You have proven you can make money. This is not about whether you can earn &mdash; it is about <b>how</b> you are earning it and what it costs you to do it that way.
+  So we will look at your setup, the leverage in it, and whether what we do is a better structure for the next chapter. If it is not, I will say so. <b>Fair enough?</b></div>
+  </div>
+
+  <div class="stop">WAIT FOR THE VERBAL YES. If they mumble: "Is that alright with you?"</div>
+  <div class="say">Awesome. Then we are officially in alignment.</div>
+
+  <h2>Time capacity contract</h2>
+  <div class="co">Kills "I am too busy" before price is ever spoken.</div>
+  <div class="say">One quick thing on the practical side. To get through the training and pass certification it is about <b>10 to 12 hours a week</b> &mdash; off-hours, your own schedule.
+  Knowing that &mdash; are you realistically in a position to carve that out, or is your schedule completely maxed right now?</div>
+  <div class="tabs">
+    <div class="tb"><button onclick="tb(this)">They can &mdash; lock it<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Perfect. <b>Write "12 hours" at the top of your page.</b> That is your baseline commitment.</div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">They hesitate &mdash; scotoma reframe<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">I hear you. But if you are that busy &mdash; <b>does that not mean finding 20 or 30 minutes a day for a skill that buys your schedule back is more important, not less?</b>
+      Or are you willing to stay this busy at this income forever?</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 3 GATES -->
+<section class="phase" data-p="3">
+  <h1 class="ph">Gates</h1>
+  <div class="sub">5:00&ndash;7:00 &middot; Two minutes here saves a dead call at minute 50.</div>
+
+  <h2>Gate 1 &middot; Decision maker</h2>
+  <div class="say">Before we get into your background &mdash; with something like this, <b>is there anyone else who would be part of the decision with you?</b> Spouse, partner, anybody?</div>
+
+  <div class="tabs">
+    <div class="tb"><button onclick="tb(this)">"No, it is my call"<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Good &mdash; then we can actually finish this today.</div>
+      <div class="co">Move to Gate 2. Never introduce a partner objection that does not exist.</div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">"Yes, my spouse / partner" &mdash; 3 routes<span class="ar">&#9660;</span></button><div class="body">
+      <div class="tb"><button onclick="tb(this)">Route A &middot; Align them first<span class="ar">&#9660;</span></button><div class="body">
+        <div class="say">Totally fair. <b>How do they feel about your current situation?</b> Are they happy with the hours and the money, or are they ready for something to change too?</div>
+        <div class="them">Honestly she hates how much I work.</div>
+        <div class="say">Right. So they are already on your side about finding a fix.
+        And when it comes to a decision on your own career &mdash; <b>is that something you lead on, or do they need to sign off on everything?</b></div>
+      </div></div>
+      <div class="tb"><button onclick="tb(this)">Route B &middot; Get them on the call<span class="ar">&#9660;</span></button><div class="body">
+        <div class="say">Then let us not make you relay an hour of this. <b>Are they around? Even ten minutes.</b></div>
+        <div class="say">If not &mdash; let us do fifteen minutes tomorrow, the three of us. They will have two questions and I would rather they ask me directly. <b>What is better for them, morning or evening?</b></div>
+        <div class="stop">BOOK IT LIVE. Then get their commitment first: "Before that &mdash; where are you at? If you are a no, that call does not matter."</div>
+      </div></div>
+      <div class="tb"><button onclick="tb(this)">Route C &middot; Skeptical partner<span class="ar">&#9660;</span></button><div class="body">
+        <div class="say">Of course. Would they be excited for you, or worried?
+        And just so I understand it fully &mdash; <b>what happens if you lay the whole thing out and they say no?</b></div>
+        <div class="co">"I do not think they would do that" is not an answer. Push once: "Say they have had a rough day. Then what?"</div>
+        <div class="stop">Do NOT run "is asking permission really respect?" on a supportive partner. It closes some and refunds more.</div>
+      </div></div>
+    </div></div>
+  </div>
+
+  <h2>Gate 2 &middot; Money &mdash; early, not at minute 45</h2>
+  <div class="co"><b>The single most fixable reason calls die.</b> Find it now, while you still have 40 minutes to solve it.</div>
+  <div class="say">And one more so I do not waste your time. This is a paid program and it is not small &mdash; I am not going to give you the number yet because it would not mean anything without context.
+  But if this turns out to be exactly what you are looking for &mdash; <b>are you in a position to invest in yourself right now?</b></div>
+  <table>
+    <tr><th>They say</th><th>You do</th></tr>
+    <tr><td>"Yes"</td><td>Note it in the panel. Move on. Do not gild it.</td></tr>
+    <tr><td>"Depends on the number"</td><td>"Fair &mdash; ballpark, what were you expecting?" Anchors them, shows you the gap.</td></tr>
+    <tr><td><b>"It would be tight"</b></td><td><b>Isolate now:</b> "Is it that it is not there, or that it is there and spoken for?"</td></tr>
+    <tr><td>"I would have to figure it out"</td><td>"Most people do. What would figuring it out look like for you?"</td></tr>
+  </table>
+  <div class="co">Nobody is disqualified here. This is so you know which close you are running before you start running it.</div>
+</section>
+
+<!-- 4 DISCOVERY -->
+<section class="phase" data-p="4">
+  <h1 class="ph">Discovery</h1>
+  <div class="sub">7:00&ndash;22:00 &middot; Low and slow. Concrete nouns and numbers, not adjectives.</div>
+
+  <h2>Open</h2>
+  <div class="say">Walk me through what your working life actually looks like right now. <b>Not the job title</b> &mdash; what does a normal week actually feel like?</div>
+  <div class="say">And how many hours a week are you actually pouring into that?</div>
+  <div class="say">And what is that bringing home monthly?</div>
+  <div class="co">Type the number straight into the panel on the right. Do not leave this phase.</div>
+
+  <h2>The ceiling question</h2>
+  <div class="trk on" data-t="launcher">
+  <div class="say">Let me ask you something direct. In what you are doing now &mdash; if you decided to work twice as hard next month, doubled your hours and your effort &mdash; <b>how much more money actually shows up?</b></div>
+  <div class="say">Right. So the effort goes up and the scoreboard does not move.
+  That is not a you problem, <b>[NAME]</b>. <b>That is a vehicle problem.</b> Fair way to put it?</div>
+  </div>
+  <div class="trk" data-t="changer">
+  <div class="say">If you doubled your output next month, how much more shows up on the paycheck? Or is there <b>a cap built right into the model?</b></div>
+  <div class="say">So your effort goes straight up and the financial scoreboard barely moves. <b>That is a vehicle problem, not a you problem.</b> Fair?</div>
+  </div>
+  <div class="trk" data-t="rep">
+  <div class="say">I respect that you are commission &mdash; it means you bet on yourself. But let us look at the pipeline.
+  Out of a 50-hour week, what percent is actually spent <b>closing</b>, versus chasing leads, driving, following up, admin?</div>
+  <div class="say">So to double your income you would have to double your volume &mdash; twice the prospecting, twice the hours. <b>Is there any version of your current model where you double revenue without burning your life down?</b></div>
+  <div class="say">That is a volume bottleneck. If a company spent thirty thousand a month on ads to fill your calendar with people who already raised their hand &mdash; <b>how much faster does that scale?</b></div>
+  </div>
+  <div class="trk" data-t="owner">
+  <div class="say">So you are pulling in <b>[CURRENT]</b>. Let us stop there &mdash; we do not need to talk about whether you can make money, you have proven that.
+  This is about <b>how</b> you make it. To pull that number right now &mdash; what is it costing you? Time, health, family?</div>
+  <div class="say">So a profitable business and a bankrupt calendar.
+  If you took the same skill, moved it remote, and made the same or more working thirty hours from a laptop &mdash; <b>what would that change?</b></div>
+  </div>
+
+  <h2>Which is it &mdash; money or freedom</h2>
+  <div class="say">Let me ask you this straight. <b>If you had to pick one</b> &mdash; is this more about the income, or more about the freedom and flexibility?</div>
+  <div class="co">Click their answer in the panel under Snapshot. It changes what you emphasize in the demo.</div>
+
+  <div id="painBlock">
+  <h2>Deepen it &mdash; only while they are defending the status quo</h2>
+  <div class="co"><b>Ask ONE, maybe two. Not all four.</b> Stacking turns a diagnosis into an interrogation and they start performing pain instead of telling the truth.</div>
+  <div class="tabs">
+    <div class="tb"><button onclick="tb(this)">Financial return<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">How do you feel about what you are getting back financially, compared to the energy you are putting in?</div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">Identity &mdash; heaviest, use with care<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">And outside the money &mdash; what has this pace been doing to <b>you</b>? Not the job title. When you look at yourself at the end of a long week, <b>who is looking back?</b></div>
+      <div class="stop">5 to 7 seconds of silence. Do not rescue it.</div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">Household ripple<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">And when you bring that home &mdash; <b>who else in the house is absorbing it?</b></div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">Trajectory<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">If nothing changes and another twelve months goes by exactly like this &mdash; <b>where does that leave you?</b></div>
+    </div></div>
+  </div>
+  </div>
+
+  <div id="derisknote" style="display:none">
+    <h2>Pain block hidden &mdash; on purpose</h2>
+    <div class="co">You marked them as already wanting out. <b>Digging for more hurt now reads as manipulation and stalls the close.</b> Skip to Heaven Island, then the bridge, then the demo. Your job from here is to make the path feel safe and specific, not to make their present feel worse.</div>
+  </div>
+
+  <h2>Heaven Island &mdash; always run this</h2>
+  <div class="say">Let us switch gears. Based on what you know about this &mdash; <b>what is actually pulling you toward it?</b></div>
+  <div class="say">Why is that important to you <b>right now</b>? What would it let you do that you cannot do today?</div>
+  <div class="say">Fast forward. You are certified, you are placed, twelve months in and you have got this dialed. <b>Walk me through a normal Tuesday.</b> Where are you waking up, what time is it, what does the morning look like?</div>
+  <div class="say">Say more about that...</div>
+  <div class="stop">Then stop completely. Highest-value pause on the call &mdash; let them build it.</div>
+  <div class="say">And <b>who benefits most</b> from you becoming that version? Who is standing there?</div>
+
+  <h2>Plan B collapse</h2>
+  <div class="say">So let me ask &mdash; <b>what is your Plan B?</b> If this is not the path, what is the actual step-by-step alternative that gets you there?
+  Because if that path is clearer and safer than this one, <b>you should go do that.</b> But if there is not one, then this stops being a "should I" and becomes a "when." Make sense?</div>
+  <div class="tabs">
+    <div class="tb"><button onclick="tb(this)">"I would just apply on Indeed / LinkedIn"<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Sure, you can. Let me save you some time though.
+      The companies actually worth working for <b>do not post those seats publicly.</b> If they did they would get four thousand unqualified applications and it would wreck their pipeline. They fill through private networks.
+      Applying cold means throwing a resume into a black hole and hoping. We walk your name into the hiring manager's Slack.
+      So which is actually more expensive &mdash; <b>six months of guessing on your own, or buying the door today?</b></div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">Gap math &mdash; only if it fits<span class="ar">&#9660;</span></button><div class="body">
+      <table>
+        <tr><th style="color:var(--ok)">Run it when</th><th style="color:var(--stop)">Do not run it when</th></tr>
+        <tr><td>They are underpaid and know it<br>They said "cannot afford it"<br>They want to wait and save<br>There is a real dated bill</td>
+            <td>They said money is not the issue<br>They are comfortable, doing this for identity<br>They already said they are ready<br>They are financially fragile &mdash; it reads as pressure</td></tr>
+      </table>
+      <div class="co"><b>The target number is theirs, never yours.</b> If they said $5,000, the math uses $5,000. Replace their number with a bigger one and you have told them their goal was too small.</div>
+      <div class="say">I am a bit confused &mdash; maybe help me understand the math on your end.
+      You said you are at <b>[CURRENT]</b> a month and where you want to be is <b>[TARGET]</b>. Still right?
+      So the difference is <b>[GAP]</b> a month. That is about <b>[DAY]</b> a day, weekends included.
+      So help me understand &mdash; if you wait six months because of cash flow, that is <b>[SIX]</b> of income that never shows up. <b>How does spending [SIX] to avoid a payment today solve a cash flow problem?</b></div>
+      <div class="stop">SILENCE. Let it land.</div>
+      <div class="say">Right. So it is not really a capacity decision, it is a priority one.
+      If a pipe burst in your living room doing a hundred and fifty a day in damage, you would not wait six months to call a plumber because the fee was inconvenient. <b>You would find it, because waiting costs more than the fix.</b>
+      So what is the most sensible way to get this handled today?</div>
+      <div class="co">Softer version for anyone scared about money: "You said [TARGET] is where this feels worth it. The investment is six thousand. That is [PAYBACK] months at your own number, and then it is yours. That is the whole financial argument &mdash; I am not going to dress it up."</div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">More probes &mdash; pull one if you need it<span class="ar">&#9660;</span></button><div class="body">
+      <div class="tb"><button onclick="tb(this)">Effort vs scoreboard<span class="ar">&#9660;</span></button><div class="body">
+        <div class="say">You want to hit <b>[TARGET]</b>. At your current rate, <b>how many more hours would you physically have to work</b> to get there? Is that even possible?</div>
+        <div class="say">If you keep doing exactly this and everything goes right &mdash; where does it leave you in three years? <b>Does that excite you, or is that the ceiling?</b></div>
+      </div></div>
+      <div class="tb"><button onclick="tb(this)">Identity drift<span class="ar">&#9660;</span></button><div class="body">
+        <div class="say">If you are in this exact spot six months from now &mdash; <b>how are you going to feel about having let another half year go?</b></div>
+      </div></div>
+      <div class="tb"><button onclick="tb(this)">Alternative collapse<span class="ar">&#9660;</span></button><div class="body">
+        <div class="say">If the good companies fill seats through private networks and never post publicly &mdash; <b>what is your plan to get in front of a hiring manager?</b> Or is it applying and hoping?</div>
+      </div></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 5 BRIDGE -->
+<section class="phase" data-p="5">
+  <h1 class="ph">Bridge</h1>
+  <div class="sub">Their words back to them, then hand off to the demo.</div>
+  <div class="say">Let me reflect this back and make sure I have got you right.
+  On one hand, where you are now feels like <b>[THEIR HELL WORDS]</b>.
+  On the other, what you actually want is <b>[THEIR HEAVEN WORDS]</b>.
+  And the gap between those two is not your drive, or your work ethic, or whether you are capable &mdash; <b>it is the vehicle.</b>
+  Fair way to put it?</div>
+  <div class="stop">Get the verbal yes. This is the agreement the whole close rests on.</div>
+  <div class="co">Their exact words are in the panel under Notes.</div>
+
+  <div class="say">I will be straight &mdash; based on everything you have told me, I think you would do well at this. And I do not say that on every call.
+  So let me show you exactly how it works. <b>Keep that pen</b> &mdash; I want you writing this down.
+  And if you have questions while I am going, just cut in. I would rather answer as we go than have you sit on something.</div>
+</section>
+
+<!-- 6 DEMO -->
+<section class="phase" data-p="6">
+  <h1 class="ph">Demo</h1>
+  <div class="sub">Four blocks. A micro-yes ends every block. Never more than about 3 minutes without handing it back.</div>
+
+  <div class="say">So there are two things we are doing here. <b>One</b> &mdash; train you to close at a high level. <b>Two</b> &mdash; get you interviews and connect you with a company that is actually hiring. Make sense?</div>
+
+  <h2>Block 1 &middot; Training + reps</h2>
+  <div class="say">Step one you are in the course. Around <b>fifty videos</b>, ten to fifteen minutes each, no filler &mdash; psychology, structure, handling objections before they show up. <b>Lifetime access</b>, so you can go back to any of it forever.
+  But watching videos does not make you good. <b>Reps do.</b>
+  So we built an <b>AI roleplay platform</b> &mdash; we took real recorded sales calls and turned them into AI buyers with different personalities. They push back, they object, they sound real. Practice any time, no scheduling with anyone. <b>And it grades you when you finish</b> and tells you exactly what to fix.
+  How valuable is it to get your first thirty rough calls out of the way where they do not cost you anything?</div>
+
+  <h2>Block 2 &middot; Coaching + community</h2>
+  <div class="say">Second piece &mdash; <b>Tuesdays at noon and Wednesdays at 5 Eastern</b>, live coaching on Zoom with Chad and Christian. Small groups, not a webinar. You can unmute, ask anything, and <b>play your own recorded calls and get them broken down live.</b>
+  All of it is recorded if you cannot make it.
+  And there is a community of people doing exactly this right now, so you are not doing it alone.
+  How important is that to you versus figuring it out solo?</div>
+
+  <h2>Block 3 &middot; Placement</h2>
+  <div class="say">Third piece, and this is the one that matters.
+  Once you finish the training you do a live mock call with our team &mdash; <b>you need 50 out of 60 to pass.</b> We are strict because when we send you to a partner, our name is on it.
+  Once you are certified you meet with our placement director. He finds your niche, <b>hand-picks three to five open offers</b>, cleans up your resume and LinkedIn, and <b>introduces you directly to the hiring managers over Slack.</b>
+  We work with <b>over 200 companies</b> &mdash; Tony Robbins, Acquisition.com, Grant Cardone &mdash; with three hundred plus offers between them.
+  <b>Not a job board. Introductions.</b>
+  We guarantee you interviews. We do not guarantee a job at a specific company &mdash; those are real interviews and you have to show up for them.
+  And there is a <b>conditional money back guarantee</b>: you do the work, get certified, apply to the companies we send &mdash; if we cannot place you, you get your money back. In writing, and you will read it before you sign anything.
+  Any questions on how that works?</div>
+
+  <h2>Block 4 &middot; Lifetime &mdash; the biggest part, and most reps skip it</h2>
+  <div class="co">This is the block that separates HTSA from every course they have looked at. <b>Do not rush it.</b></div>
+  <div class="say">Now here is the part I do not lead with, and honestly it is the biggest thing we do.
+  <b>Placement is not one and done. It is lifetime.</b>
+  Three things happen to people and we handle all three the same way &mdash; <b>we just run the process again. No second tuition.</b>
+  <b>One</b> &mdash; you get placed and it is not a good fit. Rare, but it happens. We move you.
+  <b>Two</b> &mdash; you took an offer as a <b>bridge.</b> A lot of the best offers require a certain amount of revenue closed before they will even look at you. So you take one to build the resume, then we move you to the one you actually wanted.
+  <b>Three</b> &mdash; you get traction and proof, and you want to <b>upgrade to a higher-end offer.</b> Same thing. We run it again.
+  <b>That is for life.</b></div>
+
+  <div class="say">And on the front end &mdash; <b>your first 90 days</b>, you can take a call you <b>did not</b> close, send it to Chad, and <b>he personally reviews it</b> and tells you exactly why it did not close.
+  We help you track and measure your KPIs, and I would have you block <b>one hour a week</b> for the live group coaching while you are ramping.</div>
+
+  <div class="say">And I will be honest with you about why we do all that. <b>Our success is tied to yours.</b>
+  If you do not perform, these companies do not wait around two or three months hoping you figure it out. <b>They move on.</b>
+  So we want you ramped and producing fast &mdash; that is not generosity, that is the business. <b>And it is exactly why the academy stays open for life.</b></div>
+
+  <div class="say">One thing that is not lifetime, and I would rather tell you now than have you find it later. <b>The AI roleplay platform.</b>
+  It is completely free while you are in the academy, all the way through until you actually start working for your offer.
+  If you want to keep it a few months while you are ramping &mdash; <b>and I would recommend that</b> &mdash; it is <b>thirty-nine dollars a month.</b>
+  Other than that, <b>no hidden fees, no subscriptions, no surprises.</b> We do not play around with that stuff.</div>
+
+  <div class="say">So that is the whole thing. We validate you are a skilled closer who will out-perform ninety-five percent of applicants, we prepare you for the interviews at the companies <b>you</b> choose, and then we make sure you see quick success &mdash; with training available for as long as you want it.
+  Honestly? <b>The proximity to Chad alone &mdash; his network, having that direct relationship &mdash; is worth three times what the academy costs.</b>
+  <b>So now that you know how it all works...</b></div>
+
+  <div class="tabs">
+    <div class="tb"><button onclick="tb(this)">The mirror &mdash; strongest 60 seconds for anyone who has sold before<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">And honestly &mdash; <b>this call is the process.</b> We built a little rapport, I set a frame, we went through discovery, now I am walking you through it, then we will talk pricing and options.
+      <b>That is exactly what you would be doing.</b> Whatever company hires you, the first few days is learning what to ask in discovery for their specific offer and how to present it. Same structure, different product.</div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">If they ask "how do I get paid?"<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Depends on the company, but <b>most of them pay weekly.</b> Commission is typically ten to fifteen percent, and it goes up as you hit milestones.</div>
+      <div class="co">Only if asked. Do not volunteer it &mdash; it is detail that distracts from the decision.</div>
+    </div></div>
+  </div>
+
+  <div class="stop">STOP. Ask: "Any questions about any of that?" Answer what they ask. Do not re-explain anything you already covered.</div>
+
+  <div class="say">Does this feel like the right fit for what you are trying to do?</div>
+  <div class="say">What specifically stood out? <b>What is the part that makes you think this could actually work for you?</b></div>
+  <div class="co"><b>Do not skip that last question.</b> Whatever they say is what you close on in ten minutes. Write it in the panel, word for word.</div>
+</section>
+
+<!-- 7 TIE-DOWN -->
+<section class="phase" data-p="7">
+  <h1 class="ph">Tie-Down</h1>
+  <div class="sub">Smoke out the real blocker before you have spent your ammunition.</div>
+  <div class="say">Everything you have told me makes me think you would do really well at this &mdash; <b>[ONE OR TWO THINGS THEY SAID]</b>.
+  So let me ask you straight: if this all makes sense after we go through the numbers &mdash; <b>is there anything you can think of that would stop you from getting started today?</b></div>
+  <div class="tabs">
+    <div class="tb"><button onclick="tb(this)">"Nothing" &mdash; lock it<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Perfect. Then let us look at the numbers.</div>
+      <div class="co">Remember this. It is your callback if they wobble at minute 50.</div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">Money comes up &mdash; isolate<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Totally fair, and I appreciate you being straight.
+      We have got a few ways to structure it, so budget is almost never the reason this does not happen.
+      But set the money aside one second &mdash; <b>other than that, is there anything else holding you back?</b></div>
+      <div class="co">If no: "Perfect. So we agree on the program. We just need to solve the math."</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 8 PRICE -->
+<section class="phase" data-p="8">
+  <h1 class="ph">Price</h1>
+  <div class="sub">Slow. Flat. Neutral. Then absolute silence.</div>
+  <div class="say">So let us talk about what it costs.
+  Most programs that try to do this run <b>ten to twelve thousand</b>, and a lot of them sell you recorded video and then point you at a job board.
+  We do not think it needs to cost that, and we do not think a job board is worth anything.
+  What you get is lifetime access to the training, the live coaching, the simulator, and hand-held placement into our partner network &mdash; <b>for life.</b></div>
+
+  <div class="say">There are two ways people do this.
+  <b>Six thousand paid in full</b> &mdash; lowest total, and it is what I would recommend if it is available to you.
+  Or if it is easier on cash flow, <b>four payments of seventeen fifty</b>, a month apart. And either way <b>you start today.</b> I get you in the community tonight, you are in the course tonight, and your kickoff is booked.
+  <b>Which of those works better for you?</b></div>
+  <div class="stop">GOLDEN SILENCE. Do not speak. Do not explain. First one to talk loses.</div>
+
+  <table>
+    <tr><th>Option</th><th>Terms</th><th>Total</th><th>When</th></tr>
+    <tr><td><b>Paid in full</b></td><td>$6,000 today</td><td><b>$6,000</b></td><td>Lead with this</td></tr>
+    <tr><td><b>4-pay</b></td><td>$1,750 x 4, monthly</td><td>$7,000</td><td>Lead option two</td></tr>
+    <tr><td>Clarity Pay</td><td>12 months, 0%</td><td>approval outcome</td><td><b>Only if cash flow is the real blocker</b></td></tr>
+    <tr><td>3-pay</td><td>$2,200 x 3</td><td>$6,600</td><td>On request only</td></tr>
+    <tr><td>2-pay</td><td>$3,000 x 2</td><td>$6,000</td><td>On request only</td></tr>
+  </table>
+  <div class="co"><b>Two live at a time, maximum.</b> Every extra option turns a decision into shopping.<br>
+  <b>Never quote a Clarity monthly before they prequalify</b> &mdash; it is an approval outcome, not your price.<br>
+  <b>Never present it as a descent.</b> "Well, we could also do..." tells them pushing works.</div>
+</section>
+
+<!-- 9 CARD -->
+<section class="phase" data-p="9">
+  <h1 class="ph">Take The Card</h1>
+  <div class="sub">No link. No "go read the page." A page is a pause, and a pause is where deals die.</div>
+
+  <div class="say">Perfect. Let us get you set up. <b>Do you need to grab the card you want to use, or do you already have it?</b></div>
+  <div class="co">That is the close. Not "are you ready" &mdash; a logistics question, asked as though the decision already happened. Because the frame at minute four already made it.</div>
+
+  <h2>Take it down, one field at a time</h2>
+  <div class="say">Great, I will take it right over the phone, takes about a minute.
+  The long number on the front whenever you are ready...
+  Perfect. And the expiration?
+  And the three digits on the back?
+  And the name exactly as it appears &mdash; any middle initial?
+  And the billing zip.</div>
+  <div class="co"><b>Read each one back. And keep talking while you enter it</b> &mdash; silence during payment is where second thoughts live.</div>
+  <div class="say">While this runs &mdash; tonight you will get your login, and I would start the first couple modules. Tomorrow you have got your fifteen-minute kickoff. And <b>Tuesday at noon is the live call with Chad</b>, which you want to be in for. That is the room.</div>
+
+  <h2>Terms out loud, before you charge</h2>
+  <div class="say">Before I run it, let me say the terms out loud so there are no surprises and you are not reading fine print later.
+  <b>[AMOUNT] today.</b> (if 4-pay: and three more of seventeen fifty, one a month, same card)
+  <b>Lifetime access</b> to the training, the coaching, and job placement &mdash; including if you want to move offers in two years.
+  The <b>conditional money back guarantee</b> &mdash; you complete the training, get certified, apply to the companies we send you. If we cannot place you, you get refunded.
+  And the AI roleplay is free while you are here, <b>thirty-nine a month</b> only if you choose to keep it after you start working.
+  You will get all of that in writing in your email and I want you to read it tonight. <b>Sound good?</b></div>
+  <div class="co">Saying the conditions out loud <b>before</b> the charge is the strongest trust move available at this moment &mdash; and it prevents the refund fight that starts when someone finds a condition they did not know about.</div>
+
+  <div class="say">Alright &mdash; that went through. <b>Welcome to High Ticket Sales Academy.</b></div>
+  <div class="stop">STOP SELLING. No more features, no testimonials, no re-justifying. You are an onboarding administrator now.</div>
+
+  <div class="tabs">
+    <div class="tb"><button onclick="tb(this)">If the card declines<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">No stress, happens all the time &mdash; usually the bank flagging a larger charge than normal.
+      Two options: call them and approve it, takes two minutes and I will wait right here. Or we try a different card. <b>Which is easier?</b></div>
+      <div class="stop">Stay on the line. A callback is a new decision and you will be re-closing from zero.</div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">"Can I see something first?"<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Totally fair. Here is what I would rather do though &mdash; <b>let me just tell you what is in it</b>, because it will take me thirty seconds and reading it will take you fifteen minutes.
+      (say the terms above)
+      And everything I just said comes to you in writing tonight, before you have done a single thing. If any of it does not match, you tell me and we undo it. <b>Fair?</b></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 10 ENROLLED -->
+<section class="phase" data-p="10">
+  <h1 class="ph">Enrolled</h1>
+  <div class="sub">Four minutes of admin while they are still on the line.</div>
+  <div class="say">Alright, here is exactly what is happening in the next four minutes while we are still on the phone.
+  <b>One</b> &mdash; check your email, you will have a welcome email with your login. Click it, set your password, make sure the portal opens.
+  <b>Two</b> &mdash; book your fifteen-minute kickoff call. Do it now while I am here.
+  <b>Three</b> &mdash; request access to the community group. <b>I am an admin, I will approve you right now</b> so you are in tonight.
+  Let us make sure that email landed...</div>
+  <div class="co"><b>Do not hang up until they are inside something.</b> Someone who logged in, set a password, and got approved tonight does not request a refund Tuesday.</div>
+  <div class="say">And read the agreement tonight. Not because anything is changing &mdash; <b>because you should, and because I want you sleeping fine about it.</b></div>
+</section>
+
+<!-- KNOWLEDGE -->
+<section class="phase" data-p="k">
+  <h1 class="ph">Knowledge Bank</h1>
+  <div class="sub">Analogies, reframes, stories. Pull one when you need it &mdash; never fire several in a row.</div>
+
+  <h2>Reframes</h2>
+  <div class="tabs">
+    <div class="tb"><button onclick="tb(this)">Perspective &rarr; decisions &rarr; results (the weight-loss guy)<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Can I offer you a different way to look at it?
+      <b>Our perspective shapes the decisions we make, and our decisions shape our results. Right?</b>
+      Think about the guy who says every year he is going to lose weight. He means it. But his perspective is "I will start Monday," so he keeps eating the way he is eating.
+      And here is the thing &mdash; <b>he has no idea how good he would feel, because he has never actually started.</b> He cannot imagine it from where he is standing.
+      Meanwhile the decisions keep compounding. He is a year older, twenty pounds heavier, and now it is <b>harder</b> than it was when he first said it. Every year he waits, the climb gets steeper.
+      So &mdash; you told me you are unhappy with your results. <b>That means the way you have been deciding is what produced them.</b>
+      Going away to think about it is not new information. It is the same perspective making the same kind of decision. <b>Are you willing to let that run another twelve months?</b></div>
+      <div class="co">Warm, not smug. This works because it is about a stranger, not about them &mdash; so nobody has to defend themselves.</div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">Two risks<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Let us look at what you are actually choosing between.
+      <b>Risk one</b> &mdash; you say yes, you do the work, and worst case you get the coaching, you get the reps, and if we cannot place you, <b>you get your money back.</b> Your downside is capped and it is in writing.
+      <b>Risk two</b> &mdash; you say no, and twelve months from now you wake up in exactly the same spot, same number, another year gone.
+      <b>Which of those is actually the riskier one?</b></div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">The 40-70 rule<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Colin Powell said if you decide with less than forty percent of the information you are guessing &mdash; <b>but if you wait for more than seventy, you are not deciding, you are delaying.</b>
+      Honestly &mdash; where are you on that scale right now?</div>
+      <div class="co">They will say 70+. Almost everyone does. Then: "Right. So more information is not what is missing."</div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">Broken pipe<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">If a pipe burst in your living room and was doing a hundred and fifty a day in damage, you would not wait six months to call a plumber because the fee was inconvenient. <b>You would find it, because waiting costs more than the fix.</b></div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">Gordon Ramsay steak &mdash; for early price questions<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Price without context is like asking what a steak costs before you know if it is grocery store or Gordon Ramsay on Valentine's Day.</div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">The bill for not trying<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Getting married is risky. Starting a business is risky. Investing is risky. But settling for comfort while your potential decays &mdash; <b>that is the real risk.</b>
+      Jim Rohn said it best: <b>"If you think trying is risky, wait till they hand you the bill for not trying."</b></div>
+    </div></div>
+  </div>
+
+  <h2>Story selector &mdash; pick ONE that matches them</h2>
+  <div class="co">One story. Never a dump. Match the <b>trigger</b>, not the biggest number. After every story: <b>&ldquo;Does that sound close to what you are trying to do?&rdquo;</b></div>
+  <div class="tabs">
+    <div class="tb open"><button onclick="tb(this)">Trigger table &mdash; find the match first<span class="ar">&#9660;</span></button><div class="body">
+      <table>
+        <tr><th>If they are...</th><th>Use</th></tr>
+        <tr><td>Parent / caretaker / &ldquo;I&rsquo;m not a salesperson&rdquo; / starting from zero</td><td><b>Cassi Lara</b> (+ Cassie 27-day proof if they need the video)</td></tr>
+        <tr><td>W2 / corporate / ~$70k ceiling / traveling / capable of more</td><td><b>Matt Seitz</b></td></tr>
+        <tr><td>Nervous about how long it takes / needs an honest ramp</td><td><b>Christa Kieffer</b> (lead with $3k)</td></tr>
+        <tr><td>Young / hungry / zero prior sales / dream company</td><td><b>Josh Sosa</b> (placement only &mdash; no income figures)</td></tr>
+        <tr><td>Brand new / no sales / degree that didn&rsquo;t land a job</td><td><b>Chris Vadinsky</b> or <b>Austin Rose</b></td></tr>
+        <tr><td>Already in sales / burned out / trading life for income</td><td><b>Nate Hamrick</b> (pattern only &mdash; no unsourced $)</td></tr>
+        <tr><td>Car sales / in-home grind / wants remote</td><td><b>Jake Kores</b> or <b>Ava Curnow</b></td></tr>
+        <tr><td>Already HT / wrong offer / opportunity problem</td><td><b>Brendan Boudin</b></td></tr>
+        <tr><td>Exhausted owner / 80-hr weeks / wants to sell and get life back</td><td><b>Mike Kaz</b> or <b>Christian</b></td></tr>
+        <tr><td>Phone sales / quick leverage jump</td><td><b>Jay / Jeroen</b></td></tr>
+        <tr><td>Dream role (Tony Robbins / Hormozi caliber)</td><td><b>Brianna</b> or <b>Josh</b> (placement + video)</td></tr>
+        <tr><td>Placement skepticism / &ldquo;do companies actually hire?&rdquo;</td><td><b>Taylor Conroy</b> (buyer-side proof)</td></tr>
+        <tr><td>Scam fear / burned before</td><td><b>Dana</b> (unprompted review)</td></tr>
+        <tr><td>How fast does revenue move?</td><td><b>Taylor DeCourcey</b> (revenue, not income)</td></tr>
+        <tr><td>Burned / skeptical / money / DIY / &ldquo;will it work&rdquo;</td><td><b>Your own story (CJ)</b></td></tr>
+      </table>
+      <div class="stop">Stories marked ⚠ have unsourced dollar figures &mdash; tell the <b>shape</b>, drop the precise number until confirmed. Unverified income stories are the fastest way to lose a skeptical prospect.</div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Cassi Lara &mdash; parent / no sales / flexibility<span class="ar">&#9660;</span></button><div class="body">
+      <div class="co">Highest-relatability for Career Launcher and parents. Match her to them, not the biggest number.</div>
+      <div class="say">Cassi was a stay-at-home mom for about five years &mdash; she needed remote so she could actually be present for her kids.
+      She started as a setter for about a month, then moved into closing. First full closer month she did around nine K from home.
+      She was not the most experienced person in the room. She was coachable and she committed.
+      <b>Does that sound close to what you are trying to do?</b></div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Cassie proof &mdash; $10k in 27 days (video)<span class="ar">&#9660;</span></button><div class="body">
+      <div class="co">Use when they need the clip. Say &ldquo;ten thousand&rdquo; &mdash; do not label it take-home until confirmed revenue vs commission.</div>
+      <div class="say">Cassie was a single mom starting from zero &mdash; ten thousand inside twenty-seven days.
+      I can send you the short clip right now if you want to hear it from her, not from me.</div>
+      <div class="co">Video: https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf</div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Matt Seitz &mdash; corporate / ceiling / capable of more<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Matt was a business consultant around seventy K &mdash; traveling, knew it was not the long-term family life.
+      He became one of our first trainees, fastest start at his company, still top three &mdash; well into six figures, more than double &mdash; bought a home near the Florida coast.
+      He was not failing. The path was not his ceiling.
+      <b>Does that sound close to what you are trying to do?</b></div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Christa Kieffer &mdash; honest ramp (lead with $3k)<span class="ar">&#9660;</span></button><div class="body">
+      <div class="stop">ALWAYS lead with three thousand. Everyone else leads with twenty-two and people quit at month one.</div>
+      <div class="say">Christa took a setter seat at an ideal company to prove it from the inside.
+      Month one &mdash; three thousand. Then eight. Then ten and sales team manager. Then twenty-two and a half.
+      Month one she was fighting a bad show rate and asking the community for help. She did not quit. That is a ramp, not a fairy tale.
+      <b>Does that sound close to what you are trying to do?</b></div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Josh Sosa &mdash; zero experience → dream seat ⚠<span class="ar">&#9660;</span></button><div class="body">
+      <div class="co">⚠ Placement with Hormozi is confirmed (video). Do <b>not</b> quote income or timeline numbers until sourced.</div>
+      <div class="say">Josh was in college with no sales experience and one goal &mdash; Acquisition.com.
+      We placed him on another closer offer first so he would have real reps, then he landed the dream seat and moved his family to Vegas.
+      Setter path into closer. He did not skip steps &mdash; he moved intentional and fast.
+      <b>Does that sound close to what you are trying to do?</b></div>
+      <div class="co">Video: https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib</div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Brianna Carroll &mdash; dream role (Tony Robbins) ⚠<span class="ar">&#9660;</span></button><div class="body">
+      <div class="co">⚠ Placement confirmed with video. Drop precise timeline/income until sourced.</div>
+      <div class="say">Brianna had one goal &mdash; close for Tony Robbins.
+      We placed her at another coaching company first so she would have high-ticket experience, she leveraged that relationship, went through a brutal multi-phase interview, and landed the dream role.
+      Clear target, position, execute.
+      <b>Does that sound close to what you are trying to do?</b></div>
+      <div class="co">Video: https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8</div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Nate Hamrick &mdash; experienced / burned out ⚠<span class="ar">&#9660;</span></button><div class="body">
+      <div class="stop">⚠ Pattern only. Do NOT say one-seventy, three hundred K, or twenty K a month until confirmed.</div>
+      <div class="say">Nate was crushing it in insurance &mdash; and doing seventy-hour weeks for it. His wife hated it.
+      He moved the same skill into high ticket and now runs it remote at fewer hours &mdash; worked from Hawaii and Italy without his income dropping.
+      Same skill. Better model.
+      <b>Does that sound close to what you are trying to do?</b></div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Jake Kores &mdash; car sales → remote<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Jake did ten years in cars, up to around two fifty K &mdash; sick of six days at the dealership.
+      Flew through portal, mocks, coaching &mdash; top stock-trading offer in under two weeks.
+      He could work hard. He wanted a better model for the effort.
+      <b>Does that sound close to what you are trying to do?</b></div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Ava Curnow &mdash; in-home / travel burnout<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Ava sold windows for Renewal by Andersen &mdash; two-hundred-mile radius grind.
+      Trained on weekends while driving, landed a fitness offer &mdash; month five sold over four hundred thirty K in revenue.
+      She did not need more potential. She needed a path that rewarded what she had.
+      <b>Does that sound close to what you are trying to do?</b></div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Brendan Boudin &mdash; already HT / wrong offer<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Brendan already had the skill &mdash; the offer economics could not support ten K plus consistently.
+      We repositioned him; new offer in under a month &mdash; fifteen then eighteen.
+      Wrong vehicle. Not a skill restart.
+      <b>Does that sound close to what you are trying to do?</b></div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Mike Kaz &mdash; 80-hour owner<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Mike ran online fitness coaching eighty hours a week doing everything &mdash; about five K net most months.
+      Through HTSA he went setter &mdash; month three about nineteen K commissions &mdash; now closer eighteen to twenty-two K consistent.
+      He wanted to sell, earn, and get his life back &mdash; not more fires.
+      <b>Does that sound close to what you are trying to do?</b></div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Jay / Jeroen &mdash; phone sales → high ticket<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Jay was in Denmark on phone sales for energy contracts &mdash; seven to eight K a month.
+      Trained while working; about two months later a twenty-four K offer to realtors &mdash; first week two sales, forty-eight hundred in commissions.
+      Low-ticket volume to high-ticket leverage.
+      <b>Does that sound close to what you are trying to do?</b></div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Christian Cherniawski &mdash; sold a company / wants to just close<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Christian ran a ten-year event sales company &mdash; AT&amp;T, Comcast &mdash; about five hundred K as operator of a seventy-five person company, constant travel and stress.
+      Sold in 2019, no right arena. With Chad, two forty K plus year one in high ticket.
+      Biggest change: low stress, nights and weekends, family &mdash; same skills, different vehicle.
+      <b>Does that sound close to what you are trying to do?</b></div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Chris Vadinsky &mdash; brand new / no sales<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Chris had a PT degree, could not find a PT job.
+      About a month with us into an SDR seat &mdash; first two promotions inside two months.
+      The win was the right path plus momentum &mdash; not finished product day one.
+      <b>Does that sound close to what you are trying to do?</b></div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Austin Rose &mdash; construction / minimal sales<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Austin was a high-end finish carpenter &mdash; some selling on his own jobs.
+      Setter program, record hundred fifty AI practice calls, landed a role on the first interview.
+      Work ethic and reps beat perfect background.
+      <b>Does that sound close to what you are trying to do?</b></div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Taylor Conroy &mdash; buyer-side proof (companies hire)<span class="ar">&#9660;</span></button><div class="body">
+      <div class="co">Strongest when the doubt is placement, not belief. Send the link live.</div>
+      <div class="say">Let me send you something better than me talking. Taylor Conroy runs a TEDx coaching company &mdash; he <b>hires</b> our people.
+      He recorded a whole thing from the employer&rsquo;s side about what he looks for and why he pulls from us.
+      That is not a member saying the program worked. That is a buyer saying he buys.</div>
+      <div class="co">Video: https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE</div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Dana &mdash; unprompted review (scam fear)<span class="ar">&#9660;</span></button><div class="body">
+      <div class="stop">ONLY Dana is genuinely unprompted. Never describe any other testimonial that way.</div>
+      <div class="say">Dana is a life coach, about seventeen thousand followers, placed June eleventh.
+      She recorded and posted a full review with zero involvement from us &mdash; we found out when it went up. Nobody asked her, nobody comped her.</div>
+      <div class="co">Video: https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S</div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Taylor DeCourcey &mdash; fast ramp (REVENUE)<span class="ar">&#9660;</span></button><div class="body">
+      <div class="stop">Say REVENUE for the company. Never her personal income &mdash; commission rate not confirmed.</div>
+      <div class="say">Taylor was placed about four months ago. Her first month she generated ninety-eight thousand five hundred in revenue for the company she closes for.</div>
+    </div></div>
+
+    <div class="tb"><button onclick="tb(this)">Your own story (CJ) &mdash; burned / skeptical / DIY<span class="ar">&#9660;</span></button><div class="body">
+      <div class="co">Yours when nothing else fits, or they need the closer who lived it. Do not inflate.</div>
+      <div class="say">Honestly, the reason I care about this is that your situation hits close to home.
+      Before this I was in construction &mdash; door to door roofing and solar. I did well at it. Then I got a chance to be part-owner of a roofing company and we grew fast.
+      And then my partner cleaned out the business account and I was done. Out of a job, deep in debt, no idea what I was going to do.
+      I tried applying to tech sales on my own for two months. Nobody would look at me because I had no remote experience.
+      <b>I had to borrow the money to get into this.</b> I told the person I would pay it back in six months.
+      I treated it like a sport. And it changed my life &mdash; I am taking calls from wherever I want now.
+      <b>Does any part of that sound like the shift you are trying to make?</b></div>
+    </div></div>
+  </div>
+
+  <h2>Frames</h2>
+  <div class="tabs">
+    <div class="tb"><button onclick="tb(this)">Vehicle, not you<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Your effort goes straight up and the scoreboard barely moves. <b>That is not a you problem. That is a vehicle problem.</b></div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">Skill vs access &mdash; for anyone who already sells<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">You are not buying the ability to sell. <b>You are buying the door.</b>
+      The companies worth working for do not post those seats. You could out-sell half the people in those chairs and <b>still</b> not get an interview at a company that has never heard of you.</div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">Priority, not capacity<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">This is not a capacity decision, it is a <b>priority</b> decision. The money exists &mdash; the question is what it is pointed at.</div>
+    </div></div>
+    <div class="tb"><button onclick="tb(this)">You start right away &mdash; the honest urgency<span class="ar">&#9660;</span></button><div class="body">
+      <div class="say">Whichever way you do it &mdash; <b>you start today.</b> The payments spread out, but access does not. You are in the community tonight, you are in the course tonight.</div>
+      <div class="co">The only urgency that is actually true. Use this instead of a fake deadline.</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- NEVER SAY -->
+<section class="phase" data-p="x">
+  <h1 class="ph">Never Say</h1>
+  <div class="sub">Every one of these has cost a real deal.</div>
+  <table>
+    <tr><th>Do not</th><th>Why</th><th>Instead</th></tr>
+    <tr><td><b>Any first-month income number</b></td><td>Unbacked, and prospects catch it mid-call</td><td>"Average closer does ten to fifteen a month &mdash; placed members doing the work, not month one."</td></tr>
+    <tr><td>Income with no timeframe</td><td>"Twelve to fifteen" gets heard as per year</td><td>Always attach <b>"per month"</b> the first time</td></tr>
+    <tr><td><b>Making their number sound small</b></td><td>They said $5k, you said "our average does 12 to 15." You just made their win feel like failure.</td><td><b>Their number is sacred all call.</b></td></tr>
+    <tr><td>"100% of people get placed"</td><td>Overstating it turns refunds into disputes</td><td>"Conditional money back guarantee, in writing, you read it first."</td></tr>
+    <tr><td>Guaranteeing a timeline</td><td>You cannot control it and they will hold you to it</td><td>One number, once, with the word <b>"average."</b></td></tr>
+    <tr><td>"350 companies"</td><td>Inflated</td><td><b>Over 200</b> companies, 300+ offers</td></tr>
+    <tr><td>Tax, legal or medical advice</td><td>Not your lane, kills credibility instantly</td><td>"That is not my lane and I am not going to pretend it is."</td></tr>
+    <tr><td>Naming the emotion you want</td><td>"How has that affected your mental health?" tells them the answer you want</td><td>Ask for the <b>event.</b> The feeling comes inside the story.</td></tr>
+    <tr><td>Fake urgency / expiring discounts</td><td>Anyone who has sold sees it instantly</td><td><b>"You start today. Payments spread out, access does not."</b></td></tr>
+    <tr><td>Framing a supportive spouse as an obstacle</td><td>Closes some, refunds more, and it is wrong</td><td>Get them on the call. An ally beats a workaround.</td></tr>
+  </table>
+
+  <h2>Your four loss patterns</h2>
+  <table>
+    <tr><th>Pattern</th><th>Guard</th></tr>
+    <tr><td><b>Overshared</b> &mdash; monologue, answering questions nobody asked</td><td>Micro-yes every 3 minutes. Answer, then <b>return</b>.</td></tr>
+    <tr><td><b>No isolate</b> &mdash; objection surfaced, never sorted</td><td>Say it out loud: "Is it the money, or is it whether this works?"</td></tr>
+    <tr><td><b>Single ask</b> &mdash; asked once, took the first soft no</td><td><b>Three asks. Then a 48-hour follow-up.</b> Use the dots up top.</td></tr>
+    <tr><td><b>Overlength</b> &mdash; past an hour, no close attempted</td><td>Price on the table by 0:42 regardless of where discovery is.</td></tr>
+  </table>
+</section>
+
+</main>
+
+<aside id="side">
+  <div id="sideTabs">
+    <button class="on" onclick="sp('snap',this)">Snapshot</button>
+    <button onclick="sp('num',this)">Numbers</button>
+    <button onclick="sp('note',this)">Notes</button>
+  </div>
+
+  <div class="spane on" id="sp-snap">
+    <div class="slbl">Name</div>
+    <input id="vName" placeholder="Prospect" oninput="sync()">
+    <div class="slbl">City</div>
+    <input id="vCity" placeholder="—" oninput="sync()">
+    <div class="slbl">Track &mdash; click to lock (stays visible)</div>
+    <div class="chips" id="sideTrk">
+      <button class="chip on" data-tr="launcher" onclick="setTrack('launcher',true)">Career Launcher</button>
+      <button class="chip" data-tr="changer" onclick="setTrack('changer',true)">W2 Changer</button>
+      <button class="chip" data-tr="rep" onclick="setTrack('rep',true)">Experienced Rep</button>
+      <button class="chip" data-tr="owner" onclick="setTrack('owner',true)">Owner</button>
+    </div>
+    <div class="co" id="trkLockNote" style="margin-top:6px">Click a track to <b>lock</b> it. Uploads cannot override your choice.</div>
+    <div class="slbl">Driver &mdash; click when they tell you</div>
+    <div class="chips">
+      <button class="chip" id="dr1" onclick="setDriver('Income')">Income</button>
+      <button class="chip" id="dr2" onclick="setDriver('Freedom')">Freedom</button>
+      <button class="chip" id="dr3" onclick="setDriver('Both')">Both</button>
+    </div>
+    <div class="slbl">Read</div>
+    <ul id="snapOut"><li style="color:var(--faint)">Fills in as you go.</li></ul>
+  </div>
+
+  <div class="spane" id="sp-num">
+    <div class="slbl">Making now / month</div>
+    <input id="vCur" type="number" placeholder="4000" oninput="sync()">
+    <div class="slbl">Their target / month (their number)</div>
+    <input id="vTgt" type="number" placeholder="8000" oninput="sync()">
+    <div class="calc">
+      <div><span>Gap / mo</span><b id="c1">—</b></div>
+      <div><span>Per week</span><b id="c2">—</b></div>
+      <div><span>Per day</span><b id="c3">—</b></div>
+      <div><span>3 months</span><b id="c4">—</b></div>
+      <div><span>6 months</span><b id="c5">—</b></div>
+      <div><span>Payback on $6k</span><b id="c6">—</b></div>
+    </div>
+    <div class="co" style="margin-top:11px">Their number, never yours. Fills every [GAP] in the script automatically.</div>
+  </div>
+
+  <div class="spane" id="sp-note">
+    <div class="slbl">Their exact words &mdash; hell / heaven / what stood out</div>
+    <textarea id="vNotes" placeholder="Quote them verbatim. You will use it at the Bridge and the close." oninput="sync()"></textarea>
+    <div class="slbl">Objections raised</div>
+    <textarea id="vObj" style="min-height:80px" placeholder="Money, spouse, timing, belief..." oninput="sync()"></textarea>
+  </div>
+</aside>
+</div>
+
+<div id="dock">
+  <span class="lb">Objection</span>
+  <button class="ob" onclick="ob('triage')">1 - Triage first</button>
+  <button class="ob" onclick="ob('money')">Money</button>
+  <button class="ob" onclick="ob('risk')">Will it work</button>
+  <button class="ob" onclick="ob('think')">Think about it</button>
+  <button class="ob" onclick="ob('spouse')">Spouse</button>
+  <button class="ob" onclick="ob('time')">No time</button>
+  <button class="ob" onclick="ob('sell')">I know sales</button>
+  <button class="ob" onclick="ob('shop')">Comparing</button>
+  <button class="ob" onclick="ob('diy')">DIY</button>
+  <button class="ob" onclick="ob('wait')">Wait and save</button>
+  <button class="ob" onclick="ob('third')">3rd ask - follow-up</button>
+</div>
+
+<div id="ovl" onclick="if(event.target.id==='ovl')closeOb()">
+  <div id="ovlin"><button id="ovlx" onclick="closeOb()">&#10005;</button><div id="ovlc"></div></div>
+</div>
+
+<div id="pal" onclick="if(event.target.id==='pal')closePal()">
+  <div id="palin"><input id="palq" placeholder="Search the whole script and every objection..." oninput="palGo()"><div id="palr"></div></div>
+</div>
+
+<script>
+var S={track:'launcher',trackLocked:false,jolt:'fight',phase:'1',done:{},v:{},asks:0,driver:''};
+try{var sv=localStorage.getItem('htsa_v6');if(sv)S=Object.assign(S,JSON.parse(sv));}catch(e){}
+function save(){try{localStorage.setItem('htsa_v6',JSON.stringify(S));}catch(e){}}
+function $(i){return document.getElementById(i);}
+function money(n){return '$'+Math.round(n).toLocaleString();}
+
+var t0=null,tInt=null;
+function tgTimer(){
+  if(tInt){clearInterval(tInt);tInt=null;$('btnTimer').textContent='Start';$('btnTimer').classList.remove('on');return;}
+  t0=Date.now();$('btnTimer').textContent='Stop';$('btnTimer').classList.add('on');
+  tInt=setInterval(function(){var s=Math.floor((Date.now()-t0)/1000);
+    $('timer').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');},1000);
+}
+
+function ask(n){ S.asks=(S.asks===n)?n-1:n; save(); paintAsks(); snap(); }
+function paintAsks(){
+  [1,2,3].forEach(function(i){$('d'+i).classList.toggle('on',S.asks>=i);});
+  $('askNote').textContent = S.asks>=3 ? 'Book 48hr follow-up' : '';
+  $('askNote').style.color = S.asks>=3 ? 'var(--must)' : 'var(--faint)';
+}
+
+function sync(){
+  S.v={nm:$('vName').value.trim(),city:$('vCity').value.trim(),
+       cur:parseFloat($('vCur').value)||0,tgt:parseFloat($('vTgt').value)||0,
+       notes:$('vNotes').value,obj:$('vObj').value};
+  save();
+  var g=Math.max(0,S.v.tgt-S.v.cur);
+  $('c1').textContent=g?money(g):'—'; $('c2').textContent=g?money(g/4.33):'—';
+  $('c3').textContent=g?money(g/30):'—'; $('c4').textContent=g?money(g*3):'—';
+  $('c5').textContent=g?money(g*6):'—'; $('c6').textContent=g?(6000/g).toFixed(1)+' mo':'—';
+  fill(); snap();
+}
+function fill(){
+  var g=Math.max(0,(S.v.tgt||0)-(S.v.cur||0));
+  var M={'NAME':S.v.nm||'[NAME]','CITY':S.v.city||'[CITY]',
+    'CURRENT':S.v.cur?money(S.v.cur):'[CURRENT]','TARGET':S.v.tgt?money(S.v.tgt):'[TARGET]',
+    'GAP':g?money(g):'[GAP]','DAY':g?money(g/30):'[PER DAY]','SIX':g?money(g*6):'[6-MONTH]',
+    'PAYBACK':g?(6000/g).toFixed(1):'[X]'};
+  document.querySelectorAll('.say b').forEach(function(el){
+    if(!el.dataset.o) el.dataset.o=el.textContent;
+    var k=el.dataset.o.replace(/^\[|\]$/g,'');
+    if(M[k]!==undefined) el.textContent=M[k];
+  });
+}
+var TRN={launcher:'Career Launcher',changer:'W2 Changer',rep:'Experienced Rep',owner:'Owner / High Earner'};
+function snap(){
+  var o=[],v=S.v||{};
+  if(v.nm) o.push('<li><b>'+v.nm+'</b>'+(v.city?' · '+v.city:'')+'</li>');
+  o.push('<li>Track: <b>'+TRN[S.track]+'</b></li>');
+  o.push('<li>State: <b>'+(S.jolt==='derisk'?'Already wants out':'Still defending')+'</b></li>');
+  if(S.driver) o.push('<li>Driver: <b>'+S.driver+'</b></li>');
+  if(v.cur) o.push('<li>Now: <b>'+money(v.cur)+'/mo</b></li>');
+  if(v.tgt) o.push('<li>Target: <b>'+money(v.tgt)+'/mo</b> (theirs)</li>');
+  var g=Math.max(0,(v.tgt||0)-(v.cur||0));
+  if(g) o.push('<li>Gap: <b>'+money(g)+'/mo</b> · '+money(g/30)+'/day</li>');
+  if(S.asks) o.push('<li>Asks made: <b>'+S.asks+'</b>'+(S.asks>=3?' — book 48hr':'')+'</li>');
+  if(v.obj&&v.obj.trim()) o.push('<li>Objections: <b>'+v.obj.trim().slice(0,70)+'</b></li>');
+  $('snapOut').innerHTML=o.join('')||'<li style="color:var(--faint)">Fills in as you go.</li>';
+}
+function setDriver(d){
+  S.driver=(S.driver===d)?'':d; save();
+  ['Income','Freedom','Both'].forEach(function(x,i){$('dr'+(i+1)).classList.toggle('on',S.driver===x);});
+  snap();
+}
+
+function setTrack(t,fromUser){
+  if(!TRN[t]) t='launcher';
+  S.track=t;
+  if(fromUser===true) S.trackLocked=true;
+  save();
+  document.querySelectorAll('.trk').forEach(function(d){d.classList.toggle('on',d.dataset.t===t);});
+  document.querySelectorAll('#trChips .chip, #sideTrk .chip').forEach(function(b){b.classList.toggle('on',b.dataset.tr===t);});
+  var note=$('trkLockNote');
+  if(note){
+    if(S.trackLocked){
+      note.innerHTML = 'LOCKED: <b>'+TRN[t]+'</b> — uploads cannot change this. Click another chip to switch.';
+    } else {
+      note.innerHTML = 'Click a track to <b>lock</b> it. Uploads cannot override your choice.';
+    }
+  }
+  fill(); snap();
+}
+function setJolt(m){
+  S.jolt=m; save();
+  $('jA').classList.toggle('on',m==='fight'); $('jB').classList.toggle('on',m==='derisk');
+  var p=$('painBlock'),d=$('derisknote');
+  if(p) p.style.display=(m==='fight')?'block':'none';
+  if(d) d.style.display=(m==='derisk')?'block':'none';
+  $('joltNote').innerHTML = m==='fight'
+    ? 'Pain audit and gap math stay visible. <b>Flip this the moment they admit they want change</b> — after that, more pain works against you.'
+    : 'Pain audit is hidden. <b>They already want out.</b> Recommend, de-risk, get to the demo.';
+  snap();
+}
+
+var ORDER=['p','1','2','3','4','5','6','7','8','9','10','k','x'];
+var LABEL={p:'Pre-Call','1':'Rapport','2':'Frame','3':'Gates','4':'Discovery','5':'Bridge','6':'Demo','7':'Tie-Down','8':'Price','9':'Take Card','10':'Enrolled',k:'Knowledge',x:'Never Say'};
+document.querySelectorAll('.rl').forEach(function(b){
+  b.addEventListener('click',function(e){
+    if(e.metaKey||e.ctrlKey){S.done[b.dataset.p]=!S.done[b.dataset.p];save();paintRail();return;}
+    go(b.dataset.p);});
+});
+function go(p){
+  S.phase=p;save();
+  document.querySelectorAll('.phase').forEach(function(s){s.classList.toggle('on',s.dataset.p===p);});
+  $('nowPhase').innerHTML='Phase <b>'+(LABEL[p]||'—')+'</b>';
+  paintRail(); window.scrollTo(0,0);
+}
+function paintRail(){
+  document.querySelectorAll('.rl').forEach(function(b){
+    b.classList.toggle('on',b.dataset.p===S.phase);
+    b.classList.toggle('done',!!S.done[b.dataset.p]);});
+}
+function tb(b){b.parentElement.classList.toggle('open');}
+function sp(id,btn){
+  document.querySelectorAll('.spane').forEach(function(p){p.classList.remove('on');});
+  $('sp-'+id).classList.add('on');
+  document.querySelectorAll('#sideTabs button').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+}
+function tgSide(){
+  $('side').classList.toggle('hid');
+  $('dock').classList.toggle('wide',$('side').classList.contains('hid'));
+}
+
+var OBJ={
+triage:{t:'Always triage before you answer',h:'<div class="co"><b>Never answer an objection you have not sorted.</b> Spouse, timing and "think about it" are usually smoke. Underneath, it is <b>always</b> either money or belief.</div>'+
+'<h2>Step 1 - Acknowledge</h2><div class="say">That is completely fair — I would think less of you if you did not take a decision like this seriously.</div>'+
+'<h2>Step 2 - Split it</h2><div class="say">But let me ask you straight. <b>If we set the money aside entirely for a second — how do you feel about the program itself?</b></div>'+
+'<div class="them">Oh, I love it. I know it would work.</div>'+
+'<div class="say">Okay. So it is not the program. <b>So is the money genuinely not there right now? Or is it there, and you are just not sure this is where it should go?</b> Those are two completely different conversations and I want to have the right one.</div>'+
+'<table><tr><th>They say</th><th>Go to</th></tr><tr><td>"It is there, I am just not sure"</td><td><b>Will it work</b> — it is belief</td></tr><tr><td>"It is genuinely not there"</td><td><b>Money</b> — structure it</td></tr><tr><td>Something else surfaces</td><td>Good. That is the real one.</td></tr></table>'+
+'<div class="stop">Mark an ask on the dots up top every time you re-close. Three, then book 48 hours.</div>'},
+
+money:{t:'Money - when capacity is real',h:'<h2>1 - Acknowledge</h2><div class="say">I hear you, and I am not going to pretend six thousand is nothing.</div>'+
+'<h2>2 - Solve, do not argue</h2><div class="say">So let us not guess. If cash flow is the real constraint, we work with a financing partner — <b>soft credit check that will not touch your score</b>, and you would know your exact number in about ninety seconds.<br>If it comes back workable, we know. If it does not, I have got two more options. And if none of them work, <b>I will tell you this is not the month and I will mean it.</b><br>Can I text you the link right now?</div>'+
+'<h2>3 - The ladder, never skip down unasked</h2><table><tr><td><b>1</b></td><td><b>Clarity Pay</b> — 12mo 0%, soft pull. Walk it live, stay on the phone.</td></tr><tr><td><b>2</b></td><td><b>FlexxBuy</b> — if Clarity denies. Funds go to <b>them</b>, 2-5 business days. <b>The deal is not closed.</b> Book the next contact.</td></tr><tr><td><b>3</b></td><td><b>Splitit</b> — available credit on an existing card, not a credit score</td></tr><tr><td><b>4</b></td><td>In-house — 3-pay, 2-pay, $1,750 entry</td></tr></table>'+
+'<h2>4 - If they are genuinely stretched</h2><div class="say">Before we do this — <b>after this payment, are you still solid on your bills this month?</b><br>Because I am not going to be the reason things get tight in your house. If the answer is no, I would rather book you for a few weeks out.</div>'+
+'<div class="co"><b>Ask it and honor the answer.</b> A deal that wrecks somebody refunds anyway — and the willingness to lose it is often exactly what closes it.</div>'},
+
+risk:{t:'"Will it actually work, for me?"',h:'<div class="co">The most common <b>real</b> objection. It is not doubt about the offer — it is fear of being the one who decided. <b>Do not sell harder. Take the decision off their shoulders.</b></div>'+
+'<h2>1 - Acknowledge</h2><div class="say">That is the right question, and I would be asking it too.</div>'+
+'<h2>2 - Two risks</h2><div class="say">Let us look at what you are actually choosing between.<br><b>Risk one</b> — you say yes, you do the work, and worst case you get the coaching, you get the reps, and if we cannot place you, <b>you get your money back.</b> Downside capped, in writing.<br><b>Risk two</b> — you say no, and twelve months from now you are in exactly the same spot, another year gone.<br><b>Which of those is actually riskier?</b></div>'+
+'<h2>3 - Reframe the worst case</h2><div class="say">The real worst case is not "I lost six thousand dollars."<br>It is <b>"I spent a few weeks learning to sell better and got refunded."</b><br>Best case you are closing from home before the end of the year. <b>That is a lopsided bet.</b></div>'+
+'<h2>4 - If they agreed and then went quiet</h2><div class="say">Can I say what I think is happening?<br><b>I do not think you are unsure whether this works. I think you are unsure about being the person who decided.</b> Nobody is signing off but you, and that is heavier than the money.<br>So let me do that part. <b>Based on everything you have told me — I would tell you to do this.</b> And if I am wrong, the guarantee makes me wrong, not you.</div>'+
+'<div class="co">Then re-ask. Mark the dot.</div>'},
+
+think:{t:'"I need to think about it"',h:'<h2>1 - Acknowledge</h2><div class="say">Totally fair.</div>'+
+'<h2>2 - Make it specific</h2><div class="say"><b>What specifically do you want to think about?</b><br>Because if it is the money, we can look at that right now. And if it is whether you would actually be good at this — I would rather answer that while I am on the phone than have you guessing about it alone tonight.</div>'+
+'<h2>3 - If they say "more research"</h2><div class="say">What would you be looking for? Because here is what I have noticed — <b>people who want to research usually already have the answer. They are looking for permission.</b><br>If that is where you are, what do you need permission for?</div>'+
+'<h2>4 - The perspective reframe, the strong one</h2><div class="say">Can I offer you a different way to look at it?<br><b>Our perspective shapes the decisions we make, and our decisions shape our results. Right?</b><br>Think about the guy who says every year he is going to lose weight. He means it. But his perspective is "I will start Monday," so he keeps eating the way he is eating.<br>And <b>he has no idea how good he would feel, because he has never started.</b> He cannot imagine it from where he is standing.<br>Meanwhile it compounds. A year older, twenty pounds heavier, and now it is <b>harder</b> than when he first said it.<br>You told me you are unhappy with your results. <b>That means the way you have been deciding is what produced them.</b><br>Going away to think is not new information. <b>Are you willing to let that run another twelve months?</b></div>'+
+'<h2>5 - Then re-ask</h2><div class="say">So let us not do that. <b>Which one makes more sense — the six upfront or the four payments?</b></div>'+
+'<div class="stop">Mark the dot. Third ask means book inside 48 hours, live, before you hang up.</div>'},
+
+spouse:{t:'"I need to talk to my spouse"',h:'<div class="co">Usually smoke. Underneath is money or belief. <b>Triage it first, then handle.</b></div>'+
+'<h2>1 - Acknowledge and test</h2><div class="say">Of course. <b>Would they be excited for you, or worried?</b></div>'+
+'<div class="say">And just so I understand it fully — <b>what happens if you lay the whole thing out and they say no?</b></div>'+
+'<div class="co">"I do not think they would do that" is not an answer. Push once: "Say they have had a rough day and they are in a bad mood. Then what?"</div>'+
+'<table><tr><th>Branch</th><th>Move</th></tr><tr><td>They would do it anyway</td><td>Not a real objection. <b>Re-ask.</b></td></tr><tr><td>They would not</td><td>Coach the conversation — they present the <b>problem</b>, not the solution. Then book the joint call.</td></tr></table>'+
+'<h2>2 - Better, get them on</h2><div class="say">Let us not make you relay an hour of this. <b>Are they around? Even ten minutes.</b><br>If not — fifteen minutes tomorrow, the three of us. They will have two questions and I would rather they ask me directly. <b>Morning or evening?</b></div>'+
+'<h2>3 - Get their commitment first</h2><div class="say">And before that call — <b>where are you at?</b> Because if you are a no, that conversation does not matter.</div>'+
+'<div class="stop">BOOK IT LIVE. Never "let me know." Do NOT run "is asking permission really respect?" on a supportive partner.</div>'},
+
+time:{t:'"I do not have time"',h:'<h2>Acknowledge, then flip it</h2><div class="say">Busy is kind of the point. If you keep running this same setup, <b>you will still be busy six months from now — just busy at the same income.</b><br>It is ten to twelve hours a week, on your schedule, nights, whenever.<br><b>Does being that busy not make finding twenty or thirty minutes a day for a skill that buys your schedule back more important, not less?</b></div>'+
+'<div class="co">If you ran the Time Capacity Contract in Frame, this is already dead — point back at it: "You told me earlier you had twelve hours. Has something changed, or is this really about something else?"</div>'},
+
+sell:{t:'"I already know how to sell"',h:'<h2>1 - Concede completely</h2><div class="say">Good — that makes this easier, and it is the right question.<br><b>You are right. You do not need me to teach you to sell.</b> If I tried to sell you a sales course you should hang up on me.</div>'+
+'<h2>2 - Separate two things</h2><div class="say"><b>Knowing how to sell and having sold in this specific motion are different.</b><br>What you have done is a different animal — different buyer, different pace, different structure. Inbound, one call, forty-five minutes, someone who raised their hand. Run an old framework at that buyer and they shut down.<br><b>That is a calibration, not an education. About a week.</b></div>'+
+'<h2>3 - Name what they are actually buying</h2><div class="say">And here is the real thing: <b>you are buying the door.</b><br>Those seats are not posted. You could out-sell half the people in those chairs and <b>still</b> not get an interview at a company that has never heard of you and is not advertising.<br><b>That is what this is. The rest you already own.</b></div>'},
+
+shop:{t:'"I am comparing options"',h:'<div class="say">You should. I would be worried if you were not.<br>But let me save you time. <b>You are not shopping for a course — videos are a commodity.</b> You are shopping for an outcome: a certified skill and a warm introduction to a company that is actually hiring.<br>So ignore our features. <b>Compare the placement mechanism.</b> Ask every one of them the same question: <b>"If I do everything you say and I do not get placed, what happens?"</b><br>If someone has got a written money-back guarantee and a team that walks your name into hiring managers — <b>go with them.</b> Genuinely. If what they have got is a job board and a good webinar, you already know.</div>'+
+'<div class="co"><b>Never knock a competitor by name.</b> Hand them the comparison question instead — it does the work and you stay clean.</div>'},
+
+diy:{t:'"I could figure this out myself"',h:'<div class="say">You probably could. I am not going to tell you otherwise.<br><b>The question is how long, and what that time costs you.</b><br>You would be learning from free content, applying cold, and — the expensive part — <b>you would have no way to tell a real company from a bad one</b> until you had already wasted months on it.<br>So what is more expensive: <b>six months guessing on your own, or six thousand to buy the door and the filter today?</b></div>'+
+'<div class="say">And if you are at <b>[CURRENT]</b> now with a target of <b>[TARGET]</b> — a twelve-month DIY experiment is not free. <b>It is [GAP] a month you did not earn.</b></div>'},
+
+wait:{t:'"Let me wait and save up"',h:'<h2>1 - Name the pattern, gently</h2><div class="say">I hear you. But let us look at the pattern, because it is worth naming.<br>When we say "I will wait for the right time," what we are usually doing is <b>delaying a moment of discomfort.</b> And the thing about the right time is <b>it is always next month.</b><br>Real change does not start with having the money. <b>It starts with the decision.</b></div>'+
+'<h2>2 - The math, if it fits</h2><div class="say">And practically: if the gap is <b>[GAP]</b> a month, waiting six months costs <b>[SIX]</b>.<br><b>Spending [SIX] to avoid a payment today does not solve a cash flow problem — it is the cash flow problem.</b></div>'+
+'<h2>3 - If it is a real dated expense</h2><div class="say">If this specific month would genuinely put you in a hole — <b>say so and we will book it for right after that clears.</b> I would rather that than have you resent this.<br>But if it is not a specific bill, if it is just "sometime" — <b>sometime is what got you here.</b></div>'+
+'<div class="co"><b>The willingness to book them later is what makes the push credible.</b> Offer it and mean it.</div>'},
+
+third:{t:'Third ask - the 48-hour follow-up',h:'<div class="stop">You have acknowledged, reframed and re-closed three times. <b>Stop pushing. Pushing past three converts almost nothing and costs you the relationship.</b></div>'+
+'<h2>Close the loop cleanly</h2><div class="say">Alright — I am not going to keep pushing you, that is not how I do this.<br>But I am also not going to leave it open-ended, because open-ended is how people stay exactly where they are.<br>So let us do this. <b>Take tonight. Write down every single thing that is bothering you about it</b> — every question, every worry, all of it.<br>And let us get back on <b>[DAY] at [TIME]</b> and go through your list. Not a long call — fifteen minutes.<br><b>Which works better, [OPTION A] or [OPTION B]?</b></div>'+
+'<div class="stop">Inside 48 hours. On a calendar. Before you hang up. "Let me know" is a no.</div>'+
+'<h2>Then leave one thought</h2><div class="say">And one last thing before I let you go. Write this at the bottom of your page:<br><b>"Am I deciding from my future, or from my past?"</b><br>Look at that tonight. And tomorrow let us make the decision the twelve-month-from-now version of you would want you to make.</div>'+
+'<div class="co">Then actually call at the booked time. The follow-up only works if you are the person who does what he said he would do.</div>'}
+};
+function ob(k){
+  var o=OBJ[k];if(!o)return;
+  $('ovlc').innerHTML='<h1 class="ph" style="margin-bottom:14px">'+o.t+'</h1>'+o.h;
+  $('ovl').classList.add('on'); fill();
+}
+function closeOb(){$('ovl').classList.remove('on');}
+
+var IDX=[];
+function buildIdx(){
+  IDX=[];
+  document.querySelectorAll('.phase').forEach(function(sec){
+    var p=sec.dataset.p, lab=LABEL[p]||p;
+    sec.querySelectorAll('.say,h2,.tb>button').forEach(function(el){
+      var tx=el.textContent.replace(/\s+/g,' ').trim();
+      if(tx.length>8) IDX.push({t:tx,p:p,lab:lab,k:null});
+    });
+  });
+  for(var k in OBJ){
+    var d=document.createElement('div'); d.innerHTML=OBJ[k].h;
+    (function(kk){
+      d.querySelectorAll('.say,h2').forEach(function(el){
+        var tx=el.textContent.replace(/\s+/g,' ').trim();
+        if(tx.length>8) IDX.push({t:tx,p:null,lab:'Objection · '+OBJ[kk].t,k:kk});
+      });
+    })(k);
+  }
+}
+function openPal(){$('pal').classList.add('on');$('palq').value='';$('palq').focus();palGo();}
+function closePal(){$('pal').classList.remove('on');}
+function palGo(){
+  var q=$('palq').value.toLowerCase().trim();
+  var r = q ? IDX.filter(function(x){return x.t.toLowerCase().indexOf(q)>-1;}).slice(0,40) : IDX.slice(0,18);
+  $('palr').innerHTML = r.length ? r.map(function(x){
+    return '<button onclick="palPick('+IDX.indexOf(x)+')">'+x.t.slice(0,110)+
+      (x.t.length>110?'...':'')+'<small>'+x.lab+'</small></button>';}).join('')
+    : '<button style="color:var(--faint)">Nothing found</button>';
+}
+function palPick(i){
+  var x=IDX[i]; closePal();
+  if(x.k){ob(x.k);return;}
+  go(x.p);
+  setTimeout(function(){
+    var els=document.querySelectorAll('.phase.on .say,.phase.on h2,.phase.on .tb>button');
+    for(var j=0;j<els.length;j++){
+      if(els[j].textContent.replace(/\s+/g,' ').trim()===x.t){
+        var pt=els[j].closest('.tb');
+        while(pt){pt.classList.add('open');pt=pt.parentElement?pt.parentElement.closest('.tb'):null;}
+        els[j].scrollIntoView({block:'center'});
+        var tgt=els[j];
+        tgt.style.outline='2px solid var(--must)';
+        setTimeout(function(){tgt.style.outline='none';},1400);
+        break;}
+    }},60);
+}
+document.addEventListener('keydown',function(e){
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openPal();return;}
+  if(e.key==='Escape'){closePal();closeOb();return;}
+  if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;
+  var i=ORDER.indexOf(S.phase);
+  if(e.key==='ArrowRight'&&i<ORDER.length-1)go(ORDER[i+1]);
+  if(e.key==='ArrowLeft'&&i>0)go(ORDER[i-1]);
+});
+
+(function(){
+  var fp=$('fpick'); if(!fp)return;
+  fp.addEventListener('change',function(e){
+    var f=e.target.files[0]; if(!f)return;
+    var fr=new FileReader();
+    fr.onload=function(){
+      $('rawin').value=String(fr.result).replace(/^WEBVTT.*$/m,'')
+        .replace(/^\d+$/gm,'').replace(/^\d{2}:\d{2}:\d{2}[.,]\d+\s*-->.*$/gm,'')
+        .replace(/\n{3,}/g,'\n\n');
+      runRead();};
+    fr.readAsText(f);});
+})();
+
+function runRead(){
+  var T=$('rawin').value||'';
+  if(T.trim().length<80){$('res').innerHTML='<div class="co">Not enough there to read. <b>Skip it</b> — you can run the whole call without notes.</div>';return;}
+  // Strip HTSA pitch language so "closer / commission / sales" in OUR copy does not flip them to Experienced Rep
+  var L=T.toLowerCase()
+    .replace(/high[- ]?ticket sales academy|htsa|certified (hts )?closer|placement (support|system)|ai roleplay|splitit|clarity pay/g,' ')
+    .replace(/\b(closer program|sales academy|learn to sell|get certified|get placed)\b/g,' ');
+  var TR={
+    launcher:['stay at home','no sales experience','never done sales','never been in sales','no experience','retail','waitress','server','bartend','nurse','cna','caregiver','teacher','back into the workforce','hairstylist','daycare','new to sales','never sold','not a salesperson','customer service'],
+    changer:['w2','salary','salaried','corporate','9 to 5','full time job','benefits','capped','ceiling','my paycheck','office job','my boss'],
+    rep:['i am a closer','i\'m a closer','sales rep for','years in sales','door to door','door-to-door','solar sales','insurance agent','quota','b2b sales','top seller','my close rate','account executive','already in sales','i already sell','i already close','commission only','i sell for a living'],
+    owner:['my business','my company','business owner','entrepreneur','my agency','llc','my clients','i own','my practice']
+  };
+  var sc={},best='launcher',bs=0;
+  for(var k in TR){sc[k]=TR[k].filter(function(w){return L.indexOf(w)>-1;}).length; if(sc[k]>bs){bs=sc[k];best=k;}}
+  // Hard override: any clear "no sales" signal wins over weak rep hits from leftover words
+  if(sc.launcher>0 && sc.rep<=sc.launcher) best='launcher';
+  // Experienced Rep needs a real hit — never win on a tie or a single soft match vs zero launcher
+  if(best==='rep' && sc.rep<2 && sc.launcher===0 && sc.changer===0 && sc.owner===0) best='launcher';
+  if(bs===0) best='launcher';
+  var READY=['ready','need to work','asap','yesterday','desperate','tired of','sick of','burnt out','burned out','need to get out','done with','need a change'];
+  var COLD=['just exploring','just looking','not sure yet','do more research','shopping around','no rush','take my time','need to think','compare'];
+  var rn=READY.filter(function(w){return L.indexOf(w)>-1;}).length, cn=COLD.filter(function(w){return L.indexOf(w)>-1;}).length;
+  var st = rn>cn?'derisk':'fight';
+  var RISK=[['money',["can't afford",'tight','no savings','payment plan','financing','credit score','in debt']],
+    ['spouse',['my husband','my wife','my partner','my spouse','talk to my']],
+    ['burned',['scammed','burned','refund','wasted money','screwed over','ripped off']],
+    ['shopping',['another program','also looking at','comparing','webinar','other academies']],
+    ['unemployed',['unemployed','laid off','lost my job','between jobs','no income','terminated']],
+    ['kids',['my kids','my son','my daughter','daycare','school pickup']]];
+  var flags=RISK.filter(function(r){return r[1].some(function(w){return L.indexOf(w)>-1;});}).map(function(r){return r[0];});
+  var nmM=T.match(/\b(?:hey|hi|hello),?\s+([A-Z][a-z]{2,})\b/); var nm=nmM?nmM[1]:'';
+
+  var H='';
+  H+='<div class="co">Signals only — <b>you decide.</b> Nothing is applied until you press the button. Default stays <b>Career Launcher</b> unless Experienced signals are strong and real.</div>';
+  H+='<table><tr><th>Track</th><th>Signals</th></tr>';
+  ['launcher','changer','rep','owner'].forEach(function(x){
+    H+='<tr'+(x===best?' style="background:rgba(63,169,106,.1)"':'')+'><td><b>'+TRN[x]+'</b></td><td>'+sc[x]+'</td></tr>';});
+  H+='</table>';
+  H+='<div class="co">Suggested: <b>'+TRN[best]+'</b>'+(S.trackLocked?' — <b>ignored</b>, your lock stays <b>'+TRN[S.track]+'</b>':'')+' · State: <b>'+(st==='derisk'?'Already wants out':'Still defending')+'</b> — '+rn+' ready / '+cn+' cautious'+(rn===cn?' <b>(tie — trust your ear)</b>':'')+'</div>';
+  if(flags.length) H+='<div class="co">Flags: <b>'+flags.join(' · ')+'</b> — pre-open those objection tabs.</div>';
+  if(S.trackLocked){
+    H+='<div style="margin-top:10px"><button class="tbtn on" onclick="applyRead(null,\''+st+'\',\''+nm+'\')">Apply state only — keep '+TRN[S.track]+'</button> '
+     +'<button class="tbtn" onclick="go(\'1\')">Ignore, start the call</button></div>';
+  } else {
+    H+='<div style="margin-top:10px"><button class="tbtn on" onclick="applyRead(\''+best+'\',\''+st+'\',\''+nm+'\')">Apply '+TRN[best]+' and go to Rapport</button> '
+     +'<button class="tbtn" onclick="setTrack(\'launcher\',true);applyRead(null,\''+st+'\',\''+nm+'\')">Force Career Launcher</button> '
+     +'<button class="tbtn" onclick="go(\'1\')">Ignore, start the call</button></div>';
+  }
+  $('res').innerHTML=H;
+}
+function applyRead(tr,st,nm){
+  if(S.trackLocked || tr==null){
+    // Keep locked track; only state + name
+  } else {
+    setTrack(tr,false);
+  }
+  setJolt(st);
+  if(nm){$('vName').value=nm;}
+  sync(); go('1');
+}
+
+function resetAll(){
+  if(!confirm('Clear this prospect and start a new call?'))return;
+  S={track:'launcher',trackLocked:false,jolt:'fight',phase:'p',done:{},v:{},asks:0,driver:''};
+  ['vName','vCity','vCur','vTgt','vNotes','vObj','rawin'].forEach(function(i){if($(i))$(i).value='';});
+  $('res').innerHTML=''; save(); setTrack('launcher',false); setJolt('fight'); setDriver(''); paintAsks(); go('p'); sync();
+}
+
+(function(){
+  var v=S.v||{};
+  if(v.nm)$('vName').value=v.nm; if(v.city)$('vCity').value=v.city;
+  if(v.cur)$('vCur').value=v.cur; if(v.tgt)$('vTgt').value=v.tgt;
+  if(v.notes)$('vNotes').value=v.notes; if(v.obj)$('vObj').value=v.obj;
+  // Guard stale localStorage: unknown track → Career Launcher
+  if(!TRN[S.track]) S.track='launcher';
+  setTrack(S.track); setJolt(S.jolt); paintAsks(); go(S.phase); sync(); buildIdx();
+  if(S.driver){var d=S.driver;S.driver='';setDriver(d);}
+})();
+</script>
+</body>
+</html>

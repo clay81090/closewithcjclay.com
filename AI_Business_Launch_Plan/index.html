@@ -1,0 +1,1005 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Business Launch Plan | CJ × Nick</title>
+<meta name="description" content="CJ and Nick's interactive AI business launch plan, including offers, responsibilities, launch checklist, and weekly scoreboard.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#eef1f3;
+    --paper-raised:#ffffff;
+    --ink:#182228;
+    --ink-soft:#4c5960;
+    --line:#c9d1d6;
+    --line-soft:#dde3e7;
+    --accent:#b3541e;
+    --accent-soft:#f2e2d4;
+    --blue:#294a5e;
+    --blue-soft:#e2e9ee;
+    --good:#2f6d4a;
+    --good-soft:#dfeee5;
+    --warn:#93641c;
+    --warn-soft:#f3e6ce;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#12181c;
+      --paper-raised:#1a2227;
+      --ink:#e7ecee;
+      --ink-soft:#a7b3b8;
+      --line:#324047;
+      --line-soft:#263137;
+      --accent:#e08a4f;
+      --accent-soft:#3a2c1f;
+      --blue:#8fb0c4;
+      --blue-soft:#20323d;
+      --good:#7fc79b;
+      --good-soft:#1e332a;
+      --warn:#e0b96a;
+      --warn-soft:#3a2f18;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#12181c;
+    --paper-raised:#1a2227;
+    --ink:#e7ecee;
+    --ink-soft:#a7b3b8;
+    --line:#324047;
+    --line-soft:#263137;
+    --accent:#e08a4f;
+    --accent-soft:#3a2c1f;
+    --blue:#8fb0c4;
+    --blue-soft:#20323d;
+    --good:#7fc79b;
+    --good-soft:#1e332a;
+    --warn:#e0b96a;
+    --warn-soft:#3a2f18;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    margin:0;
+    padding-block:40px;
+    line-height:1.5;
+  }
+  .wrap{
+    max-width:840px;
+    margin:0 auto;
+    padding-inline:20px;
+    display:flex;
+    flex-direction:column;
+    gap:36px;
+  }
+  h1,h2,h3{ text-wrap:balance; font-weight:700; margin:0; }
+  a{ color:var(--accent); }
+
+  /* header */
+  .masthead{
+    border-bottom:2px solid var(--ink);
+    padding-bottom:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+  h1{ font-size:clamp(26px,4.5vw,36px); }
+  .masthead p{ margin:0; color:var(--ink-soft); font-size:15px; max-width:60ch; }
+  .spec-strip{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:6px;
+  }
+  .spec{
+    background:var(--paper-raised);
+    padding:12px 14px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .spec .k{ font-family:var(--mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); }
+  .spec .v{ font-family:var(--mono); font-size:17px; font-weight:600; font-variant-numeric:tabular-nums; }
+
+  /* section headers */
+  .sec-head{ display:flex; align-items:baseline; gap:10px; margin-bottom:14px; }
+  .sec-num{ font-family:var(--mono); color:var(--accent); font-size:14px; font-weight:600; }
+  h2{ font-size:20px; }
+  .sec-sub{ color:var(--ink-soft); font-size:14px; margin:2px 0 14px; max-width:64ch; }
+
+  /* engine row */
+  .engine-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+  }
+  .engine{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-top:3px solid var(--blue);
+    padding:14px 16px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .engine .tag{ font-family:var(--mono); font-size:11px; color:var(--blue); text-transform:uppercase; letter-spacing:0.06em; }
+  .engine p{ margin:0; font-size:13.5px; color:var(--ink-soft); }
+  .engine strong{ font-size:14.5px; color:var(--ink); }
+  .arrow-row{ display:flex; justify-content:center; gap:4px; color:var(--ink-soft); font-size:12px; font-family:var(--mono); margin-top:-4px;}
+
+  /* tables */
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  .table-wrap{ overflow-x:auto; border:1px solid var(--line); }
+  th,td{ padding:9px 12px; text-align:left; border-bottom:1px solid var(--line-soft); vertical-align:top; }
+  th{ font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-soft); background:var(--paper); }
+  tr:last-child td{ border-bottom:none; }
+  td.num, th.num{ font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .tag-pill{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.04em;
+    padding:2px 7px;
+    border-radius:3px;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+  .fact{ background:var(--good-soft); color:var(--good); }
+  .est{ background:var(--warn-soft); color:var(--warn); }
+  .total-row td{ font-weight:700; border-top:2px solid var(--ink); background:var(--paper); }
+
+  /* phase cards */
+  .phase{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    padding:16px 18px;
+    display:flex;
+    gap:16px;
+  }
+  .phase + .phase{ margin-top:10px; }
+  .phase-num{
+    font-family:var(--mono);
+    font-size:22px;
+    font-weight:700;
+    color:var(--accent);
+    min-width:34px;
+  }
+  .phase-body{ display:flex; flex-direction:column; gap:6px; flex:1; }
+  .phase-body h3{ font-size:15.5px; }
+  .phase-body ol{ margin:2px 0 0; padding-left:18px; font-size:13.5px; color:var(--ink-soft); display:flex; flex-direction:column; gap:4px; }
+  .phase-body li::marker{ font-family:var(--mono); color:var(--ink-soft); }
+
+  /* comparison */
+  .compare{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .compare .col{ background:var(--paper-raised); border:1px solid var(--line); padding:14px 16px; }
+  .compare .col.pick{ border-color:var(--accent); }
+  .compare h3{ font-size:14.5px; display:flex; align-items:center; gap:8px; }
+  .pickchip{ font-family:var(--mono); font-size:9.5px; background:var(--accent); color:var(--paper-raised); padding:2px 6px; border-radius:3px; letter-spacing:0.04em; }
+  .compare ul{ margin:8px 0 0; padding-left:16px; font-size:13px; color:var(--ink-soft); display:flex; flex-direction:column; gap:4px; }
+
+  /* timeline */
+  .timeline{ display:flex; flex-direction:column; gap:8px; }
+  .tl-row{ display:grid; grid-template-columns:120px 1fr; gap:12px; align-items:center; }
+  .tl-label{ font-size:13px; font-weight:600; }
+  .tl-track{ position:relative; height:22px; background:var(--paper); border:1px solid var(--line); }
+  .tl-bar{ position:absolute; top:0; bottom:0; background:var(--blue); opacity:0.85; display:flex; align-items:center; padding-left:8px; font-family:var(--mono); font-size:10.5px; color:var(--paper-raised); white-space:nowrap;}
+  .tl-bar.accent{ background:var(--accent); }
+
+  /* stats list */
+  .stat-list{ display:flex; flex-direction:column; gap:10px; }
+  .stat{ display:grid; grid-template-columns:80px 1fr; gap:14px; padding:10px 0; border-bottom:1px solid var(--line-soft); }
+  .stat:last-child{ border-bottom:none; }
+  .stat .big{ font-family:var(--mono); font-size:22px; font-weight:700; color:var(--blue); }
+  .stat p{ margin:0 0 3px; font-size:13.5px; }
+  .stat .src{ font-size:11.5px; color:var(--ink-soft); }
+
+  .callout{
+    background:var(--blue-soft);
+    border-left:3px solid var(--blue);
+    padding:12px 16px;
+    font-size:13.5px;
+  }
+  .callout.warn{ background:var(--warn-soft); border-left-color:var(--warn); }
+
+  .actions{ display:flex; flex-direction:column; gap:10px; }
+  .action{ display:flex; gap:12px; align-items:flex-start; background:var(--paper-raised); border:1px solid var(--line); padding:12px 16px; }
+  .action .n{ font-family:var(--mono); color:var(--accent); font-weight:700; }
+
+  /* text message */
+  .msg-wrap{ display:flex; flex-direction:column; gap:6px; }
+  .bubble{
+    background:var(--blue);
+    color:var(--paper-raised);
+    border-radius:16px 16px 16px 4px;
+    padding:14px 18px;
+    font-size:14.5px;
+    max-width:80ch;
+    white-space:pre-wrap;
+  }
+  .msg-meta{ font-family:var(--mono); font-size:11px; color:var(--ink-soft); }
+
+  footer{ border-top:1px solid var(--line); padding-top:14px; font-size:11.5px; color:var(--ink-soft); }
+
+  /* command center */
+  .jump-nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    padding:8px;
+    background:color-mix(in srgb,var(--paper) 92%,transparent);
+    border:1px solid var(--line);
+    backdrop-filter:blur(10px);
+  }
+  .jump-nav a{
+    flex:0 0 auto;
+    padding:6px 9px;
+    color:var(--ink-soft);
+    font:600 10.5px var(--mono);
+    text-decoration:none;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    border:1px solid transparent;
+  }
+  .jump-nav a:hover{ color:var(--ink); border-color:var(--line); background:var(--paper-raised); }
+  .dashboard{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+  }
+  .dash-card{
+    min-height:100px;
+    padding:14px;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+  }
+  .dash-card .label{ display:block; color:var(--ink-soft); font:10.5px var(--mono); text-transform:uppercase; letter-spacing:.06em; }
+  .dash-card .value{ display:block; margin-top:7px; color:var(--blue); font:700 20px var(--mono); }
+  .dash-card p{ margin:5px 0 0; color:var(--ink-soft); font-size:12px; }
+  .progress-shell{ height:15px; overflow:hidden; background:var(--line-soft); border:1px solid var(--line); }
+  .progress-fill{ width:0; height:100%; background:var(--good); transition:width .2s ease; }
+  .progress-copy{ display:flex; justify-content:space-between; margin-top:6px; color:var(--ink-soft); font:11px var(--mono); }
+  .decision{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:14px;
+    padding:13px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .decision:last-child{ border-bottom:0; }
+  .decision .answer{ color:var(--accent); font:700 12px var(--mono); text-transform:uppercase; }
+  .decision p{ margin:0; font-size:13.5px; }
+  .level-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .level{
+    padding:16px;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-top:3px solid var(--line);
+  }
+  .level.now{ border-top-color:var(--accent); }
+  .level.next{ border-top-color:var(--blue); }
+  .level.later{ border-top-color:var(--good); }
+  .level .when{ color:var(--ink-soft); font:10.5px var(--mono); text-transform:uppercase; }
+  .level h3{ margin:5px 0 8px; font-size:16px; }
+  .level ul{ margin:0; padding-left:17px; color:var(--ink-soft); font-size:13px; }
+  .level li+li{ margin-top:5px; }
+  .domain-flow{ display:grid; grid-template-columns:1fr 34px 1fr; align-items:stretch; }
+  .domain-card{ padding:16px; background:var(--paper-raised); border:1px solid var(--line); }
+  .domain-arrow{ display:grid; place-items:center; color:var(--accent); font:700 20px var(--mono); }
+  .domain-card h3{ font-size:15px; }
+  .domain-card p,.domain-card li{ color:var(--ink-soft); font-size:13px; }
+  .domain-card ul{ margin:8px 0 0; padding-left:17px; }
+  .check-phase{ margin-top:12px; background:var(--paper-raised); border:1px solid var(--line); }
+  .check-phase summary{
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    padding:14px 16px;
+    font-weight:700;
+    list-style:none;
+  }
+  .check-phase summary::-webkit-details-marker{ display:none; }
+  .phase-count{ color:var(--ink-soft); font:11px var(--mono); }
+  .checklist{ display:grid; gap:1px; background:var(--line-soft); border-top:1px solid var(--line); }
+  .check-item{
+    display:grid;
+    grid-template-columns:22px 1fr auto;
+    gap:10px;
+    align-items:start;
+    padding:11px 14px;
+    background:var(--paper-raised);
+    font-size:13px;
+  }
+  .check-item input{ width:17px; height:17px; accent-color:var(--good); }
+  .check-item small{ display:block; margin-top:2px; color:var(--ink-soft); }
+  .owner{ color:var(--blue); font:10.5px var(--mono); white-space:nowrap; text-transform:uppercase; }
+  .metrics{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .metric{ padding:10px; background:var(--paper-raised); border:1px solid var(--line); }
+  .metric label{ display:block; color:var(--ink-soft); font:10.5px var(--mono); text-transform:uppercase; }
+  .metric input{
+    width:100%;
+    margin-top:6px;
+    padding:6px;
+    color:var(--ink);
+    background:var(--paper);
+    border:1px solid var(--line);
+    font:600 16px var(--mono);
+  }
+  .library{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  .library-group{ padding:14px 16px; background:var(--paper-raised); border:1px solid var(--line); }
+  .library-group h3{ margin-bottom:8px; font-size:14px; }
+  .library-group a{ display:block; padding:5px 0; font-size:12.5px; overflow-wrap:anywhere; }
+  .parking{
+    width:100%;
+    min-height:110px;
+    padding:12px;
+    resize:vertical;
+    color:var(--ink);
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    font:13px var(--sans);
+  }
+  .button-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  button{
+    cursor:pointer;
+    padding:8px 11px;
+    color:var(--paper-raised);
+    background:var(--blue);
+    border:0;
+    font:600 11px var(--mono);
+  }
+  button.secondary{ color:var(--ink); background:var(--paper-raised); border:1px solid var(--line); }
+  .hidden{ display:none!important; }
+
+  @media (max-width:560px){
+    .engine-row{ grid-template-columns:1fr; }
+    .compare{ grid-template-columns:1fr; }
+    .phase{ flex-direction:column; gap:6px; }
+    .tl-row{ grid-template-columns:1fr; }
+    .dashboard,.metrics{ grid-template-columns:repeat(2,1fr); }
+    .level-grid,.library{ grid-template-columns:1fr; }
+    .domain-flow{ grid-template-columns:1fr; gap:8px; }
+    .domain-arrow{ transform:rotate(90deg); }
+    .decision{ grid-template-columns:1fr; gap:4px; }
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="eyebrow">Operating Hub — v2 · September 2026</div>
+    <h1>CJ × Nick AI Agency Command Center</h1>
+    <p>One place to decide what to sell, know what to do next, track progress, and reach the supporting research. Start with a simple website offer, prove demand before buying infrastructure, and earn the right to add recurring AI services.</p>
+    <div class="spec-strip">
+      <div class="spec"><span class="k">Current focus</span><span class="v">Roofing</span></div>
+      <div class="spec"><span class="k">First proof</span><span class="v">1 paid site</span></div>
+      <div class="spec"><span class="k">Initial lead cost</span><span class="v">$0</span></div>
+      <div class="spec"><span class="k">Build rule</span><span class="v">Sell first</span></div>
+    </div>
+  </div>
+
+  <nav class="jump-nav" aria-label="Command center sections">
+    <a href="#dashboard">Dashboard</a>
+    <a href="#decision">Decision</a>
+    <a href="#offer-ladder">Offer ladder</a>
+    <a href="#domains">Domains</a>
+    <a href="#roles">Roles</a>
+    <a href="#launch-checklist">Checklist</a>
+    <a href="#scoreboard">Scoreboard</a>
+    <a href="#library">Library</a>
+    <a href="#playbook-detail">Detail</a>
+  </nav>
+
+  <section id="dashboard">
+    <div class="sec-head"><span class="sec-num">HQ</span><h2>Agency dashboard</h2></div>
+    <p class="sec-sub">This is the only screen you need to answer: where are we, what are we selling, and what happens next?</p>
+    <div class="dashboard">
+      <div class="dash-card"><span class="label">Stage</span><span class="value" id="stageValue">Foundation</span><p>Do not automate yet.</p></div>
+      <div class="dash-card"><span class="label">One focus</span><span class="value">Roofers</span><p>Florida owner-operated companies first.</p></div>
+      <div class="dash-card"><span class="label">One offer</span><span class="value">Site Launch</span><p>Website first; AI after proof.</p></div>
+      <div class="dash-card"><span class="label">Next gate</span><span class="value" id="nextGate">Agreement</span><p id="nextGateCopy">CJ and Nick settle the pilot rules.</p></div>
+    </div>
+    <div style="margin-top:14px">
+      <div class="progress-shell" role="progressbar" aria-label="Agency launch progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-copy"><span>Launch readiness</span><span id="progressText">0 of 0 complete</span></div>
+    </div>
+  </section>
+
+  <section id="decision">
+    <div class="sec-head"><span class="sec-num">01</span><h2>The customized decision</h2></div>
+    <div class="callout">
+      <strong>Recommendation:</strong> use roofing as the first market because CJ already understands the buyer, language, economics, and relationships. Begin with a simple paid website launch—not the entire roof-demand platform and not a generic “AI agency.” Add missed-call recovery, reviews, and AI reception only after a client trusts the work.
+    </div>
+    <div style="margin-top:12px">
+      <div class="decision"><span class="answer">Sell now</span><p><strong>A fast, credible website for roofers with a missing, broken, or obviously weak site.</strong> One template, one scope, one deadline. The website is the entry offer, not the long-term moat.</p></div>
+      <div class="decision"><span class="answer">Upsell next</span><p>Managed hosting, minor updates, lead forms, missed-call text-back, review requests, and speed-to-lead. AI voice is optional and should be enabled only for a paying client with a clear call-flow need.</p></div>
+      <div class="decision"><span class="answer">Build later</span><p>The property-data and manufactured-demand system. It has greater upside, but it is a separate advanced product. Keep it parked until the starter agency has cash and operating discipline.</p></div>
+      <div class="decision"><span class="answer">Do not do</span><p>Do not launch roofing, wellness, peptides, coaching, websites, receptionists, scrapers, and a SaaS product at the same time. Do not buy six more subscriptions to feel ready.</p></div>
+    </div>
+  </section>
+
+  <section id="offer-ladder">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Offer ladder: basic → recurring → true agency</h2></div>
+    <p class="sec-sub">Each level has a gate. You move forward because customers produced evidence—not because a more complex tool became interesting.</p>
+    <div class="level-grid">
+      <article class="level now">
+        <span class="when">Level 1 · Now</span>
+        <h3>Website Launch</h3>
+        <ul>
+          <li>One 5-page roofing template</li>
+          <li>Mobile-ready, contact form, click-to-call</li>
+          <li>Client supplies/approves photos and claims</li>
+          <li>Suggested test: $750–$1,500 setup</li>
+          <li><strong>Gate:</strong> one paid client</li>
+        </ul>
+      </article>
+      <article class="level next">
+        <span class="when">Level 2 · After proof</span>
+        <h3>Managed Growth</h3>
+        <ul>
+          <li>Hosting, updates, form routing</li>
+          <li>Missed-call text-back and review requests</li>
+          <li>Monthly lead/call report</li>
+          <li>Suggested test: $297–$697/month</li>
+          <li><strong>Gate:</strong> three retained clients</li>
+        </ul>
+      </article>
+      <article class="level later">
+        <span class="when">Level 3 · Later</span>
+        <h3>Revenue System</h3>
+        <ul>
+          <li>AI receptionist and qualification</li>
+          <li>Database/estimate reactivation</li>
+          <li>CRM pipeline and attribution</li>
+          <li>Roof-demand intelligence</li>
+          <li><strong>Gate:</strong> repeated ROI case study</li>
+        </ul>
+      </article>
+    </div>
+    <div class="callout warn" style="margin-top:12px">
+      Pricing above is a <strong>test range</strong>, not a proven market fact. Ask for the price on real calls. If nobody will pay a deposit, changing software will not fix the offer.
+    </div>
+  </section>
+
+  <section id="domains">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Domains and hosting—in plain English</h2></div>
+    <p class="sec-sub"><strong>Domain</strong> = the address, such as acmeroofing.com. <strong>Hosting</strong> = the computer/platform serving the site. <strong>Website</strong> = the pages and files. They are three separate things.</p>
+    <div class="domain-flow">
+      <article class="domain-card">
+        <h3>A. Cheap preview you control</h3>
+        <p>Use an agency-owned demo domain or preview address, such as <code>acme.youragencydemo.com</code>.</p>
+        <ul>
+          <li>Purpose: show the prospect what you can build.</li>
+          <li>You own the generic demo domain.</li>
+          <li>Do not present it as their permanent official site.</li>
+          <li>Do not buy a domain containing their trademark without written permission.</li>
+        </ul>
+      </article>
+      <div class="domain-arrow">→</div>
+      <article class="domain-card">
+        <h3>B. Paid client site they own</h3>
+        <p>The client buys and owns their branded domain. They invite you to manage DNS, and you point it to the website you host.</p>
+        <ul>
+          <li>Client remains domain registrant and primary owner.</li>
+          <li>You own reusable templates; client owns approved business content.</li>
+          <li>Your monthly plan pays for hosting and services.</li>
+          <li>If they leave, the contract states what is transferable.</li>
+        </ul>
+      </article>
+    </div>
+    <div class="callout" style="margin-top:12px">
+      <strong>The safest two-product setup:</strong> Product 1 is a temporary preview on your generic domain. Product 2 is a managed website on the client’s domain. You do not need to own a roofer’s branded domain to host and manage their site.
+    </div>
+    <div class="phase" style="margin-top:12px">
+      <span class="phase-num">DNS</span>
+      <div class="phase-body">
+        <h3>What “connecting the domain” means</h3>
+        <ol>
+          <li>Client purchases the domain in their own registrar account.</li>
+          <li>Client gives CJ delegated access or joins a screen-share—never collect a shared master password.</li>
+          <li>CJ copies the A/CNAME/TXT records shown by the hosting platform into the domain’s DNS settings.</li>
+          <li>The domain stays owned by the client while pointing to the agency-hosted site. SSL/HTTPS is then enabled.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="roles">
+    <div class="sec-head"><span class="sec-num">04</span><h2>What Nick can do—and what CJ owns first</h2></div>
+    <p class="sec-sub">These are 30-day pilot responsibilities, not permanent titles or equity decisions.</p>
+    <div class="compare">
+      <div class="col">
+        <h3>CJ · Product and fulfillment owner</h3>
+        <ul>
+          <li>Build one reusable roofing website template</li>
+          <li>Create demos and technical scope</li>
+          <li>Run intake, domain connection, QA, and launch</li>
+          <li>Document each delivery step as a reusable checklist</li>
+          <li>Join discovery/closing when technical confidence matters</li>
+        </ul>
+      </div>
+      <div class="col pick">
+        <h3>Nick · Pipeline and follow-up owner <span class="pickchip">Start here</span></h3>
+        <ul>
+          <li>Build and clean the first 25-target list</li>
+          <li>Call prospects and run consistent follow-up</li>
+          <li>Book 15-minute demos and collect objections</li>
+          <li>Own proposal follow-up until paid or clearly lost</li>
+          <li>Track every call, meeting, quote, close, and reason lost</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout warn" style="margin-top:12px">
+      Before money arrives, write down: whose legal entity signs, where money lands, expense approval, revenue split, client ownership, template/IP ownership, account access, and what happens if either person leaves. A handshake is not enough once a client pays.
+    </div>
+  </section>
+
+  <section id="launch-checklist">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Master launch checklist</h2></div>
+    <p class="sec-sub">Check items here; progress is saved in this browser on this Mac. Work top to bottom. The next incomplete item becomes the next action.</p>
+
+    <details class="check-phase" open data-phase="Foundation">
+      <summary><span>Phase 0 · Partnership foundation</span><span class="phase-count">0 / 6</span></summary>
+      <div class="checklist">
+        <label class="check-item"><input type="checkbox" data-task="p0-1"><span><strong>Agree to a 30-day pilot</strong><small>No permanent titles or equity required yet.</small></span><span class="owner">Both</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p0-2"><span><strong>Choose the contracting entity</strong><small>Identify the company/name that will sign the first client.</small></span><span class="owner">Both</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p0-3"><span><strong>Choose payment destination</strong><small>Bank account and payment processor; never use an unclear personal flow.</small></span><span class="owner">Both</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p0-4"><span><strong>Write the pilot revenue split</strong><small>Include refunds, software costs, taxes, and who gets paid when.</small></span><span class="owner">Both</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p0-5"><span><strong>Write ownership and exit rules</strong><small>Client, domain, template, content, logins, and work-in-progress.</small></span><span class="owner">Both</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p0-6"><span><strong>Set a $100 no-approval spending cap</strong><small>Anything above it requires both people to agree.</small></span><span class="owner">Both</span></label>
+      </div>
+    </details>
+
+    <details class="check-phase" open data-phase="Validation">
+      <summary><span>Phase 1 · Validate and sell the first site</span><span class="phase-count">0 / 8</span></summary>
+      <div class="checklist">
+        <label class="check-item"><input type="checkbox" data-task="p1-1"><span><strong>Lock the first ICP: Florida roofers</strong><small>Weak/no website, active business, reachable owner, credible job volume.</small></span><span class="owner">Both</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p1-2"><span><strong>Write one-page scope and price</strong><small>Pages, revisions, launch time, monthly option, exclusions, payment terms.</small></span><span class="owner">CJ</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p1-3"><span><strong>Build one reusable demo template</strong><small>Do not build five speculative sites. One strong template is enough.</small></span><span class="owner">CJ</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p1-4"><span><strong>Create a 25-company target list for $0</strong><small>Warm contacts → Google Maps manual research → free DBPR records → Outscraper free tier.</small></span><span class="owner">Nick</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p1-5"><span><strong>Write the opener and 5 follow-ups</strong><small>Lead with the visible business problem; do not lead with “AI.”</small></span><span class="owner">Nick</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p1-6"><span><strong>Complete 25 direct conversations</strong><small>Calls/conversations, not emails sent. Record exact objections.</small></span><span class="owner">Nick</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p1-7"><span><strong>Run 5 demos</strong><small>Show their current problem, the template, timeline, price, and next step.</small></span><span class="owner">Both</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p1-8"><span><strong>Collect the first deposit</strong><small>This—not compliments—is validation.</small></span><span class="owner">Nick</span></label>
+      </div>
+    </details>
+
+    <details class="check-phase" data-phase="Delivery">
+      <summary><span>Phase 2 · Deliver and create proof</span><span class="phase-count">0 / 7</span></summary>
+      <div class="checklist">
+        <label class="check-item"><input type="checkbox" data-task="p2-1"><span><strong>Collect intake and content approval</strong><small>Logo, services, service area, photos, testimonials, licenses, claims.</small></span><span class="owner">CJ</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p2-2"><span><strong>Confirm domain owner and access</strong><small>Client owns branded domain; agency receives delegated DNS access.</small></span><span class="owner">CJ</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p2-3"><span><strong>Build and test on phone + desktop</strong><small>Forms, click-to-call, links, spelling, performance, SSL, privacy basics.</small></span><span class="owner">CJ</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p2-4"><span><strong>Connect lead delivery</strong><small>Every form reaches a real human and creates a traceable record.</small></span><span class="owner">CJ</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p2-5"><span><strong>Client approves launch</strong><small>Written approval for business facts, photos, claims, and final domain.</small></span><span class="owner">Both</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p2-6"><span><strong>Collect final setup payment</strong><small>Payment before handoff/launch according to the signed scope.</small></span><span class="owner">Nick</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p2-7"><span><strong>Capture case study and referral</strong><small>Before/after, launch time, client quote, measurable leads, one introduction.</small></span><span class="owner">Nick</span></label>
+      </div>
+    </details>
+
+    <details class="check-phase" data-phase="MRR">
+      <summary><span>Phase 3 · Add recurring revenue</span><span class="phase-count">0 / 7</span></summary>
+      <div class="checklist">
+        <label class="check-item"><input type="checkbox" data-task="p3-1"><span><strong>Sell managed hosting and care</strong><small>Bundle uptime, updates, forms, reporting, and a defined support allowance.</small></span><span class="owner">Nick</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p3-2"><span><strong>Measure missed calls and response time</strong><small>Baseline the leak before prescribing automation.</small></span><span class="owner">CJ</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p3-3"><span><strong>Enable missed-call text-back</strong><small>Use consent, opt-out, calling-hour, and account-ownership safeguards.</small></span><span class="owner">CJ</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p3-4"><span><strong>Enable review requests</strong><small>Client retains primary ownership of Google Business Profile; agency is manager.</small></span><span class="owner">CJ</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p3-5"><span><strong>Test AI reception on one call flow</strong><small>Start pay-per-use. Human escalation and test calls are mandatory.</small></span><span class="owner">CJ</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p3-6"><span><strong>Send the first monthly report</strong><small>Calls, forms, response speed, appointments, reviews, issues, next actions.</small></span><span class="owner">CJ</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p3-7"><span><strong>Retain three monthly clients</strong><small>This is the gate before buying an unlimited agency plan or automating delivery.</small></span><span class="owner">Both</span></label>
+      </div>
+    </details>
+
+    <details class="check-phase" data-phase="Agency">
+      <summary><span>Phase 4 · Become a true agency</span><span class="phase-count">0 / 7</span></summary>
+      <div class="checklist">
+        <label class="check-item"><input type="checkbox" data-task="p4-1"><span><strong>Document sales and delivery SOPs</strong><small>A second person can follow them without guessing.</small></span><span class="owner">Both</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p4-2"><span><strong>Standardize contracts and onboarding</strong><small>Attorney-reviewed terms before risk and volume grow.</small></span><span class="owner">Both</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p4-3"><span><strong>Track unit economics by client</strong><small>Revenue, software, usage, labor, refunds, gross margin, churn.</small></span><span class="owner">CJ</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p4-4"><span><strong>Automate repeated fulfillment</strong><small>Only the steps already proven manually; preserve human approval and logs.</small></span><span class="owner">CJ</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p4-5"><span><strong>Build referral/channel motion</strong><small>Distributors, insurance agents, inspectors, and adjacent partners.</small></span><span class="owner">Nick</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p4-6"><span><strong>Test advanced roofing offer</strong><small>Reactivation or demand intelligence with one paying design partner.</small></span><span class="owner">Both</span></label>
+        <label class="check-item"><input type="checkbox" data-task="p4-7"><span><strong>Review expansion only after capacity</strong><small>Wellness stays parked until roofing delivery is stable and delegated.</small></span><span class="owner">Both</span></label>
+      </div>
+    </details>
+  </section>
+
+  <section id="scoreboard">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Weekly scoreboard</h2></div>
+    <p class="sec-sub">Update every Friday. Activity creates evidence; evidence decides what changes.</p>
+    <div class="metrics">
+      <div class="metric"><label for="m-targets">Targets researched</label><input id="m-targets" data-metric="targets" type="number" min="0" value="0"></div>
+      <div class="metric"><label for="m-talks">Conversations</label><input id="m-talks" data-metric="talks" type="number" min="0" value="0"></div>
+      <div class="metric"><label for="m-demos">Demos</label><input id="m-demos" data-metric="demos" type="number" min="0" value="0"></div>
+      <div class="metric"><label for="m-proposals">Proposals</label><input id="m-proposals" data-metric="proposals" type="number" min="0" value="0"></div>
+      <div class="metric"><label for="m-closes">New clients</label><input id="m-closes" data-metric="closes" type="number" min="0" value="0"></div>
+      <div class="metric"><label for="m-cash">Cash collected $</label><input id="m-cash" data-metric="cash" type="number" min="0" value="0"></div>
+      <div class="metric"><label for="m-mrr">New MRR $</label><input id="m-mrr" data-metric="mrr" type="number" min="0" value="0"></div>
+      <div class="metric"><label for="m-hours">Fulfillment hours</label><input id="m-hours" data-metric="hours" type="number" min="0" step=".5" value="0"></div>
+    </div>
+    <h3 style="margin:18px 0 8px;font-size:15px">Parking lot—save ideas without changing this week’s plan</h3>
+    <textarea class="parking" id="parkingLot" placeholder="Example: wellness clinic receptionist offer — revisit only after three roofing MRR clients."></textarea>
+    <div class="button-row">
+      <button type="button" id="exportBtn">Export progress backup</button>
+      <button type="button" class="secondary" id="resetBtn">Reset dashboard</button>
+    </div>
+  </section>
+
+  <section id="library">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Document and research library</h2></div>
+    <p class="sec-sub">These links point to the files already in this folder. Nothing was moved, renamed, or mixed into the CJ × Nick partnership.</p>
+    <div class="library">
+      <div class="library-group">
+        <h3>CJ × Nick · Current operating plan</h3>
+        <a href="#dashboard">This Command Center</a>
+        <a href="#launch-checklist">Master launch checklist</a>
+        <a href="#playbook-detail">Original Site-to-MRR detail below</a>
+      </div>
+      <div class="library-group">
+        <h3>Roofing · Advanced strategy</h3>
+        <a href="roof-demand-plan/dist/index.html">Manufactured Demand / Roof Demand master plan</a>
+        <a href="Manufactured_Demand.pdf">Manufactured Demand PDF</a>
+        <a href="Manufactured_Demand_CJ_AJ_Master_Plan.md">Manufactured Demand source document</a>
+        <a href="https://closewithcjclay.com/roof-demand-plan.html">Published roof-demand plan ↗</a>
+      </div>
+      <div class="library-group">
+        <h3>Agency strategy · Reference only</h3>
+        <a href="START HERE — CJ × AJ Strategy Map & Workspace Index (1).md">CJ × AJ workspace index and mind-map links</a>
+        <a href="CJ_AJ_Gap_Analysis_and_Execution_Plan_v3.md">Gap analysis and execution plan</a>
+        <a href="DRAFT — Working Partnership, Mutual Access & 30-Day Pilot.md">Earlier partnership framework</a>
+        <a href="The n8n System That Actually Fits Your Life.pdf">n8n and prioritization strategy</a>
+      </div>
+      <div class="library-group">
+        <h3>Wellness · Parked research</h3>
+        <a href="Wellness & Peptide Clinic - Opportunity Summary.pdf">Opportunity summary</a>
+        <a href="Wellness/CJ_AJ_Wellness_Vertical_Master_Document.md.pdf">Wellness vertical master document</a>
+        <a href="Wellness/Mind-Map_Whimsical (Wellness - Niche).pdf">Wellness niche mind map</a>
+        <a href="Wellness_Studio_Prospect_List_FL_Batch2.xlsx">Florida prospect list</a>
+      </div>
+      <div class="library-group">
+        <h3>RFPs and proposals</h3>
+        <a href="AJ Javidi - Marketing Plan RFP 3ba76776007b80b89c0fce4b59322833.html">Marketing plan RFP</a>
+        <a href="GTM Info/AJ Javidi - Marketing Plan RFP.html">GTM copy of marketing plan RFP</a>
+        <a href="Construction:Roofing/automated-partnership-blueprint.pdf">Roofing partnership blueprint</a>
+      </div>
+      <div class="library-group">
+        <h3>Ownership boundary</h3>
+        <p style="margin:0;color:var(--ink-soft);font-size:12.5px">The CJ × AJ documents are research inputs, not automatic CJ × Nick property. Before reusing an account, licensed template, private list, contact, or jointly developed asset, confirm permission and ownership in writing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">08</span><h2>Lead generation: free first, automation later</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Order</th><th>Method</th><th>Cost</th><th>Use it when</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td>Warm roofing relationships and referrals</td><td class="num">$0</td><td>First five conversations. Highest trust and fastest learning.</td></tr>
+          <tr><td class="num">2</td><td>Manual Google Maps research</td><td class="num">$0</td><td>First 25 targets. Record missing site, broken site, review count, owner, phone, and visible problem.</td></tr>
+          <tr><td class="num">3</td><td>Florida DBPR public contractor records</td><td class="num">$0</td><td>Roofing-specific licensee and new-applicant lists. Better niche signal than a generic scrape.</td></tr>
+          <tr><td class="num">4</td><td>Outscraper Google Maps export</td><td class="num">$0 first 500*</td><td>When manual research becomes repetitive. Turn off paid enrichments for the first test.</td></tr>
+          <tr><td class="num">5</td><td>Custom scraper / n8n enrichment</td><td class="num">Time + usage</td><td>Only after a repeated targeting rule produces sales and you need hundreds per month.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sec-sub" style="margin-top:8px">*Official Outscraper pricing viewed September 2026 lists the first 500 Google Maps businesses free and then pay-as-you-go pricing. Email/contact enrichment is separate. Platform terms and pricing can change; recheck before a large run.</p>
+  </section>
+
+  <section id="playbook-detail">
+    <div class="sec-head"><span class="sec-num">09</span><h2>Detailed Site-to-MRR reference</h2></div>
+    <p class="sec-sub">The original tactical detail is preserved below. Where it conflicts with the command center, follow the command center’s smaller validation gates.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">09.1</span><h2>The model</h2></div>
+    <p class="sec-sub">Your own framing is correct — this only works in this order. Don't sell the upsell before they've seen the win.</p>
+    <div class="engine-row">
+      <div class="engine">
+        <span class="tag">Hook</span>
+        <strong>Ship a real website</strong>
+        <p>Fast, credible, done in days not weeks. This is the door-opener, not the profit center.</p>
+      </div>
+      <div class="engine">
+        <span class="tag">Proof</span>
+        <strong>Make the gain visible</strong>
+        <p>Speed-to-lead + Google Business Profile wins show up in days — real SEO ranking takes months. Sell the fast win, not the slow one.</p>
+      </div>
+      <div class="engine">
+        <span class="tag">Upsell</span>
+        <strong>Convert to MRR</strong>
+        <p>Once they've seen the gain, bundle AI receptionist + speed-to-lead texting into one recurring plan.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2>How to actually build the sites</h2></div>
+    <p class="sec-sub">The "AI reads their LinkedIn/social and builds it" tool you heard about isn't really a single mainstream product yet — what exists is AI builders that generate from a text description or business category, then you drop in their real name, photos, and reviews. For an agency doing this repeatedly, the faster move is a pre-built niche template you customize, not a from-scratch AI generation each time.</p>
+    <div class="compare">
+      <div class="col pick">
+        <h3>Build inside GoHighLevel <span class="pickchip">Recommended for the pilot</span></h3>
+        <ul>
+          <li>Use a pre-built niche "snapshot" (roofing, med spa/wellness, etc.) — funnel-style site + pipeline + automations import together</li>
+          <li>Hosting is included in your GHL plan — $0 marginal cost per site</li>
+          <li>Site, CRM, missed-call text-back, and AI receptionist live in one login — nothing to reconcile later</li>
+          <li>Weaker for long-form content/blog SEO than real WordPress</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Real WordPress site (10Web / ZipWP)</h3>
+        <ul>
+          <li>AI-generates a full WordPress site from a prompt; you own the site outright, better for content-driven SEO</li>
+          <li>Managed hosting bundled in, roughly $10–23/mo per tier <span class="tag-pill est">estimate</span> — confirm exact tier-by-site-count on their pricing page before quoting a client</li>
+          <li>Position as your "Pro / SEO" tier for clients who want to own the asset and blog long-term</li>
+          <li>Lead capture still needs to connect back into GHL for the receptionist/speed-to-lead workflow</li>
+        </ul>
+      </div>
+    </div>
+    <p class="sec-sub" style="margin-top:12px;">Practical build flow either way: pull the business's real name, logo, photos, service list, and reviews from their Google Business Profile and Facebook/Instagram page yourself — that's 20 minutes of copy work, not a tool problem. Save every finished site as a duplicate-able snapshot/template per niche so site #6 takes an hour, not a day.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>Finding businesses without a working web presence</h2></div>
+    <p class="sec-sub">Yes, this exists — it's a Google Maps scrape with a filter, not a mystery app.</p>
+    <div class="callout">
+      <strong>Outscraper</strong> (or Apify's equivalent) pulls a Google Maps search — e.g. "roofers, Tampa FL" — with an "exclude businesses with a website" filter, returning name, phone, address, hours, and review count for every listing with no site or a dead one. Free tier to test; paid credits beyond that are pay-as-you-go <span class="tag-pill est">estimate — check their calculator, exact per-record cost wasn't confirmed</span>. That list is your first 100–300 cold-call targets before you touch dialing.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>Tool stack &amp; Month-1 budget</h2></div>
+    <p class="sec-sub">Buy software only as a client gate requires it. Current official HighLevel pricing lists Starter at $97/month with three sub-accounts, Unlimited at $297/month with unlimited sub-accounts, and AI as pay-per-use or $50/$97 per enabled client location. Start with Starter only when a live client needs the CRM/automation; upgrade after the fourth active client or another documented requirement.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>For</th><th class="num">Cost</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GoHighLevel — Starter</td>
+            <td>CRM, pipeline, website/funnel builder and workflows. Three sub-accounts are enough to validate the first clients; do not pre-build 5–10 unpaid client accounts.</td>
+            <td class="num">$97/mo</td>
+            <td><span class="tag-pill fact">fact</span></td>
+          </tr>
+          <tr>
+            <td>GHL AI products</td>
+            <td>Start pay-per-use for testing. Growth and Unlimited plans are per enabled client location; turn on only after a client is paying.</td>
+            <td class="num">$0 base / $50 / $97 per client + usage</td>
+            <td><span class="tag-pill fact">fact</span></td>
+          </tr>
+          <tr>
+            <td>Outscraper credits</td>
+            <td>First prospect list (few hundred no-website leads)</td>
+            <td class="num">$0 first 500 basic records</td>
+            <td><span class="tag-pill fact">official pricing</span></td>
+          </tr>
+          <tr>
+            <td>Domains for portfolio sites</td>
+            <td>Only if you want a live URL for cold-call proof instead of a preview link</td>
+            <td class="num">~$15/site/yr</td>
+            <td><span class="tag-pill fact">fact</span></td>
+          </tr>
+          <tr>
+            <td>10Web (optional "Pro" tier)</td>
+            <td>Only if/when a client wants a real owned WordPress site</td>
+            <td class="num">~$10–23/mo</td>
+            <td><span class="tag-pill est">estimate</span></td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="2">Recommended pre-revenue software spend</td>
+            <td class="num">$0</td>
+            <td class="num">Use existing tools + manual validation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sec-sub" style="margin-top:10px;">Later, Unlimited is $297/month when more than three active sub-accounts justify it. Agency Pro is $497/month for SaaS-mode capabilities. Recheck official pricing and exact rebilling permissions at purchase time.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>Charging monthly</h2></div>
+    <div class="callout warn">
+      Don't sell hosting/website upkeep as its own line item — it's a commodity and invites price-shopping. Fold it into one bundled plan priced on the outcome (leads captured, response speed, reviews), not the ingredients.
+    </div>
+    <div class="table-wrap" style="margin-top:12px;">
+      <table>
+        <thead><tr><th>Package</th><th>Includes</th><th class="num">Suggested price</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Setup (one-time)</td>
+            <td>Site build, CRM/pipeline setup, review-request &amp; missed-call automations</td>
+            <td class="num">$997–1,997</td>
+          </tr>
+          <tr>
+            <td>Growth Plan (monthly)</td>
+            <td>Hosting + updates, AI receptionist, speed-to-lead texting, review automation</td>
+            <td class="num">$297–497/mo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sec-sub" style="margin-top:8px;">These two numbers are a pricing <em>strategy</em>, not a researched market fact — sanity-check them against 2–3 real competitor quotes in whatever niche you pick before you print them anywhere.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">05</span><h2>Driving traffic &amp; SEO — ranked by how fast it shows up</h2></div>
+    <p class="sec-sub">This is the part most agencies oversell. Organic ranking is slow — don't promise it as the "obvious gain in a short time."</p>
+    <div class="timeline">
+      <div class="tl-row">
+        <span class="tl-label">GBP + reviews</span>
+        <div class="tl-track"><div class="tl-bar accent" style="left:0;width:10%">days</div></div>
+      </div>
+      <div class="tl-row">
+        <span class="tl-label">Speed-to-lead automation</span>
+        <div class="tl-track"><div class="tl-bar accent" style="left:0;width:6%">immediate</div></div>
+      </div>
+      <div class="tl-row">
+        <span class="tl-label">Local Service Ads / Google Ads</span>
+        <div class="tl-track"><div class="tl-bar" style="left:8%;width:15%">1–2 wks</div></div>
+      </div>
+      <div class="tl-row">
+        <span class="tl-label">Organic local SEO ranking</span>
+        <div class="tl-track"><div class="tl-bar" style="left:20%;width:70%">3–6 months</div></div>
+      </div>
+    </div>
+    <p class="sec-sub" style="margin-top:12px;"><strong style="color:var(--ink)">The demo-able "obvious gain":</strong> claim and fully optimize their Google Business Profile (categories, service areas, photos, Q&amp;A) and turn on automated review requests via GHL — this moves map-pack visibility and star rating within days, and it's something you can screenshot before/after. Layer in Local Service Ads (pay-per-lead, not per-click) if they want faster volume than organic can deliver while it builds.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">06</span><h2>The numbers behind the pitch</h2></div>
+    <div class="stat-list">
+      <div class="stat">
+        <span class="big">17–27%</span>
+        <div><p>Estimates of small businesses with no website vary by survey (17% per Network Solutions' 2026 data, 27% in other 2025–26 surveys) — treat as a range, not a single hard number.</p><span class="src">Network Solutions; Sonata Sites / LeadsAgent</span></div>
+      </div>
+      <div class="stat">
+        <span class="big">62%</span>
+        <div><p>of consumers reportedly ignore a business with no web presence at all.</p><span class="src">Reported via FitSmallBusiness</span></div>
+      </div>
+      <div class="stat">
+        <span class="big">21x</span>
+        <div><p>more likely to qualify a lead contacted within 5 minutes vs. 30 minutes — widely cited industry figure, but sourcing on the original study is thin. Use it as directional, not a footnoted fact.</p><span class="src">Widely cited (e.g. Kixie); original study uncited</span></div>
+      </div>
+      <div class="stat">
+        <span class="big">$39–59</span>
+        <div><p>cost per lead on Google Local Services Ads for electrical/HVAC/plumbing (Feb 2026 benchmark, 888 contractors). No verified figure exists yet for roofing or wellness specifically — don't quote one.</p><span class="src">SearchLight Digital, Feb 2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">07</span><h2>Next 3 actions</h2></div>
+    <div class="actions">
+      <div class="action"><span class="n">1</span><span>CJ and Nick complete Phase 0: the written 30-day pilot, payment flow, revenue split, ownership, and exit rules.</span></div>
+      <div class="action"><span class="n">2</span><span>CJ builds one reusable roofing demo template while Nick creates a manually reviewed list of 25 companies with a clear website problem.</span></div>
+      <div class="action"><span class="n">3</span><span>Nick starts direct conversations and both run five demos. Buy GoHighLevel only when a paid client or validated workflow requires it.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">08</span><h2>Draft text to Nick</h2></div>
+    <div class="msg-wrap">
+      <div class="bubble">Nick — pitching you on something concrete, not theoretical. 17–27% of small businesses still don't have a real website, and most of the ones that do respond too slow to their own leads (a lead contacted in 5 min vs 30 min converts way better — that gap alone is worth money to any owner).
+
+Plan: we build 5–10 real websites this week for actual local businesses as a portfolio (roofing to start since I've got the relationships, but it works for any local service niche). Then we cold-call a list of businesses with no site or a dead one, book 15-min Meets for the next day, and close on the spot showing them the finished site.
+
+Once they're in, we upsell one recurring plan: AI receptionist + "speed to lead" texting so every new lead gets a text the second it hits their CRM. That's the MRR engine.
+
+Cost to start is low — one shared GoHighLevel account, ~$150 each. No big buy-in, no dev team needed. I want to build the first 2 sites this week and start calling. You in?</div>
+      <span class="msg-meta">Ready to copy — trim if it runs long for your thread.</span>
+    </div>
+  </section>
+
+  <footer>
+    Primary operating references: <a href="https://www.gohighlevel.com/pricing/">HighLevel official pricing</a> · <a href="https://help.gohighlevel.com/support/solutions/articles/155000006652-ai-product-pricing">HighLevel AI pricing</a> · <a href="https://help.gohighlevel.com/support/solutions/articles/155000005132-connecting-your-domain-on-ghl-a-guide">HighLevel domain connection</a> · <a href="https://outscraper.com/pricing/">Outscraper official pricing</a> · <a href="https://support.google.com/business/answer/7353941">Google Business Profile third-party policy</a>. Prices and vendor features change; verify before purchase. Business, tax, telecommunications, privacy, and contract decisions require appropriate professional review.
+  </footer>
+
+</div>
+
+<script>
+  // Save the command center locally so CJ and Nick can close and reopen the file.
+  (() => {
+    const storageKey = 'cj-nick-agency-command-center-v2';
+    const checks = [...document.querySelectorAll('[data-task]')];
+    const metrics = [...document.querySelectorAll('[data-metric]')];
+    const parkingLot = document.getElementById('parkingLot');
+
+    function readState() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey)) || { tasks: {}, metrics: {}, parking: '' };
+      } catch {
+        return { tasks: {}, metrics: {}, parking: '' };
+      }
+    }
+
+    function getStateFromPage() {
+      return {
+        tasks: Object.fromEntries(checks.map(item => [item.dataset.task, item.checked])),
+        metrics: Object.fromEntries(metrics.map(item => [item.dataset.metric, item.value])),
+        parking: parkingLot.value,
+        savedAt: new Date().toISOString()
+      };
+    }
+
+    function save() {
+      localStorage.setItem(storageKey, JSON.stringify(getStateFromPage()));
+      render();
+    }
+
+    function render() {
+      const done = checks.filter(item => item.checked).length;
+      const percent = checks.length ? Math.round((done / checks.length) * 100) : 0;
+      const fill = document.getElementById('progressFill');
+      fill.style.width = `${percent}%`;
+      fill.parentElement.setAttribute('aria-valuenow', String(percent));
+      document.getElementById('progressText').textContent = `${done} of ${checks.length} complete · ${percent}%`;
+
+      const phases = [...document.querySelectorAll('[data-phase]')];
+      phases.forEach(phase => {
+        const phaseChecks = [...phase.querySelectorAll('[data-task]')];
+        const phaseDone = phaseChecks.filter(item => item.checked).length;
+        phase.querySelector('.phase-count').textContent = `${phaseDone} / ${phaseChecks.length}`;
+      });
+
+      const activePhase = phases.find(phase => [...phase.querySelectorAll('[data-task]')].some(item => !item.checked));
+      document.getElementById('stageValue').textContent = activePhase?.dataset.phase || 'Operating';
+      const next = checks.find(item => !item.checked);
+      document.getElementById('nextGate').textContent = next ? next.closest('.check-item').querySelector('strong').textContent : 'Review';
+      document.getElementById('nextGateCopy').textContent = next
+        ? next.closest('.check-item').querySelector('small').textContent
+        : 'All launch gates are complete. Review results and set the next 30-day target.';
+    }
+
+    const state = readState();
+    checks.forEach(item => {
+      item.checked = Boolean(state.tasks?.[item.dataset.task]);
+      item.addEventListener('change', save);
+    });
+    metrics.forEach(item => {
+      item.value = state.metrics?.[item.dataset.metric] ?? 0;
+      item.addEventListener('input', save);
+    });
+    parkingLot.value = state.parking || '';
+    parkingLot.addEventListener('input', save);
+
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(getStateFromPage(), null, 2)], { type: 'application/json' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `cj-nick-agency-progress-${new Date().toISOString().slice(0, 10)}.json`;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if (!confirm('Reset every checkbox, metric, and parking-lot note in this browser?')) return;
+      localStorage.removeItem(storageKey);
+      checks.forEach(item => item.checked = false);
+      metrics.forEach(item => item.value = 0);
+      parkingLot.value = '';
+      render();
+    });
+
+    render();
+  })();
+</script>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Private resource — High Ticket Sales Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --green: #00c97a;
+    --green-dark: #009a5e;
+    --light: #f2f5f9;
+    --mid: #e2e8f0;
+    --text: #1a2540;
+    --muted: #5a6a85;
+    --white: #ffffff;
+    --protect-bg: #fff5f5;
+    --protect-border: #e53e3e;
+    --protect-text: #742a2a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--light);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: 0 4px 40px rgba(0,0,0,0.10);
+    min-height: 100vh;
+  }
+  .header {
+    background: var(--navy);
+    padding: 24px 20px 20px;
+  }
+  .logo-wrap { display: flex; align-items: center; gap: 14px; }
+  .logo-icon { width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; border: 2px solid var(--green); object-fit: cover; }
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .logo-sub {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-top: 4px;
+  }
+  .header-prepared {
+    margin-top: 16px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+  }
+  .header-prepared strong { color: var(--white); }
+  .accent-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--green) 0%, var(--green-dark) 55%, var(--navy) 100%);
+  }
+  .body-pad { padding: 24px 20px 32px; }
+  .body-pad p {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .body-pad p:last-child { margin-bottom: 0; }
+  .protect-box {
+    background: var(--protect-bg);
+    border: 2px solid var(--protect-border);
+    border-radius: 10px;
+    padding: 18px 16px;
+    margin: 20px 0 24px;
+  }
+  .protect-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--protect-border);
+    margin-bottom: 8px;
+  }
+  .protect-box p {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--protect-text);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .sec-head {
+    background: var(--navy);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 -20px 20px;
+  }
+  .sec-head h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .sec-num {
+    width: 24px; height: 24px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    color: var(--navy);
+    flex-shrink: 0;
+  }
+  .q-item {
+    border: 1px solid var(--mid);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .q-item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 14px;
+  }
+  .q-item summary::-webkit-details-marker { display: none; }
+  .q-num {
+    width: 26px; height: 26px;
+    background: var(--green);
+    color: var(--navy);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .q-body { padding: 0 16px 16px 54px; }
+  .q-sub { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+  .q-probes {
+    margin: 0 0 12px 18px;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .q-probes li { margin-bottom: 6px; }
+  .q-ours {
+    background: linear-gradient(135deg, #f0fdf7, #e8f9f1);
+    border: 1px solid rgba(0,154,94,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .q-ours a { color: var(--green-dark); font-weight: 600; }
+  .video-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .video-card {
+    border: 1px solid var(--mid);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .video-card--featured {
+    border-color: var(--green);
+    box-shadow: 0 0 0 1px rgba(0,201,122,0.25);
+  }
+  .video-badge {
+    background: var(--green);
+    color: var(--navy);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+  }
+  .video-embed {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    background: #000;
+  }
+  .video-embed iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+  .video-card-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--navy);
+    padding: 12px 14px 4px;
+  }
+  .video-card-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    padding: 0 14px 14px;
+    line-height: 1.55;
+  }
+  .video-card--link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding-bottom: 14px;
+  }
+  .video-link-cta {
+    display: inline-block;
+    margin: 0 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green-dark);
+  }
+  .ask-block {
+    background: linear-gradient(135deg, #f7f9fc 0%, #edf0f7 100%);
+    border: 1px solid var(--mid);
+    border-radius: 10px;
+    padding: 20px 16px;
+    margin: 24px 0;
+  }
+  .ask-block h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .ask-block p { font-size: 14px; margin-bottom: 12px; }
+  .invest-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--green);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 22px rgba(0,201,122,0.15);
+    margin-top: 16px;
+  }
+  .footer-sign {
+    border-top: 1px solid var(--mid);
+    padding: 24px 20px 32px;
+    text-align: center;
+  }
+  .footer-sign .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .footer-sign p { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .footer-sign a { color: var(--green-dark); font-weight: 600; text-decoration: none; }
+  .name-gate {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,22,40,0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+  }
+  .name-gate-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 24px 20px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+  }
+  .name-gate-lead { font-size: 14px; margin-bottom: 16px; color: var(--text); }
+  .name-gate-card label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .name-gate-card input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--mid);
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  .name-gate-err { font-size: 12px; color: #c53030; margin-top: 10px; }
+  @media (min-width: 480px) {
+    .header { padding: 28px 36px 24px; }
+    .body-pad { padding: 28px 36px 36px; }
+    .sec-head { margin: 0 -36px 20px; padding: 13px 36px; }
+    .footer-sign { padding: 28px 36px 40px; }
+  }
+</style>
+{{MANIFEST_GUARD}}
+</head>
+<body>
+{{GATE_HTML}}
+<div class="page" id="main-content">
+  <div class="header">
+    {{LOGO_HTML}}
+    <p class="header-prepared">Prepared for <strong>{{FIRST_NAME}}</strong> — {{PREPARED_DATE}}</p>
+  </div>
+  <div class="accent-bar"></div>
+
+  <div class="body-pad">
+    {{OPENER_HTML}}
+
+    <div class="protect-box" role="note">
+      <div class="protect-label">Your consumer protection right</div>
+      <p>Federal law gives you 3 days to cancel — no matter what the contract says.</p>
+    </div>
+
+    <div class="sec-head">
+      <div class="sec-num">?</div>
+      <h3>Seven questions to ask before you pay anyone</h3>
+    </div>
+    <p>{{QUESTIONS_INTRO}}</p>
+    <div class="questions-wrap" style="margin-top:16px;">
+      {{QUESTIONS_HTML}}
+    </div>
+
+    <div class="sec-head" style="margin-top:28px;">
+      <div class="sec-num">▶</div>
+      <h3>If you'd rather watch than read</h3>
+    </div>
+    <div class="video-grid">
+      {{VIDEOS_HTML}}
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:12px;font-style:italic;">(And if it matters to you — we have more women than men.)</p>
+
+    <div class="ask-block">
+      <h4>{{ASK_HEADING}}</h4>
+      {{ASK_BODY_HTML}}
+      <a href="{{CALENDAR_URL}}" class="invest-btn" target="_blank" rel="noopener noreferrer">Book 20 minutes with CJ →</a>
+    </div>
+  </div>
+
+  <div class="footer-sign">
+    <div class="name">CJ Clay</div>
+    <p>{{FOOTER_NOTE}}</p>
+    <p><a href="tel:6166121735">(616) 612-1735</a></p>
+    <p><a href="mailto:cj@highticketsalesacademy.com">cj@highticketsalesacademy.com</a></p>
+  </div>
+</div>
+{{TRACKING_SCRIPT}}
+</body>
+</html>

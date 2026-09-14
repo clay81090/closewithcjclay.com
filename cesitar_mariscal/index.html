@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>For Cesitar Mariscal — A Plan in Orlando | From Tío CJ</title>
+  <meta name="description" content="A personal plan from Tío CJ for Cesitar Mariscal: train in Orlando, stay with family, grow your English, and see how far your swimming can take you." />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #14303a;
+      --ink-soft: #3d5a64;
+      --water: #1f7a8c;
+      --water-deep: #0f4c5c;
+      --sky: #dcebF2;
+      --foam: #f5fafc;
+      --sand: #f3efe6;
+      --sun: #e8b84a;
+      --leaf: #2f6b4f;
+      --line: rgba(20, 48, 58, 0.12);
+      --shadow: 0 18px 50px rgba(15, 76, 92, 0.12);
+      --radius: 18px;
+      --max: 1120px;
+      --font-display: "Fraunces", Georgia, serif;
+      --font-body: "Manrope", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--font-body);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #dff0f6 0%, transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, #efe8d8 0%, transparent 45%),
+        var(--foam);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--water-deep); }
+    .wrap { width: min(var(--max), calc(100% - 2.5rem)); margin: 0 auto; }
+
+    /* Language visibility */
+    [data-lang="es"] .en { display: none !important; }
+    [data-lang="en"] .es { display: none !important; }
+
+    /* Top bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(245, 250, 252, 0.88);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 0;
+    }
+    .brand {
+      font-family: var(--font-display);
+      font-weight: 650;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      color: var(--water-deep);
+      text-decoration: none;
+    }
+    .brand span { color: var(--ink-soft); font-weight: 500; font-size: 0.92rem; }
+    .lang-toggle {
+      display: inline-flex;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 2px;
+    }
+    .lang-toggle button {
+      border: 0;
+      background: transparent;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      cursor: pointer;
+      color: var(--ink-soft);
+    }
+    .lang-toggle button.active {
+      background: var(--water-deep);
+      color: white;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: min(92vh, 860px);
+      display: grid;
+      align-items: end;
+      color: white;
+      overflow: hidden;
+    }
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.04);
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    @keyframes drift {
+      from { transform: scale(1.04) translate3d(0,0,0); }
+      to { transform: scale(1.1) translate3d(-1.5%, -1%, 0); }
+    }
+    .hero-shade {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(15, 76, 92, 0.18) 0%, rgba(15, 76, 92, 0.35) 42%, rgba(10, 40, 48, 0.78) 100%),
+        linear-gradient(90deg, rgba(10, 40, 48, 0.45) 0%, transparent 55%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 0 4.5rem;
+      max-width: 720px;
+    }
+    .hero-kicker {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.92;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(2.6rem, 7vw, 4.6rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      margin: 0 0 1rem;
+      text-wrap: balance;
+    }
+    .hero-lead {
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+      max-width: 34rem;
+      opacity: 0.95;
+      margin: 0 0 1.75rem;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: white;
+      color: var(--water-deep);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.9rem 1.35rem;
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 22px 40px rgba(0,0,0,0.18); }
+
+    /* Sections */
+    section { padding: 5rem 0; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--water);
+      margin: 0 0 0.75rem;
+    }
+    h2 {
+      font-family: var(--font-display);
+      font-weight: 650;
+      font-size: clamp(1.85rem, 4vw, 2.75rem);
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      margin: 0 0 1rem;
+      text-wrap: balance;
+    }
+    .lede {
+      font-size: 1.08rem;
+      color: var(--ink-soft);
+      max-width: 40rem;
+      margin: 0 0 2rem;
+    }
+
+    /* Letter */
+    .letter {
+      background: linear-gradient(180deg, var(--sand) 0%, #f8f5ef 100%);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .letter-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .letter-photo {
+      position: sticky;
+      top: 5.5rem;
+      border-radius: calc(var(--radius) + 4px);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      aspect-ratio: 3 / 4;
+    }
+    .letter-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .letter-card {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(255,255,255,0.8);
+      border-radius: var(--radius);
+      padding: clamp(1.4rem, 3vw, 2.2rem);
+      box-shadow: 0 10px 30px rgba(20, 48, 58, 0.06);
+    }
+    .letter-card p {
+      font-size: 1.02rem;
+      margin: 0 0 1.05rem;
+      color: var(--ink);
+    }
+    .letter-card .signoff {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 650;
+      margin-top: 1.5rem;
+      color: var(--water-deep);
+    }
+
+    /* Family band */
+    .family-band {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    .family-band figure {
+      margin: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      aspect-ratio: 4 / 5;
+    }
+    .family-band img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Steps */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+    .step {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem 0.9rem;
+      min-height: 140px;
+    }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--water);
+      margin-bottom: 0.4rem;
+    }
+    .step strong { display: block; font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .step span { font-size: 0.82rem; color: var(--ink-soft); }
+
+    .option-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0 0;
+    }
+    .option {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+    }
+    .option.featured {
+      border-color: rgba(31, 122, 140, 0.35);
+      background: linear-gradient(180deg, #eef7fa, white);
+    }
+    .option h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      margin: 0 0 0.5rem;
+    }
+    .pill {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(31, 122, 140, 0.12);
+      color: var(--water-deep);
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Program */
+    .program-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+    .program-visual {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 360px;
+    }
+    .program-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+    .stat {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+    }
+    .stat b {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      color: var(--water-deep);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .stat span { font-size: 0.82rem; color: var(--ink-soft); }
+    .checklist { list-style: none; padding: 0; margin: 1.25rem 0 0; }
+    .checklist li {
+      position: relative;
+      padding: 0.55rem 0 0.55rem 1.6rem;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.96rem;
+    }
+    .checklist li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.95rem;
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 50%;
+      background: var(--leaf);
+      box-shadow: 0 0 0 4px rgba(47, 107, 79, 0.15);
+    }
+
+    /* Schedule */
+    .schedule {
+      background: var(--water-deep);
+      color: white;
+    }
+    .schedule h2, .schedule .section-label, .schedule .lede { color: white; }
+    .schedule .lede { opacity: 0.86; }
+    .schedule-list {
+      display: grid;
+      gap: 0.65rem;
+      margin-top: 1.5rem;
+    }
+    .sched-row {
+      display: grid;
+      grid-template-columns: 8.5rem 1fr;
+      gap: 1rem;
+      align-items: start;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 1rem 1.15rem;
+    }
+    .sched-row time {
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.02em;
+      color: #f0d78c;
+    }
+    .sched-row strong { display: block; margin-bottom: 0.2rem; }
+    .sched-row span { opacity: 0.82; font-size: 0.92rem; }
+    .note-free {
+      margin-top: 1.25rem;
+      padding: 1rem 1.15rem;
+      border-radius: 14px;
+      background: rgba(232, 184, 74, 0.16);
+      border: 1px solid rgba(232, 184, 74, 0.35);
+      font-size: 0.98rem;
+    }
+
+    /* Two column photo blocks */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .split.reverse { direction: rtl; }
+    .split.reverse > * { direction: ltr; }
+    .photo-frame {
+      margin: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      aspect-ratio: 4 / 3;
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .photo-frame figcaption {
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      padding: 0.65rem 0.2rem 0;
+    }
+
+    /* Compare table */
+    .compare {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      margin-top: 1.5rem;
+    }
+    .compare th, .compare td {
+      text-align: left;
+      padding: 0.95rem 1rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      font-size: 0.94rem;
+    }
+    .compare th {
+      background: #eef6f8;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--water-deep);
+    }
+    .compare tr:last-child td { border-bottom: 0; }
+    .tag-primary {
+      display: inline-block;
+      background: rgba(47, 107, 79, 0.12);
+      color: var(--leaf);
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      margin-left: 0.4rem;
+    }
+
+    /* Handle / next */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+    }
+    .panel h3 {
+      font-family: var(--font-display);
+      margin: 0 0 0.85rem;
+      font-size: 1.3rem;
+    }
+    .panel ul { margin: 0; padding-left: 1.1rem; }
+    .panel li { margin: 0.45rem 0; }
+
+    .next-steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0 0;
+      display: grid;
+      gap: 0.75rem;
+    }
+    .next-steps li {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      align-items: start;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem 1.15rem;
+    }
+    .next-steps li::before {
+      content: counter(step);
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--water-deep);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    /* Closing */
+    .closing {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      padding: 6rem 0;
+    }
+    .closing-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .closing-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .closing-shade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15,76,92,0.55), rgba(10,40,48,0.82));
+      z-index: 1;
+    }
+    .closing-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 40rem;
+    }
+    .closing h2 { color: white; }
+    .closing p { font-size: 1.08rem; opacity: 0.95; }
+    .closing .signoff {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 650;
+      margin-top: 1.5rem;
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--line);
+      background: white;
+    }
+    footer .sources {
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+    footer a { color: var(--water-deep); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 900px) {
+      .letter-grid,
+      .family-band,
+      .program-grid,
+      .split,
+      .split.reverse,
+      .two-col,
+      .option-cards {
+        grid-template-columns: 1fr;
+        direction: ltr;
+      }
+      .letter-photo { position: relative; top: 0; max-height: 480px; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .sched-row { grid-template-columns: 1fr; gap: 0.35rem; }
+      .hero { min-height: 78vh; }
+      .hero-content { padding-bottom: 3rem; }
+    }
+
+    @media (max-width: 560px) {
+      .wrap { width: min(var(--max), calc(100% - 1.5rem)); }
+      .steps { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr; }
+      section { padding: 3.5rem 0; }
+      .brand { font-size: 0.95rem; }
+      .brand span { font-size: 0.82rem; }
+      .hero { min-height: 72vh; }
+      .hero h1 { font-size: clamp(2.1rem, 9vw, 3rem); }
+      .hero-lead { font-size: 1.02rem; }
+      .hero-cta {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+      }
+      .hero-content { padding-bottom: 2.5rem; }
+      .lang-toggle button { min-height: 40px; padding: 0.5rem 0.95rem; }
+      img { max-width: 100%; height: auto; }
+      table { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    }
+
+    html, body { overflow-x: hidden; }
+    body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .hero-media img { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body data-lang="en">
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top">Cesitar Mariscal <span>· Orlando</span></a>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" id="btn-en" class="active" onclick="setLang('en')">EN</button>
+        <button type="button" id="btn-es" onclick="setLang('es')">ES</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-media">
+        <img src="assets/florida-water.jpg" alt="Clear Florida water and sky" />
+      </div>
+      <div class="hero-shade"></div>
+      <div class="wrap hero-content">
+        <div class="hero-kicker en">From Tío CJ · Orlando, Florida</div>
+        <div class="hero-kicker es">De tu Tío CJ · Orlando, Florida</div>
+        <h1 class="en">This isn’t goodbye.<br />It’s a plan for you.</h1>
+        <h1 class="es">Esto no es una despedida.<br />Es un plan para ti.</h1>
+        <p class="hero-lead en">Come stay with us in Orlando. Train with a real USA Swimming team. Keep growing your English. Live with family who already love you.</p>
+        <p class="hero-lead es">Ven a quedarte con nosotros en Orlando. Entrena con un equipo real de USA Swimming. Sigue mejorando tu inglés. Vive con una familia que ya te quiere.</p>
+        <a class="hero-cta en" href="#letter">Read my letter to you →</a>
+        <a class="hero-cta es" href="#letter">Lee mi carta para ti →</a>
+      </div>
+    </section>
+
+    <!-- LETTER -->
+    <section class="letter" id="letter">
+      <div class="wrap">
+        <div class="letter-grid reveal">
+          <div class="letter-photo">
+            <img src="assets/cj-cesar.jpg" alt="Tío CJ and Cesar together" />
+          </div>
+          <div>
+            <p class="section-label en">A letter for you</p>
+            <p class="section-label es">Una carta para ti</p>
+            <h2 class="en">Before the schedules and pools — this is just me talking to you.</h2>
+            <h2 class="es">Antes de los horarios y las piscinas — soy yo hablándote a ti.</h2>
+            <div class="letter-card">
+              <div class="en">
+                <p>Cesar — I know it hurts that we are leaving Ecuador. Meli and I are going to miss you just as much. Truthfully, I do not want to leave either. These weeks with you have meant more than I can put into one sentence.</p>
+                <p>I stayed at your house for almost two months this time, and more than a month last time. Watching you — competitive, smart, focused, with the whole world at your fingertips — I kept thinking the same thing: you remind me of myself. Only child energy. That quiet fire. That feeling that something bigger is possible if someone believes in you and gives you a real runway.</p>
+                <p>So I started working on something real. Not a “maybe someday.” I have been researching swim teams in Orlando, coaches, your school calendar, English options that fit around training, and what a normal week could actually look like while you live with us. A coach still needs to see your official times and evaluate you. But this is not something I said only to make you feel better. It is a plan I genuinely want to pursue.</p>
+                <p>I will fly you to Orlando. You can stay with us in our home. We will handle your meals, transportation, training arrangements, English lessons, and the adult details. You do not need to come with money or figure this out alone. Your job is to keep training, send me your best official times, and arrive ready to work hard and enjoy being part of our family here.</p>
+                <p>And this will not be only about swimming. We want time with you. Dinners together. Relaxed nights at home. Orlando adventures. Beach days. Normal family life. After practice and dinner, your night is yours — unless there is a meet or a special team event.</p>
+                <p>You already have your visa. You already have people who love you here. The only thing missing is a date on the calendar — and that is what this page is.</p>
+                <p>This isn’t goodbye. It’s the part before you come stay with us.</p>
+                <p class="signoff">Con todo mi cariño,<br />Tío CJ</p>
+              </div>
+              <div class="es">
+                <p>Cesar — sé que duele que nos vayamos de Ecuador. Meli y yo te vamos a extrañar tanto como tú nos vas a extrañar a nosotros. La verdad, yo tampoco quiero irme. Estas semanas contigo han significado más de lo que puedo decir en una sola frase.</p>
+                <p>Me quedé en tu casa casi dos meses esta vez, y más de un mes la vez anterior. Mirándote — competitivo, inteligente, enfocado, con el mundo entero al alcance de tus manos — pensaba lo mismo una y otra vez: me recuerdas a mí. Energía de hijo único. Ese fuego callado. Esa sensación de que algo más grande es posible si alguien cree en ti y te da una pista real.</p>
+                <p>Por eso empecé a trabajar en algo de verdad. No un “tal vez algún día.” He estado investigando equipos de natación en Orlando, entrenadores, tu calendario escolar, opciones de inglés que se acomoden a tu entrenamiento, y cómo podría ser una semana normal viviendo con nosotros. Un entrenador todavía necesita ver tus tiempos oficiales y evaluarte. Pero esto no es algo que te dije solo para hacerte sentir mejor. Es un plan que de verdad quiero intentar.</p>
+                <p>Yo te voy a llevar en avión a Orlando. Puedes quedarte con nosotros en nuestra casa. Nosotros nos encargamos de tu comida, transporte, entrenamiento, clases de inglés y todos los detalles de adultos. No necesitas venir con dinero ni resolver esto solo. Tu trabajo es seguir entrenando, enviarme tus mejores tiempos oficiales y llegar listo para trabajar duro y disfrutar ser parte de nuestra familia aquí.</p>
+                <p>Y esto no será solamente natación. Queremos tiempo contigo. Cenas juntos. Noches tranquilas en casa. Conocer Orlando. Ir a la playa. Vida familiar normal. Después de la práctica y la cena, la noche es tuya — excepto cuando haya una competencia o una actividad especial del equipo.</p>
+                <p>Ya tienes tu visa. Ya tienes personas aquí que te quieren. Lo único que falta es una fecha en el calendario — y de eso se trata esta página.</p>
+                <p>Esto no es una despedida. Es la parte antes de que vengas a quedarte con nosotros.</p>
+                <p class="signoff">Con todo mi cariño,<br />Tío CJ</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAMILY -->
+    <section id="family">
+      <div class="wrap">
+        <div class="family-band reveal">
+          <div>
+            <p class="section-label en">Your home base</p>
+            <p class="section-label es">Tu base aquí</p>
+            <h2 class="en">You would not be coming to a hotel.<br />You would be coming home to us.</h2>
+            <h2 class="es">No vendrías a un hotel.<br />Vendrías a casa, con nosotros.</h2>
+            <p class="lede en">Our whole family already knows you. The plan is simple on purpose: you fly in, you live with us, you train seriously, you improve your English, and we still get to enjoy having you here — not just as an athlete, but as family.</p>
+            <p class="lede es">Toda nuestra familia ya te conoce. El plan es simple a propósito: llegas en avión, vives con nosotros, entrenas en serio, mejoras tu inglés, y nosotros todavía disfrutamos tenerte aquí — no solo como atleta, sino como familia.</p>
+          </div>
+          <figure>
+            <img src="assets/family.jpg" alt="Our family together with Cesar" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE PLAN -->
+    <section id="plan" style="background: white; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+      <div class="wrap reveal">
+        <p class="section-label en">The opportunity</p>
+        <p class="section-label es">La oportunidad</p>
+        <h2 class="en">The plan I have been building for you</h2>
+        <h2 class="es">El plan que he estado preparando para ti</h2>
+        <p class="lede en">Your school break from late January to early May gives us about 12–13 weeks. We can start with a strong 6–8 week visit, or use almost the full break for a real development season.</p>
+        <p class="lede es">Tus vacaciones desde finales de enero hasta principios de mayo nos dan unas 12–13 semanas. Podemos empezar con una visita fuerte de 6–8 semanas, o aprovechar casi todas las vacaciones para una temporada real de desarrollo.</p>
+
+        <div class="option-cards">
+          <article class="option">
+            <div class="pill en">Option A</div>
+            <div class="pill es">Opción A</div>
+            <h3 class="en">6–8 weeks</h3>
+            <h3 class="es">6–8 semanas</h3>
+            <p class="en">Enough time to be evaluated, settle into a training group, improve technique, build confidence in English, and possibly enter a meet if the coach and registration allow it.</p>
+            <p class="es">Tiempo suficiente para evaluarte, adaptarte a un grupo, mejorar técnica, ganar confianza en inglés y posiblemente competir si el entrenador y el registro lo permiten.</p>
+          </article>
+          <article class="option featured">
+            <div class="pill en">Best for growth</div>
+            <div class="pill es">Mejor para crecer</div>
+            <h3 class="en">Full school break · 12–13 weeks</h3>
+            <h3 class="es">Todas tus vacaciones · 12–13 semanas</h3>
+            <p class="en">The strongest option: a full training block, more time with coaches, more English immersion, more family time, and a clearer way to measure your progress.</p>
+            <p class="es">La opción más fuerte: un bloque completo de entrenamiento, más tiempo con entrenadores, más inglés, más tiempo en familia y una forma más clara de medir tu progreso.</p>
+          </article>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <strong class="en">Finish school</strong>
+            <strong class="es">Terminas clases</strong>
+            <span class="en">Late January</span>
+            <span class="es">Finales de enero</span>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <strong class="en">Fly to Orlando</strong>
+            <strong class="es">Vuelas a Orlando</strong>
+            <span class="en">I handle the trip</span>
+            <span class="es">Yo organizo el viaje</span>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <strong class="en">Move in with us</strong>
+            <strong class="es">Vives con nosotros</strong>
+            <span class="en">Your home here is ready</span>
+            <span class="es">Tu hogar aquí está listo</span>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <strong class="en">Join the right group</strong>
+            <strong class="es">Entras al grupo correcto</strong>
+            <span class="en">Coach evaluation first</span>
+            <span class="es">Primero te evalúa el entrenador</span>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <strong class="en">Train + enjoy life</strong>
+            <strong class="es">Entrenas y disfrutas</strong>
+            <span class="en">Swimming, English, family</span>
+            <span class="es">Natación, inglés y familia</span>
+          </div>
+          <div class="step">
+            <div class="step-num">6</div>
+            <strong class="en">Return stronger</strong>
+            <strong class="es">Regresas más fuerte</strong>
+            <span class="en">Back before school starts</span>
+            <span class="es">Antes de volver a clases</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GOAT -->
+    <section id="goat">
+      <div class="wrap">
+        <div class="program-grid reveal">
+          <div>
+            <p class="section-label en">Primary plan · Orlando</p>
+            <p class="section-label es">Plan principal · Orlando</p>
+            <h2 class="en">GOAT Swim — Greater Orlando Aquatics Team</h2>
+            <h2 class="es">GOAT Swim — Greater Orlando Aquatics Team</h2>
+            <p class="lede en">This is the most realistic everyday plan because you can live with us and train locally with a year-round USA Swimming club. It is not a one-week recreational camp. It is a real competitive team with groups from developing seniors to Junior National and international-level athletes.</p>
+            <p class="lede es">Este es el plan cotidiano más realista porque puedes vivir con nosotros y entrenar cerca, con un club de USA Swimming durante todo el año. No es un campamento recreativo de una semana. Es un equipo competitivo de verdad, con grupos desde seniors en desarrollo hasta Junior Nationals y atletas de nivel internacional.</p>
+            <ul class="checklist">
+              <li class="en">Four Greater Orlando training locations, including Rosen Aquatic Center on International Drive</li>
+              <li class="es">Cuatro sedes de entrenamiento en Greater Orlando, incluyendo Rosen Aquatic Center en International Drive</li>
+              <li class="en">Senior / Gold: about five swim sessions each week</li>
+              <li class="es">Senior / Gold: alrededor de cinco sesiones de natación por semana</li>
+              <li class="en">Senior Elite: six swim sessions plus athlete-development work (coach invite)</li>
+              <li class="es">Senior Elite: seis sesiones más trabajo de desarrollo atlético (por invitación)</li>
+              <li class="en">High Performance squad for international athletes focused on long-course meters</li>
+              <li class="es">Grupo High Performance para atletas internacionales, enfocado en metros de largo curso</li>
+              <li class="en">Published senior practices are mainly late afternoon — mornings stay open for English, rest, and family</li>
+              <li class="es">Las prácticas senior publicadas son sobre todo por la tarde — las mañanas quedan libres para inglés, descanso y familia</li>
+            </ul>
+            <div class="stat-grid">
+              <div class="stat"><b>550+</b><span class="en">members reported in the water in the club’s early years</span><span class="es">miembros reportados en el agua en los primeros años del club</span></div>
+              <div class="stat"><b>42</b><span class="en">Florida Senior Championship qualifiers (team-reported)</span><span class="es">clasificados a Florida Senior Championships (según el equipo)</span></div>
+              <div class="stat"><b>16+</b><span class="en">college swimmers / signees (team-reported)</span><span class="es">nadadores universitarios / firmas (según el equipo)</span></div>
+              <div class="stat"><b>$219–259</b><span class="en">published monthly senior tuition range (plus registration / USA Swimming)</span><span class="es">rango publicado de mensualidad senior (más registro / USA Swimming)</span></div>
+            </div>
+          </div>
+          <div class="program-visual">
+            <img src="assets/rosen-pool.jpg" alt="Indoor competition pool in Orlando used by Team Orlando / GOAT training" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section class="schedule" id="schedule">
+      <div class="wrap reveal">
+        <p class="section-label en">Daily life</p>
+        <p class="section-label es">Vida diaria</p>
+        <h2 class="en">Serious training — without stealing the whole day</h2>
+        <h2 class="es">Entrenamiento serio — sin robarte el día entero</h2>
+        <p class="lede en">Exact practice times depend on the group the coach chooses. This is the balanced version I want for you: enough structure to get faster, and enough space for us to enjoy having you here.</p>
+        <p class="lede es">Los horarios exactos dependen del grupo que elija el entrenador. Esta es la versión equilibrada que quiero para ti: suficiente estructura para mejorar, y suficiente espacio para disfrutar tenerte aquí.</p>
+        <div class="schedule-list">
+          <div class="sched-row">
+            <time>8:00 AM</time>
+            <div>
+              <strong class="en">Breakfast at home</strong>
+              <strong class="es">Desayuno en casa</strong>
+              <span class="en">Easy start. Recovery. Family time.</span>
+              <span class="es">Inicio tranquilo. Recuperación. Tiempo en familia.</span>
+            </div>
+          </div>
+          <div class="sched-row">
+            <time>10:00 AM</time>
+            <div>
+              <strong class="en">English — only 2 or 3 mornings a week</strong>
+              <strong class="es">Inglés — solo 2 o 3 mañanas por semana</strong>
+              <span class="en">60–90 minutes. Conversation, confidence, and school vocabulary — not a full-day classroom.</span>
+              <span class="es">60–90 minutos. Conversación, confianza y vocabulario escolar — no un salón de clases todo el día.</span>
+            </div>
+          </div>
+          <div class="sched-row">
+            <time>11:30–3:00</time>
+            <div>
+              <strong class="en">Free time, lunch, rest</strong>
+              <strong class="es">Tiempo libre, almuerzo, descanso</strong>
+              <span class="en">Relax, errands with us, light video review, or just being a teenager.</span>
+              <span class="es">Relájate, salidas con nosotros, revisar videos un poco, o simplemente ser adolescente.</span>
+            </div>
+          </div>
+          <div class="sched-row">
+            <time>~4:00–7:00</time>
+            <div>
+              <strong class="en">GOAT practice window</strong>
+              <strong class="es">Ventana de práctica con GOAT</strong>
+              <span class="en">About 90 minutes to two hours, depending on group and location.</span>
+              <span class="es">Unos 90 minutos a dos horas, según el grupo y la sede.</span>
+            </div>
+          </div>
+          <div class="sched-row">
+            <time>After practice</time>
+            <div>
+              <strong class="en">Dinner together</strong>
+              <strong class="es">Cena juntos</strong>
+              <span class="en">We talk in English naturally — not like another class.</span>
+              <span class="es">Hablamos en inglés de forma natural — no como otra clase.</span>
+            </div>
+          </div>
+          <div class="sched-row">
+            <time>Night</time>
+            <div>
+              <strong class="en">Completely free</strong>
+              <strong class="es">Completamente libre</strong>
+              <span class="en">Games, movies, friends, relaxing — unless there is a meet or team event.</span>
+              <span class="es">Juegos, películas, amigos, descansar — excepto si hay competencia o actividad del equipo.</span>
+            </div>
+          </div>
+        </div>
+        <div class="note-free en">Weekends are not all work. Some Saturdays may include practice or a meet. Other weekends are ours: Universal, Disney, the beach, springs, or simply resting at home.</div>
+        <div class="note-free es">Los fines de semana no son solo trabajo. Algunos sábados pueden incluir práctica o competencia. Otros fines de semana son nuestros: Universal, Disney, la playa, springs, o simplemente descansar en casa.</div>
+      </div>
+    </section>
+
+    <!-- ENGLISH -->
+    <section id="english">
+      <div class="wrap">
+        <div class="split reveal">
+          <figure class="photo-frame">
+            <img src="assets/travel-plane.jpg" alt="Airplane wing above clouds — the flight to Florida" />
+          </figure>
+          <div>
+            <p class="section-label en">English that fits swimming</p>
+            <p class="section-label es">Inglés que se adapta a la natación</p>
+            <h2 class="en">Your English is already good for your age. We will make it sharper — not overwhelm you.</h2>
+            <h2 class="es">Tu inglés ya es bueno para tu edad. Lo vamos a afilar — no a saturar.</h2>
+            <p class="lede en">Best fit: a private tutor 2–3 mornings each week. Optional later: Valencia College English options for students 15+. Every day: natural immersion at home, stores, activities, and with teammates.</p>
+            <p class="lede es">Mejor opción: un tutor privado 2–3 mañanas por semana. Más adelante, opcional: programas de inglés de Valencia College para estudiantes de 15+. Todos los días: inmersión natural en casa, tiendas, actividades y con compañeros.</p>
+            <ul class="checklist">
+              <li class="en">Understand coaching instructions quickly</li>
+              <li class="es">Entender rápido las instrucciones del entrenador</li>
+              <li class="en">Speak confidently with teammates</li>
+              <li class="es">Hablar con confianza con tus compañeros</li>
+              <li class="en">Build school and college vocabulary</li>
+              <li class="es">Construir vocabulario escolar y universitario</li>
+              <li class="en">Continue online after you return to Ecuador</li>
+              <li class="es">Continuar en línea cuando regreses a Ecuador</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOLLES -->
+    <section id="bolles" style="background: var(--sand); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+      <div class="wrap reveal">
+        <p class="section-label en">Elite comparison · Jacksonville</p>
+        <p class="section-label es">Comparación élite · Jacksonville</p>
+        <h2 class="en">Bolles is world-class — and about 2.5 hours away</h2>
+        <h2 class="es">Bolles es de nivel mundial — y está a unas 2.5 horas</h2>
+        <p class="lede en">Bolles belongs in this plan because it shows what elite Florida swimming looks like. Jacksonville is not a realistic daily commute while you stay with us. So Orlando / GOAT remains the primary path. Bolles can be a future camp, a short intensive trip, or even private coaching we arrange on special weekends — not your everyday school-year base.</p>
+        <p class="lede es">Bolles pertenece a este plan porque muestra cómo se ve la natación élite en Florida. Jacksonville no es un trayecto diario realista mientras vives con nosotros. Así que Orlando / GOAT sigue siendo el camino principal. Bolles puede ser un campamento futuro, un viaje corto intensivo, o incluso coaching privado en fines de semana especiales — no tu base diaria durante el año escolar.</p>
+
+        <div class="split" style="margin-top: 1.5rem;">
+          <figure class="photo-frame">
+            <img src="assets/bolles-uible.jpg" alt="Uible Pool at The Bolles School in Jacksonville" />
+            <figcaption class="en">Uible Pool · The Bolles School, Jacksonville</figcaption>
+            <figcaption class="es">Uible Pool · The Bolles School, Jacksonville</figcaption>
+          </figure>
+          <figure class="photo-frame">
+            <img src="assets/bolles-team.jpg" alt="Bolles Swimming athletes on deck" />
+            <figcaption class="en">Bolles Swimming · tradition of excellence</figcaption>
+            <figcaption class="es">Bolles Swimming · tradición de excelencia</figcaption>
+          </figure>
+        </div>
+
+        <div class="stat-grid" style="margin-top: 1.25rem;">
+          <div class="stat"><b>67</b><span class="en">Olympians connected to Bolles since 1972 (program-reported legacy)</span><span class="es">olímpicos conectados con Bolles desde 1972 (legado reportado del programa)</span></div>
+          <div class="stat"><b>36</b><span class="en">Olympic medals linked to the Bolles swimming tradition</span><span class="es">medallas olímpicas ligadas a la tradición de Bolles</span></div>
+          <div class="stat"><b>21</b><span class="en">Olympic gold medals in that same legacy story</span><span class="es">oros olímpicos en esa misma historia de legado</span></div>
+          <div class="stat"><b>May–Jun</b><span class="en">Main published boarding camp window — after your Jan–May break</span><span class="es">Ventana principal publicada del campamento — después de tus vacaciones ene–may</span></div>
+        </div>
+
+        <table class="compare">
+          <thead>
+            <tr>
+              <th class="en">Program</th><th class="es">Programa</th>
+              <th class="en">Location</th><th class="es">Ubicación</th>
+              <th class="en">How it fits us</th><th class="es">Cómo encaja con nosotros</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GOAT Swim <span class="tag-primary en">Primary</span><span class="tag-primary es">Principal</span></td>
+              <td class="en">Orlando / Casselberry</td>
+              <td class="es">Orlando / Casselberry</td>
+              <td class="en">Live with us. Train locally. Year-round competitive club.</td>
+              <td class="es">Vives con nosotros. Entrenamiento local. Club competitivo todo el año.</td>
+            </tr>
+            <tr>
+              <td>Trinity Prep Aquatics</td>
+              <td>Winter Park</td>
+              <td class="en">Strong local backup USA Swimming option near us.</td>
+              <td class="es">Buena opción local de respaldo cerca de nosotros.</td>
+            </tr>
+            <tr>
+              <td>National Training Center</td>
+              <td>Clermont</td>
+              <td class="en">Special clinic / training day — not everyday Jan–April base.</td>
+              <td class="es">Clínica / día especial de entrenamiento — no la base diaria ene–abr.</td>
+            </tr>
+            <tr>
+              <td>Bolles Swim Camp / private coaching</td>
+              <td>Jacksonville</td>
+              <td class="en">Elite benchmark, future camp, or occasional private coaching trip.</td>
+              <td class="es">Referencia élite, campamento futuro, o viaje ocasional de coaching privado.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PATHWAY -->
+    <section id="pathway">
+      <div class="wrap reveal">
+        <p class="section-label en">Where excellence can lead</p>
+        <p class="section-label es">Hasta dónde puede llegar la excelencia</p>
+        <h2 class="en">I will never promise a scholarship before the times and schoolwork support it.</h2>
+        <h2 class="es">Nunca te voy a prometer una beca antes de que los tiempos y los estudios lo respalden.</h2>
+        <p class="lede en">But there is a real pathway: official results, stronger English, consistent training, more meets, and eventually conversations with college coaches. Florida already has serious options — starting close to home.</p>
+        <p class="lede es">Pero hay un camino real: resultados oficiales, mejor inglés, entrenamiento constante, más competencias y, con el tiempo, conversaciones con entrenadores universitarios. Florida ya tiene opciones serias — empezando cerca de casa.</p>
+
+        <table class="compare">
+          <thead>
+            <tr>
+              <th class="en">School</th><th class="es">Universidad</th>
+              <th class="en">Where</th><th class="es">Dónde</th>
+              <th class="en">Why it matters</th><th class="es">Por qué importa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Rollins College</td>
+              <td class="en">Winter Park · right here</td>
+              <td class="es">Winter Park · aquí mismo</td>
+              <td class="en">Closest college swim program to our home.</td>
+              <td class="es">El programa universitario de natación más cerca de nuestra casa.</td>
+            </tr>
+            <tr>
+              <td>University of Florida</td>
+              <td>Gainesville</td>
+              <td class="en">One of the strongest programs in the country.</td>
+              <td class="es">Uno de los programas más fuertes del país.</td>
+            </tr>
+            <tr>
+              <td>Florida State University</td>
+              <td>Tallahassee</td>
+              <td class="en">Major Florida Division I program.</td>
+              <td class="es">Gran programa Division I de Florida.</td>
+            </tr>
+            <tr>
+              <td>Florida Southern College</td>
+              <td>Lakeland</td>
+              <td class="en">Respected in-state option closer to Orlando.</td>
+              <td class="es">Opción respetada dentro del estado, más cerca de Orlando.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="two-col">
+          <div class="panel">
+            <h3 class="en">What I will handle</h3>
+            <h3 class="es">De lo que yo me encargo</h3>
+            <ul>
+              <li class="en">Your round-trip flight</li>
+              <li class="es">Tu vuelo de ida y vuelta</li>
+              <li class="en">A home with us</li>
+              <li class="es">Un hogar con nosotros</li>
+              <li class="en">Meals and normal daily expenses</li>
+              <li class="es">Comida y gastos diarios normales</li>
+              <li class="en">Transportation to practice and English</li>
+              <li class="es">Transporte a práctica e inglés</li>
+              <li class="en">Program registration and equipment needs</li>
+              <li class="es">Registro del programa y equipo necesario</li>
+              <li class="en">Coach communication and adult logistics</li>
+              <li class="es">Comunicación con el entrenador y logística de adultos</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3 class="en">What I need from you</h3>
+            <h3 class="es">Lo que necesito de ti</h3>
+            <ul>
+              <li class="en">Keep training consistently in Ecuador</li>
+              <li class="es">Seguir entrenando con constancia en Ecuador</li>
+              <li class="en">Send me your official best times</li>
+              <li class="es">Enviarme tus mejores tiempos oficiales</li>
+              <li class="en">A recent video of all four strokes, starts, and turns</li>
+              <li class="es">Un video reciente de los cuatro estilos, salidas y virajes</li>
+              <li class="en">Stay coachable and arrive ready to work</li>
+              <li class="es">Ser entrenable y llegar listo para trabajar</li>
+              <li class="en">Tell me which events you love</li>
+              <li class="es">Decirme qué pruebas te gustan</li>
+              <li class="en">Come ready to enjoy being with us too</li>
+              <li class="es">Venir listo también para disfrutar estar con nosotros</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEXT STEPS -->
+    <section id="next" style="background: white; border-top: 1px solid var(--line);">
+      <div class="wrap reveal">
+        <p class="section-label en">Making it real</p>
+        <p class="section-label es">Haciéndolo real</p>
+        <h2 class="en">The next four steps</h2>
+        <h2 class="es">Los próximos cuatro pasos</h2>
+        <ol class="next-steps">
+          <li>
+            <div>
+              <strong class="en">Collect your official times and video</strong>
+              <strong class="es">Juntamos tus tiempos oficiales y tu video</strong>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong class="en">I contact GOAT and request an evaluation for your exact travel window</strong>
+              <strong class="es">Yo contacto a GOAT y pido una evaluación para tu ventana exacta de viaje</strong>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong class="en">We choose 6–8 weeks or the full break, and lock the English plan</strong>
+              <strong class="es">Elegimos 6–8 semanas o todas las vacaciones, y cerramos el plan de inglés</strong>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong class="en">I book your flight — and you come stay with us in Orlando</strong>
+              <strong class="es">Reservo tu vuelo — y vienes a quedarte con nosotros en Orlando</strong>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="closing" id="closing">
+      <div class="closing-bg">
+        <img src="assets/florida-beach.jpg" alt="Florida beach at sunset" />
+      </div>
+      <div class="closing-shade"></div>
+      <div class="wrap closing-inner reveal">
+        <p class="section-label en" style="color:#f0d78c;">Remember this</p>
+        <p class="section-label es" style="color:#f0d78c;">Recuerda esto</p>
+        <h2 class="en">You are not being left behind.</h2>
+        <h2 class="es">No te estamos dejando atrás.</h2>
+        <p class="en">We are leaving because our home is in Orlando — but our love for you does not stay in Ecuador when we get on the plane. I have been working on this because I want the next goodbye to have a plan attached to it. I want you to picture the pool, the practices, your room at our house, dinner with us, your free nights, and the day you step off the plane in Florida.</p>
+        <p class="es">Nos vamos porque nuestro hogar está en Orlando — pero nuestro cariño por ti no se queda en Ecuador cuando subimos al avión. He estado trabajando en esto porque quiero que la próxima despedida tenga un plan. Quiero que imagines la piscina, las prácticas, tu cuarto en nuestra casa, la cena con nosotros, tus noches libres, y el día en que bajas del avión en Florida.</p>
+        <p class="en">Nothing in swimming is guaranteed. A coach has to evaluate you, and progress will depend on your work. But the opportunity to try is real — and I am serious about helping you take that step.</p>
+        <p class="es">Nada en la natación está garantizado. Un entrenador tiene que evaluarte, y el progreso dependerá de tu trabajo. Pero la oportunidad de intentarlo es real — y yo estoy en serio sobre ayudarte a dar ese paso.</p>
+        <p class="en">You do not need anything except the courage to come and the willingness to work. The rest is something we will build together.</p>
+        <p class="es">No necesitas nada excepto el valor de venir y las ganas de trabajar. El resto lo construimos juntos.</p>
+        <p class="signoff en">Keep training. Send me your times.<br />Te quiero, Cesar.<br />— Tío CJ</p>
+        <p class="signoff es">Sigue entrenando. Envíame tus tiempos.<br />Te quiero, Cesar.<br />— Tío CJ</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="en">Prepared with love by Tío CJ · Orlando, Florida · August 2026</div>
+      <div class="es">Preparado con amor por tu Tío CJ · Orlando, Florida · Agosto 2026</div>
+      <div class="sources en">
+        Research notes: schedules, fees, camp dates, eligibility, and group placement can change. We will confirm every detail directly before booking.
+        Sources include GOAT group info, facilities, and fees pages on GoMotion; Rosen Aquatic Center; and Bolles Swim Camps program materials.
+      </div>
+      <div class="sources es">
+        Notas de investigación: horarios, costos, fechas de campamentos, elegibilidad y ubicación en grupos pueden cambiar. Confirmaremos cada detalle directamente antes de reservar.
+        Fuentes incluyen las páginas de GOAT (grupos, sedes y tarifas) en GoMotion; Rosen Aquatic Center; y materiales de Bolles Swim Camps.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function setLang(lang) {
+      document.body.setAttribute('data-lang', lang);
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+      try { localStorage.setItem('cesitar_mariscal-lang', lang); } catch (e) {}
+      document.documentElement.lang = lang;
+    }
+
+    (function initLang() {
+      var saved = null;
+      try { saved = localStorage.getItem('cesitar_mariscal-lang'); } catch (e) {}
+      if (saved === 'es' || saved === 'en') setLang(saved);
+      else if ((navigator.language || '').toLowerCase().startsWith('es')) setLang('es');
+    })();
+
+    // Scroll reveal
+    var nodes = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      nodes.forEach(function (n) { io.observe(n); });
+    } else {
+      nodes.forEach(function (n) { n.classList.add('in'); });
+    }
+  </script>
+</body>
+</html>

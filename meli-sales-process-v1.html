@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Meli's Sales System — Farmasi</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a1a; font-size: 15px; line-height: 1.6; min-height: 100dvh; padding-bottom: env(safe-area-inset-bottom, 0); overflow-wrap: anywhere; word-wrap: break-word; }
+
+  /* HEADER */
+  .header { background: #1a1a1a; color: #fff; padding: 2rem 2.5rem; padding-left: max(2.5rem, env(safe-area-inset-left)); padding-right: max(2.5rem, env(safe-area-inset-right)); padding-top: max(2rem, env(safe-area-inset-top)); }
+  .header-label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #888; margin-bottom: .35rem; }
+  .header-title { font-size: 26px; font-weight: 600; margin-bottom: .2rem; }
+  .header-sub { font-size: 13px; color: #aaa; }
+
+  /* NAV */
+  .nav { background: #fff; border-bottom: 1px solid #e8e6e0; padding: .75rem 2.5rem; padding-left: max(2.5rem, env(safe-area-inset-left)); padding-right: max(2.5rem, env(safe-area-inset-right)); display: flex; flex-wrap: wrap; align-items: center; gap: 6px; position: sticky; top: 0; z-index: 100; }
+  .nb { font-size: 12px; padding: 5px 14px; border-radius: 20px; border: 1px solid #ddd; background: #fff; color: #666; cursor: pointer; transition: all .15s; white-space: nowrap; font-family: inherit; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  .nb:hover { background: #f5f4f0; color: #333; }
+  .nb.on { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+
+  /* SECTIONS */
+  .sec { display: none; padding: 2rem 2.5rem; padding-left: max(2.5rem, env(safe-area-inset-left)); padding-right: max(2.5rem, env(safe-area-inset-right)); max-width: 900px; margin: 0 auto; width: 100%; }
+  .sec.on { display: block; }
+
+  .sh { margin-bottom: 1.75rem; padding-bottom: 1.25rem; border-bottom: 1px solid #e8e6e0; }
+  .sn { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #999; margin-bottom: .25rem; }
+  .st { font-size: 22px; font-weight: 600; color: #1a1a1a; margin-bottom: .2rem; }
+  .ss { font-size: 13px; color: #777; }
+
+  /* BOXES */
+  .why { background: #f5f4f0; border-radius: 10px; padding: .9rem 1.1rem; margin: .9rem 0; }
+  .wl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #999; font-weight: 600; margin-bottom: .3rem; }
+  .wt { font-size: 13px; color: #555; line-height: 1.7; }
+
+  .warn { background: #fef8ee; border: 1px solid #f5d78e; border-radius: 10px; padding: .9rem 1.1rem; margin: .9rem 0; }
+  .warnl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #92620a; font-weight: 600; margin-bottom: .3rem; }
+  .warnt { font-size: 13px; color: #6b4a08; line-height: 1.7; }
+
+  .ask { background: #eef5fd; border: 1px solid #b8d4f5; border-radius: 12px; padding: 1rem 1.25rem; margin: .9rem 0; }
+  .al { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #1a60aa; font-weight: 600; margin-bottom: .3rem; }
+  .at { font-size: 15px; color: #0d3d72; line-height: 1.75; font-weight: 600; }
+  .an { font-size: 12px; color: #2271c4; margin-top: .4rem; font-style: italic; }
+
+  .script { background: #f5f4f0; border-left: 3px solid #ccc; padding: .9rem 1.1rem; border-radius: 0 10px 10px 0; margin: .4rem 0 1rem; font-size: 13.5px; color: #1a1a1a; line-height: 1.85; }
+  .script em { font-size: 12px; color: #999; font-style: italic; }
+  .script strong { font-weight: 600; }
+  .sl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #999; margin: 1rem 0 .3rem; }
+
+  /* BRANCHES */
+  .bw { display: flex; flex-direction: column; gap: .55rem; margin: .5rem 0 1.25rem; }
+  .br { border: 1px solid #e8e6e0; border-radius: 10px; overflow: hidden; background: #fff; }
+  .bt { display: flex; gap: 10px; align-items: flex-start; padding: .65rem 1rem; background: #f5f4f0; }
+  .btag { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: #999; min-width: 22px; padding-top: 2px; font-weight: 600; }
+  .bif { font-size: 13px; color: #555; line-height: 1.55; font-style: italic; }
+  .bb { padding: .75rem 1.1rem; }
+  .bthen { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: #999; margin-bottom: .3rem; font-weight: 600; }
+  .bsay { font-size: 13.5px; color: #1a1a1a; line-height: 1.8; }
+  .bsay em { font-size: 12px; color: #999; font-style: italic; }
+  .bnext { display: inline-block; font-size: 11px; color: #1a60aa; background: #eef5fd; padding: 3px 10px; border-radius: 20px; margin-top: .45rem; }
+  .bsub { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: #999; margin: .6rem 0 .25rem; font-weight: 600; }
+
+  /* ANCHORS */
+  .anchor { background: #f0effe; border: 1px solid #c5bef5; border-radius: 12px; padding: 1rem 1.25rem; margin: .9rem 0; }
+  .ancl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #4a3aaa; font-weight: 600; margin-bottom: .3rem; }
+  .anct { font-size: 14px; color: #2a1a7a; line-height: 1.8; }
+  .ancn { font-size: 12px; color: #6a5acc; margin-top: .4rem; font-style: italic; }
+
+  .green { background: #edfaf4; border: 1px solid #8de0bc; border-radius: 12px; padding: 1rem 1.25rem; margin: .9rem 0; }
+  .gl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #0e6647; font-weight: 600; margin-bottom: .3rem; }
+  .gt { font-size: 13.5px; color: #063d2a; line-height: 1.8; }
+
+  .red { background: #fef0f0; border: 1px solid #f5b8b8; border-radius: 12px; padding: 1rem 1.25rem; margin: .9rem 0; }
+  .rl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #aa1a1a; font-weight: 600; margin-bottom: .3rem; }
+  .rt { font-size: 14px; color: #6a0a0a; line-height: 1.8; font-weight: 500; }
+
+  /* MISC */
+  .div { height: 1px; background: #e8e6e0; margin: 1.75rem 0; }
+  .steplabel { font-size: 14px; font-weight: 600; color: #1a1a1a; margin: 1.5rem 0 .3rem; }
+  .stepsub { font-size: 12px; color: #999; margin-bottom: .75rem; }
+
+  /* TALK TIME BARS */
+  .trow { display: flex; align-items: center; gap: 12px; padding: .35rem 0; flex-wrap: wrap; }
+  .tname { font-size: 12px; color: #666; min-width: 140px; flex: 1 1 140px; }
+  .ttrack { flex: 1; height: 6px; background: #e8e6e0; border-radius: 3px; overflow: hidden; }
+  .tfill { height: 100%; border-radius: 3px; }
+  .tpct { font-size: 11px; color: #999; min-width: 80px; text-align: right; }
+
+  /* KITS */
+  .kit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: .75rem 0; }
+  .kit { border: 1px solid #e8e6e0; border-radius: 10px; padding: .9rem; background: #fff; }
+  .kit.lead { border: 2px solid #b8d4f5; }
+  .kit-badge { font-size: 10px; background: #eef5fd; color: #1a60aa; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-bottom: .4rem; font-weight: 600; }
+  .kit-price { font-size: 22px; font-weight: 700; color: #1a1a1a; }
+  .kit-val { font-size: 12px; color: #777; margin-bottom: .3rem; }
+  .kit-note { font-size: 11px; color: #999; line-height: 1.5; }
+
+  /* OBJECTIONS */
+  .obj { border: 1px solid #e8e6e0; border-radius: 12px; overflow: hidden; margin-bottom: 1rem; background: #fff; }
+  .obj-q { padding: .85rem 1.25rem; background: #f5f4f0; font-size: 14px; color: #1a1a1a; font-weight: 600; }
+  .obj-body { padding: .9rem 1.25rem; display: flex; flex-direction: column; gap: .65rem; }
+  .obj-step { font-size: 13px; color: #555; line-height: 1.7; }
+  .obj-step strong { font-weight: 600; color: #1a1a1a; }
+
+  /* FP LIST */
+  .fp-item { font-size: 13.5px; color: #1a1a1a; line-height: 1.75; padding: .35rem 0 .35rem 1.3rem; position: relative; }
+  .fp-item::before { content: "→"; position: absolute; left: 0; color: #999; }
+
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+
+    .header {
+      padding: 1.25rem 1rem 1.5rem;
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-top: max(1.25rem, env(safe-area-inset-top));
+    }
+    .header-title { font-size: clamp(1.25rem, 5vw, 1.625rem); line-height: 1.25; word-wrap: break-word; }
+    .header-sub { font-size: 12px; line-height: 1.45; }
+
+    /* Horizontal scroll nav — one row, thumb-friendly */
+    .nav {
+      flex-wrap: nowrap;
+      align-items: center;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      gap: 8px;
+      padding: .6rem 1rem .75rem;
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      scroll-padding-inline: 1rem;
+      scrollbar-width: thin;
+    }
+    .nav::after {
+      content: "";
+      flex: 0 0 12px;
+      width: 12px;
+      height: 1px;
+    }
+    .nb {
+      flex: 0 0 auto;
+      min-height: 44px;
+      padding: 10px 14px;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sec {
+      padding: 1.25rem 1rem 2rem;
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+    }
+    .sh { margin-bottom: 1.35rem; padding-bottom: 1rem; }
+    .st { font-size: clamp(1.15rem, 4.5vw, 1.35rem); line-height: 1.3; }
+    .ss { font-size: 14px; }
+
+    .kit-grid { grid-template-columns: 1fr; gap: 10px; }
+
+    /* Talk time: stack so bars stay readable */
+    .trow {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+      padding: .5rem 0;
+      border-bottom: 1px solid #e8e6e0;
+    }
+    .trow:last-child { border-bottom: none; }
+    .tname { min-width: 0; flex: none; font-size: 13px; font-weight: 500; color: #444; }
+    .ttrack { min-height: 8px; }
+    .tpct { text-align: left; min-width: 0; font-size: 12px; }
+
+    .bt { flex-wrap: wrap; gap: 8px; }
+    .bif { font-size: 14px; }
+
+    .obj-q { font-size: 15px; padding: .75rem 1rem; }
+    .obj-body { padding: .85rem 1rem; }
+
+    .fp-item { font-size: 15px; padding-left: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-label">Farmasi · Melisa Clay</div>
+  <div class="header-title">The Complete Sales System</div>
+  <div class="header-sub">DM → Zoom → Close → Follow-Up · Version 1.0</div>
+</div>
+
+<div class="nav">
+  <button class="nb on" onclick="show('s0',this)">0 · Mindset</button>
+  <button class="nb" onclick="show('s1',this)">1 · The DM</button>
+  <button class="nb" onclick="show('s2',this)">2 · Rapport</button>
+  <button class="nb" onclick="show('s3',this)">3 · Frame</button>
+  <button class="nb" onclick="show('s4',this)">4 · Discovery</button>
+  <button class="nb" onclick="show('s5',this)">5 · Present</button>
+  <button class="nb" onclick="show('s6',this)">6 · Price Reveal</button>
+  <button class="nb" onclick="show('s7',this)">7 · Close</button>
+  <button class="nb" onclick="show('s8',this)">8 · Objections</button>
+  <button class="nb" onclick="show('s9',this)">9 · Follow-Up</button>
+</div>
+
+<!-- ============================================================ SECTION 0 -->
+<div id="s0" class="sec on">
+  <div class="sh">
+    <div class="sn">Section 0</div>
+    <div class="st">Before every call — the truth</div>
+    <div class="ss">Read this before you get on Zoom. Every single time.</div>
+  </div>
+
+  <div class="red">
+    <div class="rl">The reality check</div>
+    <div class="rt">Eva makes $4,000–$8,000 a month. She is not the ideal candidate. She doesn't fully exemplify the products. She doesn't do everything she should. And she still makes $4,000–$8,000 a month.<br><br>Evelyn makes $20,000 a month. She showed up. She talked to people. She was consistent for 7 years.<br><br>You made $13,900 last year — barely trying, in spurts, while working a smoke shop for $16 an hour.<br><br>The women DMing you already want what you have. They saw your life and reached out. Your only job on this call is to help them stop talking themselves out of it.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Sales is not pushing — here is what it actually is</div>
+    <div class="wt">Sales feels pushy when you try to convince someone of something they don't want. That's not this. These women chose to reach out after watching your life. They already want in. Your job is to lead them to a decision they already want to make. Staying silent at the close isn't being kind — it's abandoning them at the moment that matters most.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">The one rule that fixes 90% of your calls</div>
+    <div class="wt">Ask one question. Then stop talking completely. Do not fill the silence. Do not add to the question. Do not say "mm-hmm" every five seconds. Wait until she finishes her full answer. The more she talks, the more she convinces herself. Every word you add is a word she didn't say about why she wants this.</div>
+  </div>
+
+  <div class="green">
+    <div class="gl">The sale — keep this in your head the entire call</div>
+    <div class="gt">"The only wrong answer is being interested, watching other women live the life you know you could live — and doing nothing."</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Be honest about what this is</div>
+    <div class="wt">This is not "make $10k in 90 days." This is a side income that grows into a full income with consistency. Most women build this alongside their current job for 6–18 months before it replaces it. That's the honest pitch — and it's more powerful than hype, because the Latina woman who's skeptical of MLM has already been burned by that promise. The truth closes more deals than the fantasy.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Talk time — the target for every call</div>
+    <div class="wt">
+      <div class="trow"><div class="tname">Rapport (2–3 min)</div><div class="ttrack"><div class="tfill" style="width:50%;background:#b8d4f5;"></div></div><div class="tpct">50 / 50</div></div>
+      <div class="trow"><div class="tname">Frame (1–2 min)</div><div class="ttrack"><div class="tfill" style="width:80%;background:#f5c842;"></div></div><div class="tpct">you: 80%</div></div>
+      <div class="trow"><div class="tname">Discovery (8–10 min)</div><div class="ttrack"><div class="tfill" style="width:20%;background:#8de0bc;"></div></div><div class="tpct">you: 20%</div></div>
+      <div class="trow"><div class="tname">Present (5–7 min)</div><div class="ttrack"><div class="tfill" style="width:60%;background:#f5c842;"></div></div><div class="tpct">you: 60%</div></div>
+      <div class="trow"><div class="tname">Price + Close (3–4 min)</div><div class="ttrack"><div class="tfill" style="width:40%;background:#8de0bc;"></div></div><div class="tpct">you: 40%</div></div>
+      <div class="trow"><div class="tname">Objections (as needed)</div><div class="ttrack"><div class="tfill" style="width:35%;background:#b8d4f5;"></div></div><div class="tpct">you: 35%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 1 -->
+<div id="s1" class="sec">
+  <div class="sh">
+    <div class="sn">Section 1</div>
+    <div class="st">The DM — before the call</div>
+    <div class="ss">The DM has one job: get her on a Zoom. Nothing else happens here.</div>
+  </div>
+
+  <div class="warn">
+    <div class="warnl">What is happening right now — and why it kills calls</div>
+    <div class="warnt">The current auto-reply sends a full explanation of the business, comp plan, income ranges, product lines, and registration steps — before the call ever happens. When you explain everything in a DM, she makes a decision based on incomplete information without you having any say. She either says "no thanks" to something she never fully understood, or she signs up as a $150 customer when she could have been a Beauty building a team. The DM is not the sale. The DM gets her to the call.</div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">Step 1 — Fix the auto-reply (do this once)</div>
+  <div class="stepsub">Replace the current auto-message with this. One warm line, one question, nothing else.</div>
+
+  <div class="sl">New auto-reply — USA audience</div>
+  <div class="script">"Hey [name]! ✨ I'm Melisa — so glad you reached out. Real quick before I send you anything — what caught your attention? Is it more about the products, building income with a brand, or being part of a community of women?" <em>(wait for her answer — do not send anything else until she responds)</em></div>
+
+  <div class="sl">New auto-reply — Ecuador / Latin America audience</div>
+  <div class="script">"Hola [name]! ✨ Soy Melisa — me alegra mucho que te hayas comunicado. Antes de contarte todo, dime — ¿qué fue lo que te llamó la atención? ¿Buscar una forma de generar ingresos, conocer más sobre los productos, o las dos cosas?" <em>(wait — do not send anything else)</em></div>
+
+  <div class="div"></div>
+  <div class="steplabel">Step 2 — When she responds, book the call</div>
+  <div class="stepsub">Her answer tells you which emotional path to lead with on the call. Note it. Then book immediately.</div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">"Income / making money / building something / generating income"</div></div>
+      <div class="bb">
+        <div class="bthen">Reply with</div>
+        <div class="bsay">"Love that — honestly the best way I can show you everything is on a quick Zoom. It takes 20–25 minutes and you'll see exactly what this looks like plus ask me anything in real time. Does [day] or [day] work for you?" <em>(always give two specific options — never "whenever works for you")</em></div>
+        <div class="bnext">→ note before the call: income-motivated lead</div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">"Community / events / being part of something / the women around you"</div></div>
+      <div class="bb">
+        <div class="bthen">Reply with</div>
+        <div class="bsay">"That's honestly my favorite part of this whole thing — and it's so much better to show than tell. Can we jump on a quick Zoom? 20 minutes, I'll show you what the community actually looks like and what we're building together. Does [day] or [day] work?" <em>(give two specific options)</em></div>
+        <div class="bnext">→ note before the call: community-motivated lead</div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">"Products / I use skincare or makeup / just curious what you use"</div></div>
+      <div class="bb">
+        <div class="bthen">Reply with</div>
+        <div class="bsay">"Of course! I actually find it's way easier to walk you through everything on a quick Zoom — I can show you exactly what I use and answer everything in real time. It's only 20 minutes. Does [day] or [day] work for you?"</div>
+        <div class="bnext">→ note before the call: product-first lead — redirect to opportunity on call</div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">No real answer — "yes send me info" / "okay" / no response to the question</div></div>
+      <div class="bb">
+        <div class="bthen">Reply with</div>
+        <div class="bsay">"For sure! Honestly the easiest way is a quick 20-minute Zoom — I can show you everything and answer any questions live. Way faster than texting back and forth 😊 Does [day] or [day] work?"</div>
+        <div class="warn" style="margin-top:.6rem;"><div class="warnl">Hold the line</div><div class="warnt">Do not send a wall of info. The call is where this happens.</div></div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">She pushes for info before agreeing to a call — "just tell me how it works first"</div></div>
+      <div class="bb">
+        <div class="bthen">Reply with</div>
+        <div class="bsay">"I totally get it — I used to send a big info message too, but I found it always raised more questions than it answered and left people confused 😅 20 minutes on Zoom and you'll have the full picture plus I can answer anything in real time. Does [day] or [day] work?"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Why this works</div>
+    <div class="wt">When she answers that one question you know exactly which emotional driver to lead with on the call. You walk into the Zoom already knowing whether she wants income, community, or products. That one data point is worth more than any questionnaire. And because you didn't dump the business in text, she shows up curious — not already decided.</div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 2 -->
+<div id="s2" class="sec">
+  <div class="sh">
+    <div class="sn">Section 2</div>
+    <div class="st">Rapport — the warm open</div>
+    <div class="ss">2–3 minutes. Genuine, warm, personal. Then move. Do not let this become a friend chat.</div>
+  </div>
+
+  <div class="warn">
+    <div class="warnl">What Meli does now — and why it costs calls</div>
+    <div class="warnt">Rapport turns into a 15-minute friend chat. By the time the real conversation starts, the energy has flattened, there's no time left, and the frame of "I'm here to help you make a decision" never gets set. Rapport is not small talk. It's warmth with a purpose and a direction.</div>
+  </div>
+
+  <div class="sl">Open the Zoom — say this first</div>
+  <div class="script">"Hey [name]! Oh my gosh, I'm so happy we finally got to connect — I've been looking forward to this. <em>(smile — match her energy)</em><br><br>Where are you calling from today?" <em>(let her answer fully — then branch below)</em></div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">She's in Ecuador or Latin America</div></div>
+      <div class="bb">
+        <div class="bthen">Say</div>
+        <div class="bsay">"Oh I love that — I'm from Guayaquil originally, I'm in Orlando now. So you and I are basically family. <em>(light laugh)</em> How long have you been there?" <em>(one exchange — then move to transition question)</em></div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">She's in the US</div></div>
+      <div class="bb">
+        <div class="bthen">Say</div>
+        <div class="bsay">"Oh amazing — I love connecting with Latinas here in the States. There's something really special about building something together when you're away from home, you know? <em>(smile)</em> How long have you been there?" <em>(one exchange — then move)</em></div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">She mentions something personal — kids, job, something going on in her life</div></div>
+      <div class="bb">
+        <div class="bthen">Acknowledge briefly — one sentence — then transition</div>
+        <div class="bsay">"I love that — [one genuine response]. Okay, I want to make sure I use your time well today, so let me ask you one more thing before we dive in…" <em>(do not follow the thread deeper — the warmth is in your tone, not the length)</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sl">The transition — this ends rapport and opens the frame</div>
+  <div class="script">"So before I show you anything — I saw you mentioned [income / community / products] when you first reached out. I want to make sure I understand what you're actually looking for so I don't waste your time talking about things that don't matter to you. Can I ask you a few questions first?" <em>(wait for yes — then go to Section 3)</em></div>
+
+  <div class="why">
+    <div class="wl">Why 3 minutes and not more</div>
+    <div class="wt">The women who DMed you already like you. They watched your content. You don't need to re-earn their trust with 20 minutes of chat — you already have it. A warm, focused 3-minute open does more for trust than a 20-minute friend conversation, because it signals: "I value your time and I know where I'm taking you."</div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 3 -->
+<div id="s3" class="sec">
+  <div class="sh">
+    <div class="sn">Section 3</div>
+    <div class="st">Set the frame — take control</div>
+    <div class="ss">1–2 minutes. You set the agenda. Say this before anything else.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Why this step cannot be skipped</div>
+    <div class="wt">Without a frame, the call has no structure. The prospect thinks she's on an info call. Then when you try to close she feels surprised or pressured. The frame sets the expectation of a decision today — so when you get to the close it feels like the natural next step, not a sudden ask. You told her where you were going. She said yes. Now you can hold the structure.</div>
+  </div>
+
+  <div class="sl">Say this — word for word</div>
+  <div class="script">"Okay so here's how I like to do these — I keep them short and focused, about 20–25 minutes, because I respect your time.<br><br>What I'm going to do is ask you a few questions to really understand where you're at and what you're looking for. Then I'll show you what we're doing and how women are building income and a real community with this. And if it feels like a fit, we'll figure out how to get you started.<br><br>Sound good?" <em>(wait for yes — do not move forward without it)</em></div>
+
+  <div class="anchor">
+    <div class="ancl">Why "sound good?" matters</div>
+    <div class="anct">When she says yes to the frame, she has agreed to the process — including the decision at the end. You told her exactly what was happening. She said yes. This is not manipulation. This is leadership.</div>
+  </div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">She tries to skip ahead — "just tell me the price" or "how does it work?"</div></div>
+      <div class="bb">
+        <div class="bthen">Say</div>
+        <div class="bsay">"I'll show you everything, I promise — and honestly the price part makes a lot more sense once I understand a little bit about you first. Can I ask you a couple quick questions?" <em>(redirect back — do not skip discovery)</em></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 4 -->
+<div id="s4" class="sec">
+  <div class="sh">
+    <div class="sn">Section 4</div>
+    <div class="st">Discovery — the most important stage</div>
+    <div class="ss">8–10 minutes. She talks 80% of the time. Ask, then go completely silent.</div>
+  </div>
+
+  <div class="red">
+    <div class="rl">The rule for this entire section</div>
+    <div class="rt">Ask the question. Close your mouth. Do not speak again until she has fully finished her answer. Not one word. Not "mm-hmm." Silence. Every second she fills is a second she's convincing herself.</div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">Step 4.1 — The opening question</div>
+  <div class="stepsub">Start every call here regardless of what she said in the DM.</div>
+
+  <div class="ask">
+    <div class="al">Meli asks</div>
+    <div class="at">"So tell me — what made you reach out after you saw my post? Like what was going through your mind?"</div>
+    <div class="an">Ask it. Then stop. Let her answer completely. Do not finish her sentence.</div>
+  </div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">"I want to make money / extra income / something of my own"</div></div>
+      <div class="bb">
+        <div class="bthen">Say</div>
+        <div class="bsay">"I love that. And can I ask — is the extra income more about covering something specific right now, or is it more about having something that's actually yours?" <em>(pause — let her answer — then go to Path A below)</em></div>
+        <div class="bnext">→ go to Step 4.2 — Path A</div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">"I love your lifestyle / I want what you have / your life looks amazing"</div></div>
+      <div class="bb">
+        <div class="bthen">Say</div>
+        <div class="bsay">"That honestly means so much, thank you. What specifically stood out — was it more the freedom, the women around you, or the fact that I've built something that's actually mine?" <em>(pause — let her answer — then go to Path B)</em></div>
+        <div class="bnext">→ go to Step 4.2 — Path B</div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">"I want to learn about the products / I use this kind of stuff already"</div></div>
+      <div class="bb">
+        <div class="bthen">Say</div>
+        <div class="bsay">"Perfect — and how long have you been into [skincare / makeup / wellness]?" <em>(let her answer)</em><br><br>"And did you see anything about the income side or is that new to you?" <em>(this opens the door — go to Path C)</em></div>
+        <div class="bnext">→ go to Step 4.2 — Path C</div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">Vague — "I was just curious" / "I saw it and reached out" / "I don't know"</div></div>
+      <div class="bb">
+        <div class="bthen">Say</div>
+        <div class="bsay">"I love that — honestly the best things usually start with curiosity. Let me ask you — what does your life look like right now? Like what are you doing for work?" <em>(bridge into current situation — go to Path D)</em></div>
+        <div class="bnext">→ go to Step 4.2 — Path D</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">Step 4.2 — Go deeper (choose the right path)</div>
+  <div class="stepsub">Pick 2–3 questions from the matching path only. Do not ask all of them.</div>
+
+  <div class="ask" style="background:#edfaf4;border-color:#8de0bc;">
+    <div class="al" style="color:#0e6647;">Path A — Income motivated</div>
+    <div class="at" style="color:#063d2a;">She wants money. Dig into why and what has stopped her before.</div>
+  </div>
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">ask</div><div class="bif">"What are you doing for work right now?"</div></div>
+      <div class="bb"><div class="bthen">follow with</div><div class="bsay">"And do you feel like you have room to grow there financially — or does it feel like a ceiling?" <em>(pause — full silence)</em></div></div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">ask</div><div class="bif">"Have you ever tried to build something of your own before?"</div></div>
+      <div class="bb">
+        <div class="bsub">If yes</div>
+        <div class="bsay">"What happened? What got in the way?" <em>(this reveals her real fear — write it down)</em></div>
+        <div class="bsub">If no</div>
+        <div class="bsay">"What's stopped you from starting something before?" <em>(write her answer word for word)</em></div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">ask</div><div class="bif">"If you had an extra $1,500–$2,000 a month — what would that actually change for you right now?"</div></div>
+      <div class="bb"><div class="bthen">follow with</div><div class="bsay">"And why is that the thing that matters most to you?" <em>(write her exact words — you will say them back at the close)</em></div></div>
+    </div>
+  </div>
+
+  <div class="ask" style="background:#f0effe;border-color:#c5bef5;margin-top:1rem;">
+    <div class="al" style="color:#4a3aaa;">Path B — Lifestyle / freedom motivated</div>
+    <div class="at" style="color:#2a1a7a;">She wants freedom, flexibility, or community. Make her feel it before you show it.</div>
+  </div>
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">ask</div><div class="bif">"What does your day-to-day look like right now?"</div></div>
+      <div class="bb"><div class="bthen">follow with</div><div class="bsay">"Do you feel like you have control over your time — or does it feel like you're always doing what you have to do instead of what you want?" <em>(pause — full silence)</em></div></div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">ask</div><div class="bif">"Do you have women around you — a real community — people who are building something and supporting each other?"</div></div>
+      <div class="bb"><div class="bthen">either way follow with</div><div class="bsay">"Because that's honestly what our women say changed their life the most. Not even the money at first. Just having a real group that shows up for each other." <em>(pause — let that land)</em></div></div>
+    </div>
+  </div>
+
+  <div class="ask" style="background:#fef8ee;border-color:#f5d78e;margin-top:1rem;">
+    <div class="al" style="color:#92620a;">Path C — Product first (expand her vision)</div>
+    <div class="at" style="color:#6b4a08;">She came for products. Open the door to the opportunity without pushing.</div>
+  </div>
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">ask</div><div class="bif">"How long have you been spending money on [skincare / makeup / wellness]?"</div></div>
+      <div class="bb"><div class="bthen">follow with</div><div class="bsay">"So you've been spending on this for [X] years. What if that same spending started paying you back instead of just going out?" <em>(pause — this opens the business door without any pressure)</em></div></div>
+    </div>
+  </div>
+
+  <div class="ask" style="background:#f5f4f0;border-color:#ddd;margin-top:1rem;">
+    <div class="al">Path D — Vague / curious (build the picture first)</div>
+    <div class="at" style="color:#333;">She's not sure yet. Find the emotional hook through her current situation.</div>
+  </div>
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">ask</div><div class="bif">"What are you doing for work right now — do you enjoy it?"</div></div>
+      <div class="bb"><div class="bthen">follow with</div><div class="bsay">"And outside of work — is there anything you've been wanting to build or start but just haven't had the right thing or the right time?" <em>(this opens the emotional conversation from a neutral point)</em></div></div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">Step 4.3 — Future pacing</div>
+  <div class="stepsub">This is where she sells herself. Do not skip this. Pick 2 questions — not all 5.</div>
+
+  <div class="green">
+    <div class="gl">Future pacing questions — pick 2 based on her answers</div>
+    <div class="gt">
+      <div class="fp-item">"Imagine it's 12 months from now. You've been consistent — not perfect, just consistent. You're making an extra $1,500–$2,000 a month doing something you actually enjoy. What does your life look like that's different from today?"</div>
+      <div class="fp-item">"What's the first thing you'd do differently if money wasn't the reason you couldn't?"</div>
+      <div class="fp-item">"Is there something you've been putting off — a trip, something for your kids, something just for yourself — that this could actually make happen?"</div>
+      <div class="fp-item">"What would it mean to you to have something that was completely yours — your brand, your business, your income?"</div>
+      <div class="fp-item">"If you watched someone else — someone just like you — build this and live that life, and you had done nothing — how would that feel?"</div>
+    </div>
+  </div>
+
+  <div class="anchor">
+    <div class="ancl">The emotional anchor — always end discovery here</div>
+    <div class="anct">"So if I'm hearing you right — what you really want is [her exact words]. And the only thing standing between you and that is a decision. Is that fair?" <em>(pause — let her confirm)</em></div>
+    <div class="ancn">Write down her exact words before anything else. You will say them back to her at the close.</div>
+  </div>
+
+  <div class="warn">
+    <div class="warnl">Do not do this after future pacing</div>
+    <div class="warnt">Do NOT immediately launch into the presentation. Pause for one full second and say: "I love that. Based on everything you just told me, I think you're going to really connect with what I'm about to show you. Let me take just 5 minutes." Then and only then move to Section 5. That pause matters — she needs to sit in the feeling before you shift to logic.</div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 5 -->
+<div id="s5" class="sec">
+  <div class="sh">
+    <div class="sn">Section 5</div>
+    <div class="st">The presentation — 3 pillars</div>
+    <div class="ss">5–7 minutes. Lead with what matters to HER. Three pillars. No catalog. No prices yet.</div>
+  </div>
+
+  <div class="green">
+    <div class="gl">Always start with this bridge — use her exact words</div>
+    <div class="gt">"Based on everything you just told me — [say her exact words from discovery] — I think you're going to really connect with what I'm about to show you. Let me take just a few minutes." <em>(this is why you wrote her words down — this sentence is the hinge between her emotion and your offer)</em></div>
+  </div>
+
+  <div class="warn">
+    <div class="warnl">The hard rule for this section</div>
+    <div class="warnt">You cover all 3 pillars in every call. But you START with the one she cares about most — determined by discovery. Do not open with products if she said she wants freedom. Do not open with income if she said she wants community. Lead with her answer, then weave in the rest.</div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">Pillar 1 — The lifestyle and freedom</div>
+  <div class="stepsub">Lead here if she mentioned: freedom, time, flexibility, she loves your life, she wants something of her own.</div>
+  <div class="script">"What you saw on my Instagram — that's real. The trips, working from wherever I want, the women around me, building something that's mine — that's what this actually looks like when you're consistent.<br><br>And here's what I want you to hear — I'm not even doing everything I could be doing yet. I still have room to grow. And I'm already building four-figure income. I made $13,900 in one year while still working another job.<br><br>Imagine what happens when you actually go all in." <em>(pause — let that land)</em></div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">tie-down</div><div class="bif">After Pillar 1 — always ask this</div></div>
+      <div class="bb">
+        <div class="bthen">Say</div>
+        <div class="bsay">"Can you see yourself building something like that — where your life becomes the brand and people want to join just from watching you?"</div>
+        <div class="bsub">If yes</div>
+        <div class="bsay">"That's exactly what this is. And you don't have to build it perfectly. You just have to start." <em>→ move to Pillar 2</em></div>
+        <div class="bsub">If "I don't know if I could do what you do"</div>
+        <div class="bsay">"You don't have to be me. You just have to be you — consistently. The women on my team who win aren't the most polished. They just show up and build trust over time. That's it." <em>→ move to Pillar 2</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="steplabel">Pillar 2 — The community</div>
+  <div class="stepsub">Lead here if she feels alone or wants belonging. Otherwise present it second.</div>
+  <div class="script">"One thing nobody talks about enough — the community is probably the biggest thing about this.<br><br>The women you see in my photos — at events, traveling together, training together — those are real friendships that came from this business. You're never alone here. We have calls, group training, events — you plug in and immediately you have a team behind you.<br><br>Eva — one of the women in my upline — started this as a stay-at-home mom with no network. Now she has consistent four-figure months and has had months at $8,000. Not because she's the loudest or most polished. Because she showed up and her community grew around her." <em>(pause)</em></div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">tie-down</div><div class="bif">After Pillar 2 — ask this</div></div>
+      <div class="bb">
+        <div class="bthen">Say</div>
+        <div class="bsay">"Do you have something like that in your life right now — a real group of women who are building something and actually pushing each other?"</div>
+        <div class="bsub">If no</div>
+        <div class="bsay">"That's one of the things that changes first when you join. Before you even see your first check, you already have a team behind you."</div>
+        <div class="bsub">If yes</div>
+        <div class="bsay">"That's amazing. Imagine adding a group who are also building businesses and understand exactly what you're going through. It's a different kind of support."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="steplabel">Pillar 3 — The income (concept only — no price yet)</div>
+  <div class="stepsub">Lead here if she wants money or mentioned financial pressure. Explain how income works — price comes in Section 6.</div>
+  <div class="script">"Here's the income side — and I'm going to be real with you, not give you hype numbers.<br><br>There are 10 ways to earn here. The first is simple — you earn 50% directly on every sale. Someone buys $100 of product through your store, you keep $50.<br><br>Then as you build a team, you earn on their sales too — a percentage of everything they bring in. That builds into residual income over time. Money that keeps coming in even when you're not actively working. That's how you stop trading time for money.<br><br>Evelyn — who's been doing this for 7 years — makes $20,000 a month. Eva, who doesn't do everything she could, still makes $4,000 to $8,000 a month consistently as a stay-at-home mom.<br><br>The difference between them and someone who makes nothing is not talent. It's consistency." <em>(pause)</em></div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">tie-down</div><div class="bif">After Pillar 3 — ask this</div></div>
+      <div class="bb">
+        <div class="bthen">Say</div>
+        <div class="bsay">"If you were consistent — not perfect, just consistent — for 6 months, can you see how this could start supplementing or replacing what you're doing now?"</div>
+        <div class="bsub">If "I don't have time to be consistent"</div>
+        <div class="bsay">"This is built around your life, not the other way around. You start with whatever time you have. An hour a day is enough to begin. You don't go all in on day one — you build as you go until the income justifies going further."</div>
+        <div class="bsub">If "Those numbers sound too good"</div>
+        <div class="bsay">"I respect that — which is exactly why I don't lead with $20k. I tell you my real story. $13,900 in one year, not doing everything I could, while still working another job. The bigger numbers are real but they come from years of consistency. Where would you want to be in year one?"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor">
+    <div class="ancl">Transition to price — after all 3 pillars</div>
+    <div class="anct">"So here's the thing — everything I just showed you, the lifestyle, the community, the income — it all starts with one simple decision. Let me show you what that looks like." <em>(move directly to Section 6 — keep the momentum — do not pause for questions here)</em></div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 6 -->
+<div id="s6" class="sec">
+  <div class="sh">
+    <div class="sn">Section 6</div>
+    <div class="st">Price anchor and reveal</div>
+    <div class="ss">2–3 minutes. Anchor high first. Then reveal the price as a relief — not a feature.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Why the anchor comes before the price</div>
+    <div class="wt">If you say "$150" before she has any frame of reference, it sounds like whatever it sounds like. The anchor creates context. When she hears what other companies charge first, $150 stops being a price and becomes a deal. The anchor is not manipulation — it's context. It makes the value obvious before she evaluates the number.</div>
+  </div>
+
+  <div class="sl">Step 1 — The price anchor</div>
+  <div class="script">"Before I tell you how to get started, I want to give you some context — because most people don't know this.<br><br>Most companies in this space — you're paying $300, $500, even $1,000 or more just to join. And that's before you ever see a product. Then you have monthly purchase minimums you have to hit just to stay active, auto-ship requirements that keep charging you whether you want to order or not, and training that costs extra on top.<br><br>Here it is the complete opposite." <em>(pause — let that contrast land before you say anything else)</em></div>
+
+  <div class="sl">Step 2 — The reveal</div>
+  <div class="script">"To get started as a Beauty Influencer — which gets you into the community, gives you your personal store, and unlocks everything I just showed you — it starts at just $150 one time.<br><br>And for that $150, you get $300 worth of products that you actually choose — skincare, makeup, nutrition, whatever you already use in your daily life. Products you were going to buy somewhere else anyway.<br><br>So you're not spending $150. You're redirecting it — and getting double back in product on day one." <em>(pause — let that sink in)</em></div>
+
+  <div class="steplabel">The kit options — present simply, lead with $150</div>
+  <div class="stepsub">Mention all three exist. Never present them equally or she'll overthink it.</div>
+  <div class="kit-grid">
+    <div class="kit lead">
+      <div class="kit-badge">Lead with this</div>
+      <div class="kit-price">$150</div>
+      <div class="kit-val">$300 in product value</div>
+      <div class="kit-note">You choose exactly what you want. Any line. Skincare, makeup, nutrition. This is the default offer.</div>
+    </div>
+    <div class="kit">
+      <div class="kit-price">$250</div>
+      <div class="kit-val">More product, more variety</div>
+      <div class="kit-note">For someone who wants more from day one. Mention if she shows strong interest in a specific category.</div>
+    </div>
+    <div class="kit">
+      <div class="kit-price">$500</div>
+      <div class="kit-val">Full kit — all in</div>
+      <div class="kit-note">Mention only if she signals she wants to go all in immediately. Never lead with this.</div>
+    </div>
+  </div>
+
+  <div class="sl">How to present the kits — say this</div>
+  <div class="script">"Most women start with the $150 kit — you pick exactly what you want, any line, and you get $300 in value. That's the most popular way to start.<br><br>There are also $250 and $500 options if you want to go bigger from day one — more product, more variety. But the $150 is where most people begin and it's honestly all you need to get started." <em>(then move directly to Section 7 — do not open a product catalog discussion)</em></div>
+
+  <div class="warn">
+    <div class="warnl">Hard rule — do not do this</div>
+    <div class="warnt">Do not ask "what products do you like?" and spend 20 minutes going through options. Product selection happens AFTER she says yes — not before. The only product info she needs before the close is: you get $300 in product for $150 and you pick what you want.</div>
+  </div>
+
+  <div class="steplabel">Ecuador / Latin America urgency — use this every time for those leads</div>
+  <div class="script">"And one more thing I want to make sure you know — Farmasi is officially launching in Ecuador in June. Right now, women in Ecuador who join are getting in before the launch, which means they're building their teams and their customer base before the market even fully opens. The women who start now will be the established leaders when it launches. That window is real and it's closing." <em>(this is legitimate — use it every time)</em></div>
+</div>
+
+<!-- ============================================================ SECTION 7 -->
+<div id="s7" class="sec">
+  <div class="sh">
+    <div class="sn">Section 7</div>
+    <div class="st">The close</div>
+    <div class="ss">2–3 minutes. Best case / worst case. Assumptive close. Then complete silence.</div>
+  </div>
+
+  <div class="red">
+    <div class="rl">The most important rule in the entire system</div>
+    <div class="rt">After you ask the close question — do not speak. Not one word. The first person who speaks loses. If she is quiet for 10, 20, 30 seconds — that is her thinking. Let her think. Your silence tells her this is a normal, confident moment. The second you fill that silence, you take the pressure off and she relaxes back into "I'll think about it."</div>
+  </div>
+
+  <div class="sl">Step 1 — Best case / worst case (remove the risk)</div>
+  <div class="script">"Here's the simplest way to think about this decision.<br><br>Worst case — you join, you get $300 in products you were already going to buy somewhere else anyway, and you decide it's not for you. You still came out ahead on day one.<br><br>Best case — you take this seriously, you're consistent, and six months from now you're making an extra $1,000, $2,000 a month doing something you already love. And a year from now this is replacing the thing you've been wanting to leave.<br><br>There is no bad outcome here. The only bad outcome is being interested and doing nothing." <em>(pause)</em></div>
+
+  <div class="sl">Step 2 — Mirror her words back, then close</div>
+  <div class="script">"Honestly, based on everything you told me — [say her exact words from discovery] — I think you would be really good at this. You already have what it takes. You just need to start.<br><br>And the investment is $150 to get $300 in product and everything I just showed you." <em>(pause — smile)</em><br><br><strong>"Do you have your card on you, or do you need a quick second to grab it?"</strong><br><br><em>(STOP. Do not say another word. Wait. Let her speak first.)</em></div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">She says yes or moves to get her card</div></div>
+      <div class="bb"><div class="bthen">Say</div><div class="bsay">"Amazing — let me pull up your registration link right now. I'll walk you through it step by step so it takes two minutes." <em>(stay on the call — guide her through registration — do not let her go do it alone later)</em></div></div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">She hesitates but doesn't say no — silence or "um…"</div></div>
+      <div class="bb"><div class="bthen">Say only</div><div class="bsay">"Take your time." <em>(then silence again — do not add a single word)</em></div></div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">if</div><div class="bif">She raises an objection</div></div>
+      <div class="bb"><div class="bnext">→ go to Section 8 — Objections</div></div>
+    </div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Why "do you have your card?" works</div>
+    <div class="wt">It's an assumptive close — it assumes she's going forward and asks about a detail, not a decision. This bypasses the yes/no trap. Most people move forward because the question implies this is what everyone does at this point. This is not pressure — it's leadership. You're treating her like someone who has already decided, which makes it easier for her to become that person.</div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 8 -->
+<div id="s8" class="sec">
+  <div class="sh">
+    <div class="sn">Section 8</div>
+    <div class="st">Objection handling</div>
+    <div class="ss">Never argue. Acknowledge — find the real issue — reframe — return to close.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">The rule before every objection response</div>
+    <div class="wt">Objections are almost never what they sound like. "I don't have the money" usually means "I'm not sure yet." "I need to think about it" means "you haven't answered my real question." Your job is always to find the real question underneath — not respond to the surface one. Ask, don't argue. Then return to the close.</div>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="obj">
+    <div class="obj-q">"I need to think about it"</div>
+    <div class="obj-body">
+      <div class="obj-step"><strong>Step 1 — Acknowledge:</strong> "Of course — I completely understand."</div>
+      <div class="obj-step"><strong>Step 2 — Find the real issue:</strong> "Can I ask — what specifically are you thinking about? Is it the $150, how the business works, or something else?" <em>(pause — wait for her real answer)</em></div>
+      <div class="obj-step"><strong>If it's money:</strong> → go to money objection below</div>
+      <div class="obj-step"><strong>If it's doubt about herself:</strong> "That's honestly the most common thing I hear from the women who end up doing the best here. You don't need to have it figured out before you start. You just need to start — and I will be with you every step of the way."</div>
+      <div class="obj-step"><strong>If she still won't name it:</strong> "I hear you. Let me ask — is there anything I said that didn't feel right, or does this just feel like a big step?" <em>(this almost always gets the real answer)</em></div>
+      <div class="obj-step"><strong>Return to close:</strong> "Based on everything you told me — [her words] — I think the only thing standing between you and that is this one decision. What's your gut telling you right now?"</div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">"I don't have the money"</div>
+    <div class="obj-body">
+      <div class="obj-step"><strong>Step 1 — Acknowledge:</strong> "I hear you — and I want to be real with you, not dismiss that."</div>
+      <div class="obj-step"><strong>Step 2 — Clarify:</strong> "Can I ask honestly — is it that $150 genuinely isn't available right now, or is it more that you're not sure yet if it's worth it?" <em>(pause — this separates the real money objection from a confidence objection)</em></div>
+      <div class="obj-step"><strong>If it's a confidence issue (most common):</strong> "Because that's a different conversation — and honestly the easier one. The product alone is worth $300. You're not spending $150, you're redirecting it. Worst case you have $300 in products you were going to buy anyway. That's a win before you even start."</div>
+      <div class="obj-step"><strong>If money is genuinely tight:</strong> "Okay — I respect that completely. When do you think would feel more right? Because I'd hate for you to miss this moment — especially with Ecuador launching in June. The women getting in now will be the leaders when it opens."</div>
+      <div class="obj-step"><strong>Return to close:</strong> "Do you have your card or should we figure out a timing that works for you?"</div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">"I want to wait"</div>
+    <div class="obj-body">
+      <div class="obj-step"><strong>Step 1 — Acknowledge:</strong> "Totally fair."</div>
+      <div class="obj-step"><strong>Step 2 — Challenge gently:</strong> "Can I ask — what would be different if you waited? Like what specifically would change between now and then?" <em>(pause — let her answer)</em></div>
+      <div class="obj-step"><strong>Then say:</strong> "Because usually when I ask that, most people realize the only thing that changes is the time that passed. And you told me [her reason from discovery]. That's not something that gets better with time — it gets more urgent."</div>
+      <div class="obj-step"><strong>Ecuador add-on:</strong> "And specifically — Farmasi is opening in Ecuador in June. The women who start building now are going to be the established leaders when that market opens. Waiting six months means watching someone else take that position."</div>
+      <div class="obj-step"><strong>Return to close:</strong> "What's your gut telling you right now — honestly?"</div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">"I don't know if I can do this"</div>
+    <div class="obj-body">
+      <div class="obj-step"><strong>Step 1 — Validate:</strong> "You know what — that's exactly what Eva said before she started making $4,000–$8,000 a month as a stay-at-home mom."</div>
+      <div class="obj-step"><strong>Step 2 — Reframe:</strong> "You don't need to know how to do this. You need to be willing to learn and show up. I will walk you through every single step. You won't be guessing alone. You'll have me and the whole team."</div>
+      <div class="obj-step"><strong>Return to close:</strong> "The only question is whether you want to start. Do you have your card?"</div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">"I need to talk to my husband / partner first"</div>
+    <div class="obj-body">
+      <div class="obj-step"><strong>Step 1 — Respect it:</strong> "Of course — I completely respect that."</div>
+      <div class="obj-step"><strong>Step 2 — Reframe the conversation:</strong> "Let me ask you this — do you think he would be upset about $150 on products you were already going to buy anyway, or proud of you for starting something that could bring in real income for your family?" <em>(pause — let her answer)</em></div>
+      <div class="obj-step"><strong>If she thinks he'd support it:</strong> "Then let's lock in your spot right now and you can share the news with him tonight. You can show him exactly what you joined and why."</div>
+      <div class="obj-step"><strong>If genuinely unsure:</strong> "I understand. Can we do this — let's set a follow-up for [specific day] after you've talked. I want to make sure you have everything you need to explain it clearly to him. Can I send you a quick summary you can share with him?"</div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">"I've tried MLM before and it didn't work"</div>
+    <div class="obj-body">
+      <div class="obj-step"><strong>Step 1 — Validate:</strong> "I hear that — and I'm not going to tell you those experiences weren't real."</div>
+      <div class="obj-step"><strong>Step 2 — Ask:</strong> "Can I ask what happened? What was the thing that made it not work?" <em>(let her answer — this tells you exactly what to address)</em></div>
+      <div class="obj-step"><strong>Then address specifically what she named:</strong><br>High minimums → "Here there's no monthly minimum to maintain your discount."<br>Expensive to join → "Here it's $150 and you get $300 back in product."<br>No support → "Here you have me directly. Not a random sponsor — me."<br>Had to sell to family → "Here you build through content and your personal brand — exactly like you saw on my Instagram."</div>
+      <div class="obj-step"><strong>Return to close:</strong> "What would need to be different for this to feel worth trying? Because I think we've covered it. Do you have your card?"</div>
+    </div>
+  </div>
+
+  <div class="warn">
+    <div class="warnl">If she still won't close after 2 objection cycles</div>
+    <div class="warnt">"I completely understand — and I never want anyone to feel pressured. Here's what I'll say honestly: once you join under someone else's team I can't mentor you directly, and the support I give my team is a big part of what makes this work. So if that matters to you, the time to decide is now. Either way, I'm happy to follow up — which day works better for you to reconnect?"</div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 9 -->
+<div id="s9" class="sec">
+  <div class="sh">
+    <div class="sn">Section 9</div>
+    <div class="st">Follow-up sequence</div>
+    <div class="ss">For prospects who didn't close on the call. Three touches. Then let go.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">The mindset for follow-up</div>
+    <div class="wt">Most sales happen on the 2nd or 3rd contact, not the first. But the follow-up has to feel like genuine care — not desperation. You are not chasing her. You are checking in because you believe in what you showed her and you want to make sure she has what she needs to decide. She will feel the difference.</div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">Touch 1 — Same day or next day</div>
+  <div class="stepsub">Send within 24 hours of the call. Warm, no pressure, opens a door.</div>
+  <div class="script">"Hey [name] — it was so great connecting with you today. I just wanted to say I really enjoyed our conversation and I genuinely think you'd be an amazing fit. No pressure at all — whenever you're ready I'm here. And if any questions came up after we hung up, just send them my way 😊"</div>
+
+  <div class="steplabel">Touch 2 — 3–4 days later</div>
+  <div class="stepsub">Reference something real from the call. Reconnect to her reason.</div>
+  <div class="script">"Hey [name]! Just thinking about you — you mentioned [her specific reason from discovery] and it really stuck with me. I wanted to check in and see if you had any questions or if anything else came up. Also just a reminder — Farmasi has new promotions activating this week, so it's a good time if you've been thinking about it. Either way, hope you're having a great week ✨"</div>
+
+  <div class="steplabel">Touch 3 — 7–10 days later</div>
+  <div class="stepsub">Final touch. Light urgency. Honest and warm. Then let go.</div>
+  <div class="script">"Hey [name] — I don't want to keep bothering you, so this will be my last check-in for a while 😊 I just want you to know the door is always open. Whenever the timing feels right, I'm here. And if you ever want to revisit what we talked about, just send me a message. Wishing you the best — truly."</div>
+
+  <div class="warn">
+    <div class="warnl">For Ecuador leads — add this to Touch 2 or Touch 3</div>
+    <div class="warnt">"Also — I want to make sure you know that Farmasi is officially launching in Ecuador in June. Women who start building now are going to be the established leaders when that market opens. If timing has been the question, this is the reason to move now."</div>
+  </div>
+
+  <div class="anchor">
+    <div class="ancl">After 3 touches with no response — let go</div>
+    <div class="anct">Do not send a 4th message. Move on. Some people need more time and they will come back when they're ready. The ones who come back later almost always say "I wish I had started when we first talked." Your job is to stay visible through your content — not to chase individually.</div>
+    <div class="ancn">The best follow-up is posting your life consistently so she keeps seeing what she's missing.</div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">After she joins — the first 24 hours matter most</div>
+  <div class="stepsub">This is where Meli is naturally strong. Give it structure.</div>
+  <div class="script">"Welcome to the team! 🎉 I'm so excited you're here. Here's what happens next — I'm going to send you three things: your login, a link to our team group, and a quick voice message walking you through your first steps. You don't need to figure anything out alone. I've got you." <em>(send within the hour of her joining — speed here determines whether she stays excited or gets cold feet)</em></div>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

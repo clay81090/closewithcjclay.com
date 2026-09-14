@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<!-- deploy: 2026-06-01-client-safe-copy-v9 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Earnings Calculator | HTSA</title>
+<meta name="description" content="Pre-call earnings calculator — model your goal income, close rate, call volume, and first-year commission ramp.">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html { color-scheme: dark; }
+:root {
+  --navy: #060d18;
+  --navy-mid: #0f1f35;
+  --navy-card: #0f1e35;
+  --green: #00e699;
+  --green-dim: #00c97a;
+  --green-dark: #009a5e;
+  --mid: rgba(255,255,255,0.10);
+  --text: #e8f0ff;
+  --text-soft: rgba(232,240,255,0.72);
+  --muted: #6b7fa0;
+  --gold: #f0c060;
+  --danger: #ff8c82;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --font-d: 'Syne', system-ui, sans-serif;
+  --font-s: 'Playfair Display', Georgia, serif;
+  --font-b: 'DM Sans', system-ui, sans-serif;
+  --font-m: 'DM Mono', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: var(--font-b);
+  background: var(--navy);
+  color: var(--text-soft);
+  line-height: 1.65;
+  font-size: 15px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  padding-top: env(safe-area-inset-top, 0px);
+  touch-action: manipulation;
+}
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(0, 230, 153, 0.22), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 90% 20%, rgba(64, 120, 255, 0.12), transparent 45%),
+    radial-gradient(ellipse 50% 60% at 50% 100%, rgba(0, 201, 122, 0.08), transparent 55%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+}
+.orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.orb { position: absolute; border-radius: 50%; filter: blur(70px); animation: floatOrb 20s var(--ease) infinite; }
+.orb:nth-child(1) { width: 380px; height: 380px; background: rgba(0, 230, 153, 0.22); top: -100px; left: -120px; }
+.orb:nth-child(2) { width: 300px; height: 300px; background: rgba(100, 140, 255, 0.14); bottom: 8%; right: -100px; animation-delay: -7s; animation-duration: 24s; }
+.orb:nth-child(3) { width: 220px; height: 220px; background: rgba(0, 201, 122, 0.18); top: 42%; left: 38%; animation-delay: -13s; animation-duration: 28s; }
+@keyframes floatOrb {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(28px,-18px) scale(1.04); }
+  66% { transform: translate(-22px,14px) scale(0.97); }
+}
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.048;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.shell {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 20px 100px;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  padding-bottom: max(100px, env(safe-area-inset-bottom, 0px));
+  width: 100%;
+}
+
+.hero {
+  min-height: 52vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 88px 0 32px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 20px;
+}
+.badge-dot {
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 18px var(--green);
+}
+.hero h1 {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--text);
+  max-width: 16ch;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--green) 0%, #4de8b0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-lead {
+  margin-top: 18px;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  max-width: 48ch;
+  color: var(--text-soft);
+}
+.hero-lead strong { color: var(--text); font-weight: 600; }
+
+.section { margin-bottom: 26px; }
+.section-head { margin-bottom: 20px; }
+.section-kicker {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 8px;
+  font-family: var(--font-m);
+}
+.section-title {
+  font-family: var(--font-d);
+  font-size: clamp(1.45rem, 3.2vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+.section-sub { font-size: 14px; color: var(--muted); margin-top: 8px; max-width: 56ch; }
+
+.phase-card,
+.summary-card,
+.chart-card,
+.mini-card {
+  padding: 24px;
+  border-radius: 22px;
+  background: linear-gradient(165deg, rgba(0,201,122,0.04) 0%, var(--navy-card) 42%);
+  border: 1px solid var(--mid);
+  position: relative;
+  overflow: hidden;
+}
+.phase-card::before,
+.summary-card::before,
+.chart-card::before,
+.mini-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  opacity: 0.85;
+}
+.phase-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.phase-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 100px;
+  border: 1px solid rgba(0,201,122,0.2);
+  background: rgba(0,201,122,0.08);
+  color: var(--green-dim);
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.grid-2, .grid-3, .metrics-grid, .summary-grid {
+  display: grid;
+  gap: 12px;
+}
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.metrics-grid { grid-template-columns: repeat(4, 1fr); margin-top: 14px; }
+.summary-grid { grid-template-columns: repeat(2, 1fr); margin-top: 16px; }
+
+.metrics-grid--year-summary {
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 10px;
+}
+
+.field { margin-bottom: 14px; }
+.field label {
+  display: block;
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 7px;
+}
+.field input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--mid);
+  background: rgba(7,17,31,0.82);
+  color: var(--text);
+  font-size: 14px;
+  font-family: var(--font-b);
+}
+.field input:focus {
+  outline: none;
+  border-color: rgba(0,201,122,0.45);
+  background: rgba(0,201,122,0.05);
+  box-shadow: 0 0 0 3px rgba(0, 201, 122, 0.18);
+}
+.field input:focus-visible {
+  outline: 2px solid var(--green-dim);
+  outline-offset: 2px;
+}
+.field-note { font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+.math-panel {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--mid);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.math-panel strong { color: var(--text); }
+.math-panel.compare-goal {
+  border-color: rgba(240,192,96,0.28);
+  background: rgba(240,192,96,0.06);
+}
+.recap-kicker {
+  display: block;
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 7px;
+}
+
+.metric {
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--mid);
+}
+.metric-label {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  display: block;
+}
+.metric-value {
+  font-family: var(--font-d);
+  font-size: clamp(1.25rem, 4.2vw, 1.65rem);
+  line-height: 1.1;
+  color: var(--text);
+  word-break: break-word;
+}
+.metric-value.green { color: var(--green); }
+.metric-value.gold { color: var(--gold); }
+.metric-value.danger { color: var(--danger); }
+
+.range-wrap {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(240,192,96,0.06);
+  border: 1px solid rgba(240,192,96,0.2);
+}
+.range-readout {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+  line-height: 1.55;
+}
+.range-readout strong { color: var(--gold); }
+.range-readout-sub {
+  display: block;
+  margin-top: 6px;
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.industry-ref-box {
+  margin: 14px 0 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(0,201,122,0.2);
+}
+.industry-ref-kicker {
+  display: block;
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 4px;
+}
+.industry-ref-title {
+  font-family: var(--font-d);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.industry-ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 10px;
+  min-width: 0;
+}
+.industry-ref-table th,
+.industry-ref-table td {
+  padding: 7px 0;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 12px;
+  line-height: 1.45;
+  vertical-align: top;
+}
+.industry-ref-table tr:last-child th,
+.industry-ref-table tr:last-child td { border-bottom: none; }
+.industry-ref-table th {
+  width: 34%;
+  padding-right: 10px;
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  font-weight: 500;
+}
+.industry-ref-table td { color: var(--text-soft); }
+.industry-ref-table td strong { color: var(--text); font-weight: 600; }
+.industry-ref-note {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+
+.commission-live-math {
+  margin-top: 16px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(0, 201, 122, 0.07);
+  border: 1px solid rgba(0, 201, 122, 0.28);
+  font-family: var(--font-b);
+  font-size: 15px;
+  line-height: 1.55;
+  color: #c8e8d8;
+}
+.commission-live-math .clm-deal {
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(0, 201, 122, 0.2);
+  color: var(--text-soft);
+}
+.commission-live-math .clm-deal strong { color: var(--text); font-weight: 600; }
+.commission-live-math .clm-amt {
+  color: var(--green);
+  font-weight: 600;
+}
+.commission-live-math .clm-amt-gold {
+  color: var(--gold);
+  font-weight: 600;
+}
+.commission-live-math .clm-label {
+  display: block;
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.commission-live-math .clm-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 5px 0;
+  color: var(--text-soft);
+}
+.commission-live-math .clm-row span:last-child {
+  text-align: right;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.commission-live-math .clm-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 201, 122, 0.25);
+  font-weight: 600;
+  color: var(--text);
+}
+.commission-live-math .clm-total .clm-amt { font-size: 1.1em; }
+.commission-live-math .clm-follow {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.12);
+}
+.commission-live-math .clm-follow .clm-row { color: rgba(200, 232, 216, 0.85); }
+.commission-live-math .clm-note {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.legal-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 230, 153, 0.38);
+  background: rgba(7, 17, 31, 0.78);
+}
+.legal-disclaimer-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 6px;
+  background: linear-gradient(145deg, #e04545 0%, #c62828 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 6px rgba(198, 40, 40, 0.3);
+}
+.legal-disclaimer-icon svg {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+.legal-disclaimer-body {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--text-soft);
+  flex: 1;
+  min-width: 0;
+}
+.legal-disclaimer-label {
+  display: inline;
+  font-family: var(--font-m);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-right: 5px;
+}
+.legal-disclaimer-body strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.chart-explainer {
+  margin: 10px 0 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 52ch;
+}
+.range-wrap input[type="range"] {
+  width: 100%;
+  height: 8px;
+  margin: 10px 0 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255,255,255,0.12);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.range-wrap input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--navy);
+  box-shadow: 0 2px 12px rgba(240,192,96,0.45);
+}
+.range-wrap input[type="range"]::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--navy);
+  box-shadow: 0 2px 12px rgba(240,192,96,0.45);
+}
+
+.phase-table-wrap {
+  margin-top: 14px;
+  border: 1px solid var(--mid);
+  border-radius: 18px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
+  scrollbar-color: rgba(0,201,122,0.45) rgba(255,255,255,0.06);
+  position: relative;
+  max-width: 100%;
+}
+.phase-table-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(6, 13, 24, 0.92));
+  opacity: 0;
+  transition: opacity 0.2s var(--ease);
+  border-radius: 0 14px 14px 0;
+}
+.phase-table-wrap.can-scroll-right::after {
+  opacity: 1;
+}
+.table-scroll-hint {
+  display: none;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(0,201,122,0.06);
+  border: 1px solid rgba(0,201,122,0.15);
+}
+table { width: 100%; border-collapse: collapse; min-width: 720px; }
+th, td {
+  padding: 11px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 12.5px;
+  vertical-align: top;
+}
+th {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: rgba(20,36,64,0.7);
+}
+tr:last-child td { border-bottom: none; }
+
+.phase-row-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.mini-card { padding: 18px; }
+.mini-kicker {
+  display: block;
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 7px;
+}
+.mini-card h4 { font-family: var(--font-d); font-size: 15px; color: var(--text); margin-bottom: 8px; }
+.mini-card p { font-size: 13px; color: var(--text-soft); }
+
+.chart-card svg { width: 100%; height: auto; display: block; }
+.chart-legend {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.footer { text-align: center; padding: 28px 0 10px; font-size: 11.5px; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .grid-3, .metrics-grid, .phase-row-grid, .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .metrics-grid--year-summary { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .table-scroll-hint { display: block; }
+  .orb { filter: blur(50px); opacity: 0.85; }
+  .orb:nth-child(1) { width: 240px; height: 240px; }
+  .orb:nth-child(2) { width: 200px; height: 200px; }
+  .orb:nth-child(3) { width: 160px; height: 160px; }
+  .shell {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-bottom: max(96px, calc(24px + env(safe-area-inset-bottom, 0px)));
+  }
+  .section { margin-bottom: 20px; }
+  .hero {
+    min-height: auto;
+    padding: 20px 0 24px;
+  }
+  .hero-badge { font-size: 10px; letter-spacing: 0.18em; margin-bottom: 14px; }
+  .hero h1 { max-width: 100%; font-size: clamp(1.75rem, 8.5vw, 2.5rem); }
+  .hero-lead { max-width: none; font-size: 1rem; line-height: 1.55; }
+  .phase-topline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .phase-chip { max-width: 100%; }
+  .phase-card,
+  .summary-card,
+  .chart-card,
+  .mini-card { padding: 16px 14px; border-radius: 18px; }
+  .metric { padding: 14px; }
+  .math-panel { padding: 14px; font-size: 14px; line-height: 1.6; }
+  .grid-2, .grid-3, .metrics-grid, .summary-grid, .phase-row-grid { grid-template-columns: 1fr; }
+  .metrics-grid--year-summary { grid-template-columns: 1fr !important; }
+  .section-title { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: anywhere; }
+  .section-sub { font-size: 13px; max-width: none; line-height: 1.55; }
+  .field { margin-bottom: 12px; }
+  .field input {
+    font-size: 16px; /* avoids iOS zoom-on-focus */
+    min-height: 48px;
+    padding: 14px 16px;
+    border-radius: 14px;
+  }
+  .range-wrap { padding: 12px 14px; }
+  .range-wrap input[type="range"] {
+    min-height: 44px;
+    margin: 8px 0 2px;
+  }
+  .range-wrap input[type="range"]::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+  }
+  .range-wrap input[type="range"]::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+  }
+  .chart-card svg { min-height: 180px; }
+  .chart-legend {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .phase-table-wrap { border-radius: 14px; }
+  th, td { padding: 10px 10px; font-size: 11.5px; line-height: 1.45; }
+  table { min-width: 680px; }
+  .footer { padding: 24px 8px 12px; font-size: 11px; line-height: 1.5; }
+  .industry-ref-box { padding: 12px 14px; }
+  .legal-disclaimer { padding: 8px 10px; gap: 7px; }
+  .legal-disclaimer-icon { width: 20px; height: 20px; }
+  .legal-disclaimer-icon svg { width: 12px; height: 12px; }
+  .legal-disclaimer-body { font-size: 10.5px; line-height: 1.42; }
+  .industry-ref-table th,
+  .industry-ref-table td {
+    display: block;
+    width: 100%;
+    padding: 4px 0;
+  }
+  .industry-ref-table th {
+    padding-top: 8px;
+    border-bottom: none;
+  }
+  .industry-ref-table tr:first-child th { padding-top: 0; }
+}
+
+@media (max-width: 380px) {
+  .hero h1 { font-size: 1.65rem; }
+  .metric-value { font-size: 1.2rem; }
+  table { min-width: 640px; }
+}
+
+@media (min-width: 641px) {
+  .table-scroll-hint { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+<div class="ambient" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+<div class="noise" aria-hidden="true"></div>
+
+<main class="shell">
+  <header class="hero" id="top">
+    <div class="hero-badge"><span class="badge-dot" aria-hidden="true"></span> HTSA tool</div>
+    <h1><em>Earnings</em><br>calculator</h1>
+    <p class="hero-lead">Before your call: enter your <strong>current income and hours</strong>, then your <strong>goal monthly income</strong>. Scroll down to model high-ticket commissions — adjust offer price, call volume, and close rate to see <strong>what it would take to hit your goal</strong>, plus a conservative <strong>12-month ramp</strong> with 4-pay residuals.</p>
+  </header>
+
+  <section class="section" id="current-reality" aria-labelledby="current-heading">
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Current reality</span>
+      </div>
+      <div class="section-head" style="margin-bottom:16px;">
+        <h2 class="section-title" id="current-heading">Current situation</h2>
+        <p class="section-sub">Your numbers only — used to calculate your hourly value and how many hours your <em>current</em> path would require to reach your goal.</p>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="prospectName">Prospect name</label>
+          <input id="prospectName" type="text" autocomplete="name" placeholder="e.g. Dan Thompson">
+        </div>
+        <div class="field">
+          <label for="currentRole">Current role / job</label>
+          <input id="currentRole" type="text" autocomplete="organization-title" placeholder="e.g. Sales Manager">
+        </div>
+        <div class="field">
+          <label for="currentMonthlyIncome">Current monthly income</label>
+          <input id="currentMonthlyIncome" type="number" inputmode="decimal" min="0" step="100" placeholder="e.g. 4000" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="currentWeeklyHours">Current weekly hours worked</label>
+          <input id="currentWeeklyHours" type="number" inputmode="numeric" min="1" max="168" step="1" placeholder="e.g. 55" autocomplete="off">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="income-gap" aria-labelledby="gap-heading">
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Gap clarification</span>
+      </div>
+      <div class="section-head" style="margin-bottom:16px;">
+        <h2 class="section-title" id="gap-heading">Can your current path reach your goal?</h2>
+        <p class="section-sub">Compare your goal income to what your current hourly rate would actually require in hours per week.</p>
+      </div>
+      <div class="grid-2" style="margin-bottom:4px;">
+        <div class="field">
+          <label for="goalMonthlyIncome">Goal monthly income</label>
+          <input id="goalMonthlyIncome" type="number" inputmode="decimal" min="0" step="100" placeholder="e.g. 15000" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="desiredWeeklyHours">Desired weekly hours</label>
+          <input id="desiredWeeklyHours" type="number" inputmode="numeric" min="1" max="120" step="1" placeholder="e.g. 25" autocomplete="off">
+        </div>
+      </div>
+      <div class="metrics-grid" id="gapMetrics">
+        <div class="metric"><span class="metric-label">Current hourly value</span><div class="metric-value" id="gapHourly">-</div></div>
+        <div class="metric"><span class="metric-label">Required weekly hours</span><div class="metric-value danger" id="gapRequiredHours">-</div></div>
+        <div class="metric"><span class="metric-label">Extra weekly hours needed</span><div class="metric-value gold" id="gapExtraHours">-</div></div>
+        <div class="metric"><span class="metric-label">Increase required</span><div class="metric-value" id="gapIncrease">-</div></div>
+      </div>
+      <div class="math-panel" id="gapRecap">
+        <span class="recap-kicker">Gap clarification</span>
+        Enter your current income, weekly hours, and goal monthly income to see how many hours per week your <em>current</em> path would require.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="possibility" aria-labelledby="possibility-heading">
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Possibility math</span>
+      </div>
+      <div class="section-head" style="margin-bottom:16px;">
+        <h2 class="section-title" id="possibility-heading">What the high-ticket vehicle could look like</h2>
+        <p class="section-sub">Adjust offer price, commission %, calls per day, and close rate to model your situation. Defaults mirror a full-time closer pace ($8k offer, 10% commission, 75% show).</p>
+      </div>
+      <div class="grid-3">
+        <div class="field">
+          <label for="offerPrice">PIF offer price</label>
+          <input id="offerPrice" type="number" inputmode="decimal" min="1000" step="100" value="8000">
+          <div class="field-note">Use the base PIF number you want to model. This tool estimates a slightly higher 4-pay total for planning only.</div>
+        </div>
+        <div class="field">
+          <label for="commissionPct">Commission percentage</label>
+          <input id="commissionPct" type="number" inputmode="decimal" min="1" max="50" step="1" value="10">
+        </div>
+        <div class="field">
+          <label for="callsPerDay">Calls per day</label>
+          <input id="callsPerDay" type="number" inputmode="numeric" min="1" max="20" step="1" value="8">
+          <div class="field-note">8/day × 5 days ≈ 40 hrs/week full-time pace.</div>
+        </div>
+        <div class="field">
+          <label for="daysPerWeek">Days per week</label>
+          <input id="daysPerWeek" type="number" inputmode="numeric" min="1" max="7" step="1" value="5">
+        </div>
+        <div class="field">
+          <label for="closeRate">Close rate (%)</label>
+          <input id="closeRate" type="number" inputmode="decimal" min="10" max="50" step="1" value="20">
+        </div>
+        <div class="field">
+          <label for="showRate">Show rate (%)</label>
+          <input id="showRate" type="number" inputmode="decimal" min="10" max="100" step="1" value="75">
+        </div>
+        <div class="field">
+          <label for="pifPct">Paid in full (%)</label>
+          <input id="pifPct" type="number" inputmode="decimal" min="0" max="100" step="5" value="65">
+          <div class="field-note">Industry-average mix: 65% PIF/financing · 35% 4-pay. Adjust if your offer differs.</div>
+        </div>
+      </div>
+
+      <aside class="industry-ref-box" aria-labelledby="industry-ref-title">
+        <span class="industry-ref-kicker">Industry basics</span>
+        <div class="industry-ref-title" id="industry-ref-title">How to read this model</div>
+        <table class="industry-ref-table">
+          <tbody>
+            <tr>
+              <th scope="row">Offer size</th>
+              <td><strong>$8k–$12k</strong> avg. for HTSA members · <strong>$5k–$25k</strong> broad range · <strong>$25k+</strong> usually experienced closers</td>
+            </tr>
+            <tr>
+              <th scope="row">Commission</th>
+              <td>~<strong>90%</strong> of companies pay <strong>10%–15%</strong> (“accelerator”) — e.g. <strong>40%+ close rate → 15%</strong></td>
+            </tr>
+            <tr>
+              <th scope="row">Show rate</th>
+              <td>Industry standard <strong>75%</strong> — 8 booked ≈ <strong>6 conversations</strong></td>
+            </tr>
+            <tr>
+              <th scope="row">Close rate</th>
+              <td>Lower <strong>20%</strong> · Good <strong>25%</strong> · Great <strong>35%+</strong> · Best <strong>40–50%</strong></td>
+            </tr>
+            <tr>
+              <th scope="row">Payment mix</th>
+              <td>Most offers: <strong>PIF + 4-pay</strong> — 4-pay is often priced slightly higher than PIF (for example, <strong>$10k</strong> PIF and <strong>$12k</strong> 4-pay).</td>
+            </tr>
+            <tr>
+              <th scope="row">Schedule</th>
+              <td>Full-time closers often <strong>35–40+ hrs/week</strong> · Industry-average mix ≈ <strong>65% PIF/financing · 35% 4-pay</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="industry-ref-note">Enter your <strong>PIF price</strong>. The calculator models 4-pay as a slightly higher total for forecasting only (not a customer-facing quote).</p>
+        <div class="legal-disclaimer" role="note" aria-labelledby="legal-disclaimer-label">
+          <span class="legal-disclaimer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 8v5M12 16.5h.01" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <p class="legal-disclaimer-body"><span class="legal-disclaimer-label" id="legal-disclaimer-label">Disclaimer</span> <strong>Not a guarantee.</strong> No specific income is promised. These inputs reflect how the math works at your show rate, close rate, offer, commission %, and PIF/4-pay mix — <strong>real income potential</strong>, not a legal earnings promise.</p>
+        </div>
+      </aside>
+
+      <div class="range-wrap" style="margin-top:6px;">
+        <div class="range-readout">
+          <strong id="pifPctReadout">65%</strong> PIF/financing · <strong id="fourPayPctReadout">35%</strong> 4-pay <span style="color:var(--muted);font-weight:400;">(industry average)</span>
+          <span class="range-readout-sub">Adjust in 5% steps.</span>
+        </div>
+        <input id="pifSlider" type="range" min="0" max="100" step="5" value="65" aria-label="PIF versus 4-pay split">
+      </div>
+
+      <div class="commission-live-math" id="commissionLiveMath" aria-live="polite"></div>
+
+      <div class="metrics-grid" style="margin-top:18px;">
+        <div class="metric"><span class="metric-label">Weekly calls</span><div class="metric-value" id="htsaWeeklyCalls">-</div></div>
+        <div class="metric"><span class="metric-label">Weekly closed deals</span><div class="metric-value green" id="htsaWeeklyDeals">-</div></div>
+        <div class="metric"><span class="metric-label">Weekly commission potential</span><div class="metric-value gold" id="htsaWeeklyCommission">-</div></div>
+        <div class="metric"><span class="metric-label">Monthly commission potential</span><div class="metric-value" id="htsaMonthlyCommission">-</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="first-year" aria-labelledby="ramp-heading">
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">First-year ramp</span>
+      </div>
+      <div class="section-head" style="margin-bottom:16px;">
+        <h2 class="section-title" id="ramp-heading">First-year ramp (conservative)</h2>
+        <p class="section-sub">Preset: <strong>20% close rate</strong> in quarters 1–2, <strong>25%</strong> in quarters 3–4. Residuals from 4-pay deals stack over the year — use the <strong>year-one average</strong> below, not the late-month peak.</p>
+      </div>
+      <div class="phase-row-grid">
+        <div class="field">
+          <label for="phaseClose1">Months 1-3 close rate</label>
+          <input id="phaseClose1" type="number" inputmode="decimal" min="10" max="50" step="1" value="20">
+        </div>
+        <div class="field">
+          <label for="phaseClose2">Months 4-6 close rate</label>
+          <input id="phaseClose2" type="number" inputmode="decimal" min="10" max="50" step="1" value="20">
+        </div>
+        <div class="field">
+          <label for="phaseClose3">Months 7-9 close rate</label>
+          <input id="phaseClose3" type="number" inputmode="decimal" min="10" max="50" step="1" value="25">
+        </div>
+        <div class="field">
+          <label for="phaseClose4">Months 10-12 close rate</label>
+          <input id="phaseClose4" type="number" inputmode="decimal" min="10" max="50" step="1" value="25">
+        </div>
+      </div>
+      <p class="table-scroll-hint" id="tableScrollHint" role="note">Swipe sideways to see all columns →</p>
+      <div class="phase-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Phase</th>
+              <th>Close rate</th>
+              <th>Monthly deals</th>
+              <th>PIF commission</th>
+              <th>4-pay collected</th>
+              <th>Residuals from prior months</th>
+              <th>Total monthly commission</th>
+              <th>Quarter total</th>
+            </tr>
+          </thead>
+          <tbody id="projectionTableBody"></tbody>
+        </table>
+      </div>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <span class="recap-kicker">Year-one summary</span>
+          <div class="metrics-grid metrics-grid--year-summary">
+            <div class="metric"><span class="metric-label">Total first-year commissions</span><div class="metric-value green" id="yearTotal">-</div></div>
+            <div class="metric"><span class="metric-label">Average monthly income</span><div class="metric-value" id="yearAvgMonthly">-</div></div>
+            <div class="metric"><span class="metric-label">Average weekly income</span><div class="metric-value" id="yearAvgWeekly">-</div></div>
+            <div class="metric"><span class="metric-label">Average close rate</span><div class="metric-value" id="yearAvgClose">-</div></div>
+            <div class="metric"><span class="metric-label">Total closed deals</span><div class="metric-value" id="yearDeals">-</div></div>
+            <div class="metric"><span class="metric-label">Total calls taken</span><div class="metric-value" id="yearCalls">-</div></div>
+            <div class="metric"><span class="metric-label">Total PIF commissions</span><div class="metric-value" id="yearPifTotal">-</div></div>
+            <div class="metric"><span class="metric-label">Total 4-pay residual commissions</span><div class="metric-value" id="yearResidualTotal">-</div></div>
+          </div>
+        </div>
+        <div class="chart-card">
+          <span class="recap-kicker">12-month income curve</span>
+          <svg id="incomeChart" viewBox="0 0 520 250" role="img" aria-label="Monthly income projection chart"></svg>
+          <div class="chart-legend">
+            <span id="chartMinLabel">Month 1</span>
+            <span id="chartPeakLabel">Month 12</span>
+          </div>
+          <p class="chart-explainer">Later months climb as 4-pay deals from prior months keep paying. Use the <strong>year-one average</strong> — not month 12.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="goal-vs-year" aria-labelledby="compare-heading">
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Benchmark</span>
+      </div>
+      <div class="section-head" style="margin-bottom:12px;">
+        <h2 class="section-title" id="compare-heading">Goal vs. year-one model</h2>
+        <p class="section-sub">With your goal income entered above, this section shows what close rate or call volume you’d need at your chosen offer price — and how the year-one model compares to your target.</p>
+      </div>
+      <div class="math-panel compare-goal" id="goalYearCompare">
+        <span class="recap-kicker">Goal vs. year-one model</span>
+        Enter your goal monthly income and adjust the model above to see required close rate, call volume, and how the year-one average compares.
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>HTSA earnings calculator · same projection engine as the engagement planner · CJ Clay</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var state = {
+    prospectName: '',
+    currentRole: '',
+    currentMonthlyIncome: '',
+    currentWeeklyHours: '',
+    goalMonthlyIncome: '',
+    desiredWeeklyHours: '',
+    offerPrice: 8000,
+    commissionPct: 10,
+    callsPerDay: 8,
+    daysPerWeek: 5,
+    closeRate: 20,
+    showRate: 75,
+    pifPct: 65,
+    phaseClose1: 20,
+    phaseClose2: 20,
+    phaseClose3: 25,
+    phaseClose4: 25
+  };
+
+  function normalizeNumber(value, fallback) {
+    var num = parseFloat(value);
+    return isFinite(num) ? num : fallback;
+  }
+
+  function money(value) {
+    var amount = normalizeNumber(value, 0);
+    return '$' + Math.round(amount).toLocaleString();
+  }
+
+  function round(value, digits) {
+    var factor = Math.pow(10, digits || 0);
+    return (Math.round(normalizeNumber(value, 0) * factor) / factor).toLocaleString(undefined, {
+      minimumFractionDigits: digits ? Math.min(digits, 2) : 0,
+      maximumFractionDigits: digits ? Math.min(digits, 2) : 0
+    });
+  }
+
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+
+  function cleanText(text) {
+    return String(text || '').trim();
+  }
+
+  function numberText(value, suffix) {
+    var num = normalizeNumber(value, 0);
+    return num ? round(num, 0) + ' ' + suffix : 'not entered';
+  }
+
+  function signedHours(value) {
+    var num = normalizeNumber(value, 0);
+    return (num > 0 ? '+' : '') + round(num, 1) + ' hrs';
+  }
+
+  function renderGapMath() {
+    var currentMonthly = normalizeNumber(state.currentMonthlyIncome, 0);
+    var currentHours = normalizeNumber(state.currentWeeklyHours, 0);
+    var goalMonthly = normalizeNumber(state.goalMonthlyIncome, 0);
+
+    var hourly = currentMonthly > 0 && currentHours > 0 ? currentMonthly / (currentHours * 4) : 0;
+    var requiredWeekly = hourly > 0 && goalMonthly > 0 ? goalMonthly / (hourly * 4) : 0;
+    var extraWeekly = requiredWeekly > 0 ? requiredWeekly - currentHours : 0;
+    var pctIncrease = currentMonthly > 0 && goalMonthly > 0 ? ((goalMonthly - currentMonthly) / currentMonthly) * 100 : 0;
+
+    document.getElementById('gapHourly').textContent = hourly ? money(hourly) : '-';
+    document.getElementById('gapRequiredHours').textContent = requiredWeekly ? round(requiredWeekly, 1) + ' hrs' : '-';
+    document.getElementById('gapExtraHours').textContent = requiredWeekly ? signedHours(extraWeekly) : '-';
+    document.getElementById('gapIncrease').textContent = goalMonthly ? round(pctIncrease, 0) + '%' : '-';
+
+    var text = 'Enter your current income, weekly hours, and goal monthly income to see how many hours per week your current path would require.';
+    if (hourly && requiredWeekly) {
+      var realism = requiredWeekly > 168
+        ? 'There are only 168 hours in a week — this is not an effort problem. It is a vehicle problem.'
+        : requiredWeekly > 90
+        ? 'That is an unrealistic weekly schedule on your current path.'
+        : 'Even if it looks possible on paper, your current vehicle was not built to scale income this way.';
+      text = 'At your current hourly rate, you would need about <strong>' + round(requiredWeekly, 1) + ' hours/week</strong> to reach <strong>' + money(goalMonthly) + '/month</strong> — an extra <strong>' + round(Math.max(extraWeekly, 0), 1) + ' hours/week</strong> above where you are now. ' + realism;
+    }
+
+    document.getElementById('gapRecap').innerHTML = '<span class="recap-kicker">Gap clarification</span>' + text;
+  }
+
+  function getOpportunityInputs() {
+    return {
+      offerPrice: Math.max(0, normalizeNumber(state.offerPrice, 8000)),
+      commissionPct: clamp(normalizeNumber(state.commissionPct, 10), 0, 100) / 100,
+      callsPerDay: Math.max(0, normalizeNumber(state.callsPerDay, 8)),
+      daysPerWeek: Math.max(0, normalizeNumber(state.daysPerWeek, 5)),
+      closeRate: clamp(normalizeNumber(state.closeRate, 20), 10, 50) / 100,
+      showRate: clamp(normalizeNumber(state.showRate, 75), 10, 100) / 100,
+      pifPct: clamp(normalizeNumber(state.pifPct, 65), 0, 100) / 100,
+      fourPayPct: 1 - (clamp(normalizeNumber(state.pifPct, 65), 0, 100) / 100)
+    };
+  }
+
+  var FOUR_PAY_INSTALLMENTS = 4;
+  var FOUR_PAY_FOLLOWING_MONTHS = FOUR_PAY_INSTALLMENTS - 1;
+
+  function fourPayFlatMarkup(pifOfferPrice) {
+    return pifOfferPrice >= 10000 ? 2000 : 1000;
+  }
+
+  function getDealEconomics(inputs) {
+    var pifOfferPrice = inputs.offerPrice;
+    var flatMarkup = fourPayFlatMarkup(pifOfferPrice);
+    var fourPayOfferPrice = pifOfferPrice + flatMarkup;
+    var paymentAmount = fourPayOfferPrice / FOUR_PAY_INSTALLMENTS;
+    var pifCommissionPerDeal = pifOfferPrice * inputs.commissionPct;
+    var fourPayInstallmentCommission = paymentAmount * inputs.commissionPct;
+    return {
+      pifOfferPrice: pifOfferPrice,
+      fourPayOfferPrice: fourPayOfferPrice,
+      flatMarkup: flatMarkup,
+      paymentAmount: paymentAmount,
+      pifCommissionPerDeal: pifCommissionPerDeal,
+      fourPayInstallmentCommission: fourPayInstallmentCommission,
+      fourPayTotalCommission: fourPayInstallmentCommission * FOUR_PAY_INSTALLMENTS
+    };
+  }
+
+  function monthlyShownPerCallDay(inputs) {
+    return inputs.daysPerWeek * 4 * inputs.showRate;
+  }
+
+  function collectedPerDealMonthOne(inputs) {
+    var econ = getDealEconomics(inputs);
+    return inputs.pifPct * econ.pifCommissionPerDeal + inputs.fourPayPct * econ.fourPayInstallmentCommission;
+  }
+
+  function renderCommissionLiveMath(inputs, econ, weeklyDeals, weeklyPifDeals, weeklyFourDeals) {
+    var el = document.getElementById('commissionLiveMath');
+    if (!el) return;
+
+    var weekPif = weeklyPifDeals * econ.pifCommissionPerDeal;
+    var weekFour = weeklyFourDeals * econ.fourPayInstallmentCommission;
+    var weekTotal = weekPif + weekFour;
+    var monthNew = weekTotal * 4;
+    var monthFourFollow = weekFour * 4;
+
+    var dealsLabel = round(weeklyDeals, 1);
+    var pifLabel = round(weeklyPifDeals, 1);
+    var fourLabel = round(weeklyFourDeals, 1);
+
+    el.innerHTML =
+      '<div class="clm-deal">PIF <strong>' + money(econ.pifOfferPrice) + '</strong> → <span class="clm-amt-gold">' + money(econ.pifCommissionPerDeal) + '</span> &nbsp;·&nbsp; 4-pay <strong>' + money(econ.fourPayOfferPrice) + '</strong> (4 × <strong>' + money(econ.paymentAmount) + '</strong>) → <span class="clm-amt">' + money(econ.fourPayInstallmentCommission) + '</span> when they sign</div>' +
+      '<div class="clm-row" style="padding-top:0;font-size:13px;color:var(--muted);"><span>4-pay = PIF + <strong>' + money(econ.flatMarkup) + '</strong></span><span></span></div>' +
+      '<span class="clm-label">This week — ' + dealsLabel + ' deals closed</span>' +
+      '<div class="clm-row"><span>' + pifLabel + ' PIF × ' + money(econ.pifCommissionPerDeal) + '</span><span class="clm-amt-gold">' + money(weekPif) + '</span></div>' +
+      '<div class="clm-row"><span>' + fourLabel + ' 4-pay × ' + money(econ.fourPayInstallmentCommission) + '</span><span class="clm-amt">' + money(weekFour) + '</span></div>' +
+      '<div class="clm-total"><span>This week total</span><span class="clm-amt">' + money(weekTotal) + '</span></div>' +
+      '<div class="clm-total" style="margin-top:4px;border-top:none;padding-top:0;"><span>× 4 weeks = this month (new closes)</span><span class="clm-amt">' + money(monthNew) + '</span></div>' +
+      '<div class="clm-follow">' +
+      '<span class="clm-label">Same ' + fourLabel + ' four-pay deals — you also get</span>' +
+      '<div class="clm-row"><span>Month 2</span><span class="clm-amt">' + money(monthFourFollow) + '</span></div>' +
+      '<div class="clm-row"><span>Month 3</span><span class="clm-amt">' + money(monthFourFollow) + '</span></div>' +
+      '<div class="clm-row"><span>Month 4</span><span class="clm-amt">' + money(monthFourFollow) + '</span></div>' +
+      '</div>' +
+      '<p class="clm-note">Stay consistent and these stack. Year-one chart below adds it all up.</p>';
+  }
+
+  function sumResiduals(queue) {
+    return queue.reduce(function (sum, item) { return sum + item.amount; }, 0);
+  }
+
+  function renderPossibilityMath() {
+    var inputs = getOpportunityInputs();
+    var econ = getDealEconomics(inputs);
+    var weeklyScheduledCalls = inputs.callsPerDay * inputs.daysPerWeek;
+    var weeklyShownCalls = weeklyScheduledCalls * inputs.showRate;
+    var weeklyDeals = weeklyShownCalls * inputs.closeRate;
+    var weeklyPifDeals = weeklyDeals * inputs.pifPct;
+    var weeklyFourDeals = weeklyDeals * inputs.fourPayPct;
+    var weeklyPifCash = weeklyPifDeals * econ.pifCommissionPerDeal;
+    var weeklyFourFirstInstallment = weeklyFourDeals * econ.fourPayInstallmentCommission;
+    var weeklyCommission = weeklyPifCash + weeklyFourFirstInstallment;
+    var monthlyCommission = weeklyCommission * 4;
+    renderCommissionLiveMath(inputs, econ, weeklyDeals, weeklyPifDeals, weeklyFourDeals);
+
+    document.getElementById('pifPctReadout').textContent = round(inputs.pifPct * 100, 0) + '%';
+    document.getElementById('fourPayPctReadout').textContent = round(inputs.fourPayPct * 100, 0) + '%';
+    document.getElementById('htsaWeeklyCalls').textContent = round(weeklyShownCalls, 2);
+    document.getElementById('htsaWeeklyDeals').textContent = round(weeklyDeals, 2);
+    document.getElementById('htsaWeeklyCommission').textContent = money(weeklyCommission);
+    document.getElementById('htsaMonthlyCommission').textContent = money(monthlyCommission);
+  }
+
+  function regularClosePct(rate) {
+    return round(rate * 100, 0);
+  }
+
+  function renderProjection() {
+    var inputs = getOpportunityInputs();
+    var rates = [
+      clamp(normalizeNumber(state.phaseClose1, 20), 10, 50) / 100,
+      clamp(normalizeNumber(state.phaseClose2, 20), 10, 50) / 100,
+      clamp(normalizeNumber(state.phaseClose3, 25), 10, 50) / 100,
+      clamp(normalizeNumber(state.phaseClose4, 25), 10, 50) / 100
+    ];
+    var weeklyShownCalls = inputs.callsPerDay * inputs.daysPerWeek * inputs.showRate;
+    var monthlyShownCalls = weeklyShownCalls * 4;
+    var econ = getDealEconomics(inputs);
+    var residualQueue = [];
+    var months = [];
+    var quarterRows = [];
+    var totalIncome = 0;
+    var totalDeals = 0;
+    var totalPifCommission = 0;
+    var totalResidualCommission = 0;
+    var totalClose = 0;
+
+    for (var month = 1; month <= 12; month += 1) {
+      var phaseIndex = Math.floor((month - 1) / 3);
+      var closeRate = rates[phaseIndex];
+      var monthlyDeals = monthlyShownCalls * closeRate;
+      var pifDeals = monthlyDeals * inputs.pifPct;
+      var fourDeals = monthlyDeals * inputs.fourPayPct;
+      var pifCommission = pifDeals * econ.pifCommissionPerDeal;
+      var fourPaySigningMonth = fourDeals * econ.fourPayInstallmentCommission;
+      var priorFourPayInstallments = sumResiduals(residualQueue);
+      var totalMonth = pifCommission + fourPaySigningMonth + priorFourPayInstallments;
+
+      months.push({
+        month: month,
+        total: totalMonth,
+        deals: monthlyDeals,
+        pifCommission: pifCommission,
+        fourPayCurrent: fourPaySigningMonth,
+        priorResiduals: priorFourPayInstallments,
+        closeRate: closeRate
+      });
+
+      for (var i = residualQueue.length - 1; i >= 0; i -= 1) {
+        residualQueue[i].remaining -= 1;
+        if (residualQueue[i].remaining <= 0) residualQueue.splice(i, 1);
+      }
+      if (fourPaySigningMonth > 0) {
+        residualQueue.push({ amount: fourPaySigningMonth, remaining: FOUR_PAY_FOLLOWING_MONTHS });
+      }
+
+      totalIncome += totalMonth;
+      totalDeals += monthlyDeals;
+      totalPifCommission += pifCommission;
+      totalResidualCommission += fourPaySigningMonth + priorFourPayInstallments;
+      totalClose += closeRate;
+    }
+
+    for (var p = 0; p < 4; p += 1) {
+      var start = p * 3;
+      var chunk = months.slice(start, start + 3);
+      var phaseTotal = chunk.reduce(function (sum, item) { return sum + item.total; }, 0);
+      var avgDeals = chunk.reduce(function (sum, item) { return sum + item.deals; }, 0) / 3;
+      var avgPif = chunk.reduce(function (sum, item) { return sum + item.pifCommission; }, 0) / 3;
+      var avgFour = chunk.reduce(function (sum, item) { return sum + item.fourPayCurrent; }, 0) / 3;
+      var avgResidual = chunk.reduce(function (sum, item) { return sum + item.priorResiduals; }, 0) / 3;
+      var avgTotal = chunk.reduce(function (sum, item) { return sum + item.total; }, 0) / 3;
+      quarterRows.push({
+        label: p === 0 ? 'Months 1-3' : p === 1 ? 'Months 4-6' : p === 2 ? 'Months 7-9' : 'Months 10-12',
+        closeRate: rates[p],
+        monthlyDeals: avgDeals,
+        pifCommission: avgPif,
+        fourPayCurrent: avgFour,
+        priorResiduals: avgResidual,
+        total: avgTotal,
+        quarterTotal: phaseTotal
+      });
+    }
+
+    var body = document.getElementById('projectionTableBody');
+    body.innerHTML = '';
+    quarterRows.forEach(function (row) {
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + row.label + '</td><td>' + round(row.closeRate * 100, 0) + '%</td><td>' + round(row.monthlyDeals, 2) + '</td><td>' + money(row.pifCommission) + '</td><td>' + money(row.fourPayCurrent) + '</td><td>' + money(row.priorResiduals) + '</td><td>' + money(row.total) + '</td><td>' + money(row.quarterTotal) + '</td>';
+      body.appendChild(tr);
+    });
+
+    document.getElementById('yearTotal').textContent = money(totalIncome);
+    document.getElementById('yearAvgMonthly').textContent = money(totalIncome / 12);
+    document.getElementById('yearAvgWeekly').textContent = money(totalIncome / 52);
+    document.getElementById('yearAvgClose').textContent = round((totalClose / 12) * 100, 1) + '%';
+    document.getElementById('yearDeals').textContent = round(totalDeals, 1);
+    document.getElementById('yearCalls').textContent = round(monthlyShownCalls * 12, 0);
+    document.getElementById('yearPifTotal').textContent = money(totalPifCommission);
+    document.getElementById('yearResidualTotal').textContent = money(totalResidualCommission);
+
+    renderChart(months);
+    state._projection = {
+      totalIncome: totalIncome,
+      avgMonthly: totalIncome / 12,
+      avgWeekly: totalIncome / 52,
+      avgClose: totalClose / 12,
+      totalDeals: totalDeals,
+      totalCalls: monthlyShownCalls * 12,
+      totalPifCommission: totalPifCommission,
+      totalResidualCommission: totalResidualCommission
+    };
+
+    renderGoalCompare();
+  }
+
+  function renderChart(months) {
+    var svg = document.getElementById('incomeChart');
+    var width = 520;
+    var height = 250;
+    var padding = 28;
+    var values = months.map(function (m) { return m.total; });
+    var maxVal = Math.max.apply(null, values.concat([1]));
+    var minVal = Math.min.apply(null, values.concat([0]));
+    var path = [];
+
+    svg.innerHTML = '';
+    svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+
+    var bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    bg.setAttribute('x', '0');
+    bg.setAttribute('y', '0');
+    bg.setAttribute('width', width);
+    bg.setAttribute('height', height);
+    bg.setAttribute('rx', '18');
+    bg.setAttribute('fill', 'rgba(255,255,255,0.02)');
+    svg.appendChild(bg);
+
+    for (var g = 0; g < 4; g += 1) {
+      var gy = padding + ((height - padding * 2) / 3) * g;
+      var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', padding);
+      line.setAttribute('x2', width - padding);
+      line.setAttribute('y1', gy);
+      line.setAttribute('y2', gy);
+      line.setAttribute('stroke', 'rgba(255,255,255,0.08)');
+      line.setAttribute('stroke-width', '1');
+      svg.appendChild(line);
+    }
+
+    months.forEach(function (month, index) {
+      var x = padding + (index * ((width - padding * 2) / 11));
+      var normalized = maxVal === minVal ? 0.5 : (month.total - minVal) / (maxVal - minVal);
+      var y = height - padding - normalized * (height - padding * 2);
+      path.push((index === 0 ? 'M' : 'L') + x + ' ' + y);
+
+      var dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      dot.setAttribute('cx', x);
+      dot.setAttribute('cy', y);
+      dot.setAttribute('r', index === months.length - 1 ? '5.5' : '4');
+      dot.setAttribute('fill', index === months.length - 1 ? '#f0c060' : '#00c97a');
+      svg.appendChild(dot);
+
+      var label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      label.setAttribute('x', x);
+      label.setAttribute('y', height - 10);
+      label.setAttribute('fill', 'rgba(232,240,255,0.58)');
+      label.setAttribute('font-size', '10');
+      label.setAttribute('font-family', 'DM Mono, monospace');
+      label.setAttribute('text-anchor', 'middle');
+      label.textContent = month.month;
+      svg.appendChild(label);
+    });
+
+    var area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    area.setAttribute('d', path.join(' ') + ' L ' + (width - padding) + ' ' + (height - padding) + ' L ' + padding + ' ' + (height - padding) + ' Z');
+    area.setAttribute('fill', 'rgba(0,201,122,0.10)');
+    svg.appendChild(area);
+
+    var linePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    linePath.setAttribute('d', path.join(' '));
+    linePath.setAttribute('fill', 'none');
+    linePath.setAttribute('stroke', '#00c97a');
+    linePath.setAttribute('stroke-width', '3');
+    linePath.setAttribute('stroke-linecap', 'round');
+    linePath.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(linePath);
+
+    document.getElementById('chartMinLabel').textContent = 'Month 1 · ' + money(values[0] || 0);
+    document.getElementById('chartPeakLabel').textContent = 'Month 12 · ' + money(values[11] || 0);
+  }
+
+  function renderGoalCompare() {
+    var el = document.getElementById('goalYearCompare');
+    var goal = normalizeNumber(state.goalMonthlyIncome, 0);
+    var proj = state._projection || {};
+    var avg = proj.avgMonthly || 0;
+    var hours = numberText(state.desiredWeeklyHours, 'hours/week');
+    var inputs = getOpportunityInputs();
+    var perDeal = collectedPerDealMonthOne(inputs);
+    var shownPerCallDay = monthlyShownPerCallDay(inputs);
+    var pathHtml = '';
+
+    if (goal && perDeal > 0 && shownPerCallDay > 0 && inputs.callsPerDay > 0 && inputs.closeRate > 0) {
+      var reqClose = goal / (inputs.callsPerDay * shownPerCallDay * perDeal);
+      var reqCalls = goal / (inputs.closeRate * shownPerCallDay * perDeal);
+      pathHtml =
+        '<p style="margin:10px 0 0;"><strong>To reach ' + money(goal) + '/month</strong> at <strong>' + money(inputs.offerPrice) + '</strong> PIF (4-pay priced higher automatically), <strong>' + round(inputs.commissionPct * 100, 0) + '%</strong> commission, and your current PIF/4-pay mix: about <strong>' + round(reqClose * 100, 1) + '% close rate</strong> at <strong>' + round(inputs.callsPerDay, 0) + ' calls/day</strong>, <em>or</em> about <strong>' + round(reqCalls, 1) + ' calls/day</strong> at <strong>' + round(inputs.closeRate * 100, 0) + '% close rate</strong>.</p>';
+    }
+
+    if (!goal) {
+      el.innerHTML =
+        '<span class="recap-kicker">Goal vs. year-one model</span><p style="margin:0;"><strong>Goal income:</strong> not set yet. <strong>Year-one average (model):</strong> ' +
+        money(avg) +
+        '/month · <strong>Desired schedule:</strong> ' +
+        hours +
+        '.</p>';
+      return;
+    }
+
+    var delta = avg - goal;
+    var pct = goal > 0 ? Math.round((delta / goal) * 100) : 0;
+    var verdict =
+      delta >= 0
+        ? 'Your <strong>year-one average</strong> at these inputs is about <strong>' + money(avg) + '/month</strong> — roughly <strong>' + (pct >= 0 ? '+' : '') + pct + '%</strong> vs. your goal of <strong>' + money(goal) + '/month</strong>.'
+        : 'Your <strong>year-one average</strong> at these inputs is about <strong>' + money(avg) + '/month</strong> — about <strong>' + Math.abs(pct) + '% below</strong> your goal of <strong>' + money(goal) + '/month</strong>. Raise call volume, close rate, or offer/commission in the model to close the gap.';
+
+    el.innerHTML =
+      '<span class="recap-kicker">Goal vs. year-one model</span><p style="margin:0 0 10px;"><strong>Your goal:</strong> ' +
+      money(goal) +
+      '/month · <strong>Desired schedule:</strong> ' +
+      hours +
+      '</p><p style="margin:0;">' +
+      verdict +
+      ' <strong>Year-one total commissions:</strong> ' +
+      money(proj.totalIncome || 0) +
+      '.</p>' +
+      pathHtml;
+  }
+
+  function readStateFromDom() {
+    state.prospectName = document.getElementById('prospectName').value;
+    state.currentRole = document.getElementById('currentRole').value;
+    state.currentMonthlyIncome = document.getElementById('currentMonthlyIncome').value;
+    state.currentWeeklyHours = document.getElementById('currentWeeklyHours').value;
+    state.goalMonthlyIncome = document.getElementById('goalMonthlyIncome').value;
+    state.desiredWeeklyHours = document.getElementById('desiredWeeklyHours').value;
+    state.offerPrice = normalizeNumber(document.getElementById('offerPrice').value, 8000);
+    state.commissionPct = normalizeNumber(document.getElementById('commissionPct').value, 10);
+    state.callsPerDay = normalizeNumber(document.getElementById('callsPerDay').value, 3);
+    state.daysPerWeek = normalizeNumber(document.getElementById('daysPerWeek').value, 5);
+    state.closeRate = normalizeNumber(document.getElementById('closeRate').value, 20);
+    state.showRate = normalizeNumber(document.getElementById('showRate').value, 75);
+    state.pifPct = clamp(normalizeNumber(document.getElementById('pifPct').value, 65), 0, 100);
+    state.phaseClose1 = normalizeNumber(document.getElementById('phaseClose1').value, 20);
+    state.phaseClose2 = normalizeNumber(document.getElementById('phaseClose2').value, 20);
+    state.phaseClose3 = normalizeNumber(document.getElementById('phaseClose3').value, 25);
+    state.phaseClose4 = normalizeNumber(document.getElementById('phaseClose4').value, 25);
+  }
+
+  function updateTableScrollAffordance() {
+    var tableWrap = document.querySelector('.phase-table-wrap');
+    if (!tableWrap) return;
+    var overflow = tableWrap.scrollWidth > tableWrap.clientWidth + 2;
+    var atEnd = tableWrap.scrollLeft + tableWrap.clientWidth >= tableWrap.scrollWidth - 6;
+    tableWrap.classList.toggle('can-scroll-right', overflow && !atEnd);
+  }
+
+  function refresh() {
+    readStateFromDom();
+    renderGapMath();
+    renderPossibilityMath();
+    renderProjection();
+    requestAnimationFrame(updateTableScrollAffordance);
+  }
+
+  var ids = [
+    'prospectName',
+    'currentRole',
+    'currentMonthlyIncome',
+    'currentWeeklyHours',
+    'goalMonthlyIncome',
+    'desiredWeeklyHours',
+    'offerPrice',
+    'commissionPct',
+    'callsPerDay',
+    'daysPerWeek',
+    'closeRate',
+    'showRate',
+    'pifPct',
+    'phaseClose1',
+    'phaseClose2',
+    'phaseClose3',
+    'phaseClose4'
+  ];
+
+  ids.forEach(function (id) {
+    var el = document.getElementById(id);
+    el.addEventListener('input', function () {
+      if (id === 'pifPct') {
+        state.pifPct = clamp(normalizeNumber(el.value, 65), 0, 100);
+        document.getElementById('pifSlider').value = state.pifPct;
+      }
+      refresh();
+    });
+  });
+
+  document.getElementById('pifSlider').addEventListener('input', function (event) {
+    state.pifPct = clamp(normalizeNumber(event.target.value, 65), 0, 100);
+    document.getElementById('pifPct').value = state.pifPct;
+    refresh();
+  });
+
+  document.getElementById('pifSlider').value = clamp(normalizeNumber(state.pifPct, 65), 0, 100);
+
+  var tableWrap = document.querySelector('.phase-table-wrap');
+  if (tableWrap) {
+    tableWrap.addEventListener('scroll', updateTableScrollAffordance, { passive: true });
+    window.addEventListener('resize', updateTableScrollAffordance, { passive: true });
+    window.addEventListener('orientationchange', updateTableScrollAffordance, { passive: true });
+  }
+
+  refresh();
+})();
+</script>
+</body>
+</html>

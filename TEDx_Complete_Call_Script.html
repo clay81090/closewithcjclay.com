@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TEDx LeadR Complete Call Script</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #eb0028 0%, #000000 100%);
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      color: #eb0028;
+      font-size: 42px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 4px solid #eb0028;
+      padding-bottom: 15px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 18px;
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+
+    .phase-header {
+      background: linear-gradient(135deg, #eb0028 0%, #000000 100%);
+      color: white;
+      padding: 20px;
+      margin: 40px -40px 30px -40px;
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section {
+      background: #f8f9fa;
+      border-left: 6px solid;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .section h3 {
+      font-size: 20px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .section h4 {
+      font-size: 16px;
+      margin-top: 15px;
+      margin-bottom: 8px;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .section p, .section li {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 12px;
+    }
+
+    .section ul {
+      margin-left: 30px;
+      margin-top: 10px;
+    }
+
+    .question {
+      background: white;
+      border-left: 4px solid #eb0028;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .question strong {
+      color: #eb0028;
+      font-size: 16px;
+    }
+
+    .arrow {
+      color: #eb0028;
+      font-weight: bold;
+    }
+
+    .tip {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 6px;
+    }
+
+    .tip strong {
+      color: #155724;
+    }
+
+    .warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 6px;
+    }
+
+    .warning strong {
+      color: #856404;
+    }
+
+    .critical {
+      background: #f8d7da;
+      border-left: 4px solid #dc3545;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .critical strong {
+      color: #721c24;
+    }
+
+    .proof-box {
+      background: #e7f3ff;
+      border: 2px solid #2196f3;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 6px;
+    }
+
+    .proof-box h4 {
+      color: #1976d2;
+      margin-top: 0;
+    }
+
+    .highlight {
+      background: #fff3cd;
+      padding: 3px 6px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    .price-box {
+      background: #fff9e6;
+      border: 4px solid #ffc107;
+      padding: 25px;
+      margin: 20px 0;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .objection-box {
+      background: #ffe6e6;
+      border: 3px solid #dc3545;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+
+    .objection-box h3 {
+      color: #dc3545;
+      margin-top: 0;
+    }
+
+    .pain { border-left-color: #dc3545; }
+    .future { border-left-color: #28a745; }
+    .micro { border-left-color: #6f42c1; }
+    .preframe { border-left-color: #fd7e14; }
+    .proof { border-left-color: #17a2b8; }
+    .consequence { border-left-color: #ffc107; }
+    .donts { border-left-color: #6c757d; }
+    .transition { border-left-color: #20c997; }
+    .objection { border-left-color: #dc3545; }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+      .container {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎤 TEDx LeadR Complete Call Script</h1>
+    <p class="subtitle">Follow this exact flow on every call - Discovery → Demo → Price → Objections</p>
+
+    <!-- ==================== PHASE 1: DISCOVERY ==================== -->
+    <div class="phase-header">📋 PHASE 1: DISCOVERY</div>
+
+    <!-- SECTION 1: PAIN QUESTIONS -->
+    <div class="section pain">
+      <h2>💔 TEDx Pain Questions</h2>
+      <p><strong>Purpose:</strong> Make them FEEL the cost of not having a TEDx talk</p>
+
+      <div class="question">
+        <strong>"How long have you been sitting on this TEDx idea?"</strong><br/>
+        <span class="arrow">→</span> Quantify time wasted. "Wow, a whole YEAR of having that message bottled up. What's been stopping it from getting out there?"
+      </div>
+
+      <div class="question">
+        <strong>"What's the cost of keeping this message inside you another 6 months?"</strong><br/>
+        <span class="arrow">→</span> Not just missed opportunities—the FRUSTRATION, the energy drain. "How does that show up for you day-to-day?"
+      </div>
+
+      <div class="question">
+        <strong>"What's it costing you NOT having that red dot credibility?"</strong><br/>
+        <span class="arrow">→</span> Financial, authority, opportunity cost. Speaking fees you can't command yet.
+      </div>
+
+      <div class="question">
+        <strong>"When you see other speakers giving TEDx talks in your space, how does that feel?"</strong><br/>
+        <span class="arrow">→</span> Get jealousy/FOMO. "So they're getting the authority and credibility that should be YOURS?"
+      </div>
+
+      <div class="question">
+        <strong>"What opportunities have you lost because you don't have that TEDx credential?"</strong><br/>
+        <span class="arrow">→</span> Speaking fees you can't command, clients who choose someone with TEDx, podcast invites that go elsewhere.
+      </div>
+
+      <div class="question">
+        <strong>"What changes for you once you're a TEDx speaker?"</strong><br/>
+        <span class="arrow">→</span> Get them to paint: $5-10K speaking gigs, consulting clients who saw your talk, podcast invites, book deals, authority in your space.
+      </div>
+
+      <div class="question">
+        <strong>"If another year goes by and you're in the same place, what does that do to your confidence?"</strong><br/>
+        <span class="arrow">→</span> Emotional label: "Yeah, that sounds exhausting—being surrounded by this potential but not moving forward."
+      </div>
+
+      <div class="critical">
+        <strong>💡 CRITICAL:</strong> After each pain question → PAUSE. Let them sit in it. Don't rush to solve. The pain is what closes the sale.
+      </div>
+    </div>
+
+    <!-- SECTION 2: FUTURE PACING -->
+    <div class="section future">
+      <h2>🚀 TEDx Future Pacing (Visualization)</h2>
+      <p><strong>Purpose:</strong> Make them FEEL having their TEDx talk live</p>
+
+      <div class="question">
+        <strong>"Close your eyes for a sec. Picture it's 6 months from now..."</strong><br/>
+        Your TEDx talk is LIVE on YouTube. 38 million subscribers see it. Your family's in the audience watching you on that red dot. People are DMing you: "Your message changed how I lead my team." What changes for you personally and professionally once that happens?
+      </div>
+
+      <div class="question">
+        <strong>"What opens up for you once you're a TEDx speaker?"</strong><br/>
+        <span class="arrow">→</span> Get them to paint the picture: speaking opportunities at $5-10K per gig, consulting clients who saw your talk, podcast invites, book deals, authority in your space.
+      </div>
+
+      <div class="question">
+        <strong>"If that's the 'YES' version—your talk live, message amplified—what does the 'NO CHANGE' version look like one year from now?"</strong><br/>
+        <span class="arrow">→</span> Consequence Question. "You're still sitting on this idea. Still frustrated. Still watching other people do what you KNOW you're meant to do. How would THAT feel?"
+      </div>
+
+      <div class="tip">
+        <strong>🎯 KEY LINE:</strong> "Most people reach a point where waiting hurts MORE than acting. Sounds like you're there. So let's close that gap."
+      </div>
+    </div>
+
+    <!-- SECTION 3: CONSEQUENCE QUESTIONS -->
+    <div class="section consequence">
+      <h2>⚠️ TEDx Consequence Questions</h2>
+      <p><strong>Purpose:</strong> Use these throughout discovery to create urgency</p>
+
+      <ul>
+        <li>"What happens to your message if you wait another year to get on that TEDx stage?"</li>
+        <li>"What happens if you keep this thinking for 2 years, 3 years?"</li>
+        <li>"What does your confidence look like if nothing changes?"</li>
+        <li>"Who doesn't get inspired because you kept your message bottled up?"</li>
+        <li>"What speaking opportunities pass you by while you're stuck without that TEDx credential?"</li>
+        <li>"How many more people in YOUR space give TEDx talks while you think about it?"</li>
+        <li>"What story do your kids see if you let fear win again on giving a TEDx talk?"</li>
+        <li>"If you're still sitting on this idea one year from now, what does that say about your commitment to your message?"</li>
+        <li>"Do you keep thinking 'Man, I should be doing this'? Do YOU?"</li>
+        <li>"Are you going to feel in 90 days? Your message dying inside you?"</li>
+      </ul>
+
+      <div class="critical">
+        <strong>⚠️ AFTER EVERY CONSEQUENCE:</strong> "Are you willing to settle for that?" → They say NO → "So what decision gets you on that TEDx stage?" → Build momentum.
+      </div>
+    </div>
+
+    <!-- SECTION 4: PRE-FRAME OBJECTIONS (PREVENTION ONLY) -->
+    <div class="section preframe">
+      <h2>🛡️ Pre-Frame Objections (Plant Seeds Only)</h2>
+      <p><strong>Purpose:</strong> Set up frames NOW that you'll use during objection handling LATER</p>
+
+      <h3>Plant Responsibility Seed (Husband Objection):</h3>
+      <div class="question">
+        <strong>"Who's giving the TEDx talk—you or him?"</strong><br/>
+        <span class="arrow">→</span> Said casually during discovery. Plants seed for later "Heavy is the Head" frame.
+      </div>
+
+      <div class="question">
+        <strong>"Whose TEDx stage moment is this?"</strong><br/>
+        Your message, your legacy, your 18 minutes on that red dot. That's YOUR crown to wear.
+      </div>
+
+      <h3>Plant Time Frame:</h3>
+      <div class="question">
+        <strong>"I know you're busy—everyone I talk to is CEO, founder, parent, running teams."</strong><br/>
+        Here's the thing: that's EXACTLY why most people finally do this. They're tired of being busy WITHOUT the authority, credibility, and opportunities a TEDx talk creates.
+      </div>
+
+      <h3>Plant ROI Seed:</h3>
+      <div class="question">
+        <strong>"Have you invested in personal development or business growth before?"</strong><br/>
+        <span class="arrow">→</span> If YES: "What was the ROI on that?" → Anchor them to getting returns on investments.
+      </div>
+    </div>
+
+    <!-- SECTION 5: MICRO-YES TIE-DOWNS -->
+    <div class="section micro">
+      <h2>✅ Micro-Yes Tie-Downs</h2>
+      <p><strong>Purpose:</strong> Use throughout discovery to build momentum</p>
+
+      <ul>
+        <li>"Did I get that right?"</li>
+        <li>"Would you say that's the real challenge?"</li>
+        <li>"Fair to say this is something you NEED to do—not just want?"</li>
+        <li>"Can you see how your message on a TEDx stage could create that kind of ripple effect?"</li>
+        <li>"Does that sound fair?"</li>
+        <li>"Make sense?"</li>
+        <li>"Sound fair?"</li>
+      </ul>
+
+      <div class="warning">
+        <strong>⚠️ WARNING:</strong> If you're NOT getting micro-yeses during discovery, they're not engaged. Re-anchor to pain before proceeding.
+      </div>
+    </div>
+
+    <!-- SECTION 6: TRANSITION TO DEMO -->
+    <div class="section transition">
+      <h2>🔄 Transition: Discovery → Product Demo</h2>
+
+      <div class="question">
+        <strong>"So just to recap what I'm hearing..."</strong><br/>
+        You've been sitting on this TEDx idea for <span class="highlight">[TIME]</span>. Every day that passes, you're watching other people in your space get that credibility while your message stays bottled up. That's costing you <span class="highlight">[SPECIFIC PAIN]</span>. And if nothing changes in the next 6-12 months, you're going to feel <span class="highlight">[CONSEQUENCE]</span>. Did I get that right?<br/>
+        <span class="arrow">→</span> They say YES
+      </div>
+
+      <div class="question">
+        <strong>"Based on everything you've shared, you're a PERFECT fit for our TEDx LeadR program."</strong><br/>
+        You have a powerful message, you're ready to amplify it, and you understand the cost of waiting. Want me to show you exactly how we get you from idea to stage to 50K+ views?<br/>
+        <span class="arrow">→</span> They say YES → Move to Product Demo
+      </div>
+    </div>
+
+    <!-- ==================== PHASE 2: PRODUCT DEMO / VALUE STACK ==================== -->
+    <div class="phase-header">🎁 PHASE 2: PRODUCT DEMO & VALUE STACK</div>
+
+    <!-- SECTION 7: SUCCESS STORIES / PROOF POINTS -->
+    <div class="section proof">
+      <h2>🏆 TEDx Success Stories (Our Results)</h2>
+      <p><strong>Purpose:</strong> Show them what's possible with our program</p>
+
+      <div class="proof-box">
+        <h4>Kevin Breel:</h4>
+        <p>19 years old, living in mom's basement. Taylor Conroy coached him through our exact framework. "Confessions of a Depressed Comic" on TEDx → <strong>5 MILLION views</strong>, $100K book deal, <strong>250+ paid speaking gigs</strong> at $5-10K each.</p>
+        <p><em>"That's over $1.25M in speaking fees alone—from one 18-minute talk."</em></p>
+      </div>
+
+      <div class="proof-box">
+        <h4>Eli Nash:</h4>
+        <p>Talked about addiction (taboo topic). Our coaches helped him craft and rehearse. <strong>4 MILLION views</strong>. Now speaks for Fortune 500 companies at <strong>$10K+ per gig</strong>.</p>
+        <p><em>"Different message, same result: TEDx credential = premium speaking fees."</em></p>
+      </div>
+
+      <div class="proof-box">
+        <h4>Susan Adams:</h4>
+        <p>Corporate finance background, ZERO speaking experience before working with us. <strong>2 MILLION views</strong>. Built <strong>six-figure coaching brand</strong> directly from her TEDx talk.</p>
+        <p><em>"She covers our entire program investment every single month now."</em></p>
+      </div>
+
+      <div class="tip">
+        <strong>💡 KEY FRAME:</strong> "Different stories, different industries, same framework. Can you see how YOUR message could create that kind of ripple effect?"<br/>
+        <span class="arrow">→</span> Get micro-yes
+      </div>
+    </div>
+
+    <!-- SECTION 8: WHAT WE PROVIDE -->
+    <div class="section proof">
+      <h2>📦 What's Included in TEDx LeadR Program</h2>
+
+      <h3>1️⃣ 90% Placement Rate</h3>
+      <div class="proof-box">
+        <p><strong>"Here's why we have a 90% placement rate..."</strong></p>
+        <p>Our Application Intensive is a 2-day workshop where we hand-select stages that match YOUR message and write submissions that organizers actually want. We don't spray-and-pray—we strategically place you.</p>
+        <p><em>"Most people apply to 20+ stages and get rejected. We get you accepted on your first or second application."</em></p>
+      </div>
+
+      <h3>2️⃣ 15-30 Rehearsals Before Stage</h3>
+      <div class="proof-box">
+        <p><strong>"You're not just winging this on stage..."</strong></p>
+        <p>Weekly calls with your dedicated TEDx coach, rehearsing your talk 15-30 times BEFORE you step on that red dot. Kevin Breel practiced 30x before his 5M view talk. The PROCESS means your talk is READY.</p>
+        <p><em>"Time-wise, this is 60-90 minutes per week for 12 weeks. Most of our speakers do this in under 90 days."</em></p>
+      </div>
+
+      <h3>3️⃣ 50,000 View Guarantee</h3>
+      <div class="proof-box">
+        <p><strong>"We don't just get you on stage—we guarantee results..."</strong></p>
+        <p>We guarantee 50,000 views in 90 days or we keep working until you hit it. We run ads, optimize thumbnails, and amplify your reach. This isn't hope-and-pray—this is guaranteed visibility.</p>
+        <p><em>"That's YOUR message reaching minimum 50K people. What's THAT worth to your business?"</em></p>
+        <span class="arrow">→</span> Get them to say a number
+      </div>
+
+      <h3>4️⃣ Weekly 1-on-1 Coaching</h3>
+      <div class="proof-box">
+        <p>Direct access to your TEDx coach every single week. Not group calls—1-on-1 sessions where we craft your talk, rehearse your delivery, and prepare you for the stage.</p>
+      </div>
+
+      <h3>5️⃣ Application Interview (3-Day Vetting)</h3>
+      <div class="proof-box">
+        <p>We hand-select which stages match your message. We write your submissions. We handle the logistics. You focus on your talk.</p>
+      </div>
+
+      <div class="tip">
+        <strong>💡 TIE-DOWN:</strong> "Even one consulting client or speaking gig after your TEDx talk goes live would cover this entire investment, right?"<br/>
+        <span class="arrow">→</span> Get micro-yes
+      </div>
+    </div>
+
+    <!-- SECTION 9: VALUE COMPARISON -->
+    <div class="section proof">
+      <h2>💎 Value Comparison (vs Competition)</h2>
+
+      <div class="proof-box">
+        <h4>Total Value Breakdown:</h4>
+        <ul>
+          <li><strong>1-on-1 TEDx Coaching (12 weeks):</strong> $8,000 value</li>
+          <li><strong>Stage Placement Service:</strong> $5,000 value</li>
+          <li><strong>Talk Development & Rehearsals:</strong> $4,000 value</li>
+          <li><strong>50K View Guarantee (Ad Spend):</strong> $2,000 value</li>
+          <li><strong>Application Intensive (2-Day Workshop):</strong> $2,000 value</li>
+        </ul>
+        <p style="margin-top: 15px; font-size: 18px;"><strong>Total Value: $21,000+</strong></p>
+      </div>
+
+      <h3>Compare to Competition:</h3>
+      <div class="proof-box">
+        <p><strong>Most PR agencies or speaker bureaus:</strong> $25,000 - $45,000 for placement, coaching, and amplification</p>
+        <p><strong>DIY route (apply yourself):</strong> 6-12 months of rejections, no coaching, no view guarantee, low placement rate</p>
+        <p><strong>Other TEDx coaches:</strong> $15K-20K with NO placement guarantee, NO view guarantee</p>
+      </div>
+
+      <div class="tip">
+        <strong>💡 ANCHOR HIGH:</strong> "Most programs charge $25-45K for what we're offering. Our entire end-to-end LeadR program with 90% placement rate and 50K view guarantee is significantly less than that."
+      </div>
+
+      <div class="question">
+        <strong>"Can you see the value in what we provide?"</strong><br/>
+        <span class="arrow">→</span> Get micro-yes
+      </div>
+
+      <div class="question">
+        <strong>"Does 90% placement rate give you confidence we can get you on a stage?"</strong><br/>
+        <span class="arrow">→</span> Get micro-yes
+      </div>
+    </div>
+
+    <!-- SECTION 10: BONUSES -->
+    <div class="section proof">
+      <h2>🎁 Exclusive Bonuses (Action Takers Only)</h2>
+
+      <div class="proof-box">
+        <h4>Bonus #1: TEDx Talk Amplification Strategy</h4>
+        <p>We show you exactly how to leverage your TEDx talk for speaking gigs, consulting clients, and media opportunities. ($2,000 value)</p>
+      </div>
+
+      <div class="proof-box">
+        <h4>Bonus #2: Speaker One-Sheet Template</h4>
+        <p>Professional speaker materials that position you as a premium TEDx speaker for paid gigs. ($500 value)</p>
+      </div>
+
+      <div class="proof-box">
+        <h4>Bonus #3: Lifetime Access to TEDx Speaker Community</h4>
+        <p>Network with other TEDx speakers in our private community. Referrals, collaborations, and ongoing support. (Priceless)</p>
+      </div>
+    </div>
+
+    <!-- ==================== PHASE 3: PRICE REVEAL ==================== -->
+    <div class="phase-header">💰 PHASE 3: PRICE REVEAL</div>
+
+    <!-- SECTION 11: PACKAGE PRICE -->
+    <div class="section">
+      <h2>💵 Investment in Your TEDx Talk</h2>
+
+      <div class="question">
+        <strong>"So here's what the investment looks like..."</strong><br/>
+        For everything I just showed you—the 90% placement rate, 15-30 rehearsals, 50K view guarantee, weekly coaching, application intensive, all the bonuses—the total package investment is <span class="highlight">$11,000</span>.
+      </div>
+
+      <div class="price-box">
+        📦 COMPLETE TEDx LEADR PACKAGE: $11,000
+      </div>
+
+      <div class="tip">
+        <strong>💡 PAUSE HERE.</strong> Let them process. Wait for their reaction. Don't fill the silence.
+      </div>
+
+      <div class="question">
+        <strong>After they respond, reveal Action Taker Discount:</strong><br/>
+        "Now, because you're taking action TODAY and not letting this sit for another 6 months, I can take $2,000 off right now. That brings your investment down to <span class="highlight">$9,000</span>."
+      </div>
+
+      <div class="price-box" style="border-color: #28a745; background: #d4edda;">
+        🎉 ACTION TAKER PRICE: $9,000<br/>
+        <span style="font-size: 16px;">(Save $2,000 - Today Only)</span>
+      </div>
+
+      <div class="question">
+        <strong>"How does that sound?"</strong><br/>
+        <span class="arrow">→</span> PAUSE. Wait for response. First to talk loses.
+      </div>
+    </div>
+
+    <!-- ==================== PHASE 4: OBJECTION HANDLING ==================== -->
+    <div class="phase-header">🛡️ PHASE 4: OBJECTION HANDLING</div>
+
+    <!-- SECTION 12: ANDRES METHOD OVERVIEW -->
+    <div class="section objection">
+      <h2>🎯 Andres Objection Handling Method</h2>
+      <p><strong>Flow:</strong> ALWAYS start with Money → Time/Husband/Fear (max 4 reframes) → Apology</p>
+
+      <div class="critical">
+        <strong>⚡ CRITICAL RULES:</strong>
+        <ul>
+          <li>ALWAYS default to MONEY first (even if they say "husband" or "time")</li>
+          <li>Maximum 4 reframes per objection → Then apologize and move on</li>
+          <li>After reclose: SHUT UP → Silence closes deals</li>
+          <li>Use 1-10 scale to isolate and validate objections</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 13: PHASE 1 - MONEY (ISOLATE) -->
+    <div class="section objection">
+      <h2>💰 PHASE 1: MONEY (Always Start Here)</h2>
+
+      <h3>Step 1: Money Aside (Isolate Value)</h3>
+      <div class="objection-box">
+        <h3>"Money Aside" Close</h3>
+        <div class="question">
+          <strong>"Money aside, if I gave you $11,000 cash in a duffel bag right now, would you want to give that TEDx talk and get your message out to millions?"</strong><br/>
+          <span class="arrow">→</span> LISTEN.
+        </div>
+        <p><strong>If YES:</strong> "So it's not about the VALUE of getting on that TEDx stage—it's purely the money, right?"</p>
+        <p><strong>If NO:</strong> You haven't built enough pain/value. Go back to discovery.</p>
+      </div>
+
+      <h3>Step 2: 1-10 Close (Isolate Belief)</h3>
+      <div class="objection-box">
+        <h3>1-10 Scale</h3>
+        <div class="question">
+          <strong>"On a scale of 1-10, how confident are you that giving a TEDx talk would transform your business and authority?"</strong><br/>
+          <span class="arrow">→</span> They give number (hopefully 8-10)
+        </div>
+        <p><strong>If 8-10:</strong> "Great! So you BELIEVE in the outcome. The only thing standing between you and that TEDx stage is the money, right?"</p>
+        <p><strong>If below 8:</strong> "What would it take to get you to a 10?" → Address that concern first</p>
+      </div>
+
+      <h3>Step 3: Best Case / Worst Case Close</h3>
+      <div class="objection-box">
+        <h3>Best Case / Worst Case</h3>
+        <div class="question">
+          <strong>"Let me ask you this... The reason we're so successful—90% placement rate, Kevin Breel's 5M views, Eli Nash speaking for Fortune 500s—is because we follow a proven framework. So realistically..."</strong>
+        </div>
+        <div class="question">
+          <strong>"BEST case: Your TEDx talk goes viral like Kevin's. 5M views, $100K book deal, 250+ speaking gigs. How would that change your life?"</strong><br/>
+          <span class="arrow">→</span> Let them paint picture
+        </div>
+        <div class="question">
+          <strong>"WORST case: You get 50,000 views (our guarantee), one consulting client worth $15K signs because they saw your TEDx talk. You've already made your investment back plus some. Does that make sense?"</strong><br/>
+          <span class="arrow">→</span> Get micro-yes
+        </div>
+        <div class="question">
+          <strong>"So even in the WORST case scenario, you win. And in the BEST case, you're looking at life-changing results. Knowing that, what's really holding you back?"</strong><br/>
+          <span class="arrow">→</span> LISTEN for real objection
+        </div>
+      </div>
+
+      <h3>Step 4: Isolate the "Person" Threat</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"So is this about the money itself, or is it about what someone ELSE might think about the investment?"</strong><br/>
+          <span class="arrow">→</span> LISTEN. This reveals if it's REALLY money or if it's spouse/fear.
+        </div>
+      </div>
+
+      <h3>Step 5: Permission It Up</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"So if you had the money available right now—like it was sitting in your bank account ready to go—would it make this decision easier?"</strong><br/>
+          <span class="arrow">→</span> Get YES. You're setting up payment plan.
+        </div>
+      </div>
+
+      <h3>Step 6: Cash on Hand</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"Fair question: What do you actually have available right now that you could put toward this?"</strong><br/>
+          <span class="arrow">→</span> LISTEN. If they give a number, you have buying intent.
+        </div>
+      </div>
+
+      <h3>Step 7: Create Payment Plan</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"Okay, here's what we can do to make this work..."</strong><br/>
+          $4,500 today to secure your spot and start working with your TEDx coach immediately. Then $4,500 in 90 days—right around when your talk goes live and you start seeing results. That way you're spreading the investment but getting started NOW. Does that work for your budget?
+        </div>
+      </div>
+
+      <h3>Step 8: RECLOSE</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"Okay [firstname], so this gets you everything we talked about—the coaching, the placement, the 50K view guarantee—and fits your budget with the payment plan. Let's lock in your spot. How would you like to proceed?"</strong><br/>
+          <span class="arrow">→</span> <strong>SHUT UP.</strong> Wait for response. First to talk loses.
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 14: OBJECTION OUTCOMES -->
+    <div class="section objection">
+      <h2>🔀 Possible Outcomes After Reclose</h2>
+
+      <div class="proof-box" style="background: #d4edda; border-color: #28a745;">
+        <h4>✅ Outcome 1: CLOSED SALE</h4>
+        <p>"Perfect! Let me send you the invoice right now..."</p>
+      </div>
+
+      <div class="objection-box">
+        <h3>❌ Outcome 2: They Give Another Objection</h3>
+        <p>Common objections after money phase:</p>
+        <ul>
+          <li><strong>"I need to talk to my husband/wife"</strong> → Go to SPOUSE OBJECTION</li>
+          <li><strong>"I don't have time"</strong> → Go to TIME OBJECTION</li>
+          <li><strong>"What if my talk isn't good enough?"</strong> → Go to FEAR OBJECTION</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 15: SPOUSE OBJECTION -->
+    <div class="section objection">
+      <h2>👥 SPOUSE OBJECTION: "I Need to Talk to My Husband"</h2>
+      <p><strong>Most common TEDx objection - Handle with Andres framework</strong></p>
+
+      <h3>Step 1: Partner Aside (Isolate)</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"I totally get that. Let me ask you this though: If your husband said YES, DO THIS TEDx talk right now, would you?"</strong><br/>
+          <span class="arrow">→</span> LISTEN for "YES" or hesitation
+        </div>
+        <p><strong>If YES:</strong> Move to Heavy is the Head frame</p>
+        <p><strong>If hesitation:</strong> "What would hold YOU back even if he said yes?" → There's another objection underneath</p>
+      </div>
+
+      <h3>Step 2: Heavy is the Head Frame</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"I understand—heavy is the head that wears the crown."</strong><br/>
+          Obviously you respect him and you want his input. I totally get that. But here's what I've noticed...
+        </div>
+        <div class="question">
+          <strong>"This is YOUR investment in YOUR authority. This is YOUR 18 minutes on that red dot. Who's giving the TEDx talk—you or him?"</strong><br/>
+          <span class="arrow">→</span> She says "ME"
+        </div>
+        <div class="question">
+          <strong>"Exactly. So whose responsibility is it to put YOU in the best position to share your message with millions?"</strong><br/>
+          <span class="arrow">→</span> She says "MINE"
+        </div>
+      </div>
+
+      <h3>Step 3: Consequence</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"Here's what I've seen happen... Every time someone says 'I need to talk to my husband,' they come back in 3 weeks and the spot's gone. And they regret not acting when they had the chance."</strong>
+        </div>
+        <div class="question">
+          <strong>"Is that a risk you're willing to take with YOUR TEDx message?"</strong><br/>
+          <span class="arrow">→</span> PAUSE
+        </div>
+      </div>
+
+      <h3>Step 4: Pushback → Reclose</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>Pushback:</strong> "I still really need to talk to him first..."
+        </div>
+        <div class="question">
+          <strong>Reclose with Risk Reversal:</strong><br/>
+          "Okay, here's what we can do. Let's hold your spot with the $4,500 deposit today. You talk to your husband tonight about the TEDx opportunity. If he says NO, we'll refund the deposit—no questions asked. But if he says YES, you're already locked in and working with your coach this week. Fair?"
+        </div>
+        <div class="question">
+          <strong>"Because the question is: Is YOUR TEDx message worth $4,500 of risk to keep the spot?"</strong><br/>
+          <span class="arrow">→</span> RECLOSE
+        </div>
+      </div>
+
+      <div class="critical">
+        <strong>⚠️ If still NO after 4 reframes:</strong> "I understand. I've tried everything I can to help you get on that TEDx stage. Unfortunately, your message is going to stay bottled up. I'm really sorry—I wish I could've helped." → End warmly, next prospect
+      </div>
+    </div>
+
+    <!-- SECTION 16: TIME OBJECTION -->
+    <div class="section objection">
+      <h2>⏰ TIME OBJECTION: "I Don't Have Time"</h2>
+
+      <h3>Step 1: Time Aside (Isolate)</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"Time aside, if you DID have the time, would you want to give that TEDx talk and get your message out there?"</strong><br/>
+          <span class="arrow">→</span> They say YES
+        </div>
+        <div class="question">
+          <strong>"So it's not about WHETHER you should do this—it's just about WHEN, right?"</strong>
+        </div>
+      </div>
+
+      <h3>Step 2: Two Types of People Frame</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"Let me share something I've noticed. There are two types of people..."</strong>
+        </div>
+        <div class="question">
+          <strong>Type 1:</strong> "I'm too busy with work, kids, life—I CAN'T give a TEDx talk right now."
+        </div>
+        <div class="question">
+          <strong>Type 2:</strong> "I'm busy with work, kids, life—which is exactly WHY I HAVE TO give a TEDx talk. Because once I do, everything else gets easier. The authority, the credibility, the opportunities—it all compounds."
+        </div>
+        <div class="question">
+          <strong>"Which type are you?"</strong><br/>
+          <span class="arrow">→</span> They say Type 2
+        </div>
+      </div>
+
+      <h3>Step 3: Consequence</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"So let me ask you this: If I come back to you in 2 years and you STILL haven't given your TEDx talk because you were too busy, how would that feel?"</strong><br/>
+          <span class="arrow">→</span> Let them sit in that
+        </div>
+        <div class="question">
+          <strong>"Would you actually be okay with that? Your message staying inside you for another 2 years?"</strong><br/>
+          <span class="arrow">→</span> They say NO
+        </div>
+      </div>
+
+      <h3>Step 4: Reclose</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"Then let's not let that happen. 60-90 minutes a week for 12 weeks. Kevin Breel was 19 with no time. Susan Adams ran a corporate finance team. They made it work because they decided their message was a PRIORITY, not just an idea. Let's get you started this week."</strong><br/>
+          <span class="arrow">→</span> RECLOSE
+        </div>
+      </div>
+
+      <div class="critical">
+        <strong>⚠️ If still NO after 4 reframes:</strong> "I understand. Time will pass either way—and in 6 months you'll either have your TEDx talk live or you'll still be thinking about it. I'm sorry I couldn't help you choose the first option." → End warmly
+      </div>
+    </div>
+
+    <!-- SECTION 17: FEAR OBJECTION -->
+    <div class="section objection">
+      <h2>😰 FEAR OBJECTION: "What If My Talk Isn't Good Enough?"</h2>
+      <p><strong>Common fear objections:</strong> "I'll freeze on stage" / "No one will watch" / "What if I fail?"</p>
+
+      <h3>Step 1: Agreeance Statement</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"I'd be concerned too if I were in your shoes. That's totally normal."</strong>
+        </div>
+      </div>
+
+      <h3>Step 2: Perspective or Certainty Frame</h3>
+      <div class="objection-box">
+        <h4>Option A: Perspective</h4>
+        <div class="question">
+          <strong>"Here's the thing: We all make decisions based on our perspective, right? Your perspective right now is 'What if I'm not good enough?' But can I share Kevin Breel's perspective?"</strong><br/>
+          Kevin was 19, living in his mom's basement, never spoke publicly before. His perspective was 'I'm going to embarrass myself.' But he trusted the process—30 rehearsals with his coach—and now he has 5M views and a $100K book deal. His perspective CHANGED after he did the work.
+        </div>
+        <div class="question">
+          <strong>"What if YOUR perspective changes too once you go through our process?"</strong>
+        </div>
+
+        <h4>Option B: Certainty</h4>
+        <div class="question">
+          <strong>"What you're really seeking is certainty, right? You want to KNOW for sure that this will work."</strong><br/>
+          <span class="arrow">→</span> They agree
+        </div>
+        <div class="question">
+          <strong>"But here's the truth: There's no certainty in anything except death and taxes. If you only took action when you had 100% certainty, you'd never do ANYTHING. Right?"</strong>
+        </div>
+      </div>
+
+      <h3>Step 3: TEDx-Specific Reframes</h3>
+      <div class="objection-box">
+        <h4>"My talk won't be good enough"</h4>
+        <div class="question">
+          <strong>"That's exactly why we do 15-30 rehearsals with you BEFORE you go on stage. You're not winging this. Kevin Breel practiced 30 times. By the time you step on that red dot, your talk will be READY. Does that make sense?"</strong>
+        </div>
+
+        <h4>"I'll freeze on stage"</h4>
+        <div class="question">
+          <strong>"Let me ask you this: What's scarier—freezing for 2 seconds on stage, or never sharing your message at all and watching it die inside you?"</strong><br/>
+          <span class="arrow">→</span> PAUSE
+        </div>
+
+        <h4>"No one will watch my talk"</h4>
+        <div class="question">
+          <strong>"We GUARANTEE 50,000 views in 90 days or we keep working until you hit it. It's literally impossible for no one to watch. We run the ads, optimize the thumbnails, amplify the reach. That's OUR job—not yours."</strong>
+        </div>
+      </div>
+
+      <h3>Step 4: Consequence → Reclose</h3>
+      <div class="objection-box">
+        <div class="question">
+          <strong>"So let me ask you: If you let this fear win and you don't give your TEDx talk, what happens to your message?"</strong><br/>
+          <span class="arrow">→</span> Let them feel it
+        </div>
+        <div class="question">
+          <strong>"Are you willing to let fear make that decision for you?"</strong><br/>
+          <span class="arrow">→</span> They say NO
+        </div>
+        <div class="question">
+          <strong>"Then let's not. Let's get you started with your coach this week and trust the process that's already worked for Kevin, Eli, Susan, and hundreds of others."</strong><br/>
+          <span class="arrow">→</span> RECLOSE
+        </div>
+      </div>
+
+      <div class="critical">
+        <strong>⚠️ Maximum 4 Reframes:</strong> If they're still stuck after 4 different fear reframes, it's not about fear—it's about commitment. Apologize and move on.
+      </div>
+    </div>
+
+    <!-- SECTION 18: FINAL REMINDERS -->
+    <div class="section donts">
+      <h2>🎯 Final Objection Handling Reminders</h2>
+
+      <div class="critical">
+        <strong>ALWAYS Money First:</strong> Even if they say "I need to talk to my husband," start with "Money aside, if I gave you $11K cash..." to isolate the real objection.
+      </div>
+
+      <div class="critical">
+        <strong>Maximum 4 Reframes:</strong> After 4th reframe attempt, apologize and let them go. "I've tried everything I can. I'm sorry your TEDx message is going to stay bottled up."
+      </div>
+
+      <div class="critical">
+        <strong>Silence After Reclose:</strong> After you ask "How would you like to proceed?" → SHUT UP. First person to talk loses.
+      </div>
+
+      <div class="critical">
+        <strong>Payment Plan:</strong> $4,500 today, $4,500 in 90 days. This eliminates budget objections AND creates commitment.
+      </div>
+
+      <div class="critical">
+        <strong>Risk Reversal (Last Resort):</strong> "$4,500 fully refundable deposit. Talk to spouse tonight. If they say no, we refund it. If they say yes, you're already started."
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

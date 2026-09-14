@@ -1,0 +1,19 @@
+{
+  "page_type": "precall",
+  "prospect_id": "sabrina-kerr",
+  "prospect_name": "Sabrina Kerr",
+  "first_name": "Sabrina",
+  "email": "sabrinakerr2519@gmail.com",
+  "phone_e164": "+14809770754",
+  "phone_display": "+1 (480) 977-0754",
+  "prepared_date": "Aug 23, 2026",
+  "slug": "sabrina_kerr",
+  "call_day": "Monday",
+  "call_date": "Aug 24",
+  "call_time": "4:00 PM",
+  "call_timezone": "EST",
+  "call_format": "Phone or Zoom",
+  "missed_meeting": false,
+  "booking_url": "https://meetings.hubspot.com/charles660/cj",
+  "show_member_contacts": false
+}

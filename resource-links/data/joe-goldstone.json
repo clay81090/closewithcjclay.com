@@ -1,0 +1,17 @@
+{
+  "page_type": "precall",
+  "prospect_id": "joe-goldstone",
+  "prospect_name": "Joe Goldstone",
+  "first_name": "Joe",
+  "email": "joegoldstonee@gmail.com",
+  "phone_e164": "+19178371185",
+  "phone_display": "+1 (917) 837-1185",
+  "prepared_date": "Aug 19, 2026",
+  "slug": "joe_goldstone",
+  "call_day": "Thursday",
+  "call_date": "Aug 20",
+  "call_time": "3:00 PM",
+  "call_timezone": "EST",
+  "call_format": "Zoom",
+  "show_member_contacts": false
+}

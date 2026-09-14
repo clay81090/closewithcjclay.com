@@ -1,0 +1,19 @@
+{
+  "page_type": "precall",
+  "prospect_id": "aniushka-vaquiro",
+  "prospect_name": "Aniushka Vaquiro",
+  "first_name": "Aniushka",
+  "email": "aniushkamarie2117@icloud.com",
+  "phone_e164": "+19194141082",
+  "phone_display": "+1 (919) 414-1082",
+  "prepared_date": "Aug 24, 2026",
+  "slug": "aniushka_vaquiro",
+  "call_day": "Tuesday",
+  "call_date": "Aug 25",
+  "call_time": "5:00 PM",
+  "call_timezone": "EST",
+  "call_format": "Phone or Zoom",
+  "missed_meeting": false,
+  "booking_url": "https://meetings.hubspot.com/charles660/cj",
+  "show_member_contacts": false
+}

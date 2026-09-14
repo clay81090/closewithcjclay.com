@@ -1,0 +1,303 @@
+---
+description: How to create new HTSA enrollment invoice HTML fast (copy template, never hand-rebuild)
+globs: htsa-enrollment*.html,htsa_closer*.html,templates/**,templates/HTSA-SECONDARY-PAYMENT-OPTIONS.md,scripts/htsa*.py,scripts/build-htsa-invoice-templates.py,scripts/check-enrollment-live.sh
+alwaysApply: true
+---
+
+# HTSA enrollment invoices — NEW pages only
+
+**Never** edit an existing client’s deployed `htsa-enrollment-*.html` to create a **new** person. **`cp`** a frozen file from **`templates/htsa-placement-*.html`** (see table below) or another modern invoice, then replace **only** the new file. Reference invoices (Zachary, Trameil, Val, Thomas, Jocelyn layout, CJ practice, Margarita, etc.) are **read-only** unless CJ explicitly asks to edit a named file. See **`templates/README.md`** for copy-paste prompts.
+
+---
+
+## CJ paste shortcut (primary on-call flow)
+
+When CJ pastes **only** a block in this shape (blank lines OK), **do not** ask them to type long shell commands. **Parse the block, map placement, normalize phone to E.164, run instantiate with `--overwrite --ship`, wait for script output `READY`, then return the live URL** (never before `READY` — avoids GitHub Pages 404).
+
+**Canonical paste:**
+
+```text
+Full Name
+
+Email: client@example.com
+
+Phone Number: +1 (555) 123-4567
+
+Setter - Cash only
+```
+
+**Program line** (usually last): CJ may type **plain English** matching the six rows (`Closer – Cash only`, `Setter - Cash + Financing`, `Closer & Setter – Cash only`, etc.) **or** `templates/htsa-placement-0X-….html` **or** both joined with ` or ` (prefer the `templates/…` segment when the file exists).
+
+**Mapping:** Closer cash only → `01` · Closer cash + financing → `02` · Setter cash only → `03` · Setter cash + financing → `04` · Dual cash only → `05` · Dual cash + financing → `06`.
+
+**Implementation:** From repo root, either (a) run **`htsa`** in Terminal (shell function in CJ’s `~/.zshrc` — paste block, **Ctrl-D**, wait for **`READY`**), (b) run `python3 scripts/htsa-paste-invoice.py` with the block on **stdin** (ends with Ctrl-D), which calls **`htsa-instantiate-invoice.py`** with **`--overwrite --ship`** by default, or (c) parse manually and invoke the same.
+
+**Terminal (free — no Agent):** `htsa` → paste canonical block → **Ctrl-D**. Do **not** paste the block alone at the shell `%` prompt (zsh will treat each line as a command). Cursor uses **zsh (login)** so `htsa` auto-loads from `~/.htsa-shell/htsa.zsh` — open a **new** Terminal tab after setup (close old tabs that still say `command not found`).
+
+**Respect explicit “do not touch”:** If CJ says an invoice is **already perfect** or **do not redo** a named file, **do not** overwrite that HTML.
+
+---
+
+## Minimal CJ input
+
+CJ may say only:
+
+- **Closer** or **Setter**  
+- **Cash**, **Financing**, or **Both**  
+- Client **name**, **email**, **phone**  
+
+Agents apply **defaults** in this rule unless CJ overrides.
+
+---
+
+## Secondary payment options (Whop) — **not** the main six
+
+**Canonical reference:** `templates/HTSA-SECONDARY-PAYMENT-OPTIONS.md`
+
+- **Primary** pricing and Whop links for new invoices come from the **frozen placement shells** (`htsa-placement-01` … `06`) unless CJ overrides ad hoc.
+- **Secondary** plans (e.g. closer **$6k 2-pay Action Taker**, **$6.6k 3-pay**, **$5k PIF experience**; setter **$3k 2-pay**) are **documented only** in `HTSA-SECONDARY-PAYMENT-OPTIONS.md`.
+- **Never** swap in secondary URLs **unless** CJ explicitly says so — e.g. *use secondary payment options*, *other Whop plans*, *$5k PIF for experience*, *Action Taker 2-pay*, etc.
+- On the HTML invoice, keep secondary offers in a **separate** subsection (divider + kicker like **Secondary payment options** or **Other payment options**) **inside** `#invest-pay-zone`, reusing the **same** investment row / button **classes** and sizing as primary rows — change only amounts, labels, and `href`s.
+
+---
+
+| CJ says | Meaning |
+|--------|---------|
+| **Cash** | Whop PIF + Whop payment plan(s) only — **no** ClarityPay / Flexxbuy tiles. |
+| **Financing** | **ClarityPay + Flexxbuy** pre-qual tiles only (no in-house Whop). *Uncommon.* |
+| **Both** | Whop cash/plan(s) **plus** **ClarityPay** on **Closer – Cash + Financing** (`02`, dual `06` closer stack). **No Flexxbuy** on Closer financing pages unless CJ asks. **Setter** financing (`04`, dual setter stack) may still include ClarityPay + Flexxbuy. |
+
+---
+
+## Orange performance guarantee — default ON
+
+- Include the orange banner for **both Closer and Setter** on every new invoice.  
+- Markup: **`enrollment-guarantee-banner enrollment-guarantee-banner--pre-terms`**.  
+- Position: directly under **Program Investment**, **above** the Terms gate.  
+- Copy: duplicate from **`htsa-enrollment-zachary-taylor.html`** / **`htsa-enrollment-chad-aleo.html`** (do not freestyle legal tone).  
+- **Omit only if** CJ explicitly says **“no guarantee”** or **“omit orange guarantee.”**
+
+---
+
+## Program Investment — fixed section order
+
+1. **Program Investment** heading  
+2. **Orange performance guarantee** (unless explicitly omitted)  
+3. **Terms agreement gate** (`#hts-terms-agreement-panel`): PDF → clarifications → checkbox → **Record agreement & unlock payments**  
+4. **Locked** `#invest-pay-zone`: **all** Whop checkouts, payment plans, ClarityPay, Flexxbuy, **Splitit** (when on page), and optional **PayVa** only when CJ requested  
+
+**Core rule:** No payment or financing action works until **`recordTermsAgreement`** succeeds. Locked zone uses **`invest-pay-zone`** + **`invest-pay-zone--locked`** until then; intercept **`a.invest-btn`** (including **`secondary`**). **`sessionStorage`** unlock for that tab — unique key:
+
+```text
+hts_terms_gate_<firstname>_<lastname>_v1
+```
+
+**Gated destinations (non-exhaustive):** Whop **PIF**, Whop **Splitit** (Closer Option 2 dedicated checkout), Whop **installment** checkouts, **ClarityPay**, **Flexxbuy**, **PayVa** (only if CJ says **PayVa**), any future checkout or pre-qual link.
+
+---
+
+## Duplicate sources (modern layout)
+
+### Frozen shells (preferred for NEW invoices)
+
+| CJ says | File |
+|--------|------|
+| **Closer – Cash only** | `templates/htsa-placement-01-closer-cash-only.html` |
+| **Closer – Cash + Financing** | `templates/htsa-placement-02-closer-cash-financing.html` |
+| **Setter – Cash only** | `templates/htsa-placement-03-setter-cash-only.html` |
+| **Setter – Cash + Financing** | `templates/htsa-placement-04-setter-cash-financing.html` |
+| **Closer & Setter – Cash only** | `templates/htsa-placement-05-closer-setter-cash-only.html` |
+| **Closer & Setter – Cash + Financing** | `templates/htsa-placement-06-closer-setter-cash-financing.html` |
+
+**Frozen-shell defaults:** Orange guarantee **on** in every shell. **Omit** the orange banner **only** if CJ explicitly says **no guarantee**. **PayVa** not in shells — snippet only when CJ says PayVa. **Closer – Cash only (`01`, `05` closer stack):** **Option 1** $6k PIF · **Option 2** Splitit $550/mo × 12 ($6,600 total) · **Option 3** 4-pay $7k. **Closer – Cash + Financing (`02`, `06` closer stack):** **Option 1** $6k PIF · **Option 2** $1,750 × 4-pay ($7k total) · **ClarityPay only** (no Splitit, no Flexxbuy) — **$600/mo × 12 months**, **0% APR**, **$7,200 total**, **620+ credit score to qualify**, Whop checkout `…/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/`. **Never** Splitit on **Setter**. **Setter – Cash + Financing** uses **$3,600** ClarityPay (`plan_z5iuUhSgm9seH` with `?d2c=true`) plus Flexxbuy unless CJ omits. **Dual** pages use the **Jocelyn** combined header/curriculum layout (read-only reference) + pay stacks inside **one** `#invest-pay-zone`. **Footer business card (CJ):** `HTSA - Career Transformation Coach` (dual: `HTSA - Career Transformation Coach & Setter`). Placeholders: `{{HTSA_FULL_NAME}}`, …
+
+### Reference pages (read-only)
+
+| Program | Preferred `cp` source (example) | Notes |
+|---------|----------------------------------|--------|
+| **Closer** | `htsa-enrollment-james-chambers.html` / `htsa-enrollment-kristijo-sherman.html` | **2026** footer + Terms stack; **edit only** the new file. |
+| **Setter** | `htsa-enrollment-trameil-lee.html` | Setter pricing/links defaults; **reference only**. |
+
+**Historical anchor:** Margarita (`htsa-enrollment-margarita-de-la-rosa.html`) was the first production Terms-gate invoice — do not rewrite her page unless CJ asks. For **2026** footer + Terms placement, duplicate from **James** / **Kristijo** / **Trameil** instead of older Closer pages.
+
+**Sandbox:** `htsa-enrollment-cj-clay-practice.html` — behavior reference only; **never** paste simulated practice payment UI onto production clients.
+
+---
+
+## Financing defaults
+
+- **Financing** or **Both (Closer):** **ClarityPay only** on **`02` / dual closer stack** — **no Flexxbuy** unless CJ asks. **Setter** `04` / dual setter stack: ClarityPay + Flexxbuy by default. Use spelling **Flexxbuy** (two **x**’s).  
+- **PayVa:** include **only** if CJ explicitly requests **PayVa**. **Not** a default.  
+- **Splitit:** **All Closer** frozen shells (**01, 02, 05, 06**) use **Option 2** Splitit ($550/mo × 12, $6,600 total, dedicated Whop checkout). **Not** on **Setter**. Omit only if CJ says **no Splitit**.
+
+---
+
+## Closer defaults
+
+- **Program copy:** Certified HTS Closer / Certified High Ticket Closer Program.  
+- **Curriculum:** **50** modules; **five** levels of AI roleplay.  
+- **Default cash pricing:** PIF **$6,000**; **4-pay** **$1,750** today / **$7,000** total.  
+- **Whop URLs:** use CJ-supplied plans or those in the Closer template duplicated — do not invent plan IDs.  
+- **Splitit** (Closer Option 2): **$550/mo × 12**, **$6,600** total — `https://whop.com/checkout/4PcFLUerpZ8E73EomZ-xA27-pI2s-WLo0-Wd4UsuNEfoL2/` on **all Closer** shells unless CJ says **no Splitit**. **Never** on setter.  
+- If financing is included on **Closer**: **ClarityPay only** ($600/mo × 12, 0% APR, $7,200 total, 620+ credit) unless CJ names **Flexxbuy** or **PayVa**. **Closer** ClarityPay Whop checkout: `https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/` — **never** the Setter `plan_z5iuUhSgm9seH` link on Closer-only or Closer stacks in dual pages.
+
+---
+
+## Setter defaults
+
+- **Program copy:** Certified HTS Setter / Certified High Ticket Setter Program; invoice badge **Setter Program Overview**.  
+- **Header / billing (placement-03 only):** `Payment:` in the dark header and in **Prepared For** must stay the short line **Select payment option below** (Wayne-style). Do **not** paste long Whop / USD amount copy there — pricing belongs under **Program Investment** only. Frozen file behavior comes from `setter_cash_only` in `scripts/build-htsa-invoice-templates.py`.  
+- **Curriculum:** **30** core modules; **three** levels of AI roleplay; certification **Certified High Ticket Setter**; setter placement language (no closer modules/pricing/timeline).  
+- **Default cash pricing:** PIF **$3,000**; **3-pay** **$1,050** today / **$3,150** total.  
+- **Default links:**  
+  - PIF: `https://whop.com/checkout/plan_qzvfCCb1rIO0L?d2c=true`  
+  - 3-pay: `https://whop.com/checkout/plan_oK3AajTKp0mXK?d2c=true`  
+  - ClarityPay (**$3,600** at checkout): `https://whop.com/checkout/plan_z5iuUhSgm9seH?d2c=true` (**Setter only** — do **not** use on **Closer** invoices; Closer uses the **$7,200** checkout in **Closer defaults**.)
+  - Flexxbuy: `https://app.flexxbuy.com/high-ticket-sales-academy-llc/apply/`  
+- **Flexxbuy setter note:** *Flexxbuy — Setter: Request $3,500 when applying through Flexxbuy, for application purposes, exactly $500 more than the $3,000 program price.*
+
+---
+
+## Mobile layout — testimonial strip + footer
+
+On **`@media (max-width: 600px)`**, newer invoices use:
+
+- **`ref-strip`** and children in **normal block flow** (not flex-shrink / `min-height: 0` traps) so long **Trinity** quote reserves full height.  
+- **`.footer-bc-photo-ring { transform: none; }`** in the footer media block only.  
+
+Compare **`ref-strip`** mobile block and second **`600px`** footer block to **`htsa-enrollment-chad-aleo.html`**. **Desktop:** preserve Zachary-style flex testimonial layout. **Do not** ship old desktop-only invoices.
+
+---
+
+## Member Voices — default layout (blue personal reviews)
+
+**Every new enrollment invoice** uses the **Joseph / CJ trial** Member Voices block unless CJ explicitly says otherwise.
+
+**Reference:** `htsa-enrollment-joseph-golen.html` (CSS + HTML). **`scripts/htsa-instantiate-invoice.py`** and **`scripts/build-htsa-invoice-templates.py`** sync this automatically from that file.
+
+**Layout:**
+1. **Centered banner** above both columns: **Member voices** + pointer to Section 4.  
+2. **Left column:** **Janaye** first, then Kate R., Jessica C., Austin G.  
+3. **Right column:** David S., Morgan M., Nick S.  
+4. **Blue cards** (same styling as **HTSA Website** block on `/r/` precall pages): **Janaye, Kate R., Jessica C., Nick S.** — class **`ref-strip-quote--personal`**, label **To CJ**, light blue gradient, blue border, gold outer ring.  
+5. **White cards** for general HTSA member reviews: **Austin, David, Morgan** — **Member voice** label.  
+6. **CJ name** in personal reviews: **`ref-strip-name-mark`** (bold navy, no grey pill).
+
+**Do not** revert to old left-column title or all-white cards on new invoices without CJ asking.
+
+---
+
+## Footer — 2026 default (new invoices)
+
+For **new** enrollment HTML, match the footer pattern in **`htsa-enrollment-james-chambers.html`** / **`htsa-enrollment-kristijo-sherman.html`**:
+
+- Brand-colored **SVG** row: website (globe), YouTube, Instagram, Facebook (`footer-htsa-link` + icons).  
+- **Trustpilot** is **not** in that row — it sits in a **full-width band** under the main footer flex (`footer-reviews-row`) with **five gold stars** (not green), copy **Trustpilot Reviews — 4.9 out of 5**, and **`support@highticketsalesacademy.com`** visible.
+
+Do **not** retrofit this across legacy client invoices unless CJ names a file.
+
+---
+
+## Terms gate — REQUIRED content & copy
+
+Duplicate structure from a **modern** Terms-gate invoice, then localize **`data-*`** on the **new** file only:
+
+- **PDF:** [`https://closewithcjclay.com/HTSA-Terms-of-Service.pdf`](https://closewithcjclay.com/HTSA-Terms-of-Service.pdf) — anchor class **`hts-terms-agreement-pdf`**, label **View Full Terms of Service (PDF)**.  
+- **Clarifications:** Lifetime access; **1-on-1 coaching**; **AI role-play platform** items (same substantive blocks as existing production gates).  
+- **Checkbox:** *I have read and agree to the Terms of Service linked above.*  
+- **Button:** *Record agreement & unlock payments*  
+- **Never** paste CJ practice simulated-payment UI onto real client invoices.
+
+**Per-invoice literals on `#hts-terms-agreement-panel`:** `data-full-name`, `data-email`, `data-phone`, `data-client-slug` — all unique; **grep** away Margarita/Zachary/Trameil/etc. leftovers before ship.
+
+---
+
+## Apps Script endpoint & Terms version
+
+**Exact** HTTPS endpoint:
+
+`https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec`
+
+**`termsVersion`:** `HTSA-TOS-PDF-closewithcjclay-2026-04`
+
+---
+
+## Payload — `recordTermsAgreement` (must include)
+
+JSON via URL-encoded **`payload=`** POST. Align with `hts-enrollment-webapp-google-apps-script-sample.gs`:
+
+| Field | Source |
+|--------|--------|
+| `action` | `recordTermsAgreement` |
+| `fullName` | `data-full-name` |
+| `email` | `data-email` |
+| `phone` | `data-phone` (E.164-style, match `tel:`) |
+| `enrollmentPageUrl` | canonical path + query (no `#` hash) |
+| `clientSlug` | `data-client-slug` |
+| `termsUrl` | `https://closewithcjclay.com/HTSA-Terms-of-Service.pdf` |
+| `termsVersion` | `HTSA-TOS-PDF-closewithcjclay-2026-04` |
+| `userAgent` | browser string |
+
+---
+
+## Pre-ship verification (agent must confirm)
+
+- Correct **Closer vs Setter** and matching curriculum numbers/wording.  
+- **Cash / Financing / Both** correctly reflected.  
+- Orange guarantee **unless** CJ said omit.  
+- Terms gate **above** all money buttons; all pay/finance controls **inside** locked zone.  
+- Endpoint + `termsVersion` + PDF URL; payload includes **`phone`**.  
+- Unique Terms **`data-*`** + **`sessionStorage`** key.  
+- **No PayVa** unless requested; **Splitit** on **Closer – Cash only** shells (`01`, `05` closer stack) unless CJ says **no Splitit**; **no Splitit** on **`02` / dual closer financing stack**. **No Flexxbuy** on Closer financing unless CJ asks.  
+- **Flexxbuy** spelling (two x’s).  
+- **Step 3 kickoff (default):** **Mark** — heading *Book Your Kickoff Call with Mark (Success Coach)*; link `https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call`. Use Chris only if CJ explicitly requests it.  
+- **Closer** ClarityPay → **$7,200** checkout (`1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf`); copy **$600/mo × 12 months · 0% APR · 620+ credit score to qualify**. **Setter** ClarityPay → **$3,600** (`plan_z5iuUhSgm9seH?d2c=true`) — **never** swap them.  
+- **Footer business card:** `HTSA - Career Transformation Coach` (dual: `… & Setter`).  
+- Footer Trustpilot row: **4.9 stars out of 5**; Mastermind step: **680+** members (see **`htsa-mastermind-member-count.mdc`**).  
+- Mobile matches **Zachary + Chad** patterns.  
+- **Member Voices:** centered banner, Janaye first, **blue** personal CJ cards (Joseph reference), white HTSA member cards.  
+- **`grep`:** no phantom client data.  
+- **Git: new invoice file committed and pushed** to the publish branch — otherwise **`https://closewithcjclay.com/htsa-enrollment-{slug}.html` 404s**.
+
+### If the live link returns **404** right after you shipped
+
+1. **Confirm the file is on `origin/main`** (not only on your laptop): `git push origin main` must have succeeded.  
+2. **Wait 1–5 minutes** — GitHub Pages rebuilds after each push; clicking the link too early often shows **404** even when the file is correct.  
+3. **Hard-refresh** the tab (**⌘⇧R** / **Ctrl+Shift+R**) in case an old 404 is cached.  
+4. **Sanity-check:** `curl -sI https://closewithcjclay.com/htsa-enrollment-{slug}.html` — you want **`HTTP/2 200`** (not 404).  
+5. **URL typo:** the path must be **`htsa-enrollment-`** (with **`a`**). **`hts-enrollment-`** (no **`a`**) **404s** except any explicit redirect stubs.
+
+---
+
+## NEW invoice workflow + delivery
+
+1. `cp` modern template → `htsa-enrollment-{slug}.html`.  
+2. Replace client fields (`<title>`, hero, billing, steps, Welcome, **`data-*`**, **`STORAGE_KEY`**, JS slug fallback).  
+3. Adjust investment HTML **only** in the new file.  
+4. Run verification checklist; **`grep`** stray names/contacts.  
+5. **`git add`** **only** the new HTML (and rule/skill if edited in the **same** task) — never scratch/review artifacts.  
+6. **`git commit`** + **`git push`** to **`origin/main`** (or the repo’s documented deploy branch) **unless** CJ explicitly says **draft only / do not push**. Live **closewithcjclay.com** pages come from this repository — skipping push is the usual cause of **404** on newly built invoice URLs.  
+7. Return **exactly:** `https://closewithcjclay.com/htsa-enrollment-{slug}.html` — **only after** instantiate/`paste` output shows **`READY`** (live HTTP 200). Do not share the link before **`READY`**.  
+   - **`htsa-instantiate-invoice.py --ship`** (and **`htsa-paste-invoice.py`**, which calls it) **polls the live URL** for up to **6 minutes** after push and only prints **`READY`** + the URL when **`HTTP 2xx`** — **do not send CJ the link until you see `READY`** (or run `sh scripts/check-enrollment-live.sh {slug}`).  
+   - **Typo guard:** Links must use **`htsa-enrollment-`** (with **a**). The pattern **`hts-enrollment-`** (no **a**) **404s** except redirect stubs.  
+   - **Manual check:** `sh scripts/check-enrollment-live.sh {slug}` — same poll loop, exits **0** when live.
+
+---
+
+## Do NOT `git add` these (unless CJ repurposes deliberately)
+
+| File / pattern | Reason |
+|----------------|--------|
+| `Untitled` | Scratch |
+| `HTSA-Terms-of-Service-cleaned-review.html` / `.pdf` | Review draft |
+| **Legacy** `htsa-enrollment-*` not explicitly tasked | Freeze rule |
+
+Bonus copy: don’t toss in “three one-on-one calls with Chad.”
+
+---
+
+## Related
+
+Full agent procedure: `.cursor/skills/htsa-enrollment-invoice/SKILL.md`  
+Facebook Mastermind count: **`htsa-mastermind-member-count.mdc`** (**680+** wording).  
+**Rebuild frozen shells:** from repo root run `python3 scripts/build-htsa-invoice-templates.py` — templates pull **Member voice** testimonials + colored footer icons from **`htsa-enrollment-wayne-wintermute.html`**; **never** run a step that replaces **Closer** ClarityPay (`…/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/`) with the **Setter** plan (`plan_z5iuUhSgm9seH`).

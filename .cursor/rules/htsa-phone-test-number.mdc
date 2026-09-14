@@ -1,0 +1,30 @@
+---
+description: Never send test texts to real clients. Example data is fake. Live SMS clicks use CJ only.
+alwaysApply: true
+---
+
+# Test data vs a real send
+
+Never put a real prospect's name, phone, or email into an example, placeholder,
+test page, preview, code comment, or sample message.
+
+## Example data in files (use these)
+
+```
+Name:   Test Person  /  Jane Doe
+Email:  test@example.com
+Phone:  +15555550100
+Slug:   test_person
+```
+
+Test pages are `test-*.html` or `r/test_*/` and get deleted before you report done.
+
+## If a click would open Messages on this Mac
+
+CJ's computer is signed into his iMessage. A Send button or `sms:` link can go
+out as him.
+
+Do not click Send to verify. Read the on-page preview.
+
+If a click is unavoidable, fill **CJ Clay** and **843-283-3409** first. Never a
+prospect. Never Amy, Anna, Julz, JC, or anyone from the list.

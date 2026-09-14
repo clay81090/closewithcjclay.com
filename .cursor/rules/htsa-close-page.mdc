@@ -1,0 +1,227 @@
+---
+description: How to create a new HTSA close/enrollment page from the close template (copy, never hand-rebuild)
+globs: templates/_TEMPLATE-close.html,htsa-enrollment-*.html,htsa-close-*.html
+alwaysApply: true
+---
+
+# HTSA close pages — the short enrollment instrument
+
+## Relationship to the older rule
+
+`.cursor/rules/htsa-enrollment-invoice-workflow.mdc` covers the **legacy long
+enrollment page** (`htsa-enrollment-*.html`, ~10,000px, locked pay zone).
+**This rule takes priority for anything CJ asks for as a "close page".**
+Do not merge the two templates. Do not port sections from the legacy page into
+this one. Do not modify existing legacy pages when building a new close page.
+
+## Trigger
+
+CJ pastes a name, or a name plus email, phone, and options, in **this chat**.
+He does **not** run Terminal. Never tell him to type `htsa-close`, open a
+tab, or press Ctrl-D. You run the command. He copies the text and email
+you print.
+
+**Name only** (page already exists):
+
+```bash
+python3 scripts/htsa-send-pack.py --full-name "<Full Name>"
+```
+
+**New person or new pricing** (full block):
+
+```bash
+python3 scripts/htsa-paste-close.py --ship <<'EOF'
+<paste his block>
+EOF
+```
+
+Do this first. Do not read other client files. Do not ask follow-up questions.
+
+Wait for `READY` plus a URL before you give him the enroll link. The 30 day
+plan is already on that page at the bottom. Do not send a second roadmap URL
+unless he asks for it.
+
+After `READY` (or after send-pack), **always** print TEXT and EMAIL in chat
+as a black-on-white HTML block he can paste into Gmail and HubSpot. One
+enroll link. Clickable. No markdown. No code fences. Use the block in Step 8.
+
+## What this page is for
+
+CJ is **on the phone or Zoom with them right now**. They have already verbally
+agreed to a plan. This page confirms a decision that was already made. It is not
+a brochure and it is not for reading alone. Every extra word on it costs money.
+
+Target: under 3,500px on a 390px viewport. If a change pushes it past that, cut something.
+
+## Never hand-rebuild
+
+```
+SOURCE:  templates/_TEMPLATE-close.html
+OUTPUT:  htsa-enrollment-<first>-<last>.html      (repo root, matches existing convention)
+```
+
+Live URL becomes `https://closewithcjclay.com/htsa-enrollment-<first>-<last>.html`
+
+Never write one from scratch. Never "improve" the template's layout, CSS, copy,
+guarantee wording, or tracking while making someone's page.
+
+## Step 1 — copy, then edit ONLY the BUYER block
+
+```js
+const BUYER = {
+  firstName: "Test",
+  fullName:  "Test Person",
+  email:     "test@example.com",
+  phone:     "+15555550100",              // E.164
+  slug:      "test_person",               // must match the filename
+  track:     "closer",                    // "closer" or "setter"
+  offer:     "standard",                  // "standard" or "reactivation"
+  show:      ["pif", "plan", "clarity"]   // which options appear, in this order
+};
+```
+
+`slug` drives the rows in CJ's Google Sheet. If it does not match the filename his
+tracking breaks silently. Check it.
+
+`show` is how CJ controls what is offered. If he says "PIF and ClarityPay only",
+set `show: ["pif","clarity"]` and the 4-pay card is removed from the DOM entirely.
+
+## Step 2 — the offer modes
+
+Never edit prices inline. Set `offer` and the whole set swaps.
+
+| | standard | reactivation |
+|---|---|---|
+| PIF | $6,000 | $5,000 |
+| Plan | 4 × $1,750 = $7,000 | 3 × $1,750 = $5,250 |
+| ClarityPay | $600/mo · $7,200 total | $500/mo · $6,000 total |
+
+## Step 3 — a negotiated one-off price
+
+If CJ says he agreed a custom number on the call, uncomment `CUSTOM_OFFER` and fill it.
+It renders as a navy card **above** every other option and removes the "best value"
+badge from PIF.
+
+Never put a negotiated price in a paragraph without a working button. The legacy
+page did that and the best offer became the only one the person could not buy.
+
+## Step 4 — promotion / reactivation checkouts (saved)
+
+Canonical table: `templates/HTSA-SECONDARY-PAYMENT-OPTIONS.md` (Promotion / reactivation).
+Wired into `OFFERS.reactivation` in `templates/_TEMPLATE-close.html`.
+
+| Offer | Total | Checkout |
+|---|---|---|
+| PIF | $5,000 | `https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true` |
+| 3-Pay $1,750 | $5,250 | `https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true` |
+| $6k ClarityPay | $6,000 ($500/mo × 12) | `https://whop.com/checkout/plan_VUSDju20gTBCg/` |
+
+Do **not** use the standard 4-pay (`plan_m6yk0QLbxWaak`) for the 3-pay promo.
+Do **not** use the standard Closer ClarityPay (`…/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/`, $600/mo · $7,200) for the $6k promo.
+
+Any `[PLACEHOLDER]` checkout is caught at click time and alerts instead of charging.
+Keep that guard.
+
+## Step 5 — do not move these
+
+- **Terms + curriculum links stay at the bottom**, below the next-steps dropdown. CJ
+  explicitly does not want them near the top.
+- **Next steps is a collapsed `<details>` directly under the payment buttons.**
+  Summary: "Doing this on your own? Here's exactly what happens next". Closed by
+  default, always openable, never gated on payment. First open fires
+  `next_steps_opened`. Do not hide this section until checkout.
+- **All HTSA Resources is the navy/green collapsed tab above CJ Reviews.** Default on
+  every close page (baked into `templates/_TEMPLATE-close.html`). Videos play in-page
+  (YouTube embeds + local clips like Taylor Decourcey and Aug 18). Trustpilot + Canva
+  use scrollable snapshot images in `/media/resources/`. Top 20 PDF opens in the same
+  in-page viewer next to the website row under **More resources**. Do not strip this
+  when building someone's page.
+- **Terms acceptance happens after plan selection**, inside the confirm sheet. Never
+  gate the payment buttons behind a terms checkbox again. That is what killed
+  conversion on the legacy page.
+- **The guarantee stays navy and green.** No gold, no brown, no yellow.
+- **No curriculum content on the page itself.** Outcomes in the "What you're getting"
+  list, detail behind the modal. A visible module list invites evaluation at the
+  moment CJ needs a decision.
+
+## Step 6 — verify before reporting done
+
+1. Page height under 3,500px at 390px width.
+2. No horizontal scroll at 320px and 375px. No console errors.
+3. No rendered text under 12px.
+4. Header shows Prepared for (their name/email/phone) and Prepared by (CJ).
+5. Only the options in `show` are present, in that order.
+6. Footer business card renders with the headshot.
+7. Tapping a plan opens the confirm sheet. Continue stays disabled until the box is
+   checked. On continue, `recordTermsAgreement` fires before the redirect.
+8. In reactivation mode: 3-pay goes to `plan_YrqGOXMxGbOVa` (true 3-pay, no
+   fourth-payment warning). ClarityPay goes to `plan_VUSDju20gTBCg` ($6k), not
+   the $7,200 closer plan.
+9. Next steps is a closed `<details>` under the payment buttons. Opening it
+   fires `next_steps_opened` once. It is never hidden behind checkout.
+
+## Step 7 — ship it
+
+Prefer `python3 scripts/htsa-paste-close.py --ship` so the BUYER swap, commit,
+push, and live check happen in one shot. The script does not treat a cached old
+invoice 200 as ready. It waits for this build's `close-build:` stamp. If the
+clean URL is still stale it prints the same URL with `?v=<stamp>` so you can
+send it immediately.
+
+If you are already in the file by hand:
+
+```bash
+cd ~/Desktop/closewithcjclay.com/closewithcjclay.com
+git add htsa-enrollment-<first>-<last>.html
+git commit -m "Add close page for <Full Name>"
+git push
+```
+
+Give CJ the live URL and tell him to load it once himself before the call.
+
+## Step 8 — output EMAIL + TEXT every time
+
+**Order is EMAIL first, then TEXT.** The text explicitly says
+"just emailed you everything", so send order matches the words.
+One enroll link only. The 30 day action plan is already at the bottom of
+that page. Never write a negative descriptive norm about other prospects.
+
+Always wrap the output in this HTML block so copy-paste into Gmail, HubSpot,
+and iMessage stays black on white. No markdown. No code fences. Voice rule
+in `no-dashes-in-client-copy.mdc`: commas and periods by default, one em
+dash per paragraph max when it earns its place. The exact default copy
+lives in `scripts/htsa_close_copy.py` (`print_send_pack`). Reproduce it
+verbatim, only substituting `First` and `ENROLL_URL`:
+
+<div style="background:#ffffff;color:#000000;padding:20px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;">
+<p style="color:#000000;background:#ffffff;margin:0 0 8px 0;"><b>EMAIL</b></p>
+<p style="color:#000000;background:#ffffff;margin:0;">Subject: Your enrollment page</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Hi First,</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Good conversation today. You asked good questions, which is the reason I'm sending this instead of just a link.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">You've made enough decisions with real money behind them to know the difference between a program that sounds right and one that holds up when you check it. So here's your page, and here's how to check it.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Your enrollment page:</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;"><a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a></p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Two things to look at while you're in there. The 30-day action plan at the bottom is the part most people skip and it's the part that matters. It's the actual sequence from day one to placed, with dates attached, not a promise. And the proof section is there so you don't have to take my word for anything I said on our call: video testimonials from members, testimonials from the companies that hire out of our network, Chad's book, our reviews. I'd rather you validate it yourself than believe me.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">The three things worth verifying before you commit to anything:</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Placement is a person's job here, not a job board. Nate's entire role is getting you in front of companies already looking. Ask anyone in the reviews about that specifically.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">It's backed in writing. If we don't place you inside 50 interviews or six months, you get refunded. The longest it's ever taken us is 15 interviews.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">There's nothing recurring. No monthly to stay in, no fees after placement, lifetime access to the training and coaching, and lifetime placement. We'll move you to a better offer in a year if you've earned it.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">If anything on that page raises a question, call or text me directly. I'd rather answer it now than have you sit on it.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">
+CJ Clay<br>
+HTSA, Career Transformation Coach<br>
+(616) 612-1735<br>
+<a href="mailto:cj@highticketsalesacademy.com" style="color:#000000;background:#ffffff;">cj@highticketsalesacademy.com</a>
+</p>
+<p style="color:#000000;background:#ffffff;margin:24px 0 8px 0;"><b>TEXT (send right after the email)</b></p>
+<p style="color:#000000;background:#ffffff;margin:0;">
+First, just emailed you everything we walked through. Link's in there, or here if it's easier: <a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a>
+<br><br>
+Worth pulling up on a computer rather than your phone. The 30-day plan and the proof section are both at the bottom and they read a lot better on a real screen. Any questions, call or text me directly.
+<br><br>
+CJ
+</p>
+</div>
+
+If he is mid-call, also remind him in one short line: stay on the phone,
+narrate the tap, do not go quiet at Whop.

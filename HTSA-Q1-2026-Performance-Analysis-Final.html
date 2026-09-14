@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTSA Q1 2026 Performance Analysis — Final</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-black: #111111;
+    --card: #161616;
+    --border: #2a2a2a;
+    --white: #f5f5f0;
+    --dim: #888880;
+    --red: #e8433a;
+    --red-soft: rgba(232,67,58,0.12);
+    --green: #3adb76;
+    --green-soft: rgba(58,219,118,0.10);
+    --yellow: #f5c842;
+    --yellow-soft: rgba(245,200,66,0.10);
+    --blue: #4da6ff;
+    --blue-soft: rgba(77,166,255,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding: 48px 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(232,67,58,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 6vw, 72px);
+    letter-spacing: 0.03em;
+    line-height: 0.95;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .header-sub {
+    color: var(--dim);
+    font-size: 14px;
+    max-width: 600px;
+  }
+  .header-meta {
+    margin-top: 24px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .meta-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--white);
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px 80px;
+  }
+
+  /* ── EXEC SUMMARY ── */
+  .exec-summary {
+    margin: 48px 0;
+    padding: 36px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--yellow);
+  }
+  .exec-summary h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    color: var(--yellow);
+    margin-bottom: 16px;
+  }
+  .exec-summary p {
+    color: #ccc;
+    line-height: 1.7;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+  .exec-summary p:last-child { margin-bottom: 0; }
+  .exec-summary strong { color: var(--white); }
+
+  /* ── STATS GRID — always 4 per row ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 32px 0;
+  }
+  .stat-box {
+    background: var(--card);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .stat-value.red    { color: var(--red); }
+  .stat-value.green  { color: var(--green); }
+  .stat-value.yellow { color: var(--yellow); }
+  .stat-value.blue   { color: var(--blue); }
+  .stat-value.white  { color: var(--white); }
+  .stat-note { font-size: 12px; color: var(--dim); line-height: 1.4; }
+
+  /* ── SECTION CHROME ── */
+  .section { margin: 56px 0; }
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--border);
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+  }
+  .section-title-block { flex: 1; }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .section-tag.red    { color: var(--red); }
+  .section-tag.green  { color: var(--green); }
+  .section-tag.yellow { color: var(--yellow); }
+  .section-tag.blue   { color: var(--blue); }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .section-desc { font-size: 13px; color: var(--dim); max-width: 600px; line-height: 1.5; }
+
+  /* ── COLUMNS ── */
+  .two-col   { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin: 20px 0; }
+
+  /* ── FINDING CARDS ── */
+  .finding {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 28px;
+  }
+  .finding-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .finding-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0;
+  }
+  .finding-icon.red    { background: var(--red-soft);    color: var(--red); }
+  .finding-icon.green  { background: var(--green-soft);  color: var(--green); }
+  .finding-icon.yellow { background: var(--yellow-soft); color: var(--yellow); }
+  .finding-icon.blue   { background: var(--blue-soft);   color: var(--blue); }
+  .finding-title { font-weight: 600; font-size: 14px; color: var(--white); }
+  .finding p { font-size: 13px; color: #bbb; line-height: 1.65; margin-bottom: 10px; }
+  .finding p:last-child { margin-bottom: 0; }
+  .finding strong { color: var(--white); }
+
+  /* ── DATA ROWS ── */
+  .data-rows { background: var(--card); border: 1px solid var(--border); overflow: hidden; }
+  .data-row {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+  }
+  .data-row:last-child { border-bottom: none; }
+  .data-row-label { flex: 1; font-size: 13px; color: #bbb; }
+  .data-row-label strong { color: var(--white); display: block; font-size: 14px; }
+  .data-row-value { font-family: 'DM Mono', monospace; font-size: 13px; text-align: right; white-space: nowrap; }
+  .data-row-value.red    { color: var(--red); }
+  .data-row-value.green  { color: var(--green); }
+  .data-row-value.yellow { color: var(--yellow); }
+  .data-row-value.white  { color: var(--white); }
+
+  /* ── BEFORE/AFTER ROW ── */
+  .ba-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+  }
+  .ba-row:last-child { border-bottom: none; }
+  .ba-label { font-size: 13px; color: #bbb; }
+  .ba-label strong { color: var(--white); display: block; font-size: 13px; }
+  .ba-before {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--red);
+    text-align: right;
+    white-space: nowrap;
+    min-width: 90px;
+  }
+  .ba-after {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+    text-align: right;
+    white-space: nowrap;
+    min-width: 90px;
+  }
+  .ba-header-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 16px;
+    padding: 10px 24px;
+    background: var(--off-black);
+    border-bottom: 1px solid var(--border);
+  }
+  .ba-header-row span {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dim);
+    text-align: right;
+    min-width: 90px;
+  }
+  .ba-header-row span:first-child { text-align: left; min-width: unset; }
+
+  /* ── BADGES ── */
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .badge.red    { background: var(--red-soft);    color: var(--red);    border: 1px solid rgba(232,67,58,0.25); }
+  .badge.green  { background: var(--green-soft);  color: var(--green);  border: 1px solid rgba(58,219,118,0.25); }
+  .badge.yellow { background: var(--yellow-soft); color: var(--yellow); border: 1px solid rgba(245,200,66,0.25); }
+  .badge.blue   { background: var(--blue-soft);   color: var(--blue);   border: 1px solid rgba(77,166,255,0.25); }
+
+  /* ── FIX LIST — clean, left-aligned, no zig-zag ── */
+  .fix-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 16px;
+  }
+  .fix-list li {
+    display: flex;
+    gap: 0;
+    align-items: flex-start;
+    font-size: 13px;
+    color: #bbb;
+    line-height: 1.6;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .fix-list li:last-child { border-bottom: none; }
+  .fix-list li .fix-arrow {
+    color: var(--green);
+    font-family: 'DM Mono', monospace;
+    flex-shrink: 0;
+    width: 28px;
+    padding-top: 1px;
+  }
+  .fix-list li .fix-body { flex: 1; }
+  .fix-list li strong { color: var(--white); display: block; margin-bottom: 3px; font-size: 13px; }
+
+  /* ── FUNNEL ── */
+  .funnel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 32px;
+    margin: 20px 0;
+  }
+  .funnel-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 24px;
+  }
+  .funnel-step { margin-bottom: 6px; }
+  .funnel-step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .funnel-step-label { font-size: 13px; color: #bbb; }
+  .funnel-step-label span { color: var(--white); font-weight: 500; }
+  .funnel-step-pct { font-family: 'DM Mono', monospace; font-size: 12px; }
+  .funnel-bar-track { height: 8px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 2px; }
+  .funnel-bar-fill { height: 100%; border-radius: 2px; }
+  .funnel-loss { font-size: 11px; color: var(--red); font-family: 'DM Mono', monospace; text-align: right; margin-bottom: 12px; }
+
+  /* ── TABLES ── */
+  .trend-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
+  .trend-table th {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dim); text-align: left;
+    padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--off-black);
+  }
+  .trend-table td {
+    padding: 12px 16px; border-bottom: 1px solid var(--border); color: #bbb;
+    vertical-align: top; font-family: 'DM Mono', monospace; font-size: 12px;
+  }
+  .trend-table td:first-child { color: var(--white); font-weight: 500; font-family: 'DM Sans', sans-serif; }
+  .trend-table tr:last-child td { border-bottom: none; }
+  .trend-table .up      { color: var(--green); }
+  .trend-table .down    { color: var(--red); }
+  .trend-table .neutral { color: var(--yellow); }
+
+  .proj-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 20px; }
+  .proj-table th {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dim); text-align: left;
+    padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--off-black);
+  }
+  .proj-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: #bbb; vertical-align: top; }
+  .proj-table td:first-child { color: var(--white); font-weight: 500; }
+  .proj-table tr:last-child td { border-bottom: none; }
+  .proj-table .highlight { color: var(--green); font-family: 'DM Mono', monospace; }
+  .proj-table .current   { color: var(--red);   font-family: 'DM Mono', monospace; }
+
+  /* ── PRIORITY GRID ── */
+  .priority-grid { display: grid; grid-template-columns: 1fr; gap: 2px; margin-top: 20px; }
+  .priority-item {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 16px;
+    align-items: start;
+    padding: 20px 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+  .priority-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--border); line-height: 1; padding-top: 2px; }
+  .priority-content strong { display: block; font-size: 14px; color: var(--white); margin-bottom: 4px; }
+  .priority-content span   { font-size: 12px; color: var(--dim); line-height: 1.55; display: block; }
+  .priority-impact { text-align: right; }
+
+  /* ── CALLOUT BOXES ── */
+  .cj-callout {
+    background: linear-gradient(135deg, rgba(58,219,118,0.05) 0%, transparent 60%);
+    border: 1px solid rgba(58,219,118,0.2);
+    padding: 36px; margin: 32px 0;
+  }
+  .cj-callout h3 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; color: var(--green); margin-bottom: 16px; }
+  .cj-callout p  { font-size: 13px; color: #bbb; line-height: 1.7; margin-bottom: 12px; }
+  .cj-callout p:last-child { margin-bottom: 0; }
+  .cj-callout strong { color: var(--white); }
+
+  .alert-callout {
+    background: linear-gradient(135deg, rgba(232,67,58,0.06) 0%, transparent 60%);
+    border: 1px solid rgba(232,67,58,0.25);
+    padding: 36px; margin: 32px 0;
+  }
+  .alert-callout h3 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; color: var(--red); margin-bottom: 16px; }
+  .alert-callout p  { font-size: 13px; color: #bbb; line-height: 1.7; margin-bottom: 12px; }
+  .alert-callout p:last-child { margin-bottom: 0; }
+  .alert-callout strong { color: var(--white); }
+
+  .callout-note {
+    display: flex; gap: 12px; padding: 16px 20px;
+    background: var(--off-black); border-left: 3px solid var(--yellow);
+    margin: 16px 0; font-size: 12px; color: var(--dim); line-height: 1.5;
+  }
+  .callout-note strong { color: var(--yellow); }
+  .callout-note.red  { border-left-color: var(--red); }
+  .callout-note.red strong  { color: var(--red); }
+  .callout-note.blue { border-left-color: var(--blue); }
+  .callout-note.blue strong { color: var(--blue); }
+  .callout-note.green { border-left-color: var(--green); }
+  .callout-note.green strong { color: var(--green); }
+
+  /* ── AUTOMATION CARDS ── */
+  .auto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .auto-card { background: var(--off-black); border: 1px solid var(--border); padding: 20px; }
+  .auto-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .auto-card-name { font-weight: 600; font-size: 14px; color: var(--white); }
+  .auto-card-timeline { font-family: 'DM Mono', monospace; font-size: 10px; }
+  .auto-card p { font-size: 12px; color: var(--dim); line-height: 1.5; }
+  .auto-card strong { color: #bbb; }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--border); padding: 32px 60px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-left  { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--dim); letter-spacing: 0.08em; }
+  .footer-right { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--dim); }
+
+  /* ── ANIMATIONS ── */
+  /* Default visible so all sections show even if JS is off or blocked (file:// preview). */
+  .fade-in { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-col, .three-col, .auto-grid { grid-template-columns: 1fr; }
+    .container { padding: 0 24px 60px; }
+    .header { padding: 36px 24px 32px; }
+    .footer { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-label">Internal Performance Review · Confidential</div>
+  <h1>HTSA<br>Q1 2026<br>Analysis</h1>
+  <p class="header-sub">A data-driven breakdown of what's working, what's broken, and the specific changes that will move the numbers — across marketing, SDR, and closing.</p>
+  <div class="header-meta">
+    <div class="meta-item">
+      <span class="meta-label">Period</span>
+      <span class="meta-value">Jan – Mar 23, 2026</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Prepared By</span>
+      <span class="meta-value">CJ Clay</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Data Source</span>
+      <span class="meta-value">HubSpot CRM</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Record Month</span>
+      <span class="meta-value">$312,500 · Feb 2026</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Total Ad Spend Q1</span>
+      <span class="meta-value">$137,350</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="exec-summary fade-in">
+    <h2>Executive Summary</h2>
+    <p>This report is not about blame. It's about identifying the specific points in our funnel where revenue is leaking and proposing concrete, sequenced fixes. The data shows a business with genuine product-market fit — <strong>$312,500 in February, the single best month in company history</strong> — but a funnel with three structurally broken layers that are compounding against each other every week.</p>
+    <p>Two urgent findings sit above all others. First, <strong>the ad engine powering this entire funnel has deteriorated from 289% ROI in January to 44% ROI in March</strong> while spend increased 60%. Without intervention, the primary revenue driver approaches break-even within 30–60 days. Second, <strong>the team's show rate of 46% — nearly 20 points below industry standard — is the single largest suppressor of otherwise-achievable revenue.</strong> Fixing show rate alone, without changing anything else, would add an estimated 10+ closes per month across the team at current close rates.</p>
+    <p>The business is 3–4 months old as a scaled operation. The ceiling is real and has already been touched. The floor is leaking at three separate points simultaneously. This document identifies exactly where, in exactly what order to fix it.</p>
+  </div>
+
+  <!-- KEY METRICS — 2 rows of 4 -->
+  <div class="stats-grid fade-in">
+    <div class="stat-box">
+      <span class="stat-label">Team Show Rate</span>
+      <span class="stat-value red">46%</span>
+      <span class="stat-note">Industry benchmark: 65–75%. Nearly 20 points below. Largest single revenue suppressor.</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-label">No-Shows This Month</span>
+      <span class="stat-value red">111</span>
+      <span class="stat-note">Out of 451 total pipeline deals. 24.6% of pipeline simply disappears.</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-label">Avg Lead Response Time</span>
+      <span class="stat-value red">1.8d</span>
+      <span class="stat-note">Q1 average. Must be under 30 min. Contact rate drops 100x after 30 minutes.</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-label">March Ad ROI</span>
+      <span class="stat-value red">44%</span>
+      <span class="stat-note">Down from 289% in January. Ad engine deteriorating at pace — urgent.</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-label">Feb Team Revenue</span>
+      <span class="stat-value green">$312K</span>
+      <span class="stat-note">Best month in company history. Proof the product and team can perform.</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-label">Team Close Rate</span>
+      <span class="stat-value yellow">19.5%</span>
+      <span class="stat-note">Suppressed by pipeline quality — not closer skill. Show rate fix unlocks this.</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-label">Contact-to-Customer</span>
+      <span class="stat-value red">1.97%</span>
+      <span class="stat-note">Of 26,965 contacts, only ~531 became customers. Massive qualification gap.</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-label">Paid Social Share</span>
+      <span class="stat-value yellow">40%</span>
+      <span class="stat-note">Of all contacts ever. Our proven engine — but requires downstream qualification to convert.</span>
+    </div>
+  </div>
+
+  <!-- SECTION 00: FUNNEL -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-number">00</div>
+      <div class="section-title-block">
+        <div class="section-tag red">The Core Problem</div>
+        <div class="section-title">Where Revenue Dies In The Funnel</div>
+        <div class="section-desc">The full picture of where leads are leaking between first touch and closed deal — three simultaneous failure points, each compounding the next.</div>
+      </div>
+    </div>
+
+    <div class="funnel">
+      <div class="funnel-title">Lead → Close Conversion Flow · Q1 2026</div>
+
+      <div class="funnel-step">
+        <div class="funnel-step-header">
+          <div class="funnel-step-label"><span>Web Traffic</span> — Top of funnel</div>
+          <div class="funnel-step-pct" style="color:var(--white)">40,270 sessions</div>
+        </div>
+        <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:100%;background:var(--blue)"></div></div>
+      </div>
+
+      <div class="funnel-step">
+        <div class="funnel-step-header">
+          <div class="funnel-step-label"><span>Form Submissions</span> — Applications received</div>
+          <div class="funnel-step-pct" style="color:var(--blue)">6,037 (15%)</div>
+        </div>
+        <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:15%;background:var(--blue)"></div></div>
+        <div class="funnel-loss">— No VSL gate · 40% from paid social scroll traffic · Unqualified applicants reach the form with no friction</div>
+      </div>
+
+      <div class="funnel-step">
+        <div class="funnel-step-header">
+          <div class="funnel-step-label"><span>Deals Set by SDR</span> — Appointments booked</div>
+          <div class="funnel-step-pct" style="color:var(--yellow)">~540 (9% of apps)</div>
+        </div>
+        <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:9%;background:var(--yellow)"></div></div>
+        <div class="funnel-loss">— 1.8 day avg response · Some leads bypass setter entirely · Price disclosed too early · Leads going cold</div>
+      </div>
+
+      <div class="funnel-step">
+        <div class="funnel-step-header">
+          <div class="funnel-step-label"><span>Showed for Closer Call</span> — Actual conversations</div>
+          <div class="funnel-step-pct" style="color:var(--yellow)">~248 (46% show rate)</div>
+        </div>
+        <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:4.1%;background:var(--yellow)"></div></div>
+        <div class="funnel-loss">— 111 no-shows this month · No confirmation SLA · Zero consequence for ghosting · Confirmation work pushed to closers</div>
+      </div>
+
+      <div class="funnel-step">
+        <div class="funnel-step-header">
+          <div class="funnel-step-label"><span>Closed Won</span> — Revenue</div>
+          <div class="funnel-step-pct" style="color:var(--green)">~42 (19.5% close rate)</div>
+        </div>
+        <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:0.7%;background:var(--green)"></div></div>
+        <div class="funnel-loss" style="color:var(--dim)">— 0.7% of original form submissions become customers</div>
+      </div>
+    </div>
+
+    <div class="callout-note">
+      <strong>Key insight:&nbsp;</strong>Even at the current 19.5% close rate, fixing show rate from 46% to 65% adds approximately 10+ closes per month across the team — without any change to closer skill, script, or headcount.
+    </div>
+  </div>
+
+  <!-- SECTION 01: MARKETING -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-number">01</div>
+      <div class="section-title-block">
+        <div class="section-tag blue">Layer One</div>
+        <div class="section-title">Marketing & Ad Performance</div>
+        <div class="section-desc">Paid Social is the proven engine. The ad ROI trend is the most urgent number in this document. Lead quality at the top of funnel is the root cause of everything downstream.</div>
+      </div>
+    </div>
+
+    <!-- AD ROI FREEFALL -->
+    <div class="alert-callout fade-in">
+      <h3>⚠ Ad ROI Freefall — Most Urgent Issue In This Report</h3>
+      <p>This is not a bad month. It is a trend line that will push the primary revenue engine to break-even or negative within 30–60 days at current trajectory. Ad spend increased 60% from January to March. Deals closed fell 44%. The audience is saturating and the creative is fatiguing simultaneously.</p>
+      <table class="trend-table" style="margin-top:16px">
+        <thead>
+          <tr><th>Period</th><th>Spend</th><th>Contacts</th><th>Deals</th><th>ROI</th><th>Cost/Deal</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>January 2026</td>
+            <td class="neutral">$36,347</td>
+            <td>1,261</td>
+            <td class="up">27</td>
+            <td class="up">289%</td>
+            <td class="up">$1,346</td>
+          </tr>
+          <tr>
+            <td>February 2026</td>
+            <td class="neutral">$41,538</td>
+            <td>892</td>
+            <td class="neutral">23</td>
+            <td class="neutral">140%</td>
+            <td class="neutral">$1,806</td>
+          </tr>
+          <tr>
+            <td>March 1–21, 2026</td>
+            <td class="down">$58,347</td>
+            <td>940</td>
+            <td class="down">15</td>
+            <td class="down">44%</td>
+            <td class="down">$3,889</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:16px">At March's cost-per-deal of <strong>$3,889</strong> against an AOV of ~$5,400, the margin on continued scaling at this rate is unsustainable. Creative refresh and audience expansion are required before spend is increased further. The fix is not to spend less — it's to spend smarter on content that is proven to convert.</p>
+    </div>
+
+    <!-- PAID SOCIAL IS THE ENGINE -->
+    <div class="finding fade-in" style="border-left:3px solid var(--blue); margin-top:20px">
+      <div class="finding-header">
+        <div class="finding-icon blue">◎</div>
+        <div class="finding-title">Contact Source Reality — All Time (26,965 Contacts)</div>
+      </div>
+      <p>Paid Social — Facebook and Instagram — is the proven, dominant lead generation engine for HTSA. It is not a secondary channel. It is the entire top of funnel. Understanding this shapes every recommendation in this document.</p>
+      <table class="trend-table" style="margin-top:8px">
+        <thead>
+          <tr><th>Source</th><th>Contacts</th><th>% of Total</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Paid Social (Meta)</td><td class="up">10,866</td><td class="up">40.3%</td><td>Dominant engine. Proven volume. Needs better downstream qualification.</td></tr>
+          <tr><td>Other Campaigns</td><td>8,576</td><td>31.8%</td><td>Mixed attribution. Largely Meta-adjacent.</td></tr>
+          <tr><td>Direct Traffic</td><td>2,973</td><td>11.0%</td><td>Warm brand-aware traffic.</td></tr>
+          <tr><td>Offline Sources</td><td>2,396</td><td>8.9%</td><td>Variable quality.</td></tr>
+          <tr><td>Organic Social</td><td>925</td><td>3.4%</td><td>Growing. No ad spend required.</td></tr>
+          <tr><td>Paid Search (Google)</td><td class="down">516</td><td class="down">1.9%</td><td>$59,354 all-time spend → 30 contacts in Q1 = $1,978/contact. Worst ROI in system.</td></tr>
+          <tr><td>Organic Search (SEO)</td><td>327</td><td>1.2%</td><td>Long-term asset. Currently minimal.</td></tr>
+          <tr><td>Email Marketing</td><td class="down">7</td><td class="down">0.03%</td><td>Essentially non-functional as a channel.</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:12px"><strong>The critical clarification:</strong> Paid Search traffic may carry higher purchase intent in theory, but HTSA's Google Keyword Only Campaign has spent <strong>$59,354 all-time to generate 30 contacts</strong> — the single worst cost-per-contact in the system at $1,978 each. Meta Paid Social is generating contacts at $5–8 each. The recommendation is not to shift budget to Google — it is to <strong>maximize what's working on Meta</strong> and fix the downstream qualification gap that Meta's scroll-behavior audience requires.</p>
+    </div>
+
+    <!-- UNQUALIFIED LEAD PROBLEM -->
+    <div class="alert-callout fade-in" style="margin-top:20px">
+      <h3>The Unqualified Lead Problem — A Top-of-Funnel Crisis</h3>
+      <p>The data shows a pattern of applicants reaching the booking stage who have no meaningful understanding of what they are applying for. There is evidence of people who believe they are applying for employment, individuals unfamiliar with what high-ticket sales is, and contacts whose professional backgrounds suggest no plausible path to closing $5,000–$7,000 programs.</p>
+      <p><strong>This is a funnel design problem, not a marketing problem.</strong> When a Facebook ad leads directly to a form that leads directly to a booking calendar with no intermediate qualification, anyone with a smartphone and 60 seconds can consume a closer's calendar slot. The ad creative does its job — it generates interest. The funnel's job is to convert interest into qualified appointments. Right now, it is not doing that job.</p>
+      <p>The downstream consequences are measurable: unqualified leads consume setter call time, closer calendar slots, follow-up sequences, and confirmation resources — and produce zero revenue. More importantly, <strong>high volumes of low-quality clicks train the ad platform's algorithm to find more people like them.</strong> A smaller volume of higher-quality leads, generating better click-through and conversion signals, will cause Meta's algorithm to self-optimize toward better prospects over time. Fewer leads at higher quality is a compounding advantage. More leads at low quality is a compounding cost.</p>
+    </div>
+
+    <div class="two-col" style="margin-top:20px">
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-icon green">✓</div>
+          <div class="finding-title">What's Working</div>
+        </div>
+        <p><strong>Paid Social at scale.</strong> Meta is generating thousands of contacts at $5–8 each. The channel works. The specific videos driving this traffic are assets — they should be identified, protected, and used as the foundation of a retargeting strategy.</p>
+        <p><strong>The VSL infrastructure exists.</strong> A 27-minute training video is already built and hosted. The content is there. It is not currently required viewing before booking — but it could be, immediately, with a routing change rather than new content creation.</p>
+        <p><strong>Form conversion at 26.74%</strong> on the HTSA.com Free Training Form Page proves that when prospects are channeled properly, they convert. The routing is the problem, not the offer.</p>
+      </div>
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-icon red">✗</div>
+          <div class="finding-title">What's Not Working</div>
+        </div>
+        <p><strong>No friction before the booking calendar.</strong> A prospect can move from cold ad click to booked closer appointment in under 60 seconds without watching any content, answering any qualifying question, or speaking to any human. This is the primary source of the no-show problem and the unqualified lead problem simultaneously.</p>
+        <p><strong>Google Keyword Only: $59,354 spent, 30 contacts in Q1, $1,978 per contact.</strong> This campaign should be paused and audited before any additional spend is allocated.</p>
+        <p><strong>Email Marketing: 7 contacts all-time.</strong> There is a 26,000+ contact database with essentially no re-engagement strategy. This is a large untapped asset.</p>
+      </div>
+    </div>
+
+    <!-- WHY MARKETING LEADS OUTPERFORM SETTER-BOOKED LEADS -->
+    <div class="finding fade-in" style="margin-top:20px; border-left:3px solid var(--yellow)">
+      <div class="finding-header">
+        <div class="finding-icon yellow">◎</div>
+        <div class="finding-title">Why Marketing Leads Currently Outperform Setter-Booked Leads</div>
+      </div>
+      <p>Marketing leads — people who book directly through an ad or organic touch — currently show at a <strong>48–52% rate</strong>, while setter-booked appointments show at <strong>40–44%</strong>. This appears counterintuitive: a setter should be adding qualification and warm-up value that improves show rate. The data shows the opposite.</p>
+      <p>The reason is intent at the point of booking. A marketing lead who finds the page organically or clicks through from a video they chose to watch has already invested attention before booking. They arrived with some degree of curiosity or pull. A setter cold-calling someone who submitted a form 24–48 hours ago reaches a person who has often cooled down, may not remember the form, and books the appointment to end the call rather than out of genuine interest. When price is disclosed on that setter call — before trust is established — the prospect has hours or days to talk themselves out of it.</p>
+      <p><strong>The fix is not to reduce setter activity — it's to change the setter's role from mini-closer to qualifier and excitement-builder.</strong> A setter call done correctly — short, energetic, price-free, focused on the closer call as the event — should produce show rates above the marketing lead baseline, not below it. The gap between 44% and 52% is entirely recoverable with script and incentive changes.</p>
+    </div>
+
+    <!-- MARKETING FIXES -->
+    <div class="finding fade-in" style="margin-top:20px; border-left:3px solid var(--blue)">
+      <div class="finding-header">
+        <div class="finding-icon blue">→</div>
+        <div class="finding-title">Marketing Fixes — In Priority Order</div>
+      </div>
+      <ul class="fix-list">
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Maximize the best-performing social videos — redirect, don't reduce them.</strong>
+            The concern about friction reducing bookings is valid but misapplied. The solution is not to remove all friction — it's to place the right friction at the right point. Let the social ads run at full volume. Gate the booking step behind a required video watch. Someone who watches 12 minutes before booking has already invested time and attention — they show up. Someone who books in 30 seconds while scrolling will not.
+          </span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Gate the booking calendar behind the existing VSL.</strong>
+            The 27-minute training video already exists. Placing it as a required step before the calendar is shown is a routing change, not a content build. It pre-sells the concept, pre-handles the most common objections, and self-selects for prospects who are genuinely interested. This one change addresses the unqualified lead problem, the no-show problem, and the algorithm quality signal problem simultaneously.
+          </span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Introduce meaningful application friction — qualifying questions with real answers required.</strong>
+            A minimum of 3–4 qualifying questions before any booking access: current income, specific career/financial goal, why now, and at minimum a confirmation that they understand this is a sales training program, not an employment opportunity. People who won't answer four questions will not commit $7,000. Screening them out here protects every downstream resource.
+          </span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Launch warm retargeting from existing video engagement.</strong>
+            People who watched 50%+ of a social video are 3–4x more likely to convert than cold traffic. This audience is being left entirely unused. A warm retargeting sequence using the existing video library is the highest available ROI move and requires no new creative — only audience configuration.
+          </span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Audit and pause the Google Keyword Only Campaign immediately.</strong>
+            $59,354 spent all-time, 30 contacts in Q1 at $1,978 per contact. This is not a search strategy — it is a budget drain. No additional spend should be allocated until a full audit is completed. Meta at $5–8 per contact is the proven channel and should absorb reallocated budget.
+          </span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Refresh ad creative and expand lookalike audiences before spend is increased.</strong>
+            The 289% → 140% → 44% ROI decline is audience saturation and creative fatigue. New creative variations built around the best-performing existing content, combined with fresh lookalike audiences from recent buyers, will recover performance without requiring a new campaign architecture.
+          </span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Activate email re-engagement to the existing contact database.</strong>
+            26,965 contacts. 7 from email marketing all-time. A segmented re-engagement sequence to the warmest prior contacts — people who submitted a form but never booked, or booked but never showed — represents a significant untapped pool at zero additional ad cost.
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 02: SDR -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-number">02</div>
+      <div class="section-title-block">
+        <div class="section-tag yellow">Layer Two</div>
+        <div class="section-title">SDR / Setter Performance</div>
+        <div class="section-desc">The setter layer is operating without the tools, incentives, or protocols needed to do its job. The consequences flow directly into closer calendars.</div>
+      </div>
+    </div>
+
+    <!-- SETTER TEAM STATE -->
+    <div class="alert-callout fade-in">
+      <h3>The Setter Team Is Under-Resourced Against The Volume It's Expected To Handle</h3>
+      <p>The active setter team — Chris Vadinsky, Humberto Arias, Sam Mojica, Nick Sotirianos, and Micah Hankinson — is operating without a parallel dialer, without AI-assisted follow-up, and in at least one documented case, with a new rep handed a contact list from November that is 4–5 months cold along with only 4 new leads to work. This is not a performance problem. It is a tooling and resource allocation problem.</p>
+      <p>For context: comparable SDR operations at high-ticket training organizations using parallel dialers routinely achieve <strong>2,000+ calls per day per rep</strong> by contacting 3 people simultaneously. At current single-line dialer capacity, HTSA's setters are operating at roughly 10–15% of that output ceiling. The solution is infrastructure, not headcount.</p>
+    </div>
+
+    <div class="data-rows fade-in">
+      <div class="data-row">
+        <div class="data-row-label">
+          <strong>Q1 Lead Response Time — Team Average</strong>
+          Jan: 2.2 days · Feb: 1.6 days · Mar: 1.8 days
+        </div>
+        <span class="data-row-value red">1.8 days</span>
+      </div>
+      <div class="data-row">
+        <div class="data-row-label">
+          <strong>SDR Close Rate vs Closer Close Rate</strong>
+          Should be dramatically lower. Nearly identical rate means setters are doing full discovery.
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="badge red">SDR: 20%</span>
+          <span class="badge yellow">Closers: 19.5%</span>
+        </div>
+      </div>
+      <div class="data-row">
+        <div class="data-row-label">
+          <strong>Setter-Booked Show Rate vs Marketing Lead Show Rate</strong>
+          Setter-booked appointments show up less than direct marketing leads.
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="badge red">Setter: ~40–44%</span>
+          <span class="badge yellow">Marketing: ~48–52%</span>
+        </div>
+      </div>
+      <div class="data-row">
+        <div class="data-row-label">
+          <strong>Monthly Sets Trend</strong>
+          Declining month over month despite volume of incoming leads.
+        </div>
+        <span class="data-row-value red">201 → 178 → 161</span>
+      </div>
+      <div class="data-row">
+        <div class="data-row-label">
+          <strong>Leads Bypassing Setter Entirely</strong>
+          Policy allows routing directly to closer to avoid setter cost.
+        </div>
+        <span class="data-row-value red">Active policy</span>
+      </div>
+      <div class="data-row">
+        <div class="data-row-label">
+          <strong>Best-Performing Setter by Appointment Quality</strong>
+          Highest close conversion rate from their booked appointments.
+        </div>
+        <span class="data-row-value green">Chris Vadinsky</span>
+      </div>
+      <div class="data-row">
+        <div class="data-row-label">
+          <strong>Highest Volume Setter (Current)</strong>
+          Most sets booked right now.
+        </div>
+        <span class="data-row-value yellow">Sam Mojica</span>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:20px">
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-icon red">✗</div>
+          <div class="finding-title">The Qualification Bypass — Hidden Cost</div>
+        </div>
+        <p>The policy of routing leads directly to closers to avoid setter cost is producing the opposite of its intended result. The math is straightforward:</p>
+        <p><strong>Setter appointment cost: ~$15–30.</strong><br>Expected revenue value of a qualified closer call slot: ~$1,053 (at 19.5% close rate × $5,400 AOV).<br><strong>Net cost of bypassing qualification: −$1,023 per wasted slot.</strong></p>
+        <p>Every unqualified lead that reaches a closer's calendar and no-shows consumes a slot that a qualified prospect could have filled. The $20 setter call is not a cost — it is a $1,000+ investment protection.</p>
+      </div>
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-icon red">✗</div>
+          <div class="finding-title">The Price Disclosure Problem</div>
+        </div>
+        <p>Setters are disclosing the $5–7k investment range on the setter call. This creates two cascading problems.</p>
+        <p><strong>1. Price before trust.</strong> The prospect now has 24–72 hours to research alternatives, talk themselves out of it, or find a cheaper option — all before the closer has had a chance to build the emotional commitment that justifies the investment.</p>
+        <p><strong>2. SDR close rate at 20%.</strong> When a setter's booked leads close at 20% — nearly identical to the closer's rate — it means the setter is running a full sales process. This leaves closers with less room, more resistance, and prospects who are already skeptical of a number they've had time to second-guess.</p>
+        <p>Price belongs to the closer. Full stop.</p>
+      </div>
+    </div>
+
+    <!-- SETTER CRITERIA — when to route direct vs setter first -->
+    <div class="finding fade-in" style="margin-top:20px; border-left:3px solid var(--yellow)">
+      <div class="finding-header">
+        <div class="finding-icon yellow">◎</div>
+        <div class="finding-title">Recommended Policy: All Leads Through Setter First — With Specific Exception Criteria</div>
+      </div>
+      <p>The default routing should be: <strong>every lead touches a setter before reaching a closer's calendar.</strong> No exceptions based on convenience or cost savings. The only permissible exceptions are leads who meet all of the following criteria simultaneously:</p>
+      <ul class="fix-list" style="margin-top:8px">
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body"><strong>Demonstrated existing knowledge of high-ticket sales</strong> — not "sales" generally. High-ticket, remote, or commission-based sales specifically. Someone who lists "selling concert tickets" or "retail associate" as their background does not qualify for this exception.</span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body"><strong>Clear financial urgency and availability</strong> — they need to be able to invest within the next 30 days and are not in a financial situation that would make the program inaccessible. This is a qualification call topic, not an assumption.</span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body"><strong>Completed the VSL or video content before submitting the form</strong> — they have demonstrated the minimum engagement level that correlates with show rate. Someone who watched 0 minutes before applying has demonstrated nothing.</span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body"><strong>Responded to automated follow-up within 2 hours of form submission</strong> — active responsiveness is a proxy for genuine interest. Leads who respond immediately are dramatically more likely to show than those chased over days.</span>
+        </li>
+      </ul>
+      <p style="margin-top:12px">If a lead meets all four criteria, a faster direct routing may be appropriate. If they meet zero, one, or two — they go through setter qualification without exception. This is not about being restrictive. It is about protecting closer calendars and the revenue those slots represent.</p>
+    </div>
+
+    <!-- SDR FIXES -->
+    <div class="finding fade-in" style="margin-top:20px; border-left:3px solid var(--yellow)">
+      <div class="finding-header">
+        <div class="finding-icon yellow">→</div>
+        <div class="finding-title">SDR Fixes — In Priority Order</div>
+      </div>
+      <ul class="fix-list">
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Lead response SOP: first contact within 30 minutes of form submission.</strong>
+            Three attempts in the first 2 hours. This is the highest-leverage manual fix available while automation is being built. The 1.8-day average response Q1 average alone accounts for a significant portion of lead death before any setter ever speaks to them. This SOP needs a named owner, a tracking mechanism, and accountability.
+          </span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Remove price from the setter script — no exceptions.</strong>
+            Four jobs only: confirm genuine interest, qualify (urgency, background, financial readiness, why now), build excitement for the closer call specifically, book and confirm. If a prospect asks about price: "That's something [closer name] walks through on the call — it depends on which track makes the most sense for where you are right now." No range. No ballpark. No financing discussion.
+          </span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Cap setter call at 15–20 minutes.</strong>
+            Any setter call exceeding 20 minutes is a setter doing a closer's job. The longer the setter call, the more price-anchoring, objection-handling, and selling occurs — all of which should happen on the closer call with full emotional context established.
+          </span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Setter owns the confirmation — not the closer.</strong>
+            Automated confirmation text + email within 24 hours of booking requiring a confirmed reply. Setter confirmation call 2 hours before every closer appointment. If no response by 1 hour before — cancel the slot and follow up on the team's terms. This responsibility belongs at the setter layer. Placing it on closers fragments focus and duplicates effort.
+          </span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Two no-show rule — no exceptions.</strong>
+            Any prospect who no-shows twice does not receive a third closer appointment. They re-enter setter qualification and must demonstrate renewed engagement before any calendar access is granted. There is currently zero consequence for ghosting. This creates a structural incentive to not show up.
+          </span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Track setter performance on show rate and close rate — not raw set volume.</strong>
+            The highest-value setter is not the one who books the most appointments. It is the one whose appointments show up and close. Chris Vadinsky generates the best conversion outcomes despite not leading in raw volume — this is the model. Compensation and performance evaluation should reflect quality over quantity. A setter whose appointments close at 25% is worth dramatically more than one closing at 10%.
+          </span>
+        </li>
+        <li>
+          <span class="fix-arrow">→</span>
+          <span class="fix-body">
+            <strong>Feed new setters fresh leads from day one.</strong>
+            A setter working a November contact list in late March — contacts that are 4–5 months cold — is not being set up to succeed. Fresh lead allocation, defined onboarding territory, and a clear ramp protocol are standard practice and should be in place before a new setter makes their first call.
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 03: CLOSERS -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-number">03</div>
+      <div class="section-title-block">
+        <div class="section-tag red">Layer Three</div>
+        <div class="section-title">Closer Performance</div>
+        <div class="section-desc">The closing team is not the primary problem — but they are absorbing the full weight of everything broken above them, including logistics work that belongs upstream.</div>
+      </div>
+    </div>
+
+    <!-- TEAM PERFORMANCE — BEFORE/AFTER STYLE -->
+    <div class="data-rows fade-in">
+      <div class="ba-header-row">
+        <span>Metric</span>
+        <span>Peak / Before</span>
+        <span>March / Current</span>
+      </div>
+      <div class="ba-row">
+        <div class="ba-label">
+          <strong>CJ Clay — Monthly Revenue</strong>
+          First rep in company history to break $100k in a single month
+        </div>
+        <div class="ba-before">$112,500 (Feb)</div>
+        <div class="ba-after" style="color:var(--yellow)">MTD ↓</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-label">
+          <strong>Will Hemmert — Monthly Revenue</strong>
+          Previous company record before Feb
+        </div>
+        <div class="ba-before">$98,000 (Jan)</div>
+        <div class="ba-after" style="color:var(--yellow)">MTD ↓</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-label">
+          <strong>CJ Clay — Rev per QAPP</strong>
+          Highest on team Dec–Feb. Dropped in March due to show rate decline, not close rate.
+        </div>
+        <div class="ba-before">$568.97 (Dec–Feb)</div>
+        <div class="ba-after" style="color:var(--red)">$295.77 (Mar)</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-label">
+          <strong>CJ Clay — March Meeting Outcomes</strong>
+          125 no value · 35 scheduled · 9 canceled
+        </div>
+        <div class="ba-before">94 completed</div>
+        <div class="ba-after" style="color:var(--yellow)">46% show rate</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-label">
+          <strong>Will Hemmert — March Meeting Outcomes</strong>
+          123 no value · 15 scheduled · 10 canceled · 94.1% call connect rate
+        </div>
+        <div class="ba-before">86 completed</div>
+        <div class="ba-after" style="color:var(--yellow)">46% show rate</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-label">
+          <strong>Charles Mockus — March Meeting Outcomes</strong>
+          131 no value · 53 scheduled · 11 canceled · 94% call connect rate
+        </div>
+        <div class="ba-before">93 completed</div>
+        <div class="ba-after" style="color:var(--yellow)">46% show rate</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-label">
+          <strong>Jason King — March Meeting Outcomes</strong>
+          78 no value · 17 scheduled · 9 canceled · 91.9% call connect rate
+        </div>
+        <div class="ba-before">69 completed</div>
+        <div class="ba-after" style="color:var(--yellow)">42.5% show rate</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-label">
+          <strong>February — Team Revenue</strong>
+          Best month in company history. All four closers hitting strong completion numbers.
+        </div>
+        <div class="ba-before">$312,500</div>
+        <div class="ba-after" style="color:var(--red)">March ↓ 24.8%</div>
+      </div>
+    </div>
+
+    <div class="callout-note red" style="margin-top:20px">
+      <strong>Hidden no-show problem:&nbsp;</strong> The 471 meetings tagged "No Value" in March are not counted in the headline 46% show rate but represent the same outcome — call slots that went nowhere. The true rate of wasted closer time is materially higher than the headline figure reflects.
+    </div>
+
+    <!-- FEBRUARY CALLOUT -->
+    <div class="cj-callout fade-in">
+      <h3>February Proves The Ceiling — March Proves The Problem Is Upstream</h3>
+      <p>In February, the closing team posted <strong>$312,500</strong> — the single best month in company history. CJ Clay completed 115 calls, Will Hemmert 114, Charles Mockus 84, Jason King 44. Revenue grew consistently through the month with no down weeks.</p>
+      <p>In March, the same four closers, running the same calls, are down 24.8%. <strong>Their close rates have not materially changed. Their completed call volume has.</strong> Fewer sets (201 → 178 → 161 per month), a declining show rate, and confirmation burdens being carried by closers rather than setters are combining to reduce the number of qualified conversations happening each week.</p>
+      <p>The closing team cannot close what doesn't show up. The February benchmark is not a ceiling — it is a floor of what this team is capable of when the pipeline delivers qualified, confirmed prospects. The goal is to make February's output the consistent baseline, not the peak exception.</p>
+    </div>
+
+    <!-- CONFIRMATION BURDEN -->
+    <div class="two-col fade-in">
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-icon red">✗</div>
+          <div class="finding-title">Confirmation Burden Is Misallocated</div>
+        </div>
+        <p>Closers are currently expected to manage night-before texts, day-of texts, hour-before texts, and personal confirmation calls — in addition to preparing for and executing the actual sales conversation. This is setter work placed on the wrong role.</p>
+        <p>The setter who booked the appointment has the relationship with the prospect from the initial call. They are the right person to confirm it. When closers carry this burden, it fragments focus, creates duplicate untracked effort, and still doesn't guarantee the slot is protected — because there is no system enforcing it.</p>
+        <p><strong>Confirmation ownership should be fully transferred to the setter layer with a defined SLA</strong>, tracked in HubSpot, and tied to setter performance metrics.</p>
+      </div>
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-icon yellow">→</div>
+          <div class="finding-title">What Closers Can Do Right Now (Bridge Measures)</div>
+        </div>
+        <p><strong>Personal confirmation call — morning of.</strong> 60 seconds. "Hey [Name], confirming we're still on at [time] today." Adds 10–15 points to personal show rate while setter confirmation protocol is implemented.</p>
+        <p><strong>Push same-day or next-day books wherever possible.</strong> Temperature drops every day between setter call and closer call. Recency is the most powerful show-rate driver available to closers today.</p>
+        <p><strong>Pre-call text — one hour before.</strong> "Hey [Name], calling you at [time] — reply YES so I know we're set." Simple, low-effort, measurable impact of 5–8 points.</p>
+        <p><strong>Two no-shows from one contact — stop the slot.</strong> Refer back to setter. Protect the calendar from dead weight consuming time that qualified prospects could use.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 04: COMPENSATION -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-number">04</div>
+      <div class="section-title-block">
+        <div class="section-tag yellow">Structural Issue</div>
+        <div class="section-title">Compensation Structure Misalignment</div>
+        <div class="section-desc">Current incentives reward the wrong behaviors at both layers. The data makes a clear case for realignment.</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-icon red">✗</div>
+          <div class="finding-title">Current: Volume-Based Setter Pay</div>
+        </div>
+        <p>Setters are rewarded for the number of appointments booked — regardless of whether those appointments show up, qualify, or close. This is precisely why the data shows setters booking anyone who will agree to a time slot, disclosing price to keep conversations moving, and running long calls that cross into closer territory.</p>
+        <p><strong>The incentive structure is producing exactly the behavior the data shows.</strong> A setter whose appointments don't show is generating cost with no revenue outcome — and the current structure does not penalize this.</p>
+      </div>
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-icon green">→</div>
+          <div class="finding-title">Proposed: Quality-Based Setter Pay</div>
+        </div>
+        <p><strong>Base pay per booked appointment</strong> (lower than current per-set rate) + <strong>performance bonus per closed deal from their booked appointments.</strong></p>
+        <p>This aligns setter incentive with the outcome that matters: revenue. A setter whose appointments close at 25% earns meaningfully more than one at 10% — as they should. The bonus is self-funding: it is paid from incremental revenue that would not exist without the quality set. Chris Vadinsky's conversion performance is already the model for what this looks like in practice.</p>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:20px">
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-icon red">✗</div>
+          <div class="finding-title">Current: RQAPP-Based Closer Pay</div>
+        </div>
+        <p>Revenue-per-qualified-appointment ties closer compensation to pipeline quality — a variable the closer does not control. When show rates drop due to upstream failures, when unqualified leads consume calendar slots, when confirmation systems fail — RQAPP deteriorates regardless of how well the closer performs on completed calls.</p>
+        <p>The March data illustrates this exactly: the same closer who produced a company-record February saw RQAPP drop nearly 50% in March — not because close rate changed, but because show rate and pipeline quality changed. <strong>Measuring closer performance on variables they do not control is both a retention risk and a measurement error.</strong></p>
+      </div>
+      <div class="finding">
+        <div class="finding-header">
+          <div class="finding-icon green">→</div>
+          <div class="finding-title">Proposed: Close Rate-Based Closer Pay</div>
+        </div>
+        <p><strong>Closer compensation tied to close rate on completed calls</strong> — the only variable the closer actually controls. Out of every call that happens, what percentage closes?</p>
+        <p>This structure protects closers from upstream failures while still holding them accountable for their actual performance. It also makes performance conversations precise: if close rate is declining, it is a skill or fit question. If close rate is stable but revenue is down, the problem is upstream — show rate, set volume, pipeline quality. The two things become separable for the first time.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 05: AUTOMATION -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-number">05</div>
+      <div class="section-title-block">
+        <div class="section-tag blue">Infrastructure</div>
+        <div class="section-title">Automation & Tech Stack</div>
+        <div class="section-desc">The automation gap is costing revenue every day. A long-term solution is in development. Immediate-deployment options exist right now.</div>
+      </div>
+    </div>
+
+    <div class="finding fade-in" style="border-left:3px solid var(--blue)">
+      <div class="finding-header">
+        <div class="finding-icon blue">◎</div>
+        <div class="finding-title">The Current State — And Why It Must Be Resolved This Month</div>
+      </div>
+      <p>Charlie AI — the planned automation solution for instant lead response, confirmation sequences, and no-show follow-up — is incompatible with the current JustCall phone platform and cannot be deployed. A proprietary AI system is being developed internally as the long-term replacement. This is the right strategic direction: a purpose-built system designed around HTSA's specific funnel will outperform any off-the-shelf tool once completed.</p>
+      <p><strong>The gap is what happens between now and then.</strong> Every day without automated lead response is a day where the 1.8-day average response time remains intact and leads go cold. Every week without confirmation automation is a week where confirmation burden stays on closers. The revenue cost of this gap is measurable and ongoing.</p>
+      <p>The following solutions can be deployed within days to weeks using existing HubSpot infrastructure, bridging the gap while the proprietary system is completed:</p>
+    </div>
+
+    <div class="auto-grid fade-in" style="margin-top:4px">
+      <div class="auto-card">
+        <div class="auto-card-header">
+          <span class="auto-card-name">Orum</span>
+          <span class="auto-card-timeline badge green">Days to deploy</span>
+        </div>
+        <p><strong>Parallel dialer — HubSpot native integration.</strong> Allows setters to call 3 contacts simultaneously, increasing daily call volume from ~300–400 to 1,000–2,000 per rep. No CRM migration required. Direct HubSpot sync. This is the fastest available fix for setter contact rate and is in active use at comparable organizations.</p>
+      </div>
+      <div class="auto-card">
+        <div class="auto-card-header">
+          <span class="auto-card-name">Koncert</span>
+          <span class="auto-card-timeline badge green">Days to deploy</span>
+        </div>
+        <p><strong>AI parallel dialer with local presence and voicemail drop.</strong> HubSpot integration available. Similar 3-line parallel capability to Orum with additional AI features for call routing and disposition logging. Particularly useful for outbound setter campaigns at scale.</p>
+      </div>
+      <div class="auto-card">
+        <div class="auto-card-header">
+          <span class="auto-card-name">Air AI / Bland AI</span>
+          <span class="auto-card-timeline badge yellow">1–2 weeks to deploy</span>
+        </div>
+        <p><strong>AI voice agent for instant lead response and follow-up.</strong> Calls new form submissions within seconds of submission, qualifies with a scripted conversation, and books directly to setter or closer calendar. HubSpot integration available. Replaces the Charlie AI use case entirely — immediate lead contact, 24/7, with no human required for the first touch.</p>
+      </div>
+      <div class="auto-card">
+        <div class="auto-card-header">
+          <span class="auto-card-name">Salesmsg / Heymarket</span>
+          <span class="auto-card-timeline badge green">Days to deploy</span>
+        </div>
+        <p><strong>SMS automation with HubSpot native integration.</strong> Triggers instant text sequences on form submission, books confirmation sequences before closer calls, and manages no-show follow-up automatically. Solves the confirmation SLA problem without any dialer change. Low cost, fast setup, immediate impact on show rate.</p>
+      </div>
+      <div class="auto-card">
+        <div class="auto-card-header">
+          <span class="auto-card-name">GoHighLevel</span>
+          <span class="auto-card-timeline badge yellow">2–4 weeks to deploy</span>
+        </div>
+        <p><strong>Full-stack sales and marketing automation platform.</strong> Parallel dialing, AI follow-up, SMS/email sequences, calendar integration, and pipeline management in one system. Requires migration from JustCall but eliminates the JustCall integration bottleneck permanently. Used extensively at high-ticket coaching and training organizations.</p>
+      </div>
+      <div class="auto-card">
+        <div class="auto-card-header">
+          <span class="auto-card-name">Proprietary HTSA System</span>
+          <span class="auto-card-timeline badge blue">Long-term</span>
+        </div>
+        <p><strong>Custom-built AI system in development.</strong> The correct long-term solution — built specifically around HTSA's funnel, scripts, qualification criteria, and CRM architecture. A purpose-built system will outperform any generic tool once deployed. The bridge solutions above are interim measures only, designed to protect revenue while this system is completed.</p>
+      </div>
+    </div>
+
+    <div class="callout-note blue" style="margin-top:20px">
+      <strong>Recommendation:&nbsp;</strong> Deploy Orum or Koncert for parallel dialing and Salesmsg for SMS confirmation automation this week — both integrate with HubSpot in days. Evaluate Air AI or Bland AI for instant lead response within the next 2 weeks. These do not conflict with the proprietary system build and can be sunset once the custom solution is ready.
+    </div>
+  </div>
+
+  <!-- SECTION 06: PROJECTIONS -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-number">06</div>
+      <div class="section-title-block">
+        <div class="section-tag green">The Upside</div>
+        <div class="section-title">Revenue Projections If We Fix The Funnel</div>
+        <div class="section-desc">Conservative estimates of what the numbers look like 90 days after implementing the core fixes in order.</div>
+      </div>
+    </div>
+
+    <table class="proj-table">
+      <thead>
+        <tr>
+          <th>Fix</th>
+          <th>Current State</th>
+          <th>Target (90 Days)</th>
+          <th>Revenue Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Team Show Rate</td>
+          <td class="current">46%</td>
+          <td class="highlight">65%</td>
+          <td>+42 additional shows/month across team</td>
+        </tr>
+        <tr>
+          <td>Additional Closes (same 19.5% rate)</td>
+          <td class="current">~42/mo</td>
+          <td class="highlight">~60/mo</td>
+          <td>+18 closes per month</td>
+        </tr>
+        <tr>
+          <td>Revenue At Current AOV ($5,400)</td>
+          <td class="current">~$188K/mo</td>
+          <td class="highlight">~$270K/mo</td>
+          <td>+$82,000 per month</td>
+        </tr>
+        <tr>
+          <td>Close Rate (with qualified pipeline)</td>
+          <td class="current">19.5%</td>
+          <td class="highlight">25%+</td>
+          <td>Additional $50K+ on top of show rate gains</td>
+        </tr>
+        <tr>
+          <td>Lead Response Time</td>
+          <td class="current">1.8 days</td>
+          <td class="highlight">&lt;5 min (AI)</td>
+          <td>+10–15% setter contact rate · +5–8% show rate</td>
+        </tr>
+        <tr>
+          <td>Ad Creative Refresh + Retargeting</td>
+          <td class="current">44% ROI</td>
+          <td class="highlight">150%+ ROI</td>
+          <td>Stabilizes and extends primary revenue engine</td>
+        </tr>
+        <tr>
+          <td>VSL Gate + Application Friction</td>
+          <td class="current">No gate</td>
+          <td class="highlight">Active</td>
+          <td>Fewer total sets · dramatically higher quality · show rate +8–12%</td>
+        </tr>
+        <tr>
+          <td>Combined Monthly Revenue Potential</td>
+          <td class="current">~$188K avg</td>
+          <td class="highlight">$300K–$350K</td>
+          <td>+$112K–162K/month consistently</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-note green" style="margin-top:20px">
+      <strong>February already proved $312,500 is achievable.&nbsp;</strong> These projections represent what a <em>consistent</em> $300K+ month looks like — not a peak. The ceiling is real. These fixes make it repeatable.
+    </div>
+  </div>
+
+  <!-- SECTION 07: PRIORITY ACTION PLAN -->
+  <div class="section fade-in">
+    <div class="section-header">
+      <div class="section-number">07</div>
+      <div class="section-title-block">
+        <div class="section-tag green">Action Plan</div>
+        <div class="section-title">Priority Order — What To Fix First</div>
+        <div class="section-desc">Sequenced by impact and implementation speed. Items 1–4 can be live this week. Items 5–7 within two weeks. Everything else by end of month.</div>
+      </div>
+    </div>
+
+    <div class="priority-grid">
+      <div class="priority-item">
+        <div class="priority-num">1</div>
+        <div class="priority-content">
+          <strong>Lead Response SOP — 30 Minutes or Less, Starting Now</strong>
+          <span>Named setter coverage during business hours. First call within 30 minutes of form submission. Three attempts in first 2 hours. Tracked in HubSpot. An owner must be assigned to this SOP today — not next week. This is the highest-leverage zero-cost fix in the entire document.</span>
+        </div>
+        <div class="priority-impact"><span class="badge green">This Week</span></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">2</div>
+        <div class="priority-content">
+          <strong>Remove Price From Setter Script — Immediately</strong>
+          <span>Script change only. No tools, no build time, no cost. Setter role: qualify, excite, book, confirm. Price stays with the closer. This is the fastest available improvement to setter-booked show rate and the easiest fix in this document to execute.</span>
+        </div>
+        <div class="priority-impact"><span class="badge green">This Week</span></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">3</div>
+        <div class="priority-content">
+          <strong>Setter Confirmation Ownership — Full Transfer</strong>
+          <span>Setter calls every appointment 2 hours before closer call. Automated text + email the evening before. No response by 1 hour out — slot is cancelled and rebooked on the team's terms. This is setter work. Document it, assign it, measure it.</span>
+        </div>
+        <div class="priority-impact"><span class="badge green">This Week</span></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">4</div>
+        <div class="priority-content">
+          <strong>Stop Routing Unqualified Leads Directly to Closers</strong>
+          <span>All leads touch a setter first unless they meet the four defined exception criteria (existing HTS knowledge, financial readiness, VSL completion, rapid response). The math on bypassing qualification does not support the cost savings — a $20 setter call protects a $1,053 expected-value closer slot.</span>
+        </div>
+        <div class="priority-impact"><span class="badge green">This Week</span></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">5</div>
+        <div class="priority-content">
+          <strong>Deploy SMS Automation (Salesmsg or Heymarket)</strong>
+          <span>HubSpot-native SMS sequences triggered on form submission, pre-call confirmation, and no-show follow-up. Deployable in days. Directly replaces the manual confirmation burden and adds instant-response capability while AI voice solutions are being evaluated.</span>
+        </div>
+        <div class="priority-impact"><span class="badge green">This Week</span></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">6</div>
+        <div class="priority-content">
+          <strong>Deploy Parallel Dialer (Orum or Koncert)</strong>
+          <span>3-line simultaneous outbound dialing. HubSpot native. Triples setter contact volume without adding headcount. Deployable in days. This is the single fastest way to increase setter productivity with existing team size.</span>
+        </div>
+        <div class="priority-impact"><span class="badge green">This Week</span></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">7</div>
+        <div class="priority-content">
+          <strong>Audit and Pause Google Keyword Only Campaign</strong>
+          <span>$59,354 spent · 30 contacts · $1,978 per contact. No additional budget allocated until a full audit is complete. Reallocate to Meta where contacts cost $5–8 each and the channel is proven.</span>
+        </div>
+        <div class="priority-impact"><span class="badge yellow">Week 1–2</span></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">8</div>
+        <div class="priority-content">
+          <strong>Two No-Show Rule — Enforce It</strong>
+          <span>Any prospect who no-shows twice does not get a third closer appointment. Back to setter for requalification. Zero consequence for ghosting is the current state. This creates the first real accountability mechanism for prospects.</span>
+        </div>
+        <div class="priority-impact"><span class="badge yellow">Week 2</span></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">9</div>
+        <div class="priority-content">
+          <strong>VSL Gate + Application Friction Before Booking Calendar</strong>
+          <span>Required video watch before calendar access. 3–4 qualifying questions with real written answers. Confirmation that applicant understands this is a sales training program. Routing change — not new content. Addresses unqualified lead problem at the source and improves algorithm quality signal over time.</span>
+        </div>
+        <div class="priority-impact"><span class="badge yellow">Week 2–3</span></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">10</div>
+        <div class="priority-content">
+          <strong>Ad Creative Refresh + Warm Retargeting Launch</strong>
+          <span>New creative variations from best-performing existing content. Lookalike audiences from Q1 buyers. Retargeting sequence to 50%+ video viewers — 3–4x conversion rate vs cold traffic. Ad ROI recovery from 44% toward 150%+ is not achievable without creative renewal.</span>
+        </div>
+        <div class="priority-impact"><span class="badge yellow">Week 2–3</span></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">11</div>
+        <div class="priority-content">
+          <strong>Evaluate Air AI or Bland AI for Instant Lead Response</strong>
+          <span>AI voice agent calls every new form submission within seconds of submission, 24/7. Qualifies using a scripted conversation and books directly to setter or closer calendar. HubSpot integration available. Directly solves the sub-30-minute response requirement without relying on human coverage.</span>
+        </div>
+        <div class="priority-impact"><span class="badge yellow">Week 2–3</span></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">12</div>
+        <div class="priority-content">
+          <strong>Setter Compensation Realignment — Quality Over Volume</strong>
+          <span>Base per set + bonus per close from booked appointments. Aligns incentives with revenue outcomes. Self-funding structure. Tracks directly to the Chris Vadinsky quality model already proven within the team.</span>
+        </div>
+        <div class="priority-impact"><span class="badge yellow">Month 2</span></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">13</div>
+        <div class="priority-content">
+          <strong>Closer Compensation Realignment — Close Rate Not RQAPP</strong>
+          <span>Tie closer pay to close rate on completed calls — the only variable they control. Separates closer performance from upstream pipeline failures. Makes performance conversations precise and defensible for both management and reps.</span>
+        </div>
+        <div class="priority-impact"><span class="badge yellow">Month 2</span></div>
+      </div>
+      <div class="priority-item">
+        <div class="priority-num">14</div>
+        <div class="priority-content">
+          <strong>Proprietary HTSA AI System — Continue Development</strong>
+          <span>The custom-built AI system is the right long-term architecture for HTSA. A purpose-built solution designed around this funnel will outperform any generic tool. Bridge solutions 5, 6, and 11 above are interim measures only — designed to protect revenue during the build and to be sunset once the proprietary system is complete.</span>
+        </div>
+        <div class="priority-impact"><span class="badge blue">Long-Term</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-left">HTSA · INTERNAL ANALYSIS · MARCH 23, 2026 · PREPARED BY CJ CLAY</div>
+  <div class="footer-right">DATA SOURCE: HUBSPOT CRM · CONFIDENTIAL</div>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+    }, 100);
+  });
+</script>
+
+</body>
+</html>

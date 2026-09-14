@@ -1,0 +1,14 @@
+---
+description: HTSA enrollment invoices — Facebook Mastermind member count copy
+globs: htsa-enrollment*.html,htsa_closer*.html
+alwaysApply: false
+---
+
+# Mastermind member count
+
+In the “Join the HTSA Mastermind Community” step, use **680+ members** for new invoices and frozen templates rebuilt via `scripts/build-htsa-invoice-templates.py`. (Legacy pages may still show older counts until updated.)
+
+Actual count as of Aug 2026: **678** → display as **680+**.
+
+Example sentence:  
+`Request access to the private Facebook Mastermind — where all live coaching call replays are posted and 680+ members support each other 24/7.`

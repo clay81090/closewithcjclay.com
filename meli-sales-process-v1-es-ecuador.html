@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es-EC">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Sistema de ventas de Meli — Farmasi</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a1a; font-size: 15px; line-height: 1.6; min-height: 100dvh; padding-bottom: env(safe-area-inset-bottom, 0); overflow-wrap: anywhere; word-wrap: break-word; }
+
+  /* HEADER */
+  .header { background: #1a1a1a; color: #fff; padding: 2rem 2.5rem; padding-left: max(2.5rem, env(safe-area-inset-left)); padding-right: max(2.5rem, env(safe-area-inset-right)); padding-top: max(2rem, env(safe-area-inset-top)); }
+  .header-label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #888; margin-bottom: .35rem; }
+  .header-title { font-size: 26px; font-weight: 600; margin-bottom: .2rem; }
+  .header-sub { font-size: 13px; color: #aaa; }
+
+  /* NAV */
+  .nav { background: #fff; border-bottom: 1px solid #e8e6e0; padding: .75rem 2.5rem; padding-left: max(2.5rem, env(safe-area-inset-left)); padding-right: max(2.5rem, env(safe-area-inset-right)); display: flex; flex-wrap: wrap; align-items: center; gap: 6px; position: sticky; top: 0; z-index: 100; }
+  .nb { font-size: 12px; padding: 5px 14px; border-radius: 20px; border: 1px solid #ddd; background: #fff; color: #666; cursor: pointer; transition: all .15s; white-space: nowrap; font-family: inherit; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  .nb:hover { background: #f5f4f0; color: #333; }
+  .nb.on { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+
+  /* SECTIONS */
+  .sec { display: none; padding: 2rem 2.5rem; padding-left: max(2.5rem, env(safe-area-inset-left)); padding-right: max(2.5rem, env(safe-area-inset-right)); max-width: 900px; margin: 0 auto; width: 100%; }
+  .sec.on { display: block; }
+
+  .sh { margin-bottom: 1.75rem; padding-bottom: 1.25rem; border-bottom: 1px solid #e8e6e0; }
+  .sn { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #999; margin-bottom: .25rem; }
+  .st { font-size: 22px; font-weight: 600; color: #1a1a1a; margin-bottom: .2rem; }
+  .ss { font-size: 13px; color: #777; }
+
+  /* BOXES */
+  .why { background: #f5f4f0; border-radius: 10px; padding: .9rem 1.1rem; margin: .9rem 0; }
+  .wl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #999; font-weight: 600; margin-bottom: .3rem; }
+  .wt { font-size: 13px; color: #555; line-height: 1.7; }
+
+  .warn { background: #fef8ee; border: 1px solid #f5d78e; border-radius: 10px; padding: .9rem 1.1rem; margin: .9rem 0; }
+  .warnl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #92620a; font-weight: 600; margin-bottom: .3rem; }
+  .warnt { font-size: 13px; color: #6b4a08; line-height: 1.7; }
+
+  .ask { background: #eef5fd; border: 1px solid #b8d4f5; border-radius: 12px; padding: 1rem 1.25rem; margin: .9rem 0; }
+  .al { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #1a60aa; font-weight: 600; margin-bottom: .3rem; }
+  .at { font-size: 15px; color: #0d3d72; line-height: 1.75; font-weight: 600; }
+  .an { font-size: 12px; color: #2271c4; margin-top: .4rem; font-style: italic; }
+
+  .script { background: #f5f4f0; border-left: 3px solid #ccc; padding: .9rem 1.1rem; border-radius: 0 10px 10px 0; margin: .4rem 0 1rem; font-size: 13.5px; color: #1a1a1a; line-height: 1.85; }
+  .script em { font-size: 12px; color: #999; font-style: italic; }
+  .script strong { font-weight: 600; }
+  .sl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #999; margin: 1rem 0 .3rem; }
+
+  /* BRANCHES */
+  .bw { display: flex; flex-direction: column; gap: .55rem; margin: .5rem 0 1.25rem; }
+  .br { border: 1px solid #e8e6e0; border-radius: 10px; overflow: hidden; background: #fff; }
+  .bt { display: flex; gap: 10px; align-items: flex-start; padding: .65rem 1rem; background: #f5f4f0; }
+  .btag { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: #999; min-width: 22px; padding-top: 2px; font-weight: 600; }
+  .bif { font-size: 13px; color: #555; line-height: 1.55; font-style: italic; }
+  .bb { padding: .75rem 1.1rem; }
+  .bthen { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: #999; margin-bottom: .3rem; font-weight: 600; }
+  .bsay { font-size: 13.5px; color: #1a1a1a; line-height: 1.8; }
+  .bsay em { font-size: 12px; color: #999; font-style: italic; }
+  .bnext { display: inline-block; font-size: 11px; color: #1a60aa; background: #eef5fd; padding: 3px 10px; border-radius: 20px; margin-top: .45rem; }
+  .bsub { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: #999; margin: .6rem 0 .25rem; font-weight: 600; }
+
+  /* ANCHORS */
+  .anchor { background: #f0effe; border: 1px solid #c5bef5; border-radius: 12px; padding: 1rem 1.25rem; margin: .9rem 0; }
+  .ancl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #4a3aaa; font-weight: 600; margin-bottom: .3rem; }
+  .anct { font-size: 14px; color: #2a1a7a; line-height: 1.8; }
+  .ancn { font-size: 12px; color: #6a5acc; margin-top: .4rem; font-style: italic; }
+
+  .green { background: #edfaf4; border: 1px solid #8de0bc; border-radius: 12px; padding: 1rem 1.25rem; margin: .9rem 0; }
+  .gl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #0e6647; font-weight: 600; margin-bottom: .3rem; }
+  .gt { font-size: 13.5px; color: #063d2a; line-height: 1.8; }
+
+  .red { background: #fef0f0; border: 1px solid #f5b8b8; border-radius: 12px; padding: 1rem 1.25rem; margin: .9rem 0; }
+  .rl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #aa1a1a; font-weight: 600; margin-bottom: .3rem; }
+  .rt { font-size: 14px; color: #6a0a0a; line-height: 1.8; font-weight: 500; }
+
+  /* MISC */
+  .div { height: 1px; background: #e8e6e0; margin: 1.75rem 0; }
+  .steplabel { font-size: 14px; font-weight: 600; color: #1a1a1a; margin: 1.5rem 0 .3rem; }
+  .stepsub { font-size: 12px; color: #999; margin-bottom: .75rem; }
+
+  /* TALK TIME BARS */
+  .trow { display: flex; align-items: center; gap: 12px; padding: .35rem 0; flex-wrap: wrap; }
+  .tname { font-size: 12px; color: #666; min-width: 140px; flex: 1 1 140px; }
+  .ttrack { flex: 1; height: 6px; background: #e8e6e0; border-radius: 3px; overflow: hidden; }
+  .tfill { height: 100%; border-radius: 3px; }
+  .tpct { font-size: 11px; color: #999; min-width: 80px; text-align: right; }
+
+  /* KITS */
+  .kit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: .75rem 0; }
+  .kit { border: 1px solid #e8e6e0; border-radius: 10px; padding: .9rem; background: #fff; }
+  .kit.lead { border: 2px solid #b8d4f5; }
+  .kit-badge { font-size: 10px; background: #eef5fd; color: #1a60aa; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-bottom: .4rem; font-weight: 600; }
+  .kit-price { font-size: 22px; font-weight: 700; color: #1a1a1a; }
+  .kit-val { font-size: 12px; color: #777; margin-bottom: .3rem; }
+  .kit-note { font-size: 11px; color: #999; line-height: 1.5; }
+
+  /* OBJECTIONS */
+  .obj { border: 1px solid #e8e6e0; border-radius: 12px; overflow: hidden; margin-bottom: 1rem; background: #fff; }
+  .obj-q { padding: .85rem 1.25rem; background: #f5f4f0; font-size: 14px; color: #1a1a1a; font-weight: 600; }
+  .obj-body { padding: .9rem 1.25rem; display: flex; flex-direction: column; gap: .65rem; }
+  .obj-step { font-size: 13px; color: #555; line-height: 1.7; }
+  .obj-step strong { font-weight: 600; color: #1a1a1a; }
+
+  /* FP LIST */
+  .fp-item { font-size: 13.5px; color: #1a1a1a; line-height: 1.75; padding: .35rem 0 .35rem 1.3rem; position: relative; }
+  .fp-item::before { content: "→"; position: absolute; left: 0; color: #999; }
+
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+
+    .header {
+      padding: 1.25rem 1rem 1.5rem;
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-top: max(1.25rem, env(safe-area-inset-top));
+    }
+    .header-title { font-size: clamp(1.25rem, 5vw, 1.625rem); line-height: 1.25; word-wrap: break-word; }
+    .header-sub { font-size: 12px; line-height: 1.45; }
+
+    /* Horizontal scroll nav — one row, thumb-friendly */
+    .nav {
+      flex-wrap: nowrap;
+      align-items: center;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      gap: 8px;
+      padding: .6rem 1rem .75rem;
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      scroll-padding-inline: 1rem;
+      scrollbar-width: thin;
+    }
+    .nav::after {
+      content: "";
+      flex: 0 0 12px;
+      width: 12px;
+      height: 1px;
+    }
+    .nb {
+      flex: 0 0 auto;
+      min-height: 44px;
+      padding: 10px 14px;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sec {
+      padding: 1.25rem 1rem 2rem;
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+    }
+    .sh { margin-bottom: 1.35rem; padding-bottom: 1rem; }
+    .st { font-size: clamp(1.15rem, 4.5vw, 1.35rem); line-height: 1.3; }
+    .ss { font-size: 14px; }
+
+    .kit-grid { grid-template-columns: 1fr; gap: 10px; }
+
+    /* Talk time: stack so bars stay readable */
+    .trow {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+      padding: .5rem 0;
+      border-bottom: 1px solid #e8e6e0;
+    }
+    .trow:last-child { border-bottom: none; }
+    .tname { min-width: 0; flex: none; font-size: 13px; font-weight: 500; color: #444; }
+    .ttrack { min-height: 8px; }
+    .tpct { text-align: left; min-width: 0; font-size: 12px; }
+
+    .bt { flex-wrap: wrap; gap: 8px; }
+    .bif { font-size: 14px; }
+
+    .obj-q { font-size: 15px; padding: .75rem 1rem; }
+    .obj-body { padding: .85rem 1rem; }
+
+    .fp-item { font-size: 15px; padding-left: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-label">Farmasi · Melisa Clay</div>
+  <div class="header-title">El sistema completo de ventas</div>
+  <div class="header-sub">MD → Zoom → Cierre → Seguimiento · Versión 1.0</div>
+</div>
+
+<div class="nav">
+  <button class="nb on" onclick="show('s0',this)">0 · Mentalidad</button>
+  <button class="nb" onclick="show('s1',this)">1 · El MD</button>
+  <button class="nb" onclick="show('s2',this)">2 · Conexión</button>
+  <button class="nb" onclick="show('s3',this)">3 · Marco</button>
+  <button class="nb" onclick="show('s4',this)">4 · Descubrimiento</button>
+  <button class="nb" onclick="show('s5',this)">5 · Presentación</button>
+  <button class="nb" onclick="show('s6',this)">6 · Precio</button>
+  <button class="nb" onclick="show('s7',this)">7 · Cierre</button>
+  <button class="nb" onclick="show('s8',this)">8 · Objeciones</button>
+  <button class="nb" onclick="show('s9',this)">9 · Seguimiento</button>
+</div>
+
+<!-- ============================================================ SECTION 0 -->
+<div id="s0" class="sec on">
+  <div class="sh">
+    <div class="sn">Sección 0</div>
+    <div class="st">Antes de cada llamada — la verdad</div>
+    <div class="ss">Lee esto antes de entrar a Zoom. Siempre.</div>
+  </div>
+
+  <div class="red">
+    <div class="rl">La puesta al día</div>
+    <div class="rt">Eva gana entre $4.000 y $8.000 al mes. No es la candidata ideal. No representa del todo los productos. No hace todo lo que debería. Y aun así gana entre $4.000 y $8.000 al mes.<br><br>Evelyn gana $20.000 al mes. Apareció. Habló con la gente. Fue constante durante 7 años.<br><br>Tú ganaste $13.900 el año pasado — casi sin intentarlo, a ratos, mientras trabajabas en un smoke shop a $16 la hora.<br><br>Las mujeres que te escriben por MD ya quieren lo que tú tienen. Vieron tu vida y te buscaron. Tu único trabajo en esta llamada es ayudarlas a dejar de convencerse de que no.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Vender no es empujar — esto es lo que es en realidad</div>
+    <div class="wt">Vender se siente agresivo cuando intentas convencer a alguien de algo que no quiere. Esto no es eso. Esas mujeres te buscaron después de ver tu vida. Ya quieren entrar. Tu trabajo es llevarlas a una decisión que ya quieren tomar. Callarte en el cierre no es ser buena — es dejarlas solas en el momento que más importa.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">La regla que arregla el 90% de tus llamadas</div>
+    <div class="wt">Haz una pregunta. Y después no hables más. No llenes el silencio. No agregues nada a la pregunta. No digas "aja" cada cinco segundos. Espera hasta que termine de responder por completo. Mientras más habla ella, más se convence sola. Cada palabra que tú sumas es una palabra que ella no dijo sobre por qué quiere esto.</div>
+  </div>
+
+  <div class="green">
+    <div class="gl">La venta — ten esto en la cabeza toda la llamada</div>
+    <div class="gt">"Lo único malo es tener interés, ver a otras mujeres viviendo la vida que tú sabes que podrías vivir — y no hacer nada."</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Sé honesta con lo que esto es</div>
+    <div class="wt">Esto no es "gana $10k en 90 días". Son ingresos extra que con constancia se vuelven ingresos de verdad. La mayoría lo construye junto a su trabajo actual durante 6 a 18 meses antes de que lo reemplace. Ese es el pitch honesto — y pesa más que el hype, porque la latina que desconfía del multinivel ya se quemó con esa promesa. La verdad cierra más que el cuento.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Tiempo de habla — la meta en cada llamada</div>
+    <div class="wt">
+      <div class="trow"><div class="tname">Conexión (2–3 min)</div><div class="ttrack"><div class="tfill" style="width:50%;background:#b8d4f5;"></div></div><div class="tpct">50 / 50</div></div>
+      <div class="trow"><div class="tname">Marco (1–2 min)</div><div class="ttrack"><div class="tfill" style="width:80%;background:#f5c842;"></div></div><div class="tpct">tú: 80%</div></div>
+      <div class="trow"><div class="tname">Descubrimiento (8–10 min)</div><div class="ttrack"><div class="tfill" style="width:20%;background:#8de0bc;"></div></div><div class="tpct">tú: 20%</div></div>
+      <div class="trow"><div class="tname">Presentación (5–7 min)</div><div class="ttrack"><div class="tfill" style="width:60%;background:#f5c842;"></div></div><div class="tpct">tú: 60%</div></div>
+      <div class="trow"><div class="tname">Precio + cierre (3–4 min)</div><div class="ttrack"><div class="tfill" style="width:40%;background:#8de0bc;"></div></div><div class="tpct">tú: 40%</div></div>
+      <div class="trow"><div class="tname">Objeciones (según haga falta)</div><div class="ttrack"><div class="tfill" style="width:35%;background:#b8d4f5;"></div></div><div class="tpct">tú: 35%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 1 -->
+<div id="s1" class="sec">
+  <div class="sh">
+    <div class="sn">Sección 1</div>
+    <div class="st">El MD — antes de la llamada</div>
+    <div class="ss">El MD tiene un solo trabajo: meterla a un Zoom. Aquí no pasa nada más.</div>
+  </div>
+
+  <div class="warn">
+    <div class="warnl">Lo que está pasando ahora — y por qué mata las llamadas</div>
+    <div class="warnt">La respuesta automática actual manda una explicación completa del negocio, plan de compensación, rangos de ingresos, líneas de producto y pasos de registro — antes de que exista la llamada. Cuando explicas todo en un MD, ella decide con información incompleta y sin que tú puedas decir nada. O dice "no, gracias" a algo que nunca entendió del todo, o se registra como cliente de $150 cuando podría ser una Beauty armando equipo. El MD no es la venta. El MD es para llevarla a la llamada.</div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">Paso 1 — Arregla la respuesta automática (hazlo una vez)</div>
+  <div class="stepsub">Cambia el mensaje automático actual por esto. Una línea cálida, una pregunta, nada más.</div>
+
+  <div class="sl">Respuesta nueva — público EE. UU.</div>
+  <div class="script">"¡Hola [nombre]! ✨ Soy Melisa — qué bueno que me escribiste. Antes de mandarte cualquier cosa, cuéntame qué fue lo que te llamó la atención: ¿más los productos, generar ingresos con una marca, o ser parte de una comunidad de mujeres?" <em>(espera su respuesta — no mandes nada más hasta que conteste)</em></div>
+
+  <div class="sl">Respuesta nueva — Ecuador / Latinoamérica</div>
+  <div class="script">"¡Hola [nombre]! ✨ Soy Melisa — me alegra mucho que te hayas comunicado. Antes de contarte todo, dime — ¿qué fue lo que te llamó la atención? ¿Buscar una forma de generar ingresos, conocer más sobre los productos, o las dos cosas?" <em>(espera — no mandes nada más)</em></div>
+
+  <div class="div"></div>
+  <div class="steplabel">Paso 2 — Cuando responda, agenda la llamada</div>
+  <div class="stepsub">Su respuesta te dice con qué emoción abrir en la llamada. Anótalo. Y agenda enseguida.</div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">"Ingresos / plata / armar algo / generar ingresos"</div></div>
+      <div class="bb">
+        <div class="bthen">Responde</div>
+        <div class="bsay">"Qué bien — la verdad, la mejor forma de mostrarte todo es en un Zoom rapidito. Son 20–25 minutos y ves tal cual cómo es esto, y me preguntas lo que quieras en vivo. ¿Te viene mejor [día] o [día]?" <em>(siempre dos opciones concretas — nunca "cuando quieras")</em></div>
+        <div class="bnext">→ anota antes de la llamada: lead motivada por ingresos</div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">"Comunidad / eventos / pertenecer / las mujeres a tu alrededor"</div></div>
+      <div class="bb">
+        <div class="bthen">Responde</div>
+        <div class="bsay">"Esa es mi parte favorita de todo esto — y se ve mejor que contarlo. ¿Podemos entrar a un Zoom rapidito? 20 minutos y te muestro cómo es la comunidad de verdad y qué estamos construyendo juntas. ¿[día] o [día]?" <em>(dos opciones concretas)</em></div>
+        <div class="bnext">→ anota antes de la llamada: lead motivada por comunidad</div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">"Productos / uso skincare o maquillaje / curiosidad por lo que usas"</div></div>
+      <div class="bb">
+        <div class="bthen">Responde</div>
+        <div class="bsay">"¡Claro! Para mí es más fácil llevarte todo en un Zoom rapidito — te enseño qué uso yo y te respondo en vivo. Son solo 20 minutos. ¿[día] o [día]?"</div>
+        <div class="bnext">→ anota antes de la llamada: lead por producto — en la llamada redirige a la oportunidad</div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">Sin respuesta de verdad — "sí, mándame info" / "ok" / no contesta la pregunta</div></div>
+      <div class="bb">
+        <div class="bthen">Responde</div>
+        <div class="bsay">"¡Dale! La forma más fácil es un Zoom de 20 minutos — te muestro todo y respondemos en vivo. Mil veces más rápido que el chat 😊 ¿[día] o [día]?"</div>
+        <div class="warn" style="margin-top:.6rem;"><div class="warnl">No aflojes</div><div class="warnt">No mandes un paredón de info. Eso pasa en la llamada.</div></div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">Insiste en info antes de aceptar llamada — "primero cuéntame cómo es"</div></div>
+      <div class="bb">
+        <div class="bthen">Responde</div>
+        <div class="bsay">"Te entiendo — yo antes también mandaba un mensajón, pero al final generaba más dudas y dejaba a la gente confundida 😅 20 minutos en Zoom y ves el panorama completo y te respondo en vivo. ¿[día] o [día]?"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Por qué funciona</div>
+    <div class="wt">Cuando contesta esa pregunta sabes con qué emoción abrir en la llamada. Entras al Zoom sabiendo si quiere ingresos, comunidad o productos. Ese dato vale más que cualquier formulario. Y como no soltaste el negocio por texto, llega con curiosidad — no con la decisión ya tomada.</div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 2 -->
+<div id="s2" class="sec">
+  <div class="sh">
+    <div class="sn">Sección 2</div>
+    <div class="st">Conexión — la apertura cálida</div>
+    <div class="ss">2–3 minutos. Cálida, real, personal. Y sigues. Que no se vuelva una charla de amigas.</div>
+  </div>
+
+  <div class="warn">
+    <div class="warnl">Lo que hace Meli ahora — y por qué pierde llamadas</div>
+    <div class="warnt">La conexión se vuelve una charla de 15 minutos con la amiga. Cuando empieza lo serio, la energía ya bajó, no hay tiempo, y nunca quedó el marco de "estoy aquí para ayudarte a decidir". La conexión no es paja. Es calidez con rumbo.</div>
+  </div>
+
+  <div class="sl">Abre el Zoom — di esto primero</div>
+  <div class="script">"¡Hola [nombre]! Por fin nos conectamos, qué gusto — tenía ganas de esta charla. <em>(sonríe — calibra su energía)</em><br><br>¿Desde dónde me llamas hoy?" <em>(que termine de hablar — luego ramifica abajo)</em></div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">Está en Ecuador o Latinoamérica</div></div>
+      <div class="bb">
+        <div class="bthen">Di</div>
+        <div class="bsay">"Qué lindo — yo soy de Guayaquil, ahora estoy en Orlando. Tú y yo somos casi familia. <em>(risa suave)</em> ¿Cuánto tiempo llevas por allá?" <em>(un intercambio — y pasas a la transición)</em></div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">Está en EE. UU.</div></div>
+      <div class="bb">
+        <div class="bthen">Di</div>
+        <div class="bsay">"Qué bacán — me encanta conectar con latinas acá en Estados. Hay algo muy especial en construir juntas lejos de casa, ¿sí o no? <em>(sonríe)</em> ¿Cuánto tiempo llevas?" <em>(un intercambio — y sigues)</em></div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">Menciona algo personal — hijos, trabajo, algo de su vida</div></div>
+      <div class="bb">
+        <div class="bthen">Reconoce en una frase — y transiciona</div>
+        <div class="bsay">"Qué lindo — [una respuesta genuina]. Oye, quiero usar bien tu tiempo hoy, así que déjame preguntarte una cosa más antes de meternos…" <em>(no sigas el hilo — la calidez va en el tono, no en la hora)</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sl">La transición — aquí termina la conexión y abre el marco</div>
+  <div class="script">"Antes de mostrarte algo — vi que cuando escribiste mencionaste [ingresos / comunidad / productos]. Quiero entender bien qué buscas para no perderte el tiempo con cosas que no te importan. ¿Te puedo hacer unas preguntitas primero?" <em>(espera el sí — luego Sección 3)</em></div>
+
+  <div class="why">
+    <div class="wl">Por qué 3 minutos y no más</div>
+    <div class="wt">Las que te escribieron por MD ya te quieren. Vieron tu contenido. No tienes que volver a ganarte la confianza con 20 minutos de chisme — ya la tienes. Una apertura cálida y clara en 3 minutos genera más confianza que 20 de charla de amigas, porque dice: "valoro tu tiempo y sé a dónde vamos".</div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 3 -->
+<div id="s3" class="sec">
+  <div class="sh">
+    <div class="sn">Sección 3</div>
+    <div class="st">Poner el marco — tomar la posta</div>
+    <div class="ss">1–2 minutos. Tú pones la agenda. Di esto antes que nada.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Por qué no puedes saltarte este paso</div>
+    <div class="wt">Sin marco, la llamada no tiene estructura. Ella cree que es solo información. Cuando cierras, se siente sorprendida o presionada. El marco crea la expectativa de decidir hoy — así el cierre se siente natural, no de la nada. Le dijiste a dónde iban. Ella dijo que sí. Ahí puedes sostener la estructura.</div>
+  </div>
+
+  <div class="sl">Di esto — palabra por palabra</div>
+  <div class="script">"Bueno, mira, así me gusta hacer estas llamadas — cortas y claras, unos 20–25 minutos, porque respeto tu tiempo.<br><br>Lo que voy a hacer es hacerte unas preguntas para entender en qué estás y qué buscas. Después te muestro lo que estamos haciendo y cómo otras mujeres están generando ingresos y una comunidad de verdad con esto. Y si ves que calza, vemos cómo empezar.<br><br>¿Te parece?" <em>(espera el sí — no sigas sin eso)</em></div>
+
+  <div class="anchor">
+    <div class="ancl">Por qué importa el "¿te parece?"</div>
+    <div class="anct">Cuando dice sí al marco, aceptó el proceso —incluida la decisión al final. Le dijiste qué iba a pasar. Ella dijo que sí. Eso no es manipulación. Es liderazgo.</div>
+  </div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">Quiere adelantarse — "solo dime el precio" o "¿cómo funciona?"</div></div>
+      <div class="bb">
+        <div class="bthen">Di</div>
+        <div class="bsay">"Te lo muestro todo, te lo prometo — y el precio tiene más sentido cuando entiendo un poquito de ti primero. ¿Te puedo hacer unas preguntitas rápidas?" <em>(vuelve al descubrimiento — no te saltes)</em></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 4 -->
+<div id="s4" class="sec">
+  <div class="sh">
+    <div class="sn">Sección 4</div>
+    <div class="st">Descubrimiento — la etapa más importante</div>
+    <div class="ss">8–10 minutos. Ella habla el 80% del tiempo. Preguntas y silencio total.</div>
+  </div>
+
+  <div class="red">
+    <div class="rl">La regla de toda esta sección</div>
+    <div class="rt">Haces la pregunta. Cierras la boca. No vuelves a hablar hasta que terminó de responder. Ni una palabra. Ni "aja". Silencio. Cada segundo que ella llena es un segundo en que se convence.</div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">Paso 4.1 — La pregunta de apertura</div>
+  <div class="stepsub">Empieza aquí toda llamada, aunque en el MD haya dicho otra cosa.</div>
+
+  <div class="ask">
+    <div class="al">Meli pregunta</div>
+    <div class="at">"Cuéntame — ¿qué te hizo escribirme después de ver mi publicación? ¿Qué tenías en la cabeza?"</div>
+    <div class="an">Pregúntalo. Y para. Que termine. No le completes la frase.</div>
+  </div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">"Quiero plata / ingresos extra / algo mío"</div></div>
+      <div class="bb">
+        <div class="bthen">Di</div>
+        <div class="bsay">"Qué bien. ¿Y puedo preguntarte — esos ingresos extra son más para cubrir algo concreto ahora, o más para tener algo que sea tuyo de verdad?" <em>(pausa — que responda — luego Ruta A)</em></div>
+        <div class="bnext">→ Paso 4.2 — Ruta A</div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">"Me encanta tu estilo / quiero lo que tú tienes / tu vida se ve increíble"</div></div>
+      <div class="bb">
+        <div class="bthen">Di</div>
+        <div class="bsay">"En serio muchas gracias, eso me significa. ¿Qué fue lo que más te pegó — la libertad, las mujeres a tu alrededor, o que armé algo que es mío?" <em>(pausa — Ruta B)</em></div>
+        <div class="bnext">→ Paso 4.2 — Ruta B</div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">"Quiero saber de los productos / ya uso cosas así"</div></div>
+      <div class="bb">
+        <div class="bthen">Di</div>
+        <div class="bsay">"Perfecto — ¿hace cuánto que te metes en [skincare / maquillaje / bienestar]?" <em>(que responda)</em><br><br>"¿Y viste algo del lado de ingresos o eso es nuevo para ti?" <em>(abre la puerta — Ruta C)</em></div>
+        <div class="bnext">→ Paso 4.2 — Ruta C</div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">Vago — "solo curiosidad" / "vi y escribí" / "no sé"</div></div>
+      <div class="bb">
+        <div class="bthen">Di</div>
+        <div class="bsay">"Qué bien — lo mejor casi siempre empieza con curiosidad. Dime — ¿cómo es tu vida ahora? ¿En qué trabajas?" <em>(puente a su situación — Ruta D)</em></div>
+        <div class="bnext">→ Paso 4.2 — Ruta D</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">Paso 4.2 — Profundiza (elige la ruta)</div>
+  <div class="stepsub">Elige 2–3 preguntas solo de la ruta que toca. No las hagas todas.</div>
+
+  <div class="ask" style="background:#edfaf4;border-color:#8de0bc;">
+    <div class="al" style="color:#0e6647;">Ruta A — Motivada por ingresos</div>
+    <div class="at" style="color:#063d2a;">Quiere plata. Cava el porqué y qué la frenó antes.</div>
+  </div>
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">pregunta</div><div class="bif">"¿En qué estás trabajando ahora?"</div></div>
+      <div class="bb"><div class="bthen">luego</div><div class="bsay">"¿Sientes que ahí puedes crecer en plata — o como que hay un techo?" <em>(pausa — silencio total)</em></div></div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">pregunta</div><div class="bif">"¿Alguna vez intentaste armar algo tuyo?"</div></div>
+      <div class="bb">
+        <div class="bsub">Si sí</div>
+        <div class="bsay">"¿Qué pasó? ¿Qué te trabó?" <em>(ahí sale el miedo de verdad — anótalo)</em></div>
+        <div class="bsub">Si no</div>
+        <div class="bsay">"¿Qué te ha frenado antes de empezar algo?" <em>(anota palabra por palabra)</em></div>
+      </div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">pregunta</div><div class="bif">"Si tuvieras unos $1.500–$2.000 extra al mes — ¿qué cambiaría en tu vida ahora mismo?"</div></div>
+      <div class="bb"><div class="bthen">luego</div><div class="bsay">"¿Y por qué eso es lo que más te pesa?" <em>(sus palabras exactas — las repites en el cierre)</em></div></div>
+    </div>
+  </div>
+
+  <div class="ask" style="background:#f0effe;border-color:#c5bef5;margin-top:1rem;">
+    <div class="al" style="color:#4a3aaa;">Ruta B — Estilo / libertad</div>
+    <div class="at" style="color:#2a1a7a;">Quiere libertad, flexibilidad o comunidad. Que lo sienta antes de mostrar.</div>
+  </div>
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">pregunta</div><div class="bif">"¿Cómo es tu día a día ahora?"</div></div>
+      <div class="bb"><div class="bthen">luego</div><div class="bsay">"¿Sientes que manejas tu tiempo — o que siempre haces lo que tienes que hacer y no lo que quieres?" <em>(pausa — silencio)</em></div></div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">pregunta</div><div class="bif">"¿Tienes mujeres a tu alrededor — comunidad de verdad — que estén construyendo y apoyándose?"</div></div>
+      <div class="bb"><div class="bthen">luego (como sea)</div><div class="bsay">"Porque eso es lo que más dicen nuestras mujeres que les cambió la vida. Ni siquiera la plata al principio. Sino tener un grupo real que se aparezca." <em>(pausa — que caiga)</em></div></div>
+    </div>
+  </div>
+
+  <div class="ask" style="background:#fef8ee;border-color:#f5d78e;margin-top:1rem;">
+    <div class="al" style="color:#92620a;">Ruta C — Primero producto (amplía el panorama)</div>
+    <div class="at" style="color:#6b4a08;">Vino por productos. Abre la puerta a la oportunidad sin empujar.</div>
+  </div>
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">pregunta</div><div class="bif">"¿Hace cuánto que gastas en [skincare / maquillaje / bienestar]?"</div></div>
+      <div class="bb"><div class="bthen">luego</div><div class="bsay">"O sea que llevas [X] años metiendo plata aquí. ¿Y si ese mismo gasto empezara a volverte a ti en vez de solo salir?" <em>(pausa — abre el negocio sin presión)</em></div></div>
+    </div>
+  </div>
+
+  <div class="ask" style="background:#f5f4f0;border-color:#ddd;margin-top:1rem;">
+    <div class="al">Ruta D — Vaga / curiosa (arma el cuadro)</div>
+    <div class="at" style="color:#333;">Aún no está segura. Encuentra el gancho por su situación actual.</div>
+  </div>
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">pregunta</div><div class="bif">"¿En qué trabajas ahora — ¿te gusta?"</div></div>
+      <div class="bb"><div class="bthen">luego</div><div class="bsay">"Y fuera del trabajo — ¿hay algo que hayas querido armar o empezar pero no te dio el momento o la cosa correcta?" <em>(abre la emoción desde neutro)</em></div></div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">Paso 4.3 — Proyección al futuro</div>
+  <div class="stepsub">Aquí ella se vende sola. No te saltes. Elige 2 preguntas — no las 5.</div>
+
+  <div class="green">
+    <div class="gl">Preguntas de proyección — elige 2 según lo que dijo</div>
+    <div class="gt">
+      <div class="fp-item">"Imagina que pasan 12 meses. Has sido constante — no perfecta, constante. Estás generando unos $1.500–$2.000 extra al mes con algo que te gusta. ¿Cómo se ve tu vida distinta a hoy?"</div>
+      <div class="fp-item">"¿Qué harías primero distinto si la plata no fuera la excusa?"</div>
+      <div class="fp-item">"¿Hay algo que llevas posponiendo — un viaje, algo para tus hijos, algo para ti — que esto podría hacer posible?"</div>
+      <div class="fp-item">"¿Qué significaría para ti tener algo completamente tuyo — tu marca, tu negocio, tus ingresos?"</div>
+      <div class="fp-item">"Si vieras a otra — igualita a ti — armar esto y vivir esa vida, y tú no hubieras hecho nada — ¿cómo te sentirías?"</div>
+    </div>
+  </div>
+
+  <div class="anchor">
+    <div class="ancl">El ancla emocional — cierra el descubrimiento aquí</div>
+    <div class="anct">"Si entendí bien — lo que de verdad quieres es [sus palabras exactas]. Y lo único entre eso y tú es una decisión. ¿Te parece justo?" <em>(pausa — que confirme)</em></div>
+    <div class="ancn">Anota sus palabras antes que nada. Se las vuelves a decir en el cierre.</div>
+  </div>
+
+  <div class="warn">
+    <div class="warnl">No hagas esto después de la proyección</div>
+    <div class="warnt">NO arranques de una con la presentación. Para un segundo completo y di: "Qué lindo. Con todo lo que me contaste, creo que te va a conectar mucho lo que te voy a mostrar. Dame unos 5 minutos." Solo ahí pasas a la Sección 5. Esa pausa importa — tiene que sentir antes de pasar a la lógica.</div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 5 -->
+<div id="s5" class="sec">
+  <div class="sh">
+    <div class="sn">Sección 5</div>
+    <div class="st">La presentación — 3 pilares</div>
+    <div class="ss">5–7 minutos. Abre con lo que a ELLA le importa. Tres pilares. Sin catálogo. Sin precio todavía.</div>
+  </div>
+
+  <div class="green">
+    <div class="gl">Siempre empieza con este puente — sus palabras exactas</div>
+    <div class="gt">"Con todo lo que me contaste — [sus palabras del descubrimiento] — creo que esto te va a resonar. Dame unos minutitos." <em>(por eso anotaste — esta frase une la emoción con la oferta)</em></div>
+  </div>
+
+  <div class="warn">
+    <div class="warnl">La regla dura de esta sección</div>
+    <div class="warnt">Los 3 pilares van en toda llamada. Pero ABRES con el que más le importa — según el descubrimiento. No abras con producto si dijo que quiere libertad. No abras con plata si dijo comunidad. Lidera con su respuesta y entrelaza el resto.</div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">Pilar 1 — Estilo de vida y libertad</div>
+  <div class="stepsub">Abre aquí si mencionó: libertad, tiempo, flexibilidad, que le encanta tu vida, que quiere algo suyo.</div>
+  <div class="script">"Lo que ves en mi Instagram — es real. Los viajes, trabajar desde donde sea, las mujeres a mi alrededor, armar algo mío — así se ve esto cuando eres constante.<br><br>Y quiero que escuches esto — ni siquiera estoy haciendo todo lo que podría. Todavía tengo techo. Y ya estoy en ingresos de cuatro cifras. Gané $13.900 en un año todavía con otro trabajo.<br><br>Imagínate cuando te metes de verdad." <em>(pausa — que caiga)</em></div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">cierra</div><div class="bif">Después del Pilar 1 — pregunta esto</div></div>
+      <div class="bb">
+        <div class="bthen">Di</div>
+        <div class="bsay">"¿Te ves armando algo así — donde tu vida es la marca y la gente quiere entrar solo viéndote?"</div>
+        <div class="bsub">Si sí</div>
+        <div class="bsay">"Eso es esto. Y no tienes que armarlo perfecto. Solo empezar." <em>→ Pilar 2</em></div>
+        <div class="bsub">Si "no sé si yo podría hacer lo que tú haces"</div>
+        <div class="bsay">"No tienes que ser yo. Tienes que ser tú — con constancia. Las de mi equipo que ganan no son las más pulidas. Aparecen y generan confianza con el tiempo. Eso es todo." <em>→ Pilar 2</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="steplabel">Pilar 2 — La comunidad</div>
+  <div class="stepsub">Abre aquí si se siente sola o quiere pertenecer. Si no, preséntalo segundo.</div>
+  <div class="script">"Algo que casi no se dice — la comunidad es de lo más grande aquí.<br><br>Las mujeres que ves en mis fotos — en eventos, viajando juntas, en capacitación — son amistades reales que nacieron de este negocio. Aquí no estás sola. Hay llamadas, entrenamiento en grupo, eventos — te conectas y ya tienes un equipo detrás.<br><br>Eva — una mujer de mi línea — empezó siendo mamá en la casa sin red. Ahora tiene meses de cuatro cifras y ha tenido meses de $8.000. No porque sea la más ruidosa. Porque apareció y la comunidad creció a su alrededor." <em>(pausa)</em></div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">cierra</div><div class="bif">Después del Pilar 2 — pregunta esto</div></div>
+      <div class="bb">
+        <div class="bthen">Di</div>
+        <div class="bsay">"¿Tienes algo así en tu vida ahora — un grupo de mujeres que estén armando algo y empujándose de verdad?"</div>
+        <div class="bsub">Si no</div>
+        <div class="bsay">"Eso es de lo primero que cambia cuando entras. Antes de tu primer cheque, ya tienes equipo."</div>
+        <div class="bsub">Si sí</div>
+        <div class="bsay">"Qué bacán. Imagina sumar un grupo que también está armando negocios y entiende lo que te pasa. Es otro tipo de apoyo."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="steplabel">Pilar 3 — Los ingresos (solo concepto — sin precio todavía)</div>
+  <div class="stepsub">Abre aquí si quiere plata o presión económica. Cómo funcionan los ingresos — el precio va en la Sección 6.</div>
+  <div class="script">"Del lado de los ingresos — te hablo claro, sin números inflados.<br><br>Aquí hay 10 formas de ganar. La primera es directa — ganas el 50% en cada venta. Alguien compra $100 en producto en tu tienda, te quedan $50.<br><br>Cuando armas equipo, también ganas sobre sus ventas — un porcentaje de lo que mueven. Eso se vuelve residual con el tiempo. Plata que sigue aunque no estés activa todo el día. Así dejas de cambiar horas por dólares.<br><br>Evelyn — lleva 7 años en esto — gana $20.000 al mes. Eva, que ni hace todo lo que podría, sigue en $4.000 a $8.000 al mes como mamá en la casa.<br><br>La diferencia con quien no gana nada no es el talento. Es la constancia." <em>(pausa)</em></div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">cierra</div><div class="bif">Después del Pilar 3 — pregunta esto</div></div>
+      <div class="bb">
+        <div class="bthen">Di</div>
+        <div class="bsay">"Si fueras constante — no perfecta, constante — durante 6 meses, ¿ves cómo esto podría empezar a sumar o reemplazar lo que haces ahora?"</div>
+        <div class="bsub">Si "no tengo tiempo para ser constante"</div>
+        <div class="bsay">"Esto se arma alrededor de tu vida, no al revés. Empiezas con el tiempo que tengas. Con una hora al día basta para comenzar. No te lanzas al 100 el día uno — vas construyendo hasta que la plata justifica meterle más."</div>
+        <div class="bsub">Si "esos números suenan demasiado"</div>
+        <div class="bsay">"Te entiendo — por eso no abro con $20k. Te digo mi historia real. $13.900 en un año sin hacer todo lo que podía, con otro trabajo. Los números grandes existen pero vienen de años de constancia. ¿Dónde te gustaría estar el primer año?"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor">
+    <div class="ancl">Paso al precio — después de los 3 pilares</div>
+    <div class="anct">"Entonces mira — todo lo que te mostré, el estilo de vida, la comunidad, los ingresos — empieza con una decisión simple. Déjame mostrarte cómo se ve eso." <em>(pasa directo a la Sección 6 — mantén el ritmo — no pauses para preguntas aquí)</em></div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 6 -->
+<div id="s6" class="sec">
+  <div class="sh">
+    <div class="sn">Sección 6</div>
+    <div class="st">Ancla de precio y revelación</div>
+    <div class="ss">2–3 minutos. Primero ancla alto. Después el precio como alivio — no como feature.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Por qué el ancla va antes del precio</div>
+    <div class="wt">Si sueltas "$150" sin referencia, suena a lo que suena. El ancla da contexto. Cuando escucha primero lo que cobran otras, $150 deja de ser solo un número y se siente oferta. El ancla no es manipulación — es contexto. El valor se ve antes de que evalúe el número.</div>
+  </div>
+
+  <div class="sl">Paso 1 — El ancla de precio</div>
+  <div class="script">"Antes de decirte cómo empezar, quiero darte contexto — porque casi nadie sabe esto.<br><br>En la mayoría de empresas de este mundo — pagas $300, $500, hasta $1.000 o más solo por entrar. Y eso antes de ver un producto. Después tienes mínimos mensuales para seguir activa, envíos automáticos que te cobran aunque no quieras pedir, y capacitación que cuesta aparte.<br><br>Aquí es al revés de punta a punta." <em>(pausa — que caiga el contraste)</em></div>
+
+  <div class="sl">Paso 2 — La revelación</div>
+  <div class="script">"Para empezar como Beauty Influencer — que te mete en la comunidad, te da tu tienda personal y desbloquea todo lo que te mostré — arranca en solo $150 una sola vez.<br><br>Y por esos $150 eliges $300 en productos — skincare, maquillaje, nutrición, lo que ya uses en el día a día. Cosas que igual ibas a comprar en otro lado.<br><br>O sea no estás 'gastando' $150. Estás redirigiendo — y el primer día ya recibes el doble en producto." <em>(pausa — que lo asimile)</em></div>
+
+  <div class="steplabel">Opciones de kit — simple, lidera con $150</div>
+  <div class="stepsub">Menciona que hay tres. No las pongas al mismo nivel o se enreda.</div>
+  <div class="kit-grid">
+    <div class="kit lead">
+      <div class="kit-badge">Lidera con esto</div>
+      <div class="kit-price">$150</div>
+      <div class="kit-val">$300 en valor de producto</div>
+      <div class="kit-note">Tú eliges qué quieres. Cualquier línea. Skincare, maquillaje, nutrición. Esta es la oferta por defecto.</div>
+    </div>
+    <div class="kit">
+      <div class="kit-price">$250</div>
+      <div class="kit-val">Más producto, más variedad</div>
+      <div class="kit-note">Para quien quiere más desde el día uno. Menciónalo si muestra mucho interés en una categoría.</div>
+    </div>
+    <div class="kit">
+      <div class="kit-price">$500</div>
+      <div class="kit-val">Kit completo — full</div>
+      <div class="kit-note">Solo si deja claro que quiere entrar full ya. Nunca abras con esto.</div>
+    </div>
+  </div>
+
+  <div class="sl">Cómo presentar los kits — di esto</div>
+  <div class="script">"La mayoría empieza con el kit de $150 — eliges lo que quieres, cualquier línea, y son $300 en valor. Es la forma más común de entrar.<br><br>También hay $250 y $500 si quieres partir más fuerte — más producto, más variedad. Pero $150 es donde empieza casi todo el mundo y de verdad es suficiente para arrancar." <em>(luego directo a la Sección 7 — no abras discusión de catálogo)</em></div>
+
+  <div class="warn">
+    <div class="warnl">Regla dura — no hagas esto</div>
+    <div class="warnt">No preguntes "¿qué productos te gustan?" y te quedes 20 minutos en opciones. La elección de producto es DESPUÉS del sí — no antes. Antes del cierre solo necesita saber: $300 en producto por $150 y tú eliges.</div>
+  </div>
+
+  <div class="steplabel">Urgencia Ecuador / Latinoamérica — úsalo siempre con esas leads</div>
+  <div class="script">"Y una cosa más que quiero que sepas — Farmasi abre oficialmente en Ecuador en junio. Ahora las que entran en Ecuador están posicionándose antes del lanzamiento: armando equipo y base de clientes antes de que el mercado abra del todo. Las que empiezan ahora van a ser las líderes establecidas cuando arranque. Esa ventana es real y se está cerrando." <em>(es legítimo — úsalo siempre)</em></div>
+</div>
+
+<!-- ============================================================ SECTION 7 -->
+<div id="s7" class="sec">
+  <div class="sh">
+    <div class="sn">Sección 7</div>
+    <div class="st">El cierre</div>
+    <div class="ss">2–3 minutos. Mejor caso / peor caso. Cierre asumido. Después silencio total.</div>
+  </div>
+
+  <div class="red">
+    <div class="rl">La regla más importante de todo el sistema</div>
+    <div class="rt">Después de la pregunta de cierre — no hables. Ni una palabra. El que habla primero pierde. Si se queda callada 10, 20, 30 segundos — está pensando. Déjala. Tu silencio le dice que esto es normal y que tú estás segura. En cuanto llenas el silencio, baja la presión y vuelve al "lo pienso".</div>
+  </div>
+
+  <div class="sl">Paso 1 — Mejor caso / peor caso (baja el riesgo)</div>
+  <div class="script">"La forma más simple de ver esta decisión.<br><br>Peor caso — entras, recibes $300 en productos que igual ibas a comprar en otro lado, y decides que no es para ti. Igual saliste ganando el día uno.<br><br>Mejor caso — te lo tomas en serio, eres constante, y a los seis meses estás generando $1.000, $2.000 extra al mes con algo que ya te gusta. Y al año esto empieza a reemplazar lo que querías dejar.<br><br>No hay mal resultado acá. El mal resultado es tener ganas y no hacer nada." <em>(pausa)</em></div>
+
+  <div class="sl">Paso 2 — Devuélvele sus palabras, y cierras</div>
+  <div class="script">"Mira, con todo lo que me contaste — [sus palabras exactas del descubrimiento] — yo creo que tú podrías con esto. Ya tienes lo que hace falta. Solo falta empezar.<br><br>Y la inversión son $150 para recibir $300 en producto y todo lo que te mostré." <em>(pausa — sonríe)</em><br><br><strong>"¿Traes la tarjeta a mano o necesitas un momentito para buscarla?"</strong><br><br><em>(PARA. No digas nada más. Espera. Que hable ella primero.)</em></div>
+
+  <div class="bw">
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">Dice que sí o va por la tarjeta</div></div>
+      <div class="bb"><div class="bthen">Di</div><div class="bsay">"¡Qué bien — te abro el link de registro ya. Te lo voy pasando paso a paso para que sean dos minutos." <em>(quédate en la llamada — no la sueltes a hacerlo sola después)</em></div></div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">Duda pero no dice que no — silencio o "em…"</div></div>
+      <div class="bb"><div class="bthen">Solo di</div><div class="bsay">"Tómate tu tiempo." <em>(y otra vez silencio — ni una palabra más)</em></div></div>
+    </div>
+    <div class="br">
+      <div class="bt"><div class="btag">si</div><div class="bif">Saca una objeción</div></div>
+      <div class="bb"><div class="bnext">→ Sección 8 — Objeciones</div></div>
+    </div>
+  </div>
+
+  <div class="why">
+    <div class="wl">Por qué funciona lo de "¿traes la tarjeta?"</div>
+    <div class="wt">Es un cierre asumido — asume que va para adelante y pregunta un detalle, no el sí o no. Eso evita la trampa del "sí/no". La mayoría avanza porque la pregunta sugiere que así lo hace todo el mundo aquí. No es presión — es liderazgo. La tratas como quien ya decidió, y eso le facilita ser esa persona.</div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 8 -->
+<div id="s8" class="sec">
+  <div class="sh">
+    <div class="sn">Sección 8</div>
+    <div class="st">Manejo de objeciones</div>
+    <div class="ss">Nunca discutas. Valida — encuentra el tema de verdad — reformula — vuelve al cierre.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">La regla antes de cada respuesta a una objeción</div>
+    <div class="wt">Casi nunca la objeción es lo que parece. "No tengo plata" muchas veces es "todavía no estoy segura". "Necesito pensarlo" es "no me respondiste lo que de verdad me preocupa". Tu trabajo es encontrar la pregunta de abajo — no pelear con la de arriba. Pregunta, no discutas. Y vuelve al cierre.</div>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="obj">
+    <div class="obj-q">"Necesito pensarlo"</div>
+    <div class="obj-body">
+      <div class="obj-step"><strong>Paso 1 — Valida:</strong> "Claro — te entiendo perfecto."</div>
+      <div class="obj-step"><strong>Paso 2 — Saca el tema real:</strong> "¿Te puedo preguntar en qué estás pensando específicamente? ¿Es los $150, cómo funciona el negocio, o otra cosa?" <em>(pausa — espera la respuesta de verdad)</em></div>
+      <div class="obj-step"><strong>Si es plata:</strong> → bajá a la objeción de plata</div>
+      <div class="obj-step"><strong>Si es duda en ella:</strong> "Eso es lo más común que escucho de las que después les va mejor aquí. No tienes que tenerlo todo claro antes de empezar. Tienes que empezar — y yo voy contigo paso a paso."</div>
+      <div class="obj-step"><strong>Si todavía no lo nombra:</strong> "Te escucho. Dime — ¿algo de lo que dije no te cerró, o es que se siente un paso grande?" <em>(casi siempre sale lo real)</em></div>
+      <div class="obj-step"><strong>Vuelve al cierre:</strong> "Con todo lo que me dijiste — [sus palabras] — creo que lo único entre tú y eso es esta decisión. ¿Qué te dice la tripa ahora?"</div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">"No tengo plata"</div>
+    <div class="obj-body">
+      <div class="obj-step"><strong>Paso 1 — Valida:</strong> "Te escucho — y quiero ser honesta contigo, no quitarte importancia."</div>
+      <div class="obj-step"><strong>Paso 2 — Aclará:</strong> "¿Te puedo preguntar con sinceridad — es que los $150 de verdad no están ahora, o es más que todavía no estás segura si vale la pena?" <em>(pausa — separa plata real de duda)</em></div>
+      <div class="obj-step"><strong>Si es duda (lo más común):</strong> "Porque es otra conversación — y más fácil. Solo el producto vale $300. No estás 'gastando' $150, estás redirigiendo. Peor caso: tienes $300 en productos que igual ibas a comprar. Ganas antes de arrancar."</div>
+      <div class="obj-step"><strong>Si la plata está súper justa:</strong> "Bueno — te respeto eso. ¿Cuándo te sentiría mejor? Porque me mataría que pierdas este momento — más con Ecuador abriendo en junio. Las que entran ahora van a ser las líderes cuando abra."</div>
+      <div class="obj-step"><strong>Vuelve al cierre:</strong> "¿Traes la tarjeta o vemos un momento que te cuadre mejor?"</div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">"Quiero esperar"</div>
+    <div class="obj-body">
+      <div class="obj-step"><strong>Paso 1 — Valida:</strong> "Tiene sentido."</div>
+      <div class="obj-step"><strong>Paso 2 — Desafía suave:</strong> "¿Te puedo preguntar qué cambiaría si esperas? ¿Qué sería distinto entre ahora y después?" <em>(pausa — que responda)</em></div>
+      <div class="obj-step"><strong>Después decí:</strong> "Porque cuando pregunto eso, muchas se dan cuenta de que lo único que cambia es el tiempo que pasó. Y me dijiste [su razón del descubrimiento]. Eso no mejora con el tiempo — se pone más urgente."</div>
+      <div class="obj-step"><strong>Extra Ecuador:</strong> "Y en concreto — Farmasi abre en Ecuador en junio. Las que empiezan a armar ahora van a ser las líderes cuando abra el mercado. Esperar seis meses es ver a otra en ese puesto."</div>
+      <div class="obj-step"><strong>Vuelve al cierre:</strong> "¿Qué te dice la tripa ahora — en serio?"</div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">"No sé si yo puedo"</div>
+    <div class="obj-body">
+      <div class="obj-step"><strong>Paso 1 — Valida:</strong> "¿Sabes qué? Eso mismo dijo Eva antes de estar en $4.000–$8.000 al mes como mamá en la casa."</div>
+      <div class="obj-step"><strong>Paso 2 — Reformula:</strong> "No necesitas saber cómo hacerlo todo. Necesitas querer aprender y aparecer. Yo te llevo cada paso. No vas sola adivinando. Estás conmigo y con el equipo."</div>
+      <div class="obj-step"><strong>Vuelve al cierre:</strong> "La única pregunta es si quieres empezar. ¿Traes la tarjeta?"</div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">"Tengo que hablarlo primero con mi esposo / pareja"</div>
+    <div class="obj-body">
+      <div class="obj-step"><strong>Paso 1 — Respeto:</strong> "Claro — te respeto eso."</div>
+      <div class="obj-step"><strong>Paso 2 — Reformulá:</strong> "Dime — ¿crees que se molestaría por $150 en productos que igual ibas a comprar, o se sentiría orgulloso de que empieces algo que puede meter plata real a la familia?" <em>(pausa — que responda)</em></div>
+      <div class="obj-step"><strong>Si cree que la apoyaría:</strong> "Entonces amarremos tu cupo ahora y le cuentas esta noche. Le mostrás qué entraste y por qué."</div>
+      <div class="obj-step"><strong>Si de verdad no sabe:</strong> "Te entiendo. ¿Podemos dejar un seguimiento para [día concreto] después de que hablen? Quiero que tengas todo claro para explicárselo. ¿Te mando un resumen para que se lo pases?"</div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">"Ya probé multinivel y no me funcionó"</div>
+    <div class="obj-body">
+      <div class="obj-step"><strong>Paso 1 — Valida:</strong> "Te creo — y no te voy a decir que eso no pasó."</div>
+      <div class="obj-step"><strong>Paso 2 — Pregunta:</strong> "¿Qué pasó? ¿Qué fue lo que hizo que no funcionara?" <em>(su respuesta te dice qué tocar)</em></div>
+      <div class="obj-step"><strong>Responde a lo que nombró:</strong><br>Mínimos altos → "Aquí no hay mínimo mensual para mantener tu descuento."<br>Caro entrar → "Aquí son $150 y recibes $300 en producto."<br>Sin apoyo → "Acá estoy yo directo. No un patrocinador random — yo."<br>Tenía que venderle a la familia → "Acá construyes con contenido y tu marca personal — como viste en mi Instagram."</div>
+      <div class="obj-step"><strong>Vuelve al cierre:</strong> "¿Qué tendría que ser distinto para que valga la pena intentar? Porque creo que ya lo cubrimos. ¿Traes la tarjeta?"</div>
+    </div>
+  </div>
+
+  <div class="warn">
+    <div class="warnl">Si después de 2 vueltas de objeción no cierra</div>
+    <div class="warnt">"Te entiendo de verdad — y no quiero que nadie se sienta presionada. Te digo honesto: si entras bajo el equipo de otra, no puedo mentorarte directo, y el apoyo que le doy a mi equipo es una parte grande de por qué funciona. Si eso te importa, el momento de decidir es ahora. Igual, si quieres, seguimos en contacto — ¿qué día te viene mejor para retomar?"</div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 9 -->
+<div id="s9" class="sec">
+  <div class="sh">
+    <div class="sn">Sección 9</div>
+    <div class="st">Secuencia de seguimiento</div>
+    <div class="ss">Prospectos que no cerraron en la llamada. Tres contactos. Y sueltas.</div>
+  </div>
+
+  <div class="why">
+    <div class="wl">La mentalidad del seguimiento</div>
+    <div class="wt">Muchas ventas pasan en el 2.º o 3.er contacto, no en el primero. Pero el seguimiento tiene que sentirse como cuidado de verdad — no desesperación. No la estás persiguiendo. Estás viendo si tiene lo que necesita para decidir. Ella siente la diferencia.</div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">Contacto 1 — Mismo día o día siguiente</div>
+  <div class="stepsub">Mandalo dentro de las 24 horas de la llamada. Cálido, sin presión, deja la puerta abierta.</div>
+  <div class="script">"¡Hola [nombre]! Qué gusto haber hablado hoy. Te escribo para decirte que disfruté la conversación y de verdad creo que te podría ir súper bien con esto. Cero presión — cuando estés lista, aquí estoy. Si te surgió alguna duda después de colgar, mándamela 😊"</div>
+
+  <div class="steplabel">Contacto 2 — 3 a 4 días después</div>
+  <div class="stepsub">Menciona algo real de la llamada. Reconecta con su motivo.</div>
+  <div class="script">"¡Hola [nombre]! Estaba pensando en ti — me quedé con lo que me dijiste de [su razón del descubrimiento] y me pegó. Te escribo por si te quedó alguna duda o salió algo nuevo. Por cierto, Farmasi tiene promos activándose esta semana, así que es buen momento si lo venías pensando. Igual, que tengas una excelente semana ✨"</div>
+
+  <div class="steplabel">Contacto 3 — 7 a 10 días después</div>
+  <div class="stepsub">Último toque. Urgencia suave. Cálido. Y sueltas.</div>
+  <div class="script">"Hola [nombre] — no quiero molestar, así que este va a ser mi último mensaje por un tiempo 😊 Quiero que sepas que la puerta sigue abierta. Cuando te sientas lista, aquí estoy. Si algún día quieres retomar lo que hablamos, escríbeme. Un abrazo — de verdad."</div>
+
+  <div class="warn">
+    <div class="warnl">Leads Ecuador — sumá esto al contacto 2 o 3</div>
+    <div class="warnt">"También quiero que tengas claro que Farmasi abre oficialmente en Ecuador en junio. Las que empiezan a construir ahora van a ser las líderes cuando abra el mercado. Si el tema era el timing, ese es el motivo para moverse ya."</div>
+  </div>
+
+  <div class="anchor">
+    <div class="ancl">Después de 3 contactos sin respuesta — suelta</div>
+    <div class="anct">No mandes un 4.º mensaje. Sigue adelante. Algunas necesitan más tiempo y vuelven cuando están listas. Las que vuelven después casi siempre dicen "ojalá hubiera empezado cuando hablamos". Tu trabajo es seguir visible con tu contenido — no perseguir una por una.</div>
+    <div class="ancn">El mejor seguimiento es mostrar tu vida con constancia para que siga viendo lo que se está perdiendo.</div>
+  </div>
+
+  <div class="div"></div>
+  <div class="steplabel">Cuando entra — las primeras 24 horas son clave</div>
+  <div class="stepsub">Aquí Meli es naturalmente fuerte. Dale estructura.</div>
+  <div class="script">"¡Bienvenida al equipo! 🎉 Qué emoción tenerte acá. Esto sigue así — te mando tres cosas: tu acceso, el link al grupo del equipo, y un audio corto con tus primeros pasos. No tienes que inventar sola. Estoy contigo." <em>(mándalo en la hora de que entre — la velocidad define si sigue prendida o se enfría)</em></div>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

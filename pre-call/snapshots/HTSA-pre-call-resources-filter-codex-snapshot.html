@@ -1,0 +1,2211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTSA Engagement Plan | CJ Clay</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #060e1c;
+  --navy-mid: #0a1628;
+  --navy-card: #0f1e35;
+  --navy-light: #142440;
+  --green: #00c97a;
+  --green-dim: #00b06b;
+  --green-dark: #009a5e;
+  --green-glow: rgba(0,201,122,0.18);
+  --green-soft: rgba(0,201,122,0.08);
+  --mid: rgba(255,255,255,0.10);
+  --mid-strong: rgba(255,255,255,0.15);
+  --text: #e8f0ff;
+  --text-soft: rgba(232,240,255,0.72);
+  --muted: #6b7fa0;
+  --gold: #f0c060;
+  --gold-soft: rgba(240,192,96,0.12);
+  --danger: #ff8c82;
+  --danger-soft: rgba(192,57,43,0.10);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --font-d: 'Syne', system-ui, sans-serif;
+  --font-s: 'Playfair Display', Georgia, serif;
+  --font-b: 'DM Sans', system-ui, sans-serif;
+  --font-m: 'DM Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-b);
+  background: var(--navy);
+  color: var(--text-soft);
+  line-height: 1.65;
+  font-size: 15px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 55% at 15% -5%,rgba(0,201,122,0.18),transparent 55%),
+    radial-gradient(ellipse 55% 45% at 92% 18%,rgba(64,100,200,0.10),transparent 50%),
+    radial-gradient(ellipse 60% 50% at 50% 105%,rgba(0,154,94,0.09),transparent 55%),
+    linear-gradient(180deg,var(--navy) 0%,#07111f 100%);
+}
+.orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.orb { position: absolute; border-radius: 50%; filter: blur(70px); animation: floatOrb 20s var(--ease) infinite; }
+.orb:nth-child(1) { width: 380px; height: 380px; background: rgba(0,201,122,0.14); top: -100px; left: -120px; animation-delay: 0s; }
+.orb:nth-child(2) { width: 300px; height: 300px; background: rgba(80,120,255,0.09); bottom: 8%; right: -100px; animation-delay: -7s; animation-duration: 24s; }
+.orb:nth-child(3) { width: 220px; height: 220px; background: rgba(0,154,94,0.12); top: 42%; left: 38%; animation-delay: -13s; animation-duration: 28s; }
+@keyframes floatOrb {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(28px,-18px) scale(1.04); }
+  66% { transform: translate(-22px,14px) scale(0.97); }
+}
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.048;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.shell { position: relative; z-index: 2; max-width: 980px; margin: 0 auto; padding: 0 20px 120px; }
+
+.hero {
+  min-height: 76vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 100px 0 38px;
+  position: relative;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 22px;
+  opacity: 0;
+  animation: heroIn 1s var(--ease) 0.1s forwards;
+}
+.badge-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 18px var(--green);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
+}
+.hero h1 {
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: clamp(2.2rem,6.5vw,3.6rem);
+  line-height: 1.03;
+  letter-spacing: -0.035em;
+  color: var(--text);
+  max-width: 15ch;
+  opacity: 0;
+  animation: heroIn 1s var(--ease) 0.28s forwards;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg,var(--green) 0%,#4de8b0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-lead {
+  margin-top: 24px;
+  font-size: clamp(1rem,2vw,1.12rem);
+  max-width: 47ch;
+  color: var(--text-soft);
+  opacity: 0;
+  animation: heroIn 1s var(--ease) 0.46s forwards;
+}
+.hero-lead strong { color: var(--text); font-weight: 600; }
+.hero-meta {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  opacity: 0;
+  animation: heroIn 1s var(--ease) 0.66s forwards;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.055);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--mid);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+.pill strong { color: var(--text); }
+.scroll-hint {
+  margin-top: 52px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10.5px;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0;
+  animation: heroIn 1s var(--ease) 0.88s forwards;
+}
+.mouse { width: 22px; height: 34px; border: 2px solid var(--muted); border-radius: 12px; position: relative; }
+.mouse::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  background: var(--green);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  animation: scrollWheel 1.8s ease-in-out infinite;
+}
+@keyframes scrollWheel {
+  0%,100% { opacity: 1; transform: translate(-50%,0); }
+  50% { opacity: 0.3; transform: translate(-50%,8px); }
+}
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.about-cj {
+  margin-bottom: 28px;
+  padding: 26px;
+  border-radius: 22px;
+  background: var(--navy-card);
+  border: 1px solid rgba(0,201,122,0.2);
+  position: relative;
+  overflow: hidden;
+}
+.about-cj::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,transparent,var(--green),transparent);
+}
+.about-grid { display: grid; grid-template-columns: 120px 1fr; gap: 22px; align-items: start; }
+.about-photo-wrap { width: 120px; height: 120px; margin: 0 auto; }
+.about-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
+  object-fit: cover;
+  border: 2px solid rgba(0,201,122,0.35);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+.about-photo-ph {
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
+  background: linear-gradient(145deg,var(--navy-light),#081422);
+  border: 2px solid var(--mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-d);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--green);
+}
+.about-kicker {
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 8px;
+}
+.about-cj h2 {
+  font-family: var(--font-d);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+.about-body p { font-size: 14px; color: var(--text-soft); margin-bottom: 12px; line-height: 1.65; }
+.about-body p:last-child { margin-bottom: 0; }
+
+.progress-cluster {
+  position: sticky;
+  top: 14px;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  margin: 0 -4px 28px;
+  border-radius: 20px;
+  background: rgba(10,22,40,0.80);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(0,201,122,0.22);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35),0 0 0 1px rgba(0,201,122,0.08);
+}
+.progress-ring-wrap { display: flex; align-items: center; gap: 16px; }
+.ring-svg { width: 56px; height: 56px; transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 4; }
+.ring-fill {
+  fill: none;
+  stroke: url(#ringGrad);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 163.36;
+  stroke-dashoffset: 163.36;
+  transition: stroke-dashoffset 0.75s var(--ease);
+  filter: drop-shadow(0 0 10px rgba(0,201,122,0.5));
+}
+.progress-copy h3 { font-family: var(--font-d); font-size: 13.5px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+.progress-copy p { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.progress-copy span#progressText { color: var(--green); font-weight: 700; }
+.streak {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: var(--green-soft);
+  border: 1px solid rgba(0,201,122,0.18);
+}
+.streak strong { color: var(--green-dim); }
+
+.show-strip {
+  margin: 0 -4px 28px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(240,192,96,0.08);
+  border: 1px solid rgba(240,192,96,0.22);
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+.show-strip strong { color: var(--gold); font-weight: 600; }
+
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s var(--ease),transform 0.8s var(--ease); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+.section { margin-bottom: 26px; }
+.section-head { margin-bottom: 24px; }
+.section-kicker {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 8px;
+  font-family: var(--font-m);
+}
+.section-title {
+  font-family: var(--font-d);
+  font-size: clamp(1.5rem,3.5vw,2.1rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+.section-sub { font-size: 14px; color: var(--muted); margin-top: 8px; max-width: 56ch; line-height: 1.65; }
+
+.phase-card,
+.summary-card,
+.admin-bar,
+.proof-card,
+.chart-card,
+.locked-card,
+.mini-card,
+.calc-wrap {
+  padding: 24px;
+  border-radius: 22px;
+  background: var(--navy-card);
+  border: 1px solid var(--mid);
+  position: relative;
+  overflow: hidden;
+}
+.phase-card::before,
+.summary-card::before,
+.admin-bar::before,
+.proof-card::before,
+.chart-card::before,
+.locked-card::before,
+.mini-card::before,
+.calc-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,transparent,var(--green),transparent);
+  opacity: 0.85;
+}
+.phase-card { background: linear-gradient(165deg,rgba(0,201,122,0.04) 0%,var(--navy-card) 42%); }
+.phase-card.phase-pain { background: linear-gradient(165deg,rgba(192,57,43,0.08) 0%,var(--navy-card) 42%); }
+.phase-card.phase-proof { background: linear-gradient(165deg,rgba(240,192,96,0.08) 0%,var(--navy-card) 42%); }
+.phase-card.locked { border-color: rgba(240,192,96,0.28); }
+
+.phase-shell { display: none; }
+.phase-shell.is-visible { display: block; }
+.phase-shell.is-complete { display: block; }
+.phase-shell.is-current .phase-card { box-shadow: 0 24px 60px rgba(0,0,0,0.28); }
+
+.phase-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.phase-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 100px;
+  border: 1px solid rgba(0,201,122,0.2);
+  background: rgba(0,201,122,0.08);
+  color: var(--green-dim);
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.phase-status {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.phase-status.done { color: var(--green); }
+
+.admin-bar {
+  margin-bottom: 20px;
+  padding: 16px 18px;
+  background: rgba(10,22,40,0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.admin-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.admin-title {
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.admin-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  background: linear-gradient(135deg,var(--green-dim) 0%,var(--green-dark) 100%);
+  color: #031a0e !important;
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 11px 18px;
+  border-radius: 11px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s,filter 0.2s;
+  box-shadow: 0 8px 28px rgba(0,176,107,0.3);
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+.btn:hover::after { transform: translateX(100%); }
+.btn:hover { filter: brightness(1.09); transform: translateY(-1px); }
+.btn:active { transform: scale(0.98); }
+.btn.ghost { background: transparent; color: var(--text) !important; border: 1.5px solid var(--mid); box-shadow: none; }
+.btn.ghost:hover { border-color: var(--green-dim); background: var(--green-soft); }
+.btn.outline { background: transparent; color: var(--text) !important; border: 1.5px solid var(--mid-strong); box-shadow: none; }
+.btn.outline:hover { border-color: rgba(0,201,122,0.5); background: var(--green-soft); }
+.btn.warn { background: linear-gradient(135deg,#d48643 0%,#b5662a 100%); color: #100700 !important; box-shadow: 0 8px 28px rgba(212,134,67,0.26); }
+
+.grid-2, .grid-3, .metrics-grid, .proof-grid, .summary-grid {
+  display: grid;
+  gap: 12px;
+}
+.grid-2 { grid-template-columns: repeat(2,1fr); }
+.grid-3 { grid-template-columns: repeat(3,1fr); }
+.metrics-grid { grid-template-columns: repeat(4,1fr); margin-top: 14px; }
+.proof-grid { grid-template-columns: 1.15fr 0.85fr; }
+.summary-grid { grid-template-columns: repeat(2,1fr); margin-top: 16px; }
+
+.field { margin-bottom: 14px; }
+.field label,
+.fieldset-label {
+  display: block;
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 7px;
+}
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--mid);
+  background: rgba(7,17,31,0.82);
+  color: var(--text);
+  font-size: 14px;
+  font-family: var(--font-b);
+}
+.field textarea { min-height: 96px; resize: vertical; }
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  outline: none;
+  border-color: rgba(0,201,122,0.45);
+  background: rgba(0,201,122,0.05);
+}
+.field-note { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+.chip-wall { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip-btn {
+  font-family: var(--font-b);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 9px 12px;
+  border-radius: 12px;
+  border: 1.5px solid var(--mid);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: border-color 0.2s,background 0.2s,transform 0.2s;
+  line-height: 1.3;
+}
+.chip-btn:hover { border-color: rgba(0,201,122,0.45); background: rgba(0,201,122,0.08); color: var(--text); transform: translateY(-1px); }
+.chip-btn.is-active { border-color: var(--green-dim); background: rgba(0,201,122,0.14); color: var(--text); box-shadow: 0 0 0 1px rgba(0,201,122,0.18); }
+.chip-btn.pain.is-active { border-color: rgba(192,57,43,0.55); background: rgba(192,57,43,0.12); }
+.chip-btn.emotion.is-active { border-color: rgba(240,192,96,0.45); background: rgba(240,192,96,0.12); }
+
+.recap,
+.math-panel,
+.locked-snapshot,
+.story-note,
+.status-banner {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--mid);
+}
+.recap strong,
+.math-panel strong,
+.locked-snapshot strong,
+.story-note strong { color: var(--text); }
+.recap-kicker,
+.mini-kicker {
+  display: block;
+  font-family: var(--font-m);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 7px;
+}
+.mini-card { padding: 18px; }
+.mini-card h4 { font-family: var(--font-d); font-size: 15px; color: var(--text); margin-bottom: 8px; }
+.mini-card p { font-size: 13px; color: var(--text-soft); }
+
+.metric {
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--mid);
+}
+.metric-label {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  display: block;
+}
+.metric-value {
+  font-family: var(--font-d);
+  font-size: 1.65rem;
+  line-height: 1.05;
+  color: var(--text);
+}
+.metric-value.green { color: var(--green); }
+.metric-value.gold { color: var(--gold); }
+.metric-value.danger { color: var(--danger); }
+
+.phase-actions {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.range-wrap {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(240,192,96,0.06);
+  border: 1px solid rgba(240,192,96,0.2);
+}
+.range-readout {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+}
+.range-readout strong { color: var(--gold); }
+.range-wrap input[type="range"] { width: 100%; }
+
+.phase-table-wrap {
+  margin-top: 14px;
+  border: 1px solid var(--mid);
+  border-radius: 18px;
+  overflow: hidden;
+}
+table { width: 100%; border-collapse: collapse; }
+th, td {
+  padding: 11px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 12.5px;
+  vertical-align: top;
+}
+th {
+  font-family: var(--font-m);
+  font-size: 9px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: rgba(20,36,64,0.7);
+}
+tr:last-child td { border-bottom: none; }
+
+.phase-row-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.story-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.story-option {
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--mid);
+  background: rgba(255,255,255,0.03);
+  cursor: pointer;
+  transition: border-color 0.2s,background 0.2s,transform 0.2s;
+}
+.story-option:hover { border-color: rgba(0,201,122,0.32); transform: translateY(-1px); }
+.story-option.is-selected { border-color: rgba(240,192,96,0.35); background: rgba(240,192,96,0.09); }
+.story-option strong { color: var(--text); display: block; margin-bottom: 4px; }
+.story-option span { font-size: 12.5px; color: var(--text-soft); display: block; }
+
+.chart-card svg { width: 100%; height: auto; display: block; }
+.chart-legend {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.locked-card,
+.locked-snapshot { background: rgba(240,192,96,0.07); border-color: rgba(240,192,96,0.25); }
+
+.toggle-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text-soft);
+}
+.toggle-line input { width: 18px; height: 18px; accent-color: var(--green-dim); }
+
+.dock {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 9px;
+  border-radius: 100px;
+  background: rgba(10,22,40,0.88);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(0,201,122,0.2);
+  box-shadow: 0 16px 50px rgba(0,0,0,0.4);
+}
+.dock a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 15px;
+  border-radius: 100px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-soft);
+  transition: background 0.2s,color 0.2s;
+  white-space: nowrap;
+}
+.dock a:hover { background: rgba(0,201,122,0.12); color: var(--text); }
+.dock a.primary { background: linear-gradient(135deg,var(--green-dim),var(--green-dark)); color: #031a0e; }
+.dock .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); opacity: 0.4; }
+
+.footer { text-align: center; padding: 28px 0 10px; font-size: 11.5px; color: var(--muted); }
+
+.hidden { display: none !important; }
+.print-only { display: none; }
+.cj-only-hidden { display: none !important; }
+
+@media (max-width: 900px) {
+  .grid-3,
+  .metrics-grid,
+  .phase-row-grid,
+  .proof-grid,
+  .summary-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 640px) {
+  .shell { padding: 0 16px 110px; }
+  .about-grid,
+  .grid-2,
+  .grid-3,
+  .metrics-grid,
+  .proof-grid,
+  .summary-grid,
+  .phase-row-grid { grid-template-columns: 1fr; }
+  .progress-cluster { top: 8px; margin: 0 0 20px; }
+  .dock { width: calc(100% - 24px); overflow-x: auto; justify-content: flex-start; }
+  .hero { min-height: auto; padding-top: 84px; }
+}
+@media print {
+  html, body {
+    background: #08131f !important;
+    color: #e8f0ff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .ambient, .orbs, .noise, .dock, .admin-bar, .progress-cluster, .phase-actions button, .phase-actions a, .toggle-line, .cj-only, .story-list { display: none !important; }
+  .shell { max-width: none; padding: 0; }
+  .phase-shell { display: block !important; }
+  .phase-card, .summary-card, .locked-card, .chart-card, .proof-card, .mini-card, .metric, .math-panel, .recap, .locked-snapshot, .story-note {
+    break-inside: avoid;
+    box-shadow: none;
+    background: #0f1e35 !important;
+    color: #e8f0ff !important;
+    border-color: rgba(255,255,255,0.12) !important;
+  }
+  .phase-card.phase-pain { background: linear-gradient(165deg,rgba(192,57,43,0.12) 0%,#0f1e35 42%) !important; }
+  .phase-card.phase-proof { background: linear-gradient(165deg,rgba(240,192,96,0.12) 0%,#0f1e35 42%) !important; }
+  .phase-card { background: linear-gradient(165deg,rgba(0,201,122,0.06) 0%,#0f1e35 42%) !important; }
+  .show-strip, .range-wrap, .locked-card, .locked-snapshot { background: rgba(240,192,96,0.08) !important; }
+  table, th, td { color: #e8f0ff !important; }
+  th { background: rgba(20,36,64,0.85) !important; }
+  input, textarea, select, svg, .metric-value, .section-title, .phase-chip, .phase-status { color: #e8f0ff !important; }
+  .print-only { display: block; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" aria-hidden="true">
+  <defs>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00c97a"/>
+      <stop offset="100%" style="stop-color:#009a5e"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="ambient" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+<div class="noise" aria-hidden="true"></div>
+
+<script>
+window.CJ_MODE = false;
+window.PRE_CALL_CONFIG = {
+  firstName: 'there',
+  personalNote: '',
+  cjPhotoUrl: '',
+  comebackLine: 'From rock bottom to building a real career in high-ticket, I learned the skill the hard way so I could help others shorten that path.',
+  aboutParagraphs: '<p>For most of my life, I was the guy wasting it. I was an athlete first, then addiction took over and I lost the next ten years of my life at full speed. By the time I finally got sober in late 2020, I had hit rock bottom and knew I had one choice left: rebuild everything or keep losing.</p><p>In 2021 I got into sales and made six figures my first year knocking doors. Then I scaled every year after that. By year four, I co-owned a roofing company. In seven months we did $4.3 million with no office and no sales team. On paper, it looked like we had made it. I thought we had about $275,000 in profit and a $1.4 million pipeline in front of us.</p><p>Then the whole thing collapsed. My partner had been stealing money. When it all surfaced, I had only been paid $39.5k. There was no money. By July 2025, everything imploded and I found myself about $38,000 in the hole, under pressure, and needing one real move that could change the direction of my life.</p><p>That is when I found HTSA. I did not see it as one option. I saw it as my shot. I committed, got placed quickly, and then got recruited by HTSA. Now I get to help other people who know they are capable of more but need the right vehicle, the right pressure, and the right opportunity to prove it.</p>',
+  bookingUrl: 'https://meetings.hubspot.com/charles660/cj',
+  enrollmentUrl: '',
+  textPhone: '6166121735'
+};
+</script>
+
+<nav class="dock" aria-label="Quick actions">
+  <a href="#top">Top</a>
+  <span class="dot" aria-hidden="true"></span>
+  <a href="#phase-1">Trust</a>
+  <span class="dot" aria-hidden="true"></span>
+  <a href="#phase-5">Gap</a>
+  <span class="dot" aria-hidden="true"></span>
+  <a href="#phase-7">Projection</a>
+  <span class="dot" aria-hidden="true"></span>
+  <a href="#phase-9">Plan</a>
+  <span class="dot" aria-hidden="true"></span>
+  <a class="primary" id="dockBook" href="#">Schedule</a>
+</nav>
+
+<main class="shell">
+  <header class="hero" id="top">
+    <div class="hero-badge cj-only cj-only-hidden"><span class="badge-dot"></span> CJ's phased engagement tool</div>
+    <h1>Your <em>Personalized</em><br>Game Plan.</h1>
+    <p class="hero-lead">Built around your current reality, your goals, and what it could honestly take to close the gap.</p>
+    <div class="hero-meta">
+      <div class="pill"><strong>CJ Clay</strong> · HTSA advisor</div>
+      <div class="pill">One static page · no backend</div>
+      <div class="pill" style="border-color:rgba(240,192,96,0.35);background:rgba(240,192,96,0.06);">Guided mode feels <strong style="color:var(--gold);">intentional</strong></div>
+    </div>
+    <div class="scroll-hint"><div class="mouse" aria-hidden="true"></div> Follow the phases</div>
+  </header>
+
+  <div class="progress-cluster reveal" data-reveal>
+    <div class="progress-ring-wrap">
+      <svg class="ring-svg" viewBox="0 0 64 64" aria-hidden="true">
+        <circle class="ring-bg" cx="32" cy="32" r="26"></circle>
+        <circle class="ring-fill" id="ringFill" cx="32" cy="32" r="26"></circle>
+      </svg>
+      <div class="progress-copy">
+        <h3>Momentum meter</h3>
+        <p><span id="progressText">11%</span> of the conversation loaded</p>
+      </div>
+    </div>
+    <div class="streak" id="streakLine">Guide the rhythm - <strong>one phase at a time</strong></div>
+  </div>
+
+  <p class="show-strip reveal cj-only cj-only-hidden" data-reveal><strong>Sales-flow first.</strong> The page only reveals what belongs in the current stage of the conversation. Future projections stay hidden until current pain, emotional cost, and future vision are clearly established.</p>
+
+  <section class="about-cj reveal" id="phase-1" data-reveal>
+    <p class="about-kicker">Phase 1 · Pre-call trust and momentum</p>
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <img id="cjPhoto" class="about-photo hidden" src="" alt="CJ Clay" width="120" height="120" loading="lazy">
+        <div id="cjPhotoPh" class="about-photo-ph" aria-hidden="true">CJ</div>
+      </div>
+      <div>
+        <h2>CJ Clay</h2>
+        <p id="comebackLine" style="font-size:14px;color:var(--gold);font-style:italic;margin-bottom:14px;line-height:1.5;"></p>
+        <div class="about-body" id="aboutBody"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="admin-bar reveal" data-reveal>
+    <div class="admin-head">
+      <div class="admin-title">View controls</div>
+      <label class="toggle-line"><input type="checkbox" id="guidedModeToggle" checked> Guided mode</label>
+    </div>
+    <div class="admin-row">
+      <button type="button" class="btn ghost" id="unlockAllBtn">Unlock all phases</button>
+      <button type="button" class="btn ghost" id="resetDataBtn">Reset all data</button>
+      <button type="button" class="btn ghost" id="clearLockedBtn">Clear locked plan</button>
+      <button type="button" class="btn ghost" id="jumpCurrentBtn">Jump to current phase</button>
+    </div>
+  </section>
+
+  <section class="section reveal cj-only cj-only-hidden" data-reveal>
+    <div class="section-head">
+      <p class="section-kicker">Conversation sequence</p>
+      <h2 class="section-title">The page now follows your actual call rhythm.</h2>
+      <p class="section-sub">Completed phases stay visible. The current phase opens next. CJ can override at any point, but the prospect side feels clean, paced, and intentional.</p>
+    </div>
+  </section>
+
+  <section class="phase-shell is-visible is-current reveal" id="phase-shell-1" data-phase="1" data-reveal>
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Phase 1 · Trust and momentum</span>
+        <span class="phase-status done" id="phase-status-1">Live now</span>
+      </div>
+      <div class="grid-2">
+        <div class="mini-card">
+          <span class="mini-kicker">About this page</span>
+          <h4>Use this before, during, or after the call.</h4>
+          <p>Pre-call it builds trust. During the call it becomes the shared visual. After the call it becomes the saved plan that supports urgency and follow-through.</p>
+        </div>
+        <div class="mini-card">
+          <span class="mini-kicker">Momentum</span>
+          <h4>Keep the top of the funnel warm.</h4>
+          <p>Nothing here feels like homework. It is a guided journey that increases curiosity, reduces confusion, and saves the details that matter for the live conversation.</p>
+        </div>
+      </div>
+      <div class="phase-actions">
+        <button type="button" class="btn" data-continue="1">Unlock Current Reality</button>
+        <a class="btn ghost" id="btnBook" href="#" target="_blank" rel="noopener noreferrer">Book / reschedule</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase-shell reveal" id="phase-shell-2" data-phase="2" data-reveal>
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Phase 2 · Current reality</span>
+        <span class="phase-status" id="phase-status-2">Locked until prior phase completes</span>
+      </div>
+      <div class="section-head">
+        <h2 class="section-title">Where are they right now?</h2>
+        <p class="section-sub">Only current situation here. No goal math. No HTSA projection. No future pacing yet.</p>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="prospectName">Prospect name</label>
+          <input id="prospectName" type="text" placeholder="e.g. Ashley">
+        </div>
+        <div class="field">
+          <label for="currentRole">Current role / job</label>
+          <input id="currentRole" type="text" placeholder="e.g. Restaurant manager">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="currentMonthlyIncome">Current monthly income</label>
+          <input id="currentMonthlyIncome" type="number" min="0" step="100" placeholder="e.g. 4000">
+        </div>
+        <div class="field">
+          <label for="currentWeeklyHours">Current weekly hours worked</label>
+          <input id="currentWeeklyHours" type="number" min="1" max="120" step="1" placeholder="e.g. 55">
+        </div>
+      </div>
+      <div class="field">
+        <label for="currentSchedule">Current schedule / lifestyle notes</label>
+        <textarea id="currentSchedule" placeholder="What does their weekly life actually look like right now?"></textarea>
+      </div>
+      <div class="field">
+        <span class="fieldset-label">Current frustrations / pain chips</span>
+        <div class="chip-wall" id="painChipWall"></div>
+      </div>
+      <div class="field">
+        <label for="customPain">Custom pain point</label>
+        <input id="customPain" type="text" placeholder="Anything specific they say in their own words">
+      </div>
+      <div class="recap" id="currentRealityRecap">
+        <span class="recap-kicker">Current reality summary</span>
+        Fill in their present situation and this recap will stay focused on what is true right now.
+      </div>
+      <div class="phase-actions">
+        <button type="button" class="btn" data-continue="2">Continue to Emotional Cost</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase-shell reveal" id="phase-shell-3" data-phase="3" data-reveal>
+    <div class="phase-card phase-pain">
+      <div class="phase-topline">
+        <span class="phase-chip">Phase 3 · Pain and emotional cost</span>
+        <span class="phase-status" id="phase-status-3">Locked until prior phase completes</span>
+      </div>
+      <div class="section-head">
+        <h2 class="section-title">Make the cost real before the future.</h2>
+        <p class="section-sub">This is where the logic stops and the human cost gets clear.</p>
+      </div>
+      <div class="field">
+        <span class="fieldset-label">What is this costing them emotionally?</span>
+        <div class="chip-wall" id="emotionChipWall"></div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="nothingChanges">If nothing changes in 6-12 months, what worries them most?</label>
+          <textarea id="nothingChanges" placeholder="What happens if this stays the same?"></textarea>
+        </div>
+        <div class="field">
+          <label for="escapingFrom">What are they trying to get away from?</label>
+          <textarea id="escapingFrom" placeholder="What are they done with?"></textarea>
+        </div>
+      </div>
+      <div class="recap" id="painRecap">
+        <span class="recap-kicker">Emotional recap</span>
+        Their emotional cost summary will land here once you capture it.
+      </div>
+      <div class="phase-actions">
+        <button type="button" class="btn" data-continue="3">Continue to Future Vision</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase-shell reveal" id="phase-shell-4" data-phase="4" data-reveal>
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Phase 4 · Future vision</span>
+        <span class="phase-status" id="phase-status-4">Locked until prior phase completes</span>
+      </div>
+      <div class="section-head">
+        <h2 class="section-title">Only now ask where they want to go.</h2>
+        <p class="section-sub">Future pace after pain. The recap should sound like their life, not a generic money goal.</p>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="goalMonthlyIncome">Goal monthly income</label>
+          <input id="goalMonthlyIncome" type="number" min="0" step="100" placeholder="e.g. 15000">
+        </div>
+        <div class="field">
+          <label for="desiredWeeklyHours">Desired weekly hours</label>
+          <input id="desiredWeeklyHours" type="number" min="1" max="120" step="1" placeholder="e.g. 25">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="moneyWhy">Why does more money matter?</label>
+          <textarea id="moneyWhy" placeholder="Debt, breathing room, investing, security, proving something, etc."></textarea>
+        </div>
+        <div class="field">
+          <label for="freedomWhy">Why does freedom matter?</label>
+          <textarea id="freedomWhy" placeholder="Family time, travel, flexibility, being present, peace, etc."></textarea>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="lifestyleGoals">Lifestyle / family / travel goals</label>
+          <textarea id="lifestyleGoals" placeholder="What do they want life to actually feel like?"></textarea>
+        </div>
+        <div class="field">
+          <label for="futureTuesday">What does a normal Tuesday look like 12 months from now?</label>
+          <textarea id="futureTuesday" placeholder="Describe their ideal ordinary day."></textarea>
+        </div>
+      </div>
+      <div class="recap" id="futureRecap">
+        <span class="recap-kicker">Future vision recap</span>
+        Capture their desired future and this card will phrase it back clearly.
+      </div>
+      <div class="phase-actions">
+        <button type="button" class="btn" data-continue="4">Unlock Gap Clarification Math</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase-shell reveal" id="phase-shell-5" data-phase="5" data-reveal>
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Phase 5 · Gap clarification math</span>
+        <span class="phase-status" id="phase-status-5">Locked until prior phase completes</span>
+      </div>
+      <div class="section-head">
+        <h2 class="section-title">Show the current path does not support the desired future.</h2>
+        <p class="section-sub">This is the first place where income-gap math is allowed to appear.</p>
+      </div>
+      <div class="metrics-grid" id="gapMetrics">
+        <div class="metric"><span class="metric-label">Current hourly value</span><div class="metric-value" id="gapHourly">-</div></div>
+        <div class="metric"><span class="metric-label">Required weekly hours</span><div class="metric-value danger" id="gapRequiredHours">-</div></div>
+        <div class="metric"><span class="metric-label">Extra weekly hours needed</span><div class="metric-value gold" id="gapExtraHours">-</div></div>
+        <div class="metric"><span class="metric-label">Increase required</span><div class="metric-value" id="gapIncrease">-</div></div>
+      </div>
+      <div class="math-panel" id="gapRecap">
+        <span class="recap-kicker">Gap clarification</span>
+        Enter current income, current hours, and future income to unlock the vehicle-vs-effort conversation.
+      </div>
+      <div class="phase-actions">
+        <button type="button" class="btn" data-continue="5">Unlock HTSA Possibility Math</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase-shell reveal" id="phase-shell-6" data-phase="6" data-reveal>
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Phase 6 · HTSA possibility math</span>
+        <span class="phase-status" id="phase-status-6">Locked until prior phase completes</span>
+      </div>
+      <div class="section-head">
+        <h2 class="section-title">Now show what the high-ticket vehicle could look like.</h2>
+        <p class="section-sub">Conservative by default, adjustable in clean 1-point increments, and grounded in collected commission rather than hype.</p>
+      </div>
+      <div class="grid-3">
+        <div class="field">
+          <label for="offerPrice">Offer price</label>
+          <input id="offerPrice" type="number" min="1000" step="100" value="6000">
+        </div>
+        <div class="field">
+          <label for="commissionPct">Commission percentage</label>
+          <input id="commissionPct" type="number" min="1" max="50" step="1" value="10">
+        </div>
+        <div class="field">
+          <label for="callsPerDay">Calls per day</label>
+          <input id="callsPerDay" type="number" min="1" max="20" step="1" value="3">
+        </div>
+        <div class="field">
+          <label for="daysPerWeek">Days per week</label>
+          <input id="daysPerWeek" type="number" min="1" max="7" step="1" value="5">
+        </div>
+        <div class="field">
+          <label for="closeRate">Close rate (%)</label>
+          <input id="closeRate" type="number" min="10" max="40" step="1" value="20">
+        </div>
+        <div class="field">
+          <label for="showRate">Show rate (%)</label>
+          <input id="showRate" type="number" min="10" max="100" step="1" value="75">
+        </div>
+        <div class="field">
+          <label for="pifPct">Paid in full (%)</label>
+          <input id="pifPct" type="number" min="0" max="100" step="1" value="50">
+          <div class="field-note">4-pay automatically uses the remaining percentage.</div>
+        </div>
+      </div>
+      <div class="range-wrap" style="margin-top:6px;">
+        <div class="range-readout"><strong id="pifPctReadout">50%</strong> paid in full and <strong id="fourPayPctReadout">50%</strong> on 4-pay.</div>
+        <input id="pifSlider" type="range" min="0" max="100" step="1" value="50">
+      </div>
+      <div class="metrics-grid" id="htsaMetrics" style="margin-top:18px;">
+        <div class="metric"><span class="metric-label">Weekly calls</span><div class="metric-value" id="htsaWeeklyCalls">-</div></div>
+        <div class="metric"><span class="metric-label">Weekly closed deals</span><div class="metric-value green" id="htsaWeeklyDeals">-</div></div>
+        <div class="metric"><span class="metric-label">Weekly commission potential</span><div class="metric-value gold" id="htsaWeeklyCommission">-</div></div>
+        <div class="metric"><span class="metric-label">Monthly commission potential</span><div class="metric-value" id="htsaMonthlyCommission">-</div></div>
+      </div>
+      <div class="summary-grid">
+        <div class="mini-card">
+          <span class="mini-kicker">Immediate cash</span>
+          <h4 id="htsaPifCash">-</h4>
+          <p>Immediate commission from the paid-in-full portion.</p>
+        </div>
+        <div class="mini-card">
+          <span class="mini-kicker">Residual stacking</span>
+          <h4 id="htsaResidual">-</h4>
+          <p>Monthly 4-pay commission collected from current production, before any stacking from prior months.</p>
+        </div>
+      </div>
+      <div class="math-panel" id="htsaRecap">
+        <span class="recap-kicker">Conservative possibility</span>
+        Once the inputs are set, this section shows an honest high-ticket commission model with immediate cash and split-pay residuals.
+      </div>
+      <div class="phase-actions">
+        <button type="button" class="btn" data-continue="6">Unlock First-Year Ramp</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase-shell reveal" id="phase-shell-7" data-phase="7" data-reveal>
+    <div class="phase-card">
+      <div class="phase-topline">
+        <span class="phase-chip">Phase 7 · First-year ramp projection</span>
+        <span class="phase-status" id="phase-status-7">Locked until prior phase completes</span>
+      </div>
+      <div class="section-head">
+        <h2 class="section-title">Model the first year conservatively, then let the skill curve do the work.</h2>
+        <p class="section-sub">All four phases default to 20%. Later phases can be manually increased, but nothing starts inflated.</p>
+      </div>
+      <div class="phase-row-grid">
+        <div class="field">
+          <label for="phaseClose1">Months 1-3 close rate</label>
+          <input id="phaseClose1" type="number" min="10" max="40" step="1" value="20">
+        </div>
+        <div class="field">
+          <label for="phaseClose2">Months 4-6 close rate</label>
+          <input id="phaseClose2" type="number" min="10" max="40" step="1" value="25">
+        </div>
+        <div class="field">
+          <label for="phaseClose3">Months 7-9 close rate</label>
+          <input id="phaseClose3" type="number" min="10" max="40" step="1" value="28">
+        </div>
+        <div class="field">
+          <label for="phaseClose4">Months 10-12 close rate</label>
+          <input id="phaseClose4" type="number" min="10" max="40" step="1" value="30">
+        </div>
+      </div>
+      <div class="phase-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Phase</th>
+              <th>Close rate</th>
+              <th>Monthly deals</th>
+              <th>PIF commission</th>
+              <th>4-pay collected</th>
+              <th>Residuals from prior months</th>
+              <th>Total monthly commission</th>
+              <th>Quarter total</th>
+            </tr>
+          </thead>
+          <tbody id="projectionTableBody"></tbody>
+        </table>
+      </div>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <span class="recap-kicker">Year-one summary</span>
+          <div class="metrics-grid" style="grid-template-columns:repeat(2,1fr);margin-top:10px;">
+            <div class="metric"><span class="metric-label">Total first-year commissions</span><div class="metric-value green" id="yearTotal">-</div></div>
+            <div class="metric"><span class="metric-label">Average monthly income</span><div class="metric-value" id="yearAvgMonthly">-</div></div>
+            <div class="metric"><span class="metric-label">Average weekly income</span><div class="metric-value" id="yearAvgWeekly">-</div></div>
+            <div class="metric"><span class="metric-label">Average close rate</span><div class="metric-value" id="yearAvgClose">-</div></div>
+            <div class="metric"><span class="metric-label">Total closed deals</span><div class="metric-value" id="yearDeals">-</div></div>
+            <div class="metric"><span class="metric-label">Total calls taken</span><div class="metric-value" id="yearCalls">-</div></div>
+            <div class="metric"><span class="metric-label">Total PIF commissions</span><div class="metric-value" id="yearPifTotal">-</div></div>
+            <div class="metric"><span class="metric-label">Total 4-pay residual commissions</span><div class="metric-value" id="yearResidualTotal">-</div></div>
+          </div>
+        </div>
+        <div class="chart-card">
+          <span class="recap-kicker">12-month income curve</span>
+          <svg id="incomeChart" viewBox="0 0 520 250" role="img" aria-label="Monthly income projection chart"></svg>
+          <div class="chart-legend">
+            <span id="chartMinLabel">Month 1</span>
+            <span id="chartPeakLabel">Month 12</span>
+          </div>
+        </div>
+      </div>
+      <div class="phase-actions">
+        <button type="button" class="btn" data-continue="7">Unlock Proof Block</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase-shell reveal" id="phase-shell-8" data-phase="8" data-reveal>
+    <div class="phase-card phase-proof">
+      <div class="phase-topline">
+        <span class="phase-chip">Phase 8 · Proof and success story</span>
+        <span class="phase-status" id="phase-status-8">Locked until prior phase completes</span>
+      </div>
+      <div class="section-head">
+        <h2 class="section-title">Use proof strategically, not like hype.</h2>
+        <p class="section-sub">Pick the story that best mirrors the prospect's situation and frame why it matters to them specifically.</p>
+      </div>
+      <div class="proof-grid">
+        <div class="story-list" id="storyList"></div>
+        <div class="proof-card">
+          <span class="recap-kicker">Selected story</span>
+          <h3 id="selectedStoryName" style="font-family:var(--font-d);font-size:1.2rem;color:var(--text);margin-bottom:10px;">Choose a story</h3>
+          <div class="story-note" id="selectedStorySummary">Once selected, this becomes the proof block CJ can position at the right emotional moment in the call.</div>
+          <div class="field" style="margin-top:14px;">
+            <label for="storyRelation">Why does this story relate to this prospect?</label>
+            <textarea id="storyRelation" placeholder="Spell out the bridge between the case study and the prospect."></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="phase-actions">
+        <button type="button" class="btn" data-continue="8">Unlock Final Game Plan</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase-shell reveal" id="phase-shell-9" data-phase="9" data-reveal>
+    <div class="phase-card locked">
+      <div class="phase-topline">
+        <span class="phase-chip">Phase 9 · Final game plan summary</span>
+        <span class="phase-status" id="phase-status-9">Locked until prior phase completes</span>
+      </div>
+      <div class="section-head">
+        <h2 class="section-title">This becomes the shareable post-call plan.</h2>
+        <p class="section-sub">Save the original plan, let them revisit the numbers later, and keep the actual call version preserved.</p>
+      </div>
+      <div class="locked-card hidden" id="lockedPlanCard">
+        <span class="recap-kicker">Locked original plan</span>
+        <div class="locked-snapshot" id="lockedPlanOutput"></div>
+      </div>
+      <div class="summary-card">
+        <span class="recap-kicker">Live plan summary</span>
+        <div id="finalPlanSummary">Complete the phases above and the full game plan will populate here.</div>
+      </div>
+      <div class="phase-actions">
+        <button type="button" class="btn" id="copySummaryBtn">Copy summary</button>
+        <button type="button" class="btn ghost" id="printPlanBtn">Print / Save as PDF</button>
+        <a class="btn ghost" id="viewInvoiceBtn" href="#">View Invoice</a>
+        <button type="button" class="btn ghost" id="lockPlanBtn">Lock Plan</button>
+        <button type="button" class="btn ghost" id="unlockPlanBtn">Unlock Plan</button>
+        <button type="button" class="btn ghost" id="duplicatePlaygroundBtn">Duplicate as Playground</button>
+        <button type="button" class="btn warn" id="resetPlanBtn">Reset</button>
+      </div>
+      <div class="print-only" id="printHeader" style="margin-top:20px;color:var(--text);font-family:var(--font-d);font-size:1.3rem;">HTSA Customized Game Plan</div>
+    </div>
+  </section>
+
+  <footer class="footer reveal" data-reveal>
+    <p>HTSA phased engagement tool · CJ Clay</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var cfg = window.PRE_CALL_CONFIG || {};
+  var CJ_MODE = window.CJ_MODE === true;
+  var STORAGE_KEY = 'htsa-engagement-tool-v2';
+  var SNAPSHOT_KEY = 'htsa-engagement-tool-v2-locked';
+  var PHASE_COUNT = 9;
+  var REVEAL_OBSERVER;
+  var R = 26;
+  var CIRC = 2 * Math.PI * R;
+
+  var painOptions = [
+    'Long hours',
+    'Underpaid',
+    'No raise path',
+    'No freedom',
+    'Dead-end role',
+    'Burned out',
+    'No flexibility',
+    'Commute drains me',
+    'No upside',
+    'Always stressed'
+  ];
+
+  var emotionOptions = [
+    'Family time',
+    'Confidence',
+    'Freedom',
+    'Energy',
+    'Health',
+    'Peace',
+    'Marriage / partner',
+    'Kids',
+    'Future security',
+    'Self-respect'
+  ];
+
+  var stories = [
+    {
+      id: 'cj',
+      name: 'CJ story',
+      who: 'CJ',
+      problem: 'Had to learn the craft the hard way and stop wasting years on the wrong path.',
+      changed: 'Built a real skill set and now helps prospects shorten the learning curve.',
+      relation: 'Best when the prospect needs to believe this path is real because you personally lived the shift.'
+    },
+    {
+      id: 'brianna',
+      name: 'Brianna',
+      who: 'Brianna',
+      problem: 'Wanted a real path into high-level opportunity, not random internet promises.',
+      changed: 'Got placed with the Tony Robbins organization.',
+      relation: 'Best for someone who wants credibility, brand trust, and a serious upside path.'
+    },
+    {
+      id: 'cassi',
+      name: 'Cassi',
+      who: 'Cassi',
+      problem: 'Single mom with no previous sales background.',
+      changed: 'Got placed quickly and created real income fast.',
+      relation: 'Best when the prospect worries they are starting behind or do not fit the usual sales mold.'
+    },
+    {
+      id: 'josh',
+      name: 'Josh',
+      who: 'Josh',
+      problem: 'Young and early in life, without the long resume most people think they need.',
+      changed: 'Ended up closing at Acquisition.com.',
+      relation: 'Best for someone who needs proof that age or lack of years in sales is not the deal-breaker.'
+    },
+    {
+      id: 'matt',
+      name: 'Matt',
+      who: 'Matt',
+      problem: 'Needed a better vehicle, not more hustle in the same lane.',
+      changed: 'Found a path where skill increased leverage and income.',
+      relation: 'Best for a prospect stuck in the grind who needs the vehicle conversation to click.'
+    },
+    {
+      id: 'nate',
+      name: 'Nate',
+      who: 'Nate',
+      problem: 'Represents the placement side and the behind-the-scenes support people rarely get elsewhere.',
+      changed: 'Shows there is an actual placement machine, not a generic job board.',
+      relation: 'Best when the prospect doubts the back-end support or worries they will be on their own.'
+    }
+  ];
+
+  var state = loadState();
+  ensureDefaults();
+  setupConfig();
+  buildChipWalls();
+  buildStoryList();
+  bindEvents();
+  initRevealObserver();
+  renderAll();
+
+  function ensureDefaults() {
+    if (!state.phaseUnlocked || typeof state.phaseUnlocked !== 'number') state.phaseUnlocked = 1;
+    if (!state.guidedMode && state.guidedMode !== false) state.guidedMode = true;
+    state.pains = Array.isArray(state.pains) ? state.pains : [];
+    state.emotions = Array.isArray(state.emotions) ? state.emotions : [];
+    state.selectedStory = state.selectedStory || '';
+    state.prospectName = state.prospectName || '';
+    state.currentRole = state.currentRole || '';
+    state.currentMonthlyIncome = state.currentMonthlyIncome || '';
+    state.currentWeeklyHours = state.currentWeeklyHours || '';
+    state.currentSchedule = state.currentSchedule || '';
+    state.customPain = state.customPain || '';
+    state.nothingChanges = state.nothingChanges || '';
+    state.escapingFrom = state.escapingFrom || '';
+    state.goalMonthlyIncome = state.goalMonthlyIncome || '';
+    state.desiredWeeklyHours = state.desiredWeeklyHours || '';
+    state.moneyWhy = state.moneyWhy || '';
+    state.freedomWhy = state.freedomWhy || '';
+    state.lifestyleGoals = state.lifestyleGoals || '';
+    state.futureTuesday = state.futureTuesday || '';
+    state.offerPrice = normalizeNumber(state.offerPrice, 6000);
+    state.commissionPct = normalizeNumber(state.commissionPct, 10);
+    state.callsPerDay = normalizeNumber(state.callsPerDay, 3);
+    state.daysPerWeek = normalizeNumber(state.daysPerWeek, 5);
+    state.closeRate = clamp(normalizeNumber(state.closeRate, 20), 10, 40);
+    state.showRate = clamp(normalizeNumber(state.showRate, 75), 10, 100);
+    state.pifPct = clamp(normalizeNumber(state.pifPct, 50), 0, 100);
+    state.phaseClose1 = clamp(normalizeNumber(state.phaseClose1, 20), 10, 40);
+    state.phaseClose2 = clamp(normalizeNumber(state.phaseClose2, 25), 10, 40);
+    state.phaseClose3 = clamp(normalizeNumber(state.phaseClose3, 28), 10, 40);
+    state.phaseClose4 = clamp(normalizeNumber(state.phaseClose4, 30), 10, 40);
+    state.storyRelation = state.storyRelation || '';
+    state.locked = !!state.locked;
+  }
+
+  function loadState() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') || {};
+    } catch (err) {
+      return {};
+    }
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (err) {}
+  }
+
+  function loadLockedSnapshot() {
+    try {
+      return JSON.parse(localStorage.getItem(SNAPSHOT_KEY) || 'null');
+    } catch (err) {
+      return null;
+    }
+  }
+
+  function saveLockedSnapshot(snapshot) {
+    try {
+      localStorage.setItem(SNAPSHOT_KEY, JSON.stringify(snapshot));
+    } catch (err) {}
+  }
+
+  function clearLockedSnapshot() {
+    try {
+      localStorage.removeItem(SNAPSHOT_KEY);
+    } catch (err) {}
+  }
+
+  function setupConfig() {
+    document.querySelectorAll('.cj-only').forEach(function (node) {
+      node.classList.toggle('cj-only-hidden', !CJ_MODE);
+    });
+
+    var first = document.getElementById('cfgFirstName');
+    if (first) first.textContent = cfg.firstName || 'there';
+
+    var body = document.getElementById('aboutBody');
+    if (body && cfg.aboutParagraphs) {
+      body.innerHTML = cfg.aboutParagraphs.indexOf('<') >= 0 ? cfg.aboutParagraphs : '<p>' + escapeHtml(cfg.aboutParagraphs) + '</p>';
+    }
+
+    var line = document.getElementById('comebackLine');
+    if (line) line.textContent = cfg.comebackLine || '';
+
+    var img = document.getElementById('cjPhoto');
+    var ph = document.getElementById('cjPhotoPh');
+    if (cfg.cjPhotoUrl && String(cfg.cjPhotoUrl).trim()) {
+      img.src = cfg.cjPhotoUrl;
+      img.classList.remove('hidden');
+      ph.classList.add('hidden');
+      img.onerror = function () {
+        img.classList.add('hidden');
+        ph.classList.remove('hidden');
+      };
+    }
+
+    if (cfg.bookingUrl) {
+      document.getElementById('btnBook').href = cfg.bookingUrl;
+      document.getElementById('dockBook').href = cfg.bookingUrl;
+    }
+  }
+
+  function buildChipWalls() {
+    var painMount = document.getElementById('painChipWall');
+    var emotionMount = document.getElementById('emotionChipWall');
+    painOptions.forEach(function (item) {
+      painMount.appendChild(createChip(item, 'pain'));
+    });
+    emotionOptions.forEach(function (item) {
+      emotionMount.appendChild(createChip(item, 'emotion'));
+    });
+  }
+
+  function createChip(label, type) {
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'chip-btn ' + type;
+    button.textContent = label;
+    button.addEventListener('click', function () {
+      var bucket = type === 'pain' ? state.pains : state.emotions;
+      var idx = bucket.indexOf(label);
+      if (idx >= 0) bucket.splice(idx, 1);
+      else bucket.push(label);
+      syncInputsFromState();
+      renderAll();
+    });
+    return button;
+  }
+
+  function buildStoryList() {
+    var list = document.getElementById('storyList');
+    stories.forEach(function (story) {
+      var div = document.createElement('div');
+      div.className = 'story-option';
+      div.setAttribute('data-story', story.id);
+      div.innerHTML = '<strong>' + escapeHtml(story.name) + '</strong><span><strong style="display:inline;color:var(--text);">Who they were:</strong> ' + escapeHtml(story.problem) + '</span><span><strong style="display:inline;color:var(--text);">What changed:</strong> ' + escapeHtml(story.changed) + '</span>';
+      div.addEventListener('click', function () {
+        state.selectedStory = story.id;
+        renderAll();
+      });
+      list.appendChild(div);
+    });
+  }
+
+  function bindEvents() {
+    var inputMap = [
+      'prospectName',
+      'currentRole',
+      'currentMonthlyIncome',
+      'currentWeeklyHours',
+      'currentSchedule',
+      'customPain',
+      'nothingChanges',
+      'escapingFrom',
+      'goalMonthlyIncome',
+      'desiredWeeklyHours',
+      'moneyWhy',
+      'freedomWhy',
+      'lifestyleGoals',
+      'futureTuesday',
+      'offerPrice',
+      'commissionPct',
+      'callsPerDay',
+      'daysPerWeek',
+      'closeRate',
+      'showRate',
+      'pifPct',
+      'phaseClose1',
+      'phaseClose2',
+      'phaseClose3',
+      'phaseClose4',
+      'storyRelation'
+    ];
+
+    inputMap.forEach(function (id) {
+      var el = document.getElementById(id);
+      el.addEventListener('input', function () {
+        state[id] = el.value;
+        if (id === 'pifPct') {
+          state.pifPct = clamp(normalizeNumber(el.value, 50), 0, 100);
+          document.getElementById('pifSlider').value = state.pifPct;
+        }
+        if (id === 'closeRate' || id.indexOf('phaseClose') === 0) {
+          state[id] = clamp(normalizeNumber(el.value, 20), 10, 40);
+        }
+        if (id === 'showRate') {
+          state[id] = clamp(normalizeNumber(el.value, 75), 10, 100);
+        }
+        renderAll();
+      });
+    });
+
+    document.getElementById('pifSlider').addEventListener('input', function (event) {
+      state.pifPct = clamp(normalizeNumber(event.target.value, 50), 0, 100);
+      document.getElementById('pifPct').value = state.pifPct;
+      renderAll();
+    });
+
+    document.querySelectorAll('[data-continue]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var phase = normalizeNumber(button.getAttribute('data-continue'), 1);
+        state.phaseUnlocked = Math.max(state.phaseUnlocked, Math.min(PHASE_COUNT, phase + 1));
+        renderAll();
+        scrollToPhase(state.phaseUnlocked);
+      });
+    });
+
+    document.getElementById('unlockAllBtn').addEventListener('click', function () {
+      state.phaseUnlocked = PHASE_COUNT;
+      renderAll();
+    });
+
+    document.getElementById('resetDataBtn').addEventListener('click', function () {
+      localStorage.removeItem(STORAGE_KEY);
+      state = {};
+      ensureDefaults();
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('clearLockedBtn').addEventListener('click', function () {
+      clearLockedSnapshot();
+      state.locked = false;
+      renderAll();
+    });
+
+    document.getElementById('jumpCurrentBtn').addEventListener('click', function () {
+      scrollToPhase(state.guidedMode ? state.phaseUnlocked : PHASE_COUNT);
+    });
+
+    document.getElementById('guidedModeToggle').addEventListener('change', function (event) {
+      state.guidedMode = event.target.checked;
+      renderAll();
+    });
+
+    document.getElementById('copySummaryBtn').addEventListener('click', function () {
+      var text = buildSummaryText();
+      if (!navigator.clipboard) return;
+      navigator.clipboard.writeText(text);
+    });
+
+    document.getElementById('printPlanBtn').addEventListener('click', function () {
+      window.print();
+    });
+
+    document.getElementById('lockPlanBtn').addEventListener('click', function () {
+      var snapshot = buildSnapshot();
+      saveLockedSnapshot(snapshot);
+      state.locked = true;
+      renderAll();
+    });
+
+    document.getElementById('unlockPlanBtn').addEventListener('click', function () {
+      state.locked = false;
+      renderAll();
+    });
+
+    document.getElementById('duplicatePlaygroundBtn').addEventListener('click', function () {
+      var snapshot = buildSnapshot();
+      state.locked = false;
+      state.phaseUnlocked = PHASE_COUNT;
+      state.offerPrice = snapshot.offerPrice;
+      state.commissionPct = snapshot.commissionPct;
+      state.callsPerDay = snapshot.callsPerDay;
+      state.daysPerWeek = snapshot.daysPerWeek;
+      state.closeRate = snapshot.closeRate;
+      state.showRate = snapshot.showRate;
+      state.pifPct = snapshot.pifPct;
+      state.phaseClose1 = snapshot.phaseClose1;
+      state.phaseClose2 = snapshot.phaseClose2;
+      state.phaseClose3 = snapshot.phaseClose3;
+      state.phaseClose4 = snapshot.phaseClose4;
+      renderAll();
+    });
+
+    document.getElementById('resetPlanBtn').addEventListener('click', function () {
+      clearLockedSnapshot();
+      localStorage.removeItem(STORAGE_KEY);
+      state = {};
+      ensureDefaults();
+      renderAll();
+    });
+  }
+
+  function syncInputsFromState() {
+    [
+      'prospectName',
+      'currentRole',
+      'currentMonthlyIncome',
+      'currentWeeklyHours',
+      'currentSchedule',
+      'customPain',
+      'nothingChanges',
+      'escapingFrom',
+      'goalMonthlyIncome',
+      'desiredWeeklyHours',
+      'moneyWhy',
+      'freedomWhy',
+      'lifestyleGoals',
+      'futureTuesday',
+      'offerPrice',
+      'commissionPct',
+      'callsPerDay',
+      'daysPerWeek',
+      'closeRate',
+      'showRate',
+      'pifPct',
+      'phaseClose1',
+      'phaseClose2',
+      'phaseClose3',
+      'phaseClose4',
+      'storyRelation'
+    ].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && document.activeElement !== el) el.value = state[id] || '';
+    });
+
+    document.getElementById('guidedModeToggle').checked = !!state.guidedMode;
+    document.getElementById('pifSlider').value = clamp(normalizeNumber(state.pifPct, 50), 0, 100);
+
+    document.querySelectorAll('.chip-btn.pain').forEach(function (button) {
+      button.classList.toggle('is-active', state.pains.indexOf(button.textContent) >= 0);
+    });
+    document.querySelectorAll('.chip-btn.emotion').forEach(function (button) {
+      button.classList.toggle('is-active', state.emotions.indexOf(button.textContent) >= 0);
+    });
+    document.querySelectorAll('.story-option').forEach(function (card) {
+      card.classList.toggle('is-selected', card.getAttribute('data-story') === state.selectedStory);
+    });
+  }
+
+  function renderAll() {
+    syncInputsFromState();
+    renderPhaseVisibility();
+    renderProgress();
+    renderCurrentRecap();
+    renderPainRecap();
+    renderFutureRecap();
+    renderGapMath();
+    renderPossibilityMath();
+    renderProjection();
+    renderStory();
+    renderFinalSummary();
+    saveState();
+  }
+
+  function renderPhaseVisibility() {
+    for (var i = 1; i <= PHASE_COUNT; i += 1) {
+      var shell = document.getElementById('phase-shell-' + i);
+      var status = document.getElementById('phase-status-' + i);
+      var visible = !state.guidedMode || i <= state.phaseUnlocked;
+      shell.classList.toggle('is-visible', visible);
+      shell.classList.toggle('is-complete', visible && i < state.phaseUnlocked);
+      shell.classList.toggle('is-current', visible && i === state.phaseUnlocked && state.guidedMode);
+
+      if (!state.guidedMode) {
+        status.textContent = i < PHASE_COUNT ? 'Manual mode' : 'Manual mode';
+        status.classList.add('done');
+      } else if (i < state.phaseUnlocked) {
+        status.textContent = 'Completed';
+        status.classList.add('done');
+      } else if (i === state.phaseUnlocked) {
+        status.textContent = 'Live now';
+        status.classList.add('done');
+      } else {
+        status.textContent = 'Locked until prior phase completes';
+        status.classList.remove('done');
+      }
+    }
+  }
+
+  function renderProgress() {
+    var progress = Math.max(1, Math.round((Math.min(state.phaseUnlocked, PHASE_COUNT) / PHASE_COUNT) * 100));
+    document.getElementById('progressText').textContent = progress + '%';
+    document.getElementById('streakLine').innerHTML = progress >= 100
+      ? 'Your plan is fully loaded - <strong>everything is in one place</strong>'
+      : 'Phase ' + state.phaseUnlocked + ' is currently open - <strong>keep going</strong>';
+
+    var ringFill = document.getElementById('ringFill');
+    ringFill.style.strokeDasharray = String(CIRC);
+    ringFill.style.strokeDashoffset = String(CIRC - ((progress / 100) * CIRC));
+  }
+
+  function renderCurrentRecap() {
+    var name = state.prospectName || 'They';
+    var income = money(state.currentMonthlyIncome);
+    var hours = numberText(state.currentWeeklyHours, 'hours/week');
+    var role = state.currentRole ? ' in ' + state.currentRole : '';
+    var pains = collectPainText();
+    var schedule = cleanText(state.currentSchedule);
+    var text = 'Right now ' + name + ' is making about ' + income + '/month while working ' + hours + role + '.';
+    if (pains) text += ' The biggest things weighing on them are ' + pains + '.';
+    if (schedule) text += ' Their current schedule feels like ' + schedule + '.';
+    document.getElementById('currentRealityRecap').innerHTML = '<span class="recap-kicker">Current reality summary</span>' + text;
+  }
+
+  function renderPainRecap() {
+    var emotions = state.emotions.length ? state.emotions.join(', ') : 'their peace of mind';
+    var consequence = cleanText(state.nothingChanges) || 'the same cycle continuing';
+    var escape = cleanText(state.escapingFrom) || 'staying stuck in the same pattern';
+    var text = 'What I am hearing is this is not just about money. It is costing them ' + emotions + ', and if nothing changes they are worried about ' + consequence + '. More than anything, they are trying to get away from ' + escape + '.';
+    document.getElementById('painRecap').innerHTML = '<span class="recap-kicker">Emotional recap</span>' + text;
+  }
+
+  function renderFutureRecap() {
+    var income = money(state.goalMonthlyIncome);
+    var hours = numberText(state.desiredWeeklyHours, 'hours/week');
+    var moneyWhy = cleanText(state.moneyWhy);
+    var freedomWhy = cleanText(state.freedomWhy);
+    var lifestyle = cleanText(state.lifestyleGoals);
+    var tuesday = cleanText(state.futureTuesday);
+    var text = 'What they want is to make around ' + income + '/month while working closer to ' + hours + '.';
+    if (moneyWhy) text += ' More money matters because ' + moneyWhy + '.';
+    if (freedomWhy) text += ' Freedom matters because ' + freedomWhy + '.';
+    if (lifestyle) text += ' The life they are reaching for looks like ' + lifestyle + '.';
+    if (tuesday) text += ' A normal Tuesday twelve months from now looks like ' + tuesday + '.';
+    document.getElementById('futureRecap').innerHTML = '<span class="recap-kicker">Future vision recap</span>' + text;
+  }
+
+  function renderGapMath() {
+    var currentMonthly = normalizeNumber(state.currentMonthlyIncome, 0);
+    var currentHours = normalizeNumber(state.currentWeeklyHours, 0);
+    var goalMonthly = normalizeNumber(state.goalMonthlyIncome, 0);
+
+    var hourly = currentMonthly > 0 && currentHours > 0 ? currentMonthly / (currentHours * 4) : 0;
+    var requiredWeekly = hourly > 0 && goalMonthly > 0 ? goalMonthly / (hourly * 4) : 0;
+    var extraWeekly = requiredWeekly > 0 ? requiredWeekly - currentHours : 0;
+    var pctIncrease = currentMonthly > 0 && goalMonthly > 0 ? ((goalMonthly - currentMonthly) / currentMonthly) * 100 : 0;
+
+    document.getElementById('gapHourly').textContent = hourly ? money(hourly) : '-';
+    document.getElementById('gapRequiredHours').textContent = requiredWeekly ? round(requiredWeekly, 1) + ' hrs' : '-';
+    document.getElementById('gapExtraHours').textContent = requiredWeekly ? signedHours(extraWeekly) : '-';
+    document.getElementById('gapIncrease').textContent = goalMonthly ? round(pctIncrease, 0) + '%' : '-';
+
+    var text = 'At their current model, they would need current income and future income entered before this section can do its job.';
+    if (hourly && requiredWeekly) {
+      var realism = requiredWeekly > 168
+        ? 'There are only 168 hours in a week, so this is not an effort problem. It is a vehicle problem.'
+        : requiredWeekly > 90
+        ? 'That pushes into an obviously brutal weekly schedule, which makes the current path mathematically weak.'
+        : 'Even if it is technically possible on paper, it is still asking the old vehicle to do something it was not designed to do well.';
+      text = 'At their current model, they would need to work about ' + round(requiredWeekly, 1) + ' hours/week to hit ' + money(goalMonthly) + '/month. That means an extra ' + round(Math.max(extraWeekly, 0), 1) + ' hours/week on top of where they are now. ' + realism;
+    }
+
+    document.getElementById('gapRecap').innerHTML = '<span class="recap-kicker">Gap clarification</span>' + text;
+  }
+
+  // Major math section: conservative HTSA possibility based on calls, close rate, commission, and cash collection mix.
+  function renderPossibilityMath() {
+    var inputs = getOpportunityInputs();
+    var weeklyScheduledCalls = inputs.callsPerDay * inputs.daysPerWeek;
+    var weeklyShownCalls = weeklyScheduledCalls * inputs.showRate;
+    var weeklyDeals = weeklyShownCalls * inputs.closeRate;
+    var commissionPerDeal = inputs.offerPrice * inputs.commissionPct;
+    var weeklyPifDeals = weeklyDeals * inputs.pifPct;
+    var weeklyFourDeals = weeklyDeals * inputs.fourPayPct;
+    var weeklyPifCash = weeklyPifDeals * commissionPerDeal;
+    var weeklyFourCollected = weeklyFourDeals * (commissionPerDeal / 4);
+    var weeklyCommission = weeklyPifCash + weeklyFourCollected;
+    var monthlyCommission = weeklyCommission * 4;
+    var monthlyResidualFromCurrent = weeklyFourDeals * 4 * (commissionPerDeal / 4);
+
+    document.getElementById('pifPctReadout').textContent = round(inputs.pifPct * 100, 0) + '%';
+    document.getElementById('fourPayPctReadout').textContent = round(inputs.fourPayPct * 100, 0) + '%';
+    document.getElementById('htsaWeeklyCalls').textContent = round(weeklyShownCalls, 2);
+    document.getElementById('htsaWeeklyDeals').textContent = round(weeklyDeals, 2);
+    document.getElementById('htsaWeeklyCommission').textContent = money(weeklyCommission);
+    document.getElementById('htsaMonthlyCommission').textContent = money(monthlyCommission);
+    document.getElementById('htsaPifCash').textContent = money(weeklyPifCash * 4);
+    document.getElementById('htsaResidual').textContent = money(monthlyResidualFromCurrent);
+
+    var text = 'At ' + round(inputs.callsPerDay, 0) + ' scheduled calls/day over ' + round(inputs.daysPerWeek, 0) + ' days/week and a ' + round(inputs.showRate * 100, 0) + '% show rate, that creates about ' + round(weeklyShownCalls, 2) + ' real conversations/week. From there, a ' + round(inputs.closeRate * 100, 0) + '% close rate creates about ' + round(weeklyDeals, 2) + ' deals/week. With a ' + round(inputs.commissionPct * 100, 0) + '% commission on a ' + money(inputs.offerPrice) + ' offer and a ' + round(inputs.pifPct * 100, 0) + '/' + round(inputs.fourPayPct * 100, 0) + ' PIF to 4-pay mix, the model lands around ' + money(monthlyCommission) + '/month in collected commission on a conservative basis.';
+    document.getElementById('htsaRecap').innerHTML = '<span class="recap-kicker">Conservative possibility</span>' + text;
+  }
+
+  // Projection section: simulates 12 months so residual 4-pay commissions stack across months instead of resetting every quarter.
+  function renderProjection() {
+    var inputs = getOpportunityInputs();
+    var rates = [
+      clamp(normalizeNumber(state.phaseClose1, 20), 10, 40) / 100,
+      clamp(normalizeNumber(state.phaseClose2, 25), 10, 40) / 100,
+      clamp(normalizeNumber(state.phaseClose3, 28), 10, 40) / 100,
+      clamp(normalizeNumber(state.phaseClose4, 30), 10, 40) / 100
+    ];
+    var monthlyScheduledCalls = inputs.callsPerDay * inputs.daysPerWeek * 4;
+    var monthlyShownCalls = monthlyScheduledCalls * inputs.showRate;
+    var commissionPerDeal = inputs.offerPrice * inputs.commissionPct;
+    var residualQueue = [];
+    var months = [];
+    var quarterRows = [];
+    var totalIncome = 0;
+    var totalDeals = 0;
+    var totalPifCommission = 0;
+    var totalResidualCommission = 0;
+    var totalClose = 0;
+
+    for (var month = 1; month <= 12; month += 1) {
+      var phaseIndex = Math.floor((month - 1) / 3);
+      var closeRate = rates[phaseIndex];
+      var monthlyDeals = monthlyShownCalls * closeRate;
+      var pifDeals = monthlyDeals * inputs.pifPct;
+      var fourDeals = monthlyDeals * inputs.fourPayPct;
+      var pifCommission = pifDeals * commissionPerDeal;
+      var currentFourCollected = fourDeals * (commissionPerDeal / 4);
+      var priorResiduals = sumResiduals(residualQueue);
+      var totalMonth = pifCommission + currentFourCollected + priorResiduals;
+
+      months.push({
+        month: month,
+        phaseIndex: phaseIndex,
+        closeRate: closeRate,
+        deals: monthlyDeals,
+        pifCommission: pifCommission,
+        fourPayCurrent: currentFourCollected,
+        priorResiduals: priorResiduals,
+        total: totalMonth
+      });
+
+      for (var i = residualQueue.length - 1; i >= 0; i -= 1) {
+        residualQueue[i].remaining -= 1;
+        if (residualQueue[i].remaining <= 0) residualQueue.splice(i, 1);
+      }
+      residualQueue.push({ amount: currentFourCollected, remaining: 3 });
+
+      totalIncome += totalMonth;
+      totalDeals += monthlyDeals;
+      totalPifCommission += pifCommission;
+      totalResidualCommission += currentFourCollected + priorResiduals;
+      totalClose += closeRate;
+    }
+
+    for (var p = 0; p < 4; p += 1) {
+      var start = p * 3;
+      var chunk = months.slice(start, start + 3);
+      var phaseTotal = chunk.reduce(function (sum, item) { return sum + item.total; }, 0);
+      var avgDeals = chunk.reduce(function (sum, item) { return sum + item.deals; }, 0) / 3;
+      var avgPif = chunk.reduce(function (sum, item) { return sum + item.pifCommission; }, 0) / 3;
+      var avgFour = chunk.reduce(function (sum, item) { return sum + item.fourPayCurrent; }, 0) / 3;
+      var avgResidual = chunk.reduce(function (sum, item) { return sum + item.priorResiduals; }, 0) / 3;
+      var avgTotal = chunk.reduce(function (sum, item) { return sum + item.total; }, 0) / 3;
+      quarterRows.push({
+        label: p === 0 ? 'Months 1-3' : p === 1 ? 'Months 4-6' : p === 2 ? 'Months 7-9' : 'Months 10-12',
+        closeRate: rates[p],
+        monthlyDeals: avgDeals,
+        pifCommission: avgPif,
+        fourPayCurrent: avgFour,
+        priorResiduals: avgResidual,
+        total: avgTotal,
+        quarterTotal: phaseTotal
+      });
+    }
+
+    var body = document.getElementById('projectionTableBody');
+    body.innerHTML = '';
+    quarterRows.forEach(function (row) {
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + row.label + '</td><td>' + round(row.closeRate * 100, 0) + '%</td><td>' + round(row.monthlyDeals, 2) + '</td><td>' + money(row.pifCommission) + '</td><td>' + money(row.fourPayCurrent) + '</td><td>' + money(row.priorResiduals) + '</td><td>' + money(row.total) + '</td><td>' + money(row.quarterTotal) + '</td>';
+      body.appendChild(tr);
+    });
+
+    document.getElementById('yearTotal').textContent = money(totalIncome);
+    document.getElementById('yearAvgMonthly').textContent = money(totalIncome / 12);
+    document.getElementById('yearAvgWeekly').textContent = money(totalIncome / 52);
+    document.getElementById('yearAvgClose').textContent = round((totalClose / 12) * 100, 1) + '%';
+    document.getElementById('yearDeals').textContent = round(totalDeals, 1);
+    document.getElementById('yearCalls').textContent = round(monthlyShownCalls * 12, 0);
+    document.getElementById('yearPifTotal').textContent = money(totalPifCommission);
+    document.getElementById('yearResidualTotal').textContent = money(totalResidualCommission);
+
+    renderChart(months);
+    state._projection = {
+      months: months,
+      quarterRows: quarterRows,
+      totalIncome: totalIncome,
+      avgMonthly: totalIncome / 12,
+      avgWeekly: totalIncome / 52,
+      avgClose: totalClose / 12,
+      totalDeals: totalDeals,
+      totalCalls: monthlyShownCalls * 12,
+      totalPifCommission: totalPifCommission,
+      totalResidualCommission: totalResidualCommission
+    };
+  }
+
+  function renderChart(months) {
+    var svg = document.getElementById('incomeChart');
+    var width = 520;
+    var height = 250;
+    var padding = 28;
+    var values = months.map(function (m) { return m.total; });
+    var maxVal = Math.max.apply(null, values.concat([1]));
+    var minVal = Math.min.apply(null, values.concat([0]));
+    var path = [];
+
+    svg.innerHTML = '';
+    svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+
+    var bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    bg.setAttribute('x', '0');
+    bg.setAttribute('y', '0');
+    bg.setAttribute('width', width);
+    bg.setAttribute('height', height);
+    bg.setAttribute('rx', '18');
+    bg.setAttribute('fill', 'rgba(255,255,255,0.02)');
+    svg.appendChild(bg);
+
+    for (var i = 0; i < 4; i += 1) {
+      var y = padding + ((height - padding * 2) / 3) * i;
+      var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', padding);
+      line.setAttribute('x2', width - padding);
+      line.setAttribute('y1', y);
+      line.setAttribute('y2', y);
+      line.setAttribute('stroke', 'rgba(255,255,255,0.08)');
+      line.setAttribute('stroke-width', '1');
+      svg.appendChild(line);
+    }
+
+    months.forEach(function (month, index) {
+      var x = padding + (index * ((width - padding * 2) / 11));
+      var normalized = maxVal === minVal ? 0.5 : (month.total - minVal) / (maxVal - minVal);
+      var y = height - padding - normalized * (height - padding * 2);
+      path.push((index === 0 ? 'M' : 'L') + x + ' ' + y);
+
+      var dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      dot.setAttribute('cx', x);
+      dot.setAttribute('cy', y);
+      dot.setAttribute('r', index === months.length - 1 ? '5.5' : '4');
+      dot.setAttribute('fill', index === months.length - 1 ? '#f0c060' : '#00c97a');
+      svg.appendChild(dot);
+
+      var label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      label.setAttribute('x', x);
+      label.setAttribute('y', height - 10);
+      label.setAttribute('fill', 'rgba(232,240,255,0.58)');
+      label.setAttribute('font-size', '10');
+      label.setAttribute('font-family', 'DM Mono, monospace');
+      label.setAttribute('text-anchor', 'middle');
+      label.textContent = month.month;
+      svg.appendChild(label);
+    });
+
+    var area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    area.setAttribute('d', path.join(' ') + ' L ' + (width - padding) + ' ' + (height - padding) + ' L ' + padding + ' ' + (height - padding) + ' Z');
+    area.setAttribute('fill', 'rgba(0,201,122,0.10)');
+    svg.appendChild(area);
+
+    var linePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    linePath.setAttribute('d', path.join(' '));
+    linePath.setAttribute('fill', 'none');
+    linePath.setAttribute('stroke', '#00c97a');
+    linePath.setAttribute('stroke-width', '3');
+    linePath.setAttribute('stroke-linecap', 'round');
+    linePath.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(linePath);
+
+    document.getElementById('chartMinLabel').textContent = 'Month 1 · ' + money(values[0] || 0);
+    document.getElementById('chartPeakLabel').textContent = 'Month 12 · ' + money(values[11] || 0);
+  }
+
+  function renderStory() {
+    var story = stories.find(function (item) { return item.id === state.selectedStory; });
+    document.getElementById('selectedStoryName').textContent = story ? story.name : 'Choose a story';
+    document.getElementById('selectedStorySummary').innerHTML = story
+      ? '<strong>Who they were:</strong> ' + escapeHtml(story.problem) + '<br><br><strong>What changed:</strong> ' + escapeHtml(story.changed) + '<br><br><strong>Why it relates:</strong> ' + escapeHtml(cleanText(state.storyRelation) || story.relation)
+      : 'Once selected, this becomes the proof block CJ can position at the right emotional moment in the call.';
+  }
+
+  function renderFinalSummary() {
+    var locked = loadLockedSnapshot();
+    var finalHtml = buildSummaryHtml();
+    document.getElementById('finalPlanSummary').innerHTML = finalHtml;
+
+    var lockedCard = document.getElementById('lockedPlanCard');
+    if (locked) {
+      lockedCard.classList.remove('hidden');
+      document.getElementById('lockedPlanOutput').innerHTML = locked.html;
+    } else {
+      lockedCard.classList.add('hidden');
+      document.getElementById('lockedPlanOutput').innerHTML = '';
+    }
+  }
+
+  function buildSummaryHtml() {
+    var story = stories.find(function (item) { return item.id === state.selectedStory; });
+    var projection = state._projection || {};
+    return [
+      '<div class="summary-grid">',
+      '<div class="mini-card"><span class="mini-kicker">Prospect</span><h4>' + escapeHtml(state.prospectName || 'Prospect') + '</h4><p>' + escapeHtml(state.currentRole || 'Current role to be discussed live') + '</p></div>',
+      '<div class="mini-card"><span class="mini-kicker">Current reality</span><h4>' + money(state.currentMonthlyIncome) + '/month</h4><p>' + numberText(state.currentWeeklyHours, 'hours/week') + ' in the current vehicle.</p></div>',
+      '<div class="mini-card"><span class="mini-kicker">Top pain points</span><h4>' + escapeHtml(collectPainText() || 'To be confirmed live') + '</h4><p>' + escapeHtml(cleanText(state.customPain) || 'No custom pain added yet.') + '</p></div>',
+      '<div class="mini-card"><span class="mini-kicker">Emotional cost</span><h4>' + escapeHtml(state.emotions.join(', ') || 'To be clarified') + '</h4><p>' + escapeHtml(cleanText(state.nothingChanges) || 'Risk of staying the same still needs to be discussed.') + '</p></div>',
+      '<div class="mini-card"><span class="mini-kicker">Goal income</span><h4>' + money(state.goalMonthlyIncome) + '/month</h4><p>Target schedule: ' + numberText(state.desiredWeeklyHours, 'hours/week') + '.</p></div>',
+      '<div class="mini-card"><span class="mini-kicker">Desired lifestyle</span><h4>' + escapeHtml(cleanText(state.lifestyleGoals) || 'To be clarified live') + '</h4><p>' + escapeHtml(cleanText(state.futureTuesday) || 'Normal Tuesday vision not yet entered.') + '</p></div>',
+      '<div class="mini-card"><span class="mini-kicker">Current path math</span><h4>' + document.getElementById('gapRequiredHours').textContent + '</h4><p>' + stripKicker(document.getElementById('gapRecap').textContent) + '</p></div>',
+      '<div class="mini-card"><span class="mini-kicker">HTSA projection</span><h4>' + document.getElementById('htsaMonthlyCommission').textContent + '/month</h4><p>' + stripKicker(document.getElementById('htsaRecap').textContent) + '</p></div>',
+      '<div class="mini-card"><span class="mini-kicker">First-year average</span><h4>' + money(projection.avgMonthly || 0) + '/month</h4><p>Year-one total: ' + money(projection.totalIncome || 0) + ' with average close rate of ' + round((projection.avgClose || 0) * 100, 1) + '%.</p></div>',
+      '<div class="mini-card"><span class="mini-kicker">Chosen story</span><h4>' + escapeHtml(story ? story.name : 'No story selected yet') + '</h4><p>' + escapeHtml(cleanText(state.storyRelation) || (story ? story.relation : 'Select the proof block that best fits the prospect.')) + '</p></div>',
+      '<div class="mini-card"><span class="mini-kicker">Why now</span><h4>' + escapeHtml(cleanText(state.escapingFrom) || 'Why now still needs to be clarified') + '</h4><p>' + escapeHtml(cleanText(state.moneyWhy) || 'The money reason still needs to be clarified.') + '</p></div>',
+      '<div class="mini-card"><span class="mini-kicker">Next step CTA</span><h4>Enrollment / invoice / follow-up</h4><p>Use this locked plan beside the enrollment page or invoice so they can revisit the exact math and reasons that were established live.</p></div>',
+      '</div>'
+    ].join('');
+  }
+
+  function buildSummaryText() {
+    var projection = state._projection || {};
+    var story = stories.find(function (item) { return item.id === state.selectedStory; });
+    return [
+      'HTSA Customized Game Plan',
+      '',
+      'Prospect: ' + (state.prospectName || 'Prospect'),
+      'Current role: ' + (state.currentRole || 'Not entered'),
+      'Current reality: ' + money(state.currentMonthlyIncome) + '/month working ' + numberText(state.currentWeeklyHours, 'hours/week'),
+      'Top pain points: ' + (collectPainText() || 'Not entered'),
+      'Emotional cost: ' + (state.emotions.join(', ') || 'Not entered'),
+      'If nothing changes: ' + (cleanText(state.nothingChanges) || 'Not entered'),
+      'Goal income: ' + money(state.goalMonthlyIncome) + '/month',
+      'Desired hours: ' + numberText(state.desiredWeeklyHours, 'hours/week'),
+      'Desired lifestyle: ' + (cleanText(state.lifestyleGoals) || 'Not entered'),
+      'Current path math: ' + stripKicker(document.getElementById('gapRecap').textContent),
+      'HTSA possibility: ' + stripKicker(document.getElementById('htsaRecap').textContent),
+      'First-year average monthly income: ' + money(projection.avgMonthly || 0),
+      'First-year total commissions: ' + money(projection.totalIncome || 0),
+      'Chosen success story: ' + (story ? story.name : 'Not selected'),
+      'Why it relates: ' + (cleanText(state.storyRelation) || (story ? story.relation : 'Not entered')),
+      'Why now: ' + (cleanText(state.escapingFrom) || 'Not entered'),
+      'Next step: Review enrollment options and act while the plan is still fresh.'
+    ].join('\n');
+  }
+
+  function buildSnapshot() {
+    return {
+      html: buildSummaryHtml(),
+      text: buildSummaryText(),
+      offerPrice: normalizeNumber(state.offerPrice, 6000),
+      commissionPct: normalizeNumber(state.commissionPct, 10),
+      callsPerDay: normalizeNumber(state.callsPerDay, 3),
+      daysPerWeek: normalizeNumber(state.daysPerWeek, 5),
+      closeRate: clamp(normalizeNumber(state.closeRate, 20), 10, 40),
+      showRate: clamp(normalizeNumber(state.showRate, 75), 10, 100),
+      pifPct: clamp(normalizeNumber(state.pifPct, 50), 0, 100),
+      phaseClose1: clamp(normalizeNumber(state.phaseClose1, 20), 10, 40),
+      phaseClose2: clamp(normalizeNumber(state.phaseClose2, 25), 10, 40),
+      phaseClose3: clamp(normalizeNumber(state.phaseClose3, 28), 10, 40),
+      phaseClose4: clamp(normalizeNumber(state.phaseClose4, 30), 10, 40)
+    };
+  }
+
+  function getOpportunityInputs() {
+    return {
+      offerPrice: Math.max(0, normalizeNumber(state.offerPrice, 6000)),
+      commissionPct: clamp(normalizeNumber(state.commissionPct, 10), 0, 100) / 100,
+      callsPerDay: Math.max(0, normalizeNumber(state.callsPerDay, 3)),
+      daysPerWeek: Math.max(0, normalizeNumber(state.daysPerWeek, 5)),
+      closeRate: clamp(normalizeNumber(state.closeRate, 20), 10, 40) / 100,
+      showRate: clamp(normalizeNumber(state.showRate, 75), 10, 100) / 100,
+      pifPct: clamp(normalizeNumber(state.pifPct, 50), 0, 100) / 100,
+      fourPayPct: 1 - (clamp(normalizeNumber(state.pifPct, 50), 0, 100) / 100)
+    };
+  }
+
+  function collectPainText() {
+    var parts = state.pains.slice();
+    if (cleanText(state.customPain)) parts.push(cleanText(state.customPain));
+    return parts.join(', ');
+  }
+
+  function scrollToPhase(phase) {
+    var target = document.getElementById('phase-shell-' + phase);
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function initRevealObserver() {
+    REVEAL_OBSERVER = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      });
+    }, { threshold: 0.14 });
+    document.querySelectorAll('[data-reveal]').forEach(function (node) { REVEAL_OBSERVER.observe(node); });
+  }
+
+  function sumResiduals(queue) {
+    return queue.reduce(function (sum, item) { return sum + item.amount; }, 0);
+  }
+
+  function normalizeNumber(value, fallback) {
+    var num = parseFloat(value);
+    return isFinite(num) ? num : fallback;
+  }
+
+  function money(value) {
+    var amount = normalizeNumber(value, 0);
+    return '$' + Math.round(amount).toLocaleString();
+  }
+
+  function round(value, digits) {
+    var factor = Math.pow(10, digits || 0);
+    return (Math.round(normalizeNumber(value, 0) * factor) / factor).toLocaleString(undefined, {
+      minimumFractionDigits: digits ? Math.min(digits, 2) : 0,
+      maximumFractionDigits: digits ? Math.min(digits, 2) : 0
+    });
+  }
+
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+
+  function escapeHtml(text) {
+    var div = document.createElement('div');
+    div.textContent = text || '';
+    return div.innerHTML;
+  }
+
+  function cleanText(text) {
+    return String(text || '').trim();
+  }
+
+  function signedHours(value) {
+    var num = normalizeNumber(value, 0);
+    return (num > 0 ? '+' : '') + round(num, 1) + ' hrs';
+  }
+
+  function numberText(value, suffix) {
+    var num = normalizeNumber(value, 0);
+    return num ? round(num, 0) + ' ' + suffix : 'not entered';
+  }
+
+  function stripKicker(text) {
+    return String(text || '').replace(/^[^\n]*?(summary|recap|clarification|possibility)\s*/i, '').trim();
+  }
+})();
+</script>
+</body>
+</html>
