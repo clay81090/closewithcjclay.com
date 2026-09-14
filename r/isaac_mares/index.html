@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a1628">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://closewithcjclay.com/r/[SLUG]/">
+<meta property="og:url" content="https://closewithcjclay.com/r/isaac_mares/">
 <meta property="og:title" content="Before our call — CJ Clay · HTSA">
 <meta property="og:description" content="One short clip worth watching before we talk. Not homework.">
 <meta property="og:image" content="https://closewithcjclay.com/r/og-precall.jpg">
@@ -241,6 +241,8 @@ details[open] .chev{transform:rotate(180deg)}
 .proof-square-media{width:100%;aspect-ratio:16/9;border:0;background:#0a1628}
 .proof-square-cta{display:block;margin:0 13px 13px;padding:10px 12px;border-radius:9px;background:var(--navy);
   color:#fff;font-size:12px;font-weight:700;text-align:center;text-decoration:none}
+button.proof-square-media,button.proof-square-cta{font-family:inherit;cursor:pointer}
+button.proof-square-cta{width:calc(100% - 26px);border:0}
 .precall-trust-bar{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin:0 0 10px;
   padding:16px 18px;border:2px solid var(--green);border-radius:12px;
   background:linear-gradient(145deg,#0a1628,#163056);color:#d7dee8;font-size:16px;font-weight:700;
@@ -253,6 +255,7 @@ details[open] .chev{transform:rotate(180deg)}
   background:linear-gradient(135deg,rgba(97,227,139,.1),#edf5ff);color:var(--navy);font-size:15px;font-weight:800;
   text-align:center;text-decoration:none;box-shadow:0 0 0 3px rgba(0,201,122,.08)}
 .precall-link-row:hover{border-color:var(--green);background:rgba(97,227,139,.16)}
+button.precall-link-row{width:100%;font-family:inherit;cursor:pointer}
 .precall-more{margin:0 0 8px;border:2px solid rgba(10,22,40,.12);border-radius:12px;background:#f7f9fc}
 .precall-more>summary{cursor:pointer;list-style:none;padding:13px 16px;color:var(--navy);font-size:15px;
   font-weight:800;text-align:center}
@@ -365,6 +368,14 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
 .media-sheet .sheet-body{padding:0;max-height:min(70dvh,560px);overflow:auto;background:#0a1628}
 .media-frame{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
 .media-frame--doc{aspect-ratio:auto;min-height:min(70dvh,560px);height:min(70dvh,560px);background:#fff}
+.book-viewer{padding:20px;background:#fff;color:var(--text)}
+.book-viewer img{display:block;width:100%;border-radius:10px}
+.book-viewer h3{margin:18px 0 4px;color:var(--navy);font-size:20px;line-height:1.25;text-transform:none;letter-spacing:0}
+.book-viewer p{margin:8px 0;color:var(--muted)}
+.book-meta{margin:12px 0;padding:12px;border-radius:10px;background:var(--grey-light);color:var(--navy);font-weight:700}
+.book-viewer ul{margin:12px 0;padding-left:20px}
+.book-amazon{display:flex;min-height:48px;align-items:center;justify-content:center;margin-top:16px;padding:12px 16px;
+  border-radius:10px;background:#ffca28;color:#111820;font-weight:800;text-decoration:none}
 .media-scroll{width:100%;max-height:min(70dvh,560px);overflow:auto;-webkit-overflow-scrolling:touch;background:#111;padding:0}
 .media-scroll img,.media-scroll video{display:block;width:100%;height:auto;margin:0}
 .media-sheet--wide{width:min(920px,calc(100% - 12px))}
@@ -530,7 +541,7 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
   </div>
   </section>
 
-<section class="close-section">
+  <section class="close-section">
     <h2 id="closeTitle">See you then.</h2>
     <p id="closeCopy">Come with your real situation and your real questions. I'd rather have a straight
       conversation than a polished one.</p>
@@ -603,14 +614,14 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
    booked:true is the default. Only set false if CJ says they still need to schedule.
    ============================================================ */
 const GUEST = {
-  firstName:  "[FIRST_NAME]",
-  fullName:   "[FULL_NAME]",
-  email:      "[EMAIL]",
-  phone:      "[PHONE_E164]",
-  slug:       "[SLUG]",
+  firstName:  "Isaac",
+  fullName:   "Isaac Mares",
+  email:      "isaacmares34@yahoo.com",
+  phone:      "+15056108659",
+  slug:       "isaac_mares",
   booked:     true,
-  callLabel:  "[DAY], [DATE] · [TIME] EST",
-  confirmDay: "[DAY]",
+  callLabel:  "Monday, Sept 14 · 10:00 AM EST",
+  confirmDay: "Monday",
   bookingUrl: "https://meetings.hubspot.com/charles660/cj"
 };
 const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
@@ -712,7 +723,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   if (booked) el("ctaNote").textContent =
     "You already have the invite. One tap just tells me you saw this — the clip is optional.";
 
-
   /* ---------- the clip: play + watched signals ---------- */
   const clip = el("clip");
   let played = false, watched = false;
@@ -796,6 +806,23 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       v.autoplay = true;
       wrap.appendChild(v);
       mediaBody.appendChild(wrap);
+    } else if (kind === "book") {
+      const wrap = document.createElement("div");
+      wrap.className = "book-viewer";
+      wrap.innerHTML = '<img src="/media/chad-aleo-book-banner.png" alt="The Book on High Ticket Sales by Chad Aleo">' +
+        '<h3>The Book on High Ticket Sales</h3>' +
+        '<p><b>Chad Aleo</b> · The Ultimate Guide to Making Millions Through Remote Selling</p>' +
+        '<div class="book-meta">4.8 out of 5 stars · 363 ratings · Paperback · 161 pages · $12.99</div>' +
+        '<p>A practical guide to building a career in remote high ticket sales from the founder of High Ticket Sales Academy.</p>' +
+        '<ul><li>Sell the way people want to buy</li><li>Master objections before they come up</li><li>Find and land legitimate high ticket sales roles</li><li>Build consistency in a one call close environment</li></ul>';
+      const link = document.createElement("a");
+      link.className = "book-amazon";
+      link.href = payload;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "View the book on Amazon";
+      wrap.appendChild(link);
+      mediaBody.appendChild(wrap);
     } else if (kind === "site") {
       const wrap = document.createElement("div");
       wrap.style.cssText = "padding:22px 20px;background:#fff;color:#17243b;font-size:15px;line-height:1.55";
@@ -817,6 +844,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       if (kind === "yt") openMedia("yt", btn.dataset.id, btn.dataset.title);
       else if (kind === "img") openMedia("img", btn.dataset.src, btn.dataset.title);
       else if (kind === "video") openMedia("video", btn.dataset.src, btn.dataset.title);
+      else if (kind === "book") openMedia("book", btn.dataset.url, btn.dataset.title);
       else if (kind === "site") openMedia("site", btn.dataset.url, btn.dataset.title);
       else openMedia("doc", btn.dataset.url, btn.dataset.title);
     });
