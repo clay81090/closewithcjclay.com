@@ -426,7 +426,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1789169267 -->
+<!-- close-build:1789417589 -->
 </head>
 <body>
 <main class="page">
@@ -1008,7 +1008,7 @@ a{color:inherit}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1789417484
+   close-build:1789417589
    ============================================================ */
 const BUYER = {
   firstName: "Toma",
@@ -1149,8 +1149,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("clarityAmt").textContent  = O.clarity.amount;
   el("clarityUnit").textContent = O.clarity.unit;
   el("clarityNote").textContent = O.clarity.note;
-  el("stickySub").textContent = "Paid in full · " + O.pif.amount;
-
   const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
     plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
@@ -1163,6 +1161,17 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   Object.keys(NODE).forEach(function(k){ if (show.indexOf(k) === -1) NODE[k].remove(); });
   show.forEach(function(k){ if (NODE[k] && NODE[k].parentNode) host.appendChild(NODE[k]); });
   if (NODE.clarity && NODE.clarity.parentNode) NODE.clarity.hidden = false;
+
+  // Sticky label matches the first visible option (ClarityPay-only for Toma).
+  if (show.length === 1 && show[0] === "clarity") {
+    el("stickySub").textContent = "ClarityPay · " + O.clarity.amount + "/mo";
+  } else if (show.indexOf("pif") !== -1) {
+    el("stickySub").textContent = "Paid in full · " + O.pif.amount;
+  } else if (show[0] && PLANS[show[0]]) {
+    el("stickySub").textContent = PLANS[show[0]].name + " · " + PLANS[show[0]].amt;
+  } else {
+    el("stickySub").textContent = "Paid in full · " + O.pif.amount;
+  }
 
   if (CUSTOM_OFFER) {
     const c = el("planCustom");
