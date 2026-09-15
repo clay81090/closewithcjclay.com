@@ -451,12 +451,13 @@ a{color:inherit}
   color:#fff;font-size:12px;font-weight:700;text-align:center;text-decoration:none}
 button.proof-square-media,button.proof-square-cta{font-family:inherit;cursor:pointer}
 button.proof-square-cta{width:calc(100% - 26px);border:0}
-.precall-trust-bar{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin:0 0 10px;
+.precall-trust-bar,.precall-top20-bar{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin:0 0 10px;
   padding:16px 18px;border:2px solid var(--green-strong);border-radius:12px;
   background:linear-gradient(145deg,#0a1628,#163056);color:#d7dee8;font-size:16px;font-weight:700;
   letter-spacing:.02em;text-align:center;text-decoration:none;box-shadow:0 8px 22px rgba(10,22,40,.16);
   font-family:inherit;cursor:pointer;appearance:none;-webkit-appearance:none}
-.precall-trust-bar:hover,.precall-trust-bar:focus-visible{color:#fff;border-color:#61e38b;outline:none}
+.precall-trust-bar:hover,.precall-trust-bar:focus-visible,
+.precall-top20-bar:hover,.precall-top20-bar:focus-visible{color:#fff;border-color:#61e38b;outline:none}
 .precall-trust-stars{color:#f5c518;font-size:22px;letter-spacing:3px;line-height:1;
   text-shadow:0 1px 2px rgba(0,0,0,.35),0 0 10px rgba(245,197,24,.35)}
 .res-trust-hint{margin-left:6px;color:var(--green);font-size:13px;font-weight:700}
@@ -467,7 +468,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1789432635 -->
+<!-- close-build:1789433117 -->
 </head>
 <body>
 <main class="page">
@@ -643,9 +644,20 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
   <!-- Visible proof (precall-style) + Trustpilot + More proof dropdown -->
   <section class="proof-visible" aria-labelledby="proofTitle">
     <div class="cj-resources-kicker">If you want to check out more...</div>
-    <h2 id="proofTitle">Employer proof, the Top 20, and a fresh member perspective.</h2>
-    <p class="section-lede">Taylor Conroy, the Top 20 companies list, then Taylor Decourcey. That is enough context to decide with confidence.</p>
+    <h2 id="proofTitle">Placement proof, employer proof, and a fresh member perspective.</h2>
+    <p class="section-lede">Aug 18 placements, Taylor Conroy, then Taylor Decourcey. That is enough context to decide with confidence.</p>
     <div class="proof-squares">
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">Must watch · Aug 18</div>
+          <h3>This Week at HTSA — Aug 18</h3>
+          <p>Four members on our live group call talking about getting placed. Every one had more than one offer.</p>
+        </div>
+        <video class="proof-square-media" controls playsinline preload="metadata" poster="/media/htsa-clip-poster.jpg" title="This Week at HTSA — Aug 18 placements">
+          <source src="/media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
+        </video>
+        <button type="button" class="proof-square-cta" data-media="video" data-src="/media/this-week-at-htsa-2026-08-18.mp4" data-title="This Week at HTSA — Aug 18 placements">Play here</button>
+      </article>
       <article class="proof-square">
         <div class="proof-square-copy">
           <div class="proof-square-kicker">Employer-side proof</div>
@@ -657,34 +669,23 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
       </article>
       <article class="proof-square">
         <div class="proof-square-copy">
-          <div class="proof-square-kicker">Industry landscape</div>
-          <h3>Top 20 Companies in HTS</h3>
-          <p>Where HTSA sits in the market. Open the PDF here without leaving this page.</p>
-        </div>
-        <button type="button" class="proof-square-media proof-square-site" data-media="doc" data-url="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" data-title="Top 20 Companies in High Ticket Sales">
-          <span class="proof-square-site-kicker">PDF preview</span>
-          <span class="proof-square-site-name">Top 20 Companies</span>
-          <span class="proof-square-site-url">High Ticket Sales</span>
-        </button>
-        <button type="button" class="proof-square-cta" data-media="doc" data-url="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" data-title="Top 20 Companies in High Ticket Sales">Open here</button>
-      </article>
-      <article class="proof-square">
-        <div class="proof-square-copy">
           <div class="proof-square-kicker">Fresh perspective</div>
           <h3>Taylor Decourcey</h3>
           <p>Newer member. A real look at the first few months after certification.</p>
         </div>
-        <button type="button" class="proof-square-media proof-square-site" data-media="video" data-src="/media/taylor-decoursey-testimonial.mp4" data-title="Taylor Decourcey — newer member perspective">
-          <span class="proof-square-site-kicker">Member video</span>
-          <span class="proof-square-site-name">Taylor Decourcey</span>
-          <span class="proof-square-site-url">Play on this page</span>
-        </button>
+        <video class="proof-square-media" controls playsinline preload="metadata" poster="/media/taylor-decoursey-poster.jpg" title="Taylor Decourcey — newer member perspective">
+          <source src="/media/taylor-decoursey-testimonial.mp4" type="video/mp4">
+        </video>
         <button type="button" class="proof-square-cta" data-media="video" data-src="/media/taylor-decoursey-testimonial.mp4" data-title="Taylor Decourcey — newer member perspective">Play here</button>
       </article>
     </div>
     <button type="button" class="precall-trust-bar res-trust-top" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5" aria-label="Trustpilot Reviews, 4.9 out of 5, opens on this page">
       <span class="precall-trust-stars" aria-hidden="true">★★★★★</span>
       <span>Trustpilot Reviews, 4.9 out of 5</span>
+      <span class="res-trust-hint">Opens here ▸</span>
+    </button>
+    <button type="button" class="precall-top20-bar" data-media="doc" data-url="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" data-title="Top 20 Companies in High Ticket Sales" aria-label="Top 20 Companies In HTS, opens on this page">
+      <span>Top 20 Companies In HTS</span>
       <span class="res-trust-hint">Opens here ▸</span>
     </button>
   <div class="res-wrap" style="margin:10px 0 0">
@@ -697,7 +698,6 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
         <div class="res-group">
           <div class="res-group-label">More from our network</div>
           <button type="button" class="res-btn" data-media="yt" data-id="eLAWEwE7pl4" data-title="Meet Chad — CEO &amp; Founder at HTSA"><span>Meet Chad — CEO &amp; Founder at HTSA<small>YouTube · plays here</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="video" data-src="/media/this-week-at-htsa-2026-08-18.mp4" data-title="This Week at HTSA — Aug 18 placements"><span>This Week at HTSA — Aug 18<small>Live call placements · plays here</small></span><span class="chev">▸</span></button>
         </div>
         <div class="res-group">
           <div class="res-group-label">Member testimonials</div>
@@ -1057,7 +1057,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1789432635
+   close-build:1789433117
    ============================================================ */
 const BUYER = {
   firstName: "Joseph",
@@ -1375,7 +1375,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     event("resource_opened", { linkLabel: title || kind, linkUrl: payload });
     openSheet(mediaSheet);
   }
-  document.querySelectorAll(".res-btn, .proof-square-cta, button.proof-square-media, .precall-trust-bar, .res-trust-top").forEach(function(btn){
+  document.querySelectorAll(".res-btn, .proof-square-cta, button.proof-square-media, .precall-trust-bar, .precall-top20-bar, .res-trust-top").forEach(function(btn){
     btn.addEventListener("click", function(){
       const kind = btn.dataset.media;
       if (kind === "yt") openMedia("yt", btn.dataset.id, btn.dataset.title);
