@@ -462,7 +462,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1789505405 -->
+<!-- close-build:1789514254 -->
 </head>
 <body>
 <main class="page">
@@ -577,6 +577,16 @@ a{color:inherit}
         <span class="plan-unit">soft pre-qual</span>
       </div>
       <button class="choose" type="button" data-plan="flexxbuy">Pre-qualify with Flexxbuy</button>
+    </div>
+
+    <div class="plan" id="planKlarna">
+      <div class="plan-name">Klarna</div>
+      <div class="plan-note" id="klarnaNote">Pre-qualify with Klarna. Another financing path to try if the others don't line up.</div>
+      <div class="plan-figs">
+        <span class="plan-amt">Apply</span>
+        <span class="plan-unit">soft pre-qual</span>
+      </div>
+      <button class="choose" type="button" data-plan="klarna">Pre-qualify with Klarna</button>
     </div>
   </section>
 
@@ -987,7 +997,7 @@ a{color:inherit}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1789505405
+   close-build:1789514254
    ============================================================ */
 const BUYER = {
   firstName: "Sarah",
@@ -997,7 +1007,7 @@ const BUYER = {
   slug:      "sarah_gomez",
   track:     "closer",
   offer:     "standard",
-  show:      ["pif", "plan", "clarity", "flexxbuy"],
+  show:      ["pif", "plan", "clarity", "flexxbuy", "klarna"],
   intro:     ""
 };
 
@@ -1134,16 +1144,18 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
     plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
     clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" },
-    flexxbuy:{ name:"Flexxbuy",      amt:"Apply",          sub:"Soft pre-qualification financing path.", url:"https://app.flexxbuy.com/high-ticket-sales-academy-llc/apply/", warn:"" }
+    flexxbuy:{ name:"Flexxbuy",      amt:"Apply",          sub:"Soft pre-qualification financing path.", url:"https://app.flexxbuy.com/high-ticket-sales-academy-llc/apply/", warn:"" },
+    klarna:  { name:"Klarna",        amt:"Apply",          sub:"Pre-qualify with Klarna as another financing path.", url:"https://whop.com/checkout/plan_rxjunCneiFHXz/", warn:"" }
   };
 
-  const show = Array.isArray(BUYER.show) && BUYER.show.length ? BUYER.show : ["pif","plan","clarity","flexxbuy"];
-  const NODE = { pif: el("planPif"), plan: el("planPlan"), clarity: el("planClarity"), flexxbuy: el("planFlexxbuy") };
+  const show = Array.isArray(BUYER.show) && BUYER.show.length ? BUYER.show : ["pif","plan","clarity","flexxbuy","klarna"];
+  const NODE = { pif: el("planPif"), plan: el("planPlan"), clarity: el("planClarity"), flexxbuy: el("planFlexxbuy"), klarna: el("planKlarna") };
   const host = el("planPif").parentNode;
   Object.keys(NODE).forEach(function(k){ if (show.indexOf(k) === -1 && NODE[k]) NODE[k].remove(); });
   show.forEach(function(k){ if (NODE[k] && NODE[k].parentNode) host.appendChild(NODE[k]); });
   if (NODE.clarity && NODE.clarity.parentNode) NODE.clarity.hidden = false;
   if (NODE.flexxbuy && NODE.flexxbuy.parentNode) NODE.flexxbuy.hidden = false;
+  if (NODE.klarna && NODE.klarna.parentNode) NODE.klarna.hidden = false;
 
   if (CUSTOM_OFFER) {
     const c = el("planCustom");
