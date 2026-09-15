@@ -424,9 +424,45 @@ a{color:inherit}
   background:var(--navy);color:var(--white);font-size:12px;font-weight:800;letter-spacing:.02em}
 @media (max-width:520px){.res-featured-grid{grid-template-columns:1fr}}
 
+
+/* ---------- Flexxbuy + referral ---------- */
+.plan-flexx-note{margin:8px 13px 0;color:var(--muted);font-size:12px;line-height:1.45}
+.refer{margin:0 26px 18px;padding:18px 18px 16px;border:2px solid var(--green-strong);
+  border-radius:16px;background:#f2fbf6;box-shadow:0 12px 28px rgba(0,201,122,.14)}
+.refer-kicker{color:var(--green-dark);font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.refer h2{margin:4px 0 0;color:var(--navy);font-family:"Playfair Display",serif;font-size:22px;line-height:1.22}
+.refer > p{margin:8px 0 0;color:var(--text);font-size:13.5px;line-height:1.55}
+.refer > p b{color:var(--navy)}
+.ref-tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.ref-tier{padding:12px 10px;border:1.5px solid var(--green-strong);border-radius:11px;background:#fff;text-align:center}
+.ref-tier-amt{color:var(--navy);font-size:22px;font-weight:800;line-height:1}
+.ref-tier-lbl{margin-top:4px;color:var(--muted);font-size:12px;line-height:1.35}
+.ref-form{margin-top:14px;padding:14px;border:1px solid rgba(0,201,122,.35);border-radius:12px;background:#fff}
+.ref-list{display:grid;gap:10px}
+.ref-line{display:grid;grid-template-columns:1.2fr 1fr auto;gap:8px;align-items:center}
+.ref-line input{min-height:44px;padding:10px 12px;border:1.5px solid var(--grey);border-radius:10px;
+  background:#fff;color:var(--navy);font:600 14px/1.2 "DM Sans",sans-serif;width:100%;box-sizing:border-box}
+.ref-line input:focus{border-color:var(--green-strong);box-shadow:0 0 0 3px rgba(0,201,122,.13);outline:none}
+.ref-send{min-height:44px;padding:0 16px;border:0;border-radius:10px;background:var(--green-strong);
+  color:#04231a;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap}
+.ref-send:hover,.ref-send:focus-visible{filter:brightness(1.06);outline:none}
+.ref-add{display:inline-flex;margin-top:10px;min-height:42px;align-items:center;justify-content:center;
+  padding:0 14px;border:1.5px dashed var(--green-strong);border-radius:10px;background:#fff;
+  color:var(--navy);font-family:inherit;font-size:13.5px;font-weight:800;cursor:pointer}
+.ref-added{margin-top:10px;display:grid;gap:6px}
+.ref-added div{padding:8px 11px;border:1px solid rgba(0,201,122,.3);border-radius:9px;
+  background:rgba(97,227,139,.1);color:var(--navy);font-size:12.5px;font-weight:700}
+.ref-fine{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.5}
+@media (max-width:680px){
+  .refer{margin-left:16px;margin-right:16px}
+  .ref-tiers{grid-template-columns:1fr}
+  .ref-line{grid-template-columns:1fr;gap:6px}
+  .ref-send{width:100%}
+}
+
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1789499990 -->
+<!-- close-build:1789505405 -->
 </head>
 <body>
 <main class="page">
@@ -532,6 +568,16 @@ a{color:inherit}
       </div>
       <button class="choose" type="button" data-plan="clarity">Choose ClarityPay</button>
     </div>
+
+    <div class="plan" id="planFlexxbuy">
+      <div class="plan-name">Flexxbuy</div>
+      <div class="plan-note" id="flexxNote">Soft pre-qualification. Another financing path if you want options beyond ClarityPay.</div>
+      <div class="plan-figs">
+        <span class="plan-amt">Apply</span>
+        <span class="plan-unit">soft pre-qual</span>
+      </div>
+      <button class="choose" type="button" data-plan="flexxbuy">Pre-qualify with Flexxbuy</button>
+    </div>
   </section>
 
   <div class="docs">
@@ -620,6 +666,40 @@ a{color:inherit}
       </div>
     </details>
   </div>
+
+
+  <section class="refer" id="referSection" aria-labelledby="referTitle">
+    <div class="refer-kicker">Referral bonus</div>
+    <h2 id="referTitle">Know someone this could help?</h2>
+    <p>When someone you introduce enrolls, you get paid. <b>Person 1: $250</b>. <b>Person 2: $350</b>. <b>Person 3+: $500</b> each.</p>
+    <div class="ref-tiers" aria-hidden="true">
+      <div class="ref-tier"><div class="ref-tier-amt">$250</div><div class="ref-tier-lbl">Person 1</div></div>
+      <div class="ref-tier"><div class="ref-tier-amt">$350</div><div class="ref-tier-lbl">Person 2</div></div>
+      <div class="ref-tier"><div class="ref-tier-amt">$500</div><div class="ref-tier-lbl">Person 3+</div></div>
+    </div>
+    <div class="ref-form">
+      <div class="ref-list" id="refList">
+        <div class="ref-line" data-ref-n="1">
+          <input class="refName" type="text" autocomplete="name" placeholder="Full name" aria-label="Referral 1 full name">
+          <input class="refPhone" type="tel" autocomplete="tel" placeholder="Phone number" aria-label="Referral 1 phone">
+          <button class="ref-send" type="button">Send intro</button>
+        </div>
+        <div class="ref-line" data-ref-n="2">
+          <input class="refName" type="text" autocomplete="name" placeholder="Full name" aria-label="Referral 2 full name">
+          <input class="refPhone" type="tel" autocomplete="tel" placeholder="Phone number" aria-label="Referral 2 phone">
+          <button class="ref-send" type="button">Send intro</button>
+        </div>
+        <div class="ref-line" data-ref-n="3">
+          <input class="refName" type="text" autocomplete="name" placeholder="Full name" aria-label="Referral 3 full name">
+          <input class="refPhone" type="tel" autocomplete="tel" placeholder="Phone number" aria-label="Referral 3 phone">
+          <button class="ref-send" type="button">Send intro</button>
+        </div>
+      </div>
+      <button class="ref-add" type="button" id="refAdd">+ Add another person</button>
+      <div class="ref-added" id="refAdded"></div>
+      <p class="ref-fine">Tap Send intro. Your phone opens a text to them with CJ’s intro and a link. I also get their name so I can call them. Soft ask only. No pressure on your friend.</p>
+    </div>
+  </section>
 
   <footer class="foot">
     <div class="foot-top">
@@ -907,7 +987,7 @@ a{color:inherit}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1789499990
+   close-build:1789505405
    ============================================================ */
 const BUYER = {
   firstName: "Sarah",
@@ -917,7 +997,7 @@ const BUYER = {
   slug:      "sarah_gomez",
   track:     "closer",
   offer:     "standard",
-  show:      ["pif", "plan", "clarity"],
+  show:      ["pif", "plan", "clarity", "flexxbuy"],
   intro:     ""
 };
 
@@ -1053,15 +1133,17 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
     plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
-    clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" }
+    clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" },
+    flexxbuy:{ name:"Flexxbuy",      amt:"Apply",          sub:"Soft pre-qualification financing path.", url:"https://app.flexxbuy.com/high-ticket-sales-academy-llc/apply/", warn:"" }
   };
 
-  const show = Array.isArray(BUYER.show) && BUYER.show.length ? BUYER.show : ["pif","plan","clarity"];
-  const NODE = { pif: el("planPif"), plan: el("planPlan"), clarity: el("planClarity") };
+  const show = Array.isArray(BUYER.show) && BUYER.show.length ? BUYER.show : ["pif","plan","clarity","flexxbuy"];
+  const NODE = { pif: el("planPif"), plan: el("planPlan"), clarity: el("planClarity"), flexxbuy: el("planFlexxbuy") };
   const host = el("planPif").parentNode;
-  Object.keys(NODE).forEach(function(k){ if (show.indexOf(k) === -1) NODE[k].remove(); });
+  Object.keys(NODE).forEach(function(k){ if (show.indexOf(k) === -1 && NODE[k]) NODE[k].remove(); });
   show.forEach(function(k){ if (NODE[k] && NODE[k].parentNode) host.appendChild(NODE[k]); });
   if (NODE.clarity && NODE.clarity.parentNode) NODE.clarity.hidden = false;
+  if (NODE.flexxbuy && NODE.flexxbuy.parentNode) NODE.flexxbuy.hidden = false;
 
   if (CUSTOM_OFFER) {
     const c = el("planCustom");
@@ -1292,6 +1374,123 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     event("checkout_started", { linkLabel:p.name, linkUrl:p.url });
     setTimeout(function(){ window.location.href = p.url; }, 550);
   });
+
+  /* ---------- referrals ---------- */
+  const REFERRAL_LANDING = "https://closewithcjclay.com/from-a-friend.html";
+  var refList = el("refList"), refAdded = el("refAdded"), refAdd = el("refAdd");
+  var refSentCount = 0;
+  function referralBonus(n){
+    if (n <= 1) return 250;
+    if (n === 2) return 350;
+    return 500;
+  }
+  function digitsPhone(v){
+    var d = String(v || "").replace(/\D/g, "");
+    if (d.length === 10) return "+1" + d;
+    if (d.length === 11 && d.charAt(0) === "1") return "+" + d;
+    if (d.length > 8) return (d.charAt(0) === "+" ? "" : "+") + d;
+    return "";
+  }
+  function firstOf(full){
+    return String(full || "").trim().split(/\s+/)[0] || "there";
+  }
+  function referralMessage(full){
+    var y = (BUYER.fullName || BUYER.firstName || "a friend").trim();
+    var w = firstOf(full);
+    var link = REFERRAL_LANDING + "?ref=" + encodeURIComponent(y);
+    return "Hey " + w + ", it's " + y + ". I just started looking at High Ticket Sales Academy with CJ Clay, remote high ticket sales, and thought of you.\n\n"
+      + "CJ will tell you straight whether it is a fit. No pressure either way. I told him to expect your name.\n\n"
+      + "Here is everything on one page (start with the 4 minute Aug 18 clip):\n" + link + "\n\n"
+      + "CJ Clay\nHTSA Career Transformation Coach\n(616) 612-1735\ncj@highticketsalesacademy.com";
+  }
+  function smsHref(phoneE164, body){
+    var ph = phoneE164 || "";
+    // iOS prefers &body, Android often ?body. Using ?&body works on many iPhones when number present.
+    if (ph) return "sms:" + ph + "?&body=" + encodeURIComponent(body);
+    return "sms:?&body=" + encodeURIComponent(body);
+  }
+  function wireRefLine(line){
+    var nameEl = line.querySelector(".refName");
+    var phoneEl = line.querySelector(".refPhone");
+    var btn = line.querySelector(".ref-send");
+    if (!nameEl || !phoneEl || !btn) return;
+    btn.addEventListener("click", function(){
+      var full = (nameEl.value || "").trim();
+      var phoneRaw = (phoneEl.value || "").trim();
+      if (!full) { nameEl.focus(); return; }
+      if (!phoneRaw) { phoneEl.focus(); return; }
+      var phone = digitsPhone(phoneRaw);
+      if (!phone) { phoneEl.focus(); return; }
+      refSentCount += 1;
+      var n = refSentCount;
+      var bonus = referralBonus(n);
+      var body = referralMessage(full);
+      var payload = {
+        action: "recordReferral",
+        pageType: "enrollment",
+        kindLabel: "referral_card_sent",
+        referrerName: BUYER.fullName || "",
+        referrerEmail: BUYER.email || "",
+        referrerPhone: BUYER.phone || "",
+        referrerSlug: BUYER.slug || "",
+        referralName: full,
+        referralPhone: phone,
+        referralEmail: "",
+        referralIndex: n,
+        referralBonus: bonus,
+        enrollmentPageUrl: canonicalUrl(),
+        referralLandingUrl: REFERRAL_LANDING + "?ref=" + encodeURIComponent(BUYER.fullName || ""),
+        userAgent: navigator.userAgent || "",
+        timestamp: new Date().toISOString()
+      };
+      post(payload);
+      // Also land in main EnrollmentLog so CJ sees a new prospect to call.
+      post({
+        action: "referral_card_sent",
+        fullName: full,
+        email: "",
+        phone: phone,
+        clientSlug: "referral-card-sent",
+        enrollmentPageUrl: canonicalUrl(),
+        referredBy: BUYER.fullName || "",
+        referrerEmail: BUYER.email || "",
+        referrerPhone: BUYER.phone || "",
+        referralIndex: n,
+        referralBonus: bonus,
+        referralLandingUrl: payload.referralLandingUrl,
+        termsVersion: "",
+        userAgent: navigator.userAgent || "",
+        timestamp: payload.timestamp
+      });
+      event("referral_sent", { linkLabel: full, linkUrl: phone });
+      if (refAdded) {
+        var row = document.createElement("div");
+        row.textContent = "Person " + n + ": " + full + " · text ready. CJ has their info ($" + bonus + " if they enroll).";
+        refAdded.appendChild(row);
+      }
+      window.location.href = smsHref(phone, body);
+      nameEl.value = "";
+      phoneEl.value = "";
+    });
+  }
+  if (refList) {
+    Array.prototype.forEach.call(refList.querySelectorAll(".ref-line"), wireRefLine);
+  }
+  if (refAdd && refList) {
+    refAdd.addEventListener("click", function(){
+      var n = refList.querySelectorAll(".ref-line").length + 1;
+      var line = document.createElement("div");
+      line.className = "ref-line";
+      line.setAttribute("data-ref-n", String(n));
+      line.innerHTML = '<input class="refName" type="text" autocomplete="name" placeholder="Full name" aria-label="Referral ' + n + ' full name">'
+        + '<input class="refPhone" type="tel" autocomplete="tel" placeholder="Phone number" aria-label="Referral ' + n + ' phone">'
+        + '<button class="ref-send" type="button">Send intro</button>';
+      refList.appendChild(line);
+      wireRefLine(line);
+      line.querySelector(".refName").focus();
+    });
+  }
+
 })();
 </script>
 </body>

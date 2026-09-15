@@ -76,6 +76,40 @@ function routeEnrollmentAction_(payload) {
       break;
     case 'recordReferral':
       appendReferralRow_(payload);
+      // Also land in the main EnrollmentLog so CJ sees a new prospect to call.
+      appendEnrollmentRow_('referral_card_sent', {
+        clientSlug: 'referral-card-sent',
+        fullName: payload.referralName || '',
+        email: payload.referralEmail || '',
+        phone: payload.referralPhone || '',
+        enrollmentPageUrl: payload.enrollmentPageUrl || '',
+        termsVersion: '',
+        referredBy: payload.referrerName || '',
+        referrerEmail: payload.referrerEmail || '',
+        referrerPhone: payload.referrerPhone || '',
+        referralIndex: payload.referralIndex || '',
+        referralBonus: payload.referralBonus || '',
+        referralLandingUrl: payload.referralLandingUrl || '',
+        userAgent: payload.userAgent || '',
+        timestamp: payload.timestamp || ''
+      });
+      sendReferralNotification_(payload);
+      break;
+    case 'referral_card_sent':
+      appendEnrollmentRow_('referral_card_sent', payload);
+      sendReferralNotification_({
+        referralName: payload.fullName || '',
+        referralPhone: payload.phone || '',
+        referralEmail: payload.email || '',
+        referrerName: payload.referredBy || '',
+        referrerEmail: payload.referrerEmail || '',
+        referrerPhone: payload.referrerPhone || '',
+        enrollmentPageUrl: payload.enrollmentPageUrl || '',
+        referralLandingUrl: payload.referralLandingUrl || '',
+        referralIndex: payload.referralIndex || '',
+        referralBonus: payload.referralBonus || '',
+        timestamp: payload.timestamp || ''
+      });
       break;
     default:
       appendEnrollmentRow_('legacy_unknown', payload);
@@ -123,41 +157,77 @@ function appendReferralRow_(payload) {
 
   var ss = SpreadsheetApp.openById(sid);
   var sheet = ss.getSheetByName('Referrals');
+  var header = [
+    'loggedAt',
+    'kind',
+    'referrerName',
+    'referrerSlug',
+    'referrerEmail',
+    'referrerPhone',
+    'referralName',
+    'referralPhone',
+    'referralEmail',
+    'referralIndex',
+    'referralBonus',
+    'enrollmentPageUrl',
+    'referralLandingUrl',
+    'userAgent',
+    'timestamp'
+  ];
   if (!sheet) {
     sheet = ss.insertSheet('Referrals');
-    sheet.appendRow([
-      'loggedAt',
-      'referrerName',
-      'referrerSlug',
-      'referralName',
-      'referralPhone',
-      'enrollmentPageUrl',
-      'userAgent',
-      'timestamp'
-    ]);
+    sheet.appendRow(header);
   } else if (sheet.getLastRow() === 0) {
-    sheet.appendRow([
-      'loggedAt',
-      'referrerName',
-      'referrerSlug',
-      'referralName',
-      'referralPhone',
-      'enrollmentPageUrl',
-      'userAgent',
-      'timestamp'
-    ]);
+    sheet.appendRow(header);
   }
 
   sheet.appendRow([
     new Date(),
+    'referral_card_sent',
     payload.referrerName || '',
     payload.referrerSlug || '',
+    payload.referrerEmail || '',
+    payload.referrerPhone || '',
     payload.referralName || '',
     payload.referralPhone || '',
+    payload.referralEmail || '',
+    payload.referralIndex || '',
+    payload.referralBonus || '',
     payload.enrollmentPageUrl || '',
+    payload.referralLandingUrl || '',
     payload.userAgent || '',
     payload.timestamp || ''
   ]);
+}
+
+/**
+ * Email CJ the moment a member sends a referral intro text from an enrollment page.
+ */
+function sendReferralNotification_(payload) {
+  var props = PropertiesService.getScriptProperties();
+  var to = props.getProperty('NOTIFY_CJ_EMAIL') || 'cj@highticketsalesacademy.com';
+  var who = String(payload.referralName || 'New referral');
+  var phone = String(payload.referralPhone || '');
+  var by = String(payload.referrerName || 'a member');
+  var subject = '[HTSA] CALL NOW · referral from ' + by + ' · ' + who;
+  var body = Utilities.formatString(
+    'New referral card sent. Call them.\n\n' +
+      'Referral: %s\nPhone: %s\nEmail: %s\nPerson #: %s\nBonus if they enroll: $%s\n\n' +
+      'Sent by: %s\nSender phone: %s\nSender email: %s\n\n' +
+      'Sent from: %s\nLanding link: %s\nTime: %s\n',
+    who,
+    phone,
+    String(payload.referralEmail || ''),
+    String(payload.referralIndex || ''),
+    String(payload.referralBonus || ''),
+    by,
+    String(payload.referrerPhone || ''),
+    String(payload.referrerEmail || ''),
+    String(payload.enrollmentPageUrl || ''),
+    String(payload.referralLandingUrl || ''),
+    String(payload.timestamp || new Date().toISOString())
+  );
+  MailApp.sendEmail({ to: to, subject: subject, body: body });
 }
 
 /**
