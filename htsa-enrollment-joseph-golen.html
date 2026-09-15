@@ -431,8 +431,8 @@ a{color:inherit}
 .proof-visible{margin:0 26px 14px}
 .proof-visible h2{margin:0 0 6px;color:var(--navy);font-family:"Playfair Display",serif;font-size:22px;line-height:1.25}
 .proof-visible .section-lede{margin:0 0 12px;color:var(--muted);font-size:13.5px;line-height:1.55}
-.proof-squares{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 12px}
-.proof-square{display:flex;flex-direction:column;min-height:100%;overflow:hidden;border:2px solid #f59e0b;
+.proof-squares{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 12px;align-items:stretch}
+.proof-square{display:flex;flex-direction:column;height:100%;overflow:hidden;border:2px solid #f59e0b;
   border-radius:14px;background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);
   box-shadow:0 8px 20px rgba(10,22,40,.06)}
 .proof-square-site{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
@@ -441,13 +441,14 @@ a{color:inherit}
 .proof-square-site-kicker{color:#61e38b;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
 .proof-square-site-name{font-family:"Playfair Display",serif;font-size:18px;line-height:1.2;text-align:center}
 .proof-square-site-url{color:rgba(255,255,255,.72);font-size:12px;font-weight:700}
-.proof-square-copy{padding:12px 13px 10px}
+.proof-square-copy{padding:12px 13px 10px;min-height:118px;box-sizing:border-box}
 .proof-square-kicker{margin-bottom:5px;color:#b45309;font-size:10px;font-weight:800;letter-spacing:.08em;
   text-transform:uppercase}
 .proof-square h3{margin:0 0 6px;color:var(--navy);font-size:15px;line-height:1.3}
 .proof-square p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}
-.proof-square-media{width:100%;aspect-ratio:16/9;border:0;background:#0a1628;object-fit:cover}
-.proof-square-cta{display:block;margin:0 13px 13px;padding:10px 12px;border-radius:9px;background:var(--navy);
+.proof-square-media-wrap{position:relative;width:100%;aspect-ratio:16/9;flex:0 0 auto;background:#0a1628;overflow:hidden}
+.proof-square-media{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0a1628;object-fit:cover}
+.proof-square-cta{display:block;margin:auto 13px 13px;padding:10px 12px;border-radius:9px;background:var(--navy);
   color:#fff;font-size:12px;font-weight:700;text-align:center;text-decoration:none}
 button.proof-square-media,button.proof-square-cta{font-family:inherit;cursor:pointer}
 button.proof-square-cta{width:calc(100% - 26px);border:0}
@@ -468,7 +469,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1789433117 -->
+<!-- close-build:1789433300 -->
 </head>
 <body>
 <main class="page">
@@ -653,9 +654,11 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
           <h3>This Week at HTSA — Aug 18</h3>
           <p>Four members on our live group call talking about getting placed. Every one had more than one offer.</p>
         </div>
-        <video class="proof-square-media" controls playsinline preload="metadata" poster="/media/htsa-clip-poster.jpg" title="This Week at HTSA — Aug 18 placements">
-          <source src="/media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
-        </video>
+        <div class="proof-square-media-wrap">
+          <video class="proof-square-media" controls playsinline preload="metadata" poster="/media/htsa-clip-poster.jpg" title="This Week at HTSA — Aug 18 placements">
+            <source src="/media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
+          </video>
+        </div>
         <button type="button" class="proof-square-cta" data-media="video" data-src="/media/this-week-at-htsa-2026-08-18.mp4" data-title="This Week at HTSA — Aug 18 placements">Play here</button>
       </article>
       <article class="proof-square">
@@ -664,7 +667,9 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
           <h3>Taylor Conroy</h3>
           <p>A TEDx coach who hires HTSA members. Hear why he trusts this certification.</p>
         </div>
-        <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/bd65afldLmE" title="Taylor Conroy explains why he hires from HTSA" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div class="proof-square-media-wrap">
+          <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/bd65afldLmE" title="Taylor Conroy explains why he hires from HTSA" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
         <button type="button" class="proof-square-cta" data-media="yt" data-id="bd65afldLmE" data-title="Taylor Conroy explains why he hires from HTSA">Watch here</button>
       </article>
       <article class="proof-square">
@@ -673,9 +678,11 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
           <h3>Taylor Decourcey</h3>
           <p>Newer member. A real look at the first few months after certification.</p>
         </div>
-        <video class="proof-square-media" controls playsinline preload="metadata" poster="/media/taylor-decoursey-poster.jpg" title="Taylor Decourcey — newer member perspective">
-          <source src="/media/taylor-decoursey-testimonial.mp4" type="video/mp4">
-        </video>
+        <div class="proof-square-media-wrap">
+          <video class="proof-square-media" controls playsinline preload="metadata" poster="/media/taylor-decoursey-poster.jpg" title="Taylor Decourcey — newer member perspective">
+            <source src="/media/taylor-decoursey-testimonial.mp4" type="video/mp4">
+          </video>
+        </div>
         <button type="button" class="proof-square-cta" data-media="video" data-src="/media/taylor-decoursey-testimonial.mp4" data-title="Taylor Decourcey — newer member perspective">Play here</button>
       </article>
     </div>
@@ -1057,7 +1064,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1789433117
+   close-build:1789433300
    ============================================================ */
 const BUYER = {
   firstName: "Joseph",
