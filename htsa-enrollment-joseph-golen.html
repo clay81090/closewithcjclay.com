@@ -432,7 +432,7 @@ a{color:inherit}
 .proof-visible h2{margin:0 0 6px;color:var(--navy);font-family:"Playfair Display",serif;font-size:22px;line-height:1.25}
 .proof-visible .section-lede{margin:0 0 12px;color:var(--muted);font-size:13.5px;line-height:1.55}
 .proof-squares{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 12px;align-items:stretch}
-.proof-square{display:flex;flex-direction:column;height:100%;overflow:hidden;border:2px solid #f59e0b;
+.proof-square{display:grid;grid-template-rows:108px auto auto;align-content:stretch;height:100%;overflow:hidden;border:2px solid #f59e0b;
   border-radius:14px;background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);
   box-shadow:0 8px 20px rgba(10,22,40,.06)}
 .proof-square-site{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
@@ -441,15 +441,17 @@ a{color:inherit}
 .proof-square-site-kicker{color:#61e38b;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
 .proof-square-site-name{font-family:"Playfair Display",serif;font-size:18px;line-height:1.2;text-align:center}
 .proof-square-site-url{color:rgba(255,255,255,.72);font-size:12px;font-weight:700}
-.proof-square-copy{padding:12px 13px 10px;min-height:118px;box-sizing:border-box}
-.proof-square-kicker{margin-bottom:5px;color:#b45309;font-size:10px;font-weight:800;letter-spacing:.08em;
-  text-transform:uppercase}
-.proof-square h3{margin:0 0 6px;color:var(--navy);font-size:15px;line-height:1.3}
-.proof-square p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}
-.proof-square-media-wrap{position:relative;width:100%;aspect-ratio:16/9;flex:0 0 auto;background:#0a1628;overflow:hidden}
+.proof-square-copy{padding:12px 13px 8px;height:108px;max-height:108px;box-sizing:border-box;overflow:hidden}
+.proof-square-kicker{margin:0 0 5px;height:14px;color:#b45309;font-size:10px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;line-height:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proof-square h3{margin:0 0 6px;height:20px;color:var(--navy);font-size:15px;line-height:20px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proof-square p{margin:0;color:var(--muted);font-size:12px;line-height:1.4;max-height:2.8em;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.proof-square-media-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#0a1628;overflow:hidden}
 .proof-square-media{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0a1628;object-fit:cover}
-.proof-square-cta{display:block;margin:auto 13px 13px;padding:10px 12px;border-radius:9px;background:var(--navy);
-  color:#fff;font-size:12px;font-weight:700;text-align:center;text-decoration:none}
+.proof-square-cta{display:block;margin:10px 13px 13px;padding:10px 12px;border-radius:9px;background:var(--navy);
+  color:#fff;font-size:12px;font-weight:700;text-align:center;text-decoration:none;box-sizing:border-box}
 button.proof-square-media,button.proof-square-cta{font-family:inherit;cursor:pointer}
 button.proof-square-cta{width:calc(100% - 26px);border:0}
 .precall-trust-bar,.precall-top20-bar{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin:0 0 10px;
@@ -469,7 +471,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1789434324 -->
+<!-- close-build:1789434554 -->
 </head>
 <body>
 <main class="page">
@@ -651,7 +653,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
       <article class="proof-square">
         <div class="proof-square-copy">
           <div class="proof-square-kicker">Must watch · Aug 18</div>
-          <h3>This Week at HTSA — Aug 18</h3>
+          <h3>Aug 18</h3>
           <p>Four members on our live group call talking about getting multiple offers.</p>
         </div>
         <div class="proof-square-media-wrap">
