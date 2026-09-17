@@ -15,7 +15,7 @@ If the trigger is ambiguous, ask one short question and nothing else.
 |---|---|---|---|
 | **"offer link"** | Special offer booking page | `<firstname>-and-cj.html` (root) | `/charles660/cj` |
 | **"game plan"** | 30 day game plan | `30-day-roadmap.html` (shared, params) | none |
-| **"enroll link"** | Enrollment / close page | `htsa-enrollment-<first>-<last>.html` | none |
+| **"enroll link"** / **"same as Brigitte"** / **recipe #** | Enrollment / close page | `htsa-enrollment-<first>-<last>.html` | none |
 | **"pre call link"** | Pre-call resources page | `r/<first>_<last>/index.html` | only if not booked |
 
 There is a fifth, built once and shared: `meet-cj.html`, the referral landing.

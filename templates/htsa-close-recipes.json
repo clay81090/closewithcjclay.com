@@ -1,0 +1,33 @@
+{
+  "_comment": "On-call close recipes. Agent or paste-close clones the source HTML and only swaps BUYER identity. Never edit these source pages unless CJ names that file.",
+  "recipes": [
+    {
+      "id": "1",
+      "name": "Sarah Gomez",
+      "aliases": ["sarah", "sarah gomez", "gomez", "referral", "flexxbuy klarna"],
+      "source": "htsa-enrollment-sarah-gomez.html",
+      "notes": "PIF, 4-pay, Clarity, Flexxbuy, Klarna. Referral preview at the bottom."
+    },
+    {
+      "id": "2",
+      "name": "Mansour Alasmar",
+      "aliases": ["mansour", "mansour alasmar", "alasmar", "testimonials tabs"],
+      "source": "htsa-enrollment-mansour-alasmar.html",
+      "notes": "Full enrollment with testimonials inside tabs (highlighted ones first). No referral preview."
+    },
+    {
+      "id": "3",
+      "name": "Erick Blakney",
+      "aliases": ["erick", "erick blakney", "blakney", "aug 18", "tedx", "taylor d"],
+      "source": "htsa-enrollment-erick-blakney.html",
+      "notes": "Full enrollment with 3 caption testimonials (Aug 18, TEDx, Taylor D). No referral box."
+    },
+    {
+      "id": "4",
+      "name": "Brigitte Prussak",
+      "aliases": ["brigitte", "brigette", "brigitte prussak", "brigette prussak", "prussak", "splitit", "split it", "split-it"],
+      "source": "htsa-enrollment-brigitte-prussak.html",
+      "notes": "Has Splitit option as on Brigitte's page. No referral preview."
+    }
+  ]
+}

@@ -21,13 +21,44 @@ He does **not** run Terminal. Never tell him to type `htsa-close`, open a
 tab, or press Ctrl-D. You run the command. He copies the text and email
 you print.
 
+### FAST PATH — clone a page he already likes (preferred on live calls)
+
+If he says **same as Brigitte**, **like Sarah**, **recipe 4**, **make this** + a
+live enroll URL, or pastes a block with `same as:` / `recipe:` / `source:`,
+**clone immediately**. Do not rebuild from `_TEMPLATE-close.html`. Do not ask
+follow-ups. Do not edit the source person's page.
+
+```bash
+python3 scripts/htsa-paste-close.py --ship <<'EOF'
+same as: 4
+Johnny Smith
+Email: johnny@example.com
+Phone Number: +1 (555) 123-4567
+EOF
+```
+
+Or with a link:
+
+```bash
+python3 scripts/htsa-paste-close.py --ship <<'EOF'
+source: https://closewithcjclay.com/htsa-enrollment-brigitte-prussak.html
+Johnny Smith
+Email: johnny@example.com
+Phone Number: +1 (555) 123-4567
+EOF
+```
+
+Recipe numbers live in `templates/htsa-close-recipes.json` and the Master Index
+(`docs/PROSPECT-PAGE-VERSION-INDEX.md` → On-call close recipes). Wait for
+`READY`, then print EMAIL + TEXT.
+
 **Name only** (page already exists):
 
 ```bash
 python3 scripts/htsa-send-pack.py --full-name "<Full Name>"
 ```
 
-**New person or new pricing** (full block):
+**New person from blank template** (no "same as" — he named prices only):
 
 ```bash
 python3 scripts/htsa-paste-close.py --ship <<'EOF'

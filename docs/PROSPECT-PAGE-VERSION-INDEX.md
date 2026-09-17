@@ -12,6 +12,37 @@ Rule: major layout / structure changes only. Tiny wording tweaks skipped.
 
 ---
 
+## ⚡ On-call close recipes (clone in seconds)
+
+When you are on a live call, **do not rebuild from scratch**. Paste this into Cursor chat (or the agent runs the same paste). It copies the exact page you like and only swaps their name / email / phone.
+
+**Machine file:** `templates/htsa-close-recipes.json`  
+**Command the agent runs:** `python3 scripts/htsa-paste-close.py --ship`
+
+| # | Same as… | What you get | Source (do not edit unless you say so) |
+|---|---|---|---|
+| **1** | Sarah / Gomez | PIF, 4-pay, Clarity, Flexxbuy, Klarna + referral preview | [sarah-gomez](https://closewithcjclay.com/htsa-enrollment-sarah-gomez.html) |
+| **2** | Mansour / Alasmar | Full page, testimonials in tabs (highlighted first), no referral | [mansour-alasmar](https://closewithcjclay.com/htsa-enrollment-mansour-alasmar.html) |
+| **3** | Erick / Blakney | 3 caption testimonials (Aug 18, TEDx, Taylor D), no referral | [erick-blakney](https://closewithcjclay.com/htsa-enrollment-erick-blakney.html) |
+| **4** | Brigitte / Prussak | Splitit as on Brigitte's page | [brigitte-prussak](https://closewithcjclay.com/htsa-enrollment-brigitte-prussak.html) |
+
+**Paste this (fastest):**
+
+```text
+same as: 4
+Johnny Smith
+Email: johnny@example.com
+Phone Number: +1 (555) 123-4567
+```
+
+Also works: `same as: Brigitte` · `recipe: 1` · `source: https://closewithcjclay.com/htsa-enrollment-sarah-gomez.html`
+
+In chat you can literally say: **make same as Brigitte for Johnny** and paste email + phone. Agent clones recipe 4 and ships. Wait for **READY**, then you get TEXT + EMAIL.
+
+To add a new favorite later: tell the agent “add this page as recipe 5” with the live URL and a one-line note. It updates `htsa-close-recipes.json` + this table. Never silently edits the source person page.
+
+---
+
 ## For new members (current defaults)
 
 Use these URL patterns for every regular prospect. Preview the layout on the CJ Clay archive first.

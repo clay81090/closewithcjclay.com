@@ -2,6 +2,19 @@
 """
 Paste CJ's enroll block on stdin, build the close page, ship it.
 
+FAST ON-CALL (clone a page you already like — keeps layout/payments exact):
+
+  python3 scripts/htsa-paste-close.py --ship <<'EOF'
+  same as: Brigitte
+  Johnny Smith
+  Email: johnny@example.com
+  Phone Number: +1 (555) 555-0100
+  EOF
+
+Also accepts: recipe: 4   OR   source: https://closewithcjclay.com/htsa-enrollment-….html
+
+Blank-template build (only when he names prices, not a recipe):
+
   python3 scripts/htsa-paste-close.py --ship <<'EOF'
   Test Person
   Email: test@example.com
@@ -9,10 +22,6 @@ Paste CJ's enroll block on stdin, build the close page, ship it.
   3 pay = $5250
   Clarity Pay $500/mo
   EOF
-
-Promo prices ($5k PIF, $1750 3-pay, $500/mo Clarity) flip offer=reactivation.
-Only the options he names go on the page. No name → no option.
-If he names none, show pif+plan+clarity at standard prices.
 """
 from __future__ import annotations
 
@@ -24,6 +33,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 INSTANTIATE = ROOT / "scripts/htsa-instantiate-close.py"
+CLONE = ROOT / "scripts/htsa-clone-close.py"
 SEND_PACK = ROOT / "scripts/htsa-send-pack.py"
 
 
@@ -38,7 +48,37 @@ def to_e164(raw: str) -> str:
     return "+" + digits
 
 
+def extract_clone_token(text: str) -> tuple[str | None, str | None]:
+    """Return (same_as_token, source_url_or_file) — at most one set."""
+    m = re.search(
+        r"(?im)^\s*(?:same\s*as|clone|recipe|like|copy)\s*[:#-]?\s*(.+?)\s*$",
+        text,
+    )
+    if m:
+        token = m.group(1).strip().strip("\"'")
+        # "same as Brigitte for Johnny" → take first chunk before " for "
+        token = re.split(r"\s+for\s+", token, maxsplit=1, flags=re.I)[0].strip()
+        return token, None
+    m = re.search(
+        r"(?im)^\s*source\s*[:#-]?\s*(\S+)",
+        text,
+    )
+    if m:
+        return None, m.group(1).strip()
+    # Bare enrollment URL anywhere in the paste
+    m = re.search(
+        r"(https?://(?:www\.)?closewithcjclay\.com/htsa-enrollment-[a-z0-9-]+\.html)",
+        text,
+        re.I,
+    )
+    if m and re.search(r"(?i)same\s*as|clone|like|copy|make\s+this|use\s+this", text):
+        return None, m.group(1)
+    return None, None
+
+
 def parse(text: str) -> dict:
+    same_as, source = extract_clone_token(text)
+
     email_m = re.search(r"(?im)^\s*e-?mail\s*[:;]?\s*(\S+@\S+)", text)
     if not email_m:
         email_m = re.search(r"([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,})", text, re.I)
@@ -47,16 +87,28 @@ def parse(text: str) -> dict:
         text,
     )
     name = ""
+    skip_name = re.compile(
+        r"(?i)^(e-?mail|phone|mobile|cell|same\s*as|clone|recipe|like|copy|source)\b"
+    )
     for line in text.splitlines():
         s = line.strip()
         if not s:
             continue
-        if re.match(r"(?i)^(e-?mail|phone|mobile|cell)\b", s):
+        if skip_name.match(s):
             continue
-        if "@" in s:
+        if "@" in s and not re.match(r"(?i)^name\b", s):
             continue
-        if re.search(r"(?i)clarity|3\s*-?\s*pay|4\s*-?\s*pay|pif|paid in full|\$", s):
-            continue
+        if re.search(r"(?i)clarity|3\s*-?\s*pay|4\s*-?\s*pay|pif|paid in full|\$|flexx|klarna|split", s):
+            # Allow a line that is ONLY the person's name even if weird
+            if re.search(r"(?i)(?:email|phone|http)", s):
+                continue
+            if "$" in s or re.search(r"(?i)pay|pif|clarity|flexx|klarna|split", s):
+                continue
+        # "Name: Johnny Smith"
+        nm = re.match(r"(?i)^(?:full\s*)?name\s*[:#-]?\s*(.+)$", s)
+        if nm:
+            name = nm.group(1).strip()
+            break
         name = s
         break
     if not name:
@@ -69,6 +121,25 @@ def parse(text: str) -> dict:
     if not phone_m:
         raise SystemExit("Could not find Phone Number:")
 
+    base = {
+        "full_name": name,
+        "email": email_m.group(1).strip().rstrip(",.;)"),
+        "phone": to_e164(phone_m.group(1)),
+    }
+
+    if same_as or source:
+        out = dict(base)
+        if same_as:
+            out["same_as"] = same_as
+        if source:
+            out["source"] = source
+        blob = text.lower()
+        if re.search(r"\bsetter\b", blob) and not re.search(r"\bcloser\b", blob):
+            out["track"] = "setter"
+        elif re.search(r"\bcloser\b", blob):
+            out["track"] = "closer"
+        return out
+
     blob = text.lower()
     show: list[str] = []
     if re.search(r"\bpif\b|paid in full|\$5,?000|5k pif", blob):
@@ -79,7 +150,6 @@ def parse(text: str) -> dict:
         show.append("clarity")
     if re.search(r"split\s*-?\s*it|splitit", blob):
         show.append("splitit")
-    # $6000 alone without "clarity" is the PIF total on promo, already handled.
 
     promo = bool(
         re.search(r"\$5,?000|5k|\$5,?250|3\s*-?\s*pay|\$500\s*/?\s*mo", blob)
@@ -93,9 +163,7 @@ def parse(text: str) -> dict:
 
     track = "setter" if re.search(r"\bsetter\b", blob) and not re.search(r"\bcloser\b", blob) else "closer"
     return {
-        "full_name": name,
-        "email": email_m.group(1).strip().rstrip(",.;)"),
-        "phone": to_e164(phone_m.group(1)),
+        **base,
         "track": track,
         "offer": "reactivation" if promo else "standard",
         "show": show,
@@ -126,6 +194,28 @@ def main() -> None:
         raise SystemExit("Could not find Email:")
     if "phone" not in fields:
         raise SystemExit("Could not find Phone Number:")
+
+    ship = args.ship and not args.no_ship
+
+    if fields.get("same_as") or fields.get("source"):
+        cmd = [
+            sys.executable,
+            str(CLONE),
+            "--full-name", fields["full_name"],
+            "--email", fields["email"],
+            "--phone-e164", fields["phone"],
+            "--overwrite",
+        ]
+        if fields.get("same_as"):
+            cmd.extend(["--same-as", fields["same_as"]])
+        if fields.get("source"):
+            cmd.extend(["--source", fields["source"]])
+        if fields.get("track"):
+            cmd.extend(["--track", fields["track"]])
+        if ship:
+            cmd.append("--ship")
+        raise SystemExit(subprocess.call(cmd, cwd=ROOT))
+
     cmd = [
         sys.executable,
         str(INSTANTIATE),
@@ -137,7 +227,7 @@ def main() -> None:
         "--show", ",".join(fields["show"]),
         "--overwrite",
     ]
-    if args.ship and not args.no_ship:
+    if ship:
         cmd.append("--ship")
     raise SystemExit(subprocess.call(cmd, cwd=ROOT))
 
