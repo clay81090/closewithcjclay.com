@@ -152,17 +152,17 @@ def main() -> None:
     ap.add_argument("--phone-e164", required=True)
     ap.add_argument("--track", default="closer", choices=("closer", "setter"))
     ap.add_argument("--offer", default="standard", choices=("standard", "reactivation"))
-    ap.add_argument("--show", default="pif,plan,clarity", help="Comma list: pif,plan,clarity")
+    ap.add_argument("--show", default="pif,plan,clarity", help="Comma list: pif,plan,clarity,splitit")
     ap.add_argument("--overwrite", action="store_true")
     ap.add_argument("--ship", action="store_true")
     ap.add_argument("--no-wait-live", action="store_true")
     args = ap.parse_args()
 
     show = [s.strip() for s in args.show.split(",") if s.strip()]
-    allowed = {"pif", "plan", "clarity"}
+    allowed = {"pif", "plan", "clarity", "splitit"}
     bad = [s for s in show if s not in allowed]
     if bad or not show:
-        raise SystemExit(f"--show must be pif/plan/clarity, got {args.show!r}")
+        raise SystemExit(f"--show must be pif/plan/clarity/splitit, got {args.show!r}")
 
     out, url, stamp, fn = write_page(
         full_name=args.full_name,

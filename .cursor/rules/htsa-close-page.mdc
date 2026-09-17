@@ -86,6 +86,17 @@ tracking breaks silently. Check it.
 `show` is how CJ controls what is offered. If he says "PIF and ClarityPay only",
 set `show: ["pif","clarity"]` and the 4-pay card is removed from the DOM entirely.
 
+**Splitit rules (close pages only):**
+1. **Only add Splitit when CJ explicitly asks** for Splitit / Split It. Never put
+   `"splitit"` in `show` by default.
+2. When he does ask, add `"splitit"` to `show`. Numbers and checkout are fixed in
+   the template — do not freestyle:
+   - **$600/mo × 12 · $7,200 total · 0% interest**
+   - Checkout: `https://whop.com/checkout/plan_LiZXezzaPMzUF`
+   - Popup + **Choose Split It** must match those numbers.
+3. Never use the old Splitit figures ($500/$6,000 or $550/$6,600) on a **new**
+   close page. Do not retrofit past client pages unless CJ names that file.
+
 ## Step 2 — the offer modes
 
 Never edit prices inline. Set `offer` and the whole set swaps.
@@ -95,6 +106,7 @@ Never edit prices inline. Set `offer` and the whole set swaps.
 | PIF | $6,000 | $5,000 |
 | Plan | 4 × $1,750 = $7,000 | 3 × $1,750 = $5,250 |
 | ClarityPay | $600/mo · $7,200 total | $500/mo · $6,000 total |
+| Splitit (only if asked) | $600/mo × 12 · $7,200 · 0% | same checkout when asked |
 
 ## Step 3 — a negotiated one-off price
 
@@ -157,7 +169,10 @@ Keep that guard.
 8. In reactivation mode: 3-pay goes to `plan_YrqGOXMxGbOVa` (true 3-pay, no
    fourth-payment warning). ClarityPay goes to `plan_VUSDju20gTBCg` ($6k), not
    the $7,200 closer plan.
-9. Next steps is a closed `<details>` under the payment buttons. Opening it
+9. If Splitit was requested: `"splitit"` is in `show`, card/popup say **$600/mo ·
+   $7,200 · 0%**, and **Choose Split It** goes to `plan_LiZXezzaPMzUF`. If Splitit
+   was not requested, the Splitit block is absent.
+10. Next steps is a closed `<details>` under the payment buttons. Opening it
    fires `next_steps_opened` once. It is never hidden behind checkout.
 
 ## Step 7 — ship it

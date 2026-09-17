@@ -77,6 +77,8 @@ def parse(text: str) -> dict:
         show.append("plan")
     if re.search(r"clarity|\$500\s*/?\s*mo|\$600\s*/?\s*mo", blob):
         show.append("clarity")
+    if re.search(r"split\s*-?\s*it|splitit", blob):
+        show.append("splitit")
     # $6000 alone without "clarity" is the PIF total on promo, already handled.
 
     promo = bool(

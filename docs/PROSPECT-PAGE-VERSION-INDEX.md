@@ -19,7 +19,7 @@ Use these URL patterns for every regular prospect. Preview the layout on the CJ 
 | When | What | Build from | ⭐ Preview (CJ Clay template) |
 |---|---|---|---|
 | **⭐ Before the call** | Pre-call resource page | `r/_TEMPLATE-precall.html` (= **V17**) | [Open V17](https://closewithcjclay.com/archive/prospect-versions/precall-resources/precall-template-v17.html) |
-| **⭐ After the call / on the close (default)** | Short enrollment page | `templates/_TEMPLATE-close.html` (= **V8**) | [Open V8](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8.html) |
+| **⭐ After the call / on the close (default)** | Short enrollment page | `templates/_TEMPLATE-close.html` (= **V9**) | [Open V9](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v9.html) |
 | **⭐ Long invoice (when you want the full page)** | Long enrollment invoice | copy from **V13** archive | [Open V13](https://closewithcjclay.com/archive/prospect-versions/long-enrollment/long-enrollment-v13.html) |
 
 **Copy pattern for CJ notes (swap in their name):**
@@ -40,7 +40,7 @@ https://closewithcjclay.com/htsa-enrollment-<first>-<last>.html
 1. Live Call Console (on-call HTML)
 2. God Script
 3. Long enrollment (regular invoice style) (**⭐ V13**)
-4. Short close pages (**⭐ V8**)
+4. Short close pages (**⭐ V9**)
 5. Pre-call resource TEMPLATES (**⭐ V17**)
 6. Special offer / self-enroll
 7. 30 day game plan
@@ -152,7 +152,8 @@ Different product from long invoices. Built from `templates/_TEMPLATE-close.html
 | V5 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v5.html) | Game plan first, pricing last in dropdown |
 | V6 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v6.html) | Amy-style 2-way enroll steps; remove need-from-you |
 | V7 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v7.html) | Reorder getting → HTSA needs → pricing → next steps (overreach) |
-| **⭐ V8** | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8.html) | **Current default for regular closes.** Continuous page, sticky CTA, in-page Terms / 30-day / curriculum popups, **All HTSA Resources** tab (YouTube + Taylor Decourcey + Aug 18 clips, Trustpilot/Canva snapshots, Top 20 PDF, website), Member testimonials + More resources, CJ Reviews, ClarityPay 0% badge. Splitit only when CJ asks (not default). |
+| V8 | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v8.html) | Continuous page, sticky CTA, in-page Terms / 30-day / curriculum popups, **All HTSA Resources** tab, ClarityPay 0% badge. Splitit still showed under PIF at old $500/$6k copy. |
+| **⭐ V9** | [Open](https://closewithcjclay.com/archive/prospect-versions/close-page/close-page-v9.html) | **Current default for regular closes.** Same as V8, plus **Splitit only when CJ asks** (`show` includes `"splitit"`). When present: **$600/mo × 12 · $7,200 total · 0% interest**, popup + **Choose Split It** → `https://whop.com/checkout/plan_LiZXezzaPMzUF`. Never the old $500/$6k or $550/$6.6k Splitit numbers on new closes. |
 
 Live template source: `templates/_TEMPLATE-close.html`
 

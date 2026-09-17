@@ -40,6 +40,19 @@ Close-page wiring: `templates/_TEMPLATE-close.html` → `OFFERS.reactivation`.
 
 ---
 
+## Close page — Splitit (opt-in only)
+
+**Only when CJ explicitly asks for Splitit / Split It** on a short close page.
+Add `"splitit"` to `BUYER.show`. Do **not** put it on by default.
+
+| Offer | Total | Payment structure | Notes | Whop checkout URL |
+|-------|-------|-------------------|-------|-------------------|
+| **Splitit** | **$7,200** | $600/mo × 12 · **0% interest** | Popup + **Choose Split It** must match these numbers. Never use old $500/$6,000 or $550/$6,600 on new closes. | `https://whop.com/checkout/plan_LiZXezzaPMzUF` |
+
+Wired into `templates/_TEMPLATE-close.html` (V9+). Archive preview: `archive/prospect-versions/close-page/close-page-v9.html`.
+
+---
+
 ## Setter — secondary Whop plan
 
 | Offer (short name) | Total | Payment structure | Notes | Whop checkout URL |
