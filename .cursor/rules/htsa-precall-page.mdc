@@ -34,6 +34,9 @@ show-up rate and arriving pre-framed. CJ texts the link the day before.
 Always copy the template. Never write a pre-call page from scratch, and never
 "improve" the template's layout, CSS, copy, or tracking while making someone's page.
 
+**No lifespan chart** on new pre-call pages unless CJ explicitly asks for it.
+Do not add the age / year-grid section back from old archives.
+
 ```
 SOURCE:  r/_TEMPLATE-precall.html   (= ⭐ V17)
 OUTPUT:  r/<first>_<last>/index.html
