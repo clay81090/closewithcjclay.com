@@ -54,8 +54,11 @@ Who: someone CJ is closing, shown live on a call or sent right after.
 
 Who: someone who has verbally agreed to a plan. CJ is on the phone with them.
 
-- Source: `templates/_TEMPLATE-close.html`
+- Source: **prefer clone** from a recipe / live URL (`templates/htsa-close-recipes.json`).
+  Fall back to `templates/_TEMPLATE-close.html` only when he names prices with no "same as".
 - Output: `htsa-enrollment-<first>-<last>.html` at root
+- **On-call fast path:** `same as: 4` (or Brigitte / Sarah / a link) + name + email + phone
+  → agent runs `htsa-paste-close.py --ship` which clones in seconds. Wait for `READY`.
 - **CJ pastes in chat. You run the script. Never tell him to use Terminal.**
   Name only → `htsa-send-pack.py`. Full block → `htsa-paste-close.py --ship`.
   Wait for `READY`, then print TEXT + EMAIL (one enroll link, black on white HTML).
