@@ -1715,6 +1715,201 @@
     }
     .invest-pay-zone-hint { display: none !important; }
   }
+
+/* ===== Erin resources/reviews (Erick/Joseph style, no video blocks) ===== */
+:root{--green-strong:#3DDC84}
+/* ---------- CJ reviews ---------- */
+.reviews{padding:20px 26px 6px}
+.reviews-banner{text-align:center;margin-bottom:14px}
+.reviews-label{font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--navy);margin-bottom:6px}
+.reviews-desc{font-size:13px;line-height:1.6;color:var(--muted);max-width:480px;
+  margin:0 auto}
+.review-card{padding:14px 16px;border:3px solid #93c5fd;border-left:5px solid #60a5fa;
+  border-radius:12px;background:#ffffff;box-shadow:0 0 0 1.5px rgba(226,178,39,.5),0 4px 14px rgba(10,22,40,.06);
+  margin-bottom:12px}
+.review-meta{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--navy);margin-bottom:8px}
+.review-body{font-size:13.5px;line-height:1.6;color:var(--text)}
+.review-attr{margin-top:10px;padding-top:8px;border-top:1px solid rgba(10,22,40,.08);
+  color:var(--muted);font-size:12.5px;font-weight:600}
+.reviews-more{margin:0;border:0;padding:0}
+.reviews-more>summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;padding:14px 18px;border-radius:12px;
+  background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border:3px solid #93c5fd;
+  border-left:5px solid #60a5fa;box-shadow:0 0 0 1.5px rgba(226,178,39,.45),0 4px 14px rgba(10,22,40,.06);
+  color:var(--navy);font-size:14px;font-weight:800}
+.reviews-more>summary::-webkit-details-marker{display:none}
+.reviews-more-sub{display:block;margin-top:2px;font-size:12px;font-weight:500;color:var(--muted)}
+.reviews-more-arrow{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:#1976d2;
+  color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:18px;
+  line-height:1;box-shadow:0 2px 8px rgba(25,118,210,.35);transition:transform .2s ease}
+.reviews-more[open]>summary .reviews-more-arrow{transform:rotate(90deg)}
+.reviews-more[open]>summary{margin-bottom:12px}
+.reviews-more-panel{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.reviews-more-panel .review-card{margin:0}
+@media (max-width:680px){.reviews-more-panel{grid-template-columns:1fr}}
+
+
+/* ---------- sheets ---------- */
+.sheet{width:min(560px,calc(100% - 20px));max-width:none;max-height:88dvh;padding:0;border:0;
+  border-radius:18px;background:var(--white);box-shadow:0 28px 80px rgba(4,12,24,.45)}
+.sheet::backdrop{background:rgba(4,12,24,.78);backdrop-filter:blur(4px)}
+.sheet-head{padding:18px 20px 14px;border-bottom:1px solid var(--grey)}
+.sheet-kicker{color:var(--green-dark);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.sheet-head h2{margin-top:4px;color:var(--navy);font-family:"Playfair Display",serif;font-size:22px;line-height:1.2}
+.sheet-body{padding:16px 20px 4px;overflow:auto;font-size:14px;line-height:1.6;color:var(--text)}
+.sheet-body h3{margin:14px 0 6px;color:var(--green-dark);font-size:12.5px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase}
+.sheet-body h3:first-child{margin-top:0}
+.sheet-body p{margin-bottom:10px}
+.sheet-body ul{margin:0 0 12px;padding-left:20px}
+.sheet-body li{margin-bottom:6px}
+.sheet-body ol{margin:0 0 12px;padding-left:22px}
+.recap{margin-bottom:14px;padding:13px 15px;border-radius:12px;background:var(--grey-light)}
+.recap-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.recap-plan{color:var(--navy);font-size:16px;font-weight:800}
+.recap-amt{color:var(--navy);font-size:22px;font-weight:800}
+.recap-sub{margin-top:3px;color:var(--muted);font-size:13px}
+.sheet-links{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:13px}
+.sheet-links a{color:var(--green-dark);font-size:13.5px;font-weight:700;cursor:pointer}
+.agree{display:flex;gap:12px;align-items:flex-start;padding:13px 15px;border:2px solid var(--grey);
+  border-radius:12px;cursor:pointer}
+.agree:has(input:checked){border-color:var(--green-strong);background:rgba(97,227,139,.08)}
+.agree input{width:24px;height:24px;flex:0 0 auto;margin-top:1px;accent-color:var(--green-strong)}
+.agree span{color:var(--text);font-size:14px;line-height:1.5}
+.sheet-foot{display:flex;gap:10px;padding:16px 20px 18px}
+.btn{display:flex;flex:1;min-height:52px;align-items:center;justify-content:center;padding:13px 18px;
+  border:0;border-radius:12px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer}
+.btn--go{background:var(--green-strong);color:#04231a}
+.btn--go[disabled]{background:#dfe6ee;color:#9aa8b8;cursor:not-allowed}
+.btn--back{flex:0 0 auto;border:1px solid var(--grey);background:var(--white);color:var(--muted);font-weight:700}
+.tos-download{text-decoration:none}
+.sheet-note{padding:0 20px 18px;color:var(--muted);font-size:12.5px;line-height:1.5;text-align:center}
+.curr-list{display:grid;gap:11px;padding:0;margin:0}
+.curr-list li{list-style:none;margin:0}
+.curr-list b{display:block;color:var(--navy);font-size:15px}
+.curr-list span{color:var(--muted);font-size:13.5px;line-height:1.5}
+
+
+/* ---------- ALL HTSA Resources tab ---------- */
+.res-wrap{margin:0 26px 14px}
+.res-tab{margin:0;border:0;padding:0}
+.res-tab>summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;padding:15px 18px;border-radius:12px;
+  background:linear-gradient(135deg,#0a1628 0%,#152a46 100%);border:2px solid var(--green-strong);
+  box-shadow:0 8px 22px rgba(10,22,40,.18);color:var(--white)}
+.res-tab>summary::-webkit-details-marker{display:none}
+.res-tab-title{font-size:15px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--green)}
+.res-tab-sub{display:block;margin-top:3px;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.72);
+  letter-spacing:0;text-transform:none}
+.res-tab-arrow{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--green-strong);
+  color:#04231a;display:inline-flex;align-items:center;justify-content:center;font-size:18px;
+  line-height:1;font-weight:900;transition:transform .2s ease}
+.res-tab[open]>summary .res-tab-arrow{transform:rotate(90deg)}
+.res-tab[open]>summary{margin-bottom:12px}
+.res-panel{display:grid;gap:10px}
+.res-group{padding:12px 14px;border:1px solid var(--grey);border-radius:12px;background:#fbfcfe}
+.res-group-label{margin:0 0 8px;color:var(--green-dark);font-size:11.5px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase}
+.res-btn{display:flex;width:100%;align-items:flex-start;justify-content:space-between;gap:10px;
+  padding:12px 13px;border:1px solid var(--grey);border-radius:10px;background:var(--white);
+  color:var(--navy);font-family:inherit;font-size:14px;font-weight:700;text-align:left;cursor:pointer;
+  line-height:1.35}
+.res-btn:hover,.res-btn:focus-visible{border-color:var(--green-strong);outline:none;
+  background:rgba(97,227,139,.08)}
+.res-btn small{display:block;margin-top:3px;color:var(--muted);font-size:12px;font-weight:500}
+.res-btn .chev{flex:0 0 auto;color:var(--green-dark);font-weight:900}
+.media-sheet{width:min(720px,calc(100% - 16px));max-height:90dvh}
+.media-sheet .sheet-body{padding:0;max-height:min(70dvh,560px);overflow:auto;background:#0a1628}
+.media-frame{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
+.media-frame--doc{aspect-ratio:auto;min-height:min(70dvh,560px);height:min(70dvh,560px);background:#fff}
+.book-viewer{padding:20px;background:#fff;color:var(--text)}
+.book-viewer img{display:block;width:100%;border-radius:10px}
+.book-viewer h3{margin:18px 0 4px;color:var(--navy);font-size:20px;line-height:1.25;text-transform:none;letter-spacing:0}
+.book-viewer p{margin:8px 0;color:var(--muted)}
+.book-meta{margin:12px 0;padding:12px;border-radius:10px;background:var(--grey-light);color:var(--navy);font-weight:700}
+.book-viewer ul{margin:12px 0;padding-left:20px}
+.book-amazon{display:flex;min-height:48px;align-items:center;justify-content:center;margin-top:16px;padding:12px 16px;
+  border-radius:10px;background:#ffca28;color:#111820;font-weight:800;text-decoration:none}
+.media-scroll{width:100%;max-height:min(70dvh,560px);overflow:auto;-webkit-overflow-scrolling:touch;background:#111;padding:0}
+.media-scroll img{display:block;width:100%;height:auto;margin:0}
+.media-sheet--wide{width:min(920px,calc(100% - 12px))}
+.media-sheet .sheet-foot{background:var(--white)}
+@media (max-width:680px){.res-wrap{margin-left:16px;margin-right:16px}}
+
+
+/* ---------- Resource featured cards (caption style) ---------- */
+.res-group--featured{padding:14px;border-color:#f59e0b;
+  background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);
+  box-shadow:0 8px 20px rgba(245,158,11,.14)}
+.res-group--featured .res-group-label{color:#b45309}
+.res-featured-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.res-btn.res-featured{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:6px;
+  padding:14px;border:1.5px solid #f59e0b;border-radius:12px;background:var(--white);
+  box-shadow:0 4px 12px rgba(10,22,40,.06);
+  transition:transform 140ms ease,box-shadow 140ms ease,border-color 140ms ease}
+.res-btn.res-featured:hover,.res-btn.res-featured:focus-visible{border-color:var(--green-strong);
+  background:var(--white);transform:translateY(-1px);box-shadow:0 10px 20px rgba(10,22,40,.1);outline:none}
+.res-featured-kicker{color:#b45309;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.res-featured-title{color:var(--navy);font-size:14.5px;font-weight:900;line-height:1.25}
+.res-featured-desc{color:var(--muted);font-size:12.5px;font-weight:500;line-height:1.5}
+.res-featured-cta{align-self:flex-start;margin-top:6px;padding:8px 12px;border-radius:8px;
+  background:var(--navy);color:var(--white);font-size:12px;font-weight:800;letter-spacing:.02em}
+@media (max-width:520px){.res-featured-grid{grid-template-columns:1fr}}
+
+
+/* ---------- Visible proof squares (precall-style, Joseph only) ---------- */
+.cj-resources-kicker{margin:0 0 8px;color:var(--green-dark);font-size:10.5px;font-weight:800;
+  letter-spacing:1.4px;text-transform:uppercase}
+.proof-visible{margin:0 26px 14px}
+.proof-visible h2{margin:0 0 6px;color:var(--navy);font-family:"Playfair Display",serif;font-size:22px;line-height:1.25}
+.proof-visible .section-lede{margin:0 0 12px;color:var(--muted);font-size:13.5px;line-height:1.55}
+.proof-squares{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 12px;align-items:stretch}
+.proof-square{display:grid;grid-template-rows:108px auto auto;align-content:stretch;height:100%;overflow:hidden;border:2px solid #f59e0b;
+  border-radius:14px;background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);
+  box-shadow:0 8px 20px rgba(10,22,40,.06)}
+.proof-square-site{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  text-decoration:none;color:#fff;background:radial-gradient(circle at 80% 20%,rgba(97,227,139,.22),transparent 16rem),
+  linear-gradient(145deg,#0a1628,#152a46);border:0;cursor:pointer;font-family:inherit}
+.proof-square-site-kicker{color:#61e38b;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.proof-square-site-name{font-family:"Playfair Display",serif;font-size:18px;line-height:1.2;text-align:center}
+.proof-square-site-url{color:rgba(255,255,255,.72);font-size:12px;font-weight:700}
+.proof-square-copy{padding:12px 13px 8px;height:108px;max-height:108px;box-sizing:border-box;overflow:hidden}
+.proof-square-kicker{margin:0 0 5px;height:14px;color:#b45309;font-size:10px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;line-height:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proof-square h3{margin:0 0 6px;height:20px;color:var(--navy);font-size:15px;line-height:20px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proof-square p{margin:0;color:var(--muted);font-size:12px;line-height:1.4;max-height:2.8em;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.proof-square-media-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#0a1628;overflow:hidden}
+.proof-square-media{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0a1628;object-fit:cover}
+.proof-square-cta{display:block;margin:10px 13px 13px;padding:10px 12px;border-radius:9px;background:var(--navy);
+  color:#fff;font-size:12px;font-weight:700;text-align:center;text-decoration:none;box-sizing:border-box}
+button.proof-square-media,button.proof-square-cta{font-family:inherit;cursor:pointer}
+button.proof-square-cta{width:calc(100% - 26px);border:0}
+.precall-trust-bar,.precall-top20-bar{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin:0 0 10px;
+  padding:16px 18px;border:2px solid var(--green-strong);border-radius:12px;
+  background:linear-gradient(145deg,#0a1628,#163056);color:#d7dee8;font-size:16px;font-weight:700;
+  letter-spacing:.02em;text-align:center;text-decoration:none;box-shadow:0 8px 22px rgba(10,22,40,.16);
+  font-family:inherit;cursor:pointer;appearance:none;-webkit-appearance:none}
+.precall-trust-bar:hover,.precall-trust-bar:focus-visible,
+.precall-top20-bar:hover,.precall-top20-bar:focus-visible{color:#fff;border-color:#61e38b;outline:none}
+.precall-trust-stars{color:#f5c518;font-size:22px;letter-spacing:3px;line-height:1;
+  text-shadow:0 1px 2px rgba(0,0,0,.35),0 0 10px rgba(245,197,24,.35)}
+.res-trust-hint{margin-left:6px;color:var(--green);font-size:13px;font-weight:700}
+@media (max-width:680px){
+  .proof-visible{margin-left:16px;margin-right:16px}
+  .proof-squares{grid-template-columns:1fr}
+}
+
+@media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
+
+.proof-visible{margin:18px 0 8px;padding:0}
+.erin-new-resources .cj-resources-kicker{margin:0 0 6px;color:var(--green-dark,#1a7a45);font-size:12px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase}
+.res-featured-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media(max-width:720px){.res-featured-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -2113,8 +2308,8 @@
               <div class="invest-option-sub">$300/month × 12 months — $3,600 total. Soft pre-qual. Other financing options may be available if approved.</div>
             </div>
             <div class="invest-price-stack">
-              <div class="invest-price-big" style="font-size:22px;">Instant</div>
-              <div class="invest-price-mini">soft pre-qualify</div>
+              <div class="invest-price-big">$300/month</div>
+              <div class="invest-price-mini">$3,600 total · 12 months</div>
             </div>
           </div>
           <div class="invest-row">
@@ -2236,94 +2431,79 @@
 
   </div>
 
-  <!-- CJ CURATED RESOURCES -->
+  <!-- CJ CURATED RESOURCES (bars + caption cards, no video blocks) -->
   <div class="sec-head">
     <div class="sec-num">4</div>
     <h3>Resources — CJ's Picks for You</h3>
   </div>
 
-  <div class="cj-resources-wrap">
-    <p class="cj-resources-lead"><strong>Erin</strong> — start with the ⭐ picks below. These are the videos and links I most want you to review while you're deciding.</p>
+  <section class="proof-visible erin-new-resources" aria-labelledby="proofTitle">
+    <div class="cj-resources-kicker">If you want to check out more...</div>
+    <h2 id="proofTitle">Placement proof, employer proof, and a fresh member perspective.</h2>
+    <p class="section-lede">Aug 18 placements, Taylor Conroy, then Taylor Decourcey. That is enough context to decide with confidence.</p>
 
-    <p class="cj-resources-kicker">⭐ Start here — CJ's top picks</p>
-    <div class="cj-resources-featured">
+    <button type="button" class="precall-trust-bar res-trust-top" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5" aria-label="Trustpilot Reviews, 4.9 out of 5, opens on this page">
+      <span class="precall-trust-stars" aria-hidden="true">★★★★★</span>
+      <span>Trustpilot Reviews, 4.9 out of 5</span>
+      <span class="res-trust-hint">Opens here ▸</span>
+    </button>
+    <button type="button" class="precall-top20-bar" data-media="doc" data-url="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" data-title="Top 20 Companies in High Ticket Sales" aria-label="Top 20 Companies In HTS, opens on this page">
+      <span>Top 20 Companies In HTS</span>
+      <span class="res-trust-hint">Opens here ▸</span>
+    </button>
 
-      <a href="https://youtu.be/FqlY37NaIsk?si=8__yr1PEtLQY-l9S" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
-        <div class="cj-resource-card-badge">⭐ CJ's #1 pick</div>
-        <div class="cj-resource-card-title">Dana — unsolicited personal review</div>
-        <p class="cj-resource-card-desc">She recorded this completely on her own — we had no idea until she posted it. Life coach with a community of about 17,000 followers. She walks through why she chose HTSA, what to expect, and her experience start to finish.</p>
-        <span class="cj-resource-card-cta">Watch on YouTube</span>
-      </a>
-
-      <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
-        <div class="cj-resource-card-badge">⭐ Verified reviews</div>
-        <div class="cj-resource-card-title">Trustpilot — 4.9 out of 5 stars</div>
-        <p class="cj-resource-card-desc">Read what real members say about HTSA — unfiltered, third-party reviews from people who went through the program.</p>
-        <span class="cj-resource-card-cta">Read Trustpilot reviews</span>
-      </a>
-
-      <a href="https://youtu.be/bd65afldLmE?si=e5Y6G5qMxX-Tx1kE" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
-        <div class="cj-resource-card-badge">⭐ From our network</div>
-        <div class="cj-resource-card-title">Taylor Conroy (TEDx Coach) — why he hires our members</div>
-        <p class="cj-resource-card-desc">Taylor is a TEDx coach who actively hires HTSA-certified closers. Hear directly from a hiring manager why he trusts our members.</p>
-        <span class="cj-resource-card-cta">Watch on YouTube</span>
-      </a>
-
-      <a href="https://drive.google.com/file/d/1Zo2ID5sdF8ZYP8rZD_fisNgj-eNpuQxM/view?usp=sharing" class="cj-resource-card cj-resource-card--featured" target="_blank" rel="noopener noreferrer">
-        <div class="cj-resource-card-badge">⭐ Fresh placement story</div>
-        <div class="cj-resource-card-title">Taylor Decourcey — newer member perspective</div>
-        <p class="cj-resource-card-desc">Newer placement with a fresher perspective (placed ~February 2026). This video is not posted publicly yet — you're seeing it here first.</p>
-        <span class="cj-resource-card-cta">Watch Taylor's story</span>
-      </a>
-
+    <div class="res-wrap" style="margin:10px 0 0">
+      <details class="res-tab" id="resTab">
+        <summary>
+          <span><span class="res-tab-title">More Resources / Proof</span><span class="res-tab-sub">Videos, website, book, placement proof. Opens on this page.</span></span>
+          <span class="res-tab-arrow" aria-hidden="true">▸</span>
+        </summary>
+        <div class="res-panel">
+          <div class="res-group res-group--featured">
+            <div class="res-group-label">⭐ Start here · caption picks</div>
+            <div class="res-featured-grid">
+              <button type="button" class="res-btn res-featured" data-media="video" data-src="/media/this-week-at-htsa-2026-08-18.mp4" data-title="This Week at HTSA — Aug 18 placements">
+                <span class="res-featured-kicker">Must watch · Aug 18</span>
+                <span class="res-featured-title">Aug 18</span>
+                <span class="res-featured-desc">Four members on our live group call talking about getting multiple offers.</span>
+                <span class="res-featured-cta">Play here ▸</span>
+              </button>
+              <button type="button" class="res-btn res-featured" data-media="yt" data-id="bd65afldLmE" data-title="Taylor Conroy explains why he hires from HTSA">
+                <span class="res-featured-kicker">Employer-side proof</span>
+                <span class="res-featured-title">Taylor Conroy</span>
+                <span class="res-featured-desc">A TEDx coach who hires HTSA members. Hear why he trusts this certification.</span>
+                <span class="res-featured-cta">Watch here ▸</span>
+              </button>
+              <button type="button" class="res-btn res-featured" data-media="video" data-src="/media/taylor-decoursey-testimonial.mp4" data-title="Taylor Decourcey — newer member perspective">
+                <span class="res-featured-kicker">Fresh perspective</span>
+                <span class="res-featured-title">Taylor Decourcey</span>
+                <span class="res-featured-desc">Newer member. A real look at the first few months after certification.</span>
+                <span class="res-featured-cta">Play here ▸</span>
+              </button>
+            </div>
+          </div>
+          <div class="res-group">
+            <div class="res-group-label">More from our network</div>
+            <button type="button" class="res-btn" data-media="yt" data-id="eLAWEwE7pl4" data-title="Meet Chad — CEO &amp; Founder at HTSA"><span>Meet Chad — CEO &amp; Founder at HTSA<small>YouTube · plays here</small></span><span class="chev">▸</span></button>
+          </div>
+          <div class="res-group">
+            <div class="res-group-label">Member testimonials</div>
+            <button type="button" class="res-btn" data-media="yt" data-id="WOVqPR-ufYM" data-title="Cassie — Single Mom success story"><span>Cassie — Single Mom<small>Relatable success story · plays here</small></span><span class="chev">▸</span></button>
+            <button type="button" class="res-btn" data-media="yt" data-id="FqlY37NaIsk" data-title="Dana — Unsolicited HTSA Personal Review"><span>Dana — Personal Review<small>Unsolicited HTSA review · plays here</small></span><span class="chev">▸</span></button>
+            <button type="button" class="res-btn" data-media="yt" data-id="5pVlD6EKy1k" data-title="Josh — Alex Hormozi background"><span>Josh — Alex Hormozi background<small>High-profile background · plays here</small></span><span class="chev">▸</span></button>
+            <button type="button" class="res-btn" data-media="yt" data-id="TWacdj9x45o" data-title="Brianna — Tony Robbins team"><span>Brianna — Tony Robbins team<small>Credibility from a big name · plays here</small></span><span class="chev">▸</span></button>
+          </div>
+          <div class="res-group">
+            <div class="res-group-label">More resources</div>
+            <button type="button" class="res-btn" data-media="book" data-url="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" data-title="Chad’s Book — The Book on High Ticket Sales"><span>Chad’s Book<small>Full book details · opens on this page</small></span><span class="chev">▸</span></button>
+            <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-why-placement.jpg" data-title="Why Everyone Raves About Our Placement"><span>Why Everyone Raves About Our Placement<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
+            <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-christa-22k.jpg" data-title="Christa Kieffer — Placement to 22k (4 months)"><span>Christa Kieffer — Placement to 22k<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
+            <button type="button" class="res-btn" data-media="img" data-src="https://image.thum.io/get/width/1200/fullpage/https://highticketsalesacademy.com/" data-title="HTSA Website"><span>HTSA Website<small>Full website snapshot · stays on this page</small></span><span class="chev">▸</span></button>
+          </div>
+        </div>
+      </details>
     </div>
-
-    <p class="cj-resources-kicker">More success stories from our network</p>
-    <div class="cj-resources-grid">
-
-      <a href="https://youtu.be/WOVqPR-ufYM?si=ncgvZym7RPX1O5Hf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
-        <div class="cj-resource-card-title">Cassie — single mom success story</div>
-        <p class="cj-resource-card-desc">Relatable story — single mom who made the transition work around real life.</p>
-        <span class="cj-resource-card-cta">Watch on YouTube</span>
-      </a>
-
-      <a href="https://youtu.be/5pVlD6EKy1k?si=3YBFqk7WhgLW0Hib" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
-        <div class="cj-resource-card-title">Josh — Alex Hormozi background</div>
-        <p class="cj-resource-card-desc">High-profile sales background — hear how HTSA fit into his path.</p>
-        <span class="cj-resource-card-cta">Watch on YouTube</span>
-      </a>
-
-      <a href="https://youtu.be/TWacdj9x45o?si=7x5kInwdseoNPTE8" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
-        <div class="cj-resource-card-title">Brianna — Tony Robbins team</div>
-        <p class="cj-resource-card-desc">Credibility from a big-name organization — her HTSA experience.</p>
-        <span class="cj-resource-card-cta">Watch on YouTube</span>
-      </a>
-
-      <a href="https://www.highticketsalesacademy.com" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
-        <div class="cj-resource-card-title">HTSA Website — more stories &amp; outcomes</div>
-        <p class="cj-resource-card-desc">Many more member outcomes, screenshots, and program details on our main site.</p>
-        <span class="cj-resource-card-cta">Visit highticketsalesacademy.com</span>
-      </a>
-
-    </div>
-
-    <p class="cj-resources-kicker" style="margin-top:18px;">Key resources</p>
-    <div class="cj-resources-grid">
-
-      <a href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
-        <div class="cj-resource-card-title">Chad's Book — <em>The Book on High Ticket Sales</em></div>
-        <p class="cj-resource-card-desc">The ultimate guide by HTSA founder Chad Aleo — available on Amazon.</p>
-        <span class="cj-resource-card-cta">View on Amazon</span>
-      </a>
-
-      <a href="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" class="cj-resource-card cj-resource-card--compact" target="_blank" rel="noopener noreferrer">
-        <div class="cj-resource-card-title">Top 20 Companies in High Ticket Sales</div>
-        <p class="cj-resource-card-desc">Industry overview PDF — where HTSA fits in the landscape.</p>
-        <span class="cj-resource-card-cta">Open PDF</span>
-      </a>
-
-    </div>
-  </div>
+  </section>
 
   <!-- PHONE OPTION -->
   <div class="phone-option">
@@ -2342,69 +2522,58 @@
     <p>You're not just enrolling in a program — you're joining a community of people who show up, do the work, and build something real. We can't wait to see where this takes you.</p>
   </div>
 
-  <!-- Member stories & book (subtle; site / Trustpilot / YouTube in footer) -->
-  <div class="ref-strip">
-    <div class="ref-strip-inner">
-      <div class="ref-strip-links-col">
-        <div class="ref-strip-label">Member voices</div>
-        <p style="font-size:12px;line-height:1.6;color:var(--muted);margin:0 0 14px;max-width:280px;">Video resources and CJ's picks are in <strong style="color:var(--navy);">Section 4 above</strong>. Below are written testimonials from members.</p>
-        <div class="ref-strip-mini-stack">
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">Member voice</div>
-            <blockquote class="ref-strip-quote-body">Just received this news from my first mock call and wanted to share... I'm SUPER grateful to you for helping me move forward with HTSA! Keep doing what you're doing!</blockquote>
-            <p class="ref-strip-quote-attr">— Kate R. · shared with HTSA</p>
-          </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">Member voice</div>
-            <blockquote class="ref-strip-quote-body">I'm really enjoying the program so far and getting a ton of value out of it! Thanks again for helping me cross the line. The work you're doing is legitimately important I hope you know that!!!!</blockquote>
-            <p class="ref-strip-quote-attr">— Jessica C. · shared with HTSA</p>
-          </div>
-          <div class="ref-strip-quote ref-strip-quote--compact">
-            <div class="ref-strip-quote-meta">Member voice</div>
-            <blockquote class="ref-strip-quote-body">HTSA has played a major role in helping me transition into a career in sales. I was looking for a structured path forward — not just motivation — and the coaching, interview prep, and overall guidance gave me the confidence and skills needed to position myself competitively for real sales opportunities.
-
-They genuinely care about helping you succeed and are always available to answer questions and provide support throughout the process. That consistency mattered on the days when interviews felt high-stakes and I needed clear, practical feedback fast.
-
-Huge shoutout to Nate Hop — he helped push me in the right direction every step of the way. He kept me focused on what actually moves the needle: preparation, positioning, and follow-through when opportunities showed up.
-
-Because of that support, I was able to land a position with Grant Cardone's sales team.
-
-I'd highly recommend HTSA to anyone looking to break into sales or level up professionally — especially if you want mentorship that shows up when it counts.</blockquote>
-            <p class="ref-strip-quote-attr">— Austin G. · shared with HTSA</p>
-          </div>
-        </div>
-      </div>
-      <div class="ref-strip-quote-wrap" style="gap:14px;">
-        <div class="ref-strip-quote ref-strip-quote--compact">
-          <div class="ref-strip-quote-meta">Member voice</div>
-          <blockquote class="ref-strip-quote-body">Before joining High Ticket Sales Academy, I had zero background in high-ticket sales. I didn't know the frameworks, the language, or even how the industry really worked — and walking in without that foundation felt intimidating at first.
-
-Through their structured coursework, consistent mock calls, and hands-on interview preparation, everything started to click in a way that finally felt repeatable. The progression from fundamentals to live practice made the learning curve feel intentional instead of chaotic.
-
-What really stood out was how practical the training was — it wasn't just theory, it was real-world application that translated directly into results. By the end of the program, I had over 17 job offers to choose from, which honestly exceeded my expectations going in.
-
-Another huge value was the community. I built strong relationships with other students who were on the same path, and that support system made a big difference throughout the process — having people to compare notes with, rehearse with, and celebrate small wins with kept me accountable and reminded me I wasn't figuring it all out alone.
-
-I also spent a lot of time working with Nate, who played a key role in my success. He coached me extensively on interviews, helped me navigate contacts and referrals, and gave valuable guidance when it came to evaluating and selecting offers. That level of access and mentorship is rare.
-
-Overall, it was a great investment.</blockquote>
-          <p class="ref-strip-quote-attr">— David S. · shared with HTSA</p>
-        </div>
-        <div class="ref-strip-quote ref-strip-quote--compact">
-          <div class="ref-strip-quote-meta">Member voice</div>
-          <blockquote class="ref-strip-quote-body">I'm a career sales professional who spent a solid year researching high-ticket programs before choosing High Ticket Sales Academy — and I'm glad I followed my gut. If you already know how to sell, the difference here is the depth of support: training and coaching that actually keep you accountable, plus a team and community that genuinely want you to win — from Chad and Christian's leadership to peers who show up for each other.
-
-So far it's been nothing but positive, and I feel confident about the move. If you're an experienced rep on the fence about high-ticket, I'd absolutely recommend HTSA — take the step.</blockquote>
-          <p class="ref-strip-quote-attr">— Morgan M. · shared with HTSA</p>
-        </div>
-        <div class="ref-strip-quote ref-strip-quote--compact">
-          <div class="ref-strip-quote-meta">Member voice</div>
-          <blockquote class="ref-strip-quote-body">Hey CJ, Just wanted to say thanks, seriously. You didn't let me slip away after I tried to bail on our call. You stayed patient, kept it real, and showed me why this team's different. That kind of support? That's why I'm all in now. Appreciate you!</blockquote>
-          <p class="ref-strip-quote-attr">— Nick S. · shared with HTSA</p>
-        </div>
-      </div>
+  <!-- CJ REVIEWS (Janaye + See more) -->
+  <section class="reviews">
+    <div class="reviews-banner">
+      <div class="reviews-label">CJ Reviews</div>
+      <p class="reviews-desc">Real messages from people who worked directly with CJ.</p>
     </div>
-  </div>
+
+    <div class="review-card">
+      <div class="review-meta">To CJ</div>
+      <div class="review-body">Hey CJ, it's Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could've made for my life right now.<br><br>I think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!</div>
+      <div class="review-attr">— Janaye · text message</div>
+    </div>
+
+    <details class="reviews-more" id="reviewsMore">
+      <summary>
+        <span>See more reviews<span class="reviews-more-sub">9 more messages from people who worked with CJ</span></span>
+        <span class="reviews-more-arrow" aria-hidden="true">▸</span>
+      </summary>
+      <div class="reviews-more-panel">
+        <div class="review-card">
+          <div class="review-meta">To CJ</div>
+          <div class="review-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you're doing.</div>
+          <div class="review-attr">— Zach Scanlon · text message</div>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">To CJ</div>
+          <div class="review-body">CJ, I just wanted to thank you for closing me on the program. I can already tell I'll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process.</div>
+          <div class="review-attr">— Riley Colston · text message</div>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">To CJ</div>
+          <div class="review-body">CJ, the program has been great so far and I've made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you.</div>
+          <div class="review-attr">— Amy Colombo · text message</div>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">To CJ</div>
+          <div class="review-body">CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I'm so grateful. I landed my dream role 65 days in, and you played a real part in that.</div>
+          <div class="review-attr">— Kate R. · text message</div>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">To CJ</div>
+          <div class="review-body">Just received this news from my first mock call and wanted to share. I'm super grateful to you for helping me move forward with HTSA. Keep doing what you're doing.</div>
+          <div class="review-attr">— Jessica C. · text message</div>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">To CJ</div>
+          <div class="review-body">Hey CJ, just wanted to say thanks, seriously. You didn't let me slip away after I tried to bail on our call. You stayed patient, kept it real, and showed me why this team's different. That's why I'm all in now. Appreciate you.</div>
+          <div class="review-attr">— Nick S. · text message</div>
+        </div>
+      </div>
+    </details>
+  </section>
 
   <!-- FOOTER -->
   <div style="background:var(--navy);border-top:3px solid var(--green);padding:28px 36px;page-break-inside:avoid;break-inside:avoid;">
@@ -2459,6 +2628,18 @@ So far it's been nothing but positive, and I feel confident about the move. If y
   </div>
 
 </div>
+
+<dialog class="sheet media-sheet" id="mediaSheet" aria-labelledby="mediaTitle">
+  <div class="sheet-head">
+    <div class="sheet-kicker">Resource</div>
+    <h2 id="mediaTitle">Resource</h2>
+  </div>
+  <div class="sheet-body" id="mediaBody"></div>
+  <div class="sheet-foot">
+    <button class="btn btn--back" type="button" id="mediaExpand">Larger</button>
+    <button class="btn btn--go" type="button" id="mediaClose">Got it</button>
+  </div>
+</dialog>
 
 <script>
 (function () {
@@ -2602,5 +2783,106 @@ So far it's been nothing but positive, and I feel confident about the move. If y
   });
 })();
 </script>
+
+<script>
+  /* ---------- New-style resources (in-page) ---------- */
+  (function(){
+    function openSheet(d){ if (!d) return; if (typeof d.showModal === "function") d.showModal(); else d.setAttribute("open",""); }
+    function closeSheet(d){ if (!d) return; if (typeof d.close === "function") d.close(); else d.removeAttribute("open"); }
+    var mediaSheet = document.getElementById("mediaSheet");
+    var mediaBody = document.getElementById("mediaBody");
+    var mediaTitle = document.getElementById("mediaTitle");
+    if (!mediaSheet || !mediaBody) return;
+    var mediaExpanded = false;
+    function clearMedia(){
+      mediaBody.innerHTML = "";
+      mediaExpanded = false;
+      mediaSheet.style.width = "";
+      mediaSheet.style.maxWidth = "";
+      mediaSheet.style.height = "";
+      mediaSheet.style.maxHeight = "";
+      mediaSheet.classList.remove("media-sheet--wide");
+    }
+    function openMedia(kind, payload, title){
+      clearMedia();
+      mediaTitle.textContent = title || "Resource";
+      mediaSheet.classList.toggle("media-sheet--wide", kind === "img" || kind === "doc");
+      if (kind === "yt") {
+        var f = document.createElement("iframe");
+        f.className = "media-frame";
+        f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        f.setAttribute("allowfullscreen", "");
+        f.setAttribute("playsinline", "");
+        f.src = "https://www.youtube-nocookie.com/embed/" + payload + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+        mediaBody.appendChild(f);
+      } else if (kind === "img") {
+        var wrap = document.createElement("div");
+        wrap.className = "media-scroll";
+        var img = document.createElement("img");
+        img.src = payload; img.alt = title || "Resource"; img.loading = "eager";
+        wrap.appendChild(img); mediaBody.appendChild(wrap);
+      } else if (kind === "video") {
+        var wrapV = document.createElement("div");
+        wrapV.className = "media-scroll"; wrapV.style.background = "#000";
+        var v = document.createElement("video");
+        v.className = "media-frame"; v.controls = true;
+        v.setAttribute("playsinline", ""); v.setAttribute("preload", "metadata");
+        v.src = payload; v.autoplay = true;
+        wrapV.appendChild(v); mediaBody.appendChild(wrapV);
+      } else if (kind === "book") {
+        var wrapB = document.createElement("div");
+        wrapB.className = "book-viewer";
+        wrapB.innerHTML = '<img src="/media/chad-aleo-book-banner.png" alt="The Book on High Ticket Sales by Chad Aleo">' +
+          '<h3>The Book on High Ticket Sales</h3>' +
+          '<p><b>Chad Aleo</b> · The Ultimate Guide to Making Millions Through Remote Selling</p>' +
+          '<div class="book-meta">4.8 out of 5 stars · 363 ratings · Paperback · 161 pages · $12.99</div>' +
+          '<p>A practical guide to building a career in remote high ticket sales from the founder of High Ticket Sales Academy.</p>';
+        var link = document.createElement("a");
+        link.className = "book-amazon"; link.href = payload; link.target = "_blank"; link.rel = "noopener noreferrer";
+        link.textContent = "View the book on Amazon";
+        wrapB.appendChild(link); mediaBody.appendChild(wrapB);
+      } else {
+        var fd = document.createElement("iframe");
+        fd.className = "media-frame media-frame--doc";
+        fd.title = title || "Resource"; fd.src = payload;
+        mediaBody.appendChild(fd);
+      }
+      openSheet(mediaSheet);
+    }
+    document.querySelectorAll(".res-btn, .precall-trust-bar, .precall-top20-bar").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var kind = btn.dataset.media; if (!kind) return;
+        if (kind === "yt") openMedia("yt", btn.dataset.id, btn.dataset.title);
+        else if (kind === "img") openMedia("img", btn.dataset.src, btn.dataset.title);
+        else if (kind === "video") openMedia("video", btn.dataset.src, btn.dataset.title);
+        else if (kind === "book") openMedia("book", btn.dataset.url, btn.dataset.title);
+        else openMedia("doc", btn.dataset.url, btn.dataset.title);
+      });
+    });
+    var mediaClose = document.getElementById("mediaClose");
+    var mediaExpand = document.getElementById("mediaExpand");
+    if (mediaClose) mediaClose.addEventListener("click", function(){ clearMedia(); closeSheet(mediaSheet); });
+    mediaSheet.addEventListener("click", function(ev){ if (ev.target === mediaSheet) { clearMedia(); closeSheet(mediaSheet); } });
+    if (mediaExpand) mediaExpand.addEventListener("click", function(){
+      mediaExpanded = !mediaExpanded;
+      var sc = mediaBody.querySelector(".media-scroll");
+      var fr = mediaBody.querySelector("iframe");
+      if (mediaExpanded) {
+        mediaSheet.style.width = "min(96vw, 1100px)";
+        mediaSheet.style.maxHeight = "96dvh";
+        mediaSheet.style.height = "96dvh";
+        if (fr) { fr.style.minHeight = "80dvh"; fr.style.height = "80dvh"; }
+        if (sc) sc.style.maxHeight = "80dvh";
+        mediaExpand.textContent = "Smaller";
+      } else {
+        mediaSheet.style.width = ""; mediaSheet.style.maxHeight = ""; mediaSheet.style.height = "";
+        if (fr) { fr.style.minHeight = ""; fr.style.height = ""; }
+        if (sc) sc.style.maxHeight = "";
+        mediaExpand.textContent = "Larger";
+      }
+    });
+  })();
+</script>
+
 </body>
 </html>
