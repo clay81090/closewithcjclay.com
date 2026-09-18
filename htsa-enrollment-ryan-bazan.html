@@ -426,7 +426,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1789169267 -->
+<!-- close-build:1789754819 -->
 </head>
 <body>
 <main class="page">
@@ -501,6 +501,11 @@ a{color:inherit}
         <span class="plan-unit">one time</span>
       </div>
       <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
+      <div class="plan-splitit plan-action">
+        <div class="plan-splitit-title">Action Taker Discount · 2 payments</div>
+        <div class="plan-splitit-copy"><b>$1,750 today</b> (checkout below). Payment 2 is <b>$4,250 due in 30 days</b>, no link on this page. CJ will send the $4,250 balance when it is due. <b>$6,000 total.</b></div>
+        <button class="choose" type="button" data-plan="action">Pay $1,750 today</button>
+      </div>
       <details class="plan-sub" id="planSplititWrap" hidden>
         <summary><span>More payment options</span><span class="plan-sub-chev" aria-hidden="true">▾</span></summary>
         <div class="plan-splitit">
@@ -1008,7 +1013,7 @@ a{color:inherit}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1789745477
+   close-build:1789754819
    ============================================================ */
 const BUYER = {
   firstName: "Ryan",
@@ -1153,6 +1158,9 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
 
   const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
+    action:  { name:"Action Taker Discount · $1,750 today", amt:"$1,750 today",
+               sub:"Payment 2 is $4,250 due in 30 days (CJ will send that link). $6,000 total.",
+               url:"https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true", warn:"" },
     plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
     clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" }
   };
