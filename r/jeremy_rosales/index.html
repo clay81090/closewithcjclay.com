@@ -182,7 +182,7 @@ details[open] .chev{transform:rotate(180deg)}
 
 .cj-resources-kicker{margin:0 0 12px;color:var(--green);font-size:10.5px;font-weight:700;
   letter-spacing:1.4px;text-transform:uppercase}
-.proof-squares{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:8px 0 12px}
+.proof-squares{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 12px}
 .proof-square{display:flex;flex-direction:column;min-height:100%;overflow:hidden;border:2px solid #f59e0b;
   border-radius:14px;background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);
   box-shadow:0 8px 20px rgba(10,22,40,.06)}
@@ -369,26 +369,10 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
     <p class="cta-note" id="ctaNote">Short page on purpose. No fluff.</p>
   </section>
 
-  <section class="section">
-    <div class="kicker">Start here</div>
-    <h2>August 18 live call — people getting placed.</h2>
-    <p class="section-lede">Four members on the live coaching call talking about getting placed.
-      This is the part that matters for someone evaluating the placement side, not the training brochure.</p>
-    <div class="video-frame">
-      <video id="clip" controls playsinline preload="metadata" controlslist="nodownload"
-             poster="/media/htsa-clip-poster.jpg"
-             title="August 18th HTSA live coaching call — placement segment">
-        <source src="/media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
-        Your browser cannot play this video.
-      </video>
-      <p class="video-caption"><strong>4:07</strong> · August 18th live coaching call with Chad.</p>
-    </div>
-  </section>
-
   <section class="section more" aria-labelledby="proofTitle">
-    <div class="cj-resources-kicker">The two things worth checking</div>
-    <h2 id="proofTitle">Hiring-side proof, then the companies.</h2>
-    <p class="section-lede">A TEDx coach who hires from HTSA, then the Top 20 list so you can see the caliber of companies in this space.</p>
+    <div class="cj-resources-kicker">The three things worth checking</div>
+    <h2 id="proofTitle">Hiring proof, the companies, and live placements.</h2>
+    <p class="section-lede">Taylor Conroy, the Top 20 companies list, then the August 18 live placement clip. Straight to the point.</p>
     <div class="proof-squares">
       <article class="proof-square">
         <div class="proof-square-copy">
@@ -412,12 +396,29 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
         </button>
         <button type="button" class="proof-square-cta" data-media="doc" data-url="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" data-title="Top 20 Companies in High Ticket Sales">Open here</button>
       </article>
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">Live placement proof</div>
+          <h3>August 18</h3>
+          <p>Four members on the live call talking about getting placed.</p>
+        </div>
+        <video id="clip" class="proof-square-media" controls playsinline preload="metadata" controlslist="nodownload"
+               poster="/media/htsa-clip-poster.jpg"
+               title="August 18th HTSA live coaching call — placement segment">
+          <source src="/media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
+          Your browser cannot play this video.
+        </video>
+        <button type="button" class="proof-square-cta" data-media="video" data-src="/media/this-week-at-htsa-2026-08-18.mp4" data-title="August 18 live placement call">Play here</button>
+      </article>
     </div>
     <button type="button" class="precall-trust-bar res-trust-top" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5" aria-label="Trustpilot Reviews, 4.9 out of 5, opens on this page">
       <span class="precall-trust-stars" aria-hidden="true">★★★★★</span>
       <span>Trustpilot Reviews, 4.9 out of 5</span>
       <span class="res-trust-hint">Opens here ▸</span>
     </button>
+    <a class="footer-site-cta" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">
+      HTSA website · more testimonials <span aria-hidden="true">▸</span>
+    </a>
   </section>
 
   <section class="close-section">
@@ -433,9 +434,14 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
       <div>
         <div class="footer-brand-name">High Ticket Sales Academy</div>
         <div class="footer-brand-sub">Certification · Coaching · Placement</div>
-        <a class="footer-site-cta" href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">
-          HTSA website · more testimonials <span aria-hidden="true">▸</span>
-        </a>
+        <div class="footer-links">
+          <a href="https://www.youtube.com/@highticketsalesacademy" target="_blank" rel="noopener noreferrer">
+            <span class="footer-ico" aria-hidden="true">▶️</span>youtube.com/@highticketsalesacademy</a>
+          <a href="https://www.instagram.com/highticketsalesacademy/" target="_blank" rel="noopener noreferrer">
+            <span class="footer-ico" aria-hidden="true">📷</span>@highticketsalesacademy</a>
+          <a href="https://www.facebook.com/HTSAcadamy/" target="_blank" rel="noopener noreferrer">
+            <span class="footer-ico" aria-hidden="true">👥</span>facebook.com/HTSAcadamy</a>
+        </div>
       </div>
 
       <div class="bcard">
@@ -450,19 +456,15 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
           <a class="bcard-line" href="mailto:cj@highticketsalesacademy.com">
             <span aria-hidden="true">✉️</span>cj@highticketsalesacademy.com</a>
           <a class="bcard-line bcard-line--sms" href="sms:+16166121735">
-            <span aria-hidden="true">💬</span>Text me anytime</a>
+            <span aria-hidden="true">💬</span>Text me if anything changes</a>
         </div>
       </div>
     </div>
 
     <div class="footer-reviews">
-      <button type="button" class="precall-trust-bar" style="margin:0;width:100%;max-width:520px" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5" aria-label="Trustpilot Reviews, 4.9 out of 5, opens on this page">
-        <span class="precall-trust-stars" aria-hidden="true">★★★★★</span>
-        <span>Trustpilot · 4.9 / 5</span>
-        <span class="res-trust-hint">Opens here ▸</span>
-      </button>
+      <a href="mailto:support@highticketsalesacademy.com">support@highticketsalesacademy.com</a>
     </div>
-    <div class="footer-copy">© High Ticket Sales Academy · Prepared for Jeremy Rosales</div>
+    <div class="footer-copy">© High Ticket Sales Academy · All Rights Reserved</div>
   </footer>
 </main>
 
@@ -492,8 +494,8 @@ const GUEST = {
   phone:      "+18475320113",
   slug:       "jeremy_rosales",
   booked:     true,
-  callLabel:  "",
-  confirmDay: "",
+  callLabel:  "Monday, Sept 21 · 1:00 PM EST",
+  confirmDay: "Monday",
   bookingUrl: "https://meetings.hubspot.com/charles660/cj"
 };
 const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
@@ -550,7 +552,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     if (GUEST.callLabel) {
       el("whenBlock").hidden = false;
       el("whenValue").textContent = GUEST.callLabel;
-      el("closeTitle").textContent = "See you " + GUEST.callLabel.split("·")[0].trim() + ".";
+      el("closeTitle").textContent = "See you " + GUEST.callLabel + ".";
     }
   } else {
     el("heroPill").textContent = "Let's get you on the calendar";
@@ -569,7 +571,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     if (booked) {
       b.type = "button";
       // Alternatives: "I'll be there Wednesday" | "Locking it in" | "Yes, I'll be on the call"
-      b.textContent = "Confirm I'll be there";
+      b.textContent = GUEST.callLabel ? "Confirm " + GUEST.callLabel : "Confirm I'll be there";
       confirmButtons.push(b);
       b.addEventListener("click", confirmAll);
     } else {
