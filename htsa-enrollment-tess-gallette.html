@@ -426,7 +426,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1789169267 -->
+<!-- close-build:1790018803 -->
 </head>
 <body>
 <main class="page">
@@ -1008,7 +1008,7 @@ a{color:inherit}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1790018694
+   close-build:1790018803
    ============================================================ */
 const BUYER = {
   firstName: "Tess",
@@ -1019,7 +1019,7 @@ const BUYER = {
   track:     "closer",
   offer:     "standard",
   show:      ["pif"],
-  intro:     ""
+  intro:     "Tess, this is the $4,000 paid in full path we covered. That is $2,000 off the usual $6,000 because of your experience."
 };
 
 const CUSTOM_OFFER = null;
@@ -1031,9 +1031,9 @@ const TRACKS = {
 
 const OFFERS = {
   standard: {
-    pif:  { amount: "$6,000", was: "$7,000",
-            note: "One payment. Saves you $1,000 against the payment plan.",
-            checkout: "https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" },
+    pif:  { amount: "$4,000", was: "$6,000",
+            note: "$2,000 off for experience. One payment. Usually $6,000 paid in full.",
+            checkout: "https://whop.com/checkout/plan_JqclZ8q3KBG1N?d2c=true" },
     plan: { name: "4 payments", amount: "$1,750", unit: "today · $7,000 total",
             note: "First payment today, then one a month for three months.",
             warn: "",
@@ -1152,7 +1152,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("stickySub").textContent = "Paid in full · " + O.pif.amount;
 
   const PLANS = {
-    pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
+    pif:     { name:"Paid in full · experience discount",  amt:O.pif.amount,     sub:"$4,000 today. $2,000 off the usual $6,000 PIF because of your experience.", url:O.pif.checkout, warn:"" },
     plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
     clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" }
   };
