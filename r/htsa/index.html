@@ -195,9 +195,19 @@ details[open] .chev{transform:rotate(180deg)}
   text-transform:uppercase}
 .proof-square h3{margin:0 0 6px;color:var(--navy);font-size:15px;line-height:1.3}
 .proof-square p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}
-.proof-square-media{width:100%;aspect-ratio:16/9;border:0;background:#0a1628}
+.proof-square-media-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#0a1628;overflow:hidden}
+.proof-square-media{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0a1628;object-fit:cover}
 .proof-square-cta{display:block;margin:0 13px 13px;padding:10px 12px;border-radius:9px;background:var(--navy);
   color:#fff;font-size:12px;font-weight:700;text-align:center;text-decoration:none}
+.res-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.res-tiles--1{grid-template-columns:1fr}
+.res-tiles--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.res-tiles .proof-square{min-height:0;border-width:1.5px}
+.res-group:not(.res-group--featured) .proof-square{border-color:var(--grey);background:#fff;box-shadow:none}
+.res-group:not(.res-group--featured) .proof-square-kicker{color:var(--green-dark)}
+.res-tiles .proof-square-copy{padding:10px 11px 8px}
+.res-tiles .proof-square h3{font-size:14px}
+.res-tiles .proof-square p{font-size:12px}
 .precall-trust-bar{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin:0 0 10px;
   padding:16px 18px;border:2px solid var(--green);border-radius:12px;
   background:linear-gradient(145deg,#0a1628,#163056);color:#d7dee8;font-size:16px;font-weight:700;
@@ -219,10 +229,16 @@ details[open] .chev{transform:rotate(180deg)}
 .precall-more-list{display:grid;gap:8px;padding:0 12px 12px}
 .precall-more-list .precall-link-row{margin:0}
 .cj-resource-card-title[hidden]{display:none}
-.book-tab{display:block;width:100%;overflow:hidden;border:1px solid var(--grey);border-radius:10px;
-  background:#0a1628;text-decoration:none}
-.book-tab img{display:block;width:100%;height:auto;object-fit:cover;object-position:center}
-.book-tab:hover,.book-tab:focus-visible{outline:2px solid rgba(97,227,139,.4);outline-offset:2px}
+.book-tab{display:flex;width:100%;align-items:center;gap:12px;min-height:58px;margin-top:10px;
+  padding:8px 12px;border:1px solid var(--grey);border-radius:10px;background:var(--white);
+  color:var(--navy);text-decoration:none;box-sizing:border-box}
+.book-tab img{display:block;width:64px;height:46px;flex:0 0 auto;border-radius:6px;object-fit:cover;object-position:center}
+.book-tab-copy{min-width:0;flex:1}
+.book-tab-kicker{display:block;color:var(--green-dark);font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.book-tab-title{display:block;font-size:14px;font-weight:800;line-height:1.25}
+.book-tab-sub{display:block;color:var(--muted);font-size:12px;font-weight:500}
+.book-tab .chev{flex:0 0 auto;color:var(--green-dark);font-weight:900}
+.book-tab:hover,.book-tab:focus-visible{border-color:var(--green-strong);outline:none;background:rgba(97,227,139,.08)}
 .review-window{margin-top:16px;max-height:min(62vh,520px);overflow:auto;-webkit-overflow-scrolling:touch;
   border:1px solid var(--grey);border-radius:15px;background:#fff}
 .review-window img{display:block;width:100%;height:auto}
@@ -242,7 +258,7 @@ details[open] .chev{transform:rotate(180deg)}
   .section,.close-section{padding:22px 16px}
   .hero-actions .cta-button{width:100%;max-width:400px}
   .more-summary{padding:13px 14px}
-  .proof-squares{grid-template-columns:1fr}
+  .proof-squares,.res-tiles,.res-tiles--3{grid-template-columns:1fr}
   .footer{padding:20px 16px 0}
   .footer-top{grid-template-columns:1fr;gap:18px;padding-bottom:18px}
   .bcard{gap:13px;padding:14px}
@@ -420,33 +436,89 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
         <div class="res-panel">
           <div class="res-group">
             <div class="res-group-label">Meet the Founder</div>
-            <button type="button" class="res-btn" data-media="yt" data-id="eLAWEwE7pl4" data-title="Meet Chad — CEO &amp; Founder at HTSA"><span>Chad video<small>CEO and Founder · plays here</small></span><span class="chev">▸</span></button>
+            <div class="res-tiles res-tiles--1">
+              <article class="proof-square">
+                <div class="proof-square-copy">
+                  <div class="proof-square-kicker">Founder</div>
+                  <h3>Chad Aleo</h3>
+                  <p>CEO and Founder at HTSA. His story, in his words.</p>
+                </div>
+                <div class="proof-square-media-wrap">
+                  <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/eLAWEwE7pl4" title="Meet Chad, CEO and Founder at HTSA" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+              </article>
+            </div>
             <a class="book-tab" href="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" target="_blank" rel="noopener noreferrer">
-              <img src="/media/chad-aleo-book-banner.png" alt="Chad's book, The Book on High Ticket Sales">
+              <img src="/media/chad-aleo-book-banner.png" alt="">
+              <span class="book-tab-copy">
+                <span class="book-tab-kicker">Chad's book</span>
+                <span class="book-tab-title">The Book on High Ticket Sales</span>
+                <span class="book-tab-sub">Tap here to open it on Amazon</span>
+              </span>
+              <span class="chev" aria-hidden="true">▸</span>
             </a>
           </div>
           <div class="res-group res-group--featured">
             <div class="res-group-label">Member testimonials · Big names</div>
-            <div class="res-featured-grid">
-              <button type="button" class="res-btn res-featured" data-media="yt" data-id="5pVlD6EKy1k" data-title="Josh — Alex Hormozi background">
-                <span class="res-featured-kicker">Big name</span>
-                <span class="res-featured-title">Josh · Alex Hormozi</span>
-                <span class="res-featured-desc">High-profile background. Watch here.</span>
-                <span class="res-featured-cta">Watch here ▸</span>
-              </button>
-              <button type="button" class="res-btn res-featured" data-media="yt" data-id="TWacdj9x45o" data-title="Brianna — Tony Robbins team">
-                <span class="res-featured-kicker">Big name</span>
-                <span class="res-featured-title">Brianna · Tony Robbins</span>
-                <span class="res-featured-desc">Member from the Tony Robbins world. Watch here.</span>
-                <span class="res-featured-cta">Watch here ▸</span>
-              </button>
+            <div class="res-tiles">
+              <article class="proof-square">
+                <div class="proof-square-copy">
+                  <div class="proof-square-kicker">Big name</div>
+                  <h3>Josh · Alex Hormozi</h3>
+                  <p>High-profile background. Watch his story here.</p>
+                </div>
+                <div class="proof-square-media-wrap">
+                  <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/5pVlD6EKy1k" title="Josh, Alex Hormozi background" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+              </article>
+              <article class="proof-square">
+                <div class="proof-square-copy">
+                  <div class="proof-square-kicker">Big name</div>
+                  <h3>Brianna · Tony Robbins</h3>
+                  <p>Member from the Tony Robbins world. Watch here.</p>
+                </div>
+                <div class="proof-square-media-wrap">
+                  <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/TWacdj9x45o" title="Brianna, Tony Robbins team" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+              </article>
             </div>
           </div>
           <div class="res-group">
             <div class="res-group-label">More</div>
-            <button type="button" class="res-btn" data-media="yt" data-id="WOVqPR-ufYM" data-title="Cassie — Single Mom success story"><span>Cassie<small>Single mom · plays here</small></span><span class="chev">▸</span></button>
-            <button type="button" class="res-btn" data-media="video" data-src="/media/taylor-decoursey-testimonial.mp4" data-title="Taylor Decourcey — $97K revenue first month"><span>Taylor Decourcey<small>Recent · $97K revenue first month · plays here</small></span><span class="chev">▸</span></button>
-            <button type="button" class="res-btn" data-media="yt" data-id="FqlY37NaIsk" data-title="Dana — Unsolicited HTSA Personal Review"><span>Dana<small>Unsolicited, unprompted review · plays here</small></span><span class="chev">▸</span></button>
+            <div class="res-tiles res-tiles--3">
+              <article class="proof-square">
+                <div class="proof-square-copy">
+                  <div class="proof-square-kicker">Single mom</div>
+                  <h3>Cassie</h3>
+                  <p>Relatable success story. Watch here.</p>
+                </div>
+                <div class="proof-square-media-wrap">
+                  <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/WOVqPR-ufYM" title="Cassie, single mom success story" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+              </article>
+              <article class="proof-square">
+                <div class="proof-square-copy">
+                  <div class="proof-square-kicker">Recent · $97K first month</div>
+                  <h3>Taylor Decourcey</h3>
+                  <p>$97K revenue in month one after certification.</p>
+                </div>
+                <div class="proof-square-media-wrap">
+                  <video class="proof-square-media" controls playsinline preload="metadata" poster="/media/taylor-decoursey-poster.jpg" title="Taylor Decourcey, $97K revenue first month">
+                    <source src="/media/taylor-decoursey-testimonial.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </article>
+              <article class="proof-square">
+                <div class="proof-square-copy">
+                  <div class="proof-square-kicker">Unsolicited</div>
+                  <h3>Dana</h3>
+                  <p>Unprompted personal review. Watch here.</p>
+                </div>
+                <div class="proof-square-media-wrap">
+                  <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/FqlY37NaIsk" title="Dana, unsolicited HTSA review" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </details>
