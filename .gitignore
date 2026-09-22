@@ -6,3 +6,6 @@ taxes/2025/bank-statements/
 
 # Local-only sandbox (carousel experiments, scratch invoices) — never push
 practice/
+
+# Private local tools (CJ Finder, disk audits, Touch ID organizers) — NEVER publish
+_PRIVATE_LOCAL/
