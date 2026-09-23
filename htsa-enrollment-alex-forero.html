@@ -424,9 +424,37 @@ a{color:inherit}
   background:var(--navy);color:var(--white);font-size:12px;font-weight:800;letter-spacing:.02em}
 @media (max-width:520px){.res-featured-grid{grid-template-columns:1fr}}
 
+.cj-resources-kicker{margin:0 0 8px;color:var(--green-dark);font-size:10.5px;font-weight:800;
+  letter-spacing:1.4px;text-transform:uppercase}
+.proof-visible{margin:0 26px 14px}
+.proof-visible h2{margin:0 0 6px;color:var(--navy);font-family:"Playfair Display",serif;font-size:22px;line-height:1.25}
+.proof-visible .section-lede{margin:0 0 12px;color:var(--muted);font-size:13.5px;line-height:1.55}
+.proof-squares{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:8px 0 12px;align-items:stretch}
+.proof-square{display:grid;grid-template-rows:auto auto;align-content:stretch;height:100%;overflow:hidden;border:2px solid #f59e0b;
+  border-radius:14px;background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);
+  box-shadow:0 8px 20px rgba(10,22,40,.06)}
+.proof-square-copy{padding:10px 12px 8px;box-sizing:border-box}
+.proof-square-kicker{margin:0 0 4px;color:#b45309;font-size:10px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;line-height:1.2}
+.proof-square h3{margin:0 0 4px;color:var(--navy);font-size:14px;line-height:1.25}
+.proof-square p{margin:0;color:var(--muted);font-size:12px;line-height:1.4}
+.proof-square-media-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#0a1628;overflow:hidden}
+.proof-square-media{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0a1628;object-fit:cover}
+.proof-square-site{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  width:100%;height:100%;border:0;cursor:pointer;font-family:inherit;text-decoration:none;color:#fff;
+  background:radial-gradient(circle at 80% 20%,rgba(97,227,139,.22),transparent 16rem),
+  linear-gradient(145deg,#0a1628,#152a46)}
+.proof-square-site-kicker{color:#61e38b;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.proof-square-site-name{font-family:"Playfair Display",serif;font-size:16px;line-height:1.2;text-align:center}
+.proof-square-site-url{color:rgba(255,255,255,.72);font-size:12px;font-weight:700}
+@media (max-width:680px){
+  .proof-visible{margin-left:16px;margin-right:16px}
+  .proof-squares{grid-template-columns:1fr}
+}
+
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790109561 -->
+<!-- close-build:1790129100 -->
 </head>
 <body>
 <main class="page">
@@ -599,57 +627,74 @@ a{color:inherit}
   </section>
 
 
-  <!-- ALL HTSA Resources (default on every close page) -->
+  <section class="proof-visible" aria-labelledby="proofTitle">
+    <div class="cj-resources-kicker">The four to watch</div>
+    <h2 id="proofTitle">Aug 18, Taylor Conroy, the Top 20, and Taylor Decourcey.</h2>
+    <p class="section-lede">Captions on each block. The three videos play right here. Top 20 opens on this page.</p>
+    <div class="proof-squares">
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">Must watch · Aug 18</div>
+          <h3>Aug 18 placements</h3>
+          <p>Four members on the live group call. Every one had more than one offer.</p>
+        </div>
+        <div class="proof-square-media-wrap">
+          <video class="proof-square-media" controls playsinline preload="metadata" poster="/media/htsa-clip-poster.jpg" title="This Week at HTSA — Aug 18 placements">
+            <source src="/media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
+          </video>
+        </div>
+      </article>
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">Employer proof</div>
+          <h3>Taylor Conroy</h3>
+          <p>TEDx CEO. Why he hires from HTSA.</p>
+        </div>
+        <div class="proof-square-media-wrap">
+          <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/bd65afldLmE" title="Taylor Conroy explains why he hires from HTSA" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </article>
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">Industry landscape</div>
+          <h3>Top 20 Companies</h3>
+          <p>Where HTSA sits in the market. Opens here.</p>
+        </div>
+        <div class="proof-square-media-wrap">
+          <button type="button" class="proof-square-site" data-media="doc" data-url="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" data-title="Top 20 Companies in High Ticket Sales">
+            <span class="proof-square-site-kicker">PDF</span>
+            <span class="proof-square-site-name">Top 20 Companies</span>
+            <span class="proof-square-site-url">High Ticket Sales</span>
+          </button>
+        </div>
+      </article>
+      <article class="proof-square">
+        <div class="proof-square-copy">
+          <div class="proof-square-kicker">Fresh perspective</div>
+          <h3>Taylor Decourcey</h3>
+          <p>Recent member. First months after certification.</p>
+        </div>
+        <div class="proof-square-media-wrap">
+          <video class="proof-square-media" controls playsinline preload="metadata" poster="/media/taylor-decoursey-poster.jpg" title="Taylor Decourcey — newer member perspective">
+            <source src="/media/taylor-decoursey-testimonial.mp4" type="video/mp4">
+          </video>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ALL HTSA Resources (simple tabs for the rest) -->
   <div class="res-wrap">
     <details class="res-tab" id="resTab">
       <summary>
-        <span><span class="res-tab-title">All HTSA Resources</span><span class="res-tab-sub">Videos, reviews, book, placement proof. Opens on this page.</span></span>
+        <span><span class="res-tab-title">More resources</span><span class="res-tab-sub">Reviews, website, founder, member stories. Opens on this page.</span></span>
         <span class="res-tab-arrow" aria-hidden="true">▸</span>
       </summary>
       <div class="res-panel">
-        <div class="res-group res-group--featured">
-          <div class="res-group-label">⭐ Start here · CJ's top picks</div>
-          <div class="res-featured-grid">
-            <button type="button" class="res-btn res-featured" data-media="video" data-src="/media/this-week-at-htsa-2026-08-18.mp4" data-title="This Week at HTSA — Aug 18 placements">
-              <span class="res-featured-kicker">Must watch · Aug 18 live call</span>
-              <span class="res-featured-title">This Week at HTSA — Aug 18</span>
-              <span class="res-featured-desc">Four members on our Aug 18 live group call talking about getting placed. Every one had more than one offer to choose from.</span>
-              <span class="res-featured-cta">Play here ▸</span>
-            </button>
-            <button type="button" class="res-btn res-featured" data-media="yt" data-id="bd65afldLmE" data-title="Taylor Conroy (TEDx Coach) Why He Hires Our Members">
-              <span class="res-featured-kicker">Employer proof</span>
-              <span class="res-featured-title">Taylor Conroy (TEDx Coach)</span>
-              <span class="res-featured-desc">A TEDx coach who actively hires HTSA members. Hear why he trusts our certification.</span>
-              <span class="res-featured-cta">Watch here ▸</span>
-            </button>
-            <button type="button" class="res-btn res-featured" data-media="video" data-src="/media/taylor-decoursey-testimonial.mp4" data-title="Taylor Decourcey — newer member perspective">
-              <span class="res-featured-kicker">Fresh perspective</span>
-              <span class="res-featured-title">Taylor Decourcey</span>
-              <span class="res-featured-desc">Newer member. A real look at the first few months after certification.</span>
-              <span class="res-featured-cta">Play here ▸</span>
-            </button>
-            <button type="button" class="res-btn res-featured" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5">
-              <span class="res-featured-kicker">Verified reviews</span>
-              <span class="res-featured-title">Trustpilot Reviews · 4.9 / 5</span>
-              <span class="res-featured-desc">Third-party reviews from real HTSA members. Scrollable snapshot on this page.</span>
-              <span class="res-featured-cta">Open here ▸</span>
-            </button>
-            <button type="button" class="res-btn res-featured" data-media="img" data-src="https://image.thum.io/get/width/1200/fullpage/https://highticketsalesacademy.com/" data-title="HTSA Website">
-              <span class="res-featured-kicker">Stories &amp; outcomes</span>
-              <span class="res-featured-title">HTSA Website</span>
-              <span class="res-featured-desc">Full website snapshot. Member stories, program details, how HTSA presents itself.</span>
-              <span class="res-featured-cta">Open here ▸</span>
-            </button>
-            <button type="button" class="res-btn res-featured" data-media="doc" data-url="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" data-title="Top 20 Companies in High Ticket Sales">
-              <span class="res-featured-kicker">Industry landscape</span>
-              <span class="res-featured-title">Top 20 Companies in HTS</span>
-              <span class="res-featured-desc">PDF showing where HTSA fits in the market. Scrollable on this page.</span>
-              <span class="res-featured-cta">Open PDF here ▸</span>
-            </button>
-          </div>
-        </div>
         <div class="res-group">
           <div class="res-group-label">More from our network</div>
+          <button type="button" class="res-btn" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5"><span>Trustpilot Reviews · 4.9 / 5<small>Scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
+          <button type="button" class="res-btn" data-media="img" data-src="https://image.thum.io/get/width/1200/fullpage/https://highticketsalesacademy.com/" data-title="HTSA Website"><span>HTSA Website<small>Site snapshot · stays on this page</small></span><span class="chev">▸</span></button>
           <button type="button" class="res-btn" data-media="yt" data-id="eLAWEwE7pl4" data-title="Meet Chad — CEO &amp; Founder at HTSA"><span>Meet Chad — CEO &amp; Founder at HTSA<small>YouTube · plays here</small></span><span class="chev">▸</span></button>
         </div>
         <div class="res-group">
@@ -1008,7 +1053,7 @@ a{color:inherit}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1790109561
+   close-build:1790129100
    ============================================================ */
 const BUYER = {
   firstName: "Alex",
@@ -1326,7 +1371,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     event("resource_opened", { linkLabel: title || kind, linkUrl: payload });
     openSheet(mediaSheet);
   }
-  document.querySelectorAll(".res-btn").forEach(function(btn){
+  document.querySelectorAll(".res-btn, .proof-square-cta, button.proof-square-site, button.proof-square-media").forEach(function(btn){
     btn.addEventListener("click", function(){
       const kind = btn.dataset.media;
       if (kind === "yt") openMedia("yt", btn.dataset.id, btn.dataset.title);
