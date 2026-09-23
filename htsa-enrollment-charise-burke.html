@@ -87,6 +87,20 @@ a{color:inherit}
 .inc-list li::before{flex:0 0 auto;margin-top:1px;color:var(--green-strong);font-size:15px;
   font-weight:800;content:"✓"}
 
+.bonuses{margin:16px 26px 8px;padding:20px 22px;border-radius:16px;background:var(--ink);
+  border:3px solid var(--green-strong);box-shadow:0 0 0 4px rgba(0,201,122,.14)}
+.bonuses-tag{display:inline-block;margin-bottom:8px;padding:4px 11px;border-radius:999px;
+  background:var(--green-strong);color:#04231a;font-size:12px;font-weight:800;letter-spacing:.07em;
+  text-transform:uppercase}
+.bonuses .h2{margin:0 0 6px;color:var(--white)}
+.bonuses-lede{margin:0 0 16px;color:rgba(255,255,255,.82);font-size:14px;line-height:1.55}
+.bonus-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.bonus-card{padding:16px 16px 14px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.04)}
+.bonus-kicker{margin-bottom:8px;color:var(--green);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.bonus-card h3{margin:0 0 8px;color:var(--white);font-size:18px;font-weight:800;line-height:1.25}
+.bonus-card p{margin:0;color:rgba(255,255,255,.8);font-size:13.5px;line-height:1.5}
+@media (max-width:680px){.bonus-grid{grid-template-columns:1fr}.bonuses{margin-left:16px;margin-right:16px}}
+
 /* ---------- guarantee ---------- */
 .guar{margin:18px 26px 6px;padding:20px 22px;border-radius:16px;background:var(--ink);
   border:3px solid var(--green-strong);
@@ -470,7 +484,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1789619425 -->
+<!-- close-build:1790132710 -->
 </head>
 <body>
 <main class="page">
@@ -508,6 +522,24 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
     <ul class="inc-list" id="incList"></ul>
   </section>
 
+  <section class="bonuses" aria-labelledby="bonusTitle">
+    <div class="bonuses-tag">Action Taker Bonuses</div>
+    <div class="h2" id="bonusTitle">Program bonuses, for signing up tonight.</div>
+    <p class="bonuses-lede">You were on the live call. These sit on top of everything in the program.</p>
+    <div class="bonus-grid">
+      <article class="bonus-card">
+        <div class="bonus-kicker">Bonus 01</div>
+        <h3>2 one-on-one coaching calls with Chad Aleo</h3>
+        <p>Suggested use: after you land your offer.</p>
+      </article>
+      <article class="bonus-card">
+        <div class="bonus-kicker">Bonus 02</div>
+        <h3>A personal Loom video</h3>
+        <p>Chad will record a Loom video for you to send to any hiring managers you apply to.</p>
+      </article>
+    </div>
+  </section>
+
   <div class="guar" id="guarantee">
     <span class="guar-tag" id="guarTag">Confirmed for your enrollment</span>
     <h3 id="guarTitle">Placed within 6 months, or your money back.</h3>
@@ -521,7 +553,8 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
   </div>
 
   <section class="plans" id="plans">
-    <div class="h2">Your payment options</div>
+    <div class="h2">Your payment option</div>
+    <div class="plans-sub">This is the ClarityPay amount you were approved for.</div>
     <div class="plans-sub">Access opens the moment your payment clears.</div>
 
     <div class="plan plan--custom" id="planCustom" hidden>
@@ -558,8 +591,9 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
       <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
     </div>
 
-    <div class="plan" id="planClarity" hidden>
-      <div class="plan-name">ClarityPay monthly</div>
+    <div class="plan plan--best" id="planClarity" hidden>
+      <span class="badge">Approved for you</span>
+      <div class="plan-name">ClarityPay</div>
       <span class="plan-clarity-badge">0% interest · 0% APR</span>
       <div class="plan-note" id="clarityNote"></div>
       <div class="plan-figs">
@@ -809,7 +843,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
   <div class="sticky-cta-inner">
     <div class="sticky-cta-name">
       <b id="stickyLabel">Your enrollment</b>
-      <span id="stickySub">Paid in full · $6,000</span>
+      <span id="stickySub">ClarityPay · $7,150</span>
     </div>
     <a class="sticky-cta-btn" href="#plans">Choose payment ↓</a>
   </div>
@@ -1030,7 +1064,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1789619425
+   close-build:1790132710
    ============================================================ */
 const BUYER = {
   firstName: "Charise",
@@ -1040,8 +1074,8 @@ const BUYER = {
   slug:      "charise_burke",
   track:     "closer",
   offer:     "standard",
-  show:      ["pif", "plan", "clarity"],
-  intro:     ""
+  show:      ["clarity"],
+  intro:     "Charise, this is the ClarityPay amount you were approved for, $7,150. The Action Taker bonuses are on this page if you enroll tonight."
 };
 
 const CUSTOM_OFFER = null;
@@ -1060,9 +1094,9 @@ const OFFERS = {
             note: "First payment today, then one a month for three months.",
             warn: "",
             checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
-    clarity: { amount: "$600", unit: "a month · 0% interest · $7,200 total",
-               note: "Soft credit check, 620 or better. The $600/mo for 12 months at 0% APR is one option. When you pre-qualify, ClarityPay shows every offer you qualify for, and that can include lower monthly options based on your credit score and history.",
-               checkout: "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" }
+    clarity: { amount: "$7,150", unit: "total · 0% interest",
+               note: "The amount ClarityPay approved for you. Soft pull only, it does not affect your credit score.",
+               checkout: "https://whop.com/checkout/plan_gUT1nEyaNOrbi/?session=chs_jkNgN6BmTg4D9h" }
   }
 };
 
@@ -1171,7 +1205,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("clarityAmt").textContent  = O.clarity.amount;
   el("clarityUnit").textContent = O.clarity.unit;
   el("clarityNote").textContent = O.clarity.note;
-  el("stickySub").textContent = "Paid in full · " + O.pif.amount;
+  el("stickySub").textContent = "ClarityPay · " + O.clarity.amount;
 
   const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
