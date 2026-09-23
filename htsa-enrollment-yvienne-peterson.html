@@ -485,7 +485,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790195281 -->
+<!-- close-build:1790195600 -->
 </head>
 <body>
 <main class="page">
@@ -554,8 +554,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
   </div>
 
   <section class="plans" id="plans">
-    <div class="h2">Your payment option</div>
-    <div class="plans-sub">This is the ClarityPay amount you were approved for.</div>
+    <div class="h2">Your payment options</div>
     <div class="plans-sub">Access opens the moment your payment clears.</div>
 
     <div class="plan plan--custom" id="planCustom" hidden>
@@ -592,9 +591,8 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
       <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
     </div>
 
-    <div class="plan plan--best" id="planClarity" hidden>
-      <span class="badge">Approved for you</span>
-      <div class="plan-name">ClarityPay</div>
+    <div class="plan" id="planClarity" hidden>
+      <div class="plan-name">ClarityPay monthly</div>
       <span class="plan-clarity-badge">0% interest · 0% APR</span>
       <div class="plan-note" id="clarityNote"></div>
       <div class="plan-figs">
@@ -844,7 +842,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
   <div class="sticky-cta-inner">
     <div class="sticky-cta-name">
       <b id="stickyLabel">Your enrollment</b>
-      <span id="stickySub">ClarityPay · $7,150</span>
+      <span id="stickySub">Paid in full · $6,000</span>
     </div>
     <a class="sticky-cta-btn" href="#plans">Choose payment ↓</a>
   </div>
@@ -1065,7 +1063,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1790195281
+   close-build:1790195600
    ============================================================ */
 const BUYER = {
   firstName: "Yvienne",
@@ -1075,8 +1073,8 @@ const BUYER = {
   slug:      "yvienne_peterson",
   track:     "closer",
   offer:     "standard",
-  show:      ["clarity"],
-  intro:     "Yvienne, this is the ClarityPay path at $7,150. The Action Taker bonuses are on this page if you enroll tonight."
+  show:      ["pif", "plan", "clarity"],
+  intro:     "Yvienne, here are the three payment options we covered. The Action Taker bonuses are on this page if you enroll tonight."
 };
 
 const CUSTOM_OFFER = null;
@@ -1095,9 +1093,9 @@ const OFFERS = {
             note: "First payment today, then one a month for three months.",
             warn: "",
             checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
-    clarity: { amount: "$7,150", unit: "total · 0% interest",
-               note: "The amount ClarityPay approved for you. Soft pull only, it does not affect your credit score.",
-               checkout: "https://whop.com/checkout/plan_gUT1nEyaNOrbi/?d2c=true" }
+    clarity: { amount: "$600", unit: "a month · 0% interest · $7,200 total",
+               note: "Monthly financing with 0% interest APR. Soft credit check, 620 or better credit score to qualify.",
+               checkout: "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" }
   }
 };
 
@@ -1206,7 +1204,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("clarityAmt").textContent  = O.clarity.amount;
   el("clarityUnit").textContent = O.clarity.unit;
   el("clarityNote").textContent = O.clarity.note;
-  el("stickySub").textContent = "ClarityPay · " + O.clarity.amount;
+  el("stickySub").textContent = "Paid in full · " + O.pif.amount;
 
   const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
