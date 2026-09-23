@@ -485,7 +485,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790198900 -->
+<!-- close-build:1790201147 -->
 </head>
 <body>
 <main class="page">
@@ -554,7 +554,8 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
   </div>
 
   <section class="plans" id="plans">
-    <div class="h2">Your payment options</div>
+    <div class="h2">Your payment option</div>
+    <div class="plans-sub">$600 a month at 0% is our 0% option. ClarityPay will show you whatever you are approved for.</div>
     <div class="plans-sub">Access opens the moment your payment clears.</div>
 
     <div class="plan plan--custom" id="planCustom" hidden>
@@ -591,7 +592,8 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
       <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
     </div>
 
-    <div class="plan" id="planClarity" hidden>
+    <div class="plan plan--best" id="planClarity" hidden>
+      <span class="badge">Action Taker</span>
       <div class="plan-name">ClarityPay monthly</div>
       <span class="plan-clarity-badge">0% interest · 0% APR</span>
       <div class="plan-note" id="clarityNote"></div>
@@ -842,7 +844,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
   <div class="sticky-cta-inner">
     <div class="sticky-cta-name">
       <b id="stickyLabel">Your enrollment</b>
-      <span id="stickySub">Paid in full · $6,000</span>
+      <span id="stickySub">ClarityPay · $600/mo</span>
     </div>
     <a class="sticky-cta-btn" href="#plans">Choose payment ↓</a>
   </div>
@@ -1063,18 +1065,18 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1790198900
+   close-build:1790201147
    ============================================================ */
 const BUYER = {
-  firstName: "Yvienne",
-  fullName:  "Yvienne Peterson",
-  email:     "yviennepeterson@gmail.com",
-  phone:     "+18083445575",
-  slug:      "yvienne_peterson",
+  firstName: "Fred",
+  fullName:  "Fred Himburg",
+  email:     "fred.himburg@gmail.com",
+  phone:     "+12819892940",
+  slug:      "fred_himburg",
   track:     "closer",
   offer:     "standard",
-  show:      ["pif", "plan", "clarity"],
-  intro:     "Yvienne, here are the three payment options we covered. The Action Taker bonuses are on this page if you enroll tonight."
+  show:      ["clarity"],
+  intro:     "Fred, this is the ClarityPay path we covered. The Action Taker bonuses are on this page if you enroll tonight."
 };
 
 const CUSTOM_OFFER = null;
@@ -1204,7 +1206,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("clarityAmt").textContent  = O.clarity.amount;
   el("clarityUnit").textContent = O.clarity.unit;
   el("clarityNote").textContent = O.clarity.note;
-  el("stickySub").textContent = "Paid in full · " + O.pif.amount;
+  el("stickySub").textContent = "ClarityPay · " + O.clarity.amount + " a month";
 
   const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
