@@ -104,25 +104,10 @@ a{color:inherit}
 
 /* ---------- plans ---------- */
 .plans{padding:22px 26px 6px}
-.plans-sub{margin-bottom:12px;color:var(--muted);font-size:14px;line-height:1.55}
-.plans-lift{margin:0 0 16px;padding:13px 15px;border-radius:12px;background:#fff6ee;
-  border:1.5px solid #f0c9a0}
-.plans-lift-tag{color:#9a4a12;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-.plans-lift p{margin-top:4px;color:var(--navy);font-size:14px;line-height:1.5}
-.plans-lift b{font-weight:800}
+.plans-sub{margin-bottom:15px;color:var(--muted);font-size:14px;line-height:1.55}
 .plan{position:relative;margin-bottom:13px;padding:18px;border:2px solid var(--grey);border-radius:15px;
   background:var(--white);transition:border-color 150ms ease,box-shadow 150ms ease}
-.plan-compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 14px}
-.plan-compare-col{padding:12px 12px 10px;border-radius:11px;min-width:0}
-.plan-compare-now{background:rgba(97,227,139,.12);border:1.5px solid rgba(0,201,122,.38)}
-.plan-compare-oct{background:#f6f8fb;border:1.5px solid var(--grey)}
-.plan-compare-label{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-.plan-compare-now .plan-compare-label{color:var(--green-dark)}
-.plan-compare-oct .plan-compare-label{color:#8a4b16}
-.plan-compare .plan-figs{margin:8px 0 0;gap:6px}
-.plan-compare .plan-amt{font-size:26px}
-.plan-compare-oct .plan-amt{color:#8a4b16}
-@media (max-width:360px){.plan-compare{grid-template-columns:1fr}}
+.plan-oct{margin:-6px 0 14px;color:#93a1b3;font-size:12.5px;line-height:1.45}
 .plan--best{border-color:var(--green-strong);box-shadow:0 10px 30px rgba(0,201,122,.14)}
 .plan--custom{border-color:var(--navy);box-shadow:0 10px 30px rgba(10,22,40,.16)}
 .badge{position:absolute;top:-11px;left:16px;padding:3px 11px;border-radius:999px;
@@ -486,7 +471,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790210400 -->
+<!-- close-build:1790211800 -->
 </head>
 <body>
 <main class="page">
@@ -538,11 +523,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
   <section class="plans" id="plans">
     <div class="h2">Your payment options</div>
-    <div class="plans-lift" id="priceLift">
-      <div class="plans-lift-tag" id="priceLiftTag">Prices go up October 1</div>
-      <p id="priceLiftCopy">Left side is today's price. Right side is what it becomes on October 1.</p>
-    </div>
-    <div class="plans-sub">Access opens the moment your payment clears.</div>
+    <div class="plans-sub" id="plansSub">Access opens the moment your payment clears.</div>
 
     <div class="plan plan--custom" id="planCustom" hidden>
       <span class="badge" id="customBadge">Your offer</span>
@@ -559,44 +540,22 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
       <span class="badge" id="pifBadge">Best value</span>
       <div class="plan-name">Paid in full</div>
       <div class="plan-note" id="pifNote"></div>
-      <div class="plan-compare">
-        <div class="plan-compare-col plan-compare-now">
-          <div class="plan-compare-label">Now</div>
-          <div class="plan-figs">
-            <span class="plan-amt" id="pifAmt"></span>
-            <span class="plan-unit">one time</span>
-          </div>
-        </div>
-        <div class="plan-compare-col plan-compare-oct">
-          <div class="plan-compare-label">October 1</div>
-          <div class="plan-figs">
-            <span class="plan-amt" id="pifOctAmt"></span>
-            <span class="plan-unit" id="pifOctUnit">one time</span>
-          </div>
-        </div>
+      <div class="plan-figs">
+        <span class="plan-amt" id="pifAmt"></span>
+        <span class="plan-unit">one time</span>
       </div>
+      <p class="plan-oct" id="pifOctNote"></p>
       <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
     </div>
 
     <div class="plan" id="planPlan">
       <div class="plan-name" id="planName"></div>
       <div class="plan-note" id="planNote"></div>
-      <div class="plan-compare">
-        <div class="plan-compare-col plan-compare-now">
-          <div class="plan-compare-label">Now</div>
-          <div class="plan-figs">
-            <span class="plan-amt" id="planAmt"></span>
-            <span class="plan-unit" id="planUnit"></span>
-          </div>
-        </div>
-        <div class="plan-compare-col plan-compare-oct">
-          <div class="plan-compare-label">October 1</div>
-          <div class="plan-figs">
-            <span class="plan-amt" id="planOctAmt"></span>
-            <span class="plan-unit" id="planOctUnit"></span>
-          </div>
-        </div>
+      <div class="plan-figs">
+        <span class="plan-amt" id="planAmt"></span>
+        <span class="plan-unit" id="planUnit"></span>
       </div>
+      <p class="plan-oct" id="planOctNote"></p>
       <p class="plan-warn" id="planWarn" hidden></p>
       <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
     </div>
@@ -605,22 +564,11 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
       <div class="plan-name">ClarityPay monthly</div>
       <span class="plan-clarity-badge">0% interest · 0% APR</span>
       <div class="plan-note" id="clarityNote"></div>
-      <div class="plan-compare">
-        <div class="plan-compare-col plan-compare-now">
-          <div class="plan-compare-label">Now</div>
-          <div class="plan-figs">
-            <span class="plan-amt" id="clarityAmt"></span>
-            <span class="plan-unit" id="clarityUnit"></span>
-          </div>
-        </div>
-        <div class="plan-compare-col plan-compare-oct">
-          <div class="plan-compare-label">October 1</div>
-          <div class="plan-figs">
-            <span class="plan-amt" id="clarityOctAmt"></span>
-            <span class="plan-unit" id="clarityOctUnit"></span>
-          </div>
-        </div>
+      <div class="plan-figs">
+        <span class="plan-amt" id="clarityAmt"></span>
+        <span class="plan-unit" id="clarityUnit"></span>
       </div>
+      <p class="plan-oct" id="clarityOctNote"></p>
       <button class="choose" type="button" data-plan="clarity">Choose ClarityPay</button>
     </div>
   </section>
@@ -1085,7 +1033,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1790210400
+   close-build:1790211800
    ============================================================ */
 const BUYER = {
   firstName: "Yvienne",
@@ -1218,34 +1166,36 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
 
   /* ---------- plans ---------- */
   (function(){
-    const lift = el("priceLiftCopy");
-    const tag = el("priceLiftTag");
-    if (lift) {
+    const sub = el("plansSub");
+    if (sub) {
       const oct = new Date("2026-10-01T00:00:00-04:00");
       const days = Math.max(0, Math.ceil((oct.getTime() - Date.now()) / 86400000));
       const dayWord = days === 1 ? "1 day" : days + " days";
-      if (tag) tag.textContent = days ? "Prices go up October 1 · " + dayWord : "Prices go up October 1";
-      lift.textContent = days
-        ? "Left side is today's price. Right side is what each option becomes on October 1, in " + dayWord + "."
-        : "Left side is today's price. Right side is what each option becomes on October 1.";
+      sub.textContent = days
+        ? "Access opens the moment your payment clears. HTSA pricing goes up October 1, in " + dayWord + "."
+        : "Access opens the moment your payment clears. HTSA pricing goes up October 1.";
     }
+    function octLine(amount, unit){
+      if (!amount) return "";
+      return "October 1: " + amount + (unit ? " " + unit : "");
+    }
+    const pifOct = el("pifOctNote");
+    if (pifOct) pifOct.textContent = octLine(O.pif.octAmount, O.pif.octUnit);
+    const planOct = el("planOctNote");
+    if (planOct) planOct.textContent = octLine(O.plan.octAmount, O.plan.octUnit);
+    const clarityOct = el("clarityOctNote");
+    if (clarityOct) clarityOct.textContent = octLine(O.clarity.octAmount, O.clarity.octUnit);
   })();
   el("pifAmt").textContent    = O.pif.amount;
   el("pifNote").textContent   = O.pif.note;
-  if (el("pifOctAmt")) el("pifOctAmt").textContent = O.pif.octAmount || "";
-  if (el("pifOctUnit") && O.pif.octUnit) el("pifOctUnit").textContent = O.pif.octUnit;
   el("planName").textContent  = O.plan.name;
   el("planAmt").textContent   = O.plan.amount;
   el("planUnit").textContent  = O.plan.unit;
   el("planNote").textContent  = O.plan.note;
-  if (el("planOctAmt")) el("planOctAmt").textContent = O.plan.octAmount || "";
-  if (el("planOctUnit")) el("planOctUnit").textContent = O.plan.octUnit || "";
   if (O.plan.warn) { el("planWarn").hidden = false; el("planWarn").textContent = O.plan.warn; }
   el("clarityAmt").textContent  = O.clarity.amount;
   el("clarityUnit").textContent = O.clarity.unit;
   el("clarityNote").textContent = O.clarity.note;
-  if (el("clarityOctAmt")) el("clarityOctAmt").textContent = O.clarity.octAmount || "";
-  if (el("clarityOctUnit")) el("clarityOctUnit").textContent = O.clarity.octUnit || "";
   el("stickySub").textContent = "Paid in full · " + O.pif.amount;
 
   const PLANS = {
