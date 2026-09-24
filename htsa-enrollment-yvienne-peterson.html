@@ -87,21 +87,6 @@ a{color:inherit}
 .inc-list li::before{flex:0 0 auto;margin-top:1px;color:var(--green-strong);font-size:15px;
   font-weight:800;content:"✓"}
 
-.bonuses{margin:16px 26px 8px;padding:20px 22px;border-radius:16px;background:var(--ink);
-  border:3px solid var(--green-strong);box-shadow:0 0 0 4px rgba(0,201,122,.14)}
-.bonuses-tag{display:inline-block;margin-bottom:8px;padding:4px 11px;border-radius:999px;
-  background:var(--green-strong);color:#04231a;font-size:12px;font-weight:800;letter-spacing:.07em;
-  text-transform:uppercase}
-.bonuses .h2{margin:0 0 6px;color:var(--white)}
-.bonuses-lede{margin:0 0 16px;color:rgba(255,255,255,.82);font-size:14px;line-height:1.55}
-.bonus-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.bonus-card{padding:16px 16px 14px;border:4px solid var(--green-strong);border-radius:12px;background:rgba(255,255,255,.04);
-  box-shadow:0 0 0 3px rgba(0,201,122,.28),0 8px 20px rgba(0,201,122,.2)}
-.bonus-kicker{margin-bottom:8px;color:var(--green);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-.bonus-card h3{margin:0 0 8px;color:var(--white);font-size:18px;font-weight:800;line-height:1.25}
-.bonus-card p{margin:0;color:rgba(255,255,255,.8);font-size:13.5px;line-height:1.5}
-@media (max-width:680px){.bonus-grid{grid-template-columns:1fr}.bonuses{margin-left:16px;margin-right:16px}}
-
 /* ---------- guarantee ---------- */
 .guar{margin:18px 26px 6px;padding:20px 22px;border-radius:16px;background:var(--ink);
   border:3px solid var(--green-strong);
@@ -119,9 +104,25 @@ a{color:inherit}
 
 /* ---------- plans ---------- */
 .plans{padding:22px 26px 6px}
-.plans-sub{margin-bottom:15px;color:var(--muted);font-size:14px}
+.plans-sub{margin-bottom:12px;color:var(--muted);font-size:14px;line-height:1.55}
+.plans-lift{margin:0 0 16px;padding:13px 15px;border-radius:12px;background:#fff6ee;
+  border:1.5px solid #f0c9a0}
+.plans-lift-tag{color:#9a4a12;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.plans-lift p{margin-top:4px;color:var(--navy);font-size:14px;line-height:1.5}
+.plans-lift b{font-weight:800}
 .plan{position:relative;margin-bottom:13px;padding:18px;border:2px solid var(--grey);border-radius:15px;
   background:var(--white);transition:border-color 150ms ease,box-shadow 150ms ease}
+.plan-compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 14px}
+.plan-compare-col{padding:12px 12px 10px;border-radius:11px;min-width:0}
+.plan-compare-now{background:rgba(97,227,139,.12);border:1.5px solid rgba(0,201,122,.38)}
+.plan-compare-oct{background:#f6f8fb;border:1.5px solid var(--grey)}
+.plan-compare-label{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.plan-compare-now .plan-compare-label{color:var(--green-dark)}
+.plan-compare-oct .plan-compare-label{color:#8a4b16}
+.plan-compare .plan-figs{margin:8px 0 0;gap:6px}
+.plan-compare .plan-amt{font-size:26px}
+.plan-compare-oct .plan-amt{color:#8a4b16}
+@media (max-width:360px){.plan-compare{grid-template-columns:1fr}}
 .plan--best{border-color:var(--green-strong);box-shadow:0 10px 30px rgba(0,201,122,.14)}
 .plan--custom{border-color:var(--navy);box-shadow:0 10px 30px rgba(10,22,40,.16)}
 .badge{position:absolute;top:-11px;left:16px;padding:3px 11px;border-radius:999px;
@@ -485,7 +486,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790198900 -->
+<!-- close-build:1790210400 -->
 </head>
 <body>
 <main class="page">
@@ -523,24 +524,6 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
     <ul class="inc-list" id="incList"></ul>
   </section>
 
-  <section class="bonuses" aria-labelledby="bonusTitle">
-    <div class="bonuses-tag">Action Taker Bonuses</div>
-    <div class="h2" id="bonusTitle">Program bonuses, for signing up tonight.</div>
-    <p class="bonuses-lede">You were on the live call. These sit on top of everything in the program.</p>
-    <div class="bonus-grid">
-      <article class="bonus-card">
-        <div class="bonus-kicker">Bonus 01</div>
-        <h3>2 one-on-one coaching calls with Chad Aleo</h3>
-        <p>Suggested use: after you land your offer.</p>
-      </article>
-      <article class="bonus-card">
-        <div class="bonus-kicker">Bonus 02</div>
-        <h3>A personal Loom video</h3>
-        <p>Chad will record a Loom video for you to send to any hiring managers you apply to.</p>
-      </article>
-    </div>
-  </section>
-
   <div class="guar" id="guarantee">
     <span class="guar-tag" id="guarTag">Confirmed for your enrollment</span>
     <h3 id="guarTitle">Placed within 6 months, or your money back.</h3>
@@ -555,6 +538,10 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
   <section class="plans" id="plans">
     <div class="h2">Your payment options</div>
+    <div class="plans-lift" id="priceLift">
+      <div class="plans-lift-tag" id="priceLiftTag">Prices go up October 1</div>
+      <p id="priceLiftCopy">Left side is today's price. Right side is what it becomes on October 1.</p>
+    </div>
     <div class="plans-sub">Access opens the moment your payment clears.</div>
 
     <div class="plan plan--custom" id="planCustom" hidden>
@@ -572,10 +559,21 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
       <span class="badge" id="pifBadge">Best value</span>
       <div class="plan-name">Paid in full</div>
       <div class="plan-note" id="pifNote"></div>
-      <div class="plan-figs">
-        <span class="plan-amt" id="pifAmt"></span>
-        <span class="plan-strike" id="pifStrike"></span>
-        <span class="plan-unit">one time</span>
+      <div class="plan-compare">
+        <div class="plan-compare-col plan-compare-now">
+          <div class="plan-compare-label">Now</div>
+          <div class="plan-figs">
+            <span class="plan-amt" id="pifAmt"></span>
+            <span class="plan-unit">one time</span>
+          </div>
+        </div>
+        <div class="plan-compare-col plan-compare-oct">
+          <div class="plan-compare-label">October 1</div>
+          <div class="plan-figs">
+            <span class="plan-amt" id="pifOctAmt"></span>
+            <span class="plan-unit" id="pifOctUnit">one time</span>
+          </div>
+        </div>
       </div>
       <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
     </div>
@@ -583,9 +581,21 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
     <div class="plan" id="planPlan">
       <div class="plan-name" id="planName"></div>
       <div class="plan-note" id="planNote"></div>
-      <div class="plan-figs">
-        <span class="plan-amt" id="planAmt"></span>
-        <span class="plan-unit" id="planUnit"></span>
+      <div class="plan-compare">
+        <div class="plan-compare-col plan-compare-now">
+          <div class="plan-compare-label">Now</div>
+          <div class="plan-figs">
+            <span class="plan-amt" id="planAmt"></span>
+            <span class="plan-unit" id="planUnit"></span>
+          </div>
+        </div>
+        <div class="plan-compare-col plan-compare-oct">
+          <div class="plan-compare-label">October 1</div>
+          <div class="plan-figs">
+            <span class="plan-amt" id="planOctAmt"></span>
+            <span class="plan-unit" id="planOctUnit"></span>
+          </div>
+        </div>
       </div>
       <p class="plan-warn" id="planWarn" hidden></p>
       <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
@@ -595,9 +605,21 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
       <div class="plan-name">ClarityPay monthly</div>
       <span class="plan-clarity-badge">0% interest · 0% APR</span>
       <div class="plan-note" id="clarityNote"></div>
-      <div class="plan-figs">
-        <span class="plan-amt" id="clarityAmt"></span>
-        <span class="plan-unit" id="clarityUnit"></span>
+      <div class="plan-compare">
+        <div class="plan-compare-col plan-compare-now">
+          <div class="plan-compare-label">Now</div>
+          <div class="plan-figs">
+            <span class="plan-amt" id="clarityAmt"></span>
+            <span class="plan-unit" id="clarityUnit"></span>
+          </div>
+        </div>
+        <div class="plan-compare-col plan-compare-oct">
+          <div class="plan-compare-label">October 1</div>
+          <div class="plan-figs">
+            <span class="plan-amt" id="clarityOctAmt"></span>
+            <span class="plan-unit" id="clarityOctUnit"></span>
+          </div>
+        </div>
       </div>
       <button class="choose" type="button" data-plan="clarity">Choose ClarityPay</button>
     </div>
@@ -1063,7 +1085,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1790198900
+   close-build:1790210400
    ============================================================ */
 const BUYER = {
   firstName: "Yvienne",
@@ -1074,7 +1096,7 @@ const BUYER = {
   track:     "closer",
   offer:     "standard",
   show:      ["pif", "plan", "clarity"],
-  intro:     "Yvienne, here are the three payment options we covered. The Action Taker bonuses are on this page if you enroll tonight."
+  intro:     "Yvienne, here are the three payment options we covered. These prices hold until October 1."
 };
 
 const CUSTOM_OFFER = null;
@@ -1086,14 +1108,16 @@ const TRACKS = {
 
 const OFFERS = {
   standard: {
-    pif:  { amount: "$6,000", was: "$7,000",
-            note: "One payment. Saves you $1,000 against the payment plan.",
+    pif:  { amount: "$6,000", octAmount: "$7,000", octUnit: "one time",
+            note: "One payment. Saves you $1,000 against today's payment plan.",
             checkout: "https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" },
     plan: { name: "4 payments", amount: "$1,750", unit: "today · $7,000 total",
+            octAmount: "$2,000", octUnit: "today · $8,000 total",
             note: "First payment today, then one a month for three months.",
             warn: "",
             checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
     clarity: { amount: "$600", unit: "a month · 0% interest · $7,200 total",
+               octAmount: "$700", octUnit: "a month · $8,400 total",
                note: "$600 a month at 0% interest is our 0% option. Depending on your credit score, lower payment options will likely be available. ClarityPay will show you whatever you are approved for.",
                checkout: "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" }
   }
@@ -1193,17 +1217,35 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     li.appendChild(b);li.appendChild(s);el("currList").appendChild(li);});
 
   /* ---------- plans ---------- */
+  (function(){
+    const lift = el("priceLiftCopy");
+    const tag = el("priceLiftTag");
+    if (lift) {
+      const oct = new Date("2026-10-01T00:00:00-04:00");
+      const days = Math.max(0, Math.ceil((oct.getTime() - Date.now()) / 86400000));
+      const dayWord = days === 1 ? "1 day" : days + " days";
+      if (tag) tag.textContent = days ? "Prices go up October 1 · " + dayWord : "Prices go up October 1";
+      lift.textContent = days
+        ? "Left side is today's price. Right side is what each option becomes on October 1, in " + dayWord + "."
+        : "Left side is today's price. Right side is what each option becomes on October 1.";
+    }
+  })();
   el("pifAmt").textContent    = O.pif.amount;
-  el("pifStrike").textContent = O.pif.was || "";
   el("pifNote").textContent   = O.pif.note;
+  if (el("pifOctAmt")) el("pifOctAmt").textContent = O.pif.octAmount || "";
+  if (el("pifOctUnit") && O.pif.octUnit) el("pifOctUnit").textContent = O.pif.octUnit;
   el("planName").textContent  = O.plan.name;
   el("planAmt").textContent   = O.plan.amount;
   el("planUnit").textContent  = O.plan.unit;
   el("planNote").textContent  = O.plan.note;
+  if (el("planOctAmt")) el("planOctAmt").textContent = O.plan.octAmount || "";
+  if (el("planOctUnit")) el("planOctUnit").textContent = O.plan.octUnit || "";
   if (O.plan.warn) { el("planWarn").hidden = false; el("planWarn").textContent = O.plan.warn; }
   el("clarityAmt").textContent  = O.clarity.amount;
   el("clarityUnit").textContent = O.clarity.unit;
   el("clarityNote").textContent = O.clarity.note;
+  if (el("clarityOctAmt")) el("clarityOctAmt").textContent = O.clarity.octAmount || "";
+  if (el("clarityOctUnit")) el("clarityOctUnit").textContent = O.clarity.octUnit || "";
   el("stickySub").textContent = "Paid in full · " + O.pif.amount;
 
   const PLANS = {
