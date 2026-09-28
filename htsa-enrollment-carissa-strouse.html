@@ -87,6 +87,21 @@ a{color:inherit}
 .inc-list li::before{flex:0 0 auto;margin-top:1px;color:var(--green-strong);font-size:15px;
   font-weight:800;content:"✓"}
 
+.bonuses{margin:16px 26px 8px;padding:20px 22px;border-radius:16px;background:var(--ink);
+  border:3px solid var(--green-strong);box-shadow:0 0 0 4px rgba(0,201,122,.14)}
+.bonuses-tag{display:inline-block;margin-bottom:8px;padding:4px 11px;border-radius:999px;
+  background:var(--green-strong);color:#04231a;font-size:12px;font-weight:800;letter-spacing:.07em;
+  text-transform:uppercase}
+.bonuses .h2{margin:0 0 6px;color:var(--white)}
+.bonuses-lede{margin:0 0 16px;color:rgba(255,255,255,.82);font-size:14px;line-height:1.55}
+.bonus-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.bonus-card{padding:16px 16px 14px;border:4px solid var(--green-strong);border-radius:12px;background:rgba(255,255,255,.04);
+  box-shadow:0 0 0 3px rgba(0,201,122,.28),0 8px 20px rgba(0,201,122,.2)}
+.bonus-kicker{margin-bottom:8px;color:var(--green);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.bonus-card h3{margin:0 0 8px;color:var(--white);font-size:18px;font-weight:800;line-height:1.25}
+.bonus-card p{margin:0;color:rgba(255,255,255,.8);font-size:13.5px;line-height:1.5}
+@media (max-width:680px){.bonus-grid{grid-template-columns:1fr}.bonuses{margin-left:16px;margin-right:16px}}
+
 /* ---------- guarantee ---------- */
 .guar{margin:18px 26px 6px;padding:20px 22px;border-radius:16px;background:var(--ink);
   border:3px solid var(--green-strong);
@@ -107,6 +122,7 @@ a{color:inherit}
 .plans-sub{margin-bottom:15px;color:var(--muted);font-size:14px}
 .plan{position:relative;margin-bottom:13px;padding:18px;border:2px solid var(--grey);border-radius:15px;
   background:var(--white);transition:border-color 150ms ease,box-shadow 150ms ease}
+.plan-oct{margin:-6px 0 14px;color:#93a1b3;font-size:12.5px;line-height:1.45}
 .plan--best{border-color:var(--green-strong);box-shadow:0 10px 30px rgba(0,201,122,.14)}
 .plan--custom{border-color:var(--navy);box-shadow:0 10px 30px rgba(10,22,40,.16)}
 .badge{position:absolute;top:-11px;left:16px;padding:3px 11px;border-radius:999px;
@@ -426,7 +442,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790018601 -->
+<!-- close-build:1790575000 -->
 </head>
 <body>
 <main class="page">
@@ -464,6 +480,24 @@ a{color:inherit}
     <ul class="inc-list" id="incList"></ul>
   </section>
 
+  <section class="bonuses" aria-labelledby="bonusTitle">
+    <div class="bonuses-tag">Extended action-taker bonuses</div>
+    <div class="h2" id="bonusTitle">Two bonuses through Sept 30 at 5pm ET.</div>
+    <p class="bonuses-lede">These were for Tuesday's live webinar. Because my enrollment email never reached you, I got approval to extend them to you through Tuesday at 5pm ET.</p>
+    <div class="bonus-grid">
+      <article class="bonus-card">
+        <div class="bonus-kicker">Bonus 01</div>
+        <h3>2 private 1-on-1 coaching sessions with Chad Aleo</h3>
+        <p>Suggested use: after you land your offer.</p>
+      </article>
+      <article class="bonus-card">
+        <div class="bonus-kicker">Bonus 02</div>
+        <h3>A personal Loom video from Chad</h3>
+        <p>Chad will record a Loom video you can send to hiring managers you apply to.</p>
+      </article>
+    </div>
+  </section>
+
   <div class="guar" id="guarantee">
     <span class="guar-tag" id="guarTag">Confirmed for your enrollment</span>
     <h3 id="guarTitle">Placed within 6 months, or your money back.</h3>
@@ -478,7 +512,7 @@ a{color:inherit}
 
   <section class="plans" id="plans">
     <div class="h2">Your payment options</div>
-    <div class="plans-sub">Access opens the moment your payment clears.</div>
+    <div class="plans-sub" id="plansSub">Access opens the moment your payment clears.</div>
 
     <div class="plan plan--custom" id="planCustom" hidden>
       <span class="badge" id="customBadge">Your offer</span>
@@ -500,15 +534,8 @@ a{color:inherit}
         <span class="plan-strike" id="pifStrike"></span>
         <span class="plan-unit">one time</span>
       </div>
+      <p class="plan-oct" id="pifOctNote"></p>
       <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
-      <details class="plan-sub" id="planSplititWrap" hidden>
-        <summary><span>More payment options</span><span class="plan-sub-chev" aria-hidden="true">▾</span></summary>
-        <div class="plan-splitit">
-          <div class="plan-splitit-title">Splitit — $600/month × 12 months</div>
-          <div class="plan-splitit-copy"><b>0% interest.</b> No credit pull. Uses the credit you already have on a Visa or Mastercard. $7,200 total, spread over 12 monthly charges of $600.</div>
-          <button type="button" class="plan-splitit-link" id="splititMoreBtn">How Splitit works →</button>
-        </div>
-      </details>
     </div>
 
     <div class="plan" id="planPlan">
@@ -530,6 +557,7 @@ a{color:inherit}
         <span class="plan-amt" id="clarityAmt"></span>
         <span class="plan-unit" id="clarityUnit"></span>
       </div>
+      <p class="plan-oct" id="clarityOctNote"></p>
       <button class="choose" type="button" data-plan="clarity">Choose ClarityPay</button>
     </div>
   </section>
@@ -1008,7 +1036,7 @@ a{color:inherit}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1790018601
+   close-build:1790575000
    ============================================================ */
 const BUYER = {
   firstName: "Carissa",
@@ -1019,7 +1047,7 @@ const BUYER = {
   track:     "closer",
   offer:     "standard",
   show:      ["pif", "clarity"],
-  intro:     "Carissa, pricing goes up October 1st. Paid in full is $6,000 today, then $7,000 on October 1st. ClarityPay is $600 a month at 0% interest today, then $700 a month on October 1st."
+  intro:     "Carissa, I caught an issue on my end. The enrollment page I told you I was sending never actually made it through. Your pricing below is protected through Tuesday, September 30th at 5pm ET. On October 1st, tuition goes up by $1,000 (see the gray October lines under each option). Because the delivery miss was on my side, I extended two webinar action-taker bonuses to you through that same cutoff."
 };
 
 const CUSTOM_OFFER = null;
@@ -1031,15 +1059,16 @@ const TRACKS = {
 
 const OFFERS = {
   standard: {
-    pif:  { amount: "$6,000", was: "$7,000",
-            note: "$6,000 today. Goes to $7,000 on October 1st.",
+    pif:  { amount: "$6,000", octAmount: "$7,000", octUnit: "one time",
+            note: "One payment. Full access as soon as it clears.",
             checkout: "https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" },
     plan: { name: "4 payments", amount: "$1,750", unit: "today · $7,000 total",
             note: "First payment today, then one a month for three months.",
             warn: "",
             checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
     clarity: { amount: "$600", unit: "a month · 0% interest · $7,200 total",
-               note: "$600 a month today at 0% interest. Goes to $700 a month on October 1st. Soft credit check, 620 or better.",
+               octAmount: "$700", octUnit: "a month · $8,400 total",
+               note: "$600 a month at 0% is our 0% option. Depending on credit score, lower payments may be available. ClarityPay shows whatever you are approved for.",
                checkout: "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" }
   }
 };
@@ -1138,6 +1167,20 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     li.appendChild(b);li.appendChild(s);el("currList").appendChild(li);});
 
   /* ---------- plans ---------- */
+  (function(){
+    const sub = el("plansSub");
+    if (sub) {
+      sub.textContent = "Current pricing is protected through Tuesday, September 30th at 5pm ET. On October 1st, tuition increases by $1,000.";
+    }
+    function octLine(amount, unit){
+      if (!amount) return "";
+      return "October 1: " + amount + (unit ? " " + unit : "");
+    }
+    const pifOct = el("pifOctNote");
+    if (pifOct) pifOct.textContent = octLine(O.pif.octAmount, O.pif.octUnit);
+    const clarityOct = el("clarityOctNote");
+    if (clarityOct) clarityOct.textContent = octLine(O.clarity.octAmount, O.clarity.octUnit);
+  })();
   el("pifAmt").textContent    = O.pif.amount;
   el("pifStrike").textContent = O.pif.was || "";
   el("pifNote").textContent   = O.pif.note;
