@@ -4,19 +4,31 @@ globs: r/**,r/_TEMPLATE-precall.html,media/**
 alwaysApply: true
 ---
 
-# HTSA pre-call resource pages — NEW pages only
+# HTSA pre-call resource pages
 
-## Trigger
+## Default (Sept 2026+): generic fail-safe URL
 
-CJ says **"pre call link"** (or "precall page", "resource page") and pastes some or all of:
-name, email, phone, day, date, time.
+**Do not build per-person pre-call pages unless CJ explicitly asks.**
 
-Then do everything below without asking follow-up questions. If something is
-missing, use the fallbacks in the Missing info table and say what you assumed.
+Everyone gets the same live page and the same text:
 
-**They already have a call booked.** That is what this page is for. Never render
-"Let's find 45 minutes" or any booking copy unless CJ explicitly says they still
-need to schedule.
+- **URL:** `https://closewithcjclay.com/before-our-call`
+- **Copy:** `scripts/htsa_precall_copy.py` (`print_precall_pack`)
+- **Single text (recommended):** one message with link + 4-minute clip hook. No name variables. No dates like "the 18th". Say **recent live call** in any agent-written copy, never a calendar date.
+
+If CJ says **"pre call link"** with no special request, print the fail-safe text
+from `htsa_precall_copy.py` only. Do not clone `r/<name>/`.
+
+Optional email subject: **Before our call / HTSA pre-call page** (same body as the text, expanded).
+
+## Legacy trigger — per-person pages only when CJ asks
+
+CJ explicitly says **"custom pre call"**, **"named pre call page"**, or names a
+prospect and says build their page. Then paste name, email, phone, day, date, time
+if you have them.
+
+**They already have a call booked.** Never render "Let's find 45 minutes" unless
+CJ says they still need to schedule.
 
 ## Read `.cursor/rules/htsa-page-map.mdc` first
 

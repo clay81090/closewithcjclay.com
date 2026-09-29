@@ -1,8 +1,7 @@
 """Shared send-pack copy for close pages.
 
 Fail-safe post-call follow-up (Sept 2026+): zero name variables in body copy.
-Only substitute the enrollment URL per person. Email opens with "Hi," and text
-opens with "Hey —".
+Single generic enrollment URL for everyone: https://closewithcjclay.com/access
 """
 
 from __future__ import annotations
@@ -11,6 +10,7 @@ import re
 from pathlib import Path
 
 LIVE = "https://closewithcjclay.com"
+GENERIC_ENROLL_URL = f"{LIVE}/access"
 
 EMAIL_SUBJECT = "Your HTSA enrollment page is ready"
 
@@ -29,7 +29,7 @@ def game_url(first: str) -> str:
 
 
 def enroll_url_from_name(full_name: str) -> str:
-    return f"{LIVE}/htsa-enrollment-{file_slug(full_name)}.html"
+    return GENERIC_ENROLL_URL
 
 
 def page_path(root: Path, full_name: str) -> Path:
@@ -41,12 +41,13 @@ def first_name_from_html(html: str) -> str:
     return m.group(1) if m else ""
 
 
-def print_send_pack(first: str, enroll: str) -> None:
+def print_send_pack(first: str, enroll: str | None = None) -> None:
     """Default post-call send pack. Send EMAIL first, then TEXT.
 
-    `first` is kept for script compatibility (game URL, logging) but is not
-    used in client-facing copy. Only `enroll` changes per person.
+    `first` is kept for script compatibility but is not used in client copy.
+    `enroll` is ignored; everyone gets GENERIC_ENROLL_URL.
     """
+    url = GENERIC_ENROLL_URL
     print("=== EMAIL SUBJECT ===")
     print(EMAIL_SUBJECT)
     print("=== EMAIL ===")
@@ -63,7 +64,7 @@ def print_send_pack(first: str, enroll: str) -> None:
         "we covered along with the enrollment bonuses discussed on our call:"
     )
     print()
-    print(f"Click Here to Access Your HTSA Enrollment Portal: {enroll}")
+    print(f"Click Here to Access Your HTSA Portal: {url}")
     print()
     print(
         "At the bottom of the page, you'll see our 30-Day Action Plan. Use that as "
@@ -74,15 +75,19 @@ def print_send_pack(first: str, enroll: str) -> None:
         "our team and placement support in your corner for life."
     )
     print()
-    print("Once you choose the payment option that fits your budget best, you have two simple ways to get started:")
+    print(
+        "Once you complete your enrollment on the page, your portal access unlocks "
+        "immediately. From there, you have two simple ways to finish setup:"
+    )
     print()
     print(
-        "1. Self-Enroll: Follow the steps in order right on the page to set up your "
-        "portal login and book your kickoff call."
+        '1. Self-Enroll Setup: Follow the steps in the green "After You Pay" section '
+        "right on the screen to set up your portal login and book your kickoff call."
     )
     print(
-        "2. Text or Call Me for 5 Minutes: Shoot me a quick text and we can jump on "
-        "a brief 5-minute call so I can walk you through setup live."
+        "2. Text or Call Me for 5 Minutes: Shoot me a quick text as soon as you "
+        "complete payment, and we can jump on a brief 5-minute call so I walk you "
+        "through portal activation live."
     )
     print()
     print("If any questions come up while reviewing everything, call or text me anytime.")
@@ -98,9 +103,9 @@ def print_send_pack(first: str, enroll: str) -> None:
     print(
         "Hey — just sent over your enrollment portal link and payment options. Really "
         "appreciated how intentional you were on our call. Take a look when you get a "
-        "second. Once you choose your option, you can self-enroll right through the "
-        "steps on the page, or give me a shout if you want to hop on a quick 5-minute "
-        "call and walk through setup together!"
+        "second. Once you complete your enrollment on the page, your portal access "
+        "unlocks right away—you can follow the post-payment steps on screen, or text "
+        "me for a quick 5-min call to walk through portal activation together!"
     )
     print()
-    print(f"{enroll}")
+    print(url)
