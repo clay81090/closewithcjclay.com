@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a1628">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://closewithcjclay.com/r/susan_phillips/">
+<meta property="og:url" content="https://closewithcjclay.com/r/christian_somaza/">
 <meta property="og:title" content="Before our call — CJ Clay · HTSA">
 <meta property="og:description" content="One short clip worth watching before we talk. Not homework.">
 <meta property="og:image" content="https://closewithcjclay.com/r/og-precall.jpg">
@@ -357,7 +357,8 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
   <section class="hero">
     <div class="pill" id="heroPill">Before our call</div>
     <h1 id="heroTitle">Four minutes, and you'll walk in already clear.</h1>
-    <p class="hero-lede" id="heroLede">Susan, on October 1st we are making some huge changes at HTSA. If you are even remotely considering high ticket sales as a career, I strongly urge you to get on a call with me before Thursday. Worst case we spend 20 minutes and find out this is not for you. Best case we walk you into your dream job and you have lifetime support from us at every level. Watch the clip below if you get a chance.</p>
+    <p class="hero-lede" id="heroLede">I pulled the one thing that actually matters. Watch it if you get a
+      chance — if you don't, we'll still be fine.</p>
 
     <div class="when" id="whenBlock" hidden>
       <div class="when-label">Already on your calendar</div>
@@ -387,8 +388,8 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
 
   <section class="section more" aria-labelledby="proofTitle">
     <div class="cj-resources-kicker">If you want to check out more...</div>
-    <h2 id="proofTitle">Employer proof, the Top 20, and Brianna from the Tony Robbins world.</h2>
-    <p class="section-lede">Taylor Conroy, the Top 20 companies list, then Brianna from the Tony Robbins world. That is enough context to walk in ready.</p>
+    <h2 id="proofTitle">Employer proof, the Top 20, and a fresh member perspective.</h2>
+    <p class="section-lede">Taylor Conroy, the Top 20 companies list, then Taylor Decourcey. That is enough context to walk in ready.</p>
     <div class="proof-squares">
       <article class="proof-square">
         <div class="proof-square-copy">
@@ -414,12 +415,16 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
       </article>
       <article class="proof-square">
         <div class="proof-square-copy">
-          <div class="proof-square-kicker">Big-name team</div>
-          <h3>Brianna · Tony Robbins</h3>
-          <p>Member from the Tony Robbins world. Credibility from someone who has seen real high ticket sales up close.</p>
+          <div class="proof-square-kicker">Fresh perspective</div>
+          <h3>Taylor Decourcey</h3>
+          <p>Newer member. A real look at the first few months after certification.</p>
         </div>
-        <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/TWacdj9x45o" title="Brianna — Tony Robbins team" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        <button type="button" class="proof-square-cta" data-media="yt" data-id="TWacdj9x45o" data-title="Brianna — Tony Robbins team">Watch here</button>
+        <div class="proof-square-media-wrap" style="position:relative;width:100%;aspect-ratio:16/9;background:#0a1628;overflow:hidden">
+          <video class="proof-square-media" controls playsinline preload="metadata" poster="/media/taylor-decoursey-poster.jpg" title="Taylor Decourcey — newer member perspective" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            <source src="/media/taylor-decoursey-testimonial.mp4" type="video/mp4">
+          </video>
+        </div>
+        <button type="button" class="proof-square-cta" data-media="video" data-src="/media/taylor-decoursey-testimonial.mp4" data-title="Taylor Decourcey — newer member perspective">Play here</button>
       </article>
     </div>
     <button type="button" class="precall-trust-bar res-trust-top" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5" aria-label="Trustpilot Reviews, 4.9 out of 5, opens on this page">
@@ -437,11 +442,11 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
         <div class="res-group res-group--featured">
           <div class="res-group-label">⭐ Start here · CJ's top picks</div>
           <div class="res-featured-grid">
-            <button type="button" class="res-btn res-featured" data-media="video" data-src="/media/taylor-decoursey-testimonial.mp4" data-title="Taylor Decourcey — newer member perspective">
-              <span class="res-featured-kicker">Fresh perspective</span>
-              <span class="res-featured-title">Taylor Decourcey</span>
-              <span class="res-featured-desc">Newer member. A real look at the first few months after certification.</span>
-              <span class="res-featured-cta">Play here ▸</span>
+            <button type="button" class="res-btn res-featured" data-media="yt" data-id="TWacdj9x45o" data-title="Brianna — Tony Robbins team">
+              <span class="res-featured-kicker">Big-name team</span>
+              <span class="res-featured-title">Brianna · Tony Robbins</span>
+              <span class="res-featured-desc">Member from the Tony Robbins world. Credibility from someone who has seen real high ticket sales up close.</span>
+              <span class="res-featured-cta">Watch here ▸</span>
             </button>
           </div>
         </div>
@@ -540,13 +545,13 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
    booked:true is the default. Only set false if CJ says they still need to schedule.
    ============================================================ */
 const GUEST = {
-  firstName:  "Susan",
-  fullName:   "Susan Phillips",
-  email:      "suziekeeton@gmail.com",
-  phone:      "+19857786055",
-  slug:       "susan_phillips",
+  firstName:  "Christian",
+  fullName:   "Christian Somaza",
+  email:      "chrissomaza@gmail.com",
+  phone:      "+19543973505",
+  slug:       "christian_somaza",
   booked:     true,
-  callLabel:  "Tuesday, Sept 29 · 3:00 PM EST",
+  callLabel:  "Tuesday, Sept 29 · 4:00 PM EST",
   confirmDay: "Tuesday",
   bookingUrl: "https://meetings.hubspot.com/charles660/cj"
 };
