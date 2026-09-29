@@ -4,6 +4,9 @@ Voice rule: mostly commas and periods so it reads human. Use a hyphen or an em
 dash only when it is genuinely the clearest way to say a thing (compound
 adjectives like "30-day", or a single em dash inside a long sentence). Never
 use dashes for stylistic filler.
+
+Default pack (Sept 2026+): brief email + short text. Enrollment page only.
+Mention green "After you pay" (self enroll or 5 min call with CJ) when relevant.
 """
 
 from __future__ import annotations
@@ -43,8 +46,7 @@ def first_name_from_html(html: str) -> str:
 def print_send_pack(first: str, enroll: str) -> None:
     """Default post-call send pack. Send the EMAIL first, then the TEXT.
 
-    Voice: warm, direct, human. Commas and periods most of the time.
-    A single em dash is fine when the sentence genuinely needs it.
+    Brief format: link up front, 30-day plan + green After you pay note.
     """
     print("=== EMAIL SUBJECT ===")
     print("Your enrollment page")
@@ -52,50 +54,19 @@ def print_send_pack(first: str, enroll: str) -> None:
     print(f"Hi {first},")
     print()
     print(
-        "Good conversation today. You asked good questions, "
-        "which is the reason I'm sending this instead of just a link."
+        "Good talking with you today. Here is your enrollment page with the payment "
+        "options we covered."
     )
-    print()
-    print(
-        "You've made enough decisions with real money behind them to know the difference "
-        "between a program that sounds right and one that holds up when you check it. "
-        "So here's your page, and here's how to check it."
-    )
-    print()
-    print("Your enrollment page:")
     print()
     print(enroll)
     print()
     print(
-        "Two things to look at while you're in there. "
-        "The 30-day action plan at the bottom is the part most people skip and it's the part "
-        "that matters. It's the actual sequence from day one to placed, with dates attached, "
-        "not a promise. And if you are finishing on your own, open the green "
-        "\"After you pay\" section for the three onboarding steps."
+        "The 30-day action plan is at the bottom. If you finish on your own, open the "
+        "green \"After you pay\" section. You can self enroll or grab a 5 minute call "
+        "with me to walk through it."
     )
     print()
-    print("The three things worth verifying before you commit to anything:")
-    print()
-    print(
-        "Placement is a person's job here, not a job board. Nate's entire role is getting you "
-        "in front of companies already looking. Ask anyone in the reviews about that specifically."
-    )
-    print()
-    print(
-        "It's backed in writing. If we don't place you inside 50 interviews or six months, "
-        "you get refunded. The longest it's ever taken us is 15 interviews."
-    )
-    print()
-    print(
-        "There's nothing recurring. No monthly to stay in, no fees after placement, lifetime "
-        "access to the training and coaching, and lifetime placement. We'll move you to a better "
-        "offer in a year if you've earned it."
-    )
-    print()
-    print(
-        "If anything on that page raises a question, call or text me directly. "
-        "I'd rather answer it now than have you sit on it."
-    )
+    print("Any questions, call or text me.")
     print()
     print("CJ Clay")
     print("HTSA, Career Transformation Coach")
@@ -104,13 +75,13 @@ def print_send_pack(first: str, enroll: str) -> None:
     print()
     print("=== TEXT (send right after the email) ===")
     print(
-        f"{first}, just emailed you everything we walked through. "
+        f"{first}, just emailed you your enrollment page. "
         f"Link's in there, or here if it's easier: {enroll}"
     )
     print()
     print(
-        "Worth pulling up on a computer rather than your phone. The 30-day plan and the green "
-        "\"After you pay\" steps are at the bottom. Any questions, call or text me directly."
+        "Worth pulling up on a computer. The 30-day plan and green \"After you pay\" "
+        "section are at the bottom. Any questions, call or text me directly."
     )
     print()
     print("CJ")

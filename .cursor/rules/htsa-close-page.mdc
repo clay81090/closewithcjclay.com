@@ -252,16 +252,10 @@ verbatim, only substituting `First` and `ENROLL_URL`:
 <p style="color:#000000;background:#ffffff;margin:0 0 8px 0;"><b>EMAIL</b></p>
 <p style="color:#000000;background:#ffffff;margin:0;">Subject: Your enrollment page</p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Hi First,</p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Good conversation today. You asked good questions, which is the reason I'm sending this instead of just a link.</p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">You've made enough decisions with real money behind them to know the difference between a program that sounds right and one that holds up when you check it. So here's your page, and here's how to check it.</p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Your enrollment page:</p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;"><a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a></p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Two things to look at while you're in there. The 30-day action plan at the bottom is the part most people skip and it's the part that matters. It's the actual sequence from day one to placed, with dates attached, not a promise. And if you are finishing on your own, open the green "After you pay" section for the three onboarding steps.</p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">The three things worth verifying before you commit to anything:</p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Placement is a person's job here, not a job board. Nate's entire role is getting you in front of companies already looking. Ask anyone in the reviews about that specifically.</p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">It's backed in writing. If we don't place you inside 50 interviews or six months, you get refunded. The longest it's ever taken us is 15 interviews.</p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">There's nothing recurring. No monthly to stay in, no fees after placement, lifetime access to the training and coaching, and lifetime placement. We'll move you to a better offer in a year if you've earned it.</p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">If anything on that page raises a question, call or text me directly. I'd rather answer it now than have you sit on it.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Good talking with you today. Here is your enrollment page with the payment options we covered.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;"><a href="ENROLL_URL" style="color:#0000EE;background:#ffffff;">ENROLL_URL</a></p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">The 30-day action plan is at the bottom. If you finish on your own, open the green "After you pay" section. You can self enroll or grab a 5 minute call with me to walk through it.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Any questions, call or text me.</p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">
 CJ Clay<br>
 HTSA, Career Transformation Coach<br>
@@ -270,9 +264,9 @@ HTSA, Career Transformation Coach<br>
 </p>
 <p style="color:#000000;background:#ffffff;margin:24px 0 8px 0;"><b>TEXT (send right after the email)</b></p>
 <p style="color:#000000;background:#ffffff;margin:0;">
-First, just emailed you everything we walked through. Link's in there, or here if it's easier: <a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a>
+First, just emailed you your enrollment page. Link's in there, or here if it's easier: <a href="ENROLL_URL" style="color:#0000EE;background:#ffffff;">ENROLL_URL</a>
 <br><br>
-Worth pulling up on a computer rather than your phone. The 30-day plan and the green "After you pay" steps are at the bottom. Any questions, call or text me directly.
+Worth pulling up on a computer. The 30-day plan and green "After you pay" section are at the bottom. Any questions, call or text me directly.
 <br><br>
 CJ
 </p>
