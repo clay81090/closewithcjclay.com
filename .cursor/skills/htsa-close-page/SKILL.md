@@ -59,4 +59,6 @@ Phone Number: +1 (555) 555-0100
 EOF
 ```
 
-Wait for `READY`. Print EMAIL + TEXT from `scripts/htsa_close_copy.py` voice (no proof section).
+Wait for `READY`. Print fail-safe EMAIL + TEXT from `scripts/htsa_close_copy.py`:
+no name in body (Hi, / Hey —), subject `Your HTSA enrollment page is ready`,
+only swap enrollment URL.

@@ -1,12 +1,8 @@
 """Shared send-pack copy for close pages.
 
-Voice rule: mostly commas and periods so it reads human. Use a hyphen or an em
-dash only when it is genuinely the clearest way to say a thing (compound
-adjectives like "30-day", or a single em dash inside a long sentence). Never
-use dashes for stylistic filler.
-
-Default pack (Sept 2026+): brief email + short text. Enrollment page only.
-Mention green "After you pay" (self enroll or 5 min call with CJ) when relevant.
+Fail-safe post-call follow-up (Sept 2026+): zero name variables in body copy.
+Only substitute the enrollment URL per person. Email opens with "Hi," and text
+opens with "Hey —".
 """
 
 from __future__ import annotations
@@ -15,6 +11,8 @@ import re
 from pathlib import Path
 
 LIVE = "https://closewithcjclay.com"
+
+EMAIL_SUBJECT = "Your HTSA enrollment page is ready"
 
 
 def file_slug(full_name: str) -> str:
@@ -44,44 +42,65 @@ def first_name_from_html(html: str) -> str:
 
 
 def print_send_pack(first: str, enroll: str) -> None:
-    """Default post-call send pack. Send the EMAIL first, then the TEXT.
+    """Default post-call send pack. Send EMAIL first, then TEXT.
 
-    Brief format: link up front, 30-day plan + green After you pay note.
+    `first` is kept for script compatibility (game URL, logging) but is not
+    used in client-facing copy. Only `enroll` changes per person.
     """
     print("=== EMAIL SUBJECT ===")
-    print("Your enrollment page")
+    print(EMAIL_SUBJECT)
     print("=== EMAIL ===")
-    print(f"Hi {first},")
+    print("Hi,")
     print()
     print(
-        "Good talking with you today. Here is your enrollment page with the payment "
-        "options we covered."
+        "It was great speaking with you. I really appreciate how intentional and "
+        "thorough you are as you evaluate this decision—that kind of diligence is "
+        "the exact characteristic we look for in the members we partner with."
     )
-    print()
-    print(enroll)
     print()
     print(
-        "The 30-day action plan is at the bottom. If you finish on your own, open the "
-        "green \"After you pay\" section. You can self enroll or grab a 5 minute call "
-        "with me to walk through it."
+        "Here is the link to your HTSA enrollment portal with the payment options "
+        "we covered along with the enrollment bonuses discussed on our call:"
     )
     print()
-    print("Any questions, call or text me.")
+    print(f"Click Here to Access Your HTSA Enrollment Portal: {enroll}")
+    print()
+    print(
+        "At the bottom of the page, you'll see our 30-Day Action Plan. Use that as "
+        "a benchmark for what's possible—many of our members have actually beaten "
+        "that timeline, but more importantly, remember that mastering a high-ticket "
+        "skill isn't something to rush. Enjoy the process, get the absolute most out "
+        "of every coaching session and AI sandbox rep, and feel good knowing you have "
+        "our team and placement support in your corner for life."
+    )
+    print()
+    print("Once you choose the payment option that fits your budget best, you have two simple ways to get started:")
+    print()
+    print(
+        "1. Self-Enroll: Follow the steps in order right on the page to set up your "
+        "portal login and book your kickoff call."
+    )
+    print(
+        "2. Text or Call Me for 5 Minutes: Shoot me a quick text and we can jump on "
+        "a brief 5-minute call so I can walk you through setup live."
+    )
+    print()
+    print("If any questions come up while reviewing everything, call or text me anytime.")
+    print()
+    print("Best,")
     print()
     print("CJ Clay")
-    print("HTSA, Career Transformation Coach")
+    print("HTSA, Senior Career Transformation Coach")
     print("(616) 612-1735")
     print("cj@highticketsalesacademy.com")
     print()
     print("=== TEXT (send right after the email) ===")
     print(
-        f"{first}, just emailed you your enrollment page. "
-        f"Link's in there, or here if it's easier: {enroll}"
+        "Hey — just sent over your enrollment portal link and payment options. Really "
+        "appreciated how intentional you were on our call. Take a look when you get a "
+        "second. Once you choose your option, you can self-enroll right through the "
+        "steps on the page, or give me a shout if you want to hop on a quick 5-minute "
+        "call and walk through setup together!"
     )
     print()
-    print(
-        "Worth pulling up on a computer. The 30-day plan and green \"After you pay\" "
-        "section are at the bottom. Any questions, call or text me directly."
-    )
-    print()
-    print("CJ")
+    print(f"{enroll}")
