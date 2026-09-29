@@ -124,7 +124,7 @@ a{color:inherit}
 .docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 26px 18px}
 .doc{display:flex;min-height:52px;align-items:center;justify-content:center;gap:8px;padding:12px;
   border:1px solid var(--grey);border-radius:12px;background:var(--white);color:var(--navy);
-  font-size:13.5px;font-weight:700;text-align:center;text-decoration:none}
+  font-family:inherit;font-size:13.5px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;width:100%}
 .doc:hover,.doc:focus-visible{border-color:var(--green-strong);outline:none}
 
 .next-wrap{margin:0 26px 16px;border:1px solid var(--grey);border-radius:13px;background:var(--white)}
@@ -194,6 +194,53 @@ a{color:inherit}
   font-size:13px;text-align:center;text-decoration:none}
 .paid-link:hover,.paid-link:focus-visible{color:var(--green)}
 
+/* Miranda Mestas June 2026 footer — brand-colored icons + business card */
+.footer-bc-wrap{margin-left:auto;flex-shrink:0}
+.footer-bc-card{display:flex;align-items:center;gap:16px;padding:14px 18px;max-width:420px;border-radius:14px;
+  background:linear-gradient(155deg,rgba(255,255,255,.07) 0%,rgba(12,22,38,.98) 42%,#070f1a 100%);
+  border:1px solid rgba(0,201,122,.18);
+  box-shadow:0 4px 28px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.05),0 0 48px rgba(0,201,122,.1)}
+.footer-bc-photo-ring{flex-shrink:0;width:108px;height:108px;border-radius:50%;border:3px solid var(--white);
+  overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.4);transform:translateY(-10px)}
+.footer-bc-headshot{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.footer-bc-info{min-width:0;flex:1;text-align:right}
+.footer-bc-logo-stack{display:flex;flex-direction:column;align-items:flex-end;gap:2px;margin-bottom:6px}
+.footer-bc-infinity-sym{font-family:Georgia,"Times New Roman",serif;color:var(--green);font-size:28px;line-height:1;font-weight:400;
+  filter:drop-shadow(0 0 6px rgba(0,201,122,.35))}
+.footer-bc-name{font-size:15px;font-weight:700;color:var(--white);margin-top:4px;text-align:right}
+.footer-bc-title{font-size:11px;color:rgba(255,255,255,.78);margin-bottom:8px;text-align:right}
+.footer-bc-lines{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+.footer-bc-line{font-size:10.5px;color:rgba(255,255,255,.68);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.footer-bc-line--cal{align-items:center;color:var(--green);font-weight:600;white-space:nowrap}
+.footer-bc-ico{flex-shrink:0}
+.footer-bc-line:hover{color:var(--white)}
+.footer-bc-line--cal:hover{color:var(--green-dark)}
+.footer-htsa-link{display:inline-flex;align-items:center;gap:9px;font-size:12px;color:rgba(255,255,255,.62);
+  text-decoration:none;line-height:1.35}
+.footer-htsa-link:hover{color:rgba(255,255,255,.95)}
+.footer-htsa-link__icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:20px;height:20px}
+.footer-htsa-link__icon svg{display:block;width:18px;height:18px}
+.footer-reviews-row{margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px}
+.footer-reviews-trustpilot{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--white);
+  font-size:16px;font-weight:600;letter-spacing:.02em}
+.footer-reviews-trustpilot:hover{color:var(--green)}
+.footer-reviews-stars{color:#e2b227;font-size:20px;letter-spacing:3px;line-height:1;
+  text-shadow:0 1px 2px rgba(0,0,0,.35),0 0 12px rgba(226,178,39,.35)}
+.footer-reviews-text{font-family:"DM Sans",sans-serif}
+.footer-reviews-support{font-size:15px;font-weight:500;color:rgba(255,255,255,.92);text-decoration:none;
+  border-bottom:1px solid rgba(0,201,122,.35);padding-bottom:2px}
+.footer-reviews-support:hover{color:var(--green);border-bottom-color:var(--green)}
+@media (max-width:600px){
+  .footer-bc-wrap{margin-left:0!important;width:100%}
+  .footer-bc-card{max-width:none!important;width:100%}
+  .footer-bc-photo-ring{transform:none}
+  .footer-bc-info,.footer-bc-logo-stack,.footer-bc-name,.footer-bc-title,.footer-bc-lines{
+    text-align:left!important;align-items:flex-start!important}
+  .footer-reviews-row{flex-direction:column;align-items:flex-start;margin-top:18px;padding-top:18px}
+  .footer-reviews-trustpilot{font-size:15px}
+}
+
 /* ---------- sheets ---------- */
 .sheet{width:min(560px,calc(100% - 20px));max-width:none;max-height:88dvh;padding:0;border:0;
   border-radius:18px;background:var(--white);box-shadow:0 28px 80px rgba(4,12,24,.45)}
@@ -201,7 +248,16 @@ a{color:inherit}
 .sheet-head{padding:18px 20px 14px;border-bottom:1px solid var(--grey)}
 .sheet-kicker{color:var(--green-dark);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
 .sheet-head h2{margin-top:4px;color:var(--navy);font-family:"Playfair Display",serif;font-size:22px;line-height:1.2}
-.sheet-body{padding:16px 20px 4px;overflow:auto}
+.sheet-body{padding:16px 20px 4px;overflow:auto;font-size:14px;line-height:1.6;color:var(--text)}
+.sheet-body h3{margin:14px 0 6px;color:var(--green-dark);font-size:12.5px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase}
+.sheet-body h3:first-child{margin-top:0}
+.sheet-body p{margin-bottom:10px}
+.sheet-body ul{margin:0 0 12px;padding-left:20px}
+.sheet-body li{margin-bottom:6px}
+.sheet-body ol{margin:0 0 12px;padding-left:22px}
+.sheet-links a,.sheet-links button{color:var(--green-dark);font-size:13.5px;font-weight:700;cursor:pointer;background:none;border:0;padding:0;font-family:inherit}
+.tos-download{flex:0 0 auto;text-decoration:none}
 .recap{margin-bottom:14px;padding:13px 15px;border-radius:12px;background:var(--grey-light)}
 .recap-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .recap-plan{color:var(--navy);font-size:16px;font-weight:800}
@@ -422,40 +478,54 @@ a{color:inherit}
 
   <div class="docs">
     <a class="doc" href="#" id="currBtn">📘 What's in the program</a>
-    <a class="doc" id="termsBtn" target="_blank" rel="noopener noreferrer">📄 Terms of Service</a>
+    <button class="doc" type="button" id="tosBtn">📄 Full Terms of Service</button>
     <a class="doc" id="roadmapBtn" target="_blank" rel="noopener noreferrer">🗺 Your 30 day game plan</a>
   </div>
 
-  <footer class="foot">
-    <div class="foot-top">
+  <footer class="foot" style="padding:0;background:transparent">
+  <div style="background:var(--navy);border-top:3px solid var(--green);padding:28px 26px;page-break-inside:avoid;break-inside:avoid;">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:28px;">
       <div>
-        <div class="foot-brand">High Ticket Sales Academy</div>
-        <div class="foot-sub">Certification · Coaching · Placement</div>
-        <div class="foot-links">
-          <a href="https://www.highticketsalesacademy.com" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">🌐</span>highticketsalesacademy.com</a>
-          <a href="https://www.youtube.com/@highticketsalesacademy" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶️</span>youtube.com/@highticketsalesacademy</a>
-          <a href="https://www.instagram.com/highticketsalesacademy/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">📷</span>@highticketsalesacademy</a>
-          <a href="https://www.facebook.com/HTSAcadamy/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">👥</span>facebook.com/HTSAcadamy</a>
+        <div style="font-family:'Playfair Display',serif;color:var(--white);font-size:17px;font-weight:700;margin-bottom:4px;">High Ticket Sales Academy</div>
+        <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:14px;">Certification · Coaching · Placement</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <a href="https://www.highticketsalesacademy.com" class="footer-htsa-link" target="_blank" rel="noopener noreferrer"><span class="footer-htsa-link__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" focusable="false"><circle cx="12" cy="12" r="10" fill="#1976D2"/><path fill="#43A047" d="M12 2.2c-1.2 2-1.8 4.2-1 6.2.9 2.2 2.8 3.5 3.8 5.5 1 2-1 5.2-2.8 7.4 4.5-1.2 7.7-5.3 7.7-10.1 0-4.4-3-8.2-7.7-9z"/><path fill="#81C784" d="M4.2 12.5c.8-1.3 2.4-2 3.8-1.2 1.5.8 2 2.5 1.4 3.9-.7 1.5-2.3 2.8-4 3.5-.9-1.8-1.3-3.8-1.2-6.2z" opacity=".9"/></svg></span><span>highticketsalesacademy.com</span></a>
+          <a href="https://www.youtube.com/@highticketsalesacademy" class="footer-htsa-link" target="_blank" rel="noopener noreferrer"><span class="footer-htsa-link__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" focusable="false"><path fill="#FF0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#fff" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span><span>youtube.com/@highticketsalesacademy</span></a>
+          <a href="https://www.instagram.com/highticketsalesacademy/" class="footer-htsa-link" target="_blank" rel="noopener noreferrer"><span class="footer-htsa-link__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" focusable="false"><defs><linearGradient id="htsFooterIgGradN" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#f58529"/><stop offset="25%" style="stop-color:#dd2a7b"/><stop offset="50%" style="stop-color:#8134af"/><stop offset="100%" style="stop-color:#515bd4"/></linearGradient></defs><path fill="url(#htsFooterIgGradN)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></span><span>@highticketsalesacademy</span></a>
+          <a href="https://www.facebook.com/HTSAcadamy/" class="footer-htsa-link" target="_blank" rel="noopener noreferrer"><span class="footer-htsa-link__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" focusable="false"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span><span>facebook.com/HTSAcadamy</span></a>
         </div>
       </div>
-      <div class="bcard">
-        <img class="bcard-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
-        <div>
-          <div class="bcard-inf" aria-hidden="true">∞</div>
-          <div class="bcard-name">CJ Clay</div>
-          <div class="bcard-title">HTSA · Career Transformation Coach</div>
-          <a class="bcard-line" href="tel:+16166121735"><span aria-hidden="true">📞</span>(616) 612-1735</a>
-          <a class="bcard-line" href="mailto:cj@highticketsalesacademy.com"><span aria-hidden="true">✉️</span>cj@highticketsalesacademy.com</a>
-          <a class="bcard-line bcard-line--sms" href="sms:+16166121735"><span aria-hidden="true">💬</span>Text me the second it clears</a>
+      <div class="footer-bc-wrap">
+        <div class="footer-bc-card">
+          <div class="footer-bc-photo-ring">
+            <img class="footer-bc-headshot" src="/cj-headshot-600.png" alt="CJ Clay — HTSA">
+          </div>
+          <div class="footer-bc-info">
+            <div class="footer-bc-logo-stack">
+              <span class="footer-bc-infinity-sym" aria-hidden="true">∞</span>
+            </div>
+            <div class="footer-bc-name">CJ Clay</div>
+            <div class="footer-bc-title">HTSA · Career Transformation Coach</div>
+            <div class="footer-bc-lines">
+              <a href="tel:+16166121735" class="footer-bc-line">📞 &nbsp;(616) 612-1735</a>
+              <a href="mailto:cj@highticketsalesacademy.com" class="footer-bc-line">✉️ &nbsp;cj@highticketsalesacademy.com</a>
+              <a href="https://meetings.hubspot.com/charles660/cj" target="_blank" rel="noopener noreferrer" class="footer-bc-line footer-bc-line--cal"><span class="footer-bc-ico" aria-hidden="true">📅</span><span class="footer-bc-line-text">meetings.hubspot.com/charles660/cj</span></a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="foot-rev">
-      <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" target="_blank" rel="noopener noreferrer">
-        <span class="foot-stars" aria-hidden="true">★★★★★</span>Trustpilot — 4.9 out of 5</a>
-      <a href="mailto:support@highticketsalesacademy.com">support@highticketsalesacademy.com</a>
+    <div class="footer-reviews-row">
+      <a href="https://www.trustpilot.com/review/highticketsalesacademy.com" class="footer-reviews-trustpilot" target="_blank" rel="noopener noreferrer">
+        <span class="footer-reviews-stars" aria-hidden="true">★★★★★</span>
+        <span class="footer-reviews-text">Trustpilot Reviews — 4.9 stars out of 5</span>
+      </a>
+      <a href="mailto:support@highticketsalesacademy.com" class="footer-reviews-support">support@highticketsalesacademy.com</a>
     </div>
-    <div class="foot-copy">© High Ticket Sales Academy · All Rights Reserved</div>
+  </div>
+  <div style="background:#060f1e;padding:12px 26px;text-align:center;font-size:10px;color:rgba(255,255,255,0.18);">
+    © High Ticket Sales Academy · All Rights Reserved
+  </div>
   </footer>
 </main>
 
@@ -476,7 +546,7 @@ a{color:inherit}
     <p class="plan-warn" id="sheetWarn" hidden></p>
     <div class="sheet-links">
       <a href="#" id="sheetCurr">📘 What's included</a>
-      <a id="sheetTerms" target="_blank" rel="noopener noreferrer">📄 Terms of Service (PDF)</a>
+      <a href="#" id="sheetTerms">📄 Read full Terms of Service</a>
     </div>
     <label class="agree">
       <input type="checkbox" id="agreeBox">
@@ -489,6 +559,67 @@ a{color:inherit}
     <button class="btn btn--go" type="button" id="goBtn" disabled>Continue to payment</button>
   </div>
   <p class="sheet-note">Your agreement is timestamped and sent to you with your receipt.</p>
+</dialog>
+
+
+<!-- Terms of Service popup (in-page) — same pattern as Sean Bowers -->
+<dialog class="sheet" id="tosSheet" aria-labelledby="tosTitle">
+  <div class="sheet-head">
+    <div class="sheet-kicker">Enrollment agreement</div>
+    <h2 id="tosTitle" tabindex="-1">Terms of Service</h2>
+  </div>
+  <div class="sheet-body">
+    <h3>Certified High Ticket Setter Program</h3>
+
+    <h3>Access to course content, Mastermind, and coaching</h3>
+    <p>Members receive <b>lifetime access to the course content</b> for their core product, <b>lifetime access to the private Facebook Mastermind community</b> (750+ members), and <b>lifetime access to Live Group Coaching Calls via Zoom, held Tuesdays at 12:00 PM EST and Wednesdays at 5:00 PM EST</b> with Chad. <b>1-on-1 coaching is included</b> and must be scheduled within three months of the program start date unless HTSA approves an extension.</p>
+
+    <h3>AI roleplay platform</h3>
+    <p><b>AI roleplay and the 24/7 AI coach are included at no cost while you are actively completing the program.</b> If you choose to keep the AI platform after placement, it is available at <b>$39/month</b> as an optional add-on.</p>
+
+    <h3>Post-hire support</h3>
+    <p>After you are placed, <b>HTSA provides 90 days of post-hire call review and performance feedback</b> to help you hit your KPIs and ramp into your new role.</p>
+
+    <h3>Limited placement guarantee</h3>
+    <p>HTSA offers a limited guarantee to members who meet the following conditions:</p>
+    <ol>
+      <li>Complete all course materials, roleplays, attend all 1-on-1 training, and finish certification before interview opportunities will be offered.</li>
+      <li>Attend at least one group coaching call per week throughout the program.</li>
+      <li>Apply to a minimum of 50 high-ticket closer or SDR/Setter positions and provide proof of application, such as screenshots or email confirmations.</li>
+    </ol>
+    <p><b>If the Member completes all these requirements and does not secure a qualifying role within 6 months of completing the certification program, or after completing at least 50 interviews (whichever comes first), they will be granted a full refund of the program's fees.</b></p>
+
+    <h3>Payment</h3>
+    <p>The Member agrees to pay HTSA in full for the purchased product(s) in United States Dollars (USD). Payments delinquent over 14 days may be sent to collections, and HTSA reserves the right to terminate the agreement. Finance charges will apply to all payment plans.</p>
+
+    <h3>Refund policy</h3>
+    <p>Refunds for purchased products or down payments will not be granted outside of the Limited Guarantee above. All sales are final except as outlined above.</p>
+
+    <h3>Notice to buyers</h3>
+    <p>You must be 18 years of age or older to sign this Agreement. If you are under 18, a legal guardian must sign on your behalf.</p>
+
+    <h3>Member expectations</h3>
+    <p>I am excited to fully commit to myself, my dreams, my career, and the High Ticket Sales Academy program. I understand that results require consistent effort.</p>
+
+    <h3>Enrollment agreement</h3>
+    <p>This Agreement is a legal contract between you (Member) and High Ticket Sales Academy, LLC (HTSA). By purchasing an HTSA product, the Member certifies that they have read, understood, and agree to this Agreement and the Refund Policy.</p>
+
+    <h3>Use of recordings</h3>
+    <p>Live group calls, webinars, testimonials, Facebook posts, or other audio/visual services may be recorded and used by HTSA for business purposes unless the Member specifically requests otherwise.</p>
+
+    <h3>Hours of operation</h3>
+    <p>HTSA's office is open Monday to Friday, 9 AM to 5 PM EST.</p>
+
+    <h3>Intellectual property</h3>
+    <p>All content within HTSA's program is protected by intellectual property rights and the Member agrees to use it only for personal purposes. Unauthorized reproduction or distribution may result in civil or criminal penalties.</p>
+
+    <h3>Customer service</h3>
+    <p>For questions or comments regarding HTSA products, please contact support@highticketsalesacademy.com or call 616-344-6220.</p>
+  </div>
+  <div class="sheet-foot">
+    <a class="btn btn--back tos-download" href="/HTSA-Terms-of-Service.pdf" download>Download PDF</a>
+    <button class="btn btn--go" type="button" id="tosClose">Got it</button>
+  </div>
 </dialog>
 
 <!-- curriculum -->
@@ -504,7 +635,7 @@ a{color:inherit}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1790717500
+   close-build:1790721000
    ============================================================ */
 const BUYER = {
   firstName: "Natalia",
@@ -684,7 +815,16 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   }
 
   /* ---------- docs ---------- */
-  el("termsBtn").href = TERMS_URL; el("sheetTerms").href = TERMS_URL;
+  const tosSheet = el("tosSheet");
+  function openTos(e){
+    if (e) e.preventDefault();
+    event("terms_opened",{linkLabel:TERMS_VERSION,linkUrl:TERMS_URL});
+    if (typeof tosSheet.showModal === "function") tosSheet.showModal();
+  }
+  el("tosBtn").addEventListener("click", openTos);
+  el("sheetTerms").addEventListener("click", openTos);
+  el("tosClose").addEventListener("click", function(){ tosSheet.close(); });
+  tosSheet.addEventListener("click", function(e){ if(e.target===tosSheet) tosSheet.close(); });
   const road = el("roadmapBtn");
   if (road) {
     const roadName = (val(first) || "").replace(/[^A-Za-z' -]/g, "").slice(0, 24);
@@ -705,9 +845,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("sheetCurr").addEventListener("click", openCurr);
   el("currClose").addEventListener("click", function(){ currSheet.close(); });
   currSheet.addEventListener("click", function(e){ if(e.target===currSheet) currSheet.close(); });
-  [el("termsBtn"), el("sheetTerms")].forEach(function(a){
-    a.addEventListener("click", function(){ event("terms_opened",{linkLabel:TERMS_VERSION,linkUrl:TERMS_URL}); });
-  });
 
   /* ---------- choose, agree, pay ---------- */
   const sheet = el("sheet"), agree = el("agreeBox"), go = el("goBtn");
