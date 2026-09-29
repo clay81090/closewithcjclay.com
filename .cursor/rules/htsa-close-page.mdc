@@ -170,9 +170,13 @@ Keep that guard.
 - **Terms + curriculum links stay at the bottom**, below the next-steps dropdown. CJ
   explicitly does not want them near the top.
 - **Next steps is a collapsed `<details>` directly under the payment buttons.** Green
-  outline/background so it is easy to spot. Summary subline: **"Doing this on your own?
-  Open for the exact 3 steps."** Closed by default, always openable, never gated on
-  payment. First open fires `next_steps_opened`. Do not hide this section until checkout.
+  outline/background so it is easy to spot. Summary subline: **"Self enroll or a 5
+  minute call with CJ — pick your path."** Inside: **two path tabs** — **Self Enroll**
+  (3 onboarding steps) and **5 Minute Call with CJ** (call/text CJ to walk through
+  welcome email, login, Mark kickoff, Mastermind). Never imply self-enroll is the only
+  option. Closed by default, always openable, never gated on payment. First open fires
+  `next_steps_opened`. Path taps fire `next_path_self` or `next_path_cj`. Do not hide
+  this section until checkout.
 - **Post-pay copy is ONE welcome email only.** Never say two emails, a second login
   email, or waiting for credentials. Step 1: welcome email → **Sales Training Login Link
   (Bookmark this)** → create password → start modules → bookmark/save email. Step 2:
@@ -206,8 +210,9 @@ Keep that guard.
    $7,200 · 0%**, and **Choose Split It** goes to `plan_LiZXezzaPMzUF`. If Splitit
    was not requested, the Splitit block is absent.
 10. Next steps is a green-outlined closed `<details>` under the payment buttons with
-   **3 steps** (welcome email login, Mark kickoff, Mastermind). No two-email language.
-   Opening it fires `next_steps_opened` once. It is never hidden behind checkout.
+   **two paths**: Self Enroll (3 steps: welcome email login, Mark kickoff, Mastermind)
+   and **5 Minute Call with CJ** (call/text). No two-email language. Opening it fires
+   `next_steps_opened` once. It is never hidden behind checkout.
 11. No All HTSA Resources tab, proof section, or CJ Reviews on close pages.
 
 ## Step 7 — ship it

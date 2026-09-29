@@ -14,12 +14,17 @@ description: >-
 
 Members receive **one welcome email** from HTSA after payment. **Never** copy that says two emails, a second login email, or waiting for credentials.
 
-**After you pay** dropdown (green outline, 3 steps):
+**After you pay** dropdown (green outline). Summary: **Self enroll or a 5 minute call
+with CJ — pick your path.** Inside, two tabs:
+
+**Path A — Self Enroll** (3 steps):
 
 1. **Welcome email + Sales Training Login** — Star/bookmark the welcome email. Click **Sales Training Login Link (Bookmark this)**, use their email to create a password, start course modules. Come back to the email later for Zoom links.
    - Login URL: `https://members.highticketsalesacademy.com/users/sign_in`
 2. **Book kickoff with Mark** — `https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call`
 3. **Join Mastermind** — `https://www.facebook.com/groups/1039656943556821`
+
+**Path B — 5 Minute Call with CJ** — Call or text CJ at `(616) 612-1735`. CJ walks them through welcome email, login, Mark kickoff, and Mastermind live. SMS body: `Payment made - ready for next steps`
 
 Template constant (do not remove):
 
@@ -27,7 +32,9 @@ Template constant (do not remove):
 const ONBOARDING = {
   trainingLogin: "https://members.highticketsalesacademy.com/users/sign_in",
   kickoffUrl:    "https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call",
-  mastermindUrl: "https://www.facebook.com/groups/1039656943556821"
+  mastermindUrl: "https://www.facebook.com/groups/1039656943556821",
+  cjPhone:       "+16166121735",
+  cjSmsBody:     "Payment made - ready for next steps"
 };
 ```
 

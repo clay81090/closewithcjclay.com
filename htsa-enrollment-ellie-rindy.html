@@ -422,6 +422,20 @@ a{color:inherit}
 .next-collapse[open] > .next-summary .next-summary-arrow{transform:rotate(180deg)}
 .next-collapse-body{padding:2px 12px 14px}
 .next-collapse-body .next-sub{margin:6px 0 12px}
+.next-path-pick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0 14px}
+.next-path-btn{min-height:48px;padding:10px 12px;border:2px solid var(--grey);border-radius:11px;
+  background:var(--white);color:var(--navy);font-size:13px;font-weight:800;line-height:1.35;cursor:pointer;
+  transition:border-color 150ms ease,background 150ms ease,box-shadow 150ms ease}
+.next-path-btn small{display:block;margin-top:3px;color:var(--muted);font-size:11.5px;font-weight:600}
+.next-path-btn--active{border-color:var(--green-strong);background:#f0fff7;
+  box-shadow:0 0 0 3px rgba(0,201,122,.14)}
+.next-path-panel[hidden]{display:none!important}
+.next-path-panel .next-step:last-child{margin-bottom:0}
+.next-call-card{padding:16px 15px;border:1px solid var(--grey);border-radius:13px;background:var(--white)}
+.next-call-card h3{margin:0 0 8px;color:var(--navy);font-size:15px;font-weight:800;line-height:1.3}
+.next-call-card p{margin:0 0 10px;color:var(--muted);font-size:13.5px;line-height:1.55}
+.next-call-actions{display:flex;flex-wrap:wrap;gap:8px}
+@media (max-width:520px){.next-path-pick{grid-template-columns:1fr}}
 
 /* ---------- Resource featured cards (caption style) ---------- */
 .res-group--featured{padding:14px;border-color:#f59e0b;
@@ -488,7 +502,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790703600 -->
+<!-- close-build:1790704200 -->
 </head>
 <body>
 <main class="page">
@@ -619,37 +633,61 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
       <details class="next-collapse" id="nextStepsCollapse">
         <summary class="next-summary">
           <span class="next-summary-title">After you pay</span>
-          <span class="next-summary-sub">Doing this on your own? Open for the exact 3 steps.</span>
+          <span class="next-summary-sub">Self enroll or a 5 minute call with CJ — pick your path.</span>
           <span class="next-summary-arrow" aria-hidden="true">▾</span>
         </summary>
         <div class="next-collapse-body">
-          <p class="next-sub">Do these three things in order.</p>
+          <p class="next-sub">Two ways to get started. Pick the one that fits you.</p>
 
-          <div class="next-step">
-            <div class="next-num">1</div>
-            <div class="next-body">
-              <h3>Your welcome email and course login</h3>
-              <p>Right after payment you get one welcome email from HTSA. Open it, star it as important, and bookmark it so you can come back anytime.</p>
-              <p>Click <b>Sales Training Login Link (Bookmark this)</b>, use your email to create your password, and you go straight into the course modules. You can start right away. Come back to the welcome email later for the live Zoom links.</p>
-              <a class="next-btn" href="https://members.highticketsalesacademy.com/users/sign_in" target="_blank" rel="noopener noreferrer">Sales Training Login</a>
+          <div class="next-path-pick" role="tablist" aria-label="After you pay options">
+            <button type="button" class="next-path-btn next-path-btn--active" id="nextPathSelfBtn" role="tab" aria-selected="true" aria-controls="nextPathSelf" data-path="self">
+              Self Enroll
+              <small>Do these 3 steps on your own</small>
+            </button>
+            <button type="button" class="next-path-btn" id="nextPathCjBtn" role="tab" aria-selected="false" aria-controls="nextPathCj" data-path="cj">
+              5 Minute Call with CJ
+              <small>I will walk you through it live</small>
+            </button>
+          </div>
+
+          <div class="next-path-panel" id="nextPathSelf" role="tabpanel" aria-labelledby="nextPathSelfBtn">
+            <div class="next-step">
+              <div class="next-num">1</div>
+              <div class="next-body">
+                <h3>Your welcome email and course login</h3>
+                <p>Right after payment you get one welcome email from HTSA. Open it, star it as important, and bookmark it so you can come back anytime.</p>
+                <p>Click <b>Sales Training Login Link (Bookmark this)</b>, use your email to create your password, and you go straight into the course modules. You can start right away. Come back to the welcome email later for the live Zoom links.</p>
+                <a class="next-btn" href="https://members.highticketsalesacademy.com/users/sign_in" target="_blank" rel="noopener noreferrer">Sales Training Login</a>
+              </div>
+            </div>
+
+            <div class="next-step">
+              <div class="next-num">2</div>
+              <div class="next-body">
+                <h3>Book your kickoff with Mark</h3>
+                <p>Mark is your Success Coach. This is a 15 minute Zoom to map your placement goals before you start the modules.</p>
+                <a class="next-btn" href="https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call" target="_blank" rel="noopener noreferrer">Book kickoff call</a>
+              </div>
+            </div>
+
+            <div class="next-step">
+              <div class="next-num">3</div>
+              <div class="next-body">
+                <h3>Join the Mastermind</h3>
+                <p>Request the private Facebook group. Live coaching replays live there, and 750+ members support each other.</p>
+                <a class="next-btn" href="https://www.facebook.com/groups/1039656943556821" target="_blank" rel="noopener noreferrer">Request access on Facebook</a>
+              </div>
             </div>
           </div>
 
-          <div class="next-step">
-            <div class="next-num">2</div>
-            <div class="next-body">
-              <h3>Book your kickoff with Mark</h3>
-              <p>Mark is your Success Coach. This is a 15 minute Zoom to map your placement goals before you start the modules.</p>
-              <a class="next-btn" href="https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call" target="_blank" rel="noopener noreferrer">Book kickoff call</a>
-            </div>
-          </div>
-
-          <div class="next-step">
-            <div class="next-num">3</div>
-            <div class="next-body">
-              <h3>Join the Mastermind</h3>
-              <p>Request the private Facebook group. Live coaching replays live there, and 750+ members support each other.</p>
-              <a class="next-btn" href="https://www.facebook.com/groups/1039656943556821" target="_blank" rel="noopener noreferrer">Request access on Facebook</a>
+          <div class="next-path-panel" id="nextPathCj" role="tabpanel" aria-labelledby="nextPathCjBtn" hidden>
+            <div class="next-call-card">
+              <h3>5 minute call with CJ</h3>
+              <p>Prefer not to do this alone? Call or text me and I will walk you through the welcome email, course login, kickoff with Mark, and the Mastermind. Usually takes about 5 minutes.</p>
+              <div class="next-call-actions">
+                <a class="next-btn" href="tel:+16166121735">Call CJ</a>
+                <a class="next-btn" href="sms:+16166121735&body=Payment%20made%20-%20ready%20for%20next%20steps">Text CJ</a>
+              </div>
             </div>
           </div>
         </div>
@@ -903,7 +941,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1790703600
+   close-build:1790704200
    ============================================================ */
 const BUYER = {
   firstName: "Ellie",
@@ -922,7 +960,9 @@ const CUSTOM_OFFER = null;
 const ONBOARDING = {
   trainingLogin: "https://members.highticketsalesacademy.com/users/sign_in",
   kickoffUrl:    "https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call",
-  mastermindUrl: "https://www.facebook.com/groups/1039656943556821"
+  mastermindUrl: "https://www.facebook.com/groups/1039656943556821",
+  cjPhone:       "+16166121735",
+  cjSmsBody:     "Payment made - ready for next steps"
 };
 
 const TRACKS = {
@@ -1154,6 +1194,28 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     nextCollapse.addEventListener("toggle", function(){
       if (nextCollapse.open && !nextFired) { nextFired = true; event("next_steps_opened"); }
     });
+  }
+  const nextPathSelfBtn = el("nextPathSelfBtn");
+  const nextPathCjBtn = el("nextPathCjBtn");
+  const nextPathSelf = el("nextPathSelf");
+  const nextPathCj = el("nextPathCj");
+  function showNextPath(path){
+    const selfOn = path === "self";
+    if (nextPathSelfBtn) {
+      nextPathSelfBtn.classList.toggle("next-path-btn--active", selfOn);
+      nextPathSelfBtn.setAttribute("aria-selected", selfOn ? "true" : "false");
+    }
+    if (nextPathCjBtn) {
+      nextPathCjBtn.classList.toggle("next-path-btn--active", !selfOn);
+      nextPathCjBtn.setAttribute("aria-selected", selfOn ? "false" : "true");
+    }
+    if (nextPathSelf) nextPathSelf.hidden = !selfOn;
+    if (nextPathCj) nextPathCj.hidden = selfOn;
+    event(selfOn ? "next_path_self" : "next_path_cj");
+  }
+  if (nextPathSelfBtn && nextPathCjBtn) {
+    nextPathSelfBtn.addEventListener("click", function(){ showNextPath("self"); });
+    nextPathCjBtn.addEventListener("click", function(){ showNextPath("cj"); });
   }
 
   /* ---------- choose, agree, pay ---------- */
