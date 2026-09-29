@@ -9,7 +9,7 @@
       (lifetime access, coaching times Tue 12pm/Wed 5pm EST, AI $39/mo, post-hire KPIs, refund clause)
     - 30 day game plan opens IN-PAGE popup (no leaving to shared /30-day-roadmap.html)
     - Curriculum + Splitit "how it works" also in-page popups
-    - All HTSA Resources tab + CJ Reviews (Janaye + See more) before footer
+    - Enrollment only: no precall resources or CJ Reviews on close pages
     - Payment confirm sheet: agreement checkbox + recordTermsAgreement to Google sheet at moment of consent
     - No "if we are still on the phone" contradiction box
     - AI subscription price updated $35 → $39/month
@@ -409,12 +409,14 @@ a{color:inherit}
 @media (max-width:680px){.res-wrap{margin-left:16px;margin-right:16px}}
 
 /* ---------- After you pay (collapsed dropdown) ---------- */
-.next-collapse{margin:0;border:1px solid var(--grey);border-radius:12px;background:#fbfcfe;
+.next-collapse{margin:0;border:3px solid var(--green-strong);border-radius:13px;
+  background:linear-gradient(160deg,#f7fffb 0%,#ecfff5 100%);
+  box-shadow:0 0 0 4px rgba(0,201,122,.14),0 10px 24px rgba(0,201,122,.12);
   transition:border-color 150ms ease,box-shadow 150ms ease}
-.next-collapse[open]{border-color:rgba(10,22,40,.18);box-shadow:0 6px 14px rgba(10,22,40,.05)}
+.next-collapse[open]{border-color:var(--green-strong);box-shadow:0 0 0 4px rgba(0,201,122,.18),0 12px 28px rgba(0,201,122,.16)}
 .next-summary{display:flex;align-items:center;gap:12px;padding:14px 16px;list-style:none;cursor:pointer}
 .next-summary::-webkit-details-marker{display:none}
-.next-summary-title{color:var(--navy);font-size:14px;font-weight:800}
+.next-summary-title{color:var(--green-dark);font-size:14px;font-weight:800}
 .next-summary-sub{flex:1;color:var(--muted);font-size:12.5px;font-weight:500;line-height:1.5}
 .next-summary-arrow{flex:0 0 auto;color:var(--muted);font-weight:900;transition:transform .2s ease}
 .next-collapse[open] > .next-summary .next-summary-arrow{transform:rotate(180deg)}
@@ -486,7 +488,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790702443 -->
+<!-- close-build:1790703600 -->
 </head>
 <body>
 <main class="page">
@@ -617,39 +619,24 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
       <details class="next-collapse" id="nextStepsCollapse">
         <summary class="next-summary">
           <span class="next-summary-title">After you pay</span>
-          <span class="next-summary-sub">Doing this on your own? Open for the exact 4 steps.</span>
+          <span class="next-summary-sub">Doing this on your own? Open for the exact 3 steps.</span>
           <span class="next-summary-arrow" aria-hidden="true">▾</span>
         </summary>
         <div class="next-collapse-body">
-          <p class="next-sub">Do these four things in order.</p>
+          <p class="next-sub">Do these three things in order.</p>
 
           <div class="next-step">
             <div class="next-num">1</div>
             <div class="next-body">
-              <h3>Text CJ, payment made</h3>
-              <p>Text <a href="sms:+16166121735">(616) 612-1735</a> the words <b>Payment made</b>. That is how I know to turn your access on if we are not on the phone together.</p>
-              <a class="next-btn" href="sms:+16166121735&body=Payment%20made">Text Payment made</a>
+              <h3>Your welcome email and course login</h3>
+              <p>Right after payment you get one welcome email from HTSA. Open it, star it as important, and bookmark it so you can come back anytime.</p>
+              <p>Click <b>Sales Training Login Link (Bookmark this)</b>, use your email to create your password, and you go straight into the course modules. You can start right away. Come back to the welcome email later for the live Zoom links.</p>
+              <a class="next-btn" href="https://members.highticketsalesacademy.com/users/sign_in" target="_blank" rel="noopener noreferrer">Sales Training Login</a>
             </div>
           </div>
 
           <div class="next-step">
             <div class="next-num">2</div>
-            <div class="next-body">
-              <h3>Two emails will hit your inbox</h3>
-              <p>Both come right after payment. Star the first one. Use the second one to log in.</p>
-              <div class="next-mail">
-                <b>Email 1. Welcome</b>
-                <span>Module access, live group coaching Zoom links, community, and your next steps. Add the Zoom links to your calendar: Tuesday, 12:00 PM EST and Wednesday, 5:00 PM EST.</span>
-              </div>
-              <div class="next-mail">
-                <b>Email 2. Login</b>
-                <span>A temporary password that takes you to your dashboard. Use this email to create your own login. It only takes a moment.</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="next-step">
-            <div class="next-num">3</div>
             <div class="next-body">
               <h3>Book your kickoff with Mark</h3>
               <p>Mark is your Success Coach. This is a 15 minute Zoom to map your placement goals before you start the modules.</p>
@@ -658,7 +645,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
           </div>
 
           <div class="next-step">
-            <div class="next-num">4</div>
+            <div class="next-num">3</div>
             <div class="next-body">
               <h3>Join the Mastermind</h3>
               <p>Request the private Facebook group. Live coaching replays live there, and 750+ members support each other.</p>
@@ -670,142 +657,6 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
     </div>
   </section>
 
-
-  <!-- Visible proof (precall-style) + Trustpilot + More proof dropdown -->
-  <section class="proof-visible" aria-labelledby="proofTitle">
-    <div class="cj-resources-kicker">If you want to check out more...</div>
-    <h2 id="proofTitle">Placement proof, employer proof, and a fresh member perspective.</h2>
-    <p class="section-lede">Aug 18 placements, Taylor Conroy, then Taylor Decourcey. That is enough context to decide with confidence.</p>
-    <div class="proof-squares">
-      <article class="proof-square">
-        <div class="proof-square-copy">
-          <div class="proof-square-kicker">Must watch · Aug 18</div>
-          <h3>Aug 18</h3>
-          <p>Four members on our live group call talking about getting multiple offers.</p>
-        </div>
-        <div class="proof-square-media-wrap">
-          <video class="proof-square-media" controls playsinline preload="metadata" poster="/media/htsa-clip-poster.jpg" title="This Week at HTSA — Aug 18 placements">
-            <source src="/media/this-week-at-htsa-2026-08-18.mp4" type="video/mp4">
-          </video>
-        </div>
-        <button type="button" class="proof-square-cta" data-media="video" data-src="/media/this-week-at-htsa-2026-08-18.mp4" data-title="This Week at HTSA — Aug 18 placements">Play here</button>
-      </article>
-      <article class="proof-square">
-        <div class="proof-square-copy">
-          <div class="proof-square-kicker">Employer-side proof</div>
-          <h3>Taylor Conroy</h3>
-          <p>A TEDx coach who hires HTSA members. Hear why he trusts this certification.</p>
-        </div>
-        <div class="proof-square-media-wrap">
-          <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/bd65afldLmE" title="Taylor Conroy explains why he hires from HTSA" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-        <button type="button" class="proof-square-cta" data-media="yt" data-id="bd65afldLmE" data-title="Taylor Conroy explains why he hires from HTSA">Watch here</button>
-      </article>
-      <article class="proof-square">
-        <div class="proof-square-copy">
-          <div class="proof-square-kicker">Fresh perspective</div>
-          <h3>Taylor Decourcey</h3>
-          <p>Newer member. A real look at the first few months after certification.</p>
-        </div>
-        <div class="proof-square-media-wrap">
-          <video class="proof-square-media" controls playsinline preload="metadata" poster="/media/taylor-decoursey-poster.jpg" title="Taylor Decourcey — newer member perspective">
-            <source src="/media/taylor-decoursey-testimonial.mp4" type="video/mp4">
-          </video>
-        </div>
-        <button type="button" class="proof-square-cta" data-media="video" data-src="/media/taylor-decoursey-testimonial.mp4" data-title="Taylor Decourcey — newer member perspective">Play here</button>
-      </article>
-    </div>
-    <button type="button" class="precall-trust-bar res-trust-top" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5" aria-label="Trustpilot Reviews, 4.9 out of 5, opens on this page">
-      <span class="precall-trust-stars" aria-hidden="true">★★★★★</span>
-      <span>Trustpilot Reviews, 4.9 out of 5</span>
-      <span class="res-trust-hint">Opens here ▸</span>
-    </button>
-    <button type="button" class="precall-top20-bar" data-media="doc" data-url="https://lp.highticketsalesacademy.com/hubfs/Top%2020%20High%20Ticket%20Sales%20E-Learning%20Companies.pdf" data-title="Top 20 Companies in High Ticket Sales" aria-label="Top 20 Companies In HTS, opens on this page">
-      <span>Top 20 Companies In HTS</span>
-      <span class="res-trust-hint">Opens here ▸</span>
-    </button>
-  <div class="res-wrap" style="margin:10px 0 0">
-    <details class="res-tab" id="resTab">
-      <summary>
-        <span><span class="res-tab-title">More Resources / Proof</span><span class="res-tab-sub">Videos, website, book, placement proof. Opens on this page.</span></span>
-        <span class="res-tab-arrow" aria-hidden="true">▸</span>
-      </summary>
-      <div class="res-panel">
-        <div class="res-group">
-          <div class="res-group-label">More from our network</div>
-          <button type="button" class="res-btn" data-media="yt" data-id="eLAWEwE7pl4" data-title="Meet Chad — CEO &amp; Founder at HTSA"><span>Meet Chad — CEO &amp; Founder at HTSA<small>YouTube · plays here</small></span><span class="chev">▸</span></button>
-        </div>
-        <div class="res-group">
-          <div class="res-group-label">Member testimonials</div>
-          <button type="button" class="res-btn" data-media="yt" data-id="WOVqPR-ufYM" data-title="Cassie — Single Mom success story"><span>Cassie — Single Mom<small>Relatable success story · plays here</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="yt" data-id="FqlY37NaIsk" data-title="Dana — Unsolicited HTSA Personal Review"><span>Dana — Personal Review<small>Unsolicited HTSA review · plays here</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="yt" data-id="5pVlD6EKy1k" data-title="Josh — Alex Hormozi background"><span>Josh — Alex Hormozi background<small>High-profile background · plays here</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="yt" data-id="TWacdj9x45o" data-title="Brianna — Tony Robbins team"><span>Brianna — Tony Robbins team<small>Credibility from a big name · plays here</small></span><span class="chev">▸</span></button>
-        </div>
-        <div class="res-group">
-          <div class="res-group-label">More resources</div>
-          <button type="button" class="res-btn" data-media="book" data-url="https://www.amazon.com/Book-High-Ticket-Sales-Ultimate/dp/B0C6C6PSMH" data-title="Chad’s Book — The Book on High Ticket Sales"><span>Chad’s Book<small>Full book details · opens on this page</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-why-placement.jpg" data-title="Why Everyone Raves About Our Placement"><span>Why Everyone Raves About Our Placement<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="img" data-src="/media/resources/canva-christa-22k.jpg" data-title="Christa Kieffer — Placement to 22k (4 months)"><span>Christa Kieffer — Placement to 22k<small>Full scrollable snapshot · stays on this page</small></span><span class="chev">▸</span></button>
-          <button type="button" class="res-btn" data-media="img" data-src="https://image.thum.io/get/width/1200/fullpage/https://highticketsalesacademy.com/" data-title="HTSA Website"><span>HTSA Website<small>Full website snapshot · stays on this page</small></span><span class="chev">▸</span></button>
-        </div>
-      </div>
-    </details>
-  </div>
-  </section>
-
-  <!-- CJ REVIEWS (last content, before footer) -->
-  <section class="reviews">
-    <div class="reviews-banner">
-      <div class="reviews-label">CJ Reviews</div>
-      <p class="reviews-desc">Real messages from people who worked directly with CJ.</p>
-    </div>
-
-    <div class="review-card">
-      <div class="review-meta">To CJ</div>
-      <div class="review-body">Hey CJ, it's Janaye again. I just wanted to reach out and let you know how grateful I am that you got me signed up with HTSA. I know you probably talk to a ton of people everyday, but I feel like you were in the trenches with me and helped me make one of the best decisions I could've made for my life right now.<br><br>I think about you often and how great you are in sales. I was definitely channeling a lot of your helpful, peaceful energy on my mock call and got my certification on the first try. So thank you again!</div>
-      <div class="review-attr">— Janaye · text message</div>
-    </div>
-
-    <details class="reviews-more" id="reviewsMore">
-      <summary>
-        <span>See more reviews<span class="reviews-more-sub">9 more messages from people who worked with CJ</span></span>
-        <span class="reviews-more-arrow" aria-hidden="true">▸</span>
-      </summary>
-      <div class="reviews-more-panel">
-        <div class="review-card">
-          <div class="review-meta">To CJ</div>
-          <div class="review-body">CJ, amazing dude. Thanks for the incredible sales process. You know what you're doing.</div>
-          <div class="review-attr">— Zach Scanlon · text message</div>
-        </div>
-        <div class="review-card">
-          <div class="review-meta">To CJ</div>
-          <div class="review-body">CJ, I just wanted to thank you for closing me on the program. I can already tell I'll get way more value back than I put in. How you closed me is a great reference point as I go through the program and learn the sales process.</div>
-          <div class="review-attr">— Riley Colston · text message</div>
-        </div>
-        <div class="review-card">
-          <div class="review-meta">To CJ</div>
-          <div class="review-body">CJ, the program has been great so far and I've made it all the way to the job search process. Honestly, your energy on our enrollment call is what convinced me. It felt caring. Care creates trust. Thanks for being you.</div>
-          <div class="review-attr">— Amy Colombo · text message</div>
-        </div>
-        <div class="review-card">
-          <div class="review-meta">To CJ</div>
-          <div class="review-body">CJ, thank you for following up with me three weeks after our first call and encouraging me to get into the program. I'm so grateful. I landed my dream role 65 days in, and you played a real part in that.</div>
-          <div class="review-attr">— Kate R. · text message</div>
-        </div>
-        <div class="review-card">
-          <div class="review-meta">To CJ</div>
-          <div class="review-body">Just received this news from my first mock call and wanted to share. I'm super grateful to you for helping me move forward with HTSA. Keep doing what you're doing.</div>
-          <div class="review-attr">— Jessica C. · text message</div>
-        </div>
-        <div class="review-card">
-          <div class="review-meta">To CJ</div>
-          <div class="review-body">Hey CJ, just wanted to say thanks, seriously. You didn't let me slip away after I tried to bail on our call. You stayed patient, kept it real, and showed me why this team's different. That's why I'm all in now. Appreciate you.</div>
-          <div class="review-attr">— Nick S. · text message</div>
-        </div>
-      </div>
-    </details>
-  </section>
 
   <footer class="foot">
     <div class="foot-top">
@@ -908,7 +759,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
         <div class="daygroup">
           <div class="day-label">Day 1</div>
           <ul>
-            <li>Access opens. Your welcome email arrives, <b>flag it as important</b>, and you set your password.</li>
+            <li>Your welcome email arrives. <b>Flag it as important</b>, open <b>Sales Training Login Link (Bookmark this)</b>, and create your password to start the modules.</li>
             <li>You're live inside the certification platform. <b>55 modules</b> waiting for you.</li>
             <li>Book your 15 minute kickoff with <b>Mark</b>, your Success Coach.</li>
             <li>Join the Mastermind community, open 24/7. Every coaching replay lives there and <b>750+ members</b> are in it. Post an introduction the day you get in.</li>
@@ -1049,24 +900,10 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 
 
-<!-- in-page media / resource viewer -->
-<dialog class="sheet media-sheet" id="mediaSheet" aria-labelledby="mediaTitle">
-  <div class="sheet-head">
-    <div class="sheet-kicker">Resource</div>
-    <h2 id="mediaTitle">Resource</h2>
-  </div>
-  <div class="sheet-body" id="mediaBody"></div>
-  <div class="sheet-foot">
-    <button class="btn btn--back" type="button" id="mediaExpand">Larger</button>
-    <button class="btn btn--go" type="button" id="mediaClose">Got it</button>
-  </div>
-</dialog>
-
-
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1790699256
+   close-build:1790703600
    ============================================================ */
 const BUYER = {
   firstName: "Ellie",
@@ -1081,6 +918,12 @@ const BUYER = {
 };
 
 const CUSTOM_OFFER = null;
+
+const ONBOARDING = {
+  trainingLogin: "https://members.highticketsalesacademy.com/users/sign_in",
+  kickoffUrl:    "https://meetings.hubspot.com/chad-aleo/member-success-team-kickoff-call",
+  mastermindUrl: "https://www.facebook.com/groups/1039656943556821"
+};
 
 const TRACKS = {
   closer: { label: "Certified High Ticket Closer" },
@@ -1290,14 +1133,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   tosSheet.addEventListener("click", function(e){ if(e.target===tosSheet) closeSheet(tosSheet); });
 
 
-  /* ---------- reviews ---------- */
-  const rm = el("reviewsMore");
-  if (rm) {
-    rm.addEventListener("toggle", function(){
-      if (rm.open) event("reviews_expanded");
-    });
-  }
-
   /* ---------- sticky cta hide near footer ---------- */
   const cta = el("stickyCta");
   const foot = document.querySelector(".foot");
@@ -1313,93 +1148,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   window.addEventListener("resize", updateCta);
 
 
-  /* ---------- resources (stay on page) ---------- */
-  const mediaSheet = el("mediaSheet");
-  const mediaBody = el("mediaBody");
-  const mediaTitle = el("mediaTitle");
-  let mediaExpanded = false;
-  function clearMedia(){
-    mediaBody.innerHTML = "";
-    mediaExpanded = false;
-    mediaSheet.style.width = "";
-    mediaSheet.style.maxWidth = "";
-    mediaSheet.style.height = "";
-    mediaSheet.style.maxHeight = "";
-  }
-  function openMedia(kind, payload, title){
-    clearMedia();
-    mediaTitle.textContent = title || "Resource";
-    mediaSheet.classList.toggle("media-sheet--wide", kind === "img" || kind === "doc");
-    if (kind === "yt") {
-      const f = document.createElement("iframe");
-      f.className = "media-frame";
-      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-      f.setAttribute("allowfullscreen", "");
-      f.setAttribute("playsinline", "");
-      f.src = "https://www.youtube-nocookie.com/embed/" + payload + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
-      mediaBody.appendChild(f);
-    } else if (kind === "img") {
-      const wrap = document.createElement("div");
-      wrap.className = "media-scroll";
-      wrap.id = "mediaScroll";
-      const img = document.createElement("img");
-      img.src = payload;
-      img.alt = title || "Resource";
-      img.loading = "eager";
-      wrap.appendChild(img);
-      mediaBody.appendChild(wrap);
-    } else if (kind === "video") {
-      const wrap = document.createElement("div");
-      wrap.className = "media-scroll";
-      wrap.style.background = "#000";
-      const v = document.createElement("video");
-      v.className = "media-frame";
-      v.controls = true;
-      v.setAttribute("playsinline", "");
-      v.setAttribute("preload", "metadata");
-      v.src = payload;
-      v.autoplay = true;
-      wrap.appendChild(v);
-      mediaBody.appendChild(wrap);
-    } else if (kind === "book") {
-      const wrap = document.createElement("div");
-      wrap.className = "book-viewer";
-      wrap.innerHTML = '<img src="/media/chad-aleo-book-banner.png" alt="The Book on High Ticket Sales by Chad Aleo">' +
-        '<h3>The Book on High Ticket Sales</h3>' +
-        '<p><b>Chad Aleo</b> · The Ultimate Guide to Making Millions Through Remote Selling</p>' +
-        '<div class="book-meta">4.8 out of 5 stars · 363 ratings · Paperback · 161 pages · $12.99</div>' +
-        '<p>A practical guide to building a career in remote high ticket sales from the founder of High Ticket Sales Academy.</p>' +
-        '<ul><li>Sell the way people want to buy</li><li>Master objections before they come up</li><li>Find and land legitimate high ticket sales roles</li><li>Build consistency in a one call close environment</li></ul>';
-      const link = document.createElement("a");
-      link.className = "book-amazon";
-      link.href = payload;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = "View full listing on Amazon ↗";
-      wrap.appendChild(link);
-      mediaBody.appendChild(wrap);
-    } else {
-      const f = document.createElement("iframe");
-      f.className = "media-frame media-frame--doc";
-      f.title = title || "Resource";
-      f.src = payload;
-      mediaBody.appendChild(f);
-    }
-    event("resource_opened", { linkLabel: title || kind, linkUrl: payload });
-    openSheet(mediaSheet);
-  }
-  document.querySelectorAll(".res-btn, .proof-square-cta, button.proof-square-media, .precall-trust-bar, .precall-top20-bar, .res-trust-top").forEach(function(btn){
-    btn.addEventListener("click", function(){
-      const kind = btn.dataset.media;
-      if (kind === "yt") openMedia("yt", btn.dataset.id, btn.dataset.title);
-      else if (kind === "img") openMedia("img", btn.dataset.src, btn.dataset.title);
-      else if (kind === "video") openMedia("video", btn.dataset.src, btn.dataset.title);
-      else if (kind === "book") openMedia("book", btn.dataset.url, btn.dataset.title);
-      else openMedia("doc", btn.dataset.url, btn.dataset.title);
-    });
-  });
-  const resTab = el("resTab");
-  if (resTab) resTab.addEventListener("toggle", function(){ if (resTab.open) event("resources_expanded"); });
   const nextCollapse = el("nextStepsCollapse");
   if (nextCollapse) {
     let nextFired = false;
@@ -1407,28 +1155,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       if (nextCollapse.open && !nextFired) { nextFired = true; event("next_steps_opened"); }
     });
   }
-  el("mediaClose").addEventListener("click", function(){ clearMedia(); closeSheet(mediaSheet); });
-  mediaSheet.addEventListener("click", function(e){ if(e.target===mediaSheet){ clearMedia(); closeSheet(mediaSheet); } });
-  el("mediaExpand").addEventListener("click", function(){
-    mediaExpanded = !mediaExpanded;
-    const sc = mediaBody.querySelector(".media-scroll");
-    const fr = mediaBody.querySelector("iframe");
-    if (mediaExpanded) {
-      mediaSheet.style.width = "min(96vw, 1100px)";
-      mediaSheet.style.maxHeight = "96dvh";
-      mediaSheet.style.height = "96dvh";
-      if (fr) { fr.style.minHeight = "80dvh"; fr.style.height = "80dvh"; }
-      if (sc) { sc.style.maxHeight = "80dvh"; }
-      el("mediaExpand").textContent = "Smaller";
-    } else {
-      mediaSheet.style.width = "";
-      mediaSheet.style.maxHeight = "";
-      mediaSheet.style.height = "";
-      if (fr) { fr.style.minHeight = ""; fr.style.height = ""; }
-      if (sc) { sc.style.maxHeight = ""; }
-      el("mediaExpand").textContent = "Larger";
-    }
-  });
 
   /* ---------- choose, agree, pay ---------- */
   const sheet = el("sheet"), agree = el("agreeBox"), go = el("goBtn");

@@ -169,16 +169,18 @@ Keep that guard.
 
 - **Terms + curriculum links stay at the bottom**, below the next-steps dropdown. CJ
   explicitly does not want them near the top.
-- **Next steps is a collapsed `<details>` directly under the payment buttons.**
-  Summary: "Doing this on your own? Here's exactly what happens next". Closed by
-  default, always openable, never gated on payment. First open fires
-  `next_steps_opened`. Do not hide this section until checkout.
-- **All HTSA Resources is the navy/green collapsed tab above CJ Reviews.** Default on
-  every close page (baked into `templates/_TEMPLATE-close.html`). Videos play in-page
-  (YouTube embeds + local clips like Taylor Decourcey and Aug 18). Trustpilot + Canva
-  use scrollable snapshot images in `/media/resources/`. Top 20 PDF opens in the same
-  in-page viewer next to the website row under **More resources**. Do not strip this
-  when building someone's page.
+- **Next steps is a collapsed `<details>` directly under the payment buttons.** Green
+  outline/background so it is easy to spot. Summary subline: **"Doing this on your own?
+  Open for the exact 3 steps."** Closed by default, always openable, never gated on
+  payment. First open fires `next_steps_opened`. Do not hide this section until checkout.
+- **Post-pay copy is ONE welcome email only.** Never say two emails, a second login
+  email, or waiting for credentials. Step 1: welcome email → **Sales Training Login Link
+  (Bookmark this)** → create password → start modules → bookmark/save email. Step 2:
+  book kickoff with Mark. Step 3: join Mastermind. Canonical login URL:
+  `https://members.highticketsalesacademy.com/users/sign_in`
+- **Enrollment pages are enrollment only.** Do **not** add All HTSA Resources, proof
+  squares, Trustpilot blocks, or CJ Reviews. Proof and resources belong on **pre-call**
+  pages (`r/<slug>/`), not close pages.
 - **Terms acceptance happens after plan selection**, inside the confirm sheet. Never
   gate the payment buttons behind a terms checkbox again. That is what killed
   conversion on the legacy page.
@@ -203,8 +205,10 @@ Keep that guard.
 9. If Splitit was requested: `"splitit"` is in `show`, card/popup say **$600/mo ·
    $7,200 · 0%**, and **Choose Split It** goes to `plan_LiZXezzaPMzUF`. If Splitit
    was not requested, the Splitit block is absent.
-10. Next steps is a closed `<details>` under the payment buttons. Opening it
-   fires `next_steps_opened` once. It is never hidden behind checkout.
+10. Next steps is a green-outlined closed `<details>` under the payment buttons with
+   **3 steps** (welcome email login, Mark kickoff, Mastermind). No two-email language.
+   Opening it fires `next_steps_opened` once. It is never hidden behind checkout.
+11. No All HTSA Resources tab, proof section, or CJ Reviews on close pages.
 
 ## Step 7 — ship it
 
@@ -247,7 +251,7 @@ verbatim, only substituting `First` and `ENROLL_URL`:
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">You've made enough decisions with real money behind them to know the difference between a program that sounds right and one that holds up when you check it. So here's your page, and here's how to check it.</p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Your enrollment page:</p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;"><a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a></p>
-<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Two things to look at while you're in there. The 30-day action plan at the bottom is the part most people skip and it's the part that matters. It's the actual sequence from day one to placed, with dates attached, not a promise. And the proof section is there so you don't have to take my word for anything I said on our call: video testimonials from members, testimonials from the companies that hire out of our network, Chad's book, our reviews. I'd rather you validate it yourself than believe me.</p>
+<p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Two things to look at while you're in there. The 30-day action plan at the bottom is the part most people skip and it's the part that matters. It's the actual sequence from day one to placed, with dates attached, not a promise. And if you are finishing on your own, open the green "After you pay" section for the three onboarding steps.</p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">The three things worth verifying before you commit to anything:</p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">Placement is a person's job here, not a job board. Nate's entire role is getting you in front of companies already looking. Ask anyone in the reviews about that specifically.</p>
 <p style="color:#000000;background:#ffffff;margin:16px 0 0 0;">It's backed in writing. If we don't place you inside 50 interviews or six months, you get refunded. The longest it's ever taken us is 15 interviews.</p>
@@ -263,7 +267,7 @@ HTSA, Career Transformation Coach<br>
 <p style="color:#000000;background:#ffffff;margin:0;">
 First, just emailed you everything we walked through. Link's in there, or here if it's easier: <a href="ENROLL_URL" style="color:#000000;background:#ffffff;">ENROLL_URL</a>
 <br><br>
-Worth pulling up on a computer rather than your phone. The 30-day plan and the proof section are both at the bottom and they read a lot better on a real screen. Any questions, call or text me directly.
+Worth pulling up on a computer rather than your phone. The 30-day plan and the green "After you pay" steps are at the bottom. Any questions, call or text me directly.
 <br><br>
 CJ
 </p>

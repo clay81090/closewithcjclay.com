@@ -70,10 +70,8 @@ def print_send_pack(first: str, enroll: str) -> None:
         "Two things to look at while you're in there. "
         "The 30-day action plan at the bottom is the part most people skip and it's the part "
         "that matters. It's the actual sequence from day one to placed, with dates attached, "
-        "not a promise. And the proof section is there so you don't have to take my word for "
-        "anything I said on our call: video testimonials from members, testimonials from the "
-        "companies that hire out of our network, Chad's book, our reviews. I'd rather you "
-        "validate it yourself than believe me."
+        "not a promise. And if you are finishing on your own, open the green "
+        "\"After you pay\" section for the three onboarding steps."
     )
     print()
     print("The three things worth verifying before you commit to anything:")
@@ -111,9 +109,8 @@ def print_send_pack(first: str, enroll: str) -> None:
     )
     print()
     print(
-        "Worth pulling up on a computer rather than your phone. The 30-day plan and the proof "
-        "section are both at the bottom and they read a lot better on a real screen. "
-        "Any questions, call or text me directly."
+        "Worth pulling up on a computer rather than your phone. The 30-day plan and the green "
+        "\"After you pay\" steps are at the bottom. Any questions, call or text me directly."
     )
     print()
     print("CJ")
