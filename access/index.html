@@ -1098,6 +1098,17 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   Object.keys(NODE).forEach(function(k){ if (show.indexOf(k) === -1) NODE[k].remove(); });
   show.forEach(function(k){ if (NODE[k] && NODE[k].parentNode) host.appendChild(NODE[k]); });
   if (NODE.clarity && NODE.clarity.parentNode) NODE.clarity.hidden = false;
+  if (show.length === 1 && NODE[show[0]]) {
+    NODE[show[0]].classList.add("plan--best");
+    const stickyMap = {
+      pif: "Paid in full · " + O.pif.amount,
+      plan: O.plan.name + " · " + O.plan.amount,
+      clarity: "ClarityPay · " + O.clarity.amount + " a month"
+    };
+    el("stickySub").textContent = stickyMap[show[0]] || el("stickySub").textContent;
+    const stickyBtn = document.querySelector(".sticky-cta-btn");
+    if (stickyBtn && show[0] === "clarity") stickyBtn.textContent = "Choose ClarityPay ↓";
+  }
 
   if (CUSTOM_OFFER) {
     const c = el("planCustom");

@@ -16,6 +16,11 @@ this one. Do not modify existing legacy pages when building a new close page.
 
 ## Trigger
 
+**Canonical UI (Sept 30 2026+):** Clone `access/index.html`. That is the look: green After you pay
+box, **one** welcome email, Self Enroll vs 5 minute call with CJ. When CJ names a person,
+keep `htsa-enrollment-<first>-<last>.html` (same URL). Set `BUYER.show` to the options he
+named (ClarityPay only = `["clarity"]`). Do **not** revive two-email copy.
+
 **Default (Sept 2026+):** After a close call, print the fail-safe EMAIL + TEXT from
 `scripts/htsa_close_copy.py` only. Link is always **`https://closewithcjclay.com/access`**.
 Do **not** build `htsa-enrollment-<name>.html` unless CJ explicitly asks for a

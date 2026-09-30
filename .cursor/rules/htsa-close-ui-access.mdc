@@ -1,0 +1,43 @@
+---
+description: Custom close pages clone /access UI. One welcome email. Named URL stays. show[] picks payment cards.
+alwaysApply: true
+---
+
+# Close page UI — locked (CJ, Sept 30 2026)
+
+This is how you remember it. Do not go back to the old long invoice or the two-email after-pay box.
+
+## Canonical look
+
+Live example: `https://closewithcjclay.com/access/`
+
+Source file: `access/index.html` (keep in sync with `templates/_TEMPLATE-close.html`).
+
+**After you pay** is the green highlighted dropdown: one welcome email, Sales Training Login, then Mark, then Mastermind, plus a 5-minute call with CJ path. Never “Email 1 / Email 2”. Never a second login email.
+
+## When CJ names a person
+
+Keep their existing URL. Example: Fred stays `htsa-enrollment-fred-himburg.html` → `https://closewithcjclay.com/htsa-enrollment-fred-himburg.html`
+
+```bash
+cp access/index.html htsa-enrollment-<first>-<last>.html
+```
+
+Then edit **only** the BUYER block (and a Clarity/PIF note if he dictated one). Put their name, email, phone, slug.
+
+`show` is the payment menu:
+
+- ClarityPay only → `show: ["clarity"]`
+- PIF only → `show: ["pif"]`
+- PIF + 4-pay + Clarity → `show: ["pif", "plan", "clarity"]`
+
+Closer ClarityPay is **$600/mo**. Setter ClarityPay is **$300/mo**. Never mix those checkouts.
+
+The one remaining card gets the green highlight (`plan--best`). That is the box CJ means.
+
+## Do not
+
+- Rebuild the page by hand
+- Add proof squares / Trustpilot / All HTSA Resources on a close page
+- Change the live path because you restyled it
+- Put two-email copy back
