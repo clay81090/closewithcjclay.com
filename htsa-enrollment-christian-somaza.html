@@ -486,7 +486,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790375500 -->
+<!-- close-build:1790795000 -->
 </head>
 <body>
 <main class="page">
@@ -579,6 +579,18 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
         <span class="plan-unit">one time</span>
       </div>
       <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
+    </div>
+
+    <div class="plan" id="planSplitit">
+      <span class="badge">Option 2</span>
+      <div class="plan-name">Split It monthly</div>
+      <div class="plan-note">$550 a month for 12 months. 0% interest. No credit pull. Uses the credit on a Visa or Mastercard you already have.</div>
+      <div class="plan-figs">
+        <span class="plan-amt">$550</span>
+        <span class="plan-unit">a month · $6,600 total</span>
+      </div>
+      <button class="choose" type="button" data-plan="splitit">Choose Split It</button>
+      <button type="button" class="plan-splitit-link" id="splititMoreBtn" style="display:inline-block;margin-top:10px;">How Splitit works →</button>
     </div>
 
     <div class="plan" id="planPlan">
@@ -1045,6 +1057,34 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
   </div>
 </dialog>
 
+<!-- Splitit popup (in-page) -->
+<dialog class="sheet" id="splititSheet" aria-labelledby="splititTitle">
+  <div class="sheet-head">
+    <div class="sheet-kicker">Payment option</div>
+    <h2 id="splititTitle">How Splitit works</h2>
+  </div>
+  <div class="sheet-body">
+    <h3>The simple version</h3>
+    <ul>
+      <li>$550 per month for 12 months ($6,600 total).</li>
+      <li>0% interest added by Splitit.</li>
+      <li>No credit pull, no new loan, no new credit account.</li>
+      <li>You use a Visa or Mastercard you already have.</li>
+      <li>That card must have the full $6,600 available at checkout.</li>
+      <li>Your statement charge each month is $550. The rest is a temporary hold, not a charge.</li>
+    </ul>
+    <h3>What actually happens</h3>
+    <ol>
+      <li><b>Today at checkout:</b> open the Splitit checkout. Splitit charges $550 and places a temporary pre-authorization hold for the remaining balance.</li>
+      <li><b>Your statement shows:</b> only that first $550. The hold is not a $6,600 purchase on your bill.</li>
+      <li><b>Each month after that:</b> another $550 posts. As each payment clears, the same amount of hold is released back into your available credit.</li>
+      <li><b>By month 12:</b> you have paid $6,600 in twelve steps. Cash flow stays predictable instead of one large posted balance on day one.</li>
+    </ol>
+    <p><b>Bottom line:</b> if you have strong credit and want to preserve cash flow, Splitit spreads $6,600 across a year at 0% interest without a credit application.</p>
+  </div>
+  <div class="sheet-foot"><button class="btn btn--go" type="button" id="splititClose">Choose Split It</button></div>
+</dialog>
+
 
 
 <!-- in-page media / resource viewer -->
@@ -1064,7 +1104,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1790713400
+   close-build:1790795000
    ============================================================ */
 const BUYER = {
   firstName: "Christian",
@@ -1074,8 +1114,8 @@ const BUYER = {
   slug:      "christian_somaza",
   track:     "closer",
   offer:     "standard",
-  show:      ["pif", "clarity"],
-  intro:     "Christian, here are the two payment options we covered. The Action Taker bonuses are on this page if you enroll tonight."
+  show:      ["pif", "splitit", "clarity"],
+  intro:     "Christian, here are the three payment options we covered: paid in full, Split It at $550 a month, and ClarityPay. The Action Taker bonuses are on this page if you enroll tonight."
 };
 
 const CUSTOM_OFFER = null;
@@ -1210,13 +1250,14 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
     plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
+    splitit: { name:"Split It",      amt:"$550",           sub:"$550 a month · $6,600 total · 0% interest. No credit pull.", url:"https://whop.com/checkout/4PcFLUerpZ8E73EomZ-xA27-pI2s-WLo0-Wd4UsuNEfoL2/", warn:"" },
     clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" }
   };
 
   const show = Array.isArray(BUYER.show) && BUYER.show.length ? BUYER.show : ["pif","plan","clarity"];
-  const NODE = { pif: el("planPif"), plan: el("planPlan"), clarity: el("planClarity") };
+  const NODE = { pif: el("planPif"), plan: el("planPlan"), splitit: el("planSplitit"), clarity: el("planClarity") };
   const host = el("planPif").parentNode;
-  Object.keys(NODE).forEach(function(k){ if (show.indexOf(k) === -1) NODE[k].remove(); });
+  Object.keys(NODE).forEach(function(k){ if (show.indexOf(k) === -1 && NODE[k]) NODE[k].remove(); });
   show.forEach(function(k){ if (NODE[k] && NODE[k].parentNode) host.appendChild(NODE[k]); });
   if (NODE.clarity && NODE.clarity.parentNode) NODE.clarity.hidden = false;
 
@@ -1265,6 +1306,16 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("tosClose").addEventListener("click", function(){ closeSheet(tosSheet); });
   tosSheet.addEventListener("click", function(e){ if(e.target===tosSheet) closeSheet(tosSheet); });
 
+  const SPLITIT_CHECKOUT = "https://whop.com/checkout/4PcFLUerpZ8E73EomZ-xA27-pI2s-WLo0-Wd4UsuNEfoL2/";
+  const splitit = el("splititSheet");
+  const splititMoreBtn = el("splititMoreBtn");
+  if (splititMoreBtn) splititMoreBtn.addEventListener("click", function(e){ e.preventDefault(); event("splitit_detail_opened"); openSheet(splitit); });
+  if (el("splititClose")) el("splititClose").addEventListener("click", function(){
+    event("checkout_started", { linkLabel: "Splitit $550/mo · $6,600", linkUrl: SPLITIT_CHECKOUT });
+    closeSheet(splitit);
+    window.location.href = SPLITIT_CHECKOUT;
+  });
+  if (splitit) splitit.addEventListener("click", function(e){ if(e.target===splitit) closeSheet(splitit); });
 
   /* ---------- reviews ---------- */
   const rm = el("reviewsMore");
