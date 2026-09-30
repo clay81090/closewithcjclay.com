@@ -254,7 +254,7 @@ Do not build per-person enrollment pages unless CJ explicitly asks.
 Always wrap the output in this HTML block so copy-paste into Gmail, HubSpot,
 and Just Call stays black on white with blank lines. No markdown. No code fences.
 The exact default copy lives in `scripts/htsa_close_copy.py` (`print_send_pack`).
-Live paste page: `docs/HTSA-FAILSAFE-SEND-PACKS.html`
+Live paste page: `https://closewithcjclay.com/send-packs/` (also `docs/HTSA-FAILSAFE-SEND-PACKS.html`)
 
 <div style="background:#ffffff;color:#000000;padding:20px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;">
 <p style="color:#000000;background:#ffffff;margin:0 0 8px 0;"><b>EMAIL</b></p>

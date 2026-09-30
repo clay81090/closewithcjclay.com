@@ -19,7 +19,7 @@ Everyone gets the same live page and the same text:
 
 If CJ says **"pre call link"** with no special request, print the fail-safe EMAIL
 + TEXT from `htsa_precall_copy.py` as a black-on-white HTML paste block. Do not
-clone `r/<name>/`. Live paste page: `docs/HTSA-FAILSAFE-SEND-PACKS.html`
+clone `r/<name>/`. Live paste page: `https://closewithcjclay.com/send-packs/`
 
 Email subject: **Before our call / HTSA pre-call page**. Email opens **Hi,**
 Text opens **Hey,** Link is always `https://closewithcjclay.com/before-our-call`.
