@@ -35,6 +35,23 @@
     .msg p{margin:16px 0 0;font-size:16px;line-height:1.5;color:#000;background:#fff}
     .msg p:first-child{margin-top:0}
     .msg a{color:#0000EE}
+    .callbox{margin-top:28px;padding:18px 16px 20px;border-radius:16px;background:var(--white);border:1px solid #d5dee8}
+    .callbox h2{font-size:20px;margin-bottom:8px}
+    .callbox-lede{font-size:14px;color:var(--muted);margin-bottom:10px}
+    .track-row{display:flex;gap:8px;margin:14px 0}
+    .track-btn{flex:1;min-height:48px;border:2px solid #d5dee8;border-radius:12px;background:#f7fafc;color:var(--navy);font-family:inherit;font-size:16px;font-weight:800;cursor:pointer}
+    .track-btn.is-on{border-color:var(--green-strong);background:#ecfff5}
+    .walk-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 16px}
+    .walk-note{font-size:12.5px;color:var(--muted);max-width:420px}
+    .plan-h{font-size:14px;margin:16px 0 8px;color:var(--navy)}
+    .plan-grid{display:grid;gap:8px}
+    .plan-card{padding:12px 12px 10px;border:1px solid #d5dee8;border-radius:12px;background:#fbfcfe}
+    .plan-card b{display:block;font-size:15px}
+    .plan-card span{display:block;margin:4px 0 8px;font-size:12.5px;color:var(--muted);line-height:1.4}
+    .plan-btns{display:flex;flex-wrap:wrap;gap:8px}
+    .copy-plain{min-height:42px;padding:8px 12px;border:0;border-radius:10px;background:var(--navy);color:var(--white);font-family:inherit;font-size:13px;font-weight:800;cursor:pointer}
+    .copy-plain.is-done{background:var(--green-strong);color:#04231a}
+    .spec-link{margin-top:18px;font-size:13px;color:var(--muted)}
     @media (max-width:520px){.picks{grid-template-columns:1fr}}
   </style>
 </head>
@@ -42,10 +59,11 @@
   <header class="top">
     <img src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
     <h1>Your send packs</h1>
-    <p>Pick one of the four. Tap Copy. Paste into HubSpot, Gmail, or Just Call. Spacing stays. Bookmark this page. Do not send this URL to a prospect.</p>
+    <p>Pick one of the four emails or texts. Scroll down for Closer vs Setter checkout links on the call. Bookmark this page. Do not send this URL to a prospect.</p>
   </header>
 
   <div class="wrap">
+    <p class="hint"><a href="#on-call">Jump to on-call checkout (Closer vs Setter)</a></p>
     <nav class="picks" aria-label="Choose a send pack">
       <button class="pick is-on" type="button" data-pack="precall-email">Pre-call email<small>HubSpot / Gmail</small></button>
       <button class="pick" type="button" data-pack="precall-text">Pre-call text<small>Just Call</small></button>
@@ -120,6 +138,26 @@
         <p>Show up and execute, and we won't let you fail, but you have to meet us halfway. In your moments of decision, life stops happening to you and starts happening for you the second you step into position. Unlock your access above when you're ready!</p>
       </div>
     </section>
+
+    <section class="callbox" id="on-call">
+      <h2>On the call. Prescribe one option.</h2>
+      <p class="callbox-lede">Person says Closer and paid in full. You tap that tile. Copy the Zoom link. Drop it in chat. Stay on the line. Do not send this page to them.</p>
+      <p class="callbox-lede"><b>ClarityPay $300 a month is Setter only.</b> Closer ClarityPay is $600 a month listed ($7,200 total). Promo Closer ClarityPay is $500 a month ($6,000 total) only when you name that offer.</p>
+      <div class="track-row">
+        <button class="track-btn is-on" type="button" data-track="closer">Closer</button>
+        <button class="track-btn" type="button" data-track="setter">Setter</button>
+      </div>
+      <div class="walk-row">
+        <button class="copy-plain" type="button" data-plain="https://closewithcjclay.com/access">Copy screen-share page</button>
+        <span class="walk-note">Today this is /access (value + all payment cards). Claude Code will add a no-price walkthrough at /agreement without replacing this.</span>
+      </div>
+      <h3 class="plan-h">Primary. Use these first.</h3>
+      <div id="planPrimary" class="plan-grid"></div>
+      <h3 class="plan-h">Only if you named this offer on the call.</h3>
+      <div id="planExtra" class="plan-grid"></div>
+    </section>
+
+    <p class="spec-link">Claude Code spec (do not change existing UI): <a href="/docs/CLOSER-HOMEBASE-CLAUDE-CODE-HANDOFF.md">docs/CLOSER-HOMEBASE-CLAUDE-CODE-HANDOFF.md</a></p>
   </div>
 
   <script>
@@ -178,9 +216,100 @@
       }
     }
 
-    document.querySelectorAll(".copy-btn").forEach(function (btn) {
+    document.querySelectorAll(".copy-btn[data-copy]").forEach(function (btn) {
       btn.addEventListener("click", function () { copyPack(btn.getAttribute("data-copy"), btn); });
     });
+
+    async function copyText(text, btn) {
+      try {
+        await navigator.clipboard.writeText(text);
+        markDone(btn);
+      } catch (err) {
+        window.prompt("Copy this:", text);
+      }
+    }
+
+    var PLANS = {
+      closer: {
+        primary: [
+          { name: "Paid in full $6,000", detail: "One time. Saves $1,000 vs the 4-pay.", url: "https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" },
+          { name: "4-pay $1,750 today", detail: "$7,000 total. First payment today, then one a month for three months.", url: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
+          { name: "ClarityPay $600 / month", detail: "Closer only. $7,200 total. 0% APR. 620+ credit. Not the Setter $300 plan.", url: "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" }
+        ],
+        extra: [
+          { name: "Splitit $600 / month", detail: "Only if you asked for Splitit. $7,200 total. 0% interest.", url: "https://whop.com/checkout/plan_LiZXezzaPMzUF" },
+          { name: "2-pay Action Taker $6,000", detail: "$3,000 today, $3,000 in 30 days.", url: "https://whop.com/checkout/plan_oMi6XYvybZY4F?d2c=true" },
+          { name: "3-pay $2,200", detail: "$6,600 total. Secondary.", url: "https://whop.com/checkout/plan_YfsUaarlyP9e1?d2c=true" },
+          { name: "PIF $5,000 promo", detail: "Experience / reactivation. Not default $6k.", url: "https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true" },
+          { name: "Promo 3-pay $1,750", detail: "$5,250 total. Real 3-pay.", url: "https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true" },
+          { name: "Promo ClarityPay $500 / month", detail: "$6,000 total. Not the $7,200 closer plan. Not Setter $300.", url: "https://whop.com/checkout/plan_VUSDju20gTBCg/" }
+        ]
+      },
+      setter: {
+        primary: [
+          { name: "Paid in full $3,000", detail: "Setter cash PIF.", url: "https://whop.com/checkout/plan_qzvfCCb1rIO0L?d2c=true" },
+          { name: "3-pay $1,050 today", detail: "$3,150 total.", url: "https://whop.com/checkout/plan_oK3AajTKp0mXK?d2c=true" },
+          { name: "ClarityPay $300 / month", detail: "Setter only. $3,600 total. Never use this checkout on Closer.", url: "https://whop.com/checkout/plan_z5iuUhSgm9seH?d2c=true" }
+        ],
+        extra: [
+          { name: "2-pay $1,500", detail: "$3,000 total. $1,500 today, $1,500 in 30 days.", url: "https://whop.com/checkout/plan_nNnBopJ5NlBHU?d2c=true" },
+          { name: "Flexxbuy apply", detail: "Setter: request $3,500 on the application.", url: "https://app.flexxbuy.com/high-ticket-sales-academy-llc/apply/" }
+        ]
+      }
+    };
+
+    var track = "closer";
+
+    function chatLine(plan) {
+      return "I just dropped your direct checkout in the Zoom chat. Open that. It is " + plan.name + ". I will stay right here with you.\n\n" + plan.url;
+    }
+
+    function renderPlans() {
+      var data = PLANS[track];
+      function fill(id, list) {
+        var box = document.getElementById(id);
+        box.innerHTML = "";
+        list.forEach(function (plan) {
+          var card = document.createElement("div");
+          card.className = "plan-card";
+          card.innerHTML = "<b></b><span></span><div class=\"plan-btns\"></div>";
+          card.querySelector("b").textContent = plan.name;
+          card.querySelector("span").textContent = plan.detail;
+          var btns = card.querySelector(".plan-btns");
+          var a = document.createElement("button");
+          a.className = "copy-plain";
+          a.type = "button";
+          a.textContent = "Copy Zoom link";
+          a.addEventListener("click", function () { copyText(plan.url, a); });
+          var b = document.createElement("button");
+          b.className = "copy-plain";
+          b.type = "button";
+          b.textContent = "Copy chat line + link";
+          b.addEventListener("click", function () { copyText(chatLine(plan), b); });
+          btns.appendChild(a);
+          btns.appendChild(b);
+          box.appendChild(card);
+        });
+      }
+      fill("planPrimary", data.primary);
+      fill("planExtra", data.extra);
+    }
+
+    document.querySelectorAll(".track-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        track = btn.getAttribute("data-track");
+        document.querySelectorAll(".track-btn").forEach(function (t) {
+          t.classList.toggle("is-on", t === btn);
+        });
+        renderPlans();
+      });
+    });
+
+    document.querySelectorAll(".copy-plain[data-plain]").forEach(function (btn) {
+      btn.addEventListener("click", function () { copyText(btn.getAttribute("data-plain"), btn); });
+    });
+
+    renderPlans();
   })();
   </script>
 </body>
