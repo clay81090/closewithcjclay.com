@@ -420,6 +420,11 @@ a{color:inherit}
   box-shadow:0 0 0 4px rgba(0,201,122,.14),0 10px 24px rgba(0,201,122,.12);
   transition:border-color 150ms ease,box-shadow 150ms ease}
 .next-collapse[open]{border-color:var(--green-strong);box-shadow:0 0 0 4px rgba(0,201,122,.18),0 12px 28px rgba(0,201,122,.16)}
+.next-collapse--always-open{border:3px solid var(--green-strong);box-shadow:0 0 0 4px rgba(0,201,122,.18),0 12px 28px rgba(0,201,122,.16)}
+.next-collapse--always-open > .next-summary{cursor:default;pointer-events:none}
+.next-collapse--always-open .next-summary-arrow{display:none}
+.next-collapse--always-open .next-path-pick{display:none}
+.next-collapse--always-open .next-path-panel[hidden]{display:block!important}
 .next-summary{display:flex;align-items:center;gap:12px;padding:14px 16px;list-style:none;cursor:pointer}
 .next-summary::-webkit-details-marker{display:none}
 .next-summary-title{color:var(--green-dark);font-size:14px;font-weight:800}
@@ -600,14 +605,14 @@ a{color:inherit}
 
   <section class="after">
     <div class="next">
-      <details class="next-collapse" id="nextStepsCollapse">
+      <details class="next-collapse next-collapse--always-open" id="nextStepsCollapse" open>
         <summary class="next-summary">
           <span class="next-summary-title">After you pay</span>
           <span class="next-summary-sub">Self enroll or a 5 minute call with CJ — pick your path.</span>
           <span class="next-summary-arrow" aria-hidden="true">▾</span>
         </summary>
         <div class="next-collapse-body">
-          <p class="next-sub">Two ways to get started. Pick the one that fits you.</p>
+          <p class="next-sub">Two ways to get started. Both are here. Pick the one that fits you.</p>
 
           <div class="next-path-pick" role="tablist" aria-label="After you pay options">
             <button type="button" class="next-path-btn next-path-btn--active" id="nextPathSelfBtn" role="tab" aria-selected="true" aria-controls="nextPathSelf" data-path="self">
@@ -650,7 +655,7 @@ a{color:inherit}
             </div>
           </div>
 
-          <div class="next-path-panel" id="nextPathCj" role="tabpanel" aria-labelledby="nextPathCjBtn" hidden>
+          <div class="next-path-panel" id="nextPathCj" role="tabpanel" aria-labelledby="nextPathCjBtn">
             <div class="next-call-card">
               <h3>5 minute call with CJ</h3>
               <p>Prefer not to do this alone? Call or text me and I will walk you through the welcome email, course login, kickoff with Mark, and the Mastermind. Usually takes about 5 minutes.</p>
@@ -1194,8 +1199,10 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   if (nextCollapse) {
     let nextFired = false;
     nextCollapse.addEventListener("toggle", function(){
+      if (!nextCollapse.open) nextCollapse.open = true;
       if (nextCollapse.open && !nextFired) { nextFired = true; event("next_steps_opened"); }
     });
+    if (nextCollapse.open && !nextFired) { nextFired = true; event("next_steps_opened"); }
   }
   const nextPathSelfBtn = el("nextPathSelfBtn");
   const nextPathCjBtn = el("nextPathCjBtn");
