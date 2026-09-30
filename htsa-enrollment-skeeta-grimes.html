@@ -469,7 +469,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790780000 -->
+<!-- close-build:1790782200 -->
 </head>
 <body>
 <main class="page">
@@ -952,10 +952,17 @@ const BUYER = {
   track:     "closer",
   offer:     "standard",
   show:      ["clarity", "plan"],
-  intro:     ""
+  intro:     "Skeeta, here are the three payment options we covered: ClarityPay at $600 a month, the Action Taker 2-pay at $3,000 today, and the 4-pay at $1,750."
 };
 
-const CUSTOM_OFFER = null;
+const CUSTOM_OFFER = {
+  name: "Action Taker 2-pay",
+  note: "$3,000 today, then $3,000 in 30 days. $6,000 total.",
+  amount: "$3,000",
+  unit: "today · $6,000 total",
+  badge: "Action Taker",
+  checkout: "https://whop.com/checkout/plan_oMi6XYvybZY4F?d2c=true"
+};
 
 const ONBOARDING = {
   trainingLogin: "https://members.highticketsalesacademy.com/users/sign_in",
@@ -1118,16 +1125,21 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
 
   if (CUSTOM_OFFER) {
     const c = el("planCustom");
-    c.hidden = false; host.insertBefore(c, host.querySelector(".plan:not(#planCustom)"));
+    c.hidden = false;
+    // Option 2: after the first visible payment card
+    const firstPlan = host.querySelector(".plan:not(#planCustom)");
+    if (firstPlan && firstPlan.nextSibling) host.insertBefore(c, firstPlan.nextSibling);
+    else if (firstPlan) firstPlan.after(c);
+    else host.appendChild(c);
     el("customBadge").textContent = CUSTOM_OFFER.badge || "Your offer";
     el("customName").textContent  = CUSTOM_OFFER.name || "";
     el("customNote").textContent  = CUSTOM_OFFER.note || "";
     el("customAmt").textContent   = CUSTOM_OFFER.amount || "";
     el("customUnit").textContent  = CUSTOM_OFFER.unit || "";
+    const customBtn = c.querySelector(".choose");
+    if (customBtn) customBtn.textContent = "Choose Action Taker";
     PLANS.custom = { name:CUSTOM_OFFER.name, amt:CUSTOM_OFFER.amount, sub:CUSTOM_OFFER.note,
                      url:CUSTOM_OFFER.checkout, warn:CUSTOM_OFFER.warn || "" };
-    el("planPif") && el("planPif").classList.remove("plan--best");
-    const b = el("pifBadge"); if (b) b.remove();
   }
 
   /* ---------- docs ---------- */
