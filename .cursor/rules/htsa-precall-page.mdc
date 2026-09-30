@@ -17,10 +17,12 @@ Everyone gets the same live page and the same text:
 - **Single text (recommended):** one message with link + 4-minute clip hook. No name variables. No dates like "the 18th". Say **recent live call** in any agent-written copy, never a calendar date.
 - **Full page layout:** generic page must still include proof squares (Taylor Conroy, Top 20, Taylor Decourcey), Trustpilot bar, and the navy **Click here for more proof** resources tab (same as Keialoha/V17). Never ship a clip-only precall.
 
-If CJ says **"pre call link"** with no special request, print the fail-safe text
-from `htsa_precall_copy.py` only. Do not clone `r/<name>/`.
+If CJ says **"pre call link"** with no special request, print the fail-safe EMAIL
++ TEXT from `htsa_precall_copy.py` as a black-on-white HTML paste block. Do not
+clone `r/<name>/`. Live paste page: `docs/HTSA-FAILSAFE-SEND-PACKS.html`
 
-Optional email subject: **Before our call / HTSA pre-call page** (same body as the text, expanded).
+Email subject: **Before our call / HTSA pre-call page**. Email opens **Hi,**
+Text opens **Hey,** Link is always `https://closewithcjclay.com/before-our-call`.
 
 ## Legacy trigger — per-person pages only when CJ asks
 

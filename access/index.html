@@ -90,6 +90,21 @@ a{color:inherit}
 .inc-list li::before{flex:0 0 auto;margin-top:1px;color:var(--green-strong);font-size:15px;
   font-weight:800;content:"✓"}
 
+.bonuses{margin:16px 26px 8px;padding:20px 22px;border-radius:16px;background:var(--ink);
+  border:3px solid var(--green-strong);box-shadow:0 0 0 4px rgba(0,201,122,.14)}
+.bonuses-tag{display:inline-block;margin-bottom:8px;padding:4px 11px;border-radius:999px;
+  background:var(--green-strong);color:#04231a;font-size:12px;font-weight:800;letter-spacing:.07em;
+  text-transform:uppercase}
+.bonuses .h2{margin:0 0 6px;color:var(--white)}
+.bonuses-lede{margin:0 0 16px;color:rgba(255,255,255,.82);font-size:14px;line-height:1.55}
+.bonus-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.bonus-card{padding:16px 16px 14px;border:4px solid var(--green-strong);border-radius:12px;background:rgba(255,255,255,.04);
+  box-shadow:0 0 0 3px rgba(0,201,122,.28),0 8px 20px rgba(0,201,122,.2)}
+.bonus-kicker{margin-bottom:8px;color:var(--green);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.bonus-card h3{margin:0 0 8px;color:var(--white);font-size:18px;font-weight:800;line-height:1.25}
+.bonus-card p{margin:0;color:rgba(255,255,255,.8);font-size:13.5px;line-height:1.5}
+@media (max-width:680px){.bonus-grid{grid-template-columns:1fr}.bonuses{margin-left:16px;margin-right:16px}}
+
 /* ---------- guarantee ---------- */
 .guar{margin:18px 26px 6px;padding:20px 22px;border-radius:16px;background:var(--ink);
   border:3px solid var(--green-strong);
@@ -149,6 +164,9 @@ a{color:inherit}
 .plan-clarity-badge{display:inline-flex;align-items:center;gap:5px;margin:0 0 6px;padding:3px 10px;
   border-radius:999px;background:rgba(0,201,122,.15);color:var(--green-dark);
   font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.plan-clarity-chance{margin:0 0 14px;padding:10px 12px;border-radius:10px;
+  background:rgba(97,227,139,.12);border:1px solid rgba(0,201,122,.32);
+  color:var(--navy);font-size:13.5px;font-weight:700;line-height:1.5}
 
 .plan-warn{margin:-4px 0 12px;padding:9px 11px;border:1px solid rgba(0,201,122,.3);border-radius:9px;
   background:rgba(97,227,139,.12);color:var(--navy);font-size:12.5px;font-weight:700;line-height:1.45}
@@ -445,7 +463,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1789169267 -->
+<!-- close-build:1790733002 -->
 </head>
 <body>
 <main class="page">
@@ -481,6 +499,24 @@ a{color:inherit}
   <section class="inc">
     <div class="h2">What you're getting</div>
     <ul class="inc-list" id="incList"></ul>
+  </section>
+
+  <section class="bonuses" aria-labelledby="bonusTitle">
+    <div class="bonuses-tag">Extended webinar bonuses</div>
+    <div class="h2" id="bonusTitle">Two exclusive bonuses through Thursday at 8pm EST.</div>
+    <p class="bonuses-lede">These were for live webinar attendees who enrolled within 24 hours. I extended them for you through Thursday, October 1st at 8pm EST. They sit on top of everything in the program.</p>
+    <div class="bonus-grid">
+      <article class="bonus-card">
+        <div class="bonus-kicker">Bonus 01</div>
+        <h3>2 one-on-one coaching calls with Chad Aleo</h3>
+        <p>Suggested use: after you land your offer.</p>
+      </article>
+      <article class="bonus-card">
+        <div class="bonus-kicker">Bonus 02</div>
+        <h3>A personal Loom video</h3>
+        <p>Chad will record a Loom video for you to send to any hiring managers you apply to.</p>
+      </article>
+    </div>
   </section>
 
   <div class="guar" id="guarantee">
@@ -549,6 +585,7 @@ a{color:inherit}
         <span class="plan-amt" id="clarityAmt"></span>
         <span class="plan-unit" id="clarityUnit"></span>
       </div>
+      <p class="plan-clarity-chance">Some members pay as low as $300 a month. See what you are approved for. Give yourself a chance.</p>
       <button class="choose" type="button" data-plan="clarity">Choose ClarityPay</button>
     </div>
   </section>
@@ -937,7 +974,7 @@ const OFFERS = {
             warn: "",
             checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
     clarity: { amount: "$600", unit: "a month · 0% interest · $7,200 total",
-               note: "Monthly financing with 0% interest APR. Soft credit check, 620 or better credit score to qualify.",
+               note: "Monthly financing with 0% interest APR. Soft credit check, 620 or better credit score to qualify. Some members pay as low as $300 a month based on approval.",
                checkout: "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" }
   }
 };

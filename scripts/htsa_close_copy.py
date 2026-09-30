@@ -53,22 +53,23 @@ def print_send_pack(first: str, enroll: str | None = None) -> None:
     print("=== EMAIL ===")
     print("Hi,")
     print()
+    print(f"Click Here to Access Your HTSA Portal: {url}")
+    print()
+    print(
+        "The page has the payment options we covered, plus the enrollment bonuses "
+        "we discussed on our call. Those bonuses stay on the page through Thursday, "
+        "October 1st at 8pm EST."
+    )
+    print()
     print(
         "It was great speaking with you. I really appreciate how intentional and "
-        "thorough you are as you evaluate this decision—that kind of diligence is "
+        "thorough you are as you evaluate this decision. That kind of diligence is "
         "the exact characteristic we look for in the members we partner with."
     )
     print()
     print(
-        "Here is the link to your HTSA enrollment portal with the payment options "
-        "we covered along with the enrollment bonuses discussed on our call:"
-    )
-    print()
-    print(f"Click Here to Access Your HTSA Portal: {url}")
-    print()
-    print(
-        "At the bottom of the page, you'll see our 30-Day Action Plan. Use that as "
-        "a benchmark for what's possible—many of our members have actually beaten "
+        "At the bottom of the page, you will see our 30-Day Action Plan. Use that as "
+        "a benchmark for what is possible. Many of our members have actually beaten "
         "that timeline, but more importantly, remember that mastering a high-ticket "
         "skill isn't something to rush. Enjoy the process, get the absolute most out "
         "of every coaching session and AI sandbox rep, and feel good knowing you have "
@@ -81,13 +82,19 @@ def print_send_pack(first: str, enroll: str | None = None) -> None:
     )
     print()
     print(
-        '1. Self-Enroll Setup: Follow the steps in the green "After You Pay" section '
+        'Self-Enroll Setup: Follow the steps in the green "After You Pay" section '
         "right on the screen to set up your portal login and book your kickoff call."
     )
+    print()
     print(
-        "2. Text or Call Me for 5 Minutes: Shoot me a quick text as soon as you "
+        "Text or Call Me for 5 Minutes: Shoot me a quick text as soon as you "
         "complete payment, and we can jump on a brief 5-minute call so I walk you "
         "through portal activation live."
+    )
+    print()
+    print(
+        "In your moments of decision, life stops happening to you and starts "
+        "happening for you the second you step into position."
     )
     print()
     print("If any questions come up while reviewing everything, call or text me anytime.")
@@ -100,12 +107,17 @@ def print_send_pack(first: str, enroll: str | None = None) -> None:
     print("cj@highticketsalesacademy.com")
     print()
     print("=== TEXT (send right after the email) ===")
-    print(
-        "Hey — just sent over your enrollment portal link and payment options. Really "
-        "appreciated how intentional you were on our call. Take a look when you get a "
-        "second. Once you complete your enrollment on the page, your portal access "
-        "unlocks right away—you can follow the post-payment steps on screen, or text "
-        "me for a quick 5-min call to walk through portal activation together!"
-    )
+    print("Hey, really enjoyed our call. You're a great fit for what we're building here.")
     print()
     print(url)
+    print()
+    print(
+        "The enrollment bonuses we talked about are on that page through Thursday, "
+        "October 1st at 8pm EST."
+    )
+    print()
+    print(
+        "Show up and execute, and we won't let you fail, but you have to meet us halfway. "
+        "In your moments of decision, life stops happening to you and starts happening "
+        "for you the second you step into position. Unlock your access above when you're ready!"
+    )
