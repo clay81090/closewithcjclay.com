@@ -469,7 +469,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790790000 -->
+<!-- close-build:1790791000 -->
 </head>
 <body>
 <main class="page">
@@ -552,8 +552,7 @@ a{color:inherit}
       <button class="choose" type="button" data-plan="custom">Choose this</button>
     </div>
 
-    <div class="plan plan--best" id="planPif">
-      <span class="badge" id="pifBadge">Best value</span>
+    <div class="plan" id="planPif">
       <div class="plan-name">Paid in full</div>
       <div class="plan-note" id="pifNote"></div>
       <div class="plan-figs">
@@ -583,7 +582,7 @@ a{color:inherit}
       <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
     </div>
 
-    <div class="plan" id="planClarity" hidden>
+    <div class="plan plan--best" id="planClarity" hidden>
       <div class="plan-name">ClarityPay monthly</div>
       <span class="plan-clarity-badge">0% interest · 0% APR</span>
       <div class="plan-note" id="clarityNote"></div>
@@ -1090,7 +1089,9 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("clarityAmt").textContent  = O.clarity.amount;
   el("clarityUnit").textContent = O.clarity.unit;
   el("clarityNote").textContent = O.clarity.note;
-  el("stickySub").textContent = "Paid in full · " + O.pif.amount;
+  el("stickySub").textContent = "ClarityPay · " + O.clarity.amount + " a month";
+  const stickyBtn = document.querySelector(".sticky-cta-btn");
+  if (stickyBtn) stickyBtn.textContent = "Choose ClarityPay ↓";
 
   const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
