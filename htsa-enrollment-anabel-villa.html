@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a1628">
-<title>Enrollment | CJ Clay · HTSA</title>
+<title>Paused · Anabel Villa | HTSA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -238,10 +238,35 @@ a{color:inherit}
 .member-vid-frame video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#0a1628}
 
 @media (prefers-reduced-motion:reduce){.choose{transition:none}}
+
+/* ---------- PAUSE GATE (set ENROLL_PAUSED false in script to restore) ---------- */
+body.enroll-paused{overflow:hidden;touch-action:none}
+body.enroll-paused .page{visibility:hidden;pointer-events:none;user-select:none}
+.enroll-pause{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;
+  padding:24px;background:radial-gradient(circle at 70% 20%,rgba(97,227,139,.14),transparent 22rem),
+  linear-gradient(155deg,#0a1628 0%,#152a46 100%);color:#fff;text-align:center}
+body.enroll-paused .enroll-pause{display:flex}
+.enroll-pause-card{width:min(440px,100%);padding:32px 26px;border:1px solid rgba(97,227,139,.35);
+  border-radius:18px;background:rgba(255,255,255,.06);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.enroll-pause-tag{display:inline-block;margin-bottom:14px;padding:5px 12px;border-radius:999px;
+  background:rgba(97,227,139,.18);color:#61e38b;font-size:12px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase}
+.enroll-pause-card h1{font-family:"Playfair Display",serif;font-size:clamp(1.55rem,5vw,2rem);line-height:1.2;
+  color:#fff}
+.enroll-pause-card p{margin-top:12px;color:rgba(255,255,255,.78);font-size:15px;line-height:1.55}
+.enroll-pause-card a{color:#61e38b;font-weight:700;text-decoration:none}
 </style>
 </head>
-<body>
-<main class="page">
+<body class="enroll-paused">
+<div class="enroll-pause" id="enrollPause" role="dialog" aria-modal="true" aria-labelledby="enrollPauseTitle">
+  <div class="enroll-pause-card">
+    <div class="enroll-pause-tag">Enrollment paused</div>
+    <h1 id="enrollPauseTitle">Paused until further communication</h1>
+    <p>Anabel, this enrollment page is on hold for now. Payment options, program links, and next steps are not available until we reconnect.</p>
+    <p>Please wait for CJ to reach out. If you need something sooner, call or text <a href="tel:+16166121735">(616) 612-1735</a>.</p>
+  </div>
+</div>
+<main class="page" aria-hidden="true">
 
   <section class="top">
     <img class="top-photo" src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
@@ -491,8 +516,10 @@ a{color:inherit}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1788391200
+   close-build:1790880000
    ============================================================ */
+const ENROLL_PAUSED = true; // set false to restore full enrollment page
+
 const BUYER = {
   firstName: "Anabel",
   fullName:  "Anabel Villa",
@@ -586,12 +613,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
 
 (function () {
   const el = id => document.getElementById(id);
-  const T = TRACKS[BUYER.track] || TRACKS.closer;
-  const O = OFFERS[BUYER.offer] || OFFERS.standard;
-  const first = (BUYER.firstName || "").trim();
-  const ph = v => typeof v === "string" && /^\[.*\]$/.test(v.trim());
-  const val = v => (v && !ph(v)) ? v : "";
-
   function canonicalUrl(){ try{const u=new URL(location.href);return u.origin+u.pathname;}catch(e){return location.href.split("#")[0];} }
   function post(p){ try{const f=new URLSearchParams();f.set("payload",JSON.stringify(p));
     fetch(GAS_ENDPOINT,{method:"POST",mode:"no-cors",body:f,cache:"no-store"}).catch(function(){});}catch(e){} }
@@ -602,6 +623,31 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       clientSlug:(BUYER.slug||"").replace(/_/g,"-"),resourceSlug:BUYER.slug,
       pageType:"enrollment",track:BUYER.track,offer:BUYER.offer}, extra||{}));
   }
+
+  if (typeof ENROLL_PAUSED !== "undefined" && ENROLL_PAUSED) {
+    document.body.classList.add("enroll-paused");
+    const main = document.querySelector("main.page");
+    if (main) main.setAttribute("aria-hidden", "true");
+    document.addEventListener("click", function (e) {
+      const a = e.target && e.target.closest ? e.target.closest("a") : null;
+      if (a && a.closest && a.closest(".enroll-pause")) return;
+      if (a || (e.target && e.target.closest && e.target.closest("button"))) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+    document.addEventListener("submit", function (e) { e.preventDefault(); e.stopPropagation(); }, true);
+    try{event("page_open_paused");}catch(err){}
+    return;
+  }
+
+  document.body.classList.remove("enroll-paused");
+  const T = TRACKS[BUYER.track] || TRACKS.closer;
+  const O = OFFERS[BUYER.offer] || OFFERS.standard;
+  const first = (BUYER.firstName || "").trim();
+  const ph = v => typeof v === "string" && /^\[.*\]$/.test(v.trim());
+  const val = v => (v && !ph(v)) ? v : "";
+
   try{const k="htsa_enroll_open_"+(BUYER.slug||"x");
     if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");event("page_open");}}catch(e){event("page_open");}
 
