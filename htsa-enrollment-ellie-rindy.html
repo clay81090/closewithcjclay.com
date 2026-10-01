@@ -502,7 +502,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790704200 -->
+<!-- close-build:1790800000 -->
 </head>
 <body>
 <main class="page">
@@ -585,7 +585,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
       <button class="choose" type="button" data-plan="custom">Choose this</button>
     </div>
 
-    <div class="plan plan--best" id="planPif">
+    <div class="plan" id="planPif">
       <span class="badge" id="pifBadge">Best value</span>
       <div class="plan-name">Paid in full</div>
       <div class="plan-note" id="pifNote"></div>
@@ -609,7 +609,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
       <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
     </div>
 
-    <div class="plan" id="planClarity" hidden>
+    <div class="plan plan--best" id="planClarity" hidden>
       <div class="plan-name">ClarityPay monthly</div>
       <span class="plan-clarity-badge">0% interest · 0% APR</span>
       <div class="plan-note" id="clarityNote"></div>
@@ -941,7 +941,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1790704200
+   close-build:1790800000
    ============================================================ */
 const BUYER = {
   firstName: "Ellie",
@@ -951,8 +951,8 @@ const BUYER = {
   slug:      "ellie_rindy",
   track:     "closer",
   offer:     "standard",
-  show:      ["pif", "plan", "clarity"],
-  intro:     "Ellie, great call today. Three payment options below: $6,000 paid in full, the 4-pay plan, or ClarityPay at $600 a month. Pricing goes up October 1st, and I added two Chad bonuses on this page through Wednesday at 8pm EST."
+  show:      ["clarity"],
+  intro:     "Ellie, here is the ClarityPay path we covered: $500 a month, $6,000 total."
 };
 
 const CUSTOM_OFFER = null;
@@ -980,10 +980,9 @@ const OFFERS = {
             note: "First payment today, then one a month for three months.",
             warn: "",
             checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
-    clarity: { amount: "$600", unit: "a month · 0% interest · $7,200 total",
-               octAmount: "$700", octUnit: "a month · $8,400 total",
-               note: "$600 a month at 0% is our 0% option. Depending on credit score, lower payments may be available. ClarityPay shows whatever you are approved for.",
-               checkout: "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" }
+    clarity: { amount: "$500", unit: "a month · 0% interest · $6,000 total",
+               note: "Monthly financing at $500 a month, 0% APR, $6,000 total. Soft credit check, 620 or better credit score to qualify.",
+               checkout: "https://whop.com/checkout/plan_VUSDju20gTBCg/" }
   }
 };
 
@@ -1112,7 +1111,9 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("clarityAmt").textContent  = O.clarity.amount;
   el("clarityUnit").textContent = O.clarity.unit;
   el("clarityNote").textContent = O.clarity.note;
-  el("stickySub").textContent = "Paid in full · " + O.pif.amount;
+  el("stickySub").textContent = "ClarityPay · " + O.clarity.amount + " a month";
+  const stickyBtn = document.querySelector(".sticky-cta-btn");
+  if (stickyBtn) stickyBtn.textContent = "Choose ClarityPay ↓";
 
   const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
