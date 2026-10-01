@@ -1,0 +1,39 @@
+---
+description: Never put a big Visit HTSA website tab in the footer
+alwaysApply: true
+---
+
+# Never put a website CTA tab in the footer
+
+## Hard rule
+
+**Never** put a big “Visit the HTSA website” / `footer-site-cta` button or tab in the footer of any page CJ sends to a prospect.
+
+That includes:
+- Precall pages (`r/<slug>/`, `before-our-call/`, templates)
+- Close / enrollment pages
+- Due diligence / resource pages
+
+CJ has said this repeatedly. It looks terrible. Do not revive it from old clones.
+
+## What to do instead
+
+If the HTSA website needs to be reachable:
+
+1. Prefer it inside **All HTSA Resources** / proof area (subtle, not hero-level)
+2. Or as a **small text link** in the same footer row as YouTube / Instagram / Facebook (same size, no big green button)
+
+## Templates that must stay clean
+
+When cloning or editing:
+
+- `r/_TEMPLATE-precall.html`
+- `before-our-call/index.html`
+- `templates/_TEMPLATE-close.html`
+- `access/index.html`
+
+Strip any `footer-site-cta` / “Visit the HTSA website” block before shipping.
+
+## Pre-ship check
+
+Grep the new file for `footer-site-cta` and `Visit the HTSA website`. Zero matches.

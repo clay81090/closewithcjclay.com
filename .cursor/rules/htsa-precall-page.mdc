@@ -52,6 +52,11 @@ Always copy the template. Never write a pre-call page from scratch, and never
 **No lifespan chart** on new pre-call pages unless CJ explicitly asks for it.
 Do not add the age / year-grid section back from old archives.
 
+**No big website tab in the footer.** Never ship `footer-site-cta` / "Visit the
+HTSA website" as a fat footer button. Website belongs as a small footer link
+alongside YouTube / Instagram / Facebook, or inside All HTSA Resources. See
+`.cursor/rules/no-footer-website-tab.mdc`.
+
 ```
 SOURCE:  r/_TEMPLATE-precall.html   (= ⭐ V17)
 OUTPUT:  r/<first>_<last>/index.html
