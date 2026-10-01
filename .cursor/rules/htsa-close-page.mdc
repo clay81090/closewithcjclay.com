@@ -251,10 +251,17 @@ One enroll link only (in email body + optional duplicate at end of text).
 The 30 day plan is already at the bottom of that page. Never write a
 negative descriptive norm about other prospects.
 
-**Fail-safe copy:** No first name in email or text. Email opens **Hi,** Text
-opens **Hey,** Subject: **Your HTSA enrollment page is ready**. **Zero variables:**
-always link `https://closewithcjclay.com/access` (generic enrollment portal).
-Do not build per-person enrollment pages unless CJ explicitly asks.
+**Fail-safe (generic) copy:** No first name. Email opens **Hi,** Text opens **Hey,**
+Subject: **Your HTSA enrollment page is ready**. Link text:
+**Click Here to Access Your HTSA Portal** → `https://closewithcjclay.com/access`.
+
+**Personal copy (when CJ says personal / names the person):** Email opens
+**Hi &lt;First&gt;,** Link text is exactly **`&lt;Full Name&gt; / Access`**
+(clickable) pointing at their real
+`https://closewithcjclay.com/htsa-enrollment-&lt;first&gt;-&lt;last&gt;.html`
+URL. Never rename that URL. Never swap in `/access` for a named page. Put
+`og:title` = `&lt;Full Name&gt; / Access` + `og:image` on their page so texts
+show a preview card. Keep the body personal to what he said on the call.
 
 Always wrap the output in this HTML block so copy-paste into Gmail, HubSpot,
 and Just Call stays black on white with blank lines. No markdown. No code fences.
