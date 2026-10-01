@@ -120,6 +120,9 @@ a{color:inherit}
 /* ---------- plans ---------- */
 .plans{padding:22px 26px 6px}
 .plans-sub{margin-bottom:15px;color:var(--muted);font-size:14px;line-height:1.55}
+.plans-track{margin-top:8px}
+.plans-track + .plans-track{margin-top:22px;padding-top:18px;border-top:1px solid var(--grey)}
+.plans-track-label{margin:0 0 12px;color:var(--navy);font-size:15px;font-weight:800;letter-spacing:.01em}
 .plan{position:relative;margin-bottom:13px;padding:18px;border:2px solid var(--grey);border-radius:15px;
   background:var(--white);transition:border-color 150ms ease,box-shadow 150ms ease}
 .plan-oct{margin:-6px 0 14px;color:#93a1b3;font-size:12.5px;line-height:1.45}
@@ -486,7 +489,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790367900 -->
+<!-- close-build:1790812000 -->
 </head>
 <body>
 <main class="page">
@@ -556,51 +559,92 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 
   <section class="plans" id="plans">
     <div class="h2">Your payment options</div>
-    <div class="plans-sub" id="plansSub">Access opens the moment your payment clears.</div>
+    <div class="plans-sub" id="plansSub">Access opens the moment your payment clears. Pick Closer or Setter below.</div>
 
-    <div class="plan plan--custom" id="planCustom" hidden>
-      <span class="badge" id="customBadge">Your offer</span>
-      <div class="plan-name" id="customName"></div>
-      <div class="plan-note" id="customNote"></div>
-      <div class="plan-figs">
-        <span class="plan-amt" id="customAmt"></span>
-        <span class="plan-unit" id="customUnit"></span>
+    <div class="plans-track" id="closerPlans">
+      <div class="plans-track-label">Certified High Ticket Closer</div>
+
+      <div class="plan plan--custom" id="planCustom" hidden>
+        <span class="badge" id="customBadge">Your offer</span>
+        <div class="plan-name" id="customName"></div>
+        <div class="plan-note" id="customNote"></div>
+        <div class="plan-figs">
+          <span class="plan-amt" id="customAmt"></span>
+          <span class="plan-unit" id="customUnit"></span>
+        </div>
+        <button class="choose" type="button" data-plan="custom">Choose this</button>
       </div>
-      <button class="choose" type="button" data-plan="custom">Choose this</button>
+
+      <div class="plan plan--best" id="planPif">
+        <span class="badge" id="pifBadge">Best value</span>
+        <div class="plan-name">Paid in full</div>
+        <div class="plan-note" id="pifNote"></div>
+        <div class="plan-figs">
+          <span class="plan-amt" id="pifAmt"></span>
+          <span class="plan-strike" id="pifStrike"></span>
+          <span class="plan-unit">one time</span>
+        </div>
+        <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
+      </div>
+
+      <div class="plan" id="planPlan">
+        <div class="plan-name" id="planName"></div>
+        <div class="plan-note" id="planNote"></div>
+        <div class="plan-figs">
+          <span class="plan-amt" id="planAmt"></span>
+          <span class="plan-unit" id="planUnit"></span>
+        </div>
+        <p class="plan-warn" id="planWarn" hidden></p>
+        <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
+      </div>
+
+      <div class="plan" id="planClarity" hidden>
+        <div class="plan-name">ClarityPay monthly</div>
+        <span class="plan-clarity-badge">0% interest · 0% APR</span>
+        <div class="plan-note" id="clarityNote"></div>
+        <div class="plan-figs">
+          <span class="plan-amt" id="clarityAmt"></span>
+          <span class="plan-unit" id="clarityUnit"></span>
+        </div>
+        <button class="choose" type="button" data-plan="clarity">Choose ClarityPay</button>
+      </div>
     </div>
 
-    <div class="plan plan--best" id="planPif">
-      <span class="badge" id="pifBadge">Best value</span>
-      <div class="plan-name">Paid in full</div>
-      <div class="plan-note" id="pifNote"></div>
-      <div class="plan-figs">
-        <span class="plan-amt" id="pifAmt"></span>
-        <span class="plan-strike" id="pifStrike"></span>
-        <span class="plan-unit">one time</span>
-      </div>
-      <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
-    </div>
+    <div class="plans-track" id="setterPlans">
+      <div class="plans-track-label">Certified High Ticket Setter</div>
 
-    <div class="plan" id="planPlan">
-      <div class="plan-name" id="planName"></div>
-      <div class="plan-note" id="planNote"></div>
-      <div class="plan-figs">
-        <span class="plan-amt" id="planAmt"></span>
-        <span class="plan-unit" id="planUnit"></span>
+      <div class="plan" id="planSetterPif">
+        <span class="badge">Best value</span>
+        <div class="plan-name">Paid in full</div>
+        <div class="plan-note" id="setterPifNote"></div>
+        <div class="plan-figs">
+          <span class="plan-amt" id="setterPifAmt"></span>
+          <span class="plan-strike" id="setterPifStrike"></span>
+          <span class="plan-unit">one time</span>
+        </div>
+        <button class="choose" type="button" data-plan="setter_pif">Choose paid in full</button>
       </div>
-      <p class="plan-warn" id="planWarn" hidden></p>
-      <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
-    </div>
 
-    <div class="plan" id="planClarity" hidden>
-      <div class="plan-name">ClarityPay monthly</div>
-      <span class="plan-clarity-badge">0% interest · 0% APR</span>
-      <div class="plan-note" id="clarityNote"></div>
-      <div class="plan-figs">
-        <span class="plan-amt" id="clarityAmt"></span>
-        <span class="plan-unit" id="clarityUnit"></span>
+      <div class="plan" id="planSetterPlan">
+        <div class="plan-name" id="setterPlanName"></div>
+        <div class="plan-note" id="setterPlanNote"></div>
+        <div class="plan-figs">
+          <span class="plan-amt" id="setterPlanAmt"></span>
+          <span class="plan-unit" id="setterPlanUnit"></span>
+        </div>
+        <button class="choose" type="button" data-plan="setter_plan">Choose the payment plan</button>
       </div>
-      <button class="choose" type="button" data-plan="clarity">Choose ClarityPay</button>
+
+      <div class="plan" id="planSetterClarity">
+        <div class="plan-name">ClarityPay monthly</div>
+        <span class="plan-clarity-badge">0% interest · 0% APR</span>
+        <div class="plan-note" id="setterClarityNote"></div>
+        <div class="plan-figs">
+          <span class="plan-amt" id="setterClarityAmt"></span>
+          <span class="plan-unit" id="setterClarityUnit"></span>
+        </div>
+        <button class="choose" type="button" data-plan="setter_clarity">Choose ClarityPay</button>
+      </div>
     </div>
   </section>
 
@@ -1064,7 +1108,7 @@ button.proof-square-cta{width:calc(100% - 26px);border:0}
 <script>
 /* ============================================================
    EDIT THIS BLOCK ONLY — one person per page.
-   close-build:1790367900
+   close-build:1790812000
    ============================================================ */
 const BUYER = {
   firstName: "Peter",
@@ -1075,13 +1119,13 @@ const BUYER = {
   track:     "closer",
   offer:     "standard",
   show:      ["pif", "plan", "clarity"],
-  intro:     "Peter, here are the three payment options we covered. The Action Taker bonuses are on this page if you enroll tonight."
+  intro:     "Peter, here are the Closer and Setter payment options we covered. The Action Taker bonuses are on this page if you enroll tonight."
 };
 
 const CUSTOM_OFFER = null;
 
 const TRACKS = {
-  closer: { label: "Certified High Ticket Closer" },
+  closer: { label: "Certified High Ticket Closer & Setter" },
   setter: { label: "Certified Appointment Setter" }
 };
 
@@ -1098,6 +1142,19 @@ const OFFERS = {
                note: "$600 a month at 0% interest is our 0% option. Depending on your credit score, lower payment options will likely be available. ClarityPay will show you whatever you are approved for.",
                checkout: "https://whop.com/checkout/1ba2LjGOo3B1Wpp4jf-eF61-w5X4-yCzD-25zhqI3VcVLf/" }
   }
+};
+
+const SETTER_OFFERS = {
+  pif:  { amount: "$3,000", was: "$3,150",
+          note: "One payment. Saves you $150 against the payment plan.",
+          checkout: "https://whop.com/checkout/plan_qzvfCCb1rIO0L?d2c=true" },
+  plan: { name: "3 payments", amount: "$1,050", unit: "today · $3,150 total",
+          note: "First payment today, then one a month for two more months.",
+          warn: "",
+          checkout: "https://whop.com/checkout/plan_oK3AajTKp0mXK?d2c=true" },
+  clarity: { amount: "$300", unit: "a month · 0% interest · $3,600 total",
+             note: "Monthly financing at $300 a month, 0% APR, $3,600 total. Soft credit check, 620 or better credit score to qualify.",
+             checkout: "https://whop.com/checkout/plan_z5iuUhSgm9seH?d2c=true" }
 };
 
 const INCLUDED = [
@@ -1205,17 +1262,31 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("clarityAmt").textContent  = O.clarity.amount;
   el("clarityUnit").textContent = O.clarity.unit;
   el("clarityNote").textContent = O.clarity.note;
-  el("stickySub").textContent = "Paid in full · " + O.pif.amount;
+  el("stickySub").textContent = "Closer PIF · " + O.pif.amount + " · Setter PIF · " + SETTER_OFFERS.pif.amount;
+
+  el("setterPifAmt").textContent    = SETTER_OFFERS.pif.amount;
+  el("setterPifStrike").textContent = SETTER_OFFERS.pif.was || "";
+  el("setterPifNote").textContent   = SETTER_OFFERS.pif.note;
+  el("setterPlanName").textContent  = SETTER_OFFERS.plan.name;
+  el("setterPlanAmt").textContent   = SETTER_OFFERS.plan.amount;
+  el("setterPlanUnit").textContent  = SETTER_OFFERS.plan.unit;
+  el("setterPlanNote").textContent  = SETTER_OFFERS.plan.note;
+  el("setterClarityAmt").textContent  = SETTER_OFFERS.clarity.amount;
+  el("setterClarityUnit").textContent = SETTER_OFFERS.clarity.unit;
+  el("setterClarityNote").textContent = SETTER_OFFERS.clarity.note;
 
   const PLANS = {
-    pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
-    plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
-    clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" }
+    pif:     { name:"Closer · Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
+    plan:    { name:"Closer · " + O.plan.name, amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
+    clarity: { name:"Closer · ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" },
+    setter_pif:     { name:"Setter · Paid in full",  amt:SETTER_OFFERS.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:SETTER_OFFERS.pif.checkout, warn:"" },
+    setter_plan:    { name:"Setter · " + SETTER_OFFERS.plan.name, amt:SETTER_OFFERS.plan.amount, sub:SETTER_OFFERS.plan.note, url:SETTER_OFFERS.plan.checkout, warn:SETTER_OFFERS.plan.warn || "" },
+    setter_clarity: { name:"Setter · ClarityPay",    amt:SETTER_OFFERS.clarity.amount, sub:SETTER_OFFERS.clarity.note, url:SETTER_OFFERS.clarity.checkout, warn:"" }
   };
 
   const show = Array.isArray(BUYER.show) && BUYER.show.length ? BUYER.show : ["pif","plan","clarity"];
   const NODE = { pif: el("planPif"), plan: el("planPlan"), clarity: el("planClarity") };
-  const host = el("planPif").parentNode;
+  const host = el("closerPlans");
   Object.keys(NODE).forEach(function(k){ if (show.indexOf(k) === -1) NODE[k].remove(); });
   show.forEach(function(k){ if (NODE[k] && NODE[k].parentNode) host.appendChild(NODE[k]); });
   if (NODE.clarity && NODE.clarity.parentNode) NODE.clarity.hidden = false;
