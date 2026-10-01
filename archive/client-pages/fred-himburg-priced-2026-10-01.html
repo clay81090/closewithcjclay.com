@@ -469,7 +469,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790850000 -->
+<!-- close-build:1790817000 -->
 </head>
 <body>
 <main class="page">
@@ -498,8 +498,8 @@ a{color:inherit}
 
   <section class="welcome" id="welcomeBand">
     <h2 id="welcomeTitle">Welcome to the <span>HTSA family</span>.</h2>
-    <p id="welcomeCopy">You're not just enrolling in a program. You're joining people who show up, do the work, and build something real. This page is yours to come back to. We will lock your payment path together on Zoom.</p>
-    <a class="welcome-cta" href="#plans">Jump to next steps ↓</a>
+    <p id="welcomeCopy">You're not just enrolling in a program. You're joining people who show up, do the work, and build something real. This page is yours to come back to. When you're ready, choose the payment option that fits.</p>
+    <a class="welcome-cta" href="#plans">Jump to payment ↓</a>
   </section>
 
   <section class="inc">
@@ -538,17 +538,62 @@ a{color:inherit}
   </div>
 
   <section class="plans" id="plans">
-    <div class="h2">Payment path</div>
-    <div class="plans-sub">No checkout on this page yet. We will pick the right option together on Zoom, then I will send you the exact link.</div>
+    <div class="h2">Your payment options</div>
+    <div class="plans-sub">Access opens the moment your payment clears.</div>
 
-    <div class="plan plan--best" id="planZoomHold">
-      <span class="badge">On our Zoom</span>
-      <div class="plan-name">We choose your path live</div>
-      <div class="plan-note">I pulled the numbers off this page on purpose so you can review everything else first. On our call we will lock Splitit, paid in full, ClarityPay, or the payment plan based on what fits your consulting cash flow and credit limit.</div>
+    <div class="plan plan--custom" id="planCustom" hidden>
+      <span class="badge" id="customBadge">Your offer</span>
+      <div class="plan-name" id="customName"></div>
+      <div class="plan-note" id="customNote"></div>
       <div class="plan-figs">
-        <span class="plan-unit" style="font-size:15px;color:var(--navy);font-weight:700;">Text or call me when you are ready to enroll</span>
+        <span class="plan-amt" id="customAmt"></span>
+        <span class="plan-unit" id="customUnit"></span>
       </div>
-      <a class="choose-text" href="sms:+16166121735&body=Fred%20ready%20to%20lock%20payment%20path" style="text-decoration:none;text-align:center;display:block;width:100%;padding:14px 16px;border:0;border-radius:12px;background:var(--green-strong);color:#04231a;font-size:16px;font-weight:800;cursor:pointer;">Text CJ to lock payment</a>
+      <button class="choose" type="button" data-plan="custom">Choose this</button>
+    </div>
+
+    <div class="plan plan--best" id="planPif">
+      <span class="badge" id="pifBadge">Best value</span>
+      <div class="plan-name">Paid in full</div>
+      <div class="plan-note" id="pifNote"></div>
+      <div class="plan-figs">
+        <span class="plan-amt" id="pifAmt"></span>
+        <span class="plan-strike" id="pifStrike"></span>
+        <span class="plan-unit">one time</span>
+      </div>
+      <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
+      <details class="plan-sub" id="planSplititWrap" hidden>
+        <summary><span>More payment options</span><span class="plan-sub-chev" aria-hidden="true">▾</span></summary>
+        <div class="plan-splitit">
+          <div class="plan-splitit-title">Splitit — $600/month × 12 months</div>
+          <div class="plan-splitit-copy"><b>0% interest.</b> No credit pull. Uses the credit you already have on a Visa or Mastercard. $7,200 total, spread over 12 monthly charges of $600.</div>
+          <button type="button" class="plan-splitit-link" id="splititMoreBtn">How Splitit works →</button>
+        </div>
+      </details>
+    </div>
+
+    <div class="plan" id="planPlan">
+      <div class="plan-name" id="planName"></div>
+      <div class="plan-note" id="planNote"></div>
+      <div class="plan-figs">
+        <span class="plan-amt" id="planAmt"></span>
+        <span class="plan-unit" id="planUnit"></span>
+      </div>
+      <p class="plan-warn" id="planWarn" hidden></p>
+      <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
+    </div>
+
+    <div class="plan" id="planClarity" hidden>
+      <span class="badge">Action Taker</span>
+      <div class="plan-name">ClarityPay monthly</div>
+      <span class="plan-clarity-badge">0% interest · 0% APR</span>
+      <div class="plan-note" id="clarityNote"></div>
+      <div class="plan-figs">
+        <span class="plan-amt" id="clarityAmt"></span>
+        <span class="plan-unit" id="clarityUnit"></span>
+      </div>
+      <p class="plan-clarity-chance">See what you are approved for. Give yourself a chance. Soft credit check, 620 or better.</p>
+      <button class="choose" type="button" data-plan="clarity">Choose ClarityPay</button>
     </div>
   </section>
 
@@ -666,7 +711,7 @@ a{color:inherit}
       <b id="stickyLabel">Your enrollment</b>
       <span id="stickySub">Paid in full · $6,000</span>
     </div>
-    <a class="sticky-cta-btn" href="#plans">Next steps ↓</a>
+    <a class="sticky-cta-btn" href="#plans">Choose payment ↓</a>
   </div>
 </div>
 
@@ -907,8 +952,8 @@ const BUYER = {
   slug:      "fred_himburg",
   track:     "closer",
   offer:     "standard",
-  show:      [],
-  intro:     "Fred, welcome home. This page keeps everything we covered about the program, bonuses, guarantee, and next steps. I took the payment numbers off on purpose so we can lock the right path together on Zoom. Text or call me when you are ready and I will send the exact checkout."
+  show:      ["pif", "splitit", "clarity"],
+  intro:     "Fred, here are the payment options we covered: $6,000 paid in full, Splitit at $600 a month, or ClarityPay at $500 a month ($6,000 total). The Action Taker bonuses are on this page if you enroll tonight."
 };
 
 const CUSTOM_OFFER = null;
@@ -1034,10 +1079,57 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     const s=document.createElement("span");s.textContent=r[1];
     li.appendChild(b);li.appendChild(s);el("currList").appendChild(li);});
 
-  /* ---------- plans (pricing removed — Zoom prescribe) ---------- */
-  el("stickySub").textContent = "Payment path locked on Zoom";
-  const PLANS = {};
-  const show = Array.isArray(BUYER.show) ? BUYER.show : [];
+  /* ---------- plans ---------- */
+  el("pifAmt").textContent    = O.pif.amount;
+  el("pifStrike").textContent = O.pif.was || "";
+  el("pifNote").textContent   = O.pif.note;
+  el("planName").textContent  = O.plan.name;
+  el("planAmt").textContent   = O.plan.amount;
+  el("planUnit").textContent  = O.plan.unit;
+  el("planNote").textContent  = O.plan.note;
+  if (O.plan.warn) { el("planWarn").hidden = false; el("planWarn").textContent = O.plan.warn; }
+  el("clarityAmt").textContent  = O.clarity.amount;
+  el("clarityUnit").textContent = O.clarity.unit;
+  el("clarityNote").textContent = O.clarity.note;
+  el("stickySub").textContent = "Paid in full · " + O.pif.amount;
+
+  const PLANS = {
+    pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
+    plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
+    clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" }
+  };
+
+  const show = Array.isArray(BUYER.show) && BUYER.show.length ? BUYER.show : ["pif","plan","clarity"];
+  const NODE = { pif: el("planPif"), plan: el("planPlan"), clarity: el("planClarity") };
+  const host = el("planPif").parentNode;
+  Object.keys(NODE).forEach(function(k){ if (show.indexOf(k) === -1) NODE[k].remove(); });
+  show.forEach(function(k){ if (NODE[k] && NODE[k].parentNode) host.appendChild(NODE[k]); });
+  if (NODE.clarity && NODE.clarity.parentNode) NODE.clarity.hidden = false;
+  if (show.length === 1 && NODE[show[0]]) {
+    NODE[show[0]].classList.add("plan--best");
+    const stickyMap = {
+      pif: "Paid in full · " + O.pif.amount,
+      plan: O.plan.name + " · " + O.plan.amount,
+      clarity: "ClarityPay · " + O.clarity.amount + " a month"
+    };
+    el("stickySub").textContent = stickyMap[show[0]] || el("stickySub").textContent;
+    const stickyBtn = document.querySelector(".sticky-cta-btn");
+    if (stickyBtn && show[0] === "clarity") stickyBtn.textContent = "Choose ClarityPay ↓";
+  }
+
+  if (CUSTOM_OFFER) {
+    const c = el("planCustom");
+    c.hidden = false; host.insertBefore(c, host.querySelector(".plan:not(#planCustom)"));
+    el("customBadge").textContent = CUSTOM_OFFER.badge || "Your offer";
+    el("customName").textContent  = CUSTOM_OFFER.name || "";
+    el("customNote").textContent  = CUSTOM_OFFER.note || "";
+    el("customAmt").textContent   = CUSTOM_OFFER.amount || "";
+    el("customUnit").textContent  = CUSTOM_OFFER.unit || "";
+    PLANS.custom = { name:CUSTOM_OFFER.name, amt:CUSTOM_OFFER.amount, sub:CUSTOM_OFFER.note,
+                     url:CUSTOM_OFFER.checkout, warn:CUSTOM_OFFER.warn || "" };
+    el("planPif") && el("planPif").classList.remove("plan--best");
+    const b = el("pifBadge"); if (b) b.remove();
+  }
 
   /* ---------- docs ---------- */
   function openSheet(d){ if (typeof d.showModal === "function") d.showModal(); else d.setAttribute("open",""); }
@@ -1070,8 +1162,23 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("tosClose").addEventListener("click", function(){ closeSheet(tosSheet); });
   tosSheet.addEventListener("click", function(e){ if(e.target===tosSheet) closeSheet(tosSheet); });
 
-  /* Splitit sheet kept in DOM for optional restore; not linked while show is empty */
+  /* Splitit: only when BUYER.show includes "splitit". Numbers always $600/mo · $7,200 · 0% interest. */
+  const SPLITIT_CHECKOUT = "https://whop.com/checkout/plan_LiZXezzaPMzUF";
+  const splititWrap = el("planSplititWrap");
+  if (show.indexOf("splitit") === -1) {
+    if (splititWrap) splititWrap.remove();
+  } else if (splititWrap) {
+    splititWrap.hidden = false;
+  }
   const splitit = el("splititSheet");
+  const splititMoreBtn = el("splititMoreBtn");
+  if (splititMoreBtn) splititMoreBtn.addEventListener("click", function(e){ e.preventDefault(); event("splitit_detail_opened"); openSheet(splitit); });
+  if (el("splititClose")) el("splititClose").addEventListener("click", function(){
+    if (show.indexOf("splitit") === -1) { closeSheet(splitit); return; }
+    event("checkout_started", { linkLabel: "Splitit $600/mo · $7,200", linkUrl: SPLITIT_CHECKOUT });
+    closeSheet(splitit);
+    window.location.href = SPLITIT_CHECKOUT;
+  });
   if (splitit) splitit.addEventListener("click", function(e){ if(e.target===splitit) closeSheet(splitit); });
 
   /* ---------- sticky cta hide near footer ---------- */

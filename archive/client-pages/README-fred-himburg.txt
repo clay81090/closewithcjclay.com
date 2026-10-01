@@ -1,0 +1,1 @@
+IMPORTANT: Full Fred Himburg enrollment page WITH pricing (PIF $6k, Splitit, ClarityPay) frozen before Zoom no-pricing version. Live URL stays htsa-enrollment-fred-himburg.html. Call notes: docs/calls/fred-himburg-2026-10-01.md
