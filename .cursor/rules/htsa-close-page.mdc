@@ -140,14 +140,29 @@ set `show: ["pif","clarity"]` and the 4-pay card is removed from the DOM entirel
 
 ## Step 2 — the offer modes
 
-Never edit prices inline. Set `offer` and the whole set swaps.
+**Current prices are Oct 2, 2026.** Full table: `templates/HTSA-CURRENT-PRICING.md`.
+CJ's on-call desk (one tap, one option, email and text ready): `https://closewithcjclay.com/desk/`
+Prospect page for that tap: `https://closewithcjclay.com/enroll/?opt=` plus the code in the pricing file.
+Walkthrough with no prices: `https://closewithcjclay.com/enroll/?walk=1`
 
-| | standard | reactivation |
+Do not put the old closer set ($6,000 PIF, $1,750 × 4, $600 ClarityPay) or the old setter set ($3,000 / $1,050 / $300) on a new page unless CJ explicitly says to use the old price.
+
+| Closer | Amount | Checkout |
 |---|---|---|
-| PIF | $6,000 | $5,000 |
-| Plan | 4 × $1,750 = $7,000 | 3 × $1,750 = $5,250 |
-| ClarityPay | $600/mo · $7,200 total | $500/mo · $6,000 total |
-| Splitit (only if asked) | $600/mo × 12 · $7,200 · 0% | same checkout when asked |
+| PIF | $7,000 | `plan_GPDXTLOKvW6l8` |
+| 2-pay | $3,500 × 2 = $7,000 | `plan_JeFDCjxcpLjbH` |
+| 3-pay | $2,500 × 3 = $7,500 | `plan_nNEMqbkEaSc5d` |
+| 4-pay | $1,950 × 4 = $7,800 | `plan_KZi8Kt0Ioq6tK` |
+| ClarityPay | $700/mo · $8,400 | `plan_K4goBzDEHXO15` |
+
+| Setter | Amount | Checkout |
+|---|---|---|
+| PIF | $4,000 | `plan_zws0zh0bKQULB` |
+| 2-pay | $2,000 × 2 = $4,000 | `plan_Pv22kJmMNIDxc` |
+| 3-pay | $1,600 × 3 = $4,800 | `plan_OizMbt56Cw6du` |
+| ClarityPay | $4,800 total | `plan_iXtkgcI6xwxbP` |
+
+Show one option unless he names more than one. Splitit and older promo prices only when he asks for that deal.
 
 ## Step 3 — a negotiated one-off price
 

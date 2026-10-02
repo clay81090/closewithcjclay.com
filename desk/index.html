@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a1628">
+<title>CJ Deal Desk</title>
+<link rel="icon" href="/cj-headshot-600.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1628;--navy-soft:#152a46;--green:#61e38b;--green-strong:#00c97a;--green-dark:#087b50;--grey:#f3f6f9;--line:#dce3eb;--text:#17243b;--muted:#54637a;--white:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-width:320px;background:var(--grey);color:var(--text);font-family:"DM Sans",sans-serif;line-height:1.45}
+.wrap{width:min(980px,calc(100% - 24px));margin:18px auto 40px}
+header{padding:22px 22px 18px;border-radius:18px;color:#fff;background:radial-gradient(circle at 90% 0%,rgba(97,227,139,.2),transparent 16rem),linear-gradient(145deg,var(--navy),var(--navy-soft))}
+header h1{font-family:"Playfair Display",serif;font-size:clamp(1.7rem,4vw,2.2rem)}
+header p{margin-top:6px;color:rgba(255,255,255,.78);font-size:15px}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.ghost{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:700;font-size:14px}
+.ghost:hover{border-color:var(--green)}
+.panel{margin-top:14px;padding:16px;border-radius:16px;background:#fff;border:1px solid var(--line)}
+label{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+input[type=text]{width:100%;margin-top:6px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:16px}
+.tracks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.track,.price{border:1px solid var(--line);background:#fff;border-radius:14px;font:inherit;font-weight:800;cursor:pointer;color:var(--navy)}
+.track{min-height:52px;font-size:16px}
+.track.on,.price.on{background:#f7fffb;border-color:var(--green-strong);box-shadow:0 0 0 3px rgba(0,201,122,.18)}
+.prices{display:grid;gap:8px;margin-top:12px}
+.price{display:flex;justify-content:space-between;gap:12px;align-items:center;text-align:left;padding:14px 16px;font-size:16px;min-height:64px}
+.price small{display:block;font-weight:600;color:var(--muted);font-size:13px}
+.out{margin-top:14px;padding:16px;border-radius:16px;background:#fff;border:3px solid var(--green-strong)}
+.out h2{font-family:"Playfair Display",serif;font-size:1.35rem}
+.out .who{margin:6px 0 12px;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+button.copy,a.open{min-height:44px;padding:8px 14px;border-radius:999px;border:0;background:var(--navy);color:#fff;font:inherit;font-weight:800;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;cursor:pointer}
+button.copy.did{background:var(--green-dark)}
+pre{white-space:pre-wrap;background:#fff;color:#000;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.45;margin-top:8px}
+.note{margin-top:14px;color:var(--muted);font-size:13px}
+@media(max-width:640px){.tracks{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Deal desk</h1>
+    <p>Keep this tab open. Walk them through the page with no prices. Then tap the one option you want. Their link, email, and text show up here.</p>
+    <div class="row">
+      <a class="ghost" id="walkLink" href="/enroll/?walk=1&track=closer" target="_blank" rel="noopener">Open the walkthrough (no prices)</a>
+      <a class="ghost" href="https://closewithcjclay.com/before-our-call" target="_blank" rel="noopener">Resources before the call</a>
+      <a class="ghost" href="https://closewithcjclay.com/30-day-roadmap.html" target="_blank" rel="noopener">30 day game plan</a>
+    </div>
+  </header>
+
+  <section class="panel">
+    <label for="who">Their name <span style="font-weight:600;letter-spacing:0;text-transform:none">(optional, for the email greeting)</span></label>
+    <input id="who" type="text" autocomplete="off" placeholder="Danielle Ramsey">
+    <div class="tracks" role="tablist">
+      <button class="track on" type="button" data-track="closer">Closer</button>
+      <button class="track" type="button" data-track="setter">Setter</button>
+    </div>
+    <div class="prices" id="prices"></div>
+  </section>
+
+  <section class="out" id="out" hidden>
+    <h2 id="outTitle">Ready</h2>
+    <p class="who" id="outWho"></p>
+    <div class="actions">
+      <a class="open" id="openLink" href="#" target="_blank" rel="noopener">Open their page</a>
+      <button class="copy" type="button" data-copy="link">Copy link</button>
+      <button class="copy" type="button" data-copy="email">Copy email</button>
+      <button class="copy" type="button" data-copy="text">Copy text</button>
+    </div>
+    <label>Email</label>
+    <pre id="emailBox"></pre>
+    <label style="margin-top:12px">Text, send right after the email</label>
+    <pre id="textBox"></pre>
+  </section>
+  <p class="note">Their page shows one option. Pages you already sent stay as they were. The old generic /access page is not this desk.</p>
+</div>
+<script>
+/* Keep in sync with enroll/index.html ENROLL_MENU. Oct 2, 2026. */
+const MENU = {
+  closer: [
+    { opt:"c-pif", name:"Paid in full", sub:"$7,000 once", line:"One payment of $7,000." },
+    { opt:"c-2", name:"2-pay, action taker", sub:"$3,500 then $3,500 · $7,000", line:"$3,500 today, then one more payment of $3,500. $7,000 total." },
+    { opt:"c-3", name:"3-pay", sub:"$2,500 × 3 · $7,500", line:"$2,500 today, then one a month for two more months. $7,500 total." },
+    { opt:"c-4", name:"4-pay", sub:"$1,950 × 4 · $7,800", line:"$1,950 today, then one a month for three more months. $7,800 total." },
+    { opt:"c-cp", name:"ClarityPay", sub:"$700 a month · $8,400", line:"ClarityPay at $700 a month, $8,400 total." }
+  ],
+  setter: [
+    { opt:"s-pif", name:"Paid in full", sub:"$4,000 once", line:"One payment of $4,000." },
+    { opt:"s-2", name:"2-pay", sub:"$2,000 then $2,000 · $4,000", line:"$2,000 today, then one more payment of $2,000. $4,000 total." },
+    { opt:"s-3", name:"3-pay", sub:"$1,600 × 3 · $4,800", line:"$1,600 today, then one a month for two more months. $4,800 total." },
+    { opt:"s-cp", name:"ClarityPay", sub:"$4,800 total", line:"ClarityPay financing, $4,800 total. The monthly amount is on the checkout." }
+  ]
+};
+const SIGN = "CJ Clay\nHTSA, Senior Career Transformation Coach\n(616) 612-1735\ncj@highticketsalesacademy.com";
+let track = "closer";
+let picked = null;
+
+function cleanName(v){
+  return (v || "").replace(/[<>]/g, "").trim().slice(0, 80);
+}
+function pageUrl(opt, name){
+  const u = new URL("/enroll/", location.origin);
+  u.searchParams.set("opt", opt);
+  if (name) u.searchParams.set("n", name);
+  return u.toString();
+}
+function walkUrl(){
+  const u = new URL("/enroll/", location.origin);
+  u.searchParams.set("walk", "1");
+  u.searchParams.set("track", track);
+  const name = cleanName(document.getElementById("who").value);
+  if (name) u.searchParams.set("n", name);
+  return u.toString();
+}
+function packs(item, name, url){
+  const first = name ? name.split(/\s+/)[0] : "";
+  const linkLine = name ? (name + " / Access\n" + url) : ("Click Here to Access Your HTSA Portal\n" + url);
+  const hello = name ? ("Hi " + first + ",") : "Hi,";
+  const email = "Subject: Your HTSA enrollment page is ready\n\n" + hello + "\n\n" + linkLine + "\n\nThe page has the payment option we covered. " + item.line + "\n\nOnce you enroll, access unlocks right away. Use the green After You Pay section to self-enroll, or text me and we can do a quick 5-minute walkthrough.\n\nIn your moments of decision, life stops happening to you and starts happening for you the second you step into position.\n\nCall or text anytime if questions come up.\n\nBest,\n\n" + SIGN;
+  const hey = name ? ("Hey " + first + ", really enjoyed our call. You're a great fit for what we're building here.") : "Hey, really enjoyed our call. You're a great fit for what we're building here.";
+  const text = hey + "\n\n" + url + "\n\nThat page is the option we covered. " + item.line + "\n\nShow up and execute, and we won't let you fail, but you have to meet us halfway. In your moments of decision, life stops happening to you and starts happening for you the second you step into position. Unlock your access above when you're ready!";
+  return { email: email, text: text };
+}
+function renderPrices(){
+  const host = document.getElementById("prices");
+  host.innerHTML = "";
+  MENU[track].forEach(function(item){
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "price" + (picked && picked.opt === item.opt ? " on" : "");
+    b.innerHTML = "<span>" + item.name + "<small>" + item.sub + "</small></span>";
+    b.addEventListener("click", function(){ choose(item, true); });
+    host.appendChild(b);
+  });
+  document.getElementById("walkLink").href = walkUrl();
+}
+function choose(item, scroll){
+  picked = item;
+  const name = cleanName(document.getElementById("who").value);
+  const url = pageUrl(item.opt, name);
+  const pack = packs(item, name, url);
+  document.getElementById("out").hidden = false;
+  document.getElementById("outTitle").textContent = item.name;
+  document.getElementById("outWho").textContent = name ? (name + " · one option on their page") : "No name yet · generic greeting";
+  document.getElementById("openLink").href = url;
+  document.getElementById("emailBox").textContent = pack.email;
+  document.getElementById("textBox").textContent = pack.text;
+  document.getElementById("out").dataset.link = url;
+  document.getElementById("out").dataset.email = pack.email;
+  document.getElementById("out").dataset.text = pack.text;
+  renderPrices();
+  if (scroll) document.getElementById("out").scrollIntoView({ behavior:"smooth", block:"start" });
+}
+document.querySelectorAll(".track").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    track = btn.dataset.track;
+    picked = null;
+    document.getElementById("out").hidden = true;
+    document.querySelectorAll(".track").forEach(function(b){ b.classList.toggle("on", b === btn); });
+    renderPrices();
+  });
+});
+document.getElementById("who").addEventListener("input", function(){
+  document.getElementById("walkLink").href = walkUrl();
+  if (picked) choose(picked, false);
+});
+document.querySelectorAll("button.copy").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    const key = btn.dataset.copy;
+    const value = document.getElementById("out").dataset[key] || "";
+    navigator.clipboard.writeText(value).then(function(){
+      const old = btn.textContent;
+      btn.textContent = "Copied";
+      btn.classList.add("did");
+      setTimeout(function(){ btn.textContent = old; btn.classList.remove("did"); }, 1200);
+    });
+  });
+});
+renderPrices();
+</script>
+</body>
+</html>
