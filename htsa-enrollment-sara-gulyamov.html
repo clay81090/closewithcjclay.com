@@ -473,7 +473,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790895000 -->
+<!-- close-build:1790896000 -->
 </head>
 <body>
 <main class="page">
@@ -584,7 +584,7 @@ a{color:inherit}
         <span class="plan-unit" id="planUnit"></span>
       </div>
       <p class="plan-warn" id="planWarn" hidden></p>
-      <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
+      <button class="choose" type="button" data-plan="plan">Pay $1,750 today</button>
     </div>
 
     <div class="plan" id="planClarity" hidden>
@@ -956,7 +956,7 @@ const BUYER = {
   track:     "closer",
   offer:     "standard",
   show:      ["plan"],
-  intro:     "Sara, here is the 4-pay we covered: $1,750 today, then one a month for three more months, $7,000 total. The bonuses are on this page."
+  intro:     "Sara, pay $1,750 today. If you pay $4,250 by day 30, your total is $6,000 and you are done. If that second payment is not in by day 30, it stays the $1,750 monthly plan, $7,000 total. I will send the $4,250 link when it is due. The bonuses are on this page."
 };
 
 const CUSTOM_OFFER = null;
@@ -979,9 +979,9 @@ const OFFERS = {
     pif:  { amount: "$6,000", was: "$7,000",
             note: "One payment. Saves you $1,000 against the payment plan.",
             checkout: "https://whop.com/checkout/plan_hDgy1h7nsgiim?d2c=true" },
-    plan: { name: "4 payments", amount: "$1,750", unit: "today · $7,000 total",
-            note: "First payment today, then one a month for three months.",
-            warn: "",
+    plan: { name: "$1,750 today", amount: "$1,750", unit: "today · $6,000 if $4,250 is paid by day 30",
+            note: "Pay $1,750 today. If you pay $4,250 by day 30, your total is $6,000 and you are done. I will send that $4,250 link when it is due. If it is not paid by day 30, this stays the $1,750 monthly plan, $7,000 total.",
+            warn: "Day 30: $4,250 locks $6,000 total. If that payment is missed, it stays $1,750 a month, $7,000 total.",
             checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
     clarity: { amount: "$600", unit: "a month · 0% interest · $7,200 total",
                note: "Monthly financing with 0% interest APR. Soft credit check, 620 or better credit score to qualify.",
