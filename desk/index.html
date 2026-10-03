@@ -27,7 +27,8 @@ input[type=text]{width:100%;margin-top:6px;padding:12px 14px;border:1px solid va
 .track{min-height:52px;font-size:16px}
 .track.on,.price.on{background:#f7fffb;border-color:var(--green-strong);box-shadow:0 0 0 3px rgba(0,201,122,.18)}
 .prices{display:grid;gap:8px;margin-top:12px}
-.price{display:flex;justify-content:space-between;gap:12px;align-items:center;text-align:left;padding:14px 16px;font-size:16px;min-height:64px}
+.price{display:flex;justify-content:flex-start;gap:12px;align-items:center;text-align:left;padding:14px 16px;font-size:16px;min-height:64px}
+.price input{width:22px;height:22px;accent-color:#087b50;flex:none}
 .price small{display:block;font-weight:600;color:var(--muted);font-size:13px}
 .out{margin-top:14px;padding:16px;border-radius:16px;background:#fff;border:3px solid var(--green-strong)}
 .out h2{font-family:"Playfair Display",serif;font-size:1.35rem}
@@ -44,7 +45,7 @@ pre{white-space:pre-wrap;background:#fff;color:#000;border:1px solid var(--line)
 <div class="wrap">
   <header>
     <h1>Deal desk</h1>
-    <p>Keep this tab open. Walk them through the page with no prices. Then tap the one option you want. Their link, email, and text show up here.</p>
+    <p>Keep this tab open. Walk them through the page with no prices. Then check every option you want on that same page. One link, and the email and text are ready.</p>
     <div class="row">
       <a class="ghost" id="walkLink" href="/enroll/?walk=1&track=closer" target="_blank" rel="noopener">Open the walkthrough (no prices)</a>
       <a class="ghost" href="https://closewithcjclay.com/before-our-call" target="_blank" rel="noopener">Resources before the call</a>
@@ -76,7 +77,7 @@ pre{white-space:pre-wrap;background:#fff;color:#000;border:1px solid var(--line)
     <label style="margin-top:12px">Text, send right after the email</label>
     <pre id="textBox"></pre>
   </section>
-  <p class="note">Their page shows one option. Pages you already sent stay as they were. The old generic /access page is not this desk.</p>
+  <p class="note">Check 1, 2, or all of them. They all show on the one page you already walked them through. The email has that one link, not a separate checkout for each price. Pages you already sent stay as they were.</p>
 </div>
 <script>
 /* Keep in sync with enroll/index.html ENROLL_MENU. Oct 2, 2026. */
@@ -97,14 +98,17 @@ const MENU = {
 };
 const SIGN = "CJ Clay\nHTSA, Senior Career Transformation Coach\n(616) 612-1735\ncj@highticketsalesacademy.com";
 let track = "closer";
-let picked = null;
+const selected = new Set();
 
 function cleanName(v){
   return (v || "").replace(/[<>]/g, "").trim().slice(0, 80);
 }
-function pageUrl(opt, name){
+function chosenItems(){
+  return MENU[track].filter(function(item){ return selected.has(item.opt); });
+}
+function pageUrl(items, name){
   const u = new URL("/enroll/", location.origin);
-  u.searchParams.set("opt", opt);
+  u.searchParams.set("opt", items.map(function(item){ return item.opt; }).join(","));
   if (name) u.searchParams.set("n", name);
   return u.toString();
 }
@@ -116,49 +120,71 @@ function walkUrl(){
   if (name) u.searchParams.set("n", name);
   return u.toString();
 }
-function packs(item, name, url){
+function optionSentence(items){
+  if (items.length === 1) return "The page has the payment option we covered. " + items[0].line;
+  return "The page has the payment options we covered.\n\n" + items.map(function(item){ return item.name + ". " + item.line; }).join("\n");
+}
+function packs(items, name, url){
   const first = name ? name.split(/\s+/)[0] : "";
   const linkLine = name ? (name + " / Access\n" + url) : ("Click Here to Access Your HTSA Portal\n" + url);
   const hello = name ? ("Hi " + first + ",") : "Hi,";
-  const email = "Subject: Your HTSA enrollment page is ready\n\n" + hello + "\n\n" + linkLine + "\n\nThe page has the payment option we covered. " + item.line + "\n\nOnce you enroll, access unlocks right away. Use the green After You Pay section to self-enroll, or text me and we can do a quick 5-minute walkthrough.\n\nIn your moments of decision, life stops happening to you and starts happening for you the second you step into position.\n\nCall or text anytime if questions come up.\n\nBest,\n\n" + SIGN;
+  const covered = optionSentence(items);
+  const email = "Subject: Your HTSA enrollment page is ready\n\n" + hello + "\n\n" + linkLine + "\n\n" + covered + "\n\nOnce you enroll, access unlocks right away. Use the green After You Pay section to self-enroll, or text me and we can do a quick 5-minute walkthrough.\n\nIn your moments of decision, life stops happening to you and starts happening for you the second you step into position.\n\nCall or text anytime if questions come up.\n\nBest,\n\n" + SIGN;
   const hey = name ? ("Hey " + first + ", really enjoyed our call. You're a great fit for what we're building here.") : "Hey, really enjoyed our call. You're a great fit for what we're building here.";
-  const text = hey + "\n\n" + url + "\n\nThat page is the option we covered. " + item.line + "\n\nShow up and execute, and we won't let you fail, but you have to meet us halfway. In your moments of decision, life stops happening to you and starts happening for you the second you step into position. Unlock your access above when you're ready!";
+  const textCovered = items.length === 1
+    ? "That page is the option we covered. " + items[0].line
+    : "That page has the options we covered.\n\n" + items.map(function(item){ return item.name + ". " + item.line; }).join("\n");
+  const text = hey + "\n\n" + url + "\n\n" + textCovered + "\n\nShow up and execute, and we won't let you fail, but you have to meet us halfway. In your moments of decision, life stops happening to you and starts happening for you the second you step into position. Unlock your access above when you're ready!";
   return { email: email, text: text };
 }
 function renderPrices(){
   const host = document.getElementById("prices");
   host.innerHTML = "";
   MENU[track].forEach(function(item){
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "price" + (picked && picked.opt === item.opt ? " on" : "");
-    b.innerHTML = "<span>" + item.name + "<small>" + item.sub + "</small></span>";
-    b.addEventListener("click", function(){ choose(item, true); });
-    host.appendChild(b);
+    const label = document.createElement("label");
+    label.className = "price" + (selected.has(item.opt) ? " on" : "");
+    const box = document.createElement("input");
+    box.type = "checkbox";
+    box.checked = selected.has(item.opt);
+    box.addEventListener("change", function(){
+      if (box.checked) selected.add(item.opt);
+      else selected.delete(item.opt);
+      label.classList.toggle("on", box.checked);
+      sync(box.checked);
+    });
+    const span = document.createElement("span");
+    span.textContent = item.name;
+    const small = document.createElement("small");
+    small.textContent = item.sub;
+    span.appendChild(small);
+    label.appendChild(box);
+    label.appendChild(span);
+    host.appendChild(label);
   });
   document.getElementById("walkLink").href = walkUrl();
 }
-function choose(item, scroll){
-  picked = item;
+function sync(scroll){
+  const items = chosenItems();
+  const out = document.getElementById("out");
+  if (!items.length) { out.hidden = true; return; }
   const name = cleanName(document.getElementById("who").value);
-  const url = pageUrl(item.opt, name);
-  const pack = packs(item, name, url);
-  document.getElementById("out").hidden = false;
-  document.getElementById("outTitle").textContent = item.name;
-  document.getElementById("outWho").textContent = name ? (name + " · one option on their page") : "No name yet · generic greeting";
+  const url = pageUrl(items, name);
+  const pack = packs(items, name, url);
+  out.hidden = false;
+  document.getElementById("outTitle").textContent = items.length === 1 ? items[0].name : (items.length + " options on their page");
+  document.getElementById("outWho").textContent = (name ? name + " · " : "No name yet · ") + (items.length === 1 ? "one option on the page you showed them" : items.length + " options on the page you showed them");
   document.getElementById("openLink").href = url;
   document.getElementById("emailBox").textContent = pack.email;
   document.getElementById("textBox").textContent = pack.text;
-  document.getElementById("out").dataset.link = url;
-  document.getElementById("out").dataset.email = pack.email;
-  document.getElementById("out").dataset.text = pack.text;
-  renderPrices();
-  if (scroll) document.getElementById("out").scrollIntoView({ behavior:"smooth", block:"start" });
+  out.dataset.link = url;
+  out.dataset.email = pack.email;
+  out.dataset.text = pack.text;
+  if (scroll) out.scrollIntoView({ behavior:"smooth", block:"start" });
 }
 document.querySelectorAll(".track").forEach(function(btn){
   btn.addEventListener("click", function(){
     track = btn.dataset.track;
-    picked = null;
+    selected.clear();
     document.getElementById("out").hidden = true;
     document.querySelectorAll(".track").forEach(function(b){ b.classList.toggle("on", b === btn); });
     renderPrices();
@@ -166,7 +192,7 @@ document.querySelectorAll(".track").forEach(function(btn){
 });
 document.getElementById("who").addEventListener("input", function(){
   document.getElementById("walkLink").href = walkUrl();
-  if (picked) choose(picked, false);
+  if (selected.size) sync(false);
 });
 document.querySelectorAll("button.copy").forEach(function(btn){
   btn.addEventListener("click", function(){

@@ -476,7 +476,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790970000 -->
+<!-- close-build:1790981000 -->
 </head>
 <body>
 <main class="page">
@@ -1008,7 +1008,7 @@ const TERMS_VERSION = "HTSA-TOS-PDF-closewithcjclay-2026-04";
 const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5DnBNKUDVTvMvzFwD60DPpjMEm60LnIQ2tjSkGmy5u1Gt5sQa4Jng/exec";
 /* ==================== stop editing ==================== */
 
-/* Oct 2, 2026 prices. One option from /desk/ via ?opt= . Keep in sync with desk/index.html. */
+/* Oct 2, 2026 prices. One or more options from /desk/ via ?opt=c-2,c-4 . Keep in sync with desk/index.html. */
 const ENROLL_MENU = {
   "c-pif": { track:"closer", show:"pif", line:"One payment of $7,000.",
     pif:{ amount:"$7,000", was:"", note:"One payment. Full access as soon as it clears.", checkout:"https://whop.com/checkout/plan_GPDXTLOKvW6l8?d2c=true" } },
@@ -1029,26 +1029,45 @@ const ENROLL_MENU = {
   "s-cp": { track:"setter", show:"clarity", line:"ClarityPay financing, $4,800 total. The monthly amount is on the checkout.",
     clarity:{ amount:"$4,800", unit:"ClarityPay total", note:"ClarityPay financing, $4,800 total. The monthly amount is on the checkout.", checkout:"https://whop.com/checkout/plan_iXtkgcI6xwxbP?d2c=true" } }
 };
+function enrollCardView(item){
+  if (item.pif) return { name:"Paid in full", amount:item.pif.amount, unit:"one time", note:item.pif.note, url:item.pif.checkout, btn:"Choose paid in full" };
+  if (item.plan) return { name:item.plan.name, amount:item.plan.amount, unit:item.plan.unit, note:item.plan.note, url:item.plan.checkout, warn:item.plan.warn || "", btn:"Choose this" };
+  return { name:"ClarityPay", amount:item.clarity.amount, unit:item.clarity.unit, note:item.clarity.note, url:item.clarity.checkout, btn:"Choose ClarityPay" };
+}
+window.ENROLL_PICKS = [];
 (function applyEnrollChoice(){
   const params = new URLSearchParams(location.search);
-  const opt = (params.get("opt") || "").trim();
-  const item = ENROLL_MENU[opt];
-  const walk = params.get("walk") === "1" || !item;
+  const codes = (params.get("opt") || "").split(/[,+\s]+/).map(function(c){ return c.trim(); }).filter(Boolean);
+  const items = [];
+  codes.forEach(function(code){
+    const found = ENROLL_MENU[code];
+    if (found && !items.some(function(have){ return have.code === code; })) items.push(Object.assign({ code: code }, found));
+  });
+  const sameTrack = items.length ? items.filter(function(item){ return item.track === items[0].track; }) : [];
+  window.ENROLL_PICKS = sameTrack;
+  const item = sameTrack.length === 1 ? sameTrack[0] : null;
+  const walk = params.get("walk") === "1" || !sameTrack.length;
   document.body.dataset.enrollWalk = walk ? "1" : "0";
-  if (!item) {
+  document.body.dataset.enrollMulti = sameTrack.length > 1 ? "1" : "0";
+  if (!sameTrack.length) {
     BUYER.show = [];
     BUYER.track = params.get("track") === "setter" ? "setter" : "closer";
     OFFERS.standard.pif.checkout = "";
     OFFERS.standard.plan.checkout = "";
     OFFERS.standard.clarity.checkout = "";
-  } else {
+  } else if (item) {
     BUYER.track = item.track;
     BUYER.show = [item.show];
     BUYER.offer = "standard";
-    BUYER.slug = "enroll_" + opt;
+    BUYER.slug = "enroll_" + item.code;
     if (item.pif) Object.assign(OFFERS.standard.pif, item.pif);
     if (item.plan) Object.assign(OFFERS.standard.plan, item.plan);
     if (item.clarity) Object.assign(OFFERS.standard.clarity, item.clarity);
+  } else {
+    BUYER.track = sameTrack[0].track;
+    BUYER.show = [];
+    BUYER.offer = "standard";
+    BUYER.slug = "enroll_" + sameTrack.map(function(pick){ return pick.code; }).join("_");
   }
   if (BUYER.track === "setter") {
     INCLUDED.length = 0;
@@ -1087,7 +1106,9 @@ const ENROLL_MENU = {
     BUYER.fullName = rawName;
     BUYER.firstName = rawName.split(/\s+/)[0];
     document.title = rawName + " / Access";
-    const bit = item ? item.line : "We will lock the payment option together on this page.";
+    const bit = sameTrack.length > 1
+      ? "The payment options we covered are on this page."
+      : (item ? item.line : "We will lock the payment option together on this page.");
     BUYER.intro = BUYER.firstName + ", this is the page from our call. " + bit;
   }
 })();
@@ -1171,7 +1192,8 @@ const ENROLL_MENU = {
     clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" }
   };
 
-  const show = (document.body.dataset.enrollWalk === "1")
+  const multi = document.body.dataset.enrollMulti === "1" && window.ENROLL_PICKS && window.ENROLL_PICKS.length > 1;
+  const show = (document.body.dataset.enrollWalk === "1" || multi)
     ? []
     : (Array.isArray(BUYER.show) && BUYER.show.length ? BUYER.show : []);
   const NODE = { pif: el("planPif"), plan: el("planPlan"), clarity: el("planClarity") };
@@ -1189,6 +1211,46 @@ const ENROLL_MENU = {
     el("stickySub").textContent = stickyMap[show[0]] || el("stickySub").textContent;
     const stickyBtn = document.querySelector(".sticky-cta-btn");
     if (stickyBtn && show[0] === "clarity") stickyBtn.textContent = "Choose ClarityPay ↓";
+  }
+  if (multi) {
+    const custom = el("planCustom");
+    if (custom) custom.remove();
+    const plansEl = el("plans");
+    const h2 = plansEl.querySelector(".h2");
+    if (h2) h2.textContent = "Your payment options";
+    window.ENROLL_PICKS.forEach(function(pick, i){
+      const view = enrollCardView(pick);
+      const card = document.createElement("div");
+      card.className = "plan";
+      const nameEl = document.createElement("div");
+      nameEl.className = "plan-name";
+      nameEl.textContent = view.name;
+      const noteEl = document.createElement("div");
+      noteEl.className = "plan-note";
+      noteEl.textContent = view.note;
+      const figs = document.createElement("div");
+      figs.className = "plan-figs";
+      const amtEl = document.createElement("span");
+      amtEl.className = "plan-amt";
+      amtEl.textContent = view.amount;
+      const unitEl = document.createElement("span");
+      unitEl.className = "plan-unit";
+      unitEl.textContent = view.unit;
+      figs.appendChild(amtEl);
+      figs.appendChild(unitEl);
+      const btn = document.createElement("button");
+      btn.className = "choose";
+      btn.type = "button";
+      btn.dataset.plan = "pick" + i;
+      btn.textContent = view.btn;
+      card.appendChild(nameEl);
+      card.appendChild(noteEl);
+      card.appendChild(figs);
+      card.appendChild(btn);
+      plansEl.appendChild(card);
+      PLANS["pick" + i] = { name: view.name, amt: view.amount, sub: view.note, url: view.url, warn: view.warn || "" };
+    });
+    el("stickySub").textContent = "Choose the option that fits";
   }
 
   if (CUSTOM_OFFER) {

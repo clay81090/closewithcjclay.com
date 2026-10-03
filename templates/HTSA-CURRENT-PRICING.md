@@ -20,7 +20,11 @@ Resources before the call: https://closewithcjclay.com/before-our-call
 | `c-4` | 4 payments of $1,950 | $7,800 | https://whop.com/checkout/plan_KZi8Kt0Ioq6tK |
 | `c-cp` | ClarityPay, $700 a month | $8,400 | https://whop.com/checkout/plan_K4goBzDEHXO15 |
 
-Example prospect link: `https://closewithcjclay.com/enroll/?opt=c-4&n=Danielle%20Ramsey`
+Example prospect link, one option: `https://closewithcjclay.com/enroll/?opt=c-4&n=Danielle%20Ramsey`
+
+Several options on that same page: `https://closewithcjclay.com/enroll/?opt=c-2,c-4,c-cp`
+
+The desk checkboxes build this for you. One link in the email. Each checked price is a button on the page.
 
 ## Setter
 
