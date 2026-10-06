@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Landon Smither and calendar visibility · CJ Clay for Chad Aleo</title>
-<!-- build:1791231000 -->
+<!-- build:1791232000 -->
 <style>
 :root{
   --navy:#0b2545; --navy-2:#13315c; --green:#1b9a59; --green-soft:#e8f6ee; --green-line:#bfe5cf;
@@ -215,7 +215,8 @@ dialog::backdrop{background:rgba(7,18,36,.78)}
         <span class="pill">The recording</span>
         <h3 style="margin:8px 0 4px;font-size:18px;color:var(--navy)">May 17 consultation, full call</h3>
         <p style="margin:0 0 10px;color:var(--muted);font-size:14px">1 hour, 20 minutes, 40 seconds, recorded in HubSpot. Press play anywhere to hear how we connected.</p>
-        <div class="audio"><audio controls preload="none" src="/media/landon/may-17-strategy-session.mp3">Audio is not supported in this browser.</audio></div>
+        <div class="audio"><audio id="mayCallAudio" controls preload="metadata" src="/media/landon/may-17-strategy-session.mp3">Audio is not supported in this browser.</audio></div>
+        <p style="margin:8px 0 0;font-size:12px;color:var(--muted)">Plays at 1.25x. You can change the speed in the player menu.</p>
       </div>
 
       <div class="chat">
@@ -350,7 +351,7 @@ dialog::backdrop{background:rgba(7,18,36,.78)}
           <div class="m"><div class="av a">AA</div><div><div class="who">Anjelica Ayala<span>2:27 PM</span></div><div class="txt"><em>Ultimately this is your deal! You spent 1 hour with him already back in May!</em> So I would for sure say it's ok to take it from Jonnie and move it to you if you are free at that time on Tuesday ????</div></div></div>
           <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ Clay<span>4:22 PM</span></div><div class="txt">Hey Anjelica, thank you again for catching this! Quick question, were you able to book me because my normal availability is showing now, or only because I told you I was available?</div></div></div>
           <div class="dayline">VOICE MESSAGE · 5:09 PM</div>
-          <div class="m"><div class="av a">AA</div><div><div class="who">Anjelica Ayala<span>voice message, 0:30</span></div><div class="txt">Auto transcript from Slack:<br><b>0:01</b> "Hey, CJ, I tried to find where you're at on the list for like every single time next week and I couldn't find you."<br><b>0:11</b> "So, I sent you the link if you wanna check yourself."<br><b>0:14</b> "I just put a random email or whatever just to kind of see, to bypass the first information."<br><b>0:21</b> "But I checked every time slot, I refreshed it."<br><b>0:25</b> "I'm not sure if you wanna reach back out, but I don't see your name coming up."</div></div></div>
+          <div class="m"><div class="av a">AA</div><div><div class="who">Anjelica Ayala<span>voice message, 0:30</span></div><div class="txt"><audio controls preload="metadata" src="/media/landon/anjelica-oct3-voice-message.mp3" style="width:100%;margin:2px 0 8px">Audio is not supported in this browser.</audio><br>Auto transcript from Slack:<br><b>0:01</b> "Hey, CJ, I tried to find where you're at on the list for like every single time next week and I couldn't find you."<br><b>0:11</b> "So, I sent you the link if you wanna check yourself."<br><b>0:14</b> "I just put a random email or whatever just to kind of see, to bypass the first information."<br><b>0:21</b> "But I checked every time slot, I refreshed it."<br><b>0:25</b> "I'm not sure if you wanna reach back out, but I don't see your name coming up."</div></div></div>
         </div>
       </div>
       <button class="shotbtn" data-shot="img/oct3-anjelica-voice.png" data-cap="Slack, Oct 3, Anjelica voice message and transcript">View voice message screenshot</button>
@@ -434,6 +435,11 @@ dialog::backdrop{background:rgba(7,18,36,.78)}
   document.querySelectorAll("[data-shot]").forEach(function(b){
     b.addEventListener("click", function(){ open(b.getAttribute("data-shot"), b.getAttribute("data-cap")); });
   });
+  var may = document.getElementById("mayCallAudio");
+  var speedSet = false;
+  function setSpeed(){ if (!speedSet) { may.playbackRate = 1.25; speedSet = true; } }
+  may.addEventListener("loadedmetadata", setSpeed);
+  may.addEventListener("play", setSpeed);
   document.getElementById("lbClose").addEventListener("click", function(){ dlg.close ? dlg.close() : dlg.removeAttribute("open"); });
   dlg.addEventListener("click", function(e){ if (e.target === dlg) { dlg.close ? dlg.close() : dlg.removeAttribute("open"); } });
 })();
