@@ -528,12 +528,16 @@ a{color:inherit}
 .thread-line b{color:var(--navy)}
 .thread-line .when{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
 .bonuses--action{border:4px solid var(--green-strong)!important;box-shadow:0 0 0 5px rgba(0,201,122,.28),0 16px 36px rgba(0,201,122,.22)!important}
+.badge--opt{background:var(--navy);color:#fff}
+.plan--nested{margin:26px 0 0}
+.plan--nested .badge{background:var(--green-strong);color:#04231a}
+.plan--nested .choose{background:var(--green-strong);color:#04231a}
 .plan--action{border:3px solid var(--green-strong)!important;box-shadow:0 0 0 4px rgba(0,201,122,.2)!important;
   background:linear-gradient(160deg,#f7fffb 0%,#fff 70%)}
 @media (max-width:680px){.landon-hero,.landon-note,.landon-call,.slack-card,.landon-thread{margin-left:16px;margin-right:16px}}
 
 </style>
-<!-- close-build:1791234000 -->
+<!-- close-build:1791235000 -->
 </head>
 <body>
 <main class="page">
@@ -675,19 +679,8 @@ a{color:inherit}
     <div class="h2">Your May 17th payment options</div>
     <div class="plans-sub">May action-taker pricing locked. Access opens the moment your payment clears.</div>
 
-    <div class="plan plan--custom" id="planCustom" hidden>
-      <span class="badge" id="customBadge">Your offer</span>
-      <div class="plan-name" id="customName"></div>
-      <div class="plan-note" id="customNote"></div>
-      <div class="plan-figs">
-        <span class="plan-amt" id="customAmt"></span>
-        <span class="plan-unit" id="customUnit"></span>
-      </div>
-      <button class="choose" type="button" data-plan="custom">Choose this</button>
-    </div>
-
     <div class="plan plan--best" id="planPif">
-      <span class="badge" id="pifBadge">Best value</span>
+      <span class="badge" id="pifBadge">Option 1 · Best value</span>
       <div class="plan-name">Paid in full</div>
       <div class="plan-note" id="pifNote"></div>
       <div class="plan-figs">
@@ -696,6 +689,18 @@ a{color:inherit}
         <span class="plan-unit">one time</span>
       </div>
       <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
+
+      <div class="plan plan--custom plan--nested" id="planCustom" hidden>
+        <span class="badge" id="customBadge">Action Taker Bonus</span>
+        <div class="plan-name" id="customName"></div>
+        <div class="plan-note" id="customNote"></div>
+        <div class="plan-figs">
+          <span class="plan-amt" id="customAmt"></span>
+          <span class="plan-unit" id="customUnit"></span>
+        </div>
+        <button class="choose" type="button" data-plan="custom">Choose the 2-pay</button>
+      </div>
+
       <details class="plan-sub" id="planSplititWrap" hidden>
         <summary><span>More payment options</span><span class="plan-sub-chev" aria-hidden="true">▾</span></summary>
         <div class="plan-splitit">
@@ -707,6 +712,7 @@ a{color:inherit}
     </div>
 
     <div class="plan" id="planPlan">
+      <span class="badge badge--opt">Option 2</span>
       <div class="plan-name" id="planName"></div>
       <div class="plan-note" id="planNote"></div>
       <div class="plan-figs">
@@ -718,6 +724,7 @@ a{color:inherit}
     </div>
 
     <div class="plan" id="planClarity" hidden>
+      <span class="badge badge--opt">Option 3</span>
       <div class="plan-name">ClarityPay monthly</div>
       <span class="plan-clarity-badge">0% interest · 0% APR</span>
       <div class="plan-note" id="clarityNote"></div>
@@ -1085,14 +1092,14 @@ const BUYER = {
   slug:      "landon_smither",
   track:     "closer",
   offer:     "standard",
-  show:      ["custom", "pif", "plan", "clarity"],
+  show:      ["pif", "plan", "clarity"],
   intro:     ""
 };
 
 const CUSTOM_OFFER = {
-  badge: "May action taker",
+  badge: "Action Taker Bonus",
   name: "2-Pay Action Taker",
-  note: "The path we talked through on May 17th. $3,000 today, $3,000 in 30 days. $6,000 total.",
+  note: "Same $6,000 price, split in two, the path we talked through on May 17th. $3,000 today, $3,000 in 30 days.",
   amount: "$3,000",
   unit: "today · $6,000 total",
   warn: "",
@@ -1271,7 +1278,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
 
   if (CUSTOM_OFFER) {
     const c = el("planCustom");
-    c.hidden = false; host.insertBefore(c, host.querySelector(".plan:not(#planCustom)"));
+    c.hidden = false;
     el("customBadge").textContent = CUSTOM_OFFER.badge || "Your offer";
     el("customName").textContent  = CUSTOM_OFFER.name || "";
     el("customNote").textContent  = CUSTOM_OFFER.note || "";
@@ -1279,10 +1286,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     el("customUnit").textContent  = CUSTOM_OFFER.unit || "";
     PLANS.custom = { name:CUSTOM_OFFER.name, amt:CUSTOM_OFFER.amount, sub:CUSTOM_OFFER.note,
                      url:CUSTOM_OFFER.checkout, warn:CUSTOM_OFFER.warn || "" };
-    el("planPif") && el("planPif").classList.remove("plan--best");
-    c.classList.add("plan--best");
     c.classList.add("plan--action");
-    const b = el("pifBadge"); if (b) b.remove();
   }
 
   /* ---------- docs ---------- */
