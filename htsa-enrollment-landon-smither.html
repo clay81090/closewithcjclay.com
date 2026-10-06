@@ -1157,6 +1157,17 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   try{const k="htsa_enroll_open_"+(BUYER.slug||"x");
     if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");event("page_open");}}catch(e){event("page_open");}
 
+  const mayAudio = document.getElementById("mayCallAudio");
+  if (mayAudio) {
+    var maySpeedSet = false;
+    function setMaySpeed(){
+      if (maySpeedSet) return;
+      try{ mayAudio.playbackRate = 1.25; maySpeedSet = true; }catch(e){}
+    }
+    mayAudio.addEventListener("loadedmetadata", setMaySpeed);
+    mayAudio.addEventListener("play", setMaySpeed);
+  }
+
   /* ---------- header ---------- */
   if (val(first)) {
     el("topTitle").textContent = first + ", here's what we just went over.";
