@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Landon Smither and calendar visibility · CJ Clay for Chad Aleo</title>
+<!-- build:1791230000 -->
+<style>
+:root{
+  --navy:#0b2545; --navy-2:#13315c; --green:#1b9a59; --green-soft:#e8f6ee; --green-line:#bfe5cf;
+  --ink:#16202e; --muted:#5b6778; --line:#e2e7ee; --bg:#f4f6f9; --card:#ffffff; --warm:#f8fafc;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.55}
+a{color:var(--navy-2)}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px}
+
+/* top nav */
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:8px;padding-bottom:8px;scrollbar-width:none}
+.nav a{white-space:nowrap;text-decoration:none;color:var(--navy);font-size:14px;font-weight:600;padding:8px 14px;border-radius:999px;min-height:36px;display:inline-flex;align-items:center}
+.nav a:hover{background:var(--green-soft)}
+
+/* hero */
+.hero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:34px 0 40px}
+.hero .who{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.hero .who img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.55);background:#fff}
+.hero .who small{display:block;color:#b9c7dc;font-size:13px;letter-spacing:.02em}
+.hero .who b{font-size:16px}
+.hero h1{margin:0 0 10px;font-size:clamp(26px,5vw,38px);line-height:1.15;font-weight:800;letter-spacing:-.01em}
+.hero p{margin:0 0 12px;color:#dbe5f3;max-width:720px;font-size:17px}
+.hero .when{display:inline-block;margin-top:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:6px 12px;border-radius:999px;font-size:14px;color:#fff}
+
+/* sections */
+section.block{padding:34px 0 8px}
+.kicker{display:inline-block;color:var(--green);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+h2{margin:0 0 6px;font-size:clamp(22px,4vw,28px);color:var(--navy);line-height:1.2}
+.lede{margin:0 0 20px;color:var(--muted);max-width:720px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 1px 2px rgba(11,37,69,.04)}
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:760px){.g3,.g2{grid-template-columns:1fr}}
+
+.glance .card h3{margin:0 0 6px;font-size:17px;color:var(--navy)}
+.glance .card p{margin:0;color:var(--ink);font-size:15px}
+.glance .num{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:800;align-items:center;justify-content:center;margin-bottom:8px;font-size:14px}
+
+/* timeline */
+.tl{position:relative;margin:6px 0 0;padding:0 0 0 22px;list-style:none}
+.tl:before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl li{position:relative;padding:0 0 18px 14px}
+.tl li:before{content:"";position:absolute;left:-21px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--navy-2)}
+.tl li.key:before{border-color:var(--green);background:var(--green)}
+.tl .d{font-size:13px;font-weight:800;color:var(--navy-2);letter-spacing:.02em}
+.tl .t{margin:2px 0 0;font-size:15px}
+.tl .q{margin:6px 0 0;padding:8px 12px;border-left:3px solid var(--green);background:var(--green-soft);border-radius:0 10px 10px 0;font-size:15px}
+.tl .q small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+
+/* scroll chat windows */
+.chat{border:1px solid var(--line);border-radius:14px;background:var(--warm);overflow:hidden}
+.chat-head{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:9px 14px;background:#fff;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.chat-head b{color:var(--navy);font-size:14px}
+.chat-body{max-height:290px;overflow-y:auto;padding:12px 14px;-webkit-overflow-scrolling:touch}
+.chat-body:focus{outline:2px solid var(--green-line);outline-offset:-2px}
+.m{display:flex;gap:10px;margin:0 0 12px}
+.av{flex:0 0 32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;background:#6b7a90;overflow:hidden}
+.av img{width:100%;height:100%;object-fit:cover}
+.av.l{background:#3b6ea5}.av.a{background:#8a5a9e}.av.c{background:#2f7d6d}.av.j{background:#b7791f}
+.m .who{font-size:14px;font-weight:700;color:var(--navy)}
+.m .who span{font-weight:500;color:var(--muted);font-size:12px;margin-left:6px}
+.m .txt{font-size:15px;color:var(--ink)}
+.m .txt em{font-style:normal;background:#fff6c7;padding:0 3px;border-radius:3px}
+.dayline{text-align:center;font-size:12px;color:var(--muted);margin:4px 0 12px;font-weight:700;letter-spacing:.03em}
+.shotbtn{appearance:none;border:1px solid var(--navy-2);background:#fff;color:var(--navy-2);font-weight:700;font-size:14px;padding:9px 14px;border-radius:10px;cursor:pointer;min-height:40px;margin-top:10px}
+.shotbtn:hover{background:var(--navy-2);color:#fff}
+
+/* steps */
+.step{display:grid;grid-template-columns:44px 1fr;gap:12px;margin:0 0 14px}
+.step .pin{width:44px;height:44px;border-radius:12px;background:var(--navy);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:12px;text-align:center;line-height:1.1}
+.step h3{margin:0 0 2px;font-size:17px;color:var(--navy)}
+.step .sub{margin:0 0 10px;color:var(--muted);font-size:14px}
+
+/* audio */
+.audio{display:grid;gap:8px}
+audio{width:100%}
+.pill{display:inline-block;background:var(--green-soft);color:#146c40;border:1px solid var(--green-line);font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px}
+
+/* pricing */
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+td.n{font-weight:800;color:var(--navy);white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 20px;border-radius:12px;background:var(--green);color:#fff;font-weight:800;text-decoration:none;border:0;cursor:pointer;font-size:16px}
+.btn.alt{background:#fff;color:var(--navy-2);border:1px solid var(--navy-2)}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.links a{font-size:14px;font-weight:600;text-decoration:none;border:1px solid var(--line);background:#fff;color:var(--navy-2);padding:8px 12px;border-radius:10px}
+.links a:hover{border-color:var(--navy-2)}
+
+/* stats */
+.stat{text-align:center}
+.stat .big{font-size:34px;font-weight:800;color:var(--navy);line-height:1.05}
+.stat .lab{font-size:13px;color:var(--muted);margin-top:4px}
+.stat .sub{font-size:13px;color:var(--green);font-weight:700;margin-top:2px}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.g4{grid-template-columns:repeat(2,1fr)}}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:14px}
+.thumb{appearance:none;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px;text-align:left;cursor:pointer}
+.thumb:hover{border-color:var(--navy-2)}
+.thumb img{width:100%;height:120px;object-fit:cover;object-position:top left;border-radius:8px;border:1px solid var(--line);display:block}
+.thumb span{display:block;margin-top:8px;font-size:13px;font-weight:700;color:var(--navy)}
+.thumb small{display:block;color:var(--muted);font-size:12px;font-weight:500}
+
+/* ask */
+.opt{border:1px solid var(--green-line);background:var(--green-soft);border-radius:14px;padding:14px 16px;margin:0 0 10px}
+.opt b{color:#0f5d37}
+.opt p{margin:4px 0 0;font-size:15px}
+.fair{border:1px dashed var(--line);border-radius:12px;padding:12px 14px;background:#fff;font-size:15px;color:var(--muted);margin-top:14px}
+.sign{margin:26px 0 0;padding:20px;background:var(--navy);color:#fff;border-radius:16px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.sign img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.5);background:#fff}
+.sign p{margin:0}
+.sign .nm{font-weight:800;font-size:18px}
+.sign .ti{color:#c8d5ea;font-size:14px}
+footer{padding:26px 0 60px;text-align:center;color:var(--muted);font-size:13px}
+
+/* lightbox */
+dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:94vh}
+dialog::backdrop{background:rgba(7,18,36,.78)}
+.lb{background:#fff;border-radius:14px;overflow:hidden;max-width:96vw}
+.lb-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line);font-weight:700;color:var(--navy);font-size:14px}
+.lb-bar button{appearance:none;border:0;background:var(--navy);color:#fff;border-radius:8px;min-height:38px;padding:0 14px;font-weight:700;cursor:pointer}
+.lb-img{max-height:82vh;overflow:auto;background:#eef1f5}
+.lb-img img{display:block;width:100%;min-width:640px;height:auto}
+@media(max-width:700px){.lb-img img{min-width:900px}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a href="#summary">Summary</a>
+    <a href="#landon">Landon timeline</a>
+    <a href="#calendar">Calendar visibility</a>
+    <a href="#numbers">Numbers</a>
+    <a href="#today">Today</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="who">
+      <img src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
+      <div><small>Prepared for Chad Aleo</small><b>From CJ Clay</b></div>
+    </div>
+    <h1>Landon Smither and my setter calendar</h1>
+    <p>Chad, good morning. Landon's call is at 9:00 AM today and I'm out Thursday through Monday, so I wanted everything in one place. The short version is first. Every detail has the screenshot or recording behind it if you want to look.</p>
+    <span class="when">Tuesday, October 6, 2026 · 7:00 AM ET</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- SUMMARY -->
+<section class="block" id="summary">
+  <span class="kicker">The short version</span>
+  <h2>Three things to know</h2>
+  <p class="lede">Nobody did anything wrong on purpose here. I just want you to have the full picture before the 9:00 call.</p>
+  <div class="grid g3 glance">
+    <div class="card">
+      <div class="num">1</div>
+      <h3>Landon is a May prospect of mine</h3>
+      <p>Anjelica booked him with me on May 8. We had an 80 minute, 40 second consultation on May 17, I built his enrollment page, and he texted me about funding on May 19.</p>
+    </div>
+    <div class="card">
+      <div class="num">2</div>
+      <h3>He came back on Oct 3 and I could not be booked</h3>
+      <p>Anjelica told me she could not find a Tuesday slot under my name and had to book Jonnie. She also told me: "Ultimately this is your deal! You spent 1 hour with him already back in May!"</p>
+    </div>
+    <div class="card">
+      <div class="num">3</div>
+      <h3>Today at 9:00 AM ET</h3>
+      <p>I am available 9:00 to 9:45 and can pick up exactly where we left off. I'm also out Thursday, Oct 8 through Monday, Oct 12 for my grandmother's funeral, so today and tomorrow matter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LANDON -->
+<section class="block" id="landon">
+  <span class="kicker">Part 1</span>
+  <h2>Landon's history with me</h2>
+  <p class="lede">Dates and times come from my texts, HubSpot, and Slack. Quotes are word for word.</p>
+
+  <div class="grid g2" style="align-items:start">
+    <div class="card">
+      <ul class="tl">
+        <li><div class="d">MAY 8</div><p class="t">Anjelica qualifies Landon and books him on my calendar. I introduce myself by text and send resources. He replies "All right man perfect can't wait."</p></li>
+        <li><div class="d">MAY 9 TO 15</div><p class="t">His work (diesel service calls, family plans) moves the appointment several times. I work around it each time and we stay in direct contact. Anjelica gets him back on my calendar for Sunday, May 17.</p></li>
+        <li class="key"><div class="d">MAY 17 · 3:09 PM</div><p class="t"><b>1 hour, 20 minutes, 40 seconds.</b> His fiber door to door background, football, Kentucky family roots, income goals, the program, and payment options. Recording is below.</p></li>
+        <li><div class="d">MAY 18</div><p class="t">I send him a personalized enrollment page with the options we discussed.</p></li>
+        <li class="key"><div class="d">MAY 19 · 5:26 PM</div><p class="t">Landon texts me about funding.</p><div class="q">"I'm tying to figure out a way to get this money man."<small>Landon, by text</small></div></li>
+        <li><div class="d">SEPT 24</div><p class="t">Replies to webinar outreach: "Yeah save me a spot."</p></li>
+        <li class="key"><div class="d">OCT 3 · RECORDED CALL WITH ANJELICA</div><p class="t">About a minute and fifteen seconds in, she brings up our consultation.</p><div class="q">"I know that you have spoken to CJ on like an hour call. Does that ring a bell?"<small>Anjelica Ayala, and Landon acknowledged it</small></div></li>
+        <li class="key"><div class="d">OCT 3 · 2:27 PM, SLACK</div><div class="q">"Ultimately this is your deal! You spent 1 hour with him already back in May!"<small>Anjelica Ayala to CJ</small></div></li>
+        <li><div class="d">OCT 5 · ABOUT 8:10 PM</div><p class="t">Landon and Jonnie settle on Tuesday, Oct 6 at 9:00 AM ET, working around his family and a dealership interview.</p></li>
+        <li class="key"><div class="d">TODAY · 9:00 TO 9:45 AM ET</div><p class="t">I'm ready to take it.</p></li>
+      </ul>
+    </div>
+
+    <div style="display:grid;gap:14px">
+      <div class="card">
+        <span class="pill">The recording</span>
+        <h3 style="margin:8px 0 4px;font-size:18px;color:var(--navy)">May 17 consultation, full call</h3>
+        <p style="margin:0 0 10px;color:var(--muted);font-size:14px">1 hour, 20 minutes, 40 seconds, recorded in HubSpot. Press play anywhere to hear how we connected.</p>
+        <div class="audio"><audio controls preload="none" src="/media/landon/may-17-strategy-session.mp3">Audio is not supported in this browser.</audio></div>
+      </div>
+
+      <div class="chat">
+        <div class="chat-head"><b>Landon and CJ · texts</b><span>scroll</span></div>
+        <div class="chat-body" tabindex="0" aria-label="Texts between Landon and CJ">
+          <div class="dayline">MAY 8</div>
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ<span>3:11 PM</span></div><div class="txt">Introduced myself, told him I would be calling from my number, and sent resources to review before the call.</div></div></div>
+          <div class="m"><div class="av l">LS</div><div><div class="who">Landon<span>reply</span></div><div class="txt">"All right man perfect can't wait."<br>"Yes sir I got it."</div></div></div>
+          <div class="dayline">MAY 9 TO 12</div>
+          <div class="m"><div class="av l">LS</div><div><div class="who">Landon</div><div class="txt">Asked to reschedule, a job was running long. Later asked to start earlier because of a diesel service call, and let me know at 10:24 PM that he had just gotten home.</div></div></div>
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ</div><div class="txt">Thanked him for communicating and offered times that worked around his schedule.</div></div></div>
+          <div class="dayline">MAY 15 TO 17</div>
+          <div class="m"><div class="av a">AA</div><div><div class="who">Anjelica<span>setter</span></div><div class="txt">Rebooked him with me for Sunday, May 17 at 3:00 PM ET.</div></div></div>
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ<span>May 17</span></div><div class="txt">Resource reminder in the morning, confirmed shortly before the call. Connected at about 3:09 PM.</div></div></div>
+          <div class="dayline">MAY 18</div>
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ</div><div class="txt">Sent his personalized enrollment page after the call.</div></div></div>
+          <div class="dayline">MAY 19</div>
+          <div class="m"><div class="av l">LS</div><div><div class="who">Landon<span>5:26 PM</span></div><div class="txt">"I'm tying to figure out a way to get this money man."</div></div></div>
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ</div><div class="txt">Encouraged him and offered to brainstorm funding together.</div></div></div>
+          <div class="dayline">SEPT 24</div>
+          <div class="m"><div class="av l">LS</div><div><div class="who">Landon</div><div class="txt">"Yeah save me a spot." (webinar outreach)</div></div></div>
+        </div>
+      </div>
+      <p style="margin:-4px 0 0;font-size:12px;color:var(--muted)">Paraphrased where a message was long. Original texts are in HubSpot.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <span class="pill">The page I built for him</span>
+    <h3 style="margin:8px 0 4px;font-size:18px;color:var(--navy)">His enrollment page and pricing</h3>
+    <p style="margin:0 0 12px;color:var(--muted);font-size:14px">This is the original version of his page, last edited May 18, so you can see exactly what we covered and what he was shown.</p>
+    <table>
+      <thead><tr><th>Option</th><th>How it worked</th><th>Total</th></tr></thead>
+      <tbody>
+        <tr><td class="n">Paid in full</td><td>One payment of $6,000</td><td class="n">$6,000</td></tr>
+        <tr><td class="n">2 pay Action Taker</td><td>$3,000 at checkout, $3,000 in 30 days</td><td class="n">$6,000</td></tr>
+        <tr><td class="n">4 pay</td><td>$1,750 today, then three more monthly</td><td class="n">$7,000</td></tr>
+      </tbody>
+    </table>
+    <div class="links">
+      <a class="btn" style="color:#fff" href="/htsa-enrollment-landon-smither-v1.html" target="_blank" rel="noopener">Open his original page</a>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h3 style="margin:0 0 4px;font-size:17px;color:var(--navy)">HubSpot records</h3>
+    <p style="margin:0;color:var(--muted);font-size:14px">Everything above is in the CRM. Direct links, in case it saves you a search.</p>
+    <div class="links">
+      <a href="https://app.hubspot.com/calls/44315583/review/109704062566" target="_blank" rel="noopener">May 17 consultation call</a>
+      <a href="https://app.hubspot.com/calls/44315583/review/117924703588" target="_blank" rel="noopener">Oct 3 call with Anjelica</a>
+      <a href="https://app.hubspot.com/go-to/44315583/0-3/60278541373" target="_blank" rel="noopener">My May deal</a>
+      <a href="https://app.hubspot.com/go-to/44315583/0-3/60146209425" target="_blank" rel="noopener">Earlier May deal (mine)</a>
+      <a href="https://app.hubspot.com/go-to/44315583/0-3/65631198746" target="_blank" rel="noopener">October deal (Jonnie)</a>
+    </div>
+    <p style="margin:12px 0 0;font-size:14px;color:var(--muted)">The CRM shows my May deals are still under my name. The October booking created a separate deal for the same returning contact, so this is a workflow result and not anyone changing records by hand.</p>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section class="block" id="calendar">
+  <span class="kicker">Part 2</span>
+  <h2>Setter calendar visibility</h2>
+  <p class="lede">I've been trying to understand why setters can't always find me. Here are the four places it came up, with the actual messages. Tap any screenshot button for the full image.</p>
+
+  <div class="step">
+    <div class="pin">SEPT<br>22</div>
+    <div>
+      <h3>During the webinar, with Josiah and Christian</h3>
+      <p class="sub">I opened the 9, 10, and 11 PM slots for webinar leads and checked that they were showing.</p>
+      <div class="chat">
+        <div class="chat-head"><b>Slack · Sept 22</b><span>scroll</span></div>
+        <div class="chat-body" tabindex="0">
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ Clay<span>7:49 PM</span></div><div class="txt">Open 9, 10, and 11 for now. I may open 12 as well.</div></div></div>
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ Clay<span>9:11 PM</span></div><div class="txt">You get my message about opening my 11? If people have booked like they say on the call, I don't have any scheduled in calendar, just letting ya know.</div></div></div>
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ Clay<span>9:21 PM</span></div><div class="txt"><em>Christian said my times didnt show up in booking for tonight?</em></div></div></div>
+          <div class="m"><div class="av c">JF</div><div><div class="who">Josiah Fogle<span>10:36 PM</span></div><div class="txt">"yo dude, I was already in the webinar when you got back to me dude, sorry you missed out on some of them, there are gonna be more coming from SDR sets and the weby on Thursday."</div></div></div>
+        </div>
+      </div>
+      <button class="shotbtn" data-shot="img/sept22-josiah.png" data-cap="Slack, Sept 22">View screenshot</button>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="pin">SEPT<br>24</div>
+    <div>
+      <h3>Second webinar, with Christian</h3>
+      <p class="sub">I opened extra evening time again and told him my limits that night.</p>
+      <div class="chat">
+        <div class="chat-head"><b>Slack · Sept 24</b><span></span></div>
+        <div class="chat-body" style="max-height:none" tabindex="0">
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ Clay<span>3:34 PM</span></div><div class="txt">I opened 5pm, and i can do 7pm. I already have one at 8pm from last time, I cant do after 9 this time...have a family event with my wife.</div></div></div>
+          <div class="m"><div class="av c">CC</div><div><div class="who">Christian Cherniawski<span>3:34 PM</span></div><div class="txt">That's alright!</div></div></div>
+        </div>
+      </div>
+      <button class="shotbtn" data-shot="img/sept24-oct3-channel.png" data-cap="Slack, Sept 24 and Oct 3 channel post">View screenshot</button>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="pin">OCT<br>1</div>
+    <div>
+      <h3>Direct message with Christian</h3>
+      <p class="sub">My calendar looked normal to me but my bookings were very light. Christian made a setting change that day.</p>
+      <div class="chat">
+        <div class="chat-head"><b>Slack DM · Oct 1</b><span>scroll</span></div>
+        <div class="chat-body" tabindex="0">
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ Clay<span>11:24 AM</span></div><div class="txt">everything ok with my calendar? ... I changed it to this: opened up later times, can you see on my calendar if they are open?</div></div></div>
+          <div class="m"><div class="av c">CC</div><div><div class="who">Christian<span>11:28 AM</span></div><div class="txt">Yup! Looks open to me!!</div></div></div>
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ Clay<span>2:22 PM</span></div><div class="txt">I just want to double check that there is nothing wrong with my calendar. <em>I have gotten a single booking all day</em> ... so wondering if there is an error, or if I am low on the list for leads?</div></div></div>
+          <div class="m"><div class="av c">CC</div><div><div class="who">Christian<span>2:23 PM</span></div><div class="txt">Did you change anything with your hubspot calendars?</div></div></div>
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ Clay<span>2:25 PM</span></div><div class="txt">No, expect deleted the ones I made that had 0 bookings, didn't touch any of the others. Richard said he sees my schedule when I changed and blocked mid day and opened the rest.</div></div></div>
+          <div class="m"><div class="av c">CC</div><div><div class="who">Christian<span>2:26 PM</span></div><div class="txt">Ok, good. If SDR's see it then you're good there. <em>I just changed a marketing setting that opened up your calendar for those leads. It wasn't intentionally closed off, it just wasn't working the way it was supposed to</em></div></div></div>
+        </div>
+      </div>
+      <button class="shotbtn" data-shot="img/oct1-christian.png" data-cap="Slack DM with Christian, Oct 1">View screenshot</button>
+      <button class="shotbtn" data-shot="img/oct1-2-my-calendar.png" data-cap="My calendar, Thursday Oct 1 and Friday Oct 2">My calendar Oct 1 and 2</button>
+      <button class="shotbtn" data-shot="img/oct1-team-calendar.png" data-cap="Team calendar view, Thursday Oct 1">Team view Oct 1</button>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="pin">OCT<br>3</div>
+    <div>
+      <h3>Anjelica tries to book Landon with me</h3>
+      <p class="sub">This is how Landon ended up on another board. Anjelica did the right thing with what she could see.</p>
+      <div class="chat">
+        <div class="chat-head"><b>Slack · Oct 3 · Anjelica and CJ</b><span>key messages, scroll</span></div>
+        <div class="chat-body" tabindex="0">
+          <div class="m"><div class="av a">AA</div><div><div class="who">Anjelica Ayala<span>10:45 AM</span></div><div class="txt">I got an old set that is on the phone back from May! LANDON SMITHER !!! You have time to tie him down @CJ Clay</div></div></div>
+          <div class="m"><div class="av a">AA</div><div><div class="who">Anjelica Ayala<span>11:00 AM</span></div><div class="txt">Are you not in the office? <em>I tried to find a time slot under your name for Tuesday but nothing? I had to book under Jonnie.</em></div></div></div>
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ Clay<span>1:53 PM</span></div><div class="txt">Nobody is telling me. Anything, I've asked multiple times to Christian what is wrong with my calendar. I had basically nothing Thursday and Friday.</div></div></div>
+          <div class="m"><div class="av a">AA</div><div><div class="who">Anjelica Ayala<span>2:27 PM</span></div><div class="txt"><em>Ultimately this is your deal! You spent 1 hour with him already back in May!</em> So I would for sure say it's ok to take it from Jonnie and move it to you if you are free at that time on Tuesday ????</div></div></div>
+          <div class="m"><div class="av j"><img src="/cj-headshot-600.png" alt="" onerror="this.parentNode.textContent='CJ'"></div><div><div class="who">CJ Clay<span>4:22 PM</span></div><div class="txt">Hey Anjelica, thank you again for catching this! Quick question, were you able to book me because my normal availability is showing now, or only because I told you I was available?</div></div></div>
+          <div class="dayline">VOICE MESSAGE · 5:09 PM</div>
+          <div class="m"><div class="av a">AA</div><div><div class="who">Anjelica Ayala<span>voice message, 0:30</span></div><div class="txt">Auto transcript from Slack:<br><b>0:01</b> "Hey, CJ, I tried to find where you're at on the list for like every single time next week and I couldn't find you."<br><b>0:11</b> "So, I sent you the link if you wanna check yourself."<br><b>0:14</b> "I just put a random email or whatever just to kind of see, to bypass the first information."<br><b>0:21</b> "But I checked every time slot, I refreshed it."<br><b>0:25</b> "I'm not sure if you wanna reach back out, but I don't see your name coming up."</div></div></div>
+        </div>
+      </div>
+      <button class="shotbtn" data-shot="img/oct3-anjelica-voice.png" data-cap="Slack, Oct 3, Anjelica voice message and transcript">View voice message screenshot</button>
+      <button class="shotbtn" data-shot="img/sept24-oct3-channel.png" data-cap="Slack channel post, Oct 3, and Christian's reply">My post in channel and reply</button>
+      <button class="shotbtn" data-shot="img/oct6-team-calendar.png" data-cap="Team calendar view, Tuesday Oct 6">Team view today</button>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="block" id="numbers">
+  <span class="kicker">Part 3</span>
+  <h2>October so far</h2>
+  <p class="lede">With fewer calls than anyone else, the conversion has held up. That is why each booked call matters to me right now.</p>
+
+  <div class="grid g4">
+    <div class="card stat"><div class="big">75%</div><div class="lab">Show rate</div><div class="sub">4 of 6 attended</div></div>
+    <div class="card stat"><div class="big">75%</div><div class="lab">Close rate</div><div class="sub">3 of 4 closed</div></div>
+    <div class="card stat"><div class="big">$2,375</div><div class="lab">Revenue per QAPP</div><div class="sub">top of the team chart</div></div>
+    <div class="card stat"><div class="big">4 / 2</div><div class="lab">Consults on Oct 1 / Oct 2</div><div class="sub">compare the team view below</div></div>
+  </div>
+
+  <div class="thumbs">
+    <button class="thumb" data-shot="img/show-rate.png" data-cap="Show rate per rep, October"><img src="img/show-rate.png" alt=""><span>Show rate per rep<small>Report from HubSpot</small></span></button>
+    <button class="thumb" data-shot="img/close-rate.png" data-cap="Close rate, October"><img src="img/close-rate.png" alt=""><span>Close rate<small>Report from HubSpot</small></span></button>
+    <button class="thumb" data-shot="img/rev-per-qapp.png" data-cap="Revenue per QAPP, October"><img src="img/rev-per-qapp.png" alt=""><span>Revenue per QAPP<small>Report from HubSpot</small></span></button>
+    <button class="thumb" data-shot="img/oct1-2-my-calendar.png" data-cap="My calendar, Thursday Oct 1 and Friday Oct 2"><img src="img/oct1-2-my-calendar.png" alt=""><span>My calendar Oct 1 and 2<small>4 consults, then 2</small></span></button>
+    <button class="thumb" data-shot="img/oct1-team-calendar.png" data-cap="Team calendar view, Thursday Oct 1"><img src="img/oct1-team-calendar.png" alt=""><span>Team view, Oct 1<small>Same day, all closers</small></span></button>
+  </div>
+</section>
+
+<!-- TODAY -->
+<section class="block" id="today">
+  <span class="kicker">Today</span>
+  <h2>What would help</h2>
+  <p class="lede">I'm not asking you to rule on anything. I'd just like Landon to have the best experience, and I'm glad to work with whatever you think is cleanest.</p>
+
+  <div class="opt"><b>Option A, my calendar at 9:00</b><p>Landon's 9:00 AM moves to my calendar and I take the call. I'll pick up where we left off so he doesn't repeat his story.</p></div>
+  <div class="opt"><b>Option B, handoff on the call</b><p>Jonnie opens the 9:00 AM by noting Landon already spoke with me in May and introduces me. I'll be on and ready.</p></div>
+  <div class="opt"><b>Option C, if 9:00 doesn't work for him</b><p>He told Jonnie his family schedule is tight. If the time shifts, I'm happy to find whatever works for him today or tomorrow before I'm out.</p></div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 style="margin:0 0 6px;font-size:17px;color:var(--navy)">Also, if someone can look at my setter booking visibility today</h3>
+    <p style="margin:0;font-size:15px">Anjelica could not find me in the setter queue on Saturday, and Christian's Oct 1 note says the setting "wasn't working the way it was supposed to." I'd love Tuesday and Wednesday to be fully bookable before I leave, and I'm happy to jump on a quick call to walk through what Anjelica saw.</p>
+  </div>
+
+  <div class="fair">In fairness: Landon did not enroll in May, and Jonnie has done real work coordinating with him this week. None of this is about Jonnie or Anjelica. A quick look at a returning prospect's call history before booking would likely prevent this for everyone going forward, if that is ever useful to you.</div>
+
+  <div class="sign">
+    <img src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
+    <div>
+      <p class="nm">CJ Clay</p>
+      <p class="ti">HTSA · Senior Career Transformation Coach</p>
+      <p class="ti">cj@highticketsalesacademy.com</p>
+    </div>
+    <p style="flex:1 1 260px;color:#dbe5f3;font-size:15px">Thank you for taking a look, Chad. I'm on Slack and ready for 9:00.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Prepared by CJ Clay for Chad Aleo · October 6, 2026 · Private link, please do not forward</div>
+</footer>
+
+<dialog id="lb" aria-label="Screenshot">
+  <div class="lb">
+    <div class="lb-bar"><span id="lbCap"></span><button type="button" id="lbClose">Close</button></div>
+    <div class="lb-img"><img id="lbImg" alt=""></div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  var dlg = document.getElementById("lb");
+  var img = document.getElementById("lbImg");
+  var cap = document.getElementById("lbCap");
+  function open(src, c){
+    img.src = src; cap.textContent = c || "";
+    if (typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open","");
+  }
+  document.querySelectorAll("[data-shot]").forEach(function(b){
+    b.addEventListener("click", function(){ open(b.getAttribute("data-shot"), b.getAttribute("data-cap")); });
+  });
+  document.getElementById("lbClose").addEventListener("click", function(){ dlg.close ? dlg.close() : dlg.removeAttribute("open"); });
+  dlg.addEventListener("click", function(e){ if (e.target === dlg) { dlg.close ? dlg.close() : dlg.removeAttribute("open"); } });
+})();
+</script>
+</body>
+</html>
