@@ -477,10 +477,33 @@ a{color:inherit}
   color:var(--green-dark);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
 .landon-hero h2{font-family:"Playfair Display",serif;font-size:clamp(1.35rem,4vw,1.75rem);color:var(--navy);line-height:1.2;margin:0 0 8px}
 .landon-hero p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.55}
-.landon-media{margin:16px 22px 0;padding:16px;border-radius:16px;background:var(--ink);color:#fff}
-.landon-media h3{margin:0 0 6px;font-size:16px;font-weight:800}
-.landon-media p{margin:0 0 12px;color:rgba(255,255,255,.78);font-size:13.5px;line-height:1.5}
-.landon-media audio{width:100%;margin-top:4px}
+.landon-call{margin:16px 22px 0;padding:18px 16px 16px;border-radius:18px;position:relative;
+  background:linear-gradient(160deg,#1a1200 0%,#0a1628 55%,#0c1a2e 100%);color:#fff;
+  border:3px solid #e3a008;
+  box-shadow:0 0 0 5px rgba(227,160,8,.28),0 0 0 10px rgba(227,160,8,.12),0 18px 40px rgba(227,160,8,.22)}
+.landon-call-stars{display:flex;justify-content:center;gap:10px;margin-bottom:10px;color:#e3a008;font-size:22px;
+  text-shadow:0 0 12px rgba(227,160,8,.55);letter-spacing:.08em}
+.landon-call .tag{display:inline-block;margin-bottom:8px;padding:5px 12px;border-radius:999px;
+  background:rgba(227,160,8,.18);border:1px solid rgba(227,160,8,.55);color:#f6d27a;
+  font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.landon-call h3{margin:0 0 6px;font-size:clamp(1.15rem,3.8vw,1.45rem);font-weight:800;line-height:1.25;color:#fff}
+.landon-call p{margin:0 0 12px;color:rgba(255,255,255,.82);font-size:14px;line-height:1.5}
+.landon-call audio{width:100%;margin-top:4px;border-radius:10px;outline:2px solid rgba(227,160,8,.45)}
+.landon-call .speed{margin-top:8px;color:#f6d27a;font-size:12.5px;font-weight:700}
+.slack-card{margin:14px 22px 0;padding:14px;border-radius:16px;background:#fff;border:1px solid #dce3eb;
+  box-shadow:0 10px 28px rgba(10,22,40,.08)}
+.slack-card .label{margin:0 0 10px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.slack-pane{border:1px solid #e8e8e8;border-radius:12px;background:#f8f8f8;padding:12px 12px 6px}
+.slack-msg{display:grid;grid-template-columns:36px 1fr;gap:10px;margin:0 0 14px}
+.slack-msg:last-child{margin-bottom:4px}
+.slack-av{width:36px;height:36px;border-radius:8px;object-fit:cover;background:#ddd}
+.slack-av--anj{background:linear-gradient(145deg,#7c5cff,#c084fc);display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:12px;font-weight:800}
+.slack-meta{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;margin-bottom:3px}
+.slack-name{font-size:14px;font-weight:800;color:#1d1c1d}
+.slack-time{font-size:12px;color:#616061}
+.slack-body{font-size:14.5px;line-height:1.45;color:#1d1c1d}
+.slack-body b{font-weight:800}
 .landon-thread{margin:12px 22px 0;padding:14px;border-radius:16px;border:2px solid var(--green-strong);background:#fff}
 .landon-thread h3{margin:0 0 6px;font-size:15px;font-weight:800;color:var(--navy)}
 .landon-thread .hint{margin:0 0 10px;color:var(--muted);font-size:13px}
@@ -493,10 +516,10 @@ a{color:inherit}
 .bonuses--action{border:4px solid var(--green-strong)!important;box-shadow:0 0 0 5px rgba(0,201,122,.28),0 16px 36px rgba(0,201,122,.22)!important}
 .plan--action{border:3px solid var(--green-strong)!important;box-shadow:0 0 0 4px rgba(0,201,122,.2)!important;
   background:linear-gradient(160deg,#f7fffb 0%,#fff 70%)}
-@media (max-width:680px){.landon-hero,.landon-media,.landon-thread{margin-left:16px;margin-right:16px}}
+@media (max-width:680px){.landon-hero,.landon-call,.slack-card,.landon-thread{margin-left:16px;margin-right:16px}}
 
 </style>
-<!-- close-build:1791208000 -->
+<!-- close-build:1791210000 -->
 </head>
 <body>
 <main class="page">
@@ -536,13 +559,39 @@ a{color:inherit}
     <p>Your May 17th action-taker pricing is locked below. Tuition increased by $1,000 on October 1st, but as promised, I am personally honoring your original rate and applying your $1,000 savings. Re-watch our original strategy session, review our thread, then lock in your portal setup.</p>
   </section>
 
-  <section class="landon-media" aria-label="Recordings">
-    <h3>Quick note first (about 30 seconds)</h3>
-    <p>Hit play on this short clip, then open our full May 17th strategy session underneath.</p>
-    <audio controls preload="metadata" src="/media/landon/cj-note.mp3">Your browser does not support audio.</audio>
-    <h3 style="margin-top:18px">Our May 17th strategy session (about 80 minutes)</h3>
-    <p>This is the full consultation we already did together. No need to repeat your story from scratch.</p>
-    <audio controls preload="metadata" src="/media/landon/may-17-strategy-session.mp3">Your browser does not support audio.</audio>
+  <section class="landon-call" id="mayCall" aria-label="May 17 strategy session">
+    <div class="landon-call-stars" aria-hidden="true">★ ★ ★</div>
+    <div class="tag">Do not skip · May 17, 2026</div>
+    <h3>★ Our May 17th strategy session · press play</h3>
+    <p>This is the full consultation we already did together, about 1 hour 20 minutes. Starts at 1.25x so you can move through it faster. No need to repeat your story from scratch.</p>
+    <audio id="mayCallAudio" controls preload="metadata" src="/media/landon/may-17-strategy-session.mp3">Your browser does not support audio.</audio>
+    <div class="speed">Playing at 1.25x · you can change speed in the player controls if your phone shows them</div>
+  </section>
+
+  <section class="slack-card" aria-label="Internal note from Anjelica">
+    <p class="label">Saturday, October 3, 2026 · team chat</p>
+    <div class="slack-pane">
+      <div class="slack-msg">
+        <div class="slack-av slack-av--anj" aria-hidden="true">AA</div>
+        <div>
+          <div class="slack-meta">
+            <span class="slack-name">Anjelica Ayala</span>
+            <span class="slack-time">Oct 3 · 2:27 PM</span>
+          </div>
+          <div class="slack-body">Ultimately this is your deal! You spent 1 hour with him already back in May! So I would for sure say it's ok to take it from Jonnie and move it to you if you are free at that time on Tuesday ????</div>
+        </div>
+      </div>
+      <div class="slack-msg">
+        <img class="slack-av" src="/cj-headshot-600.png" alt="" onerror="this.style.display='none'">
+        <div>
+          <div class="slack-meta">
+            <span class="slack-name">CJ Clay</span>
+            <span class="slack-time">Oct 3 · 4:22 PM</span>
+          </div>
+          <div class="slack-body">Hey Anjelica, thank you again for catching this! Quick question, were you able to book me because <b>my normal availability is showing now</b>, or only because I told you I was available?</div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="landon-thread" aria-label="Our text history">
