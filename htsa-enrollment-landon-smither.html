@@ -529,6 +529,9 @@ a{color:inherit}
 .thread-line .when{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
 .bonuses--action{border:4px solid var(--green-strong)!important;box-shadow:0 0 0 5px rgba(0,201,122,.28),0 16px 36px rgba(0,201,122,.22)!important}
 .badge--opt{background:var(--navy);color:#fff}
+.plan--dark{border-color:var(--navy);box-shadow:0 10px 30px rgba(10,22,40,.16)}
+.plan--dark>.badge{background:var(--navy);color:#fff}
+.plan--dark>.choose{background:var(--navy);color:#fff}
 .plan--nested{margin:26px 0 0}
 .plan--nested .badge{background:var(--green-strong);color:#04231a}
 .plan--nested .choose{background:var(--green-strong);color:#04231a}
@@ -537,7 +540,7 @@ a{color:inherit}
 @media (max-width:680px){.landon-hero,.landon-note,.landon-call,.slack-card,.landon-thread{margin-left:16px;margin-right:16px}}
 
 </style>
-<!-- close-build:1791235000 -->
+<!-- close-build:1791236000 -->
 </head>
 <body>
 <main class="page">
@@ -679,7 +682,7 @@ a{color:inherit}
     <div class="h2">Your May 17th payment options</div>
     <div class="plans-sub">May action-taker pricing locked. Access opens the moment your payment clears.</div>
 
-    <div class="plan plan--best" id="planPif">
+    <div class="plan plan--dark" id="planPif">
       <span class="badge" id="pifBadge">Option 1 · Best value</span>
       <div class="plan-name">Paid in full</div>
       <div class="plan-note" id="pifNote"></div>
