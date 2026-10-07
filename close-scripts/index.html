@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#0a1628">
+<title>CJ Close Scripts | HTSA</title>
+<link rel="icon" href="/cj-headshot-600.png" type="image/png">
+<style>
+:root{--navy:#0a1628;--navy2:#132040;--green:#00c97a;--green-dark:#087b50;--light:#f2f5f9;--line:#dce3eb;--text:#17243b;--muted:#54637a;--white:#fff}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--light);color:var(--text);line-height:1.6;min-height:100dvh}
+.top{background:var(--navy);color:#fff;border-bottom:3px solid var(--green);position:sticky;top:0;z-index:20;padding:14px 16px 0}
+.top h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.15rem,4vw,1.45rem);font-weight:700}
+.top p{margin-top:4px;font-size:13px;color:rgba(255,255,255,.72);max-width:42rem}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;padding-bottom:0}
+.tab{appearance:none;border:0;border-radius:10px 10px 0 0;padding:10px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;background:rgba(255,255,255,.08);color:rgba(255,255,255,.72);touch-action:manipulation}
+.tab.active{background:var(--light);color:var(--navy)}
+.panel{display:none;max-width:920px;margin:0 auto;padding:18px 16px 48px}
+.panel.active{display:block}
+.panel.loading{color:var(--muted);font-size:15px;padding-top:24px}
+.err{color:#8a1010;background:#fff0f0;border:1px solid #f5b8b8;border-radius:10px;padding:12px 14px;font-size:14px}
+.doc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 18px;box-shadow:0 8px 24px rgba(10,22,40,.06)}
+.doc h1,.doc h2,.doc h3,.doc h4{color:var(--navy);line-height:1.25;margin:1.2em 0 .45em}
+.doc h1{font-size:1.55rem;margin-top:0}
+.doc h2{font-size:1.25rem;border-bottom:1px solid var(--line);padding-bottom:.35em}
+.doc h3{font-size:1.05rem}
+.doc p,.doc li{font-size:15px}
+.doc p{margin:.65em 0}
+.doc ul,.doc ol{margin:.5em 0 .75em 1.25em}
+.doc li{margin:.25em 0}
+.doc strong{font-weight:800}
+.doc em{font-style:italic}
+.doc hr{border:0;border-top:1px solid var(--line);margin:1.25em 0}
+.doc blockquote{margin:.75em 0;padding:10px 12px;border-left:3px solid var(--green);background:#f7fffb;color:var(--text)}
+.doc pre{background:var(--navy);color:rgba(255,255,255,.92);border-radius:10px;padding:14px;overflow:auto;font-size:13px;line-height:1.55;margin:.75em 0}
+.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em}
+.doc :not(pre)>code{background:#eef2f7;padding:.1em .35em;border-radius:4px;color:var(--navy)}
+.doc table{width:100%;border-collapse:collapse;font-size:13px;margin:.75em 0;overflow:auto;display:block;max-width:100%}
+.doc th,.doc td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.doc th{background:#f7fafc;font-weight:700}
+.doc a{color:var(--green-dark);word-break:break-word}
+.jump{display:inline-flex;align-items:center;min-height:40px;margin-top:10px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.1);color:#fff;text-decoration:none;font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,.18)}
+.jump:hover{border-color:var(--green)}
+@media(max-width:640px){.doc{padding:16px 14px}.doc pre{font-size:12px}}
+@media print{.top{position:static}.panel{display:block!important;page-break-before:always}.panel:first-of-type{page-break-before:auto}.tab{display:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>CJ close scripts</h1>
+  <p>HubSpot-friendly links. Pick a script below. Scroll to read. Bookmark this page.</p>
+  <div class="tabs" role="tablist">
+    <button class="tab active" type="button" role="tab" aria-selected="true" data-doc="one-call">Ultimate one-call close</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" data-doc="challenger">Challenger methodology</button>
+  </div>
+  <a class="jump" href="#doc-one-call">Jump to script ↓</a>
+</header>
+
+<section class="panel active" id="panel-one-call" role="tabpanel" aria-labelledby="tab-one-call">
+  <div class="doc-wrap" id="doc-one-call"><p class="loading">Loading one-call script…</p></div>
+</section>
+
+<section class="panel" id="panel-challenger" role="tabpanel" aria-labelledby="tab-challenger" hidden>
+  <div class="doc-wrap" id="doc-challenger"><p class="loading">Loading Challenger guide…</p></div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+(function(){
+  const FILES = {
+    "one-call": "ultimate-one-call-close.md",
+    "challenger": "challenger-sales-methodology.md"
+  };
+  const cache = {};
+  marked.setOptions({ gfm: true, breaks: true, headerIds: true, mangle: false });
+
+  async function load(key){
+    if (cache[key]) return cache[key];
+    const res = await fetch(FILES[key], { cache: "no-cache" });
+    if (!res.ok) throw new Error("Could not load " + FILES[key]);
+    const md = await res.text();
+    cache[key] = marked.parse(md);
+    return cache[key];
+  }
+
+  function show(key){
+    document.querySelectorAll(".tab").forEach(function(btn){
+      const on = btn.dataset.doc === key;
+      btn.classList.toggle("active", on);
+      btn.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    document.querySelectorAll(".panel").forEach(function(p){
+      const on = p.id === "panel-" + key;
+      p.classList.toggle("active", on);
+      p.hidden = !on;
+    });
+    history.replaceState(null, "", key === "one-call" ? "#one-call" : "#challenger");
+    render(key);
+  }
+
+  async function render(key){
+    const host = document.getElementById("doc-" + key);
+    if (!host || host.dataset.ready === "1") return;
+    host.innerHTML = '<p class="loading">Loading…</p>';
+    try {
+      host.innerHTML = '<article class="doc">' + await load(key) + "</article>";
+      host.dataset.ready = "1";
+    } catch (e) {
+      host.innerHTML = '<p class="err">' + e.message + "</p>";
+    }
+  }
+
+  document.querySelectorAll(".tab").forEach(function(btn){
+    btn.addEventListener("click", function(){ show(btn.dataset.doc); });
+  });
+
+  const hash = (location.hash || "#one-call").replace("#", "");
+  show(hash === "challenger" ? "challenger" : "one-call");
+})();
+</script>
+<!-- close-scripts-build:1791260000 -->
+</body>
+</html>
