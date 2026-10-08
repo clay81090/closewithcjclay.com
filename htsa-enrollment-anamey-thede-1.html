@@ -188,6 +188,38 @@ a{color:inherit}
 .plan-warn{margin:-4px 0 12px;padding:9px 11px;border:1px solid rgba(0,201,122,.3);border-radius:9px;
   background:rgba(97,227,139,.12);color:var(--navy);font-size:12.5px;font-weight:700;line-height:1.45}
 
+/* ---------- payment options: hard-sectioned cards (Anamey fix) ---------- */
+.plans{margin-top:20px;padding:28px 26px 26px;background:#e8eef5;
+  border-top:1px solid #cfd9e4;border-bottom:1px solid #cfd9e4;scroll-margin-top:12px}
+.plans .h2{margin-bottom:4px;font-size:24px}
+.plans-sub{margin-bottom:6px}
+.plans-trust{margin-bottom:22px;color:var(--green-dark);font-size:13.5px;font-weight:800}
+.opt{overflow:hidden;border:2px solid #b9c7d6;border-radius:18px;background:var(--white);
+  box-shadow:0 8px 22px rgba(10,22,40,.1)}
+.opt--best{border-color:var(--green-strong);box-shadow:0 12px 30px rgba(0,201,122,.2)}
+.opt-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 18px;
+  background:var(--navy);color:var(--white);font-size:13px;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase}
+.opt--best .opt-head{background:var(--green-strong);color:#04231a}
+.opt-tag{font-size:12px;letter-spacing:.08em;opacity:.85}
+.opt-body{padding:20px 18px 18px}
+.or{display:flex;align-items:center;gap:14px;margin:20px 6px;color:#5d6f84;font-size:14px;
+  font-weight:800;letter-spacing:.22em;text-transform:uppercase}
+.or::before,.or::after{flex:1;height:2px;background:#b9c7d6;content:""}
+.or--small{margin:20px 0 22px;font-size:12px;letter-spacing:.14em}
+.split{position:relative;padding:22px 16px 16px;border:3px solid var(--green-strong);border-radius:14px;
+  background:linear-gradient(160deg,#f7fffb 0%,#fff 70%);box-shadow:0 0 0 4px rgba(0,201,122,.16)}
+.choose--action{background:var(--green-strong);color:#04231a}
+.fin{display:flex;flex-direction:column;align-items:flex-start;gap:4px;margin-top:24px;padding:14px 16px;
+  border:2px dashed #9fb0c3;border-radius:14px;background:rgba(255,255,255,.65);color:var(--navy);
+  font-size:14.5px;line-height:1.45}
+.fin span{color:var(--muted);font-size:13.5px}
+.fin-link{min-height:44px;margin-top:4px;padding:8px 0;border:0;background:none;color:var(--green-dark);
+  font-family:inherit;font-size:14.5px;font-weight:800;text-align:left;text-decoration:underline;cursor:pointer}
+.fin-link:focus-visible{outline:3px solid rgba(0,201,122,.4);outline-offset:3px;border-radius:6px}
+.help{margin-top:16px;color:var(--muted);font-size:14px;line-height:1.55;text-align:center}
+.help a{color:var(--navy);font-weight:800}
+
 /* ---------- doc buttons ---------- */
 .docs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 26px 18px}
 .doc{display:flex;min-height:52px;align-items:center;justify-content:center;gap:8px;padding:12px;
@@ -195,9 +227,10 @@ a{color:inherit}
   font-size:13.5px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;
   font-family:inherit}
 .doc:hover,.doc:focus-visible{border-color:var(--green-strong);outline:none}
-.doc--terms{grid-column:1/-1;background:var(--navy);color:var(--green);border-color:var(--green-strong);
-  font-size:15px;font-weight:800;letter-spacing:.02em}
-.doc--terms:hover{background:#12233d;color:#3dffb0}
+/* Terms stay reachable (and are shown again in the confirm step) but no longer shout next to the payment buttons. */
+.doc--terms{grid-column:1/-1;min-height:46px;background:var(--white);color:var(--muted);
+  border-color:var(--grey);font-size:13.5px;font-weight:700}
+.doc--terms:hover{color:var(--navy);border-color:var(--green-strong)}
 
 /* ---------- after ---------- */
 .after{padding:0 26px 20px}
@@ -294,7 +327,7 @@ a{color:inherit}
   padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.06);
   border:1px solid rgba(0,201,122,.35);backdrop-filter:blur(6px)}
 .sticky-cta-name{min-width:0;flex:1 1 auto;color:var(--white);font-size:13.5px;line-height:1.35}
-.sticky-cta-name b{display:block;color:var(--green);font-size:11.5px;font-weight:800;
+.sticky-cta-name b{display:block;color:var(--green);font-size:12px;font-weight:800;
   letter-spacing:.14em;text-transform:uppercase;margin-bottom:2px}
 .sticky-cta-btn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
   padding:12px 18px;border:0;border-radius:10px;background:var(--green-strong);color:#04231a;
@@ -352,7 +385,7 @@ a{color:inherit}
   border-radius:50%;background:var(--green-strong);content:"";box-shadow:0 0 0 2px var(--green-strong)}
 #roadmapSheet .phase-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin:0}
 #roadmapSheet .phase-chip{flex:0 0 auto;padding:3px 10px;border-radius:999px;background:rgba(97,227,139,.16);
-  color:var(--green-dark);font-size:11.5px;font-weight:800;letter-spacing:.06em;
+  color:var(--green-dark);font-size:12px;font-weight:800;letter-spacing:.06em;
   text-transform:uppercase;white-space:nowrap}
 #roadmapSheet .phase-head h3{color:var(--navy);font-family:"DM Sans",sans-serif;font-size:17px;font-weight:800;line-height:1.25;margin:0;text-transform:none;letter-spacing:0}
 #roadmapSheet .daygroup{margin-top:13px}
@@ -380,6 +413,8 @@ a{color:inherit}
   .bcard-photo{width:70px;height:70px}
   .foot-rev{justify-content:center;text-align:center}
   .plan{padding:16px}
+  .plans{padding-top:24px;padding-bottom:22px}
+  .opt-body{padding:18px 16px 16px}
   .docs{grid-template-columns:1fr}
 }
 
@@ -448,7 +483,7 @@ a{color:inherit}
 .next-path-btn{min-height:48px;padding:10px 12px;border:2px solid var(--grey);border-radius:11px;
   background:var(--white);color:var(--navy);font-size:13px;font-weight:800;line-height:1.35;cursor:pointer;
   transition:border-color 150ms ease,background 150ms ease,box-shadow 150ms ease}
-.next-path-btn small{display:block;margin-top:3px;color:var(--muted);font-size:11.5px;font-weight:600}
+.next-path-btn small{display:block;margin-top:3px;color:var(--muted);font-size:12px;font-weight:600}
 .next-path-btn--active{border-color:var(--green-strong);background:#f0fff7;
   box-shadow:0 0 0 3px rgba(0,201,122,.14)}
 .next-path-panel[hidden]{display:none!important}
@@ -480,7 +515,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1791415000 -->
+<!-- close-build:1791425000 -->
 </head>
 <body>
 <main class="page">
@@ -531,55 +566,63 @@ a{color:inherit}
   </div>
 
   <section class="plans" id="plans">
-    <div class="h2">Your payment options</div>
-    <div class="plans-sub">Access opens the moment your payment clears.</div>
+    <div class="h2">Choose how you want to pay</div>
+    <div class="plans-sub">Same program, same access. Pick one and you are in the moment payment clears.</div>
+    <div class="plans-trust">✓ Backed by the performance guarantee above</div>
 
-    <div class="plan plan--best" id="planPif">
-      <span class="badge" id="pifBadge">Option 1 · Best value</span>
-      <div class="plan-name">Paid in full</div>
-      <div class="plan-note" id="pifNote"></div>
-      <div class="plan-figs">
-        <span class="plan-amt" id="pifAmt"></span>
-        <span class="plan-strike" id="pifStrike"></span>
-        <span class="plan-unit">one time</span>
-      </div>
-      <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
-
-      <div class="plan plan--custom plan--nested" id="planCustom" hidden>
-        <span class="badge" id="customBadge">Action Taker Bonus</span>
-        <div class="plan-name" id="customName"></div>
-        <div class="plan-note" id="customNote"></div>
+    <!-- OPTION 1: $7k paid in full, with the Action Taker 2-pay of the same $7k nested inside -->
+    <div class="opt opt--best" id="planPif">
+      <div class="opt-head"><span id="pifBadge">Option 1</span><span class="opt-tag">Best value</span></div>
+      <div class="opt-body">
+        <div class="plan-name">Paid in full</div>
+        <div class="plan-note" id="pifNote"></div>
         <div class="plan-figs">
-          <span class="plan-amt" id="customAmt"></span>
-          <span class="plan-unit" id="customUnit"></span>
+          <span class="plan-amt" id="pifAmt"></span>
+          <span class="plan-strike" id="pifStrike"></span>
+          <span class="plan-unit">one time</span>
         </div>
-        <button class="choose" type="button" data-plan="custom">Choose the 2-pay</button>
+        <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
+
+        <div class="or or--small" id="orSplit" hidden>or split the same $7,000</div>
+
+        <div class="split" id="planCustom" hidden>
+          <span class="badge" id="customBadge">Action Taker Bonus</span>
+          <div class="plan-name" id="customName"></div>
+          <div class="plan-note" id="customNote"></div>
+          <div class="plan-figs">
+            <span class="plan-amt" id="customAmt"></span>
+            <span class="plan-unit" id="customUnit"></span>
+          </div>
+          <button class="choose choose--action" type="button" data-plan="custom">Choose the 2-pay</button>
+        </div>
       </div>
     </div>
 
-    <div class="plan" id="planPlan">
-      <span class="badge">Option 2</span>
-      <div class="plan-name" id="planName"></div>
-      <div class="plan-note" id="planNote"></div>
-      <div class="plan-figs">
-        <span class="plan-amt" id="planAmt"></span>
-        <span class="plan-unit" id="planUnit"></span>
+    <div class="or" id="orBetween">or</div>
+
+    <!-- OPTION 2: 4-pay -->
+    <div class="opt" id="planPlan">
+      <div class="opt-head"><span>Option 2</span><span class="opt-tag">Monthly payments</span></div>
+      <div class="opt-body">
+        <div class="plan-name" id="planName"></div>
+        <div class="plan-note" id="planNote"></div>
+        <div class="plan-figs">
+          <span class="plan-amt" id="planAmt"></span>
+          <span class="plan-unit" id="planUnit"></span>
+        </div>
+        <p class="plan-warn" id="planWarn" hidden></p>
+        <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
       </div>
-      <p class="plan-warn" id="planWarn" hidden></p>
-      <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
     </div>
 
-    <div class="plan" id="planClarity" hidden>
-      <div class="plan-name">ClarityPay monthly</div>
-      <span class="plan-clarity-badge">0% interest · 0% APR</span>
-      <div class="plan-note" id="clarityNote"></div>
-      <div class="plan-figs">
-        <span class="plan-amt" id="clarityAmt"></span>
-        <span class="plan-unit" id="clarityUnit"></span>
-      </div>
-      <p class="plan-clarity-chance">See what you are approved for. Soft credit check, 620 or better credit score. Lower monthly options may be available depending on what you qualify for.</p>
-      <button class="choose" type="button" data-plan="clarity">Choose ClarityPay</button>
+    <!-- Financing: a sentence, not an option. Opens ClarityPay in a new tab after the terms check. -->
+    <div class="fin">
+      <b>Interested in 12 months at 0% interest?</b>
+      <span>Soft credit check. You may be approved for lower monthly options.</span>
+      <button class="fin-link" type="button" data-plan="clarity">Click here to see what you qualify for →</button>
     </div>
+
+    <p class="help">Not sure which fits? <a href="sms:+16166121735">Text CJ</a> or <a href="tel:+16166121735">call (616) 612-1735</a> and we will pick it together.</p>
   </section>
 
   <div class="docs">
@@ -911,7 +954,7 @@ const BUYER = {
   slug:      "anamey_thede_1",
   track:     "closer",
   offer:     "standard",
-  show:      ["pif", "plan", "clarity"],
+  show:      ["pif", "plan"], // ClarityPay is a sentence link under the options, not a card
   intro:     ""
 };
 
@@ -945,9 +988,8 @@ const OFFERS = {
     plan: { name: "4 payments", amount: "$1,950", unit: "today · $7,800 total",
             note: "First payment today, then one a month for three more months.",
             warn: "", checkout: "https://whop.com/checkout/plan_KZi8Kt0Ioq6tK?d2c=true" },
-    clarity: { amount: "$700", unit: "a month · 0% interest · $8,400 total",
-               note: "Monthly financing at 0% interest. Soft credit check, 620 or better credit score to qualify.",
-               checkout: "https://whop.com/checkout/plan_K4goBzDEHXO15?d2c=true" }
+    // No price shown on the page. She only mentioned it as a maybe; the checkout shows what she is approved for.
+    clarity: { checkout: "https://whop.com/checkout/plan_K4goBzDEHXO15?d2c=true" }
   }
 };
 
@@ -1053,41 +1095,26 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("planUnit").textContent  = O.plan.unit;
   el("planNote").textContent  = O.plan.note;
   if (O.plan.warn) { el("planWarn").hidden = false; el("planWarn").textContent = O.plan.warn; }
-  el("clarityAmt").textContent  = O.clarity.amount;
-  el("clarityUnit").textContent = O.clarity.unit;
-  el("clarityNote").textContent = O.clarity.note;
   el("stickySub").textContent = "Paid in full · " + O.pif.amount;
 
   const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
     plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
-    clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" }
+    // ClarityPay: no dollar figure on this page. Terms are recorded first, then it opens in a NEW tab.
+    clarity: { name:"ClarityPay",    amt:"12 months at 0%",
+               sub:"Soft credit check, 620 or better. You will see what you are approved for on the next page, and lower monthly options may be available.",
+               url:O.clarity.checkout, warn:"", newTab:true }
   };
 
-  const show = Array.isArray(BUYER.show) && BUYER.show.length ? BUYER.show : ["pif","plan","clarity"];
-  const NODE = { pif: el("planPif"), plan: el("planPlan"), clarity: el("planClarity") };
-  const host = el("planPif").parentNode;
+  const show = Array.isArray(BUYER.show) && BUYER.show.length ? BUYER.show : ["pif","plan"];
+  const NODE = { pif: el("planPif"), plan: el("planPlan") };
   Object.keys(NODE).forEach(function(k){ if (show.indexOf(k) === -1) NODE[k].remove(); });
-  show.forEach(function(k){ if (NODE[k] && NODE[k].parentNode) host.appendChild(NODE[k]); });
-  if (NODE.clarity && NODE.clarity.parentNode) NODE.clarity.hidden = false;
-  if (show.length === 1 && NODE[show[0]]) {
-    NODE[show[0]].classList.add("plan--best");
-    const stickyMap = {
-      pif: "Paid in full · " + O.pif.amount,
-      plan: O.plan.name + " · " + O.plan.amount,
-      clarity: "ClarityPay · " + O.clarity.amount + " a month"
-    };
-    el("stickySub").textContent = stickyMap[show[0]] || el("stickySub").textContent;
-    const stickyBtn = document.querySelector(".sticky-cta-btn");
-    if (stickyBtn && show[0] === "clarity") stickyBtn.textContent = "Choose ClarityPay ↓";
-  }
+  if (show.length < 2) { const orB = el("orBetween"); if (orB) orB.remove(); }
 
   if (CUSTOM_OFFER) {
     const c = el("planCustom");
     c.hidden = false;
-    const pifCard = el("planPif");
-    if (pifCard) { pifCard.appendChild(c); } else { host.insertBefore(c, host.querySelector(".plan:not(#planCustom)")); }
-    c.classList.add("plan--action");
+    el("orSplit").hidden = false;
     el("customBadge").textContent = CUSTOM_OFFER.badge || "Your offer";
     el("customName").textContent  = CUSTOM_OFFER.name || "";
     el("customNote").textContent  = CUSTOM_OFFER.note || "";
@@ -1095,7 +1122,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     el("customUnit").textContent  = CUSTOM_OFFER.unit || "";
     PLANS.custom = { name:CUSTOM_OFFER.name, amt:CUSTOM_OFFER.amount, sub:CUSTOM_OFFER.note,
                      url:CUSTOM_OFFER.checkout, warn:CUSTOM_OFFER.warn || "" };
-    // Keep Option 1 / Best value on the $7k PIF card. Action Taker stays nested + outlined inside it.
+    // Action Taker stays nested + outlined inside Option 1 (the $7k card).
   }
 
   /* ---------- docs ---------- */
@@ -1132,12 +1159,17 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   /* ---------- sticky cta hide near footer ---------- */
   const cta = el("stickyCta");
   const foot = document.querySelector(".foot");
+  const plansEl = el("plans");
   function updateCta(){
     if (!foot || !cta) return;
     const r = foot.getBoundingClientRect();
     const viewportH = window.innerHeight || document.documentElement.clientHeight;
-    cta.style.opacity = (r.top < viewportH - 60) ? "0" : "1";
-    cta.style.pointerEvents = (r.top < viewportH - 60) ? "none" : "auto";
+    // Hide near the footer, and while the payment options are on screen so the bar never covers a Choose button.
+    const pr = plansEl ? plansEl.getBoundingClientRect() : null;
+    const plansInView = pr && pr.top < viewportH - 40 && pr.bottom > 40;
+    const hide = (r.top < viewportH - 60) || plansInView;
+    cta.style.opacity = hide ? "0" : "1";
+    cta.style.pointerEvents = hide ? "none" : "auto";
   }
   updateCta();
   window.addEventListener("scroll", updateCta, { passive:true });
@@ -1177,7 +1209,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   const sheet = el("sheet"), agree = el("agreeBox"), go = el("goBtn");
   let chosen = null;
 
-  document.querySelectorAll(".choose").forEach(function (btn) {
+  document.querySelectorAll("[data-plan]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       const p = PLANS[btn.dataset.plan]; if (!p) return;
       if (!p.url || ph(p.url)) { alert("That checkout link is not set up yet. Tell CJ before paying."); return; }
@@ -1187,7 +1219,8 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       el("recapSub").textContent  = p.sub;
       const w = el("sheetWarn");
       if (p.warn) { w.hidden = false; w.textContent = p.warn; } else { w.hidden = true; w.textContent = ""; }
-      agree.checked = false; go.disabled = true; go.textContent = "Continue to payment";
+      agree.checked = false; go.disabled = true;
+      go.textContent = p.newTab ? "Open ClarityPay in a new tab" : "Continue to payment";
       event("plan_selected", { linkLabel: p.name, linkUrl: p.url });
       openSheet(sheet);
     });
@@ -1200,7 +1233,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   go.addEventListener("click", function () {
     if (!agree.checked || !chosen) return;
     const p = PLANS[chosen];
-    go.disabled = true; go.textContent = "Opening payment…";
+    go.disabled = true; go.textContent = p.newTab ? "Opening ClarityPay…" : "Opening payment…";
     post({ action:"recordTermsAgreement", fullName:BUYER.fullName, email:BUYER.email, phone:BUYER.phone,
       enrollmentPageUrl:canonicalUrl(), clientSlug:(BUYER.slug||"").replace(/_/g,"-"),
       termsUrl:TERMS_URL, termsVersion:TERMS_VERSION, track:BUYER.track, offer:BUYER.offer,
@@ -1209,6 +1242,12 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       agreementText:"I agree to the HTSA Terms of Service and refund policy, and I understand I must meet the minimum requirements for my performance guarantee to remain in effect.",
       userAgent:navigator.userAgent||"", timestamp:new Date().toISOString() });
     event("checkout_started", { linkLabel:p.name, linkUrl:p.url });
+    if (p.newTab) {
+      // Same click gesture, so the new tab is not popup-blocked. This page stays open behind it.
+      window.open(p.url, "_blank", "noopener");
+      closeSheet(sheet);
+      return;
+    }
     setTimeout(function(){ window.location.href = p.url; }, 550);
   });
 })();
