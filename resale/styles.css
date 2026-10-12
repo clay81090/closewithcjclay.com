@@ -362,6 +362,29 @@ textarea {
   margin: 14px 0;
 }
 
+.quick-note {
+  margin: 12px 0;
+  padding: 12px;
+  border: 2px solid #1f7a3a;
+  border-radius: 12px;
+  background: #eef8f1;
+}
+
+.quick-note p:first-child { margin: 0 0 6px; }
+.quick-note textarea { background: #fff; }
+
+.talk-note {
+  background: #1f7a3a;
+  color: #fff;
+  border-color: #1f7a3a;
+  font-weight: 700;
+}
+
+.talk-note.listening {
+  background: #9a2a2a;
+  border-color: #9a2a2a;
+}
+
 .edit-note small { color: #45695a; font-weight: 400; }
 
 .edit-more { margin: 10px 0; }

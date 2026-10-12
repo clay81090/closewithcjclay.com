@@ -229,7 +229,9 @@ export async function verifyAnthropicKey(settings) {
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
     const message = data.error && data.error.message ? data.error.message : "Key check failed";
-    throw new Error(explainApiFailure(response.status, message));
+    const error = new Error(explainApiFailure(response.status, message));
+    error.status = response.status;
+    throw error;
   }
   return true;
 }

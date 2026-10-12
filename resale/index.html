@@ -63,6 +63,15 @@
         <button type="button" id="next" class="mode-on">Next item</button>
       </div>
       <p id="save-status" class="quiet"></p>
+      <div id="quick-note" class="quick-note" hidden>
+        <p id="quick-note-title"><strong>Add a note to this item</strong></p>
+        <textarea id="quick-note-text" placeholder="Example: 1985, pristine, still in the original box"></textarea>
+        <div class="actions">
+          <button type="button" id="talk-note" class="talk-note">🎤 Talk note</button>
+          <button type="button" id="save-quick-note">Save note</button>
+        </div>
+        <p id="talk-status" class="quiet"></p>
+      </div>
       <details id="details">
         <summary>Details</summary>
         <label>Name <input id="f-name" autocomplete="off"></label>
@@ -116,7 +125,7 @@
       <p>Do not paste the key into a chat, a text, or an email. It stays on this phone or this computer only.</p>
       <p>Your items are saved on each device by itself. To copy them, tap Share backup on one device, then Import backup on the other. Paste the key once on each device. A backup does not carry the key.</p>
       <label>Anthropic key
-        <input id="api-key" type="password" autocomplete="off" placeholder="Paste your key">
+        <input id="api-key" type="password" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Paste your key">
       </label>
       <label>Fee percent <input id="fee" type="number" min="0" max="50" step="1"></label>
       <label>Shipping guess, dollars <input id="ship" type="number" min="0" step="1"></label>
@@ -127,6 +136,7 @@
       <div class="actions">
         <button type="button" id="save-settings">Save settings</button>
         <button type="button" id="test-key">Test key</button>
+        <button type="button" id="clear-key" class="delete-btn">Clear saved key</button>
         <button type="button" id="export-backup">Download backup</button>
         <button type="button" id="share-backup">Share backup</button>
         <label>Import behavior

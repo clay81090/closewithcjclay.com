@@ -39,6 +39,7 @@ import {
   setSetting,
 } from "./db.js";
 import { importSeed } from "./seed.js";
+import { createNoteDictation } from "./voice.js";
 import {
   cancelResearch,
   displayAsk,
@@ -870,9 +871,31 @@ async function createFromBlob(blob) {
   return item;
 }
 
+async function showQuickNote(itemId) {
+  const item = await getItem(itemId);
+  if (!item) return;
+  state.currentId = itemId;
+  $("quick-note").hidden = false;
+  $("quick-note-title").innerHTML =
+    "<strong>Quick note for " + escapeHtml(itemId) + "</strong> · speak or type what you know";
+  $("quick-note-text").value = item.notes || "";
+  $("talk-status").textContent = "Tap Talk note, speak naturally, then pause. It saves to this item.";
+}
+
+async function saveQuickNote(message = "Note saved.") {
+  if (!state.currentId) return;
+  const item = await getItem(state.currentId);
+  if (!item) return;
+  item.notes = $("quick-note-text").value.trim();
+  await putItem(item);
+  $("talk-status").textContent = message + " Ready for the next photo.";
+  await reload();
+}
+
 async function ingestFiles(fileList) {
   const files = [...fileList].filter((file) => file && (file.type.startsWith("image/") || file.size));
   if (!files.length) return;
+  let lastItemId = state.currentId;
   if (state.mode === "another") {
     let id = state.currentId;
     for (const file of files) {
@@ -882,11 +905,16 @@ async function ingestFiles(fileList) {
       } else {
         await attachPhoto(id, file);
       }
+      lastItemId = id;
     }
   } else {
-    for (const file of files) await createFromBlob(file);
+    for (const file of files) {
+      const item = await createFromBlob(file);
+      lastItemId = item.id;
+    }
   }
   await reload();
+  if (lastItemId) await showQuickNote(lastItemId);
 }
 
 function setCameraButton() {
@@ -1174,6 +1202,12 @@ async function prepareMergedImport(incoming) {
 }
 
 function bind() {
+  const noteDictation = createNoteDictation({
+    textarea: $("quick-note-text"),
+    button: $("talk-note"),
+    status: $("talk-status"),
+    onSave: () => saveQuickNote("Voice note saved."),
+  });
   for (const button of document.querySelectorAll(".nav button")) {
     button.addEventListener("click", () => showView(button.dataset.view));
   }
@@ -1208,9 +1242,12 @@ function bind() {
   $("next").addEventListener("click", () => {
     state.mode = "next";
     state.detailsDirty = false;
+    $("quick-note").hidden = true;
     fillDetails(null);
     markMode();
   });
+  $("talk-note").addEventListener("click", noteDictation.toggle);
+  $("save-quick-note").addEventListener("click", () => saveQuickNote());
   $("details").addEventListener("input", async () => {
     state.detailsDirty = true;
     if (state.mode === "another" && state.currentId) {
@@ -1245,10 +1282,14 @@ function bind() {
   });
   $("save-settings").addEventListener("click", saveSettings);
   $("test-key").addEventListener("click", testSavedKey);
+  $("clear-key").addEventListener("click", clearSavedKey);
   $("export-backup").addEventListener("click", downloadBackup);
   $("share-backup").addEventListener("click", shareBackup);
   $("import-backup").addEventListener("change", importBackup);
   $("restore-import").addEventListener("click", restoreLastImport);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) noteDictation.stop();
+  });
 }
 
 async function describeItem() {
@@ -1286,8 +1327,23 @@ async function testSavedKey() {
     await verifyAnthropicKey(settings);
     $("settings-note").textContent = "Key works on this browser. " + keyHint(settings.apiKey) + ".";
   } catch (err) {
-    $("settings-note").textContent = err.message;
+    if (err.status === 401) {
+      await setSetting("apiKey", "");
+      $("api-key").value = "";
+      $("api-key").placeholder = "Paste a new Anthropic key";
+      $("settings-note").textContent =
+        err.message + " The rejected saved key was cleared, so Safari will not keep retrying it.";
+    } else {
+      $("settings-note").textContent = err.message;
+    }
   }
+}
+
+async function clearSavedKey() {
+  await setSetting("apiKey", "");
+  $("api-key").value = "";
+  $("api-key").placeholder = "Paste a new Anthropic key";
+  $("settings-note").textContent = "Saved key cleared on this browser. Paste the new key and tap Save settings.";
 }
 
 async function saveSettings() {
@@ -1429,7 +1485,8 @@ async function start() {
     await reload();
     $("boot").hidden = true;
     turnCameraOff();
-    showView("list");
+    const params = new URLSearchParams(window.location.search);
+    showView(params.get("settings") === "1" ? "settings" : "list");
     if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js").catch(() => {});
   } catch (err) {
     $("boot").textContent = err.message || "Could not open the catalog";
