@@ -1,6 +1,6 @@
 // App shell only. Catalog photos and price lookups stay out of this cache.
 
-const CACHE = "resale-shell-8";
+const CACHE = "resale-shell-9";
 const SHELL = [
   "./index.html",
   "./styles.css",

@@ -205,6 +205,8 @@ export function blankItem(id, captureOrder) {
     suggestedName: "",
     suggestedCategory: "",
     identityConfidence: null,
+    pricingConfidence: null,
+    uncertainReason: "",
     starred: false,
     starReason: "",
     starTouched: false,

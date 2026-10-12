@@ -123,9 +123,12 @@ async function buildContent(items) {
         SITE_MEMORY +
         learned +
         "\n\nRules:\n" +
-        "- Prefer sold and auction comps. An asking price, guide, or appraisal is not a sold price.\n" +
-        "- Every comp needs a real http URL you actually found. If you cannot find one, use an empty comps list and null prices.\n" +
-        "- Do not invent a URL or a sold price.\n" +
+        "- Identify the item from the photos first, even without a model number. Match the visible design to similar listings.\n" +
+        "- Prefer sold and auction comps. Asking prices and guides are weaker but still useful for a preliminary range.\n" +
+        "- Every comp needs a real http URL you actually found. Do not invent a URL or a sold price.\n" +
+        "- When the photos are enough to name the item and find similar examples, return low and high even if you still need a back label, serial, or working/light test. Put that follow-up in needsPhoto and uncertainReason, not as a reason to skip the range.\n" +
+        "- confidence is how sure you are about what the item is (0 to 1). priceConfidence is how sure you are about the dollar range (0 to 1).\n" +
+        "- Use uncertainReason for one short sentence when the estimate is preliminary, for example back label not photographed or light-up function not confirmed.\n" +
         "- Souvenir medal is not precious-metal or flown metal.\n" +
         "- Untested loose watch is not a sealed working boxed watch.\n" +
         "- Base card is not a rare parallel.\n" +
@@ -133,9 +136,9 @@ async function buildContent(items) {
         "- Gold plate is not solid gold.\n" +
         "- The owner's notes are facts about the item in hand. A sealed, unopened, or undamaged box is not the same as an opened, empty, or damaged example. Say that difference in the evidence and do not copy the opened price onto a sealed item.\n" +
         "- A written description with no photo is enough to search. Do not put needsPhoto on a specific named item such as a doll, card, or bottle when the owner already described the year, name, and whether it is sealed.\n" +
-        "- If a hallmark, caseback, card back, mint mark, or whether the bottle is inside is missing from both the photos and the notes, put that in needsPhoto and use null prices.\n" +
+        "- If a hallmark, caseback, card back, mint mark, or back label would tighten value, put that in needsPhoto but still return your best preliminary low and high when the front photo is enough to compare.\n" +
         "- kind is one of sold, auction, ask, guide, appraisal.\n\n" +
-        'JSON shape: {"items":[{"id":"","name":"","category":"","confidence":0,"needsPhoto":"","star":false,"starReason":"","low":null,"high":null,"ask":null,"comps":[{"url":"","site":"","kind":"sold","amount":0,"note":""}],"evidence":"","nextStep":""}]}\n\n' +
+        'JSON shape: {"items":[{"id":"","name":"","category":"","confidence":0,"priceConfidence":0,"uncertainReason":"","needsPhoto":"","star":false,"starReason":"","low":null,"high":null,"ask":null,"comps":[{"url":"","site":"","kind":"sold","amount":0,"note":""}],"evidence":"","nextStep":""}]}\n\n' +
         "Items in this batch:\n" +
         items
           .map((item) => {
@@ -269,6 +272,12 @@ async function rememberComp(item, comp) {
   }
 }
 
+function rangeFromCompAmounts(comps) {
+  const amounts = comps.map((comp) => comp.amount).filter((amount) => amount != null && Number.isFinite(Number(amount)));
+  if (!amounts.length) return { low: null, high: null };
+  return { low: Math.min(...amounts), high: Math.max(...amounts) };
+}
+
 export async function applyLookup(item, result) {
   const next = { ...item };
   if (!next.name && result.name) next.name = result.name;
@@ -276,6 +285,9 @@ export async function applyLookup(item, result) {
   if (result.name) next.suggestedName = result.name;
   if (result.category) next.suggestedCategory = result.category;
   if (typeof result.confidence === "number") next.identityConfidence = result.confidence;
+  if (typeof result.priceConfidence === "number") next.pricingConfidence = result.priceConfidence;
+  else if (typeof result.confidence === "number") next.pricingConfidence = result.confidence;
+  if (result.uncertainReason) next.uncertainReason = String(result.uncertainReason).trim();
 
   const comps = (Array.isArray(result.comps) ? result.comps : [])
     .filter((comp) => comp && typeof comp.url === "string" && /^https?:\/\//i.test(comp.url.trim()))
@@ -310,39 +322,53 @@ export async function applyLookup(item, result) {
   }
 
   next.errorText = "";
-  const written = (item.notes || item.description || "").trim().length > 12;
-  const low = numberOrNull(result.low);
-  const high = numberOrNull(result.high);
-  if (needsPhoto && !(written && hasSale && low != null && high != null)) {
-    next.pricingStatus = "needs_photo";
-    next.lowUsd = null;
-    next.highUsd = null;
-    next.askUsd = null;
-    next.nextStep = needsPhoto;
-    next.evidence = result.evidence || next.evidence || "";
-  } else if (!hasSale) {
-    next.pricingStatus = "needs_photo";
-    next.lowUsd = null;
-    next.highUsd = null;
-    next.askUsd = null;
-    next.evidence = result.evidence || "";
-    next.nextStep = comps.length
-      ? "Only asking prices or guides came back. No sold range was saved."
-      : "No source link came back, so no price was saved.";
-  } else {
-    next.lowUsd = numberOrNull(result.low);
-    next.highUsd = numberOrNull(result.high);
+  let low = numberOrNull(result.low);
+  let high = numberOrNull(result.high);
+  if (low == null || high == null) {
+    const derived = rangeFromCompAmounts(comps);
+    if (low == null) low = derived.low;
+    if (high == null) high = derived.high;
+  }
+  next.evidence = result.evidence || "";
+  next.nextStep = result.nextStep || "";
+  const followUp = [needsPhoto, next.uncertainReason].filter(Boolean).join(" · ");
+  if (followUp && !next.nextStep.includes(needsPhoto)) {
+    next.nextStep = followUp + (next.nextStep ? " · " + next.nextStep : "");
+  }
+
+  const hasAsk = comps.some((comp) => comp.kind === "ask" || comp.kind === "guide" || comp.kind === "appraisal");
+  const priceSure =
+    hasSale &&
+    (next.pricingConfidence == null || next.pricingConfidence >= 0.55) &&
+    !needsPhoto &&
+    !next.uncertainReason;
+
+  if (low != null && high != null) {
+    next.lowUsd = low;
+    next.highUsd = high;
     next.askUsd = numberOrNull(result.ask);
-    next.evidence = result.evidence || "";
-    next.nextStep = result.nextStep || "";
-    if (next.lowUsd == null || next.highUsd == null) {
-      next.pricingStatus = "needs_photo";
-      next.askUsd = null;
-      next.nextStep = next.nextStep || "A sold link came back without a usable range.";
-    } else {
-      next.pricingStatus = "priced";
-      if (needsPhoto) next.nextStep = needsPhoto + (next.nextStep ? " " + next.nextStep : "");
+    next.pricingStatus = priceSure ? "priced" : "estimate";
+    if (next.pricingStatus === "estimate" && next.evidence && !/preliminary/i.test(next.evidence)) {
+      next.evidence = next.evidence + " Preliminary estimate from photo match and comps, not an authenticated appraisal.";
+    } else if (next.pricingStatus === "estimate" && !next.evidence) {
+      next.evidence = "Preliminary estimate from photo match and comps, not an authenticated appraisal.";
     }
+  } else if (comps.length || result.name || result.evidence) {
+    next.pricingStatus = "needs_photo";
+    next.lowUsd = null;
+    next.highUsd = null;
+    next.askUsd = null;
+    next.nextStep =
+      next.nextStep ||
+      (comps.length && !hasSale && hasAsk
+        ? "Similar listings found, but no dollar range yet. Add a note or back photo, then retry."
+        : "Could not build a range yet. Add a back photo or a short note, then retry.");
+  } else {
+    next.pricingStatus = "needs_photo";
+    next.lowUsd = null;
+    next.highUsd = null;
+    next.askUsd = null;
+    next.nextStep = next.nextStep || "No match yet. Add another angle or a note about maker and condition.";
   }
 
   if (result.star && !next.starTouched) {

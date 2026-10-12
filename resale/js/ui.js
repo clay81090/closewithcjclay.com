@@ -66,6 +66,7 @@ const FILTERS = [
   ["bundle", "Bundle"],
   ["photo", "Needs a better photo"],
   ["failed", "Lookup failed"],
+  ["estimate", "Preliminary / unsure"],
   ["ready", "Ready to list"],
 ];
 
@@ -113,6 +114,7 @@ function rememberSession(id) {
 function chip(item) {
   if (state.jobStates[item.id] === "running") return "Identifying";
   if (item.pricingStatus === "priced") return "Priced";
+  if (item.pricingStatus === "estimate") return "Preliminary estimate";
   if (item.pricingStatus === "needs_photo") return "Needs a better photo";
   if (item.pricingStatus === "failed") return "Lookup failed";
   return "Saved";
@@ -121,6 +123,7 @@ function chip(item) {
 function lookupButtonLabel(item) {
   if (item.pricingStatus === "failed") return "Retry lookup";
   if (item.pricingStatus === "saved") return "Look up price";
+  if (item.pricingStatus === "estimate") return "Refine estimate";
   return "Update price using my notes";
 }
 
@@ -130,7 +133,9 @@ function priceText(item) {
     if (item.pricingStatus === "failed") return item.errorText || "Lookup failed";
     return "No sold price yet";
   }
-  return money(item.lowUsd) + " to " + money(item.highUsd);
+  const range = money(item.lowUsd) + " to " + money(item.highUsd);
+  if (item.pricingStatus === "estimate") return range + " · preliminary estimate";
+  return range;
 }
 
 function firstPhoto(itemId) {
@@ -216,10 +221,14 @@ function card(item) {
 function paintHero() {
   const totals = grossTotals(state.items);
   const items = state.items.length;
+  const preliminary = state.items.filter((item) => item.pricingStatus === "estimate").length;
   $("hero-range").textContent = totals.count ? money(totals.low) + " to " + money(totals.high) : "$0";
   $("hero-count").textContent = items + (items === 1 ? " item" : " items");
   $("hero-note").textContent = totals.count
-    ? totals.count + " priced. Gross estimate, not money in hand."
+    ? totals.count +
+      " with a range" +
+      (preliminary ? ", " + preliminary + " preliminary" : "") +
+      ". Gross estimate, not money in hand."
     : "No priced items yet.";
 }
 
@@ -299,6 +308,7 @@ function entry(item) {
     ["Next step", item.nextStep],
     ["My notes", item.notes],
     ["Looked up with", item.lookupLabel],
+    ["Why unsure", item.uncertainReason],
   ]
     .filter((row) => row[1])
     .map((row) => "<tr><th>" + escapeHtml(row[0]) + "</th><td>" + escapeHtml(row[1]) + "</td></tr>")
@@ -369,6 +379,7 @@ function filterMatch(item) {
   if (state.filter === "star") return item.starred;
   if (state.filter === "photo") return item.pricingStatus === "needs_photo";
   if (state.filter === "failed") return item.pricingStatus === "failed";
+  if (state.filter === "estimate") return item.pricingStatus === "estimate";
   if (state.filter === "ready") {
     return item.pricingStatus === "priced" && !item.starred && (item.priority === "high" || item.priority === "medium");
   }
