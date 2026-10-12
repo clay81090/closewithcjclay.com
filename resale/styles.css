@@ -103,6 +103,15 @@ h1 {
   color: #333;
 }
 
+.steps {
+  margin: 8px 0 12px;
+  padding-left: 22px;
+}
+
+.steps li { margin: 8px 0; }
+
+.steps a { color: #0000ee; }
+
 .top-row .go { width: 100%; }
 
 h2 { font-size: 20px; margin: 16px 0 8px; }

@@ -862,12 +862,18 @@ async function describeItem() {
 }
 
 async function saveSettings() {
-  await setSetting("apiKey", $("api-key").value.trim());
+  const typed = $("api-key").value.trim();
+  if (typed) await setSetting("apiKey", typed);
   await setSetting("feePercent", Number($("fee").value) || 0);
   await setSetting("shippingUsd", Number($("ship").value) || 0);
   await setSetting("haikuModel", $("haiku").value.trim() || "claude-haiku-4-5");
   await setSetting("sonnetModel", $("sonnet").value.trim() || "claude-sonnet-4-6");
-  $("settings-note").textContent = "Saved on this browser.";
+  $("api-key").value = "";
+  const saved = (await getSettings()).apiKey;
+  $("api-key").placeholder = saved ? "Key saved on this browser" : "Paste your key";
+  $("settings-note").textContent = saved
+    ? "Saved on this browser. The key stays here."
+    : "Saved. Paste a key in the box to look up prices.";
   await reload();
 }
 
@@ -919,6 +925,11 @@ async function fillSettings() {
   $("ship").value = settings.shippingUsd;
   $("haiku").value = settings.haikuModel;
   $("sonnet").value = settings.sonnetModel;
+  $("api-key").value = "";
+  $("api-key").placeholder = settings.apiKey ? "Key saved on this browser" : "Paste your key";
+  if (settings.apiKey) {
+    $("settings-note").textContent = "A key is already saved on this browser. Leave the box empty unless you are replacing it.";
+  }
 }
 
 async function start() {
