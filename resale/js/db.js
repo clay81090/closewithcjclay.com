@@ -207,6 +207,8 @@ export function blankItem(id, captureOrder) {
     identityConfidence: null,
     pricingConfidence: null,
     uncertainReason: "",
+    potentialHigh: null,
+    potentialCondition: "",
     starred: false,
     starReason: "",
     starTouched: false,

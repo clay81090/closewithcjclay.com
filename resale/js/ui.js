@@ -51,6 +51,7 @@ const state = {
   filter: "all",
   category: "",
   query: "",
+  sort: "newest",
   selectedId: null,
   detailsDirty: false,
   jobStates: {},
@@ -129,13 +130,25 @@ function lookupButtonLabel(item) {
 
 function priceText(item) {
   if (item.lowUsd == null || item.highUsd == null) {
-    if (item.pricingStatus === "saved") return "Saved, price not looked up yet";
-    if (item.pricingStatus === "failed") return item.errorText || "Lookup failed";
-    return "No sold price yet";
+    if (item.pricingStatus === "saved") return "Tap to price";
+    if (item.pricingStatus === "failed") return "Lookup failed";
+    return "No price yet";
   }
-  const range = money(item.lowUsd) + " to " + money(item.highUsd);
-  if (item.pricingStatus === "estimate") return range + " · preliminary estimate";
-  return range;
+  return money(item.lowUsd) + " to " + money(item.highUsd);
+}
+
+function priceBadge(item) {
+  if (item.pricingStatus === "estimate") return "<span class='badge badge-est'>Preliminary estimate</span>";
+  if (item.pricingStatus === "needs_photo") return "<span class='badge badge-need'>Add a note or photo</span>";
+  if (item.pricingStatus === "priced") return "<span class='badge badge-ok'>Priced</span>";
+  return "";
+}
+
+function upsideLine(item) {
+  if (item.potentialHigh == null) return "";
+  if (item.highUsd != null && Number(item.potentialHigh) <= Number(item.highUsd)) return "";
+  const cond = item.potentialCondition ? " if " + item.potentialCondition.replace(/^if\s+/i, "") : "";
+  return "<p class='upside'>Could reach " + money(item.potentialHigh) + escapeHtml(cond) + "</p>";
 }
 
 function firstPhoto(itemId) {
@@ -266,12 +279,13 @@ function renderList() {
     cats.map((cat) => '<option value="' + escapeHtml(cat) + '">' + escapeHtml(cat) + "</option>").join("");
   select.value = state.category;
 
+  const sortSelect = $("sort-order");
+  if (sortSelect) sortSelect.value = state.sort;
+
   const query = state.query.trim().toLowerCase();
   const rows = $("rows");
   rows.innerHTML = "";
-  const visible = [...state.items]
-    .sort((a, b) => (a.captureOrder || 0) - (b.captureOrder || 0))
-    .filter((item) => matches(item, query));
+  const visible = [...state.items].filter((item) => matches(item, query)).sort(sortComparator);
   $("count").textContent = visible.length + " of " + state.items.length + " items";
   if (!visible.length) {
     rows.innerHTML = "<p class='quiet'>Nothing in this filter.</p>";
@@ -314,10 +328,11 @@ function entry(item) {
     .map((row) => "<tr><th>" + escapeHtml(row[0]) + "</th><td>" + escapeHtml(row[1]) + "</td></tr>")
     .join("");
   const failed = item.pricingStatus === "failed";
-  const lookupClass = failed ? "retry-go" : "";
+  const lookupClass = failed || item.pricingStatus === "estimate" ? "retry-go" : "";
   const failBox = failed
-    ? "<p class='fail-msg'>" + escapeHtml(item.errorText || "Lookup failed. Tap Retry lookup on the same item.") + "</p>"
+    ? "<p class='fail-msg'>" + escapeHtml(item.errorText || "Lookup failed. Tap Retry on the same item.") + "</p>"
     : "";
+  const hasRange = item.lowUsd != null && item.highUsd != null;
   article.innerHTML =
     (photo ? '<img alt="" src="' + trackUrl(photo.blob) + '">' : '<img alt="">') +
     "<div><small>" +
@@ -333,17 +348,15 @@ function entry(item) {
     escapeHtml(item.name || item.id) +
     "</h2>" +
     failBox +
-    "<p class='price'>" +
+    "<p class='price" + (hasRange ? "" : " price-empty") + "'>" +
     escapeHtml(priceText(item)) +
-    "</p><p>" +
-    (item.askUsd == null ? "Suggested ask: not set yet" : "Suggested ask: " + money(displayAsk(item))) +
-    "</p><label>What I know about this<textarea data-note='" +
+    "</p>" +
+    priceBadge(item) +
+    upsideLine(item) +
+    (hasRange && item.askUsd != null ? "<p class='ask'>Suggested ask " + money(displayAsk(item)) + "</p>" : "") +
+    "<p class='card-actions'><button type='button' data-open='" +
     escapeHtml(item.id) +
-    "' placeholder='Original undamaged box. Bottle not opened. The $93 listing was opened. Mine is not.'>" +
-    escapeHtml(item.notes || "") +
-    "</textarea></label><p><button type='button' data-open='" +
-    escapeHtml(item.id) +
-    "'>Open</button> <button type='button' class='" +
+    "'>Open and edit</button> <button type='button' class='" +
     lookupClass +
     "' data-reprice='" +
     escapeHtml(item.id) +
@@ -355,14 +368,14 @@ function entry(item) {
     "</table></details></div>";
   article.querySelector("[data-open]").addEventListener("click", () => openItem(item.id));
   article.querySelector("[data-reprice]").addEventListener("click", () => lookupOne(item.id));
-  article.querySelector("textarea").addEventListener("change", async (event) => {
-    const current = await getItem(item.id);
-    current.notes = event.target.value.trim();
-    await putItem(current);
-    item.notes = current.notes;
-    $("save-status").textContent = "Note saved on " + item.id;
-  });
   return article;
+}
+
+function sortComparator(a, b) {
+  if (state.sort === "newest") return (b.captureOrder || 0) - (a.captureOrder || 0);
+  if (state.sort === "priceHigh") return (Number(b.highUsd) || 0) - (Number(a.highUsd) || 0);
+  if (state.sort === "priceLow") return (Number(a.lowUsd) || 0) - (Number(b.lowUsd) || 0);
+  return (a.captureOrder || 0) - (b.captureOrder || 0);
 }
 
 function matches(item, query) {
@@ -449,15 +462,18 @@ async function renderItem(id) {
     "<div class='photos'>" +
     (photoHtml || "<p>No photo yet.</p>") +
     "</div>" +
-    "<p><strong>" +
+    "<p class='price" + (item.lowUsd != null && item.highUsd != null ? "" : " price-empty") + "'>" +
     escapeHtml(priceText(item)) +
-    "</strong></p>" +
+    "</p>" +
+    priceBadge(item) +
+    upsideLine(item) +
     (ask != null ? "<p>Suggested ask " + money(ask) + (item.tested === "untested" && showsTested(item) ? " · Untested" : "") + "</p>" : "") +
     (clear ? "<p>You might clear " + money(clear.low) + " to " + money(clear.high) + ". Guess after fees.</p>" : "") +
     (item.evidence ? "<p>" + escapeHtml(item.evidence) + "</p>" : "") +
     (item.nextStep ? "<p>" + escapeHtml(item.nextStep) + "</p>" : "") +
     (item.starReason ? "<p>Star: " + escapeHtml(item.starReason) + "</p>" : "") +
     (item.lookupLabel ? "<p>Looked up with " + escapeHtml(item.lookupLabel) + ".</p>" : "") +
+    (item.uncertainReason ? "<p>Why unsure: " + escapeHtml(item.uncertainReason) + "</p>" : "") +
     (item.pricingStatus === "failed"
       ? "<p class='fail-msg'>" + escapeHtml(item.errorText || "Lookup failed.") + "</p>"
       : "") +
@@ -490,6 +506,16 @@ async function renderItem(id) {
     "</pre>" +
     compHtml +
     dupes.map((other) => dupeHtml(item, other)).join("") +
+    "<div class='edit-note'>" +
+    "<label>What I know about this<br><small>Add things like electric, working, in the original box, or a model number. Then re-price.</small>" +
+    "<textarea id='edit-notes' placeholder='Electric and working. Lights up. In the original box. Model G-011.'>" +
+    escapeHtml(item.notes || "") +
+    "</textarea></label>" +
+    "<div class='actions'>" +
+    "<button type='button' id='save-note'>Save note</button>" +
+    "<button type='button' id='save-refine' class='retry-go'>Save note and re-price</button>" +
+    "</div></div>" +
+    "<details class='edit-more'><summary>Edit name, category, and more</summary>" +
     "<label>Name <input id='edit-name' value='" +
     escapeHtml(item.name || "") +
     "'></label>" +
@@ -502,12 +528,11 @@ async function renderItem(id) {
     "<label>Serial <input id='edit-serial' value='" +
     escapeHtml(item.serial || "") +
     "'></label>" +
-    "<label>What I know about this<textarea id='edit-notes' placeholder='Original undamaged box. Bottle not opened. The $93 listing was opened. Mine is not.'>" +
-    escapeHtml(item.notes || "") +
-    "</textarea></label>" +
     "<label>Where it is stored <input id='edit-where' value='" +
     escapeHtml(item.storageLocation || "") +
-    "'></label>";
+    "'></label>" +
+    "<button type='button' id='save-details'>Save these details</button>" +
+    "</details>";
 
   $("toggle-star").addEventListener("click", async () => {
     item.starred = !item.starred;
@@ -547,9 +572,9 @@ async function renderItem(id) {
   for (const button of body.querySelectorAll("[data-different]")) {
     button.addEventListener("click", () => markDifferent(item.id, button.dataset.different));
   }
-  for (const input of ["edit-name", "edit-category", "edit-date", "edit-serial", "edit-notes", "edit-where"]) {
-    $(input).addEventListener("change", () => saveEdits(item));
-  }
+  $("save-note").addEventListener("click", () => saveEdits(item, { refine: false }));
+  $("save-refine").addEventListener("click", () => saveEdits(item, { refine: true }));
+  if ($("save-details")) $("save-details").addEventListener("click", () => saveEdits(item, { refine: false }));
 }
 
 function dupeHtml(item, other) {
@@ -623,15 +648,21 @@ async function markDifferent(id, otherId) {
   await renderItem(id);
 }
 
-async function saveEdits(item) {
-  item.name = $("edit-name").value.trim();
-  item.category = $("edit-category").value.trim();
-  item.itemDate = $("edit-date").value.trim();
-  item.serial = $("edit-serial").value.trim();
-  item.notes = $("edit-notes").value.trim();
-  item.storageLocation = $("edit-where").value.trim();
-  await putItem(item);
+async function saveEdits(item, opts = {}) {
+  const current = await getItem(item.id);
+  if ($("edit-notes")) current.notes = $("edit-notes").value.trim();
+  if ($("edit-name")) current.name = $("edit-name").value.trim();
+  if ($("edit-category")) current.category = $("edit-category").value.trim();
+  if ($("edit-date")) current.itemDate = $("edit-date").value.trim();
+  if ($("edit-serial")) current.serial = $("edit-serial").value.trim();
+  if ($("edit-where")) current.storageLocation = $("edit-where").value.trim();
+  await putItem(current);
   await reload();
+  if (opts.refine) {
+    await lookupOne(item.id);
+  } else {
+    $("progress").textContent = "Saved on " + item.id + ".";
+  }
 }
 
 async function setTested(item, value) {
@@ -896,6 +927,10 @@ function bind() {
     state.category = $("category-filter").value;
     renderList();
   });
+  $("sort-order").addEventListener("change", () => {
+    state.sort = $("sort-order").value;
+    renderList();
+  });
   $("describe-go").addEventListener("click", describeItem);
   $("back").addEventListener("click", () => {
     state.selectedId = null;
@@ -928,6 +963,7 @@ async function describeItem() {
   await putItem(item);
   $("describe").value = "";
   await reload();
+  await openItem(item.id);
   await lookupOne(item.id);
 }
 

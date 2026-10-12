@@ -129,6 +129,8 @@ async function buildContent(items) {
         "- When the photos are enough to name the item and find similar examples, return low and high even if you still need a back label, serial, or working/light test. Put that follow-up in needsPhoto and uncertainReason, not as a reason to skip the range.\n" +
         "- confidence is how sure you are about what the item is (0 to 1). priceConfidence is how sure you are about the dollar range (0 to 1).\n" +
         "- Use uncertainReason for one short sentence when the estimate is preliminary, for example back label not photographed or light-up function not confirmed.\n" +
+        "- low and high are the safe range for what you can confirm right now. potentialHigh is the higher price this could reach IF the best case is true (working, electric, in the original box, a desirable model number). Put the conditions that unlock it in potentialCondition, for example if electric, working, and in the original box.\n" +
+        "- If there is no meaningful upside beyond high, set potentialHigh to null.\n" +
         "- Souvenir medal is not precious-metal or flown metal.\n" +
         "- Untested loose watch is not a sealed working boxed watch.\n" +
         "- Base card is not a rare parallel.\n" +
@@ -138,7 +140,7 @@ async function buildContent(items) {
         "- A written description with no photo is enough to search. Do not put needsPhoto on a specific named item such as a doll, card, or bottle when the owner already described the year, name, and whether it is sealed.\n" +
         "- If a hallmark, caseback, card back, mint mark, or back label would tighten value, put that in needsPhoto but still return your best preliminary low and high when the front photo is enough to compare.\n" +
         "- kind is one of sold, auction, ask, guide, appraisal.\n\n" +
-        'JSON shape: {"items":[{"id":"","name":"","category":"","confidence":0,"priceConfidence":0,"uncertainReason":"","needsPhoto":"","star":false,"starReason":"","low":null,"high":null,"ask":null,"comps":[{"url":"","site":"","kind":"sold","amount":0,"note":""}],"evidence":"","nextStep":""}]}\n\n' +
+        'JSON shape: {"items":[{"id":"","name":"","category":"","confidence":0,"priceConfidence":0,"uncertainReason":"","needsPhoto":"","star":false,"starReason":"","low":null,"high":null,"potentialHigh":null,"potentialCondition":"","ask":null,"comps":[{"url":"","site":"","kind":"sold","amount":0,"note":""}],"evidence":"","nextStep":""}]}\n\n' +
         "Items in this batch:\n" +
         items
           .map((item) => {
@@ -288,6 +290,8 @@ export async function applyLookup(item, result) {
   if (typeof result.priceConfidence === "number") next.pricingConfidence = result.priceConfidence;
   else if (typeof result.confidence === "number") next.pricingConfidence = result.confidence;
   if (result.uncertainReason) next.uncertainReason = String(result.uncertainReason).trim();
+  next.potentialHigh = numberOrNull(result.potentialHigh);
+  next.potentialCondition = result.potentialCondition ? String(result.potentialCondition).trim() : "";
 
   const comps = (Array.isArray(result.comps) ? result.comps : [])
     .filter((comp) => comp && typeof comp.url === "string" && /^https?:\/\//i.test(comp.url.trim()))
