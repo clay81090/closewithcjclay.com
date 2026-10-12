@@ -47,6 +47,17 @@
       <video id="preview" class="preview" playsinline autoplay muted hidden></video>
       <p id="cam-note" class="quiet"></p>
       <button type="button" id="cam-toggle" hidden>Turn camera on</button>
+      <section class="smart-batch">
+        <h2>Smart batch upload</h2>
+        <p>Select many mixed photos at once. The fast AI groups matching angles and keeps different boxes, names, and items separate for your review.</p>
+        <label class="choice">
+          Choose all batch photos
+          <input id="smart-batch-input" type="file" accept="image/*" multiple>
+        </label>
+        <p id="smart-batch-status" class="quiet">Nothing is saved until you review the groups.</p>
+        <button type="button" id="smart-batch-retry" hidden>Retry photo sorting</button>
+        <div id="smart-batch-review" hidden></div>
+      </section>
       <div class="actions">
         <label class="shutter">
           Take photo
@@ -78,6 +89,7 @@
         <label>Category <input id="f-category" autocomplete="off"></label>
         <label>Item date <input id="f-date" autocomplete="off"></label>
         <label>Serial <input id="f-serial" autocomplete="off"></label>
+        <label>Quantity <input id="f-quantity" type="number" min="1" max="9999" step="1" value="1"></label>
         <label>Note <input id="f-notes" autocomplete="off"></label>
         <label>Where it is stored <input id="f-where" autocomplete="off"></label>
       </details>

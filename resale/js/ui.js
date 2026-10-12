@@ -28,6 +28,7 @@ import {
   getSettings,
   grossTotals,
   importCatalogAtomic,
+  itemQuantity,
   mightClear,
   money,
   photosFor,
@@ -38,6 +39,7 @@ import {
   removeItemFully,
   setSetting,
 } from "./db.js";
+import { initSmartBatch } from "./batch.js";
 import { importSeed } from "./seed.js";
 import { createNoteDictation } from "./voice.js";
 import {
@@ -108,6 +110,7 @@ function readDetails() {
     category: $("f-category").value.trim(),
     itemDate: $("f-date").value.trim(),
     serial: $("f-serial").value.trim(),
+    unitCount: Math.max(1, Number($("f-quantity").value) || 1),
     notes: $("f-notes").value.trim(),
     storageLocation: $("f-where").value.trim(),
   };
@@ -118,6 +121,7 @@ function fillDetails(item) {
   $("f-category").value = item ? item.category || "" : "";
   $("f-date").value = item ? item.itemDate || "" : "";
   $("f-serial").value = item ? item.serial || "" : "";
+  $("f-quantity").value = item ? itemQuantity(item) : 1;
   $("f-notes").value = item ? item.notes || "" : "";
   $("f-where").value = item ? item.storageLocation || "" : "";
 }
@@ -149,7 +153,11 @@ function priceText(item) {
     if (item.pricingStatus === "failed") return "Lookup failed";
     return "No price yet";
   }
-  return money(item.lowUsd) + " to " + money(item.highUsd);
+  const each = money(item.lowUsd) + " to " + money(item.highUsd);
+  const quantity = itemQuantity(item);
+  return quantity === 1
+    ? each
+    : each + " each · " + money(Number(item.lowUsd) * quantity) + " to " + money(Number(item.highUsd) * quantity) + " total";
 }
 
 function priceBadge(item) {
@@ -270,9 +278,11 @@ function paintHero() {
   const backedTotals = grossTotals(state.items.filter((item) => item.evidenceBacked));
   const preliminaryTotals = grossTotals(state.items.filter((item) => !item.evidenceBacked));
   const items = state.items.length;
+  const pieces = state.items.reduce((sum, item) => sum + itemQuantity(item), 0);
   const preliminary = state.items.filter((item) => item.pricingStatus === "estimate").length;
   $("hero-range").textContent = totals.count ? money(totals.low) + " to " + money(totals.high) : "$0";
-  $("hero-count").textContent = items + (items === 1 ? " item" : " items");
+  $("hero-count").textContent =
+    items + (items === 1 ? " item" : " items") + (pieces === items ? "" : " · " + pieces + " total pieces");
   $("hero-backed").textContent = backedTotals.count
     ? "Evidence-backed: " + money(backedTotals.low) + " to " + money(backedTotals.high)
     : "Evidence-backed: $0";
@@ -359,7 +369,7 @@ function entry(item) {
     ["Category", item.category],
     ["Year", item.year],
     ["Description", item.description],
-    ["Quantity", item.quantity],
+    ["Quantity", itemQuantity(item) > 1 ? itemQuantity(item) : item.quantity],
     ["Condition", item.condition],
     ["Evidence", item.evidence],
     ["Next step", item.nextStep],
@@ -396,7 +406,9 @@ function entry(item) {
     "</p>" +
     priceBadge(item) +
     upsideLine(item) +
-    (hasRange && item.askUsd != null ? "<p class='ask'>Suggested ask " + money(displayAsk(item)) + "</p>" : "") +
+    (hasRange && item.askUsd != null
+      ? "<p class='ask'>Suggested ask " + money(displayAsk(item)) + (itemQuantity(item) > 1 ? " each" : "") + "</p>"
+      : "") +
     "<p class='card-actions'><button type='button' data-open='" +
     escapeHtml(item.id) +
     "'>Open and edit</button> <button type='button' class='" +
@@ -437,8 +449,8 @@ async function removeItem(item) {
 
 function sortComparator(a, b) {
   if (state.sort === "newest") return (b.captureOrder || 0) - (a.captureOrder || 0);
-  if (state.sort === "priceHigh") return (Number(b.highUsd) || 0) - (Number(a.highUsd) || 0);
-  if (state.sort === "priceLow") return (Number(a.lowUsd) || 0) - (Number(b.lowUsd) || 0);
+  if (state.sort === "priceHigh") return (Number(b.highUsd) || 0) * itemQuantity(b) - (Number(a.highUsd) || 0) * itemQuantity(a);
+  if (state.sort === "priceLow") return (Number(a.lowUsd) || 0) * itemQuantity(a) - (Number(b.lowUsd) || 0) * itemQuantity(b);
   return (a.captureOrder || 0) - (b.captureOrder || 0);
 }
 
@@ -538,8 +550,8 @@ async function renderItem(id) {
     priceBadge(item) +
     upsideLine(item) +
     tiersHtml(item) +
-    (ask != null ? "<p>Suggested ask " + money(ask) + (item.tested === "untested" && showsTested(item) ? " · Untested" : "") + "</p>" : "") +
-    (clear ? "<p>You might clear " + money(clear.low) + " to " + money(clear.high) + ". Guess after fees.</p>" : "") +
+    (ask != null ? "<p>Suggested ask " + money(ask) + (itemQuantity(item) > 1 ? " each" : "") + (item.tested === "untested" && showsTested(item) ? " · Untested" : "") + "</p>" : "") +
+    (clear ? "<p>You might clear " + money(clear.low) + " to " + money(clear.high) + (itemQuantity(item) > 1 ? " each" : "") + ". Guess after fees.</p>" : "") +
     (item.evidence ? "<p>" + escapeHtml(item.evidence) + "</p>" : "") +
     (item.nextStep ? "<p>" + escapeHtml(item.nextStep) + "</p>" : "") +
     (item.starReason ? "<p>Star: " + escapeHtml(item.starReason) + "</p>" : "") +
@@ -599,6 +611,9 @@ async function renderItem(id) {
     "'></label>" +
     "<label>Serial <input id='edit-serial' value='" +
     escapeHtml(item.serial || "") +
+    "'></label>" +
+    "<label>Quantity <input id='edit-quantity' type='number' min='1' max='9999' value='" +
+    itemQuantity(item) +
     "'></label>" +
     "<label>Where it is stored <input id='edit-where' value='" +
     escapeHtml(item.storageLocation || "") +
@@ -786,6 +801,7 @@ async function saveEdits(item, opts = {}) {
   if ($("edit-category")) current.category = $("edit-category").value.trim();
   if ($("edit-date")) current.itemDate = $("edit-date").value.trim();
   if ($("edit-serial")) current.serial = $("edit-serial").value.trim();
+  if ($("edit-quantity")) current.unitCount = itemQuantity({ unitCount: $("edit-quantity").value });
   if ($("edit-where")) current.storageLocation = $("edit-where").value.trim();
   await putItem(current);
   await reload();
@@ -1286,6 +1302,7 @@ async function prepareMergedImport(incoming) {
 }
 
 function bind() {
+  initSmartBatch({ onSaved: reload, onNeedsKey: () => showView("settings") });
   const noteDictation = createNoteDictation({
     textarea: $("quick-note-text"),
     button: $("talk-note"),

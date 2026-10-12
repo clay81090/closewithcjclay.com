@@ -140,6 +140,7 @@ async function buildContent(items) {
         "- Prefer sold and auction comps for the numbers. Asking prices and guides are weaker but fine for a preliminary range.\n" +
         "- Put a real http URL on any comp you actually found. Never invent a URL or a fake sold price. Having no URL is NOT a reason to skip low and high.\n" +
         "- confidence is how sure you are what the item is (0 to 1). priceConfidence is how sure you are about the dollars (0 to 1). A knowledge estimate with no live comp should have priceConfidence around 0.3 to 0.5, not null prices.\n" +
+        "- When quantity is more than 1, low, high, ask, potentialHigh, and every condition tier must be the PER-ITEM value. The app multiplies those numbers for the collection total.\n" +
         "- conditionTiers: 3 to 5 rows showing how the value changes with condition, newest first in value. Example rows: used with wear; good, no box; excellent with original outfit; with original box and paperwork; rare variant. Each row is {label, low, high}. Use the owner's stated condition to pick which tier the main low and high come from.\n" +
         "- low and high reflect the owner's actual condition from OWNER FACTS. If they say in box, pristine, sealed, or collector edition, price the matching higher tier, do not price it like a loose used one.\n" +
         "- potentialHigh is the top price if the best case is confirmed (sealed, boxed, working, rare variant, desirable model). potentialCondition names what unlocks it. Set potentialHigh null only if there is no upside.\n" +
@@ -166,7 +167,7 @@ async function buildContent(items) {
               "; tested status=" +
               (item.tested || "not stated") +
               "; quantity=" +
-              (item.quantity || "not stated") +
+              (Number(item.unitCount) > 1 ? item.unitCount : item.quantity || "not stated") +
               "; OWNER NOTES=" +
               (item.notes || "none") +
               "; DESCRIPTION=" +
@@ -756,7 +757,8 @@ export function listingBlurb(item) {
   if (/box only|box-only|no decanter/i.test(condition + " " + (item.description || ""))) {
     lines.push("Box only. The piece inside is not confirmed.");
   }
-  if (item.quantity && lines.length < 3) lines.push(item.quantity);
+  const quantity = Number(item.unitCount) > 1 ? "Quantity: " + item.unitCount : item.quantity;
+  if (quantity && lines.length < 3) lines.push(quantity);
   if (condition && lines.length < 3 && !lines.includes(condition)) lines.push(condition);
   if (item.nextStep && lines.length < 3) lines.push(item.nextStep);
   while (lines.length < 3) lines.push("See the photos for condition.");

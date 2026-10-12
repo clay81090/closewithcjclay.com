@@ -126,6 +126,7 @@ export function researchInputFingerprint(item) {
     "description",
     "condition",
     "quantity",
+    "unitCount",
     "tested",
     "starred",
     "starTouched",
@@ -306,6 +307,34 @@ export async function allocateItem() {
   };
 }
 
+export async function saveNewItemBatch(groups) {
+  const existing = await allItems();
+  const usedIds = new Set(existing.map((item) => item.id));
+  let next = Number(await getSetting("nextNumber")) || existing.length + 1;
+  let captureOrder = existing.reduce((max, item) => Math.max(max, item.captureOrder || 0), 0);
+  const items = [];
+  const photos = [];
+
+  for (const group of groups) {
+    while (usedIds.has("CJ-" + String(next).padStart(3, "0"))) next += 1;
+    const id = "CJ-" + String(next).padStart(3, "0");
+    next += 1;
+    captureOrder += 1;
+    usedIds.add(id);
+    items.push({ ...blankItem(id, captureOrder), ...(group.item || {}), id, captureOrder });
+    for (const [order, photo] of (group.photos || []).entries()) {
+      photos.push({ ...photo, id: photo.id || crypto.randomUUID(), itemId: id, order });
+    }
+  }
+
+  await tx(["items", "photos", "settings"], "readwrite", (t) => {
+    for (const item of items) t.objectStore("items").put(item);
+    for (const photo of photos) t.objectStore("photos").put(photo);
+    t.objectStore("settings").put({ key: "nextNumber", value: next });
+  });
+  return items;
+}
+
 export function blankItem(id, captureOrder) {
   return {
     id,
@@ -341,6 +370,7 @@ export function blankItem(id, captureOrder) {
     nextStep: "",
     condition: "",
     quantity: "",
+    unitCount: 1,
     year: "",
     description: "",
     saleStatus: "Unlisted",
@@ -367,11 +397,16 @@ export function grossTotals(items) {
   let count = 0;
   for (const item of items) {
     if (item.lowUsd == null || item.highUsd == null) continue;
-    low += Number(item.lowUsd);
-    high += Number(item.highUsd);
+    const quantity = itemQuantity(item);
+    low += Number(item.lowUsd) * quantity;
+    high += Number(item.highUsd) * quantity;
     count += 1;
   }
   return { low, high, count };
+}
+
+export function itemQuantity(item) {
+  return Math.max(1, Math.min(9999, Number(item?.unitCount) || 1));
 }
 
 // Guess after fees. Fee comes off the price first, then shipping.
