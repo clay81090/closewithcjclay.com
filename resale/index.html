@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Resale">
+  <title>Resale</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icon.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body data-view="camera">
+  <header class="top">
+    <div class="top-row">
+      <h1>Resale</h1>
+      <button type="button" id="go" class="go">Find resale prices</button>
+    </div>
+    <nav class="nav">
+      <button type="button" data-view="camera" class="nav-on">Camera</button>
+      <button type="button" data-view="list">Items</button>
+      <button type="button" data-view="settings">Settings</button>
+    </nav>
+    <p id="progress" class="progress"></p>
+  </header>
+
+  <div class="workspace">
+    <section id="view-camera" class="view on">
+      <p id="boot" class="boot">Loading starter items…</p>
+      <p class="quiet">Saved on this browser.</p>
+      <video id="preview" class="preview" playsinline autoplay muted hidden></video>
+      <p id="cam-note" class="quiet"></p>
+      <div class="actions">
+        <label class="shutter">
+          Take photo
+          <input id="take" type="file" accept="image/*" capture="environment">
+        </label>
+        <button type="button" id="shutter" class="shutter" hidden>Shutter</button>
+        <label class="choice">
+          Choose photos
+          <input id="choose" type="file" accept="image/*" multiple>
+        </label>
+      </div>
+      <div class="mode">
+        <button type="button" id="another">Another photo of this</button>
+        <button type="button" id="next" class="mode-on">Next item</button>
+      </div>
+      <p id="save-status" class="quiet"></p>
+      <details id="details">
+        <summary>Details</summary>
+        <label>Name <input id="f-name" autocomplete="off"></label>
+        <label>Category <input id="f-category" autocomplete="off"></label>
+        <label>Item date <input id="f-date" autocomplete="off"></label>
+        <label>Serial <input id="f-serial" autocomplete="off"></label>
+        <label>Note <input id="f-notes" autocomplete="off"></label>
+        <label>Where it is stored <input id="f-where" autocomplete="off"></label>
+      </details>
+      <h2>This session</h2>
+      <div id="tray" class="tray"></div>
+    </section>
+
+    <section id="view-list" class="view">
+      <p id="count" class="quiet"></p>
+      <p id="totals" class="totals"></p>
+      <input id="search" type="search" placeholder="Search name, ID, serial, note" autocomplete="off">
+      <div id="filters" class="filters"></div>
+      <div id="rows" class="rows"></div>
+    </section>
+
+    <section id="view-item" class="view">
+      <button type="button" id="back" class="back">Back</button>
+      <div id="item-body"></div>
+    </section>
+
+    <section id="view-settings" class="view">
+      <h2>Settings</h2>
+      <p id="settings-note" class="note"></p>
+      <p>Chrome on your computer and Safari on your phone keep separate catalogs. Export on one, import on the other.</p>
+      <label>Anthropic key
+        <input id="api-key" type="password" autocomplete="off" placeholder="Paste your key">
+      </label>
+      <label>Fee percent <input id="fee" type="number" min="0" max="50" step="1"></label>
+      <label>Shipping guess, dollars <input id="ship" type="number" min="0" step="1"></label>
+      <label>Haiku model id <input id="haiku" autocomplete="off"></label>
+      <label>Sonnet model id <input id="sonnet" autocomplete="off"></label>
+      <div class="actions">
+        <button type="button" id="save-settings">Save settings</button>
+        <button type="button" id="export-backup">Download backup</button>
+        <button type="button" id="share-backup">Share backup</button>
+        <label class="choice">
+          Import backup
+          <input id="import-backup" type="file" accept="application/json,.json">
+        </label>
+      </div>
+    </section>
+  </div>
+  <script type="module" src="./js/ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(resale/**)",
+      "Edit(resale/index.html)",
+      "Edit(resale/styles.css)",
+      "Edit(resale/manifest.webmanifest)",
+      "Edit(resale/sw.js)",
+      "Edit(resale/icon.png)",
+      "Edit(resale/js/**)",
+      "Edit(resale/BUILD_REPORT.md)",
+      "Write(resale/index.html)",
+      "Write(resale/styles.css)",
+      "Write(resale/manifest.webmanifest)",
+      "Write(resale/sw.js)",
+      "Write(resale/icon.png)",
+      "Write(resale/js/**)",
+      "Write(resale/BUILD_REPORT.md)",
+      "Glob(resale/**)",
+      "Grep(resale/**)",
+      "Bash(python3 -m http.server*)",
+      "Bash(git status*)",
+      "Bash(git diff --stat*)"
+    ],
+    "deny": [
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git push*)",
+      "Bash(git reset*)",
+      "Bash(git checkout*)",
+      "Bash(git restore*)",
+      "Bash(git clean*)",
+      "Bash(rm *)",
+      "Bash(sudo *)",
+      "Read(resale/seed/**/*.html)",
+      "Edit(resale/PLAN.md)",
+      "Edit(resale/CLAUDE.md)",
+      "Edit(resale/BUILD_TASK.md)",
+      "Edit(resale/claude-settings.json)",
+      "Edit(resale/start-build.sh)",
+      "Edit(resale/seed/**)",
+      "Edit(resale/memory/**)",
+      "Write(resale/PLAN.md)",
+      "Write(resale/CLAUDE.md)",
+      "Write(resale/seed/**)",
+      "Write(resale/memory/**)",
+      "WebFetch",
+      "WebSearch"
+    ]
+  }
+}
