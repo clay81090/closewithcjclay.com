@@ -4,12 +4,12 @@ import {
   allItems,
   applyAutoStar,
   autoPriority,
-  compsFor,
-  getJob,
+  commitResearchResult,
+  getItem,
   getSettings,
+  photoSignature,
   photosFor,
-  putComp,
-  putItem,
+  researchInputFingerprint,
   saveJob,
   setSetting,
   getSetting,
@@ -34,14 +34,14 @@ Check the matching category first. A weak site is not a sold price.
 - An untested loose watch is not a sealed working boxed watch.
 
 ## Jewelry
-- Do not price until a metal mark is visible. Star it when the mark is missing.
+- If the metal mark is missing, give a broad preliminary costume or unknown-metal range. Never assume precious metal. Star it for follow-up.
 
 ## Coins and currency
-- First: Numista. eBay sold only after the date and mint mark are visible.
+- First: Numista. If date or mint mark is missing, give a broad preliminary range and say what would tighten it.
 - A folder is one lot until a key date is split out.
 
 ## Stamps
-- Scott number and condition before a price.
+- If Scott number or condition is missing, give a broad preliminary range and say what would tighten it.
 
 ## Elvis decanters and whiskey memorabilia
 - HiBid and Proxibid realized prices, then eBay sold.
@@ -57,11 +57,22 @@ Check the matching category first. A weak site is not a sold price.
 `;
 
 const KINDS = new Set(["sold", "auction", "ask", "guide", "appraisal"]);
+const LOCK_NAME = "cj-resale-price-research";
+const FALLBACK_LOCK_KEY = "cj-resale-price-lock";
+const LOCK_TTL_MS = 10 * 60 * 1000;
+let activeController = null;
 
 function numberOrNull(value) {
   if (value == null || value === "") return null;
   const number = Number(value);
-  return Number.isFinite(number) ? number : null;
+  return Number.isFinite(number) && number >= 0 ? number : null;
+}
+
+function normalizedRange(lowValue, highValue) {
+  const low = numberOrNull(lowValue);
+  const high = numberOrNull(highValue);
+  if (low == null || high == null) return { low, high };
+  return low <= high ? { low, high } : { low: high, high: low };
 }
 
 async function downscale(blob) {
@@ -146,10 +157,20 @@ async function buildContent(items) {
               (item.name || "unknown") +
               "; category=" +
               (item.category || "unknown") +
+              "; item date=" +
+              (item.itemDate || item.year || "unknown") +
+              "; serial/model=" +
+              (item.serial || "unknown") +
               "; condition=" +
               (item.condition || "") +
-              "; OWNER FACTS=" +
-              (item.notes || item.description || "none")
+              "; tested status=" +
+              (item.tested || "not stated") +
+              "; quantity=" +
+              (item.quantity || "not stated") +
+              "; OWNER NOTES=" +
+              (item.notes || "none") +
+              "; DESCRIPTION=" +
+              (item.description || "none")
             );
           })
           .join("\n"),
@@ -158,10 +179,20 @@ async function buildContent(items) {
 
   for (const item of items) {
     const photos = await photosFor(item.id);
-    const chosen = photos.slice(0, 4);
+    const chosen =
+      photos.length <= 6
+        ? photos
+        : [...photos.slice(0, 2), ...photos.slice(-4)];
     blocks.push({
       type: "text",
-      text: "Photos for " + item.id + " (" + chosen.length + " of " + photos.length + ").",
+      text:
+        "Photos for " +
+        item.id +
+        " (" +
+        chosen.length +
+        " of " +
+        photos.length +
+        "). First views plus newest detail photos are included.",
     });
     for (const photo of chosen) {
       try {
@@ -222,23 +253,39 @@ async function callModel(settings, model, items, allowSearch) {
       "anthropic-dangerous-direct-browser-access": "true",
     },
     body: JSON.stringify(body),
+    signal: activeController?.signal,
   });
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
     const message = data.error && data.error.message ? data.error.message : "Lookup failed";
     const error = new Error(explainApiFailure(response.status, message));
     error.status = response.status;
+    error.code = "HTTP";
     throw error;
   }
   const text = (data.content || [])
     .filter((block) => block.type === "text" && block.text)
     .map((block) => block.text)
     .join("\n");
-  if (!text.trim()) throw new Error("The lookup returned no price text");
+  if (!text.trim()) {
+    const error = new Error("The lookup returned no price text");
+    error.code = "EMPTY_RESPONSE";
+    throw error;
+  }
   const start = text.indexOf("{");
   const end = text.lastIndexOf("}");
-  if (start < 0 || end < start) throw new Error("The lookup did not return JSON");
-  return JSON.parse(text.slice(start, end + 1));
+  if (start < 0 || end < start) {
+    const error = new Error("The lookup did not return structured price data");
+    error.code = "PARSE_RESPONSE";
+    throw error;
+  }
+  try {
+    return JSON.parse(text.slice(start, end + 1));
+  } catch (cause) {
+    const error = new Error("The lookup returned malformed price data. No second paid attempt was made.");
+    error.code = "PARSE_RESPONSE";
+    throw error;
+  }
 }
 
 function isAuthOrBillingError(err) {
@@ -252,9 +299,13 @@ async function lookupGroup(settings, model, items) {
   try {
     return await callModel(settings, model, items, true);
   } catch (err) {
-    // Only a bad key or empty balance should hard-fail. Anything else, try again
-    // without the web search tool so a tool hiccup never blocks an estimate.
-    if (isAuthOrBillingError(err)) throw err;
+    if (isAuthOrBillingError(err) || err.name === "AbortError") throw err;
+    const message = String(err.message || "");
+    const toolRejected =
+      err.code === "HTTP" &&
+      (err.status === 400 || err.status === 422) &&
+      /tool|web_search|search/i.test(message);
+    if (!toolRejected) throw err;
     return callModel(settings, model, items, false);
   }
 }
@@ -277,13 +328,65 @@ async function rememberComp(item, comp) {
 }
 
 function rangeFromCompAmounts(comps) {
-  const amounts = comps.map((comp) => comp.amount).filter((amount) => amount != null && Number.isFinite(Number(amount)));
+  const amounts = comps
+    .map((comp) => numberOrNull(comp.amount))
+    .filter((amount) => amount != null && amount > 0);
   if (!amounts.length) return { low: null, high: null };
   return { low: Math.min(...amounts), high: Math.max(...amounts) };
 }
 
-export async function applyLookup(item, result) {
-  const next = { ...item };
+function isDocumentedSaleComp(comp) {
+  if (comp.kind !== "sold" && comp.kind !== "auction") return false;
+  if (comp.amount == null || comp.amount <= 0 || !comp.note) return false;
+  try {
+    const url = new URL(comp.url);
+    return (url.protocol === "http:" || url.protocol === "https:") && url.pathname !== "/";
+  } catch (error) {
+    return false;
+  }
+}
+
+const RESEARCH_FIELDS = [
+  "name",
+  "category",
+  "suggestedName",
+  "suggestedCategory",
+  "identityConfidence",
+  "pricingConfidence",
+  "uncertainReason",
+  "potentialHigh",
+  "potentialCondition",
+  "conditionTiers",
+  "errorText",
+  "evidence",
+  "nextStep",
+  "lowUsd",
+  "highUsd",
+  "askUsd",
+  "pricingStatus",
+  "evidenceBacked",
+  "verifiedSaleCount",
+  "starred",
+  "starReason",
+  "priority",
+  "lookupModel",
+  "lookupLabel",
+];
+
+function researchPatch(item) {
+  return Object.fromEntries(RESEARCH_FIELDS.map((key) => [key, item[key]]));
+}
+
+export async function applyLookup(item, result, meta = {}) {
+  const current = await getItem(item.id);
+  if (!current) return { status: "deleted", item: null };
+  const expectedFingerprint = item.__researchFingerprint || researchInputFingerprint(item);
+  const expectedPhotoSignature = item.__photoSignature || photoSignature(await photosFor(item.id));
+  if (researchInputFingerprint(current) !== expectedFingerprint) {
+    return { status: "changed", item: current };
+  }
+
+  const next = { ...current };
   if (!next.name && result.name) next.name = result.name;
   if (!next.category && result.category) next.category = result.category;
   if (result.name) next.suggestedName = result.name;
@@ -296,11 +399,14 @@ export async function applyLookup(item, result) {
   next.potentialCondition = result.potentialCondition ? String(result.potentialCondition).trim() : "";
   next.conditionTiers = Array.isArray(result.conditionTiers)
     ? result.conditionTiers
-        .map((tier) => ({
-          label: tier && tier.label ? String(tier.label).trim() : "",
-          low: numberOrNull(tier && tier.low),
-          high: numberOrNull(tier && tier.high),
-        }))
+        .map((tier) => {
+          const range = normalizedRange(tier && tier.low, tier && tier.high);
+          return {
+            label: tier && tier.label ? String(tier.label).trim() : "",
+            low: range.low,
+            high: range.high,
+          };
+        })
         .filter((tier) => tier.label && (tier.low != null || tier.high != null))
         .slice(0, 5)
     : [];
@@ -314,16 +420,12 @@ export async function applyLookup(item, result) {
       amount: numberOrNull(comp.amount),
       note: comp.note || "",
     }));
-  const hasSale = comps.some((comp) => comp.kind === "sold" || comp.kind === "auction");
+  const documentedSales = comps.filter(isDocumentedSaleComp);
+  const hasSale = documentedSales.length > 0;
   const needsPhoto = String(result.needsPhoto || "").trim();
 
-  const previous = await compsFor(item.id);
-  for (const comp of previous) {
-    if (comp.latest) await putComp({ ...comp, latest: false });
-  }
   const seenAt = new Date().toISOString();
-  for (const comp of comps) {
-    await putComp({
+  const compRows = comps.map((comp) => ({
       id: crypto.randomUUID(),
       itemId: item.id,
       url: comp.url,
@@ -333,13 +435,10 @@ export async function applyLookup(item, result) {
       note: comp.note,
       seenAt,
       latest: true,
-    });
-    await rememberComp(next, comp);
-  }
+  }));
 
   next.errorText = "";
-  let low = numberOrNull(result.low);
-  let high = numberOrNull(result.high);
+  let { low, high } = normalizedRange(result.low, result.high);
   if (low == null || high == null) {
     const derived = rangeFromCompAmounts(comps);
     if (low == null) low = derived.low;
@@ -354,14 +453,17 @@ export async function applyLookup(item, result) {
 
   const hasAsk = comps.some((comp) => comp.kind === "ask" || comp.kind === "guide" || comp.kind === "appraisal");
   const priceSure =
-    hasSale &&
+    documentedSales.length > 0 &&
     (next.pricingConfidence == null || next.pricingConfidence >= 0.55) &&
     !needsPhoto &&
     !next.uncertainReason;
+  next.evidenceBacked = priceSure;
+  next.verifiedSaleCount = documentedSales.length;
 
   if (low != null && high != null) {
     next.lowUsd = low;
     next.highUsd = high;
+    if (next.potentialHigh != null && next.potentialHigh < high) next.potentialHigh = null;
     next.askUsd = numberOrNull(result.ask);
     next.pricingStatus = priceSure ? "priced" : "estimate";
     if (next.pricingStatus === "estimate" && next.evidence && !/preliminary/i.test(next.evidence)) {
@@ -393,19 +495,31 @@ export async function applyLookup(item, result) {
   }
   applyAutoStar(next, needsPhoto);
   next.priority = autoPriority(next);
-  await putItem(next);
-  return next;
+  next.lookupModel = meta.model || "";
+  next.lookupLabel = meta.label || "";
+
+  const outcome = await commitResearchResult({
+    id: item.id,
+    expectedFingerprint,
+    expectedPhotoSignature,
+    patch: researchPatch(next),
+    comps: compRows,
+  });
+  if (outcome.status === "saved") {
+    for (const comp of comps) await rememberComp(outcome.item, comp);
+  }
+  return outcome;
 }
 
 async function failItem(item, message) {
-  const next = {
-    ...item,
-    pricingStatus: "failed",
-    errorText: message,
-    nextStep: message,
-  };
-  await putItem(next);
-  return next;
+  return commitResearchResult({
+    id: item.id,
+    expectedFingerprint: item.__researchFingerprint || researchInputFingerprint(item),
+    expectedPhotoSignature: item.__photoSignature || photoSignature(await photosFor(item.id)),
+    patch: { pricingStatus: "failed", errorText: message, nextStep: message },
+    comps: [],
+    replaceComps: false,
+  });
 }
 
 async function priceGroup(settings, model, group, onProgress, states, unsure) {
@@ -419,36 +533,43 @@ async function priceGroup(settings, model, group, onProgress, states, unsure) {
     for (const item of group) {
       const row = byId.get(item.id);
       if (!row) {
-        states[item.id] = "failed";
-        await failItem(item, "This item was missing from the lookup result.");
+        const failure = await failItem(item, "This item was missing from the lookup result.");
+        states[item.id] = failure.status === "saved" ? "failed" : "discarded";
         continue;
       }
       try {
-        const saved = await applyLookup(item, row);
         const label = modelPhrase(model, settings, false).replace(/^Using /, "").replace(/\.$/, "");
-        saved.lookupModel = model;
-        saved.lookupLabel = label;
-        await putItem(saved);
+        const outcome = await applyLookup(item, row, { model, label });
+        if (outcome.status === "deleted" || outcome.status === "changed") {
+          states[item.id] = "discarded";
+          continue;
+        }
+        const saved = outcome.item;
         states[item.id] = "done";
         const lowConfidence = typeof saved.identityConfidence === "number" && saved.identityConfidence < 0.5;
         const newlyStarred = saved.starred && !item.starred;
         if (!unsure && model !== closerModel(settings) && (lowConfidence || newlyStarred)) retry.push(saved);
       } catch (err) {
-        states[item.id] = "failed";
-        await failItem(item, err.message || "Could not save this result");
+        const failure = await failItem(item, err.message || "Could not save this result");
+        states[item.id] = failure.status === "saved" ? "failed" : "discarded";
       }
     }
   } catch (err) {
+    if (err.name === "AbortError") {
+      for (const item of group) states[item.id] = "cancelled";
+      if (onProgress) onProgress(states, "Lookup cancelled. Saved items were kept.");
+      return retry;
+    }
     for (const item of group) {
-      states[item.id] = "failed";
-      await failItem(item, err.message || "Lookup failed");
+      const failure = await failItem(item, err.message || "Lookup failed");
+      states[item.id] = failure.status === "saved" ? "failed" : "discarded";
     }
   }
   if (onProgress) onProgress(states, phrase);
   return retry;
 }
 
-async function runItems(settings, items, onProgress, states) {
+async function runItems(settings, items, onProgress, states, heartbeat) {
   const groups = new Map();
   for (const item of items) {
     const photos = await photosFor(item.id);
@@ -463,37 +584,78 @@ async function runItems(settings, items, onProgress, states) {
     // stronger model for those from the start instead of the fast one.
     const model = photos.length ? modelFor(item, settings) : closerModel(settings);
     if (!groups.has(model)) groups.set(model, []);
-    groups.get(model).push(item);
+    groups.get(model).push({
+      ...item,
+      __researchFingerprint: researchInputFingerprint(item),
+      __photoSignature: photoSignature(photos),
+    });
   }
 
   const retry = [];
   for (const [model, groupItems] of groups) {
     for (const group of chunk(groupItems, 8)) {
+      if (heartbeat) await heartbeat();
       retry.push(...(await priceGroup(settings, model, group, onProgress, states, false)));
+      if (heartbeat) await heartbeat();
     }
   }
   for (const group of chunk(retry, 8)) {
+    if (heartbeat) await heartbeat();
     await priceGroup(settings, closerModel(settings), group, onProgress, states, true);
+    if (heartbeat) await heartbeat();
   }
 }
 
-async function clearStaleJob() {
-  const existing = await getJob();
-  if (!existing || !existing.running) return null;
-  const started = existing.startedAt ? new Date(existing.startedAt).getTime() : 0;
-  if (Date.now() - started < 90000) return existing;
-  existing.running = false;
-  await saveJob(existing);
-  return null;
+function busyError() {
+  const error = new Error("A lookup is already running in this or another tab.");
+  error.code = "BUSY";
+  return error;
 }
 
-export async function researchItems(items, onProgress) {
-  const busy = await clearStaleJob();
-  if (busy && busy.running) {
-    const error = new Error("A lookup is already running. Wait a moment, or refresh the page.");
-    error.code = "BUSY";
-    throw error;
+async function withFallbackLock(task) {
+  const owner = crypto.randomUUID();
+  const now = Date.now();
+  let lease;
+  try {
+    lease = JSON.parse(localStorage.getItem(FALLBACK_LOCK_KEY) || "null");
+  } catch (error) {
+    lease = null;
   }
+  if (lease && lease.expiresAt > now) throw busyError();
+  localStorage.setItem(FALLBACK_LOCK_KEY, JSON.stringify({ owner, expiresAt: now + LOCK_TTL_MS }));
+  const renew = setInterval(() => {
+    localStorage.setItem(
+      FALLBACK_LOCK_KEY,
+      JSON.stringify({ owner, expiresAt: Date.now() + LOCK_TTL_MS })
+    );
+  }, 15000);
+  try {
+    return await task();
+  } finally {
+    clearInterval(renew);
+    try {
+      const current = JSON.parse(localStorage.getItem(FALLBACK_LOCK_KEY) || "null");
+      if (current?.owner === owner) localStorage.removeItem(FALLBACK_LOCK_KEY);
+    } catch (error) {
+      localStorage.removeItem(FALLBACK_LOCK_KEY);
+    }
+  }
+}
+
+async function withResearchLock(task) {
+  if (!navigator.locks?.request) return withFallbackLock(task);
+  let result;
+  let acquired = false;
+  await navigator.locks.request(LOCK_NAME, { ifAvailable: true }, async (lock) => {
+    if (!lock) return;
+    acquired = true;
+    result = await task();
+  });
+  if (!acquired) throw busyError();
+  return result;
+}
+
+async function researchItemsLocked(items, onProgress) {
   const settings = await getSettings();
   if (!settings.apiKey) {
     const error = new Error("Add your Anthropic key to look up prices. Your photos stay saved.");
@@ -505,31 +667,52 @@ export async function researchItems(items, onProgress) {
   const job = {
     itemIds: items.map((item) => item.id),
     startedAt: new Date().toISOString(),
+    heartbeatAt: new Date().toISOString(),
     running: true,
     states,
   };
   await saveJob(job);
   if (onProgress) onProgress(states);
+  activeController = new AbortController();
+  const heartbeat = async () => {
+    job.heartbeatAt = new Date().toISOString();
+    job.states = { ...states };
+    await saveJob(job);
+  };
   try {
-    await runItems(settings, items, onProgress, states);
+    await runItems(settings, items, onProgress, states, heartbeat);
   } finally {
     job.running = false;
     job.states = states;
+    job.finishedAt = new Date().toISOString();
     await saveJob(job);
+    activeController = null;
   }
   return job;
 }
 
+export async function researchItems(items, onProgress) {
+  return withResearchLock(() => researchItemsLocked(items, onProgress));
+}
+
+export function cancelResearch() {
+  if (activeController) activeController.abort();
+}
+
 export async function researchUnpriced(onProgress) {
+  const settings = await getSettings();
+  const limit = Math.max(1, Math.min(25, Number(settings.maxItemsPerRun) || 10));
   const items = (await allItems()).filter(
     (item) => item.pricingStatus === "saved" || item.pricingStatus === "failed"
-  );
+  ).slice(0, limit);
   if (!items.length) return null;
   return researchItems(items, onProgress);
 }
 
 export async function researchFailed(onProgress) {
-  const items = (await allItems()).filter((item) => item.pricingStatus === "failed");
+  const settings = await getSettings();
+  const limit = Math.max(1, Math.min(25, Number(settings.maxItemsPerRun) || 10));
+  const items = (await allItems()).filter((item) => item.pricingStatus === "failed").slice(0, limit);
   if (!items.length) return null;
   return researchItems(items, onProgress);
 }

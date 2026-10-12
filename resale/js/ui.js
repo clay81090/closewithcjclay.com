@@ -1,6 +1,15 @@
 // Screen controller. Camera first. Prices only after Find resale prices.
 
-import { checksumOf, grabFrame, hasPreview, isIphone, startPreview, stopPreview } from "./camera.js";
+import {
+  checksumOf,
+  grabFrame,
+  hashDistance,
+  hasPreview,
+  isIphone,
+  perceptualHashOf,
+  startPreview,
+  stopPreview,
+} from "./camera.js";
 import {
   allItems,
   allPhotos,
@@ -15,8 +24,10 @@ import {
   deletePhoto,
   getItem,
   getJob,
+  getRecoveryBackup,
   getSettings,
   grossTotals,
+  importCatalogAtomic,
   mightClear,
   money,
   photosFor,
@@ -25,12 +36,11 @@ import {
   putItem,
   putPhoto,
   removeItemFully,
-  replaceCatalog,
-  saveJob,
   setSetting,
 } from "./db.js";
 import { importSeed } from "./seed.js";
 import {
+  cancelResearch,
   displayAsk,
   listingBlurb,
   researchItems,
@@ -253,10 +263,18 @@ function card(item) {
 
 function paintHero() {
   const totals = grossTotals(state.items);
+  const backedTotals = grossTotals(state.items.filter((item) => item.evidenceBacked));
+  const preliminaryTotals = grossTotals(state.items.filter((item) => !item.evidenceBacked));
   const items = state.items.length;
   const preliminary = state.items.filter((item) => item.pricingStatus === "estimate").length;
   $("hero-range").textContent = totals.count ? money(totals.low) + " to " + money(totals.high) : "$0";
   $("hero-count").textContent = items + (items === 1 ? " item" : " items");
+  $("hero-backed").textContent = backedTotals.count
+    ? "Evidence-backed: " + money(backedTotals.low) + " to " + money(backedTotals.high)
+    : "Evidence-backed: $0";
+  $("hero-preliminary").textContent = preliminaryTotals.count
+    ? "Preliminary: " + money(preliminaryTotals.low) + " to " + money(preliminaryTotals.high)
+    : "Preliminary: $0";
   $("hero-note").textContent = totals.count
     ? totals.count +
       " with a range" +
@@ -321,10 +339,11 @@ function entry(item) {
   const count = (state.photos.get(item.id) || []).length;
   const comps = state.comps.get(item.id) || [];
   const links = comps
+    .filter((comp) => safeHttpUrl(comp.url))
     .map(
       (comp) =>
         '<a href="' +
-        escapeHtml(comp.url) +
+        escapeHtml(safeHttpUrl(comp.url)) +
         '" target="_blank" rel="noopener">' +
         escapeHtml(comp.site || comp.url) +
         "</a> (" +
@@ -462,11 +481,12 @@ async function renderItem(id) {
     ? mightClear(item.lowUsd, item.highUsd, settings.feePercent, settings.shippingUsd)
     : null;
   const compHtml = comps
+    .filter((comp) => safeHttpUrl(comp.url))
     .map((comp) => {
       const amount = comp.amount == null ? "" : " · " + money(comp.amount);
       return (
         "<p class='comps'><a href='" +
-        escapeHtml(comp.url) +
+        escapeHtml(safeHttpUrl(comp.url)) +
         "' target='_blank' rel='noopener'>" +
         escapeHtml(comp.site || "Source") +
         "</a> · " +
@@ -646,6 +666,30 @@ async function dupeCandidates(item) {
       if (row.itemId !== item.id && !(item.dismissedDupes || []).includes(row.itemId)) ids.add(row.itemId);
     }
   }
+  for (const [otherId, otherPhotos] of state.photos) {
+    if (otherId === item.id || (item.dismissedDupes || []).includes(otherId)) continue;
+    const visuallySimilar = photos.some((photo) =>
+      otherPhotos.some(
+        (other) =>
+          photo.perceptualHash &&
+          other.perceptualHash &&
+          hashDistance(photo.perceptualHash, other.perceptualHash) <= 8
+      )
+    );
+    if (visuallySimilar) ids.add(otherId);
+  }
+  for (const other of state.items) {
+    if (other.id === item.id || (item.dismissedDupes || []).includes(other.id)) continue;
+    const sameSerial =
+      item.serial &&
+      other.serial &&
+      normalizedIdentity(item.serial) === normalizedIdentity(other.serial);
+    const sameNamedItem =
+      normalizedIdentity(item.name) &&
+      normalizedIdentity(item.name) === normalizedIdentity(other.name) &&
+      normalizedIdentity(item.category) === normalizedIdentity(other.category);
+    if (sameSerial || sameNamedItem) ids.add(other.id);
+  }
   const found = [];
   for (const id of ids) {
     const other = state.items.find((row) => row.id === id) || (await getItem(id));
@@ -655,6 +699,28 @@ async function dupeCandidates(item) {
 }
 
 async function mergePair(keepId, dropId) {
+  const keepItem = await getItem(keepId);
+  const dropItem = await getItem(dropId);
+  if (!keepItem || !dropItem) return;
+  const merged = mergeMatchingItem(keepItem, dropItem);
+  const conflicts = [];
+  for (const [label, key] of [
+    ["name", "name"],
+    ["category", "category"],
+    ["item date", "itemDate"],
+    ["serial/model", "serial"],
+    ["storage location", "storageLocation"],
+  ]) {
+    const kept = String(keepItem[key] || "").trim();
+    const dropped = String(dropItem[key] || "").trim();
+    if (kept && dropped && kept !== dropped) conflicts.push("Other " + label + ": " + dropped);
+  }
+  if (conflicts.length) merged.notes = joinDistinct(merged.notes, conflicts.join("\n"));
+  merged.dismissedDupes = [
+    ...new Set([...(keepItem.dismissedDupes || []), ...(dropItem.dismissedDupes || [])]),
+  ].filter((id) => id !== keepId && id !== dropId);
+  await putItem(merged);
+
   const keepPhotos = await photosFor(keepId);
   const seen = new Set(keepPhotos.map((photo) => photo.checksum));
   let order = keepPhotos.length;
@@ -729,6 +795,7 @@ async function lookupOne(itemId) {
   $("progress").textContent = retry
     ? "Retrying " + item.id + ". Same item, not a duplicate."
     : "Pricing " + item.id + "…";
+  $("cancel-lookup").hidden = false;
   try {
     const job = await researchOne(item, (states, note) => {
       state.jobStates = states;
@@ -740,9 +807,12 @@ async function lookupOne(itemId) {
     else if (outcome === "failed") {
       const again = await getItem(item.id);
       $("progress").textContent = again.errorText || "Lookup failed again.";
-    }
+    } else if (outcome === "discarded") $("progress").textContent = "Result discarded because the item changed or was deleted.";
+    else if (outcome === "cancelled") $("progress").textContent = "Lookup cancelled. The item was kept.";
   } catch (err) {
     $("progress").textContent = err.message;
+  } finally {
+    $("cancel-lookup").hidden = true;
   }
   state.jobStates = {};
   await reload();
@@ -762,11 +832,13 @@ function escapeHtml(value) {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 async function attachPhoto(itemId, blob) {
   const checksum = await checksumOf(blob);
+  const perceptualHash = await perceptualHashOf(blob).catch(() => "");
   const existing = await photosFor(itemId);
   if (existing.some((photo) => photo.checksum === checksum)) {
     $("save-status").textContent = "That photo is already on this item.";
@@ -777,6 +849,7 @@ async function attachPhoto(itemId, blob) {
     itemId,
     order: existing.length,
     checksum,
+    perceptualHash,
     createdAt: new Date().toISOString(),
     blob,
   });
@@ -861,11 +934,14 @@ async function runBatchLookup(run) {
   }
   $("go").disabled = true;
   if ($("retry-failed")) $("retry-failed").disabled = true;
+  $("cancel-lookup").hidden = false;
   try {
     const job = await run((states, note) => {
       state.jobStates = { ...states };
       const ids = Object.keys(states);
-      const finished = ids.filter((id) => states[id] === "done" || states[id] === "failed").length;
+      const finished = ids.filter((id) =>
+        ["done", "failed", "discarded", "cancelled"].includes(states[id])
+      ).length;
       $("progress").textContent = ids.length
         ? "Pricing " + finished + " of " + ids.length + "." + (note ? " " + note : "")
         : "Nothing new to price.";
@@ -878,6 +954,7 @@ async function runBatchLookup(run) {
   } finally {
     $("go").disabled = false;
     if ($("retry-failed")) $("retry-failed").disabled = false;
+    $("cancel-lookup").hidden = true;
     state.jobStates = {};
     await reload();
   }
@@ -914,12 +991,198 @@ async function backupPayload() {
   return { kind: "cj-resale-backup", exportedAt: new Date().toISOString(), items, photos: encoded, comps, settings };
 }
 
+function safeHttpUrl(value) {
+  try {
+    const url = new URL(String(value || ""));
+    return url.protocol === "http:" || url.protocol === "https:" ? url.href : "";
+  } catch (error) {
+    return "";
+  }
+}
+
+function assertUniqueIds(rows, label) {
+  const seen = new Set();
+  for (const row of rows) {
+    if (!row || typeof row.id !== "string" || !row.id.trim()) {
+      throw new Error(label + " contains a row without an ID.");
+    }
+    if (seen.has(row.id)) throw new Error(label + " contains the ID " + row.id + " more than once.");
+    seen.add(row.id);
+  }
+}
+
+function validateBackupPayload(raw) {
+  if (!raw || raw.kind !== "cj-resale-backup") throw new Error("That file is not a Resale backup.");
+  if (!Array.isArray(raw.items) || !Array.isArray(raw.photos) || !Array.isArray(raw.comps)) {
+    throw new Error("That backup is incomplete. Items, photos, and comps must all be present.");
+  }
+  assertUniqueIds(raw.items, "Items");
+  assertUniqueIds(raw.photos, "Photos");
+  assertUniqueIds(raw.comps, "Comps");
+
+  const itemIds = new Set(raw.items.map((item) => item.id));
+  for (const photo of raw.photos) {
+    if (!itemIds.has(photo.itemId)) throw new Error("Photo " + photo.id + " points to a missing item.");
+    if (typeof photo.blob !== "string" && !(photo.blob instanceof Blob)) {
+      throw new Error("Photo " + photo.id + " has no usable image data.");
+    }
+  }
+  for (const comp of raw.comps) {
+    if (!itemIds.has(comp.itemId)) throw new Error("Comp " + comp.id + " points to a missing item.");
+    if (!safeHttpUrl(comp.url)) throw new Error("Comp " + comp.id + " has an unsafe or invalid link.");
+  }
+
+  return {
+    kind: raw.kind,
+    exportedAt: raw.exportedAt || "",
+    items: raw.items.map((item) => ({ ...item })),
+    photos: raw.photos.map((photo) => ({
+      ...photo,
+      blob: typeof photo.blob === "string" ? base64ToBlob(photo.blob, photo.type) : photo.blob,
+    })),
+    comps: raw.comps.map((comp) => ({ ...comp, url: safeHttpUrl(comp.url) })),
+    settings: raw.settings && typeof raw.settings === "object" ? { ...raw.settings } : {},
+  };
+}
+
+function normalizedIdentity(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function joinDistinct(left, right) {
+  const a = String(left || "").trim();
+  const b = String(right || "").trim();
+  if (!a) return b;
+  if (!b || a === b || a.includes(b)) return a;
+  if (b.includes(a)) return b;
+  return a + "\n" + b;
+}
+
+function mergeMatchingItem(local, incoming) {
+  const merged = { ...incoming, ...local };
+  merged.name = local.name || incoming.name || "";
+  merged.category = local.category || incoming.category || "";
+  merged.itemDate = local.itemDate || incoming.itemDate || "";
+  merged.serial = local.serial || incoming.serial || "";
+  merged.storageLocation = local.storageLocation || incoming.storageLocation || "";
+  merged.notes = joinDistinct(local.notes, incoming.notes);
+  merged.description = joinDistinct(local.description, incoming.description);
+
+  if (local.lowUsd == null && incoming.lowUsd != null) {
+    for (const key of [
+      "lowUsd",
+      "highUsd",
+      "askUsd",
+      "potentialHigh",
+      "potentialCondition",
+      "conditionTiers",
+      "pricingConfidence",
+      "pricingStatus",
+      "evidence",
+      "nextStep",
+      "uncertainReason",
+      "lookupModel",
+      "lookupLabel",
+    ]) {
+      merged[key] = incoming[key];
+    }
+  }
+  return merged;
+}
+
+async function prepareMergedImport(incoming) {
+  const localItems = await allItems();
+  const localPhotos = await allPhotos();
+  const localComps = await allComps();
+  const localById = new Map(localItems.map((item) => [item.id, item]));
+  const localPhotoIds = new Set(localPhotos.map((photo) => photo.id));
+  const localCompIds = new Set(localComps.map((comp) => comp.id));
+  const checksumsByItem = new Map();
+  for (const photo of localPhotos) {
+    if (!checksumsByItem.has(photo.itemId)) checksumsByItem.set(photo.itemId, new Set());
+    checksumsByItem.get(photo.itemId).add(photo.checksum);
+  }
+
+  let next = Math.max(
+    Number((await getSettings()).nextNumber) || 1,
+    ...localItems.map((item) => Number(String(item.id).match(/\d+/)?.[0]) + 1 || 1),
+    ...incoming.items.map((item) => Number(String(item.id).match(/\d+/)?.[0]) + 1 || 1)
+  );
+  let captureOrder = localItems.reduce((max, item) => Math.max(max, Number(item.captureOrder) || 0), 0);
+  const targetByIncomingId = new Map();
+  const outputItems = [];
+
+  for (const item of incoming.items) {
+    const local = localById.get(item.id);
+    if (!local) {
+      targetByIncomingId.set(item.id, item.id);
+      outputItems.push(item);
+      continue;
+    }
+    const incomingChecksums = new Set(
+      incoming.photos.filter((photo) => photo.itemId === item.id).map((photo) => photo.checksum)
+    );
+    const checksumMatch = [...incomingChecksums].some((checksum) => checksumsByItem.get(item.id)?.has(checksum));
+    const nameMatch =
+      normalizedIdentity(local.name) &&
+      normalizedIdentity(local.name) === normalizedIdentity(item.name);
+    if (checksumMatch || nameMatch) {
+      targetByIncomingId.set(item.id, item.id);
+      outputItems.push(mergeMatchingItem(local, item));
+      continue;
+    }
+
+    const newId = "CJ-" + String(next++).padStart(3, "0");
+    captureOrder += 1;
+    targetByIncomingId.set(item.id, newId);
+    outputItems.push({
+      ...item,
+      id: newId,
+      captureOrder,
+      name: item.name ? item.name + " (imported)" : newId + " imported item",
+    });
+  }
+
+  const outputPhotos = [];
+  for (const photo of incoming.photos) {
+    const target = targetByIncomingId.get(photo.itemId);
+    const sameTargetChecksums = checksumsByItem.get(target) || new Set();
+    if (sameTargetChecksums.has(photo.checksum)) continue;
+    const id = localPhotoIds.has(photo.id) ? crypto.randomUUID() : photo.id;
+    localPhotoIds.add(id);
+    sameTargetChecksums.add(photo.checksum);
+    checksumsByItem.set(target, sameTargetChecksums);
+    outputPhotos.push({ ...photo, id, itemId: target });
+  }
+
+  const outputComps = incoming.comps.map((comp) => {
+    const id = localCompIds.has(comp.id) ? crypto.randomUUID() : comp.id;
+    localCompIds.add(id);
+    return { ...comp, id, itemId: targetByIncomingId.get(comp.itemId) };
+  });
+
+  return {
+    ...incoming,
+    items: outputItems,
+    photos: outputPhotos,
+    comps: outputComps,
+    settings: { ...incoming.settings, nextNumber: next },
+  };
+}
+
 function bind() {
   for (const button of document.querySelectorAll(".nav button")) {
     button.addEventListener("click", () => showView(button.dataset.view));
   }
   $("go").addEventListener("click", onFind);
   $("retry-failed").addEventListener("click", onRetryFailed);
+  $("cancel-lookup").addEventListener("click", () => {
+    cancelResearch();
+    $("progress").textContent = "Cancelling after the current response…";
+  });
   $("take").addEventListener("change", (event) => {
     ingestFiles(event.target.files);
     event.target.value = "";
@@ -985,6 +1248,7 @@ function bind() {
   $("export-backup").addEventListener("click", downloadBackup);
   $("share-backup").addEventListener("click", shareBackup);
   $("import-backup").addEventListener("change", importBackup);
+  $("restore-import").addEventListener("click", restoreLastImport);
 }
 
 async function describeItem() {
@@ -1040,6 +1304,7 @@ async function saveSettings() {
   await setSetting("shippingUsd", Number($("ship").value) || 0);
   await setSetting("haikuModel", $("haiku").value.trim() || "claude-haiku-4-5");
   await setSetting("sonnetModel", $("sonnet").value.trim() || "claude-sonnet-4-6");
+  await setSetting("maxItemsPerRun", Math.max(1, Math.min(25, Number($("max-items").value) || 10)));
   $("api-key").value = "";
   const saved = (await getSettings()).apiKey;
   const hint = saved ? keyHint(saved) : "";
@@ -1077,18 +1342,50 @@ async function importBackup(event) {
   const file = event.target.files && event.target.files[0];
   event.target.value = "";
   if (!file) return;
-  const payload = JSON.parse(await file.text());
-  if (!payload || payload.kind !== "cj-resale-backup" || !Array.isArray(payload.items)) {
-    $("settings-note").textContent = "That file is not a Resale backup.";
+  try {
+    const parsed = JSON.parse(await file.text());
+    const validated = validateBackupPayload(parsed);
+    const mode = $("import-mode").value === "replace" ? "replace" : "merge";
+    if (
+      mode === "replace" &&
+      !window.confirm(
+        "Replace this entire catalog with the backup? A private recovery copy will be saved so you can undo once."
+      )
+    ) {
+      $("settings-note").textContent = "Import cancelled. Nothing changed.";
+      return;
+    }
+
+    const recovery = await backupPayload();
+    const payload = mode === "merge" ? await prepareMergedImport(validated) : validated;
+    await importCatalogAtomic(payload, { mode, recovery });
+    $("restore-import").hidden = false;
+    $("settings-note").textContent =
+      mode === "merge"
+        ? "Backup merged safely. Existing items were kept; ID conflicts became imported copies."
+        : "Backup replaced this catalog. Tap Undo last import if that was not what you wanted.";
+    await reload();
+  } catch (error) {
+    $("settings-note").textContent = "Import stopped before changing anything: " + (error.message || "Invalid backup.");
+  }
+}
+
+async function restoreLastImport() {
+  const recovery = await getRecoveryBackup();
+  if (!recovery || !recovery.payload) {
+    $("settings-note").textContent = "There is no import to undo.";
     return;
   }
-  payload.photos = (payload.photos || []).map((photo) => ({
-    ...photo,
-    blob: typeof photo.blob === "string" ? base64ToBlob(photo.blob, photo.type) : photo.blob,
-  }));
-  await replaceCatalog(payload);
-  $("settings-note").textContent = "Backup imported on this browser. Your key was left as it was.";
-  await reload();
+  if (!window.confirm("Undo the last import and restore the catalog from " + recovery.savedAt + "?")) return;
+  try {
+    const current = await backupPayload();
+    const payload = validateBackupPayload(recovery.payload);
+    await importCatalogAtomic(payload, { mode: "replace", recovery: current });
+    $("settings-note").textContent = "The catalog from before the last import was restored.";
+    await reload();
+  } catch (error) {
+    $("settings-note").textContent = "Restore stopped without changing the catalog: " + (error.message || "Invalid recovery.");
+  }
 }
 
 async function fillSettings() {
@@ -1097,8 +1394,10 @@ async function fillSettings() {
   $("ship").value = settings.shippingUsd;
   $("haiku").value = settings.haikuModel;
   $("sonnet").value = settings.sonnetModel;
+  $("max-items").value = settings.maxItemsPerRun;
   $("api-key").value = "";
   $("api-key").placeholder = settings.apiKey ? "Key saved on this browser" : "Paste your key";
+  $("restore-import").hidden = !(await getRecoveryBackup());
   if (settings.apiKey) {
     $("settings-note").textContent =
       "A key is already saved on this browser (" +
@@ -1120,9 +1419,11 @@ async function start() {
     });
     const job = await getJob();
     if (job && job.running) {
-      job.running = false;
-      await saveJob(job);
-      $("progress").textContent = "The last lookup stopped. Tap Find resale prices to continue. Photos are still saved.";
+      const heartbeat = new Date(job.heartbeatAt || job.startedAt || 0).getTime();
+      const recent = Date.now() - heartbeat < 10 * 60 * 1000;
+      $("progress").textContent = recent
+        ? "A lookup may still be running in another tab. The app will not start a second one."
+        : "The previous lookup stopped. Tap Find resale prices to continue. Photos are still saved.";
     }
     await fillSettings();
     await reload();

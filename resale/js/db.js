@@ -43,7 +43,14 @@ function tx(storeNames, mode, fn) {
     (db) =>
       new Promise((resolve, reject) => {
         const t = db.transaction(storeNames, mode);
-        const result = fn(t);
+        let result;
+        try {
+          result = fn(t);
+        } catch (error) {
+          t.abort();
+          reject(error);
+          return;
+        }
         t.oncomplete = () => resolve(result);
         t.onerror = () => reject(t.error);
         t.onabort = () => reject(t.error || new Error("Save was cancelled"));
@@ -64,6 +71,7 @@ export const DEFAULT_SETTINGS = {
   shippingUsd: 5,
   haikuModel: "claude-haiku-4-5",
   sonnetModel: "claude-sonnet-4-6",
+  maxItemsPerRun: 10,
   seedImported: "",
   nextNumber: 1,
 };
@@ -105,6 +113,94 @@ export async function putItem(item) {
     t.objectStore("items").put(item);
   });
   return item;
+}
+
+export function researchInputFingerprint(item) {
+  const fields = [
+    "name",
+    "category",
+    "itemDate",
+    "year",
+    "serial",
+    "notes",
+    "description",
+    "condition",
+    "quantity",
+    "tested",
+    "starred",
+    "starTouched",
+  ];
+  return JSON.stringify(fields.map((key) => item?.[key] ?? ""));
+}
+
+export function photoSignature(photos) {
+  return [...(photos || [])]
+    .map((photo) => String(photo.checksum || photo.id || ""))
+    .sort()
+    .join("|");
+}
+
+export async function commitResearchResult({
+  id,
+  expectedFingerprint,
+  expectedPhotoSignature,
+  patch,
+  comps = [],
+  replaceComps = true,
+}) {
+  const outcome = { status: "pending", item: null };
+  await tx(["items", "photos", "comps"], "readwrite", (t) => {
+    const items = t.objectStore("items");
+    const photos = t.objectStore("photos");
+    const compStore = t.objectStore("comps");
+    const itemRequest = items.get(id);
+    const photoRequest = photos.index("itemId").getAll(id);
+    let current;
+    let currentPhotos;
+
+    const commitWhenReady = () => {
+      if (current === undefined || currentPhotos === undefined) return;
+      if (!current) {
+        outcome.status = "deleted";
+        return;
+      }
+      if (
+        researchInputFingerprint(current) !== expectedFingerprint ||
+        photoSignature(currentPhotos) !== expectedPhotoSignature
+      ) {
+        outcome.status = "changed";
+        return;
+      }
+
+      const next = { ...current, ...patch };
+      items.put(next);
+      outcome.status = "saved";
+      outcome.item = next;
+
+      if (!replaceComps) return;
+      const newCompIds = new Set(comps.map((comp) => comp.id));
+      const cursorRequest = compStore.index("itemId").openCursor(IDBKeyRange.only(id));
+      cursorRequest.onsuccess = () => {
+        const cursor = cursorRequest.result;
+        if (!cursor) return;
+        if (cursor.value.latest && !newCompIds.has(cursor.value.id)) {
+          cursor.update({ ...cursor.value, latest: false });
+        }
+        cursor.continue();
+      };
+      for (const comp of comps) compStore.put(comp);
+    };
+
+    itemRequest.onsuccess = () => {
+      current = itemRequest.result || null;
+      commitWhenReady();
+    };
+    photoRequest.onsuccess = () => {
+      currentPhotos = photoRequest.result || [];
+      commitWhenReady();
+    };
+  });
+  return outcome;
 }
 
 export async function deleteItem(id) {
@@ -167,11 +263,22 @@ export async function deleteComp(id) {
 }
 
 export async function removeItemFully(id) {
-  const photos = await photosFor(id);
-  for (const photo of photos) await deletePhoto(photo.id);
-  const comps = await compsFor(id);
-  for (const comp of comps) await deleteComp(comp.id);
-  await deleteItem(id);
+  await tx(["items", "photos", "comps"], "readwrite", (t) => {
+    const photos = t.objectStore("photos");
+    const comps = t.objectStore("comps");
+    const deleteIndexed = (store, indexName) => {
+      const request = store.index(indexName).openKeyCursor(IDBKeyRange.only(id));
+      request.onsuccess = () => {
+        const cursor = request.result;
+        if (!cursor) return;
+        store.delete(cursor.primaryKey);
+        cursor.continue();
+      };
+    };
+    deleteIndexed(photos, "itemId");
+    deleteIndexed(comps, "itemId");
+    t.objectStore("items").delete(id);
+  });
 }
 
 export async function getJob() {
@@ -184,12 +291,6 @@ export async function saveJob(job) {
     t.objectStore("jobs").put(job);
   });
   return job;
-}
-
-async function clearStore(name) {
-  await tx([name], "readwrite", (t) => {
-    t.objectStore(name).clear();
-  });
 }
 
 // Next new item. Existing CJ-001 through CJ-031 are never reused.
@@ -224,6 +325,8 @@ export function blankItem(id, captureOrder) {
     potentialHigh: null,
     potentialCondition: "",
     conditionTiers: [],
+    evidenceBacked: false,
+    verifiedSaleCount: 0,
     starred: false,
     starReason: "",
     starTouched: false,
@@ -333,21 +436,45 @@ export function applyAutoStar(item, needsPhoto) {
   return item;
 }
 
-export async function replaceCatalog(payload) {
-  const apiKey = await getSetting("apiKey");
-  await clearStore("items");
-  await clearStore("photos");
-  await clearStore("comps");
-  for (const item of payload.items || []) await putItem(item);
-  for (const photo of payload.photos || []) await putPhoto(photo);
-  for (const comp of payload.comps || []) await putComp(comp);
+export async function importCatalogAtomic(payload, options = {}) {
+  const mode = options.mode === "replace" ? "replace" : "merge";
+  const recovery = options.recovery || null;
   const incoming = payload.settings || {};
-  for (const key of Object.keys(DEFAULT_SETTINGS)) {
-    if (key === "apiKey") continue;
-    if (incoming[key] !== undefined) await setSetting(key, incoming[key]);
-  }
-  await setSetting("apiKey", apiKey || "");
-  await setSetting("seedImported", incoming.seedImported || "backup");
+
+  await tx(["items", "photos", "comps", "settings"], "readwrite", (t) => {
+    const items = t.objectStore("items");
+    const photos = t.objectStore("photos");
+    const comps = t.objectStore("comps");
+    const settings = t.objectStore("settings");
+
+    if (mode === "replace") {
+      items.clear();
+      photos.clear();
+      comps.clear();
+    }
+
+    for (const item of payload.items || []) items.put(item);
+    for (const photo of payload.photos || []) photos.put(photo);
+    for (const comp of payload.comps || []) comps.put(comp);
+
+    for (const key of Object.keys(DEFAULT_SETTINGS)) {
+      if (key === "apiKey" || incoming[key] === undefined) continue;
+      settings.put({ key, value: incoming[key] });
+    }
+    if (incoming.seedImported !== undefined) {
+      settings.put({ key: "seedImported", value: incoming.seedImported });
+    }
+    if (recovery) {
+      settings.put({
+        key: "lastRecoveryBackup",
+        value: { savedAt: new Date().toISOString(), payload: recovery },
+      });
+    }
+  });
+}
+
+export async function getRecoveryBackup() {
+  return getSetting("lastRecoveryBackup");
 }
 
 export async function blobToBase64(blob) {

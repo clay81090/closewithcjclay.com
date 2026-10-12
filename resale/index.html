@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; media-src blob:; connect-src 'self' https://api.anthropic.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta name="referrer" content="no-referrer">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Resale">
   <title>Resale</title>
@@ -18,12 +20,17 @@
       <div class="hero-box">
         <p id="hero-range" class="hero-range">$0</p>
         <p id="hero-count" class="hero-count">0 items</p>
+        <div class="hero-breakdown">
+          <span id="hero-backed">Evidence-backed: $0</span>
+          <span id="hero-preliminary">Preliminary: $0</span>
+        </div>
       </div>
       <p id="hero-note" class="hero-note"></p>
     </div>
     <div class="top-row">
       <button type="button" id="go" class="go">Find resale prices</button>
       <button type="button" id="retry-failed" class="retry-go">Retry failed</button>
+      <button type="button" id="cancel-lookup" class="delete-btn" hidden>Cancel lookup</button>
     </div>
     <nav class="nav">
       <button type="button" data-view="camera">Camera</button>
@@ -115,16 +122,24 @@
       <label>Shipping guess, dollars <input id="ship" type="number" min="0" step="1"></label>
       <label>Haiku model id <input id="haiku" autocomplete="off"></label>
       <label>Sonnet model id <input id="sonnet" autocomplete="off"></label>
+      <label>Maximum items per batch <input id="max-items" type="number" min="1" max="25" step="1"></label>
       <p class="quiet">Leave these two names. You do not pick for each search. Normal items use the fast model. Starred items, and anything the fast model is unsure about, use the closer look. The line at the top tells you which one is running.</p>
       <div class="actions">
         <button type="button" id="save-settings">Save settings</button>
         <button type="button" id="test-key">Test key</button>
         <button type="button" id="export-backup">Download backup</button>
         <button type="button" id="share-backup">Share backup</button>
+        <label>Import behavior
+          <select id="import-mode">
+            <option value="merge">Merge safely (recommended)</option>
+            <option value="replace">Replace this catalog</option>
+          </select>
+        </label>
         <label class="choice">
           Import backup
           <input id="import-backup" type="file" accept="application/json,.json">
         </label>
+        <button type="button" id="restore-import" hidden>Undo last import</button>
       </div>
     </section>
   </div>

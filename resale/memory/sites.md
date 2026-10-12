@@ -24,19 +24,19 @@ When a real comp is saved, the app may append one line under that category: site
 
 ## Jewelry
 
-- Do not price until a metal mark is visible (925, sterling, 14k, gold plate, pewter, or similar).
+- If the metal mark is missing, give only a broad preliminary costume/unknown-metal range. Never assume precious metal.
 - Star when the mark is missing or the piece might be precious metal.
 - Photograph the back, clasp, and any tiny tag.
 
 ## Coins and currency
 
-- First: Numista to identify. eBay sold or iCollector only after the date and mint mark, or the note series, are visible.
+- First: Numista to identify. Use a broad preliminary range if the date, mint mark, or note series is missing; tighten it only after those details are visible.
 - A folder or album is one lot until CJ splits out a key date. Star a possible key date instead of pricing the whole folder as that one coin.
 - A world coin is not a U.S. silver coin. The 1969 Bahamas 25 cents is a known modest example. The 1928A $2 red seal needs grade before a tight price.
 
 ## Stamps
 
-- Identify the Scott number, count, and gum or condition before pricing.
+- If the Scott number, count, gum, or condition is missing, give a broad preliminary range and say exactly what would tighten it.
 - eBay sold for that stamp or booklet, not a broad category page.
 
 ## Elvis decanters and whiskey memorabilia
