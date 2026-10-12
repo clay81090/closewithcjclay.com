@@ -204,7 +204,16 @@ input[type="file"] {
   clip: rect(0 0 0 0);
 }
 
-.mode button { flex: 1; }
+.capture-session {
+  margin-top: 10px;
+  padding: 12px;
+  border: 2px solid #d6b24c;
+  border-radius: 12px;
+  background: #fff9e8;
+}
+
+.capture-session p { margin: 0 0 10px; }
+.capture-session button { width: 100%; }
 
 #details {
   margin-top: 12px;

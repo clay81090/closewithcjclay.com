@@ -59,6 +59,9 @@ const state = {
   photos: new Map(),
   mode: "next",
   currentId: null,
+  ingestPromise: Promise.resolve(),
+  researchQueue: [],
+  researchRunning: false,
   sessionIds: [],
   filter: "all",
   category: "",
@@ -524,6 +527,11 @@ async function renderItem(id) {
     "<div class='photos'>" +
     (photoHtml || "<p>No photo yet.</p>") +
     "</div>" +
+    "<div class='actions item-photo-actions'>" +
+    "<label class='shutter'>Take another photo<input id='edit-take-photo' type='file' accept='image/*' capture='environment'></label>" +
+    "<label class='choice'>Choose more photos<input id='edit-add-photos' type='file' accept='image/*' multiple></label>" +
+    "</div>" +
+    "<p id='edit-photo-status' class='quiet'>New photos will be added to this same item.</p>" +
     "<p class='price" + (item.lowUsd != null && item.highUsd != null ? "" : " price-empty") + "'>" +
     escapeHtml(priceText(item)) +
     "</p>" +
@@ -598,6 +606,18 @@ async function renderItem(id) {
     "<button type='button' id='save-details'>Save these details</button>" +
     "</details>";
 
+  for (const inputId of ["edit-take-photo", "edit-add-photos"]) {
+    $(inputId).addEventListener("change", async (event) => {
+      const files = [...event.target.files];
+      event.target.value = "";
+      const added = await addPhotosToItem(item.id, files);
+      if (!added) return;
+      await reload();
+      await renderItem(item.id);
+      $("edit-photo-status").textContent =
+        added + (added === 1 ? " photo added" : " photos added") + " to " + item.id + ".";
+    });
+  }
   $("toggle-star").addEventListener("click", async () => {
     item.starred = !item.starred;
     item.starTouched = true;
@@ -843,7 +863,7 @@ async function attachPhoto(itemId, blob) {
   const existing = await photosFor(itemId);
   if (existing.some((photo) => photo.checksum === checksum)) {
     $("save-status").textContent = "That photo is already on this item.";
-    return;
+    return false;
   }
   await putPhoto({
     id: crypto.randomUUID(),
@@ -855,6 +875,7 @@ async function attachPhoto(itemId, blob) {
     blob,
   });
   $("save-status").textContent = "Saved";
+  return true;
 }
 
 async function createFromBlob(blob) {
@@ -866,9 +887,19 @@ async function createFromBlob(blob) {
   await attachPhoto(item.id, blob);
   state.detailsDirty = false;
   state.currentId = item.id;
+  sessionStorage.setItem("resale-active-item", item.id);
   rememberSession(item.id);
   fillDetails(item);
   return item;
+}
+
+async function addPhotosToItem(itemId, fileList) {
+  const files = [...fileList].filter((file) => file && (file.type.startsWith("image/") || file.size));
+  let added = 0;
+  for (const file of files) {
+    if (await attachPhoto(itemId, file)) added += 1;
+  }
+  return added;
 }
 
 async function showQuickNote(itemId) {
@@ -895,26 +926,28 @@ async function saveQuickNote(message = "Note saved.") {
 async function ingestFiles(fileList) {
   const files = [...fileList].filter((file) => file && (file.type.startsWith("image/") || file.size));
   if (!files.length) return;
-  let lastItemId = state.currentId;
-  if (state.mode === "another") {
-    let id = state.currentId;
-    for (const file of files) {
-      if (!id) {
-        const item = await createFromBlob(file);
-        id = item.id;
-      } else {
-        await attachPhoto(id, file);
-      }
-      lastItemId = id;
-    }
-  } else {
-    for (const file of files) {
-      const item = await createFromBlob(file);
-      lastItemId = item.id;
-    }
+  let id = state.mode === "active" ? state.currentId : null;
+  let startIndex = 0;
+  if (!id) {
+    const item = await createFromBlob(files[0]);
+    id = item.id;
+    startIndex = 1;
+    state.mode = "active";
   }
+  await addPhotosToItem(id, files.slice(startIndex));
   await reload();
-  if (lastItemId) await showQuickNote(lastItemId);
+  await showQuickNote(id);
+  renderCaptureState();
+}
+
+function queueIngest(fileList) {
+  const files = [...fileList];
+  state.ingestPromise = state.ingestPromise
+    .then(() => ingestFiles(files))
+    .catch((err) => {
+      $("save-status").textContent = err.message || "Could not save those photos.";
+    });
+  return state.ingestPromise;
 }
 
 function setCameraButton() {
@@ -948,9 +981,60 @@ async function turnCameraOn() {
   setCameraButton();
 }
 
-function markMode() {
-  $("another").classList.toggle("mode-on", state.mode === "another");
-  $("next").classList.toggle("mode-on", state.mode === "next");
+function renderCaptureState() {
+  const active = state.mode === "active" && state.currentId;
+  const count = active ? (state.photos.get(state.currentId) || []).length : 0;
+  $("next").disabled = !active;
+  $("capture-status").textContent = active
+    ? "Adding to " + state.currentId + " · " + count + (count === 1 ? " photo" : " photos") +
+      ". Keep taking or choosing photos until you save this item."
+    : "Ready for a new item. Every photo you add stays together until you save it.";
+}
+
+async function processResearchQueue() {
+  if (state.researchRunning) return;
+  state.researchRunning = true;
+  while (state.researchQueue.length) {
+    const itemId = state.researchQueue.shift();
+    await lookupOne(itemId);
+  }
+  state.researchRunning = false;
+}
+
+async function queueItemResearch(itemId) {
+  const settings = await getSettings();
+  if (!settings.apiKey) {
+    $("progress").textContent = itemId + " saved. Add your key later to research it.";
+    return;
+  }
+  if (!state.researchQueue.includes(itemId)) state.researchQueue.push(itemId);
+  processResearchQueue();
+}
+
+async function finishCurrentItem() {
+  await state.ingestPromise;
+  const itemId = state.currentId;
+  const item = itemId ? await getItem(itemId) : null;
+  if (!item) return;
+  const details = readDetails();
+  const quickNote = $("quick-note-text").value.trim();
+  if (quickNote) details.notes = quickNote;
+  else if (!details.notes) details.notes = item.notes || "";
+  Object.assign(item, details);
+  if (!item.priorityTouched) item.priority = autoPriority(item);
+  await putItem(item);
+
+  state.currentId = null;
+  state.mode = "next";
+  sessionStorage.removeItem("resale-active-item");
+  state.detailsDirty = false;
+  $("quick-note").hidden = true;
+  $("quick-note-text").value = "";
+  fillDetails(null);
+  await reload();
+  renderCaptureState();
+  $("save-status").textContent = itemId + " saved. Start the next item while research runs.";
+  queueItemResearch(itemId);
 }
 
 async function runBatchLookup(run) {
@@ -1218,39 +1302,27 @@ function bind() {
     $("progress").textContent = "Cancelling after the current response…";
   });
   $("take").addEventListener("change", (event) => {
-    ingestFiles(event.target.files);
+    queueIngest(event.target.files);
     event.target.value = "";
   });
   $("choose").addEventListener("change", (event) => {
-    ingestFiles(event.target.files);
+    queueIngest(event.target.files);
     event.target.value = "";
   });
   $("shutter").addEventListener("click", async () => {
     const blob = await grabFrame($("preview"));
-    if (blob) await ingestFiles([blob]);
+    if (blob) await queueIngest([blob]);
   });
   $("cam-toggle").addEventListener("click", () => {
     if (hasPreview()) turnCameraOff();
     else turnCameraOn();
   });
-  $("another").addEventListener("click", () => {
-    state.mode = "another";
-    markMode();
-    const current = state.items.find((item) => item.id === state.currentId);
-    if (current) fillDetails(current);
-  });
-  $("next").addEventListener("click", () => {
-    state.mode = "next";
-    state.detailsDirty = false;
-    $("quick-note").hidden = true;
-    fillDetails(null);
-    markMode();
-  });
+  $("next").addEventListener("click", finishCurrentItem);
   $("talk-note").addEventListener("click", noteDictation.toggle);
   $("save-quick-note").addEventListener("click", () => saveQuickNote());
   $("details").addEventListener("input", async () => {
     state.detailsDirty = true;
-    if (state.mode === "another" && state.currentId) {
+    if (state.mode === "active" && state.currentId) {
       const item = await getItem(state.currentId);
       if (!item) return;
       Object.assign(item, readDetails());
@@ -1261,7 +1333,7 @@ function bind() {
   camera.addEventListener("dragover", (event) => event.preventDefault());
   camera.addEventListener("drop", (event) => {
     event.preventDefault();
-    ingestFiles(event.dataTransfer.files);
+    queueIngest(event.dataTransfer.files);
   });
   $("search").addEventListener("input", () => {
     state.query = $("search").value;
@@ -1483,6 +1555,17 @@ async function start() {
     }
     await fillSettings();
     await reload();
+    const activeId = sessionStorage.getItem("resale-active-item");
+    const activeItem = activeId ? await getItem(activeId) : null;
+    if (activeItem) {
+      state.currentId = activeItem.id;
+      state.mode = "active";
+      fillDetails(activeItem);
+      await showQuickNote(activeItem.id);
+    } else {
+      sessionStorage.removeItem("resale-active-item");
+    }
+    renderCaptureState();
     $("boot").hidden = true;
     turnCameraOff();
     const params = new URLSearchParams(window.location.search);
