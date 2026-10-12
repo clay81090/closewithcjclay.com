@@ -122,25 +122,21 @@ async function buildContent(items) {
         "You price resale items for one person. Return JSON only, no markdown.\n\n" +
         SITE_MEMORY +
         learned +
-        "\n\nRules:\n" +
-        "- Identify the item from the photos first, even without a model number. Match the visible design to similar listings.\n" +
-        "- Prefer sold and auction comps. Asking prices and guides are weaker but still useful for a preliminary range.\n" +
-        "- Every comp needs a real http URL you actually found. Do not invent a URL or a sold price.\n" +
-        "- When the photos are enough to name the item and find similar examples, return low and high even if you still need a back label, serial, or working/light test. Put that follow-up in needsPhoto and uncertainReason, not as a reason to skip the range.\n" +
-        "- confidence is how sure you are about what the item is (0 to 1). priceConfidence is how sure you are about the dollar range (0 to 1).\n" +
-        "- Use uncertainReason for one short sentence when the estimate is preliminary, for example back label not photographed or light-up function not confirmed.\n" +
-        "- low and high are the safe range for what you can confirm right now. potentialHigh is the higher price this could reach IF the best case is true (working, electric, in the original box, a desirable model number). Put the conditions that unlock it in potentialCondition, for example if electric, working, and in the original box.\n" +
-        "- If there is no meaningful upside beyond high, set potentialHigh to null.\n" +
-        "- Souvenir medal is not precious-metal or flown metal.\n" +
-        "- Untested loose watch is not a sealed working boxed watch.\n" +
-        "- Base card is not a rare parallel.\n" +
-        "- Box only is not the complete product.\n" +
-        "- Gold plate is not solid gold.\n" +
-        "- The owner's notes are facts about the item in hand. A sealed, unopened, or undamaged box is not the same as an opened, empty, or damaged example. Say that difference in the evidence and do not copy the opened price onto a sealed item.\n" +
-        "- A written description with no photo is enough to search. Do not put needsPhoto on a specific named item such as a doll, card, or bottle when the owner already described the year, name, and whether it is sealed.\n" +
-        "- If a hallmark, caseback, card back, mint mark, or back label would tighten value, put that in needsPhoto but still return your best preliminary low and high when the front photo is enough to compare.\n" +
+        "\n\nYou are a sharp, helpful resale appraiser. Behave like an expert who gives a useful number first and refines later. Never refuse to estimate.\n\n" +
+        "Core rule: ALWAYS return your best low and high in US dollars. A photo is not required. A written description alone is enough. If you found real sold or auction listings, base the range on them. If you could not find a listing right now, still give a reasoned market range from what you know about this kind of item, and lower priceConfidence to show it is a knowledge estimate. Only leave low and high null if the description is too vague to even guess what the item is (for example 'old toy').\n\n" +
+        "Rules:\n" +
+        "- Identify the item from the photos and the owner's words together. You do not need a model number to give a range.\n" +
+        "- Prefer sold and auction comps for the numbers. Asking prices and guides are weaker but fine for a preliminary range.\n" +
+        "- Put a real http URL on any comp you actually found. Never invent a URL or a fake sold price. Having no URL is NOT a reason to skip low and high.\n" +
+        "- confidence is how sure you are what the item is (0 to 1). priceConfidence is how sure you are about the dollars (0 to 1). A knowledge estimate with no live comp should have priceConfidence around 0.3 to 0.5, not null prices.\n" +
+        "- conditionTiers: 3 to 5 rows showing how the value changes with condition, newest first in value. Example rows: used with wear; good, no box; excellent with original outfit; with original box and paperwork; rare variant. Each row is {label, low, high}. Use the owner's stated condition to pick which tier the main low and high come from.\n" +
+        "- low and high reflect the owner's actual condition from OWNER FACTS. If they say in box, pristine, sealed, or collector edition, price the matching higher tier, do not price it like a loose used one.\n" +
+        "- potentialHigh is the top price if the best case is confirmed (sealed, boxed, working, rare variant, desirable model). potentialCondition names what unlocks it. Set potentialHigh null only if there is no upside.\n" +
+        "- uncertainReason: one short sentence on what would tighten the number, for example exact edition or back tag not confirmed. This never blocks the range.\n" +
+        "- needsPhoto: only a short note of what photo would help later. Never a reason to return null prices when you can name the item.\n" +
+        "- Honor the facts: sealed or in-box is not an opened example. Box only is not the complete product. Gold plate is not solid gold. Untested is not confirmed working. Base card is not a rare parallel.\n" +
         "- kind is one of sold, auction, ask, guide, appraisal.\n\n" +
-        'JSON shape: {"items":[{"id":"","name":"","category":"","confidence":0,"priceConfidence":0,"uncertainReason":"","needsPhoto":"","star":false,"starReason":"","low":null,"high":null,"potentialHigh":null,"potentialCondition":"","ask":null,"comps":[{"url":"","site":"","kind":"sold","amount":0,"note":""}],"evidence":"","nextStep":""}]}\n\n' +
+        'JSON shape: {"items":[{"id":"","name":"","category":"","confidence":0,"priceConfidence":0,"uncertainReason":"","needsPhoto":"","star":false,"starReason":"","low":null,"high":null,"potentialHigh":null,"potentialCondition":"","conditionTiers":[{"label":"","low":0,"high":0}],"ask":null,"comps":[{"url":"","site":"","kind":"sold","amount":0,"note":""}],"evidence":"","nextStep":""}]}\n\n' +
         "Items in this batch:\n" +
         items
           .map((item) => {
@@ -245,15 +241,21 @@ async function callModel(settings, model, items, allowSearch) {
   return JSON.parse(text.slice(start, end + 1));
 }
 
+function isAuthOrBillingError(err) {
+  const status = err && err.status;
+  if (status === 401 || status === 403) return true;
+  const message = String((err && err.message) || "").toLowerCase();
+  return message.includes("rejected this key") || message.includes("balance is too low");
+}
+
 async function lookupGroup(settings, model, items) {
   try {
     return await callModel(settings, model, items, true);
   } catch (err) {
-    const message = String(err.message || "");
-    if (/tool|web_search|search/i.test(message)) {
-      return callModel(settings, model, items, false);
-    }
-    throw err;
+    // Only a bad key or empty balance should hard-fail. Anything else, try again
+    // without the web search tool so a tool hiccup never blocks an estimate.
+    if (isAuthOrBillingError(err)) throw err;
+    return callModel(settings, model, items, false);
   }
 }
 
@@ -292,6 +294,16 @@ export async function applyLookup(item, result) {
   if (result.uncertainReason) next.uncertainReason = String(result.uncertainReason).trim();
   next.potentialHigh = numberOrNull(result.potentialHigh);
   next.potentialCondition = result.potentialCondition ? String(result.potentialCondition).trim() : "";
+  next.conditionTiers = Array.isArray(result.conditionTiers)
+    ? result.conditionTiers
+        .map((tier) => ({
+          label: tier && tier.label ? String(tier.label).trim() : "",
+          low: numberOrNull(tier && tier.low),
+          high: numberOrNull(tier && tier.high),
+        }))
+        .filter((tier) => tier.label && (tier.low != null || tier.high != null))
+        .slice(0, 5)
+    : [];
 
   const comps = (Array.isArray(result.comps) ? result.comps : [])
     .filter((comp) => comp && typeof comp.url === "string" && /^https?:\/\//i.test(comp.url.trim()))
@@ -447,7 +459,9 @@ async function runItems(settings, items, onProgress, states) {
       if (onProgress) onProgress(states, "");
       continue;
     }
-    const model = modelFor(item, settings);
+    // No photo means the model has to reason from words alone, so use the
+    // stronger model for those from the start instead of the fast one.
+    const model = photos.length ? modelFor(item, settings) : closerModel(settings);
     if (!groups.has(model)) groups.set(model, []);
     groups.get(model).push(item);
   }

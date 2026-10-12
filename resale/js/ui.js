@@ -152,6 +152,25 @@ function upsideLine(item) {
   return "<p class='upside'>Could reach " + money(item.potentialHigh) + escapeHtml(cond) + "</p>";
 }
 
+function tiersHtml(item) {
+  const tiers = Array.isArray(item.conditionTiers) ? item.conditionTiers : [];
+  if (!tiers.length) return "";
+  const body = tiers
+    .map((tier) => {
+      const range =
+        tier.low != null && tier.high != null
+          ? money(tier.low) + " to " + money(tier.high)
+          : tier.high != null
+          ? "up to " + money(tier.high)
+          : tier.low != null
+          ? money(tier.low) + "+"
+          : "";
+      return "<tr><th>" + escapeHtml(tier.label) + "</th><td>" + escapeHtml(range) + "</td></tr>";
+    })
+    .join("");
+  return "<p class='tier-title'>Value by condition</p><table class='tiers'>" + body + "</table>";
+}
+
 function firstPhoto(itemId) {
   const photos = state.photos.get(itemId) || [];
   return photos[0] || null;
@@ -365,7 +384,9 @@ function entry(item) {
     escapeHtml(lookupButtonLabel(item)) +
     "</button> <button type='button' class='delete-btn' data-delete='" +
     escapeHtml(item.id) +
-    "'>Delete</button></p><details><summary>Description, condition and research</summary><table>" +
+    "'>Delete</button></p><details><summary>Description, condition and research</summary>" +
+    tiersHtml(item) +
+    "<table>" +
     rows +
     (links ? "<tr><th>Sources</th><td>" + links + "</td></tr>" : "") +
     "</table></details></div>";
@@ -487,6 +508,7 @@ async function renderItem(id) {
     "</p>" +
     priceBadge(item) +
     upsideLine(item) +
+    tiersHtml(item) +
     (ask != null ? "<p>Suggested ask " + money(ask) + (item.tested === "untested" && showsTested(item) ? " · Untested" : "") + "</p>" : "") +
     (clear ? "<p>You might clear " + money(clear.low) + " to " + money(clear.high) + ". Guess after fees.</p>" : "") +
     (item.evidence ? "<p>" + escapeHtml(item.evidence) + "</p>" : "") +

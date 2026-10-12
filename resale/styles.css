@@ -323,6 +323,12 @@ textarea {
 
 .ask { margin: 4px 0; color: #333; }
 
+.tier-title { margin: 10px 0 4px; font-weight: 700; color: #31475c; }
+.tiers { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+.tiers th, .tiers td { text-align: left; padding: 6px 4px; border-bottom: 1px solid #e6e6e6; }
+.tiers th { width: 60%; font-weight: 500; color: #333; }
+.tiers td { color: #12654c; font-weight: 700; }
+
 .card-actions { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 2px; }
 .card-actions button { flex: 1; min-width: 110px; }
 

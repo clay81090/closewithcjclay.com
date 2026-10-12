@@ -223,6 +223,7 @@ export function blankItem(id, captureOrder) {
     uncertainReason: "",
     potentialHigh: null,
     potentialCondition: "",
+    conditionTiers: [],
     starred: false,
     starReason: "",
     starTouched: false,
