@@ -135,8 +135,8 @@ function showView(name) {
   for (const view of document.querySelectorAll(".view")) {
     view.classList.toggle("on", view.id === "view-" + name);
   }
-  if (name === "camera" && !isIphone()) bootCamera();
-  if (name !== "camera" && window.innerWidth < 900) stopPreview($("preview"));
+  const cameraHidden = name === "settings" || (name !== "camera" && window.innerWidth < 900);
+  if (cameraHidden) turnCameraOff();
 }
 
 async function reload() {
@@ -583,18 +583,35 @@ async function ingestFiles(fileList) {
   await reload();
 }
 
-async function bootCamera() {
-  if (isIphone() || !navigator.mediaDevices || hasPreview()) return;
+function setCameraButton() {
+  const button = $("cam-toggle");
+  if (isIphone()) {
+    button.hidden = true;
+    return;
+  }
+  button.hidden = false;
+  button.textContent = hasPreview() ? "Turn camera off" : "Turn camera on";
+}
+
+function turnCameraOff() {
+  stopPreview($("preview"));
+  $("preview").hidden = true;
+  $("shutter").hidden = true;
+  if (!isIphone()) $("cam-note").textContent = "Camera is off.";
+  setCameraButton();
+}
+
+async function turnCameraOn() {
   try {
     await startPreview($("preview"));
     $("preview").hidden = false;
     $("shutter").hidden = false;
     $("cam-note").textContent = "";
   } catch (err) {
-    $("preview").hidden = true;
-    $("shutter").hidden = true;
+    turnCameraOff();
     $("cam-note").textContent = "Camera permission is off. You can still add photos.";
   }
+  setCameraButton();
 }
 
 function markMode() {
@@ -675,6 +692,10 @@ function bind() {
   $("shutter").addEventListener("click", async () => {
     const blob = await grabFrame($("preview"));
     if (blob) await ingestFiles([blob]);
+  });
+  $("cam-toggle").addEventListener("click", () => {
+    if (hasPreview()) turnCameraOff();
+    else turnCameraOn();
   });
   $("another").addEventListener("click", () => {
     state.mode = "another";
@@ -797,7 +818,7 @@ async function start() {
     await fillSettings();
     await reload();
     $("boot").hidden = true;
-    if (!isIphone()) bootCamera();
+    turnCameraOff();
     if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js").catch(() => {});
   } catch (err) {
     $("boot").textContent = err.message || "Could not open the catalog";
