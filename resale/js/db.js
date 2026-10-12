@@ -1,5 +1,7 @@
 // Phone database. Everything CJ saves stays in this browser until he exports it.
 
+import { normalizeApiKey } from "./keys.js";
+
 const DB_NAME = "cj-resale";
 const DB_VERSION = 1;
 
@@ -85,6 +87,7 @@ export async function getSettings() {
     const value = await getSetting(key);
     if (value !== undefined) settings[key] = value;
   }
+  if (settings.apiKey) settings.apiKey = normalizeApiKey(settings.apiKey);
   return settings;
 }
 

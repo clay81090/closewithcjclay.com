@@ -38,7 +38,9 @@ import {
   researchUnpriced,
   searchLinks,
   showsTested,
+  verifyAnthropicKey,
 } from "./research.js";
+import { keyHint, normalizeApiKey, validateApiKeyShape } from "./keys.js";
 
 const state = {
   items: [],
@@ -889,6 +891,7 @@ function bind() {
     showView("list");
   });
   $("save-settings").addEventListener("click", saveSettings);
+  $("test-key").addEventListener("click", testSavedKey);
   $("export-backup").addEventListener("click", downloadBackup);
   $("share-backup").addEventListener("click", shareBackup);
   $("import-backup").addEventListener("change", importBackup);
@@ -917,19 +920,41 @@ async function describeItem() {
   await lookupOne(item.id);
 }
 
+async function testSavedKey() {
+  const settings = await getSettings();
+  if (!settings.apiKey) {
+    $("settings-note").textContent = "Paste your Anthropic key, tap Save settings, and wait for Key works.";
+    return;
+  }
+  $("settings-note").textContent = "Checking key on this browser…";
+  try {
+    await verifyAnthropicKey(settings);
+    $("settings-note").textContent = "Key works on this browser. " + keyHint(settings.apiKey) + ".";
+  } catch (err) {
+    $("settings-note").textContent = err.message;
+  }
+}
+
 async function saveSettings() {
-  const typed = $("api-key").value.trim();
-  if (typed) await setSetting("apiKey", typed);
+  const typed = normalizeApiKey($("api-key").value);
+  if (typed) {
+    const shape = validateApiKeyShape(typed);
+    if (shape) {
+      $("settings-note").textContent = shape;
+      return;
+    }
+    await setSetting("apiKey", typed);
+  }
   await setSetting("feePercent", Number($("fee").value) || 0);
   await setSetting("shippingUsd", Number($("ship").value) || 0);
   await setSetting("haikuModel", $("haiku").value.trim() || "claude-haiku-4-5");
   await setSetting("sonnetModel", $("sonnet").value.trim() || "claude-sonnet-4-6");
   $("api-key").value = "";
   const saved = (await getSettings()).apiKey;
-  $("api-key").placeholder = saved ? "Key saved on this browser" : "Paste your key";
-  $("settings-note").textContent = saved
-    ? "Saved on this browser. The key stays here."
-    : "Saved. Paste a key in the box to look up prices.";
+  const hint = saved ? keyHint(saved) : "";
+  $("api-key").placeholder = saved ? "Key saved on this browser" + (hint ? " · " + hint : "") : "Paste your key";
+  if (saved) await testSavedKey();
+  else $("settings-note").textContent = "Saved. Paste a key in the box to look up prices.";
   await reload();
 }
 
@@ -984,7 +1009,10 @@ async function fillSettings() {
   $("api-key").value = "";
   $("api-key").placeholder = settings.apiKey ? "Key saved on this browser" : "Paste your key";
   if (settings.apiKey) {
-    $("settings-note").textContent = "A key is already saved on this browser. Leave the box empty unless you are replacing it.";
+    $("settings-note").textContent =
+      "A key is already saved on this browser (" +
+      keyHint(settings.apiKey) +
+      "). Tap Test key, or paste a new key and Save settings.";
   }
 }
 

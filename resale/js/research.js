@@ -14,6 +14,7 @@ import {
   setSetting,
   getSetting,
 } from "./db.js";
+import { explainApiFailure, normalizeApiKey } from "./keys.js";
 
 // Copy of memory/sites.md so the phone does not depend on a second fetch.
 const SITE_MEMORY = `
@@ -176,7 +177,33 @@ async function buildContent(items) {
   return blocks;
 }
 
+export async function verifyAnthropicKey(settings) {
+  const apiKey = normalizeApiKey(settings.apiKey);
+  if (!apiKey) throw new Error("No key saved yet.");
+  const response = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "x-api-key": apiKey,
+      "anthropic-version": "2023-06-01",
+      "anthropic-dangerous-direct-browser-access": "true",
+    },
+    body: JSON.stringify({
+      model: settings.haikuModel || "claude-haiku-4-5",
+      max_tokens: 8,
+      messages: [{ role: "user", content: "Reply with the word OK." }],
+    }),
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const message = data.error && data.error.message ? data.error.message : "Key check failed";
+    throw new Error(explainApiFailure(response.status, message));
+  }
+  return true;
+}
+
 async function callModel(settings, model, items, allowSearch) {
+  const apiKey = normalizeApiKey(settings.apiKey);
   const body = {
     model,
     max_tokens: 4096,
@@ -189,7 +216,7 @@ async function callModel(settings, model, items, allowSearch) {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      "x-api-key": settings.apiKey,
+      "x-api-key": apiKey,
       "anthropic-version": "2023-06-01",
       "anthropic-dangerous-direct-browser-access": "true",
     },
@@ -198,7 +225,7 @@ async function callModel(settings, model, items, allowSearch) {
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
     const message = data.error && data.error.message ? data.error.message : "Lookup failed";
-    const error = new Error(message);
+    const error = new Error(explainApiFailure(response.status, message));
     error.status = response.status;
     throw error;
   }
