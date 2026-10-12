@@ -12,8 +12,16 @@
 </head>
 <body data-view="list">
   <header class="top">
+    <div class="hero">
+      <p class="hero-kicker">Resale</p>
+      <h1>What this might bring</h1>
+      <div class="hero-box">
+        <p id="hero-range" class="hero-range">$0</p>
+        <p id="hero-count" class="hero-count">0 items</p>
+      </div>
+      <p id="hero-note" class="hero-note"></p>
+    </div>
     <div class="top-row">
-      <h1>Resale</h1>
       <button type="button" id="go" class="go">Find resale prices</button>
     </div>
     <nav class="nav">
@@ -68,7 +76,6 @@
         <button type="button" id="describe-go">Find comps</button>
       </div>
       <p id="count" class="quiet"></p>
-      <p id="totals" class="totals"></p>
       <input id="search" type="search" placeholder="Search items" autocomplete="off">
       <select id="category-filter" aria-label="Filter category">
         <option value="">All categories</option>

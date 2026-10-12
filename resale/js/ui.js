@@ -203,14 +203,18 @@ function card(item) {
   return button;
 }
 
-function renderList() {
-  $("count").textContent = state.items.length + " items";
+function paintHero() {
   const totals = grossTotals(state.items);
-  $("totals").textContent =
-    (totals.count
-      ? money(totals.low) + " to " + money(totals.high) + " across " + totals.count + " priced items. "
-      : "No priced items yet. ") +
-    "October 11, 2026 starter prices are included. Gross estimate, not money in hand.";
+  const items = state.items.length;
+  $("hero-range").textContent = totals.count ? money(totals.low) + " to " + money(totals.high) : "$0";
+  $("hero-count").textContent = items + (items === 1 ? " item" : " items");
+  $("hero-note").textContent = totals.count
+    ? totals.count + " priced. Gross estimate, not money in hand."
+    : "No priced items yet.";
+}
+
+function renderList() {
+  paintHero();
 
   const filters = $("filters");
   if (!filters.childElementCount) {
