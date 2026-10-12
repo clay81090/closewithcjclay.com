@@ -85,10 +85,24 @@ async function toBase64(blob) {
   return dataUrl.split(",")[1] || "";
 }
 
+function fastModel(settings) {
+  return settings.haikuModel || "claude-haiku-4-5";
+}
+
+function closerModel(settings) {
+  return settings.sonnetModel || "claude-sonnet-4-6";
+}
+
 function modelFor(item, settings) {
   const lowConfidence = typeof item.identityConfidence === "number" && item.identityConfidence < 0.5;
-  if (item.starred || lowConfidence) return settings.sonnetModel || "claude-sonnet-4-6";
-  return settings.haikuModel || "claude-haiku-4-5";
+  if (item.starred || lowConfidence) return closerModel(settings);
+  return fastModel(settings);
+}
+
+function modelPhrase(model, settings, unsure) {
+  const kind = model === closerModel(settings) ? "the closer look" : "the fast model";
+  const lead = unsure ? "The fast model was unsure. Now using " : "Using ";
+  return lead + kind + ", " + model + ".";
 }
 
 function chunk(list, size) {
@@ -325,6 +339,46 @@ async function failItem(item, message) {
   return next;
 }
 
+async function priceGroup(settings, model, group, onProgress, states, unsure) {
+  for (const item of group) states[item.id] = "running";
+  const phrase = modelPhrase(model, settings, unsure);
+  if (onProgress) onProgress(states, phrase);
+  const retry = [];
+  try {
+    const parsed = await lookupGroup(settings, model, group);
+    const byId = new Map((parsed.items || []).map((row) => [row.id, row]));
+    for (const item of group) {
+      const row = byId.get(item.id);
+      if (!row) {
+        states[item.id] = "failed";
+        await failItem(item, "This item was missing from the lookup result.");
+        continue;
+      }
+      try {
+        const saved = await applyLookup(item, row);
+        const label = modelPhrase(model, settings, false).replace(/^Using /, "").replace(/\.$/, "");
+        saved.lookupModel = model;
+        saved.lookupLabel = label;
+        await putItem(saved);
+        states[item.id] = "done";
+        const lowConfidence = typeof saved.identityConfidence === "number" && saved.identityConfidence < 0.5;
+        const newlyStarred = saved.starred && !item.starred;
+        if (!unsure && model !== closerModel(settings) && (lowConfidence || newlyStarred)) retry.push(saved);
+      } catch (err) {
+        states[item.id] = "failed";
+        await failItem(item, err.message || "Could not save this result");
+      }
+    }
+  } catch (err) {
+    for (const item of group) {
+      states[item.id] = "failed";
+      await failItem(item, err.message || "Lookup failed");
+    }
+  }
+  if (onProgress) onProgress(states, phrase);
+  return retry;
+}
+
 async function runItems(settings, items, onProgress, states) {
   const groups = new Map();
   for (const item of items) {
@@ -333,7 +387,7 @@ async function runItems(settings, items, onProgress, states) {
     if (!photos.length && written.length < 8) {
       states[item.id] = "failed";
       await failItem(item, "Add a photo or describe the item.");
-      if (onProgress) onProgress(states);
+      if (onProgress) onProgress(states, "");
       continue;
     }
     const model = modelFor(item, settings);
@@ -341,36 +395,14 @@ async function runItems(settings, items, onProgress, states) {
     groups.get(model).push(item);
   }
 
+  const retry = [];
   for (const [model, groupItems] of groups) {
     for (const group of chunk(groupItems, 8)) {
-      for (const item of group) states[item.id] = "running";
-      if (onProgress) onProgress(states);
-      try {
-        const parsed = await lookupGroup(settings, model, group);
-        const byId = new Map((parsed.items || []).map((row) => [row.id, row]));
-        for (const item of group) {
-          const row = byId.get(item.id);
-          if (!row) {
-            states[item.id] = "failed";
-            await failItem(item, "This item was missing from the lookup result.");
-            continue;
-          }
-          try {
-            await applyLookup(item, row);
-            states[item.id] = "done";
-          } catch (err) {
-            states[item.id] = "failed";
-            await failItem(item, err.message || "Could not save this result");
-          }
-        }
-      } catch (err) {
-        for (const item of group) {
-          states[item.id] = "failed";
-          await failItem(item, err.message || "Lookup failed");
-        }
-      }
-      if (onProgress) onProgress(states);
+      retry.push(...(await priceGroup(settings, model, group, onProgress, states, false)));
     }
+  }
+  for (const group of chunk(retry, 8)) {
+    await priceGroup(settings, closerModel(settings), group, onProgress, states, true);
   }
 }
 

@@ -282,6 +282,7 @@ function entry(item) {
     ["Evidence", item.evidence],
     ["Next step", item.nextStep],
     ["My notes", item.notes],
+    ["Looked up with", item.lookupLabel],
   ]
     .filter((row) => row[1])
     .map((row) => "<tr><th>" + escapeHtml(row[0]) + "</th><td>" + escapeHtml(row[1]) + "</td></tr>")
@@ -417,6 +418,7 @@ async function renderItem(id) {
     (item.evidence ? "<p>" + escapeHtml(item.evidence) + "</p>" : "") +
     (item.nextStep ? "<p>" + escapeHtml(item.nextStep) + "</p>" : "") +
     (item.starReason ? "<p>Star: " + escapeHtml(item.starReason) + "</p>" : "") +
+    (item.lookupLabel ? "<p>Looked up with " + escapeHtml(item.lookupLabel) + ".</p>" : "") +
     "<p>" +
     links +
     "</p>" +
@@ -600,9 +602,9 @@ async function lookupOne(item) {
   }
   $("progress").textContent = "Pricing " + item.id + "…";
   try {
-    await researchOne(item, (states) => {
+    await researchOne(item, (states, note) => {
       state.jobStates = states;
-      $("progress").textContent = "Pricing " + item.id + "…";
+      $("progress").textContent = "Pricing " + item.id + "." + (note ? " " + note : "");
     });
   } catch (err) {
     $("progress").textContent = err.message;
@@ -730,11 +732,13 @@ async function onFind() {
   }
   $("go").disabled = true;
   try {
-    const job = await researchUnpriced((states) => {
+    const job = await researchUnpriced((states, note) => {
       state.jobStates = { ...states };
       const ids = Object.keys(states);
       const finished = ids.filter((id) => states[id] === "done" || states[id] === "failed").length;
-      $("progress").textContent = ids.length ? "Pricing " + finished + " of " + ids.length : "Nothing new to price.";
+      $("progress").textContent = ids.length
+        ? "Pricing " + finished + " of " + ids.length + "." + (note ? " " + note : "")
+        : "Nothing new to price.";
       render();
     });
     if (!job) $("progress").textContent = "Nothing new to price.";
