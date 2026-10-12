@@ -160,6 +160,20 @@ export async function putComp(comp) {
   });
 }
 
+export async function deleteComp(id) {
+  await tx(["comps"], "readwrite", (t) => {
+    t.objectStore("comps").delete(id);
+  });
+}
+
+export async function removeItemFully(id) {
+  const photos = await photosFor(id);
+  for (const photo of photos) await deletePhoto(photo.id);
+  const comps = await compsFor(id);
+  for (const comp of comps) await deleteComp(comp.id);
+  await deleteItem(id);
+}
+
 export async function getJob() {
   return tx(["jobs"], "readonly", (t) => requestToPromise(t.objectStore("jobs").get("active")));
 }

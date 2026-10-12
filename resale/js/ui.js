@@ -24,6 +24,7 @@ import {
   putComp,
   putItem,
   putPhoto,
+  removeItemFully,
   replaceCatalog,
   saveJob,
   setSetting,
@@ -362,13 +363,32 @@ function entry(item) {
     escapeHtml(item.id) +
     "'>" +
     escapeHtml(lookupButtonLabel(item)) +
-    "</button></p><details><summary>Description, condition and research</summary><table>" +
+    "</button> <button type='button' class='delete-btn' data-delete='" +
+    escapeHtml(item.id) +
+    "'>Delete</button></p><details><summary>Description, condition and research</summary><table>" +
     rows +
     (links ? "<tr><th>Sources</th><td>" + links + "</td></tr>" : "") +
     "</table></details></div>";
   article.querySelector("[data-open]").addEventListener("click", () => openItem(item.id));
   article.querySelector("[data-reprice]").addEventListener("click", () => lookupOne(item.id));
+  article.querySelector("[data-delete]").addEventListener("click", () => removeItem(item));
   return article;
+}
+
+async function removeItem(item) {
+  const label = item.name ? item.name + " (" + item.id + ")" : item.id;
+  if (!window.confirm("Delete " + label + "? This removes the item and its photos on this device. It cannot be undone.")) {
+    return;
+  }
+  await removeItemFully(item.id);
+  state.sessionIds = state.sessionIds.filter((id) => id !== item.id);
+  sessionStorage.setItem("resale-session", JSON.stringify(state.sessionIds));
+  if (state.selectedId === item.id) {
+    state.selectedId = null;
+    showView("list");
+  }
+  await reload();
+  $("progress").textContent = "Deleted " + item.id + ".";
 }
 
 function sortComparator(a, b) {
@@ -500,6 +520,7 @@ async function renderItem(id) {
       ? ""
       : "<button type='button' id='refresh-one'>Update price using my notes</button>") +
     "<button type='button' id='copy-blurb'>Copy listing</button>" +
+    "<button type='button' id='delete-item' class='delete-btn'>Delete this item</button>" +
     "</div>" +
     "<pre id='blurb'>" +
     escapeHtml(listingBlurb(item)) +
@@ -575,6 +596,7 @@ async function renderItem(id) {
   $("save-note").addEventListener("click", () => saveEdits(item, { refine: false }));
   $("save-refine").addEventListener("click", () => saveEdits(item, { refine: true }));
   if ($("save-details")) $("save-details").addEventListener("click", () => saveEdits(item, { refine: false }));
+  $("delete-item").addEventListener("click", () => removeItem(item));
 }
 
 function dupeHtml(item, other) {
