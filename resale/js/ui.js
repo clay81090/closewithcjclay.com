@@ -1070,13 +1070,14 @@ async function runBatchLookup(run) {
       const finished = ids.filter((id) =>
         ["done", "failed", "discarded", "cancelled"].includes(states[id])
       ).length;
+      const current = ids.find((id) => states[id] === "running");
       $("progress").textContent = ids.length
-        ? "Pricing " + finished + " of " + ids.length + "." + (note ? " " + note : "")
+        ? (current ? "Pricing " + current + ". " : "Pricing ") + finished + " of " + ids.length + "." + (note ? " " + note : "")
         : "Nothing new to price.";
       render();
     });
     if (!job) $("progress").textContent = "Nothing new to price.";
-    else $("progress").textContent = "Lookup finished.";
+    else $("progress").textContent = "All unfinished items were processed.";
   } catch (err) {
     $("progress").textContent = err.message;
   } finally {
@@ -1302,7 +1303,7 @@ async function prepareMergedImport(incoming) {
 }
 
 function bind() {
-  initSmartBatch({ onSaved: reload, onNeedsKey: () => showView("settings") });
+  initSmartBatch({ onSaved: async () => { await reload(); onFind(); }, onNeedsKey: () => showView("settings") });
   const noteDictation = createNoteDictation({
     textarea: $("quick-note-text"),
     button: $("talk-note"),
@@ -1449,7 +1450,6 @@ async function saveSettings() {
   await setSetting("shippingUsd", Number($("ship").value) || 0);
   await setSetting("haikuModel", $("haiku").value.trim() || "claude-haiku-4-5");
   await setSetting("sonnetModel", $("sonnet").value.trim() || "claude-sonnet-4-6");
-  await setSetting("maxItemsPerRun", Math.max(1, Math.min(25, Number($("max-items").value) || 10)));
   $("api-key").value = "";
   const saved = (await getSettings()).apiKey;
   const hint = saved ? keyHint(saved) : "";
@@ -1539,7 +1539,6 @@ async function fillSettings() {
   $("ship").value = settings.shippingUsd;
   $("haiku").value = settings.haikuModel;
   $("sonnet").value = settings.sonnetModel;
-  $("max-items").value = settings.maxItemsPerRun;
   $("api-key").value = "";
   $("api-key").placeholder = settings.apiKey ? "Key saved on this browser" : "Paste your key";
   $("restore-import").hidden = !(await getRecoveryBackup());
@@ -1587,6 +1586,8 @@ async function start() {
     turnCameraOff();
     const params = new URLSearchParams(window.location.search);
     showView(params.get("settings") === "1" ? "settings" : "list");
+    const pricingSettings = await getSettings();
+    if (pricingSettings.apiKey && state.items.some((item) => item.pricingStatus === "saved")) setTimeout(onFind, 0);
     if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js").catch(() => {});
   } catch (err) {
     $("boot").textContent = err.message || "Could not open the catalog";

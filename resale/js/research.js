@@ -117,12 +117,6 @@ function modelPhrase(model, settings, unsure) {
   return lead + kind + ", " + model + ".";
 }
 
-function chunk(list, size) {
-  const groups = [];
-  for (let i = 0; i < list.length; i += size) groups.push(list.slice(i, i + size));
-  return groups;
-}
-
 async function buildContent(items) {
   const notes = (await getSetting("siteNotes")) || [];
   const learned = notes.length ? "\n\nNotes saved from earlier lookups in this browser:\n" + notes.join("\n") : "";
@@ -296,6 +290,11 @@ function isAuthOrBillingError(err) {
   if (status === 401 || status === 403) return true;
   const message = String((err && err.message) || "").toLowerCase();
   return message.includes("rejected this key") || message.includes("balance is too low");
+}
+
+function stopsPricingQueue(err) {
+  const status = Number(err && err.status);
+  return isAuthOrBillingError(err) || status === 429 || status >= 500;
 }
 
 async function lookupGroup(settings, model, items) {
@@ -563,6 +562,7 @@ async function priceGroup(settings, model, group, onProgress, states, unsure) {
       if (onProgress) onProgress(states, "Lookup cancelled. Saved items were kept.");
       return retry;
     }
+    if (stopsPricingQueue(err)) throw err;
     for (const item of group) {
       const failure = await failItem(item, err.message || "Lookup failed");
       states[item.id] = failure.status === "saved" ? "failed" : "discarded";
@@ -573,8 +573,11 @@ async function priceGroup(settings, model, group, onProgress, states, unsure) {
 }
 
 async function runItems(settings, items, onProgress, states, heartbeat) {
-  const groups = new Map();
   for (const item of items) {
+    if (activeController?.signal.aborted) {
+      states[item.id] = "cancelled";
+      continue;
+    }
     const photos = await photosFor(item.id);
     const written = (item.notes || item.name || item.description || "").trim();
     if (!photos.length && written.length < 8) {
@@ -586,27 +589,19 @@ async function runItems(settings, items, onProgress, states, heartbeat) {
     // No photo means the model has to reason from words alone, so use the
     // stronger model for those from the start instead of the fast one.
     const model = photos.length ? modelFor(item, settings) : closerModel(settings);
-    if (!groups.has(model)) groups.set(model, []);
-    groups.get(model).push({
+    const prepared = {
       ...item,
       __researchFingerprint: researchInputFingerprint(item),
       __photoSignature: photoSignature(photos),
-    });
-  }
-
-  const retry = [];
-  for (const [model, groupItems] of groups) {
-    for (const group of chunk(groupItems, 8)) {
-      if (heartbeat) await heartbeat();
-      retry.push(...(await priceGroup(settings, model, group, onProgress, states, false)));
-      if (heartbeat) await heartbeat();
+    };
+    if (heartbeat) await heartbeat();
+    const retry = await priceGroup(settings, model, [prepared], onProgress, states, false);
+    if (retry.length && !activeController?.signal.aborted) {
+      await priceGroup(settings, closerModel(settings), retry, onProgress, states, true);
     }
-  }
-  for (const group of chunk(retry, 8)) {
-    if (heartbeat) await heartbeat();
-    await priceGroup(settings, closerModel(settings), group, onProgress, states, true);
     if (heartbeat) await heartbeat();
   }
+  if (onProgress) onProgress(states, activeController?.signal.aborted ? "Lookup cancelled. Saved items were kept." : "");
 }
 
 function busyError() {
@@ -703,19 +698,13 @@ export function cancelResearch() {
 }
 
 export async function researchUnpriced(onProgress) {
-  const settings = await getSettings();
-  const limit = Math.max(1, Math.min(25, Number(settings.maxItemsPerRun) || 10));
-  const items = (await allItems()).filter(
-    (item) => item.pricingStatus === "saved" || item.pricingStatus === "failed"
-  ).slice(0, limit);
+  const items = (await allItems()).filter((item) => item.pricingStatus === "saved");
   if (!items.length) return null;
   return researchItems(items, onProgress);
 }
 
 export async function researchFailed(onProgress) {
-  const settings = await getSettings();
-  const limit = Math.max(1, Math.min(25, Number(settings.maxItemsPerRun) || 10));
-  const items = (await allItems()).filter((item) => item.pricingStatus === "failed").slice(0, limit);
+  const items = (await allItems()).filter((item) => item.pricingStatus === "failed");
   if (!items.length) return null;
   return researchItems(items, onProgress);
 }

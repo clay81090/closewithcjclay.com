@@ -28,7 +28,7 @@
       <p id="hero-note" class="hero-note"></p>
     </div>
     <div class="top-row">
-      <button type="button" id="go" class="go">Find resale prices</button>
+      <button type="button" id="go" class="go">Price all unfinished items</button>
       <button type="button" id="retry-failed" class="retry-go">Retry failed</button>
       <button type="button" id="cancel-lookup" class="delete-btn" hidden>Cancel lookup</button>
     </div>
@@ -143,8 +143,7 @@
       <label>Shipping guess, dollars <input id="ship" type="number" min="0" step="1"></label>
       <label>Haiku model id <input id="haiku" autocomplete="off"></label>
       <label>Sonnet model id <input id="sonnet" autocomplete="off"></label>
-      <label>Maximum items per batch <input id="max-items" type="number" min="1" max="25" step="1"></label>
-      <p class="quiet">Leave these two names. You do not pick for each search. Normal items use the fast model. Starred items, and anything the fast model is unsure about, use the closer look. The line at the top tells you which one is running.</p>
+      <p class="quiet">Leave these two names. You do not pick for each search. Normal items use the fast model. Starred items, and anything the fast model is unsure about, use the closer look. Pricing runs one item at a time in upload order.</p>
       <div class="actions">
         <button type="button" id="save-settings">Save settings</button>
         <button type="button" id="test-key">Test key</button>
