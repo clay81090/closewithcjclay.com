@@ -34,6 +34,7 @@ import {
   listingBlurb,
   researchItems,
   researchOne,
+  researchFailed,
   researchUnpriced,
   searchLinks,
   showsTested,
@@ -62,6 +63,7 @@ const FILTERS = [
   ["low", "Low"],
   ["bundle", "Bundle"],
   ["photo", "Needs a better photo"],
+  ["failed", "Lookup failed"],
   ["ready", "Ready to list"],
 ];
 
@@ -112,6 +114,12 @@ function chip(item) {
   if (item.pricingStatus === "needs_photo") return "Needs a better photo";
   if (item.pricingStatus === "failed") return "Lookup failed";
   return "Saved";
+}
+
+function lookupButtonLabel(item) {
+  if (item.pricingStatus === "failed") return "Retry lookup";
+  if (item.pricingStatus === "saved") return "Look up price";
+  return "Update price using my notes";
 }
 
 function priceText(item) {
@@ -215,6 +223,12 @@ function paintHero() {
 
 function renderList() {
   paintHero();
+  const failedCount = state.items.filter((item) => item.pricingStatus === "failed").length;
+  const retryAll = $("retry-failed");
+  if (retryAll) {
+    retryAll.hidden = failedCount === 0;
+    retryAll.textContent = failedCount === 1 ? "Retry 1 failed" : "Retry " + failedCount + " failed";
+  }
 
   const filters = $("filters");
   if (!filters.childElementCount) {
@@ -287,6 +301,11 @@ function entry(item) {
     .filter((row) => row[1])
     .map((row) => "<tr><th>" + escapeHtml(row[0]) + "</th><td>" + escapeHtml(row[1]) + "</td></tr>")
     .join("");
+  const failed = item.pricingStatus === "failed";
+  const lookupClass = failed ? "retry-go" : "";
+  const failBox = failed
+    ? "<p class='fail-msg'>" + escapeHtml(item.errorText || "Lookup failed. Tap Retry lookup on the same item.") + "</p>"
+    : "";
   article.innerHTML =
     (photo ? '<img alt="" src="' + trackUrl(photo.blob) + '">' : '<img alt="">') +
     "<div><small>" +
@@ -300,7 +319,9 @@ function entry(item) {
     (item.starred ? " · Starred" : "") +
     "</small><h2>" +
     escapeHtml(item.name || item.id) +
-    "</h2><p class='price'>" +
+    "</h2>" +
+    failBox +
+    "<p class='price'>" +
     escapeHtml(priceText(item)) +
     "</p><p>" +
     (item.askUsd == null ? "Suggested ask: not set yet" : "Suggested ask: " + money(displayAsk(item))) +
@@ -310,14 +331,18 @@ function entry(item) {
     escapeHtml(item.notes || "") +
     "</textarea></label><p><button type='button' data-open='" +
     escapeHtml(item.id) +
-    "'>Open</button> <button type='button' data-reprice='" +
+    "'>Open</button> <button type='button' class='" +
+    lookupClass +
+    "' data-reprice='" +
     escapeHtml(item.id) +
-    "'>Update price using my notes</button></p><details><summary>Description, condition and research</summary><table>" +
+    "'>" +
+    escapeHtml(lookupButtonLabel(item)) +
+    "</button></p><details><summary>Description, condition and research</summary><table>" +
     rows +
     (links ? "<tr><th>Sources</th><td>" + links + "</td></tr>" : "") +
     "</table></details></div>";
   article.querySelector("[data-open]").addEventListener("click", () => openItem(item.id));
-  article.querySelector("[data-reprice]").addEventListener("click", () => lookupOne(item));
+  article.querySelector("[data-reprice]").addEventListener("click", () => lookupOne(item.id));
   article.querySelector("textarea").addEventListener("change", async (event) => {
     const current = await getItem(item.id);
     current.notes = event.target.value.trim();
@@ -341,6 +366,7 @@ function filterMatch(item) {
   if (state.category && item.category !== state.category) return false;
   if (state.filter === "star") return item.starred;
   if (state.filter === "photo") return item.pricingStatus === "needs_photo";
+  if (state.filter === "failed") return item.pricingStatus === "failed";
   if (state.filter === "ready") {
     return item.pricingStatus === "priced" && !item.starred && (item.priority === "high" || item.priority === "medium");
   }
@@ -419,6 +445,9 @@ async function renderItem(id) {
     (item.nextStep ? "<p>" + escapeHtml(item.nextStep) + "</p>" : "") +
     (item.starReason ? "<p>Star: " + escapeHtml(item.starReason) + "</p>" : "") +
     (item.lookupLabel ? "<p>Looked up with " + escapeHtml(item.lookupLabel) + ".</p>" : "") +
+    (item.pricingStatus === "failed"
+      ? "<p class='fail-msg'>" + escapeHtml(item.errorText || "Lookup failed.") + "</p>"
+      : "") +
     "<p>" +
     links +
     "</p>" +
@@ -433,8 +462,14 @@ async function renderItem(id) {
     (showsTested(item)
       ? "<button type='button' id='mark-untested'>Untested</button><button type='button' id='mark-tested'>Tested</button>"
       : "") +
-    "<button type='button' id='price-one'>Price this item</button>" +
-    "<button type='button' id='refresh-one'>Update price using my notes</button>" +
+    "<button type='button' id='price-one' class='" +
+    (item.pricingStatus === "failed" ? "retry-go" : "") +
+    "'>" +
+    escapeHtml(lookupButtonLabel(item)) +
+    "</button>" +
+    (item.pricingStatus === "failed"
+      ? ""
+      : "<button type='button' id='refresh-one'>Update price using my notes</button>") +
     "<button type='button' id='copy-blurb'>Copy listing</button>" +
     "</div>" +
     "<pre id='blurb'>" +
@@ -482,8 +517,8 @@ async function renderItem(id) {
     $("mark-untested").addEventListener("click", () => setTested(item, "untested"));
     $("mark-tested").addEventListener("click", () => setTested(item, "tested"));
   }
-  $("price-one").addEventListener("click", () => lookupOne(item));
-  $("refresh-one").addEventListener("click", () => lookupOne(item));
+  $("price-one").addEventListener("click", () => lookupOne(item.id));
+  if ($("refresh-one")) $("refresh-one").addEventListener("click", () => lookupOne(item.id));
   $("copy-blurb").addEventListener("click", async () => {
     const text = listingBlurb(item);
     try {
@@ -593,24 +628,37 @@ async function setTested(item, value) {
   await renderItem(item.id);
 }
 
-async function lookupOne(item) {
+async function lookupOne(itemId) {
+  const item = await getItem(itemId);
+  if (!item) return;
   const settings = await getSettings();
   if (!settings.apiKey) {
     $("settings-note").textContent = "Add your Anthropic key to look up prices. Your photos stay saved.";
     showView("settings");
     return;
   }
-  $("progress").textContent = "Pricing " + item.id + "…";
+  const retry = item.pricingStatus === "failed";
+  $("progress").textContent = retry
+    ? "Retrying " + item.id + ". Same item, not a duplicate."
+    : "Pricing " + item.id + "…";
   try {
-    await researchOne(item, (states, note) => {
+    const job = await researchOne(item, (states, note) => {
       state.jobStates = states;
-      $("progress").textContent = "Pricing " + item.id + "." + (note ? " " + note : "");
+      const lead = retry ? "Retrying " + item.id : "Pricing " + item.id;
+      $("progress").textContent = lead + "." + (note ? " " + note : "");
     });
+    const outcome = job && job.states ? job.states[item.id] : "";
+    if (outcome === "done") $("progress").textContent = item.id + " priced.";
+    else if (outcome === "failed") {
+      const again = await getItem(item.id);
+      $("progress").textContent = again.errorText || "Lookup failed again.";
+    }
   } catch (err) {
     $("progress").textContent = err.message;
   }
+  state.jobStates = {};
   await reload();
-  await renderItem(item.id);
+  if (state.selectedId === item.id) await renderItem(item.id);
 }
 
 function priorityLabel(priority) {
@@ -716,23 +764,17 @@ function markMode() {
   $("next").classList.toggle("mode-on", state.mode === "next");
 }
 
-async function onFind() {
+async function runBatchLookup(run) {
   const settings = await getSettings();
   if (!settings.apiKey) {
     $("settings-note").textContent = "Add your Anthropic key to look up prices. Your photos stay saved.";
     showView("settings");
     return;
   }
-  const running = await getJob();
-  if (running && running.running) {
-    state.jobStates = running.states || {};
-    $("progress").textContent = "A lookup is already running.";
-    render();
-    return;
-  }
   $("go").disabled = true;
+  if ($("retry-failed")) $("retry-failed").disabled = true;
   try {
-    const job = await researchUnpriced((states, note) => {
+    const job = await run((states, note) => {
       state.jobStates = { ...states };
       const ids = Object.keys(states);
       const finished = ids.filter((id) => states[id] === "done" || states[id] === "failed").length;
@@ -747,9 +789,18 @@ async function onFind() {
     $("progress").textContent = err.message;
   } finally {
     $("go").disabled = false;
+    if ($("retry-failed")) $("retry-failed").disabled = false;
     state.jobStates = {};
     await reload();
   }
+}
+
+async function onFind() {
+  await runBatchLookup(researchUnpriced);
+}
+
+async function onRetryFailed() {
+  await runBatchLookup(researchFailed);
 }
 
 async function backupPayload() {
@@ -780,6 +831,7 @@ function bind() {
     button.addEventListener("click", () => showView(button.dataset.view));
   }
   $("go").addEventListener("click", onFind);
+  $("retry-failed").addEventListener("click", onRetryFailed);
   $("take").addEventListener("change", (event) => {
     ingestFiles(event.target.files);
     event.target.value = "";
@@ -862,7 +914,7 @@ async function describeItem() {
   await putItem(item);
   $("describe").value = "";
   await reload();
-  await lookupOne(item);
+  await lookupOne(item.id);
 }
 
 async function saveSettings() {

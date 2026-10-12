@@ -406,9 +406,23 @@ async function runItems(settings, items, onProgress, states) {
   }
 }
 
-export async function researchItems(items, onProgress) {
+async function clearStaleJob() {
   const existing = await getJob();
-  if (existing && existing.running) return existing;
+  if (!existing || !existing.running) return null;
+  const started = existing.startedAt ? new Date(existing.startedAt).getTime() : 0;
+  if (Date.now() - started < 90000) return existing;
+  existing.running = false;
+  await saveJob(existing);
+  return null;
+}
+
+export async function researchItems(items, onProgress) {
+  const busy = await clearStaleJob();
+  if (busy && busy.running) {
+    const error = new Error("A lookup is already running. Wait a moment, or refresh the page.");
+    error.code = "BUSY";
+    throw error;
+  }
   const settings = await getSettings();
   if (!settings.apiKey) {
     const error = new Error("Add your Anthropic key to look up prices. Your photos stay saved.");
@@ -436,11 +450,15 @@ export async function researchItems(items, onProgress) {
 }
 
 export async function researchUnpriced(onProgress) {
-  const existing = await getJob();
-  if (existing && existing.running) return existing;
   const items = (await allItems()).filter(
     (item) => item.pricingStatus === "saved" || item.pricingStatus === "failed"
   );
+  if (!items.length) return null;
+  return researchItems(items, onProgress);
+}
+
+export async function researchFailed(onProgress) {
+  const items = (await allItems()).filter((item) => item.pricingStatus === "failed");
   if (!items.length) return null;
   return researchItems(items, onProgress);
 }
