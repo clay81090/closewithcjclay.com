@@ -10,22 +10,22 @@
   <link rel="apple-touch-icon" href="./icon.png">
   <link rel="stylesheet" href="./styles.css">
 </head>
-<body data-view="camera">
+<body data-view="list">
   <header class="top">
     <div class="top-row">
       <h1>Resale</h1>
       <button type="button" id="go" class="go">Find resale prices</button>
     </div>
     <nav class="nav">
-      <button type="button" data-view="camera" class="nav-on">Camera</button>
-      <button type="button" data-view="list">Items</button>
+      <button type="button" data-view="camera">Camera</button>
+      <button type="button" data-view="list" class="nav-on">Items</button>
       <button type="button" data-view="settings">Settings</button>
     </nav>
     <p id="progress" class="progress"></p>
   </header>
 
   <div class="workspace">
-    <section id="view-camera" class="view on">
+    <section id="view-camera" class="view">
       <p id="boot" class="boot">Loading starter items…</p>
       <p class="quiet">Saved on this browser.</p>
       <video id="preview" class="preview" playsinline autoplay muted hidden></video>
@@ -60,10 +60,19 @@
       <div id="tray" class="tray"></div>
     </section>
 
-    <section id="view-list" class="view">
+    <section id="view-list" class="view on">
+      <div class="describe">
+        <h2>No photo, just describe it</h2>
+        <p class="quiet">Example: 1985 unopened Cabbage Patch doll Molly.</p>
+        <textarea id="describe" placeholder="Year, name, and whether it is sealed or opened"></textarea>
+        <button type="button" id="describe-go">Find comps</button>
+      </div>
       <p id="count" class="quiet"></p>
       <p id="totals" class="totals"></p>
-      <input id="search" type="search" placeholder="Search name, ID, serial, note" autocomplete="off">
+      <input id="search" type="search" placeholder="Search items" autocomplete="off">
+      <select id="category-filter" aria-label="Filter category">
+        <option value="">All categories</option>
+      </select>
       <div id="filters" class="filters"></div>
       <div id="rows" class="rows"></div>
     </section>

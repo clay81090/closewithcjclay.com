@@ -9,6 +9,7 @@ import {
   base64ToBlob,
   blankItem,
   blobToBase64,
+  allComps,
   compsFor,
   deleteItem,
   deletePhoto,
@@ -45,6 +46,7 @@ const state = {
   currentId: null,
   sessionIds: [],
   filter: "all",
+  category: "",
   query: "",
   selectedId: null,
   detailsDirty: false,
@@ -148,6 +150,12 @@ async function reload() {
     state.photos.get(photo.itemId).push(photo);
   }
   for (const list of state.photos.values()) list.sort((a, b) => (a.order || 0) - (b.order || 0));
+  const comps = await allComps();
+  state.comps = new Map();
+  for (const comp of comps) {
+    if (!state.comps.has(comp.itemId)) state.comps.set(comp.itemId, []);
+    state.comps.get(comp.itemId).push(comp);
+  }
   render();
 }
 
@@ -222,27 +230,110 @@ function renderList() {
     button.classList.toggle("on", button.dataset.filter === state.filter);
   }
 
+  const select = $("category-filter");
+  const cats = [...new Set(state.items.map((item) => item.category).filter(Boolean))].sort();
+  select.innerHTML =
+    '<option value="">All categories</option>' +
+    cats.map((cat) => '<option value="' + escapeHtml(cat) + '">' + escapeHtml(cat) + "</option>").join("");
+  select.value = state.category;
+
   const query = state.query.trim().toLowerCase();
   const rows = $("rows");
   rows.innerHTML = "";
-  const visible = [...state.items].reverse().filter((item) => matches(item, query));
+  const visible = [...state.items]
+    .sort((a, b) => (a.captureOrder || 0) - (b.captureOrder || 0))
+    .filter((item) => matches(item, query));
+  $("count").textContent = visible.length + " of " + state.items.length + " items";
   if (!visible.length) {
     rows.innerHTML = "<p class='quiet'>Nothing in this filter.</p>";
     return;
   }
-  for (const item of visible) rows.appendChild(card(item));
+  for (const item of visible) rows.appendChild(entry(item));
+}
+
+function entry(item) {
+  const article = document.createElement("article");
+  article.className = "entry";
+  const photo = firstPhoto(item.id);
+  const count = (state.photos.get(item.id) || []).length;
+  const comps = state.comps.get(item.id) || [];
+  const links = comps
+    .map(
+      (comp) =>
+        '<a href="' +
+        escapeHtml(comp.url) +
+        '" target="_blank" rel="noopener">' +
+        escapeHtml(comp.site || comp.url) +
+        "</a> (" +
+        escapeHtml(comp.kind) +
+        ")"
+    )
+    .join("<br>");
+  const rows = [
+    ["Category", item.category],
+    ["Year", item.year],
+    ["Description", item.description],
+    ["Quantity", item.quantity],
+    ["Condition", item.condition],
+    ["Evidence", item.evidence],
+    ["Next step", item.nextStep],
+    ["My notes", item.notes],
+  ]
+    .filter((row) => row[1])
+    .map((row) => "<tr><th>" + escapeHtml(row[0]) + "</th><td>" + escapeHtml(row[1]) + "</td></tr>")
+    .join("");
+  article.innerHTML =
+    (photo ? '<img alt="" src="' + trackUrl(photo.blob) + '">' : '<img alt="">') +
+    "<div><small>" +
+    escapeHtml(item.id) +
+    " / " +
+    escapeHtml(item.category || "No category yet") +
+    " · " +
+    count +
+    " photo" +
+    (count === 1 ? "" : "s") +
+    (item.starred ? " · Starred" : "") +
+    "</small><h2>" +
+    escapeHtml(item.name || item.id) +
+    "</h2><p class='price'>" +
+    escapeHtml(priceText(item)) +
+    "</p><p>" +
+    (item.askUsd == null ? "Suggested ask: not set yet" : "Suggested ask: " + money(displayAsk(item))) +
+    "</p><label>What I know about this<textarea data-note='" +
+    escapeHtml(item.id) +
+    "' placeholder='Original undamaged box. Bottle not opened. The $93 listing was opened. Mine is not.'>" +
+    escapeHtml(item.notes || "") +
+    "</textarea></label><p><button type='button' data-open='" +
+    escapeHtml(item.id) +
+    "'>Open</button> <button type='button' data-reprice='" +
+    escapeHtml(item.id) +
+    "'>Update price using my notes</button></p><details><summary>Description, condition and research</summary><table>" +
+    rows +
+    (links ? "<tr><th>Sources</th><td>" + links + "</td></tr>" : "") +
+    "</table></details></div>";
+  article.querySelector("[data-open]").addEventListener("click", () => openItem(item.id));
+  article.querySelector("[data-reprice]").addEventListener("click", () => lookupOne(item));
+  article.querySelector("textarea").addEventListener("change", async (event) => {
+    const current = await getItem(item.id);
+    current.notes = event.target.value.trim();
+    await putItem(current);
+    item.notes = current.notes;
+    $("save-status").textContent = "Note saved on " + item.id;
+  });
+  return article;
 }
 
 function matches(item, query) {
   if (!filterMatch(item)) return false;
   if (!query) return true;
-  const hay = [item.name, item.id, item.category, item.serial, item.notes, item.suggestedName]
+  const hay = [item.name, item.id, item.category, item.serial, item.notes, item.suggestedName, item.description, item.condition, item.evidence]
     .join(" ")
     .toLowerCase();
   return hay.includes(query);
 }
 
 function filterMatch(item) {
+  if (state.category && item.category !== state.category) return false;
   if (state.filter === "star") return item.starred;
   if (state.filter === "photo") return item.pricingStatus === "needs_photo";
   if (state.filter === "ready") {
@@ -337,7 +428,7 @@ async function renderItem(id) {
       ? "<button type='button' id='mark-untested'>Untested</button><button type='button' id='mark-tested'>Tested</button>"
       : "") +
     "<button type='button' id='price-one'>Price this item</button>" +
-    "<button type='button' id='refresh-one'>Refresh price</button>" +
+    "<button type='button' id='refresh-one'>Update price using my notes</button>" +
     "<button type='button' id='copy-blurb'>Copy listing</button>" +
     "</div>" +
     "<pre id='blurb'>" +
@@ -357,9 +448,9 @@ async function renderItem(id) {
     "<label>Serial <input id='edit-serial' value='" +
     escapeHtml(item.serial || "") +
     "'></label>" +
-    "<label>Note <input id='edit-notes' value='" +
+    "<label>What I know about this<textarea id='edit-notes' placeholder='Original undamaged box. Bottle not opened. The $93 listing was opened. Mine is not.'>" +
     escapeHtml(item.notes || "") +
-    "'></label>" +
+    "</textarea></label>" +
     "<label>Where it is stored <input id='edit-where' value='" +
     escapeHtml(item.storageLocation || "") +
     "'></label>";
@@ -728,6 +819,11 @@ function bind() {
     state.query = $("search").value;
     renderList();
   });
+  $("category-filter").addEventListener("change", () => {
+    state.category = $("category-filter").value;
+    renderList();
+  });
+  $("describe-go").addEventListener("click", describeItem);
   $("back").addEventListener("click", () => {
     state.selectedId = null;
     showView("list");
@@ -736,6 +832,29 @@ function bind() {
   $("export-backup").addEventListener("click", downloadBackup);
   $("share-backup").addEventListener("click", shareBackup);
   $("import-backup").addEventListener("change", importBackup);
+}
+
+async function describeItem() {
+  const text = $("describe").value.trim();
+  if (text.length < 8) {
+    $("progress").textContent = "Add a little more, like the year and the name.";
+    return;
+  }
+  const settings = await getSettings();
+  if (!settings.apiKey) {
+    $("settings-note").textContent = "Add your Anthropic key to look up prices. Your photos stay saved.";
+    showView("settings");
+    return;
+  }
+  const slot = await allocateItem();
+  const item = blankItem(slot.id, slot.captureOrder);
+  item.name = text.length > 140 ? text.slice(0, 137) + "..." : text;
+  item.notes = text;
+  item.description = text;
+  await putItem(item);
+  $("describe").value = "";
+  await reload();
+  await lookupOne(item);
 }
 
 async function saveSettings() {
@@ -819,6 +938,7 @@ async function start() {
     await reload();
     $("boot").hidden = true;
     turnCameraOff();
+    showView("list");
     if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js").catch(() => {});
   } catch (err) {
     $("boot").textContent = err.message || "Could not open the catalog";

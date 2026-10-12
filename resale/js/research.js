@@ -116,7 +116,9 @@ async function buildContent(items) {
         "- Base card is not a rare parallel.\n" +
         "- Box only is not the complete product.\n" +
         "- Gold plate is not solid gold.\n" +
-        "- If a hallmark, caseback, card back, mint mark, or whether the bottle is inside is missing, put that in needsPhoto and use null prices.\n" +
+        "- The owner's notes are facts about the item in hand. A sealed, unopened, or undamaged box is not the same as an opened, empty, or damaged example. Say that difference in the evidence and do not copy the opened price onto a sealed item.\n" +
+        "- A written description with no photo is enough to search. Do not put needsPhoto on a specific named item such as a doll, card, or bottle when the owner already described the year, name, and whether it is sealed.\n" +
+        "- If a hallmark, caseback, card back, mint mark, or whether the bottle is inside is missing from both the photos and the notes, put that in needsPhoto and use null prices.\n" +
         "- kind is one of sold, auction, ask, guide, appraisal.\n\n" +
         'JSON shape: {"items":[{"id":"","name":"","category":"","confidence":0,"needsPhoto":"","star":false,"starReason":"","low":null,"high":null,"ask":null,"comps":[{"url":"","site":"","kind":"sold","amount":0,"note":""}],"evidence":"","nextStep":""}]}\n\n' +
         "Items in this batch:\n" +
@@ -128,10 +130,10 @@ async function buildContent(items) {
               (item.name || "unknown") +
               "; category=" +
               (item.category || "unknown") +
-              "; notes=" +
-              (item.notes || "") +
               "; condition=" +
-              (item.condition || "")
+              (item.condition || "") +
+              "; OWNER FACTS=" +
+              (item.notes || item.description || "none")
             );
           })
           .join("\n"),
@@ -267,7 +269,10 @@ export async function applyLookup(item, result) {
   }
 
   next.errorText = "";
-  if (needsPhoto) {
+  const written = (item.notes || item.description || "").trim().length > 12;
+  const low = numberOrNull(result.low);
+  const high = numberOrNull(result.high);
+  if (needsPhoto && !(written && hasSale && low != null && high != null)) {
     next.pricingStatus = "needs_photo";
     next.lowUsd = null;
     next.highUsd = null;
@@ -295,6 +300,7 @@ export async function applyLookup(item, result) {
       next.nextStep = next.nextStep || "A sold link came back without a usable range.";
     } else {
       next.pricingStatus = "priced";
+      if (needsPhoto) next.nextStep = needsPhoto + (next.nextStep ? " " + next.nextStep : "");
     }
   }
 
@@ -323,9 +329,10 @@ async function runItems(settings, items, onProgress, states) {
   const groups = new Map();
   for (const item of items) {
     const photos = await photosFor(item.id);
-    if (!photos.length) {
+    const written = (item.notes || item.name || item.description || "").trim();
+    if (!photos.length && written.length < 8) {
       states[item.id] = "failed";
-      await failItem(item, "Add a photo first.");
+      await failItem(item, "Add a photo or describe the item.");
       if (onProgress) onProgress(states);
       continue;
     }
