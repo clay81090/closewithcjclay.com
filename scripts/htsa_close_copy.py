@@ -12,7 +12,7 @@ from pathlib import Path
 LIVE = "https://closewithcjclay.com"
 GENERIC_ENROLL_URL = f"{LIVE}/access"
 
-EMAIL_SUBJECT = "Your HTSA enrollment page is ready"
+EMAIL_SUBJECT = "Your HTSA enrollment page"
 
 
 def file_slug(full_name: str) -> str:
@@ -53,25 +53,23 @@ def print_send_pack(first: str, enroll: str | None = None) -> None:
     print("=== EMAIL ===")
     print("Hi,")
     print()
+    print(
+        "Thank you for the time on our call. I appreciate you talking it through "
+        "with me. Your enrollment page is here:"
+    )
+    print()
     print(f"Click Here to Access Your HTSA Portal: {url}")
     print()
     print(
-        "The page has the payment options we covered, plus the enrollment bonuses "
-        "from our call. Those bonuses stay on the page through Thursday, "
-        "October 1st at 8pm EST."
+        "The options on the page: $7,000 paid in full, four payments of $1,950, "
+        "or ClarityPay at $700 a month at 0% interest. Depending on approval, "
+        "ClarityPay may offer lower monthly options."
     )
     print()
     print(
-        "Once you enroll, access unlocks right away. Use the green After You Pay "
-        "section to self-enroll, or text me and we can do a quick 5-minute walkthrough."
+        "Once you enroll, access unlocks right away. Text me anytime and we can "
+        "do a quick 5-minute walkthrough."
     )
-    print()
-    print(
-        "In your moments of decision, life stops happening to you and starts "
-        "happening for you the second you step into position."
-    )
-    print()
-    print("Call or text anytime if questions come up.")
     print()
     print("Best,")
     print()
@@ -81,17 +79,12 @@ def print_send_pack(first: str, enroll: str | None = None) -> None:
     print("cj@highticketsalesacademy.com")
     print()
     print("=== TEXT (send right after the email) ===")
-    print("Hey, really enjoyed our call. You're a great fit for what we're building here.")
+    print("Hey, really appreciate the time on our call. Here is your enrollment page:")
     print()
     print(url)
     print()
     print(
-        "The enrollment bonuses we talked about are on that page through Thursday, "
-        "October 1st at 8pm EST."
-    )
-    print()
-    print(
-        "Show up and execute, and we won't let you fail, but you have to meet us halfway. "
-        "In your moments of decision, life stops happening to you and starts happening "
-        "for you the second you step into position. Unlock your access above when you're ready!"
+        "$7,000 paid in full, four payments of $1,950, or ClarityPay at $700 a "
+        "month at 0%. Lower monthly options may be available depending on "
+        "approval. Text me anytime if you want a quick walkthrough."
     )
