@@ -145,6 +145,16 @@ a{color:inherit}
 .plan-amt{color:var(--navy);font-size:33px;font-weight:800;line-height:1}
 .plan-unit{color:var(--muted);font-size:13.5px}
 .plan-strike{color:#93a1b3;font-size:15px;text-decoration:line-through}
+/* honoring old pricing block (Landon) */
+.honor{margin:2px 0 16px;padding:12px 14px;border-radius:12px;border:2px solid rgba(0,201,122,.45);
+  background:linear-gradient(160deg,#f7fffb 0%,#ecfff5 100%)}
+.honor-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.honor-label{color:var(--green-dark);font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.honor-save{padding:3px 10px;border-radius:999px;background:var(--green-strong);color:#04231a;font-size:12px;font-weight:800}
+.honor-was{margin-top:8px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;color:#5d6f84;font-size:16px;font-weight:700}
+.honor-was s{text-decoration:line-through;text-decoration-thickness:2px}
+.honor-tag{color:var(--muted);font-size:12.5px;font-weight:700}
+
 .choose{display:flex;width:100%;min-height:54px;align-items:center;justify-content:center;
   padding:14px 20px;border:0;border-radius:12px;background:var(--navy);color:var(--white);
   font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;
@@ -471,7 +481,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1791989534 -->
+<!-- close-build:1791990029 -->
 </head>
 <body>
 <main class="page">
@@ -558,13 +568,23 @@ a{color:inherit}
     </div>
 
     <div class="plan" id="planPlan">
-      <span class="badge" id="planBadge">$200 off current 4-pay</span>
+      <span class="badge" id="planBadge">Your locked rate</span>
       <div class="plan-name" id="planName"></div>
       <div class="plan-note" id="planNote"></div>
       <div class="plan-figs">
         <span class="plan-amt" id="planAmt"></span>
-        <span class="plan-strike" id="planStrike"></span>
         <span class="plan-unit" id="planUnit"></span>
+      </div>
+      <div class="honor" id="planHonor" hidden>
+        <div class="honor-top">
+          <span class="honor-label">Honoring our pricing from months ago</span>
+          <span class="honor-save" id="honorSave"></span>
+        </div>
+        <div class="honor-was">
+          <span class="honor-tag">Oct 1st pricing</span>
+          <s id="honorWasAmt"></s>
+          <s id="honorWasTotal"></s>
+        </div>
       </div>
       <p class="plan-warn" id="planWarn" hidden></p>
       <button class="choose" type="button" data-plan="plan">Choose the payment plan</button>
@@ -939,7 +959,7 @@ const BUYER = {
   track:     "closer",
   offer:     "standard",
   show:      ["plan"],
-  intro:     "Landon, I am honoring the 4-pay pricing we spoke about months ago. Today that plan is $1,950. Your rate stays at $1,750, which is $200 off."
+  intro:     "Landon, I am honoring the 4-pay pricing we spoke about months ago. Our pricing went up October 1st, but your rate stays where we agreed."
 };
 
 const CUSTOM_OFFER = null;
@@ -962,9 +982,9 @@ const OFFERS = {
     pif:  { amount: "$7,000", was: "",
             note: "One payment. Full access as soon as it clears.",
             checkout: "https://whop.com/checkout/plan_GPDXTLOKvW6l8" },
-    plan: { name: "4 payments", amount: "$1,750", was: "$1,950",
-            unit: "today · $7,000 total",
-            note: "Honoring the rate we locked in months ago. Current 4-pay is $1,950. Yours is $1,750 ($200 off). First payment today, then one a month for three more months.",
+    plan: { name: "4 payments", amount: "$1,750", unit: "today · $7,000 total",
+            wasAmt: "$1,950 × 4", wasTotal: "$7,800 total", save: "You save $800",
+            note: "First payment today, then one a month for three more months.",
             warn: "",
             checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
     clarity: { amount: "$700", unit: "a month · 0% interest · $8,400 total",
@@ -1083,8 +1103,12 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
   el("pifNote").textContent   = O.pif.note;
   el("planName").textContent  = O.plan.name;
   el("planAmt").textContent   = O.plan.amount;
-  const planStrike = el("planStrike");
-  if (planStrike) planStrike.textContent = O.plan.was || "";
+  if (O.plan.wasAmt) {
+    el("planHonor").hidden = false;
+    el("honorWasAmt").textContent   = O.plan.wasAmt;
+    el("honorWasTotal").textContent = O.plan.wasTotal || "";
+    el("honorSave").textContent     = O.plan.save || "";
+  }
   el("planUnit").textContent  = O.plan.unit;
   el("planNote").textContent  = O.plan.note;
   if (O.plan.warn) { el("planWarn").hidden = false; el("planWarn").textContent = O.plan.warn; }
