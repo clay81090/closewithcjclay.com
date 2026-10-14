@@ -1090,8 +1090,8 @@ a{color:inherit}
 const BUYER = {
   firstName: "Landon",
   fullName:  "Landon Smither",
-  email:     "",
-  phone:     "",
+  email:     "smitherlandon1@gmail.com",
+  phone:     "+15027068017",
   slug:      "landon_smither",
   track:     "closer",
   offer:     "standard",
@@ -1230,8 +1230,19 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
       }
     }
     el("prepName").textContent  = BUYER.fullName;
-    el("prepEmail").textContent = val(BUYER.email);
-    el("prepPhone").textContent = val(BUYER.phone);
+    if (val(BUYER.email)) {
+      el("prepEmail").innerHTML = '<a href="mailto:' + BUYER.email + '">' + BUYER.email + "</a>";
+    }
+    if (val(BUYER.phone)) {
+      const digits = String(BUYER.phone).replace(/\D/g, "");
+      let pretty = BUYER.phone;
+      if (digits.length === 11 && digits.charAt(0) === "1") {
+        pretty = "(" + digits.slice(1,4) + ") " + digits.slice(4,7) + "-" + digits.slice(7);
+      } else if (digits.length === 10) {
+        pretty = "(" + digits.slice(0,3) + ") " + digits.slice(3,6) + "-" + digits.slice(6);
+      }
+      el("prepPhone").innerHTML = '<a href="tel:' + BUYER.phone + '">' + pretty + "</a>";
+    }
   }
 
   INCLUDED.forEach(function(t){const li=document.createElement("li");li.textContent=t;el("incList").appendChild(li);});
