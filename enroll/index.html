@@ -476,7 +476,17 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1790981000 -->
+<style>
+/* Oct 15 2026: no sticky "Choose payment" bar on /enroll/ (it showed one price when options differ). */
+.sticky-cta{display:none!important}
+.track-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:22px 0 12px;padding:11px 14px;
+  border-radius:12px;background:var(--navy);color:var(--white);font-family:"Playfair Display",serif;font-size:19px;font-weight:700}
+.track-head:first-of-type{margin-top:4px}
+.track-head span{padding:3px 10px;border-radius:999px;background:var(--green-strong);color:#04231a;
+  font-family:"DM Sans",sans-serif;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.track-head--main{background:#087b50}
+.list-head{list-style:none;margin:14px 0 6px;color:var(--green-dark);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+</style><!-- close-build:1792096259 -->
 </head>
 <body>
 <main class="page">
@@ -1043,20 +1053,34 @@ window.ENROLL_PICKS = [];
     const found = ENROLL_MENU[code];
     if (found && !items.some(function(have){ return have.code === code; })) items.push(Object.assign({ code: code }, found));
   });
-  const sameTrack = items.length ? items.filter(function(item){ return item.track === items[0].track; }) : [];
-  window.ENROLL_PICKS = sameTrack;
-  const item = sameTrack.length === 1 ? sameTrack[0] : null;
-  const walk = params.get("walk") === "1" || !sameTrack.length;
+  // Tracks (Closer / Setter) appear in the order CJ chose: ?order=setter,closer . Picks keep the order given in ?opt=
+  const orderParam = (params.get("order") || "").split(/[,+\s]+/).filter(function(t){ return t === "closer" || t === "setter"; });
+  const tracks = [];
+  function addTrack(t){ if (tracks.indexOf(t) === -1) tracks.push(t); }
+  if (items.length) {
+    orderParam.forEach(function(t){ if (items.some(function(i){ return i.track === t; })) addTrack(t); });
+    items.forEach(function(i){ addTrack(i.track); });
+  } else {
+    orderParam.forEach(addTrack);
+    if (!tracks.length) addTrack(params.get("track") === "setter" ? "setter" : "closer");
+  }
+  const picks = [];
+  tracks.forEach(function(t){ items.forEach(function(i){ if (i.track === t) picks.push(i); }); });
+  window.ENROLL_PICKS = picks;
+  window.ENROLL_TRACKS = tracks;
+  window.ENROLL_MAIN = (params.get("main") || "").split(/[,+\s]+/).filter(Boolean);   // green "recommended" options
+  window.ENROLL_MAIN_TRACK = params.get("mt") || "";                                     // green "recommended path"
+  const item = picks.length === 1 ? picks[0] : null;
+  const walk = params.get("walk") === "1" || !picks.length;
   document.body.dataset.enrollWalk = walk ? "1" : "0";
-  document.body.dataset.enrollMulti = sameTrack.length > 1 ? "1" : "0";
-  if (!sameTrack.length) {
+  document.body.dataset.enrollMulti = picks.length > 1 ? "1" : "0";
+  BUYER.track = tracks[0];
+  if (!picks.length) {
     BUYER.show = [];
-    BUYER.track = params.get("track") === "setter" ? "setter" : "closer";
     OFFERS.standard.pif.checkout = "";
     OFFERS.standard.plan.checkout = "";
     OFFERS.standard.clarity.checkout = "";
   } else if (item) {
-    BUYER.track = item.track;
     BUYER.show = [item.show];
     BUYER.offer = "standard";
     BUYER.slug = "enroll_" + item.code;
@@ -1064,49 +1088,70 @@ window.ENROLL_PICKS = [];
     if (item.plan) Object.assign(OFFERS.standard.plan, item.plan);
     if (item.clarity) Object.assign(OFFERS.standard.clarity, item.clarity);
   } else {
-    BUYER.track = sameTrack[0].track;
     BUYER.show = [];
     BUYER.offer = "standard";
-    BUYER.slug = "enroll_" + sameTrack.map(function(pick){ return pick.code; }).join("_");
+    BUYER.slug = "enroll_" + picks.map(function(pick){ return pick.code; }).join("_");
   }
-  if (BUYER.track === "setter") {
-    INCLUDED.length = 0;
-    ["Certification as a Certified High Ticket Setter",
-     "Live group coaching with Chad, plus lifetime replay access",
-     "1-on-1 coaching, scheduled within your first 3 months",
-     "Resume optimization, interview prep, and our placement system",
-     "A personalized 30 day action plan built with our team",
-     "90 days of call review and coaching after you're hired",
-     "Unlimited AI roleplay and a 24/7 AI coach, live on your calls",
-     "Lifetime access to the private Mastermind, 750+ members"
-    ].forEach(function(t){ INCLUDED.push(t); });
-    CURRICULUM.length = 0;
-    [
-      ["Training platform and certification", "Setter course, roleplays, and the Certified High Ticket Setter certification."],
-      ["Live coaching with Chad", "Weekly group calls, plus lifetime access to every replay in the Mastermind."],
-      ["1-on-1 coaching", "Included. Scheduled within 3 months of your start unless HTSA approves an extension."],
-      ["Placement support", "Resume optimization, interview preparation, and access to the placement system."],
-      ["Your 30 day action plan", "Built with our team, focused on getting you placed and transitioned in."],
-      ["90 days of post-hire support", "Call review and performance feedback for your first 90 days on the job."],
-      ["AI roleplay and 24/7 AI coach", "Unlimited practice before real prospects, plus live support during calls. Free while you're in the program. Optional $39/month if you keep it after placement."],
-      ["Community and job network", "Lifetime access to the private Facebook Mastermind, 750+ members."]
-    ].forEach(function(r){ CURRICULUM.push(r); });
-    const road = document.getElementById("roadmapSheet");
-    if (road) {
-      road.innerHTML = road.innerHTML
-        .replaceAll("Certified High Ticket Closer", "Certified High Ticket Setter")
-        .replaceAll("55 modules", "30 modules")
-        .replaceAll("55 certification modules", "30 certification modules");
-    }
-    const tosHead = document.querySelector("#tosSheet h3");
-    if (tosHead) tosHead.textContent = "Certified High Ticket Setter Program";
+  // Content for each path. One path = same as before. Two paths = a labeled block per path, in CJ's order.
+  const dual = tracks.length > 1;
+  const SETTER_INC = [
+    "Certification as a Certified High Ticket Setter",
+    "Live group coaching with Chad, plus lifetime replay access",
+    "1-on-1 coaching, scheduled within your first 3 months",
+    "Resume optimization, interview prep, and our placement system",
+    "A personalized 30 day action plan built with our team",
+    "90 days of call review and coaching after you're hired",
+    "Unlimited AI roleplay and a 24/7 AI coach, live on your calls",
+    "Lifetime access to the private Mastermind, 750+ members"
+  ];
+  const SETTER_CUR = [
+    ["Training platform and certification", "Setter course, roleplays, and the Certified High Ticket Setter certification."],
+    ["Live coaching with Chad", "Weekly group calls, plus lifetime access to every replay in the Mastermind."],
+    ["1-on-1 coaching", "Included. Scheduled within 3 months of your start unless HTSA approves an extension."],
+    ["Placement support", "Resume optimization, interview preparation, and access to the placement system."],
+    ["Your 30 day action plan", "Built with our team, focused on getting you placed and transitioned in."],
+    ["90 days of post-hire support", "Call review and performance feedback for your first 90 days on the job."],
+    ["AI roleplay and 24/7 AI coach", "Unlimited practice before real prospects, plus live support during calls. Free while you're in the program. Optional $39/month if you keep it after placement."],
+    ["Community and job network", "Lifetime access to the private Facebook Mastermind, 750+ members."]
+  ];
+  const BY_TRACK = {
+    closer: { name: "Closer Path", inc: INCLUDED.slice(), cur: CURRICULUM.slice() },
+    setter: { name: "Setter Path", inc: SETTER_INC,       cur: SETTER_CUR }
+  };
+  INCLUDED.length = 0;
+  CURRICULUM.length = 0;
+  tracks.forEach(function(t){
+    if (dual) { INCLUDED.push("\u00a7" + BY_TRACK[t].name); CURRICULUM.push(["\u00a7" + BY_TRACK[t].name, ""]); }
+    BY_TRACK[t].inc.forEach(function(x){ INCLUDED.push(x); });
+    BY_TRACK[t].cur.forEach(function(x){ CURRICULUM.push(x); });
+  });
+  const road = document.getElementById("roadmapSheet");
+  if (tracks[0] === "setter" && road) {
+    road.innerHTML = road.innerHTML
+      .replaceAll("Certified High Ticket Closer", "Certified High Ticket Setter")
+      .replaceAll("55 modules", "30 modules")
+      .replaceAll("55 certification modules", "30 certification modules");
+  }
+  if (dual && road) {
+    const first = tracks[0] === "setter" ? "Setter" : "Closer";
+    const other = tracks[0] === "setter" ? "Closer" : "Setter";
+    const note = document.createElement("p");
+    note.className = "plan-warn";
+    note.textContent = "This game plan is written for the " + first + " path (" + (first === "Setter" ? "30" : "55") + " modules). The " + other + " path follows the same steps with " + (first === "Setter" ? "55" : "30") + " modules.";
+    const body = road.querySelector(".sheet-body");
+    if (body) body.insertBefore(note, body.firstChild);
+  }
+  const tosHead = document.querySelector("#tosSheet h3");
+  if (tosHead) {
+    if (dual) tosHead.textContent = "Certified High Ticket " + tracks.map(function(t){ return t === "setter" ? "Setter" : "Closer"; }).join(" and ") + " Programs";
+    else if (tracks[0] === "setter") tosHead.textContent = "Certified High Ticket Setter Program";
   }
   const rawName = (params.get("n") || "").replace(/[<>]/g, "").trim().slice(0, 80);
   if (rawName) {
     BUYER.fullName = rawName;
     BUYER.firstName = rawName.split(/\s+/)[0];
     document.title = rawName + " / Access";
-    const bit = sameTrack.length > 1
+    const bit = picks.length > 1
       ? "The payment options we covered are on this page."
       : (item ? item.line : "We will lock the payment option together on this page.");
     BUYER.intro = BUYER.firstName + ", this is the page from our call. " + bit;
@@ -1141,7 +1186,7 @@ window.ENROLL_PICKS = [];
     el("stickyLabel").textContent = first + "'s enrollment";
     el("guarTag").textContent = "Confirmed for " + first + "'s enrollment";
   }
-  el("trackPill").textContent = T.label;
+  el("trackPill").textContent = window.ENROLL_TRACKS.map(function(t){ return (TRACKS[t] || TRACKS.closer).label; }).join(" + ");
   if (val(BUYER.fullName)) {
     el("prepBox").hidden = false;
     const introEl = el("prepIntro");
@@ -1165,9 +1210,12 @@ window.ENROLL_PICKS = [];
     el("prepPhone").textContent = val(BUYER.phone);
   }
 
-  INCLUDED.forEach(function(t){const li=document.createElement("li");li.textContent=t;el("incList").appendChild(li);});
+  INCLUDED.forEach(function(t){const li=document.createElement("li");
+    if (t.charAt(0) === "\u00a7") { li.textContent = t.slice(1); li.className = "list-head"; } else { li.textContent = t; }
+    el("incList").appendChild(li);});
   GUARANTEE_STEPS.forEach(function(t){const li=document.createElement("li");li.textContent=t;el("guarSteps").appendChild(li);});
   CURRICULUM.forEach(function(r){const li=document.createElement("li");
+    if (r[0].charAt(0) === "\u00a7") { li.textContent = r[0].slice(1); li.className = "list-head"; el("currList").appendChild(li); return; }
     const b=document.createElement("b");b.textContent=r[0];
     const s=document.createElement("span");s.textContent=r[1];
     li.appendChild(b);li.appendChild(s);el("currList").appendChild(li);});
@@ -1218,10 +1266,31 @@ window.ENROLL_PICKS = [];
     const plansEl = el("plans");
     const h2 = plansEl.querySelector(".h2");
     if (h2) h2.textContent = "Your payment options";
+    let lastTrack = "";
     window.ENROLL_PICKS.forEach(function(pick, i){
+      if (window.ENROLL_TRACKS.length > 1 && pick.track !== lastTrack) {
+        lastTrack = pick.track;
+        const head = document.createElement("div");
+        head.className = "track-head";
+        head.textContent = pick.track === "setter" ? "Setter Path" : "Closer Path";
+        if (window.ENROLL_MAIN_TRACK === pick.track) {
+          head.classList.add("track-head--main");
+          const tag = document.createElement("span");
+          tag.textContent = "Recommended path";
+          head.appendChild(tag);
+        }
+        plansEl.appendChild(head);
+      }
       const view = enrollCardView(pick);
+      const isMain = window.ENROLL_MAIN.indexOf(pick.code) !== -1;
       const card = document.createElement("div");
-      card.className = "plan";
+      card.className = "plan" + (isMain ? " plan--best" : "");
+      if (isMain) {
+        const badge = document.createElement("span");
+        badge.className = "badge";
+        badge.textContent = "Recommended";
+        card.appendChild(badge);
+      }
       const nameEl = document.createElement("div");
       nameEl.className = "plan-name";
       nameEl.textContent = view.name;

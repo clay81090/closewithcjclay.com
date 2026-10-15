@@ -1,16 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="robots" content="noindex,nofollow">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="refresh" content="0;url=/send-packs/#builder">
-<link rel="canonical" href="https://closewithcjclay.com/send-packs/">
-<title>CJ Deal Desk moved</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#0a1628">
+  <title>CJ Desk | closewithcjclay.com</title>
+  <link rel="icon" href="/cj-headshot-600.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#0a1628;--green:#61e38b;--green-strong:#00c97a;--green-dark:#087b50;--text:#17243b;--muted:#54637a;--white:#fff;--grey:#e8eef4;--line:#d5dee8}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{min-width:320px;background:var(--grey);color:var(--text);font-family:"DM Sans",sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+    .top{background:var(--navy);color:var(--white);padding:22px 18px 20px;text-align:center}
+    .top img{width:52px;height:52px;border-radius:50%;border:2px solid var(--green-strong);object-fit:cover;margin-bottom:10px}
+    .top h1{font-family:"Playfair Display",serif;font-size:clamp(1.4rem,4.5vw,1.9rem)}
+    .top p{margin-top:8px;color:rgba(255,255,255,.78);font-size:14px;max-width:520px;margin-left:auto;margin-right:auto}
+    .wrap{max-width:760px;margin:0 auto;padding:18px 14px 72px}
+    .card{background:var(--white);border-radius:16px;padding:16px 16px 20px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(10,22,40,.08);margin-bottom:16px}
+    .lab{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .card input[type=text]{width:100%;margin-top:6px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:16px}
+    .hint{font-size:13px;color:var(--muted);margin:8px 0 0}
+    .mode{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    .mode button{min-height:76px;padding:12px 14px;border:2px solid var(--line);border-radius:14px;background:var(--white);color:var(--navy);font-family:inherit;font-size:16px;font-weight:800;text-align:left;cursor:pointer}
+    .mode button small{display:block;margin-top:2px;font-size:12.5px;font-weight:600;color:var(--muted)}
+    .mode button.is-on{border-color:var(--green-strong);background:#ecfff5;box-shadow:0 0 0 4px rgba(0,201,122,.16)}
+    h2.sec{font-size:18px;color:var(--navy);margin-bottom:6px}
+    .chips{display:flex;gap:8px;margin:10px 0 4px}
+    .chip{flex:1;min-height:52px;border:2px solid var(--line);border-radius:12px;background:#f7fafc;color:var(--navy);font-family:inherit;font-size:16px;font-weight:800;cursor:pointer}
+    .chip.is-on{background:var(--navy);border-color:var(--navy);color:var(--white)}
+    .chip.is-main{background:var(--green-strong);border-color:var(--green-strong);color:#04231a}
+    .path{margin-top:16px;padding-top:14px;border-top:1px solid #e3e9f0}
+    .path-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;margin-bottom:10px;padding:10px 12px;border-radius:12px;background:var(--navy);color:var(--white)}
+    .path-head.is-main{background:var(--green-dark)}
+    .path-head h3{font-family:"Playfair Display",serif;font-size:18px}
+    .path-tools{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700}
+    .path-tools label{display:flex;align-items:center;gap:6px;cursor:pointer}
+    .path-tools input{width:18px;height:18px;accent-color:var(--green-strong)}
+    .mv{min-width:34px;min-height:34px;border:0;border-radius:8px;background:rgba(255,255,255,.18);color:inherit;font-size:14px;font-weight:800;cursor:pointer}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .opt{position:relative;display:block;padding:12px 14px;border:2px solid var(--line);border-radius:12px;background:#fbfcfe;cursor:pointer}
+    .opt-top{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy)}
+    .opt-top input{width:20px;height:20px;accent-color:var(--green-dark);flex:none}
+    .opt small{display:block;font-weight:600;font-size:12.5px;color:var(--muted);margin-left:30px}
+    .opt.is-on{border-color:var(--green-strong);background:#dcfbea}
+    .opt-extra{display:flex;align-items:center;gap:10px;margin:8px 0 0 30px;font-size:13px;font-weight:700;color:var(--navy)}
+    .opt-extra label{display:flex;align-items:center;gap:6px;cursor:pointer}
+    .opt-extra input{width:18px;height:18px;accent-color:var(--green-strong)}
+    .opt .num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--navy);color:var(--white);font-size:12px}
+    .opt.is-main{background:var(--green-strong);border-color:var(--green-dark)}
+    .opt.is-main small,.opt.is-main .opt-extra{color:#04231a}
+    .mini{min-width:30px;min-height:28px;border:1px solid var(--line);border-radius:7px;background:var(--white);color:var(--navy);font-weight:800;cursor:pointer}
+    .more{margin-top:10px}
+    .more summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--muted);padding:6px 0}
+    .linkbox{margin:4px 0 14px;padding:12px 14px;border:2px solid var(--green-strong);border-radius:12px;background:#ecfff5}
+    .linkbox b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--green-dark)}
+    .linkbox a{display:block;margin:6px 0 10px;word-break:break-all;color:#0000EE;font-size:14px}
+    .btns{display:flex;flex-wrap:wrap;gap:8px}
+    .copy-btn,.btn{min-height:48px;padding:10px 16px;border:0;border-radius:12px;background:var(--navy);color:var(--white);font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+    .btn--ghost{background:var(--white);color:var(--navy);border:2px solid var(--navy)}
+    .copy-btn.is-done{background:var(--green-strong);color:#04231a}
+    .panel-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:20px 0 10px}
+    .panel-head h2{font-size:18px}
+    .msg{background:#fff;color:#000;padding:4px 2px 8px}
+    .msg p{margin:16px 0 0;font-size:16px;line-height:1.5;color:#000;background:#fff}
+    .msg p:first-child{margin-top:0}
+    .msg a{color:#0000EE}
+    .plan-h{font-size:14px;margin:16px 0 8px;color:var(--navy)}
+    .plan-grid{display:grid;gap:8px}
+    .plan-card{padding:12px 12px 10px;border:1px solid var(--line);border-radius:12px;background:#fbfcfe}
+    .plan-card b{display:block;font-size:15px}
+    .plan-card span{display:block;margin:4px 0 8px;font-size:12.5px;color:var(--muted);line-height:1.4}
+    .copy-plain{min-height:42px;padding:8px 12px;border:0;border-radius:10px;background:var(--navy);color:var(--white);font-family:inherit;font-size:13px;font-weight:800;cursor:pointer}
+    .copy-plain.is-done{background:var(--green-strong);color:#04231a}
+    .direct summary{cursor:pointer;font-size:16px;font-weight:800;color:var(--navy)}
+    .direct .lede{font-size:14px;color:var(--muted);margin:10px 0}
+    .track-row{display:flex;gap:8px;margin:12px 0}
+    .track-btn{flex:1;min-height:48px;border:2px solid var(--line);border-radius:12px;background:#f7fafc;color:var(--navy);font-family:inherit;font-size:16px;font-weight:800;cursor:pointer}
+    .track-btn.is-on{background:var(--navy);border-color:var(--navy);color:var(--white)}
+    .foot-links{margin-top:6px;font-size:13px;color:var(--muted)}
+    [hidden]{display:none!important}
+    @media (max-width:520px){.mode,.grid{grid-template-columns:1fr}}
+  </style>
 </head>
-<body style="font-family:Arial,Helvetica,sans-serif;padding:24px">
-<!-- The deal desk now lives in /send-packs/ so the builder and the copy packs are one page. -->
-<p>The deal desk now lives with your send packs. <a href="/send-packs/#builder">Open it here</a>.</p>
-<script>location.replace("/send-packs/#builder");</script>
+<body>
+  <header class="top">
+    <img src="/cj-headshot-600.png" alt="CJ Clay" onerror="this.style.display='none'">
+    <h1>CJ Desk</h1>
+    <p>Type a name. Pick what you need. Copy and paste. Bookmark this page. Never send this page to a prospect.</p>
+  </header>
+
+  <div class="wrap">
+    <section class="card">
+      <label class="lab" for="name">1. Their name</label>
+      <input id="name" type="text" autocomplete="off" placeholder="Jessica Smith">
+      <p class="hint">Their first name fills in the text and the email.</p>
+
+      <label class="lab" style="margin-top:18px">2. What do you need?</label>
+      <div class="mode" role="group" aria-label="What do you need">
+        <button type="button" id="modePre" class="is-on">Before the call<small>Pre-call resources, text and email</small></button>
+        <button type="button" id="modePost">After the call<small>Enrollment page, text and email</small></button>
+      </div>
+    </section>
+
+    <!-- BEFORE THE CALL -->
+    <section class="card" id="preCard">
+      <div class="linkbox">
+        <b>Pre-call page</b>
+        <a id="preLink" href="https://closewithcjclay.com/before-our-call" target="_blank" rel="noopener">https://closewithcjclay.com/before-our-call</a>
+        <div class="btns"><button class="copy-btn" type="button" data-copylink="preLink">Copy link only</button></div>
+      </div>
+      <div class="panel-head"><h2>Text (Just Call)</h2><button class="copy-btn" type="button" data-copy="preText">Copy text</button></div>
+      <div class="msg" data-msg id="preText"></div>
+      <div class="panel-head"><h2>Email (HubSpot / Gmail)</h2><button class="copy-btn" type="button" data-copy="preEmail">Copy email</button></div>
+      <p class="hint">Subject is the first line. Copy it into the subject field, then delete it from the body.</p>
+      <div class="msg" data-msg id="preEmail"></div>
+    </section>
+
+    <!-- AFTER THE CALL -->
+    <section class="card" id="postCard" hidden>
+      <h2 class="sec">3. Which program?</h2>
+      <p class="hint">Tap in the order you want them shown. Blank means a walkthrough page with no prices.</p>
+      <div class="chips" id="chips"></div>
+      <div id="paths"></div>
+
+      <div class="panel-head" style="margin-top:22px"><h2>Their link</h2></div>
+      <div class="linkbox">
+        <b id="linkKind">Walkthrough (no prices)</b>
+        <a id="postLink" href="#" target="_blank" rel="noopener"></a>
+        <div class="btns">
+          <button class="copy-btn" type="button" data-copylink="postLink">Copy link only</button>
+          <a class="btn btn--ghost" id="openLink" href="#" target="_blank" rel="noopener">Open page</a>
+        </div>
+      </div>
+      <div class="panel-head"><h2>Text (Just Call)</h2><button class="copy-btn" type="button" data-copy="postText">Copy text</button></div>
+      <div class="msg" data-msg id="postText"></div>
+      <div class="panel-head"><h2>Email (HubSpot / Gmail)</h2><button class="copy-btn" type="button" data-copy="postEmail">Copy email</button></div>
+      <p class="hint">Subject is the first line. Copy it into the subject field, then delete it from the body.</p>
+      <div class="msg" data-msg id="postEmail"></div>
+    </section>
+
+    <!-- DIRECT PAYMENT LINKS -->
+    <section class="card direct">
+      <details id="direct">
+        <summary>On a call: copy a direct payment link</summary>
+        <p class="lede">They say yes to one option. Tap Closer or Setter, copy the payment link or the message with the link, and paste it into the Zoom chat. Stay on the line. Never send this page to them.</p>
+        <p class="lede"><b>Current prices (Oct 2026).</b> Closer: $7,000 paid in full, $1,950 x 4, ClarityPay $700 a month. Setter: $4,000 paid in full, $1,600 x 3, ClarityPay $4,800 total. Never swap the Closer and Setter ClarityPay links.</p>
+        <div class="track-row">
+          <button class="track-btn is-on" type="button" data-track="closer">Closer</button>
+          <button class="track-btn" type="button" data-track="setter">Setter</button>
+        </div>
+        <h3 class="plan-h">Use these first</h3>
+        <div id="planPrimary" class="plan-grid"></div>
+        <h3 class="plan-h">Only if you named this offer on the call</h3>
+        <div id="planExtra" class="plan-grid"></div>
+      </details>
+    </section>
+
+    <p class="foot-links">Where everything lives: <a href="/docs/handoffs/README.md">docs/handoffs</a></p>
+  </div>
+
+  <script>
+  (function () {
+    var SITE = "https://closewithcjclay.com";
+    var PRE_LINK = SITE + "/before-our-call";
+
+    // ---------- the options CJ can offer. Codes must match ENROLL_MENU in /enroll/index.html ----------
+    var TRACKS = {
+      closer: { label: "Closer Path", main: [
+          { opt: "c-pif", name: "Paid in full", sub: "$7,000 once" },
+          { opt: "c-4", name: "4-pay", sub: "$1,950 x 4 = $7,800" },
+          { opt: "c-3", name: "3-pay", sub: "$2,500 x 3 = $7,500" },
+          { opt: "c-cp", name: "ClarityPay", sub: "$700 a month = $8,400" }
+        ], more: [ { opt: "c-2", name: "2-pay, action taker", sub: "$3,500 then $3,500 = $7,000" } ] },
+      setter: { label: "Setter Path", main: [
+          { opt: "s-pif", name: "Paid in full", sub: "$4,000 once" },
+          { opt: "s-3", name: "3-pay", sub: "$1,600 x 3 = $4,800" },
+          { opt: "s-cp", name: "ClarityPay", sub: "$4,800 total" }
+        ], more: [ { opt: "s-2", name: "2-pay", sub: "$2,000 then $2,000 = $4,000" } ] }
+    };
+
+    // ---------- message copy. Edit wording here only. No prices in messages. ----------
+    var MSG = {
+      preSubject: "Before our call",
+      postSubject: "Your HTSA enrollment page is ready",
+      textClose: "Say yes, and your downside is capped and in writing. Say no, and a year from now you are in the same spot with another year gone. Which one is actually riskier?",
+      bezos: "Jeff Bezos said if you decide with less than forty percent of the information you are guessing \u2014 but if you wait for more than seventy, you are not deciding, you are delaying. Honestly \u2014 where are you on that scale right now?",
+      risk: "Let us look at what you are actually choosing between. Risk one \u2014 you say yes, you do the work, and worst case you get the coaching, you get the reps, and if we cannot place you, you get your money back. Your downside is capped and it is in writing. Risk two \u2014 you say no, and twelve months from now you wake up in exactly the same spot, same number, another year gone. Which of those is actually the riskier one?",
+      sign: "CJ Clay<br>HTSA, Senior Career Transformation Coach<br>(616) 612-1735<br><a href=\"mailto:cj@highticketsalesacademy.com\">cj@highticketsalesacademy.com</a>"
+    };
+
+    var S = { mode: "pre", tracks: [], picks: { closer: [], setter: [] }, main: { closer: "", setter: "" }, mainTrack: "" };
+    function $(id) { return document.getElementById(id); }
+    function cleanName() { return $("name").value.replace(/[<>]/g, "").replace(/\s+/g, " ").trim().slice(0, 80); }
+    function firstName() { var n = cleanName(); return n ? n.split(" ")[0] : ""; }
+
+    // ---------- copy helpers: paste keeps blank lines in Just Call, HubSpot and Gmail ----------
+    function plainFrom(el) {
+      return Array.prototype.map.call(el.querySelectorAll("p"), function (p) { return p.innerText.replace(/\u00a0/g, " ").trim(); }).filter(Boolean).join("\n\n");
+    }
+    function htmlFrom(el) {
+      var parts = Array.prototype.map.call(el.querySelectorAll("p"), function (p) {
+        return "<p style=\"margin:16px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;color:#000000;background:#ffffff;\">" + p.innerHTML + "</p>";
+      });
+      if (parts[0]) parts[0] = parts[0].replace("margin:16px 0 0", "margin:0");
+      return "<div style=\"background:#ffffff;color:#000000;\">" + parts.join("") + "</div>";
+    }
+    function markDone(btn) {
+      var old = btn.textContent;
+      btn.classList.add("is-done");
+      btn.textContent = "Copied";
+      setTimeout(function () { btn.classList.remove("is-done"); btn.textContent = old; }, 1600);
+    }
+    async function copyRich(id, btn) {
+      var box = $(id), html = htmlFrom(box), text = plainFrom(box);
+      try {
+        if (navigator.clipboard && window.ClipboardItem) {
+          await navigator.clipboard.write([new ClipboardItem({
+            "text/html": new Blob([html], { type: "text/html" }),
+            "text/plain": new Blob([text], { type: "text/plain" })
+          })]);
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else { throw new Error("no clipboard"); }
+        markDone(btn);
+      } catch (err) { window.prompt("Copy this:", text); }
+    }
+    async function copyText(text, btn) {
+      try { await navigator.clipboard.writeText(text); markDone(btn); }
+      catch (err) { window.prompt("Copy this:", text); }
+    }
+    function addP(box, text) { var p = document.createElement("p"); p.textContent = text; box.appendChild(p); return p; }
+    function addLinkP(box, href, label) {
+      var p = document.createElement("p"), a = document.createElement("a");
+      a.href = href; a.textContent = label || href; p.appendChild(a); box.appendChild(p);
+    }
+    function addSig(box) { var p = document.createElement("p"); p.innerHTML = MSG.sign; box.appendChild(p); }
+
+    // ---------- BEFORE THE CALL ----------
+    function renderPre() {
+      var f = firstName();
+      var t = $("preText"); t.innerHTML = "";
+      addP(t, (f ? "Hey " + f + ", " : "Hey, ") + "CJ here with HTSA. Looking forward to our call! Here is a quick page to look at before we talk:");
+      addLinkP(t, PRE_LINK);
+      addP(t, "The 4 minute clip is four of our members talking about getting placed. Not homework, just come with your real questions and we will dive right in.");
+      var e = $("preEmail"); e.innerHTML = "";
+      addP(e, "Subject: " + MSG.preSubject);
+      addP(e, f ? "Hi " + f + "," : "Hi,");
+      addP(e, "CJ here with HTSA. Looking forward to connecting. Here is a quick page to look at before we talk:");
+      addLinkP(e, PRE_LINK, "Click Here to Review the Pre-Call Page");
+      addP(e, "The 4 minute clip at the top is four of our members talking about getting placed and having more than one offer to choose from. It is not homework, just a look at what is possible.");
+      addP(e, "Come with your real situation and your real questions, and we will dive right in.");
+      addP(e, "Best,");
+      addSig(e);
+    }
+
+    // ---------- AFTER THE CALL ----------
+    function allItems(key) { return TRACKS[key].main.concat(TRACKS[key].more); }
+    function itemFor(key, code) { return allItems(key).filter(function (i) { return i.opt === code; })[0]; }
+    function move(arr, i, d) { var j = i + d; if (j < 0 || j >= arr.length) return; var x = arr[i]; arr[i] = arr[j]; arr[j] = x; }
+
+    function enrollUrl() {
+      var q = [], codes = [], tr = S.tracks.filter(function (k) { return S.picks[k].length; });
+      tr.forEach(function (k) { codes = codes.concat(S.picks[k]); });
+      if (codes.length) q.push("opt=" + codes.join(","));
+      else q.push("walk=1");
+      var order = codes.length ? tr : S.tracks;
+      if (order.length) q.push("order=" + order.join(","));
+      var mains = tr.map(function (k) { return S.main[k]; }).filter(Boolean);
+      if (mains.length) q.push("main=" + mains.join(","));
+      if (tr.length > 1 && S.mainTrack && tr.indexOf(S.mainTrack) !== -1) q.push("mt=" + S.mainTrack);
+      var n = cleanName();
+      if (n) q.push("n=" + encodeURIComponent(n));
+      return SITE + "/enroll/?" + q.join("&");
+    }
+
+    function optNode(key, item) {
+      var on = S.picks[key].indexOf(item.opt) !== -1;
+      var isMain = on && S.main[key] === item.opt;
+      var label = document.createElement("div");
+      label.className = "opt" + (on ? " is-on" : "") + (isMain ? " is-main" : "");
+      var top = document.createElement("label");
+      top.className = "opt-top";
+      var box = document.createElement("input");
+      box.type = "checkbox"; box.checked = on;
+      box.addEventListener("change", function () {
+        var arr = S.picks[key], at = arr.indexOf(item.opt);
+        if (box.checked && at === -1) arr.push(item.opt);
+        if (!box.checked && at !== -1) { arr.splice(at, 1); if (S.main[key] === item.opt) S.main[key] = ""; }
+        renderPost();
+      });
+      top.appendChild(box);
+      if (on) { var num = document.createElement("span"); num.className = "num"; num.textContent = String(S.picks[key].indexOf(item.opt) + 1); top.appendChild(num); }
+      top.appendChild(document.createTextNode(item.name));
+      label.appendChild(top);
+      var small = document.createElement("small"); small.textContent = item.sub; label.appendChild(small);
+      if (on) {
+        var extra = document.createElement("div"); extra.className = "opt-extra";
+        var ml = document.createElement("label");
+        var mb = document.createElement("input"); mb.type = "checkbox"; mb.checked = isMain;
+        mb.addEventListener("change", function () { S.main[key] = mb.checked ? item.opt : ""; renderPost(); });
+        ml.appendChild(mb); ml.appendChild(document.createTextNode("Main (green)"));
+        extra.appendChild(ml);
+        var idx = S.picks[key].indexOf(item.opt);
+        [["\u25B2", -1], ["\u25BC", 1]].forEach(function (a) {
+          var b = document.createElement("button"); b.type = "button"; b.className = "mini"; b.textContent = a[0];
+          b.setAttribute("aria-label", a[1] < 0 ? "Move up" : "Move down");
+          b.addEventListener("click", function () { move(S.picks[key], idx, a[1]); renderPost(); });
+          extra.appendChild(b);
+        });
+        label.appendChild(extra);
+      }
+      return label;
+    }
+
+    function renderPost() {
+      // program chips
+      var chips = $("chips"); chips.innerHTML = "";
+      ["closer", "setter"].forEach(function (k) {
+        var b = document.createElement("button");
+        var on = S.tracks.indexOf(k) !== -1;
+        b.type = "button";
+        b.className = "chip" + (on ? " is-on" : "") + (on && S.mainTrack === k ? " is-main" : "");
+        b.textContent = (on ? (S.tracks.indexOf(k) + 1) + ". " : "") + TRACKS[k].label;
+        b.addEventListener("click", function () {
+          var at = S.tracks.indexOf(k);
+          if (at === -1) S.tracks.push(k); else { S.tracks.splice(at, 1); if (S.mainTrack === k) S.mainTrack = ""; }
+          renderPost();
+        });
+        chips.appendChild(b);
+      });
+      // one section per chosen program, in order
+      var host = $("paths"); host.innerHTML = "";
+      S.tracks.forEach(function (k, ti) {
+        var data = TRACKS[k], sec = document.createElement("div");
+        sec.className = "path";
+        var head = document.createElement("div");
+        head.className = "path-head" + (S.mainTrack === k ? " is-main" : "");
+        var h = document.createElement("h3"); h.textContent = data.label; head.appendChild(h);
+        var tools = document.createElement("div"); tools.className = "path-tools";
+        if (S.tracks.length > 1) {
+          var lab = document.createElement("label"), cb = document.createElement("input");
+          cb.type = "checkbox"; cb.checked = S.mainTrack === k;
+          cb.addEventListener("change", function () { S.mainTrack = cb.checked ? k : ""; renderPost(); });
+          lab.appendChild(cb); lab.appendChild(document.createTextNode("Main path (green)"));
+          tools.appendChild(lab);
+          [["\u25B2", -1], ["\u25BC", 1]].forEach(function (a) {
+            var b = document.createElement("button"); b.type = "button"; b.className = "mv"; b.textContent = a[0];
+            b.setAttribute("aria-label", a[1] < 0 ? "Show this path first" : "Show this path second");
+            b.addEventListener("click", function () { move(S.tracks, ti, a[1]); renderPost(); });
+            tools.appendChild(b);
+          });
+        }
+        head.appendChild(tools);
+        sec.appendChild(head);
+        var grid = document.createElement("div"); grid.className = "grid";
+        data.main.forEach(function (item) { grid.appendChild(optNode(k, item)); });
+        sec.appendChild(grid);
+        var det = document.createElement("details"); det.className = "more";
+        if (data.more.some(function (i) { return S.picks[k].indexOf(i.opt) !== -1; })) det.open = true;
+        var sum = document.createElement("summary"); sum.textContent = "More " + (k === "closer" ? "Closer" : "Setter") + " options";
+        det.appendChild(sum);
+        var grid2 = document.createElement("div"); grid2.className = "grid";
+        data.more.forEach(function (item) { grid2.appendChild(optNode(k, item)); });
+        det.appendChild(grid2);
+        sec.appendChild(det);
+        host.appendChild(sec);
+      });
+      renderPostMessages();
+    }
+
+    function renderPostMessages() {
+      var url = enrollUrl(), f = firstName();
+      var hasOpts = S.tracks.some(function (k) { return S.picks[k].length; });
+      $("linkKind").textContent = hasOpts ? "Enrollment page (with options)" : "Walkthrough (no prices)";
+      var a = $("postLink"); a.href = url; a.textContent = url;
+      $("openLink").href = url;
+
+      var t = $("postText"); t.innerHTML = "";
+      var e = $("postEmail"); e.innerHTML = "";
+      if (hasOpts) {
+        addP(t, (f ? "Hey " + f + ", " : "Hey, ") + "really enjoyed our call. Your enrollment page is ready:");
+        addLinkP(t, url);
+        addP(t, MSG.textClose);
+        addP(e, "Subject: " + MSG.postSubject);
+        addP(e, f ? "Hi " + f + "," : "Hi,");
+        addP(e, "Really enjoyed our call. Your enrollment page is here:");
+        addLinkP(e, url, "Click Here to Access Your HTSA Portal");
+        addP(e, MSG.bezos);
+        addP(e, MSG.risk);
+        addP(e, "Best,");
+        addSig(e);
+      } else {
+        addP(t, (f ? "Hey " + f + ", " : "Hey, ") + "great talking with you. Here is the page we are going through together:");
+        addLinkP(t, url);
+        addP(e, "Subject: Your HTSA page");
+        addP(e, f ? "Hi " + f + "," : "Hi,");
+        addP(e, "Great talking with you. Here is the page we are going through together:");
+        addLinkP(e, url, "Click Here to Open Your HTSA Page");
+        addP(e, "Everything included in the program is on it, and I am here for any questions.");
+        addP(e, "Best,");
+        addSig(e);
+      }
+    }
+
+    // ---------- mode switch + wiring ----------
+    function setMode(m) {
+      S.mode = m;
+      $("modePre").classList.toggle("is-on", m === "pre");
+      $("modePost").classList.toggle("is-on", m === "post");
+      $("preCard").hidden = m !== "pre";
+      $("postCard").hidden = m !== "post";
+    }
+    $("modePre").addEventListener("click", function () { setMode("pre"); });
+    $("modePost").addEventListener("click", function () { setMode("post"); });
+    $("name").addEventListener("input", function () { renderPre(); renderPostMessages(); });
+    document.querySelectorAll("[data-copy]").forEach(function (b) {
+      b.addEventListener("click", function () { copyRich(b.getAttribute("data-copy"), b); });
+    });
+    document.querySelectorAll("[data-copylink]").forEach(function (b) {
+      b.addEventListener("click", function () { copyText($(b.getAttribute("data-copylink")).textContent, b); });
+    });
+
+    // ---------- direct payment links (paste into Zoom chat) ----------
+    var PLANS = {
+      closer: {
+        primary: [
+          { name: "Paid in full $7,000", detail: "One time. Full access as soon as it clears.", url: "https://whop.com/checkout/plan_GPDXTLOKvW6l8?d2c=true" },
+          { name: "4-pay $1,950 today", detail: "$7,800 total. First payment today, then one a month for three months.", url: "https://whop.com/checkout/plan_KZi8Kt0Ioq6tK?d2c=true" },
+          { name: "ClarityPay $700 / month", detail: "Closer only. 0% interest, 620+ credit. Lower monthly options may show depending on approval.", url: "https://whop.com/checkout/plan_K4goBzDEHXO15?d2c=true" }
+        ],
+        extra: [
+          { name: "2-pay $3,500", detail: "$7,000 total. $3,500 today, $3,500 in 30 days (Action Taker).", url: "https://whop.com/checkout/plan_JeFDCjxcpLjbH?d2c=true" },
+          { name: "3-pay $2,500", detail: "$7,500 total.", url: "https://whop.com/checkout/plan_nNEMqbkEaSc5d?d2c=true" },
+          { name: "ClarityPay $7,600 (promo code 100 OFF = $7,500)", detail: "Only when you agreed $7,500. They enter promo code 100 OFF at checkout.", url: "https://whop.com/checkout/plan_NFV1BS6L4ByFK" },
+          { name: "Splitit $600 / month", detail: "Only if you asked for Splitit. $7,200 total. 0% interest.", url: "https://whop.com/checkout/plan_LiZXezzaPMzUF" },
+          { name: "PIF $5,000 promo", detail: "Experience / reactivation only. Not the default.", url: "https://whop.com/checkout/plan_gdThsrGLXqaDF?d2c=true" },
+          { name: "Promo 3-pay $1,750", detail: "$5,250 total. Real 3-pay.", url: "https://whop.com/checkout/plan_YrqGOXMxGbOVa?d2c=true" },
+          { name: "Promo ClarityPay $500 / month", detail: "$6,000 total. Only when you name that offer.", url: "https://whop.com/checkout/plan_VUSDju20gTBCg/" }
+        ]
+      },
+      setter: {
+        primary: [
+          { name: "Paid in full $4,000", detail: "Setter cash PIF.", url: "https://whop.com/checkout/plan_zws0zh0bKQULB?d2c=true" },
+          { name: "3-pay $1,600", detail: "$4,800 total.", url: "https://whop.com/checkout/plan_OizMbt56Cw6du?d2c=true" },
+          { name: "ClarityPay $4,800", detail: "Setter only. $4,800 total. Never use this checkout on Closer.", url: "https://whop.com/checkout/plan_iXtkgcI6xwxbP?d2c=true" }
+        ],
+        extra: [
+          { name: "2-pay $2,000", detail: "$4,000 total. $2,000 today, $2,000 in 30 days.", url: "https://whop.com/checkout/plan_Pv22kJmMNIDxc?d2c=true" },
+          { name: "Flexxbuy apply", detail: "Setter: ask for $500 above the program price on the application.", url: "https://app.flexxbuy.com/high-ticket-sales-academy-llc/apply/" }
+        ]
+      }
+    };
+    var dTrack = "closer";
+    function chatLine(plan) {
+      return "I just dropped your direct checkout in the Zoom chat. Open that. It is " + plan.name + ". I will stay right here with you.\n\n" + plan.url;
+    }
+    function renderPlans() {
+      function fill(id, list) {
+        var box = $(id); box.innerHTML = "";
+        list.forEach(function (plan) {
+          var card = document.createElement("div");
+          card.className = "plan-card";
+          card.innerHTML = "<b></b><span></span><div class=\"btns\"></div>";
+          card.querySelector("b").textContent = plan.name;
+          card.querySelector("span").textContent = plan.detail;
+          var btns = card.querySelector(".btns");
+          var a = document.createElement("button"); a.className = "copy-plain"; a.type = "button"; a.textContent = "Copy payment link";
+          a.addEventListener("click", function () { copyText(plan.url, a); });
+          var b = document.createElement("button"); b.className = "copy-plain"; b.type = "button"; b.textContent = "Copy message + link";
+          b.addEventListener("click", function () { copyText(chatLine(plan), b); });
+          btns.appendChild(a); btns.appendChild(b); box.appendChild(card);
+        });
+      }
+      fill("planPrimary", PLANS[dTrack].primary);
+      fill("planExtra", PLANS[dTrack].extra);
+    }
+    document.querySelectorAll(".track-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        dTrack = btn.getAttribute("data-track");
+        document.querySelectorAll(".track-btn").forEach(function (t) { t.classList.toggle("is-on", t === btn); });
+        renderPlans();
+      });
+    });
+
+    renderPre();
+    renderPost();
+    renderPlans();
+    if (location.hash === "#after") setMode("post");
+  })();
+  </script>
 </body>
 </html>
