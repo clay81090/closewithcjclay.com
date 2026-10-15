@@ -112,11 +112,24 @@
         <a id="preLink" href="https://closewithcjclay.com/before-our-call" target="_blank" rel="noopener">https://closewithcjclay.com/before-our-call</a>
         <div class="btns"><button class="copy-btn" type="button" data-copylink="preLink">Copy link only</button></div>
       </div>
-      <div class="panel-head"><h2>Text (Just Call)</h2><button class="copy-btn" type="button" data-copy="preText">Copy text</button></div>
+      <label class="lab" for="callTime">Call time (optional, fills in [time])</label>
+      <input id="callTime" type="text" autocomplete="off" placeholder="2:00 PM EST">
+
+      <div class="panel-head"><h2>1. Text right after they book (Just Call)</h2><button class="copy-btn" type="button" data-copy="preText">Copy text</button></div>
       <div class="msg" data-msg id="preText"></div>
-      <div class="panel-head"><h2>Email (HubSpot / Gmail)</h2><button class="copy-btn" type="button" data-copy="preEmail">Copy email</button></div>
+      <div class="panel-head"><h2>Email right after they book (HubSpot / Gmail)</h2><button class="copy-btn" type="button" data-copy="preEmail">Copy email</button></div>
       <p class="hint">Subject is the first line. Copy it into the subject field, then delete it from the body.</p>
       <div class="msg" data-msg id="preEmail"></div>
+
+      <h2 class="sec" style="margin-top:26px">Day of the call</h2>
+      <div class="panel-head"><h2>Same day booking text</h2><button class="copy-btn" type="button" data-copy="preTextSame">Copy text</button></div>
+      <div class="msg" data-msg id="preTextSame"></div>
+      <div class="panel-head"><h2>If they have not replied</h2><button class="copy-btn" type="button" data-copy="preTextNudge">Copy text</button></div>
+      <div class="msg" data-msg id="preTextNudge"></div>
+      <div class="panel-head"><h2>After they confirm</h2><button class="copy-btn" type="button" data-copy="preTextThanks">Copy text</button></div>
+      <div class="msg" data-msg id="preTextThanks"></div>
+      <div class="panel-head"><h2>Voicemail (Ryan's script) and text</h2><button class="copy-btn" type="button" data-copy="preVoicemail">Copy</button></div>
+      <div class="msg" data-msg id="preVoicemail"></div>
     </section>
 
     <!-- AFTER THE CALL -->
@@ -240,19 +253,42 @@
     function addSig(box) { var p = document.createElement("p"); p.innerHTML = MSG.sign; box.appendChild(p); }
 
     // ---------- BEFORE THE CALL ----------
+    // Ryan's voicemail is kept word for word. Do not edit it.
+    function callTime() { var v = ($("callTime") && $("callTime").value || "").trim(); return v || "[time]"; }
     function renderPre() {
-      var f = firstName();
-      var t = $("preText"); t.innerHTML = "";
-      addP(t, (f ? "Hey " + f + ", " : "Hey, ") + "CJ here with HTSA. Looking forward to our call! Here is a quick page to look at before we talk:");
-      addLinkP(t, PRE_LINK);
-      addP(t, "The 4 minute clip is four of our members talking about getting placed. Not homework, just come with your real questions and we will dive right in.");
+      var f = firstName(), hey = f ? "Hey " + f + ", " : "Hey, ", t = callTime();
+
+      var a = $("preText"); a.innerHTML = "";
+      addP(a, hey + "CJ here with High Ticket Sales Academy. Looking forward to speaking with you!");
+      addP(a, "I put together a quick page to look through before our call. Start with the 4 minute video at the top. You will hear directly from four of our members about getting placed into high ticket sales roles.");
+      addLinkP(a, PRE_LINK);
+      addP(a, "Quick question so I can come prepared: what made you book this call?");
+
+      var d = $("preTextSame"); d.innerHTML = "";
+      addP(d, hey + "CJ here with HTSA. Looking forward to our call today at " + t + "!");
+      addP(d, "I put together a quick page to look at before we talk. Start with the 4 minute video at the top:");
+      addLinkP(d, PRE_LINK);
+      addP(d, "Just confirming we are still good for " + t + ", and you will be somewhere you can focus for our conversation?");
+
+      var n = $("preTextNudge"); n.innerHTML = "";
+      addP(n, hey + "CJ here. Just checking in ahead of our call at " + t + ". Want to make sure we are still good on your end. Can you shoot me a quick confirmation when you get a chance?");
+
+      var c = $("preTextThanks"); c.innerHTML = "";
+      addP(c, (f ? "Perfect, " + f + "! " : "Perfect! ") + "Appreciate you confirming. Looking forward to hearing more about what you are looking to accomplish. Talk soon!");
+
+      var v = $("preVoicemail"); v.innerHTML = "";
+      addP(v, "Hey " + (f || "[name]") + ", it's CJ from High Ticket Sales Academy. Just reaching out ahead of our call at " + t + " today. You're the last person on my calendar today I'm waiting to get confirmation from. Let me know if we can still count on you for your meeting. Would hate for you to miss out on the opportunity at hand.");
+
       var e = $("preEmail"); e.innerHTML = "";
-      addP(e, "Subject: " + MSG.preSubject);
+      addP(e, "Subject: " + (f ? f + ", a few things before our call" : "A few things before our call"));
       addP(e, f ? "Hi " + f + "," : "Hi,");
-      addP(e, "CJ here with HTSA. Looking forward to connecting. Here is a quick page to look at before we talk:");
-      addLinkP(e, PRE_LINK, "Click Here to Review the Pre-Call Page");
-      addP(e, "The 4 minute clip at the top is four of our members talking about getting placed and having more than one offer to choose from. It is not homework, just a look at what is possible.");
-      addP(e, "Come with your real situation and your real questions, and we will dive right in.");
+      addP(e, "CJ here with High Ticket Sales Academy. I am looking forward to connecting with you!");
+      addP(e, "I put together a page with a few resources I would like you to see before our conversation.");
+      addLinkP(e, PRE_LINK, "Take a Look Before Our Call");
+      addP(e, "Start with the 4 minute video at the top. You will hear directly from four of our members about their experience getting placed into high ticket sales roles.");
+      addP(e, "I have also included additional member stories, an employer's perspective, and information about the industry if you would like to explore further.");
+      addP(e, "When we connect, my goal is to learn more about your background and what you are looking to accomplish, and see whether high ticket sales is the right direction for you. If we are a good fit, I will walk you through exactly how we can help you get there.");
+      addP(e, "Looking forward to our conversation!");
       addP(e, "Best,");
       addSig(e);
     }
@@ -417,6 +453,7 @@
     $("modePre").addEventListener("click", function () { setMode("pre"); });
     $("modePost").addEventListener("click", function () { setMode("post"); });
     $("name").addEventListener("input", function () { renderPre(); renderPostMessages(); });
+    $("callTime").addEventListener("input", renderPre);
     document.querySelectorAll("[data-copy]").forEach(function (b) {
       b.addEventListener("click", function () { copyRich(b.getAttribute("data-copy"), b); });
     });

@@ -15,17 +15,21 @@ def print_precall_pack() -> None:
     print("=== EMAIL ===")
     print("Hi,")
     print()
-    print("Looking forward to connecting. Here is a quick page to look at before we talk:")
+    print("CJ here with High Ticket Sales Academy. I am looking forward to connecting with you!")
     print()
-    print(f"Click Here to Review the Pre-Call Page: {url}")
+    print("I put together a page with a few resources I would like you to see before our conversation.")
+    print()
+    print(f"Take a Look Before Our Call: {url}")
     print()
     print(
-        "The 4 minute clip at the top is four of our members talking about getting "
-        "placed and having more than one offer to choose from. It is not homework, "
-        "just a look at what is possible."
+        "Start with the 4 minute video at the top. You will hear directly from four of our "
+        "members about their experience getting placed into high ticket sales roles."
     )
     print()
-    print("Come with your real situation and your real questions, and we will dive right in.")
+    print(
+        "When we connect, my goal is to learn more about your background and what you are "
+        "looking to accomplish, and see whether high ticket sales is the right direction for you."
+    )
     print()
     print("Best,")
     print()
@@ -35,11 +39,13 @@ def print_precall_pack() -> None:
     print("cj@highticketsalesacademy.com")
     print()
     print("=== TEXT ===")
-    print("Hey, looking forward to our call! Here is a quick page to look at before we talk:")
+    print("Hey, CJ here with High Ticket Sales Academy. Looking forward to speaking with you!")
+    print()
+    print(
+        "I put together a quick page to look through before our call. Start with the 4 minute "
+        "video at the top. You will hear directly from four of our members about getting placed."
+    )
     print()
     print(url)
     print()
-    print(
-        "The 4 minute clip is four of our members talking about getting placed. "
-        "Not homework, just come with your real questions and we will dive right in."
-    )
+    print("Quick question so I can come prepared: what made you book this call?")
