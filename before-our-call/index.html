@@ -199,6 +199,11 @@ details[open] .chev{transform:rotate(180deg)}
 .proof-square-site-kicker{color:#61e38b;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
 .proof-square-site-name{font-family:"Playfair Display",serif;font-size:18px;line-height:1.2;text-align:center}
 .proof-square-site-url{color:rgba(255,255,255,.72);font-size:12px;font-weight:700}
+.proof-square-trust{appearance:none;border:0;cursor:pointer;font-family:inherit}
+.proof-square-trust-stars{color:#f5c518;font-size:28px;letter-spacing:4px;line-height:1;
+  text-shadow:0 1px 2px rgba(0,0,0,.35),0 0 12px rgba(245,197,24,.32)}
+.proof-square-trust-rating{color:#fff;font-size:17px;font-weight:900;text-align:center}
+.proof-square-trust-source{color:rgba(255,255,255,.72);font-size:12px;font-weight:700}
 .proof-square-copy{padding:12px 13px 10px}
 .proof-square-kicker{margin-bottom:5px;color:#b45309;font-size:12px;font-weight:800;letter-spacing:.08em;
   text-transform:uppercase}
@@ -398,8 +403,8 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
 
   <section class="section more" aria-labelledby="quickProofTitle">
     <div class="cj-resources-kicker">Quick proof</div>
-    <h2 id="quickProofTitle">An employer’s perspective and a candid member story.</h2>
-    <p class="section-lede">The live clip shows the community. These give you an outside hiring perspective and one member’s firsthand experience.</p>
+    <h2 id="quickProofTitle">An employer’s perspective and independent reviews.</h2>
+    <p class="section-lede">The live clip shows the community. These give you an outside hiring perspective and verified member feedback.</p>
     <div class="proof-squares">
       <article class="proof-square">
         <div class="proof-square-copy">
@@ -412,19 +417,18 @@ button.precall-trust-bar{appearance:none;-webkit-appearance:none;width:100%}
       </article>
       <article class="proof-square">
         <div class="proof-square-copy">
-          <div class="proof-square-kicker">Candid member perspective</div>
-          <h3>Dana</h3>
-          <p>An unsolicited review of the training, support, and experience inside HTSA.</p>
+          <div class="proof-square-kicker">Independent reviews</div>
+          <h3>Trustpilot Reviews</h3>
+          <p>Read verified feedback from members about their experience with HTSA.</p>
         </div>
-        <iframe class="proof-square-media" src="https://www.youtube-nocookie.com/embed/FqlY37NaIsk?rel=0&amp;modestbranding=1&amp;playsinline=1" title="Dana’s unsolicited HTSA review" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        <button type="button" class="proof-square-cta" data-media="yt" data-id="FqlY37NaIsk" data-title="Dana — Unsolicited HTSA Personal Review">Watch here</button>
+        <button type="button" class="proof-square-media proof-square-site proof-square-trust" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5">
+          <span class="proof-square-trust-stars" aria-hidden="true">★★★★★</span>
+          <span class="proof-square-trust-rating">4.9 out of 5</span>
+          <span class="proof-square-trust-source">Trustpilot Reviews</span>
+        </button>
+        <button type="button" class="proof-square-cta" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5">Open reviews</button>
       </article>
     </div>
-    <button type="button" class="precall-trust-bar res-trust-top" data-media="img" data-src="/media/resources/trustpilot-htsa.jpg" data-title="Trustpilot Reviews — 4.9 out of 5" aria-label="Trustpilot Reviews, 4.9 out of 5, opens on this page">
-      <span class="precall-trust-stars" aria-hidden="true">★★★★★</span>
-      <span>Trustpilot Reviews, 4.9 out of 5</span>
-      <span class="res-trust-hint">Opens here ▸</span>
-    </button>
   </section>
 
 <div id="tierResources"></div>
