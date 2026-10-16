@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+# Tier 1 is the default page, so the link stays clean (no tier word for the prospect to see).
 GENERIC_PRECALL_URL = "https://closewithcjclay.com/before-our-call"
 
 PRECALL_EMAIL_SUBJECT = "Before our call"
@@ -15,37 +16,44 @@ def print_precall_pack() -> None:
     print("=== EMAIL ===")
     print("Hi,")
     print()
-    print("CJ here with High Ticket Sales Academy. I am looking forward to connecting with you!")
+    print("CJ here with High Ticket Sales Academy. Looking forward to speaking with you.")
     print()
-    print("I put together a page with a few resources I would like you to see before our conversation.")
+    print(
+        "I put a few resources together to help you get a better understanding of what "
+        "we do before we connect."
+    )
     print()
     print(f"Take a Look Before Our Call: {url}")
     print()
     print(
-        "Start with the 4 minute video at the top. You will hear directly from four of our "
-        "members about their experience getting placed into high ticket sales roles."
+        "Start with the short live coaching clip where four members discuss their placement "
+        "experiences. I've also included an employer's perspective, independent reviews, "
+        "and member stories if you'd like to explore further."
     )
     print()
     print(
-        "When we connect, my goal is to learn more about your background and what you are "
-        "looking to accomplish, and see whether high ticket sales is the right direction for you."
+        "When we connect, my goal is to understand where you are, where you want to go, "
+        "and whether high-ticket sales is the right direction for you."
     )
     print()
-    print("Best,")
+    print("If it is, I'll walk you through what the path looks like.")
+    print()
+    print("Talk soon,")
     print()
     print("CJ Clay")
-    print("HTSA, Senior Career Transformation Coach")
+    print("Senior Career Transformation Coach")
+    print("High Ticket Sales Academy")
     print("(616) 612-1735")
     print("cj@highticketsalesacademy.com")
     print()
     print("=== TEXT ===")
-    print("Hey, CJ here with High Ticket Sales Academy. Looking forward to speaking with you!")
+    print("Hey, CJ with High Ticket Sales Academy. Looking forward to our call.")
     print()
     print(
-        "I put together a quick page to look through before our call. Start with the 4 minute "
-        "video at the top. You will hear directly from four of our members about getting placed."
+        "I put a few resources together for you. Start with the 4-minute clip of our "
+        "members discussing placement on a live call with Chad:"
     )
     print()
     print(url)
     print()
-    print("Quick question so I can come prepared: what made you book this call?")
+    print("What's the biggest thing you want clarity on when we speak?")
