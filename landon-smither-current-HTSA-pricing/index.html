@@ -161,11 +161,6 @@ a{color:inherit}
 .plan-action-copy{margin-top:6px;color:var(--muted);font-size:13px;line-height:1.5}
 .plan-action-copy b{color:var(--navy)}
 .choose--action{margin-top:12px;background:var(--green-strong);color:#04231a}
-.call-rec{margin:0 0 16px;padding:16px 18px;border:2px solid var(--green-strong);border-radius:14px;
-  background:linear-gradient(160deg,#f7fffb 0%,#ecfff5 100%)}
-.call-rec-kicker{color:var(--green-dark);font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-.call-rec-title{margin-top:4px;color:var(--navy);font-size:16px;font-weight:800}
-.call-rec audio{width:100%;display:block;margin-top:10px}
 
 .choose{display:flex;width:100%;min-height:54px;align-items:center;justify-content:center;
   padding:14px 20px;border:0;border-radius:12px;background:var(--navy);color:var(--white);
@@ -493,7 +488,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1792219840 -->
+<!-- close-build:1792220100 -->
 </head>
 <body>
 <main class="page">
@@ -518,12 +513,6 @@ a{color:inherit}
       </div>
     </div>
     <div class="prep-intro" id="prepIntro" hidden></div>
-  </section>
-
-  <section class="call-rec" id="mayCall">
-    <div class="call-rec-kicker">May 17 call</div>
-    <div class="call-rec-title">Our consultation recording</div>
-    <audio id="mayCallAudio" controls preload="metadata" src="/media/landon/may-17-strategy-session.mp3">Audio is not supported in this browser.</audio>
   </section>
 
   <section class="welcome" id="welcomeBand">
@@ -1315,21 +1304,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
     event("checkout_started", { linkLabel:p.name, linkUrl:p.url });
     setTimeout(function(){ window.location.href = p.url; }, 550);
   });
-})();
-</script>
-<script>
-(function () {
-  var may = document.getElementById("mayCallAudio");
-  if (!may) return;
-  var speedSet = false;
-  function setSpeed() {
-    if (!speedSet) {
-      may.playbackRate = 1.25;
-      speedSet = true;
-    }
-  }
-  may.addEventListener("loadedmetadata", setSpeed);
-  may.addEventListener("play", setSpeed);
 })();
 </script>
 </body>
