@@ -27,7 +27,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://closewithcjclay.com/htsa-enrollment-landon-smither-v1.html">
 <meta property="og:title" content="Landon Smither / Access">
-<meta property="og:description" content="Your HTSA enrollment page. The May 4-pay rate is locked for you.">
+<meta property="og:description" content="Your HTSA enrollment page. Current pricing after Sunday, October 18.">
 <meta property="og:image" content="https://closewithcjclay.com/media/og-enrollment-sara.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Landon Smither / Access">
@@ -153,6 +153,14 @@ a{color:inherit}
 .honor-was{margin-top:8px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;color:#5d6f84;font-size:16px;font-weight:700}
 .honor-was s{text-decoration:line-through;text-decoration-thickness:2px}
 .honor-tag{color:var(--muted);font-size:12.5px;font-weight:700}
+
+.plan-action{margin-top:14px;padding:14px 15px;border:2px solid var(--green-strong);border-radius:12px;
+  background:linear-gradient(160deg,#f7fffb 0%,#ecfff5 100%);box-shadow:0 8px 20px rgba(0,201,122,.12)}
+.plan-action-kicker{color:var(--green-dark);font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.plan-action-title{margin-top:4px;color:var(--navy);font-size:16px;font-weight:800}
+.plan-action-copy{margin-top:6px;color:var(--muted);font-size:13px;line-height:1.5}
+.plan-action-copy b{color:var(--navy)}
+.choose--action{margin-top:12px;background:var(--green-strong);color:#04231a}
 
 .choose{display:flex;width:100%;min-height:54px;align-items:center;justify-content:center;
   padding:14px 20px;border:0;border-radius:12px;background:var(--navy);color:var(--white);
@@ -480,7 +488,7 @@ a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.choose,.reviews-more-arrow,.res-tab-arrow{transition:none}}
 </style>
-<!-- close-build:1791990029 -->
+<!-- close-build:1760682000 -->
 </head>
 <body>
 <main class="page">
@@ -556,6 +564,12 @@ a{color:inherit}
         <span class="plan-unit">one time</span>
       </div>
       <button class="choose" type="button" data-plan="pif">Choose paid in full</button>
+      <div class="plan-action" id="planAction">
+        <div class="plan-action-kicker">Action Taker</div>
+        <div class="plan-action-title">2-pay Action Taker — $7,000 total</div>
+        <p class="plan-action-copy"><b>$3,500 today</b>, then <b>$3,500 in 30 days</b>. Same total as paid in full, split into two payments.</p>
+        <button class="choose choose--action" type="button" data-plan="twopay">Choose 2-pay — $3,500 today</button>
+      </div>
       <details class="plan-sub" id="planSplititWrap" hidden>
         <summary><span>More payment options</span><span class="plan-sub-chev" aria-hidden="true">▾</span></summary>
         <div class="plan-splitit">
@@ -567,7 +581,7 @@ a{color:inherit}
     </div>
 
     <div class="plan" id="planPlan">
-      <span class="badge" id="planBadge">Your locked rate</span>
+      <span class="badge" id="planBadge">4-pay</span>
       <div class="plan-name" id="planName"></div>
       <div class="plan-note" id="planNote"></div>
       <div class="plan-figs">
@@ -957,8 +971,8 @@ const BUYER = {
   slug:      "landon_smither_v1",
   track:     "closer",
   offer:     "standard",
-  show:      ["plan"],
-  intro:     "Landon, I am honoring the 4-pay pricing we spoke about months ago. Our pricing went up October 1st, but your rate stays where we agreed."
+  show:      ["pif", "plan"],
+  intro:     "Landon, this page is current HTSA pricing after Sunday, October 18. I tried to keep the May terms open as an Action Taker bonus, but I no longer have a basis to do that, and I have no clean way to explain it to Chad if you are not taking action. That is okay.\n\nIf you would rather wait a little longer, think it through, and you are okay paying $800 more than you needed to on the 4-pay, I am okay with that too. Paid in full is $7,000. The Action Taker 2-pay is $3,500 today and $3,500 in 30 days. The 4-pay is $1,950 today, $7,800 total.\n\nOn October 16 I enrolled two members who had been sitting since July and September. Both paid current pricing. That is where we are now."
 };
 
 const CUSTOM_OFFER = null;
@@ -980,12 +994,15 @@ const OFFERS = {
   standard: {
     pif:  { amount: "$7,000", was: "",
             note: "One payment. Full access as soon as it clears.",
-            checkout: "https://whop.com/checkout/plan_GPDXTLOKvW6l8" },
-    plan: { name: "4 payments", amount: "$1,750", unit: "today · $7,000 total",
-            wasAmt: "$1,950 × 4", wasTotal: "$7,800 total", save: "You save $800",
+            checkout: "https://whop.com/checkout/plan_GPDXTLOKvW6l8?d2c=true" },
+    twopay: { amount: "$3,500", unit: "today · $3,500 in 30 days · $7,000 total",
+            note: "Action Taker 2-pay. Same $7,000 total as paid in full.",
+            checkout: "https://whop.com/checkout/plan_JeFDCjxcpLjbH?d2c=true" },
+    plan: { name: "4 payments", amount: "$1,950", unit: "today · $7,800 total",
+            wasAmt: "", wasTotal: "", save: "",
             note: "First payment today, then one a month for three more months.",
             warn: "",
-            checkout: "https://whop.com/checkout/plan_m6yk0QLbxWaak?d2c=true" },
+            checkout: "https://whop.com/checkout/plan_KZi8Kt0Ioq6tK?d2c=true" },
     clarity: { amount: "$700", unit: "a month · 0% interest · $8,400 total",
                note: "Monthly financing at 0% interest. Soft credit check, 620 or better credit score to qualify.",
                checkout: "https://whop.com/checkout/plan_K4goBzDEHXO15" }
@@ -1118,6 +1135,7 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeyf0Q_wiM-d6pq5D
 
   const PLANS = {
     pif:     { name:"Paid in full",  amt:O.pif.amount,     sub:"One payment. Full access as soon as it clears.", url:O.pif.checkout, warn:"" },
+    twopay:  { name:"Action Taker 2-pay", amt:O.twopay.amount, sub:O.twopay.note, url:O.twopay.checkout, warn:"" },
     plan:    { name:O.plan.name,     amt:O.plan.amount,    sub:O.plan.note, url:O.plan.checkout, warn:O.plan.warn || "" },
     clarity: { name:"ClarityPay",    amt:O.clarity.amount, sub:O.clarity.note, url:O.clarity.checkout, warn:"" }
   };
