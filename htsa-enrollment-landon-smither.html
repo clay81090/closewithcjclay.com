@@ -131,6 +131,28 @@
 
   .hero-band p strong { color: var(--text); font-weight: 600; }
 
+  .call-recording {
+    padding: 18px 36px 20px;
+    background: #f7fffb;
+    border-bottom: 2px solid #00c97a;
+  }
+  .call-recording-kicker {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin-bottom: 6px;
+  }
+  .call-recording h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 0 0 10px;
+  }
+  .call-recording audio { width: 100%; display: block; }
+
   .billing-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -948,6 +970,7 @@
     .invoice-meta { text-align: left; }
     .invoice-badge { margin-bottom: 8px; }
     .hero-band { padding: 18px 20px; }
+    .call-recording { padding: 16px 20px; }
     .hts-terms-agreement-wrap { padding-left: 20px; padding-right: 20px; }
     .invest-pay-zone-hint { padding-left: 20px; padding-right: 20px; }
     .billing-grid { grid-template-columns: 1fr; }
@@ -1511,6 +1534,12 @@
     <h2>Certified High Ticket Closer Program</h2>
     <p>Landon, I really enjoyed speaking with you earlier. It was clear from our conversation that you're someone who takes their future seriously and is ready to make a real change — and that's exactly the kind of person we love working with here at High Ticket Sales Academy.</p>
     <p style="margin-top:10px;">Everything you need to review and get started is right here. The biggest difference at HTSA is that you are not just another number — we are not influencers, but true experts in the field of high ticket sales. You have around-the-clock support, and once certified, our team walks you directly into roles from a network of 300+ partner companies. Take your time reviewing and reach out to CJ with any questions or assistance with enrollment.</p>
+  </div>
+
+  <div class="call-recording">
+    <div class="call-recording-kicker">May 17 call</div>
+    <h3>Our consultation recording</h3>
+    <audio id="mayCallAudio" controls preload="metadata" src="/media/landon/may-17-strategy-session.mp3">Audio is not supported in this browser.</audio>
   </div>
 
   <!-- BILLING -->
@@ -2082,6 +2111,21 @@ So far it's been nothing but positive, and I feel confident about the move. If y
     }
     syncDisabled();
   });
+})();
+</script>
+<script>
+(function () {
+  var may = document.getElementById("mayCallAudio");
+  if (!may) return;
+  var speedSet = false;
+  function setSpeed() {
+    if (!speedSet) {
+      may.playbackRate = 1.25;
+      speedSet = true;
+    }
+  }
+  may.addEventListener("loadedmetadata", setSpeed);
+  may.addEventListener("play", setSpeed);
 })();
 </script>
 </body>
